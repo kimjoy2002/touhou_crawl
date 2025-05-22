@@ -4844,16 +4844,22 @@ bool skill_throw_oil(int power, bool short_, unit* order, coord_def target)
 
 bool skill_heavenly_storm(int pow, bool short_, unit* order, coord_def target)
 {
-	if (order->isplayer() || order->GetId() != MON_SONBITEN)
+	if (order->isplayer() || (order->GetId() != MON_SONBITEN && order->GetId() != MON_ENSLAVE_GHOST))
 		return false;
 	if (env[current_level].isInSight(order->position)) {
 		soundmanager.playSound("wind");
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_UNIQUE_SONBITEN,true,false,false,CL_small_danger,
 			PlaceHolderHelper(order->GetName()->getName()));
 	}
-	order->ChangeMonster(MON_SONBITEN_SPINTOWIN, 0);
+	if(order->GetId() == MON_ENSLAVE_GHOST && ((monster*)order)->id2 == MON_SONBITEN) {
+		((monster*)order)->id2 = MON_SONBITEN_SPINTOWIN;
+		((monster*)order)->image = &img_mons_sonbiten_spintowin;
+	} else {
+		((monster*)order)->ChangeMonster(MON_SONBITEN_SPINTOWIN, 0);
+	}
 	((monster*)order)->special_value = rand_int(20,30);
-	return false;
+	((monster*)order)->direction = GetPositionToAngle(order->position.x, order->position.y, target.x, target.y);
+	return true;
 }
 
 bool skill_tracking(int pow, bool short_, unit* order, coord_def target)
@@ -4877,6 +4883,7 @@ bool skill_create_fog(int pow, bool short_, unit* order, coord_def target)
 		soundmanager.playSound("spellcard");
 		you.SetWeather(1, 30);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_MAGIC_FOG), true, false, false, CL_small_danger);
+		return true;
 	}
 	return false;
 }

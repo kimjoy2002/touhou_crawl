@@ -1252,6 +1252,15 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				monster *mon2_ = BaseSummon(mon_->id, -1, false, false,4,&you, mon_->position, SKD_OTHER, -1);
 				if(mon2_)
 				{
+					if(mon2_->id == MON_SONBITEN_SPINTOWIN) {
+						mon2_->ChangeMonster(MON_SONBITEN, 0);
+					}
+					if(mon2_->id == MON_YUMA2) {
+						mon2_->ChangeMonster(MON_YUMA, 0);
+					}
+					if(mon2_->id == MON_KEINE2) {
+						mon2_->ChangeMonster(MON_KEINE, 0);
+					}
 					mon2_->id2 = mon2_->id;
 					mon2_->id = MON_ENSLAVE_GHOST;
 					mon2_->name = name_infor(LOC_SYSTEM_ENSLAVE_GHOST, (monster_index)mon_->id);
@@ -2216,6 +2225,7 @@ void Pray()
 		{
 			WaitForSingleObject(mutx, INFINITE);
 			deletesub();
+			DisplayManager.current_position = -1;
 			SetDisplayTexture(&img_god_background[(type - DG_TEMPLE_FIRST)]);
 			GodInfor((god_type)(type-DG_TEMPLE_FIRST));
 			D3DCOLOR color_ = you.god != GT_NONE ? CL_small_danger:CL_help;

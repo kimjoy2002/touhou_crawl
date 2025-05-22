@@ -864,7 +864,20 @@ void Memorize_book(int key_) {
 		GetItemInfor(item_, false, NULL);
 		ReleaseMutex(mutx);
 		changedisplay(DT_SUB_TEXT);
-		int key_ = waitkeyinput(true);
+		int key_;
+		while(1) {
+			key_ = waitkeyinput(true);
+			if(key_ == VK_UP)
+				DisplayManager.addPosition(-1);
+			else if(key_ == VK_DOWN)
+				DisplayManager.addPosition(1);
+			else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+				key_ = DisplayManager.positionToChar();
+				break;
+			} else {
+				break;
+			}
+		}
 		if( (key_ >= 'a' && key_ <= 'f'))
 		{
 			if(int spell_ = item_->GetValue(key_ - 'a'+1))

@@ -981,8 +981,8 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,0,0,10,'&'},
 
 	{MON_SONBITEN,13,3100,name_infor(MON_SONBITEN),&img_mons_sonbiten,170,5,15,
-	{35,45,0},{ATT_NORMAL,ATT_NORMAL,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_POLE),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,0,0,10,'&'},
+	{35,45,0},{ATT_NORMAL,ATT_NORMAL,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_POLE),name_infor(LOC_SYSTEM_ATT_POLE),name_infor()},
+	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,2,1,10,'&'},
 
 	{MON_HISAMI,2,4,name_infor(MON_HISAMI),&img_mons_hisami,25,0,5,
 	{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
@@ -1072,7 +1072,7 @@ const mon_infor mondata[] = {
 		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
 
-	{MON_SONBITEN_SPINTOWIN,2,4,name_infor(MON_SONBITEN_SPINTOWIN),&img_mons_sonbiten_spintowin,25,0,5,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'}
+	{MON_SONBITEN_SPINTOWIN,13,3100,name_infor(MON_SONBITEN_SPINTOWIN),&img_mons_sonbiten_spintowin,170,5,15,
+		{35,45,0},{ATT_NORMAL,ATT_NORMAL,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_POLE),name_infor(LOC_SYSTEM_ATT_POLE),name_infor()},
+		M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,7,'&'}
 };

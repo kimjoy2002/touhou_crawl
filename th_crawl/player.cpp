@@ -3643,7 +3643,8 @@ bool players::SetSuperGraze(int s_super_graze_)
 }
 bool players::SetNoneMove(int s_none_move_)
 {
-	s_none_move += s_none_move_;
+	if(s_none_move < s_none_move_)
+		s_none_move = s_none_move_;
 	return true;
 }
 bool players::SetNightSight(int value_, int turn_, bool stong_)

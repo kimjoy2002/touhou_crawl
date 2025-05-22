@@ -467,6 +467,7 @@ extern textures img_fog_cold[];
 extern textures img_fog_dark[];
 extern textures img_fog_poison[];
 extern textures img_fog_slow[];
+extern textures img_fog_heavenly_storm[];
 extern textures img_fog_sion[3][4];
 extern textures img_blizzard[];
 extern textures img_fog_tonado[];

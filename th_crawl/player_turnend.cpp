@@ -829,7 +829,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	}
 	if (s_none_move)
 	{
-		s_none_move = 0;
+		s_none_move--;
 	}
 	if(s_spellcard)
 	{

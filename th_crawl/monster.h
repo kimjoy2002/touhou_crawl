@@ -91,6 +91,7 @@ public:
 	int s_oil;
 	int s_fire;
 	parent_type fire_reason;
+	int s_none_move;
 	int debuf_boost;
 	int summon_time;
 	parent_type summon_parent;
@@ -228,6 +229,7 @@ public:
 	bool SetSleep(int s_sleep_);
 	bool SetOil(int oil_, int max_);
 	bool SetFire(int fire_, parent_type type_, bool from_oil);
+	bool SetNoneMove(int s_none_move);
 	int PlusTimeDelay(int delay_)
 	{
 		time_delay += delay_;

@@ -144,6 +144,8 @@ string smoke::GetName()
 		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_CURSE);
 	case SMT_BLIZZARD:
 		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_BLIZZARD);
+	case SMT_HEAVENLY_STORM:
+		return LocalzationManager::locString(LOC_SYSTEM_SMOKE_HEAVENLY_STORM);
 	default:
 		return 0;
 	}

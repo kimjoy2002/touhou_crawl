@@ -220,6 +220,8 @@ public:
 	template<typename... Args>
 	static void printLogWithKey(LOCALIZATION_ENUM_KEY template_key, bool enter_, bool log_, bool temp_, D3DCOLOR color_, Args... args) {
         std::string template_str = locString(template_key);
+        if(template_str.size() == 0)
+            return;
         if((template_str.back() == '.' || template_str.back() == '!' || template_str.back() == '?') && enter_ == false) {
             template_str.push_back(' '); //스페이스 보정
         }

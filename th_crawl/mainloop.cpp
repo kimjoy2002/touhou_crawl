@@ -1191,7 +1191,6 @@ void MainLoop()
 		case GVK_BUTTON_X_LONG: //패드 X 길게
 			SkillUse(0);
 			break;
-		case 'B': //테스트용
 		case GVK_BUTTON_Y://패드 X
 			rightmenu_control();
 			break;
@@ -1259,7 +1258,20 @@ bool option_menu(int value_)
 		
 		changedisplay(DT_SUB_TEXT);
 		InputedKey inputedKey;
-		int input_ = waitkeyinput(inputedKey,true);
+		int input_;
+		while(1) {
+			input_ = waitkeyinput(inputedKey,true);
+			if(input_ == VK_UP)
+				DisplayManager.addPosition(-1);
+			else if(input_ == VK_DOWN)
+				DisplayManager.addPosition(1);
+			else if(input_ == VK_RETURN || input_ == GVK_BUTTON_A || input_ == GVK_BUTTON_A_LONG) {
+				input_ = DisplayManager.positionToChar();
+				break;
+			} else {
+				break;
+			}
+		}
 
 		if(input_ >= 'a' && input_ <= 'c')
 		{

@@ -855,14 +855,18 @@ void search_monspell_view(monster* mon_)
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey, true);
 
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			key_ = DisplayManager.positionToChar();
+		}
+
 		if(key_ == VK_UP)
 		{
-			changemove(1);  //위
+			DisplayManager.addPosition(-1);
 			loop_ = true;
 		}
 		else if(key_ == VK_DOWN)
 		{
-			changemove(-1); //아래
+			DisplayManager.addPosition(1);
 			loop_ = true;
 		}
 		else if(key_ == VK_PRIOR)
@@ -963,6 +967,7 @@ void Search()
 		case 'U':
 			Move(coord_def(you.position.x + 8, you.position.y - 8));
 			break;
+		case GVK_BUTTON_A_LONG:
 		case 'v':
 			if(unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y))
 			{
@@ -975,6 +980,7 @@ void Search()
 			break;
 		case 'E':
 		case 'e':
+		case GVK_BUTTON_X:
 			if (!env[current_level].isBamboo())
 			{
 				env[current_level].AddForbid(you.search_pos);
@@ -982,6 +988,7 @@ void Search()
 			break;
 		case '.': 
 		case VK_RETURN:
+		case GVK_BUTTON_A:
 			deletelog();
 			you.search = false;
 			Long_Move(you.search_pos, true);
@@ -3646,6 +3653,7 @@ void dungeonView()
 	{
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey, true);
+
 		if(key_ == VK_UP)
 		{
 			changemove(1);  //위
@@ -4171,6 +4179,20 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 	{
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey, true);
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				if(key_ == GVK_BUTTON_A_LONG) {
+					inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+					inputedKey.val1 = char_;
+					key_ = -1;
+				} else {
+					key_ = char_;
+				}
+			}
+		}
+
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
@@ -4194,11 +4216,11 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 		}
 		else if(key_ == VK_UP)
 		{
-			changemove(1);  //위
+			DisplayManager.addPosition(-1);
 		}
 		else if(key_ == VK_DOWN)
 		{
-			changemove(-1); //아래
+			DisplayManager.addPosition(1);
 		}
 		else if(key_ == VK_PRIOR)
 		{

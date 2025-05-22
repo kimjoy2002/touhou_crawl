@@ -822,12 +822,12 @@ $$$...$$$";
 			map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 			
 			if(!is_exist_named(MON_WAKASAGI)){
-				map->monster_list.push_back(mapdummy_mon(MON_WAKASAGI,0,coord_def(0,0)));
+				map->monster_list.push_back(mapdummy_mon(MON_WAKASAGI,M_FLAG_DECORATE,coord_def(0,0)));
 				set_exist_named(MON_WAKASAGI);
 			}
 			else
 			{
-				map->monster_list.push_back(mapdummy_mon(MON_NESI,0,coord_def(0,0)));
+				map->monster_list.push_back(mapdummy_mon(MON_NESI,M_FLAG_DECORATE,coord_def(0,0)));
 
 			}
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;

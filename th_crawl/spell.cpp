@@ -72,6 +72,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 		return ((S_FLAG_CLOUD | S_FLAG_SMITE | S_FLAG_SPEAK) & flag);
 	case SPL_WHIRLWIND:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK) & flag);
+	case SPL_HEAVENLY_STORM:
+		return ((S_FLAG_SMITE | S_FLAG_DELAYED) & flag);
 	case SPL_FIRE_WALL:
 		return ((S_FLAG_CLOUD | S_FLAG_SMITE | S_FLAG_SPEAK | S_FLAG_NO_COM | S_FLAG_NO_TARGET) & flag);	
 	case SPL_COLD_BEAM:
@@ -238,7 +240,6 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_MISTIA_SONG:
 	case SPL_MESS_CONFUSION:
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;
-	case SPL_HEAVENLY_STORM:
 	case SPL_SPEAKER_PHONE:
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_DELAYED) & flag;	
 	case SPL_MOON_COMMUNICATION:
@@ -1923,6 +1924,8 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 		return (!mon->s_exhausted && you.god != GT_YUKARI && you.s_dimension == 0);
 	case SPL_CREATE_FOG:
 		return (you.s_weather>0 || !(current_level >= MISTY_LAKE_LEVEL && current_level <=MISTY_LAKE_LAST_LEVEL)?false:true);
+	case SPL_HEAVENLY_STORM:
+		return (mon->id == MON_SONBITEN || (mon->id == MON_ENSLAVE_GHOST && mon->id2 == MON_SONBITEN))?true:false;
 	default:
 		return true;
 	}

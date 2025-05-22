@@ -140,7 +140,7 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 
 		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
 			key_ = DisplayManager.positionToChar();
-		}		
+		}
 
 		if(item_->type == ITM_BOOK && (key_ >= 'a' && key_ <= 'f'))
 		{
@@ -174,13 +174,13 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 				continue;
 			}
 		}
-		else if(key_ == VK_DOWN)
+		else if(key_ == VK_DOWN || key_ == VK_RIGHT)
 		{
 			DisplayManager.addPosition(1);
 			save_position = DisplayManager.current_position;
 			continue;
 		}
-		else if(key_ == VK_UP)
+		else if(key_ == VK_UP || key_ == VK_LEFT)
 		{
 			DisplayManager.addPosition(-1);
 			save_position = DisplayManager.current_position;

@@ -2378,7 +2378,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				0.0f,
 				calc_tile_scale,
 				calc_tile_scale,
-				D3DCOLOR_XRGB(255, 0, 0)
+				D3DCOLOR_XRGB(255, 255, 255)
 			);
 		}
 	}

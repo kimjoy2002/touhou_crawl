@@ -230,3 +230,5 @@ MON_KAGUYA_QUIZ_2,Robe of the Fire Rat,One of Kaguya’s impossible requests. A 
 MON_KAGUYA_QUIZ_3,Swallow’s Cowrie Shell,One of Kaguya’s impossible requests. A round, glossy shell said to be laid by a swallow.\nIt symbolizes safe childbirth.\nThis shell emanates a chilling cold aura.
 MON_KAGUYA_QUIZ_4,Jeweled Branch of Hourai,One of Kaguya’s impossible requests. A branch made of gold, silver, and jade.\nSaid to grow on Mount Hourai, with silver roots, gold leaves and stems, and jade fruits.\nUpon closer inspection, danmaku is embedded in its branches.
 MON_MISYAGUZI,Mishaguji,A fearsome deity commanded by Suwako, shaped like a white snake.\nMishaguji’s fangs curse those bitten with irresistible slowing and poison.
+MON_SONBITEN,Sonbiten,A sarugami yokai who leads wild monkeys.\nHe claims to be a descendant of Sun Wukong, born from a rock.
+MON_SONBITEN_SPINTOWIN,Sonbiten,A sarugami yokai who leads wild monkeys.\nSpin to win!

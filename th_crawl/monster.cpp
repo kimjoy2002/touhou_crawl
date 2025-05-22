@@ -42,10 +42,10 @@ ac(0), ev(0), flag(0), resist(0), sense(0), dream(false), s_poison(0), poison_re
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
-force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), s_oil(0), s_fire(0), fire_reason(PRT_NEUTRAL), debuf_boost(0),
+force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), s_oil(0), s_fire(0), fire_reason(PRT_NEUTRAL), s_none_move(0), debuf_boost(0),
 	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0), time_delay(0), 
 	speed(10), memory_time(0), first_contact(true), strong(1), special_value(0), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(),
-	direction(0), sm_info(), state(MS_NORMAL), random_spell(false), wait(false)
+	direction(-1), sm_info(), state(MS_NORMAL), random_spell(false), wait(false)
 {
 	for(int i = 0; i < 3; i++) {
 		atk[i] = 0;
@@ -125,6 +125,7 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_oil);
 	SaveData<int>(fp, s_fire);
 	SaveData<parent_type>(fp,fire_reason);
+	SaveData<int>(fp, s_none_move);
 	SaveData<int>(fp, debuf_boost);
 	SaveData<int>(fp, summon_time);
 	SaveData<parent_type>(fp, summon_parent);
@@ -247,6 +248,7 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_oil);
 	LoadData<int>(fp, s_fire);
 	LoadData<parent_type>(fp,fire_reason);
+	LoadData<int>(fp, s_none_move);
 	LoadData<int>(fp, debuf_boost);
 	LoadData<int>(fp, summon_time);
 	LoadData<parent_type>(fp, summon_parent);
@@ -377,6 +379,7 @@ void monster::init()
 	s_oil = 0;
 	s_fire = 0;
 	fire_reason = PRT_NEUTRAL;
+	s_none_move = 0;
 	debuf_boost = 0;
 	summon_time = 0;
 	summon_parent = PRT_NEUTRAL;
@@ -399,7 +402,7 @@ void monster::init()
 	temp_target_map_id = -1;
 	target_pos.x = 0;
 	target_pos.y = 0;
-	direction = 0;
+	direction = -1;
 	sm_info.init();
 	state.SetState(MS_SLEEP);
 	spell_lists.clear();
@@ -443,7 +446,7 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int
 	if(init_)
 	{
 		summon_time = time_;
-		direction = rand_int(0,7);
+		direction = -1;
 		if(flag & M_FLAG_WAKE) {
 			state.SetState(MS_NORMAL);
 		}
@@ -654,6 +657,10 @@ void monster::TurnLoad()
 	else
 		s_sick = 0;
 
+	if(s_none_move-temp_turn>0)
+		s_none_move-=temp_turn;
+	else
+		s_none_move = 0;
 	
 
 	if(s_silence)
@@ -975,7 +982,7 @@ bool monster::isMultipleAttack(bool canAttackFreindly) {
 	if(id == MON_YUMA2) {
 		return true;
 	}
-	if(id == MON_SONBITEN_SPINTOWIN) {
+	if(id == MON_SONBITEN_SPINTOWIN || (id == MON_ENSLAVE_GHOST && id2 == MON_SONBITEN_SPINTOWIN)) {
 		return canAttackFreindly?false:true;
 	}
 	return false;
@@ -990,6 +997,9 @@ void monster::multipleAttack(unit* except, attack_infor& att_infor) {
 				it->damage(att_infor);
 				break;
 			}
+		}
+		if(except != &you && (isMultipleAttack(true) || isEnemyUnit(&you)) && distan_coord(you.position, position) < 4) {
+			you.damage(att_infor);
 		}
 	}
 }
@@ -1042,6 +1052,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_THROW_MIDDLE_POISON:
 	case ATT_THROW_STRONG_POISON:
 	case ATT_OIL_BLAST:
+	case ATT_BEARTRAP:
 	default:
 		damage_ -= randA(ac);
 		if(damage_<0)
@@ -1173,6 +1184,7 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_THROW_MIDDLE_POISON:
 		case ATT_THROW_STRONG_POISON:
 		case ATT_THROW_NONE_DAMAGE:
+		case ATT_BEARTRAP:
 		default:
 			if(a.order) {
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,CL_normal,
@@ -1440,7 +1452,8 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_THROW_MIDDLE_POISON:
 	case ATT_THROW_STRONG_POISON:
 	case ATT_THROW_ELEC:
-	case ATT_NORMAL_HIT:	
+	case ATT_NORMAL_HIT:
+	case ATT_BEARTRAP:
 	default:
 		printlog(LocalzationManager::locString(LOC_SYSTEM_BUT_NO_DAMAGE),true,false,false,CL_normal);
 		break;
@@ -2134,7 +2147,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 				}
 				else
 				{
-					if(!(flag & M_FLAG_LEADER_SUMMON) && (*it).isAllyMonster(this) && randA(4) == 0)
+					if(!s_none_move && !(flag & M_FLAG_LEADER_SUMMON) && (*it).isAllyMonster(this) && randA(4) == 0)
 					{
 						set<int> already_move;
 						already_move.insert(map_id);
@@ -2157,6 +2170,9 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 			return 0;
 		}
 
+		if(s_none_move) {
+			return 0;
+		}
 		SetXY(coord_def(position.x+x_mov,position.y+y_mov));
 
 		return 2;
@@ -2225,6 +2241,8 @@ bool monster::OpenDoor(const coord_def &c)
 
 int monster::longmove()
 {
+	if(direction < 0 || direction > 7)
+		direction = rand_int(0,7);
 	if(move(inttodirec(direction,position.x,position.y), false))
 	{
 		if(randA(15)==1)
@@ -3145,6 +3163,10 @@ int monster::action(int delay_)
 			}
 		}
 
+		if (s_none_move > 0)
+		{
+			s_none_move--;
+		}
 
 		if(s_communication)
 		{
@@ -3953,14 +3975,35 @@ void monster::special_action(int delay_, bool smoke_)
 		if (smoke_){
 			for (int i = -1; i < 2; i++)
 				for (int j = -1; j < 2; j++)
-					env[current_level].MakeSmoke(coord_def(i + position.x, j + position.y), img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, this);
+					env[current_level].MakeSmoke(coord_def(i + position.x, j + position.y), img_fog_heavenly_storm, SMT_HEAVENLY_STORM, rand_int(3, 4), 0, this);
 		}
 		else {
+			Noise(position,16,this);
 			if(special_value-- < 0) {
 				ChangeMonster(MON_SONBITEN, 0);
+				s_exhausted = rand_int(4,6);
 			}
 		}
 		break;
+	case MON_ENSLAVE_GHOST:
+	{
+		if(id2 == MON_SONBITEN_SPINTOWIN) {
+			if (smoke_){
+				for (int i = -1; i < 2; i++)
+					for (int j = -1; j < 2; j++)
+						env[current_level].MakeSmoke(coord_def(i + position.x, j + position.y), img_fog_heavenly_storm, SMT_HEAVENLY_STORM, rand_int(3, 4), 0, this);
+			}
+			else {
+				Noise(position,16,this);
+				if(special_value-- < 0) {
+					id2 = MON_SONBITEN;
+					image = &img_mons_sonbiten;
+					s_exhausted = rand_int(4,6);
+				}
+			}
+		}
+	}
+	break;
 	default:
 		break;
 	}
@@ -4750,7 +4793,11 @@ bool monster::SetFire(int fire_, parent_type type_, bool from_oil) {
 		s_fire = 30;
 	return true;
 }
-
+bool monster::SetNoneMove(int s_none_move_) {
+	if(s_none_move < s_none_move_)
+		s_none_move = s_none_move_;
+	return true;
+}
 bool monster::AttackedTarget(unit *order_)
 {	
 	if(order_)
@@ -5104,43 +5151,56 @@ bool monster::CanChase()
 		return false;
 	return true;	
 }
+
+int MoveAngleTowards(int A, int B, int delta)
+{
+    int diff = ((B - A + 540) % 360) - 180;
+
+    if (std::abs(diff) <= delta)
+        return B;
+    else
+        return A + (diff > 0 ? delta : -delta);
+}
+
 bool monster::special_state(bool is_sight_for_monster) {
 	switch(id) {
+	case MON_ENSLAVE_GHOST:
+	{
+		if(id2 != MON_SONBITEN_SPINTOWIN)
+			break;
+	} //break passthorough
 	case MON_SONBITEN_SPINTOWIN:
 	{
-		if(move(inttodirec(direction,position.x,position.y), false))
+		if(target) {
+			int target_angle = GetBaseAngle(GetPositionToAngle(position.x,position.y,target->position.x, target->position.y));
+			direction = MoveAngleTowards(direction, target_angle, 30);
+		}
+		if(move(inttodirec(GetAngleToDirec(direction),position.x,position.y), false) == 2)
 		{
-			if(randA(15)==1)
-				direction = rand_int(0,7);
+			int num_=0;
+			for(int i=0;i<3;i++,num_++)
+				if(atk_type[i] == ATT_NONE)
+					break;
+			if(num_)
+			{
+				num_ = randA(num_-1);
+				attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
+				multipleAttack(nullptr, temp_att);
+			}
 		}
 		else
-		{	
-			deque<int> dq;
-			for(int i=0;i<8;i++)
-				if(i != direction || randA(2) == 1)
-					dq.push_back(i);
-			if(dq.size() == 7)
-				dq.push_back(direction);
-			rand_shuffle(dq.begin(),dq.end());
-			for(int i=0;i<8;i++)
-			{
-				if(env[current_level].isMove(inttodirec(dq[i],position.x,position.y),isFly(), isSwim(), flag & M_FLAG_CANT_GROUND, id == MON_SEIGA)) //나는 몹은 2번째인자
+		{
+			for(int i = 0; i < 10; i++) {
+				direction += rand_int(120,240);
+				direction = GetBaseAngle(direction);
+
+				if(env[current_level].isMove(inttodirec(GetAngleToDirec(direction),position.x,position.y), isFly(), isSwim())) //나는 몹은 2번째인자
 				{
-					direction = dq[i];
+					break;
 				}
 			}
 		}
-		int num_=0;
-		for(int i=0;i<3;i++,num_++)
-			if(atk_type[i] == ATT_NONE)
-				break;
-		f(num_)
-		{
-			num_ = randA(num_-1);
-			attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
-			multipleAttack(nullptr, temp_att);
-		}
-		sightcheck(is_sight_for_monster);
+		CheckSightNewTarget();
 	}
 		return true;
 	default:
@@ -5340,6 +5400,8 @@ monster_state_simple monster::GetSimpleState()
 		temp = MSS_POISON;
 	if(s_fire)
 		temp = MSS_FIRE;
+	if(s_none_move)
+		temp = MSS_NONE_MOVE;
 	if(s_fear)
 		temp = MSS_FEAR;
 	if (s_confuse && (flag & M_FLAG_CONFUSE) == 0)
@@ -5628,6 +5690,13 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, ostringstream& ss)
 		if (s_fire)
 		{
 			ss << LocalzationManager::locString(LOC_SYSTEM_STICKY_FIRE);
+			return CL_normal;
+		}
+		return CL_none;
+	case MSS_NONE_MOVE:
+		if (s_none_move)
+		{
+			ss << LocalzationManager::locString(LOC_SYSTEM_NONE_MOVE);
 			return CL_normal;
 		}
 		return CL_none;

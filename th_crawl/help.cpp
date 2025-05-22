@@ -38,8 +38,18 @@ void Help_Show()
 	{
 		InputedKey inputedKey;
 		input_ = waitkeyinput(inputedKey,true);
+		if(input_ == VK_RETURN || input_ == GVK_BUTTON_A || input_ == GVK_BUTTON_A_LONG) {
+			input_ = DisplayManager.positionToChar();
+		}
+
 		switch(input_)
 		{
+		case VK_UP:
+			DisplayManager.addPosition(-1);
+			continue;
+		case VK_DOWN:
+			DisplayManager.addPosition(1);
+			continue;
 		case '?':
 		case 'p':
 		{
@@ -49,13 +59,13 @@ void Help_Show()
 			if(isPadHelp) {
 				printsub("                                   --- " + LocalzationManager::locString(LOC_SYSTEM_PAD_COMMAND_LIST) + " ---",true,CL_normal);
 				printsub("",true,CL_normal);
-				for(TextHelper text_ : LocalzationManager::getHelpCommand()) {
+				for(TextHelper text_ : LocalzationManager::getHelpPadCommand()) {
 					printsub(text_.text,text_.enter,text_.color);
 				}
 			} else {
 				printsub("                                   --- " + LocalzationManager::locString(LOC_SYSTEM_COMMAND_LIST) + " ---",true,CL_normal);
 				printsub("",true,CL_normal);
-				for(TextHelper text_ : LocalzationManager::getHelpPadCommand()) {
+				for(TextHelper text_ : LocalzationManager::getHelpCommand()) {
 					printsub(text_.text,text_.enter,text_.color);
 				}
 			}

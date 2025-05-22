@@ -362,6 +362,7 @@ enum smoke_type
 	SMT_WHIRLWIND,
 	SMT_CURSE,
 	SMT_BLIZZARD,
+	SMT_HEAVENLY_STORM,
 	SMT_MAX
 };
 
@@ -803,6 +804,7 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_d
 	ATT_LUNATIC,
 	ATT_SLEEP,
 	ATT_HOOF,
+	ATT_BEARTRAP,
 	ATT_THROW_NORMAL, //여기부터 그레이즈가 됨
 	ATT_THROW_NONE_MASSAGE,
 	ATT_THROW_NONE_DAMAGE,
@@ -904,6 +906,7 @@ enum monster_state_simple //표시용 상태
 	MSS_HP,
 	MSS_OIL,
 	MSS_FIRE,
+	MSS_NONE_MOVE,
 	MSS_MAX
 };
 

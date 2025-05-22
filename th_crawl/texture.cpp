@@ -1803,6 +1803,11 @@ textures img_fog_slow[] = {textures(&texture_item01, 84, 255),
 							    textures(&texture_item01, 86, 255),
 							    textures(&texture_item01, 87, 255)
 };
+textures img_fog_heavenly_storm[] = {textures(&texture_item03, 209, 255),
+	textures(&texture_item03, 210, 255),
+	textures(&texture_item03, 211, 255),
+	textures(&texture_item03, 212, 255)
+};
 
 textures img_fog_sion[3][4] = { {textures(&texture_item03, 13, 255),
 textures(&texture_item03, 14, 255),
@@ -3515,6 +3520,8 @@ int texturetoint(textures* input)
 		return 549;
 	else if(input == &img_item_skeleton[2])
 		return 550;
+	else if(input == &img_fog_heavenly_storm[0])
+		return 551;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -4643,6 +4650,8 @@ textures* inttotexture(int input)
 		return &img_item_skeleton[1];
 	case 550:
 		return &img_item_skeleton[2];
+	case 551:
+		return &img_fog_heavenly_storm[0];
 	default:
 		return &img_mons_default;
 	}

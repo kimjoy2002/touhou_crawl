@@ -457,6 +457,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_THROW_WEAK_POISON:
 	case ATT_THROW_MIDDLE_POISON:
 	case ATT_THROW_STRONG_POISON:
+	case ATT_BEARTRAP:
 	default:
 		{//데미지 계산공식
 			//최종데미지  :  1d(percent_*damage_) - 0d(ac_dec)
@@ -617,6 +618,7 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_THROW_MIDDLE_POISON:
 	case ATT_THROW_STRONG_POISON:
 	case ATT_THROW_NONE_DAMAGE:
+	case ATT_BEARTRAP:
 	default:
 		if(a.order)
 		{

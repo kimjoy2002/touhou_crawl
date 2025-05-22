@@ -1002,6 +1002,9 @@ bool players::damage(attack_infor &a, bool perfect_)
 				if (a.type == ATT_LUNATIC && randA(2) == 0) {
 					SetLunatic(rand_int(3,8));	
 				}
+				if (a.type == ATT_BEARTRAP) {
+					SetNoneMove(10);	
+				}
 
 				//SkillTraining(SKT_ARMOUR,3);
 			}

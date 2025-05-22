@@ -342,8 +342,11 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  22,  9,  14,  20,  3}, //츠쿠모
 	{  31,  9,  14,  25,  3}, //코이시
 	{  49,  9,  14,  15,  3}, //책읽는요괴(토키코)
+	{  74,  9,  14,  15,  3}, //에노코
+	{  75,  11,  14,  15,  3}, //치야리
 	{  35,  11,  14,  15,  3}, //클라운피스
 	{  37,  11,  14,  15,  3}, //레티
+	{  76,  12,  14,  15,  5}, //손미천
 	{ 55,  13,  14, 10,  5 }, //케이네
 	
 	//안개호수
@@ -355,6 +358,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  21,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4,  10,  3}, //파르시
 	{  18,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4,  15,  2}, //세키반키
 	{  49,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4,  15,  2}, //책읽는요괴(토키코)
+	{  74,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4,  15,  2}, //에노코
 	{  18,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4,  15,  2}, //세키반키
 
 	{ 57,  YOUKAI_MOUNTAIN_LEVEL , YOUKAI_MOUNTAIN_LEVEL + 3,  20,  4 }, //프리즘리버
@@ -365,6 +369,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	//{  13,  YOUKAI_MOUNTAIN_LEVEL+4,  YOUKAI_MOUNTAIN_LEVEL+4,  100,  5}, //아야(현재버젼에선 벌트로 등장)
 	{  21,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  10,  3}, //파르시
 	{ 69,  YOUKAI_MOUNTAIN_LEVEL,   YOUKAI_MOUNTAIN_LEVEL + 3,  10,  3}, //쿠타카
+	{  76,   YOUKAI_MOUNTAIN_LEVEL+2,   YOUKAI_MOUNTAIN_LEVEL + 3,  20,  5}, //손미천
 	//{  19,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+2,  30,  3}, //니토리(현재버젼에선 벌트로 등장)
 
 
@@ -374,8 +379,9 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	//{  25,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  40,  4}, //파츄리(아마 벌트고정)
 	{  26,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  50,  3}, //소악마
 	{ 69,  SCARLET_LEVEL+1,   SCARLET_LEVEL + 3,  10,  3}, //쿠타카
+	{  75,   SCARLET_LEVEL+1,   SCARLET_LEVEL + 3,  20,  3}, //치야리
 	//{  27,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4,  60,  4}, //메이린(아마 벌트고정)
-	{  28,  SCARLET_LEVEL+3,  SCARLET_LEVEL+4,  100,  4}, //사쿠야
+	{  28,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  100,  4}, //사쿠야
 	//{  29,  SCARLET_LEVEL+4,  SCARLET_LEVEL+4,  60,  5}, //레밀리아 아마 벌트 고정
 	
 	
@@ -404,7 +410,8 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{ 59,  DEPTH_LEVEL + 2, DEPTH_LAST_LEVEL , 15,  28 }, //스미레코
 	{ 72,  DEPTH_LEVEL + 3, DEPTH_LAST_LEVEL, 10,  28 }, //사키
 	
-	{ 6,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+1, 20,  28}, //키스메 
+	{ 6,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+1, 20,  3}, //키스메 
+	{ 75, SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+2,  20,  3}, //치야리
 	{ 15,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+2, 20,  28}, //야마메 
 	{ 21,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+3, 20,  28}, //파르시 
 	{ 23,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+5, 30,  28}, //오린
@@ -2159,6 +2166,15 @@ void SetResistMonster(monster* mon)
 		mon->ice_resist=1;
 		mon->elec_resist=1;
 		mon->fire_resist=3;
+		break;
+	case MON_ENOKO:
+		mon->ice_resist=1;
+		break;
+	case MON_CHIYARI:
+		mon->fire_resist=2;
+		break;
+	case MON_SONBITEN:
+		mon->elec_resist=1;
 		break;
 	}
 }

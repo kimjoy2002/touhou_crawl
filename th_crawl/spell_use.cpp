@@ -4844,6 +4844,15 @@ bool skill_throw_oil(int power, bool short_, unit* order, coord_def target)
 
 bool skill_heavenly_storm(int pow, bool short_, unit* order, coord_def target)
 {
+	if (order->isplayer() || order->GetId() != MON_SONBITEN)
+		return false;
+	if (env[current_level].isInSight(order->position)) {
+		soundmanager.playSound("wind");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_UNIQUE_SONBITEN,true,false,false,CL_small_danger,
+			PlaceHolderHelper(order->GetName()->getName()));
+	}
+	order->ChangeMonster(MON_SONBITEN_SPINTOWIN, 0);
+	((monster*)order)->special_value = rand_int(20,30);
 	return false;
 }
 
@@ -5762,7 +5771,13 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_THROW_OIL, 25));
 		list->push_back(spell(SPL_FIRE_BALL, 15));
 		break;
-
+	case MON_CHIYARI:
+		list->push_back(spell(SPL_BLOOD_SMITE, 20));
+		list->push_back(spell(SPL_FIRE_BOLT, 25));
+		break;
+	case MON_SONBITEN:
+		list->push_back(spell(SPL_HEAVENLY_STORM, 15));
+		break;
 	default:
 		break;
 	}

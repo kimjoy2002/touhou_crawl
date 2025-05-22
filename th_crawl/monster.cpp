@@ -4004,6 +4004,20 @@ void monster::special_action(int delay_, bool smoke_)
 		}
 	}
 	break;
+	case MON_VINE:
+		if (!smoke_){
+			for(auto it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end();it++)
+			{
+				if(it->isLive() && !(it->flag & M_FLAG_NONE_MOVE) && isEnemyMonster(&(*it)) && distan_coord(position,it->position) <= 2)
+				{
+					//t->SetSwift(-10);
+				}
+			}
+			if(isEnemyUnit(&you) && distan_coord(you.position,position) <= 2) {
+				you.s_swift = -2;
+			}
+		}
+	break;
 	default:
 		break;
 	}

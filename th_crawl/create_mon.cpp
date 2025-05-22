@@ -1007,7 +1007,10 @@ void create_id_to_mon(int id, int level, int strong)
 		break;
 	case 102:
 		index.push_back(pair<monster_index, int>(MON_FOG_FAIRY, strong));
-		break;	
+		break;
+	case 103:
+		index.push_back(pair<monster_index, int>(MON_TSUCHINOKO, strong));
+		break;
 	}
 
 	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;
@@ -2175,6 +2178,14 @@ void SetResistMonster(monster* mon)
 		break;
 	case MON_SONBITEN:
 		mon->elec_resist=1;
+		break;
+	case MON_TSUCHINOKO:
+		break;
+	case MON_VINE:
+		mon->fire_resist = -1;
+		mon->elec_resist = 3;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
 		break;
 	}
 }

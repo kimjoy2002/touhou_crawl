@@ -4890,7 +4890,22 @@ bool skill_create_fog(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_grow_vine(int pow, bool short_, unit* order, coord_def target)
 {
-	return false;
+	bool return_=false;
+	
+	int i = rand_int(3,4); 
+	for(; i>0 ; i--)
+	{
+		if(monster *mon_ = BaseSummon(MON_VINE, rand_int(20,30)+pow/20, true, false, 1, order, target, SKD_SUMMON_VINE, GetSummonMaxNumber(SPL_GROW_VINE)))
+		{
+			return_ = true;
+		}
+	} 
+	if (return_) {
+		if (env[current_level].isInSight(order->position)) {
+			soundmanager.playSound("summon");
+		}
+	}
+	return return_;
 }
 
 bool skill_close_door(int pow, bool short_, unit* order, coord_def target)
@@ -5773,6 +5788,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	case MON_FOG_FAIRY:
 		list->push_back(spell(SPL_CREATE_FOG, 50));
+		break;
+	case MON_TSUCHINOKO:
+		list->push_back(spell(SPL_GROW_VINE, 50));
 		break;
 	case MON_YUMA:
 		list->push_back(spell(SPL_THROW_OIL, 25));

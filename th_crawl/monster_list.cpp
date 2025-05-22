@@ -1024,13 +1024,13 @@ const mon_infor mondata[] = {
 		{4,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_SPEAK | M_FLAG_FLY,0,1,10,'f'},
 
-	{MON_TSUCHINOKO,2,4,name_infor(MON_TSUCHINOKO),&img_mons_tsuchinoko,25,0,5,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
+	{MON_TSUCHINOKO,13,900,name_infor(MON_TSUCHINOKO),&img_mons_tsuchinoko,150,3,3,
+		{35,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_ANIMAL | M_FLAG_SWIM,0,0,12,'S'},
 
-	{MON_VINE,2,4,name_infor(MON_VINE),&img_mons_vine,25,0,5,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_NONE_STAIR | M_FLAG_NONE_MOVE | M_FLAG_NO_STATE | M_FLAG_INANIMATE | M_FLAG_UNHARM | M_FLAG_NO_ATK  | M_FLAG_CANT_NETURAL,0,0,15,'y'},
+	{MON_VINE,1,0,name_infor(MON_VINE),&img_mons_vine,30,0,0,
+		{0,0,0},{ATT_NONE,ATT_NONE,ATT_NONE},{name_infor(),name_infor(),name_infor()},
+		M_FLAG_NONE_STAIR | M_FLAG_NONE_MOVE | M_FLAG_NO_STATE | M_FLAG_INANIMATE | M_FLAG_UNHARM | M_FLAG_NO_ATK  | M_FLAG_CANT_NETURAL,0,0,15,'W'},
 
 	{MON_SECURITY_MAID_FIARY,2,4,name_infor(MON_SECURITY_MAID_FIARY),&img_mons_security_fairy_maid,25,0,5,
 		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},

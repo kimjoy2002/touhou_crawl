@@ -2415,7 +2415,7 @@ list<item>::iterator environment::GetPositiontoitemend(coord_def position_)
 }
 
 
-void SaveFile()
+void SaveFile(bool test_)
 { 
 	if(ReplayClass.ReplayMode())
 		return;
@@ -2425,16 +2425,34 @@ void SaveFile()
 	WaitForSingleObject(mutx, INFINITE);
 	FILE *fp;
 
-	std::wstring wfilename = ConvertUTF8ToUTF16(save_file[option_mg.getSaveSlot()-1]);
+	std::wstring wfilename = save_file_w[option_mg.getSaveSlot()-1];
+
     if (_wfopen_s(&fp, wfilename.c_str(), L"wb") != 0 || !fp) {
+		std::wstringstream ss;
+		ss << L"errno: " << errno << L"\n";
+
+		switch (errno) {
+			case EACCES: ss << L"Access denied (EACCES)"; break;
+			case EEXIST: ss << L"File exists (EEXIST)"; break;
+			case EINVAL: ss << L"Invalid parameter (EINVAL)"; break;
+			case ENOENT: ss << L"Path not found (ENOENT)"; break;
+			case EMFILE: ss << L"Too many open files (EMFILE)"; break;
+			case ENFILE: ss << L"Too many files in system (ENFILE)"; break;
+			default: ss << L"Unknown error";
+		}
+
+		::MessageBoxW(0, ss.str().c_str(), L"fopen error", MB_OK | MB_ICONERROR);
+		ReleaseMutex(mutx);
         return;
     }
+
 
 	SaveData<int>(fp, current_level);
 	//최소한의 정보
 
 
 	you.SaveDatas(fp);
+
 	for(int i = 0; i < MAXLEVEL; i++)
 	{
 		env[i].SaveDatas(fp);
@@ -2455,7 +2473,6 @@ void SaveFile()
 
 	fclose(fp);
 
-
 	ReleaseMutex(mutx);
 }
 
@@ -2465,7 +2482,7 @@ void LoadFile()
 	WaitForSingleObject(mutx, INFINITE);
 	FILE *fp;
 
-	std::wstring wfilename = ConvertUTF8ToUTF16(save_file[option_mg.getSaveSlot()-1]);
+	std::wstring wfilename = save_file_w[option_mg.getSaveSlot()-1];
     if (_wfopen_s(&fp, wfilename.c_str(), L"rb") != 0 || !fp) {
         return;
     }

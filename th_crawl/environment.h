@@ -365,7 +365,7 @@ int GetLevelMonsterNum(int level, bool item_);
 void Noise(coord_def center_, int length_, const unit* excep_=NULL);
 bool Auto_Pick_Up(list<item>::iterator it);
 
-void SaveFile();
+void SaveFile(bool test_ = false);
 void LoadFile();
 
 

@@ -252,7 +252,7 @@ bool checkSavefile(int value_)
 	if(ReplayClass.ReplayMode() == true)
 		return false;
 
-	if(load_data(save_file[option_mg.getSaveSlot()-1].c_str()))
+	if(load_data(save_file_w[option_mg.getSaveSlot()-1]))
 	{
 		steam_mg.setCurrentInfo();
 		saveexit = true;

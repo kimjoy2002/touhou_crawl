@@ -29,7 +29,7 @@ class replay_class
 		InputedKey inputedkey;
 	};
 public:
-	string replay_string;
+	wstring replay_string;
 	base_infor infor;
 	bool init;
 	bool play;

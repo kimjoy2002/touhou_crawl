@@ -8,6 +8,7 @@
 
 #include "option_manager.h"
 #include "steam_api.h"
+#include "common.h"
 #include <stdio.h>
 #include <sys/stat.h>
 
@@ -25,30 +26,31 @@ vector<screen_info> able_screens = {
 	{1920, 1080},
 	{1920, 1200}
 };
+std::string wcharToUtf8(const wchar_t* wstr);
 
-void optionManager::init(string fileName) {
+void optionManager::init(wstring fileName) {
 	this->steam_lang = steam_mg.getSteamLang();
 	this->fileName = fileName;
-	struct stat stStat = { 0 };
+	struct _stat64i32  stStat = { 0 };
 
-	if (stat(fileName.c_str(), &stStat) == -1){
+	if (_wstat(fileName.c_str(), &stStat) == -1){
 		createNewFile(fileName);
 	}
 	{
 
-		TCHAR szBuf[MAX_STR_SIZE] = { 0, };
+		wchar_t szBuf[MAX_STR_SIZE] = { 0, };
 
-		GetPrivateProfileString(_T("config"), _T("name"), _T("Default"), szBuf, MAX_STR_SIZE, fileName.c_str());
-		name = TCHARToString(szBuf);
+		GetPrivateProfileStringW(_T(L"config"), _T(L"name"), _T(L"Default"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		name = wcharToUtf8(szBuf);
 
-		GetPrivateProfileString(_T("config"), _T("height"), _T("720"), szBuf, MAX_STR_SIZE, fileName.c_str());
-		height = _tstoi(szBuf);
+		GetPrivateProfileStringW(_T(L"config"), _T(L"height"), _T(L"720"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		height =  std::stoi(szBuf);
 
-		GetPrivateProfileString(_T("config"), _T("width"), _T("1280"), szBuf, MAX_STR_SIZE, fileName.c_str());
-		width = _tstoi(szBuf);
+		GetPrivateProfileStringW(_T(L"config"), _T(L"width"), _T(L"1280"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		width =   std::stoi(szBuf);
 		
-		GetPrivateProfileString(_T("config"), _T("saveslot"), _T("1"), szBuf, MAX_STR_SIZE, fileName.c_str());
-		current_saveslot = _tstoi(szBuf);
+		GetPrivateProfileStringW(_T(L"config"), _T(L"saveslot"), _T(L"1"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		current_saveslot =  std::stoi(szBuf);
 
 		if(current_saveslot > 3) {
 			current_saveslot = 3;
@@ -75,14 +77,14 @@ void optionManager::init(string fileName) {
 		}
 		calcTileXY();
 
-		GetPrivateProfileString(_T("config"), _T("fullscreen"), _T("false"), szBuf, MAX_STR_SIZE, fileName.c_str());
-		fullscreen = (_tcscmp(szBuf, _T("true")) == 0 || _tcscmp(szBuf, _T("1")) == 0);
+		GetPrivateProfileStringW(_T(L"config"), _T(L"fullscreen"), _T(L"false"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		fullscreen =  (wcscmp(szBuf, L"true") == 0 || wcscmp(szBuf, L"1") == 0);
 
-		GetPrivateProfileString(_T("config"), _T("bgm_volume"), _T("70"), szBuf, MAX_STR_SIZE, fileName.c_str());
-		bgm_volume = _tstoi(szBuf);
+		GetPrivateProfileStringW(_T(L"config"), _T(L"bgm_volume"), _T(L"70"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		bgm_volume = std::stoi(szBuf);
 
-		GetPrivateProfileString(_T("config"), _T("se_volume"), _T("70"), szBuf, MAX_STR_SIZE, fileName.c_str());
-		se_volume = _tstoi(szBuf);
+		GetPrivateProfileStringW(_T(L"config"), _T(L"se_volume"), _T(L"70"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		se_volume = std::stoi(szBuf);
 
 		// GetPrivateProfileString(_T("config"), _T("server_ip"), _T("joy1999.codns.com"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		// server_ip = TCHARToString(szBuf);
@@ -90,51 +92,36 @@ void optionManager::init(string fileName) {
 		// GetPrivateProfileString(_T("config"), _T("server_port"), _T("12345"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		// server_port = _tstoi(szBuf);
 
-		GetPrivateProfileString(_T("config"), _T("language"), _T(steam_lang.c_str()), szBuf, MAX_STR_SIZE, fileName.c_str());
-		lang = TCHARToString(szBuf);
+		GetPrivateProfileStringW(_T(L"config"), _T(L"language"), _T(ConvertUTF8ToUTF16(steam_lang).c_str()), szBuf, MAX_STR_SIZE, fileName.c_str());
+		lang = wcharToUtf8(szBuf);
 	}
 }
 
-void optionManager::createNewFile(string fileName) {
-	CString strString = _T("Default");
-	TCHAR  *tchr = (TCHAR*)(LPCTSTR)strString;
-	WritePrivateProfileString(_T("config"), _T("name"), tchr, fileName.c_str());
+void optionManager::createNewFile(wstring fileName) {
+	std::wstring name_w = L"Default";
+	WritePrivateProfileStringW(_T(L"config"), _T(L"name"), name_w.c_str(), fileName.c_str());
 
-	strString = _T("720");
-	tchr = (TCHAR*)(LPCTSTR)strString;
-	WritePrivateProfileString(_T("config"), _T("height"), tchr, fileName.c_str());
+	std::wstring height_w = L"720";
+	WritePrivateProfileStringW(_T(L"config"), _T(L"height"), height_w.c_str(), fileName.c_str());
 
-	strString = _T("1280");
-	tchr = (TCHAR*)(LPCTSTR)strString;
-	WritePrivateProfileString(_T("config"), _T("width"), tchr, fileName.c_str());
+	std::wstring width_w = L"1280";
+	WritePrivateProfileStringW(_T(L"config"), _T(L"width"), width_w.c_str(), fileName.c_str());
 	
-	strString = _T("1");
-	tchr = (TCHAR*)(LPCTSTR)strString;
-	WritePrivateProfileString(_T("config"), _T("saveslot"), tchr, fileName.c_str());
+	std::wstring saveslot_w = L"1";
+	WritePrivateProfileStringW(_T(L"config"), _T(L"saveslot"), saveslot_w.c_str(), fileName.c_str());
 
-	strString = _T("false");
-	fullscreen = (_tcscmp((LPCTSTR)strString, _T("true")) == 0 || _tcscmp((LPCTSTR)strString, _T("1")) == 0);
-	WritePrivateProfileString(_T("config"), _T("fullscreen"), tchr, fileName.c_str());
+	std::wstring fullscreen_w = L"false";
+	fullscreen = false;
+	WritePrivateProfileStringW(_T(L"config"), _T(L"fullscreen"), fullscreen_w.c_str(), fileName.c_str());
 
-	strString = _T("70");
-	tchr = (TCHAR*)(LPCTSTR)strString;
-	WritePrivateProfileString(_T("config"), _T("bgm_volume"), tchr, fileName.c_str());
+	std::wstring bgm_volume_w = L"70";
+	WritePrivateProfileStringW(_T(L"config"), _T(L"bgm_volume"), bgm_volume_w.c_str(), fileName.c_str());
 
-	strString = _T("70");
-	tchr = (TCHAR*)(LPCTSTR)strString;
-	WritePrivateProfileString(_T("config"), _T("se_volume"), tchr, fileName.c_str());
+	std::wstring se_volume_w = L"70";
+	WritePrivateProfileStringW(_T(L"config"), _T(L"se_volume"), se_volume_w.c_str(), fileName.c_str());
 
-	// strString = _T("joy1999.codns.com");
-	// tchr = (TCHAR*)(LPCTSTR)strString;
-	// WritePrivateProfileString(_T("config"), _T("server_ip"), tchr, fileName.c_str());
-
-	// strString = _T("12345");
-	// tchr = (TCHAR*)(LPCTSTR)strString;
-	// WritePrivateProfileString(_T("config"), _T("server_port"), tchr, fileName.c_str());
-
-	strString = _T(steam_lang.c_str());
-	tchr = (TCHAR*)(LPCTSTR)strString;
-	WritePrivateProfileString(_T("config"), _T("language"), tchr, fileName.c_str());
+	std::wstring steam_lang_w = ConvertUTF8ToUTF16(steam_lang);
+	WritePrivateProfileStringW(_T(L"config"), _T(L"language"), steam_lang_w.c_str(), fileName.c_str());
 }
 
 void optionManager::calcTileXY() {
@@ -164,8 +151,8 @@ void optionManager::setFullscreen(bool full_value) {
     fullscreen = full_value; 
 
 	if(!fileName.empty()) {
-        CString strValue = full_value ? _T("true") : _T("false");
-        WritePrivateProfileString(_T("config"), _T("fullscreen"), strValue, fileName.c_str());
+        CStringW strValue = full_value ? _T(L"true") : _T(L"false");
+        WritePrivateProfileStringW(_T(L"config"), _T(L"fullscreen"), strValue, fileName.c_str());
 	}
 }
 
@@ -173,8 +160,8 @@ void optionManager::setSaveSlot(int currentsaveslot) {
     current_saveslot = currentsaveslot; 
 
 	if(!fileName.empty()) {
-		CString str(to_string(current_saveslot).c_str());
-		WritePrivateProfileString(_T("config"), _T("false"), str, fileName.c_str());
+		CStringW str(to_string(current_saveslot).c_str());
+		WritePrivateProfileStringW(_T(L"config"), _T(L"false"), str, fileName.c_str());
 	}
 }
 
@@ -182,8 +169,8 @@ void optionManager::setWidth(int w_value) {
     width = w_value;  // lang이 string일 경우
 
 	if(!fileName.empty()) {
-		CString strW(to_string(w_value).c_str());
-		WritePrivateProfileString(_T("config"), _T("width"), strW, fileName.c_str());
+		CStringW strW(to_string(w_value).c_str());
+		WritePrivateProfileStringW(_T(L"config"), _T(L"width"), strW, fileName.c_str());
 	}
 }
 
@@ -192,8 +179,8 @@ void optionManager::setHeight(int h_value) {
     height = h_value;  // lang이 string일 경우
 
 	if(!fileName.empty()) {
-		CString strH(to_string(h_value).c_str());
-		WritePrivateProfileString(_T("config"), _T("height"), strH, fileName.c_str());
+		CStringW strH(to_string(h_value).c_str());
+		WritePrivateProfileStringW(_T(L"config"), _T(L"height"), strH, fileName.c_str());
 	}
 }
 
@@ -202,8 +189,8 @@ void optionManager::setLang(const string& lang_value) {
     lang = lang_value;  // lang이 string일 경우
 
 	if(!fileName.empty()) {
-		CString strLang(lang_value.c_str());
-		WritePrivateProfileString(_T("config"), _T("language"), strLang, fileName.c_str());
+		CStringW strLang(lang_value.c_str());
+		WritePrivateProfileStringW(_T(L"config"), _T(L"language"), strLang, fileName.c_str());
 	}
 }
 
@@ -231,4 +218,18 @@ string optionManager::TCHARToString(const TCHAR* ptsz)
 	str = ptsz;
 #endif
 	return str;
+}
+
+std::string wcharToUtf8(const wchar_t* wstr)
+{
+    if (!wstr) return "";
+
+    int size_needed = WideCharToMultiByte(CP_UTF8, 0, wstr, -1, nullptr, 0, nullptr, nullptr);
+    if (size_needed <= 0) return "";
+
+    std::string result(size_needed, 0);
+    WideCharToMultiByte(CP_UTF8, 0, wstr, -1, &result[0], size_needed, nullptr, nullptr);
+    result.pop_back(); // remove null terminator
+
+    return result;
 }

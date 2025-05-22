@@ -26,7 +26,7 @@
 extern const char *version_string;
 
 
-extern string morgue_path;
+extern wstring morgue_path_w;
 
 
 
@@ -120,20 +120,24 @@ bool Dump(int type, string *filename_)
 	ostringstream ss;
 	char filename[256];
 	//char sql_[256];
-	_mkdir(morgue_path.c_str());
+	_wmkdir(morgue_path_w.c_str());
 	FILE *fp;
 	struct tm t;
 	time_t now;
 	time(&now);
 	localtime_s(&t, &now);
 
-	sprintf_s(filename, 256, (morgue_path + "/%s-%s-%04d%02d%02d-%02d%02d%02d.txt").c_str(),
-		isNormalGame() ? "dump" : (isArena()?"arena": (isArena()?"sprint":"dump")),
-		you.user_name.c_str(),
-		1900 + t.tm_year, t.tm_mon + 1, t.tm_mday, t.tm_hour, t.tm_min, t.tm_sec);
+	wchar_t wfilename[256];
 
-	std::wstring wfilename = ConvertUTF8ToUTF16(filename);
-	if(_wfopen_s(&fp, wfilename.c_str(), L"wt") != 0 || !fp){
+	swprintf_s(wfilename, 256, L"%s\\%s-%s-%04d%02d%02d-%02d%02d%02d.txt",
+		morgue_path_w.c_str(),
+		isNormalGame() ? L"dump" : (isArena() ? L"arena" : L"sprint"),
+		ConvertUTF8ToUTF16(you.user_name).c_str(),
+		1900 + t.tm_year, t.tm_mon + 1, t.tm_mday,
+		t.tm_hour, t.tm_min, t.tm_sec);
+
+    *filename_ = ConvertUTF16ToUTF8(wfilename);
+	if(_wfopen_s(&fp, wfilename, L"wt") != 0 || !fp){
 		return false;  
 	}
 	unsigned char utf8_bom[] = { 0xEF, 0xBB, 0xBF };

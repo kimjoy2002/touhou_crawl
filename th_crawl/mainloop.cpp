@@ -629,7 +629,7 @@ void init_alldata() {
 	iden_list = Iden_collect(); 
 	int temp = map_list.random_number;
  	map_list = map_infor();	
-	ReplayClass.replay_string = "";
+	ReplayClass.replay_string = L"";
 	map_list.random_number = temp;
 	unique_list.clear();
 	DisplayManager.initText();

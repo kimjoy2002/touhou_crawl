@@ -14,8 +14,8 @@
 
 #include <iostream>
 
-extern std::string save_file[3];
-extern std::string user_name_file;
+extern std::wstring save_file_w[3];
+extern std::wstring user_name_file_w;
 
 template <typename T>
 void SaveData(FILE *fp, const T &input, int size = 1)
@@ -55,8 +55,8 @@ void delete_file();
 void saveandexit();
 void saveandcheckexit();
 void nosaveandexit();
-bool load_data(const char* path);
-bool load_name(const char* path);
+bool load_data(const std::wstring& path);
+bool load_name(const std::wstring& path);
 
 
 #endif // __SAVE_H__

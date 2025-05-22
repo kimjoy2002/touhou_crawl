@@ -22,7 +22,7 @@ typedef struct _finddata_t  FILE_SEARCH;
 
 
 extern const char *version_string;
-extern string replay_path;
+extern wstring replay_path_w;
 
 replay_class ReplayClass;
 
@@ -36,7 +36,7 @@ replay_class::~replay_class()
 void replay_class::DeleteRpy()
 {
 	if(!replay_string.empty()){		
-		remove(replay_string.c_str());
+		DeleteFileW(replay_string.c_str());
 		replay_string.clear();
 	}
     input_buffer.clear();
@@ -44,8 +44,9 @@ void replay_class::DeleteRpy()
 
 void replay_class::SaveDatas(FILE *fp)
 {
+	std::string utf8str = ConvertUTF16ToUTF8(replay_string);
 	char temp[1024];
-	sprintf_s(temp,1024,"%s",replay_string.c_str());
+	sprintf_s(temp,1024,"%s",utf8str.c_str());
 	SaveData<char>(fp,*temp, strlen(temp)+1);
 
 	SaveData<base_infor>(fp,infor);
@@ -60,7 +61,7 @@ void replay_class::LoadDatas(FILE *fp)
 	DeleteRpy();
 	char temp[1024];
 	LoadData<char>(fp, *temp);
-	replay_string = temp;
+	replay_string = ConvertUTF8ToUTF16(temp);
 	
 	LoadData<base_infor>(fp,infor);
 	
@@ -79,10 +80,10 @@ void replay_class::init_class(std::vector<int>& init_starting)
 	time_t now;
 	time(&now);
 	localtime_s(&t, &now);
-	char filename[512];
-	sprintf_s(filename,512, (replay_path + "/%s-%04d%02d%02d-%02d%02d%02d.rpy").c_str(),you.user_name.c_str(),1900+t.tm_year,t.tm_mon+1,t.tm_mday,t.tm_hour,t.tm_min,t.tm_sec);
+	wchar_t wfilename[512];
+	swprintf_s(wfilename,512, (replay_path_w + L"/%s-%04d%02d%02d-%02d%02d%02d.rpy").c_str(),ConvertUTF8ToUTF16(you.user_name).c_str(),1900+t.tm_year,t.tm_mon+1,t.tm_mday,t.tm_hour,t.tm_min,t.tm_sec);
 	
-	replay_string = filename;
+	replay_string = wfilename;
 	sprintf_s(infor.name,64,"%s",you.user_name.c_str());
 	sprintf_s(infor.version,32,"%s",version_string);
 	memset(infor.infor,0,256);
@@ -97,7 +98,7 @@ void replay_class::init_replay(const char* name)
 {
 	DeleteRpy();
 
-	replay_string = name;
+	replay_string = ConvertUTF8ToUTF16(name);
 	
 	play = true;
 	auto_key = true;
@@ -108,7 +109,7 @@ bool replay_class::SaveReplayStart()
     if (!init || play)
         return false;
 
-    _mkdir(replay_path.c_str());  // Windows에서 mkdir 대신 _mkdir 사용
+    _wmkdir(replay_path_w.c_str());  // Windows에서 mkdir 대신 _mkdir 사용
 
     FILE* fp = nullptr;
     struct tm t;
@@ -117,10 +118,10 @@ bool replay_class::SaveReplayStart()
 	localtime_s(&t, &now);
 
     if (replay_string.empty()) {
-        replay_string = replay_path + "/temp.rpy";
+        replay_string = replay_path_w + L"/temp.rpy";
     }
 	
-    std::wstring wfilename = ConvertUTF8ToUTF16(replay_string);
+    std::wstring wfilename = replay_string;
 
     if (_wfopen_s(&fp, wfilename.c_str(), L"wb") != 0 || !fp) {
         return false;
@@ -149,7 +150,7 @@ bool replay_class::FlushReplayInput()
         return false;
 
     FILE* fp = nullptr;
-    std::wstring wfilename = ConvertUTF8ToUTF16(replay_string);
+    std::wstring wfilename = replay_string;
 
     if (_wfopen_s(&fp, wfilename.c_str(), L"ab") != 0 || !fp)
         return false;
@@ -182,13 +183,9 @@ bool replay_class::LoadReplayStart()
 		return false;
 	}
 
-	char filename[512];
-	_mkdir(replay_path.c_str());
+	_wmkdir(replay_path_w.c_str());
 	
-	sprintf_s(filename,512,"%s",replay_string.c_str());
-
-	
-	std::wstring wfilename = ConvertUTF8ToUTF16(filename);
+	std::wstring wfilename = replay_string;
 
 	if (_wfopen_s(&play_fp, wfilename.c_str(), L"rb") != 0 || !play_fp) {
 		auto_key = false;
@@ -272,11 +269,8 @@ bool replay_class::StopReplay(string str)
 		FlushReplayInput();
 		strcpy_s(infor.infor,256,str.c_str());
 		
-		char filename[512];
-		FILE *fp;  
-		sprintf_s(filename,512,"%s",replay_string.c_str());
-
-		std::wstring wfilename = ConvertUTF8ToUTF16(filename);
+		FILE *fp; 
+		std::wstring wfilename = replay_string;
 
 		if(_wfopen_s(&fp, wfilename.c_str(), L"r+b") == 0 && fp)
 		{
@@ -284,7 +278,7 @@ bool replay_class::StopReplay(string str)
 			fwrite(&infor,sizeof(base_infor),1,fp);
 			//rewind(fp);
 			fclose(fp);
-			replay_string = "";
+			replay_string = L"";
 		}
 	}
 	return true;
@@ -296,10 +290,10 @@ bool replay_class::StopReplay(string str)
 class replay_sort
 {
 public:
-	string path;	
+	wstring path;	
 	string infor;	
 	FILETIME localtime;
-	replay_sort(string path_,string infor_,FILETIME localtime_):path(path_),infor(infor_),localtime(localtime_){};
+	replay_sort(wstring path_,string infor_,FILETIME localtime_):path(path_),infor(infor_),localtime(localtime_){};
 
 
 	bool operator<(const replay_sort &t) const {
@@ -321,8 +315,8 @@ bool replay_menu(int value_)
 
 
 	
-		WIN32_FIND_DATAA findFileData;
-		HANDLE MyHandle = FindFirstFileA((replay_path + "/*.rpy").c_str(),&findFileData);
+		WIN32_FIND_DATAW  findFileData;
+		HANDLE MyHandle = FindFirstFileW((replay_path_w + L"/*.rpy").c_str(),&findFileData);
 		
 		
 		std::vector<replay_sort> file_vector;
@@ -330,18 +324,19 @@ bool replay_menu(int value_)
 		{
 			do
 			{	
-				char filename[512];
-				
-				sprintf_s(filename,512,(replay_path + "/%s").c_str(),findFileData.cFileName);
-				
-				std::wstring wfilename = ConvertUTF8ToUTF16(filename);
-				FILE *fp;
+				std::wstring wfull_path = replay_path_w + L"/" + findFileData.cFileName;
+				std::string filename_utf8 = ConvertUTF16ToUTF8(wfull_path);
+
+				std::wstring wfilename = wfull_path;
+				FILE* fp;
 				base_infor temp_infor;
 				if(_wfopen_s(&fp, wfilename.c_str(), L"rb") == 0 && fp)
 				{
 					fread(&temp_infor,sizeof(base_infor),1,fp);
-					fclose(fp);
-					if(strcmp(temp_infor.version,version_string)==0 && strcmp(filename, ReplayClass.replay_string.c_str()) && temp_infor.infor[0] != 0)
+					fclose(fp);					
+					if (strcmp(temp_infor.version, version_string) == 0 &&
+						wfilename != ReplayClass.replay_string && 
+						temp_infor.infor[0] != 0)
 					{
 						FILETIME localtime_;
 						FileTimeToLocalFileTime(&findFileData.ftCreationTime,&localtime_);
@@ -353,7 +348,7 @@ bool replay_menu(int value_)
 
 					}
 				}
-			}while(FindNextFileA(MyHandle,&findFileData)!=0 );
+			}while(FindNextFileW(MyHandle,&findFileData)!=0 );
 
 
 
@@ -393,7 +388,7 @@ bool replay_menu(int value_)
 						break;
 
 					ostringstream ss;
-					ss << char_ << " - " << file_vector[cur].path;
+					ss << char_ << " - " << ConvertUTF16ToUTF8(file_vector[cur].path);
 					SYSTEMTIME stC;
 					memset(&stC, 0, sizeof(stC));
 					FileTimeToSystemTime(&file_vector[cur].localtime, &stC);
@@ -471,8 +466,11 @@ bool replay_menu(int value_)
 
 				if(select_<file_num)
 				{
+					std::wstring wpath = replay_path_w + L"/" + file_vector[select_].path;
+					std::string utf8path = ConvertUTF16ToUTF8(wpath);
 					char temp[512];
-					sprintf_s(temp,512,(replay_path + "/%s").c_str(),file_vector[select_].path.c_str());
+					sprintf_s(temp,utf8path.c_str(), sizeof(temp) - 1);
+					temp[sizeof(temp) - 1] = '\0';
 					ReplayClass.init_replay(temp);
 					ReplayClass.LoadReplayStart();
 					game_over = true;

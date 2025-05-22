@@ -26,7 +26,7 @@ struct screen_info {
 };
 
 class optionManager {
-	string fileName;
+	wstring fileName;
 	string name;
 	string steam_lang;
 
@@ -45,9 +45,9 @@ class optionManager {
 
 public:
 	optionManager() {};
-	void init(string fileName);
+	void init(wstring fileName);
 
-	void createNewFile(string fileName);
+	void createNewFile(wstring fileName);
 	void calcTileXY();
 	screen_info getNextScreen(int& pos);
 

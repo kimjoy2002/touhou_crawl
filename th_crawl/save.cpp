@@ -18,14 +18,13 @@ extern HANDLE mutx;
 extern std::atomic<bool> g_saveandexit;
 
 const wchar_t* saveslot_wstring[3] = {L"save.sav",L"save2.sav",L"save3.sav"};
-const char* saveslot_string[3] = {"save.sav","save2.sav","save3.sav"};
 
 
-std::string app_path;
-std::string save_file[3];
-std::string user_name_file;
-std::string replay_path;
-std::string morgue_path;
+std::wstring app_path_w;
+std::wstring save_file_w[3];
+std::wstring user_name_file_w;
+std::wstring replay_path_w;
+std::wstring morgue_path_w;
 
 
 void init_save_paths() {
@@ -35,35 +34,35 @@ void init_save_paths() {
         base /= L"AppData\\LocalLow\\TouhouCrawl\\TouhouCrawl";
         std::filesystem::create_directories(base); // 폴더가 없으면 생성
 
-		option_mg.init((base / L"config.ini").string());
+		option_mg.init((base / L"config.ini").wstring());
 
 		for(int i = 0; i < 3; i++) {
-        	save_file[i] = (base / saveslot_wstring[i]).string();
+        	save_file_w[i] = (base / saveslot_wstring[i]).wstring();
 		}
-        user_name_file = (base / L"user_name.txt").string();
-		replay_path = (base / L"replay").string();
-		morgue_path = (base / L"morgue").string();
+        user_name_file_w = (base / L"user_name.txt").wstring();
+		replay_path_w = (base / L"replay").wstring();
+		morgue_path_w = (base / L"morgue").wstring();
     } else {
-		option_mg.init("./config.ini");
+		option_mg.init(L"./config.ini");
 
 		for(int i = 0; i < 3; i++) {
-        	save_file[i] = saveslot_string[i];
+        	save_file_w[i] = saveslot_wstring[i];
 		}
-        user_name_file ="user_name.txt";
-		replay_path = "replay";
-		morgue_path = "morgue";
+        user_name_file_w = L"user_name.txt";
+		replay_path_w = L"replay";
+		morgue_path_w = L"morgue";
 
     }
 }
 
 void delete_file(int slot)
 {
-	remove(save_file[slot-1].c_str());
+	DeleteFileW(save_file_w[slot-1].c_str());
 }
 
 void delete_file()
 {
-	remove(save_file[option_mg.getSaveSlot()-1].c_str());
+	DeleteFileW(save_file_w[option_mg.getSaveSlot()-1].c_str());
 	saveexit = false;
 
 }
@@ -166,30 +165,32 @@ void nosaveandexit()
 		}
 	}
 }
-bool load_data(const char* path)
+bool load_data(const std::wstring& path)
 {
-	if(GetFileAttributes(path) == -1)
-	{
-		return false;
-	}
-	else
+    DWORD attr = GetFileAttributesW(path.c_str());
+    if (attr == INVALID_FILE_ATTRIBUTES)
+    {
+        return false;
+    }
+    else
 	{
 		LoadFile();
 		return true;
 	}
 }
 
-bool load_data_onlyinfo(string path, players& temp_player)
+bool load_data_onlyinfo(wstring path, players& temp_player)
 {
-	if(GetFileAttributes(path.c_str()) == -1)
-	{
-		return false;
-	}
+    DWORD attr = GetFileAttributesW(path.c_str());
+    if (attr == INVALID_FILE_ATTRIBUTES)
+    {
+        return false;
+    }
 	else
 	{
 		//WaitForSingleObject(mutx, INFINITE);
 		FILE *fp;
-		std::wstring wfilename = ConvertUTF8ToUTF16(path);
+		std::wstring wfilename = path;
 		if (_wfopen_s(&fp, wfilename.c_str(), L"rb") != 0 || !fp) {
 			return false;
 		}
@@ -206,18 +207,19 @@ bool load_data_onlyinfo(string path, players& temp_player)
 
 
 
-bool load_name(const char* path)
+bool load_name(const std::wstring& path)
 {
-	if(GetFileAttributes(path) == -1)
-	{
-		return false;
-	}
+    DWORD attr = GetFileAttributesW(path.c_str());
+    if (attr == INVALID_FILE_ATTRIBUTES)
+    {
+        return false;
+    }
 	else
 	{	
 		FILE *fp;
 		char name[31];
 
-		std::wstring wfilename = ConvertUTF8ToUTF16(user_name_file);
+		std::wstring wfilename = user_name_file_w;
 
 		if(_wfopen_s(&fp, wfilename.c_str(), L"rt") != 0 || !fp)
 			return false;
@@ -261,7 +263,7 @@ bool save_menu(int value_)
 	for(int i = 0; i < 3; i++) {
 		try {
 			players temp_player;
-			if(load_data_onlyinfo(save_file[i], temp_player)) {
+			if(load_data_onlyinfo(save_file_w[i], temp_player)) {
 				ostringstream ss;
 				if(!(temp_player.tribe >= 0 && temp_player.tribe < TRI_MAX && temp_player.job >= 0 && temp_player.job < JOB_MAX)) {
 					ss << LocalzationManager::locString(LOC_SYSTEM_SAVE_MENU_BROKEN);

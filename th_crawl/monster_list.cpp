@@ -19,22 +19,22 @@
 */
 const mon_infor mondata[] = {
 	{MON_REIMUYUKKURI,2,4,name_infor(MON_REIMUYUKKURI),&img_mons_reimu_yukkuri,25,0,5,
-	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{4,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_SPEAK,0,0,15,'y'},
 
 	{MON_REIMUYUKKURI,2,70,name_infor(MON_REIMUYUKKURI),&img_mons_reimu_yukkuri,25,0,5,
-	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{4,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
 
-	{MON_RAT,1,1,name_infor(MON_RAT),&img_mons_rat,10,0,6,
+	{MON_RAT,1,1,name_infor(MON_RAT),&img_mons_rat,10,0,3,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_ANIMAL,0,0,10,'r'},
 
-	{MON_FAIRY_GREEN,1,2,name_infor(MON_FAIRY_GREEN),&img_mons_fairy_green,10,0,8,
+	{MON_FAIRY_GREEN,1,2,name_infor(MON_FAIRY_GREEN),&img_mons_fairy_green,10,0,4,
 	{3,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10,'f'},
 
-	{MON_FAIRY_BLUE,2,3,name_infor(MON_FAIRY_BLUE),&img_mons_fairy_blue,8,0,12,
+	{MON_FAIRY_BLUE,2,3,name_infor(MON_FAIRY_BLUE),&img_mons_fairy_blue,8,0,8,
 	{1,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_FLY | M_FLAG_SPEAK | M_FLAG_RANGE_ATTACK,0,1,10,'f'},
 
@@ -42,11 +42,11 @@ const mon_infor mondata[] = {
 	{4,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10,'f'},
 
-	{MON_MOOK,1,2,name_infor(MON_MOOK),&img_mons_mook,5,0,10,
+	{MON_MOOK,1,2,name_infor(MON_MOOK),&img_mons_mook,5,0,5,
 	{3,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_FLY,0,0,10,'m'},
 
-	{MON_MOOK,1,18,name_infor(MON_MOOK),&img_mons_mook,5,0,10,
+	{MON_MOOK,1,18,name_infor(MON_MOOK),&img_mons_mook,5,0,5,
 	{3,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_FLY | M_FLAG_CANT_NETURAL,0,0,10,'m' },
 

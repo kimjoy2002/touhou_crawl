@@ -2100,6 +2100,35 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 		{
 			if((*it).isLive() && (*it).position.x == position.x+x_mov && (*it).position.y == position.y+y_mov)
 			{
+				if((*it).flag & M_FLAG_NONE_MOVE && !canSwap(&(*it)) && (*it).position != target_pos) {
+					coord_def able[2];
+
+					//(1,1)로 움직이는데 있으면 (1,0)이나 (0,1)
+					//(-1,-1)로 움직이는데 있으면 (-1,0)이나 (0,-1)
+					//(1,-1)로 움직이는데 있으면 (1,0)이나 (0,-1)
+					if(x_mov == 0) {
+						able[0] = coord_def(-1, y_mov);
+						able[1] = coord_def(1, y_mov);
+					}
+					else if(y_mov == 0) {
+						able[0] = coord_def(x_mov, -1);
+						able[1] = coord_def(x_mov, 1);
+					}
+					else {
+						able[0] = coord_def(x_mov, 0);
+						able[1] = coord_def( 0, y_mov);
+					}
+					for(int i = 0; i<2;i++) {
+						if(env[current_level].isMove(position.x+able[i].x,position.y+able[i].y,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND, id == MON_SEIGA) &&
+							!env[current_level].isMonsterPos(position.x+able[i].x,position.y+able[i].y)) {
+							SetXY(coord_def(position.x+able[i].x,position.y+able[i].y));
+							return 2;
+						}
+					}
+
+				}
+
+
 				if((*it).isEnemyMonster(this) || s_confuse || (*it).id == MON_BUSH) //적일때
 				{
 					if(only_move)
@@ -2147,7 +2176,12 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 				}
 				else
 				{
-					if(!s_none_move && !(flag & M_FLAG_LEADER_SUMMON) && (*it).isAllyMonster(this) && randA(4) == 0)
+					if(canSwap(&(*it))) {
+						it->SetXY(coord_def(position.x, position.y));
+						SetXY(coord_def(position.x + x_mov, position.y + y_mov));
+						return 2;
+					}
+					else if(!s_none_move && !(flag & M_FLAG_LEADER_SUMMON) && (*it).isAllyMonster(this) && randA(4) == 0)
 					{
 						set<int> already_move;
 						already_move.insert(map_id);
@@ -3409,7 +3443,7 @@ int monster::action(int delay_)
 							if (!s_fear)
 								CheckSightNewTarget();
 
-							if(will_move.empty() && target != nullptr && id != MON_SEIGA) { //세이가는 일직선!
+							if(will_move.empty() && target != nullptr && !isSightnonblocked(target->position) && id != MON_SEIGA) { //세이가는 일직선!
 								stack<coord_def> will_move_;
 								will_move.clear();
 								if (PathSearch(position, target->position, will_move_, search_type_, current_level, isFly(), isSwim()))
@@ -4005,18 +4039,12 @@ void monster::special_action(int delay_, bool smoke_)
 	}
 	break;
 	case MON_VINE:
-		if (!smoke_){
-			for(auto it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end();it++)
-			{
-				if(it->isLive() && !(it->flag & M_FLAG_NONE_MOVE) && isEnemyMonster(&(*it)) && distan_coord(position,it->position) <= 2)
-				{
-					//t->SetSwift(-10);
-				}
-			}
-			if(isEnemyUnit(&you) && distan_coord(you.position,position) <= 2) {
-				you.s_swift = -2;
-			}
+	{
+		if(isEnemyUnit(&you) && distan_coord(you.position, position) > 2 && summon_time > 1) {
+			summon_time = std::max(1, summon_time-5); //빠르게 시듬
+			
 		}
+	}
 	break;
 	default:
 		break;
@@ -4811,6 +4839,12 @@ bool monster::SetNoneMove(int s_none_move_) {
 	if(s_none_move < s_none_move_)
 		s_none_move = s_none_move_;
 	return true;
+}
+bool monster::canSwap(monster* target_mon) {
+	if(id == MON_TSUCHINOKO && target_mon->id == MON_VINE) {
+		return true;
+	}
+	return false;
 }
 bool monster::AttackedTarget(unit *order_)
 {	

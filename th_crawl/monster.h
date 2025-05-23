@@ -230,6 +230,7 @@ public:
 	bool SetOil(int oil_, int max_);
 	bool SetFire(int fire_, parent_type type_, bool from_oil);
 	bool SetNoneMove(int s_none_move);
+	bool canSwap(monster* target_mon);
 	int PlusTimeDelay(int delay_)
 	{
 		time_delay += delay_;

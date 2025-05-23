@@ -61,6 +61,9 @@ bool PathSearch(const coord_def& start,const coord_def& goal, stack<coord_def>& 
 	bool is_passable_door = (env[floor_].isDoor(goal.x,goal.y) && type < ST_MONSTER_NORMAL);//열수있는 문이냐
 	bool is_move = (env[floor_].isMove(goal.x,goal.y,alway_fly_,alway_swim_) || type == ST_SEARCH);
 	bool is_block = env[floor_].isBlockPos(goal.x, goal.y) && type < ST_MONSTER_NORMAL_CANPASSWALL;
+
+
+
 	if(!((is_explore || is_mapping) && (is_move || is_passable_door)  && !is_block))
 	{
 		return false;

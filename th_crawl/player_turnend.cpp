@@ -40,15 +40,19 @@ bool CheckMonsterPassive(int turn)
 	{
 		if (you.GetPunish(GT_KANAKO))
 		{
-			if (it->isLive() && it->GetId() == MON_ONBASIRA && !it->isUserAlly() && distan_coord(you.position, it->position) <= 2)
+			if (it->isLive() && it->GetId() == MON_ONBASIRA && it->isEnemyUnit(&you) && distan_coord(you.position, it->position) <= 2)
 			{
 				you.SetSlaying(-3);
 				you.SetNoneMove(1);
 			}
 		}
-		if (it->isLive() && it->GetId() == MON_ANCHOR && !it->isUserAlly() && distan_coord(you.position, it->position) <= 2)
+		if (it->isLive() && it->GetId() == MON_ANCHOR && it->isEnemyUnit(&you) && distan_coord(you.position, it->position) <= 2)
 		{
 			you.SetNoneMove(1);
+		}
+		if (it->isLive() && it->GetId() == MON_VINE && it->isEnemyUnit(&you) && distan_coord(you.position, it->position) <= 2)
+		{
+			you.s_swift = -1;
 		}
 	}
 	return true;
@@ -853,11 +857,6 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	if (s_swift<0)
 	{
 		s_swift++;
-		if (!s_swift)
-		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLUGGISH_END) + " ", false, false, false, CL_white_blue);
-			SetInter(IT_STAT);
-		}
 		if (s_swift == -5)
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLUGGISH_END_ALMOST) + " ", false, false, false, CL_blue);

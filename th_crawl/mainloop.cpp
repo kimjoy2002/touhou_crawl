@@ -358,8 +358,16 @@ void charter_selete(bool first)
 			case 'd':
 				sprint2s(0);
 				//1안씀
-				select_char(ReplayClass.infor.starting[2]);
-				select_job(ReplayClass.infor.starting[3]);
+				if(ReplayClass.infor.starting[1] == 'b') { //직접픽
+					select_char(ReplayClass.infor.starting[2]);
+					select_job(ReplayClass.infor.starting[3]);
+
+				} else { //'a'와 기본
+					select_named(ReplayClass.infor.starting[2]);
+					if(ReplayClass.infor.starting[2] == 7) { //삼월정
+						select_fairy(ReplayClass.infor.starting[3]);
+					}
+				}
 				break;
 			case 'a'://메인게임
 			default:
@@ -617,6 +625,7 @@ void init_alldata() {
 	}
 	current_level=0;
 	unique_list.clear();
+	save_note.note_list.clear();
 	wiz_list.wizard_mode = false;
 	shift_check = false;
 	ctrl_check = false;

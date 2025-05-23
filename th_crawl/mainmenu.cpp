@@ -333,7 +333,6 @@ bool select_fairy(int value_)
 }
 bool select_named(int value_)
 {
-	g_selected[0] = 'a';
 	g_selected[1] = 'a';
 	g_selected[2] = value_;
 	switch( value_ )
@@ -395,7 +394,6 @@ bool select_named(int value_)
 }
 bool select_char(int value_)
 {
-	g_selected[0] = 'a';
 	g_selected[1] = 'b';
 	g_selected[2] = value_;
 	you.tribe = (tribe_type)(value_);

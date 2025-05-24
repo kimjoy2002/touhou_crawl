@@ -4908,14 +4908,72 @@ bool skill_grow_vine(int pow, bool short_, unit* order, coord_def target)
 	return return_;
 }
 
-bool skill_close_door(int pow, bool short_, unit* order, coord_def target)
+bool skill_close_door(int pow, bool short_, unit* order, coord_def target_)
 {
-	return false;
+	if(!order)
+		return false;
+	if(order->isplayer())
+		return false;
+	if(!order->isEnemyUnit(&you))
+		return false;
+	if (!env[current_level].isInSight(order->position))
+		return false;
+	bool create_door = false;
+	for(int i = 0; i< DG_MAX_X; i++) {
+		for(int j = 0; j< DG_MAX_Y; j++) {		
+			coord_def target(i,j);	
+			if (env[current_level].isInSight(target) && 
+			(env[current_level].dgtile[target.x][target.y].isDoor() || env[current_level].dgtile[target.x][target.y].isStair())) {
+				unit *unit_ = env[current_level].isMonsterPos(target.x, target.y);
+				if(unit_ && unit_->GetId() == MON_CLOSE_DOOR)
+					continue;
+
+				if (unit_) {
+					rand_rect_iterator rit(unit_->position, 1, 1, true);
+					while (!rit.end()) {
+						unit* unit_hit_ = env[current_level].isMonsterPos(rit->x, rit->y);
+
+						if (!unit_hit_ && ((monster*)order)->isMonsterSight(*rit)) {
+							unit_->SetXY(rit->x, rit->y);
+							break;
+						}
+
+						rit++;
+					}
+				}
+				if(env[current_level].dgtile[target.x][target.y].isDoor()) {
+					env[current_level].changeTile(target, env[current_level].base_floor, true);
+				}
+				//적이 서있으면 강제로 비키도록 한다.
+				
+				if (monster *mon_ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(pow / 10), true, false, 0, order, target, SKD_OTHER, -1))
+				{
+					if(!create_door && order->isYourShight()) {
+						printlog(LocalzationManager::formatString(LOC_SYSTEM_MON_LOCKED_DOOR, PlaceHolderHelper(order->GetName()->getName())),true, false, false, CL_small_danger);
+					}
+					create_door = true;
+					soundmanager.playSound("block");
+					mon_->LevelUpdown(pow/20, 6);
+				}
+			}
+		}
+	}
+	return create_door;
 }
 
 bool skill_speaker_phone(int pow, bool short_, unit* order, coord_def target)
 {
-	return false;
+	if(!order)
+		return false;
+	if(order->isplayer())
+		return false;
+	if(!order->isEnemyUnit(&you))
+		return false;
+	if (!env[current_level].isInSight(order->position))
+		return false;
+
+	order->SetCommunication(6);
+	return true;
 }
 
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
@@ -5801,7 +5859,12 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_FIRE_BOLT, 25));
 		break;
 	case MON_SONBITEN:
+	case MON_SONBITEN_SPINTOWIN:
 		list->push_back(spell(SPL_HEAVENLY_STORM, 15));
+		break;
+	case MON_SECURITY_MAID_FIARY:
+		list->push_back(spell(SPL_CLOSE_DOOR, 80));
+		list->push_back(spell(SPL_SPEAKER_PHONE, 30));
 		break;
 	default:
 		break;

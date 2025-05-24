@@ -2202,6 +2202,7 @@ textures img_state_haste(&texture_item01, 110, 255);
 textures img_state_lunatic(&texture_item01, 219, 255);
 textures img_state_slow(&texture_item01, 239, 255);
 textures img_state_neutral(&texture_item03, 194, 255);
+textures img_state_calling(&texture_item03, 213, 255);
 
 textures dot_floor(&texture_dot_floor, 0, 0, 1, 1, 255);
 textures dot_wall(&texture_dot_wall, 0, 0, 1, 1, 255);
@@ -4688,6 +4689,8 @@ textures* statetotexture(monster_state_simple state_)
 		return &img_state_lunatic;
 	case MSS_NEUTRAL:
 		return &img_state_neutral;
+	case MSS_COMMUNICATION:
+		return &img_state_calling;
 	default:
 		return nullptr;
 	}

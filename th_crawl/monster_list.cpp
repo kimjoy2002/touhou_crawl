@@ -1030,11 +1030,12 @@ const mon_infor mondata[] = {
 
 	{MON_VINE,1,0,name_infor(MON_VINE),&img_mons_vine,30,0,0,
 		{0,0,0},{ATT_NONE,ATT_NONE,ATT_NONE},{name_infor(),name_infor(),name_infor()},
-		M_FLAG_NONE_STAIR | M_FLAG_NONE_MOVE | M_FLAG_NO_STATE | M_FLAG_INANIMATE | M_FLAG_UNHARM | M_FLAG_NO_ATK  | M_FLAG_CANT_NETURAL,0,0,15,'W'},
+		M_FLAG_NONE_STAIR | M_FLAG_NONE_MOVE | M_FLAG_NO_STATE | M_FLAG_INANIMATE | M_FLAG_UNHARM | M_FLAG_NO_ATK  | M_FLAG_CANT_NETURAL,99,0,15,'W'},
 
-	{MON_SECURITY_MAID_FIARY,2,4,name_infor(MON_SECURITY_MAID_FIARY),&img_mons_security_fairy_maid,25,0,5,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
+	{MON_SECURITY_MAID_FIARY,8,160,name_infor(MON_SECURITY_MAID_FIARY),&img_mons_security_fairy_maid,30,1,20,
+		{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,0,2,10,'f'},
+
 
 	{MON_GIANT_SLIME,2,4,name_infor(MON_GIANT_SLIME),&img_mons_big_slime,25,0,5,
 		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
@@ -1074,5 +1075,5 @@ const mon_infor mondata[] = {
 
 	{MON_SONBITEN_SPINTOWIN,13,3100,name_infor(MON_SONBITEN_SPINTOWIN),&img_mons_sonbiten_spintowin,170,5,15,
 		{35,45,0},{ATT_NORMAL,ATT_NORMAL,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_POLE),name_infor(LOC_SYSTEM_ATT_POLE),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,7,'&'}
+		M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,2,1,7,'&'}
 };

@@ -47,6 +47,7 @@ extern map_infor map_list;
 skill_type itemtoskill(item_type type_);
 int shieldPanaltyOfWeapon(item_type type, int weapon_kind);
 extern bool widesearch; //X커맨드용
+extern int g_menu_select;
 
 void name_infor::SaveDatas(FILE *fp)
 {
@@ -3929,10 +3930,43 @@ void players::LevelUp(bool speak_)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_STAT_MESSGE_I),false,false,false,CL_help, 'I');
 			printlog(" ",false,false,false,CL_help);
 			startSelection({'S', 'D', 'I'});
+			g_menu_select = -1;
 			while(!end_)
 			{
-				switch(waitkeyinput())
+				switch(waitkeyinput(true))
 				{
+				case VK_RIGHT:
+					if(++g_menu_select>2)
+						g_menu_select = 0;
+					break;
+				case VK_LEFT:
+					if(--g_menu_select<0)
+						g_menu_select = 2;
+					break;
+				case VK_RETURN:
+				case GVK_BUTTON_A:
+				{
+					switch(g_menu_select) {
+					case 0:
+						you.StatUpDown(1,STAT_STR);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_STR),true,false,false,CL_good);
+						end_ = true;
+						break;
+					case 1:
+						you.StatUpDown(1,STAT_DEX);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_DEX),true,false,false,CL_good);
+						end_ = true;
+						break;
+					case 2:
+						you.StatUpDown(1,STAT_INT);
+						printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_INT),true,false,false,CL_good);
+						end_ = true;
+						break;
+					default:
+						break;
+					}
+				}
+				break;
 				case 'S':
 				case 's':
 					you.StatUpDown(1,STAT_STR);
@@ -3955,6 +3989,7 @@ void players::LevelUp(bool speak_)
 					break;
 				}
 			}
+			g_menu_select = -1;
 			endSelection();
 		}
 		else

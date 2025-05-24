@@ -1926,6 +1926,24 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 		return (you.s_weather>0 || !(current_level >= MISTY_LAKE_LEVEL && current_level <=MISTY_LAKE_LAST_LEVEL)?false:true);
 	case SPL_HEAVENLY_STORM:
 		return (mon->id == MON_SONBITEN || (mon->id == MON_ENSLAVE_GHOST && mon->id2 == MON_SONBITEN))?true:false;
+	case SPL_CLOSE_DOOR:
+		{
+			bool able = false;
+			for(int i = 0; i< DG_MAX_X; i++) {
+				for(int j = 0; j< DG_MAX_Y; j++) {		
+					coord_def target(i,j);	
+					if (env[current_level].isInSight(target) && 
+					(env[current_level].dgtile[target.x][target.y].isDoor() || env[current_level].dgtile[target.x][target.y].isStair())) {
+						unit *unit_ = env[current_level].isMonsterPos(target.x, target.y);
+						if(unit_ && unit_->GetId() == MON_CLOSE_DOOR)
+							continue;
+
+						able = true;
+					}
+				}
+			}
+			return able;
+		}
 	default:
 		return true;
 	}

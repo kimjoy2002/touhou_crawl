@@ -1036,6 +1036,7 @@ LOC_SYSTEM_MON_LUNATIC,{0:은|는} 광기에 휩싸였다.
 LOC_SYSTEM_MON_GATHERING,{0:은|는} 동료를 끌어모으고 있다.
 LOC_SYSTEM_MON_GATHERING_MOON_RABBIT,{0:은|는} 동료에 도움을 청하는 전파를 보내기 시작했다.
 LOC_SYSTEM_MON_GATHERING_HELL_HOUND,{0}의 소리에 이끌려 또 다른 지옥개들이 몰려오기 시작한다.
+LOC_SYSTEM_MON_LOCKED_DOOR,{0:은|는} 방범 장치를 사용해 시야내의 모든 문을 닫았다.
 LOC_SYSTEM_MON_STRONG,{0:은|는} 강화되었다.
 LOC_SYSTEM_MON_WEAK,{0:은|는} 약화되었다.
 LOC_SYSTEM_MON_INVINCIBILITY,{0:은|는} 무적상태가 되었다.
@@ -1074,6 +1075,7 @@ LOC_SYSTEM_MON_NO_LONGER_INVINCIBLE,{0:은|는} 더 이상 무적이 아니다.
 LOC_SYSTEM_MON_NO_LONGER_OIL,{0:은|는} 더 이상 기름범벅이 아니다.
 LOC_SYSTEM_MON_NO_LONGER_FIRE,{0}에 붙어있던 화염이 사그라들었다.
 LOC_SYSTEM_MON_ABIL_GATHERING,{0:은|는} 동료를 끌어모으고 있다.
+LOC_SYSTEM_MON_ABIL_SPEAEKER_PHONE,{0:은|는} 큰 확성기로 같은 층의 동료들을 호출했다.
 LOC_SYSTEM_MON_DROWNED,{0:은|는} 물에 빠졌다.
 LOC_SYSTEM_MON_FALL_LAVA,{0:은|는} 용암에 빠졌다.
 LOC_SYSTEM_MON_FALL_OIL,{0:은|는} 석유 웅덩이에 착지했다.
@@ -1269,6 +1271,7 @@ LOC_SYSTEM_UNIQUE_EIKA_REGA_DISTANCE,멀리있는 누군가의 분노가 느껴�
 LOC_SYSTEM_UNIQUE_EIKA_REGA,{0:이|가} 분노했다! {0:이|가} 강해졌다.
 LOC_SYSTEM_UNIQUE_KOGASA_REGA,{0:이|가} 당신의 행동에 분노했다! ...그러나 아무런 일도 일어나지 않았다.
 LOC_SYSTEM_UNIQUE_SONBITEN,{0:이|가} 제자리에서 빠르게 회전을 시작했다!
+LOC_SYSTEM_UNIQUE_SAKUYA_COME,{0:이|가} 경보와 동시에 갑자기 허공에서 나타났다!
 LOC_SYSTEM_TENSI_GOOD1,텐시가 당신에게 호의적인 시선을 주었다.
 LOC_SYSTEM_TENSI_GOOD2,텐시의 힘이 당신에게 닿았다.
 LOC_SYSTEM_TENSI_GOOD3,텐시: 힘들어보이네!

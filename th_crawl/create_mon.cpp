@@ -86,7 +86,7 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 39,  9,  14,  5, 1}, //캇파창병부대
 	{ 36,  9,  14,  3, 3}, //키메이마루
 
-	{ 37,  10,  14,  5, 3}, //레밀리아 윳쿠리
+	{ 37,  10,  14,  5, 3}, //레밀리아 윳쿠
 	{ 53,  10,  14,  5, 3}, //매	
 	{ 54,  10,  14,  5, 3}, //호랑이
 
@@ -114,7 +114,6 @@ mon_group normal_group[] = //일반몹 그룹
 	{  7,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  1,  1}, //초록요정 2~3
 	{ 28,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  2,  1}, //초록모옥
 	{ 30,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  2,  1}, //회색모옥
-	{ 65,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  1,  5}, //요정영웅부대(가끔!)
 	{ 102,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  8,  1}, //안개요정
 	
 	{ 21,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  5,  1}, //요정 전사사격 호위부대
@@ -124,6 +123,7 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 31,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  7, 3}, //개구리
 	{ 94,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  5, 3}, //버섯요괴
 	{ 103,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  1, 5}, //츠치노코
+	{ 65,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  1,  5}, //요정영웅부대(가끔!)
 		
 	{ 22,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 5, 1}, //깃발 요정 호위부대
 	{ 65,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 1, 5}, //요정영웅부대
@@ -176,6 +176,7 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 48,  SCARLET_LEVEL,  SCARLET_LEVEL+2, 15,  1}, //홉고블린 소부대 
 	{ 49,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 5,  3}, //홉고블린 메이드2기
 	{ 50,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 1,  4}, //홉고블린 서기
+	{ 104,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 7,  1}, //경보 메이드 요정
 	
 	{ 48,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 5,  1}, //홉고블린 소부대 
 	{ 50,  SCARLET_LEVEL,  SCARLET_LEVEL+3, 3,  4}, //홉고블린 서기
@@ -1012,6 +1013,9 @@ void create_id_to_mon(int id, int level, int strong)
 		break;
 	case 103:
 		index.push_back(pair<monster_index, int>(MON_TSUCHINOKO, strong));
+		break;
+	case 104:
+		index.push_back(pair<monster_index, int>(MON_SECURITY_MAID_FIARY, strong));
 		break;
 	}
 
@@ -2321,6 +2325,7 @@ int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 		rand_.push(MON_MUSHROOM, middle(power_));
 		rand_.push(MON_FROG, middle(power_));
 		rand_.push(MON_DEAGAMA, strong(power_));
+		rand_.push(MON_TSUCHINOKO, strong(power_));
 	}
 	else if (level_ >= YOUKAI_MOUNTAIN_LEVEL && level_ <= YOUKAI_MOUNTAIN_LEVEL + MAX_YOUKAI_MOUNTAIN_LEVEL) {
 		rand_.push(MON_FROG, weak(power_)); 

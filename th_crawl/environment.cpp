@@ -1957,7 +1957,9 @@ bool environment::MakeNoise(coord_def center_, int length_, const unit* excep_)
 			if(block_length_ > 0 && distan_coord((*it).position, center_) <= block_length_*block_length_)
 			{
 				(*it).target_pos = center_;
-				(*it).memory_time = (*it).FoundTime();
+				if((*it).FoundTime() > (*it).memory_time) {
+					(*it).memory_time = (*it).FoundTime();
+				}
 				(*it).state.StateTransition(MSI_NOISE);
 			}
 		}

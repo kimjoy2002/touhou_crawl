@@ -1084,6 +1084,8 @@ void display_manager::skill_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 
 	rc.left = 50;
 
+	int current_skill = 0;
+
 	while(skt < SKT_MAX)
 	{
 		for(i = 0;i<1;i++)
@@ -1151,6 +1153,10 @@ void display_manager::skill_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
 			}
+
+			if(current_skill == current_position ) {
+				DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 0, 255, 0));
+			}
 			
 			if (MousePoint.x > rc2.left && MousePoint.x <= rc2.right &&
 				MousePoint.y > rc2.top && MousePoint.y <= rc2.bottom){
@@ -1183,6 +1189,7 @@ void display_manager::skill_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 			default:
 				break;
 			}
+			current_skill++;
 
 
 			if(skt == SKT_SPELLCASTING - 1)
@@ -3326,7 +3333,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						pixel_->draw(pSprite,x_,y_,255);
 
 						if(g_menu_select == tile_count) {
-							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 255, 0));
+							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 0, 0));
 						}
 
 						if(pixel_ != &img_command_empty) {
@@ -3410,7 +3417,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						pixel_->draw(pSprite,x_,y_,255);
 
 						if(g_menu_select == tile_count) {
-							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 255, 0));
+							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 0, 0));
 						}
 
 						if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
@@ -3512,7 +3519,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							
 
 							if(g_menu_select == tile_count) {
-								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 255, 0));
+								if(curse) {
+									img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 0, 255));
+								} else {
+									img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 0, 0));
+								}
 							}
 
 							{ //마우스
@@ -3547,7 +3558,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 
 							if(g_menu_select == tile_count) {
-								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 255, 0));
+								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 0, 0));
 							}
 
 							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
@@ -3588,7 +3599,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 
 	//광기
-	if(you.s_sleep < 0 || you.s_lunatic || map_effect || you.s_evoke_ghost)
+	if(you.s_sleep < 0 || you.s_lunatic || map_effect || you.s_evoke_ghost || g_menu_select != -1)
 	{
 		int x_ = you.GetDisplayPos().x-sight_x;
 		int y_ = you.GetDisplayPos().y-sight_y;
@@ -3613,7 +3624,10 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							img_effect_sion.draw(pSprite, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, 80);
 						else if (you.s_evoke_ghost)
 							img_effect_white.draw(pSprite, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, D3DCOLOR_ARGB(80, 80, 0, 100));
-							//env[current_level].dgtile[i+x_][j+y_].draw(pSprite,i*32.0f+tile_x_offset,j*32.0f+tile_x_offset,D3DCOLOR_XRGB(160,160,255));
+						
+						if(g_menu_select != -1) {
+							img_effect_sleep.draw(pSprite, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, 120);
+						}
 					}
 				}
 			}
@@ -4204,7 +4218,26 @@ bool display_manager::checkItemSimpleType(list<item>::iterator it) {
 
 void display_manager::setPosition(int value_, int char_) {
 	int max_position = -1;
-	if(state == DT_SKILL_USE || state == DT_SPELL) {
+	if(state == DT_SKILL) {
+		int skt = 0; 
+		while(skt < SKT_MAX)
+		{
+			max_position++;
+			if(char_ != -1 && skt == asctonum(char_)) {
+				current_position = max_position;
+				return;
+			}
+			skt++;
+		}
+		if(char_ == -1) {
+			while(value_ <= -1)
+				value_ += max_position+1;
+			while(value_ > max_position)
+				value_ -=  max_position+1;
+			current_position = value_;
+		} 
+	}
+	else if(state == DT_SKILL_USE || state == DT_SPELL) {
 		
 		for(int i=0;i<52;i++)
 		{
@@ -4302,7 +4335,18 @@ void display_manager::addPosition(int value_) {
 }
 int display_manager::positionToChar() {
 	int max_position = 0;
-	if(state == DT_SKILL_USE || state == DT_SPELL) {
+	if(state == DT_SKILL) {
+		int skt = 0; 
+		while(skt < SKT_MAX)
+		{
+			if(max_position == current_position) {
+				return numtoasc(skt);
+			}
+			max_position++;
+			skt++;
+		}
+	}
+	else if(state == DT_SKILL_USE || state == DT_SPELL) {
 		for(int i=0;i<52;i++)
 		{
 			if(state == DT_SKILL_USE?you.MemorizeSkill[i]:you.MemorizeSpell[i])

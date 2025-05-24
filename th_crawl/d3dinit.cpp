@@ -223,10 +223,18 @@ void Cleanup()
 // 윈도우 프로시저
 //
 
+extern std::unique_ptr<KeyInputQueue> g_keyQueue;
 LRESULT CALLBACK d3d::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch( msg )
 	{
+    case WM_KILLFOCUS:
+	{
+		MSG fake_msg = {};
+		fake_msg.message = WM_KILLFOCUS;
+		g_keyQueue->push(fake_msg);
+		break;
+	}
 	case WM_DESTROY:
 		g_saveandexit = true;
 		break;

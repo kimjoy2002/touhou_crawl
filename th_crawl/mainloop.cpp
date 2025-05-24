@@ -1201,6 +1201,7 @@ void MainLoop()
 			SkillUse(0);
 			break;
 		case GVK_BUTTON_Y://패드 X
+		case 'B':
 			rightmenu_control();
 			break;
 		case GVK_BUTTON_Y_LONG: //패드 X 길게

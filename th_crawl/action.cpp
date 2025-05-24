@@ -103,7 +103,7 @@ void Long_Move(const coord_def &c, bool speak_)
 	}
 	if(you.s_confuse)
 	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE_WARNING),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
@@ -274,7 +274,7 @@ void auto_battle()
 	}
 	if(you.s_confuse)
 	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE_WARNING),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
@@ -343,7 +343,7 @@ void auto_Move()
 	}
 	if(you.s_confuse)
 	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE),true,false,false,CL_small_danger);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE_WARNING),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
@@ -464,7 +464,7 @@ bool stack_move(bool auto_)
 		}
 		if(you.s_confuse)
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE),true,false,false,CL_small_danger);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE_WARNING),true,false,false,CL_small_danger);
 			while(!you.will_move.empty()){you.will_move.pop();}	
 			return false;
 		}
@@ -1119,6 +1119,7 @@ void Wide_Search()
 			Move(coord_def(you.position.x+8,you.position.y-8));
 			break;
 		case '>':
+		case GVK_RIGHT_BUMPER:
 			if(down_distans.empty())
 			{
 				if(!environment::isLastFloor(current_level))
@@ -1172,6 +1173,7 @@ void Wide_Search()
 			}
 			break;
 		case '<':
+		case GVK_LEFT_BUMPER:
 			if(up_distans.empty())
 			{
 				for(int i = 0;i<3;i++)
@@ -1203,6 +1205,7 @@ void Wide_Search()
 			}
 			break;
 		case 'v': 
+		case GVK_BUTTON_A_LONG:
 			if(unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y))
 			{
 				if(!unit_->isplayer() && unit_->isView() && env[current_level].isInSight(you.search_pos))
@@ -1214,6 +1217,7 @@ void Wide_Search()
 			break;
 		case 'E':
 		case 'e':
+		case GVK_BUTTON_X:
 			if (!env[current_level].isBamboo())
 			{
 				env[current_level].AddForbid(you.search_pos);
@@ -1221,6 +1225,7 @@ void Wide_Search()
 			break;
 		case '.': 
 		case VK_RETURN:
+		case GVK_BUTTON_A:
 			widesearch = false;
 			you.search = false;
 			deletelog();
@@ -2390,6 +2395,11 @@ void skill_view()
 		{
 			InputedKey inputedKey;
 			int key_ = waitkeyinput(inputedKey,true);
+
+			if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+				key_ = DisplayManager.positionToChar();
+			}
+
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
 				int num = (key_ >= 'a' && key_ <= 'z')?key_-'a':key_-'A'+26;
@@ -2402,6 +2412,22 @@ void skill_view()
 			{
 				changemove(move_);
 				move_ = move_==1?-1:1;
+			}
+			else if(key_ == VK_DOWN)//-----이동키-------
+			{
+				DisplayManager.addPosition(1);
+			}
+			else if(key_ == VK_UP)
+			{
+				DisplayManager.addPosition(-1);
+			}
+			else if(key_ == VK_RIGHT)//-----이동키-------
+			{
+				DisplayManager.addPosition(SKT_SPELLCASTING);
+			}
+			else if(key_ == VK_LEFT)
+			{
+				DisplayManager.addPosition(-SKT_SPELLCASTING);
 			}
 			else if(key_ == -1) {
 				if(inputedKey.mouse == MKIND_SCROLL_UP) {

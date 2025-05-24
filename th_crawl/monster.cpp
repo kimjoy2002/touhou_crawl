@@ -2814,6 +2814,7 @@ int monster::action(int delay_)
 		{
 			hp = 0;
 			if (id == MON_CLOSE_DOOR) {
+				if(env[current_level].dgtile[position.x][position.y].tile <= DG_FLOOR_END)
 				env[current_level].changeTile(position, DG_CLOSE_DOOR);
 				if (is_sight) {
 					LocalzationManager::printLogWithKey(LOC_SYSTEM_DEAD_DOOR,true,false,false,CL_okina,
@@ -3255,6 +3256,60 @@ int monster::action(int delay_)
 					}
 				}
 				break;
+			case MON_SECURITY_MAID_FIARY:
+			if(s_communication == 6 || s_communication == 4 || s_communication == 2)
+			{
+				coord_def noise_pos;
+				int noise_len = 20; //소음반경
+				int calling_len = 5; //완벽한 위치를 노출하는 반경
+				
+				for(auto it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end();it++)
+				{
+					if(it->isAllyMonster(this) && !(it->flag & M_FLAG_UNHARM ||it->flag & M_FLAG_NONE_MOVE) &&
+						(it->state.GetState() == MS_NORMAL || it->state.GetState() == MS_SLEEP || it->state.GetState() == MS_REST ))
+					{
+						noise_pos = it->position;
+						env[current_level].MakeNoise(noise_pos,noise_len, this);
+						if(isYourShight())
+						{
+							printlog(LocalzationManager::formatString(LOC_SYSTEM_MON_ABIL_SPEAEKER_PHONE, 
+								PlaceHolderHelper(GetName()->getName())) + " ",false,false,false,CL_magic);
+						}
+						break;
+					}
+				}
+				
+				for(auto it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end();it++)
+				{
+					if(it->id == MON_SAKUYA && it->isAllyMonster(this) && !env[current_level].isInSight(it->position)) {
+						it->FoundTarget(&you, it->FoundTime());
+						dif_rect_iterator rit(position,2);
+						for(;!rit.end();rit++)
+						{
+							if(env[current_level].isMove(rit->x, rit->y, it->isFly(), it->isSwim()) && !env[current_level].isMonsterPos(rit->x,rit->y) && you.position != (*rit))
+							{
+								it->SetXY(rit->x,rit->y);
+								if(it->isYourShight())
+								{
+									printlog(LocalzationManager::formatString(LOC_SYSTEM_UNIQUE_SAKUYA_COME, 
+										PlaceHolderHelper(it->GetName()->getName())),true,false,false,CL_small_danger);
+									break;
+								}
+							}
+						}
+
+					}
+					else if(it->isAllyMonster(this) &&
+						(it->state.GetState() == MS_FIND || it->state.GetState() == MS_NORMAL || it->state.GetState() == MS_ATACK) && distan_coord((*it).position, noise_pos) < calling_len*calling_len)
+					{
+						it->state = MS_ATACK;
+						it->target = &you;
+						it->target_pos = you.position;
+						it->memory_time = 200;
+					}
+				}
+			}
+			break;
 			default:
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_ABIL_GATHERING,true,false,false,CL_magic,
 					PlaceHolderHelper(GetName()->getName()));
@@ -4714,8 +4769,7 @@ bool monster::SetCommunication(int s_communication_)
 					PlaceHolderHelper(GetName()->getName()));
 				break;
 			default:
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_GATHERING,true,false,false,CL_magic,
-					PlaceHolderHelper(GetName()->getName()));
+				break;
 			}
 
 		}
@@ -5421,6 +5475,8 @@ bool monster::isSimpleState(monster_state_simple state_)
 			return s_fire>0;
 		case MSS_NEUTRAL:
 			return (isCompleteNeutral());
+		case MSS_COMMUNICATION:
+			return (s_communication > 0);
 		case MSS_ALLY:
 			return (isUserAlly());
 		default:
@@ -5438,6 +5494,8 @@ monster_state_simple monster::GetSimpleState()
 		temp = MSS_WANDERING;
 	if(!isUserAlly() && state.GetState() == MS_ATACK && target != &you)
 		temp = MSS_WANDERING;
+	if(s_communication)
+		temp = MSS_COMMUNICATION;
 	if((s_slow != 0) && s_haste == 0)
 		temp = MSS_SLOW;
 	if((s_haste != 0) && s_slow == 0)

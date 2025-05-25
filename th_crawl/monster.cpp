@@ -1164,7 +1164,15 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 	{
 		switch(a.type)
 		{
+		default:
 		case ATT_NORMAL:
+			if(a.order && a.name.getSystemKey() == LOC_SYSTEM_ATT_NORMAL) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_DEFAULT,false,false,false,CL_normal,
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(GetName()->getName()));
+			break;
+			} 
+			//break passthrough
 		case ATT_SPEAR:
 		case ATT_S_POISON:
 		case ATT_M_POISON:
@@ -1185,7 +1193,6 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_THROW_STRONG_POISON:
 		case ATT_THROW_NONE_DAMAGE:
 		case ATT_BEARTRAP:
-		default:
 			if(a.order) {
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,CL_normal,
 					PlaceHolderHelper(name_.getName()),

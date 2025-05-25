@@ -597,7 +597,15 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 		name_ = (*a.order->GetName());
 	switch(a.type)
 	{
+	default:
 	case ATT_NORMAL:
+		if(a.order && a.name.getSystemKey() == LOC_SYSTEM_ATT_NORMAL) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_DEFAULT,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
+				PlaceHolderHelper(name_.getName()),
+				PlaceHolderHelper(name.getName()));
+		break;
+		} 
+		//break passthrough
 	case ATT_SPEAR:
 	case ATT_S_POISON:
 	case ATT_M_POISON:
@@ -619,7 +627,6 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_THROW_STRONG_POISON:
 	case ATT_THROW_NONE_DAMAGE:
 	case ATT_BEARTRAP:
-	default:
 		if(a.order)
 		{
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,a.order->isView()?CL_normal:CL_small_danger,

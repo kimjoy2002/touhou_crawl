@@ -41,6 +41,7 @@ public:
 	string getName() const;
 
 	void addPostFix(string postfix) {this->postfix+=postfix;}
+	LOCALIZATION_ENUM_KEY getSystemKey(){return system_key;}
 	bool isEmpty() {return (system_key == LOC_NONE && name_key == MON_NONE_MONSTER);} 
 };
 

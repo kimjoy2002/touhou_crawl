@@ -1126,6 +1126,8 @@ LOC_SYSTEM_MAGIC_SLEEP_SMITE,{0:은|는} {1:을|를} 꿈으로 인도했다.
 LOC_SYSTEM_MAGIC_DIMENSIONAL_RIFT,{0:은|는} {1}에게 순간적으로 이동하며 발차기를 날렸다.
 LOC_SYSTEM_MAGIC_WINDFLAW,{0:은|는} 강한 바람에 의해 튕겨져나갔다.
 LOC_SYSTEM_MAGIC_FOG,안개의 호수에 안개가 드리워졌다.
+LOC_SYSTEM_HIT_DEFAULT,{0:은|는} {1:을|를} 공격했다.
+LOC_SYSTEM_HIT_DEFAULT,{0:은|는} {1:을|를} 공격했다.
 LOC_SYSTEM_HIT_NORMAL,{0}의 {1:은|는} {2}에게 명중했다.
 LOC_SYSTEM_HIT_DREAM,{0:은|는} {1}의 꿈을 먹었다.
 LOC_SYSTEM_HIT_FIRE,{0}의 {1:은|는} {2}에게 명중하고 불타올랐다.

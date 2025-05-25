@@ -230,5 +230,38 @@ MON_KAGUYA_QUIZ_2,Robe of the Fire Rat,One of Kaguya’s impossible requests. A 
 MON_KAGUYA_QUIZ_3,Swallow’s Cowrie Shell,One of Kaguya’s impossible requests. A round, glossy shell said to be laid by a swallow.\nIt symbolizes safe childbirth.\nThis shell emanates a chilling cold aura.
 MON_KAGUYA_QUIZ_4,Jeweled Branch of Hourai,One of Kaguya’s impossible requests. A branch made of gold, silver, and jade.\nSaid to grow on Mount Hourai, with silver roots, gold leaves and stems, and jade fruits.\nUpon closer inspection, danmaku is embedded in its branches.
 MON_MISYAGUZI,Mishaguji,A fearsome deity commanded by Suwako, shaped like a white snake.\nMishaguji’s fangs curse those bitten with irresistible slowing and poison.
-MON_SONBITEN,Sonbiten,A sarugami yokai who leads wild monkeys.\nHe claims to be a descendant of Sun Wukong, born from a rock.
-MON_SONBITEN_SPINTOWIN,Sonbiten,A sarugami yokai who leads wild monkeys.\nSpin to win!
+MON_EIKA,Eika,The idol of Mizuko's ghost clan, hosting a stone-stacking contest.\nShe lives alone in the dungeon, building stone towers.\nApparently, someone has been knocking them over, and she’s looking for the culprit.
+MON_STONETOWER,Stone Tower,A carefully stacked pile of stones by someone.\nBreaking it might anger whoever built it.
+MON_URUMI,Urumi,An oni who entrusts children to nearby people, makes them heavy, and throws them into the Sanzu River.\nLately, she’s been raising a giant fish and seeking sacrifices to feed it.
+MON_KUTAKA,Kutaka,A wild chicken deity who also guards the gates of the Netherworld.\nSeems to be testing your skills in person.\nRumor has it that being a bird, she’s not particularly smart.
+MON_YACHIE,Yachie,A qilin leading the Kiketsugyoku gang, one of the four beast realm factions.\nShe wears a turtle shell and has a dragon’s tail.\nHer polite speech carries an overwhelming pressure that makes it hard to argue back.
+MON_MAYUMI,Mayumi,The commander of the haniwa army created by Keiki.\nShe always travels with a large haniwa force, waging war.
+MON_SAKI,Saki,A kurokomas who leads the Keiga gang, one of the four beast realm factions.\nA horse with large wings, said to be once ridden by a shrine maiden.\nShe may be simple-minded, but her brute strength is no joke. Don’t get kicked!
+MON_YUMA,Yuma,A taotie who serves as an allied leader of the Kiketsugyoku gang.\nShe guards the Blood Pool Hell with her giant spork.\nShe can devour anything, attacking enemies or consuming items at her feet to recover health.\nDon’t drop important items near her!
+MON_YUMA2,Yuma,Driven mad by hunger, she has entered a starvation state.\nNow half-merged with Blood Pool Hell, she pulls in everything in sight.\nItems, enemies, allies—she attacks and absorbs everything in all 8 directions around her.\nThis state lasts until she fully recovers HP! End it quickly!
+MON_ENOKO,Enoko,A mountain dog cursed with immortality.\nShe has a giant bear trap on her hand. Getting caught in it will likely paralyze you.
+MON_CHIYARI,Chiyari,A hikikomori chupacabra? living in Blood Pool Hell.\nOddly enough, she gets angry when called a chupacabra.
+MON_SONBITEN,Sonbiten,A monkey youkai who leads wild monkeys.\nClaims to be a descendant of Sun Wukong, born from stone.
+MON_SONBITEN_SPINTOWIN,Sonbiten,A monkey youkai who leads wild monkeys.\nSpin to win!
+MON_HISAMI,Hisami,A youkai who lures those nearing Hell into its depths.\nIt’s said she never lets anyone escape.\nIf you try to flee from her, expect relentless pursuit.
+MON_TSUKASA,Tsukasa,A kudakitsune who sows discord by manipulating those around her.\nSometimes she’ll stop fighting to make a tempting offer.\nHer words may be sweet, but they always lead to ruin.
+MON_UBAME,Ubame,To be written
+MON_CHIMI,Chimi,To be written
+MON_NAREKO,Nareko,To be written
+MON_MIKE,Mike,A maneki-neko said to bring good luck, once living at Kotokuji.\nHowever, unlike others of her kind, she isn’t very skilled at attracting fortune.
+MON_TAKANE,Takane,A yamawaro, a river kappa mutant who moved onto land.\nMore polite than the average yamawaro, she serves as their leader.
+MON_SANNYO,Sannyo,A youkai named Yamashiro who runs a gambling den.\nIt’s said she can manipulate minds using her cigarette smoke.
+MON_CLUMSY_STONE_TOWER,Stone Tower,A stone tower someone tried very hard to stack.\nBut it’s poorly made, awkwardly propped up with twigs and such.\nSomeone must’ve tried to copy a real tower but didn’t succeed.
+MON_FOG_FAIRY,Fog Fairy,A peculiar fairy that only lives at Misty Lake.\nShe holds a fog-spewing flower native to the lake and spreads mist around.\nFairies from Misty Lake seem unaffected and can still see clearly through it.\nPerhaps this mist is all their doing.
+MON_TSUCHINOKO,Tsuchinoko,A lucky, fat snake said to be rarely seen.\nIt can summon vines, and rumor has it there's a big bounty on its head.\nSome even say it's a delicacy when soaked in liquor.
+MON_VINE,Vine,Suddenly sprouted vines.\nThey entangle those who approach, slowing movement and hindering actions.
+MON_SECURITY_MAID_FIARY,Security Maid Fairy,A fairy working at Scarlet Devil Mansion, though not particularly useful.\nShe’s especially clueless, so the head maid gave her a megaphone.\nWhen an intruder appears, she shouts into it with all her might.\nSometimes she uses it just for fun, even without intruders.
+MON_GIANT_SLIME,Giant Slime,A summoned creature by Patchouli residing in the Scarlet Devil Mansion's library.\nFailed experiments from various spells, but sticks to dust well and is used as a vacuum cleaner.\nUnstable—if damaged, it splits into smaller slimes.
+MON_SMALL_SLIME,Small Slime,Fragments split off from the Giant Slime when it's damaged.\nThey can move independently for a short time, but shrink quickly due to instability.
+MON_HANIWA,Haniwa,A clay lifeform created by the sculpting god Keiki Haniyasushin.\nShe gifts them to her believers—they're obedient servants that do everything well.\nSome devotees rely on them so much that roles get reversed.
+MON_HANIWA_SPEARMAN,Haniwa Spearman,A clay lifeform created by the sculpting god Keiki Haniyasushin.\nTrained harshly by their commander Mayumi, they’ve mastered spear techniques.\nThey strike fiercely at enemies from two tiles away.
+MON_HANIWA_ARCHER,Haniwa Archer,A clay lifeform created by the sculpting god Keiki Haniyasushin.\nTrained harshly by their commander Mayumi, they boast excellent archery skills.\nThey shoot at distant foes with high accuracy.
+MON_HANIWA_CAVALRY,Haniwa Cavalry,A clay lifeform created by the sculpting god Keiki Haniyasushin.\nTrained harshly by their commander Mayumi, they’re skilled horsemen.\nThey charge in faster than anyone and attack with swords.
+MON_WOLF_SPIRIT,Wolf Spirit,A member of the Keiga gang, one of the four beast-realm factions.\nExcels in hand-to-hand combat thanks to superior physical ability.\nVictims of their savage attacks may be overwhelmed by rabid frenzy.\nCould it be rabies?
+MON_EAGLE_SPIRIT,Eagle Spirit,A member of the Ganyoku Alliance, one of the four beast-realm factions.\nDominates aerial battles with size and arrogance.\nNormally acts freely, but now acts opportunistically amid the chaos underground.
+MON_OTTER_SPIRIT,Otter Spirit,A member of the Kiketsugyoku gang, one of the four beast-realm factions.\nExcels at ambushes and surprise attacks, despite a gentle appearance.\nSurprisingly, it's said to be the strongest among the beast spirits.

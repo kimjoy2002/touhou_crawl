@@ -35,11 +35,11 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI1,自動探索＆自動攻撃型。Oキ�
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI2,適性ボーナス）長剣適性 +1
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,ボーナス）+2,+2 曲刀、+2 鉄の盾、+2 チェインメイル、治癒ポーション×2、力のポーション×2、透明感知の指輪
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI4,初心者向けヒント）tabで自動攻撃、oで自動探索。危ない時はqでポーションを飲みましょう。
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI1,本気！あなたの背後にいます。無意識の力で全てを暗殺せよ！
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI1,本怖！貴方の後ろにいるよ。無意識の力で全てを暗殺せよ！
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI2,適性ボーナス）短剣適性 +2、精神魔法適性 +2
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI3,ボーナス）永久透明特性、MP保持特性、Lv15で突き刺し（混乱を引き起こす近接攻撃）
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI4,初心者向けヒント）非戦闘時は常に透明状態。戦闘に入ると解除されます。\n眠っている敵を刺すと、奇襲と短剣スキルに応じて大ダメージ！\nxを押しながらモンスターにカーソルを合わせ、vを押すと情報表示。透明視持ちか確認しましょう！
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU1,激烈！人間インフェルノ。死んでも蘇って突破せよ！
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU1,激熱！人間インフェルノ。死んでも蘇って突破せよ！
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU2,適性ボーナス）HP +20%、戦闘適性 +2、火炎魔法適性 +2
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,ボーナス）2回まで復活可能（レベル9と18に到達すると削除される）
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4,初心者向けヒント）2回までなら死亡しても復活できます。復活時にHPとMPが回復し爆発が発生します。\n死なずにレベル9と18に到達すると復活能力が1つずつ消えます。だから死を恐れないで！
@@ -1689,7 +1689,7 @@ LOC_SYSTEM_EVENT_KOGASA_TIME1,It's SURPRISE TIME!!
 LOC_SYSTEM_EVENT_KOGASA_TIME2,...しかし小傘は何かがおかしいと感じた。
 LOC_SYSTEM_EVENT_HOJOK1,{0}は叫んだ。「やってやんよ！」
 LOC_SYSTEM_EVENT_HOJOK2,{0}は叫んだ。「お任せください！」
-LOC_SYSTEM_EVENT_KOGASA_SMOKE1,{0}は叫んだ。「恨めし...ゴホッ、ゴホッ！」
+LOC_SYSTEM_EVENT_KOGASA_SMOKE1,{0}は叫んだ。「うらめし...ゴホッ、ゴホッ！」
 LOC_SYSTEM_EVENT_KOGASA_SMOKE2,...小傘は準備していた煙を吸いすぎてしまったようだ。
 LOC_SYSTEM_EVENT_SION_ITEM,アイテム
 LOC_SYSTEM_EVENT_SION_ITEM_DELETE,{0}が近づくと消えてしまった。

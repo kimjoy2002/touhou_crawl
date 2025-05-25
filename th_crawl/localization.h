@@ -217,6 +217,15 @@ public:
 		return processTags(template_str, values);
 	}
 
+    static bool equalsIgnoreCase(const std::string& a, const std::string& b) {
+        return a.size() == b.size() &&
+            std::equal(a.begin(), a.end(), b.begin(),
+                        [](char a_char, char b_char) {
+                            return std::tolower(static_cast<unsigned char>(a_char)) ==
+                                    std::tolower(static_cast<unsigned char>(b_char));
+                        });
+    }
+
 	template<typename... Args>
 	static void printLogWithKey(LOCALIZATION_ENUM_KEY template_key, bool enter_, bool log_, bool temp_, D3DCOLOR color_, Args... args) {
         std::string template_str = locString(template_key);
@@ -226,19 +235,37 @@ public:
             template_str.push_back(' '); //스페이스 보정
         }
 
-        regex split_regex(R"(\{(\d+(?::[^{}]+)?)\}|\{([^{}\d][^{}]*\|[^{}]*)\})");
+        regex split_regex(R"(\{(\d+(?::[^{}]+)?)\}|\{([^{}\d][^{}]*\|[^{}]*)\}|\{(\d+)(!=|==)([^{}]+)\?([^{}:]*):([^{}]*)\})");
         std::regex placeholder_regex(R"(\{(\d+(?::[^{}]+)?)\})");
+        std::regex conditional_regex(R"(\{(\d+)(!=|==)([^{}]+)\?([^{}:]*):([^{}]*)\})");
         std::regex randomholder_regex(R"(\{([^{}\d][^{}]*\|[^{}]*)\})");
         smatch match;
 		std::vector<PlaceHolderHelper> values = { std::forward<Args>(args)...};
         std::sregex_token_iterator iter(template_str.begin(), template_str.end(), split_regex, {-1, 0});
         std::sregex_token_iterator end;
     
-
         while (iter != end) {
             std::string token = *iter;
             bool isEnd = (++iter) == end;
-            if (std::regex_match(token, match, placeholder_regex)) {
+            if (std::regex_match(token, match, conditional_regex)) {
+                int index = std::stoi(match[1].str());
+                std::string op = match[2].str();         // == or !=
+                std::string compare_value = match[3].str();
+                std::string true_val = match[4].str();
+                std::string false_val = match[5].str();
+
+                if (index < values.size()) {
+                    const PlaceHolderHelper& ph = values[index];
+                    std::string actual = (ph.key != LOC_NONE) ? locString(ph.key) : ph.name;
+
+                    bool condition = (op == "==") ? equalsIgnoreCase(actual, compare_value)
+                                                : !equalsIgnoreCase(actual, compare_value);
+
+                    const std::string& result = condition ? true_val : false_val;
+                    printlog(result, isEnd ? enter_ : false, log_, temp_, color_);
+                }
+            }
+            else if (std::regex_match(token, match, placeholder_regex)) {
                 auto pair_placeholder = extractPlaceholder(token);
                 if(!pair_placeholder.first.empty()) {
                     int index = stoi(pair_placeholder.first); 

@@ -10,6 +10,7 @@ LOC_SYSTEM_MAINMENU_ARENA,Arena
 LOC_SYSTEM_MAINMENU_SPRINT,Sprint
 LOC_SYSTEM_MAINMENU_ETC,Etc
 LOC_SYSTEM_MAINMENU_OPTION,Option
+LOC_SYSTEM_MAINMENU_SAVE,Save Management
 LOC_SYSTEM_MAINMENU_REPLAY,Replay
 LOC_SYSTEM_MAINMENU_QUIT,Exit
 LOC_SYSTEM_MAINMENU_KILLTHENALL,Kill Them All!
@@ -29,21 +30,21 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA3,Bonus) +2,+2 Broom, MP Ring, Book of D
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA4,Beginner Tip: Use 'z' to cast spells and 'M' to learn new ones. Keep your MP full with the 5 key!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE1,High-power & wide explosion type. Just as Suwako commands!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE2,Aptitude Bonus) Combat +2, Evasion +1, Activation +3
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,Bonus) Earth Spell Card (9), Air Spell Card (9), Starts with faith in Suwako.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,Bonus) Spell Card of Earth (9), Spell Card of Air (9), Starts with faith in Suwako.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4,Beginner Tip: Press 'V' to use spell cards. Earth spell cards explode on walls for area damage!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI1,Auto-explore & auto-attack type. Let 'O' and 'TAB' guard you.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI2,Aptitude Bonus) Longsword +1
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,Bonus) +2,+2 Crescent Blade, +2 Iron Shield, +2 Chainmail, 2 Wound Healing Potions, 2 Strength Potions, Ring of Detect Invisibility
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI4,Beginner Tip: 'TAB' for auto-attack, 'O' for auto-explore. Press 'Q' to drink a potion in emergencies!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI1,True Form! I'm right behind you. Assassinate them all with the power of the unconscious!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI2,Aptitude Bonus) Dagger +2, Mind Magic +2
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI1,True Horror! Standing Right Behind You. Assassinate them all with the power of the unconscious!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI2,Aptitude Bonus) Shortsword +2, Mental Magic +2
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI3,Bonus) Permanent Invisibility Trait, MP Preservation Trait, Lv15 Stab (Confusion-inducing melee attack)
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI4,Beginner Tip: You're always invisible outside combat. Be careful—it disappears during combat.\nStabbing sleeping enemies deals massive damage based on sneak and dagger skill.\nHold 'x' and hover over a monster, then press 'v' to check info. Make sure they can't see invisibility!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU1,Intense! Human Inferno. Revive and break through even after death!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU1,Blaze! Human Inferno. Revive and break through even after death!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU2,Aptitude Bonus) HP +20%, Combat +2, Fire Magic +2
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,Bonus) Can revive twice (removed at Lv9 and Lv18)
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4,Beginner Tip: You can revive twice after dying. When revived, you explode and restore HP and MP.\nIf you reach Lv9 and Lv18 without dying, the revive abilities disappear one by one. Don’t be afraid to die!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI1,Prehistoric! Triassic Kappa. Break through with the power of items!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI1,Ancient! The triassic Kappa. Break through with the power of items!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2,Aptitude Bonus) Blunt Weapon +2, Activation +1
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI3,Bonus) Starts with Cloth Kappa Suit, Aerial Torpedo, and Neshii’s Occult Amulet
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4,Beginner Tip: Use 'V' to activate items. The aerial torpedo fires long-range danmaku.\nOccult amulets charge with XP. When fully charged, press 'V' to launch Neshii!\nActivatable items are permanent but consume lots of MP. Use them wisely in tough battles.
@@ -96,7 +97,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR1,One of the Three Fairies of Light, se
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR2,Aptitude Bonus) Combat +1, Evasion +1, Alchemy +1
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR3,Bonus) Starts with See Invisibility trait.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA1,One of the Three Fairies of Light, erases sound with moonlight.
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA2,Aptitude Bonus) Dagger +1, Stealth +1, Mind Magic +1
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA2,Aptitude Bonus) Dagger +1, Stealth +1, Mental Magic +1
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3,Bonus) Starts with 5 Scrolls of Silence.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON1,Beginner Tip: The Three Fairies always fight as a team, not alone.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON2,Remember: your life comes first when in danger. Allies will revive even if they fall.
@@ -110,6 +111,12 @@ LOC_SYSTEM_OPTION_MENU_DISPLAY,Display
 LOC_SYSTEM_OPTION_MENU_FULLSCREEN,Fullscreen
 LOC_SYSTEM_OPTION_MENU_WINDOWED,Windowed
 LOC_SYSTEM_OPTION_MENU_BACK,back
+LOC_SYSTEM_SAVE_MENU_SLOT,Slot {0}
+LOC_SYSTEM_SAVE_MENU_BROKEN,Corrupted Save
+LOC_SYSTEM_SAVE_MENU_DELETE,Delete
+LOC_SYSTEM_SAVE_MENU_DELETE_SELECT,Select a save to delete.
+LOC_SYSTEM_SAVE_MENU_USED,In Use
+LOC_SYSTEM_SAVE_MENU_DELETE_REALLY,This save will be permanently deleted. Are you sure?
 LOC_SYSTEM_WELCOME_FIRST,Welcome to Gensokyo!
 LOC_SYSTEM_WELCOME,Welcome back to Gensokyo!
 LOC_SYSTEM_LOS_MON,You see a monster.
@@ -173,6 +180,7 @@ LOC_SYSTEM_ALL_SPELL,View All Spell
 LOC_SYSTEM_DAMAGED_BY_POISON1,You're taking poison damage.
 LOC_SYSTEM_DAMAGED_BY_POISON2,You're taking heavy poison damage.
 LOC_SYSTEM_DAMAGED_BY_POISON3,You're taking severe poison damage.
+LOC_SYSTEM_DAMAGED_BY_FIRE,Taking fire damage.
 LOC_SYSTEM_HEALED_POISON1,The poison has been cured.
 LOC_SYSTEM_HEALED_POISON2,You've slightly recovered from the poison.
 LOC_SYSTEM_OUCH,Ouch!
@@ -435,7 +443,9 @@ LOC_SYSTEM_WIZARD_MODE,Wizard Mode
 LOC_SYSTEM_SAVEREMAIN_MODE,Save Retention
 LOC_SYSTEM_TOUHOUCRAWL_HELP,Touhou Crawl Help List
 LOC_SYSTEM_COMMAND,Command
+LOC_SYSTEM_PAD_COMMAND,Commands (joypad)
 LOC_SYSTEM_COMMAND_LIST,Command List
+LOC_SYSTEM_PAD_COMMAND_LIST,Command List (joypad)
 LOC_SYSTEM_CHARACTER_HELP,Tribe & Job Help
 LOC_SYSTEM_GODS_HELP,Gods Help
 LOC_SYSTEM_PROCESS_NOTE,Progress Notes
@@ -527,6 +537,10 @@ LOC_SYSTEM_ENHANCE,Enhanced
 LOC_SYSTEM_WEAKENING,Weakened
 LOC_SYSTEM_CHANGED,Disguised
 LOC_SYSTEM_INVINCIBILITY,Invincible
+LOC_SYSTEM_NEUTRAL,Neutral
+LOC_SYSTEM_OIL,Oil
+LOC_SYSTEM_STICKY_FIRE,Fire
+LOC_SYSTEM_NONE_MOVE,Cannot Move
 LOC_SYSTEM_HP_VERY_LOW,Near Death
 LOC_SYSTEM_HP_LOW,Severely Wounded
 LOC_SYSTEM_HP_MIDDLE,Wounded
@@ -612,6 +626,8 @@ LOC_SYSTEM_BUFF_STAT_SUPERMAN,Super
 LOC_SYSTEM_BUFF_STAT_NONE_MOVE,-Move
 LOC_SYSTEM_BUFF_STAT_NIGHT_SIGHT,Blind
 LOC_SYSTEM_BUFF_STAT_SLEEP,Sleep
+LOC_SYSTEM_BUFF_STAT_OIL,Oil
+LOC_SYSTEM_BUFF_STAT_FIRE,Fire
 LOC_SYSTEM_BUFF_DESCRIBE_RISK,Risk indicates how dangerous your current situation is.
 LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY1,Your armor and shield are too heavy! Your evasion, stealth, magic, accuracy, and movement speed are reduced by the penalty.
 LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY2,This is the total penalty from your armor and shield. Your evasion, stealth, magic success rate, accuracy, and movement speed are reduced accordingly.
@@ -711,6 +727,8 @@ LOC_SYSTEM_BUFF_DESCRIBE_STAT_SUPERMAN,Your movement speed has greatly increased
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_NONE_MOVE,You're held by something and cannot move.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_NIGHT_SIGHT,You can't see a thing. Your vision is drastically reduced.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLEEP,You are asleep!
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_OIL,You are covered in oil. Beware of sparks.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_FIRE,You are on fire!
 LOC_SYSTEM_SMOKE_NORMAL,Thin Smoke
 LOC_SYSTEM_SMOKE_FOG,Fog Cloud
 LOC_SYSTEM_SMOKE_FIRE,Flame Cloud
@@ -725,6 +743,7 @@ LOC_SYSTEM_SMOKE_TWIST,Twister
 LOC_SYSTEM_SMOKE_WHIRLWIND,Whirlwind
 LOC_SYSTEM_SMOKE_CURSE,Cursed Cloud
 LOC_SYSTEM_SMOKE_BLIZZARD,Blizzard
+LOC_SYSTEM_SMOKE_HEAVENLY_STORM,Golden Dust
 LOC_SYSTEM_MANY_ITEMS,Many Items
 LOC_SYSTEM_TERRAIN_UNSEEN,Unseen Area
 LOC_SYSTEM_TERRAIN,Terrain
@@ -736,8 +755,8 @@ LOC_SYSTEM_ON_THE_ITEM_SINGLE,There is {0} here. (Press ',' to pick up)
 LOC_SYSTEM_ON_THE_ITEM_MULTIPLE,There are {0} here. (Press ',' to pick up)
 LOC_SYSTEM_ON_THE_ITEM_SOME,There are some items here. (Press ',' to pick up)
 LOC_SYSTEM_ON_THE_ITEM_MANY,There are several items here. (Press ',' to pick up)
-LOC_SYSTEM_ASK_DOOR,어느 쪽 문을 여닫을거지?
-LOC_SYSTEM_DOOR_NONE,근처에 여닫을만한 것이 없다.
+LOC_SYSTEM_ASK_DOOR,Which door do you want to open or close?
+LOC_SYSTEM_DOOR_NONE,There’s nothing nearby to open or close.
 LOC_SYSTEM_ASK_CLOSE_DOOR,Which door do you want to close?
 LOC_SYSTEM_CLOSE_DOOR,You closed the door.
 LOC_SYSTEM_CLOSE_DOOR_FAIL,Something is blocking you from closing it.
@@ -892,6 +911,7 @@ LOC_SYSTEM_YOU_FLY_END_ALMOST,Your body is getting heavier.
 LOC_SYSTEM_YOU_FLY_END,You landed softly on the ground.
 LOC_SYSTEM_YOU_FLY_WATER,You fell onto the water.
 LOC_SYSTEM_YOU_FLY_LAVA,You fell onto the lava.
+LOC_SYSTEM_YOU_FLY_OIL,You landed in a pool of oil.
 LOC_SYSTEM_YOU_GLOW,You began to emit light.
 LOC_SYSTEM_YOU_MORE_GLOW,You emitted a stronger light.
 LOC_SYSTEM_YOU_GLOW_END,The glow from your body has faded.
@@ -959,6 +979,14 @@ LOC_SYSTEM_YOU_SLEEP,You fell asleep!
 LOC_SYSTEM_YOU_SLEEP_END1,You shook off drowsiness.
 LOC_SYSTEM_YOU_SLEEP_END2,You woke up from sleep.
 LOC_SYSTEM_YOU_MANA_BUFF_END,MP recovery rate has normalized.
+LOC_SYSTEM_YOU_OIL,You are covered in oil.
+LOC_SYSTEM_YOU_MORE_OIL,You are even more soaked in oil.
+LOC_SYSTEM_YOU_OIL_END,The oil on you has been washed away.
+LOC_SYSTEM_YOU_FIRE,You caught on fire.
+LOC_SYSTEM_YOU_MORE_FIRE,The flames on you grew stronger.
+LOC_SYSTEM_YOU_FIRE_FROM_OIL,The oil on you ignited.
+LOC_SYSTEM_YOU_MORE_FIRE_FROM_OIL,The fire on you was fueled further.
+LOC_SYSTEM_YOU_FIRE_END,The flames on you died out.
 LOC_SYSTEM_MON_RED_DESIRE,Red Spirit
 LOC_SYSTEM_MON_BLUE_DESIRE,Blue Spirit
 LOC_SYSTEM_MON_GREEN_DESIRE,Green Spirit
@@ -1008,6 +1036,7 @@ LOC_SYSTEM_MON_LUNATIC,{0} is consumed by madness.
 LOC_SYSTEM_MON_GATHERING,{0} is calling for allies.
 LOC_SYSTEM_MON_GATHERING_MOON_RABBIT,{0} starts sending out signals for reinforcements.
 LOC_SYSTEM_MON_GATHERING_HELL_HOUND,Drawn by {0}’s howl, more Hellhounds are approaching.
+LOC_SYSTEM_MON_LOCKED_DOOR,{0} activated a security device and closed all visible doors.
 LOC_SYSTEM_MON_STRONG,{0} is empowered.
 LOC_SYSTEM_MON_WEAK,{0} is weakened.
 LOC_SYSTEM_MON_INVINCIBILITY,{0} becomes invincible.
@@ -1020,6 +1049,11 @@ LOC_SYSTEM_MON_RECORVER_FROZEN,The ice on {0} melts away.
 LOC_SYSTEM_MON_RECORVER_PARALYSE,{0} regains mobility.
 LOC_SYSTEM_MON_RECORVER_SICK,{0} is no longer sick.
 LOC_SYSTEM_MON_REIMU_APPEAR,An angry shrine maiden from Hakurei Shrine appeared from the gap!
+LOC_SYSTEM_MON_FIRE,{0} was engulfed in flames.
+LOC_SYSTEM_MON_MORE_FIRE,{0} was further engulfed in flames.
+LOC_SYSTEM_MON_FIRE_FROM_OIL,The oil on {0} ignited.
+LOC_SYSTEM_MON_MORE_FIRE_FROM_OIL,The fire on {0} was further fueled.
+LOC_SYSTEM_MON_OIL,{0} was covered in oil.
 LOC_SYSTEM_MON_NO_LONGER_STRONG,{0} is no longer empowered.
 LOC_SYSTEM_MON_NO_LONGER_HASTE,{0} is no longer fast.
 LOC_SYSTEM_MON_NO_LONGER_SLOW,{0} is no longer slowed.
@@ -1038,15 +1072,19 @@ LOC_SYSTEM_MON_NO_LONGER_FORCE,{0}'s power boost fades.
 LOC_SYSTEM_MON_NO_LONGER_WEAK,{0}'s weakening ends.
 LOC_SYSTEM_MON_NO_LONGER_CHANGED,{0} reverts from disguise—back to a raccoon!
 LOC_SYSTEM_MON_NO_LONGER_INVINCIBLE,{0} is no longer invincible.
+LOC_SYSTEM_MON_NO_LONGER_OIL,{0} is no longer drenched in oil.
+LOC_SYSTEM_MON_NO_LONGER_FIRE,The flames on {0} died out.
 LOC_SYSTEM_MON_ABIL_GATHERING,{0} is rallying allies.
+LOC_SYSTEM_MON_ABIL_SPEAEKER_PHONE,{0} used a loudspeaker to call allies on the same floor.
 LOC_SYSTEM_MON_DROWNED,{0} drowns.
 LOC_SYSTEM_MON_FALL_LAVA,{0} falls into lava.
-LOC_SYSTEM_FIGHT_BLOCK,{0} blocks {1}’s {2} with a shield.
-LOC_SYSTEM_FIGHT_EVADE,{0} evades {1}’s {2}.
-LOC_SYSTEM_FIGHT_GRAZE,{0} grazes {1}’s {2}.
-LOC_SYSTEM_FIGHT_MISS,{0}’s {1} misses {2}.
-LOC_SYSTEM_FIGHT_GRAZED,{0}’s {1} is grazed by {2}.
-LOC_SYSTEM_MAGIC_RESIST,{0} resists the effect.
+LOC_SYSTEM_MON_FALL_OIL,{0} landed in a pool of oil.
+LOC_SYSTEM_FIGHT_BLOCK,{0} block{0!=you?s:} {1}{1==you?r:'s} {2} with a shield.
+LOC_SYSTEM_FIGHT_EVADE,{0} evade{0!=you?s:} {1}{1==you?r:'s} {2}.
+LOC_SYSTEM_FIGHT_GRAZE,{0} graze{0!=you?s:} {1}{1==you?r:'s} {2}.
+LOC_SYSTEM_FIGHT_MISS,{0}{0==you?r:'s} {1} misses {2}.
+LOC_SYSTEM_FIGHT_GRAZED,{0}{0==you?r:'s} {1} is grazed by {2}.
+LOC_SYSTEM_MAGIC_RESIST,{0} resist{0!=you?s:} the effect.
 LOC_SYSTEM_MAGIC_SUMMON,{0} is summoned to your side.
 LOC_SYSTEM_MAGIC_FIRE_BRAND,{0} is set ablaze.
 LOC_SYSTEM_MAGIC_FIRE_BRAND_MORE,{0} burns even brighter.
@@ -1055,8 +1093,9 @@ LOC_SYSTEM_MAGIC_COLD_BRAND_MORE,{0} radiates even more intense cold.
 LOC_SYSTEM_MAGIC_POISON_BRAND,{0} begins to ooze poison.
 LOC_SYSTEM_MAGIC_POISON_BRAND_MORE,{0}'s poison grows more potent.
 LOC_SYSTEM_MAGIC_RECALL,{0} is recalled.
-LOC_SYSTEM_MAGIC_KNOCKBACK,{0} is knocked back.
-LOC_SYSTEM_MAGIC_HYPNOSIS_MOVE,{0} moves under hypnosis.
+LOC_SYSTEM_MAGIC_KNOCKBACK,{0} {0==you?are:is} knocked back.
+LOC_SYSTEM_MAGIC_KICK_KNOCKBACK,{0} {0==you?were:was} kicked by a hoof and knocked back.
+LOC_SYSTEM_MAGIC_HYPNOSIS_MOVE,{0} move{0!=you?s:} under hypnosis.
 LOC_SYSTEM_MAGIC_ANIMAL_CHANGE_RESIST,{0} is already an animal—transformation fails.
 LOC_SYSTEM_MAGIC_ANIMAL_CHANGE,{0} is transformed into an animal.
 LOC_SYSTEM_MAGIC_SUMMON_DREAM_LAKE,{0} summons a dream of the Misty Lake!
@@ -1068,7 +1107,7 @@ LOC_SYSTEM_MAGIC_SUMMON_DREAM_SUBTERRANEAN,{0} summons a dream of the Underworld
 LOC_SYSTEM_MAGIC_SUMMON_DREAM_PANDEMONIUM,{0} summons a dream of Pandemonium!
 LOC_SYSTEM_MAGIC_MANA_DRAIN,{0} drains your mana.
 LOC_SYSTEM_MAGIC_BLOOD_STARE,{0} stares intently at {1}.
-LOC_SYSTEM_MAGIC_JUMP_ATTACK,{0} leaps at {1}.
+LOC_SYSTEM_MAGIC_JUMP_ATTACK,{0} leap{0!=you?s:} at {1}.
 LOC_SYSTEM_MAGIC_DISGUISE,{0} disguises itself as {1}!
 LOC_SYSTEM_MAGIC_RECALL_YOSHIKA,{0} is summoned next to {1}.
 LOC_SYSTEM_MAGIC_REVIVE_YOSHIKA,{0} revives {1}!
@@ -1076,57 +1115,61 @@ LOC_SYSTEM_MAGIC_TASTE_OF_DEATH,{0} is drawn into {1}.
 LOC_SYSTEM_MAGIC_AFTERLIFE,{0} swings a scythe toward you.
 LOC_SYSTEM_MAGIC_PRISM_CONCERTO,Prism Concerto!
 LOC_SYSTEM_MAGIC_PRISM_CALL,{0} joins the ensemble.
-LOC_SYSTEM_MAGIC_UNLUCK,{0} manipulates {1}’s fortune.
-LOC_SYSTEM_MAGIC_UNLUCK_TO_MONSTER,{0} manipulates {1}’s fortune. {2} seems oddly unlucky.
-LOC_SYSTEM_MAGIC_MERMAID_SONG,{0} is drawn toward {1}’s song.
-LOC_SYSTEM_MAGIC_PSYCHOKINESIS,{0} is thrown by telekinesis.
+LOC_SYSTEM_MAGIC_UNLUCK,{0} manipulates {1}{1==you?r:'s} fortune.
+LOC_SYSTEM_MAGIC_UNLUCK_TO_MONSTER,{0} manipulates {1}{1==you?r:'s} fortune. {2} seems oddly unlucky.
+LOC_SYSTEM_MAGIC_MERMAID_SONG,{0} {0==you?are:is} drawn toward {1}’s song.
+LOC_SYSTEM_MAGIC_PSYCHOKINESIS,{0} {0==you?are:is} thrown by telekinesis.
 LOC_SYSTEM_MAGIC_KOKORO_ROULETTE_RED,{0} dons the Mask of Rage.
 LOC_SYSTEM_MAGIC_KOKORO_ROULETTE_BLUE,{0} dons the Mask of Sorrow.
 LOC_SYSTEM_MAGIC_KOKORO_ROULETTE_GREEN,{0} dons the Mask of Joy.
 LOC_SYSTEM_MAGIC_SLEEP_SMITE,{0} leads {1} into a dream.
 LOC_SYSTEM_MAGIC_DIMENSIONAL_RIFT,{0} warps to {1} and delivers a swift kick.
-LOC_SYSTEM_HIT_NORMAL,{0}’s {1} hits {2}.
-LOC_SYSTEM_HIT_DREAM,{0} devours {1}’s dream.
-LOC_SYSTEM_HIT_FIRE,{0}’s {1} hits {2}, setting them ablaze.
-LOC_SYSTEM_HIT_COLD,{0}’s {1} hits {2}, freezing them.
-LOC_SYSTEM_HIT_ELEC,{0}’s {1} hits {2}, shocking them.
-LOC_SYSTEM_HIT_GERMAN_SUPLEX,{0}’s {1} slams into {2}.
+LOC_SYSTEM_MAGIC_WINDFLAW,{0} was blown away by a strong wind.
+LOC_SYSTEM_MAGIC_FOG,Fog spreads over the Misty Lake.
+LOC_SYSTEM_HIT_DEFAULT,{0} hit{0==you?:s} {1!=you?the :}{1}.
+LOC_SYSTEM_HIT_NORMAL,{0} hit{0==you?:s} {1!=you?the :}{2} with {1}.
+LOC_SYSTEM_HIT_DREAM,{0} devour{0==you?:s} {1}{1==you?r:'s} dream.
+LOC_SYSTEM_HIT_FIRE,{0}{0==you?r:'s} {1} scorches {2} with flames.
+LOC_SYSTEM_HIT_COLD,{0}{0==you?r:'s} {1} freezes {2} with ice.
+LOC_SYSTEM_HIT_ELEC,{0}{0==you?r:'s} {1} shocks {2} with electricity.
+LOC_SYSTEM_HIT_GERMAN_SUPLEX,{0}{0==you?r:'s} {1} slams into {2}.
 LOC_SYSTEM_HIT_SMITE,Something smites {0}.
-LOC_SYSTEM_HIT_SMASH,{0} is thrown and slammed into the ground.
-LOC_SYSTEM_HIT_BLOOD,{0}’s blood bursts out.
-LOC_SYSTEM_HIT_NOISE,A deafening sound strikes {0}’s ears.
-LOC_SYSTEM_HIT_CLOUD_FIRE,{0} is engulfed in flames.
-LOC_SYSTEM_HIT_CLOUD_COLD,{0} is frozen solid.
-LOC_SYSTEM_HIT_CLOUD_ELEC,{0} is electrified.
+LOC_SYSTEM_HIT_SMASH,{0} {0==you?are:is} thrown and slammed into the ground.
+LOC_SYSTEM_HIT_HOOF,{0} was kicked by a hoof.
+LOC_SYSTEM_HIT_BLOOD,{0}{0==you?r:'s} blood bursts out.
+LOC_SYSTEM_HIT_NOISE,A deafening sound strikes {0}{0==you?r:'s} ears.
+LOC_SYSTEM_HIT_CLOUD_FIRE,{0} {0==you?are:is} engulfed in flames.
+LOC_SYSTEM_HIT_CLOUD_COLD,{0} {0==you?are:is} frozen solid.
+LOC_SYSTEM_HIT_CLOUD_ELEC,{0} {0==you?are:is} electrified.
 LOC_SYSTEM_HIT_STONE_TRAP,{0} steps on a sharp stone.
-LOC_SYSTEM_HIT_BLAST,{0} is caught in {1}’s explosion.
-LOC_SYSTEM_HIT_SUN_BLAST,{0} is scorched by {1}.
-LOC_SYSTEM_HIT_BLLIZARD,{0} is swept into the blizzard.
-LOC_SYSTEM_HIT_BURST,{0} explodes.
-LOC_SYSTEM_HIT_TWIST,{0} is swept up in the wind.
-LOC_SYSTEM_HIT_CURSED,{0} is cursed.
-LOC_SYSTEM_HIT_VEILING,{0} is cut by the wind armor.
-LOC_SYSTEM_HIT_RUSH,{0} is struck.
-LOC_SYSTEM_HIT_BUMP,{0} bumps into {1}.
-LOC_SYSTEM_HIT_BUMP_WALL,{0} crashes into a wall.
-LOC_SYSTEM_HIT_PSYCHO,{0} is slammed into the ground.
-LOC_SYSTEM_HIT_DROWNING,{0} is drowning.
-LOC_SYSTEM_HIT_DROWNING_MONSTER,{0} falls into the water.
-LOC_SYSTEM_HIT_VAMP,{0} drains {1}’s HP.
-LOC_SYSTEM_HIT_THROW_ELEC,{0} is electrocuted.
+LOC_SYSTEM_HIT_BLAST,{0} {0==you?are:is} caught in {1}’s explosion.
+LOC_SYSTEM_HIT_SUN_BLAST,{0} {0==you?are:is} scorched by {1}.
+LOC_SYSTEM_HIT_BLLIZARD,{0} {0==you?are:is} swept into the blizzard.
+LOC_SYSTEM_HIT_BURST,{0} explode{0==you?:s}.
+LOC_SYSTEM_HIT_TWIST,{0} {0==you?are:is} swept up in the wind.
+LOC_SYSTEM_HIT_CURSED,{0} {0==you?are:is} cursed.
+LOC_SYSTEM_HIT_VEILING,{0} {0==you?are:is} cut by the wind armor.
+LOC_SYSTEM_HIT_RUSH,{0} {0==you?are:is} struck.
+LOC_SYSTEM_HIT_BUMP,{0} bump{0==you?:s} into {1}.
+LOC_SYSTEM_HIT_BUMP_WALL,{0} crash{0==you?:es} into a wall.
+LOC_SYSTEM_HIT_PSYCHO,{0} {0==you?are:is} slammed into the ground.
+LOC_SYSTEM_HIT_DROWNING,{0} {0==you?are:is} drowning.
+LOC_SYSTEM_HIT_DROWNING_MONSTER,{0} fall{0==you?:s} into the water.
+LOC_SYSTEM_HIT_VAMP,{0} drain{0==you?:s} {1}{0==you?r:'s} HP.
+LOC_SYSTEM_HIT_THROW_ELEC,{0} {0==you?are:is} electrocuted.
 LOC_SYSTEM_HIT_CONFUSE_ATTACK,Your attack catches {0} off guard!
-LOC_SYSTEM_HIT_STAB_SHORTBLADE,{0} stabs {1} from behind.
-LOC_SYSTEM_HIT_STAB_LONGBLADE,{0} slashes {1} from behind.
-LOC_SYSTEM_HIT_STAB_MACE,{0} smashes {1} from behind.
-LOC_SYSTEM_HIT_STAB_AXE,{0} cleaves {1} from behind.
-LOC_SYSTEM_HIT_STAB_SPEAR,{0} pierces {1} from behind.
-LOC_SYSTEM_HIT_STAB_OTHER,{0} ambushes {1} from behind.
-LOC_SYSTEM_NO_DAMAGE,No damage taken.
+LOC_SYSTEM_HIT_STAB_SHORTBLADE,{0} stab{0==you?:s} {1} from behind.
+LOC_SYSTEM_HIT_STAB_LONGBLADE,{0} slash{0==you?:es} {1} from behind.
+LOC_SYSTEM_HIT_STAB_MACE,{0} smash{0==you?:es} {1} from behind.
+LOC_SYSTEM_HIT_STAB_AXE,{0} cleav{0==you?:es} {1} from behind.
+LOC_SYSTEM_HIT_STAB_SPEAR,{0} pierc{0==you?:es} {1} from behind.
+LOC_SYSTEM_HIT_STAB_OTHER,{0} ambush{0==you?:es} {1} from behind.
+LOC_SYSTEM_NO_DAMAGE,But does no damage.
 LOC_SYSTEM_BUT_NO_DAMAGE,But it dealt no damage.
 LOC_SYSTEM_FRIEND_SHIELD,{0} shields {1}!
 LOC_SYSTEM_MAMIZO_EVADE,{0} transforms into paper charms and evades the attack!
-LOC_SYSTEM_KILL_NORMAL,{0} kills {1}.
-LOC_SYSTEM_KILL_INANIMATE,{0} destroys {1}.
+LOC_SYSTEM_KILL_NORMAL,{0} kill{0==you?:s} {1}.
+LOC_SYSTEM_KILL_INANIMATE,{0} destroy{0==you?:s} {1}.
 LOC_SYSTEM_DEAD_YOU,You died...
 LOC_SYSTEM_DEAD_ESCAPE,You escaped the dungeon.
 LOC_SYSTEM_DEAD_NORMAL,{0} dies.
@@ -1137,29 +1180,29 @@ LOC_SYSTEM_DEAD_REIMU,{0} slips into the gap.
 LOC_SYSTEM_GAIN_EXPERIENCE,You feel your experience grow.
 LOC_SYSTEM_GAIN_NO_EXPERIENCE_WITH_FEAR,No experience gained from enemies that lost the will to fight.
 LOC_SYSTEM_NOTE_START,{0}, {1} {2} {3}. began their dungeon adventure.
-LOC_SYSTEM_NOTE_UNIQUE_FIND,You’ve encountered the named foe: {0}.
-LOC_SYSTEM_NOTE_UNIQUE_KILL,You’ve slain the named foe: {0}.
-LOC_SYSTEM_NOTE_UNIQUE_DEAD,The named foe {0} has died.
-LOC_SYSTEM_NOTE_ENSLAVE_DEAD,{0} has died.
-LOC_SYSTEM_NOTE_INVITE_FAIRY_UNIQUE,{0} has joined as an ally.
-LOC_SYSTEM_NOTE_INVITE_FAIRY,{0} ({1}) has joined as an ally.
-LOC_SYSTEM_NOTE_DUNGEON_ENTER,Dungeon Progress: Entered {0}.
-LOC_SYSTEM_NOTE_SKILL_LEVEL_UP,Skill {0} leveled up. Skill Level {1}
-LOC_SYSTEM_NOTE_MEMORIZE_SPELL,Spell memorized: Level {0} {1}
+LOC_SYSTEM_NOTE_UNIQUE_FIND,Noticed {0}.
+LOC_SYSTEM_NOTE_UNIQUE_KILL,Killed {0}.
+LOC_SYSTEM_NOTE_UNIQUE_DEAD,{0} has died.
+LOC_SYSTEM_NOTE_ENSLAVE_DEAD,Enslaved {0} has died.
+LOC_SYSTEM_NOTE_INVITE_FAIRY_UNIQUE,{0} has joined.
+LOC_SYSTEM_NOTE_INVITE_FAIRY,{0} ({1}) has joined.
+LOC_SYSTEM_NOTE_DUNGEON_ENTER,Entered {0}.
+LOC_SYSTEM_NOTE_SKILL_LEVEL_UP,Reached skill level {1} in {0}
+LOC_SYSTEM_NOTE_MEMORIZE_SPELL,Learned a level {0} spell: {1}
 LOC_SYSTEM_NOTE_GET_ITEM,Obtained {0}.
 LOC_SYSTEM_NOTE_GET_YINYANG_ORB,Obtained the Yin-Yang Orb.
-LOC_SYSTEM_NOTE_GOD_WORSHIP,You have become a follower of {0}.
-LOC_SYSTEM_NOTE_GOD_GIVEUP,You have renounced {0}.
-LOC_SYSTEM_NOTE_GOD_FORGIVE,You have been forgiven by {0}.
+LOC_SYSTEM_NOTE_GOD_WORSHIP,Become a follower of {0}.
+LOC_SYSTEM_NOTE_GOD_GIVEUP,Renounced {0}.
+LOC_SYSTEM_NOTE_GOD_FORGIVE,Forgiven by {0}.
 LOC_SYSTEM_NOTE_GOD_GIFT,Received a gift from {0}.
-LOC_SYSTEM_NOTE_GOD_ABANDON,You abandoned {0}.
-LOC_SYSTEM_NOTE_GOD_ABANDONED,You were abandoned by {0}.
+LOC_SYSTEM_NOTE_GOD_ABANDON,Abandoned {0}.
+LOC_SYSTEM_NOTE_GOD_ABANDONED,Abandoned by {0}.
 LOC_SYSTEM_NOTE_SATORI_REUNION,Reunited with Satori.
 LOC_SYSTEM_NOTE_SATORI_WORSHIP,Became Satori’s pet.
 LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN,Half-Youkai Mutation Manifested
 LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GROW,Half-Youkai Mutation Strengthened
-LOC_SYSTEM_NOTE_YUYUKO_ENSLAVE_GHOST,You have bound {0}.
-LOC_SYSTEM_NOTE_SEIJA_GIFT,You received a gift from Seija. ({0})
+LOC_SYSTEM_NOTE_YUYUKO_ENSLAVE_GHOST,Enslave {0}.
+LOC_SYSTEM_NOTE_SEIJA_GIFT,Received a gift from Seija. ({0})
 LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_ITEM,Blessing of purification from Junko: {0}
 LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_SKILL,Blessing of skill purification ({0}) from Junko.
 LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_FIRERESIST,Blessing of fire resistance purification from Junko.
@@ -1214,12 +1257,22 @@ LOC_SYSTEM_NOTE_DEAD_QUIT,Gave up the game.
 LOC_SYSTEM_NOTE_DEAD_ESCAPE,Escaped from the dungeon.
 LOC_SYSTEM_NOTE_DEAD_POISON,Died from poison.
 LOC_SYSTEM_NOTE_DEAD_EFFECT,Died from side effects.
+LOC_SYSTEM_NOTE_DEAD_FIRE,Burned to death by fire.
 LOC_SYSTEM_REPLAY_TITLE,{0}, Level {1} {2} {3} {4} "{5}"
 LOC_SYSTEM_REPLAY_TITLE_ARENA,Arena Level {0} "{1}"
 LOC_SYSTEM_REPLAY_TITLE_SPRINT,Sprint
 LOC_SYSTEM_UNIQUE_BENYATH_RAGE,{0} lets out a roar of rage and awakens their true power!
 LOC_SYSTEM_UNIQUE_BENYATH_RAGE_DISTANCE,You hear a furious scream in the distance.
 LOC_SYSTEM_UNIQUE_KEINE_TRANSFORM,Wounded Keine transforms into a White-Haired Beast!
+LOC_SYSTEM_UNIQUE_YUMA_TRANSFORM,Overwhelmed by hunger, Yuma transformed into a Grid Monster!
+LOC_SYSTEM_UNIQUE_YUMA_ABSORB,{0} absorbed {1} from the ground and recovered.
+LOC_SYSTEM_UNIQUE_YUMA_ABSORB_MANY,{0} absorbed {1} items from the ground and recovered.
+LOC_SYSTEM_UNIQUE_YUMA_ABSORB,{0} absorbed {1} from the ground and recovered.
+LOC_SYSTEM_UNIQUE_EIKA_REGA_DISTANCE,You feel the anger of someone from afar.
+LOC_SYSTEM_UNIQUE_EIKA_REGA,{0} is enraged! {0} has grown stronger.
+LOC_SYSTEM_UNIQUE_KOGASA_REGA,{0} was angered by your actions! ...But nothing happened.
+LOC_SYSTEM_UNIQUE_SONBITEN,{0} suddenly began spinning rapidly in place!
+LOC_SYSTEM_UNIQUE_SAKUYA_COME,{0} suddenly appeared out of thin air along with an alarm!
 LOC_SYSTEM_TENSI_GOOD1,Tenshi gives you a friendly glance.
 LOC_SYSTEM_TENSI_GOOD2,Tenshi's power reaches you.
 LOC_SYSTEM_TENSI_GOOD3,Tenshi: You look like you're struggling!
@@ -1301,7 +1354,7 @@ LOC_SYSTEM_TENSI_BAD_TELE4,Tenshi: Boring~ Time to shake things up!
 LOC_SYSTEM_TENSI_BAD_TELE5,Your vision spins wildly.
 LOC_SYSTEM_TENSI_EARHQUAKE1,You feel the earth overturn beneath you.
 LOC_SYSTEM_TENSI_EARHQUAKE2,Tenshi: Shatter!
-LOC_SYSTEM_TENSI_EARHQUAKE3,Tenshi: *Car crash!* (CRACK!)
+LOC_SYSTEM_TENSI_EARHQUAKE3,Tenshi: *Ka-crash!*
 LOC_SYSTEM_TENSI_EARHQUAKE4,Tenshi: It’s an earthquake!
 LOC_SYSTEM_TENSI_EARHQUAKE5,A massive earthquake erupts!
 LOC_SYSTEM_TENSI_SUPERARMOR1,You feel your body harden like stone.
@@ -1563,7 +1616,7 @@ LOC_SYSTEM_ATT_MIMA_MAGIC,Magic
 LOC_SYSTEM_ATT_MIMA_FIRE_MAGIC,Fire Magic
 LOC_SYSTEM_ATT_MIMA_EARTH_MAGIC,Earth Magic
 LOC_SYSTEM_ATT_MIMA_ELEC_MAGIC,Electric Magic
-LOC_SYSTEM_ATT_MIMA_POISION_MAGIC,Venom Magic
+LOC_SYSTEM_ATT_MIMA_POISION_MAGIC,Poison Magic
 LOC_SYSTEM_ATT_MIMA_ICE_MAGIC,Ice Magic
 LOC_SYSTEM_ATT_MIMA_CONJURE_MAGIC,Arcane Power
 LOC_SYSTEM_ATT_STONE_PUNCH,Stone Fist
@@ -1609,9 +1662,15 @@ LOC_SYSTEM_ATT_PSYCHOKINESIS,Psychokinesis
 LOC_SYSTEM_ATT_HYPERBEAM,Hyper Beam
 LOC_SYSTEM_ATT_SWORD,Sword
 LOC_SYSTEM_ATT_KNIFE,Knife
-LOC_SYSTEM_ATT_THROWING_ATLAS,Thousand-Handed Toss
+LOC_SYSTEM_ATT_THROWING_ATLAS,Ame-no-Tajikarao Toss
 LOC_SYSTEM_ATT_BILL,Talisman
 LOC_SYSTEM_ATT_DIMENSIONAL_RIFT,Dimensional Rift
+LOC_SYSTEM_ATT_WIND,Gale
+LOC_SYSTEM_ATT_HOOF,Hoof
+LOC_SYSTEM_ATT_SPORK,Spork
+LOC_SYSTEM_ATT_OIL_BALL,Oil Ball
+LOC_SYSTEM_ATT_BEARTRAP,Trap
+LOC_SYSTEM_ATT_POLE,Pole
 LOC_SYSTEM_THAT,That
 LOC_SYSTEM_SOMETHING,Something
 LOC_SYSTEM_FIND_ONE,Found {0}.
@@ -1680,20 +1739,24 @@ LOC_SYSTEM_EVENT_DREAM_OPEN3,The dream world expands once more! Its denizens hav
 LOC_SYSTEM_EVENT_DREAM_OPEN4,Most of the dream world has opened! Monsters will soon flood in!
 LOC_SYSTEM_EVENT_DREAM_OPEN5,The dream world is fully open! Enter the portal to the moon as soon as possible!
 LOC_SYSTEM_EVENT_MARY_SAN1,It’s me, Mary-san.
-LOC_SYSTEM_EVENT_MARY_SAN2,I’m right behind
-LOC_SYSTEM_EVENT_MARY_SAN3,you...
-LOC_SYSTEM_EVENT_MARY_SAN_FAIL,...You can’t see me, but I’m here.
+LOC_SYSTEM_EVENT_MARY_SAN2,I’m right
+LOC_SYSTEM_EVENT_MARY_SAN3,...behind you!
+LOC_SYSTEM_EVENT_MARY_SAN_FAIL,...there somewhere.
 LOC_SYSTEM_EVENT_RUN_TRHEEFAIRY,{0} shouted, "Run for it!"
 LOC_SYSTEM_EVENT_SCALET_TRAP,Defensive magic circle activated. Eliminate the intruder!
 LOC_SYSTEM_EVENT_KOGASA_TIME1,It's SURPRISE TIME!!
 LOC_SYSTEM_EVENT_KOGASA_TIME2,...But Kogasa senses something went wrong.
 LOC_SYSTEM_EVENT_HOJOK1,{0} shouted, "I'll finish this!"
 LOC_SYSTEM_EVENT_HOJOK2,{0} shouted, "Leave it to me!"
-LOC_SYSTEM_EVENT_KOGASA_SMOKE1,{0} shouted, "I'll get you—*cough cough!*"
+LOC_SYSTEM_EVENT_HOJOK3,{0} shouted, "Leave it to m— Who goes there!?"
+LOC_SYSTEM_EVENT_KOGASA_SMOKE1,{0} shouted, "BOO—*cough cough!*"
 LOC_SYSTEM_EVENT_KOGASA_SMOKE2,...Looks like Kogasa inhaled too much of her own smoke.
 LOC_SYSTEM_EVENT_SION_ITEM,Item
 LOC_SYSTEM_EVENT_SION_ITEM_DELETE,{0} vanished as you got too close.
 LOC_SYSTEM_EVENT_SION_ITEMS_DELETE,Items vanished as you got too close.
+LOC_SYSTEM_EVENT_DAIYOUSEI_WITH_FOG,The fog suddenly thickens... It's a fairy ambush!
+LOC_SYSTEM_EVENT_TENSI_EARTHQUAKE,Cracks suddenly begin to form along the walls!
+LOC_SYSTEM_EVENT_KISME_RUN,Kisume noticed you and fled into the air!
 LOC_SYSTEM_MON_DREAM_UNIQUE,Dream Dweller {0}
 LOC_SYSTEM_EVOKE_AIRSCROLL,You gained MP from the Air Scroll!
 LOC_SYSTEM_EVOKE_DREAM_SOUL,You have evoked the dream of {0}!
@@ -1967,13 +2030,13 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BLOOD_MAGIC,If you lack MP, you can cast spells
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_TORMENT,Spend 1 Power to halve the HP of all enemies in sight.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CLOUD_RESIST,As a being of nature itself, you are less affected by clouds.\nDamage from clouds is halved.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SEE_INVI,You can see invisible enemies.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIRE_IMUNE,Blessed by Sunho, you are immune to fire and take no fire damage.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_COLD_IMUNE,Blessed by Sunho, you are immune to cold and take no cold damage.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_ELEC_IMUNE,Blessed by Sunho, you are immune to electricity and take no electric damage.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_MP,Blessed by Sunho, your HP and MP are unified.\nYou use the same value for both taking damage and casting spells.\nHP and MP regeneration are also combined for faster recovery.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_POWER,Blessed by Sunho, you are always in full power mode and never lose power.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_LIFE,Blessed by Sunho, you can revive after death.\nHowever, death caused by betraying Sunho cannot be reversed.\nYou have {0} extra lives remaining.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_SYSTEM,Blessed by Sunho, item effects from the shooting system are enhanced.\nYou can use spell cards even while purified.\nTalisman recharge speed is tripled.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIRE_IMUNE,Blessed by Junko, you are immune to fire and take no fire damage.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_COLD_IMUNE,Blessed by Junko, you are immune to cold and take no cold damage.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_ELEC_IMUNE,Blessed by Junko, you are immune to electricity and take no electric damage.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_MP,Blessed by Junko, your HP and MP are unified.\nYou use the same value for both taking damage and casting spells.\nHP and MP regeneration are also combined for faster recovery.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_POWER,Blessed by Junko, you are always in full power mode and never lose power.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_LIFE,Blessed by Junko, you can revive after death.\nHowever, death caused by betraying Junko cannot be reversed.\nYou have {0} extra lives remaining.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_SYSTEM,Blessed by Junko, item effects from the shooting system are enhanced.\nYou can use spell cards even while purified.\nTalisman recharge speed is tripled.
 LOC_SYSTEM_TRIBE_PROPERTY_HEAD_UNEQUIP,Your headgear has been unequipped!
 LOC_SYSTEM_TRIBE_PROPERTY_FOOT_UNEQUIP,Your leg armor has been unequipped!
 LOC_SYSTEM_TRIBE_PROPERTY_HAND_UNEQUIP,Your gloves have been unequipped!
@@ -2002,6 +2065,8 @@ LOC_SYSTEM_JOB_ENGINEER,Engineer
 LOC_SYSTEM_JOB_MISSING,Missing Person
 LOC_SYSTEM_TILE_UNKNOWN,Unknown
 LOC_SYSTEM_TILE_FLOOR,Floor
+LOC_SYSTEM_TILE_OIL,Oil Pool
+LOC_SYSTEM_TILE_SNOW,Snowfield
 LOC_SYSTEM_TILE_OPEN_DOOR,Open Door
 LOC_SYSTEM_TILE_STAIR_DOWN,Stairs Down
 LOC_SYSTEM_TILE_STAIR_UP,Stairs Up
@@ -2042,6 +2107,9 @@ LOC_SYSTEM_TILE_TEMPLE_LILLY,Lily’s Sunflower Altar
 LOC_SYSTEM_TILE_TEMPLE_MIKO,Miko’s Shoutoku Altar
 LOC_SYSTEM_TILE_TEMPLE_OKINA,Okina’s Backdoor Altar
 LOC_SYSTEM_TILE_TEMPLE_JUNKO,Junko’s Divine Spirit Altar
+LOC_SYSTEM_TILE_TEMPLE_SHIKIEIKI,Shikieiki’s Enma Altar
+LOC_SYSTEM_TILE_TEMPLE_KEIKI,Keiki’s Haniwa Altar
+LOC_SYSTEM_TILE_TEMPLE_TENKYUU,Tenkyuu’s Rainbow Altar
 LOC_SYSTEM_TILE_STONE_WALL,Stone Wall
 LOC_SYSTEM_TILE_RED_WALL,Red Wall
 LOC_SYSTEM_TILE_BOOK_WALL,Bookshelf
@@ -2056,6 +2124,9 @@ LOC_SYSTEM_TILE_CLOSE_DOOR,Closed Door
 LOC_SYSTEM_TILE_GRASS,Glass
 LOC_SYSTEM_TILE_STATUE,Statue
 LOC_SYSTEM_TILE_BUDDHA_STATUE,Jizo Statue
+LOC_SYSTEM_TILE_IZAKAYA,Food Stall
+LOC_SYSTEM_TILE_GRAVE,Gravestone
+LOC_SYSTEM_TILE_SNOWMAN,Snowman
 LOC_SYSTEM_TILE_DEEP_WATER,Deep Water
 LOC_SYSTEM_TILE_LAVA,Lava
 LOC_SYSTEM_TILE_HELP_DOWN,(Press `>` to go down)
@@ -2135,6 +2206,7 @@ LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_OFF,Your Philosopher's Stone has finally v
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ALMOST_OFF,The Philosopher's Stone is nearly gone.
 LOC_SYSTEM_SPELL_UNLUCK_UFO,Unbelievable! A UFO fell from the sky!
 LOC_SYSTEM_SPELL_UNLUCK_RECORVER,Your fortune has returned to normal.
+LOC_SYSTEM_SPELL_TOUGUE,{0} pulled in {1}.
 LOC_SYSTEM_SPL_MON_TANMAC_SMALL,Small Danmaku
 LOC_SYSTEM_SPL_MON_TANMAC_MIDDLE,Medium Danmaku
 LOC_SYSTEM_SPL_MON_WATER_GUN,Water Gun
@@ -2285,6 +2357,19 @@ LOC_SYSTEM_SPL_THROW_PLAYER,Throw Thousand-Handed Power Guy
 LOC_SYSTEM_SPL_THROW_AMULET,Throw Amulet
 LOC_SYSTEM_SPL_WARP_KICK,Subspatial Rift
 LOC_SYSTEM_SPL_REIMU_BARRIER,Seal Barrier
+LOC_SYSTEM_SPL_TOUGUE,Tongue Pull
+LOC_SYSTEM_SPL_WINDFLAW,Gust
+LOC_SYSTEM_SPL_SUMMON_GHOST,Ghost Summon
+LOC_SYSTEM_SPL_MEGATON_KICK,Megaton Kick
+LOC_SYSTEM_SPL_THROW_OIL,Oil Burst
+LOC_SYSTEM_SPL_HEAVENLY_STORM,Heavenly Storm
+LOC_SYSTEM_SPL_TRACKING,Marking
+LOC_SYSTEM_SPL_DISCORD,Discord
+LOC_SYSTEM_SPL_SMOKING,Smoking Dragon
+LOC_SYSTEM_SPL_CREATE_FOG,Create Fog
+LOC_SYSTEM_SPL_GROW_VINE,Summon Vines
+LOC_SYSTEM_SPL_CLOSE_DOOR,Lock Doors
+LOC_SYSTEM_SPL_SPEAKER_PHONE,Intruder Alert
 LOC_SYSTEM_SPL_UKNOWN,Unknown Magic
 LOC_SYSTEM_SPL_DESCRIBE_NONE,This magic doesn’t exist.\n
 LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_SMALL,Fires a small danmaku.\n
@@ -2438,6 +2523,19 @@ LOC_SYSTEM_SPL_DESCRIBE_THROW_AMULET,Throws a charm that exorcises youkai.\nHome
 LOC_SYSTEM_SPL_DESCRIBE_WARP_KICK,Reimu uses a gap to instantly warp next to an enemy and deliver a powerful kick.\nJust because she’s far doesn’t mean you’re safe.\n
 LOC_SYSTEM_SPL_DESCRIBE_REIMU_BARRIER,Reimu fixes a barrier in place to prevent escape.\nWhile active, nothing can pass through.\nIt’s hard to counter but lasts only briefly and has a cooldown.\n
 LOC_SYSTEM_SPL_DESCRIBE_REIMU_BARRIER_YUKARI,However, Yukari may be able to counter this spell in advance, as she’s well-versed in it.\n
+LOC_SYSTEM_SPL_DESCRIBE_TOUGUE,Extends its tongue to pull a distant enemy right in front of it.\nIt’s sticky and makes the victim uncomfortable.\n
+LOC_SYSTEM_SPL_DESCRIBE_WINDFLAW,Unleashes a powerful wind using tengu strength to deal physical damage.\nAlso blows the target away to a random location.\nHowever, it’s said the technique is too powerful to be used consecutively.\n
+LOC_SYSTEM_SPL_DESCRIBE_SUMMON_GHOST,Summons ghosts near the enemy.\nThe ghosts appear instantly around the target, blocking any escape routes.\n
+LOC_SYSTEM_SPL_DESCRIBE_MEGATON_KICK,Delivers a mighty kick using tremendous leg strength.\nThis unstoppable kick easily pierces half of the target’s defense and causes severe internal damage.\nThough highly damaging, it causes the user to be knocked back and briefly stunned, allowing the target a chance to escape.\n
+LOC_SYSTEM_SPL_DESCRIBE_THROW_OIL,Hurls a splash of oil at the target.\nEnemies doused in oil take extra damage from fire attacks.\nThe oil is boiling from underground heat, so fire resistance can help reduce the damage.\n
+LOC_SYSTEM_SPL_DESCRIBE_HEAVENLY_STORM,An ultimate technique said to be taught by a divine Eastern martial arts society.\nNo one knows how she learned it, but she spins her body and staff to create a heavenly storm.\nFor a time, she is surrounded by golden clouds, damaging all nearby enemies.\nHowever, she still seems untrained and unable to control it properly.\n
+LOC_SYSTEM_SPL_DESCRIBE_TRACKING,Targets are marked by Hisami’s unfailing tracking ability.\nA marked player becomes visible to all monsters on the map.\n
+LOC_SYSTEM_SPL_DESCRIBE_DISCORD,Tsukasa slyly manipulates nearby monsters with sweet talk.\nAffected monsters may gain random buffs—or even betray their allies and become hostile.\n
+LOC_SYSTEM_SPL_DESCRIBE_SMOKING,Yamashiro Sannyo blows smoke from her cigarette at the enemy.\nInhaling this smoke causes random debuffs, manipulated by Sannyo’s mental control.\nShe’s said to use this to pacify unruly youkai in gambling dens.\n
+LOC_SYSTEM_SPL_DESCRIBE_CREATE_FOG,Temporarily fills the surroundings with thick fog, drastically reducing visibility.\nFairies of the Misty Lake are used to the fog and can still attack targets accurately.\n
+LOC_SYSTEM_SPL_DESCRIBE_GROW_VINE,Causes vines to rapidly grow around the enemy.\nThese vines entangle nearby foes, reducing their movement speed.\n
+LOC_SYSTEM_SPL_DESCRIBE_CLOSE_DOOR,Activates Scarlet Devil Mansion’s emergency security system, closing all visible doors.\nEven staircases are sealed by the system, possibly pushing aside any unit standing there.\nSealed doors can still be broken open with force.\n
+LOC_SYSTEM_SPL_DESCRIBE_SPEAKER_PHONE,Sounds an alert to allies using a loudspeaker.\nLinked to the Scarlet Devil Mansion’s internal security system, some distant groups may hear it and come.\nHowever, since they’re walking, you may have time to escape.\nRumor has it the head maid on the same floor arrives as if by teleportation.\n
 LOC_SYSTEM_SPL_DESCRIBE_UKNOWN,A spell with no existing description.\n
 LOC_SYSTEM_SPL_DESCRIBE_ALCHEMY,This spell is an alchemy buff.\nOnly one alchemy buff can be active at a time.\nCasting another will overwrite the previous one.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMONING,This spell can summon up to {0} creatures.\n
@@ -3208,6 +3306,7 @@ LOC_SYSTEM_ITEM_ETC_SATORI,Missing Poster
 LOC_SYSTEM_ITEM_ETC_CATNIP,Catnip Tree
 LOC_SYSTEM_ITEM_ETC_BROKEN_CAMERA,Broken Camera
 LOC_SYSTEM_ITEM_ETC_KAPPA_TRASH,Kappa Junk
+LOC_SYSTEM_ITEM_ETC_SKELETON,Skeleton
 LOC_SYSTEM_ITEM_ETC_PHOTO,Photograph
 LOC_SYSTEM_ITEM_ETC_CATNIP_CONFUSE,You're intoxicated by the scent of catnip!
 LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT,This item can be enchanted up to {0}.
@@ -3404,6 +3503,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE2,A flyer reading “Lost Item - Kome
 LOC_SYSTEM_ITEM_DESCRIPTION_ETC_CATNIP,It’s catnip. Not very useful, but cats seem helpless against it.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ETC_BROKEN_CAMERA,A broken tengu camera, likely being kept by kappas for repair.\nIt’s so broken it seems unusable.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ETC_KAPPA_TRASH,Leftover tools and materials from kappas. Doesn’t seem useful.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SKELETON,The skeleton of a poor human who was attacked by youkai.\nIt doesn’t seem to have any use.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_BUG,This is a bug item.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO1,A photo of {0}.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_PHOTO2,A photo of a beautiful girl.\n
@@ -3444,6 +3544,7 @@ LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BLIZARD,Immune to blizzards—thanks to th
 LOC_SYSTEM_MONSTER_DESCRIPTION_DEBUFF_IMMUN,Completely immune to debuff magic.
 LOC_SYSTEM_MONSTER_DESCRIPTION_SILENCE,Can cast spells even while silenced.
 LOC_SYSTEM_MONSTER_DESCRIPTION_SUMMONED,This monster was summoned and will disappear over time.\nAlso gives no EXP.
+LOC_SYSTEM_MONSTER_DESCRIPTION_COMPLETE_NATURAL,This monster is non-hostile and grants no experience.
 LOC_SYSTEM_MONSTER_DESCRIPTION_DREAM_IMMUN,As a dream-being, this monster can’t be befriended or have its soul taken.
 LOC_SYSTEM_MONSTER_DESCRIPTION_USE_MAGIC,Spells used:
 LOC_SYSTEM_MONSTER_DESCRIPTION_RANDOM_MAGIC,This monster uses random magic. Who knows what it’ll cast?!
@@ -3796,6 +3897,7 @@ LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY1,You can charge forward with Kanako's power.
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY2,You can manifest Kanako’s pillar.
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3,You can be enveloped in Kanako’s wind power.
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY4,You sometimes get a gift of weapons from Kanako.
+LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY5,You occasionally receive danmaku as a gift from Kanako.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_JUMP,You can perform short jumps.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_TEMPLE,You can build shrines to earn faith.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_WATER_GUN,You can fire water danmaku at distant enemies.
@@ -4351,6 +4453,7 @@ LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_SUMMON,Summoned monsters can't be recruited.
 LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_ONLYFAIRY,Only fairies can be recruited.
 LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_ZOMBIEFAIRY,This fairy is employed as a zombie. Fairies with jobs can't be recruited.
 LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_MAIDFAIRY,This fairy is working as a maid. Fairies with jobs can't be recruited.
+LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_FOGFAIRY,This fairy cannot leave the Misty Lake and cannot be recruited.
 LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_DREAM,This fairy is a resident of a dream. Dream entities can't be recruited.
 LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_ALREADY,This fairy is already your ally.
 LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_NOT_MONSTER,There are no monsters here.
@@ -4365,7 +4468,7 @@ LOC_SYSTEM_GOD_LILLY_ABIL_FAIRY_WAR,You shared your power with the fairies!
 LOC_SYSTEM_GOD_LILLY_ABIL_FAIRY_WAR_FAIL,There are no allied fairies nearby to receive your power.
 LOC_SYSTEM_GOD_LILLY_PUNISH_WEAK,Lily has drained your strength!
 LOC_SYSTEM_GOD_LILLY_PUNISH_SUMMON,You betrayed Lily—all your fairy allies have turned against you!
-LOC_SYSTEM_GOD_LILLY_ABANDON,You betrayed Lilly, and all your fairy allies turned against you!
+LOC_SYSTEM_GOD_LILLY_ABANDON,You betrayed Lily, and all your fairy allies turned against you!
 LOC_SYSTEM_GOD_MIKO_WELCOME,Miko: Let me hear the desires of all!
 LOC_SYSTEM_GOD_MIKO_TALK1,Miko: No one knows you yet—go spread your fame!
 LOC_SYSTEM_GOD_MIKO_TALK2,Miko: Listen closely and hear your enemies' desires.
@@ -4387,8 +4490,8 @@ LOC_SYSTEM_GOD_MIKO_RESIST_ASK,Miko: Which resistance will you choose? The buff 
 LOC_SYSTEM_GOD_MIKO_RESIST1,a - Fire Resistance    b - Cold Resistance    c - Electric Resistance
 LOC_SYSTEM_GOD_MIKO_RESIST2,d - Poison Resistance    e - Confusion Resistance
 LOC_SYSTEM_GOD_MIKO_CLOAK_ASK,Miko: Which cloak will you choose? The buff lasts until you change floors.
-LOC_SYSTEM_GOD_MIKO_CLOAK_RED,a - Red Cloak: +6 combat power bonus and HP regeneration
-LOC_SYSTEM_GOD_MIKO_CLOAK_BLUE,b - Blue Cloak: 1.5x spell power bonus and MP regeneration
+LOC_SYSTEM_GOD_MIKO_CLOAK_RED,a - Red Cloak: +6 slay bonus and HP regen
+LOC_SYSTEM_GOD_MIKO_CLOAK_BLUE,b - Blue Cloak: 1.5x spell power bonus and MP regen
 LOC_SYSTEM_GOD_MIKO_ALREADY_CLOAK,You've already chosen a cloak on this floor.
 LOC_SYSTEM_GOD_MIKO_POPULAR_LACK,You lack popularity.
 LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST,Popularity burst!
@@ -4425,7 +4528,7 @@ LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_NO_NEED,There's no need to summon a backdan
 LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK,Which backdancer would you like to summon?
 LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_MAI,Mai Teireida: Dancing from behind restores your HP.
 LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_SATONO,Satono Nishida: Dancing from behind restores your MP.
-LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_BACKDANCERS,Summon the Backdancers: Summon both dancers. (Double faith cost)
+LOC_SYSTEM_GOD_OKINA_ABIL_BACKDANCER_ASK_BACKDANCERS,Summon the Backdancers: Summon both dancers. (Double cost)
 LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE,You opened the door behind you and escaped!
 LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_ALREADY,You're already in the world behind the door.
 LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_CANTDOOR,There's no space here to open a door!
@@ -4479,7 +4582,7 @@ LOC_SYSTEM_GOD_PRAY_TEMPLE,You prayed at the altar.
 LOC_SYSTEM_GOD_PRAY_TEMPLE_YN,Would you like to be a believer?
 LOC_SYSTEM_GOD_PRAY_TEMPLE_CONVERSION_YN,Do you want to abandon all the blessings of your current god and convert to a different one?
 LOC_SYSTEM_GOD_PRAY_TEMPLE_CONVERSION_REALLY,This action will incur the wrath of your current god. Are you sure?
-LOC_SYSTEM_GOD_GIFT,{0}: Use this well!
+LOC_SYSTEM_GOD_GIFT,{0}: Use wisely!
 LOC_SYSTEM_GOD_GIFT_APPEAR,Something appeared beneath your feet!
 LOC_SYSTEM_GOD_WRATH,You feel the wrath of {0}.
 LOC_SYSTEM_GOD_FORGIVE,You have been forgiven by {0}.
@@ -4568,12 +4671,14 @@ LOC_SYSTEM_DUMP_DEATHREASON_HUNGRY,Died of starvation from {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_MIRROR,Died from reflected damage from {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_MIRROR_BY,Died from {1}'s reflected damage from {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_MP,Died as all purified MP was depleted from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_INSTANT,Died as their karma was purified by Sunho from {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_INSTANT,Died as their karma was purified by Junko from {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_SLEEP,Died while having a happy dream from {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_SLEEP_BY,Died while having a happy dream caused by {1} from {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_HOOF,Died by being trampled at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_HOOF_BY,Died by being trampled by {1} at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_GHOST,Died as life force was drained by Okurichochin from {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_SIDEEFFECT,Died from side effects from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_WIN,Escaped successfully with the Onmyo Orb and {0} runes.
+LOC_SYSTEM_DUMP_DEATHREASON_WIN,Escaped successfully with the Yin-Yang Orb and {0} runes.
 LOC_SYSTEM_DUMP_DEATHREASON_COWARD,Fled with only {0} runes.
 LOC_SYSTEM_DUMP_DEATHREASON_FAIL,Escaped with nothing to show.
 LOC_SYSTEM_REPLAY_LIST,Replay List!
@@ -4601,6 +4706,7 @@ LOC_SYSTEM_DEBUG_CREATE_ALTAR,Which shrine would you like to create?
 LOC_SYSTEM_DEBUG_CREATE_MONSTER,Create Monster
 LOC_SYSTEM_DEBUG_CANCLE_CREATE_MONSTER,Cancel monster creation
 LOC_SYSTEM_DEBUG_DUNGEON_CLEAR,{0} cleared, Level: {1} (EXP gained: {2})
+LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE,Continue?
 LOC_SYSTEM_DEBUG_CLEVER,Debug) Empowering {0}'s spell
 LOC_SYSTEM_DEBUG_CURRENT_POSITION,Current coordinates <{0},{1}>
 LOC_SYSTEM_DEBUG_SPELLPOWER,Spell Power {0}/{1}

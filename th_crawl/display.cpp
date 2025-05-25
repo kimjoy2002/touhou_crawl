@@ -3617,7 +3617,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						else if (you.s_sleep < 0)
 							img_effect_sleep.draw(pSprite, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, 100);
 						else if(you.s_lunatic)
-							img_effect_lunatic.draw(pSprite,i*calc_tile_size+tile_x_offset,j*calc_tile_size+tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale,80);
+							img_effect_lunatic.draw(pSprite,i*calc_tile_size+tile_x_offset,j*calc_tile_size+tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale,50);
 						else if(map_effect==2)
 							img_effect_gold.draw(pSprite,i*calc_tile_size+tile_x_offset,j*calc_tile_size+tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale,80);
 						else if (map_effect == 3)

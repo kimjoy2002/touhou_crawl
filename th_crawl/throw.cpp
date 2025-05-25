@@ -464,7 +464,7 @@ coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, cons
 				env[current_level].MakeEffect(postion_,item_->image,false);
 			Sleep(16);
 			length++;
-			if(pow((float)abs(beam.start_pos().x-(*beam).x),2)+pow((float)abs(beam.start_pos().y-(*beam).y),2)>(infor_.length)*(infor_.length))
+			if(pow((float)abs(beam.start_pos().x-(*beam).x),2)+pow((float)abs(beam.start_pos().y-(*beam).y),2)>(infor_.length+1)*(infor_.length+1)-1)
 				break;
 			if(infor_.type1 == BMT_NORMAL || infor_.type1 == BMT_WALL)
 				env[current_level].ClearEffect();

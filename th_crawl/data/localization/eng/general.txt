@@ -39,7 +39,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI4,Beginner Tip: 'TAB' for auto-attack, '
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI1,True Horror! Standing Right Behind You. Assassinate them all with the power of the unconscious!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI2,Aptitude Bonus) Shortsword +2, Mental Magic +2
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI3,Bonus) Permanent Invisibility Trait, MP Preservation Trait, Lv15 Stab (Confusion-inducing melee attack)
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI4,Beginner Tip: You're always invisible outside combat. Be careful—it disappears during combat.\nStabbing sleeping enemies deals massive damage based on sneak and dagger skill.\nHold 'x' and hover over a monster, then press 'v' to check info. Make sure they can't see invisibility!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI4,Beginner Tip: You're always invisible outside combat. Be careful-it disappears during combat.\nStabbing sleeping enemies deals massive damage based on sneak and dagger skill.\nHold 'x' and hover over a monster, then press 'v' to check info. Make sure they can't see invisibility!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU1,Blaze! Human Inferno. Revive and break through even after death!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU2,Aptitude Bonus) HP +20%, Combat +2, Fire Magic +2
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,Bonus) Can revive twice (removed at Lv9 and Lv18)
@@ -663,8 +663,8 @@ LOC_SYSTEM_BUFF_DESCRIBE_MIKO_ULT2,Your MP recovery speed greatly increases.
 LOC_SYSTEM_BUFF_DESCRIBE_MIKO_ULT3,All your action speeds are 1.5x faster.
 LOC_SYSTEM_BUFF_DESCRIBE_MIKO_HALO,Lowers nearby enemies' evasion and reveals invisibility, but also reduces your stealth and evasion.
 LOC_SYSTEM_BUFF_DESCRIBE_MIKO_PUNISH,Your maximum HP is halved.
-LOC_SYSTEM_BUFF_DESCRIBE_JOON1,Using consumables always wastes 2–3 of them at once.
-LOC_SYSTEM_BUFF_DESCRIBE_JOON2,Using consumables always wastes 2–3 of them. When possession ends, you gain a 3.00x power bonus.
+LOC_SYSTEM_BUFF_DESCRIBE_JOON1,Using consumables always wastes 2-3 of them at once.
+LOC_SYSTEM_BUFF_DESCRIBE_JOON2,Using consumables always wastes 2-3 of them. When possession ends, you gain a 3.00x power bonus.
 LOC_SYSTEM_BUFF_DESCRIBE_SION1,Uncollected consumables disappear quickly. Discarded ones vanish immediately.
 LOC_SYSTEM_BUFF_DESCRIBE_SION2,Uncollected consumables disappear quickly. Discarded ones vanish immediately. There's also a power penalty.
 LOC_SYSTEM_BUFF_DESCRIBE_DROWNING,You're drowning!
@@ -1023,7 +1023,7 @@ LOC_SYSTEM_MON_MORE_INVISIBLE,{0} becomes even more invisible.
 LOC_SYSTEM_MON_INVISIBLE_WARNING,{0} fades away into invisibility.
 LOC_SYSTEM_MON_MUTE,{0} becomes mute.
 LOC_SYSTEM_MON_MORE_MUTE,{0}'s silence deepens.
-LOC_SYSTEM_MON_ENSLAVE_INANIMATE,{0} has no soul to bind—it's inanimate.
+LOC_SYSTEM_MON_ENSLAVE_INANIMATE,{0} has no soul to bind-it's inanimate.
 LOC_SYSTEM_MON_ENSLAVE_REIMU,The shrine maiden of paradise cannot be bound by anything.
 LOC_SYSTEM_MON_ENSLAVE_DREAM,{0} dwells in dreams and cannot be bound.
 LOC_SYSTEM_MON_ENSLAVE_SUMMONED,{0} is already bound to a master.
@@ -1070,7 +1070,7 @@ LOC_SYSTEM_MON_NO_LONGER_ENSLAVE,{0}'s soul is no longer bound.
 LOC_SYSTEM_MON_NO_LONGER_LUNATIC,{0} regains sanity.
 LOC_SYSTEM_MON_NO_LONGER_FORCE,{0}'s power boost fades.
 LOC_SYSTEM_MON_NO_LONGER_WEAK,{0}'s weakening ends.
-LOC_SYSTEM_MON_NO_LONGER_CHANGED,{0} reverts from disguise—back to a raccoon!
+LOC_SYSTEM_MON_NO_LONGER_CHANGED,{0} reverts from disguise-back to a raccoon!
 LOC_SYSTEM_MON_NO_LONGER_INVINCIBLE,{0} is no longer invincible.
 LOC_SYSTEM_MON_NO_LONGER_OIL,{0} is no longer drenched in oil.
 LOC_SYSTEM_MON_NO_LONGER_FIRE,The flames on {0} died out.
@@ -1096,7 +1096,7 @@ LOC_SYSTEM_MAGIC_RECALL,{0} is recalled.
 LOC_SYSTEM_MAGIC_KNOCKBACK,{0} {0==you?are:is} knocked back.
 LOC_SYSTEM_MAGIC_KICK_KNOCKBACK,{0} {0==you?were:was} kicked by a hoof and knocked back.
 LOC_SYSTEM_MAGIC_HYPNOSIS_MOVE,{0} move{0!=you?s:} under hypnosis.
-LOC_SYSTEM_MAGIC_ANIMAL_CHANGE_RESIST,{0} is already an animal—transformation fails.
+LOC_SYSTEM_MAGIC_ANIMAL_CHANGE_RESIST,{0} is already an animal-transformation fails.
 LOC_SYSTEM_MAGIC_ANIMAL_CHANGE,{0} is transformed into an animal.
 LOC_SYSTEM_MAGIC_SUMMON_DREAM_LAKE,{0} summons a dream of the Misty Lake!
 LOC_SYSTEM_MAGIC_SUMMON_DREAM_MOUNTAIN,{0} summons a dream of the Youkai Mountain!
@@ -1310,11 +1310,11 @@ LOC_SYSTEM_TENSI_NOTHING6,Tenshi: Be a little bolder, will you?
 LOC_SYSTEM_TENSI_NOTHING7,Tenshi: I wanna see something *fun*!
 LOC_SYSTEM_TENSI_NOTHING8,Tenshi: You know, I could make this *way* more exciting.
 LOC_SYSTEM_TENSI_NOTHING9,Tenshi: Don’t you dare bore me, okay?
-LOC_SYSTEM_TENSI_NOTHING10,You nearly trip over a sharp rock—then hear someone giggling.
+LOC_SYSTEM_TENSI_NOTHING10,You nearly trip over a sharp rock-then hear someone giggling.
 LOC_SYSTEM_TENSI_NOTHING11,A jagged keystone drops right beside you. “So close~!”
 LOC_SYSTEM_TENSI_NOTHING12,Tenshi: Watching sacrifices from up here is my favorite pastime!
 LOC_SYSTEM_TENSI_NOTHING13,Tenshi: You're not gonna die *that* fast, right? Hang in there a bit longer!
-LOC_SYSTEM_TENSI_NOTHING14,Tenshi: Hey, hey—wanna bet how you'll die?
+LOC_SYSTEM_TENSI_NOTHING14,Tenshi: Hey, hey-wanna bet how you'll die?
 LOC_SYSTEM_TENSI_NOTHING15,Tenshi: That kid I watched last time? Got killed by {0}.
 LOC_SYSTEM_TENSI_NOTHING16,Tenshi: Why is {0} so {tough|adorable}, huh?
 LOC_SYSTEM_TENSI_NOTHING17,Tenshi: Just wait a little~ I’m setting up a surprise party!
@@ -1334,7 +1334,7 @@ LOC_SYSTEM_TENSI_BAD_POTION4,Tenshi: A special drink I made just for you~
 LOC_SYSTEM_TENSI_BAD_POTION5,Tenshi forces a potion down your throat.
 LOC_SYSTEM_TENSI_SUMMON1,Tenshi grants you an ally from above.
 LOC_SYSTEM_TENSI_SUMMON2,Tenshi: Need a friend?
-LOC_SYSTEM_TENSI_SUMMON3,Tenshi: Reinforcements—incoming!
+LOC_SYSTEM_TENSI_SUMMON3,Tenshi: Reinforcements-incoming!
 LOC_SYSTEM_TENSI_SUMMON4,Tenshi: Now you don’t have to run away, right?
 LOC_SYSTEM_TENSI_SUMMON5,Tenshi summons friendly spirits around you.
 LOC_SYSTEM_TENSI_BAD_SUMMON1,Tenshi sends down a hostile summon to test you.
@@ -1377,19 +1377,19 @@ LOC_SYSTEM_TENSI_KANAME2,Tenshi: With this, you won’t lose, right?
 LOC_SYSTEM_TENSI_KANAME3,Tenshi: They’re my favorite little cuties!
 LOC_SYSTEM_TENSI_KANAME4,Tenshi: Ever heard of a *pet rock*?
 LOC_SYSTEM_TENSI_KANAME5,Tenshi: Handle them with care!
-LOC_SYSTEM_TENSI_KANAME6,Tenshi: Kaname Funnels—go!
+LOC_SYSTEM_TENSI_KANAME6,Tenshi: Kaname Funnels-go!
 LOC_SYSTEM_TENSI_BAD_KANAME1,Tenshi: You might wanna step back.
 LOC_SYSTEM_TENSI_BAD_KANAME2,Tenshi: Ever slept on a *rock bed*?
 LOC_SYSTEM_TENSI_BAD_KANAME3,Tenshi: My rocks don’t bite… but they *do* shoot!
 LOC_SYSTEM_TENSI_BAD_KANAME4,Tenshi: Let’s see if you can survive *here*!
-LOC_SYSTEM_TENSI_BAD_KANAME5,Tenshi: Just made this new spell card—wanna help me test it?
+LOC_SYSTEM_TENSI_BAD_KANAME5,Tenshi: Just made this new spell card-wanna help me test it?
 LOC_SYSTEM_TENSI_BAD_KANAME6,Tenshi: How about some target practice? You're the target, of course!
 LOC_SYSTEM_TENSI_FIELD1,You feel a great barrier forming around you.
 LOC_SYSTEM_TENSI_FIELD2,Tenshi: Need a new battlefield?
 LOC_SYSTEM_TENSI_FIELD3,Tenshi: Looks way more fun to fight *here*!
-LOC_SYSTEM_TENSI_FIELD4,Tenshi: I’m pitching a tent—mind lending a hand?
+LOC_SYSTEM_TENSI_FIELD4,Tenshi: I’m pitching a tent-mind lending a hand?
 LOC_SYSTEM_TENSI_FIELD5,Tenshi: Want to try fighting in better conditions?
-LOC_SYSTEM_TENSI_BLIND1,Tenshi: I’m gonna nap—can you dim the lights?
+LOC_SYSTEM_TENSI_BLIND1,Tenshi: I’m gonna nap-can you dim the lights?
 LOC_SYSTEM_TENSI_BLIND2,Tenshi: Isn’t it *way* too bright?
 LOC_SYSTEM_TENSI_BLIND3,Tenshi: Don’t you think this’ll be more *fun*?
 LOC_SYSTEM_TENSI_BLIND4,Tenshi: What you see isn’t always the truth!
@@ -1400,30 +1400,30 @@ LOC_SYSTEM_TENSI_DEBUFF4,Tenshi: This one’s more like… making your enemies *
 LOC_SYSTEM_TENSI_DEBUFF5,Tenshi: Think this’ll be enough?
 LOC_SYSTEM_TENSI_DEBUFF6,Tenshi: You all move like slugs!
 LOC_SYSTEM_TENSI_SUCIDE1,Tenshi: Let me introduce you to some *fun* friends!
-LOC_SYSTEM_TENSI_SUCIDE2,Tenshi: They’re nice folks—aside from being a bit... *aggressive*!
+LOC_SYSTEM_TENSI_SUCIDE2,Tenshi: They’re nice folks-aside from being a bit... *aggressive*!
 LOC_SYSTEM_TENSI_SUCIDE3,Tenshi: Do you like explosions?
-LOC_SYSTEM_TENSI_SUCIDE4,Tenshi: Brave, sure—but they don’t really watch out for allies.
+LOC_SYSTEM_TENSI_SUCIDE4,Tenshi: Brave, sure-but they don’t really watch out for allies.
 LOC_SYSTEM_TENSI_SUCIDE5,Tenshi: Play nice together, even if it’s just for a moment!
 LOC_SYSTEM_TENSI_SUCIDE6,Tenshi: I don’t really get suicide charges... Do they follow some weird faith or something?
 LOC_SYSTEM_TENSI_SUCIDE7,Tenshi: Nothing clears a room like this!
-LOC_SYSTEM_TENSI_FOG1,Tenshi: Today’s forecast—thick fog!
+LOC_SYSTEM_TENSI_FOG1,Tenshi: Today’s forecast-thick fog!
 LOC_SYSTEM_TENSI_FOG2,Tenshi: I don’t really like foggy days.
 LOC_SYSTEM_TENSI_FOG3,Tenshi: Can you even fight in this weather?
 LOC_SYSTEM_TENSI_FOG4,Tenshi: Ugh, it’s all damp and dark!
 LOC_SYSTEM_TENSI_FOG5,Tenshi: Perfect weather to stay hidden!
-LOC_SYSTEM_TENSI_FOG6,Tenshi: Weather manifestation—activate!
-LOC_SYSTEM_TENSI_THUNDER1,Tenshi: Today’s weather—heavy thunder and lightning!
+LOC_SYSTEM_TENSI_FOG6,Tenshi: Weather manifestation-activate!
+LOC_SYSTEM_TENSI_THUNDER1,Tenshi: Today’s weather-heavy thunder and lightning!
 LOC_SYSTEM_TENSI_THUNDER2,Tenshi: Let’s make this flashy!
 LOC_SYSTEM_TENSI_THUNDER3,Tenshi: What’s the chance you’ll get struck?
 LOC_SYSTEM_TENSI_THUNDER4,Tenshi: Yeah… you’re not dodging *this* one.
 LOC_SYSTEM_TENSI_THUNDER5,Tenshi: Hope you’re wearing something non-conductive!
 LOC_SYSTEM_TENSI_THUNDER6,Tenshi: *Boom! Boom! Rumble!*
-LOC_SYSTEM_TENSI_THUNDER7,Tenshi: O blade of the storm—gather thunder from the skies!
-LOC_SYSTEM_TENSI_SUN1,Tenshi: Today’s forecast—clear skies and blazing sun!
+LOC_SYSTEM_TENSI_THUNDER7,Tenshi: O blade of the storm-gather thunder from the skies!
+LOC_SYSTEM_TENSI_SUN1,Tenshi: Today’s forecast-clear skies and blazing sun!
 LOC_SYSTEM_TENSI_SUN2,Tenshi: How is sunlight even reaching the dungeon? Eh, who cares!
 LOC_SYSTEM_TENSI_SUN3,Tenshi: Who could possibly hide under sunlight like this?
 LOC_SYSTEM_TENSI_SUN4,Tenshi: Gotta dry some laundry real quick!
-LOC_SYSTEM_TENSI_SUN5,Tenshi: Sunlight—shine!
+LOC_SYSTEM_TENSI_SUN5,Tenshi: Sunlight-shine!
 LOC_SYSTEM_TENSI_SUN6,Tenshi: The Sword of Hisou can do this too!
 LOC_SYSTEM_TENSI_SUN7,Tenshi: Today’s perfect for a picnic!
 LOC_SYSTEM_TENSI_WHISPERING,Tenshi whispered in an inaudible voice.
@@ -1456,7 +1456,7 @@ LOC_SYSTEM_SEIJA_GOD_KANAKO3,Seija: That god, I mean. What terrible fashion sens
 LOC_SYSTEM_SEIJA_GOD_KANAKO4,Seija: Dodging that pillar was pretty tough... Try to avoid it well!
 LOC_SYSTEM_SEIJA_GOD_SUWAKO1,Seija: That little kid was a god? Didn’t look all that strong.
 LOC_SYSTEM_SEIJA_GOD_SUWAKO2,Seija: There were tons of frogs there. Not really a fan, honestly.
-LOC_SYSTEM_SEIJA_GOD_SUWAKO3,Seija: That goddess of misfortune—she’s more dangerous than she looks.
+LOC_SYSTEM_SEIJA_GOD_SUWAKO3,Seija: That goddess of misfortune-she’s more dangerous than she looks.
 LOC_SYSTEM_SEIJA_GOD_SUWAKO4,Seija: This item carries a curse with it. You sure you want it?
 LOC_SYSTEM_SEIJA_GOD_MINORIKO1,Seija: Even on the run, you’ve still gotta eat. Here, have some.
 LOC_SYSTEM_SEIJA_GOD_MINORIKO2,Seija: I’ve had enough of sweet potatoes… was thinking of giving them away.
@@ -1503,7 +1503,7 @@ LOC_SYSTEM_SEIJA_GOD_TENSI2,Seija: Watch out for falling rocks from the sky.
 LOC_SYSTEM_SEIJA_GOD_TENSI3,Seija: You really need this junk? You’ve got unique taste.
 LOC_SYSTEM_SEIJA_GOD_TENSI4,Seija: For a celestial’s stuff, it all looked pretty cheap.
 LOC_SYSTEM_SEIJA_GOD_LILLY1,Seija: Fairies? Fighting for rights? What nonsense are they spouting now?
-LOC_SYSTEM_SEIJA_GOD_LILLY2,Seija: Fairies are just like bugs—no matter how many you squash, they keep coming back.
+LOC_SYSTEM_SEIJA_GOD_LILLY2,Seija: Fairies are just like bugs-no matter how many you squash, they keep coming back.
 LOC_SYSTEM_SEIJA_GOD_LILLY3,Seija: Not sure if fairy gear will help, but I swiped some. Give it a try.
 LOC_SYSTEM_SEIJA_GOD_LILLY4,Seija: That fairy just bombarded everything without looking. Total menace.
 LOC_SYSTEM_SEIJA_GOD_MIKO1,Seija: I got my hands on one of that show-off’s favorite capes.
@@ -1517,7 +1517,7 @@ LOC_SYSTEM_SEIJA_GOD_OKINA4,Seija: I saw a door behind me, walked in, and stole 
 LOC_SYSTEM_SEIJA_GOD_JUNKO1,Seija: Enhancing your gear is what really matters, right?
 LOC_SYSTEM_SEIJA_GOD_JUNKO2,Seija: Muttering about killing someone the whole time? What a creep.
 LOC_SYSTEM_SEIJA_GOD_JUNKO3,Seija: Purification is a blessing? What’s the point if you can’t use the item anymore?
-LOC_SYSTEM_SEIJA_GOD_JUNKO4,Seija: We might not have brute strength, but we’ve got brains—and gear.
+LOC_SYSTEM_SEIJA_GOD_JUNKO4,Seija: We might not have brute strength, but we’ve got brains-and gear.
 LOC_SYSTEM_SEIJA_WELCOME1,Seija: A new resistance is born! Welcome aboard!
 LOC_SYSTEM_SEIJA_WELCOME2,Seija: We’re gonna make the best team ever!
 LOC_SYSTEM_SEIJA_WELCOME3,Seija: Let’s give those arrogant jerks a taste of their own medicine!
@@ -1534,10 +1534,10 @@ LOC_SYSTEM_SEIJA_DOUBT2,Seija: You know, I think we made it this far thanks to m
 LOC_SYSTEM_SEIJA_DOUBT3,Seija: Hm... Here, take it.
 LOC_SYSTEM_SEIJA_DOUBT4,Seija: Kinda hate to give this up...
 LOC_SYSTEM_SEIJA_DOUBT5,Seija: I doubt this guy’s more useful than the item I gave up...
-LOC_SYSTEM_SEIJA_DOUBT6,Seija: Ugh, I really hate giving this up—ah, it’s nothing!
+LOC_SYSTEM_SEIJA_DOUBT6,Seija: Ugh, I really hate giving this up-ah, it’s nothing!
 LOC_SYSTEM_SEIJA_DOUBT7,Seija: Now that I think about it, I’m totally getting the short end here.
 LOC_SYSTEM_SEIJA_DOUBT_REFUSE_ITEM1,Seija: Are you *really* saying you don’t need it?
-LOC_SYSTEM_SEIJA_DOUBT_REFUSE_ITEM2,Seija: I’m offering you treasure—why would you say no?
+LOC_SYSTEM_SEIJA_DOUBT_REFUSE_ITEM2,Seija: I’m offering you treasure-why would you say no?
 LOC_SYSTEM_SEIJA_DISTRUST1,Seija: ...
 LOC_SYSTEM_SEIJA_DISTRUST2,Seija looks visibly annoyed.
 LOC_SYSTEM_SEIJA_DISTRUST3,Seija: ...No matter how I look at it, I’m getting ripped off.
@@ -1548,8 +1548,8 @@ LOC_SYSTEM_SEIJA_DISTRUST7,Seija: Betray before being betrayed… That’s my cr
 LOC_SYSTEM_SEIJA_DISTRUST_ITEM1,Seija: Hey, spill it. What’s your real game here?
 LOC_SYSTEM_SEIJA_DISTRUST_ITEM2,Seija: I can’t read you at all.
 LOC_SYSTEM_SEIJA_ABANDONED1,Seija: Listen up. I’m an Amanojaku to the core! I don’t do allies!
-LOC_SYSTEM_SEIJA_ABANDONED2,Seija: I knew it—you’re the enemy. You’re no friend to the weak!
-LOC_SYSTEM_SEIJA_ABANDONED3,Seija: You were planning to betray me, weren’t you? Well too bad—*I* betray *you*!
+LOC_SYSTEM_SEIJA_ABANDONED2,Seija: I knew it-you’re the enemy. You’re no friend to the weak!
+LOC_SYSTEM_SEIJA_ABANDONED3,Seija: You were planning to betray me, weren’t you? Well too bad-*I* betray *you*!
 LOC_SYSTEM_SEIJA_ABANDONED4,Seija: You’re the one who got used and tossed aside, you fool! I used you all along!
 LOC_SYSTEM_SEIJA_ABANDONED5,Seija: You came because you wanted my treasure too, didn’t you? Don’t think I didn’t notice.
 LOC_SYSTEM_SEIJA_ABANDONED6,Seija: Amanojaku don’t have allies! You were just being used from the start!
@@ -1686,14 +1686,14 @@ LOC_SYSTEM_TUTORIAL3,Kanako said: Use the numpad or the Y, U, B, N keys to move 
 LOC_SYSTEM_TUTORIAL4,Kanako said: Press O to automatically move to unexplored areas.
 LOC_SYSTEM_TUTORIAL5,Kanako said: Press , or G to pick up items and try equipping them.
 LOC_SYSTEM_TUTORIAL6,Kanako said: Press W to equip armor, w for weapons, I for info, and D to drop.
-LOC_SYSTEM_TUTORIAL7,Kanako said: Crawl is all about constant combat—just run into enemies to attack.
+LOC_SYSTEM_TUTORIAL7,Kanako said: Crawl is all about constant combat-just run into enemies to attack.
 LOC_SYSTEM_TUTORIAL8,Kanako said: Even weak enemies are easier to deal with one-on-one. Try luring them into corridors.
 LOC_SYSTEM_TUTORIAL9,Kanako said: Always get in the habit of healing after a fight.
 LOC_SYSTEM_TUTORIAL10,Kanako said: Press `.` to rest for 1 turn, or `5` to rest for 100 turns.
 LOC_SYSTEM_TUTORIAL11,Kanako said: Press M to open the skill window and decide how to invest your skills.
 LOC_SYSTEM_TUTORIAL12,Kanako said: Power helps manage hunger, use abilities, and boost melee damage.
 LOC_SYSTEM_TUTORIAL13,Kanako said: Use `>` to go down stairs and `<` to come back up.
-LOC_SYSTEM_TUTORIAL14,Kanako said: If you've cleared a floor, there's nothing left—let's head down.
+LOC_SYSTEM_TUTORIAL14,Kanako said: If you've cleared a floor, there's nothing left-let's head down.
 LOC_SYSTEM_TUTORIAL15,Kanako said: If your power drops below 2.00, your attack strength will decrease.
 LOC_SYSTEM_TUTORIAL16,Kanako said: Recover HP by picking up P items from enemies or by eating food.
 LOC_SYSTEM_TUTORIAL17,Kanako said: Press E to eat bread and restore your power.
@@ -1705,7 +1705,7 @@ LOC_SYSTEM_TUTORIAL22,Kanako said: Pick up a ring and equip it with P. You can r
 LOC_SYSTEM_TUTORIAL23,Kanako said: To read a scroll, press R. Try using it on a ring when prompted.
 LOC_SYSTEM_TUTORIAL24,Kanako said: Haha, the Ring of Hunger is totally useless. You can drop it with D.
 LOC_SYSTEM_TUTORIAL25,Kanako said: I see a potion. You can drink it with Q.
-LOC_SYSTEM_TUTORIAL26,Kanako said: You never know the effect of food until you eat it—sometimes it’s bad.
+LOC_SYSTEM_TUTORIAL26,Kanako said: You never know the effect of food until you eat it-sometimes it’s bad.
 LOC_SYSTEM_TUTORIAL27,Kanako said: To learn magic, you first have to study a spell from a book.
 LOC_SYSTEM_TUTORIAL28,Kanako said: Pick up the book and use M to learn magic danmaku.
 LOC_SYSTEM_TUTORIAL29,Kanako said: To use magic, press Z or z.
@@ -1716,7 +1716,7 @@ LOC_SYSTEM_TUTORIAL33,Kanako said: If you find an altar, you can pray on it by p
 LOC_SYSTEM_TUTORIAL34,Kanako said: It's my shrine, so trust me! Once you do, press `^` to view the explanation.
 LOC_SYSTEM_TUTORIAL35,Kanako said: Try using your power by pressing A to fight.
 LOC_SYSTEM_TUTORIAL36,Kanako said: Powers grow stronger as your faith increases.
-LOC_SYSTEM_TUTORIAL37,Kanako said: My powers consume a set amount of faith—use them wisely.
+LOC_SYSTEM_TUTORIAL37,Kanako said: My powers consume a set amount of faith-use them wisely.
 LOC_SYSTEM_TUTORIAL38,Kanako said: Each god has different ways to gain faith and dislikes different things.
 LOC_SYSTEM_TUTORIAL39,Kanako said: In my case, my faith increases a little each time I kill an enemy.
 LOC_SYSTEM_TUTORIAL40,Kanako said: For me, my faith rises automatically whenever I defeat an enemy.
@@ -1728,7 +1728,7 @@ LOC_SYSTEM_TUTORIAL45,Kanako said: Don’t fear death in the real game!
 LOC_SYSTEM_EVENT_TEMPLE,A holy aura surrounds the area.
 LOC_SYSTEM_EVENT_SCARLET_UNDER,You sense a powerful force. Run while you still can!
 LOC_SYSTEM_EVENT_BUG,This is an unfinished bug area.
-LOC_SYSTEM_EVENT_BAMBOO,This place is a dreadful maze! Find the exit—or maybe discover somewhere new...?
+LOC_SYSTEM_EVENT_BAMBOO,This place is a dreadful maze! Find the exit-or maybe discover somewhere new...?
 LOC_SYSTEM_EVENT_KISME_DROP,Kisume dropped from the sky!
 LOC_SYSTEM_EVENT_LUNATIC_TIME,It’s LUNATIC TIME!!
 LOC_SYSTEM_EVENT_KOGASA_DROP,Kogasa dropped from the sky!
@@ -1748,12 +1748,12 @@ LOC_SYSTEM_EVENT_KOGASA_TIME1,It's SURPRISE TIME!!
 LOC_SYSTEM_EVENT_KOGASA_TIME2,...But Kogasa senses something went wrong.
 LOC_SYSTEM_EVENT_HOJOK1,{0} shouted, "I'll finish this!"
 LOC_SYSTEM_EVENT_HOJOK2,{0} shouted, "Leave it to me!"
-LOC_SYSTEM_EVENT_HOJOK3,{0} shouted, "Leave it to m— Who goes there!?"
-LOC_SYSTEM_EVENT_KOGASA_SMOKE1,{0} shouted, "BOO—*cough cough!*"
+LOC_SYSTEM_EVENT_HOJOK3,{0} shouted, "Leave it to m- Who goes there!?"
+LOC_SYSTEM_EVENT_KOGASA_SMOKE1,{0} shouted, "BOO-*cough cough!*"
 LOC_SYSTEM_EVENT_KOGASA_SMOKE2,...Looks like Kogasa inhaled too much of her own smoke.
 LOC_SYSTEM_EVENT_SION_ITEM,Item
-LOC_SYSTEM_EVENT_SION_ITEM_DELETE,{0} vanished as you got too close.
-LOC_SYSTEM_EVENT_SION_ITEMS_DELETE,Items vanished as you got too close.
+LOC_SYSTEM_EVENT_SION_ITEM_DELETE,{0} vanished as you approached.
+LOC_SYSTEM_EVENT_SION_ITEMS_DELETE,Items vanished as you approached.
 LOC_SYSTEM_EVENT_DAIYOUSEI_WITH_FOG,The fog suddenly thickens... It's a fairy ambush!
 LOC_SYSTEM_EVENT_TENSI_EARTHQUAKE,Cracks suddenly begin to form along the walls!
 LOC_SYSTEM_EVENT_KISME_RUN,Kisume noticed you and fled into the air!
@@ -2222,7 +2222,7 @@ LOC_SYSTEM_SPL_SELF_HEAL,Minor Heal
 LOC_SYSTEM_SPL_BLINK,Blink
 LOC_SYSTEM_SPL_BURN,Flame
 LOC_SYSTEM_SPL_FROZEN,Frost
-LOC_SYSTEM_SPL_FIRE_WALL,Fire Pillar
+LOC_SYSTEM_SPL_FIRE_WALL,Conjure Flame
 LOC_SYSTEM_SPL_FREEZE,Rapid Freeze
 LOC_SYSTEM_SPL_STING,Venom Danmaku
 LOC_SYSTEM_SPL_CURE_POISON,Cure Poison
@@ -2247,7 +2247,7 @@ LOC_SYSTEM_SPL_FIRE_BALL,Fireball
 LOC_SYSTEM_SPL_FIRE_BOLT,Fire Bolt
 LOC_SYSTEM_SPL_ICE_BOLT,Ice Bolt
 LOC_SYSTEM_SPL_VENOM_BOLT,Venom Bolt
-LOC_SYSTEM_SPL_CONFUSE_CLOUD,Stench Cloud
+LOC_SYSTEM_SPL_CONFUSE_CLOUD,Mephitic Cloud
 LOC_SYSTEM_SPL_POISON_CLOUD,Poison Cloud
 LOC_SYSTEM_SPL_ICE_CLOUD,Frost Cloud
 LOC_SYSTEM_SPL_SUMMON_BIRD,Summon Bird
@@ -2392,7 +2392,7 @@ LOC_SYSTEM_SPL_DESCRIBE_FREEZE,Freezes the air around a nearby enemy instantly.\
 LOC_SYSTEM_SPL_DESCRIBE_STING,A basic poison spell that fires magical stingers as danmaku.\nInflicts weak poison; repeated hits stack the effect.\n
 LOC_SYSTEM_SPL_DESCRIBE_CURE_POISON,A spell that cures poison from the caster.\nTakes effect immediately upon use.\n
 LOC_SYSTEM_SPL_DESCRIBE_TWIST,A wind spell that distorts air flow at a chosen location.\nCan be cast even on occupied tiles and lasts for several turns.\n
-LOC_SYSTEM_SPL_DESCRIBE_SUMMON_MOOK,A basic summoning spell that calls forth small spirits (Mo’oku).\n1–2 allies are summoned nearby and disappear over time.\n
+LOC_SYSTEM_SPL_DESCRIBE_SUMMON_MOOK,A basic summoning spell that calls forth small spirits (Mo’oku).\n1-2 allies are summoned nearby and disappear over time.\n
 LOC_SYSTEM_SPL_DESCRIBE_FIRE_BRAND,Temporarily enchants your weapon with the fire attribute, dealing fire damage.\nCannot be used on already enchanted, barehanded, or artifact weapons.\n
 LOC_SYSTEM_SPL_DESCRIBE_COLD_BRAND,Temporarily enchants your weapon with the ice attribute, dealing cold damage.\nCannot be used on already enchanted, barehanded, or artifact weapons.\n
 LOC_SYSTEM_SPL_DESCRIBE_POISON_BRAND,Temporarily enchants your weapon with the poison attribute.\nApplies poison on hit.\nCannot be used on already enchanted, barehanded, or artifact weapons.\n
@@ -2421,7 +2421,7 @@ LOC_SYSTEM_SPL_DESCRIBE_TELEPORT_OTHER,Casts teleportation on an enemy.\nThere i
 LOC_SYSTEM_SPL_DESCRIBE_TELEPORT_SELF,Casts teleportation on yourself.\nThere is a slight delay before it takes effect.\n
 LOC_SYSTEM_SPL_DESCRIBE_WHIRLWIND,Creates a strong whirlwind at the enemy’s position.\nDeals continuous damage.\nAya is immune to this wind.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_PENDULUM,Summons a pendulum.\nIt does not attack but blocks attacks on your behalf.\n
-LOC_SYSTEM_SPL_DESCRIBE_SUMMON_SEKIBANKI,Sekibanki floats her head.\nHer body becomes vulnerable—target it!\n
+LOC_SYSTEM_SPL_DESCRIBE_SUMMON_SEKIBANKI,Sekibanki floats her head.\nHer body becomes vulnerable-target it!\n
 LOC_SYSTEM_SPL_DESCRIBE_WATER_CANNON,Compresses and fires water.\nCan push back the enemy on hit.\n
 LOC_SYSTEM_SPL_DESCRIBE_KYOKO_SMITE,Kyoko’s special skill.\nGreets the enemy with an overwhelming blast of sound.\nIgnores all defense and may inflict brief confusion.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_OPTION,Summons an Option.\nThe Option circles the summoner and intercepts visible enemies.\n
@@ -2432,7 +2432,7 @@ LOC_SYSTEM_SPL_DESCRIBE_SELF_INJURY,Forces the target to harm themselves.\nThe s
 LOC_SYSTEM_SPL_DESCRIBE_CHARM,Temporarily turns an enemy into an ally.\nThey will fight nearby enemies until the effect ends, then return to hostile.\n
 LOC_SYSTEM_SPL_DESCRIBE_LASER,A pure sorcery spell that deals piercing damage in a straight line.\nUseful for hitting multiple enemies.\n
 LOC_SYSTEM_SPL_DESCRIBE_SPARK,Fires a huge, powerful beam of magic.\nSparks and lasers are romantic.\nDanmaku is all about firepower.\n
-LOC_SYSTEM_SPL_DESCRIBE_SUMMON_UNZAN,Summons a giant Unzan.\nIt’s not really a spell—it’s just basic at this point.\n
+LOC_SYSTEM_SPL_DESCRIBE_SUMMON_UNZAN,Summons a giant Unzan.\nIt’s not really a spell-it’s just basic at this point.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_UNZAN_PUNCH,Summons Unzan’s massive fist beside the enemy.\nGetting hit by it hurts a lot.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_ZOMBIE_FAIRY,Summons zombie fairies around the target.\nThey appear in large numbers and can be a nuisance.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_UFO,Summons an unidentified flying object.\nIt changes color over time, shifting its attributes and resistances.\n
@@ -2463,7 +2463,7 @@ LOC_SYSTEM_SPL_DESCRIBE_FIELD_VIOLET,Spreads a violet wave in a selected area, i
 LOC_SYSTEM_SPL_DESCRIBE_TIME_PARADOX,Creates a doppelgänger of your danmaku to attack twice.\nWhen in Paradox state, the next danmaku or danmaku spell is cast twice.\nDoesn’t apply to non-danmaku spells like Spark or Firestorm.\nThe second attack consumes no MP or ammo.\n
 LOC_SYSTEM_SPL_DESCRIBE_PRIVATE_SQ,Slows down time around you, giving a relative speed boost.\nApplies Slow to all enemies in sight. Can be resisted.\n
 LOC_SYSTEM_SPL_DESCRIBE_CONTROLED_BLINK,A precise teleportation spell that lets you move exactly where you want.\nCauses severe spatial aftereffects.\n
-LOC_SYSTEM_SPL_DESCRIBE_THE_WORLD,The ultimate spacetime spell, usable only by masters.\nStops time for a short while, letting you act freely—even attack.\nSevere temporal backlash occurs, so it can’t be used repeatedly.\n
+LOC_SYSTEM_SPL_DESCRIBE_THE_WORLD,The ultimate spacetime spell, usable only by masters.\nStops time for a short while, letting you act freely-even attack.\nSevere temporal backlash occurs, so it can’t be used repeatedly.\n
 LOC_SYSTEM_SPL_DESCRIBE_HASTE_ALL,Grants acceleration to all allies within view.\n
 LOC_SYSTEM_SPL_DESCRIBE_HEAL_ALL,Heals all allies within view.\n
 LOC_SYSTEM_SPL_DESCRIBE_MOON_COMMUNICATION,Uses communication waves to gather moon rabbits.\nYou can’t move while casting, but allies gather over time.\nSummoned rabbits gain acceleration.\nThey grant no EXP but don’t disappear if the caster dies.\n
@@ -2483,19 +2483,19 @@ LOC_SYSTEM_SPL_DESCRIBE_ALERT_NOISE,Makes a loud noise that wakes up nearby mons
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_NAMAZ,Drops a giant Namazu at the targeted location.\nIt takes some time to fall, and causes a large explosion on impact.\n
 LOC_SYSTEM_SPL_DESCRIBE_SCHEMA_TANMAC,Danmaku that flies in from beyond the boundary.\nHigh-level Schema casts stronger danmaku.\n
 LOC_SYSTEM_SPL_DESCRIBE_CHANGE,A raccoon’s specialty transformation magic.\nTransforms into the strongest visible enemy nearby, but not into another raccoon.\nTemporarily gains the stats and spells of that monster, except summoning. Reverts after some time and grants full EXP when defeated.\n
-LOC_SYSTEM_SPL_DESCRIBE_UNLUCK,Manipulates local fortune using feng shui.\nInflicts misfortune on a targeted enemy, reducing their luck through three stages: Misfortune, Great Misfortune, and Calamity.\nBad luck makes attacks land more, dodging harder, and item drops worse.\nCalamity can lead to absurd disasters—like a UFO falling from the sky.\nA UFO? Just kidding! Maybe.\n
+LOC_SYSTEM_SPL_DESCRIBE_UNLUCK,Manipulates local fortune using feng shui.\nInflicts misfortune on a targeted enemy, reducing their luck through three stages: Misfortune, Great Misfortune, and Calamity.\nBad luck makes attacks land more, dodging harder, and item drops worse.\nCalamity can lead to absurd disasters-like a UFO falling from the sky.\nA UFO? Just kidding! Maybe.\n
 LOC_SYSTEM_SPL_DESCRIBE_THUNDER,Calls down a thunderbolt from the sky, striking a 3x3 area with powerful electric damage.\nHowever, the lightning is unpredictable and may not hit every spot.\n
-LOC_SYSTEM_SPL_DESCRIBE_AIR_STRIKE,Fires fast-moving air bullets at the enemy.\nNot very powerful or piercing, but casts much faster than other spells—up to twice as fast.\n
+LOC_SYSTEM_SPL_DESCRIBE_AIR_STRIKE,Fires fast-moving air bullets at the enemy.\nNot very powerful or piercing, but casts much faster than other spells-up to twice as fast.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_RACOON,Mamizou’s specialty that summons multiple raccoon minions at once.\nThey're weak, but since raccoons can also transform, leaving them alone might cause trouble.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_YOUKAI,Summons a variety of powerful youkai.\nOni, lantern youkai, and yuki-onna may appear.\nOnly one can be summoned at a time.\n
 LOC_SYSTEM_SPL_DESCRIBE_MAMIZO_EVADE,Mamizou's transformation art that lets her automatically turn into a jizo statue to evade attacks.\nMakes her very difficult to hit.\n
 LOC_SYSTEM_SPL_DESCRIBE_MACRO_BURST,Strikes a two-tile range ahead with a powerful whirlwind and launches you backward.\nLeaves small whirlwinds that deal continuous damage.\nCan be used as a mobility spell.\nCannot be used if there’s no space to move.\nNote: You’ll be forcibly moved in the opposite direction.\n
 LOC_SYSTEM_SPL_DESCRIBE_SHATTER,An ultimate earth magic that causes a massive earthquake.\nDeals damage and destroys terrain within sight with a loud rumble.\nDeals only one-third damage to flying enemies.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_YOSHIKA,Seiga’s signature technique that summons the jiangshi Yoshika.\nYoshika can be revived even if defeated, making this Seiga's main summoning spell.\n
-LOC_SYSTEM_SPL_DESCRIBE_NESY_CANNON,A powerful water cannon mounted on Neshie.\nHigh water pressure used to knock back enemies, but now refined to reduce knockback without sacrificing power—showcasing Kappa engineering.\n
+LOC_SYSTEM_SPL_DESCRIBE_NESY_CANNON,A powerful water cannon mounted on Neshie.\nHigh water pressure used to knock back enemies, but now refined to reduce knockback without sacrificing power-showcasing Kappa engineering.\n
 LOC_SYSTEM_SPL_DESCRIBE_MERMAID_SONG,Wakasagihime's favorite song.\nThe magical melody pulls enemies toward her one tile at a time.\nCannot be blocked by magic resistance but is nullified by confusion resistance.\n
 LOC_SYSTEM_SPL_DESCRIBE_EMERALD_CITY,Creates emerald walls using alchemy.\nDeals heavy physical damage in the surrounding 8 tiles.\n
-LOC_SYSTEM_SPL_DESCRIBE_AUTUMN_BLADE,Attaches steel saw blades to your weapon or fists using alchemy.\nTriples all melee damage while active—simple and deadly.\n
+LOC_SYSTEM_SPL_DESCRIBE_AUTUMN_BLADE,Attaches steel saw blades to your weapon or fists using alchemy.\nTriples all melee damage while active-simple and deadly.\n
 LOC_SYSTEM_SPL_DESCRIBE_PHILOSOPHERS_STONE,The ultimate alchemy spell that creates the Philosopher's Stone.\nWhile active, you can rapidly cast elemental spells with minimal MP cost, based on your alchemy power.\nAllows silent casting of certain spells like Fireball, Water Cannon, Wind Blade, Emerald City, and Ground Raise using the 'a' key.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_ANCHOR,Drops a giant anchor near the targeted enemy.\nThe anchor itself does no damage but pins the target in place.\nThe enemy must destroy the anchor or wait for it to disappear to move again.\n
 LOC_SYSTEM_SPL_DESCRIBE_REAPER_MET,Instantly pulls a distant enemy toward you and binds their feet, reducing their movement speed for a short time.\n
@@ -2514,11 +2514,11 @@ LOC_SYSTEM_SPL_DESCRIBE_SLEEP_SMITE,A sleep-inducing spell that affects all enem
 LOC_SYSTEM_SPL_DESCRIBE_TARGET_ELEC,Casts a weak electric current on a designated enemy.\nUnlike most spells, it targets a specific foe precisely.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_ELEC_BALL,Creates floating electric orbs that drift around.\nThey don't deal damage immediately but release a powerful current after several turns.\nOrbs disappear if attacked or if they fail to find a target.\n
 LOC_SYSTEM_SPL_DESCRIBE_DREAM_CALL,Doremy’s ultimate spell in her final form.\nTeleports dream dwellers around a distant enemy to surround them.\nStronger enemies are more likely to be summoned.\nCannot be used if no monsters are nearby.\n
-LOC_SYSTEM_SPL_DESCRIBE_HYPER_BEAM,Fires a powerful straight-line beam that pierces through targets.\nNo real reason for the beam—it just looks cool on a robot.\n
+LOC_SYSTEM_SPL_DESCRIBE_HYPER_BEAM,Fires a powerful straight-line beam that pierces through targets.\nNo real reason for the beam-it just looks cool on a robot.\n
 LOC_SYSTEM_SPL_DESCRIBE_KAGUYA_SPELL,Kaguya’s five impossible requests.\nFive immobile challenges appear around the enemy and attack nearby foes with various elemental spells.\nThe challenges are invincible and must be stopped by attacking Kaguya directly.\n
-LOC_SYSTEM_SPL_DESCRIBE_THROW_SWORD,Breaks the stereotype that swords must be swung—throws a massive greatsword instead.\nCan’t throw it at close range, but it hurts all the same whether swung or thrown.\n
+LOC_SYSTEM_SPL_DESCRIBE_THROW_SWORD,Breaks the stereotype that swords must be swung-throws a massive greatsword instead.\nCan’t throw it at close range, but it hurts all the same whether swung or thrown.\n
 LOC_SYSTEM_SPL_DESCRIBE_THROW_KNIFE,Throws silver knives as danmaku.\nThough simple, the sharp blades and user skill make them quite powerful.\n
-LOC_SYSTEM_SPL_DESCRIBE_THROW_PLAYER,Grabs and throws the enemy—a simple move, but terrifying with oni strength.\nIgnores defense, dodge, and shields, dealing massive fixed damage.\nMust be adjacent to use.\nInspired by the iron hell giant?\n
+LOC_SYSTEM_SPL_DESCRIBE_THROW_PLAYER,Grabs and throws the enemy-a simple move, but terrifying with oni strength.\nIgnores defense, dodge, and shields, dealing massive fixed damage.\nMust be adjacent to use.\nInspired by the iron hell giant?\n
 LOC_SYSTEM_SPL_DESCRIBE_THROW_AMULET,Throws a charm that exorcises youkai.\nHomes in on the target, making it hard to dodge.\nEffective even on non-youkai.\n
 LOC_SYSTEM_SPL_DESCRIBE_WARP_KICK,Reimu uses a gap to instantly warp next to an enemy and deliver a powerful kick.\nJust because she’s far doesn’t mean you’re safe.\n
 LOC_SYSTEM_SPL_DESCRIBE_REIMU_BARRIER,Reimu fixes a barrier in place to prevent escape.\nWhile active, nothing can pass through.\nIt’s hard to counter but lasts only briefly and has a cooldown.\n
@@ -2530,7 +2530,7 @@ LOC_SYSTEM_SPL_DESCRIBE_MEGATON_KICK,Delivers a mighty kick using tremendous leg
 LOC_SYSTEM_SPL_DESCRIBE_THROW_OIL,Hurls a splash of oil at the target.\nEnemies doused in oil take extra damage from fire attacks.\nThe oil is boiling from underground heat, so fire resistance can help reduce the damage.\n
 LOC_SYSTEM_SPL_DESCRIBE_HEAVENLY_STORM,An ultimate technique said to be taught by a divine Eastern martial arts society.\nNo one knows how she learned it, but she spins her body and staff to create a heavenly storm.\nFor a time, she is surrounded by golden clouds, damaging all nearby enemies.\nHowever, she still seems untrained and unable to control it properly.\n
 LOC_SYSTEM_SPL_DESCRIBE_TRACKING,Targets are marked by Hisami’s unfailing tracking ability.\nA marked player becomes visible to all monsters on the map.\n
-LOC_SYSTEM_SPL_DESCRIBE_DISCORD,Tsukasa slyly manipulates nearby monsters with sweet talk.\nAffected monsters may gain random buffs—or even betray their allies and become hostile.\n
+LOC_SYSTEM_SPL_DESCRIBE_DISCORD,Tsukasa slyly manipulates nearby monsters with sweet talk.\nAffected monsters may gain random buffs-or even betray their allies and become hostile.\n
 LOC_SYSTEM_SPL_DESCRIBE_SMOKING,Yamashiro Sannyo blows smoke from her cigarette at the enemy.\nInhaling this smoke causes random debuffs, manipulated by Sannyo’s mental control.\nShe’s said to use this to pacify unruly youkai in gambling dens.\n
 LOC_SYSTEM_SPL_DESCRIBE_CREATE_FOG,Temporarily fills the surroundings with thick fog, drastically reducing visibility.\nFairies of the Misty Lake are used to the fog and can still attack targets accurately.\n
 LOC_SYSTEM_SPL_DESCRIBE_GROW_VINE,Causes vines to rapidly grow around the enemy.\nThese vines entangle nearby foes, reducing their movement speed.\n
@@ -2703,20 +2703,20 @@ LOC_SYSTEM_SKL_DESCRIBE_LEVITATION_OFF,Cancels flight state.\n
 LOC_SYSTEM_SKL_DESCRIBE_INVISIBLE,Grants temporary invisibility.\nGreatly reduces the chance of being detected.\nEnemies nearby may still notice you, and some can see through invisibility.\nRapidly drains MP while active.\n
 LOC_SYSTEM_SKL_DESCRIBE_INVISIBLE_OFF,Cancels invisibility.\n
 LOC_SYSTEM_SKL_DESCRIBE_EIRIN_0,Allows you to throw potions in your inventory.\nCreates a 3x3 cloud at the landing spot.\nBeneficial potions create harmless smoke, while harmful ones release powerful clouds.\n
-LOC_SYSTEM_SKL_DESCRIBE_EIRIN_1,Let Eirin modify your body at will.\nTransfers all other stats into one chosen stat based on your faith.\nThe transferred amount ranges from 2–5 and can be changed anytime.\nThe effect is semi-permanent until modified again.\n
+LOC_SYSTEM_SKL_DESCRIBE_EIRIN_1,Let Eirin modify your body at will.\nTransfers all other stats into one chosen stat based on your faith.\nThe transferred amount ranges from 2-5 and can be changed anytime.\nThe effect is semi-permanent until modified again.\n
 LOC_SYSTEM_SKL_DESCRIBE_EIRIN_2,Eirin’s ultimate divine technique.\nConsumes high faith and 1 MP segment to restore most of your HP instantly.\nAfter a while, you take damage equal to the amount healed.\n
 LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_1,Byakuren’s body enhancement magic that temporarily boosts Intelligence.\nIncreases INT by 5, improves spell success and power recovery rate.\n
 LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_2,Byakuren’s body enhancement magic that temporarily boosts Dexterity (W).\nMovement speed increases dramatically.\nDoes not stack with Haste and lasts briefly.\nSuperhuman speed!\n
 LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_1,Drives enemies standing on autumn leaves into madness.\nInflicts Confusion by comparing their magic resistance.\n
 LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_2,Replaces your non-artifact body armor with Maple Armor.\nIncreases stealth while you have faith in Shizuha.\nHowever, it removes previous resistances.\nMaple Armor cannot be reverted once equipped.\n
-LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_3,Permanently enchants your weapon with the Maple brand and +1–2.\nMaple-branded weapons can deal large backstab damage, even if not a dagger.\nDaggers gain a backstab chance on normal attacks.\n
+LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_3,Permanently enchants your weapon with the Maple brand and +1-2.\nMaple-branded weapons can deal large backstab damage, even if not a dagger.\nDaggers gain a backstab chance on normal attacks.\n
 LOC_SYSTEM_SKL_DESCRIBE_MINORIKO_1,Removes harmful debuffs and stat reductions.\nConsumes faith and a small amount of MP.\n
 LOC_SYSTEM_SKL_DESCRIBE_MINORIKO_2,Consumes a food item in your inventory to greatly restore HP.\nCosts high faith, mana, and 1 MP segment.\nBetter food restores more HP.\n
 LOC_SYSTEM_SKL_DESCRIBE_YUUGI_1,Consumes one potion in your inventory to gain drunkenness.\nThe original potion effect is not applied.\n
 LOC_SYSTEM_SKL_DESCRIBE_YUUGI_2,Grabs an adjacent enemy and performs a German Suplex.\nDeals heavy damage and switches positions.\nIf you’re already grabbing the enemy, it costs no Faith.\n
 LOC_SYSTEM_SKL_DESCRIBE_YUUGI_3,Lifts a nearby enemy and throws them far away, creating a shockwave that deals area damage.\nThe player is immune to this shockwave.\nIf grabbing, the skill costs no Faith.\n
 LOC_SYSTEM_SKL_DESCRIBE_YUUGI_4,Borrows oni power to roar mightily.\nEnemies in sight may become Silenced by fear.\nIf used while grabbing, the target is guaranteed to be Silenced.\n
-LOC_SYSTEM_SKL_DESCRIBE_YUUGI_5,Uses the oni’s ultimate—Triple Destruction.\nThree explosions occur over 3 turns, each with increasing range, eventually covering nearly the entire screen.\nIf used while grabbing, deals double damage.\n
+LOC_SYSTEM_SKL_DESCRIBE_YUUGI_5,Uses the oni’s ultimate-Triple Destruction.\nThree explosions occur over 3 turns, each with increasing range, eventually covering nearly the entire screen.\nIf used while grabbing, deals double damage.\n
 LOC_SYSTEM_SKL_DESCRIBE_SATORI_1,Reads the enemy's mind and triggers trauma.\nCauses Fear, making the enemy flee.\nRarely causes them to completely lose will, granting EXP and permanent fear, but they give no EXP when killed and vanish off-screen.\n
 LOC_SYSTEM_SKL_DESCRIBE_SATORI_2,Reads the enemy’s thoughts.\nIf the target is an animal, they become a permanent ally but cannot use stairs.\nOther enemies suffer reduced hit and evasion rates and lose debuff resistance.\nTakes several turns based on the target’s magic resistance.\nInterrupts on status effects or if they leave sight.\nRequired turns decrease with level.\n
 LOC_SYSTEM_SKL_DESCRIBE_SHINKI_1,Summons a small group of low-tier demons.\nThey aren’t very strong but cost very little Faith and can overwhelm with numbers.\n
@@ -2746,7 +2746,7 @@ LOC_SYSTEM_SKL_DESCRIBE_HINA_1,Converts negative cursed equipment enchantments i
 LOC_SYSTEM_SKL_DESCRIBE_HINA_2,Temporarily curses your current weapon with the Curse Brand.\nDeals unavoidable poison damage and has a chance to slow enemies.\nIf already cursed, strengthens instead.\nCannot be used on already cursed weapons.\n
 LOC_SYSTEM_SKL_DESCRIBE_HINA_3,Temporarily curses your armor to reflect all incoming damage.\nLasts longer on body armor.\nCannot be used on already cursed armor.\n
 LOC_SYSTEM_SKL_DESCRIBE_HINA_4,Temporarily curses your accessory, restoring HP and MP.\nCannot be used if already cursed.\n
-LOC_SYSTEM_SKL_DESCRIBE_HINA_5,Permanently enchants your weapon with the Curse Brand and +1–2.\nDeals unavoidable poison damage and may slow the enemy.\n
+LOC_SYSTEM_SKL_DESCRIBE_HINA_5,Permanently enchants your weapon with the Curse Brand and +1-2.\nDeals unavoidable poison damage and may slow the enemy.\n
 LOC_SYSTEM_SKL_DESCRIBE_BREATH,Fires a straight-line breath matching your dragon element.\nCauses fatigue, preventing immediate reuse.\n
 LOC_SYSTEM_SKL_DESCRIBE_TORMENT,Reduces the HP of all visible enemies by half.\nYou are immune due to your demonic heritage.\n
 LOC_SYSTEM_SKL_DESCRIBE_ABANDON_GOD,Abandons your current deity.\nAll divine powers and benefits are lost, and the god becomes enraged.\nYou’ll suffer divine punishment for a time, but it fades eventually.\n
@@ -2757,8 +2757,8 @@ LOC_SYSTEM_SKL_DESCRIBE_LILLY_1,Recruits a selected fairy as an ally.\nThe numbe
 LOC_SYSTEM_SKL_DESCRIBE_LILLY_2,Calls all allied fairies to your side.\nFallen fairies cannot be summoned until revived by gathering EXP.\n
 LOC_SYSTEM_SKL_DESCRIBE_LILLY_3,Heals an allied fairy.\nThe amount healed scales with the fairy’s max HP and your Faith.\nCosts a small amount of MP.\n
 LOC_SYSTEM_SKL_DESCRIBE_LILLY_4,Buffs all visible fairy allies, sharing your strength with them.\nYou gain a combat penalty: reduced accuracy, attack, and halved spell power.\nCosts 1 MP bar, no Faith.\n
-LOC_SYSTEM_SKL_DESCRIBE_OKINA_1,Turns a destructible wall within sight into a door.\nCannot be created if blocked by enemies or obstacles.\nThe door starts closed and functions like any other door—quietly sneak behind enemies!\n
-LOC_SYSTEM_SKL_DESCRIBE_OKINA_2,Locks a door within sight with divine power.\nIf open, it closes and pushes back anyone on it, dealing minor damage and Confusion.\nThe door becomes impassable—even to deities—until it is damaged enough or the effect ends.\n
+LOC_SYSTEM_SKL_DESCRIBE_OKINA_1,Turns a destructible wall within sight into a door.\nCannot be created if blocked by enemies or obstacles.\nThe door starts closed and functions like any other door-quietly sneak behind enemies!\n
+LOC_SYSTEM_SKL_DESCRIBE_OKINA_2,Locks a door within sight with divine power.\nIf open, it closes and pushes back anyone on it, dealing minor damage and Confusion.\nThe door becomes impassable-even to deities-until it is damaged enough or the effect ends.\n
 LOC_SYSTEM_SKL_DESCRIBE_OKINA_3,Creates a door behind a target enemy and teleports behind them silently.\nWorks on destructible terrain.\nFails if terrain or enemies prevent door placement.\n
 LOC_SYSTEM_SKL_DESCRIBE_OKINA_4,Temporarily summons Mai and Satono, Okina’s followers.\nThey dance behind you, healing nearby allies.\nMai restores HP, Satono restores MP.\nSpend double Faith to summon both.\n
 LOC_SYSTEM_SKL_DESCRIBE_OKINA_5,Okina’s followers can escape into the Back Door World at any time by opening a door behind themselves.\nOnly works on valid terrain (not stairs or water).\nInside, only Mai and Satono exist, are invincible, and restore HP/MP.\nEnemies may follow if nearby.\n
@@ -2766,7 +2766,7 @@ LOC_SYSTEM_SKL_DESCRIBE_JUNKO_1,Fires a simple but powerful physical danmaku.\nD
 LOC_SYSTEM_SKL_DESCRIBE_JUNKO_2,Temporarily gains pure power.\nSTR +5, boosts melee and danmaku damage.\nEach use increases Purification level by 1, limiting item use.\n
 LOC_SYSTEM_SKL_DESCRIBE_JUNKO_3,Enhances bloodlust for a burst of speed.\nAll actions are 1.5x faster while enemies are in sight.\nBloodlust fades if no enemies remain.\nEach use increases Purification by 2.\n
 LOC_SYSTEM_SKL_DESCRIBE_JUNKO_4,Grants a one-time permanent blessing of Purity from Junko.\nChoose one of three passive effects and gain permanent stat boosts.\nYou can no longer use Junko’s powers or items.\nIf you betray Junko in this state, you die instantly.\nYou can delay the choice but must regain Faith later to retry.\n
-LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_1,Become possessed by Joon (plague god) or Shion (poverty god).\nWhile possessed, use their powers but suffer stronger curses.\nAfter possession ends, gain Faith before reusing.\nJoon fills your MP but wastes 2–3 items and resets MP to 3.00 if over.\nShion restores HP/MP, removes low MP penalties, but causes all dropped items to vanish faster.\n
+LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_1,Become possessed by Joon (plague god) or Shion (poverty god).\nWhile possessed, use their powers but suffer stronger curses.\nAfter possession ends, gain Faith before reusing.\nJoon fills your MP but wastes 2-3 items and resets MP to 3.00 if over.\nShion restores HP/MP, removes low MP penalties, but causes all dropped items to vanish faster.\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_2,While possessed by Joon, use Queen of Bubble.\nConfuses all enemies briefly and deals damage based on your level.\nUnavailable until the next possession.\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_3,While possessed by Shion, use Misfortune Scatter.\nSlows all enemies and spreads mist to obscure vision.\nUnavailable until the next possession.\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_4,Forcefully possess an enemy with Shion, nullifying their luck.\nHit enemies lose levels and combat power.\nCan only be used while possessed.\nCosts 5 Faith.\nDoes not work on non-living targets.\n
@@ -2779,7 +2779,7 @@ LOC_SYSTEM_SKL_DESCRIBE_MIKO_5,Choose a red or blue cloak from Miko.\nRed boosts
 LOC_SYSTEM_SKL_DESCRIBE_MIKO_6,Explodes your full Popularity bar to gain a powerful buff.\nChoose between doubled max HP, massively boosted MP recovery, or semi-permanent speed.\nLasts for the floor only.\n
 LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_1,Creates a fireball that explodes on contact.\nDeals splash damage and may hurt you if too close.\n
 LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_2,Fires compressed water that pushes the enemy back.\n
-LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_3,Shoots a fast air bullet.\nIt’s not strong or piercing, but casts much faster than other spells—about twice as fast.\n
+LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_3,Shoots a fast air bullet.\nIt’s not strong or piercing, but casts much faster than other spells-about twice as fast.\n
 LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_4,Erupts large emerald walls around you.\nDeals damage to nearby enemies.\n
 LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_5,Raises spiked earth at a location.\nDeals heavy damage in a small area.\nMay fail if Power is too low.\n
 LOC_SYSTEM_SKL_DESCRIBE_UKNOWN,An unknown ability.\n
@@ -3315,7 +3315,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_DAGGER,A small and easily portable
 LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_THROWING_KNIFE,A dagger optimized for throwing. It can be used in melee, but not effectively.\nAlthough you need to retrieve it after throwing, if that issue is solved, it's a very useful ranged weapon.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_SHORTBLADE_SHORTSWORD,A longer blade than most daggers, making it viable even for direct combat.\nIf you're the kind who insists on fighting head-on with a dagger, this is your choice.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE,A long-bladed sword for stabbing and slashing enemies.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_KATANA,A standard sword with no particular traits—simple and easy to use.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_KATANA,A standard sword with no particular traits-simple and easy to use.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_SCIMITAR,A large, curved longsword often carried by White Wolf Tengu.\nIts larger blade delivers more damage than regular longswords.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_GREATSWORD,A massive double-edged sword. It's hard to wield even with two hands.\nIt boasts immense destructive power, but handling it well requires training.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_CHAKRAM,A circular throwing weapon often used by some local deity.\nIf spun and thrown properly, it might even return to the user.\nIt might not look like a sword, but it can be wielded like one.\n
@@ -3350,7 +3350,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_SHIELD_INFO1,With your current skill, you gain {0} s
 LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_BUG,A basic danmaku used for bullet hell games. You throw it to hit the enemy.\nThe problem is… it's a bugged danmaku.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_AMULET,This cheap amulet used by Reimu has powerful homing capabilities.\nIt’s a simple danmaku, but boasts high accuracy.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_POISON_NEEDLE,A shuriken that embeds into the target when thrown.\nIt deals little damage, but appears to be coated in poison.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_COMPRESSER,One of the Kappa's inventions—a bomb filled with highly compressed water.\nWhen thrown, it bursts all at once.\nLikely to hit a wide area.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_COMPRESSER,One of the Kappa's inventions-a bomb filled with highly compressed water.\nWhen thrown, it bursts all at once.\nLikely to hit a wide area.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_DOGGOJEO,An ancient Indian weapon said to be used by Buddhist monks during training.\nIt looks like an ordinary handle, but releases magic when thrown with great force.\nUnlike other danmaku, this one pierces through enemies.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_NORMAL,Comfortable clothing for everyday wear.\nSignificantly reduces the base penalty for non-fabric armor.\nHowever, since the minimum penalty is the same as other outfits, this benefit disappears once you're used to armor.\n\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MIKO,A shrine maiden's garment.\nBlessed by the gods, it protects the mind and grants confusion resistance while worn.\n\n
@@ -3359,7 +3359,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_KAPPA,A blue uniform worn like standard attir
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_FIRE,Clothing imbued with the spirit of the fire rat.\nIt appears capable of withstanding intense heat, granting fire resistance while worn.\n\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MAID,Uniforms worn by the maids of the Scarlet Devil Mansion.\nSpecially enchanted by the library there, it increases magic resistance while worn.\n\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_POISON,A doll from the lily-of-the-valley field wore this, but it's large enough to wear.\nThe flower's energy protects you, granting poison resistance while worn.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_AUTUMN,A garment made of autumn leaves—surprisingly, it's properly crafted.\nWith faith in Shizuha, you'll blend into your surroundings and drastically increase stealth.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_AUTUMN,A garment made of autumn leaves-surprisingly, it's properly crafted.\nWith faith in Shizuha, you'll blend into your surroundings and drastically increase stealth.\n\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL0,A cloth outfit designed for easy movement.\nMade from tough fabric that withstands frequent grazing!\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL1,A suit made of durable material.\nLess flexible than cloth, but quite lightweight.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL2,Armor bound with chains.\nSturdy, but not as protective as plate armor.\n
@@ -3368,9 +3368,9 @@ LOC_SYSTEM_ITEM_DESCRIPTION_SHIELD,A shield used to block enemy attacks. Cannot 
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_HEAD,An accessory worn on the head. The foundation of fashion.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_CLOAK,A stylish cloak worn over the body.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE,Gloves for your hands. Cursed gloves must be worn before rings.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_BOOT,Shoes that protect your feet. Don’t walk barefoot in the dungeon—wear these!\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_BOOT,Shoes that protect your feet. Don’t walk barefoot in the dungeon-wear these!\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_WATER,A bottle filled with plain water.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL,A healing potion. Recovers confusion, poison, sickness, and some HP.\nInstant effect upon drinking—truly mysterious.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL,A healing potion. Recovers confusion, poison, sickness, and some HP.\nInstant effect upon drinking-truly mysterious.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_POISON,A potion filled with poison. It tastes awful and causes severe poisoning.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL_WOUND,A potion that heals wounds. Instantly restores a lot of HP,\nbut doesn’t cure status effects.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_MIGHT,A potion that grants temporary super strength. Also increases attack power.\n
@@ -3479,15 +3479,15 @@ LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TENSI,A spellbook handwritten by the delinquent
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TEST_ANNIHILATE,The ultimate spellbook of destruction written by Mima.\nThe dream tome for every destruction mage.
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEBUF,A book written by Satori of the Underworld on mental domination.\nIt feels like the book is reading your mind.
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_ULTI,A legendary book said to have been created by the chief maid of the Scarlet Devil Mansion to train elite maids.\nAside from Sakuya, no one could understand it.\nIncludes appendices on cleaning, laundry, and more.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ICE_ULTI,A book written by a certain ice fairy from the lake to prove her ultimate strength.\nIt’s filled with wiggly handwriting and drawings like a picture book.\nIts abstract explanations make it surprisingly hard to understand—only someone with great insight might comprehend it.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ICE_ULTI,A book written by a certain ice fairy from the lake to prove her ultimate strength.\nIt’s filled with wiggly handwriting and drawings like a picture book.\nIts abstract explanations make it surprisingly hard to understand-only someone with great insight might comprehend it.
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_ULTI,A book said to be often carried by the puppeteer living in the Forest of Magic.\nIt details intricate methods of controlling dolls that can also apply to summoning.\nStrangely, it includes notes on handling explosives and cursing others... Let’s pretend we didn’t see that.
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_ULTI,A thrilling adventure manga featuring a tengu as the protagonist.\nThe story is exciting, and the protagonist’s techniques seem worth imitating.
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMY_ULTI,A tome containing all of alchemy, found in a massive library inside a mansion.\nThe vague and messy handwriting makes it hard to understand unless you’re a true alchemy master.\nJudging from the scribbles, even the original owner probably didn’t understand it well.
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA,A lost pagoda infused with great power.\nWhen activated, releases stored energy as a laser.\nDamage increases with higher Activation skill.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL,A scripture once used by a wandering monk.\nConsumes Power to rapidly restore MP.\nMP restored increases with higher Activation skill.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL,A soul that wandered from the dream world.\nSummons allies from the dream world for a short time.\nStronger allies with higher Activation skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BOMB,A massive bomb ignitable with magic.\nCan be thrown after activation. Explodes after a few turns.\nTakes up a tile. Destroyed if hit by enemies.\nNot consumed on use—powered by mysterious magic.\nDamage and bomb HP scale with Activation skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL,A lantern said to be carried by ghosts.\nActivating turns you into a ghost state—untouchable, invisible.\nConsumes 30–70% of your HP. MP drains quickly while active.\nCannot act during ghost state. Ends when MP reaches 0 or you cancel it.\nStronger Activation reduces HP loss and MP drain.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BOMB,A massive bomb ignitable with magic.\nCan be thrown after activation. Explodes after a few turns.\nTakes up a tile. Destroyed if hit by enemies.\nNot consumed on use-powered by mysterious magic.\nDamage and bomb HP scale with Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL,A lantern said to be carried by ghosts.\nActivating turns you into a ghost state-untouchable, invisible.\nConsumes 30-70% of your HP. MP drains quickly while active.\nCannot act during ghost state. Ends when MP reaches 0 or you cancel it.\nStronger Activation reduces HP loss and MP drain.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_SKY_TORPEDO,A torpedo modified by kappas to fire out of water.\nBasically a missile. Damage increases with higher Activation skill.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_MAGIC_HAMMER,A magic hammer wielded by the small people, once owned by an oni.\nAllows powerful effects with only 1 P.\nHowever, has a 10% chance to cause the opposite of the intended effect.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_CAMERA,A camera brought by accident to Gensokyo.\nUses mysterious energy to take pictures without film.\nWon’t help in battle but can photograph beautiful girls.\nToo weak to shoot distant subjects.\n
@@ -3497,7 +3497,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2,This item can be activated without usage
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3,Press 'V' to activate using Power.\n\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,Each time this activatable item is used, it requires
 LOC_SYSTEM_ITEM_DESCRIPTION_RUNE,This is a rune proving you’ve conquered dungeons.\nCollect 3 to open the final door of the Hakurei Shrine.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_YINYANG_ORB,This is the powerful Yin-Yang Orb. It’s enshrined within the shrine.\nTake it to escape or harness its power—but beware!\nThe red-white shrine maiden will chase you relentlessly.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_YINYANG_ORB,This is the powerful Yin-Yang Orb. It’s enshrined within the shrine.\nTake it to escape or harness its power-but beware!\nThe red-white shrine maiden will chase you relentlessly.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE1,A flyer reading “Missing Pet - Komeiji Satori.”\nIt has your photo on it...\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE2,A flyer reading “Lost Item - Komeiji Satori.”\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ETC_CATNIP,It’s catnip. Not very useful, but cats seem helpless against it.\n
@@ -3540,7 +3540,7 @@ LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_FLY,Can fly.
 LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_SWIM,Can swim.
 LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_SEE_INVISIBLE,Can see invisible entities.
 LOC_SYSTEM_MONSTER_DESCRIPTION_INANIMATE,An inanimate object.
-LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BLIZARD,Immune to blizzards—thanks to the power of the moon sisters.
+LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BLIZARD,Immune to blizzards-thanks to the power of the moon sisters.
 LOC_SYSTEM_MONSTER_DESCRIPTION_DEBUFF_IMMUN,Completely immune to debuff magic.
 LOC_SYSTEM_MONSTER_DESCRIPTION_SILENCE,Can cast spells even while silenced.
 LOC_SYSTEM_MONSTER_DESCRIPTION_SUMMONED,This monster was summoned and will disappear over time.\nAlso gives no EXP.
@@ -3601,7 +3601,7 @@ LOC_SYSTEM_GOD_YUUGI_DESCRIPTION,Yuugi is an oni who lives in the Old Capital un
 LOC_SYSTEM_GOD_TENSI_TITLE,Hinanawi Tenshi - Girl of Bhavaagra, the Celestial Realm
 LOC_SYSTEM_GOD_TENSI_DESCRIPTION,Tenshi is a spoiled celestial from the Celestial Realm.\nBored with heaven, she toys with followers who worship her during this incident.\nShe grants no powers, and all outcomes depend on her whim.\nIf you amuse her with constant risky battles, she may help you.\nIf you seek safety, you’ll regret your decision.
 LOC_SYSTEM_GOD_BYAKUREN_TITLE,Hijiri Byakuren - Sealed Great Magician
-LOC_SYSTEM_GOD_BYAKUREN_DESCRIPTION,Byakuren is a great sorceress once sealed in Makai, now a Buddhist teacher in Myouren Temple.\nShe teaches magic—especially buffs that enhance physical abilities.\nHer powers grant intelligence, speed, and reduction in magic penalties.\nFaith is earned by meeting new people.
+LOC_SYSTEM_GOD_BYAKUREN_DESCRIPTION,Byakuren is a great sorceress once sealed in Makai, now a Buddhist teacher in Myouren Temple.\nShe teaches magic-especially buffs that enhance physical abilities.\nHer powers grant intelligence, speed, and reduction in magic penalties.\nFaith is earned by meeting new people.
 LOC_SYSTEM_GOD_SEIJA_TITLE,Kijin Seija - The Rebellious Amanojaku
 LOC_SYSTEM_GOD_SEIJA_DESCRIPTION,Seija is a wanted amanojaku fleeing with stolen goods.\nAligning with her grants powerful stolen items.\nShe welcomes you now, but only to use you.\nShe will use you as a shield and abandon you once you're no longer useful.\nFaith in her draws eternal scorn from other gods.\nShe hates the strong and distrusts all; if you reach level 9, she rejects you.
 LOC_SYSTEM_GOD_LILLY_TITLE,Lily White - Fairy Who Heralds Spring
@@ -3609,7 +3609,7 @@ LOC_SYSTEM_GOD_LILLY_DESCRIPTION,Lily White is the fairy of spring, known to blo
 LOC_SYSTEM_GOD_MIKO_TITLE,Toyosatomimi no Miko - Omniscient Taoist Governing the Cosmos
 LOC_SYSTEM_GOD_MIKO_DESCRIPTION,Toyosatomimi no Miko is a sage of the Mausoleum with the power to read desires.\nHer followers use Popularity instead of Piety.\nPopularity increases quickly via reading or defeating enemies.\nHowever, it drops when floors or subdungeons change, and powers consume large amounts.\nHer Taoist arts last indefinitely but vanish when changing floors.
 LOC_SYSTEM_GOD_OKINA_TITLE,Matara Okina - The Ultimate Hidden God
-LOC_SYSTEM_GOD_OKINA_DESCRIPTION,Okina Matara is a hidden, mysterious god whose true identity is unknown.\nShe seeks subordinates to do her bidding—you might be one.\nAs her follower, you gain door-based powers.\nYou can teleport through doors or appear behind enemies.\nYou can also call allies to boost HP and MP.\nShe enjoys spreading her divine presence through victorious battles.
+LOC_SYSTEM_GOD_OKINA_DESCRIPTION,Okina Matara is a hidden, mysterious god whose true identity is unknown.\nShe seeks subordinates to do her bidding-you might be one.\nAs her follower, you gain door-based powers.\nYou can teleport through doors or appear behind enemies.\nYou can also call allies to boost HP and MP.\nShe enjoys spreading her divine presence through victorious battles.
 LOC_SYSTEM_GOD_JUNKO_TITLE,Junko
 LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,Junko is a divine spirit purified by hatred, seeking vengeance.\nHer powers are simple but strong.\nThey require no piety but cause temporary Purified status.\nHigher Purification limits item usage.\nNormally this fades over time, but her favorite followers may be permanently purified.\nHer blessings are heavy, with great penalties and no betrayal allowed, but immense rewards.\nShe enjoys slaying every visible enemy.
 LOC_SYSTEM_GOD_BUG_TITLE,Bug God
@@ -3871,8 +3871,8 @@ LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION,(MP, Once upon Possession)
 LOC_SYSTEM_GOD_SHOW_ONCE_UPON_POSSESSION_N,(MP {0}, Once upon Possession)
 LOC_SYSTEM_GOD_SHOW_POPULAR,(Popularity {0}%)
 LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1,You are cursed by the gods of pestilence and poverty.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_1,Sometimes you consume 2–3 consumables at once.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_2,You always consume 2–3 consumables at once. (Enhanced)
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_1,Sometimes you consume 2-3 consumables at once.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_2,You always consume 2-3 consumables at once. (Enhanced)
 LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_3,Uncollected consumables slowly disappear. Discarded items have a chance to vanish.
 LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY1_4,Uncollected consumables disappear quickly. Discarded items always vanish. (Enhanced)
 LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY2,You can temporarily become possessed by Joon or Shion.
@@ -3989,7 +3989,7 @@ LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY2,You can draw out an enemy’s trauma.
 LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY3,You can read the map layout from enemies’ memories.
 LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY4,You can sense the presence of mobs.
 LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY5,You can completely read the thoughts of one enemy.
-LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY6,Satori occasionally feeds you — the more danger, the more frequent.
+LOC_SYSTEM_GOD_SHOW_SATORI_ABLILITY6,Satori occasionally feeds you - the more danger, the more frequent.
 LOC_SYSTEM_GOD_SHOW_TENSI_ABLILITY,Tenshi’s actions are unpredictable!
 LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY1,You are receiving stat boosts from Seija.
 LOC_SYSTEM_GOD_SHOW_SEIJA_ABLILITY2,She helps you escape divine punishment chases.
@@ -4002,12 +4002,12 @@ LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY3,You can summon fairies nearby.
 LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY4,You can heal allied fairies.
 LOC_SYSTEM_GOD_SHOW_LILLY_ABLILITY5,You can share your power with fairies.
 LOC_SYSTEM_GOD_SHOW_MIKO_TIP1,Popularity increases with the following actions:
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_1,Kill enemies — stronger ones give more popularity.
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_1,Kill enemies - stronger ones give more popularity.
 LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_2,Use Desire Gather to collect desires from enemies in sight.
 LOC_SYSTEM_GOD_SHOW_MIKO_TIP1_3,Enter a new sub-dungeon.
 LOC_SYSTEM_GOD_SHOW_MIKO_TIP2,Popularity decreases with the following actions:
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_1,Changing floors — the higher you go, the more popularity you lose.
-LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_2,Changing sub-dungeons — all popularity is lost.
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_1,Changing floors - the higher you go, the more popularity you lose.
+LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_2,Changing sub-dungeons - all popularity is lost.
 LOC_SYSTEM_GOD_SHOW_MIKO_TIP2_3,Using Miko’s divine powers.
 LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY1,You can collect popularity from nearby enemies.
 LOC_SYSTEM_GOD_SHOW_MIKO_ABLILITY2,You can randomly teleport at high speed.
@@ -4052,7 +4052,7 @@ LOC_SYSTEM_GOD_COMMON_SEIJA_TOO_STRONG,Seija doesn’t accept strong followers o
 LOC_SYSTEM_GOD_COMMON_ALREADY_GOD,You’re already following a god.
 LOC_SYSTEM_GOD_JOON_AND_SION_WELCOME1,Joon: Let’s rob them of every last coin!
 LOC_SYSTEM_GOD_JOON_AND_SION_WELCOME2,Shion: I'm hungry...
-LOC_SYSTEM_GOD_JOON_AND_SION_TALK1,Joon: A new sucker—I mean customer!
+LOC_SYSTEM_GOD_JOON_AND_SION_TALK1,Joon: A new sucker-I mean customer!
 LOC_SYSTEM_GOD_JOON_AND_SION_TALK2,Shion: I'm hungry...
 LOC_SYSTEM_GOD_JOON_AND_SION_TALK3,Joon: You could spend a bit more, you know.
 LOC_SYSTEM_GOD_JOON_AND_SION_TALK4,Shion: Where's the food...?
@@ -4070,12 +4070,12 @@ LOC_SYSTEM_GOD_JOON_AND_SION_WASTE_CONSUMABLE,Due to the Curse of Pestilence, yo
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_READY,You can be possessed again.
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_ASK,Which god will you channel?
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO1,a - Joon Yorigami: Instantly maxes out Power when possessed, but it's wasted upon release.
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO2,Also, using consumables always wastes 2–3 items.
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO2,Also, using consumables always wastes 2-3 items.
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO3,b - Shion Yorigami: Instantly restores HP and MP upon possession. Discarded consumables vanish.
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_INFO4,Consumables on the ground deplete faster. No power penalty is applied.
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK1,Joon: Take it all—everything!
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK1,Joon: Take it all-everything!
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK2,Joon: Steal anything of value!
-LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK3,Joon: I’ll give you power—just offer me everything!
+LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK3,Joon: I’ll give you power-just offer me everything!
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_J_TALK4,Joon: Time to collect!
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK1,Shion: Come on, won't you share your blessings?
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK2,Shion: I’m done being poor!
@@ -4108,7 +4108,7 @@ LOC_SYSTEM_GOD_KANAKO_TALK3,Kanako: Who dares call upon me?
 LOC_SYSTEM_GOD_KANAKO_TALK4,Kanako: Eliminate all who would hinder faith.
 LOC_SYSTEM_GOD_KANAKO_TALK5,Kanako: I shall repay your faith with strength.
 LOC_SYSTEM_GOD_KANAKO_TALK6,Kanako: Spread the faith of the mountain far and wide.
-LOC_SYSTEM_GOD_KANAKO_TALK7,Kanako: Once called the god of battle—let me show you that power.
+LOC_SYSTEM_GOD_KANAKO_TALK7,Kanako: Once called the god of battle-let me show you that power.
 LOC_SYSTEM_GOD_KANAKO_TALK8,Kanako: Avatar of true battle, march forward!
 LOC_SYSTEM_GOD_KANAKO_PUNISH_STRIKE,Kanako struck you with a mighty blow!
 LOC_SYSTEM_GOD_KANAKO_PUNISH_ONBASIRA,Kanako struck you with a powerful blow!
@@ -4119,7 +4119,7 @@ LOC_SYSTEM_GOD_SWAWKO_WELCOME_SANAE,Suwako: Sanae! How’s it going? Getting use
 LOC_SYSTEM_GOD_SUWAKO_TALK1,Suwako: Time to exterminate some youkai, Sanae!
 LOC_SYSTEM_GOD_SUWAKO_TALK2,Suwako: Hm? Did you call me?
 LOC_SYSTEM_GOD_SUWAKO_TALK3,Suwako: Lately, followers want too much.
-LOC_SYSTEM_GOD_SUWAKO_TALK4,Suwako: Don’t forget—I’m a goddess of curses too!
+LOC_SYSTEM_GOD_SUWAKO_TALK4,Suwako: Don’t forget-I’m a goddess of curses too!
 LOC_SYSTEM_GOD_SUWAKO_TALK5,Suwako: Put in a bit more effort~!
 LOC_SYSTEM_GOD_SUWAKO_TALK6,Suwako: Don’t worry, I’ll give you plenty of power.
 LOC_SYSTEM_GOD_SWAWKO_HAT,Suwako’s Hat
@@ -4156,7 +4156,7 @@ LOC_SYSTEM_GOD_MIMA_TALK1,Mima: Long time no see. Are you doing well?
 LOC_SYSTEM_GOD_MIMA_TALK2,Mima: A new recruit hoping to join?
 LOC_SYSTEM_GOD_MIMA_TALK3,Mima: Honestly, I haven't taken students recently, but you’re a special case.
 LOC_SYSTEM_GOD_MIMA_TALK4,Mima: The basics of magic? Power. Write that down.
-LOC_SYSTEM_GOD_MIMA_TALK5,Mima: Strike first—whoever attacks first wins.
+LOC_SYSTEM_GOD_MIMA_TALK5,Mima: Strike first-whoever attacks first wins.
 LOC_SYSTEM_GOD_MIMA_TALK6,Mima: Curious about my ultimate magic?
 LOC_SYSTEM_GOD_MIMA_TALK7,Mima: I have no more magic left to teach you.
 LOC_SYSTEM_GOD_MIMA_TALK8,Mima: Use the power of magic to carve a path!
@@ -4174,7 +4174,7 @@ LOC_SYSTEM_GOD_YUUGI_TALK3,Yuugi: I hate liars.
 LOC_SYSTEM_GOD_YUUGI_TALK4,Yuugi: Can you hold your liquor?
 LOC_SYSTEM_GOD_YUUGI_TALK5,Yuugi: Watching you fight somehow makes me happy!
 LOC_SYSTEM_GOD_YUUGI_TALK6,Yuugi: Want to spar with me sometime?
-LOC_SYSTEM_GOD_YUUGI_TALK7,Yuugi: I’ll invite you for drinks next time—just make sure you survive!
+LOC_SYSTEM_GOD_YUUGI_TALK7,Yuugi: I’ll invite you for drinks next time-just make sure you survive!
 LOC_SYSTEM_GOD_YUUGI_ACCECPT,Yuugi rejoiced in your victory.
 LOC_SYSTEM_GOD_YUUGI_CATCH,You caught {0}.
 LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX_NOT_ENOUGH_TILE,There's not enough ground to perform a German Suplex.
@@ -4230,10 +4230,10 @@ LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_FAIL,This weapon cannot be cursed.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_MIGHT,{0} glowed darkly, filling you with mysterious strength.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_FAIL,This armor cannot be cursed.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ONLY_ARMOUR,Can only be used on armor.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_MIRROR,{0} glowed darkly — you now reflect all damage.
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_MIRROR,{0} glowed darkly - you now reflect all damage.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_FAIL,This accessory cannot be cursed.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ONLY_JEWELRY,Can only be used on accessories.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_HEAL,{0} glowed darkly — you feel yourself healing.
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_HEAL,{0} glowed darkly - you feel yourself healing.
 LOC_SYSTEM_GOD_HINA_CURSE_BRAND_YN,You can only apply the cursed brand to your current weapon once. Proceed?
 LOC_SYSTEM_GOD_HINA_CURSE_BRAND,{0} emanates a cold, hollow aura of curse.
 LOC_SYSTEM_GOD_BREAND_SHOULD_WEAPON,You must be wielding a weapon to use this.
@@ -4467,10 +4467,10 @@ LOC_SYSTEM_GOD_LILLY_ABIL_HEAL_TARGET,You must target an allied fairy.
 LOC_SYSTEM_GOD_LILLY_ABIL_FAIRY_WAR,You shared your power with the fairies!
 LOC_SYSTEM_GOD_LILLY_ABIL_FAIRY_WAR_FAIL,There are no allied fairies nearby to receive your power.
 LOC_SYSTEM_GOD_LILLY_PUNISH_WEAK,Lily has drained your strength!
-LOC_SYSTEM_GOD_LILLY_PUNISH_SUMMON,You betrayed Lily—all your fairy allies have turned against you!
+LOC_SYSTEM_GOD_LILLY_PUNISH_SUMMON,You betrayed Lily-all your fairy allies have turned against you!
 LOC_SYSTEM_GOD_LILLY_ABANDON,You betrayed Lily, and all your fairy allies turned against you!
 LOC_SYSTEM_GOD_MIKO_WELCOME,Miko: Let me hear the desires of all!
-LOC_SYSTEM_GOD_MIKO_TALK1,Miko: No one knows you yet—go spread your fame!
+LOC_SYSTEM_GOD_MIKO_TALK1,Miko: No one knows you yet-go spread your fame!
 LOC_SYSTEM_GOD_MIKO_TALK2,Miko: Listen closely and hear your enemies' desires.
 LOC_SYSTEM_GOD_MIKO_TALK3,Miko: Faith is a popularity contest. Gather your followers!
 LOC_SYSTEM_GOD_MIKO_TALK4,Miko: I hear your desire to become stronger.
@@ -4505,7 +4505,7 @@ LOC_SYSTEM_GOD_MIKO_PUNISH_SLOW,Miko has slowed you down!
 LOC_SYSTEM_GOD_MIKO_PUNISH_RESIST,Miko has lowered your resistance!
 LOC_SYSTEM_GOD_OKINA_WELCOME,Okina: Engrave my presence into this world!
 LOC_SYSTEM_GOD_OKINA_TALK1,Okina: I'm going to test whether you're fit to be my attendant.
-LOC_SYSTEM_GOD_OKINA_TALK2,Okina: No interviews here—your performance decides everything.
+LOC_SYSTEM_GOD_OKINA_TALK2,Okina: No interviews here-your performance decides everything.
 LOC_SYSTEM_GOD_OKINA_TALK3,Okina: My presence must always be known.
 LOC_SYSTEM_GOD_OKINA_TALK4,Okina: Open the door behind you and receive my power.
 LOC_SYSTEM_GOD_OKINA_TALK5,Okina: I’m thinking of finally releasing Mai and Satono.
@@ -4595,7 +4595,7 @@ LOC_SYSTEM_GOD_ABANDONED,You were forsaken by {0}.
 LOC_SYSTEM_GOD_ABANDON_SATORI,You abandoned {0}. Your god doesn’t seem to mind much.
 LOC_SYSTEM_GOD_ABANDON_SANAE,You abandoned {0}. {1} tearfully accepted your independence.
 LOC_SYSTEM_ARENA_START1,Welcome to the Arena! Stand on the side you think will win!
-LOC_SYSTEM_ARENA_START2,Guess the winner to gain 1 level. Guess wrong—game over! You get 3 chances...
+LOC_SYSTEM_ARENA_START2,Guess the winner to gain 1 level. Guess wrong-game over! You get 3 chances...
 LOC_SYSTEM_ARENA_CLEAR,Congratulations on clearing it! You're truly blessed by luck!
 LOC_SYSTEM_ARENA_LAST_BATTLE,The final battle. Are you ready?
 LOC_SYSTEM_ARENA_CHOOSE,Now, choose who will win!

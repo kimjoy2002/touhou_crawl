@@ -4933,7 +4933,7 @@ bool skill_close_door(int pow, bool short_, unit* order, coord_def target_)
 					while (!rit.end()) {
 						unit* unit_hit_ = env[current_level].isMonsterPos(rit->x, rit->y);
 
-						if (!unit_hit_ && ((monster*)order)->isMonsterSight(*rit)) {
+						if (!unit_hit_ && env[current_level].isMove(rit->x, rit->y,unit_->isFly(),unit_->isSwim()) && distan_coord(order->position, unit_->position) >= distan_coord(order->position, *rit))  {
 							unit_->SetXY(rit->x, rit->y);
 							break;
 						}
@@ -4946,7 +4946,7 @@ bool skill_close_door(int pow, bool short_, unit* order, coord_def target_)
 				}
 				//적이 서있으면 강제로 비키도록 한다.
 				
-				if (monster *mon_ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(pow / 10), true, false, 0, order, target, SKD_OTHER, -1))
+				if (monster *mon_ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(pow / 10), true, false, 0, NULL, target, SKD_OTHER, -1))
 				{
 					if(!create_door && order->isYourShight()) {
 						printlog(LocalzationManager::formatString(LOC_SYSTEM_MON_LOCKED_DOOR, PlaceHolderHelper(order->GetName()->getName())),true, false, false, CL_small_danger);

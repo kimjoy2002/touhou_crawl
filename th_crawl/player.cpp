@@ -5232,6 +5232,21 @@ bool players::PunishUpDown(int punish_, god_type god_ , bool absolutely_ )
 	return true;
 	
 }
+
+int GetLengthFromCenter(int x, int y, int cx, int cy)
+{
+    int dx = x - cx;
+    int dy = y - cy;
+    int dist_sq = dx * dx + dy * dy;
+
+    int length = 0;
+    while ((length + 1) * (length + 1) - 1 < dist_sq)
+        ++length;
+
+    return length;
+}
+
+
 bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_, beam_iterator& beam)
 {
 	//던질때 장비된 아이템이면 장비가 풀리도록 만들어야함
@@ -5246,14 +5261,14 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 
 
 		int type_ = 0;
-		int pentan_ = s_wind?8:1;
+		int pentan_ = s_wind?7:1;
 		tanmac_type tanmac_type_ = TMT_WEAPON;
 		beam_type beam_type_ = s_wind?BMT_PENETRATE:BMT_NORMAL;
 		if ((*it).type == ITM_THROW_TANMAC && (*it).value4 == TMT_DOGGOJEO) {
-			pentan_ = 8;
+			pentan_ = 7;
 			beam_type_ = BMT_PENETRATE;
 		}
-		beam_infor temp_infor(GetThrowAttack(&(*it),false),GetThrowAttack(&(*it),true),GetThrowHit(&(*it)),this,GetParentType(),8,pentan_,beam_type_,ATT_THROW_NORMAL,(*it).GetNameInfor());
+		beam_infor temp_infor(GetThrowAttack(&(*it),false),GetThrowAttack(&(*it),true),GetThrowHit(&(*it)),this,GetParentType(),7,pentan_,beam_type_,ATT_THROW_NORMAL,(*it).GetNameInfor());
 		if((*it).type >= ITM_THROW_FIRST && (*it).type < ITM_THROW_LAST )
 		{
 			tanmac_type_ = (tanmac_type)(*it).value4;
@@ -5269,7 +5284,9 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 		if(kiku_)
 		{ //키쿠이치 컴프레서 전용
 
-			int length_ = ceil(sqrt(pow((float)abs(you.position.x-target_pos_.x),2)+pow((float)abs(you.position.y-target_pos_.y),2)));
+			int length_ = GetLengthFromCenter(target_pos_.x, target_pos_.y, you.position.x, you.position.y);
+			
+			//ceil(sqrt(pow((float)abs(you.position.x-target_pos_.x),2)+pow((float)abs(you.position.y-target_pos_.y),2)));
 	
 			temp_infor.length = length_;
 			for(int i=0;i<(you.GetParadox()?2:1);i++)

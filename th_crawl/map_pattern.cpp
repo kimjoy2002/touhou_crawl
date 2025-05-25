@@ -2006,7 +2006,7 @@ _____\
 			}
 			map->monster_list.push_back(mapdummy_mon(MON_DANCING_ARMOUR,0,coord_def(2,0)));
 			map->monster_list.push_back(mapdummy_mon(MON_DANCING_WEAPON,0,coord_def(-2,0)));
-			map->monster_list.push_back(mapdummy_mon(MON_CURSE_DOLL,0,coord_def(0,2)));
+			map->monster_list.push_back(mapdummy_mon(MON_CURSE_DOLL,0,coord_def(0,1)));
 			map->monster_list.push_back(mapdummy_mon(MON_CURSE_DOLL,0,coord_def(0,-2)));
 			
 			map->name = "MEDICINE_FLOWER";

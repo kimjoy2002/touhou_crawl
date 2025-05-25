@@ -146,16 +146,16 @@ const mon_infor mondata[] = {
 	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	0,1,1,10,'('},
 
-	{MON_GREEN_MOOK,2,6,name_infor(MON_GREEN_MOOK),&img_mons_green_mook,18,0,10,
-	{4,4,6},{ATT_NORMAL,ATT_NORMAL,ATT_S_POISON},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL)},
+	{MON_GREEN_MOOK,2,6,name_infor(MON_GREEN_MOOK),&img_mons_green_mook,18,0,5,
+	{3,3,6},{ATT_NORMAL,ATT_NORMAL,ATT_S_POISON},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL)},
 	M_FLAG_FLY,0,0,10,'m'},
 
-	{MON_ORANGE_MOOK,3,11,name_infor(MON_ORANGE_MOOK),&img_mons_orange_mook,22,0,14,
-	{8,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_ORANGE_MOOK,3,11,name_infor(MON_ORANGE_MOOK),&img_mons_orange_mook,22,0,7,
+	{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_FLY,0,0,10,'m' },
 
-	{MON_GRAY_MOOK,4,23,name_infor(MON_GRAY_MOOK),&img_mons_gray_mook,18,1,10,
-	{11,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_GRAY_MOOK,4,23,name_infor(MON_GRAY_MOOK),&img_mons_gray_mook,18,1,5,
+	{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_FLY,0,0,10,'m' },
 
 	{MON_FROG,7,224,name_infor(MON_FROG),&img_mons_frog,60,1,14,
@@ -190,8 +190,8 @@ const mon_infor mondata[] = {
 	{16,16,20},{ATT_NORMAL,ATT_NORMAL,ATT_NORMAL},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(LOC_SYSTEM_ATT_CLAW)},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,8,'&' },
 
-	{MON_KOGASA,7,550,name_infor(MON_KOGASA),&img_named_kogasa,55,1,14,
-	{13,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_KOGASA,7,550,name_infor(MON_KOGASA),&img_named_kogasa,55,1,12,
+	{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10,'&' },
 
 	{MON_SUNNY,4,129,name_infor(MON_SUNNY),&img_named_sunny,43,1,10,
@@ -936,7 +936,7 @@ const mon_infor mondata[] = {
 	{ 49,0,0 },{ ATT_CURSE,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 	M_FLAG_CAN_SEE_INVI | M_FLAG_SWIM,99,1,10,'8' },
 	
-	{MON_EIKA,7,250,name_infor(MON_EIKA),&img_mons_eika,52,4,8,
+	{MON_EIKA,7,250,name_infor(MON_EIKA),&img_mons_eika,42,4,8,
 	{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_WAKE,0,0,10,'e'},
 

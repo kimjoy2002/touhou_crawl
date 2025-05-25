@@ -1746,7 +1746,7 @@ bool GodAccpect_Explore_100()
 	{
 		bool return_ = false;
 		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-			if (70 > randA(100))
+			if (40 > randA(100))
 			{
 				you.PietyUpDown(1);
 				return_ = true;
@@ -2967,7 +2967,7 @@ void God_AblilityShow(god_type god) {
 			abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_3, 3, CL_small_danger));
 			abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_4, 4, CL_small_danger));
 			abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_5, 5, CL_small_danger));
-			printGodAbility(GT_JOON_AND_SION, level_, 1, true, LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3, abillist, LOC_SYSTEM_GOD_SHOW_PASSIVE);
+			printGodAbility(GT_EIRIN, level_, 1, true, LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3, abillist, LOC_SYSTEM_GOD_SHOW_PASSIVE);
 
 		}
 		printGodAbility(GT_EIRIN, level_, 2, false, LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_POTION);

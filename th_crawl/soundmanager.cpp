@@ -479,6 +479,7 @@ void SOUNDMANAGER::Initialize(HWND WindowHandle)
 	addSound("rune", "sound\\se\\rune.wav", false, true); //ok
 	addSound("knife", "sound\\se\\knife.wav", false, true); //ok
 	addSound("thunder", "sound\\se\\thunder.wav", false, true); //ok
+	addSound("door", "sound\\se\\door.wav", false, true); //ok
 	
 	
 
@@ -579,6 +580,7 @@ void SOUNDMANAGER::stopCurrentBGM(const char* except)
 	{
 		current_bgm->StopSound();
 		stop_bgm = current_bgm;
+		current_bgm = 0;
 	}
 }
 void InitSound(HWND windowhandle_)
@@ -624,6 +626,22 @@ void VolumeDown()
 	for (auto it = soundmanager.soundList.begin(); it != soundmanager.soundList.end(); it++) {
 		it->second->quite = true;
 		//it->second->Volume -= 10;
+		it->second->SetVolume();
+	}
+}
+
+void SetBgmVolume(int value_)
+{
+	for (auto it = soundmanager.bgmList.begin(); it != soundmanager.bgmList.end(); it++) {
+		it->second->Volume = value_;
+		it->second->SetVolume();
+	}
+}
+
+void SetSEVolume(int value_)
+{
+	for (auto it = soundmanager.soundList.begin(); it != soundmanager.soundList.end(); it++) {
+		it->second->Volume = value_;
 		it->second->SetVolume();
 	}
 }

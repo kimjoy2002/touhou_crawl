@@ -448,7 +448,7 @@ void charter_selete(bool first)
 	
 		item_infor t;
 		item *it;
-		it = env[current_level].MakeItem(you.position,makeitem(ITM_RING,1,&t,RGT_SEE_INVISIBLE));	
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_RING,1,&t,RGT_SEE_INVISIBLE));
 		it->Identify();
 		you.additem(it,false);
 		you.equip('a',ET_LEFT,false);
@@ -483,6 +483,7 @@ void charter_selete(bool first)
 
 		addItem_temp(ITM_SCROLL, SCT_BLINK, 1);
 		steam_mg.setCurrentInfo();
+		env[current_level].enterBgm(0);
 	}
 
 
@@ -614,6 +615,7 @@ extern int map_effect;
 extern bool widesearch;
 extern display_manager DisplayManager;
 void init_alldata() {
+	StopCurrentBGM();
 	WaitForSingleObject(mutx, INFINITE);
 	//map_list.random_number = (unsigned long)time(NULL);
 	//init_nonlogic_seed((unsigned long)time(NULL));
@@ -1240,10 +1242,17 @@ bool option_menu(int value_)
 	LOCALIZATION_ENUM_KEY origin_display = display;  
 	int width_ = option_mg.getWidth();
 	int height_ = option_mg.getHeight();
+	int bgm_ = option_mg.getBgmVolume();
+	int se_ = option_mg.getSeVolume();
+	bool right_ = false;
 	int origin_w = width_, origin_h = height_;
+	int origin_bgm_ = bgm_, origin_se_ = se_;
 	int current_pos_ = option_mg.getCurrentPos();
+	
+	DisplayManager.current_position = 0;
 	while(1)
 	{
+		int prev_position = DisplayManager.current_position;
 		deletesub();
 
 		printsub("",true,CL_normal);
@@ -1262,11 +1271,16 @@ bool option_menu(int value_)
 		printsub("b - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_RESOLUTION) + ": " + to_string(width_) +" X " +  to_string(height_),true,CL_normal,'b');
 		printsub(blank,false,CL_warning);
 		printsub("c - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_DISPLAY) + ": " + LocalzationManager::locString(display),true,CL_normal,'c');
+		printsub(blank,false,CL_warning);
+		printsub("d - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BGM) + ": " + to_string(bgm_),true,CL_normal,'d');
+		printsub(blank,false,CL_warning);
+		printsub("e - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_SE) + ": " + to_string(se_),true,CL_normal,'e');
 		printsub("",true,CL_normal);
 		printsub(blank,false,CL_warning);
 		printsub("esc - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BACK),true,CL_normal,VK_ESCAPE);
 		
 		changedisplay(DT_SUB_TEXT);
+		DisplayManager.current_position = prev_position;
 		InputedKey inputedKey;
 		int input_;
 		while(1) {
@@ -1277,24 +1291,54 @@ bool option_menu(int value_)
 				DisplayManager.addPosition(1);
 			else if(input_ == VK_RETURN || input_ == GVK_BUTTON_A || input_ == GVK_BUTTON_A_LONG) {
 				input_ = DisplayManager.positionToChar();
+				right_ = true;
+				break;
+			}
+			else if(input_ == VK_RIGHT) {
+				input_ = DisplayManager.positionToChar();
+				right_ = true;
+				break;
+			}
+			else if(input_ == VK_LEFT) {
+				input_ = DisplayManager.positionToChar();
+				right_ = false;
 				break;
 			} else {
 				break;
 			}
 		}
 
-		if(input_ >= 'a' && input_ <= 'c')
+		if(input_ >= 'a' && input_ <= 'e')
 		{
 			if(input_ == 'a') {
-				lang = LocalzationManager::getNextLang(lang);
+				lang = right_?LocalzationManager::getNextLang(lang):LocalzationManager::getPrevLang(lang);
 			}
 			else if(input_ == 'b') {
-				auto next_resolution = option_mg.getNextScreen(current_pos_);
+				auto next_resolution = option_mg.getNextScreen(current_pos_, right_);
 				width_ = next_resolution.width;
 				height_ = next_resolution.height;
 			}
 			else if(input_ == 'c') {
 				display = (display==LOC_SYSTEM_OPTION_MENU_WINDOWED)?LOC_SYSTEM_OPTION_MENU_FULLSCREEN:LOC_SYSTEM_OPTION_MENU_WINDOWED;
+			}
+			else if(input_ == 'd') {
+				bgm_+=10*(right_?1:-1);
+				if(bgm_>100)
+					bgm_ = 100;
+				if(bgm_<0)
+					bgm_ = 0;
+				SetBgmVolume(bgm_);
+				StopCurrentBGM("dungeon");
+				PlayBGM("dungeon");
+			}
+			else if(input_ == 'e') {
+				se_+=10*(right_?1:-1);
+				if(se_>100)
+					se_ = 100;
+				if(se_<0)
+					se_ = 0;
+				SetSEVolume(se_);
+				soundmanager.playSound("shoot");
 			}
 		}
 		else if(input_ == VK_ESCAPE ||
@@ -1322,6 +1366,13 @@ bool option_menu(int value_)
 			if(origin_display != display) {
 				should_reload = true;
 			}
+			if(origin_bgm_ != bgm_) {
+				option_mg.setBgmVolume(bgm_);
+			}
+			if(origin_se_ != se_) {
+				option_mg.setBgmVolume(se_);
+			}
+			
 			if(should_reload) {
 				if(display == LOC_SYSTEM_OPTION_MENU_FULLSCREEN) {
 					option_mg.setFullscreen(true);
@@ -1332,6 +1383,7 @@ bool option_menu(int value_)
 					g_changefullscreen = true;
 				}
 			}
+			StopCurrentBGM(nullptr);
 
 			
 			break;

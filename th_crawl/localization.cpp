@@ -263,6 +263,18 @@ string LocalzationManager::getNextLang(string cur) {
 	}
 	return first_;
 }
+
+string LocalzationManager::getPrevLang(string cur) {
+	string prev_;
+	for(pair<string, localizationInfo> pair_ : localization_type.ordered_entries()) {
+		if(pair_.first == cur && !prev_.empty()){
+			return prev_;
+		}
+		prev_ = pair_.first;
+	}
+	return prev_;
+}
+
 string LocalzationManager::getCurrentFont() {
 	return localization_type.find(current_lang).font;
 }

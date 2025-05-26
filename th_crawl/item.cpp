@@ -816,7 +816,7 @@ bool item::isiden()
 	}
 	else if(type == ITM_RING)
 	{
-		return identify && identify_curse && iden_list.ring_list[value1].iden == 2;
+		return identify && identify_curse && (isArtifact() || iden_list.ring_list[value1].iden == 2);
 
 	}
 	else if (type == ITM_AMULET)

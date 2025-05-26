@@ -2256,6 +2256,7 @@ bool monster::OpenDoor(const coord_def &c)
 		{
 			if(env[current_level].isInSight(c))
 			{
+				soundmanager.playSound("door");
 				if(env[current_level].isInSight(position))
 				{
 					LocalzationManager::printLogWithKey(LOC_SYSTEM_MONSTER_OPEN_DOOR,true,false,false,CL_normal,

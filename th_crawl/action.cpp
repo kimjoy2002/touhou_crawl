@@ -1394,7 +1394,9 @@ void Open_Close_door()
 	{
 		int close_= 0;
 		if((close_ = env[current_level].CloseDoor(temp.x,temp.y)) == 1)
-		{				
+		{
+			if(env[current_level].isInSight(temp))
+				soundmanager.playSound("door");
 			printlog(LocalzationManager::locString(LOC_SYSTEM_CLOSE_DOOR) + " ",false,false,false,CL_normal);
 			you.time_delay += you.GetNormalDelay();
 			you.TurnEnd();
@@ -1415,7 +1417,7 @@ void Open_Close_door()
 		if(result == 0)
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_OPEN_DOOR_EMPTY),true,false,false,CL_normal);
-		}		
+		}
 		else if(result > 0)
 			you.TurnEnd();
 		you.SetPrevAction('O');
@@ -1510,7 +1512,9 @@ void Close_door()
 	{
 		int close_= 0;
 		if((close_ = env[current_level].CloseDoor(temp.x,temp.y)) == 1)
-		{				
+		{
+			if(env[current_level].isInSight(temp))
+				soundmanager.playSound("door");
 			printlog(LocalzationManager::locString(LOC_SYSTEM_CLOSE_DOOR) + " ",false,false,false,CL_normal);
 			you.time_delay += you.GetNormalDelay();
 			you.TurnEnd();
@@ -4362,9 +4366,50 @@ void shout(char auto_)
 	}
 
 	int key_ = auto_;
-	if (key_ == 0)
-		key_ = waitkeyinput(true);
-	endSelection();
+	g_menu_select = -1;
+
+
+	if (key_ == 0) {
+		while(true) {
+			key_ = waitkeyinput(true);
+
+			if(key_ == VK_RIGHT){
+				if(++g_menu_select>5)
+					g_menu_select = 0;
+				continue;
+			} else if (key_ == VK_LEFT) {
+				if(--g_menu_select<0)
+					g_menu_select = 5;
+				continue;
+			} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+				switch(g_menu_select) {
+					case 0:
+						key_ = 't';
+						break;
+					case 1:
+						key_ = 'a';
+						break;
+					case 2:
+						key_ = 's';
+						break;
+					case 3:
+						key_ = 'w';
+						break;
+					case 4:
+						key_ = 'f';
+						break;
+					default:
+						break;
+				}
+			}
+			endSelection();
+			break;
+		}
+	}
+	g_menu_select = -1;
+
+
+	
 	switch(key_)
 	{
 	case 't':

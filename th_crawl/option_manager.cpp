@@ -139,10 +139,10 @@ void optionManager::calcTileXY() {
 	}
 }
 
-screen_info optionManager::getNextScreen(int& pos) {
-	pos++;
+screen_info optionManager::getNextScreen(int& pos, bool next_) {
+	next_?pos++:pos--;
 	if(pos<0)
-		pos = 0;
+		pos = able_screens.size() - 1;
 	if(pos >= able_screens.size())
 		pos = 0;
 	return able_screens[pos];
@@ -184,6 +184,23 @@ void optionManager::setHeight(int h_value) {
 	}
 }
 
+void optionManager::setBgmVolume(int value) {
+    bgm_volume = value;  // lang이 string일 경우
+
+	if(!fileName.empty()) {
+		CStringW strW(to_string(bgm_volume).c_str());
+		WritePrivateProfileStringW(_T(L"config"), _T(L"bgm_volume"), strW, fileName.c_str());
+	}
+}
+
+void optionManager::setSeVolume(int value) {
+    se_volume = value;  // lang이 string일 경우
+
+	if(!fileName.empty()) {
+		CStringW strW(to_string(se_volume).c_str());
+		WritePrivateProfileStringW(_T(L"config"), _T(L"se_volume"), strW, fileName.c_str());
+	}
+}
 
 void optionManager::setLang(const string& lang_value) {
     lang = lang_value;  // lang이 string일 경우

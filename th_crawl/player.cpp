@@ -1436,7 +1436,9 @@ int players::OpenDoor(const coord_def &c, bool no_turn)
 		if(env[current_level].OpenDoor(c.x,c.y))
 		{
 			env[current_level].CheckForbid(c);
-			if (no_turn == false) {
+			if (no_turn == false) {	
+				if(env[current_level].isInSight(c))
+					soundmanager.playSound("door");
 				printlog(LocalzationManager::locString(LOC_SYSTEM_OPEN_DOOR) + " ", false, false, false, CL_normal);
 				time_delay += GetWalkDelay();
 			}
@@ -5625,17 +5627,48 @@ bool players::equipjewerly(char id_)
 					printlog(ss.str(),false,false,false,CL_normal,'>');
 					printlog(equipment[ET_RIGHT]->GetName(),true,false,false,equipment[ET_RIGHT]->item_color(), '>');
 					startSelection({'<', '>', VK_ESCAPE});
+
+
+
+
+
+					g_menu_select = -1;
 					while(1)
 					{
 						InputedKey inputedKey;
 						int key_ = waitkeyinput(inputedKey,true);
-						if(key_ == '<' || key_ == equipment[ET_LEFT]->id)
+
+						if(key_ == VK_RIGHT){
+							if(++g_menu_select>2)
+								g_menu_select = 0;
+							continue;
+						} else if (key_ == VK_LEFT) {
+							if(--g_menu_select<0)
+								g_menu_select = 2;
+							continue;
+						}else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+							if(g_menu_select == 0) {
+								type_ = ET_LEFT;
+								endSelection();
+								break;
+							}
+							else if(g_menu_select == 1) {
+								type_ = ET_RIGHT;
+								endSelection();
+								break;
+							}
+							else if(g_menu_select == 2) {
+								endSelection();
+								g_menu_select = -1;
+								return 0;
+							}
+						} if(key_ == '<' || key_ == equipment[ET_LEFT]->id || key_ == GVK_LEFT_BUMPER)
 						{
 							type_ = ET_LEFT;
 							endSelection();
 							break;
 						}
-						else if(key_ == '>' || key_ == equipment[ET_RIGHT]->id)
+						else if(key_ == '>' || key_ == equipment[ET_RIGHT]->id || key_ == GVK_RIGHT_BUMPER)
 						{
 							type_ = ET_RIGHT;
 							endSelection();
@@ -5644,6 +5677,7 @@ bool players::equipjewerly(char id_)
 						else if(key_ == -1) {
 							if(inputedKey.isRightClick()) {
 								endSelection();
+								g_menu_select = -1;
 								return 0;
 							}
 						}
@@ -5652,9 +5686,11 @@ bool players::equipjewerly(char id_)
 							key_ == GVK_BUTTON_B_LONG)
 						{
 							endSelection();
+							g_menu_select = -1;
 							return 0;
-						}								
+						}
 					}
+					g_menu_select = -1;
 				}
 				else if (equipment[ET_LEFT] && equipment[ET_RIGHT]) {
 					if (equipment[ET_LEFT]->curse && equipment[ET_RIGHT]->curse) {

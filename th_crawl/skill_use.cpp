@@ -1180,7 +1180,7 @@ bool skill_shinki_low_demon(int power, bool short_, unit* order, coord_def targe
 	if(return_)
 	{
 		soundmanager.playSound("summon");
-		printlog( LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_PUNISH_MAGIC) ,true,false,false,CL_magic);
+		printlog( LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_SUMMON_LOW_DEMONS) ,true,false,false,CL_magic);
 	}
 	return return_;
 }

@@ -177,6 +177,7 @@ public:
 
 	static string langString(string key);
 	static string getNextLang(string cur);
+    static string getPrevLang(string cur);
 	static string getCurrentFont();
 	static const string& locString(LOCALIZATION_ENUM_KEY key);
 	static const string& speakString(SPEAK_ENUM_KEY key);

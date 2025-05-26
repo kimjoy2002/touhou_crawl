@@ -49,7 +49,7 @@ public:
 
 	void createNewFile(wstring fileName);
 	void calcTileXY();
-	screen_info getNextScreen(int& pos);
+	screen_info getNextScreen(int& pos, bool next_);
 
 	string getName() { return name; };
 
@@ -69,6 +69,8 @@ public:
 
 	int getBgmVolume() { return bgm_volume; };
 	int getSeVolume() { return se_volume; };
+	void setBgmVolume(int value);
+	void setSeVolume(int value);
 
 	void setLang(const string& lang_value);
 	string getLang() { return lang; };

@@ -111,7 +111,8 @@ void InitSound(HWND windowhandle_);
 
 void VolumeUp();
 void VolumeDown();
-
+void SetBgmVolume(int value_);
+void SetSEVolume(int value_);
 
 void PlaySE(const char* name);
 boolean PlayBGM(const char* name);

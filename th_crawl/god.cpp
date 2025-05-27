@@ -2254,6 +2254,7 @@ void Pray()
 				
 			while(ok_)
 			{
+				DisplayManager.current_position = -1;
 				InputedKey inputedKey;
 				int select = waitkeyinput(inputedKey,true);
 				switch(select)
@@ -3215,6 +3216,7 @@ void God_show()
 	God_AblilityShow(you.god);
 
 	changedisplay(DT_SUB_TEXT);
+	
 	ReleaseMutex(mutx);
 	while(1)
 	{

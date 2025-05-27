@@ -1272,9 +1272,9 @@ bool option_menu(int value_)
 		printsub(blank,false,CL_warning);
 		printsub("c - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_DISPLAY) + ": " + LocalzationManager::locString(display),true,CL_normal,'c');
 		printsub(blank,false,CL_warning);
-		printsub("d - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BGM) + ": " + to_string(bgm_),true,CL_normal,'d');
+		printsub("d <-> D - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BGM) + ": " + to_string(bgm_),true,CL_normal,'D');
 		printsub(blank,false,CL_warning);
-		printsub("e - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_SE) + ": " + to_string(se_),true,CL_normal,'e');
+		printsub("e <-> E - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_SE) + ": " + to_string(se_),true,CL_normal,'E');
 		printsub("",true,CL_normal);
 		printsub(blank,false,CL_warning);
 		printsub("esc - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BACK),true,CL_normal,VK_ESCAPE);
@@ -1285,7 +1285,26 @@ bool option_menu(int value_)
 		int input_;
 		while(1) {
 			input_ = waitkeyinput(inputedKey,true);
-			if(input_ == VK_UP)
+			right_ = true;
+			if(input_ >= 'd' && input_ <= 'e') {
+				right_ = false;
+				break;
+			}
+			else if(input_ == -1) {
+				if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+					if(inputedKey.val1 >= 'a' && inputedKey.val1 <= 'e' ) {
+						right_ = true;
+						input_ = inputedKey.val1 + 'A' - 'a';
+					} else if(inputedKey.val1 >= 'A' && inputedKey.val1 <= 'Z' ) {
+						right_ = false;
+						input_ = inputedKey.val1 - ('A' - 'a');
+					} else {
+						input_ = inputedKey.val1;
+					}
+					break;
+				}
+			}
+			else if(input_ == VK_UP)
 				DisplayManager.addPosition(-1);
 			else if(input_ == VK_DOWN)
 				DisplayManager.addPosition(1);
@@ -1308,20 +1327,20 @@ bool option_menu(int value_)
 			}
 		}
 
-		if(input_ >= 'a' && input_ <= 'e')
+		if((input_ >= 'a' && input_ <= 'e') || (input_ >= 'A' && input_ <= 'E'))
 		{
-			if(input_ == 'a') {
+			if(input_ == 'a' || input_ == 'A') {
 				lang = right_?LocalzationManager::getNextLang(lang):LocalzationManager::getPrevLang(lang);
 			}
-			else if(input_ == 'b') {
+			else if(input_ == 'b' || input_ == 'B') {
 				auto next_resolution = option_mg.getNextScreen(current_pos_, right_);
 				width_ = next_resolution.width;
 				height_ = next_resolution.height;
 			}
-			else if(input_ == 'c') {
+			else if(input_ == 'c' || input_ == 'C') {
 				display = (display==LOC_SYSTEM_OPTION_MENU_WINDOWED)?LOC_SYSTEM_OPTION_MENU_FULLSCREEN:LOC_SYSTEM_OPTION_MENU_WINDOWED;
 			}
-			else if(input_ == 'd') {
+			else if(input_ == 'd' || input_ == 'D') {
 				bgm_+=10*(right_?1:-1);
 				if(bgm_>100)
 					bgm_ = 100;
@@ -1331,7 +1350,7 @@ bool option_menu(int value_)
 				StopCurrentBGM("dungeon");
 				PlayBGM("dungeon");
 			}
-			else if(input_ == 'e') {
+			else if(input_ == 'e' || input_ == 'E') {
 				se_+=10*(right_?1:-1);
 				if(se_>100)
 					se_ = 100;

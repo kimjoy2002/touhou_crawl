@@ -42,6 +42,7 @@ extern HANDLE mutx;
 extern bool widesearch; //X커맨드용
 extern bool sample_dimention;
 extern int map_effect;
+extern int g_menu_select;
 
 bool skill_kanako_might(int pow, bool short_, unit* order, coord_def target)
 {
@@ -399,7 +400,44 @@ bool skill_eirin_move_stat(int pow, bool short_, unit* order, coord_def target)
 		while(!end_)
 		{
 			InputedKey inputedKey;
-			switch(waitkeyinput(inputedKey))
+
+			int key_;
+			g_menu_select = -1;
+			while(true) {
+				key_ = waitkeyinput(inputedKey, true);
+
+				if(key_ == VK_RIGHT){
+					if(++g_menu_select>4)
+						g_menu_select = 0;
+					continue;
+				} else if (key_ == VK_LEFT) {
+					if(--g_menu_select<0)
+						g_menu_select = 4;
+					continue;
+				} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+					switch(g_menu_select) {
+						case 0:
+							key_ = 'S';
+							break;
+						case 1:
+							key_ = 'D';
+							break;
+						case 2:
+							key_ = 'I';
+							break;
+						case 3:
+							key_ = 'R';
+							break;
+						default:
+							break;
+					}
+				}
+				break;
+			}
+			g_menu_select = -1;
+
+
+			switch(key_)
 			{
 			case 'S':
 				stat_ = 1;
@@ -2447,8 +2485,43 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 			}
 		}
 		startSelection({'a', 'b', 'c', 'd', VK_ESCAPE});
-		int key_ = waitkeyinput();
-		endSelection();
+
+
+		int key_;
+		g_menu_select = -1;
+		while(true) {
+			key_ = waitkeyinput(true);
+
+			if(key_ == VK_RIGHT){
+				if(++g_menu_select>4)
+					g_menu_select = 0;
+				continue;
+			} else if (key_ == VK_LEFT) {
+				if(--g_menu_select<0)
+					g_menu_select = 4;
+				continue;
+			} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+				switch(g_menu_select) {
+					case 0:
+						key_ = 'a';
+						break;
+					case 1:
+						key_ = 'b';
+						break;
+					case 2:
+						key_ = 'c';
+						break;
+					case 3:
+						key_ = 'd';
+						break;
+					default:
+						break;
+				}
+			}
+			endSelection();
+			break;
+		}
+		g_menu_select = -1;
 
 
 		switch (key_)
@@ -3115,7 +3188,42 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 		
 		startSelection({'a', 'b', 'c',VK_ESCAPE});
 		InputedKey inputedKey;
-		switch (waitkeyinput(inputedKey))
+
+		int key_;
+		g_menu_select = -1;
+		while(true) {
+			key_ = waitkeyinput(inputedKey, true);
+
+			if(key_ == VK_RIGHT){
+				if(++g_menu_select>3)
+					g_menu_select = 0;
+				continue;
+			} else if (key_ == VK_LEFT) {
+				if(--g_menu_select<0)
+					g_menu_select = 3;
+				continue;
+			} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+				switch(g_menu_select) {
+					case 0:
+						key_ = 'a';
+						break;
+					case 1:
+						key_ = 'b';
+						break;
+					case 2:
+						key_ = 'c';
+						break;
+					default:
+						break;
+				}
+			}
+			break;
+		}
+		g_menu_select = -1;
+
+
+
+		switch (key_)
 		{
 		case 'a':
 		case 'A':
@@ -3336,7 +3444,47 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		
 		startSelection({'a', 'b', 'c','d',VK_ESCAPE});
 		InputedKey inputedKey;
-		switch (waitkeyinput(inputedKey))
+
+
+		int key_;
+		g_menu_select = -1;
+		while(true) {
+			key_ = waitkeyinput(inputedKey, true);
+
+			if(key_ == VK_RIGHT){
+				if(++g_menu_select>4)
+					g_menu_select = 0;
+				continue;
+			} else if (key_ == VK_LEFT) {
+				if(--g_menu_select<0)
+					g_menu_select = 4;
+				continue;
+			} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+				switch(g_menu_select) {
+					case 0:
+						key_ = 'a';
+						break;
+					case 1:
+						key_ = 'b';
+						break;
+					case 2:
+						key_ = 'c';
+						break;
+					case 3:
+						key_ = 'd';
+						break;
+					default:
+						break;
+				}
+			}
+			break;
+		}
+		g_menu_select = -1;
+
+
+
+
+		switch (key_)
 		{
 		case 'a':
 		case 'A':
@@ -3480,8 +3628,41 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		printlog("c-"+LocalzationManager::locString(LOC_SYSTEM_ELEC_RESIST), true, false, false, CL_junko,'c');
 
 		startSelection({'a', 'b', 'c', VK_ESCAPE});
-		int key_ = waitkeyinput(true);
-		endSelection();
+
+		int key_;
+		g_menu_select = -1;
+		while(true) {
+			key_ = waitkeyinput(true);
+
+			if(key_ == VK_RIGHT){
+				if(++g_menu_select>3)
+					g_menu_select = 0;
+				continue;
+			} else if (key_ == VK_LEFT) {
+				if(--g_menu_select<0)
+					g_menu_select = 3;
+				continue;
+			} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+				switch(g_menu_select) {
+					case 0:
+						key_ = 'a';
+						break;
+					case 1:
+						key_ = 'b';
+						break;
+					case 2:
+						key_ = 'c';
+						break;
+					default:
+						break;
+				}
+			}
+			endSelection();
+			break;
+		}
+		g_menu_select = -1;
+
+
 		switch (key_)
 		{
 		case 'a':
@@ -3687,7 +3868,38 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 		
 		startSelection({'a', 'b', VK_ESCAPE});
 		InputedKey inputedKey;
-		switch (waitkeyinput(inputedKey))
+
+		int key_;
+		g_menu_select = -1;
+		while(true) {
+			key_ = waitkeyinput(inputedKey, true);
+
+			if(key_ == VK_RIGHT){
+				if(++g_menu_select>2)
+					g_menu_select = 0;
+				continue;
+			} else if (key_ == VK_LEFT) {
+				if(--g_menu_select<0)
+					g_menu_select = 2;
+				continue;
+			} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+				switch(g_menu_select) {
+					case 0:
+						key_ = 'a';
+						break;
+					case 1:
+						key_ = 'b';
+						break;
+					default:
+						break;
+				}
+			}
+			break;
+		}
+		g_menu_select = -1;
+
+
+		switch (key_)
 		{
 		case 'a':
 		case 'A':
@@ -4047,7 +4259,48 @@ bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
 		}
 		startSelection({'a', 'b', 'c', 'd', 'e', VK_ESCAPE});
 		InputedKey inputedKey;
-		switch (waitkeyinput(inputedKey))
+
+
+		int key_;
+		g_menu_select = -1;
+		while(true) {
+			key_ = waitkeyinput(inputedKey, true);
+
+			if(key_ == VK_RIGHT){
+				if(++g_menu_select>5)
+					g_menu_select = 0;
+				continue;
+			} else if (key_ == VK_LEFT) {
+				if(--g_menu_select<0)
+					g_menu_select = 5;
+				continue;
+			} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+				switch(g_menu_select) {
+					case 0:
+						key_ = 'a';
+						break;
+					case 1:
+						key_ = 'b';
+						break;
+					case 2:
+						key_ = 'c';
+						break;
+					case 3:
+						key_ = 'd';
+						break;
+					case 4:
+						key_ = 'e';
+						break;
+					default:
+						break;
+				}
+			}
+			break;
+		}
+		g_menu_select = -1;
+
+
+		switch (key_)
 		{
 		case 'a':
 		case 'A':
@@ -4145,7 +4398,40 @@ bool skill_miko_5(int power, bool short_, unit* order, coord_def target)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_CLOAK_BLUE), true, false, false, CL_miko, 'b');
 		startSelection({'a', 'b', VK_ESCAPE});
 		InputedKey inputedKey;
-		switch (waitkeyinput(inputedKey))
+
+
+		int key_;
+		g_menu_select = -1;
+		while(true) {
+			key_ = waitkeyinput(inputedKey, true);
+
+			if(key_ == VK_RIGHT){
+				if(++g_menu_select>2)
+					g_menu_select = 0;
+				continue;
+			} else if (key_ == VK_LEFT) {
+				if(--g_menu_select<0)
+					g_menu_select = 2;
+				continue;
+			} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+				switch(g_menu_select) {
+					case 0:
+						key_ = 'a';
+						break;
+					case 1:
+						key_ = 'b';
+						break;
+					default:
+						break;
+				}
+			}
+			break;
+		}
+		g_menu_select = -1;
+
+
+
+		switch (key_)
 		{
 		case 'a':
 		case 'A':
@@ -4211,7 +4497,42 @@ bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST_INFO3), true, false, false, CL_miko, 'c');
 		startSelection({'a', 'b', 'c', VK_ESCAPE});
 		InputedKey inputedKey;
-		switch (waitkeyinput(inputedKey))
+
+		int key_;
+		g_menu_select = -1;
+		while(true) {
+			key_ = waitkeyinput(inputedKey, true);
+
+			if(key_ == VK_RIGHT){
+				if(++g_menu_select>3)
+					g_menu_select = 0;
+				continue;
+			} else if (key_ == VK_LEFT) {
+				if(--g_menu_select<0)
+					g_menu_select = 3;
+				continue;
+			} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+				switch(g_menu_select) {
+					case 0:
+						key_ = 'a';
+						break;
+					case 1:
+						key_ = 'b';
+						break;
+					case 2:
+						key_ = 'c';
+						break;
+					default:
+						break;
+				}
+			}
+			break;
+		}
+		g_menu_select = -1;
+
+
+
+		switch (key_)
 		{
 		case 'a':
 		case 'A':

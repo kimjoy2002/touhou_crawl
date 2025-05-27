@@ -52,11 +52,12 @@ class menu
 {
 	int id; //아이디
 	unique_ptr<vector<menu_string>> textmg;
-
 	list<menu_input> input_list;
 	
 public:
-	menu::menu(int id_, unique_ptr<vector<menu_string>>& textmg):id(id_),textmg(std::move(textmg)){}
+	bool isRectangle;
+
+	menu::menu(int id_, unique_ptr<vector<menu_string>>& textmg, bool isRectangle):id(id_),textmg(std::move(textmg)), isRectangle(isRectangle){}
 
 	
 	void input_puls(int input_, int output_, string text_, bool infor_, bool (*f_)(int), int value_)
@@ -149,9 +150,9 @@ public:
 	}
 
 
-	void menu_puls(int id_, unique_ptr<vector<menu_string>>& textmg)
+	void menu_puls(int id_, unique_ptr<vector<menu_string>>& textmg, bool isRectangle = false)
 	{
-		menu_list.push_back(new menu(id_,textmg));
+		menu_list.push_back(new menu(id_,textmg, isRectangle));
 	}
 
 
@@ -193,9 +194,13 @@ public:
 						int input_ = 0;
 						while(1) {
 							input_ = waitkeyinput(inputedKey, true);
-							if(input_ == VK_UP || input_ == VK_LEFT) {
+							if(input_ == VK_UP) {
+								DisplayManager.addPosition((*it)->isRectangle?-2:-1);
+							} else if(input_ == VK_LEFT) {
 								DisplayManager.addPosition(-1);
-							} else if(input_ == VK_DOWN  || input_ == VK_RIGHT)  {
+							} else if(input_ == VK_DOWN ) {
+								DisplayManager.addPosition((*it)->isRectangle?2:1);
+							} else if(input_ == VK_RIGHT) {
 								DisplayManager.addPosition(1);
 							} else {
 								break;
@@ -571,7 +576,7 @@ void start_mainmenu()
 		}
 
 		temp->push_back(menu_string("", true, CL_normal));
-		m_mgr.menu_puls(2,temp);
+		m_mgr.menu_puls(2,temp, true);
 		
 		
 		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_REIMU);
@@ -706,7 +711,7 @@ void start_mainmenu()
 		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP_APTIT), true, CL_normal, '?'));
 		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP), true, CL_normal));
 		temp->push_back(menu_string("", true, CL_normal));
-		m_mgr.menu_puls(3,temp);
+		m_mgr.menu_puls(3,temp, true);
 
 
 		LOCALIZATION_ENUM_KEY tribelist[max_tribe][2] = {
@@ -766,7 +771,7 @@ void start_mainmenu()
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT_HELP), true, CL_normal));
 		temp->push_back(menu_string("", true, CL_normal));
-		m_mgr.menu_puls(4,temp);
+		m_mgr.menu_puls(4,temp, true);
 		
 
 

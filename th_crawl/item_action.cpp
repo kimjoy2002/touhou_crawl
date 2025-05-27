@@ -148,9 +148,11 @@ void PickUpSelect(list<item>::iterator it, int num)
 					}
 				case 'y':
 				case 'Y':
+				case GVK_BUTTON_A:
 					PickUpSelect_logic(temp);
 					break;
 				case 'a':
+				case GVK_BUTTON_A_LONG:
 					PickUpNum(temp,num,false);
 					endSelection();
 					return;
@@ -158,6 +160,8 @@ void PickUpSelect(list<item>::iterator it, int num)
 				case '?':
 				case 'g':
 				case ',':
+				case GVK_BUTTON_Y:
+				case GVK_BUTTON_Y_LONG:
 					iteminfor_pick();
 					endSelection();
 					return;

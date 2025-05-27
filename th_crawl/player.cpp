@@ -6239,7 +6239,7 @@ bool players::isView(const monster* monster_info)
 	if(isArena() || s_evoke_ghost)
 		return false;
 	if((you.s_invisible || you.togle_invisible) && 
-		!(you.s_glow && you.GetBuffOk(BUFFSTAT_HALO)) &&
+		!(you.s_glow || you.GetBuffOk(BUFFSTAT_HALO)) &&
 		!(you.s_oil) &&
 		!(you.s_fire) &&
 		!(monster_info->flag & M_FLAG_CAN_SEE_INVI)) //투명?

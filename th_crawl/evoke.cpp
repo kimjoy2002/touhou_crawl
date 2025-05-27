@@ -252,6 +252,7 @@ void returnHammerItem();
 string DreamSoulMonster(vector<int>& list_, int level_);
 
 
+extern int g_menu_select;
 
 bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 {
@@ -337,8 +338,43 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 				
 				startSelection({'a', 'b', 'c', 'd', VK_ESCAPE});
 				InputedKey inputedKey;
-				int key_ = waitkeyinput(inputedKey);
-				endSelection();
+				int key_ = 0;
+				g_menu_select = -1;
+				while(true) {
+					key_ = waitkeyinput(inputedKey, true);
+
+					if(key_ == VK_RIGHT){
+						if(++g_menu_select>4)
+							g_menu_select = 0;
+						continue;
+					} else if (key_ == VK_LEFT) {
+						if(--g_menu_select<0)
+							g_menu_select = 4;
+						continue;
+					} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+						switch(g_menu_select) {
+							case 0:
+								key_ = 'a';
+								break;
+							case 1:
+								key_ = 'b';
+								break;
+							case 2:
+								key_ = 'c';
+								break;
+							case 3:
+								key_ = 'd';
+								break;
+							default:
+								break;
+						}
+					}
+					endSelection();
+					break;
+				}
+				g_menu_select = -1;
+
+
 				switch (key_) {
 					case 'a':
 					case 'A':

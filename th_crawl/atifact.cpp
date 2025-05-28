@@ -415,7 +415,7 @@ void MakeArtifact(item* item_, int good_bad_)
 		}
 		if (isSprint() && 
 			(i == RGT_TELEPORT || i == RGT_HUNGRY || i == RGT_FULL || i == RGT_LEVITATION)) {
-			continue;;
+			continue;
 		}
 
 		temp.push_back(i);

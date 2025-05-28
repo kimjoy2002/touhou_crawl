@@ -428,7 +428,7 @@ SPEAK_SEKIBANKI_CONFUSE3,{0:은|는} 외쳤다. "안돼!"
 SPEAK_SEKIBANKI_CONFUSE4,{0:은|는} 위태롭게 움직인다.
 SPEAK_SEKIBANKI_CONFUSE5,{0:은|는} 빙글빙글 돌아간다.
 SPEAK_SEKIBANKI_MAGIC1,{0:은|는} 머리를 부유시킨다.
-SPEAK_SEKIBANKI_MAGIC2,{0:은|는} 의 머리가 날라다니기 시작한다.
+SPEAK_SEKIBANKI_MAGIC2,{0}의 머리가 날라다니기 시작한다.
 SPEAK_SEKIBANKI_CAMERA,{0:은|는} 외쳤다. "떠다니는 얼굴의 사진이라도 찍을거야?"
 SPEAK_NITORI_NORMAL1_H,{0:은|는} 외쳤다. "게겍, 인간?"
 SPEAK_NITORI_NORMAL2_H,{0:은|는} 외쳤다. "인간이 어째서 여기에 들어온거지?"

@@ -225,6 +225,7 @@ void map_algorithms_tuto02(int num);
 void map_algorithms_tuto03(int num);
 void map_algorithms_arena(int num);
 void map_algorithms_sprint(int num);
+void map_algorithms_shooting_sprint(int num);
 void map_algorithms_okina(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
 
 void map_algorithms(int num)
@@ -376,8 +377,10 @@ void map_algorithms(int num)
 		if (num == OKINA_LEVEL)
 		{
 			map_algorithms_okina(num, DG_FLOOR, DG_METAL_WALL);
-		} else {
+		} else if (isMiniSprint()) {
 			map_algorithms_sprint(num);
+		} else if (isShootingSprint()) {
+			map_algorithms_shooting_sprint(num);
 		}
 	}
 }

@@ -300,6 +300,7 @@ public:
 	int s_evoke_ghost;
 	int s_oil;
 	int s_fire;
+	int s_tracking;
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -383,6 +384,7 @@ public:
 	int move(short_move x_mov, short_move y_mov);
 	int move(const coord_def &c);
 	bool offsetmove(const coord_def &c);
+	bool shooing_fire();
 	void youAttack(unit* unit_); //누군가를 공격하다.
 	int OpenDoor(const coord_def &c, bool no_turn);
 	bool GetStatPanalty(){return s_str<=0 ||s_dex<=0 || s_int<=0;};
@@ -520,7 +522,8 @@ public:
 	bool SetEvokeGhost(int turn_);
 	bool SetOil(int value_, int max_);
 	bool SetFire(int value_, bool from_oil);
-
+	bool SetTracking(int value_);
+	
 	int GetInvisible();
 	int GetSaved(){return true;};
 	int GetParadox(){return s_paradox;}

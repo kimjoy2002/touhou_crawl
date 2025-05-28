@@ -4364,7 +4364,7 @@ const char* scarlet_pattern(map_dummy* map)
 		map->monster_list.push_back(mapdummy_mon(MON_MAID_FAIRY,0,coord_def(2,1)));
 		map->monster_list.push_back(mapdummy_mon(MON_MAID_FAIRY,0,coord_def(-2,1)));
 		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-		map->name = "SCARLET__ENTER";
+		map->name = "SCARLET_MAID_FAIRY_ENTER";
 		return  "\
 (((((((\
 (,(,(,(\

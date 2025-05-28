@@ -192,6 +192,7 @@ extern textures img_mons_otter_spirit;
 
 extern textures img_mons_haniwa_equipments[];
 extern textures img_mons_stonetower[];
+extern textures img_mons_security_door;
 
 
 

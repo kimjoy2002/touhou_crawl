@@ -431,6 +431,11 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int
 	image = mondata[id_].image;
 	hp = mondata[id_].max_hp;
 	max_hp = mondata[id_].max_hp;
+	if(isShootingSprint()) {
+		hp /=3;
+		max_hp /=3; //나중엔 데미지를 늘리자.		
+	}
+
 	ac = mondata[id_].ac;
 	ev = mondata[id_].ev;
 	speed = mondata[id_].speed;
@@ -506,10 +511,9 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int
 bool monster::ChangeMonster( int id_, uint64_t flag_)
 {
 	float hp_per_ = (float)(hp) / max_hp;
-	bool summon_ = (flag & M_FLAG_SUMMON)?true:false;
+	uint64_t pass_flag = (flag & M_FLAG_SUMMON) | (flag & M_FLAG_DECORATE) | (flag & M_FLAG_NETURALY) | (flag & M_FLAG_COMPLETE_NETURALY);
 	SetMonster(current_level,map_id,id_,flag_,summon_time,position,false);
-	if(summon_)
-		flag |= M_FLAG_SUMMON;
+	flag |= pass_flag;
 	if(flag & M_FLAG_ALLY)
 	{
 		s_ally = -1;
@@ -3392,7 +3396,13 @@ int monster::action(int delay_)
 				}
 			}
 
-
+			if(you.s_tracking > 0 && state.GetState() != MS_SLEEP && !isUserAlly()) {
+				state.SetState(MS_ATACK);
+				if(target == nullptr) {
+					target = &you;
+				}
+				memory_time = 30;
+			}
 		  	search_type search_type_ = (flag & M_FLAG_OPEN_DOOR)?ST_MONSTER_NORMAL_CANDOOR:ST_MONSTER_NORMAL;
 			if(id == MON_SEIGA) {
 				search_type_ = ST_MONSTER_NORMAL_CANPASSWALL;
@@ -3406,7 +3416,7 @@ int monster::action(int delay_)
 					wait = false;
 					longmove();
 					if (flag & M_FLAG_SHIELD) {
-						if (distan_coord(position, first_position) > 4 * 4)
+						if (distan_coord(position, first_position) > 3 * 3)
 						{
 							//이 몹은 자리를 지키기 위해 원래 자리로 돌아간다.
 							stack<coord_def> will_move_;
@@ -3505,7 +3515,6 @@ int monster::action(int delay_)
 						{
 							if (!s_fear)
 								CheckSightNewTarget();
-
 							if(will_move.empty() && target != nullptr && !isSightnonblocked(target->position) && id != MON_SEIGA) { //세이가는 일직선!
 								stack<coord_def> will_move_;
 								will_move.clear();
@@ -4109,6 +4118,13 @@ void monster::special_action(int delay_, bool smoke_)
 		}
 	}
 	break;
+	case MON_SECURITY_MAID_FIARY:
+		if (!smoke_) {
+			if(special_value > 0) {
+				special_value--;
+			}
+		}
+		break;
 	default:
 		break;
 	}
@@ -4919,7 +4935,7 @@ bool monster::AttackedTarget(unit *order_)
 			}
 			//if(back_stab)
 			//	you.SkillTraining(SKT_BACKSTAB,1);
-			if(state.GetState() != MS_ATACK || !target)
+			if(state.GetState() != MS_ATACK || !target || !you.isView(this))
 			{
 				target = &you;
 				target_pos = you.position;
@@ -5850,6 +5866,25 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, ostringstream& ss)
 	return CL_none;
 }
 
+int monster::GetOriginalForm(int form) {
+	switch(form) {
+		case MON_SONBITEN_SPINTOWIN:
+			return MON_SONBITEN;
+		case MON_YUMA2:
+			return MON_YUMA;
+		case MON_KEINE2:
+			return MON_KEINE;
+		case MON_SEKIBANKI_BODY:
+			return MON_SEKIBANKI;
+		case MON_KOKORO1:
+		case MON_KOKORO2:
+		case MON_KOKORO3:
+			return MON_KOKORO;
+		default:
+			return MON_NONE_MONSTER;
+	}
+}
+
 shadow::shadow(const coord_def &c, textures *t, int original_id_, shadow_type type_, string name_)
 {
 	position = c;
@@ -5867,7 +5902,6 @@ shadow::shadow(const coord_def &c, textures *t, int original_id_, shadow_type ty
 	}
 	name = name_;
 };
-
 
 
 

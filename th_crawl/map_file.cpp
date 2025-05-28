@@ -92,10 +92,26 @@ bool isArena()
 }
 bool isSprint()
 {
+	return map_list.tutorial == GM_SPRINT2_MINISTAGE || map_list.tutorial == GM_SPRINT3_MINISTAGE;
+}
+bool isMiniSprint()
+{
 	return map_list.tutorial == GM_SPRINT2_MINISTAGE;
+}
+bool isShootingSprint()
+{
+	return map_list.tutorial == GM_SPRINT3_MINISTAGE;
 }
 int sprintMulti()
 {
+	switch(map_list.tutorial) {
+	case GM_SPRINT2_MINISTAGE:
+		return 7;
+	case GM_SPRINT3_MINISTAGE:
+		return 3;
+	default:
+		break;
+	}
 	return 7;
 }
 

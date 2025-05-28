@@ -260,6 +260,9 @@ void stand_action()
 	{ 
 		Pray();
 	} else {
+		if(isShootingSprint()){
+			you.shooing_fire();
+		}
 		action_turn_skip();
 	}
 }

@@ -366,7 +366,6 @@ public:
 
 
 
-
 int distan_coord(const coord_def& a, const coord_def& b);
 
 wstring ConvertUTF8ToUTF16(const string& utf8Str);

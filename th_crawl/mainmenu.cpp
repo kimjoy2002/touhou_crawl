@@ -298,7 +298,12 @@ bool sprint2s(int value_)
 	map_list.tutorial = GM_SPRINT2_MINISTAGE;
 	return false;
 }
-
+bool sprint3s(int value_)
+{
+	g_selected[0] = 'e';
+	map_list.tutorial = GM_SPRINT3_MINISTAGE;
+	return false;
+}
 bool option_menu(int value_);
 
 bool select_fairy(int value_)
@@ -504,11 +509,12 @@ void start_mainmenu()
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("c - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_ARENA), true, CL_normal, 'c'));
 		temp->push_back(menu_string("d - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_SPRINT), true, CL_normal, 'd'));
+		temp->push_back(menu_string("e - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_SPRINT2), true, CL_normal, 'e'));
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_ETC), true, CL_help));
 		temp->push_back(menu_string("", true, CL_normal));
-		temp->push_back(menu_string("e - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_OPTION), true, CL_normal, 'e'));
+		temp->push_back(menu_string("o - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_OPTION), true, CL_normal, 'o'));
 		temp->push_back(menu_string("s - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_SAVE), true, CL_normal, 's'));
 		temp->push_back(menu_string("R - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_REPLAY), true, CL_normal, 'R'));
 		temp->push_back(menu_string("", true, CL_normal));
@@ -519,7 +525,8 @@ void start_mainmenu()
 		//m_mgr.menu_input_puls(0,'c',0,"",false,tutorial2,0);
 		m_mgr.menu_input_puls(0,'c',0,"",false,sprint1s,0);
 		m_mgr.menu_input_puls(0, 'd', 1, "", false, sprint2s, 0);
-		m_mgr.menu_input_puls(0,'e',-3,"",false,option_menu,0);
+		m_mgr.menu_input_puls(0, 'e', 1, "", false, sprint3s, 0);
+		m_mgr.menu_input_puls(0,'o',-3,"",false,option_menu,0);
 		m_mgr.menu_input_puls(0,'s',0,"",false,save_menu,0);
 		m_mgr.menu_input_puls(0,'R',0,"",false,replay_menu,0);
 		m_mgr.menu_input_puls(0,'X',0,"",false,quit_menu,0);

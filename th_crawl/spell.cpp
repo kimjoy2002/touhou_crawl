@@ -1927,6 +1927,7 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 	case SPL_HEAVENLY_STORM:
 		return (mon->id == MON_SONBITEN || (mon->id == MON_ENSLAVE_GHOST && mon->id2 == MON_SONBITEN))?true:false;
 	case SPL_CLOSE_DOOR:
+		if(mon->special_value == 0)
 		{
 			bool able = false;
 			for(int i = 0; i< DG_MAX_X; i++) {
@@ -1935,7 +1936,7 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 					if (env[current_level].isInSight(target) && 
 					(env[current_level].dgtile[target.x][target.y].isDoor() || env[current_level].dgtile[target.x][target.y].isStair())) {
 						unit *unit_ = env[current_level].isMonsterPos(target.x, target.y);
-						if(unit_ && unit_->GetId() == MON_CLOSE_DOOR)
+						if(unit_ && (!unit_->isplayer()  && ((monster*)unit_)->flag & M_FLAG_NONE_MOVE))
 							continue;
 
 						able = true;
@@ -1943,7 +1944,11 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 				}
 			}
 			return able;
+		} else {
+			return false;
 		}
+	case SPL_TRACKING:
+		return ((!you.s_tracking && !mon->isUserAlly() && mon->target == &you) ?true:false);
 	default:
 		return true;
 	}

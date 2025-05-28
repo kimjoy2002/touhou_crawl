@@ -16,6 +16,7 @@
 extern bool saveexit;
 extern HANDLE mutx;
 extern std::atomic<bool> g_saveandexit;
+std::string loading_version_string;
 
 const wchar_t* saveslot_wstring[3] = {L"save.sav",L"save2.sav",L"save3.sav"};
 
@@ -194,7 +195,19 @@ bool load_data_onlyinfo(wstring path, players& temp_player)
 		if (_wfopen_s(&fp, wfilename.c_str(), L"rb") != 0 || !fp) {
 			return false;
 		}
-		LoadData<int>(fp, current_level);
+		int magic_number;
+		LoadData<int>(fp, magic_number); //version 1.11부터 매직넘버로 시작한다
+		if(magic_number != 1999) {
+			//ver1.1에선 첫 int가 1999임
+			current_level = magic_number;
+		} else {
+			{
+				char temp[256];
+				LoadData<char>(fp, *temp);
+				//loading_version_string = temp;
+			}
+			LoadData<int>(fp, current_level);
+		}
 		LoadData<int>(fp, temp_player.level);
 		LoadData<tribe_type>(fp, temp_player.tribe);
 		LoadData<job_type>(fp, temp_player.job);

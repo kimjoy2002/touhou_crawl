@@ -401,6 +401,8 @@ monster* BaseSummon(int id_, int time_, bool targeting_, bool random_, int range
 	return mon_;
 }
 
+
+
 bool skill_tanmac_small(int pow, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
@@ -4092,6 +4094,8 @@ bool skill_prism_call(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isMove(rit->x, rit->y, dq[i]->isFly(), dq[i]->isSwim()) && !env[current_level].isMonsterPos(rit->x, rit->y) && env[current_level].isInSight(coord_def(rit->x, rit->y)) && you.position != (*rit))
 		{
 			dq[i]->SetXY(rit->x, rit->y);
+			if(mon_->target != nullptr)
+				dq[i]->FoundTarget(mon_->target,30);
 			if (dq[i]->isYourShight())
 			{
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_PRISM_CALL,false,false,false,CL_normal,
@@ -4864,6 +4868,21 @@ bool skill_heavenly_storm(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_tracking(int pow, bool short_, unit* order, coord_def target)
 {
+	int turn_ = rand_int(50, 70);
+	if(unit* hit_mon = DebufBeam(SPL_TRACKING, order, target))
+	{
+		if(!hit_mon->isplayer())
+			return false;
+		if(hit_mon->CalcuateMR(GetDebufPower(SPL_TRACKING,pow)))
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_TRACKING) + " ", false, false, false, CL_normal); 
+			if (env[current_level].isInSight(order->position)) {
+				soundmanager.playSound("laugh");
+			}
+			you.SetTracking(turn_);
+		}
+		return true;
+	}
 	return false;
 }
 
@@ -4874,6 +4893,56 @@ bool skill_discord(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_smoking(int pow, bool short_, unit* order, coord_def target)
 {
+	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
+	
+	if(target_unit)
+	{
+		if (env[current_level].isInSight(order->position)) {
+			soundmanager.playSound("wind");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_SMOKING,false,false,false,CL_normal,
+				 PlaceHolderHelper(order->GetName()->getName()),
+				 PlaceHolderHelper(target_unit->GetName()->getName()));
+		}
+		rand_rect_iterator rit(target_unit->position,1,1);
+		int smoke_ = rand_int(1,3);
+		for(int i = 0; !rit.end() && i < smoke_;rit++)
+		{
+			if(env[current_level].isMove(rit->x, rit->y, true))
+			{
+				env[current_level].MakeSmoke(*rit,img_fog_normal, SMT_FOG,rand_int(3,5),0,NULL);
+				i++;
+			}
+		}
+		env[current_level].MakeSmoke(target_unit->position,img_fog_normal, SMT_FOG,rand_int(6,12),0,NULL);
+		
+		random_extraction<int> rand_;
+
+		rand_.push(0,5);
+		rand_.push(1,5);
+		rand_.push(2,10);
+		rand_.push(3,10);
+		rand_.push(4,2);
+
+		switch (rand_.choice()) {
+		case 0:
+			target_unit->SetConfuse(rand_int(3,8));
+			break;
+		case 1:
+			target_unit->SetSlow(rand_int(15,30));
+			break;
+		case 2:
+			target_unit->SetSick(rand_int(30,50));
+			break;
+		case 3:
+			target_unit->SetSleep(rand_int(60,80));
+			break;
+		case 4:
+			target_unit->SetLunatic(rand_int(5,10));
+			break;
+		}
+		order->PlusTimeDelay(-1*order->GetWalkDelay());
+		return true;
+	}
 	return false;
 }
 
@@ -4925,7 +4994,7 @@ bool skill_close_door(int pow, bool short_, unit* order, coord_def target_)
 			if (env[current_level].isInSight(target) && 
 			(env[current_level].dgtile[target.x][target.y].isDoor() || env[current_level].dgtile[target.x][target.y].isStair())) {
 				unit *unit_ = env[current_level].isMonsterPos(target.x, target.y);
-				if(unit_ && unit_->GetId() == MON_CLOSE_DOOR)
+				if(unit_ && unit_->GetId() == MON_SECURIRY_DOOR)
 					continue;
 
 				if (unit_) {
@@ -4941,19 +5010,20 @@ bool skill_close_door(int pow, bool short_, unit* order, coord_def target_)
 						rit++;
 					}
 				}
-				if(env[current_level].dgtile[target.x][target.y].isDoor()) {
-					env[current_level].changeTile(target, env[current_level].base_floor, true);
+				if(env[current_level].dgtile[target.x][target.y].isCloseDoor()) {
+					env[current_level].changeTile(target, DG_OPEN_DOOR, true);
 				}
 				//적이 서있으면 강제로 비키도록 한다.
 				
-				if (monster *mon_ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(pow / 10), true, false, 0, NULL, target, SKD_OTHER, -1))
+				if (monster *mon_ = BaseSummon(MON_SECURIRY_DOOR, 30 + randA_1(pow / 10), true, false, 0, NULL, target, SKD_OTHER, -1))
 				{
+					((monster*)order)->special_value = 50;
 					if(!create_door && order->isYourShight()) {
 						printlog(LocalzationManager::formatString(LOC_SYSTEM_MON_LOCKED_DOOR, PlaceHolderHelper(order->GetName()->getName())),true, false, false, CL_small_danger);
 					}
 					create_door = true;
 					soundmanager.playSound("block");
-					mon_->LevelUpdown(pow/20, 6);
+					mon_->LevelUpdown(pow/20, 10);
 				}
 			}
 		}
@@ -5865,6 +5935,14 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_SECURITY_MAID_FIARY:
 		list->push_back(spell(SPL_CLOSE_DOOR, 80));
 		list->push_back(spell(SPL_SPEAKER_PHONE, 30));
+		break;
+	case MON_HISAMI:
+		list->push_back(spell(SPL_TRACKING, 35));
+		list->push_back(spell(SPL_VENOM_BOLT, 20));
+		list->push_back(spell(SPL_HASTE, 15));
+		break;
+	case MON_SANNYO:
+		list->push_back(spell(SPL_SMOKING, 30));
 		break;
 	default:
 		break;

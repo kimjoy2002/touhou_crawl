@@ -2449,6 +2449,11 @@ void SaveFile(bool test_)
     }
 
 
+	int magic_number = 1999;
+	SaveData<int>(fp, magic_number); 
+	{
+		SaveData<char>(fp,*version_string, strlen(version_string)+1);
+	}
 	SaveData<int>(fp, current_level);
 	//최소한의 정보
 
@@ -2489,7 +2494,20 @@ void LoadFile()
         return;
     }
 
-	LoadData<int>(fp, current_level);
+	int magic_number;
+	LoadData<int>(fp, magic_number); //version 1.11부터 매직넘버로 시작한다
+	if(magic_number != 1999) {
+		//ver1.1에선 첫 int가 1999임
+		current_level = magic_number;
+		loading_version_string = "ver1.1";
+	} else {
+		{
+			char temp[256];
+			LoadData<char>(fp, *temp);
+			loading_version_string = temp;
+		}
+		LoadData<int>(fp, current_level);
+	}
 
 	you.LoadDatas(fp);
 	for(int i = 0; i < MAXLEVEL; i++)

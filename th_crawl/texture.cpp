@@ -29,7 +29,8 @@ const char *imgfile_title[MAX_TITLE] =
 	"./data/title_3.png",
 	"./data/title_4.png",
 	"./data/title_5.png",
-	"./data/title_6.png"
+	"./data/title_6.png",
+	"./data/title_7.png"
 };
 
 const char *imgfile_god[GT_LAST] =
@@ -1040,6 +1041,7 @@ textures img_mons_stonetower[] =
 	textures(&texture_monster02, 18, 255),
 	textures(&texture_monster02, 19, 255)
 };
+textures img_mons_security_door(&texture_item03, 214, 255);
 
 
 textures img_named_rumia(&texture_monster01, 13, 255);
@@ -3523,6 +3525,8 @@ int texturetoint(textures* input)
 		return 550;
 	else if(input == &img_fog_heavenly_storm[0])
 		return 551;
+	else if(input == &img_mons_security_door)
+		return 552;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -4653,6 +4657,8 @@ textures* inttotexture(int input)
 		return &img_item_skeleton[2];
 	case 551:
 		return &img_fog_heavenly_storm[0];
+	case 552:
+		return &img_mons_security_door;
 	default:
 		return &img_mons_default;
 	}

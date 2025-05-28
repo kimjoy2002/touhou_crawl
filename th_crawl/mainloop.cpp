@@ -39,9 +39,10 @@ extern bool saveexit;
 
 extern HANDLE mutx;
 
-const char *version_string = "ver1.1";
+const char *version_string = "ver1.11";
 extern int g_tile_size;
 
+bool isPrevVersion(const string& versionstring, const string& targetstring);
 void Initialize();
 
 
@@ -282,6 +283,7 @@ vector<int> g_selected;
 bool tutorials(int value_);
 bool sprint1s(int value_);
 bool sprint2s(int value_);
+bool sprint3s(int value_);
 bool select_named(int value_);
 bool select_char(int value_);
 bool select_fairy(int value_);
@@ -357,6 +359,20 @@ void charter_selete(bool first)
 				break;
 			case 'd':
 				sprint2s(0);
+				//1안씀
+				if(ReplayClass.infor.starting[1] == 'b') { //직접픽
+					select_char(ReplayClass.infor.starting[2]);
+					select_job(ReplayClass.infor.starting[3]);
+
+				} else { //'a'와 기본
+					select_named(ReplayClass.infor.starting[2]);
+					if(ReplayClass.infor.starting[2] == 7) { //삼월정
+						select_fairy(ReplayClass.infor.starting[3]);
+					}
+				}
+				break;
+			case 'e':
+				sprint3s(0);
 				//1안씀
 				if(ReplayClass.infor.starting[1] == 'b') { //직접픽
 					select_char(ReplayClass.infor.starting[2]);
@@ -484,6 +500,26 @@ void charter_selete(bool first)
 		addItem_temp(ITM_SCROLL, SCT_BLINK, 1);
 		steam_mg.setCurrentInfo();
 		env[current_level].enterBgm(0);
+	} else if (map_list.tutorial == GM_SPRINT3_MINISTAGE)
+	{
+		AddNote(you.turn, CurrentLevelString(), LocalzationManager::formatString(LOC_SYSTEM_NOTE_START,
+			PlaceHolderHelper(you.user_name),
+			PlaceHolderHelper(LocalzationManager::locString(tribe_type_string[you.tribe])),
+			PlaceHolderHelper(LocalzationManager::locString(job_type_string[you.job])),
+			PlaceHolderHelper(you.GetCharNameString())), CL_normal);
+
+		SetTribe(you.tribe);
+		TouhouPlayerble(you.char_type, true);
+		SetJobs(you.job, you.char_type);
+		TouhouPlayerble(you.char_type, false);
+		/*Test_char_init(item_, bonus);*/
+		you.CalcuHP();
+		Initialize();
+
+		steam_mg.setCurrentInfo();
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOOTING_SPRINT_START1),true,false,false,CL_help);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOOTING_SPRINT_START2),true,false,false,CL_help);
+		env[current_level].enterBgm(0);
 	}
 
 
@@ -506,6 +542,34 @@ void addItem_temp(item_type item_type_, int item_id, int num_)
 }
 
 
+// "ver1.21" -> {1, 21}
+vector<int> parseVersion(const string& ver) {
+    vector<int> result;
+    string v = ver;
+    if (v.rfind("ver", 0) == 0)
+        v = v.substr(3);
+
+    stringstream ss(v);
+    string token;
+    while (getline(ss, token, '.')) {
+        result.push_back(stoi(token));
+    }
+    return result;
+}
+
+bool isPrevVersion(const string& versionstring, const string& targetstring) {
+    vector<int> v1 = parseVersion(versionstring);
+    vector<int> v2 = parseVersion(targetstring);
+    size_t len = max(v1.size(), v2.size());
+
+    for (size_t i = 0; i < len; ++i) {
+        int a = (i < v1.size()) ? v1[i] : 0;
+        int b = (i < v2.size()) ? v2[i] : 0;
+        if (a < b) return true;
+        if (a > b) return false;
+    }
+    return true; // same
+}
 
 
 void Initialize()
@@ -574,12 +638,25 @@ bool useAutoTanmac(unit* mon_) {
 	return false;
 }
 
-void scrollup(bool down) {
+void scrollup(bool down, int need_y) {
 	vector<int> ablesize = {23,32,47,64,95,128};
 
 
 	bool next_ = false;
-	if(!down) {
+	if(need_y > 0) {
+		for(int i = 0; i < ablesize.size();i++) {
+			int sight_x = option_mg.getTileMaxX();
+			int sight_y = option_mg.getTileMaxY();
+			float calc_tile_scale = ablesize[i]/32.0f;
+			sight_x = (int)(sight_x/calc_tile_scale);
+			sight_y = (int)(sight_y/calc_tile_scale+0.3f);
+			if(sight_y == need_y) {
+				g_tile_size = ablesize[i];
+				break;
+			}
+		}
+	}
+	else if(!down) {
 		for(int i = 0; i < ablesize.size();i++) {
 			if(g_tile_size == ablesize[i]) {
 				next_ = true;
@@ -656,7 +733,7 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 		if(target_pos == you.position) {
 			stand_action();
 		}
-		else if(env[current_level].insight_mon(MET_ENEMY) || you.s_confuse || you.s_dimension || you.resetLOS() == IT_MAP_DANGER) {
+		else if(env[current_level].insight_mon(MET_ENEMY) || you.s_confuse || you.s_dimension || isShootingSprint() || you.resetLOS() == IT_MAP_DANGER) {
 			//한칸씩 이동 
 			beam_iterator beam(you.position,target_pos);
 			if(CheckThrowPath(you.position,target_pos,beam, true)) {
@@ -910,9 +987,9 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 			}
 		}
 	} else if (mouse_type == MKIND_SCROLL_UP) {
-		scrollup(false);
+		scrollup(false, -1);
 	} else if (mouse_type == MKIND_SCROLL_DOWN) {
-		scrollup(true);
+		scrollup(true, -1);
 	}
 }
 
@@ -992,6 +1069,9 @@ void MainLoop()
 			break;
 		case 's': //턴스킵
 		case '.': //턴스킵
+			if(isShootingSprint()){
+				you.shooing_fire();
+			}
 			action_turn_skip();
 			break;
 		case 'g':
@@ -1120,11 +1200,11 @@ void MainLoop()
 			Pray();
 			break;
 		case '+':
-			scrollup(false);
+			scrollup(false, -1);
 			//VolumeUp();
 			break;
 		case '-':
-			scrollup(true);
+			scrollup(true, -1);
 			//VolumeDown();
 			break;
 		case '#':
@@ -1216,10 +1296,10 @@ void MainLoop()
 			auto_Move();
 			break;
 		case GVK_LT: //왼쪽 트리거
-			scrollup(true);
+			scrollup(true, -1);
 			break;
 		case GVK_RT://오른쪽 트리거
-			scrollup(false);
+			scrollup(false, -1);
 			break;
 		default:
 			break;
@@ -1389,7 +1469,7 @@ bool option_menu(int value_)
 				option_mg.setBgmVolume(bgm_);
 			}
 			if(origin_se_ != se_) {
-				option_mg.setBgmVolume(se_);
+				option_mg.setSeVolume(se_);
 			}
 			
 			if(should_reload) {

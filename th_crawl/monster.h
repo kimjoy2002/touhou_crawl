@@ -286,6 +286,7 @@ public:
 	int GetId(){return id;};
 	int GetMapId(){return map_id;};
 	int GetLevel(){return level;};
+	int GetOriginalForm(int form);
 };
 
 

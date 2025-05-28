@@ -356,6 +356,8 @@ bool isTutorial();
 bool isNormalGame();
 bool isArena();
 bool isSprint();
+bool isMiniSprint();
+bool isShootingSprint();
 int sprintMulti();
 
 float GetDotX(int offset_, int x, int magnification);

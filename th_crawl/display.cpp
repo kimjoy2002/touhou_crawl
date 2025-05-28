@@ -2079,6 +2079,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	}
 
 	string mouseInfo;
+	POINT infoDrawPoint;
 	D3DCOLOR mouseColor = CL_normal;
 
 	list<item>::iterator floor_items = env[current_level].item_list.end(); 
@@ -2112,6 +2113,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 								MousePoint.y > yy - calc_tile_size/2 && MousePoint.y <= yy + calc_tile_size/2){
 							mouseInfo = (*temp).GetName();
 							mouseColor = (*temp).item_color();
+							infoDrawPoint = MousePoint;
 						}
 
 
@@ -2180,8 +2182,8 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 	//플레이어 그리기
 	{
-		int you_x_ = (you.s_dimension || widesearch) ? you.position.x - x_ : sight_x;
-		int you_y_ = (you.s_dimension || widesearch) ? you.position.y - y_ : sight_y;
+		int you_x_ = (you.s_dimension || widesearch || isShootingSprint()) ? you.position.x - x_ : sight_x;
+		int you_y_ = (you.s_dimension || widesearch || isShootingSprint()) ? you.position.y - y_ : sight_y;
 
 		
 		if (!you.s_timestep && abs(you_x_ - sight_x) <= sight_x && abs(you_y_ - sight_y) <= sight_y)
@@ -3226,8 +3228,13 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				bool glow_ = (you.s_glow || you.GetBuffOk(BUFFSTAT_HALO));
 				bool oil_ = (you.s_oil);
 				bool fire_ = (you.s_fire);
-				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_INVISIBLE), (glow_ || oil_ || fire_) ? CL_bad : (you.togle_invisible ? CL_speak : you.s_invisible>10 ? CL_white_blue : CL_blue),
+				bool tracking_ = you.s_tracking;
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_INVISIBLE), (glow_ || oil_ || fire_ || tracking_) ? CL_bad : (you.togle_invisible ? CL_speak : you.s_invisible>10 ? CL_white_blue : CL_blue),
 					glow_? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_INVISIBLE_MEANLESS) : LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_INVISIBLE), this);
+			}
+			if(you.s_tracking) {
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_TRACKING), CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_TRACKING), this);
 			}
 			if(you.s_swift)
 			{
@@ -3333,6 +3340,12 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						pixel_->draw(pSprite,x_,y_,255);
 
 						if(g_menu_select == tile_count) {
+							if(mouseInfo.empty()) {
+								mouseInfo = getCilnkableString(selection_vector[tile_count]);
+								mouseColor = CL_help;
+								infoDrawPoint.x = x_;
+								infoDrawPoint.y = y_;
+							}
 							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 0, 0));
 						}
 
@@ -3343,6 +3356,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 								
 								mouseInfo = getCilnkableString(selection_vector[tile_count]);
 								mouseColor = CL_help;
+								infoDrawPoint = MousePoint;
 								if(isClicked(LEFT_CLICK)) {
 									MSG msg;
 									msg.message = WM_CHAR;
@@ -3417,6 +3431,12 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						pixel_->draw(pSprite,x_,y_,255);
 
 						if(g_menu_select == tile_count) {
+							if(mouseInfo.empty()) {
+								mouseInfo = getCommandString(tile_count, value_);
+								mouseColor = CL_help;
+								infoDrawPoint.x = x_;
+								infoDrawPoint.y = y_;
+							}
 							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 0, 0));
 						}
 
@@ -3425,6 +3445,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
 							mouseInfo = getCommandString(tile_count, value_);
 							mouseColor = CL_help;
+							infoDrawPoint = MousePoint;
 							if(isClicked(LEFT_CLICK)) {
 								g_keyQueue->push(InputedKey(MKIND_SYSTEM,tile_count,0));
 							}
@@ -3447,6 +3468,23 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						
 
 						if(g_menu_select == tile_count) {
+							if(mouseInfo.empty()) {
+								if((id_ >= 'a' && id_ <= 'z') || (id_ >= 'A' && id_ <= 'Z')) {
+									spell_list focus_spell_id = (spell_list)you.MemorizeSpell[asctonum(id_)];
+									if(focus_spell_id != SPL_NONE) {
+										int miscast_level_ = SpellMiscastingLevel(SpellLevel(focus_spell_id), 100-you.GetSpellSuccess(focus_spell_id));
+										D3DCOLOR spell_color_ = (miscast_level_==3?CL_danger:
+											(miscast_level_==2?CL_small_danger:
+											(miscast_level_==1?CL_warning:CL_STAT)));
+										ostringstream ss;
+										ss << SpellString(focus_spell_id) << " (" << LocalzationManager::locString(LOC_SYSTEM_FAILURE_RATE) << ":" << (100 -you.GetSpellSuccess(focus_spell_id))<< "%)";
+										mouseInfo = ss.str();
+										mouseColor = spell_color_;
+										infoDrawPoint.x = x_;
+										infoDrawPoint.y = y_;
+									}
+								}
+							}
 							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 255, 0));
 						}
 
@@ -3465,6 +3503,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 										ss << SpellString(focus_spell_id) << " (" << LocalzationManager::locString(LOC_SYSTEM_FAILURE_RATE) << ":" << (100 -you.GetSpellSuccess(focus_spell_id))<< "%)";
 										mouseInfo = ss.str();
 										mouseColor = spell_color_;
+										infoDrawPoint = MousePoint;
 									}
 								}
 								if(isClicked(LEFT_CLICK)) {
@@ -3519,6 +3558,12 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							
 
 							if(g_menu_select == tile_count) {
+								if(mouseInfo.empty()) {
+									mouseInfo = string(1,it->id) + " - " + it->GetName();
+									mouseColor = it->item_color();
+									infoDrawPoint.x = x_;
+									infoDrawPoint.y = y_;
+								}
 								if(curse) {
 									img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 0, 255));
 								} else {
@@ -3532,6 +3577,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 									img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
 									mouseInfo = string(1,it->id) + " - " + it->GetName();
 									mouseColor = it->item_color();
+									infoDrawPoint = MousePoint;
 
 									if(isClicked(LEFT_CLICK)) {
 										g_keyQueue->push(InputedKey(MKIND_ITEM,it->id,0));
@@ -3558,6 +3604,12 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 
 							if(g_menu_select == tile_count) {
+								if(mouseInfo.empty()) {
+									mouseInfo = floor_items->GetName();
+									mouseColor = floor_items->item_color();
+									infoDrawPoint.x = x_;
+									infoDrawPoint.y = y_;
+								}
 								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 0, 0));
 							}
 
@@ -3567,6 +3619,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 								mouseInfo = floor_items->GetName();
 								mouseColor = floor_items->item_color();
+								infoDrawPoint = MousePoint;
 
 								if(isClicked(LEFT_CLICK)) {
 									g_keyQueue->push(InputedKey(MKIND_PICK,tile_count-72,0));
@@ -3655,6 +3708,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							MousePoint.y > ((*it).position.y - y_)*calc_tile_size + 4 && MousePoint.y <= ((*it).position.y - y_)*calc_tile_size + 4+calc_tile_size){
 						mouseInfo = (*it).GetName()->getName();
 						mouseColor = CL_normal;
+						infoDrawPoint = MousePoint;
 					}
 				}
 			}
@@ -3698,7 +3752,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	
 	if(!mouseInfo.empty()) {
 		LONG strWidth = PrintCharWidth(mouseInfo)*fontDesc.Width+fontDesc.Width;
-		RECT rc = {MousePoint.x-strWidth/2,  (LONG)(MousePoint.y-fontDesc.Height), MousePoint.x+strWidth/2 ,MousePoint.y}; 
+		RECT rc = {infoDrawPoint.x-strWidth/2,  (LONG)(infoDrawPoint.y-fontDesc.Height), infoDrawPoint.x+strWidth/2 ,infoDrawPoint.y}; 
 	
 		if (rc.right  > option_mg.getWidth()) {
 			int i = rc.right - option_mg.getWidth();

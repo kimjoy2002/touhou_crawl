@@ -20,6 +20,7 @@ int EventOccur(int id, events* event_);
 
 void bamboo_count(int num);
 void arena_event(int num);
+void shooting_event(int num);
 bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target);
 
 events::events()
@@ -1095,6 +1096,11 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		monster *tower_ = env[current_level].AddMonster(MON_CLUMSY_STONE_TOWER, 0, event_->position);
 		tower_->image = &img_mons_stonetower[3+randA(1)];
 		return 1;
+	}
+	case EVL_SHOOTING_SPRINT:
+	{
+		shooting_event(current_level);
+		return 0;
 	}
 	default:
 		break;

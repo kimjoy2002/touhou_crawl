@@ -132,6 +132,8 @@ int GetDebufPower(spell_list skill, int power_)
 		return power_+20;
 	case SPL_MESS_CONFUSION:
 		return power_-10;
+	case SPL_TRACKING:
+		return power_+20;
 	default:
 		return power_-10;
 	}

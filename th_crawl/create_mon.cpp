@@ -331,7 +331,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{  7,  6,  9,  30,  3}, //첸
 	{  44,  6,  9,  30,  3}, //세이란
 	{  5,  7,  8,  30,  2}, //대요정
-	{ 62,  7,  10,  30,  2 }, //라바
+	{ 62,  5,  8,  30,  2 }, //라바
 	{  16,  7,  11,  20,  3}, //나즈린
 	{  3,  8,  10,  30,  3}, //치르노
 	{  4,  8,  12,  20,  3}, //메디슨
@@ -366,6 +366,7 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 
 	{ 57,  YOUKAI_MOUNTAIN_LEVEL , YOUKAI_MOUNTAIN_LEVEL + 3,  20,  4 }, //프리즘리버
 	{ 65,  YOUKAI_MOUNTAIN_LEVEL , YOUKAI_MOUNTAIN_LEVEL + 3,  20,  4 }, //나루미
+	{  84,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  30,  3}, //산뇨
 	{  12,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  60,  4}, //모미지
 	{  22,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3, 20,  3}, //츠쿠모
 	{  16,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  20,  3}, //나즈린
@@ -418,9 +419,11 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{ 15,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+2, 20,  28}, //야마메 
 	{ 21,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+3, 20,  28}, //파르시 
 	{ 23,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+5, 30,  28}, //오린
+	{ 77,  SUBTERRANEAN_LEVEL, SUBTERRANEAN_LEVEL+5, 30,  28}, //히사미
 	{ 54,  SUBTERRANEAN_LEVEL + 2, SUBTERRANEAN_LEVEL + 5, 20,  28 }, //무라사
 	{ 58,  SUBTERRANEAN_LEVEL + 3, SUBTERRANEAN_LEVEL + 5, 20,  28 }, //코마치
 	{ 72,  SUBTERRANEAN_LEVEL + 3, SUBTERRANEAN_LEVEL + 5, 25,  28 }, //사키
+
 
 	{ 37,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL-1,  30,  3}, //스이카
 	{ 59,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL-1,  20,  3 }, //스미레코
@@ -2190,6 +2193,13 @@ void SetResistMonster(monster* mon)
 	case MON_VINE:
 		mon->fire_resist = -1;
 		mon->elec_resist = 3;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
+	case MON_SECURIRY_DOOR:
+		mon->elec_resist = 3;
+		mon->fire_resist = 3;
+		mon->ice_resist = 3;
 		mon->poison_resist = 1;
 		mon->confuse_resist = 1;
 		break;

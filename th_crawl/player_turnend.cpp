@@ -965,6 +965,11 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			WaitForSingleObject(mutx, INFINITE);
 		}
 	}
+	if(s_tracking) 
+	{
+		s_tracking--;
+	}
+
 
 	if(battle_count)
 	{

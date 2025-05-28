@@ -7,7 +7,8 @@ LOC_SYSTEM_MAINMENU_GAMESTART,게임시작
 LOC_SYSTEM_MAINMENU_TUTORIAL,튜토리얼
 LOC_SYSTEM_MAINMENU_MINIGAME,미니 게임
 LOC_SYSTEM_MAINMENU_ARENA,아레나
-LOC_SYSTEM_MAINMENU_SPRINT,스프린트
+LOC_SYSTEM_MAINMENU_SPRINT,스프린트1: 미니 동방크롤
+LOC_SYSTEM_MAINMENU_SPRINT2,스프린트2: 슈팅&로그라이크
 LOC_SYSTEM_MAINMENU_ETC,기타
 LOC_SYSTEM_MAINMENU_OPTION,옵션
 LOC_SYSTEM_MAINMENU_SAVE,세이브관리
@@ -630,6 +631,7 @@ LOC_SYSTEM_BUFF_STAT_NIGHT_SIGHT,야맹증
 LOC_SYSTEM_BUFF_STAT_SLEEP,수면
 LOC_SYSTEM_BUFF_STAT_OIL,기름
 LOC_SYSTEM_BUFF_STAT_FIRE,화염
+LOC_SYSTEM_BUFF_STAT_TRACKING,추적
 LOC_SYSTEM_BUFF_DESCRIBE_RISK,위험도는 얼마나 현재 상황이 위험한지에 대한 수치입니다.
 LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY1,갑옷과 방패가 너무 무겁습니다! 패널티만큼 회피, 은밀, 마법, 명중, 이동속도가 감소되고, 행동속도가 2배로 느려집니다.
 LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY2,갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피, 은밀, 마법성공율, 명중, 이동속도가 감소합니다.
@@ -731,6 +733,7 @@ LOC_SYSTEM_BUFF_DESCRIBE_STAT_NIGHT_SIGHT,당신은 한치앞도 보이지않습
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLEEP,당신은 잠을 자고 있습니다!
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_OIL,당신은 기름을 뒤집어 썼습니다. 불씨를 조심하세요.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_FIRE,당신은 불타고 있습니다!
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_TRACKING,당신은 추적당하고 있습니다. 맵의 모든 적이 당신의 위치를 정확히 쫓습니다.
 LOC_SYSTEM_SMOKE_NORMAL,옅은 연기
 LOC_SYSTEM_SMOKE_FOG,안개 구름
 LOC_SYSTEM_SMOKE_FIRE,화염 구름
@@ -989,6 +992,7 @@ LOC_SYSTEM_YOU_MORE_FIRE,당신에 붙어있던 불길이 강해졌다.
 LOC_SYSTEM_YOU_FIRE_FROM_OIL,당신에 묻어있던 기름에 불이 붙었다.
 LOC_SYSTEM_YOU_MORE_FIRE_FROM_OIL,당신에 붙어있던 불꽃에 연료가 더해졌다.
 LOC_SYSTEM_YOU_FIRE_END,당신에 붙어있던 불꽃이 사그라들었다.
+LOC_SYSTEM_YOU_TRACKING,당신은 추적당하는 동안 절대로 도망칠 수 없다!
 LOC_SYSTEM_MON_RED_DESIRE,빨간 신령
 LOC_SYSTEM_MON_BLUE_DESIRE,파란 신령
 LOC_SYSTEM_MON_GREEN_DESIRE,초록 신령
@@ -1128,6 +1132,7 @@ LOC_SYSTEM_MAGIC_SLEEP_SMITE,{0:은|는} {1:을|를} 꿈으로 인도했다.
 LOC_SYSTEM_MAGIC_DIMENSIONAL_RIFT,{0:은|는} {1}에게 순간적으로 이동하며 발차기를 날렸다.
 LOC_SYSTEM_MAGIC_WINDFLAW,{0:은|는} 강한 바람에 의해 튕겨져나갔다.
 LOC_SYSTEM_MAGIC_FOG,안개의 호수에 안개가 드리워졌다.
+LOC_SYSTEM_MAGIC_SMOKING,{0:은|는} {1}에게 담배 연기를 뿜었다.
 LOC_SYSTEM_HIT_DEFAULT,{0:은|는} {1:을|를} 공격했다.
 LOC_SYSTEM_HIT_DEFAULT,{0:은|는} {1:을|를} 공격했다.
 LOC_SYSTEM_HIT_NORMAL,{0}의 {1:은|는} {2}에게 명중했다.
@@ -2183,6 +2188,7 @@ LOC_SYSTEM_SPELL_TRASH_RUSH,쓰레기 더미가 날라오기 시작한다!
 LOC_SYSTEM_SPELL_MYSTIA_SONG,밤참새의 노랫소리가 들려온다!
 LOC_SYSTEM_SPELL_DREAM_CALL,적들이 당신을 순식간에 둘러쌓았다!
 LOC_SYSTEM_SPELL_REIMU_BARRIER,레이무에 의해 도망칠 수 없는 결계가 쳐졌다!
+LOC_SYSTEM_SPELL_TRACKING,당신은 미지의 힘에 의해 추적당한다.
 LOC_SYSTEM_SPELL_TOO_DANGEROURS,이 마법은 사용하기엔 너무 위험하다. 그래도 쓸건가?
 LOC_SYSTEM_SPELL_SELF_HURT,이 공격은 당신에게 피해를 줄 것이다. 그래도 쓸건가?
 LOC_SYSTEM_SPELL_BLOCK,여긴 막혀있다.
@@ -4610,6 +4616,8 @@ LOC_SYSTEM_ARENA_LEFT_LIFE,남은 기회 {0}
 LOC_SYSTEM_ARENA_DRAW,무승부! 이번 대전은 무효다.
 LOC_SYSTEM_ARENA_TIMEOVER,시한초과! 무승부! 이번 대전은 무효다.
 LOC_SYSTEM_ARENA_GAMEOVER,당신의 기록은 {0}레벨이다. 다음에 더욱 높은 레벨에 도전하도록! ({1}로 기록확인)
+LOC_SYSTEM_SHOOTING_SPRINT_START1,슈팅&로그라이크에 온걸 환영한다! 쏟아지는 적들을 처리해라!
+LOC_SYSTEM_SHOOTING_SPRINT_START2,여기서는 .키를 눌러서 원거리 공격을 할 수 있다!
 LOC_SYSTEM_DUMP_SUCCESS,덤프에 성공했습니다.
 LOC_SYSTEM_DUMP_TITLE,동방크롤 {0} 덤프 파일
 LOC_SYSTEM_DUMP_PLACE_IN,당신은 {0}에 있다.

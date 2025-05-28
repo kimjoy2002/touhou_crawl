@@ -1098,7 +1098,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				if(!mon_->isUserAlly())
 				{ //적일때
 					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_LETTY_ACCECPT),true,false,false,CL_warning);
-					you.PietyUpDown(5*(isSprint()?5:1));
+					you.PietyUpDown(5*(isSprint()?sprintMulti():1));
 				}
 			}
 		}
@@ -1252,14 +1252,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				monster *mon2_ = BaseSummon(mon_->id, -1, false, false,4,&you, mon_->position, SKD_OTHER, -1);
 				if(mon2_)
 				{
-					if(mon2_->id == MON_SONBITEN_SPINTOWIN) {
-						mon2_->ChangeMonster(MON_SONBITEN, 0);
-					}
-					if(mon2_->id == MON_YUMA2) {
-						mon2_->ChangeMonster(MON_YUMA, 0);
-					}
-					if(mon2_->id == MON_KEINE2) {
-						mon2_->ChangeMonster(MON_KEINE, 0);
+					if(mon2_->GetOriginalForm(mon2_->id) != MON_NONE_MONSTER) {
+						mon2_->ChangeMonster(mon2_->GetOriginalForm(mon2_->id), 0);
 					}
 					mon2_->id2 = mon2_->id;
 					mon2_->id = MON_ENSLAVE_GHOST;

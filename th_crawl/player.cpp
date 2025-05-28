@@ -119,7 +119,7 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
 force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
-s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_oil(0), s_fire(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
+s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_oil(0), s_fire(0), s_tracking(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -302,6 +302,7 @@ void players::init() {
 	s_evoke_ghost = 0;
 	s_oil = 0;
 	s_fire = 0;
+	s_tracking = 0;
 	alchemy_buff = ALCT_NONE;
 	alchemy_time = 0;
 	teleport_curse = false;
@@ -533,6 +534,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_evoke_ghost);
 	SaveData<int>(fp, s_oil);
 	SaveData<int>(fp, s_fire);
+	SaveData<int>(fp, s_tracking);
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
 
@@ -785,7 +787,9 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_evoke_ghost);
 	LoadData<int>(fp, s_oil);
 	LoadData<int>(fp, s_fire);
-	
+	if(!isPrevVersion(loading_version_string, "ver1.1")) {
+		LoadData<int>(fp, s_tracking);
+	}
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
 	LoadData<int>(fp, alchemy_time);
@@ -974,6 +978,9 @@ void players::maybeAction()
 }
 coord_def players::GetDisplayPos()
 {
+	if(isShootingSprint()){ 
+		return coord_def(DG_MAX_X/2, DG_MAX_Y/2);
+	}
 	if(!s_dimension)
 	{
 		return widesearch?search_pos:position;
@@ -1356,6 +1363,25 @@ bool players::offsetmove(const coord_def &c)
 	else
 		return false;
 }
+
+bool players::shooing_fire()
+{
+	beam_iterator beam(you.position,coord_def(you.position.x, you.position.y-1));
+	attack_type brand_ = ATT_NORMAL;
+	if(equipment[ET_WEAPON])
+		brand_ = (attack_type)GetAttType((weapon_brand)equipment[ET_WEAPON]->value5);
+	
+	beam_infor temp_infor(GetAttack(false),GetAttack(true),GetHit(),&you,you.GetParentType(),20,1,BMT_NORMAL,brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
+	soundmanager.playSound("shoot");
+	if(you.equipment[ET_WEAPON]) {
+		throwtanmac(you.equipment[ET_WEAPON]->image,beam,temp_infor,NULL);
+	} else {
+		throwtanmac(rand_int(10, 15), beam, temp_infor, NULL);
+	}
+	return true;
+}
+
+
 void players::youAttack(unit* unit_)
 {
 	for(auto it = env[current_level].mon_vector.begin();  it != env[current_level].mon_vector.end() ;it++)
@@ -3739,6 +3765,15 @@ bool players::SetFire(int value_, bool from_oil) {
 		s_fire = 50;
 	return true;
 }
+bool players::SetTracking(int value_) {
+	if(!value_)
+		return false;
+	printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_TRACKING) + " ",false,false,false,CL_danger);
+	s_tracking += value_;
+	if(s_tracking>100)
+		s_tracking = 100;
+	return true;
+}
 int players::GetInvisible()
 {
 	return s_invisible;
@@ -4107,7 +4142,7 @@ vector<monster>::iterator players::GetTargetIter()
 
 interupt_type players::resetLOS(bool speak_)
 {
-	int sight = 7;
+	int sight =isShootingSprint()?20: 7;
 	interupt_type interrupt_ = IT_NONE;
 	for(int x=0;x<DG_MAX_X;x++)
 	{
@@ -6242,6 +6277,7 @@ bool players::isView(const monster* monster_info)
 		!(you.s_glow || you.GetBuffOk(BUFFSTAT_HALO)) &&
 		!(you.s_oil) &&
 		!(you.s_fire) &&
+		!(you.s_tracking) &&
 		!(monster_info->flag & M_FLAG_CAN_SEE_INVI)) //투명?
 		return false;
 	return true;

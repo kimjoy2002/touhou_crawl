@@ -190,8 +190,10 @@ bool PickUpNum(list<item>::iterator it, int num, bool no_delay)
 				if(!no_delay)
 				{
 					bool item_delete= false;
-					you.time_delay+=you.GetNormalDelay();
-					you.TurnEnd(&item_delete);
+					if(!isShootingSprint()) {
+						you.time_delay+=you.GetNormalDelay();
+						you.TurnEnd(&item_delete);
+					}
 					if(item_delete)
 						return true; //아이템을 줍는 도중 아이템이 삭제되었다.
 

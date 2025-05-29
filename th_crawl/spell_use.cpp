@@ -5114,7 +5114,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		}
 		break;
 	case MON_KATPA_GUN:
-		list->push_back(spell(SPL_MON_WATER_GUN, 90));
+		list->push_back(spell(SPL_MON_WATER_GUN, 30));
 		break;
 	case MON_RUMIA:
 	{
@@ -5431,6 +5431,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 			makeitem(ITM_ARMOR_BODY_ARMOUR_0, 0, &t, AMK_MAID);
 			item_list_->push_back(t);
 		}
+		break;
+	case MON_MAID_FAIRY_WEAK:
+		list->push_back(spell(SPL_MON_TANMAC_MIDDLE, 25));
 		break;
 	case MON_SAKUYA:
 	{

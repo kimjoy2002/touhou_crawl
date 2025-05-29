@@ -70,9 +70,9 @@ const mon_infor mondata[] = {
 	{3,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_SWIM,0,1,10,'k'},
 
-	{MON_KATPA_GUN,5,65,name_infor(MON_KATPA_GUN),&img_mons_katpa_gun,40,1,10,
+	{MON_KATPA_GUN,8,145,name_infor(MON_KATPA_GUN),&img_mons_katpa_gun,40,1,10,
 	{4,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_SWIM | M_FLAG_CANT_NETURAL,0,2,10,'k'},
+	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_SWIM | M_FLAG_RANGE_ATTACK | M_FLAG_CANT_NETURAL,0,2,10,'k'},
 
 	{MON_FAIRY_GREEN_WARRIOR,5,128,name_infor(MON_FAIRY_GREEN_WARRIOR),&img_mons_fairy_green_warroir,35,8,6,
 	{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
@@ -387,6 +387,10 @@ const mon_infor mondata[] = {
 	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_SPEAK | M_FLAG_FLY | M_FLAG_RANGE_ATTACK | M_FLAG_MAGICIAN,0,1,10,'f' },
 	
+	{MON_MAID_FAIRY_WEAK,8,171,name_infor(MON_MAID_FAIRY),&img_mons_maid_fairy,32,1,12,
+	{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_SPEAK | M_FLAG_FLY | M_FLAG_RANGE_ATTACK | M_FLAG_CANT_NETURAL,0,1,10,'f' },
+		
 	{MON_CHUPARCABRA,12,1384,name_infor(MON_CHUPARCABRA),&img_mons_chuparcabra,132,3,14,
 	{30,0,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,2,1,7,'C' },

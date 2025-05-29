@@ -2713,7 +2713,7 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_ZOMBIEFAIRY),true,false,false,CL_normal);
 					return false;
 				}
-				if(hit_mon->id == MON_MAID_FAIRY || hit_mon->id == MON_SECURITY_MAID_FIARY)
+				if(hit_mon->id == MON_MAID_FAIRY || hit_mon->id == MON_MAID_FAIRY_WEAK|| hit_mon->id == MON_SECURITY_MAID_FIARY)
 				{
 					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_JOIN_MAIDFAIRY),true,false,false,CL_normal);
 					return false;

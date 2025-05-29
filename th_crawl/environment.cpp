@@ -1721,6 +1721,27 @@ bool environment::ActionItem(int delay_)
 	}
 	return stop_;
 }
+
+bool environment::ShootingTurnEnd(int delay_)
+{
+	bool stop_ = false;
+	if(isShootingSprint()) {
+		list<item>::iterator it;
+		it = item_list.begin();
+		for(;it != item_list.end() ;)
+		{
+			list<item>::iterator temp = it++;
+			if(temp->type == ITM_FOOD && distan_coord(temp->position, you.position) <= 2 ) {
+				if (you.additem(&(*temp), true) > 0) {
+					env[current_level].DeleteItem(temp);
+					stop_ = true;
+				}
+			}
+		}
+	}
+	return stop_;
+}
+
 bool environment::DisableMove(coord_def pos_, bool view_)
 {
 	int sight_ = 7;

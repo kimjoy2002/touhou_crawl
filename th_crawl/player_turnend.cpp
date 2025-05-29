@@ -157,6 +157,11 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if(item_delete_)
 			(*item_delete_) = true;
 	}
+	if(env[current_level].ShootingTurnEnd(delay_))
+	{//아이템이 도중 삭제되었다.
+		if(item_delete_)
+			(*item_delete_) = true;
+	}
 	if(env[current_level].ActionEvent(delay_))
 			SetInter(IT_EVENT);
 	WaitForSingleObject(mutx, INFINITE);

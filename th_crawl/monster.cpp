@@ -433,12 +433,12 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int
 	hp = mondata[id_].max_hp;
 	max_hp = mondata[id_].max_hp;
 	if(isShootingSprint()) {
-		if(flag & M_FLAG_UNIQUE) {
-			hp *=3; //오히려 늘림
-			max_hp *=3;	
+		if(mondata[id_].flag & M_FLAG_UNIQUE) {
+			hp *= 1 + 2 * max(0,min(20-mondata[id_].level, 10))/10.0f; //오히려 늘림
+			max_hp *=  1 + 2 * max(0,min(20-mondata[id_].level, 10))/10.0f; //오히려 늘림	
 		} else {
-			hp /=3;
-			max_hp /=3;	
+			hp /=2;
+			max_hp /=2;
 		}	
 	}
 
@@ -3743,23 +3743,22 @@ int monster::action(int delay_)
 						if(isShootingSprint() && isOutskirt(c_)) {
 							dead(PRT_NEUTRAL, false, true);
 							return 0;
-						} else if (c_ == position) {
-							tryMagic();
-						} else {
+						} else if (c_ != position) {
 							int success_ = MoveToPos(c_, false);
 							if (success_ != 2) //이동실패
 							{
 								will_move.clear();
 								state.SetState(MS_ATACK);
-							} else {
-								tryMagic();
-							}
+								break;
+							} 
 						}						
 					}
 					else {
 						state.SetState(MS_ATACK);
+						break;
 					}
 					CheckSightNewTarget();
+					tryMagic();
 					break;
 				}
 				}
@@ -5020,7 +5019,8 @@ bool monster::AttackedTarget(unit *order_)
 		}
 
 		state.StateTransition(MSI_ATACKED);
-		will_move.clear();
+		if(state.GetState() != MS_DECIDE)
+			will_move.clear();
 	}
 	else
 	{

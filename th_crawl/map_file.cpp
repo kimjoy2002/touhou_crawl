@@ -108,7 +108,7 @@ int sprintMulti()
 	case GM_SPRINT2_MINISTAGE:
 		return 7;
 	case GM_SPRINT3_MINISTAGE:
-		return 3;
+		return 2;
 	default:
 		break;
 	}

@@ -1371,7 +1371,7 @@ bool players::shooing_fire()
 	if(equipment[ET_WEAPON])
 		brand_ = (attack_type)GetAttType((weapon_brand)equipment[ET_WEAPON]->value5);
 	
-	beam_infor temp_infor(GetAttack(false),GetAttack(true),GetHit(),&you,you.GetParentType(),20,1,BMT_NORMAL,brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
+	beam_infor temp_infor(GetAttack(false)/0.7f,GetAttack(true)/0.7f,GetHit(),&you,you.GetParentType(),20,1,BMT_NORMAL,brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
 	soundmanager.playSound("shoot");
 	if(you.equipment[ET_WEAPON]) {
 		throwtanmac(you.equipment[ET_WEAPON]->image,beam,temp_infor,NULL);

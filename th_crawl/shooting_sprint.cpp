@@ -15,6 +15,8 @@
 #include "note.h"
 #include "evoke.h"
 #include "armour.h"
+#include "shooting_sprint.h"
+#include "soundmanager.h"
 
 
 
@@ -45,22 +47,22 @@ const shootingPathInfo two_straight_back(coord_def(DG_MAX_X/2-2, DG_MAX_Y/2+7), 
 const shootingPathInfo three_straight_back(coord_def(DG_MAX_X/2+2, DG_MAX_Y/2+7), {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0});
 const shootingPathInfo four_straight_back(coord_def(DG_MAX_X/2+4, DG_MAX_Y/2+7), {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0});
 
-const shootingPathInfo left_straight_stopandgo(coord_def(DG_MAX_X/2-3, DG_MAX_Y/2-7), {4,4,4,4,4,8,8,8,8,8,8,8,8,8,8,8,8,8});
-const shootingPathInfo middle_straight_stopandgo(coord_def(DG_MAX_X/2, DG_MAX_Y/2-7), {4,4,4,4,4,8,8,8,8,8,8,8,8,8,8,8,8,8});
+const shootingPathInfo left_straight_stopandgo(coord_def(DG_MAX_X/2-3, DG_MAX_Y/2-7),  {4,4,4,4,4,8,8,8,8,8,8,8,8,8,8,8,8,8});
+const shootingPathInfo middle_straight_stopandgo(coord_def(DG_MAX_X/2, DG_MAX_Y/2-7) , {4,4,4,4,4,8,8,8,8,8,8,8,8,8,8,8,8,8});
 const shootingPathInfo right_straight_stopandgo(coord_def(DG_MAX_X/2+3, DG_MAX_Y/2-7), {4,4,4,4,4,8,8,8,8,8,8,8,8,8,8,8,8,8});
-const shootingPathInfo one_straight_stopandgo(coord_def(DG_MAX_X/2-4, DG_MAX_Y/2-7), {4,4,4,4,4,8,8,8,8,8,8,8,8,8,8,8,8,8});
-const shootingPathInfo two_straight_stopandgo(coord_def(DG_MAX_X/2-2, DG_MAX_Y/2-7), {4,4,4,4,4,8,8,8,8,8,8,8,,8,8,8,8,8,8});
+const shootingPathInfo one_straight_stopandgo(coord_def(DG_MAX_X/2-4, DG_MAX_Y/2-7),   {4,4,4,4,4,8,8,8,8,8,8,8,8,8,8,8,8,8});
+const shootingPathInfo two_straight_stopandgo(coord_def(DG_MAX_X/2-2, DG_MAX_Y/2-7),   {4,4,4,4,4,8,8,8,8,8,8,8,8,8,8,8,8,8});
 const shootingPathInfo three_straight_stopandgo(coord_def(DG_MAX_X/2+2, DG_MAX_Y/2-7), {4,4,4,4,4,8,8,8,8,8,8,8,8,8,8,8,8,8});
-const shootingPathInfo four_straight_stopandgo(coord_def(DG_MAX_X/2+4, DG_MAX_Y/2-7), {4,4,4,4,4,8,8,8,8,8,8,8,8,8,8,8,8,8});
+const shootingPathInfo four_straight_stopandgo(coord_def(DG_MAX_X/2+4, DG_MAX_Y/2-7),  {4,4,4,4,4,8,8,8,8,8,8,8,8,8,8,8,8,8});
 
 
-const shootingPathInfo left_immediately(coord_def(DG_MAX_X/2-3, DG_MAX_Y/2+7), {4,4,4,4,4});
-const shootingPathInfo middle_immediately(coord_def(DG_MAX_X/2, DG_MAX_Y/2+7), {4,4,4,4,4});
-const shootingPathInfo right_immediately(coord_def(DG_MAX_X/2+3, DG_MAX_Y/2+7), {4,4,4,4,4});
-const shootingPathInfo one_immediately(coord_def(DG_MAX_X/2-4, DG_MAX_Y/2+7), {4,4,4,4,4});
-const shootingPathInfo two_immediately(coord_def(DG_MAX_X/2-2, DG_MAX_Y/2+7), {4,4,4,4,4});
-const shootingPathInfo three_immediately(coord_def(DG_MAX_X/2+2, DG_MAX_Y/2+7), {4,4,4,4,4});
-const shootingPathInfo four_immediately(coord_def(DG_MAX_X/2+4, DG_MAX_Y/2+7), {4,4,4,4,4});
+const shootingPathInfo left_immediately(coord_def(DG_MAX_X/2-3, DG_MAX_Y/2-7), {4,4,4,4,4});
+const shootingPathInfo middle_immediately(coord_def(DG_MAX_X/2, DG_MAX_Y/2-7), {4,4,4,4,4});
+const shootingPathInfo right_immediately(coord_def(DG_MAX_X/2+3, DG_MAX_Y/2-7), {4,4,4,4,4});
+const shootingPathInfo one_immediately(coord_def(DG_MAX_X/2-4, DG_MAX_Y/2-7), {4,4,4,4,4});
+const shootingPathInfo two_immediately(coord_def(DG_MAX_X/2-2, DG_MAX_Y/2-7), {4,4,4,4,4});
+const shootingPathInfo three_immediately(coord_def(DG_MAX_X/2+2, DG_MAX_Y/2-7), {4,4,4,4,4});
+const shootingPathInfo four_immediately(coord_def(DG_MAX_X/2+4, DG_MAX_Y/2-7), {4,4,4,4,4});
 
 
 
@@ -205,23 +207,23 @@ shootingLineTemplate(30, 0, SHT_STAGE_1, SHT_STAGE_END,
 	stUnit(18, SHT_MON_WEAK, &right_straight),
 	stUnit(21, SHT_MON_STRONG, &right_straight, true)
 })
-,shootingLineTemplate(30, 0, SHT_STAGE_1, SHT_STAGE_END,
+,shootingLineTemplate(40, 0, SHT_STAGE_1, SHT_STAGE_END,
 {
 	stUnit(0, SHT_MON_WEAK, &one_straight),
-	stUnit(2, SHT_MON_WEAK, &one_straight),
-	stUnit(4, SHT_MON_WEAK, &one_straight),
-	stUnit(4, SHT_MON_WEAK, &two_straight),
+	stUnit(3, SHT_MON_WEAK, &one_straight),
+	stUnit(6, SHT_MON_WEAK, &one_straight),
 	stUnit(6, SHT_MON_WEAK, &two_straight),
-	stUnit(8, SHT_MON_WEAK, &two_straight),
-	stUnit(8, SHT_MON_WEAK, &middle_straight),
-	stUnit(10, SHT_MON_WEAK, &middle_straight),
+	stUnit(9, SHT_MON_WEAK, &two_straight),
+	stUnit(12, SHT_MON_WEAK, &two_straight),
 	stUnit(12, SHT_MON_WEAK, &middle_straight),
-	stUnit(12, SHT_MON_WEAK, &three_straight),
-	stUnit(14, SHT_MON_WEAK, &three_straight),
-	stUnit(16, SHT_MON_WEAK, &three_straight),
-	stUnit(18, SHT_MON_WEAK, &four_straight),
-	stUnit(20, SHT_MON_WEAK, &four_straight),
-	stUnit(22, SHT_MON_WEAK, &four_straight)
+	stUnit(15, SHT_MON_WEAK, &middle_straight),
+	stUnit(18, SHT_MON_WEAK, &middle_straight),
+	stUnit(18, SHT_MON_WEAK, &three_straight),
+	stUnit(21, SHT_MON_WEAK, &three_straight),
+	stUnit(24, SHT_MON_WEAK, &three_straight),
+	stUnit(24, SHT_MON_WEAK, &four_straight),
+	stUnit(27, SHT_MON_WEAK, &four_straight),
+	stUnit(30, SHT_MON_WEAK, &four_straight)
 })
 ,shootingLineTemplate(50, 0, SHT_STAGE_1, SHT_STAGE_END,
 {
@@ -352,26 +354,34 @@ int line_delay = 0;
 int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MONSTER_TYPE type) ;
 
 
+bool isOutskirt(coord_def c) {
+	if(c.x < DG_MAX_X/2-5 || c.x > DG_MAX_X/2+5 || c.y < DG_MAX_Y/2-7 || c.y > DG_MAX_Y/2+7) {
+		return true;
+	}
+	return false;
+}
+
+
 std::shared_ptr<shootingLineInfo> getMonsterLine(SHOOTING_STAGE_LEVEL base_level, int count) 
 {
 	random_extraction<const shootingLineTemplate*> lines;
-	for(shootingLineTemplate& shootingline : shootinglines) {
+	for(const shootingLineTemplate& shootingline : shootinglines) {
 		if(shootingline.min_count <= count && shootingline.minStage <= base_level && shootingline.maxStage >= base_level) {
-			lines.push_back(&shootingline);
+			lines.push(&shootingline);
 		}
 	}
-	std::shared_ptr<shootingLineInfo> created_line = std::make_shared<shootingLineInfo>(ines.choice());
+	std::shared_ptr<shootingLineInfo> created_line = std::make_shared<shootingLineInfo>(lines.choice());
 	for(int i =0;i<SHT_MAX;i++) {
-		created_line->mon = getMonsterForSprint(base_level, count, (SHOOTING_MONSTER_TYPE)i);
+		created_line->mon[i] = getMonsterForSprint(base_level, count, (SHOOTING_MONSTER_TYPE)i);
 	}
 	return created_line;
 }
 
 SHOOTING_STAGE_LEVEL getNextlevel(SHOOTING_STAGE_LEVEL base_level) 
 {
-	swtich (base_level) {
+	switch (base_level) {
 	case SHT_STAGE_DUNGEON:
-		return SHT_STAGE_DUNGEON;
+		return SHT_STAGE_MISTY;
 	case SHT_STAGE_MISTY:
 		return randA(1)?SHT_STAGE_YOUKAI:SHT_STAGE_SCARLET;
 	case SHT_STAGE_YOUKAI:
@@ -397,7 +407,7 @@ SHOOTING_STAGE_LEVEL getNextlevel(SHOOTING_STAGE_LEVEL base_level)
 
 void initBaselevel(SHOOTING_STAGE_LEVEL base_level) 
 {
-	swtich (base_level) {
+	switch (base_level) {
 	case SHT_STAGE_DUNGEON:
 		break;
 	case SHT_STAGE_MISTY:
@@ -441,7 +451,7 @@ void initBaselevel(SHOOTING_STAGE_LEVEL base_level)
 
 int getFloorOfBaselevel(SHOOTING_STAGE_LEVEL base_level, int count) 
 {
-	swtich (base_level) {
+	switch (base_level) {
 	case SHT_STAGE_DUNGEON:
 		return 0 + count/70;
 	case SHT_STAGE_MISTY:
@@ -468,7 +478,7 @@ int getFloorOfBaselevel(SHOOTING_STAGE_LEVEL base_level, int count)
 
 dungeon_tile_type getTileOfBaselevel(SHOOTING_STAGE_LEVEL base_level, int count) 
 {
-	swtich (base_level) {
+	switch (base_level) {
 	case SHT_STAGE_DUNGEON:
 		return DG_FLOOR;
 	case SHT_STAGE_MISTY:
@@ -482,7 +492,7 @@ dungeon_tile_type getTileOfBaselevel(SHOOTING_STAGE_LEVEL base_level, int count)
 	case SHT_STAGE_PANDE:
 		return (dungeon_tile_type)(DG_PANDE_FLOOR1 + (count/20)%7);
 	case SHT_STAGE_MOON:
-		return DG_FLOOR2;
+		return DG_DREAM_FLOOR;
 	case SHT_STAGE_HELL:
 		return DG_HELL_FLOOR;
 	case SHT_STAGE_HAKUREI:
@@ -493,6 +503,33 @@ dungeon_tile_type getTileOfBaselevel(SHOOTING_STAGE_LEVEL base_level, int count)
 	return DG_FLOOR;
 };
 
+
+dungeon_tile_type getWallTileOfBaselevel(SHOOTING_STAGE_LEVEL base_level, int count) 
+{
+	switch (base_level) {
+	case SHT_STAGE_DUNGEON:
+		return DG_WALL;
+	case SHT_STAGE_MISTY:
+		return DG_WALL;
+	case SHT_STAGE_YOUKAI:
+		return DG_STONE_WALL;
+	case SHT_STAGE_SCARLET:
+		return DG_RED_WALL;
+	case SHT_STAGE_DEPTH:
+		return DG_WALL;
+	case SHT_STAGE_PANDE:
+		return (dungeon_tile_type)(DG_PANDE_WALL1 + (count/20+1)%7);
+	case SHT_STAGE_MOON:
+		return DG_WALL2;
+	case SHT_STAGE_HELL:
+		return DG_HELL_WALL;
+	case SHT_STAGE_HAKUREI:
+		return DG_WALL;
+	default:
+		break;
+	}
+	return DG_FLOOR;
+};
 
 
 
@@ -507,13 +544,13 @@ bool shootingLineInfo::process(int stage_count) {
 				if(step != 8) {
 					start_pos += GetDirecToPos(step);
 				}
-				mon_->will_move.push_back(start_pos);
+				mon_->will_move.push_front(start_pos);
 			}
 			mon_->item_lists.clear();
 			if(unit_.item) {
 				item_infor t;
-				CreateFloorItem(getFloorOfBaselevel(current_base_level, stage_count), &i);
-				mon_->item_lists.
+				CreateFloorItem(getFloorOfBaselevel(current_base_level, stage_count), &t);
+				mon_->item_lists.push_back(t);
 			}
 			mon_->target = &you;
 			mon_->target_pos = you.position;
@@ -534,6 +571,7 @@ bool shootingLineInfo::process(int stage_count) {
 int getBossForSprint(SHOOTING_STAGE_LEVEL base_level) 
 {
 	random_extraction<int> boss;
+	switch (base_level) {
 	case SHT_STAGE_DUNGEON:
 		boss.push(MON_RUMIA);
 		boss.push(MON_WRIGGLE);
@@ -584,14 +622,14 @@ int getBossForSprint(SHOOTING_STAGE_LEVEL base_level)
 	return boss.choice();
 }
 
-
 int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MONSTER_TYPE type) 
 {
 	random_extraction<int> monsters;
-	swtich (base_level) {
+	switch (base_level) {
 	case SHT_STAGE_DUNGEON:
+	default:
 		if(count < 100) {//극초반
-			swtich (type) {
+			switch (type) {
 			case SHT_MON_WEAK:
 				monsters.push(MON_MOOK);
 				monsters.push(MON_FAIRY_GREEN);
@@ -615,9 +653,11 @@ int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MON
 				monsters.push(MON_SNAKE);
 				monsters.push(MON_ORANGE_MOOK);
 				break;
+			default:
+				break;
 			}
 		} else {
-			swtich (type) {
+			switch (type) {
 			case SHT_MON_WEAK:
 				monsters.push(MON_MOOK);
 				monsters.push(MON_FAIRY_GREEN);
@@ -643,19 +683,20 @@ int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MON
 				monsters.push(MON_FROG);
 				monsters.push(MON_MARISAYUKKURI);
 				break;
+			default:
+				break;
 			}
 		}
 		break;
 	case SHT_STAGE_MISTY:
 		if(count < 100) {//극초반
-			swtich (type) {
+			switch (type) {
 			case SHT_MON_WEAK:
 				monsters.push(MON_FAIRY_GREEN);
 				monsters.push(MON_FAIRY_RED);
 				break;
 			case SHT_MON_WEAK_RANGE:
 				monsters.push(MON_FAIRY_BLUE);
-				monsters.push(MON_FAIRY_BLUE_MAGICIAN);
 				break;
 			case SHT_MON_STRONG:
 				monsters.push(MON_FAIRY_GREEN_WARRIOR);
@@ -673,17 +714,18 @@ int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MON
 			case SHT_MON_NORMAL_STRONG:
 				monsters.push(MON_TSUCHINOKO);
 				monsters.push(MON_DEAGAMA);
+				break;
+			default:
 				break;
 			}
 		} else {
-			swtich (type) {
+			switch (type) {
 			case SHT_MON_WEAK:
-				monsters.push(MON_FAIRY_GREEN);
 				monsters.push(MON_FAIRY_RED);
 				monsters.push(MON_FAIRY_GREEN_WARRIOR);
 				break;
 			case SHT_MON_WEAK_RANGE:
-				monsters.push(MON_FAIRY_BLUE);
+				monsters.push(MON_FAIRY_BLUE_MAGICIAN);
 				break;
 			case SHT_MON_STRONG:
 				monsters.push(MON_FAIRY_GREEN_WARRIOR);
@@ -707,12 +749,14 @@ int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MON
 				monsters.push(MON_FAIRY_HERO);
 				monsters.push(MON_FAIRY_SOCERER);
 				monsters.push(MON_FAIRY_SUN_FLOWER);
+				break;
+			default:
 				break;
 			}
 		}
 		break;
 	case SHT_STAGE_YOUKAI:
-		swtich (type) {
+		switch (type) {
 		case SHT_MON_WEAK:
 			monsters.push(MON_KATPA);
 			monsters.push(MON_CROW);
@@ -740,20 +784,21 @@ int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MON
 			if(count > 100)
 				monsters.push(MON_SANPEI_FIGHTER);
 			break;
+		default:
+			break;
 		}
 		break;
 	case SHT_STAGE_SCARLET:
-		swtich (type) {
+		switch (type) {
 		case SHT_MON_WEAK:
 			monsters.push(MON_HOBGOBRIN);
 			break;
 		case SHT_MON_WEAK_RANGE:
-			monsters.push(MON_MAID_FAIRY);
+			monsters.push(MON_MAID_FAIRY_WEAK);
 			break;
 		case SHT_MON_STRONG:
 			monsters.push(MON_HOBGOBRIN_MAID);
 			monsters.push(MON_HOBGOBRIN_LIBRARIAN);
-			monsters.push(MON_CROW_TENGU);
 			break;
 		case SHT_MON_STRONG_RANGE:
 			monsters.push(MON_MAGIC_BOOK);
@@ -769,10 +814,12 @@ int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MON
 			monsters.push(MON_CHUPARCABRA);
 			monsters.push(MON_VAMPIER_BAT);
 			break;
+		default:
+			break;
 		}
 		break;
 	case SHT_STAGE_DEPTH:
-		swtich (type) {
+		switch (type) {
 		case SHT_MON_WEAK:
 			monsters.push(MON_EAGLE);
 			monsters.push(MON_DESIRE);
@@ -801,10 +848,12 @@ int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MON
 			monsters.push(MON_DRAGON_BABY);
 			monsters.push(MON_NAMAZ);
 			break;
+		default:
+			break;
 		}
 		break;
 	case SHT_STAGE_PANDE:
-		swtich (type) {
+		switch (type) {
 		case SHT_MON_WEAK:
 			monsters.push(MON_LITTLE_IMP, 3);
 			monsters.push(MON_SARA);
@@ -835,10 +884,12 @@ int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MON
 			monsters.push(MON_YUKI);
 			monsters.push(MON_SARIEL);
 			break;
+		default:
+			break;
 		}
 		break;
 	case SHT_STAGE_MOON:
-		swtich (type) {
+		switch (type) {
 		case SHT_MON_WEAK:
 			monsters.push(MON_MOON_RABIT_ATTACK);
 			break;
@@ -861,10 +912,12 @@ int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MON
 			monsters.push(MON_NIGHTMARE);
 			monsters.push(MON_MAC);
 			break;
+		default:
+			break;
 		}
 		break;
 	case SHT_STAGE_HELL:
-		swtich (type) {
+		switch (type) {
 		case SHT_MON_WEAK:
 			monsters.push(MON_HAUNT);
 			monsters.push(MON_HELL_CROW);
@@ -887,10 +940,12 @@ int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MON
 		case SHT_MON_NORMAL_STRONG:
 			monsters.push(MON_FIRE_CAR);
 			break;
+		default:
+			break;
 		}
 		break;
 	case SHT_STAGE_HAKUREI:
-		swtich (type) {
+		switch (type) {
 		case SHT_MON_WEAK:
 			monsters.push(MON_FAIRY_GREEN_WARRIOR);
 			monsters.push(MON_HELL_CROW);
@@ -917,6 +972,8 @@ int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MON
 		case SHT_MON_NORMAL_STRONG:
 			monsters.push(MON_EVIL_EYE_TANK);
 			break;
+		default:
+			break;
 		}
 		break;
 	}
@@ -929,7 +986,7 @@ int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MON
 
 void map_algorithms_shooting_sprint(int num)
 {
-	current_base_level = 0;
+	current_base_level = SHT_STAGE_DUNGEON;
 	shooting_god_dq.clear();
 	current_lines_info.clear();
 	line_delay = 10;
@@ -972,12 +1029,15 @@ bool shooting_event(int num)
 			temp->position.y++;
 		}
 
-		for(int x = -5 + DG_MAX_X/2; x <= 5 + DG_MAX_X/2; x++) {
+		for(int x = -6 + DG_MAX_X/2; x <= 6 + DG_MAX_X/2; x++) {
 			for(int y = 7 + DG_MAX_Y/2; y >= -7 + DG_MAX_Y/2; y--) {
 				if(y != 7 + DG_MAX_Y/2) {
 					env[current_level].changeTile(coord_def(x, y+1), env[current_level].dgtile[x][y].tile);
 				}
-				env[current_level].changeTile(coord_def(x, y), getTileOfBaselevel(current_base_level, map_list.bamboo_count));
+				env[current_level].changeTile(coord_def(x, y),
+				(std::abs(x -DG_MAX_X/2) == 6) ?
+				getWallTileOfBaselevel(current_base_level, map_list.bamboo_count)
+				:getTileOfBaselevel(current_base_level, map_list.bamboo_count));
 			}
 		}
 
@@ -994,9 +1054,9 @@ bool shooting_event(int num)
 		line_delay--;
 	}
 	
-	for(list<std::shared_ptr<shootingLineInfo>>::literator it : current_lines_info; it != current_lines_info.end();) {
-		list<std::shared_ptr<shootingLineInfo>>::literator temp = it++;
-		if(temp.process(map_list.bamboo_count)) {
+	for(list<std::shared_ptr<shootingLineInfo>>::iterator it = current_lines_info.begin(); it != current_lines_info.end();) {
+		list<std::shared_ptr<shootingLineInfo>>::iterator temp = it++;
+		if((*temp)->process(map_list.bamboo_count)) {
 			current_lines_info.erase(temp);
 		}
 	}
@@ -1009,9 +1069,11 @@ bool shooting_event(int num)
 			rand_x.push(i);
 		}
 		for(int i = 0; i < GT_LAST/5;i++) {
-			int temple_ = shooting_god_dq.back();
-			env[current_level].changeTile(coord_def(rand_x.pop()+DG_MAX_X/2, DG_MAX_Y/2-7), (dungeon_tile_type)(DG_TEMPLE_FIRST+temple_));
-			shooting_god_dq.pop_back();
+			if(shooting_god_dq.size() > 0) {
+				int temple_ = shooting_god_dq.back();
+				env[current_level].changeTile(coord_def(rand_x.pop()+DG_MAX_X/2, DG_MAX_Y/2-7), (dungeon_tile_type)(DG_TEMPLE_FIRST+temple_));
+				shooting_god_dq.pop_back();
+			}
 		}
 		if(shooting_god_dq.size() <= 2) {
 			while(  shooting_god_dq.size() > 0) {
@@ -1026,7 +1088,7 @@ bool shooting_event(int num)
 		//보스!
 		int boss = getBossForSprint(current_base_level);
 		coord_def create_pos(DG_MAX_X/2, DG_MAX_Y/2-7);
-		env[current_level].AddMonster(boss.choice(), M_FLAG_EVENT, create_pos);
+		env[current_level].AddMonster(boss, M_FLAG_EVENT, create_pos);
 	}
 
 	if(map_list.bamboo_count > boss_trun) {
@@ -1046,12 +1108,13 @@ bool shooting_event(int num)
 			if(next_base_level == SHT_STAGE_END) {
 				item_infor t;
 				makeitem(ITM_ORB, -1, &t);
-				env[num].MakeItem(create_pos(DG_MAX_X/2, DG_MAX_Y/2-7), t);
-				env[current_level].changeTile(create_pos(DG_MAX_X/2, DG_MAX_Y/2-7), DG_UP_STAIR);
+				env[num].MakeItem(coord_def(DG_MAX_X/2, DG_MAX_Y/2-7), t);
+				env[current_level].changeTile(coord_def(DG_MAX_X/2, DG_MAX_Y/2-7), DG_UP_STAIR);
 				return true;
 			} else {
 				current_base_level = next_base_level;
 				map_list.bamboo_count = 0;
+				line_delay = 10;
 				initBaselevel(current_base_level);
 			}
 		}

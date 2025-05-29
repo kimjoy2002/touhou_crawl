@@ -1813,6 +1813,8 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 		return (mon->hp>mon->max_hp*0.2f || mon->s_tele?false:true);
 	case SPL_DISCHARGE:
 		return (mon->s_elec ? false : true);
+	case SPL_BLINK:
+		return (mon->state.GetState() != MS_DECIDE);
 	case SPL_MOON_COMMUNICATION:
 	case SPL_FIRE_SPREAD:
 	case SPL_ALERT_NOISE: 

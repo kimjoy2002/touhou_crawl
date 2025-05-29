@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+class map_dummy;
+
 void set_shooting_sprint_map(map_dummy* map_dummy_);
 bool shooting_event(int num);
 bool isOutskirt(coord_def c);
@@ -49,7 +51,7 @@ public:
 	SHOOTING_MONSTER_TYPE type; //몬스터 타입
 	const shootingPathInfo* path;
 	bool item;
-	stUnit(int count,SHOOTING_MONSTER_TYPE type,shootingPathInfo* path, bool item = false):count(count), type(type),path(path), item(item){}
+	stUnit(int count,SHOOTING_MONSTER_TYPE type,const shootingPathInfo* path, bool item = false):count(count), type(type),path(path), item(item){}
 };
 
 

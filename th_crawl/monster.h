@@ -172,6 +172,7 @@ public:
 	bool offsetmove(const coord_def &c);
 	bool OpenDoor(const coord_def &c);
 	int longmove();
+	bool tryMagic();
 	int atkmove(int is_sight, bool only_move=false);
 	bool isCanMove();
 	bool isHaveSpell(spell_list sp);

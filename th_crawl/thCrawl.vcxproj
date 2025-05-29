@@ -213,6 +213,7 @@
     <ClCompile Include="spell_use.cpp" />
     <ClCompile Include="sprint.cpp" />
     <ClCompile Include="steam_api.cpp" />
+    <ClCompile Include="shooting_sprint.cpp" />
     <ClCompile Include="summon.cpp" />
     <ClCompile Include="swako.cpp" />
     <ClCompile Include="temp.cpp" />

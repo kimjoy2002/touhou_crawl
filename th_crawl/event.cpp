@@ -13,6 +13,7 @@
 #include "key.h"
 #include "mon_infor.h"
 #include "skill_use.h"
+#include "shooting_sprint.h"
 #include "floor.h"
 #include "beam.h"
 
@@ -20,7 +21,6 @@ int EventOccur(int id, events* event_);
 
 void bamboo_count(int num);
 void arena_event(int num);
-void shooting_event(int num);
 bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target);
 
 events::events()
@@ -1099,8 +1099,11 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	}
 	case EVL_SHOOTING_SPRINT:
 	{
-		shooting_event(current_level);
-		return 0;
+		if(shooting_event(current_level)) {
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 	default:
 		break;

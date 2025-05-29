@@ -864,7 +864,8 @@ enum monster_state
 	MS_REST,
 	MS_FOLLOW,
 	MS_FIND,
-	MS_WAIT
+	MS_WAIT,
+	MS_DECIDE
 };
 
 enum monster_state_simple //표시용 상태

@@ -25,6 +25,7 @@
 #include "tribe.h"
 #include "rand_shuffle.h"
 #include "soundmanager.h"
+#include "shooting_sprint.h"
 #include <set>
 
 
@@ -432,8 +433,13 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int
 	hp = mondata[id_].max_hp;
 	max_hp = mondata[id_].max_hp;
 	if(isShootingSprint()) {
-		hp /=3;
-		max_hp /=3; //나중엔 데미지를 늘리자.		
+		if(flag & M_FLAG_UNIQUE) {
+			hp *=3; //오히려 늘림
+			max_hp *=3;	
+		} else {
+			hp /=3;
+			max_hp /=3;	
+		}	
 	}
 
 	ac = mondata[id_].ac;
@@ -938,7 +944,7 @@ void monster::CheckSightNewTarget()
 			isSpecialSight(position)) && 
 			you.isView(this) && !you.s_timestep)
 		{
-			if(state.GetState() == MS_ATACK || you_detect())
+			if(state.GetState() == MS_ATACK || state.GetState() == MS_DECIDE || you_detect())
 			{
 				int temp = max(s_lunatic?1:0,distan_coord(you.position, position)-(s_lunatic?0:30)+(isSightnonblocked(you.position)?0:60));
 				if(distant_ == 999 || temp  < distant_)
@@ -2333,17 +2339,9 @@ int monster::longmove()
 	//}
 	return true;
 }
-int monster::atkmove(int is_sight, bool only_move)
-{
-	int move_ = 0;
-	
-	//if(target || memory_time)
-	//{
-	//	if(target && !(target->isplayer()))
-	//		target_pos = target->position;
-	//}
 
-	if(!only_move && !s_confuse && !s_fear && !s_lunatic)
+bool monster::tryMagic() {
+	if(!s_confuse && !s_fear && !s_lunatic)
 	{
 		if(target && target->position == target_pos)
 		{
@@ -2385,6 +2383,26 @@ int monster::atkmove(int is_sight, bool only_move)
 					}
 				}			
 			}
+		}
+	}
+	return false;
+}	
+
+int monster::atkmove(int is_sight, bool only_move)
+{
+	int move_ = 0;
+	
+	//if(target || memory_time)
+	//{
+	//	if(target && !(target->isplayer()))
+	//		target_pos = target->position;
+	//}
+	
+
+	if(!only_move)
+	{
+		if(tryMagic()) {
+			return true;
 		}
 	}
 
@@ -3711,6 +3729,35 @@ int monster::action(int delay_)
 								first_position = position;
 							}
 						}
+					}
+					CheckSightNewTarget();
+					break;
+				}
+				case MS_DECIDE:{
+					if(s_confuse || s_paralyse || s_lunatic) {
+						state.SetState(MS_ATACK);
+					}
+					else if(!will_move.empty()) {
+						coord_def c_ = will_move.back();
+						will_move.pop_back();
+						if(isShootingSprint() && isOutskirt(c_)) {
+							dead(PRT_NEUTRAL, false, true);
+							return 0;
+						} else if (c_ == position) {
+							tryMagic();
+						} else {
+							int success_ = MoveToPos(c_, false);
+							if (success_ != 2) //이동실패
+							{
+								will_move.clear();
+								state.SetState(MS_ATACK);
+							} else {
+								tryMagic();
+							}
+						}						
+					}
+					else {
+						state.SetState(MS_ATACK);
 					}
 					CheckSightNewTarget();
 					break;

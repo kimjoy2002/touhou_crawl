@@ -231,6 +231,9 @@
     <ClCompile Include="sprint.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="shooting_sprint.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="summon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -435,6 +438,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="spellcard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="shooting_sprint.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sprint.h">

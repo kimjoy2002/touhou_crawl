@@ -110,6 +110,7 @@ FSMstate state_rest(MS_REST);
 FSMstate state_follow(MS_FOLLOW);
 FSMstate state_find(MS_FIND);
 FSMstate state_wait(MS_WAIT);
+FSMstate state_decide(MS_DECIDE);
 
 
 void init_state()
@@ -121,6 +122,7 @@ void init_state()
 	state_follow = FSMstate(MS_FOLLOW);
 	state_find = FSMstate(MS_FIND);
 	state_wait = FSMstate(MS_WAIT);
+	state_decide = FSMstate(MS_DECIDE);
 
 
 	//상태 노말: 적을 발견하지않고 떠도는 상태
@@ -167,6 +169,8 @@ void init_state()
 	state_wait.AddTransition(MSI_SEARCH, MS_FIND);
 	state_wait.AddTransition(MSI_FOLLOW, MS_FOLLOW);
 	
+	//상태 지정된 경로: 슈팅 스프린트 전용 ai. 정해진 경로로만 이동하면서 마법을 씀
+	//전이 없음
 }
 
 void base_state_setup(FSMclass& state, monster_state first_state)
@@ -178,6 +182,7 @@ void base_state_setup(FSMclass& state, monster_state first_state)
 	state.AddState(&state_follow);
 	state.AddState(&state_find);
 	state.AddState(&state_wait);
+	state.AddState(&state_decide);
 
 	state.SetState(first_state);
 }

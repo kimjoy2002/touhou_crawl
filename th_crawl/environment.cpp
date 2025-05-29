@@ -1356,7 +1356,11 @@ void environment::ClearFloor()
 }
 void environment::enterBgm(boolean first_)
 {
-	if (isArena() || isSprint()) {
+	if (isShootingSprint()) {
+		PlayBGM("dungeon");
+		return;
+	}
+	else if (isArena() || isSprint()) {
 		PlayBGM("sprint");
 		return;
 	}
@@ -1419,6 +1423,8 @@ void environment::enterBgm(boolean first_)
 void environment::playBgm() {
 	if (isArena())
 		PlayBGM("sprint");
+	else if (isShootingSprint())
+		PlayBGM("dungeon");
 	else if (isSprint())
 		PlayBGM("sprint");
 	else if (floor<TEMPLE_LEVEL)

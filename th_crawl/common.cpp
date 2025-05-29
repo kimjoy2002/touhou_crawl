@@ -280,6 +280,9 @@ int GetPosToDirec(const coord_def &start, const coord_def &target)
 }
 coord_def GetDirecToPos(int pos_)
 {
+	//701
+	//682
+	//543
 	switch((pos_+8)%8)
 	{
 	case 7:

@@ -11,6 +11,7 @@
 #include "skill_use.h"
 #include "mon_infor.h"
 #include "rand_shuffle.h"
+#include "tribe.h"
 #include "event.h"
 #include "note.h"
 #include "evoke.h"
@@ -1112,9 +1113,27 @@ bool shooting_event(int num)
 				env[current_level].changeTile(coord_def(DG_MAX_X/2, DG_MAX_Y/2-7), DG_UP_STAIR);
 				return true;
 			} else {
+				random_extraction<int> rand_reward;
+				for(int i = TPT_STG_START; i <= TPT_STG_LAST; i++) {
+					if( i == TPT_STG_OPTION && you.GetProperty((tribe_proper_type)i)<3) {
+						rand_reward.push(100+i-TPT_STG_START);
+					}
+					else if(!you.GetProperty((tribe_proper_type)i)) {
+						rand_reward.push(100+i-TPT_STG_START);
+					}
+				}
+
+				for(int i = 0; i < 3;i++) {
+					item_infor t;
+					int value1 = rand_reward.pop();
+					makeitem(ITM_GOAL, 0, &t, value1);
+					t.name = name_infor(getTribePropertyKey((tribe_proper_type)(value1-100+TPT_STG_START), 1));
+					env[num].MakeItem(coord_def(DG_MAX_X/2-4+i*4, DG_MAX_Y/2-7), t);
+				}
+
 				current_base_level = next_base_level;
 				map_list.bamboo_count = 0;
-				line_delay = 10;
+				line_delay = 30;
 				initBaselevel(current_base_level);
 			}
 		}

@@ -132,6 +132,8 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_INVISIBLE_OFF:
 	case SKL_TORMENT:
 	case SKL_ABANDON_GOD:
+	case SKL_SOULSHOT:
+	case SKL_SUPER_GRAZE:
 		return ((S_FLAG_IMMEDIATELY) & flag);
 	case SKL_NONE:
 	case SKL_BREATH:
@@ -245,6 +247,8 @@ int SkillLength(skill_list skill)
 	case SKL_MIKO_4:
 	case SKL_MIKO_5:
 	case SKL_MIKO_6:
+	case SKL_SOULSHOT:
+	case SKL_SUPER_GRAZE:
 	default:
 		return 0;
 	}
@@ -434,6 +438,10 @@ string SkillString(skill_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_MIKO_5);
 	case SKL_MIKO_6:
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_MIKO_6);
+	case SKL_SOULSHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SOULSHOT);
+	case SKL_SUPER_GRAZE:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SUPER_GRAZE);
 	case SKL_NONE:
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_UKNOWN);
@@ -515,6 +523,8 @@ int SkillCap(skill_list skill)
 	case SKL_JOON_AND_SION_3:
 	case SKL_JOON_AND_SION_4:
 	case SKL_JOON_AND_SION_OFF:
+	case SKL_SOULSHOT:
+	case SKL_SUPER_GRAZE:
 		return 200;
 	case SKL_LEVITATION:
 		return 75;
@@ -626,6 +636,8 @@ int SkillNoise(skill_list skill)
 	case SKL_JOON_AND_SION_4:
 	case SKL_MIKO_1:
 	case SKL_MIKO_6:
+	case SKL_SOULSHOT:
+	case SKL_SUPER_GRAZE:
 		return 8;
 	case SKL_YUUGI_4:
 	case SKL_SWAKO_DIGGING:
@@ -738,6 +750,8 @@ int SkillPow(skill_list skill)
 	case SKL_JOON_AND_SION_2:
 	case SKL_JOON_AND_SION_3:
 	case SKL_JOON_AND_SION_4:
+	case SKL_SOULSHOT:
+	case SKL_SUPER_GRAZE:
 		return you.level*5;
 		//return you.skill[SKT_SPELLCASTING].level*5;
 	case SKL_SIZUHA_2:
@@ -869,6 +883,8 @@ int SkillDiffer(skill_list skill)
 	case SKL_MIKO_4:
 	case SKL_MIKO_5:
 	case SKL_MIKO_6:
+	case SKL_SOULSHOT:
+	case SKL_SUPER_GRAZE:
 		return 100;
 	case SKL_NONE:
 	default:
@@ -1008,6 +1024,8 @@ int SkillMana(skill_list skill)
 	case SKL_SHINKI_1:	
 	case SKL_SHINKI_2:	
 	case SKL_SHINKI_3:
+	case SKL_SOULSHOT:
+	case SKL_SUPER_GRAZE:
 	default:
 		return 0;
 	}
@@ -1296,7 +1314,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 			you.PowUpDown(-100,true);
 			you.PietyUpDown(-6);
 		}
-		return true;	
+		return true;
 	case SKL_YUUGI_2:
 		if(check_ && you.power<100)
 		{
@@ -1464,6 +1482,18 @@ bool SkillPlusCost(skill_list skill,bool check_)
 		if (!check_)
 		{
 			you.PowUpDown(-(25 + randA(10)), true);
+		}
+		return true;
+	case SKL_SOULSHOT:
+	case SKL_SUPER_GRAZE:
+		if(check_ && you.power<100)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
+			return false;
+		}
+		if(!check_)
+		{
+			you.PowUpDown(-100,true);
 		}
 		return true;
 	case SKL_OKINA_2:
@@ -1787,6 +1817,10 @@ string SkillCostString(skill_list skill)
 		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(to_string(getMikoPiety(3)/2)));
 	case SKL_MIKO_6:
 		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_POPULAR, PlaceHolderHelper(to_string(getMikoPiety(4)/2)));
+	case SKL_SOULSHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_BIG);
+	case SKL_SUPER_GRAZE:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_BIG);
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:

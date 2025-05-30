@@ -507,6 +507,14 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			SetInter(IT_STAT);
 		}
 	}
+
+	if(you.GetProperty(TPT_STG_STATIC_ELECTRONIC) == 1)
+	{
+		int power_=you.level*10;
+		if(randA(5)<2)
+			skill_elec_passive(power_,&you);
+	}
+
 	WaitForSingleObject(mutx, INFINITE);
 	if(s_paralyse)
 	{
@@ -974,6 +982,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	{
 		s_tracking--;
 	}
+	if(s_shield.turn < s_shield.max_turn) {
+		s_shield.turn++;
+		if(s_shield.max_turn == s_shield.turn && s_shield.value < GetMaxHp()*s_shield.percent/100) {
+			s_shield.value = GetMaxHp()*s_shield.percent/100;
+		}
+	}
 
 
 	if(battle_count)
@@ -1147,7 +1161,15 @@ bool players::TraningStealth()
 bool players::isEnemyMonster(const monster* monster_info)
 {
 	return !monster_info->isUserAlly();
-}	
+}
+bool players::isPassedBullet(unit* order) {
+	if(isShootingSprint()) {
+		if(order->isUserAlly()) {
+			return true;
+		}
+	}
+	return false;
+}
 bool players::isSightnonblocked(coord_def c)
 {
 	int sight_ = 7;

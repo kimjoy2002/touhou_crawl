@@ -434,8 +434,8 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int
 	max_hp = mondata[id_].max_hp;
 	if(isShootingSprint()) {
 		if(mondata[id_].flag & M_FLAG_UNIQUE) {
-			hp *= 1 + 2 * max(0,min(20-mondata[id_].level, 10))/10.0f; //오히려 늘림
-			max_hp *=  1 + 2 * max(0,min(20-mondata[id_].level, 10))/10.0f; //오히려 늘림	
+			hp *= 1 + 1 * max(0,min(20-mondata[id_].level, 10))/10.0f; //오히려 늘림
+			max_hp *=  1 + 1 * max(0,min(20-mondata[id_].level, 10))/10.0f; //오히려 늘림	
 		} else {
 			hp /=2;
 			max_hp /=2;
@@ -5166,6 +5166,8 @@ bool monster::isPassedBullet(unit* order)
 	{ //이것이 플레이어의 탄환일때
 		if(isUserAlly() && flag & M_FLAG_PASSED_ALLY)
 			return true;
+		else if(isUserAlly() && isShootingSprint())
+			return true;
 		else if(isUserAlly() && flag & M_FLAG_PASSED_ENEMY)
 			return false;
 		else if(flag & M_FLAG_PASSED_ENEMY)
@@ -5176,6 +5178,8 @@ bool monster::isPassedBullet(unit* order)
 	else
 	{ //이것이 몬스터의 탄환일때
 		if(flag & M_FLAG_PASSED_ENEMY  && isEnemyMonster((monster*)order))
+			return true;
+		else if(isShootingSprint()  && isEnemyMonster((monster*)order))
 			return true;
 		else if(flag & M_FLAG_PASSED_ALLY  && isAllyMonster((monster*)order))
 			return true;

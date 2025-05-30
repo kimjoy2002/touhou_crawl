@@ -407,7 +407,201 @@ LOCALIZATION_ENUM_KEY GetTanmacKey(int type)
 		return LOC_SYSTEM_ITEM_TANMAC_DOGGOJEO;
 	}
 }
+
+
+ThrowTamacInstance::ThrowTamacInstance(textures* t_, int graphic_type, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_):
+ t_(t_), graphic_type(graphic_type), beam(beam), infor_(infor_), item_(item_), effect_delete(effect_delete), mimic_(mimic_)
+{
+	init();
+}
+
+
+void ThrowTamacInstance::init() {
+	beam.init();
+	prev = beam.start_pos();
+	penetrate = infor_.penetrate;
+	direc = beam.GetDirec();
+	length = 1;
+	count = 0;
+	path = 8;
+	switch(infor_.type1)
+	{
+	case BMT_NORMAL:
+	case BMT_WALL:
+	case BMT_PENETRATE:
+	default:
+		if(isStartGraphic(graphic_type))
+		{
+			coord_def postion_ = prev;
+			int path_ = 80+GetPosToDirec(prev,(*beam));
+			if(graphic_type || !item_) {
+				env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path_),false);
+			}
+			else if(item_) {//자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
+				env[current_level].MakeEffect(postion_,item_->image,false);
+			}
+		}
+	break;
+	}
+}
+
+bool ThrowTamacInstance::oneturn() {
+	if(!(env[current_level].isMove(*(beam),true) && penetrate>0 && length>0))
+		return true;
+	switch(infor_.type1)
+	{
+	case BMT_NORMAL:
+	case BMT_WALL:
+	case BMT_PENETRATE:
+	default:
+		for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
+		{
+			if((*it).isLive() && (*it).position.x == (*beam).x && (*it).position.y == (*beam).y &&
+				!(*it).isPassedBullet(infor_.order)
+				)
+			{
+				attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+				if((*it).damage(temp_att))
+					penetrate--;
+			}
+		}
+		if(!infor_.order->isplayer() && you.position.x == (*beam).x && you.position.y == (*beam).y &&				
+			!you.isPassedBullet(infor_.order)
+			) //플레이어는 자기자신에게 맞지않는 조건은 나중에 지울까?
+		{
+			attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+			if(you.damage(temp_att))
+				penetrate--;
+		}
+		path = 10*GetPosToDirec((*beam),prev);
+		coord_def postion_ = (*beam);
+		prev = *(beam++);
+		path += (penetrate>0 && length>0)?GetPosToDirec(prev,(*beam)):9;
+		if(t_)
+			env[current_level].MakeEffect(postion_,t_,false);
+		else if(graphic_type || !item_)
+			env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path),false);
+		else if(item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
+			env[current_level].MakeEffect(postion_,item_->image,false);
+	}
+	
+	return false;
+}
+
+
+bool ThrowTamacInstance::oneturn_after(bool without_laser) {
+	switch(infor_.type1)
+	{
+	case BMT_NORMAL:
+	case BMT_WALL:
+	case BMT_PENETRATE:
+	default:
+		length++;
+		if(pow((float)abs(beam.start_pos().x-(*beam).x),2)+pow((float)abs(beam.start_pos().y-(*beam).y),2)>(infor_.length+1)*(infor_.length+1)-1)
+			return true;
+		if(infor_.type1 == BMT_NORMAL || infor_.type1 == BMT_WALL) {
+			if(without_laser) {
+				env[current_level].ClearWithoutLaserEffect();
+			} else {
+				env[current_level].ClearEffect();
+			}
+		}
+	}
+	
+	return !(env[current_level].isMove(*(beam),true) && penetrate>0 && length>0);
+}
+
+
+
+coord_def ThrowTamacInstance::endShoot(bool sleep_, bool without_laser) {
+	switch(infor_.type1)
+	{
+	case BMT_NORMAL:
+	case BMT_WALL:
+	case BMT_PENETRATE:
+	default:
+		if(infor_.type1 == BMT_WALL && !env[current_level].isMove(*(beam),true) && penetrate>0 &&  infor_.max_damage>length)
+		{
+			prev = *(beam++);
+			//벽에 부딪히는?
+		}
+
+		if(item_ && !mimic_ && (infor_.order != &you || !you.s_knife_collect))
+		{
+			if(!(item_->type>=ITM_THROW_FIRST && item_->type<ITM_THROW_LAST) || !TanmacDeleteRand((tanmac_type)item_->value4, false))
+			{
+				if (item_->type == ITM_WEAPON_LONGBLADE && item_->value0 == 3)
+				{//철륜
+					if(without_laser) {
+						env[current_level].ClearWithoutLaserEffect();
+					} else {
+						env[current_level].ClearEffect();
+					}
+					beam--;
+					coord_def pos_;
+					while (length>1)
+					{
+						pos_ = *(beam--);
+						if (t_)
+							env[current_level].MakeEffect(pos_, t_, false);
+						else if (graphic_type || !item_)
+							env[current_level].MakeEffect(pos_, GetTanmacGraphic(graphic_type, direc, count++, path), false);
+						else if (item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
+							env[current_level].MakeEffect(pos_, item_->image, false);
+						if(sleep_)
+							Sleep(16);
+						if(without_laser) {
+							env[current_level].ClearWithoutLaserEffect();
+						} else {
+							env[current_level].ClearEffect();
+						}
+						length--;
+					}
+					item* temp = env[current_level].AddItem(beam.start_pos(), item_, 1);
+					temp->throw_item = true;
+					if(you.additem(temp, false))
+						env[current_level].DeleteItem(temp);
+				}
+				else
+				{
+					item* temp = env[current_level].AddItem(prev, item_, 1);
+					temp->throw_item = true;
+				}
+			}
+		}
+		break;
+	}
+	if(sleep_)
+		Sleep(60);
+	if(effect_delete)
+		env[current_level].ClearEffect();
+	return prev;
+}
+
+
+
 coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_)
+{
+	ThrowTamacInstance throw_instance(t_, graphic_type, beam, infor_, item_, effect_delete, mimic_);
+	while(true) {
+		if(throw_instance.oneturn())
+			break;
+		Sleep(16);
+		if(throw_instance.oneturn_after(false))
+			break;
+	}
+	return throw_instance.endShoot(true, false);
+}
+
+
+
+
+
+
+
+
+
+coord_def throwtanmac_temp(int graphic_type, textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_)
 {
 	beam.init();
 	coord_def prev = beam.start_pos();

@@ -119,7 +119,7 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
 force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
-s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_oil(0), s_fire(0), s_tracking(0), alchemy_buff(ALCT_NONE), alchemy_time(0),
+s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_oil(0), s_fire(0), s_tracking(0), s_shield(), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -303,6 +303,10 @@ void players::init() {
 	s_oil = 0;
 	s_fire = 0;
 	s_tracking = 0;
+	s_shield.percent = 0;
+	s_shield.value = 0;
+	s_shield.turn = 0;
+	s_shield.max_turn = 0;
 	alchemy_buff = ALCT_NONE;
 	alchemy_time = 0;
 	teleport_curse = false;
@@ -535,6 +539,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_oil);
 	SaveData<int>(fp, s_fire);
 	SaveData<int>(fp, s_tracking);
+	SaveData<shield_struct>(fp, s_shield);
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
 
@@ -790,6 +795,10 @@ void players::LoadDatas(FILE *fp)
 	if(!isPrevVersion(loading_version_string, "ver1.1")) {
 		LoadData<int>(fp, s_tracking);
 	}
+	if(!isPrevVersion(loading_version_string, "ver1.11")) {
+		LoadData<shield_struct>(fp, s_shield);
+	}
+	SaveData<shield_struct>(fp, s_shield);
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
 	LoadData<int>(fp, alchemy_time);
@@ -1364,20 +1373,106 @@ bool players::offsetmove(const coord_def &c)
 		return false;
 }
 
-bool players::shooing_fire()
+bool players::shooing_fire(float bonus_)
 {
+	list<shared_ptr<ThrowTamacInstance>> tanmac_list;
+
 	beam_iterator beam(you.position,coord_def(you.position.x, you.position.y-1));
 	attack_type brand_ = ATT_NORMAL;
 	if(equipment[ET_WEAPON])
 		brand_ = (attack_type)GetAttType((weapon_brand)equipment[ET_WEAPON]->value5);
 	
-	beam_infor temp_infor(GetAttack(false)/0.7f,GetAttack(true)/0.7f,GetHit(),&you,you.GetParentType(),20,1,BMT_NORMAL,brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
-	soundmanager.playSound("shoot");
-	if(you.equipment[ET_WEAPON]) {
-		throwtanmac(you.equipment[ET_WEAPON]->image,beam,temp_infor,NULL);
-	} else {
-		throwtanmac(rand_int(10, 15), beam, temp_infor, NULL);
+
+	bool laser_ = GetProperty(TPT_STG_LASER_SHOT);
+	bool spread_ = GetProperty(TPT_STG_SPREAD_SHOT);
+	bool triple_ = GetProperty(TPT_STG_TRIPLE_SHOT);
+	bool back_ = GetProperty(TPT_STG_BACK_SHOT);
+	float multi_ = 1.0f;//0.7f;
+	float attack_speed_ = 10.0f/GetAtkDelay();
+	multi_ *= attack_speed_;
+	multi_ *= bonus_;
+	int hit_ = GetHit()+5;//명중보정
+	beam_infor temp_infor(GetAttack(false)*multi_,GetAttack(true)*multi_,hit_,&you,you.GetParentType(),20,laser_?20:1,laser_?BMT_PENETRATE:BMT_NORMAL,brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
+	
+	int graphic_ = rand_int(10, 15);
+	textures* texture_ = nullptr;
+	// if(you.equipment[ET_WEAPON]) {
+	// 	texture_ = you.equipment[ET_WEAPON]->image;
+	// 	graphic_ = 0;
+	// }
+
+	if(laser_) {
+		soundmanager.playSound("laser");
+		graphic_ = 29;
 	}
+	else {
+		soundmanager.playSound("shoot");
+	}
+	tanmac_list.push_back(make_shared<ThrowTamacInstance>(texture_, graphic_, beam, temp_infor, nullptr, false));
+
+	if(spread_) {
+		for(int i = 0; i < 4; i++) {
+			static const coord_def target_[4] = {
+				coord_def(-5,-3),
+				coord_def(-3,-3),
+				coord_def(3,-3),
+				coord_def(5,-3)
+			};
+
+			beam_infor temp_infor_sub(GetAttack(false)*multi_,GetAttack(true)*multi_,hit_,&you,you.GetParentType(),20,laser_?20:1,laser_?BMT_PENETRATE:BMT_NORMAL,brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
+			beam_iterator beam_sub(you.position,you.position+target_[i],RT_CEIL);
+			tanmac_list.push_back(make_shared<ThrowTamacInstance>(texture_, graphic_, beam_sub, temp_infor_sub, nullptr, false));
+		}
+	}
+
+	if(triple_) {
+		for(int i = 0; i < 2; i++) {
+			beam_infor temp_infor_sub(GetAttack(false)*multi_,GetAttack(true)*multi_,hit_,&you,you.GetParentType(),20,laser_?20:1,laser_?BMT_PENETRATE:BMT_NORMAL,brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
+			beam_iterator beam_sub(coord_def(you.position.x-1+2*i, you.position.y-1),coord_def(you.position.x-1+2*i, you.position.y-2));
+			tanmac_list.push_back(make_shared<ThrowTamacInstance>(texture_, graphic_, beam_sub, temp_infor_sub, nullptr, false));
+		}
+	}
+
+	if(back_) {
+		for(int i = 0; i < 3; i++) {
+			beam_infor temp_infor_sub(GetAttack(false)*multi_,GetAttack(true)*multi_,hit_,&you,you.GetParentType(),20,laser_?20:1,laser_?BMT_PENETRATE:BMT_NORMAL,brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
+			beam_iterator beam_sub(you.position,coord_def(you.position.x-1+i, you.position.y+1));
+			tanmac_list.push_back(make_shared<ThrowTamacInstance>(texture_, graphic_, beam_sub, temp_infor_sub, nullptr, false));
+		}
+	}
+
+
+	for(auto it = env[current_level].mon_vector.begin();  it != env[current_level].mon_vector.end() ;it++)
+	{
+		if(it->isLive() && it->id == MON_MAGICAL_STAR && it->isUserAlly() && it->s_invincibility != 0)
+		{
+			float multi_option_ = 0.5f * multi_;
+			beam_infor temp_infor_sub(GetAttack(false)*multi_option_,GetAttack(true)*multi_option_,hit_,&you,you.GetParentType(),20,laser_?20:1,laser_?BMT_PENETRATE:BMT_NORMAL,brand_,name_infor(LOC_SYSTEM_ATT_NORMAL));
+			beam_iterator beam_sub(it->position,coord_def(it->position.x, it->position.y-1));
+			tanmac_list.push_back(make_shared<ThrowTamacInstance>(texture_, graphic_, beam_sub, temp_infor_sub, nullptr, false));
+		}
+	}
+
+
+	while(!tanmac_list.empty()) {
+		for(list<shared_ptr<ThrowTamacInstance>>::iterator it = tanmac_list.begin(); it != tanmac_list.end();) {
+			list<shared_ptr<ThrowTamacInstance>>::iterator temp = it++;
+			if((*temp)->oneturn()) {
+				(*temp)->endShoot(false, laser_);
+				tanmac_list.erase(temp);
+			}
+		}
+		Sleep(10);
+		for(list<shared_ptr<ThrowTamacInstance>>::iterator it = tanmac_list.begin(); it != tanmac_list.end();) {
+			list<shared_ptr<ThrowTamacInstance>>::iterator temp = it++;
+			if((*temp)->oneturn_after(laser_)) {
+				(*temp)->endShoot(false, laser_);
+				tanmac_list.erase(temp);
+			}
+		}
+	}
+	Sleep(40);
+	env[current_level].ClearEffect();
 	return true;
 }
 
@@ -1561,6 +1656,8 @@ int players::GetNormalDelay()
 int players::GetWalkDelay()
 {
 	int speed_ = s_superman?3:(speed-(s_swift>0?2:(s_swift<0?-6:0)));
+	if(GetProperty(TPT_STG_SPEED)==1)
+		speed_ = speed_*7/10;
 	if(GetProperty(TPT_SPEED)==1)
 		speed_ = speed_*8/10;
 	else if(GetProperty(TPT_SPEED)==-1)
@@ -1832,6 +1929,10 @@ int players::HpRecoverDelay(int delay_)
 	{
 		cacul_ *= 0.7f;
 	}
+	if(GetProperty(TPT_STG_HP_RECOVERY)>0)
+	{
+		cacul_ += 100;
+	}
 
 
 
@@ -1883,6 +1984,11 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_WAKEUP_WITH_DAMAGE) + " ", false, false, false, CL_white_blue);
 		s_sleep = 0;
 	}
+
+	if(value_ < 0) {
+		value_ = -AbsorbShield(-value_);
+	}
+
 	if (pure_mp && value_ < 0 && mp > 0)
 	{
 		int temp_value_ = value_+mp;
@@ -2066,6 +2172,10 @@ int players::MpRecoverDelay(int delay_,bool set_)
 	else if(GetProperty(TPT_MP_REGEN)<0)
 	{
 		cacul_ *= 0.7f;
+	}
+	if(GetProperty(TPT_STG_MP_RECOVERY) > 0)
+	{
+		cacul_ += 30;
 	}
 
 
@@ -3774,6 +3884,25 @@ bool players::SetTracking(int value_) {
 		s_tracking = 100;
 	return true;
 }
+bool players::SetShield(int percent_, int turn_) {
+	s_shield.percent = percent_;
+	s_shield.max_turn = turn_;
+	s_shield.turn = 0;
+	s_shield.value = GetMaxHp()*s_shield.percent/100;
+
+	return true;
+}
+int players::AbsorbShield(int damage_) {
+	if(!damage_ || s_shield.percent == 0)
+		return damage_;
+	
+	int absorb_dam_ = std::min(s_shield.value, damage_);
+
+	s_shield.value -= absorb_dam_;
+	s_shield.turn = 0;
+
+	return damage_ - absorb_dam_;
+}
 int players::GetInvisible()
 {
 	return s_invisible;
@@ -3952,11 +4081,12 @@ void players::LevelUp(bool speak_)
 		soundmanager.playSound("levelup");
 		string temp = "레벨업! (" + to_string( you.level) +")";
 		LOG_MESSAGE(temp);
-		MoreWait();
+		if(!isShootingSprint())
+			MoreWait();
 	}
 	if(level%3 == 0)
 	{
-		if(speak_)
+		if(speak_ && !isShootingSprint())
 		{
 			bool end_ = false;
 			printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_STAT_MESSGE) + " ",false,false,false,CL_help);
@@ -4502,11 +4632,33 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 
 	if(t->type == ITM_GOAL)
 	{
-		printlog(LocalzationManager::formatString(LOC_SYSTEM_PICKUP_RUNE, 
-			PlaceHolderHelper(rune_string[t->value1])),true,false,false,CL_good);
-		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GET_ITEM, 
-			PlaceHolderHelper(rune_string[t->value1])),CL_warning);
-		rune[t->value1]++;
+		if(t->value1 >=0 && t->value1 < RUNE_MAX) {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_PICKUP_RUNE, 
+				PlaceHolderHelper(rune_string[t->value1])),true,false,false,CL_good);
+			AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GET_ITEM, 
+				PlaceHolderHelper(rune_string[t->value1])),CL_warning);
+			rune[t->value1]++;
+		} else if(t->value1 >= 100 && t->value1 < 100+(TPT_STG_LAST-TPT_STG_START+1)) { //100부터는 슈팅 스프린트용 
+			tribe_proper_type add_abil = (tribe_proper_type)(TPT_STG_START+t->value1-100);
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_PICKUP_RUNE, 
+				PlaceHolderHelper(getTribeProperty(add_abil, 1))),true,false,false,CL_good);
+			int prev_ = you.GetProperty(add_abil);
+			if(prev_ > 0) {
+				you.DeleteProperty(add_abil);
+				you.SetProperty(add_abil,prev_+1);
+			} else {
+				you.SetProperty(add_abil,1);
+			}
+
+
+			for(list<item>::iterator it = env[current_level].item_list.begin();it !=  env[current_level].item_list.end();it++)
+			{
+				if(it->type == ITM_GOAL) {
+					it->value1 = -1;
+				}
+			}
+
+		}
 		ReleaseMutex(mutx);
 		if (speak_)
 			soundmanager.playSound("rune");

@@ -8,7 +8,9 @@
 
 #include "tribe.h"
 #include "enum.h"
+#include "rect.h"
 #include "player.h"
+#include "mon_infor.h"
 #include "skill.h"
 #include "save.h"
 #include "skill_use.h"
@@ -32,106 +34,94 @@ void tribe_property::LoadDatas(FILE *fp)
 }
 
 
+LOCALIZATION_ENUM_KEY getTribePropertyKey(tribe_proper_type id, int value) {
+	return tribe_property(id, value).GetNameKey();
+}
 string getTribeProperty(tribe_proper_type id, int value) {
 	return tribe_property(id, value).GetName();
 }
+string getTribePropertyInfo(tribe_proper_type id, int value) {
+	return tribe_property(id, value).GetDetail();
+}
 
-string tribe_property::GetName()
+LOCALIZATION_ENUM_KEY tribe_property::GetNameKey()
 {
 	switch(id)
 	{
 	case TPT_FIRE_RESIST:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_FIRE_RESIST);
+		return LOC_SYSTEM_TRIBE_PROPERTY_FIRE_RESIST;
 	case TPT_COLD_RESIST:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_COLD_RESIST);
+		return LOC_SYSTEM_TRIBE_PROPERTY_COLD_RESIST;
 	case TPT_ELEC_RESIST:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_ELEC_RESIST);
+		return LOC_SYSTEM_TRIBE_PROPERTY_ELEC_RESIST;
 	case TPT_POISON_RESIST:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_POISON_RESIST);
+		return LOC_SYSTEM_TRIBE_PROPERTY_POISON_RESIST;
 	case TPT_STEALTH:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_STEALTH);
+		return LOC_SYSTEM_TRIBE_PROPERTY_STEALTH;
 	case TPT_FLY:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_FLY);
+		return LOC_SYSTEM_TRIBE_PROPERTY_FLY;
 	case TPT_SWIM:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SWIM);
+		return LOC_SYSTEM_TRIBE_PROPERTY_SWIM;
 	case TPT_SIZE:
 		{
 			switch(value)
 			{
 			case 1:
-				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SIZE1);
+				return LOC_SYSTEM_TRIBE_PROPERTY_SIZE1;
 			case -1:
-				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SIZE2);
+				return LOC_SYSTEM_TRIBE_PROPERTY_SIZE2;
 			default:
-				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BUG);
+				return LOC_SYSTEM_TRIBE_PROPERTY_BUG;
 			}
 		}
 	case TPT_HORN:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_HORN);
+		return LOC_SYSTEM_TRIBE_PROPERTY_HORN;
 	case TPT_GHOST_FOOT:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_GHOST_FOOT);
+		return LOC_SYSTEM_TRIBE_PROPERTY_GHOST_FOOT;
 	case TPT_CHEUKUMOGAMI:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_CHEUKUMOGAMI);
+		return LOC_SYSTEM_TRIBE_PROPERTY_CHEUKUMOGAMI;
 	case TPT_HP:
-		{
-			switch(value)
-			{
-			case 3:
-				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("+30"));
-			case 2:
-				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("+20"));
-			case 1:
-				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("+10"));
-			case -1:
-				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("-10"));
-			case -2:
-				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("-20"));
-			case -3:
-				return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_HP, PlaceHolderHelper("-30"));
-			default:
-				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BUG);
-			}
-		}
+		return LOC_SYSTEM_TRIBE_PROPERTY_HP;
 	case TPT_INVISIBLE:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_INVISIBLE);
+		return LOC_SYSTEM_TRIBE_PROPERTY_INVISIBLE;
 	case TPT_POWER_SAVE:
 		{
 			switch(value)
 			{
 			case 1:
-				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_POWER_SAVE1);
+				return LOC_SYSTEM_TRIBE_PROPERTY_POWER_SAVE1;
 			case -1:
-				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_POWER_SAVE2);
+				return LOC_SYSTEM_TRIBE_PROPERTY_POWER_SAVE2;
 			default:
-				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BUG);
+				return LOC_SYSTEM_TRIBE_PROPERTY_BUG;
 			}
 		}
 	case TPT_9_LIFE:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_MORE_LIFE);
+		return LOC_SYSTEM_TRIBE_PROPERTY_MORE_LIFE;
 	case TPT_18_LIFE:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_MORE_LIFE);
+		return LOC_SYSTEM_TRIBE_PROPERTY_MORE_LIFE;
 	case TPT_SPEED:
 		{
 			switch(value)
 			{
 			case 1:
-				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SPEED1);
+				return LOC_SYSTEM_TRIBE_PROPERTY_SPEED1;
 			case -1:
-				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SPEED2);
+				return LOC_SYSTEM_TRIBE_PROPERTY_SPEED2;
 			default:
-				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BUG);
+				return LOC_SYSTEM_TRIBE_PROPERTY_BUG;
 			}
 		}
 	case TPT_CLAW:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_CLAW);		
+		return LOC_SYSTEM_TRIBE_PROPERTY_CLAW;		
 	case TPT_JAW:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_JAW);	
+		return LOC_SYSTEM_TRIBE_PROPERTY_JAW;	
 	case TPT_FOOT:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_FOOT);
+		return LOC_SYSTEM_TRIBE_PROPERTY_FOOT;
 	case TPT_EYE:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_EYE);
+		return LOC_SYSTEM_TRIBE_PROPERTY_EYE;
 	case TPT_FUR:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_FUR);
+		return LOC_SYSTEM_TRIBE_PROPERTY_FUR;
 	case TPT_REGEN:
 		{
 			switch(value)
@@ -139,81 +129,133 @@ string tribe_property::GetName()
 			case 1:
 			case 2:
 			case 3:
-				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_REGEN1);	
+				return LOC_SYSTEM_TRIBE_PROPERTY_REGEN1;	
 			case -1:
 			case -2:
 			case -3:
-				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_REGEN2);
+				return LOC_SYSTEM_TRIBE_PROPERTY_REGEN2;
 			default:
-				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BUG);
+				return LOC_SYSTEM_TRIBE_PROPERTY_BUG;
 			}
 		}
 	case TPT_SLAY:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SLAY);
+		return LOC_SYSTEM_TRIBE_PROPERTY_SLAY;
 	case TPT_CONFUSE_ATTACK:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_CONFUSE_ATTACK);
+		return LOC_SYSTEM_TRIBE_PROPERTY_CONFUSE_ATTACK;
 	case TPT_MAGIC_RESIST:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_MAGIC_RESIST);
+		return LOC_SYSTEM_TRIBE_PROPERTY_MAGIC_RESIST;
 	case TPT_SKIN_AC:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SKIN_AC);
+		return LOC_SYSTEM_TRIBE_PROPERTY_SKIN_AC;
 	case TPT_STR:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_STR);
+		return LOC_SYSTEM_TRIBE_PROPERTY_STR;
 	case TPT_EV:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_EV);
+		return LOC_SYSTEM_TRIBE_PROPERTY_EV;
 	case TPT_CLOUD:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_CLOUD);
+		return LOC_SYSTEM_TRIBE_PROPERTY_CLOUD;
 	case TPT_BREATH:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BREATH);
+		return LOC_SYSTEM_TRIBE_PROPERTY_BREATH;
 	case TPT_SCALE:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SCALE);
+		return LOC_SYSTEM_TRIBE_PROPERTY_SCALE;
 	case TPT_GRAZE_CONTROL:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_GRAZE_CONTROL);
+		return LOC_SYSTEM_TRIBE_PROPERTY_GRAZE_CONTROL;
 	case TPT_FORCE_OF_NATURE:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_FORCE_OF_NATURE);
+		return LOC_SYSTEM_TRIBE_PROPERTY_FORCE_OF_NATURE;
 	case TPT_MP_REGEN:
 		{
 			switch(value)
 			{
 			case 1:
-				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_MP_REGEN1);
+				return LOC_SYSTEM_TRIBE_PROPERTY_MP_REGEN1;
 			case -1:
-				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_MP_REGEN2);
+				return LOC_SYSTEM_TRIBE_PROPERTY_MP_REGEN2;
 			default:
-				return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BUG);
+				return LOC_SYSTEM_TRIBE_PROPERTY_BUG;
 			}
 		}
 	case TPT_CONFUSE_RESIST:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_CONFUSE_RESIST);
+		return LOC_SYSTEM_TRIBE_PROPERTY_CONFUSE_RESIST;
 	case TPT_SPELL_POWER:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SPELL_POWER);
+		return LOC_SYSTEM_TRIBE_PROPERTY_SPELL_POWER;
 	case TPT_FINGER_MAGIC:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_FINGER_MAGIC);
+		return LOC_SYSTEM_TRIBE_PROPERTY_FINGER_MAGIC;
 	case TPT_BLOOD_MAGIC:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BLOOD_MAGIC);
+		return LOC_SYSTEM_TRIBE_PROPERTY_BLOOD_MAGIC;
 	case TPT_TORMENT:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_TORMENT);
+		return LOC_SYSTEM_TRIBE_PROPERTY_TORMENT;
 	case TPT_CLOUD_RESIST:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_CLOUD_RESIST);
+		return LOC_SYSTEM_TRIBE_PROPERTY_CLOUD_RESIST;
 	case TPT_SEE_INVI:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_SEE_INVI);
+		return LOC_SYSTEM_TRIBE_PROPERTY_SEE_INVI;
 	case TPT_FIRE_IMUNE:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_FIRE_IMUNE);
+		return LOC_SYSTEM_TRIBE_PROPERTY_FIRE_IMUNE;
 	case TPT_COLD_IMUNE:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_COLD_IMUNE);
+		return LOC_SYSTEM_TRIBE_PROPERTY_COLD_IMUNE;
 	case TPT_ELEC_IMUNE:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_ELEC_IMUNE);
+		return LOC_SYSTEM_TRIBE_PROPERTY_ELEC_IMUNE;
 	case TPT_PURE_MP:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_PURE_MP);
+		return LOC_SYSTEM_TRIBE_PROPERTY_PURE_MP;
 	case TPT_PURE_POWER:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_PURE_POWER);
+		return LOC_SYSTEM_TRIBE_PROPERTY_PURE_POWER;
 	case TPT_PURE_LIFE:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_PURE_LIFE);
+		return LOC_SYSTEM_TRIBE_PROPERTY_PURE_LIFE;
 	case TPT_PURE_SYSTEM:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_PURE_SYSTEM);
+		return LOC_SYSTEM_TRIBE_PROPERTY_PURE_SYSTEM;
+	case TPT_STG_SPREAD_SHOT:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_SPREAD_SHOT;
+	case TPT_STG_TRIPLE_SHOT:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_TRIPLE_SHOT;
+	case TPT_STG_BACK_SHOT:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_BACK_SHOT;
+	case TPT_STG_LASER_SHOT:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_LASER_SHOT;
+	case TPT_STG_SPEED:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_SPEED;
+	case TPT_STG_OPTION:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_OPTION;
+	case TPT_STG_STATIC_ELECTRONIC:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_STATIC_ELECTRONIC;
+	case TPT_STG_SOUL_BOMB:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_SOUL_BOMB;
+	case TPT_STG_SHIELD:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_SHIELD;
+	case TPT_STG_HP_RECOVERY:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_HP_RECOVERY;
+	case TPT_STG_MP_RECOVERY:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_MP_RECOVERY;
 	default:
 		break;
 	}
-	return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_BUG);
+	return LOC_SYSTEM_TRIBE_PROPERTY_BUG;
+}
+
+
+string tribe_property::GetName()
+{
+	switch(id)
+	{
+	default:
+		return LocalzationManager::locString(GetNameKey());
+	case TPT_HP:
+		{
+			switch(value)
+			{
+			case 3:
+				return LocalzationManager::formatString(GetNameKey(), PlaceHolderHelper("+30"));
+			case 2:
+				return LocalzationManager::formatString(GetNameKey(), PlaceHolderHelper("+20"));
+			case 1:
+				return LocalzationManager::formatString(GetNameKey(), PlaceHolderHelper("+10"));
+			case -1:
+				return LocalzationManager::formatString(GetNameKey(), PlaceHolderHelper("-10"));
+			case -2:
+				return LocalzationManager::formatString(GetNameKey(), PlaceHolderHelper("-20"));
+			case -3:
+				return LocalzationManager::formatString(GetNameKey(), PlaceHolderHelper("-30"));
+			default:
+				return LocalzationManager::locString(GetNameKey());
+			}
+		}
+	}
 }
 string tribe_property::GetInfor()
 {
@@ -478,6 +520,28 @@ string tribe_property::GetInfor()
 		return value>1?LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_LIFE1):LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_LIFE2); 
 	case TPT_PURE_SYSTEM:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_SYSTEM);
+	case TPT_STG_SPREAD_SHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SPREAD_SHOT);
+	case TPT_STG_TRIPLE_SHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_TRIPLE_SHOT);
+	case TPT_STG_BACK_SHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_BACK_SHOT);
+	case TPT_STG_LASER_SHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_LASER_SHOT);
+	case TPT_STG_SPEED:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SPEED);
+	case TPT_STG_OPTION:
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_OPTION, PlaceHolderHelper(to_string(value)));
+	case TPT_STG_STATIC_ELECTRONIC:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_STATIC_ELECTRONIC);
+	case TPT_STG_SOUL_BOMB:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SOUL_BOMB);
+	case TPT_STG_SHIELD:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SHIELD);
+	case TPT_STG_HP_RECOVERY:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_HP_RECOVERY);
+	case TPT_STG_MP_RECOVERY:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_MP_RECOVERY);
 	default:
 		break;
 	}
@@ -705,6 +769,28 @@ string tribe_property::GetDetail()
 		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_LIFE, PlaceHolderHelper(value>1?"2":"1"));
 	case TPT_PURE_SYSTEM:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_SYSTEM);
+	case TPT_STG_SPREAD_SHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SPREAD_SHOT);
+	case TPT_STG_TRIPLE_SHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_TRIPLE_SHOT);
+	case TPT_STG_BACK_SHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_BACK_SHOT);
+	case TPT_STG_LASER_SHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_LASER_SHOT);
+	case TPT_STG_SPEED:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SPEED);
+	case TPT_STG_OPTION:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_OPTION);
+	case TPT_STG_STATIC_ELECTRONIC:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_STATIC_ELECTRONIC);
+	case TPT_STG_SOUL_BOMB:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SOUL_BOMB);
+	case TPT_STG_SHIELD:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SHIELD);
+	case TPT_STG_HP_RECOVERY:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_HP_RECOVERY);
+	case TPT_STG_MP_RECOVERY:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_MP_RECOVERY);
 	default:
 		break;
 	}
@@ -724,6 +810,18 @@ D3DCOLOR tribe_property::getColor()
 	case TPT_PURE_LIFE:	
 	case TPT_PURE_SYSTEM:
 		return CL_junko;
+	case TPT_STG_SPREAD_SHOT:
+	case TPT_STG_TRIPLE_SHOT:
+	case TPT_STG_BACK_SHOT:
+	case TPT_STG_LASER_SHOT:
+	case TPT_STG_SPEED:
+	case TPT_STG_OPTION:
+	case TPT_STG_STATIC_ELECTRONIC:
+	case TPT_STG_SOUL_BOMB:
+	case TPT_STG_SHIELD:
+	case TPT_STG_HP_RECOVERY:
+	case TPT_STG_MP_RECOVERY:
+		return CL_green;
 	default:
 		break;
 	}
@@ -902,6 +1000,60 @@ void tribe_property::gain(bool gain_)
 	case TPT_PURE_LIFE:
 		return;
 	case TPT_PURE_SYSTEM:
+		return;
+	case TPT_STG_SPREAD_SHOT:
+		return;
+	case TPT_STG_TRIPLE_SHOT:
+		return;
+	case TPT_STG_BACK_SHOT:
+		return;
+	case TPT_STG_LASER_SHOT:
+		return;
+	case TPT_STG_SPEED:
+		return;
+	case TPT_STG_OPTION:
+	if(gain_)
+	{
+		dif_rect_iterator rit(you.position, 3);
+		int i = 1;
+		int count = value_;
+		for (; !rit.end() && i > 0; rit++)
+		{
+			if (env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && you.position != (*rit))
+			{
+				monster* mon_ = env[current_level].AddMonster(MON_MAGICAL_STAR, M_FLAG_ALLY, *rit);
+				mon_->SetInvincibility(-1, false);
+				mon_->spell_lists.clear();
+				count--;
+				if(count == 0)
+					break;
+			}
+		}
+	} else {
+		for(auto it = env[current_level].mon_vector.begin();  it != env[current_level].mon_vector.end() ;it++)
+		{
+			if(it->isLive() && it->id == MON_MAGICAL_STAR && it->isUserAlly() && it->s_invincibility != 0)
+			{
+				it->dead(PRT_NEUTRAL, false, true);
+			}
+		}
+	}
+		return;
+	case TPT_STG_STATIC_ELECTRONIC:
+		return;
+	case TPT_STG_SOUL_BOMB:
+		you.Ability(SKL_SOULSHOT,true,!gain_);
+		return;
+	case TPT_STG_SHIELD:
+		if(value_>0) {
+			you.SetShield(30,20);
+		} else {
+			you.SetShield(0,0);
+		}
+		return;
+	case TPT_STG_HP_RECOVERY:
+		return;
+	case TPT_STG_MP_RECOVERY:
 		return;
 	default:
 		break;

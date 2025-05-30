@@ -971,6 +971,11 @@ bool item::isBreakable(){
 	return true;
 
 }
+bool item::isNameAccent() {
+	if(type == ITM_ORB || type == ITM_GOAL)
+		return true;
+	return false;
+}
 void item::Identify()
 {
 	bool prev_iden = identify;
@@ -1222,6 +1227,12 @@ int item::action(int delay_)
 				}
 			}
 		}
+	}
+	
+	if(type == ITM_GOAL && value1 == -1)
+	{
+		env[current_level].DeleteItem(this);
+		return 0;
 	}
 	if(type == ITM_FOOD && value1 == 0)
 	{

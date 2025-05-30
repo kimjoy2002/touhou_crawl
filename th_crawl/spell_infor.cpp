@@ -856,8 +856,14 @@ string GetSkillInfor(skill_list skill)
 	case SKL_PHILOSOPHERS_5:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_5);
 		break;
+	case SKL_SOULSHOT:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SOULSHOT);
+		break;
+	case SKL_SUPER_GRAZE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SUPER_GRAZE);
+		break;
 	default:
-		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_5);
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_UKNOWN);
 		break;
 	}
 	return oss.str();

@@ -141,6 +141,19 @@ struct prev_action_struct
 };
 
 
+
+struct shield_struct
+{
+	int percent;
+	int value;
+	int turn;
+	int max_turn;
+
+	shield_struct():percent(0),value(0),turn(0),max_turn(0){};
+};
+
+
+
 class players: public unit
 {
 public:
@@ -301,6 +314,8 @@ public:
 	int s_oil;
 	int s_fire;
 	int s_tracking;
+	shield_struct s_shield;
+
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
@@ -384,7 +399,7 @@ public:
 	int move(short_move x_mov, short_move y_mov);
 	int move(const coord_def &c);
 	bool offsetmove(const coord_def &c);
-	bool shooing_fire();
+	bool shooing_fire(float bonus_ = 1.0f);
 	void youAttack(unit* unit_); //누군가를 공격하다.
 	int OpenDoor(const coord_def &c, bool no_turn);
 	bool GetStatPanalty(){return s_str<=0 ||s_dex<=0 || s_int<=0;};
@@ -523,6 +538,8 @@ public:
 	bool SetOil(int value_, int max_);
 	bool SetFire(int value_, bool from_oil);
 	bool SetTracking(int value_);
+	bool SetShield(int percent_, int turn_);
+	int AbsorbShield(int damage_);
 	
 	int GetInvisible();
 	int GetSaved(){return true;};
@@ -600,6 +617,7 @@ public:
 	void burstCloud(int kind_, int rate_);
 	bool isEnemyMonster(const monster* monster_info);
 	bool isUserAlly() const {return true;}
+	bool isPassedBullet(unit* order);
 	bool isMemorizeSpell(int spell_);
 	bool CanMemorizeSpell(int spell_);
 	bool isView(){return true;};

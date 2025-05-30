@@ -2349,6 +2349,42 @@ bool skill_torment(int pow, bool short_, unit* order, coord_def target)
 	return true;
 }
 
+bool skill_soulshot(int pow, bool short_, unit* order, coord_def target)
+{
+	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_SOULSHOT) + " ", false, false, false, CL_white_blue);
+	soundmanager.playSound("soul_shot");
+	for(int i=-4;i<=4;i++)
+		for(int j=-4;j<=4;j++)
+			if(i*i+j*j<24 && env[current_level].isMove(order->position.x+i,order->position.y+j,true))
+				env[current_level].MakeEffect(coord_def(order->position.x+i,order->position.y+j),&img_blast[3],false);
+	for(int i=-4;i<=4;i++)
+	{
+		for(int j=-4;j<=4;j++)
+		{				
+			if(i*i+j*j<24 && (env[current_level].isInSight(order->position+i)) && env[current_level].isMove(order->position.x+i,order->position.y+j,true))
+			{
+				if(unit* hit_ = env[current_level].isMonsterPos(order->position.x+i,order->position.y+j))
+				{
+					if(hit_ != order)
+						hit_->SetParalyse(rand_int(7,12));
+				}
+			}
+		}
+	}
+	Sleep(300);
+	env[current_level].ClearEffect();
+
+	return true;
+}
+
+bool skill_super_graze(int pow, bool short_, unit* order, coord_def target)
+{
+	soundmanager.playSound("buff");
+	you.SetSuperGraze(rand_int(10, 15));
+	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER), false, false, false, CL_white_blue);
+	return true;
+}
+
 void abandon_god() {
 	bool sanae_ = (you.char_type == UNIQ_START_SANAE) && (you.god == GT_KANAKO || you.god == GT_SUWAKO);
 	bool junko_ = you.god_value[GT_JUNKO][3] != 0 && you.god == GT_JUNKO;
@@ -4793,6 +4829,12 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_TORMENT:
 		return skill_torment(power,short_,&you, target);
+		break;
+	case SKL_SOULSHOT:
+		return skill_soulshot(power,short_,&you, target);
+		break;
+	case SKL_SUPER_GRAZE:
+		return skill_super_graze(power,short_,&you, target);
 		break;
 	case SKL_ABANDON_GOD:
 		return skill_abandon_god(power,short_,&you, target);

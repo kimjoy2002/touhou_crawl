@@ -285,6 +285,7 @@ public:
 	bool MakeEvent(int id_, coord_def position_, event_type type_, int count_ = -1, int value = 0);
 	void MakeEffect(const coord_def &c, textures *t, bool over_sight_); //over_sight_ : 시야 밖에서의 이펙트도 볼것인가?
 	void ClearEffect();
+	void ClearWithoutLaserEffect();
 	void ClearAllShadow();
 	void ClearEvent();
 	void ClearSmoke();

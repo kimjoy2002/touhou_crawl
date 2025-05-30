@@ -1243,6 +1243,17 @@ void environment::ClearEffect()
 	effect_list.clear();
 	ReleaseMutex(mutx);
 }
+void environment::ClearWithoutLaserEffect()
+{
+	WaitForSingleObject(mutx, INFINITE);
+	for(list<effect>::iterator it = effect_list.begin();it !=effect_list.end();) {
+		list<effect>::iterator temp = it++;
+		if(!(temp->position.x == you.position.x && temp->position.y < you.position.x)) {
+			effect_list.erase(temp);
+		}
+	}
+	ReleaseMutex(mutx);
+}
 void environment::ClearAllShadow()
 {
 	WaitForSingleObject(mutx, INFINITE);
@@ -1357,7 +1368,7 @@ void environment::ClearFloor()
 void environment::enterBgm(boolean first_)
 {
 	if (isShootingSprint()) {
-		PlayBGM("dungeon");
+		PlayBGM("stage1");
 		return;
 	}
 	else if (isArena() || isSprint()) {
@@ -1424,7 +1435,7 @@ void environment::playBgm() {
 	if (isArena())
 		PlayBGM("sprint");
 	else if (isShootingSprint())
-		PlayBGM("dungeon");
+		PlayBGM("stage1");
 	else if (isSprint())
 		PlayBGM("sprint");
 	else if (floor<TEMPLE_LEVEL)

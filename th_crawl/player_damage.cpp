@@ -225,6 +225,9 @@ int players::GetAtkDelay()
 	}
 	else if(equipment[ET_WEAPON])
 		delay_ = 10;
+	
+	if(delay_<2)
+		delay_ = 2;
 		
 	return delay_;
 

@@ -43,6 +43,37 @@ list<item>::iterator ThrowSelect();
 bool CheckThrowPath(coord_def start,coord_def target, beam_iterator &beam, bool passdoor = false);
 void paintpath(coord_def c_,beam_iterator &beam, list<item>::iterator item_, bool set, projectile_infor* infor_, int m_len, float sector_);
 
+
+
+class ThrowTamacInstance {
+public:
+	textures* t_;
+	int graphic_type;
+	beam_iterator beam;
+	const beam_infor infor_;
+	item* item_;
+	bool effect_delete;
+	bool mimic_;
+
+
+private:
+	coord_def prev;
+	int penetrate;
+	int direc;
+	int length;
+	int count;
+	int path;
+
+public:
+	ThrowTamacInstance(textures* t_, int graphic_type, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete = true, bool mimic_ = false);
+
+	void init();
+	bool oneturn();
+	bool oneturn_after(bool without_laser); //슈팅모드 전용 파라미터
+	coord_def endShoot(bool sleep_, bool without_laser);
+};
+
+
 coord_def throwtanmac(textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete = true, bool mimic_ = false);
 coord_def throwtanmac(int graphic_type,beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete = true, bool mimic_ = false);
 bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &target, const beam_infor &infor_);

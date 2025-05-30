@@ -495,6 +495,7 @@ void SOUNDMANAGER::Initialize(HWND WindowHandle)
 	addBgm("hakurei", "sound\\bgm\\hakurei.wav");
 	addBgm("sprint", "sound\\bgm\\sprint.wav");
 	addBgm("ziggurat", "sound\\bgm\\ziggurat.wav");
+	addBgm("stage1", "sound\\bgm\\stage1.wav");
 
 }
 

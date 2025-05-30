@@ -1610,8 +1610,14 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	break;
 
 	case ITM_GOAL:
+	
+	if(it->value1 >= 100 && it->value1 < 100+(TPT_STG_LAST-TPT_STG_START+1)) {
+		_infor_(getTribePropertyInfo((tribe_proper_type)(it->value1-100+TPT_STG_START), 1));
+	} else {
 		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RUNE));
-		break;
+
+	}
+	break;
 	case ITM_ORB:
 		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_YINYANG_ORB));
 		break;

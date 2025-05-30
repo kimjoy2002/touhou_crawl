@@ -11,7 +11,7 @@
 
 #include <string>
 #include "d3dUtility.h"
-
+#include "enumMapBuilder.h"
 using namespace std;
 
 enum tribe_type;
@@ -67,6 +67,19 @@ enum tribe_proper_type
 	TPT_PURE_POWER,
 	TPT_PURE_LIFE,
 	TPT_PURE_SYSTEM,
+	TPT_STG_START,
+	TPT_STG_SPREAD_SHOT = TPT_STG_START,
+	TPT_STG_TRIPLE_SHOT,
+	TPT_STG_BACK_SHOT,
+	TPT_STG_LASER_SHOT,
+	TPT_STG_SPEED,
+	TPT_STG_OPTION,
+	TPT_STG_STATIC_ELECTRONIC,
+	TPT_STG_SOUL_BOMB,
+	TPT_STG_SHIELD,
+	TPT_STG_HP_RECOVERY,
+	TPT_STG_MP_RECOVERY,
+	TPT_STG_LAST = TPT_STG_MP_RECOVERY,
 	TPT_MAX
 };
 
@@ -82,6 +95,7 @@ public:
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
 
+	LOCALIZATION_ENUM_KEY GetNameKey();
 	string GetName();
 	string GetInfor();
 	string GetDetail();
@@ -90,8 +104,9 @@ public:
 };
 
 
-
-
+LOCALIZATION_ENUM_KEY getTribePropertyKey(tribe_proper_type id, int value);
+string getTribeProperty(tribe_proper_type id, int value);
+string getTribePropertyInfo(tribe_proper_type id, int value);
 void SetTribe(tribe_type select_);
 void PropertyView();
 void LevelUpTribe(int level_);

@@ -150,6 +150,8 @@ enum skill_list
 	SKL_MIKO_4,
 	SKL_MIKO_5,
 	SKL_MIKO_6,
+	SKL_SOULSHOT,
+	SKL_SUPER_GRAZE,
 	SKL_MAX
 };
 

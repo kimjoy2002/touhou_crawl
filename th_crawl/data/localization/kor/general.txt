@@ -632,6 +632,7 @@ LOC_SYSTEM_BUFF_STAT_SLEEP,수면
 LOC_SYSTEM_BUFF_STAT_OIL,기름
 LOC_SYSTEM_BUFF_STAT_FIRE,화염
 LOC_SYSTEM_BUFF_STAT_TRACKING,추적
+LOC_SYSTEM_BUFF_STAT_SHIELD,실드({0})
 LOC_SYSTEM_BUFF_DESCRIBE_RISK,위험도는 얼마나 현재 상황이 위험한지에 대한 수치입니다.
 LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY1,갑옷과 방패가 너무 무겁습니다! 패널티만큼 회피, 은밀, 마법, 명중, 이동속도가 감소되고, 행동속도가 2배로 느려집니다.
 LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY2,갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피, 은밀, 마법성공율, 명중, 이동속도가 감소합니다.
@@ -734,6 +735,7 @@ LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLEEP,당신은 잠을 자고 있습니다!
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_OIL,당신은 기름을 뒤집어 썼습니다. 불씨를 조심하세요.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_FIRE,당신은 불타고 있습니다!
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_TRACKING,당신은 추적당하고 있습니다. 맵의 모든 적이 당신의 위치를 정확히 쫓습니다.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_SHIELD,모든 데미지를 실드가 대신 막아줍니다. 일정 시간 데미지를 받지않으면 재생합니다.
 LOC_SYSTEM_SMOKE_NORMAL,옅은 연기
 LOC_SYSTEM_SMOKE_FOG,안개 구름
 LOC_SYSTEM_SMOKE_FIRE,화염 구름
@@ -1911,6 +1913,17 @@ LOC_SYSTEM_TRIBE_PROPERTY_PURE_MP,순수한 마력
 LOC_SYSTEM_TRIBE_PROPERTY_PURE_POWER,순수한 파워
 LOC_SYSTEM_TRIBE_PROPERTY_PURE_LIFE,순수한 생명
 LOC_SYSTEM_TRIBE_PROPERTY_PURE_SYSTEM,순수한 시스템
+LOC_SYSTEM_TRIBE_PROPERTY_STG_SPREAD_SHOT,확산사격
+LOC_SYSTEM_TRIBE_PROPERTY_STG_TRIPLE_SHOT,3발사격
+LOC_SYSTEM_TRIBE_PROPERTY_STG_BACK_SHOT,등뒤사격
+LOC_SYSTEM_TRIBE_PROPERTY_STG_LASER_SHOT,레이저사격
+LOC_SYSTEM_TRIBE_PROPERTY_STG_SPEED,고속이동
+LOC_SYSTEM_TRIBE_PROPERTY_STG_OPTION,옵션추가
+LOC_SYSTEM_TRIBE_PROPERTY_STG_STATIC_ELECTRONIC,정전기
+LOC_SYSTEM_TRIBE_PROPERTY_STG_SOUL_BOMB,영격
+LOC_SYSTEM_TRIBE_PROPERTY_STG_SHIELD,실드
+LOC_SYSTEM_TRIBE_PROPERTY_STG_HP_RECOVERY,체력재생증가
+LOC_SYSTEM_TRIBE_PROPERTY_STG_MP_RECOVERY,영력재생증가
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BUG,이 특성은 버그다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIRE_RESIST1,당신은 화염에 아주 강하다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIRE_RESIST2,당신은 화염에 강하다.
@@ -1985,6 +1998,17 @@ LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_POWER,당신은 항상 풀파워다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_LIFE1,당신은 2개의 추가 생명이 남아있다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_LIFE2,당신은 1개의 추가 생명이 남아있다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_SYSTEM,당신은 순화 상태에서도 스펠카드를 사용할 수 있으며 부적의 충전속도가 3배가 된다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SPREAD_SHOT,당신의 사격이 확산된다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_TRIPLE_SHOT,당신의 사격이 3발씩 나간다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_BACK_SHOT,당신의 뒤에서도 사격이 나간다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_LASER_SHOT,당신의 기본 사격은 관통된다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SPEED,당신은 빠르게 이동할 수 있다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_OPTION,당신은 옵션을 {0}개 들고 다닌다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_STATIC_ELECTRONIC,당신은 주변에 정전기를 내뿜는다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SOUL_BOMB,당신은 파워를 1칸 소모해서 영격을 쓸 수 있다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SHIELD,당신은 일정시간 맞지않으면 실드를 만든다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_HP_RECOVERY,당신의 체력 회복속도가 상당히 빨라진다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_MP_RECOVERY,당신읜 영력 회복속도가 상당히 빨라진다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BUG,이 특성은 버그이므로 존재자체가 해악이다.\n제작자에게 신고하자.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIRE_RESIST1,화염 저항이 {0}단계 증가한다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIRE_RESIST2,화염 저항이 {0}단계 감소한다.
@@ -2045,6 +2069,17 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_MP,당신은 순호의 축복으로 영력
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_POWER,당신은 순호의 축복으로 항상 풀파워모드이며 떨어지지않는다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_LIFE,당신은 순호의 축복으로 죽어도 다시 부활할 수 있다.\n단, 순호를 배신하여 생긴 죽음은 이 축복으로 상쇄가 불가능하다.\n당신의 추가 생명은 {0}개 남았다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_SYSTEM,당신은 순호의 축복으로 슈팅 시스템에서 가져온 아이템 효과가 강화되었다.\n때문에 순화상태에서도 스펠카드가 사용이 가능하게 되었다.\n또한, 평상시보다 부적의 충전속도가 3배로 빨라지게된다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SPREAD_SHOT,당신의 양옆으로 넓게 퍼져나가는 확산사격을 4발 더 발사 할 수 있다.\n추가되는 사격은 기본 사격과 동일한 데미지를 가지나 동일한 적을 때리진 않는다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_TRIPLE_SHOT,당신은 기본 사격 바로 양옆에 동일한 사격을 발사 할 수 있다.\n추가되는 사격은 기본 사격과 동일한 데미지를 가지나 동일한 적을 때리진 않는다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_BACK_SHOT,당신은 자신의 아래로 발사하는 3발의 확산 사격을 추가로 발사한다.\n추가되는 사격은 기본 사격과 동일한 데미지를 가지나 동일한 적을 때리진 않는다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_LASER_SHOT,당신의 모든 사격이 레이저가 되어 전방의 모든 적을 관통한다.\n다른 능력에 의해 얻은 사격 또한 레이저가 된다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SPEED,당신의 이동속도가 1.5배로 늘어난다.\n이동을 제외한 행동 속도는 증가하지않는다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_OPTION,당신을 따라다니는 옵션이 한개 생긴다.\n옵션은 기본 사격에 맞춰서 전방으로 발사된다.\n옵션의 사격은 근접 공격의 50%로 공격한다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_STATIC_ELECTRONIC,가끔씩 당신의 주위에 정전기가 발생하여 가까운 적을 자동으로 공격한다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SOUL_BOMB,당신은 파워를 1.00 소모하여 주변의 적을 마비시키는 영격을 발동할 수 있다.\n일반적인 영격보다 범위가 훨씬 크다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SHIELD,당신은 최대 체력의 30%의 피해를 막아주는 보호막을 얻는다.\n이 보호막은 20턴정도 피해를 받지않으면 다시 재생된다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_HP_RECOVERY,당신의 체력 회복속도가 눈에 띄게 상승한다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_MP_RECOVERY,당신의 영력 회복속도가 눈에 띄게 상승한다.
 LOC_SYSTEM_TRIBE_PROPERTY_HEAD_UNEQUIP,당신이 쓰고있던 머리방어구가 벗겨졌다!
 LOC_SYSTEM_TRIBE_PROPERTY_FOOT_UNEQUIP,당신이 쓰고있던 다리방어구가 벗겨졌다!
 LOC_SYSTEM_TRIBE_PROPERTY_HAND_UNEQUIP,당신이 쓰고있던 손방어구가 벗겨졌다!
@@ -2700,6 +2735,8 @@ LOC_SYSTEM_SKL_MIKO_3,후광
 LOC_SYSTEM_SKL_MIKO_4,저항얻기
 LOC_SYSTEM_SKL_MIKO_5,빨간망토 파란망토
 LOC_SYSTEM_SKL_MIKO_6,인기폭발
+LOC_SYSTEM_SKL_SOULSHOT,영격
+LOC_SYSTEM_SKL_SUPER_GRAZE,근성회피
 LOC_SYSTEM_SKL_UKNOWN,알수없는 능력
 LOC_SYSTEM_SKL_DESCRIBE_NONE,존재하지 않는 능력이다.\n
 LOC_SYSTEM_SKL_DESCRIBE_KANAKO_1,카나코님의 힘을 구현화하여 상대에게 순간적인 돌진을 할 수 있게된다.\n자신의 근접공격력, 신앙심과 거리에 비례해서 데미지가 들어가며\n사용후 이동속도가 느려지는 버프를 받게된다.\n이 버프중엔 건신초래돌을 추가적으로 사용할 수 없다.\n
@@ -2791,6 +2828,8 @@ LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_2,물을 압축하여 발사한다.\n맞은
 LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_3,빠른 대기의 탄환을 적에게 날리는 마법.\n적을 관통하거나 아주 강력한 마법은 아니지만 다른 마법에 비해 시전하는 속도가 빠르다.\n다른 마법에 비해 2배 빠른 속도로 시전이 가능하다.\n
 LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_4,주변에 커다란 에메랄드로 된 벽을 솓구친다.\n밀착하여 가까이 있는 상대에게 데미지를 줄 수 있다.\n
 LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_5,원하는 위치의 대지에 마법을 걸어 빠른 속도로 융기시키는 마법.\n뾰족한 바위가 올라오면서 작은 범위에 큰 데미지를 준다.\n파워가 낮으면 범위안에서도 폭발이 안일어날 수 있다.\n
+LOC_SYSTEM_SKL_DESCRIBE_SOULSHOT,주변의 적에게 저항할 수 없는 짧은 마비를 건다.\n또한 일반적인 영격보다 훨씬 범위가 큰 주변 5칸의 적을 마비시킨다.\n
+LOC_SYSTEM_SKL_DESCRIBE_SUPER_GRAZE,일정시간 회피가능한 모든 공격을 100% 회피한다.\n
 LOC_SYSTEM_SKL_DESCRIBE_UKNOWN,모르는 능력.\n
 LOC_SYSTEM_ITEM_CATEGORY_WEAPON,무기
 LOC_SYSTEM_ITEM_CATEGORY_TANMAC,탄막

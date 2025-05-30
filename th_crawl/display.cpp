@@ -2908,6 +2908,14 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_SION2), this);
 				}
 			}
+
+			if(you.s_shield.percent > 0) {
+				stateDraw.addState(LocalzationManager::formatString(LOC_SYSTEM_BUFF_STAT_SHIELD, PlaceHolderHelper(to_string(you.s_shield.value))),(you.s_shield.value>= you.GetMaxHp()*you.s_shield.percent/100 ?CL_white_blue:(you.s_shield.value>0?CL_blue:CL_danger)),
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SHIELD), this);
+			}
+
+
+
 			if (you.drowned)
 			{
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_DROWNING), CL_danger, LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_DROWNING), this);
@@ -3687,6 +3695,35 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		}
 	}
 
+
+
+
+	//아이템 이름만 그리기
+	{
+		list<item>::iterator it; 
+		for(it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();)
+		{
+			list<item>::iterator temp = it++; 
+			
+			if((*temp).position == you.position && floor_items == env[current_level].item_list.end()) {
+				floor_items = temp;
+			}
+			if(it == env[current_level].item_list.end() || (*temp).position != (*it).position)
+			{
+				if(env[current_level].isInSight((*temp).position))
+				{
+					if(abs((*temp).position.x - x_-sight_x)<=sight_x && abs((*temp).position.y - y_-sight_y)<=sight_y)
+					{
+						if((*temp).isNameAccent() && (*temp).GetName() != mouseInfo) {
+							
+							RECT rc = { (LONG)(((*temp).position.x - x_)*calc_tile_size + tile_x_offset - calc_tile_size/2),(LONG)(((*temp).position.y - y_)*calc_tile_size + tile_x_offset - calc_tile_size/2-fontDesc.Height), (LONG)option_mg.getWidth(), (LONG)option_mg.getHeight() };
+							DrawTextUTF8(pfont,pSprite, (*temp).GetName() .c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (*temp).item_color());
+						}
+					}
+				}
+			}
+		}
+	}
 
 
 

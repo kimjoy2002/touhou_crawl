@@ -79,7 +79,7 @@ int GetHazard()
 				{
 					for(auto it2 = it->spell_lists.begin();it2!= it->spell_lists.end(); it2++)
 					{
-						int length_ = SpellLength((spell_list)it2->num);
+						int length_ = SpellLength((spell_list)it2->num, false);
 						if(!length_ || !(distant_ > length_*length_))
 						{
 							if(SpellFlagCheck((spell_list)it2->num,S_FLAG_RANGE_ATTACK))

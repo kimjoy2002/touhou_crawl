@@ -641,6 +641,9 @@ bool useAutoTanmac(unit* mon_) {
 void scrollup(bool down, int need_y) {
 	vector<int> ablesize = {23,32,47,64,95,128};
 
+	if((need_y == 0 && isShootingSprint()) || ReplayClass.play) {
+		return;
+	}
 
 	bool next_ = false;
 	if(need_y > 0) {

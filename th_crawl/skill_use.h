@@ -183,7 +183,7 @@ enum skill_flag
 
 float GetSpellSector(spell_list spell_);
 bool SpellFlagCheck(spell_list skill, skill_flag flag);
-int SpellLength(spell_list skill);
+int SpellLength(spell_list skill, bool isPlayer);
 bool isMonsterhurtSpell(monster* use_, monster* target_, spell_list spell_);
 bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target);
 string SpellString(spell_list skill);
@@ -217,6 +217,8 @@ void SkillUseTraning(skill_list skill);
 string SkillCostString(skill_list skill);//코스트표현문장
 
 monster* BaseSummon(int id_, int time_, bool targeting_, bool random_, int range_, unit* order, coord_def target, SUMMON_KIND kind_, int max_num_);
+
+void BaseBomb_forAlly(coord_def pos, textures* t_, attack_infor& att_, unit* order_, bool frozen_);
 void BaseBomb(coord_def pos, textures* t_, attack_infor& att_, unit* except_ = NULL);
 int GetSpellBombRange(skill_list skill);//폭발넓이
 int GetSpellBombRange(spell_list spell);
@@ -242,7 +244,7 @@ void SpellView();
 void SkillUse(char auto_);
 
 
-string GetSpellInfor(spell_list spell);
+string GetSpellInfor(spell_list spell, bool isPlayer);
 string GetSkillInfor(skill_list skill);
 string GetSpellSchoolString(spell_list spell);
 

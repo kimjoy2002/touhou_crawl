@@ -282,6 +282,7 @@ LOC_SYSTEM_ALREADY_FULL_POWER,당신은 이미 풀파워다!
 LOC_SYSTEM_IS_EQUIP_ITEM,장착중인 아이템이다.
 LOC_SYSTEM_PICKUP_PITEM,P가 증가했다.
 LOC_SYSTEM_PICKUP_RUNE,당신은 {0:을|를} 주웠다! ( ]키로 그동안 얻은 룬을 표시 )
+LOC_SYSTEM_PICKUP_SHOOTING_ABIL,당신은 {0:을|를} 얻었다!
 LOC_SYSTEM_PICKUP_YINYANG_ORB,당신은 음양옥을 주웠다. 던전1층으로 가지고 올라가면 승리한다
 LOC_SYSTEM_PICKUP_SELECT_ASK,{0:을|를} 줍습니까?
 LOC_SYSTEM_PICKUP_NUMBER,({0}개 획득)
@@ -1924,6 +1925,13 @@ LOC_SYSTEM_TRIBE_PROPERTY_STG_SOUL_BOMB,영격
 LOC_SYSTEM_TRIBE_PROPERTY_STG_SHIELD,실드
 LOC_SYSTEM_TRIBE_PROPERTY_STG_HP_RECOVERY,체력재생증가
 LOC_SYSTEM_TRIBE_PROPERTY_STG_MP_RECOVERY,영력재생증가
+LOC_SYSTEM_TRIBE_PROPERTY_STG_MOVING_SHOT,이동사격
+LOC_SYSTEM_TRIBE_PROPERTY_STG_SPELL_SHOT,마법사격
+LOC_SYSTEM_TRIBE_PROPERTY_STG_BUSRT_SHOT,폭발사격
+LOC_SYSTEM_TRIBE_PROPERTY_STG_ICE_SHOT,냉기사격
+LOC_SYSTEM_TRIBE_PROPERTY_STG_MISSLE,미사일발사
+LOC_SYSTEM_TRIBE_PROPERTY_STG_COMSUMABLE,소모품생성
+LOC_SYSTEM_TRIBE_PROPERTY_STG_DEFAULT_ABIL,동방라이크 기본특성
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BUG,이 특성은 버그다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIRE_RESIST1,당신은 화염에 아주 강하다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIRE_RESIST2,당신은 화염에 강하다.
@@ -2008,7 +2016,14 @@ LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_STATIC_ELECTRONIC,당신은 주변에 정
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SOUL_BOMB,당신은 파워를 1칸 소모해서 영격을 쓸 수 있다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SHIELD,당신은 일정시간 맞지않으면 실드를 만든다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_HP_RECOVERY,당신의 체력 회복속도가 상당히 빨라진다.
-LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_MP_RECOVERY,당신읜 영력 회복속도가 상당히 빨라진다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_MP_RECOVERY,당신의 영력 회복속도가 상당히 빨라진다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_MOVING_SHOT,당신은 이동할때마다 사격이 나간다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SPELL_SHOT,당신이 마법을 사용하거나 탄막을 투척할때마다 사격이 나간다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_BUSRT_SHOT,당신의 사격은 폭발한다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_ICE_SHOT,당신의 사격은 적을 느리게 만든다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_MISSLE,당신은 가끔 미사일을 발사한다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_COMSUMABLE,즉시 소모품을 생성한다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_DEFAULT_ABIL,슈팅에 맞게 일부 게임 시스템이 바뀐다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BUG,이 특성은 버그이므로 존재자체가 해악이다.\n제작자에게 신고하자.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIRE_RESIST1,화염 저항이 {0}단계 증가한다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIRE_RESIST2,화염 저항이 {0}단계 감소한다.
@@ -2080,6 +2095,13 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SOUL_BOMB,당신은 파워를 1.00 소모�
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SHIELD,당신은 최대 체력의 30%의 피해를 막아주는 보호막을 얻는다.\n이 보호막은 20턴정도 피해를 받지않으면 다시 재생된다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_HP_RECOVERY,당신의 체력 회복속도가 눈에 띄게 상승한다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_MP_RECOVERY,당신의 영력 회복속도가 눈에 띄게 상승한다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_MOVING_SHOT,당신은 이동할때마다 자동으로 사격을 발사한다.\n이동속도가 빠르면 사격도 속도만큼 약화된다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SPELL_SHOT,당신은 마법을 쓰거나 탄막을 투척할때 자동으로 사격을 발사한다.\n시전, 투척 속도가 빠르면 사격도 속도만큼 약화된다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_BUSRT_SHOT,당신의 사격은 적에게 닿으면 3X3범위로 폭발한다.\n사격의 기본데미지가 사라지는 대신 폭발 반경에 동일한 데미지를 입힌다.\n다른 효과로 사용되는 모든 사격에도 동일한 폭발 효과가 적용된다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_ICE_SHOT,당신의 사격은 닿은 상대를 얼려서 행동속도를 늦춘다.\n이 효과는 데미지를 늘리거나 줄이지않고 냉기 저항과도 무관하게 적용된다.\n다른 효과로 사용되는 모든 사격에도 효과가 적용된다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_MISSLE,당신은 일정시간마다 적에게 자동 유도되는 4발의 미사일을 발사한다.\n이 미사일은 자기 자신이나 아군에 피해를 주지않는다.\n사격을 하는 상황에서만 자동으로 발사된다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_COMSUMABLE,이 능력은 얻자마자 9~11개의 무작위 소모품을 랜덤하게 얻는다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_DEFAULT_ABIL,여기서는 일반 게임과 몇가지 다른 규칙을 적용한다.\n\n제자리에서 1턴을 보내면 근접 공격력만큼 위로 사격을 쏜다.\n아이템을 줍는데는 턴이 들지않으며 P아이템은 1칸 옆에서 자동으로 획득된다.\n투척사거리, 시야가 무한대가 되며 마법의 사거리는 2배가 된다.\n모든 아이템은 식별된 채로 등장한다.\n모든 사격은 아군을 관통한다.\n맵과 아이템은 자동으로 아래로 스크롤된다.\n레벨업시 스탯 선택을 하지않고 자동으로 높은 스탯이 올라간다.\n
 LOC_SYSTEM_TRIBE_PROPERTY_HEAD_UNEQUIP,당신이 쓰고있던 머리방어구가 벗겨졌다!
 LOC_SYSTEM_TRIBE_PROPERTY_FOOT_UNEQUIP,당신이 쓰고있던 다리방어구가 벗겨졌다!
 LOC_SYSTEM_TRIBE_PROPERTY_HAND_UNEQUIP,당신이 쓰고있던 손방어구가 벗겨졌다!

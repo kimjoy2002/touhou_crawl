@@ -21,12 +21,12 @@
 
 extern HANDLE mutx;
 
-int GetSpellMlen(spell_list spell_)
+int GetSpellMlen(spell_list spell_, bool isplayer)
 { 
 	switch(spell_)
 	{
 	case SPL_SPARK:
-		return SpellLength(spell_);
+		return SpellLength(spell_, isplayer);
 	default:
 		break;
 	}
@@ -259,8 +259,9 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	}
 }
 
-int SpellLength(spell_list skill)
+int SpellLength(spell_list skill, bool isPlayer)
 {
+	int length_ = 7;
 	switch(skill)
 	{
 	case SPL_MON_TANMAC_SMALL:
@@ -308,7 +309,8 @@ int SpellLength(spell_list skill)
 	case SPL_THROW_AMULET:
 	case SPL_WARP_KICK:
 	case SPL_TRACKING:
-		return 7;
+		length_ = 7;
+		break;
 	case SPL_FLAME:	
 	case SPL_STING:
 	case SPL_ICE_BOLT:
@@ -337,7 +339,8 @@ int SpellLength(spell_list skill)
 	case SPL_HYPER_BEAM:
 	case SPL_KAGUYA_SPELL:
 	case SPL_TOUGUE:
-		return 6;
+		length_ = 6;
+		break;
 	case SPL_FIRE_BALL:
 	case SPL_WATER_CANNON:
 	case SPL_MIND_BENDING:
@@ -354,16 +357,20 @@ int SpellLength(spell_list skill)
 	case SPL_THROW_OIL:
 	case SPL_GROW_VINE:
 	case SPL_SUMMON_GHOST:
-		return 5;
+		length_ = 5;
+		break;
 	case SPL_SMOKING:
-		return 4;
+		length_ = 4;
+		break;
 	case SPL_BURN:
 	case SPL_FREEZE:
-		return 2;
+		length_ = 2;
+		break;
 	case SPL_FROZEN:
 	case SPL_THROW_PLAYER:
 	case SPL_MEGATON_KICK:
-		return 1;
+		length_ = 1;
+		break;
 	case SPL_SUMMON_BUG:
 	case SPL_SELF_HEAL:
 	case SPL_BLINK:
@@ -433,8 +440,10 @@ int SpellLength(spell_list skill)
 	case SPL_CLOSE_DOOR:
 	case SPL_SPEAKER_PHONE:
 	default:
-		return 0;		
+		length_ = 0;
+		break;		
 	}
+	return (isPlayer&&isShootingSprint())?2 *length_ :length_;
 }
 
 string SpellString(spell_list skill)
@@ -2085,7 +2094,7 @@ void SimpleSpellUse()
 				if(spell_list spell__ = (spell_list)you.MemorizeSpell[asctonum(inputedKey.val1)])
 				{
 					WaitForSingleObject(mutx, INFINITE);
-					SetText() = GetSpellInfor((spell_list)spell__);
+					SetText() = GetSpellInfor((spell_list)spell__, true);
 					ReleaseMutex(mutx);
 					changedisplay(DT_TEXT);
 					waitkeyinput();
@@ -2167,7 +2176,7 @@ void SpellUse(char auto_, int auto_direc_, bool only_char)
 						}
 						if(SpellFlagCheck(spell_, S_FLAG_DIREC))
 						{
-							SetSpellSight(SpellLength(spell_),SpellFlagCheck(spell_, S_FLAG_RECT)?2:1);
+							SetSpellSight(SpellLength(spell_, true),SpellFlagCheck(spell_, S_FLAG_RECT)?2:1);
 							changedisplay(DT_GAME);
 							coord_def target_;
 							int direc_ = Direc_Throw(auto_direc_, &target_);
@@ -2194,6 +2203,8 @@ void SpellUse(char auto_, int auto_direc_, bool only_char)
 									you.SetBattleCount(30);
 									if(!silence_)
 										Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
+									
+									you.afterSpell(you.GetSpellDelay()*SpellSpeed(spell_)/10);
 									you.TurnEnd();
 									you.SetPrevAction('z',key_, direc_);
 								}
@@ -2203,12 +2214,12 @@ void SpellUse(char auto_, int auto_direc_, bool only_char)
 						}
 						else if(!SpellFlagCheck(spell_, S_FLAG_IMMEDIATELY))
 						{
-							SetSpellSight(SpellLength(spell_),SpellFlagCheck(spell_, S_FLAG_RECT)?2:1);
+							SetSpellSight(SpellLength(spell_, true),SpellFlagCheck(spell_, S_FLAG_RECT)?2:1);
 							changedisplay(DT_GAME);
 							beam_iterator beam(you.position,you.position);
-							projectile_infor infor(SpellLength(spell_),false,SpellFlagCheck(spell_, S_FLAG_SMITE),spell_,false);
+							projectile_infor infor(SpellLength(spell_, true),false,SpellFlagCheck(spell_, S_FLAG_SMITE),spell_,false);
 							auto it = you.item_list.end();
-							if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor,GetSpellMlen(spell_),GetSpellSector(spell_), (auto_>0 && !only_char)))
+							if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor,GetSpellMlen(spell_, true),GetSpellSector(spell_), (auto_>0 && !only_char)))
 							{
 								unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
 								if(unit_)
@@ -2234,6 +2245,8 @@ void SpellUse(char auto_, int auto_direc_, bool only_char)
 									you.time_delay += you.GetSpellDelay()*SpellSpeed(spell_)/10;
 									if(!silence_)
 										Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
+									
+									you.afterSpell(you.GetSpellDelay()*SpellSpeed(spell_)/10);
 									you.TurnEnd();
 									you.SetPrevAction('z', key_);
 								}
@@ -2265,6 +2278,8 @@ void SpellUse(char auto_, int auto_direc_, bool only_char)
 								you.time_delay += you.GetSpellDelay()*SpellSpeed(spell_)/10;
 								if(!silence_)	
 									Noise(you.position,you.GetProperty(TPT_FINGER_MAGIC)?SpellNoise(spell_)*0.7f:SpellNoise(spell_));
+								
+								you.afterSpell(you.GetSpellDelay()*SpellSpeed(spell_)/10);
 								you.TurnEnd();
 								you.SetPrevAction('z', key_);
 							}		
@@ -2277,7 +2292,7 @@ void SpellUse(char auto_, int auto_direc_, bool only_char)
 						if(spell_list spell__ = (spell_list)you.MemorizeSpell[num_])
 						{
 							WaitForSingleObject(mutx, INFINITE);
-							SetText() = GetSpellInfor((spell_list)spell__);
+							SetText() = GetSpellInfor((spell_list)spell__, true);
 							ReleaseMutex(mutx);
 							changedisplay(DT_TEXT);
 							waitkeyinput();
@@ -2314,7 +2329,7 @@ void SpellUse(char auto_, int auto_direc_, bool only_char)
 					if(spell_list spell__ = (spell_list)you.MemorizeSpell[asctonum(inputedKey.val1)])
 					{
 						WaitForSingleObject(mutx, INFINITE);
-						SetText() = GetSpellInfor((spell_list)spell__);
+						SetText() = GetSpellInfor((spell_list)spell__, true);
 						ReleaseMutex(mutx);
 						changedisplay(DT_TEXT);
 						waitkeyinput();
@@ -2356,7 +2371,7 @@ void SpellView()
 				if(spell_list spell_ = (spell_list)you.MemorizeSpell[num])
 				{
 					WaitForSingleObject(mutx, INFINITE);
-					SetText() = GetSpellInfor((spell_list)spell_);
+					SetText() = GetSpellInfor((spell_list)spell_, true);
 					ReleaseMutex(mutx);
 					changedisplay(DT_TEXT);
 					waitkeyinput();
@@ -2370,7 +2385,7 @@ void SpellView()
 					if(spell_list spell__ = (spell_list)you.MemorizeSpell[asctonum(inputedKey.val1)])
 					{
 						WaitForSingleObject(mutx, INFINITE);
-						SetText() = GetSpellInfor((spell_list)spell__);
+						SetText() = GetSpellInfor((spell_list)spell__, true);
 						ReleaseMutex(mutx);
 						changedisplay(DT_TEXT);
 						waitkeyinput();

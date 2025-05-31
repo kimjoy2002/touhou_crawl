@@ -21,7 +21,6 @@
 
 
 
-void reward_random_init();
 
 void set_sprint_map(map_dummy* map_dummy_);
 
@@ -97,7 +96,7 @@ shootingLineTemplate(30, 0, SHT_STAGE_1, SHT_STAGE_END,
 	stUnit(18, SHT_MON_WEAK, &right_straight),
 	stUnit(21, SHT_MON_STRONG, &right_straight, true)
 })
-,shootingLineTemplate(30, 0, SHT_STAGE_1, SHT_STAGE_END,
+,shootingLineTemplate(30, 0, SHT_STAGE_2, SHT_STAGE_END,
 {
 	stUnit(0, SHT_MON_WEAK, &left_straight_back),
 	stUnit(3, SHT_MON_WEAK, &left_straight_back),
@@ -108,7 +107,7 @@ shootingLineTemplate(30, 0, SHT_STAGE_1, SHT_STAGE_END,
 	stUnit(18, SHT_MON_WEAK, &left_straight_back),
 	stUnit(21, SHT_MON_STRONG, &left_straight_back, true)
 })
-,shootingLineTemplate(30, 0, SHT_STAGE_1, SHT_STAGE_END,
+,shootingLineTemplate(30, 0, SHT_STAGE_2, SHT_STAGE_END,
 {
 	stUnit(0, SHT_MON_WEAK, &right_straight_back),
 	stUnit(3, SHT_MON_WEAK, &right_straight_back),
@@ -119,7 +118,7 @@ shootingLineTemplate(30, 0, SHT_STAGE_1, SHT_STAGE_END,
 	stUnit(18, SHT_MON_WEAK, &right_straight_back),
 	stUnit(21, SHT_MON_STRONG, &right_straight_back, true)
 })
-,shootingLineTemplate(25, 100, SHT_STAGE_1, SHT_STAGE_END,
+,shootingLineTemplate(25, 100, SHT_STAGE_2, SHT_STAGE_END,
 {
 	stUnit(0, SHT_MON_WEAK_RANGE, &left_straight),
 	stUnit(0, SHT_MON_WEAK_RANGE, &right_straight),
@@ -348,6 +347,179 @@ shootingLineTemplate(30, 0, SHT_STAGE_1, SHT_STAGE_END,
 
 
 
+random_extraction<pair<item_type,int>> rand_stage[6];
+
+void addToRandomStage(int min, int max, int num, item_type type, int value, int percent = 1) {
+	//스테이지에 골고루 분산시키기
+	
+	random_extraction<int> able_stage;
+	for(int i = 0; i<6; i++) {
+		if(i >= min && i <= max) {
+			able_stage.push(i);
+		}
+	}
+
+	for(int i = 0;i < num; i++) {
+		rand_stage[able_stage.choice()].push(make_pair(type, value), percent);
+	}
+}
+
+
+void shooting_reward_random_init()
+{
+	for(int i = 0; i< 6; i++)
+		rand_stage[i].clear();
+
+	//필수 소모품들
+	addToRandomStage(0, 3, rand_int(6,8), ITM_POTION, PT_HEAL,2);
+	addToRandomStage(0, 3, rand_int(6,8), ITM_POTION, PT_HEAL_WOUND,2);
+	addToRandomStage(4, 5, rand_int(1,2), ITM_POTION, PT_HEAL_WOUND);
+	addToRandomStage(0, 4, rand_int(3,5), ITM_POTION, PT_MIGHT,2);
+	addToRandomStage(0, 4, rand_int(3,5), ITM_POTION, PT_CLEVER);
+	addToRandomStage(0, 4, rand_int(3,5), ITM_POTION, PT_AGILITY);
+	addToRandomStage(0, 4, rand_int(3,5), ITM_POTION, PT_HASTE);
+	addToRandomStage(0, 4, rand_int(3,5), ITM_POTION, PT_RECOVER_STAT);
+	addToRandomStage(0, 4, rand_int(1,3), ITM_POTION, PT_MAGIC);
+
+	addToRandomStage(1, 5, rand_int(3,5), ITM_SCROLL, SCT_BLINK);
+	addToRandomStage(1, 5, rand_int(1,2), ITM_SCROLL, SCT_SILENCE);
+	addToRandomStage(1, 5, rand_int(1,2), ITM_SCROLL, SCT_FOG);
+	addToRandomStage(1, 5, 1, ITM_SCROLL, SCT_SANTUARY);
+	addToRandomStage(0, 4, rand_int(6,9), ITM_SCROLL, SCT_ENCHANT_ARMOUR);
+	addToRandomStage(0, 4, rand_int(6,9), ITM_SCROLL, SCT_ENCHANT_WEAPON_1);
+	addToRandomStage(1, 5, rand_int(1,2), ITM_SCROLL, SCT_SOUL_SHOT);
+	addToRandomStage(2, 5, 2, ITM_SCROLL, SCT_BRAND_WEAPON);
+
+	//초반에 필요한 저항들
+	addToRandomStage(0, 2, 1, ITM_RING, RGT_ELEC_RESIS,3);
+	addToRandomStage(0, 2, 1, ITM_RING, RGT_FIRE_RESIS,3);
+	addToRandomStage(0, 2, 1, ITM_RING, RGT_ICE_RESIS,3);
+	addToRandomStage(0, 2, 1, ITM_RING, RGT_POISON_RESIS,3);
+	addToRandomStage(0, 2, 1, ITM_RING, RGT_SEE_INVISIBLE,3);
+
+	//아마 방어구
+	addToRandomStage(0, 4, 1, ITM_ARMOR_HEAD, -1, 3);
+	addToRandomStage(0, 4, 1, ITM_ARMOR_CLOAK, -1, 3);
+	addToRandomStage(0, 4, 1, ITM_ARMOR_GLOVE, -1, 3);
+	addToRandomStage(0, 4, 1, ITM_ARMOR_BOOT, -1, 3);
+
+	//발동템(하나씩)
+	addToRandomStage(1, 5, 1, ITM_MISCELLANEOUS, EVK_PAGODA);
+	addToRandomStage(2, 5, 1, ITM_MISCELLANEOUS, EVK_AIR_SCROLL);
+	addToRandomStage(1, 5, 1, ITM_MISCELLANEOUS, EVK_BOMB);
+	addToRandomStage(3, 5, 1, ITM_MISCELLANEOUS, EVK_GHOST_BALL);
+
+	//탄막
+	addToRandomStage(0, 2, 3, ITM_THROW_TANMAC, TMT_AMULET);
+	addToRandomStage(0, 1, 3, ITM_THROW_TANMAC, TMT_POISON_NEEDLE);
+	addToRandomStage(0, 3, 2, ITM_THROW_TANMAC, TMT_KIKU_COMPRESSER);
+	addToRandomStage(1, 3, 2, ITM_THROW_TANMAC, TMT_DOGGOJEO);
+
+
+	for(int i = ITM_WEAPON_FIRST; i<= ITM_WEAPON_CLOSE; i++) {
+		//무기별 3개씩만, 좋은 효과 줘서
+		for(int j = 0; j < 3; j++) {
+			addToRandomStage(0, 5, 3, (item_type )i, -1);
+		}
+	}
+
+	for(int i = ITM_ARMOR_BODY_FIRST; i<= ITM_ARMOR_BODY_LAST; i++) {
+		//방어구도 3개씩만, 좋은 효과 줘서
+		for(int j = 0; j < 3; j++) {
+			addToRandomStage(0, 5, 3, (item_type )i, -1);
+		}
+	}
+
+	addToRandomStage(2, 2, 2, (item_type )rand_int(ITM_WEAPON_FIRST, ITM_WEAPON_CLOSE), -2); //초반용 무기 아티팩트
+	addToRandomStage(2, 2, 1, ITM_RING, -2); //초반용 반지 아티팩트
+	addToRandomStage(2, 2, 1,  (item_type )rand_int(ITM_ARMOR_BODY_FIRST, ITM_ARMOR_BODY_LAST-1), -2); //초반용 갑옷 아티팩트
+
+	addToRandomStage(3, 5, 2, (item_type )rand_int(ITM_WEAPON_FIRST, ITM_WEAPON_CLOSE), -2); //후반 무기 아티팩트
+	addToRandomStage(3, 5, 3, ITM_RING, -2); //후반용 반지 아티팩트
+	addToRandomStage(3, 5, 3,  (item_type )rand_int(ITM_ARMOR_BODY_FIRST, ITM_ARMOR_BODY_LAST-1), -2); //후반 갑옷 아티팩트
+	addToRandomStage(3, 5, 3,  (item_type )rand_int(ITM_ARMOR_HEAD, ITM_ARMOR_BOOT), -2); //후반 갑옷 아티팩트
+
+
+	
+	//나오면 좋은 반지들
+	random_extraction<int> able_ring;
+	able_ring.push(RGT_STR);
+	able_ring.push(RGT_DEX);
+	able_ring.push(RGT_INT);
+	able_ring.push(RGT_INVISIBLE);
+	able_ring.push(RGT_MANA);
+	able_ring.push(RGT_MAGACIAN);
+	able_ring.push(RGT_AC);
+	able_ring.push(RGT_AC);
+	able_ring.push(RGT_EV);
+	able_ring.push(RGT_EV);
+	able_ring.push(RGT_CONFUSE_RESIS);
+	able_ring.push(RGT_MAGACIAN);
+	able_ring.push(RGT_FULL);
+	able_ring.push(RGT_MAGIC_RESIS);
+	for(int i = 0; i < 8; i++) {		
+		addToRandomStage(0, 5, 1, ITM_RING, able_ring.pop());
+	}
+
+	
+	//나오면 좋은 스펠카드
+	random_extraction<int> able_spellcard;
+	
+	addToRandomStage(0, 4, 1, ITM_RING, ITM_ARMOR_HEAD,3);
+
+	able_spellcard.push(SPC_V_FIRE);
+	able_spellcard.push(SPC_V_ICE);
+	able_spellcard.push(SPC_V_AIR);
+	able_spellcard.push(SPC_V_METAL);
+	able_spellcard.push(SPC_V_SUN);
+
+	for(int i = 0; i < 3; i++) {		
+		addToRandomStage(0, 5, 1, ITM_SPELL, able_spellcard.pop());
+	}
+
+	//나오면 좋은 아뮬렛
+	random_extraction<int> able_amulet;
+
+	able_amulet.push(AMT_PERFECT);
+	able_amulet.push(AMT_BLOSSOM);
+	able_amulet.push(AMT_TIMES);
+	able_amulet.push(AMT_FAITH);
+	able_amulet.push(AMT_SPIRIT);
+	able_amulet.push(AMT_GRAZE);
+	able_amulet.push(AMT_WEATHER);
+	able_amulet.push(AMT_OCCULT);
+
+	for(int i = 0; i < 4; i++) {
+		addToRandomStage(1, 4, 1, ITM_AMULET, able_amulet.pop(), 2);
+	}
+
+	//나오면 좋은 책
+	random_extraction<int> able_book;
+	random_extraction<int> able_end_book;
+
+
+	for (int i = 0; i < BOOK_LAST; i++) {
+		if(i != BOOK_TRANSITION) {
+			if(i < BOOK_TENSI)
+				able_book.push(i);
+			else 
+				able_end_book.push(i);
+		}
+	}
+	for(int i = 0; i < 2; i++) {		
+		//초반용 부스트
+		addToRandomStage(0, 1, 1, ITM_BOOK, able_book.pop());
+	}
+	for(int i = 0; i < 8; i++) {		
+		//중반 부스트
+		addToRandomStage(2, 4, 1, ITM_BOOK, able_book.pop());
+	}
+	while(able_end_book.GetSize() > 0) {		
+		//후반용 책
+		addToRandomStage(3, 5, 1, ITM_BOOK, able_end_book.pop());
+	}
+}
+
 
 list<std::shared_ptr<shootingLineInfo>> current_lines_info;
 int line_delay = 0;
@@ -377,6 +549,32 @@ std::shared_ptr<shootingLineInfo> getMonsterLine(SHOOTING_STAGE_LEVEL base_level
 	}
 	return created_line;
 }
+
+
+
+int getStageLevel(SHOOTING_STAGE_LEVEL base_level) 
+{
+	switch (base_level) {
+	case SHT_STAGE_DUNGEON:
+		return 0;
+	case SHT_STAGE_MISTY:
+		return 1;
+	case SHT_STAGE_YOUKAI:
+	case SHT_STAGE_SCARLET:
+		return 2;
+	case SHT_STAGE_DEPTH:
+		return 3;
+	case SHT_STAGE_PANDE:
+	case SHT_STAGE_MOON:
+	case SHT_STAGE_HELL:
+		return 4;
+	case SHT_STAGE_HAKUREI:
+		return 5;
+	default:
+		break;
+	}
+	return 0;
+};
 
 SHOOTING_STAGE_LEVEL getNextlevel(SHOOTING_STAGE_LEVEL base_level) 
 {
@@ -533,7 +731,6 @@ dungeon_tile_type getWallTileOfBaselevel(SHOOTING_STAGE_LEVEL base_level, int co
 };
 
 
-
 bool shootingLineInfo::process(int stage_count) {
 	bool last_ = true;
 	for(const stUnit& unit_ : lineTemplate->units) {
@@ -549,9 +746,18 @@ bool shootingLineInfo::process(int stage_count) {
 			}
 			mon_->item_lists.clear();
 			if(unit_.item) {
-				item_infor t;
-				CreateFloorItem(getFloorOfBaselevel(current_base_level, stage_count), &t);
-				mon_->item_lists.push_back(t);
+				if(rand_stage[getStageLevel(current_base_level)].GetSize() > 0) {
+					std::pair<item_type, int> item_ = rand_stage[getStageLevel(current_base_level)].pop();
+					item_infor t;
+					if(item_.second != -2) {
+						makeitem(item_.first, 1, &t, item_.second);
+					} else {
+						//아티팩트
+						makeitem(item_.first, 1, &t, -1);
+						t.artifact = true;
+					}
+					mon_->item_lists.push_back(t);
+				}
 			}
 			mon_->target = &you;
 			mon_->target_pos = you.position;
@@ -988,8 +1194,10 @@ int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MON
 void map_algorithms_shooting_sprint(int num)
 {
 	current_base_level = SHT_STAGE_DUNGEON;
+	shooting_reward_random_init();
 	shooting_god_dq.clear();
 	current_lines_info.clear();
+	you.SetProperty(TPT_STG_DEFAULT_ABIL, 1);
 	line_delay = 10;
 	for(int i=0;i<GT_LAST;i++)
 	{
@@ -1015,7 +1223,7 @@ void map_algorithms_shooting_sprint(int num)
 	scrollup(false, 7);
 }
 
-
+bool pickup_move();
 
 bool shooting_event(int num)
 {
@@ -1028,6 +1236,9 @@ bool shooting_event(int num)
 		{
 			list<item>::iterator temp = it++;
 			temp->position.y++;
+			if(temp->position == you.position) {
+				pickup_move();
+			}
 		}
 
 		for(int x = -6 + DG_MAX_X/2; x <= 6 + DG_MAX_X/2; x++) {
@@ -1114,12 +1325,14 @@ bool shooting_event(int num)
 				return true;
 			} else {
 				random_extraction<int> rand_reward;
-				for(int i = TPT_STG_START; i <= TPT_STG_LAST; i++) {
+				for(int i = TPT_STG_START; i < TPT_STG_DEFAULT_ABIL; i++) {
 					if( i == TPT_STG_OPTION && you.GetProperty((tribe_proper_type)i)<3) {
 						rand_reward.push(100+i-TPT_STG_START);
 					}
 					else if(!you.GetProperty((tribe_proper_type)i)) {
-						rand_reward.push(100+i-TPT_STG_START);
+						if(i != TPT_STG_MISSLE) {
+							rand_reward.push(100+i-TPT_STG_START);
+						}
 					}
 				}
 
@@ -1171,7 +1384,12 @@ void set_shooting_sprint_map(map_dummy* map_dummy_) {
 	map_dummy_->size_x = 6;
 	map_dummy_->size_y = 8;
 
+	for(int x = 0; x<DG_MAX_X; x++)
+	{	
+		for(int y=0; y<DG_MAX_Y; y++)
+		{
+			env[current_level].dgtile[x][y].tile = DG_WALL;
+		}
+	}
 	PixedMap(map_dummy_, create_shooting_sprint_map());
 }
-
-

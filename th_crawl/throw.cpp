@@ -445,7 +445,7 @@ void ThrowTamacInstance::init() {
 	}
 }
 
-bool ThrowTamacInstance::oneturn() {
+bool ThrowTamacInstance::oneturn(coord_def& hit_pos_) {
 	if(!(env[current_level].isMove(*(beam),true) && penetrate>0 && length>0))
 		return true;
 	switch(infor_.type1)
@@ -461,8 +461,10 @@ bool ThrowTamacInstance::oneturn() {
 				)
 			{
 				attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
-				if((*it).damage(temp_att))
+				if((*it).damage(temp_att)) {
+					hit_pos_ = (*beam);
 					penetrate--;
+				}
 			}
 		}
 		if(!infor_.order->isplayer() && you.position.x == (*beam).x && you.position.y == (*beam).y &&				
@@ -470,8 +472,10 @@ bool ThrowTamacInstance::oneturn() {
 			) //플레이어는 자기자신에게 맞지않는 조건은 나중에 지울까?
 		{
 			attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
-			if(you.damage(temp_att))
+			if(you.damage(temp_att)) {
+				hit_pos_ = (*beam);
 				penetrate--;
+			}
 		}
 		path = 10*GetPosToDirec((*beam),prev);
 		coord_def postion_ = (*beam);
@@ -584,7 +588,8 @@ coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, cons
 {
 	ThrowTamacInstance throw_instance(t_, graphic_type, beam, infor_, item_, effect_delete, mimic_);
 	while(true) {
-		if(throw_instance.oneturn())
+		coord_def hit_pos_;
+		if(throw_instance.oneturn(hit_pos_))
 			break;
 		Sleep(16);
 		if(throw_instance.oneturn_after(false))
@@ -1179,7 +1184,7 @@ void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2, bool au
 		return;
 	}
 	beam_iterator beam(you.position,you.position);
-	projectile_infor infor(7,true,false);
+	projectile_infor infor(you.getThrowLength(),true,false);
 	int short_ = Common_Throw(it, it2, beam, &infor, -1,  0, auto_);
 	if(short_)
 	{
@@ -1195,6 +1200,7 @@ void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2, bool au
 			if(you.Throw(it,you.search_pos,short_==2,beam))
 			{				
 				you.SetBattleCount(30);
+				you.afterThrow(you.time_delay);
 				//you.SkillTraining(SKT_TANMAC,2);
 				you.TurnEnd();
 			}

@@ -536,22 +536,39 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 	int sight_x = option_mg.getTileMaxX();
 	int sight_y = option_mg.getTileMaxY();
 	int return_ = 1;
-	if((c.x > you.position.x && you.search_pos.x < DG_MAX_X-1 && wide && !you.s_dimension) 
-		|| (!you.s_dimension && c.x > you.position.x && you.search_pos.x < you.position.x + sight_x)
-		|| (you.s_dimension && c.x > you.position.x && you.search_pos.x < you.god_value[GT_YUKARI][0] + sight_))
+	if(isShootingSprint()) {
 		you.search_pos.x+= c.x - you.position.x;
-	else if((c.x < you.position.x && you.search_pos.x > 0 && wide && !you.s_dimension) 
-		|| (!you.s_dimension && c.x < you.position.x && you.search_pos.x > you.position.x - sight_x)
-		|| (you.s_dimension && c.x < you.position.x && you.search_pos.x > you.god_value[GT_YUKARI][0] - sight_))
-		you.search_pos.x-= you.position.x - c.x ;
-	if((c.y > you.position.y && you.search_pos.y < DG_MAX_Y-1 && wide && !you.s_dimension) 
-		|| (!you.s_dimension && c.y > you.position.y && you.search_pos.y < you.position.y + sight_y)
-		|| (you.s_dimension && c.y > you.position.y && you.search_pos.y < you.god_value[GT_YUKARI][1] + sight_))
 		you.search_pos.y+= c.y - you.position.y;
-	else if((c.y < you.position.y && you.search_pos.y > 0 && wide && !you.s_dimension) 
-		|| (!you.s_dimension && c.y < you.position.y && you.search_pos.y > you.position.y - sight_y)
-		|| (you.s_dimension && c.y < you.position.y && you.search_pos.y > you.god_value[GT_YUKARI][1] - sight_))
-		you.search_pos.y-= you.position.y -c.y;
+		if(you.search_pos.x < DG_MAX_X/2-6) {
+			you.search_pos.x = DG_MAX_X/2-6;
+		}
+		if(you.search_pos.x > DG_MAX_X/2+6) {
+			you.search_pos.x = DG_MAX_X/2+6;
+		}
+		if(you.search_pos.y < DG_MAX_Y/2-7) {
+			you.search_pos.y = DG_MAX_Y/2-7;
+		}
+		if(you.search_pos.y > DG_MAX_Y/2+7) {
+			you.search_pos.y = DG_MAX_Y/2+7;
+		}
+	}else {
+		if((c.x > you.position.x && you.search_pos.x < DG_MAX_X-1 && wide && !you.s_dimension) 
+			|| (!you.s_dimension && c.x > you.position.x && you.search_pos.x < you.position.x + sight_x)
+			|| (you.s_dimension && c.x > you.position.x && you.search_pos.x < you.god_value[GT_YUKARI][0] + sight_))
+			you.search_pos.x+= c.x - you.position.x;
+		else if((c.x < you.position.x && you.search_pos.x > 0 && wide && !you.s_dimension) 
+			|| (!you.s_dimension && c.x < you.position.x && you.search_pos.x > you.position.x - sight_x)
+			|| (you.s_dimension && c.x < you.position.x && you.search_pos.x > you.god_value[GT_YUKARI][0] - sight_))
+			you.search_pos.x-= you.position.x - c.x ;
+		if((c.y > you.position.y && you.search_pos.y < DG_MAX_Y-1 && wide && !you.s_dimension) 
+			|| (!you.s_dimension && c.y > you.position.y && you.search_pos.y < you.position.y + sight_y)
+			|| (you.s_dimension && c.y > you.position.y && you.search_pos.y < you.god_value[GT_YUKARI][1] + sight_))
+			you.search_pos.y+= c.y - you.position.y;
+		else if((c.y < you.position.y && you.search_pos.y > 0 && wide && !you.s_dimension) 
+			|| (!you.s_dimension && c.y < you.position.y && you.search_pos.y > you.position.y - sight_y)
+			|| (you.s_dimension && c.y < you.position.y && you.search_pos.y > you.god_value[GT_YUKARI][1] - sight_))
+			you.search_pos.y-= you.position.y -c.y;
+	}
 
 
 
@@ -747,13 +764,80 @@ bool Auto_Pick_Up(list<item>::iterator it)
 		return false;
 	if(you.s_confuse)
 		return false;
-	if(env[current_level].insight_mon(MET_ENEMY))
+	if(!isShootingSprint() && env[current_level].insight_mon(MET_ENEMY))
 		return false;
 	//if(you.resetLOS() == IT_MAP_DANGER)
 	//	return false; 
 	//느린 연산.. 되도록이면 쓰지말자
 	return true;
 }
+
+bool pickup_move() {
+	bool pick_ups = false;
+	//아이템이 땅에 있으면 메세지 출력
+	int num=0;
+	if(env[current_level].dgtile[you.position.x][you.position.y].tile >= DG_DOWN_STAIR && env[current_level].dgtile[you.position.x][you.position.y].tile <= DG_SEA-1)
+	{
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_ON_THE_TERRAIN, PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile])), false,false,false,CL_normal);
+		printlog(env[current_level].getTileHelp(you.position.x, you.position.y), true, false, false, CL_normal);
+		
+	}
+		
+	list<item>::iterator it,start_it;
+	for(it = env[current_level].item_list.begin();it != env[current_level].item_list.end();)
+	{
+		list<item>::iterator temp = it++;
+
+		if((*temp).position.x == you.position.x && (*temp).position.y == you.position.y)
+		{
+			if(!Auto_Pick_Up(temp) || you.s_lunatic || you.s_evoke_ghost)
+			{
+				if(!num)
+					start_it = temp;
+				num++;
+			}
+			else
+			{
+				if(PickUpNum(temp,1,false))
+					break;
+				pick_ups = true;
+				{ //아이템을 주울때 P가 사라지면 튕길 가능성이 있다.
+					it = env[current_level].item_list.begin();
+					num = 0;
+				}
+
+			}
+		}
+		else if(num)
+			break;
+	}
+	if(num)
+	{
+		if(num==1)
+		{
+			LocalzationManager::printLogWithKey((*start_it).num > 1 ? LOC_SYSTEM_ON_THE_ITEM_MULTIPLE:LOC_SYSTEM_ON_THE_ITEM_SINGLE ,true,false,false,CL_normal, PlaceHolderHelper((*start_it).GetName(), (*start_it).item_color(), (*start_it).num>1));
+		}
+		else if(num<=4)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ON_THE_ITEM_SOME),true,false,false,CL_normal);
+			while(num>0)
+			{
+				printlog((*start_it).GetName(),false,false,false,(*start_it).item_color());
+				printlog("; ",num>1?false:true,false,false,CL_normal);
+				start_it++;
+				num--;
+			}
+		}
+		else
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ON_THE_ITEM_MANY),true,false,false,CL_normal);
+		}
+	}
+	return pick_ups;
+}
+
+
+
 int Player_Move(const coord_def &c)
 {
 	int move_type; //0은 이동불가. 1은 이동하진 않음(주로 공격). 2는 이동했음
@@ -764,66 +848,11 @@ int Player_Move(const coord_def &c)
 	{
 		if(move_type != 1) //한칸이라도 이동했을때
 		{
-			//아이템이 땅에 있으면 메세지 출력
-			int num=0;
-			if(env[current_level].dgtile[you.position.x][you.position.y].tile >= DG_DOWN_STAIR && env[current_level].dgtile[you.position.x][you.position.y].tile <= DG_SEA-1)
-			{
-				printlog(LocalzationManager::formatString(LOC_SYSTEM_ON_THE_TERRAIN, PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile])), false,false,false,CL_normal);
-				printlog(env[current_level].getTileHelp(you.position.x, you.position.y), true, false, false, CL_normal);
-				
-			}
-				
-			list<item>::iterator it,start_it;
-			for(it = env[current_level].item_list.begin();it != env[current_level].item_list.end();)
-			{
-				list<item>::iterator temp = it++;
+			pick_ups = pickup_move();
 
-				if((*temp).position.x == you.position.x && (*temp).position.y == you.position.y)
-				{
-					if(!Auto_Pick_Up(temp) || you.s_lunatic || you.s_evoke_ghost)
-					{
-						if(!num)
-							start_it = temp;
-						num++;
-					}
-					else
-					{
-						if(PickUpNum(temp,1,false))
-							break;
-						pick_ups = true;
-						{ //아이템을 주울때 P가 사라지면 튕길 가능성이 있다.
-							it = env[current_level].item_list.begin();
-							num = 0;
-						}
-
-					}
-				}
-				else if(num)
-					break;
+			if(you.GetProperty(TPT_STG_MOVING_SHOT) > 0) {
+				you.shooing_fire(you.time_delay/10.0f);
 			}
-			if(num)
-			{
-				if(num==1)
-				{
-					LocalzationManager::printLogWithKey((*start_it).num > 1 ? LOC_SYSTEM_ON_THE_ITEM_MULTIPLE:LOC_SYSTEM_ON_THE_ITEM_SINGLE ,true,false,false,CL_normal, PlaceHolderHelper((*start_it).GetName(), (*start_it).item_color(), (*start_it).num>1));
-				}
-				else if(num<=4)
-				{
-					printlog(LocalzationManager::locString(LOC_SYSTEM_ON_THE_ITEM_SOME),true,false,false,CL_normal);
-					while(num>0)
-					{
-						printlog((*start_it).GetName(),false,false,false,(*start_it).item_color());
-						printlog("; ",num>1?false:true,false,false,CL_normal);
-						start_it++;
-						num--;
-					}
-				}
-				else
-				{
-					printlog(LocalzationManager::locString(LOC_SYSTEM_ON_THE_ITEM_MANY),true,false,false,CL_normal);
-				}
-			}
-
 
 
 			if (you.god == GT_OKINA && !you.GetPunish(GT_OKINA)) {
@@ -889,7 +918,7 @@ void search_monspell_view(monster* mon_)
 				if(num == 0)
 				{
 					WaitForSingleObject(mutx, INFINITE);
-					SetText() = GetSpellInfor((spell_list)it->num);
+					SetText() = GetSpellInfor((spell_list)it->num, false);
 					ReleaseMutex(mutx);
 					changedisplay(DT_TEXT);
 					waitkeyinput();
@@ -4279,7 +4308,7 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 				{
 					WaitForSingleObject(mutx, INFINITE);					
 					int get_item_move_ = getDisplayMove();
-					SetText() = GetSpellInfor((spell_list)spell_);
+					SetText() = GetSpellInfor((spell_list)spell_, true);
 					ReleaseMutex(mutx);
 					changedisplay(DT_TEXT);
 					waitkeyinput();

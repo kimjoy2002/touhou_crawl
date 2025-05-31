@@ -2771,7 +2771,10 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 				for (auto it = item_lists.begin(); it != item_lists.end(); it++)
 				{
 					item *it2;
-					it2 = env[current_level].MakeItem(position, (*it));;
+					it2 = env[current_level].MakeItem(position, (*it));
+					if(it->artifact) {
+						MakeArtifact(it2, 1);
+					}
 				}
 			}
 		}

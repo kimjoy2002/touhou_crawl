@@ -222,6 +222,20 @@ LOCALIZATION_ENUM_KEY tribe_property::GetNameKey()
 		return LOC_SYSTEM_TRIBE_PROPERTY_STG_HP_RECOVERY;
 	case TPT_STG_MP_RECOVERY:
 		return LOC_SYSTEM_TRIBE_PROPERTY_STG_MP_RECOVERY;
+	case TPT_STG_MOVING_SHOT:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_MOVING_SHOT;
+	case TPT_STG_SPELL_SHOT:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_SPELL_SHOT;
+	case TPT_STG_BUSRT_SHOT:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_BUSRT_SHOT;
+	case TPT_STG_ICE_SHOT:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_ICE_SHOT;
+	case TPT_STG_MISSLE:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_MISSLE;
+	case TPT_STG_COMSUMABLE:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_COMSUMABLE;
+	case TPT_STG_DEFAULT_ABIL:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STG_DEFAULT_ABIL;
 	default:
 		break;
 	}
@@ -542,6 +556,20 @@ string tribe_property::GetInfor()
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_HP_RECOVERY);
 	case TPT_STG_MP_RECOVERY:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_MP_RECOVERY);
+	case TPT_STG_MOVING_SHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_MOVING_SHOT);
+	case TPT_STG_SPELL_SHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SPELL_SHOT);
+	case TPT_STG_BUSRT_SHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_BUSRT_SHOT);
+	case TPT_STG_ICE_SHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_ICE_SHOT);
+	case TPT_STG_MISSLE:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_MISSLE);
+	case TPT_STG_COMSUMABLE:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_COMSUMABLE);
+	case TPT_STG_DEFAULT_ABIL:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_DEFAULT_ABIL);
 	default:
 		break;
 	}
@@ -791,6 +819,20 @@ string tribe_property::GetDetail()
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_HP_RECOVERY);
 	case TPT_STG_MP_RECOVERY:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_MP_RECOVERY);
+	case TPT_STG_MOVING_SHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_MOVING_SHOT);
+	case TPT_STG_SPELL_SHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SPELL_SHOT);
+	case TPT_STG_BUSRT_SHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_BUSRT_SHOT);
+	case TPT_STG_ICE_SHOT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_ICE_SHOT);
+	case TPT_STG_MISSLE:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_MISSLE);
+	case TPT_STG_COMSUMABLE:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_COMSUMABLE);
+	case TPT_STG_DEFAULT_ABIL:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_DEFAULT_ABIL);
 	default:
 		break;
 	}
@@ -821,6 +863,13 @@ D3DCOLOR tribe_property::getColor()
 	case TPT_STG_SHIELD:
 	case TPT_STG_HP_RECOVERY:
 	case TPT_STG_MP_RECOVERY:
+	case TPT_STG_MOVING_SHOT:
+	case TPT_STG_SPELL_SHOT:
+	case TPT_STG_BUSRT_SHOT:
+	case TPT_STG_ICE_SHOT:
+	case TPT_STG_MISSLE:
+	case TPT_STG_COMSUMABLE:
+	case TPT_STG_DEFAULT_ABIL:
 		return CL_green;
 	default:
 		break;
@@ -1054,6 +1103,20 @@ void tribe_property::gain(bool gain_)
 	case TPT_STG_HP_RECOVERY:
 		return;
 	case TPT_STG_MP_RECOVERY:
+		return;
+	case TPT_STG_MOVING_SHOT:
+		return;
+	case TPT_STG_SPELL_SHOT:
+		return;
+	case TPT_STG_BUSRT_SHOT:
+		return;
+	case TPT_STG_ICE_SHOT:
+		return;
+	case TPT_STG_MISSLE:
+		return;
+	case TPT_STG_COMSUMABLE:
+		return;
+	case TPT_STG_DEFAULT_ABIL:
 		return;
 	default:
 		break;

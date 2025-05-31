@@ -100,8 +100,10 @@ void PickUpSelect_logic(list<item>::iterator& it) {
 	if(you.additem(&(*it)))
 	{
 		env[current_level].DeleteItem(it);
-		you.time_delay+=you.GetNormalDelay();
-		you.TurnEnd();
+		if(!isShootingSprint()) {
+			you.time_delay+=you.GetNormalDelay();
+			you.TurnEnd();
+		}
 	}
 }
 
@@ -298,8 +300,10 @@ void iteminfor_pick()
 					if(you.additem(&(*temp)))
 					{
 						env[current_level].DeleteItem(temp);
-						you.time_delay+=you.GetNormalDelay();
-						you.TurnEnd();
+						if(!isShootingSprint()) {
+							you.time_delay+=you.GetNormalDelay();
+							you.TurnEnd();
+						}
 						it = env[current_level].GetPositiontoitem(you.position);
 						end = env[current_level].GetPositiontoitemend(you.position);
 					}
@@ -899,7 +903,7 @@ void Memorize_book(int key_) {
 				printsub("",true,CL_normal);
 				printsub("",true,CL_normal);
 				printsub(blank,false,CL_normal);
-				_infor_(GetSpellInfor((spell_list)spell_));
+				_infor_(GetSpellInfor((spell_list)spell_, true));
 				_infor_("\n\n");
 				printsub(LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_HELP, PlaceHolderHelper("m")), false, CL_normal, 'm');
 				_infor_("\n");

@@ -340,6 +340,12 @@ public:
 	{
 		return max_percent;
 	}
+    void clear()
+    {
+        percent.clear();
+        value.clear();
+        max_percent = 0;
+    }
 
 	int push(T value_, int percent_ = 1) //하나를 넣으면서 
 	{

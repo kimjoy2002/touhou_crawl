@@ -1536,10 +1536,13 @@ item* environment::AddItem(const coord_def &c, item *t, int num_)
 		{
 			t->position = c;
 			it = item_list.insert(it,*t);
-			if(num_ && it->is_pile && it->num > num_)
+			if(num_ && it->is_pile)
 			{
 				it->weight = (it->weight*num_/it->num);
 				it->num = num_;
+			}
+			if(isShootingSprint()) {
+				it->Identify();
 			}
 			ReleaseMutex(mutx);
 			return &(*it);

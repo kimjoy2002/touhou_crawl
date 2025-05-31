@@ -476,6 +476,21 @@ random_extraction<int> rand_bonus_for_middle; //스펙업에 도움이 되는 �
 random_extraction<int> rand_bonus_for_random; //랜덤 아이템
 void reward_random_init()
 {
+	rand_scroll_necessary.clear();
+	rand_scroll_option.clear();
+	rand_potion_option.clear();
+	rand_ring_necessary.clear();
+	rand_spell_card.clear();
+	rand_book.clear();
+	rand_ring_option.clear();
+	rand_armour2.clear();
+	rand_shield.clear();
+	rand_amulet.clear();
+	rand_evoke.clear();
+	rand_tanmac.clear();
+	rand_bonus_for_early.clear();
+	rand_bonus_for_middle.clear();
+	rand_bonus_for_random.clear();
 
 	for (int i = rand_int(8, 12); i>0; i--)
 		rand_scroll_necessary.push(SCT_IDENTIFY,2);

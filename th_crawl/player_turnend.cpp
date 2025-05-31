@@ -1172,11 +1172,11 @@ bool players::isPassedBullet(unit* order) {
 }
 bool players::isSightnonblocked(coord_def c)
 {
-	int sight_ = 7;
+	int sight_ = getThrowLength();
 	bool intercept = false;
 	for(int i=RT_BEGIN;i!=RT_END;i++)
 	{
-		int length_ = 8;
+		int length_ = getThrowLength();
 		beam_iterator it(position,c,(round_type)i);
 		while(!intercept && !it.end())
 		{

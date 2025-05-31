@@ -1373,6 +1373,24 @@ bool players::offsetmove(const coord_def &c)
 		return false;
 }
 
+
+
+bool shooing_fire_effect(coord_def pos_, int rand_graphic_, bool burst_, bool ice_, float burst_multi_)
+{
+	if(burst_) {
+		attack_infor temp_infor(you.GetAttack(false)*burst_multi_,you.GetAttack(true)*burst_multi_,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_BURST));
+		BaseBomb_forAlly(pos_, &img_blast[rand_graphic_],temp_infor, &you, ice_);	
+	}
+	if(!burst_ && ice_) {
+		unit* unit_ = env[current_level].isMonsterPos(pos_.x, pos_.y);
+		if(unit_)
+			unit_->SetFrozen(10);
+	}
+	return true;
+}
+
+
+
 bool players::shooing_fire(float bonus_)
 {
 	list<shared_ptr<ThrowTamacInstance>> tanmac_list;
@@ -1384,26 +1402,46 @@ bool players::shooing_fire(float bonus_)
 	
 
 	bool laser_ = GetProperty(TPT_STG_LASER_SHOT);
+	bool pentan_ = GetProperty(TPT_STG_LASER_SHOT) || s_wind;
 	bool spread_ = GetProperty(TPT_STG_SPREAD_SHOT);
 	bool triple_ = GetProperty(TPT_STG_TRIPLE_SHOT);
 	bool back_ = GetProperty(TPT_STG_BACK_SHOT);
+	
+	bool burst_ = GetProperty(TPT_STG_BUSRT_SHOT);
+	bool ice_ =	GetProperty(TPT_STG_ICE_SHOT);
 	float multi_ = 1.0f;//0.7f;
 	float attack_speed_ = 10.0f/GetAtkDelay();
 	multi_ *= attack_speed_;
 	multi_ *= bonus_;
+	float burst_multi_ = multi_;
+	if(burst_){
+		multi_ = 0;
+	}
 	int hit_ = GetHit()+5;//명중보정
-	beam_infor temp_infor(GetAttack(false)*multi_,GetAttack(true)*multi_,hit_,&you,you.GetParentType(),20,laser_?20:1,laser_?BMT_PENETRATE:BMT_NORMAL,brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
 	
-	int graphic_ = rand_int(10, 15);
+	beam_infor temp_infor(GetAttack(false)*multi_,GetAttack(true)*multi_,hit_,&you,you.GetParentType(),20,pentan_?20:1,pentan_?BMT_PENETRATE:BMT_NORMAL,brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
+	
+	int rand_graphic_ = rand_int(0, 5);
+	int graphic_ = 10 + rand_graphic_;
 	textures* texture_ = nullptr;
 	// if(you.equipment[ET_WEAPON]) {
 	// 	texture_ = you.equipment[ET_WEAPON]->image;
 	// 	graphic_ = 0;
 	// }
 
-	if(laser_) {
+	if(ice_ && laser_) {
+		soundmanager.playSound("cold");
+		graphic_ = 18;
+		rand_graphic_ = 4;
+	} else if(laser_) {
 		soundmanager.playSound("laser");
 		graphic_ = 29;
+		rand_graphic_ = 3;
+	}
+	else if(ice_) {
+		soundmanager.playSound("cold");
+		rand_graphic_ = 4;
+		graphic_ = 10 + rand_graphic_;
 	}
 	else {
 		soundmanager.playSound("shoot");
@@ -1419,7 +1457,7 @@ bool players::shooing_fire(float bonus_)
 				coord_def(5,-3)
 			};
 
-			beam_infor temp_infor_sub(GetAttack(false)*multi_,GetAttack(true)*multi_,hit_,&you,you.GetParentType(),20,laser_?20:1,laser_?BMT_PENETRATE:BMT_NORMAL,brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
+			beam_infor temp_infor_sub(GetAttack(false)*multi_,GetAttack(true)*multi_,hit_,&you,you.GetParentType(),20,pentan_?20:1,pentan_?BMT_PENETRATE:BMT_NORMAL,brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
 			beam_iterator beam_sub(you.position,you.position+target_[i],RT_CEIL);
 			tanmac_list.push_back(make_shared<ThrowTamacInstance>(texture_, graphic_, beam_sub, temp_infor_sub, nullptr, false));
 		}
@@ -1427,7 +1465,7 @@ bool players::shooing_fire(float bonus_)
 
 	if(triple_) {
 		for(int i = 0; i < 2; i++) {
-			beam_infor temp_infor_sub(GetAttack(false)*multi_,GetAttack(true)*multi_,hit_,&you,you.GetParentType(),20,laser_?20:1,laser_?BMT_PENETRATE:BMT_NORMAL,brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
+			beam_infor temp_infor_sub(GetAttack(false)*multi_,GetAttack(true)*multi_,hit_,&you,you.GetParentType(),20,pentan_?20:1,pentan_?BMT_PENETRATE:BMT_NORMAL,brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
 			beam_iterator beam_sub(coord_def(you.position.x-1+2*i, you.position.y-1),coord_def(you.position.x-1+2*i, you.position.y-2));
 			tanmac_list.push_back(make_shared<ThrowTamacInstance>(texture_, graphic_, beam_sub, temp_infor_sub, nullptr, false));
 		}
@@ -1435,7 +1473,7 @@ bool players::shooing_fire(float bonus_)
 
 	if(back_) {
 		for(int i = 0; i < 3; i++) {
-			beam_infor temp_infor_sub(GetAttack(false)*multi_,GetAttack(true)*multi_,hit_,&you,you.GetParentType(),20,laser_?20:1,laser_?BMT_PENETRATE:BMT_NORMAL,brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
+			beam_infor temp_infor_sub(GetAttack(false)*multi_,GetAttack(true)*multi_,hit_,&you,you.GetParentType(),20,pentan_?20:1,pentan_?BMT_PENETRATE:BMT_NORMAL,brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
 			beam_iterator beam_sub(you.position,coord_def(you.position.x-1+i, you.position.y+1));
 			tanmac_list.push_back(make_shared<ThrowTamacInstance>(texture_, graphic_, beam_sub, temp_infor_sub, nullptr, false));
 		}
@@ -1447,29 +1485,56 @@ bool players::shooing_fire(float bonus_)
 		if(it->isLive() && it->id == MON_MAGICAL_STAR && it->isUserAlly() && it->s_invincibility != 0)
 		{
 			float multi_option_ = 0.5f * multi_;
-			beam_infor temp_infor_sub(GetAttack(false)*multi_option_,GetAttack(true)*multi_option_,hit_,&you,you.GetParentType(),20,laser_?20:1,laser_?BMT_PENETRATE:BMT_NORMAL,brand_,name_infor(LOC_SYSTEM_ATT_NORMAL));
+			beam_infor temp_infor_sub(GetAttack(false)*multi_option_,GetAttack(true)*multi_option_,hit_,&you,you.GetParentType(),20,pentan_?20:1,pentan_?BMT_PENETRATE:BMT_NORMAL,brand_,name_infor(LOC_SYSTEM_ATT_NORMAL));
 			beam_iterator beam_sub(it->position,coord_def(it->position.x, it->position.y-1));
 			tanmac_list.push_back(make_shared<ThrowTamacInstance>(texture_, graphic_, beam_sub, temp_infor_sub, nullptr, false));
 		}
 	}
 
 
+	bool do_burst_ = false;
+
 	while(!tanmac_list.empty()) {
 		for(list<shared_ptr<ThrowTamacInstance>>::iterator it = tanmac_list.begin(); it != tanmac_list.end();) {
 			list<shared_ptr<ThrowTamacInstance>>::iterator temp = it++;
-			if((*temp)->oneturn()) {
-				(*temp)->endShoot(false, laser_);
+			coord_def hit_pos_(0,0);
+			if((*temp)->oneturn(hit_pos_)) {
+				coord_def pos_ = (*temp)->endShoot(false, laser_);
+				
+				shooing_fire_effect(pos_, rand_graphic_, burst_, ice_, burst_multi_);
+				if(burst_) {
+					if(!do_burst_)
+						soundmanager.playSound("bomb");
+					do_burst_ = true;
+				}
+
 				tanmac_list.erase(temp);
+			} else if(hit_pos_ != coord_def(0,0)) {
+				shooing_fire_effect(hit_pos_, rand_graphic_, burst_, ice_, burst_multi_);
+				if(burst_) {
+					if(!do_burst_)
+						soundmanager.playSound("bomb");
+					do_burst_ = true;
+				}
 			}
 		}
 		Sleep(10);
 		for(list<shared_ptr<ThrowTamacInstance>>::iterator it = tanmac_list.begin(); it != tanmac_list.end();) {
 			list<shared_ptr<ThrowTamacInstance>>::iterator temp = it++;
 			if((*temp)->oneturn_after(laser_)) {
-				(*temp)->endShoot(false, laser_);
+				coord_def pos_ = (*temp)->endShoot(false, laser_);
+				shooing_fire_effect(pos_, rand_graphic_, burst_, ice_, burst_multi_);
+				if(burst_) {
+					if(!do_burst_)
+						soundmanager.playSound("bomb");
+					do_burst_ = true;
+				}
 				tanmac_list.erase(temp);
 			}
 		}
+	}
+	if(do_burst_) {
+		Sleep(100);
 	}
 	Sleep(40);
 	env[current_level].ClearEffect();
@@ -1505,6 +1570,17 @@ void players::youAttack(unit* unit_)
 
 }
 
+void players::afterSpell(int delay) {
+	if(you.GetProperty(TPT_STG_SPELL_SHOT) > 0) {
+		you.shooing_fire(delay/10.0f);
+	}
+}
+
+void players::afterThrow(int delay) {
+	if(you.GetProperty(TPT_STG_SPELL_SHOT) > 0) {
+		you.shooing_fire(delay/10.0f);
+	}
+}
 int players::OpenDoor(const coord_def &c, bool no_turn)
 {
 	if(env[current_level].isDoor(c.x,c.y))
@@ -4640,14 +4716,54 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 			rune[t->value1]++;
 		} else if(t->value1 >= 100 && t->value1 < 100+(TPT_STG_LAST-TPT_STG_START+1)) { //100부터는 슈팅 스프린트용 
 			tribe_proper_type add_abil = (tribe_proper_type)(TPT_STG_START+t->value1-100);
-			printlog(LocalzationManager::formatString(LOC_SYSTEM_PICKUP_RUNE, 
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_PICKUP_SHOOTING_ABIL, 
 				PlaceHolderHelper(getTribeProperty(add_abil, 1))),true,false,false,CL_good);
-			int prev_ = you.GetProperty(add_abil);
-			if(prev_ > 0) {
-				you.DeleteProperty(add_abil);
-				you.SetProperty(add_abil,prev_+1);
+
+			if (add_abil == TPT_STG_COMSUMABLE) {
+				random_extraction<pair<item_type,int>> able_comsumable;
+				
+				able_comsumable.push(make_pair<item_type,int>(ITM_POTION, PT_HEAL),2);
+				able_comsumable.push(make_pair<item_type,int>(ITM_POTION, PT_HEAL_WOUND),4);
+				able_comsumable.push(make_pair<item_type,int>(ITM_POTION, PT_MIGHT),2 );
+				able_comsumable.push(make_pair<item_type,int>(ITM_POTION, PT_HASTE), 1);
+				able_comsumable.push(make_pair<item_type,int>(ITM_SCROLL, SCT_ENCHANT_ARMOUR),1);
+				able_comsumable.push(make_pair<item_type,int>(ITM_SCROLL, SCT_ENCHANT_WEAPON_1),3);
+
+				map<int, pair<item_type,int>> dummy;
+
+				for(int i = rand_int(12,8);i> 0;i--) {
+					pair<item_type,int> get_ = able_comsumable.choice();
+					if(dummy.find(get_.second) != dummy.end()) {
+						dummy.find(get_.second)->second.second++;
+					} else {
+						item_type item_type_ = get_.first;
+						pair<item_type,int> val_ = make_pair<item_type,int>((item_type)item_type_, 1);
+						dummy.insert({get_.second, val_});
+					}
+				}
+
+				coord_def pos_ = you.position;
+				if(pos_.y > DG_MAX_Y/2){
+					pos_.y =  DG_MAX_Y/2;
+				}
+				rand_rect_iterator rand_(pos_,3,3);
+				auto it = dummy.begin();
+				while( !rand_.end() && it != dummy.end()) {
+					if (env[current_level].isMove(*rand_)) {
+						item_infor temp;
+						env[current_level].MakeItem(*rand_, makeitem(it->second.first, 0, &temp, it->first), it->second.second);
+						it++;
+					}
+					rand_++;
+				}
 			} else {
-				you.SetProperty(add_abil,1);
+				int prev_ = you.GetProperty(add_abil);
+				if(prev_ > 0) {
+					you.DeleteProperty(add_abil);
+					you.SetProperty(add_abil,prev_+1);
+				} else {
+					you.SetProperty(add_abil,1);
+				}
 			}
 
 
@@ -5450,14 +5566,14 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 
 
 		int type_ = 0;
-		int pentan_ = s_wind?7:1;
+		int pentan_ = s_wind?getThrowLength():1;
 		tanmac_type tanmac_type_ = TMT_WEAPON;
 		beam_type beam_type_ = s_wind?BMT_PENETRATE:BMT_NORMAL;
 		if ((*it).type == ITM_THROW_TANMAC && (*it).value4 == TMT_DOGGOJEO) {
-			pentan_ = 7;
+			pentan_ = getThrowLength();
 			beam_type_ = BMT_PENETRATE;
 		}
-		beam_infor temp_infor(GetThrowAttack(&(*it),false),GetThrowAttack(&(*it),true),GetThrowHit(&(*it)),this,GetParentType(),7,pentan_,beam_type_,ATT_THROW_NORMAL,(*it).GetNameInfor());
+		beam_infor temp_infor(GetThrowAttack(&(*it),false),GetThrowAttack(&(*it),true),GetThrowHit(&(*it)),this,GetParentType(),getThrowLength(),pentan_,beam_type_,ATT_THROW_NORMAL,(*it).GetNameInfor());
 		if((*it).type >= ITM_THROW_FIRST && (*it).type < ITM_THROW_LAST )
 		{
 			tanmac_type_ = (tanmac_type)(*it).value4;
@@ -5972,6 +6088,9 @@ int players::isequip(item* item_)
 		}
 	}	
 	return 0;
+}
+int players::getThrowLength() {
+	return isShootingSprint()?20:7;
 }
 int players::haveGoal()
 {

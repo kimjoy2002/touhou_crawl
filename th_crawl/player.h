@@ -401,6 +401,8 @@ public:
 	bool offsetmove(const coord_def &c);
 	bool shooing_fire(float bonus_ = 1.0f);
 	void youAttack(unit* unit_); //누군가를 공격하다.
+	void afterSpell(int delay);
+	void afterThrow(int delay);
 	int OpenDoor(const coord_def &c, bool no_turn);
 	bool GetStatPanalty(){return s_str<=0 ||s_dex<=0 || s_int<=0;};
 	void CalcuHP();
@@ -597,6 +599,7 @@ public:
 	bool possibleunequip(list<item>::iterator it); //장착하고있다면 장비벗기. 장착안해도 실패처리는 아님
 	int isequip(list<item>::iterator it);
 	int isequip(item* item_);
+	int getThrowLength();
 	int haveGoal();
 	int haveOrb();
 	bool isImpossibeEquip(equip_type type_, bool massage_);

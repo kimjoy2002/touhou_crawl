@@ -152,7 +152,7 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 				printsub("",true,CL_normal);
 				printsub("",true,CL_normal);
 				printsub(blank,false,CL_normal);
-				_infor_(GetSpellInfor((spell_list)spell_));
+				_infor_(GetSpellInfor((spell_list)spell_, true));
 				_infor_("\n\n");
 				if(!onlyinfor) {
 					printsub(LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_HELP, PlaceHolderHelper("m")), false, CL_normal, 'm');

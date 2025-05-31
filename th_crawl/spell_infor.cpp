@@ -14,7 +14,7 @@
 
 
 
-string GetSpellInfor(spell_list spell)
+string GetSpellInfor(spell_list spell, bool isPlayer)
 {
 	ostringstream oss;
 	oss << SpellString(spell) << "\n\n";
@@ -570,7 +570,7 @@ string GetSpellInfor(spell_list spell)
 		break;
 	}
 	oss << "\n";
-	if (int length_ = SpellLength(spell)) {
+	if (int length_ = SpellLength(spell,isPlayer)) {
 		oss << LocalzationManager::locString(LOC_SYSTEM_RANGE) << ": " << length_ << " " << (length_<=1 ?  LocalzationManager::locString(LOC_SYSTEM_TILE): LocalzationManager::locString(LOC_SYSTEM_TILES));
 	}
 	oss << "\n";

@@ -68,7 +68,7 @@ public:
 	ThrowTamacInstance(textures* t_, int graphic_type, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete = true, bool mimic_ = false);
 
 	void init();
-	bool oneturn();
+	bool oneturn(coord_def& hit_pos_);
 	bool oneturn_after(bool without_laser); //슈팅모드 전용 파라미터
 	coord_def endShoot(bool sleep_, bool without_laser);
 };

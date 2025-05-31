@@ -55,7 +55,7 @@ unit* DebufBeam(int spell_length_, unit* order, coord_def target)
 
 unit* DebufBeam(spell_list spell_, unit* order, coord_def target)
 {
-	return DebufBeam(SpellLength(spell_),order, target);
+	return DebufBeam(SpellLength(spell_, order->isplayer()),order, target);
 }
 unit* DebufBeam(skill_list skill_, unit* order, coord_def target)
 {

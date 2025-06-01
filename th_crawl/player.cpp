@@ -119,7 +119,7 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
 force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
-s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_oil(0), s_fire(0), s_tracking(0), s_shield(), alchemy_buff(ALCT_NONE), alchemy_time(0),
+s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_oil(0), s_fire(0), s_tracking(0), s_shooting_turn(0), s_shield(), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -303,6 +303,7 @@ void players::init() {
 	s_oil = 0;
 	s_fire = 0;
 	s_tracking = 0;
+	s_shooting_turn = 0;
 	s_shield.percent = 0;
 	s_shield.value = 0;
 	s_shield.turn = 0;
@@ -539,6 +540,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_oil);
 	SaveData<int>(fp, s_fire);
 	SaveData<int>(fp, s_tracking);
+	SaveData<int>(fp, s_shooting_turn);
 	SaveData<shield_struct>(fp, s_shield);
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
@@ -794,6 +796,9 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_fire);
 	if(!isPrevVersion(loading_version_string, "ver1.1")) {
 		LoadData<int>(fp, s_tracking);
+	}
+	if(!isPrevVersion(loading_version_string, "ver1.101")) {
+		LoadData<int>(fp, s_shooting_turn);
 	}
 	if(!isPrevVersion(loading_version_string, "ver1.11")) {
 		LoadData<shield_struct>(fp, s_shield);
@@ -1377,14 +1382,15 @@ bool players::offsetmove(const coord_def &c)
 
 bool shooing_fire_effect(coord_def pos_, int rand_graphic_, bool burst_, bool ice_, float burst_multi_)
 {
-	if(burst_) {
-		attack_infor temp_infor(you.GetAttack(false)*burst_multi_,you.GetAttack(true)*burst_multi_,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_BURST));
-		BaseBomb_forAlly(pos_, &img_blast[rand_graphic_],temp_infor, &you, ice_);	
-	}
-	if(!burst_ && ice_) {
-		unit* unit_ = env[current_level].isMonsterPos(pos_.x, pos_.y);
-		if(unit_)
+	unit* unit_ = env[current_level].isMonsterPos(pos_.x, pos_.y);
+	if(unit_) {
+		if(burst_) {
+			attack_infor temp_infor(you.GetAttack(false)*burst_multi_,you.GetAttack(true)*burst_multi_,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_BURST));
+			BaseBomb_forAlly(pos_, &img_blast[rand_graphic_],temp_infor, &you, ice_);	
+		}
+		if(!burst_ && ice_) {
 			unit_->SetFrozen(10);
+		}
 	}
 	return true;
 }
@@ -1538,6 +1544,20 @@ bool players::shooing_fire(float bonus_)
 	}
 	Sleep(40);
 	env[current_level].ClearEffect();
+
+	s_shooting_turn+=10*bonus_;
+	if(GetProperty(TPT_STG_MISSLE) && s_shooting_turn> 100) {
+		for(int i = 0; i<4 ; i++)
+		{
+			monster* missle_ = BaseSummon(MON_MISSLE, rand_int(30,60), true, true, 1, &you, you.position, SKD_OTHER, -1);
+			if(missle_ != nullptr) {
+				missle_->LevelUpdown(you.level-1,0,0);
+				missle_->direction = GetPositionToAngle(position.x, position.y, missle_->position.x, missle_->position.y);
+			}
+		}
+		s_shooting_turn = 0;
+	}
+
 	return true;
 }
 

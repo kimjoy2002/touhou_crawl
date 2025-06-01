@@ -439,6 +439,10 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int
 		} else {
 			hp /=2;
 			max_hp /=2;
+			if(max_hp < 1) {
+				hp =1;
+				max_hp =1;
+			}
 		}	
 	}
 
@@ -1916,7 +1920,10 @@ bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX:
 		img_effect_veiling.draw(pSprite, x_, y_,0.0f,scale_,scale_, 255);
 	}
 
-	return_ = image->draw(pSprite, x_, y_,0.0f,scale_,scale_,id == MON_ENSLAVE_GHOST?128:255);
+	int blue_ = s_frozen==0?255:127 +  std::max(0, 25-s_frozen)*128/25;
+	D3DCOLOR color_ = D3DCOLOR_ARGB(id == MON_ENSLAVE_GHOST?128:255, blue_,blue_,255);
+
+	return_ = image->draw(pSprite, x_, y_,0.0f,scale_,scale_,color_);
 	if (id == MON_DANCING_ARMOUR || id == MON_DANCING_WEAPON) {
 		img_mons_dancing_weapon.draw(pSprite, x_, y_,0.0f,scale_,scale_, 255);
 	}
@@ -4140,6 +4147,13 @@ void monster::special_action(int delay_, bool smoke_)
 			}
 		}
 		break;
+	case MON_MISSLE:
+		if (smoke_){
+			env[current_level].MakeSmoke(coord_def(position.x, position.y), img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, this);
+		} else {
+			image = &img_tanmac_missle[GetAngleToDirec(direction)];
+		}
+		break;
 	case MON_ENSLAVE_GHOST:
 	{
 		if(id2 == MON_SONBITEN_SPINTOWIN) {
@@ -5342,21 +5356,14 @@ int MoveAngleTowards(int A, int B, int delta)
         return A + (diff > 0 ? delta : -delta);
 }
 
-bool monster::special_state(bool is_sight_for_monster) {
-	switch(id) {
-	case MON_ENSLAVE_GHOST:
+bool monster::special_move(bool is_sight_for_monster, bool can_bounce, float angle_) {
+	if(target) {
+		int target_angle = GetBaseAngle(GetPositionToAngle(position.x,position.y,target->position.x, target->position.y));
+		direction = MoveAngleTowards(direction, target_angle, angle_);
+	}
+	if(move(inttodirec(GetAngleToDirec(direction),position.x,position.y), false) == 2)
 	{
-		if(id2 != MON_SONBITEN_SPINTOWIN)
-			break;
-	} //break passthorough
-	case MON_SONBITEN_SPINTOWIN:
-	{
-		if(target) {
-			int target_angle = GetBaseAngle(GetPositionToAngle(position.x,position.y,target->position.x, target->position.y));
-			direction = MoveAngleTowards(direction, target_angle, 30);
-		}
-		if(move(inttodirec(GetAngleToDirec(direction),position.x,position.y), false) == 2)
-		{
+		if(isMultipleAttack(false)) {
 			int num_=0;
 			for(int i=0;i<3;i++,num_++)
 				if(atk_type[i] == ATT_NONE)
@@ -5368,8 +5375,10 @@ bool monster::special_state(bool is_sight_for_monster) {
 				multipleAttack(nullptr, temp_att);
 			}
 		}
-		else
-		{
+	}
+	else
+	{
+		if(can_bounce) {
 			for(int i = 0; i < 10; i++) {
 				direction += rand_int(120,240);
 				direction = GetBaseAngle(direction);
@@ -5379,10 +5388,40 @@ bool monster::special_state(bool is_sight_for_monster) {
 					break;
 				}
 			}
+		} else {
+			//더이상 이동을 못할때
+			return true;
 		}
-		CheckSightNewTarget();
+	}
+	CheckSightNewTarget();
+	return false;
+}
+
+bool monster::special_state(bool is_sight_for_monster) {
+	switch(id) {
+	case MON_ENSLAVE_GHOST:
+	{
+		if(id2 != MON_SONBITEN_SPINTOWIN)
+			break;
+	} //break passthorough
+	case MON_SONBITEN_SPINTOWIN:
+	{
+		special_move(is_sight_for_monster, true, 30);
 	}
 		return true;
+	case MON_MISSLE:
+	{
+		if(special_move(is_sight_for_monster, false, 45)) {
+			bool ice_ =  you.GetProperty(TPT_STG_ICE_SHOT);
+			int damage_ = 3 +level/3;
+			attack_infor temp_infor(randC(2,damage_),damage_*2,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_BURST));
+			BaseBomb_forAlly(position, &img_blast[ice_?4:0],temp_infor, &you, ice_);
+			Sleep(30);
+			env[current_level].ClearEffect();
+			dead(PRT_NEUTRAL, false);
+		}
+	}
+	return true;
 	default:
 		break;
 	}

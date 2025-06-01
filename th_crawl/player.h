@@ -314,6 +314,7 @@ public:
 	int s_oil;
 	int s_fire;
 	int s_tracking;
+	int s_shooting_turn;
 	shield_struct s_shield;
 
 

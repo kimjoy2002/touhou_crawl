@@ -1083,5 +1083,9 @@ const mon_infor mondata[] = {
 		
 	{ MON_SECURIRY_DOOR, 1, 0, name_infor(MON_SECURIRY_DOOR), &img_mons_security_door, 1, 10, 0,
 	{ 0, 0, 0 }, { ATT_NONE, ATT_NONE, ATT_NONE }, { name_infor(), name_infor(), name_infor() },
-	M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE | M_FLAG_NO_STATE, 99, 0, 10 ,'X' }
+	M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE | M_FLAG_NO_STATE, 99, 0, 10 ,'X' },
+
+	{ MON_MISSLE, 1, 0, name_infor(MON_MISSLE), &img_tanmac_missle[1], 1, 10, 0,
+	{ 0, 0, 0 }, { ATT_NORMAL, ATT_NONE, ATT_NONE }, { name_infor(LOC_SYSTEM_ATT_NORMAL), name_infor(), name_infor() },
+	M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_STATE | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY, 99, 0, 7 ,')' }
 };

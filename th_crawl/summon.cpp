@@ -43,7 +43,7 @@ bool summon_check(coord_def c, coord_def order, bool fly_, bool swim_)
 
 	
 	//막히지않은곳
-	if(!env[current_level].PostoCheckSight(order, c, 8))
+	if(!env[current_level].PostoCheckSight(order, c, isShootingSprint()?20:7))
 		return false;
 
 	//if(order == &you)

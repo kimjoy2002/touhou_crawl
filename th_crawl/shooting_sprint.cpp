@@ -1330,9 +1330,7 @@ bool shooting_event(int num)
 						rand_reward.push(100+i-TPT_STG_START);
 					}
 					else if(!you.GetProperty((tribe_proper_type)i)) {
-						if(i != TPT_STG_MISSLE) {
-							rand_reward.push(100+i-TPT_STG_START);
-						}
+						rand_reward.push(100+i-TPT_STG_START);
 					}
 				}
 

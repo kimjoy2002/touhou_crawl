@@ -1977,6 +1977,15 @@ textures(&texture_item03, 58, 255),
 textures(&texture_item03, 59, 255),
 textures(&texture_item03, 60, 255)
 };
+textures img_tanmac_missle[] = { textures(&texture_item03, 215, 255),
+textures(&texture_item03, 216, 255),
+textures(&texture_item03, 217, 255),
+textures(&texture_item03, 218, 255),
+textures(&texture_item03, 219, 255),
+textures(&texture_item03, 220, 255),
+textures(&texture_item03, 221, 255),
+textures(&texture_item03, 222, 255)
+};
 
 
 
@@ -3527,6 +3536,12 @@ int texturetoint(textures* input)
 		return 551;
 	else if(input == &img_mons_security_door)
 		return 552;
+	else if(input == &img_tanmac_missle[0] ||
+		input == &img_tanmac_missle[1]||input == &img_tanmac_missle[2] ||
+		input == &img_tanmac_missle[3]||input == &img_tanmac_missle[4] ||
+		input == &img_tanmac_missle[5]||input == &img_tanmac_missle[6] ||
+		input == &img_tanmac_missle[7])
+		return 553;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -4659,6 +4674,8 @@ textures* inttotexture(int input)
 		return &img_fog_heavenly_storm[0];
 	case 552:
 		return &img_mons_security_door;
+	case 553:
+		return &img_tanmac_missle[1];
 	default:
 		return &img_mons_default;
 	}

@@ -260,6 +260,7 @@ public:
 	bool isSpecialSight(coord_def c);//몬스터 특수시야
 	bool isMonsterSight(coord_def c, boolean okina = false);//해당 위치에 몬스터의 시야에 들어왔는가?
 	bool CanChase();
+	bool special_move(bool is_sight_for_monster, bool can_bounce, float angle_);
 	bool special_state(bool is_sight_for_monster);//모든 상태를 무시하고 자신만의 상태를 가짐
 	parent_type GetParentType();
 	bool isUnique();

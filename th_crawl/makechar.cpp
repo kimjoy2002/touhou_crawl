@@ -359,6 +359,9 @@ void MakeStartItem(start_item_type select_, int num)
 			case JOB_AIR_WIZARD:
 				book_ = BOOK_AIR_BASE;
 				break;
+			case JOB_LIGHT_WIZARD:
+				book_ = BOOK_LIGHT_BASE;
+				break;
 			case JOB_SUMMON_WIZARD:
 				book_ = BOOK_SUMMON_BASE;
 				break;
@@ -635,6 +638,20 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,20),false);
 		you.GiveSkillExp(SKT_AIR,80,false);
 		you.Memorize(SPL_SHOCK,true);
+		break;
+	case JOB_LIGHT_WIZARD:
+		you.max_hp-=1;
+		you.max_mp+=3;
+		you.StatUpDown(-5,STAT_STR);
+		you.StatUpDown(4,STAT_INT);
+		you.StatUpDown(1,STAT_DEX);
+		MakeStartItem(SIT_ROBE,0);
+		MakeStartItem(SIT_BOOK,1);
+		you.GiveSkillExp(SKT_DODGE,30,false);
+		you.GiveSkillExp(SKT_STEALTH,30,false);
+		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,20),false);
+		you.GiveSkillExp(SKT_CONJURE,80,false);
+		you.Memorize(SPL_MAGIC_TANMAC,true);
 		break;/*
 	case JOB_WATER_WIZARD:
 		you.max_hp-=1;

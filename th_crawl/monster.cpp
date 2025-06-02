@@ -4154,6 +4154,13 @@ void monster::special_action(int delay_, bool smoke_)
 			image = &img_tanmac_missle[GetAngleToDirec(direction)];
 		}
 		break;
+	case MON_HOMING:
+		if (smoke_){
+			//env[current_level].MakeSmoke(coord_def(position.x, position.y), img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, this);
+		} else {
+			image = &img_tanmac_homing[GetAngleToDirec(direction)];
+		}
+		break;
 	case MON_ENSLAVE_GHOST:
 	{
 		if(id2 == MON_SONBITEN_SPINTOWIN) {
@@ -5418,6 +5425,13 @@ bool monster::special_state(bool is_sight_for_monster) {
 			BaseBomb_forAlly(position, &img_blast[ice_?4:0],temp_infor, &you, ice_);
 			Sleep(30);
 			env[current_level].ClearEffect();
+			dead(PRT_NEUTRAL, false);
+		}
+	}
+	return true;
+	case MON_HOMING:
+	{
+		if(special_move(is_sight_for_monster, false, 45)) {
 			dead(PRT_NEUTRAL, false);
 		}
 	}

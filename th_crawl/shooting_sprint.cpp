@@ -500,7 +500,7 @@ void shooting_reward_random_init()
 
 	for (int i = 0; i < BOOK_LAST; i++) {
 		if(i != BOOK_TRANSITION) {
-			if(i < BOOK_TENSI)
+			if(!isRareBook((book_list)i))
 				able_book.push(i);
 			else 
 				able_end_book.push(i);

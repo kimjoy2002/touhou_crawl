@@ -81,6 +81,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_JOB_FIRE_WIZARD,화염을 다루는 화염마법을
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_COLD_WIZARD,냉기를 다루는 냉기마법을 배우고 시작하는 원소마법사.\n초보 냉기술사의 책을 들고 냉기를 배우고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_EARTH_WIZARD,대지를 다루는 대지마법을 배우고 시작하는 원소마법사.\n초보 대지술사의 책을 들고 돌주먹을 배우고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_AIR_WIZARD,대기와 전기를 다루는 대기마법을 배우고 시작하는 원소마법사.\n초보 대기술사의 책을 들고 전격을 배우고 시작한다.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_LIGHT_WIZARD,빛 마법을 주로 다루는 마법사.\n초보 빛술사의 책을 들고 마법의 탄막을 배우고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SUMMON_WIZARD,소환수를 다루는 소환마법을 배우고 시작하는 마법사.\n초보 소환술사의 책을 들고 모옥 소환을 배우고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ALCHEMIST,연금술을 사용하여 근접전투를 하는 마법사 겸 연금술사.\n초보 연금술사의 책을 들고 돌주먹을 배우고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_PSYCHOLOGIST,상대를 조종하는 심리마법을 배우는 디버프에 능한 마법사.\n초보 심리학자의 책을 들고 최면을 배우고 시작한다.
@@ -2118,6 +2119,7 @@ LOC_SYSTEM_JOB_FIRE_WIZARD,화염술사
 LOC_SYSTEM_JOB_COLD_WIZARD,냉기술사
 LOC_SYSTEM_JOB_EARTH_WIZARD,대지술사
 LOC_SYSTEM_JOB_AIR_WIZARD,대기술사
+LOC_SYSTEM_JOB_LIGHT_WIZARD,빛술사
 LOC_SYSTEM_JOB_SUMMON_WIZARD,소환술사
 LOC_SYSTEM_JOB_ALCHEMIST,연금술사
 LOC_SYSTEM_JOB_PSYCHOLOGIST,심리학자
@@ -2436,6 +2438,8 @@ LOC_SYSTEM_SPL_CREATE_FOG,안개 생성
 LOC_SYSTEM_SPL_GROW_VINE,덩굴 소환
 LOC_SYSTEM_SPL_CLOSE_DOOR,문 잠그기
 LOC_SYSTEM_SPL_SPEAKER_PHONE,침입자 경보
+LOC_SYSTEM_SPL_HOMING_TANMAC,호밍탄
+LOC_SYSTEM_SPL_ALLROUND_TANMAC,전방위 탄막
 LOC_SYSTEM_SPL_UKNOWN,알수없는 마법
 LOC_SYSTEM_SPL_DESCRIBE_NONE,존재하지 않는 마법이다.\n
 LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_SMALL,작은 탄막을 발사한다.\n
@@ -2602,6 +2606,8 @@ LOC_SYSTEM_SPL_DESCRIBE_CREATE_FOG,일정시간 주변의 날씨를 안개로 �
 LOC_SYSTEM_SPL_DESCRIBE_GROW_VINE,적의 주변에 빠른 속도로 덩쿨을 자라게한다.\n이 덩쿨은 주변의 적을 묶어서 이동 속도를 늦춘다.\n
 LOC_SYSTEM_SPL_DESCRIBE_CLOSE_DOOR,홍마관의 비상 방범시스템을 작동시켜서 시야 내의 모든 문을 닫는다.\n계단에도 방범시스템이 설치되어있기에 계단에서도 문이 닫히며, 위에 유닛이 있다면 비켜낼 수 밌다.\n이렇게 닫힌 문은 피해를 줘서 강제로 파괴할 수 도 있다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SPEAKER_PHONE,큰 확성기를 이용해 아군에게 경보를 울린다.\n내부 홍마관 경비시스템에 연동되어있어서 아주 먼거리에 있는 일부 그룹이 듣고 찾아오게 된다.\n다만 단순히 경보를 울리는것이기때문에 어디까지나 걸어서 오기때문에 그 전에 도망칠 수 있다.\n소문에 의하면 같은 층의 메이드장은 마치 순간이동을 한 것마냥 찾아온다고 한다.\n
+LOC_SYSTEM_SPL_DESCRIBE_HOMING_TANMAC,에너지로 만들어진 작은 호밍 탄막 소환물을 2체 만들어낸다.\n호밍은 일반적인 탄막보다 느리기에 적에게 날라갈 시간이 필요하다.\n일단 적에게 도달하면 높은 명중률로 적을 공격하지만 날라갈 궤도가 필요하기때문에\n적과 너무 가깝거나 지형이 좁으면 벽에 부딪히거나 엉뚱한 경로로 날라갈 가능성이 있다.
+LOC_SYSTEM_SPL_DESCRIBE_ALLROUND_TANMAC,전방위의 적에게 탄막을 흩뿌리는 마법.\n사거리 내에 위협이 되는 적들을 자동으로 조준해서 중간 크기의 탄막을 뿌린다.\n사거리내의 적을 동시에 공격가능하지만, 적을 관통할수는 없다.
 LOC_SYSTEM_SPL_DESCRIBE_UKNOWN,설명이 존재하지 않는 마법.\n
 LOC_SYSTEM_SPL_DESCRIBE_ALCHEMY,이 마법은 연금술 버프다. 연금술 버프끼리는 중첩되지않는다.\n다른 연금술 버프가 걸린 상태에서 이 마법을 시전하면 기존의 연금술 버프가 사라진다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMONING,이 마법은 최대 {0}마리까지 소환수를 소환할 수 있다.\n
@@ -3338,6 +3344,7 @@ LOC_SYSTEM_ITEM_BOOK_ICE_ULTI,얼음요정 비전서
 LOC_SYSTEM_ITEM_BOOK_SUMMON_ULTI,앨리스의 마도서
 LOC_SYSTEM_ITEM_BOOK_AIR_ULTI,텐구의 활극 만화
 LOC_SYSTEM_ITEM_BOOK_ALCHMY_ULTI,마그눔 오푸스
+LOC_SYSTEM_ITEM_BOOK_LIGHT_BASE,초보 빛술사의 마법책
 LOC_SYSTEM_ITEM_BOOK_RANDOM1,빨간 커버의 책
 LOC_SYSTEM_ITEM_BOOK_RANDOM2,초록 커버의 책
 LOC_SYSTEM_ITEM_BOOK_RANDOM3,파란 커버의 책
@@ -3553,6 +3560,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ICE_ULTI,호수에 살고있는 모 얼음 요�
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_ULTI,마법의 숲에 살고있는 인형술사가 자주 들고다니는 책이라고 한다.\n정교하고 섬세하게 설명되어있는 많은 인형을 다루는 법은 소환술에도 응용할 수 있을 것 같다.\n무섭게도 폭약다루는 법, 상대를 저주하는 법도 적혀있다. 이 부분은 못본척하자.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_ULTI,텐구가 주인공인 박진감 넘치는 모험 만화.\n내용도 재밌지만 이 만화의 주인공이 쓰는 기술은 따라해 볼 수 있을 것 같다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMY_ULTI,어느 저택안에있는 큰 도서관에 꽂혀있던 연금술의 모든 것이 적혀있는 마도서.\n알아보기 힘들고 애매하게 적혀있어서 연금술의 대가가 아니면 내용을 이해하는건 힘들어보인다.\n적혀있는 지저분한 낙서로 봐선 이 책의 원 주인도 내용을 잘 이해하지 못했던거같다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_LIGHT_BASE,광탄을 사용하여 탄막 전투에서 쓸만한 마법들을 담은 기초 책.\n지나가던 요정에서부터 숙련된 마법사까지 모두 쓰는 탄막 전투의 기본기다.
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA,누군가가 잃어버린 보탑. 강력한 힘이 담겨있다.\n발동하게되면 안에 모여있던 힘이 레이저의 형태로 발사된다.\n발동 스킬이 높아지면 데미지가 높아진다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL,어딘가의 주지승이 쓰고 있던 경전. 마법의 힘이 담겨 있다.\n발동하게되면 파워를 대가로 사용자의 영력을 순식간에 회복시켜준다.\n발동 스킬이 높아지면 회복되는 영력이 많아진다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL,꿈의 세계에서 해메고있던 영혼이다.\n사용하면 꿈의 세계로부터 환상의 실체화가 잠시동안 가능하다.\n어딘가의 지역에 있던 몬스터 무리들이 아군이 되어 소환된다.\n발동 스킬이 높아지면 더욱 강한 아군이 소환된다.\n

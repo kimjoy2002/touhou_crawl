@@ -515,6 +515,12 @@ string GetSpellInfor(spell_list spell, bool isPlayer)
 	case SPL_SPEAKER_PHONE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SPEAKER_PHONE);
 		break;	
+	case SPL_HOMING_TANMAC:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_HOMING_TANMAC);
+		break;	
+	case SPL_ALLROUND_TANMAC:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ALLROUND_TANMAC);
+		break;	
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_UKNOWN);
 		break;

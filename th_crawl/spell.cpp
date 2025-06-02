@@ -160,6 +160,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_WINDFLAW:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK | S_FLAG_DELAYED) & flag);	
 	case SPL_MERMAID_SONG:
+	case SPL_HOMING_TANMAC:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK | S_FLAG_CLOSE_DANGER) & flag);	
 	case SPL_BURST:
 	case SPL_MANA_DRAIN:	
@@ -239,6 +240,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_SANTUARY:
 	case SPL_MISTIA_SONG:
 	case SPL_MESS_CONFUSION:
+	case SPL_ALLROUND_TANMAC:
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;
 	case SPL_SPEAKER_PHONE:
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_DELAYED) & flag;	
@@ -309,6 +311,7 @@ int SpellLength(spell_list skill, bool isPlayer)
 	case SPL_THROW_AMULET:
 	case SPL_WARP_KICK:
 	case SPL_TRACKING:
+	case SPL_HOMING_TANMAC:
 		length_ = 7;
 		break;
 	case SPL_FLAME:	
@@ -357,6 +360,7 @@ int SpellLength(spell_list skill, bool isPlayer)
 	case SPL_THROW_OIL:
 	case SPL_GROW_VINE:
 	case SPL_SUMMON_GHOST:
+	case SPL_ALLROUND_TANMAC:
 		length_ = 5;
 		break;
 	case SPL_SMOKING:
@@ -776,6 +780,10 @@ string SpellString(spell_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_CLOSE_DOOR);
 	case SPL_SPEAKER_PHONE:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_SPEAKER_PHONE);
+	case SPL_HOMING_TANMAC:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_HOMING_TANMAC);
+	case SPL_ALLROUND_TANMAC:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_ALLROUND_TANMAC);
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_UKNOWN);
 	}
@@ -818,6 +826,7 @@ int SpellLevel(spell_list skill)
 	case SPL_DIAMOND_HARDNESS:
 	case SPL_DRAW_POWER:
 	case SPL_SPEAKER_PHONE:
+	case SPL_HOMING_TANMAC:
 		return 2;
 	case SPL_CONFUSE:
 	case SPL_FREEZE:
@@ -883,6 +892,7 @@ int SpellLevel(spell_list skill)
 	case SPL_SUMMON_TRASH:
 	case SPL_THROW_AMULET:
 	case SPL_TRACKING:
+	case SPL_ALLROUND_TANMAC:
 		return 5;
 	case SPL_COLD_BEAM:
 	case SPL_CHAIN_LIGHTNING:
@@ -1033,6 +1043,7 @@ int SpellNoise(spell_list skill)
 	case SPL_WARP_KICK:
 	case SPL_SMOKING:
 	case SPL_GROW_VINE:
+	case SPL_HOMING_TANMAC:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -1097,6 +1108,7 @@ int SpellNoise(spell_list skill)
 	case SPL_TRACKING:
 	case SPL_DISCORD:
 	case SPL_CLOSE_DOOR:
+	case SPL_ALLROUND_TANMAC:
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
@@ -1499,6 +1511,10 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_EARTH) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_SPEAKER_PHONE:
 		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_HOMING_TANMAC:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_ALLROUND_TANMAC:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1553,6 +1569,7 @@ int SpellCap(spell_list skill)
 	case SPL_POISON_SKIN:
 	case SPL_KNIFE_COLLECT:
 	case SPL_FREEZE:
+	case SPL_HOMING_TANMAC:
 		return 75;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_SMITE:
@@ -1672,6 +1689,7 @@ int SpellCap(spell_list skill)
 	case SPL_GROW_VINE:
 	case SPL_CLOSE_DOOR:
 	case SPL_SPEAKER_PHONE:
+	case SPL_ALLROUND_TANMAC:
 		return 200;
 	default:
 	case SPL_BLINK:
@@ -1689,7 +1707,7 @@ int SpellDiffer(int level)
 	switch(level)
 	{
 	case 1:
-		return -5;
+		return -6;
 	case 2:
 		return -2;
 	case 3:

@@ -414,14 +414,16 @@ monster* BaseSummon(int id_, int time_, bool targeting_, bool random_, int range
 			summon_info s_(order?order->GetMapId():-1,kind_,max_num_);
 			mon_=env[current_level].AddMonster_Summon(id_,flag_,(*rit),s_,time_); //파워에 따라서 조정하기
 
-			if(order && !order->isplayer())
-			{
-				mon_->SetNeutrality(((monster*)order)->s_neutrality);
-			}
-			//unit* unit_ = env[current_level].isMonsterPos(target.x,target.y,order);
-			if(mon_ && targeting_){
-				if(env[current_level].isInSight((*rit)))
-					mon_->CheckSightNewTarget();
+			if(mon) {
+				if(order && !order->isplayer())
+				{
+					mon_->SetNeutrality(((monster*)order)->s_neutrality);
+				}
+				//unit* unit_ = env[current_level].isMonsterPos(target.x,target.y,order);
+				if(targeting_){
+					if(env[current_level].isInSight((*rit)))
+						mon_->CheckSightNewTarget();
+				}
 			}
 			break;
 		}
@@ -5006,6 +5008,8 @@ bool skill_grow_vine(int pow, bool short_, unit* order, coord_def target)
 	return return_;
 }
 
+
+
 bool skill_close_door(int pow, bool short_, unit* order, coord_def target_)
 {
 	if(!order)
@@ -5074,6 +5078,67 @@ bool skill_speaker_phone(int pow, bool short_, unit* order, coord_def target)
 	order->SetCommunication(6);
 	return true;
 }
+
+
+bool skill_homing_tanmac(int pow, bool short_, unit* order, coord_def target)
+{
+	if(target == order->position) {
+		return false;
+	}
+	int stating_direction_ = GetAngleToDirec(GetPositionToAngle(order->position.x, order->position.y, target.x, target.y));
+	bool return_=false;
+	
+	
+	for(int i = 0; i < 2; i++) { //두발
+	    for(int angle = 0; angle = 3; angle++) { //각도 3번
+			int current_direction_ = stating_direction_+ (angle+1)*(i==0?1:-1);
+			if(current_direction_ > 7) current_direction_-8;
+			if(current_direction_ < 0) current_direction_+8;
+			coord_def summon_position = order->position GetDirecToPos(current_direction_);
+			int id_ = MON_HOMING;
+			if(summon_check(summon_position, target, mondata[id_].flag & M_FLAG_FLY, mondata[id_].flag & M_FLAG_SWIM))
+			{
+				uint64_t flag_=M_FLAG_SUMMON;
+				if(order)
+				{
+					if(order->GetParentType() == PRT_PLAYER || order->GetParentType() == PRT_ALLY)
+					{
+						flag_ |= M_FLAG_ALLY;
+					}
+				}
+
+				summon_info s_(order?order->GetMapId():-1,kind_,max_num_);
+				mon_=env[current_level].AddMonster_Summon(id_,flag_,(*rit),s_,time_);
+
+				if(mon_){
+					if(order && !order->isplayer())
+					{
+						mon_->SetNeutrality(((monster*)order)->s_neutrality);
+					}
+					mon_->
+					if(env[current_level].isInSight((*rit)))
+						mon_->CheckSightNewTarget();
+					mon_->LevelUpdown(pow/15,0.0f,1f);
+				}
+				missle_->direction = GetPositionToAngle(position.x, position.y, missle_->position.x, missle_->position.y);
+				return_ = true;
+				break;
+			}
+		}
+	}
+	if (return_) {
+		if (env[current_level].isInSight(order->position)) {
+			soundmanager.playSound("shoot_heavy");
+		}
+	}
+	return return_;
+}
+
+bool skill_allround_tanmac(int pow, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
 
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
@@ -6322,6 +6387,10 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_close_door(power, short_, order, target);
 	case SPL_SPEAKER_PHONE:
 		return skill_speaker_phone(power, short_, order, target);
+	case SPL_HOMING_TANMAC:
+		return skill_homing_tanmac(power, short_, order, target);
+	case SPL_ALLROUND_TANMAC:
+		return skill_allround_tanmac(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -6840,6 +6909,10 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_close_door(power, short_, &you, target);
 	case SPL_SPEAKER_PHONE:
 		return skill_speaker_phone(power, short_, &you, target);
+	case SPL_HOMING_TANMAC:
+		return skill_homing_tanmac(power, short_, &you, target);
+	case SPL_ALLROUND_TANMAC:
+		return skill_allround_tanmac(power, short_, &you, target);
 	default:
 		return false;
 	}

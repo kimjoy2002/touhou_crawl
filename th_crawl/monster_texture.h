@@ -457,6 +457,7 @@ extern textures img_tanmac_master_spark[];
 extern textures img_tanmac_sword[];
 extern textures img_tanmac_knife[];
 extern textures img_tanmac_missle[];
+extern textures img_tanmac_homing[];
 extern textures img_tanmac_small[6][4];
 extern textures img_joypad_arrow[];
 

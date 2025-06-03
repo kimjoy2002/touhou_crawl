@@ -1987,14 +1987,14 @@ textures(&texture_item03, 221, 255),
 textures(&texture_item03, 222, 255)
 };
 
-textures img_tanmac_homing[] = { textures(&texture_item03, 215, 255),
-textures(&texture_item03, 216, 255),
-textures(&texture_item03, 217, 255),
-textures(&texture_item03, 218, 255),
-textures(&texture_item03, 219, 255),
-textures(&texture_item03, 220, 255),
-textures(&texture_item03, 221, 255),
-textures(&texture_item03, 222, 255)
+textures img_tanmac_homing[] = { textures(&texture_laser, 141, 255),
+textures(&texture_laser, 142, 255),
+textures(&texture_laser, 143, 255),
+textures(&texture_laser, 144, 255),
+textures(&texture_laser, 145, 255),
+textures(&texture_laser, 146, 255),
+textures(&texture_laser, 147, 255),
+textures(&texture_laser, 148, 255)
 };
 
 

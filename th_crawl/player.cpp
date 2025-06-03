@@ -803,7 +803,6 @@ void players::LoadDatas(FILE *fp)
 	if(!isPrevVersion(loading_version_string, "ver1.11")) {
 		LoadData<shield_struct>(fp, s_shield);
 	}
-	SaveData<shield_struct>(fp, s_shield);
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
 	LoadData<int>(fp, alchemy_time);

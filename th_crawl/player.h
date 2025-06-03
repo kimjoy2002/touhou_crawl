@@ -619,6 +619,7 @@ public:
 	float GetElecResist(bool cloud_ = false);
 	bool GetCloudResist();
 	void burstCloud(int kind_, int rate_);
+	bool isEnemyUnit(unit* unit_info);
 	bool isEnemyMonster(const monster* monster_info);
 	bool isUserAlly() const {return true;}
 	bool isPassedBullet(unit* order);

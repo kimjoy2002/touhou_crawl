@@ -2285,6 +2285,23 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			}
 		}
 	}
+	
+	//잔상 그리기
+	{
+		list<afterimage>::iterator it;
+		
+		for(it = env[current_level].afterimage_list.begin(); it != env[current_level].afterimage_list.end(); it++)
+		{
+			if(abs((*it).position.x -x_-sight_x)<=sight_x && abs((*it).position.y -y_-sight_y)<=sight_y)
+			{
+				if(env[current_level].isInSight((*it).position)) 
+				{
+					(*it).draw(pSprite,((*it).position.x-x_)*calc_tile_size+tile_x_offset,((*it).position.y-y_)*calc_tile_size+tile_x_offset,calc_tile_scale);
+				}
+			}
+		}
+	}
+
 
 	//안개그리기
 	if(you.s_weather >= 1 && you.s_weather_turn > 0)

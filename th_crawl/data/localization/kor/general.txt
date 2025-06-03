@@ -125,6 +125,7 @@ LOC_SYSTEM_WELCOME_FIRST,환상향에 온걸 환영한다!
 LOC_SYSTEM_WELCOME,환상향에 돌아온걸 환영한다!
 LOC_SYSTEM_LOS_MON,시야안에 몬스터가 있다.
 LOC_SYSTEM_LOS_NOMON,시야안에 몬스터가 없다.
+LOC_SYSTEM_LENGTH_NOMON,사거리 안에 공격 가능한 몬스터가 없다.
 LOC_SYSTEM_NOTHING_HAPPEND,아무 일도 일어나지않았다.
 LOC_SYSTEM_CONFUSE_WARNING,당신은 혼란스럽다.
 LOC_SYSTEM_DIMENSTION,차원이 고정된 상태에서는 지원되지않는다.

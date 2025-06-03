@@ -149,8 +149,9 @@ public:
 	void SetX(int x_);
 	void SetY(int y_);
 	void SetXY(int x_, int y_);
-	void SetXY(int map_num_, int x_, int y_);
+	void SetXY(int map_num_, int x_, int y_, bool init_);
 	void SetXY(coord_def pos_);
+	void AfterMove(int map_num_, int x_, int y_);
 	char getAsciiDot();
 	void LevelUpdown(int level_, float hp_ = 6.0f, float atk_ = 2.0f);
 	void FoundTarget(unit* unit_, int time_);
@@ -166,6 +167,9 @@ public:
 	void multipleAttack(unit* except, attack_infor& att_infor);
 	bool simple_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_, float scale_);
 	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_, float scale_);
+	bool isMovetoSide();
+	bool isSmartMove();
+	bool isMoveNotInturrpt(monster* mon_);
 	bool smartmove(short_move x_mov, short_move y_mov, int num_, set<int>& already_move); //아군이 자리를 잡을 수 있게 길을 비켜주는 인공지능
 	int move(short_move x_mov, short_move y_mov, bool only_move);
 	int move(const coord_def &c, bool only_move);
@@ -307,6 +311,28 @@ public:
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
 };
+
+
+
+class afterimage
+{
+public:
+	textures *image;
+	coord_def position;
+	int life_time;
+	float alpha;
+	float alpha_decrese;
+	afterimage():image(NULL),position(),life_time(10), alpha(0), alpha_decrese(0)
+	{}
+	afterimage(const coord_def &c, textures *t, int life_time, float alpha):
+	image(t),position(c),life_time(life_time*10), alpha(alpha), alpha_decrese(alpha/life_time){}
+
+	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x_, float y_, float scale_);
+	bool action(int delay);
+	void SaveDatas(FILE *fp);
+	void LoadDatas(FILE *fp);
+};
+
 
 
 class effect

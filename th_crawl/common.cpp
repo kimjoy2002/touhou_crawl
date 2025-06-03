@@ -331,6 +331,8 @@ int GetDirecToChar(int pos_)
 
 int GetAngleToDirec(int angle)
 {
+	while(angle<0)angle+=360; 
+	while(angle>360)angle-=360; 
 	if(angle>=22 && angle <67)
 		return 3;
 	else if(angle>=67 && angle < 112)

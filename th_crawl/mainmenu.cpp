@@ -753,33 +753,6 @@ void start_mainmenu()
 		m_mgr.menu_input_puls(3,VK_ESCAPE,1,"",false,NULL,0);
 
 		
-		
-		temp = make_unique<vector<menu_string>>();
-		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT), true, CL_help));
-		temp->push_back(menu_string("", true, CL_normal));
-		temp->push_back(menu_string("", true, CL_normal));
-		for(int i=0;i<JOB_MAX;i++)
-		{
-			char hotkey_ = 'a' + i;
-			ostringstream ss;
-			ss << hotkey_ << " - " << LocalzationManager::locString(job_type_string[i]);
-			
-			temp->push_back(menu_string(ss.str(), false, CL_normal, hotkey_));
-
-			if(i%2 == 1  || i == JOB_MAX-1) {
-				temp->push_back(menu_string("", true, CL_normal));
-			}
-			else if(23 - PrintCharWidth(ss.str()) > 0) {
-				temp->push_back(menu_string(string(23 - PrintCharWidth(ss.str()), ' '), false, CL_normal));
-			} else {
-				temp->push_back(menu_string(" ", false, CL_normal));
-			}
-		}
-		temp->push_back(menu_string("", true, CL_normal));
-		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT_HELP), true, CL_normal));
-		temp->push_back(menu_string("", true, CL_normal));
-		m_mgr.menu_puls(4,temp, true);
-		
 
 		struct joblist_struct {
 			job_type type;
@@ -787,7 +760,7 @@ void start_mainmenu()
 			LOCALIZATION_ENUM_KEY infor;
 		};
 
-		joblist_struct joblist[22] = {
+		joblist_struct joblist[JOB_MAX] = {
 			{JOB_WARRIOR, LOC_SYSTEM_JOB_WARRIOR,LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WARRIOR},
 			{JOB_WIZARD, LOC_SYSTEM_JOB_WIZARD,LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WIZARD},
 			{JOB_SHAMAN, LOC_SYSTEM_JOB_SHAMAN,LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SHAMAN},
@@ -813,7 +786,37 @@ void start_mainmenu()
 		};
 
 
-		for (int i = 0; i < 21; i++) {
+		
+		temp = make_unique<vector<menu_string>>();
+		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT), true, CL_help));
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string("", true, CL_normal));
+		for(int i=0;i<JOB_MAX;i++)
+		{
+			char hotkey_ = 'a' + i;
+			ostringstream ss;
+			ss << hotkey_ << " - " << LocalzationManager::locString(joblist[i].name);
+			
+			temp->push_back(menu_string(ss.str(), false, CL_normal, hotkey_));
+
+			if(i%2 == 1  || i == JOB_MAX-1) {
+				temp->push_back(menu_string("", true, CL_normal));
+			}
+			else if(23 - PrintCharWidth(ss.str()) > 0) {
+				temp->push_back(menu_string(string(23 - PrintCharWidth(ss.str()), ' '), false, CL_normal));
+			} else {
+				temp->push_back(menu_string(" ", false, CL_normal));
+			}
+		}
+		temp->push_back(menu_string("", true, CL_normal));
+		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT_HELP), true, CL_normal));
+		temp->push_back(menu_string("", true, CL_normal));
+		m_mgr.menu_puls(4,temp, true);
+		
+
+
+
+		for (int i = 0; i < 22; i++) {
 			char hotkey_ = 'a' + i;
 			tempstr = LocalzationManager::locString(joblist[i].name);
 			tempstr += ": ";

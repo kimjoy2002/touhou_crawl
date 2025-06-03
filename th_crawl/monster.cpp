@@ -317,6 +317,8 @@ void monster::ReTarget()
 }
 void monster::init()
 { 
+	position.x = 0;
+	position.y = 0;
 	map_id=-1;
 	id=0;
 	id2=0;
@@ -472,7 +474,7 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int
 			else
 				state.SetState(MS_ATACK);
 		}
-		SetXY(map_num_, position_.x, position_.y);
+		SetXY(map_num_, position_.x, position_.y, true);
 		first_position = position_;
 		if(flag & M_FLAG_ALLY)
 		{
@@ -785,22 +787,26 @@ void monster::SetY(int y_)
 }
 void monster::SetXY(int x_, int y_)
 {
-	SetXY(current_level, x_, y_);
+	SetXY(current_level, x_, y_, false);
 }
-void monster::SetXY(int map_num_, int x_, int y_)
+void monster::SetXY(int map_num_, int x_, int y_, bool init_)
 {
 	if(position.x == x_ && position.y == y_)
 		return;
-	if(s_silence)
-		env[map_num_].MakeSilence(position, s_silence_range, false);
-	if(s_catch)
-		you.SetCatch(NULL);
 
-	if (flag & M_FLAG_NONE_MOVE && flag & M_FLAG_UNHARM)
-	{
-		env[map_num_].dgtile[position.x][position.y].flag &= ~FLAG_BLOCK;
+
+	if(!init_) {
+		if(s_silence)
+			env[map_num_].MakeSilence(position, s_silence_range, false);
+		if(s_catch)
+			you.SetCatch(NULL);
+
+		if (flag & M_FLAG_NONE_MOVE && flag & M_FLAG_UNHARM)
+		{
+			env[map_num_].dgtile[position.x][position.y].flag &= ~FLAG_BLOCK;
+		}
+		AfterMove(map_num_, x_, y_);
 	}
-
 
 	position.set(x_,y_);
 	for(auto it = env[map_num_].floor_list.begin(); it != env[map_num_].floor_list.end();it++)
@@ -820,6 +826,15 @@ void monster::SetXY(int map_num_, int x_, int y_)
 void monster::SetXY(coord_def pos_)
 {
 	SetXY(pos_.x,pos_.y);
+}
+void monster::AfterMove(int map_num_, int x_, int y_) {
+	switch(id) {
+	case MON_HOMING:
+		env[map_num_].MakeAfterimage(coord_def(position.x, position.y), image, 30, 3);
+		break;
+	default:
+		break;
+	}
 }
 char monster::getAsciiDot() 
 {
@@ -1986,6 +2001,23 @@ std::vector<coord_def> get_forward_5_tiles(coord_def my_pos, coord_def target_po
     return result;
 }
 
+bool monster::isMovetoSide() {
+	if(id == MON_HOMING || flag & M_FLAG_RANGE_ATTACK)
+		return true;
+	return false;
+}
+bool monster::isSmartMove() {
+	if(id == MON_HOMING || randA(4) == 0)
+		return true;
+	return false;
+}
+bool monster::isMoveNotInturrpt(monster* mon) {
+	if(id == MON_HOMING && mon->id == MON_HOMING)
+		return true;
+	if(mon->flag & M_FLAG_NONE_MOVE && !canSwap(mon) && mon->position != target_pos)
+		return true;
+	return false;
+}
 
 bool monster::smartmove(short_move x_mov, short_move y_mov, int num_, set<int>& already_move)
 {
@@ -1999,11 +2031,11 @@ bool monster::smartmove(short_move x_mov, short_move y_mov, int num_, set<int>& 
 		if(target)
 		{//타겟이 정해져있고
 			if(max(abs(position.x - target->position.x),abs(position.y -  target->position.y))<=1
-				|| (flag & M_FLAG_RANGE_ATTACK))
+				|| isMovetoSide())
 			{//타겟과 거리가 1칸미만일때 + 내가 원거리 유닛일때
 				bool range_attack = false;
 				rand_rect_iterator new_pos_(target->position,1,1,true);
-				if(max(abs(position.x - target->position.x),abs(position.y -  target->position.y))>1 && (flag & M_FLAG_RANGE_ATTACK)) {
+				if(max(abs(position.x - target->position.x),abs(position.y -  target->position.y))>1 && isMovetoSide()) {
 					//원거리: 난 대신 옆으로 살짝 피해줘!
 					new_pos_ = rand_rect_iterator(position,1,1,true);
 					range_attack = true;
@@ -2124,7 +2156,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 		{
 			if((*it).isLive() && (*it).position.x == position.x+x_mov && (*it).position.y == position.y+y_mov)
 			{
-				if((*it).flag & M_FLAG_NONE_MOVE && !canSwap(&(*it)) && (*it).position != target_pos) {
+				if(isMoveNotInturrpt(&(*it))) {
 					coord_def able[2];
 
 					//(1,1)로 움직이는데 있으면 (1,0)이나 (0,1)
@@ -2205,7 +2237,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 						SetXY(coord_def(position.x + x_mov, position.y + y_mov));
 						return 2;
 					}
-					else if(!s_none_move && !(flag & M_FLAG_LEADER_SUMMON) && (*it).isAllyMonster(this) && randA(4) == 0)
+					else if(!s_none_move && !(flag & M_FLAG_LEADER_SUMMON) && (*it).isAllyMonster(this) && isSmartMove())
 					{
 						set<int> already_move;
 						already_move.insert(map_id);
@@ -4149,15 +4181,12 @@ void monster::special_action(int delay_, bool smoke_)
 		break;
 	case MON_MISSLE:
 		if (smoke_){
-			env[current_level].MakeSmoke(coord_def(position.x, position.y), img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, this);
 		} else {
 			image = &img_tanmac_missle[GetAngleToDirec(direction)];
 		}
 		break;
 	case MON_HOMING:
-		if (smoke_){
-			//env[current_level].MakeSmoke(coord_def(position.x, position.y), img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, this);
-		} else {
+		if (!smoke_){
 			image = &img_tanmac_homing[GetAngleToDirec(direction)];
 		}
 		break;
@@ -5241,7 +5270,7 @@ bool monster::isSightnonblocked(coord_def c)
 	bool intercept = false;
 	for(int i=RT_BEGIN;i!=RT_END;i++)
 	{
-		int length_ = 8;
+		int length_ = 7;
 		beam_iterator it(position,c,(round_type)i);
 		while(!intercept && !it.end())
 		{
@@ -5432,6 +5461,7 @@ bool monster::special_state(bool is_sight_for_monster) {
 	case MON_HOMING:
 	{
 		if(special_move(is_sight_for_monster, false, 45)) {
+			env[current_level].MakeAfterimage(coord_def(position.x, position.y), image, 50, 4);
 			dead(PRT_NEUTRAL, false);
 		}
 	}
@@ -5489,6 +5519,9 @@ int monster::GetAttack(int num_, bool max_)
 }
 int monster::GetHit()
 {
+	if(id == MON_HOMING) {
+		return 99;
+	}
 	int hit_ = level*1.5f+8;
 	return hit_;
 }
@@ -6038,6 +6071,49 @@ void shadow::LoadDatas(FILE *fp)
 	char temp[100];
 	LoadData<char>(fp, *temp);
 	name = temp;
+}
+
+
+bool afterimage::draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x_, float y_, float scale_)
+{
+	bool return_ = false;
+	return_ = image->draw(pSprite, x_, y_,0.0f,scale_,scale_,(int)alpha);
+	return return_;
+}
+bool afterimage::action(int delay) {
+	int prev_turn = life_time/10;
+	life_time-=delay;
+	int next_turn = life_time/10;
+	for(int i = 0; i < prev_turn - next_turn;i++) {
+		alpha -= alpha_decrese;
+		if(alpha < 0) {
+			alpha = 0;
+		}
+	}
+	if(next_turn <= 0) {
+		return false;
+	}
+	return true;
+}
+
+void afterimage::SaveDatas(FILE *fp) {
+	SaveData<int>(fp, texturetoint(image));
+	SaveData<int>(fp, position.x);
+	SaveData<int>(fp, position.y);
+	SaveData<int>(fp, life_time);
+	SaveData<float>(fp, alpha);
+	SaveData<float>(fp, alpha_decrese);
+}
+
+void afterimage::LoadDatas(FILE *fp) {
+	int it;
+	LoadData<int>(fp, it);
+	image = inttotexture(it);
+	LoadData<int>(fp, position.x);
+	LoadData<int>(fp, position.y);
+	LoadData<int>(fp, life_time);
+	LoadData<float>(fp, alpha);
+	LoadData<float>(fp, alpha_decrese);
 }
 
 

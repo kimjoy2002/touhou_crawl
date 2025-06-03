@@ -1090,6 +1090,6 @@ const mon_infor mondata[] = {
 	M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_STATE | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY, 99, 0, 7 ,')' },
 
 	{ MON_HOMING, 1, 0, name_infor(MON_HOMING), &img_tanmac_homing[1], 1, 10, 0,
-	{ 6, 0, 0 }, { ATT_NORMAL, ATT_NONE, ATT_NONE }, { name_infor(LOC_SYSTEM_ATT_NORMAL), name_infor(), name_infor() },
+	{ 9, 0, 0 }, { ATT_NORMAL, ATT_NONE, ATT_NONE }, { name_infor(LOC_SYSTEM_ATT_NORMAL), name_infor(), name_infor() },
 	M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_STATE | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY, 99, 0, 2 ,'*' }
 };

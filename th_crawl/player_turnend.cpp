@@ -126,8 +126,10 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 
 	ReleaseMutex(mutx);
-	if(you.s_the_world==0 || you.s_the_world==1)
+	if(you.s_the_world==0 || you.s_the_world==1) {
+		env[current_level].ActionAfterimage(delay_);
 		env[current_level].ActionSmoke(delay_);
+	}
 	env[current_level].ActionFloor(delay_);
 	if(you.s_the_world==0 || you.s_the_world==1)
 	{
@@ -1157,7 +1159,11 @@ bool players::TraningStealth()
 	return false;
 }
 
-
+bool players::isEnemyUnit(unit* unit_info) {
+	if(unit_info->isplayer())
+		return false;
+	return !unit_info->isUserAlly() && !unit_info->isCompleteNeutral();
+}
 bool players::isEnemyMonster(const monster* monster_info)
 {
 	return !monster_info->isUserAlly();

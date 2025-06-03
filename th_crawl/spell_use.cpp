@@ -36,6 +36,7 @@
 extern HANDLE mutx;
 extern int map_effect;
 
+int GetLengthFromCenter(int x, int y, int cx, int cy);
 bool isMonsterhurtSpell(monster* use_, monster* target_, spell_list spell_)
 {
 	//이 마법이 이 몬스터에게 제대로 듣는지
@@ -414,7 +415,7 @@ monster* BaseSummon(int id_, int time_, bool targeting_, bool random_, int range
 			summon_info s_(order?order->GetMapId():-1,kind_,max_num_);
 			mon_=env[current_level].AddMonster_Summon(id_,flag_,(*rit),s_,time_); //파워에 따라서 조정하기
 
-			if(mon) {
+			if(mon_) {
 				if(order && !order->isplayer())
 				{
 					mon_->SetNeutrality(((monster*)order)->s_neutrality);
@@ -5090,13 +5091,13 @@ bool skill_homing_tanmac(int pow, bool short_, unit* order, coord_def target)
 	
 	
 	for(int i = 0; i < 2; i++) { //두발
-	    for(int angle = 0; angle = 3; angle++) { //각도 3번
+	    for(int angle = 0; angle < 3; angle++) { //각도 3번
 			int current_direction_ = stating_direction_+ (angle+1)*(i==0?1:-1);
-			if(current_direction_ > 7) current_direction_-8;
-			if(current_direction_ < 0) current_direction_+8;
-			coord_def summon_position = order->position GetDirecToPos(current_direction_);
+			if(current_direction_ > 7) current_direction_-=8;
+			if(current_direction_ < 0) current_direction_+=8;
+			coord_def summon_position = order->position + GetDirecToPos(current_direction_);
 			int id_ = MON_HOMING;
-			if(summon_check(summon_position, target, mondata[id_].flag & M_FLAG_FLY, mondata[id_].flag & M_FLAG_SWIM))
+			if(summon_check(summon_position, summon_position, mondata[id_].flag & M_FLAG_FLY, mondata[id_].flag & M_FLAG_SWIM))
 			{
 				uint64_t flag_=M_FLAG_SUMMON;
 				if(order)
@@ -5106,21 +5107,29 @@ bool skill_homing_tanmac(int pow, bool short_, unit* order, coord_def target)
 						flag_ |= M_FLAG_ALLY;
 					}
 				}
-
-				summon_info s_(order?order->GetMapId():-1,kind_,max_num_);
-				mon_=env[current_level].AddMonster_Summon(id_,flag_,(*rit),s_,time_);
+				summon_info s_(order?order->GetMapId():-1,SKD_OTHER,-1);
+				monster* mon_=env[current_level].AddMonster_Summon(id_,flag_,summon_position,s_,10);
 
 				if(mon_){
 					if(order && !order->isplayer())
 					{
 						mon_->SetNeutrality(((monster*)order)->s_neutrality);
 					}
-					mon_->
-					if(env[current_level].isInSight((*rit)))
+					unit* unit_hit_ = env[current_level].isMonsterPos(target.x, target.y);
+					if(unit_hit_) {	
+						mon_->FoundTarget(unit_hit_, mon_->FoundTime());
+					}
+					else if(env[current_level].isInSight(summon_position))
 						mon_->CheckSightNewTarget();
-					mon_->LevelUpdown(pow/15,0.0f,1f);
+					else {
+						mon_->memory_time = mon_->FoundTime();
+						mon_->target_pos = target;
+					}
+					mon_->LevelUpdown(pow/15,0.0f,2.0f);
 				}
-				missle_->direction = GetPositionToAngle(position.x, position.y, missle_->position.x, missle_->position.y);
+				mon_->direction = GetPositionToAngle(order->position.x, order->position.y, mon_->position.x, mon_->position.y);
+				mon_->image = &img_tanmac_homing[GetAngleToDirec(mon_->direction)];
+				mon_->PlusTimeDelay(-you.GetSpellDelay()+2*mon_->GetWalkDelay());
 				return_ = true;
 				break;
 			}
@@ -5136,6 +5145,114 @@ bool skill_homing_tanmac(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_allround_tanmac(int pow, bool short_, unit* order, coord_def target)
 {
+	vector<unit*> able_unit_vector;
+
+	for(vector<monster>::iterator it = env[current_level].mon_vector.begin(); it!=env[current_level].mon_vector.end(); it++)
+	{	
+		if(it->isLive() && order->isEnemyUnit(&(*it)) && !(it->flag & M_FLAG_UNHARM) && 
+				!it->isPassedBullet(order)
+			&& env[current_level].isInSight(it->position) && order->isSightnonblocked(it->position) 
+		&& GetLengthFromCenter(it->position.x, it->position.y, order->position.x, order->position.y) <= SpellLength(SPL_ALLROUND_TANMAC, order->isplayer()))
+		{
+			
+			if((it->position - target).abs() <= 2) {
+				able_unit_vector.push_back(&(*it));
+			} else {
+				beam_iterator beam(it->position, target);
+				if (CheckThrowPath(it->position, target, beam)) {
+					beam.init();
+					int len_ = 0;
+					while (!beam.end())
+					{
+						unit *unit_ = env[current_level].isMonsterPos(beam->x, beam->y, order->isplayer()?&you:nullptr);
+						if (unit_ && !unit_->isPassedBullet(order))
+						{
+							break;
+						}
+						len_++;
+						beam++;
+					}
+					if (beam.end() && len_ != 0) {
+						able_unit_vector.push_back(&(*it));
+					}
+				}
+			}
+		}
+	}
+	if(!order->isplayer()) {
+		monster* mon_ = (monster*) order;
+		if(mon_->isEnemyUnit(&you) && mon_->isMonsterSight(you.position) && mon_->isSightnonblocked(you.position) && 
+			 GetLengthFromCenter(you.position.x, you.position.y, order->position.x, order->position.y) <= SpellLength(SPL_ALLROUND_TANMAC, order->isplayer())) {
+
+			beam_iterator beam(order->position, you.position);
+			if (CheckThrowPath(order->position, you.position, beam)) {
+				beam.init();
+				int len_ = 0;
+				while (!beam.end())
+				{
+					unit *unit_ = env[current_level].isMonsterPos(beam->x, beam->y, order->isplayer()?&you:nullptr);
+					if (unit_)
+					{
+						break;
+					}
+					len_++;
+					beam++;
+				}
+				if (beam.end() && len_ != 0) {
+					able_unit_vector.push_back(&(you));
+				}
+			}
+		}
+	}
+
+	if(!able_unit_vector.empty()) {
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			if (env[current_level].isInSight(order->position)) {
+				soundmanager.playSound("shoot");
+			}
+			list<shared_ptr<ThrowTamacInstance>> tanmac_list;
+
+			int graphic_ = rand_int(10, 15);
+			for(unit* target_unit : able_unit_vector) {
+				if(target_unit->isLive()) {
+					int mon_panlty_ = order->isplayer()?0:2;//몬스터가 쓸때 패널티
+					int damage_ = 6+pow/9-mon_panlty_;
+					beam_infor temp_infor_sub(randC(3,damage_),3*(damage_),15+pow/25,order,order->GetParentType(),SpellLength(SPL_ALLROUND_TANMAC, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
+					temp_infor_sub.length = ceil(GetPositionGap(order->position.x, order->position.y, target_unit->position.x, target_unit->position.y));
+					beam_iterator beam_sub(order->position,target_unit->position);
+					tanmac_list.push_back(make_shared<ThrowTamacInstance>(nullptr, graphic_, beam_sub, temp_infor_sub, nullptr, false));
+				}
+			}
+
+			while(!tanmac_list.empty()) {
+				for(list<shared_ptr<ThrowTamacInstance>>::iterator it = tanmac_list.begin(); it != tanmac_list.end();) {
+					list<shared_ptr<ThrowTamacInstance>>::iterator temp = it++;
+					coord_def hit_pos_(0,0);
+					if((*temp)->oneturn(hit_pos_)) {
+						(*temp)->endShoot(false, false);
+						tanmac_list.erase(temp);
+					}
+				}
+				Sleep(16);
+				for(list<shared_ptr<ThrowTamacInstance>>::iterator it = tanmac_list.begin(); it != tanmac_list.end();) {
+					list<shared_ptr<ThrowTamacInstance>>::iterator temp = it++;
+					if((*temp)->oneturn_after(false)) {
+						(*temp)->endShoot(false, false);
+						tanmac_list.erase(temp);
+					}
+				}
+			}
+			Sleep(60);
+			env[current_level].ClearEffect();
+			return true;
+		}
+	}
+	
+
+	if(order->isplayer()) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LENGTH_NOMON), true, false, false, CL_normal);
+	}
+
 	return false;
 }
 

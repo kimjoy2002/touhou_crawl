@@ -10,6 +10,7 @@
 #include "map.h"
 #include "skill_use.h"
 #include "mon_infor.h"
+#include "book.h"
 #include "rand_shuffle.h"
 #include "tribe.h"
 #include "event.h"

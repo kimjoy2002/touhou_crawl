@@ -79,6 +79,7 @@ void environment::init() {
 	mon_vector.clear();
 	mon_vector.reserve(MON_MAX_IN_FLOOR);
 	shadow_list.clear();
+	afterimage_list.clear();
 	item_list.clear();
 	effect_list.clear();
 	smoke_list.clear();
@@ -111,6 +112,11 @@ void environment::SaveDatas(FILE *fp)
 	}
 	SaveData<int>(fp, shadow_list.size());
 	for(list<shadow>::iterator it=shadow_list.begin();it!=shadow_list.end();it++)
+	{
+		(*it).SaveDatas(fp);
+	}
+	SaveData<int>(fp, afterimage_list.size());
+	for(list<afterimage>::iterator it=afterimage_list.begin();it!=afterimage_list.end();it++)
 	{
 		(*it).SaveDatas(fp);
 	}
@@ -152,6 +158,7 @@ void environment::LoadDatas(FILE *fp)
 {
 	mon_vector.clear();
 	shadow_list.clear();
+	afterimage_list.clear();
 	item_list.clear();
 	effect_list.clear();
 	LoadData<int>(fp, floor);
@@ -184,6 +191,15 @@ void environment::LoadDatas(FILE *fp)
 		shadow temp;
 		temp.LoadDatas(fp);
 		shadow_list.push_back(temp);
+	}
+	if(!isPrevVersion(loading_version_string, "ver1.102")) {
+		LoadData<int>(fp, size_);
+		for(int i=0;i<size_;i++)
+		{	
+			afterimage temp;
+			temp.LoadDatas(fp);
+			afterimage_list.push_back(temp);
+		}
 	}
 	LoadData<int>(fp, size_);
 	for(int i=0;i<size_;i++)
@@ -1169,6 +1185,28 @@ void environment::MakeShadow(const coord_def &c, textures *t, int original_id_, 
 	ReleaseMutex(mutx);
 }
 
+void environment::MakeAfterimage(const coord_def &c, textures *t, int start_alpha, int turn_) {
+
+	WaitForSingleObject(mutx, INFINITE);
+	list<afterimage>::iterator it;
+	for(it = afterimage_list.begin();;it++)
+	{
+		if(it == afterimage_list.end() || (*it).position.y > c.y || ((*it).position.y == c.y && (*it).position.x > c.x) )
+		{
+			afterimage_list.insert(it,afterimage(c,t,turn_,(float)start_alpha));
+			ReleaseMutex(mutx);
+			return;
+		}
+		else if((*it).position.y == c.y && (*it).position.x == c.x)
+		{
+			afterimage_list.insert(it,afterimage(c,t,turn_,(float)start_alpha));
+			ReleaseMutex(mutx);
+			return;
+		}
+	}
+	ReleaseMutex(mutx);
+}
+
 
 bool environment::MakeSmoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, unit* parent_)
 {
@@ -1654,17 +1692,35 @@ void environment::ActionMonsterSpecial(int delay_)
 		}
 	}
 }
+void environment::ActionAfterimage(int delay_)
+{
+	list<afterimage>::iterator it;
+	for(it = afterimage_list.begin();it != afterimage_list.end() ;)
+	{
+		list<afterimage>::iterator temp = it++;
+		if(!DisableMove(temp->position)) {
+			if(!temp->action(delay_))
+			{
+				WaitForSingleObject(mutx, INFINITE);
+				afterimage_list.erase(temp);
+				ReleaseMutex(mutx);
+			}
+		}
+	}
+}
 void environment::ActionSmoke(int delay_)
 {
 	list<smoke>::iterator it;
 	for(it = smoke_list.begin();it != smoke_list.end() ;)
 	{
 		list<smoke>::iterator temp = it++;
-		if(!DisableMove(temp->position) && !temp->action(delay_))
-		{
-			WaitForSingleObject(mutx, INFINITE);
-			smoke_list.erase(temp);
-			ReleaseMutex(mutx);
+		if(!DisableMove(temp->position)) {
+			if(!temp->action(delay_))
+			{
+				WaitForSingleObject(mutx, INFINITE);
+				smoke_list.erase(temp);
+				ReleaseMutex(mutx);
+			}
 		}
 	}
 }
@@ -1674,11 +1730,13 @@ void environment::ActionFloor(int delay_)
 	for(it = floor_list.begin();it != floor_list.end() ;)
 	{
 		list<floor_effect>::iterator temp = it++;
-		if(!DisableMove(temp->position) && !temp->action(delay_))
-		{
-			WaitForSingleObject(mutx, INFINITE);
-			floor_list.erase(temp);
-			ReleaseMutex(mutx);
+		if(!DisableMove(temp->position)) {
+			if(!temp->action(delay_))
+			{
+				WaitForSingleObject(mutx, INFINITE);
+				floor_list.erase(temp);
+				ReleaseMutex(mutx);
+			}
 		}
 	}
 }
@@ -1689,10 +1747,12 @@ bool environment::ActionEvent(int delay_)
 	for(it = event_list.begin();it != event_list.end() ;)
 	{
 		list<events>::iterator temp = it++;
-		if(!DisableMove(temp->position) && !temp->action(delay_))
-		{
-			event_list.erase(temp);
-			return_= true;
+		if(!DisableMove(temp->position)) {
+			if(!temp->action(delay_))
+			{
+				event_list.erase(temp);
+				return_= true;
+			}
 		}
 	}
 	return return_;

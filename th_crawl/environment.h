@@ -21,6 +21,7 @@ class smoke;
 class floor_effect;
 class events;
 class forbid;
+class afterimage;
 
 enum floor_type;
 
@@ -164,6 +165,7 @@ public:
 	vector<stair_info> stair_vector; //추가 계단.(나중엔 통합하기)
 	vector<monster> mon_vector;
 	list<shadow> shadow_list;
+	list<afterimage> afterimage_list;
 	list<item> item_list;
 	list<effect> effect_list;
 	list<smoke> smoke_list;
@@ -280,6 +282,7 @@ public:
 	monster* AddMonster_Summon(int id_, uint64_t flag_, coord_def position_, summon_info &info_ , int time_);
 	void SummonClear(int map_id_);
 	void MakeShadow(const coord_def &c, textures *t, int original_id_, shadow_type type_= SWT_MONSTER, const string &name_ = "");
+	void MakeAfterimage(const coord_def &c, textures *t, int start_alpha, int turn_);
 	bool MakeSmoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, unit* parent_ = NULL);
 	bool MakeFloorEffect(const coord_def &c, textures *t,textures *t2, floor_type type_, int time_, unit* parent_ = NULL);
 	bool MakeEvent(int id_, coord_def position_, event_type type_, int count_ = -1, int value = 0);
@@ -305,6 +308,7 @@ public:
 	void CheckFloor();
 	void ActionMonster(int delay_);
 	void ActionMonsterSpecial(int delay_);
+	void ActionAfterimage(int delay_);
 	void ActionSmoke(int delay_);
 	void ActionFloor(int delay_);
 	bool ActionEvent(int delay_);

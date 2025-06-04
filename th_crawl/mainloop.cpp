@@ -919,6 +919,12 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 			case SYSCMD_100REST:
 				long_rest();
 				break;
+			case SYSCMD_1TURN:
+				if(isShootingSprint()){
+					you.shooing_fire();
+				}
+				action_turn_skip();
+				break;
 			case SYSCMD_MAGIC:
 				SimpleSpellUse();
 				break;
@@ -933,6 +939,9 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 				break;
 			case SYSCMD_PRAY:
 				Pray();
+				break;
+			case SYSCMD_QUICKTHROW:
+				Quick_Throw(you.GetThrowIter(),you.GetTargetIter(), false);
 				break;
 			case SYSCMD_MORE_ITEM:
 				More_Item_Action();
@@ -957,6 +966,9 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 				break;
 			case SYSCMD_QUIT:
 				saveandcheckexit();
+				break;
+			case SYSCMD_WIZARD:
+				wiz_mode();
 				break;
 			default: 
 				break;

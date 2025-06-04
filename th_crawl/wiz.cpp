@@ -41,6 +41,7 @@ void create_and_kill(int floor, float percent_ = 1.0f) {
 			list<item>::iterator temp = it++;
 			if(percent_ > 0.0f && rand_float(0.0f,1.0f) <= percent_)
 			{
+				item->Identify();
 				env[current_level].AddItem(you.position, &(*temp));
 				env[floor].DeleteItem(&(*temp));
 			}
@@ -92,7 +93,35 @@ void wiz_mode()
 	wiz_list.wizard_mode = 1;
 	while(1)
 	{
-		int key_ = waitkeyinput();
+		vector<int> wizard_listkey = {
+			'A', 'C', 'D', 'E', 'f', 'G', 'H', 'I', 'm', 'p', 
+			'q', 'R', 'w', 'W', 'X', '>', '<', '^', '?', VK_ESCAPE
+		};
+		startSelection(wizard_listkey);
+		
+		int key_ = 0;
+		g_menu_select = -1;
+		while(true) {
+			key_ = waitkeyinput(true);
+			if(key_ == VK_RIGHT){
+				if(++g_menu_select>wizard_listkey.size()-1)
+					g_menu_select = 0;
+				continue;
+			} else if (key_ == VK_LEFT) {
+				if(--g_menu_select<0)
+					g_menu_select = wizard_listkey.size()-1;
+				continue;
+			} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+				if(wizard_listkey.size() > g_menu_select) {
+					key_ = wizard_listkey[g_menu_select];
+				} else {
+					break;
+				}
+			}
+			endSelection();
+			break;
+		}
+		g_menu_select = -1;
 	
 		changedisplay(DT_GAME);
 		switch (key_)
@@ -105,20 +134,46 @@ void wiz_mode()
 		case 'A':
 		{
 			ostringstream ss;
-			ss << "p-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_POTION)
-			   << " s-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_SCROLL)
-			   << " e-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_EVOCABLE)
-			   << " v-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_SPELLCARD)
-			   << " r-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING)
-			   << " b-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_BOOK)
-			   << " a-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_ARMOUR)
-			   << " R-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET)
-			   << " f-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_TANMAC);
-
-
-			printlog(ss.str(), true, false, false, CL_help);
+			printlog("p-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_POTION) + " ", false, false, false, CL_help, 'p');
+			printlog("s-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_SCROLL) + " ", false, false, false, CL_help, 's');
+			printlog("e-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_EVOCABLE) + " ", false, false, false, CL_help, 'e');
+			printlog("v-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_SPELLCARD) + " ", false, false, false, CL_help, 'v');
+			printlog("r-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING) + " ", false, false, false, CL_help, 'r');
+			printlog("b-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_BOOK) + " ", false, false, false, CL_help, 'b');
+			printlog("a-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_ARMOUR) + " ", false, false, false, CL_help, 'a');
+			printlog("R-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET) + " ", false, false, false, CL_help, 'R');
+			printlog("f-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_TANMAC), true, false, false, CL_help, 'f');
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_ITEM), false, false, false, CL_help);
-			key_ = waitkeyinput();
+			
+			
+			vector<int> create_listkey = {
+				'p','s','e','v','r','b','a','R','f', VK_ESCAPE
+			};
+			startSelection(create_listkey);
+			g_menu_select = -1;
+			while(true) {
+				key_ = waitkeyinput(true);
+				if(key_ == VK_RIGHT){
+					if(++g_menu_select>create_listkey.size()-1)
+						g_menu_select = 0;
+					continue;
+				} else if (key_ == VK_LEFT) {
+					if(--g_menu_select<0)
+						g_menu_select = create_listkey.size()-1;
+					continue;
+				} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+					if(create_listkey.size() > g_menu_select) {
+						key_ = create_listkey[g_menu_select];
+					} else {
+						break;
+					}
+				}
+				endSelection();
+				break;
+			}
+			g_menu_select = -1;
+			
+			
 			switch (key_)
 			{
 			case 'p':
@@ -147,14 +202,41 @@ void wiz_mode()
 				};
 					
 				enterlog();
+				std::vector<int> listkey;
 				for(int i = 0; i < PT_MAX; i++) {
 					ss.str("");
 					ss.clear();
 					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
-					printlog(ss.str(), (i==PT_MAX-1?true:false), false, false, CL_help);
+					printlog(ss.str(), (i==PT_MAX-1?true:false), false, false, CL_help,(char)('a'+i));
+					listkey.push_back('a'+i);
 				}
+				listkey.push_back(VK_ESCAPE);
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_POTION), false, false, false, CL_help);
-				key_ = waitkeyinput();
+				startSelection(listkey);
+				
+				g_menu_select = -1;
+				while(true) {
+					key_ = waitkeyinput(true);
+					if(key_ == VK_RIGHT){
+						if(++g_menu_select>listkey.size()-1)
+							g_menu_select = 0;
+						continue;
+					} else if (key_ == VK_LEFT) {
+						if(--g_menu_select<0)
+							g_menu_select = listkey.size()-1;
+						continue;
+					} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+						if(listkey.size() > g_menu_select) {
+							key_ = listkey[g_menu_select];
+						} else {
+							break;
+						}
+					}
+					endSelection();
+					break;
+				}
+				g_menu_select = -1;
+				
 				if (key_ >= 'a' && key_ <= 'q')
 				{
 					for (int i = 0; i < 10; i++)
@@ -199,16 +281,43 @@ void wiz_mode()
 				};
 
 				enterlog();
+				std::vector<int> listkey;
 				for(int i = 0; i < SCT_MAX-1; i++) {
 					ss.str("");
 					ss.clear();
 					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
-					printlog(ss.str(), (i==SCT_MAX-2?true:false), false, false, CL_help);
+					printlog(ss.str(), (i==SCT_MAX-2?true:false), false, false, CL_help, (char)('a'+i));
+					listkey.push_back('a'+i);
 				}
+				listkey.push_back(VK_ESCAPE);
 
 				
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_SCROLL), false, false, false, CL_help);
-				key_ = waitkeyinput();
+				startSelection(listkey);
+				g_menu_select = -1;
+				while(true) {
+					key_ = waitkeyinput(true);
+					if(key_ == VK_RIGHT){
+						if(++g_menu_select>listkey.size()-1)
+							g_menu_select = 0;
+						continue;
+					} else if (key_ == VK_LEFT) {
+						if(--g_menu_select<0)
+							g_menu_select = listkey.size()-1;
+						continue;
+					} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+						if(listkey.size() > g_menu_select) {
+							key_ = listkey[g_menu_select];
+						} else {
+							break;
+						}
+					}
+					endSelection();
+					break;
+				}
+				g_menu_select = -1;
+				
+				
 				if (key_ >= 'a' && key_ <= 's')
 				{
 					for (int i = 0; i < 10; i++)
@@ -238,14 +347,39 @@ void wiz_mode()
 					LOC_SYSTEM_ITEM_EVOKE_MAGIC_HAMMER
 				};
 				enterlog();
+				std::vector<int> listkey;
 				for(int i = 0; i < EVK_MAX-1; i++) {
 					ss.str("");
 					ss.clear();
 					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
-					printlog(ss.str(), (i==EVK_MAX-2?true:false), false, false, CL_help);
+					printlog(ss.str(), (i==EVK_MAX-2?true:false), false, false, CL_help, (char)('a'+i));
+					listkey.push_back('a'+i);
 				}
+				listkey.push_back(VK_ESCAPE);
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_EVOKE), false, false, false, CL_help);
-				key_ = waitkeyinput();
+				startSelection(listkey);
+				g_menu_select = -1;
+				while(true) {
+					key_ = waitkeyinput(true);
+					if(key_ == VK_RIGHT){
+						if(++g_menu_select>listkey.size()-1)
+							g_menu_select = 0;
+						continue;
+					} else if (key_ == VK_LEFT) {
+						if(--g_menu_select<0)
+							g_menu_select = listkey.size()-1;
+						continue;
+					} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+						if(listkey.size() > g_menu_select) {
+							key_ = listkey[g_menu_select];
+						} else {
+							break;
+						}
+					}
+					endSelection();
+					break;
+				}
+				g_menu_select = -1;
 				if (key_ >= 'a' && key_ <= 'g')
 				{
 					item_infor t;
@@ -273,14 +407,39 @@ void wiz_mode()
 				};
 				
 				enterlog();
+				std::vector<int> listkey;
 				for(int i = 0; i < SPC_V_MAX; i++) {
 					ss.str("");
 					ss.clear();
 					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
-					printlog(ss.str(), (i==SPC_V_MAX-1?true:false), false, false, CL_help);
+					printlog(ss.str(), (i==SPC_V_MAX-1?true:false), false, false, CL_help, (char)('a'+i));
+					listkey.push_back('a'+i);
 				}
+				listkey.push_back(VK_ESCAPE);
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_SPELLCARD), false, false, false, CL_help);
-				key_ = waitkeyinput();
+				startSelection(listkey);
+				g_menu_select = -1;
+				while(true) {
+					key_ = waitkeyinput(true);
+					if(key_ == VK_RIGHT){
+						if(++g_menu_select>listkey.size()-1)
+							g_menu_select = 0;
+						continue;
+					} else if (key_ == VK_LEFT) {
+						if(--g_menu_select<0)
+							g_menu_select = listkey.size()-1;
+						continue;
+					} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+						if(listkey.size() > g_menu_select) {
+							key_ = listkey[g_menu_select];
+						} else {
+							break;
+						}
+					}
+					endSelection();
+					break;
+				}
+				g_menu_select = -1;
 				if (key_ >= 'a' && key_ <= 'g')
 				{
 					item_infor t;
@@ -321,18 +480,43 @@ void wiz_mode()
 					LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_MAGIC_RESIS_SHORT
 				};
 				enterlog();
+				std::vector<int> listkey;
 				for(int i = 0; i < RGT_MAX; i++) {
 					ss.str("");
 					ss.clear();
 					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
-					printlog(ss.str(),false, false, false, CL_help);
-				}				
+					printlog(ss.str(),false, false, false, CL_help, (char)('a'+i));
+					listkey.push_back('a'+i);
+				}
+				listkey.push_back(VK_ESCAPE);	
 				ss.str("");
 				ss.clear();
 				ss << string(1,'!') << "-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT);
 				printlog(ss.str(),true, false, false, CL_help);
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_RING), false, false, false, CL_help);
-				key_ = waitkeyinput();
+				startSelection(listkey);
+				g_menu_select = -1;
+				while(true) {
+					key_ = waitkeyinput(true);
+					if(key_ == VK_RIGHT){
+						if(++g_menu_select>listkey.size()-1)
+							g_menu_select = 0;
+						continue;
+					} else if (key_ == VK_LEFT) {
+						if(--g_menu_select<0)
+							g_menu_select = listkey.size()-1;
+						continue;
+					} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+						if(listkey.size() > g_menu_select) {
+							key_ = listkey[g_menu_select];
+						} else {
+							break;
+						}
+					}
+					endSelection();
+					break;
+				}
+				g_menu_select = -1;
 				if (key_ >= 'a' && key_ <= 's')
 				{
 					item_infor t;
@@ -353,13 +537,6 @@ void wiz_mode()
 				else {
 					printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
 				}
-			}
-			return;
-			case 'b':
-			{
-				item_infor t;
-				makeitem(ITM_BOOK, 0, &t, -1);
-				env[current_level].MakeItem(you.position, t);
 			}
 			return;
 			case 'a':
@@ -392,14 +569,39 @@ void wiz_mode()
 					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_OCCULT_SHORT
 				};
 				enterlog();
+				std::vector<int> listkey;
 				for(int i = 0; i < AMT_MAX; i++) {
 					ss.str("");
 					ss.clear();
 					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
-					printlog(ss.str(), (i==AMT_MAX-1?true:false), false, false, CL_help);
+					printlog(ss.str(), (i==AMT_MAX-1?true:false), false, false, CL_help, (char)('a'+i));
+					listkey.push_back('a'+i);
 				}
+				listkey.push_back(VK_ESCAPE);
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_AMULET), false, false, false, CL_help);
-				key_ = waitkeyinput();
+				startSelection(listkey);
+				g_menu_select = -1;
+				while(true) {
+					key_ = waitkeyinput(true);
+					if(key_ == VK_RIGHT){
+						if(++g_menu_select>listkey.size()-1)
+							g_menu_select = 0;
+						continue;
+					} else if (key_ == VK_LEFT) {
+						if(--g_menu_select<0)
+							g_menu_select = listkey.size()-1;
+						continue;
+					} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+						if(listkey.size() > g_menu_select) {
+							key_ = listkey[g_menu_select];
+						} else {
+							break;
+						}
+					}
+					endSelection();
+					break;
+				}
+				g_menu_select = -1;
 				if (key_ >= 'a' && key_ <= 'i')
 				{
 					item_infor t;
@@ -425,6 +627,12 @@ void wiz_mode()
 			}
 
 		}
+		case 'I': //아이템 모두 식별
+			for(list<item>::iterator it = you.item_list.begin();it!=you.item_list.end();it++)
+			{
+				it->Identify();
+			}
+			break;
 		case 'H':
 			you.HpUpDown(you.GetMaxHp(), DR_EFFECT);
 			if(!you.pure_mp)
@@ -493,13 +701,38 @@ void wiz_mode()
 				make_pair('!',LOC_SYSTEM_DUNGEON_ZIGURRAT)
 			};
 			enterlog();
+			std::vector<int> listkey;
 			for(int i = 0; i < 17; i++) {
 				ostringstream ss;
 				ss << string(1,keylist[i].first) << "-" << LocalzationManager::locString(keylist[i].second) << " ";
-				printlog(ss.str(), (i==16?true:false), false, false, CL_help);
+				printlog(ss.str(), (i==16?true:false), false, false, CL_help, keylist[i].first);
+				listkey.push_back(keylist[i].first);
 			}
+			listkey.push_back(VK_ESCAPE);
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_TRAVEL_DUNGEON), false, false, false, CL_help);
-			key_ = waitkeyinput();
+			startSelection(listkey);
+			g_menu_select = -1;
+			while(true) {
+				key_ = waitkeyinput(true);
+				if(key_ == VK_RIGHT){
+					if(++g_menu_select>listkey.size()-1)
+						g_menu_select = 0;
+					continue;
+				} else if (key_ == VK_LEFT) {
+					if(--g_menu_select<0)
+						g_menu_select = listkey.size()-1;
+					continue;
+				} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+					if(listkey.size() > g_menu_select) {
+						key_ = listkey[g_menu_select];
+					} else {
+						break;
+					}
+				}
+				endSelection();
+				break;
+			}
+			g_menu_select = -1;
 			switch (key_)
 			{
 			case 'd':
@@ -617,14 +850,39 @@ void wiz_mode()
 				LOC_SYSTEM_BUFF_THUNDER,
 				LOC_SYSTEM_BUFF_SUNNY
 			};
+			std::vector<int> listkey;
 			for(int i = 0; i < 3; i++) {
 				ostringstream ss;
 				ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
-				printlog(ss.str(), (i==2?true:false), false, false, CL_help);
+				printlog(ss.str(), (i==2?true:false), false, false, CL_help, (char)('a'+i));
+				listkey.push_back('a'+i);
 			}
+			listkey.push_back(VK_ESCAPE);
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_WEATHER), false, false, false, CL_help);
 			wiz_list.wizard_mode = true;
-			key_ = waitkeyinput();
+			startSelection(listkey);
+			g_menu_select = -1;
+			while(true) {
+				key_ = waitkeyinput(true);
+				if(key_ == VK_RIGHT){
+					if(++g_menu_select>listkey.size()-1)
+						g_menu_select = 0;
+					continue;
+				} else if (key_ == VK_LEFT) {
+					if(--g_menu_select<0)
+						g_menu_select = listkey.size()-1;
+					continue;
+				} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+					if(listkey.size() > g_menu_select) {
+						key_ = listkey[g_menu_select];
+					} else {
+						break;
+					}
+				}
+				endSelection();
+				break;
+			}
+			g_menu_select = -1;
 			switch (key_)
 			{
 			case 'a':
@@ -672,13 +930,37 @@ void wiz_mode()
 				make_pair('X',LOC_SYSTEM_GOD_JOON_AND_SION)
 			};
 			enterlog();
+			std::vector<int> listkey;
 			for(int i = 0; i < 20; i++) {
 				ostringstream ss;
 				ss << string(1,keylist[i].first) << "-" << LocalzationManager::locString(keylist[i].second) << " ";
-				printlog(ss.str(), (i==19?true:false), false, false, CL_help);
+				printlog(ss.str(), (i==19?true:false), false, false, CL_help, keylist[i].first);
+				listkey.push_back(keylist[i].first);
 			}
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_ALTAR),false,false,false,CL_help);
-			key_ = waitkeyinput();
+			startSelection(listkey);
+			g_menu_select = -1;
+			while(true) {
+				key_ = waitkeyinput(true);
+				if(key_ == VK_RIGHT){
+					if(++g_menu_select>listkey.size()-1)
+						g_menu_select = 0;
+					continue;
+				} else if (key_ == VK_LEFT) {
+					if(--g_menu_select<0)
+						g_menu_select = listkey.size()-1;
+					continue;
+				} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+					if(listkey.size() > g_menu_select) {
+						key_ = listkey[g_menu_select];
+					} else {
+						break;
+					}
+				}
+				endSelection();
+				break;
+			}
+			g_menu_select = -1;
 			switch (key_)
 			{
 			case 'x':
@@ -825,6 +1107,7 @@ void wiz_mode()
 					id_ = key_ - '0' + id_*10;
 					break;
 				case VK_RETURN:
+				case GVK_BUTTON_A:
 					if (monster* mon_ = BaseSummon(id_, 100, false, false, 2, &you, you.position, SKD_OTHER, -1))
 					{
 						mon_->state.SetState(MS_SLEEP);
@@ -858,17 +1141,10 @@ void wiz_mode()
 			}
 		}
 		break;
-		case '.':
-		{
-		}
-			break;
 		case '^':
 			if(you.god != GT_SEIJA)
 				you.PietyUpDown(10);
 			you.GiftCount(10);
-			break;
-		case 'o':
-			you.hp = 1;
 			break;
 		case 'q':
 		{
@@ -1198,18 +1474,6 @@ void wiz_mode()
 				//끝!!
 			}
 			break;
-		case 'B':
-			god_punish(you.god);
-			break;
-		case 'e':
-		{
-			ostringstream oss;
-			oss << LocalzationManager::formatString(LOC_SYSTEM_DEBUG_CURRENT_POSITION,
-				PlaceHolderHelper(to_string(you.position.x)),
-				PlaceHolderHelper(to_string(you.position.y)));
-			printlog(oss.str(), true, false, false, CL_magic);
-			break;
-		}
 		case '?'://도움말
 
 			WaitForSingleObject(mutx, INFINITE);

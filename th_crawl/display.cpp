@@ -3448,6 +3448,15 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							case SYSCMD_QUIT:
 								pixel_ = &img_command_quit;
 								break;
+							case SYSCMD_1TURN:
+								pixel_ = &img_command_number[23];
+								break;
+							case SYSCMD_QUICKTHROW:
+								pixel_ = &img_command_throw;
+								break;
+							case SYSCMD_WIZARD:
+								pixel_ = &img_command_number[21];
+								break;
 							default:
 								 break;
 						}
@@ -4590,7 +4599,13 @@ string getCommandString(int kind, int value) {
 	case SYSCMD_HELP:
 		return LocalzationManager::locString(LOC_SYSTEM_CMD_HELP);
 	case SYSCMD_QUIT:
-		return LocalzationManager::locString(LOC_SYSTEM_CMD_QUIT);
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_QUIT);	
+	case SYSCMD_1TURN:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_1TURN);
+	case SYSCMD_QUICKTHROW:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_QUICKTHROW);
+	case SYSCMD_WIZARD:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_WIZARD);
 	default:
 		return "";
 	}

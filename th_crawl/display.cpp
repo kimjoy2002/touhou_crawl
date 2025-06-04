@@ -1750,6 +1750,29 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 
 int g_tile_size = 32;
 
+
+int getItemIdFromDragStart(int item_start_x, int item_start_y, int drag_start_x, int drag_start_y)
+{
+	int rel_x = drag_start_x - item_start_x;
+	int rel_y = drag_start_y - item_start_y;
+
+	if (rel_x < 0 || rel_y < 0) return 0; // 밖
+	int col = rel_x / 32;
+	int row = rel_y / 32;
+	bool right = rel_x%32;
+	
+	int tile_index = row * 10 + col;
+
+	if (tile_index >= 0 || row >= 52) return 0;
+
+	auto it = you.item_list.begin();
+	std::advance(it, tile_index);
+	if (it == you.item_list.end()) return 0;
+
+	return it->id + (right?100:0);
+}
+
+
 void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont)
 {
 	int sight_x = option_mg.getTileMaxX();
@@ -3346,8 +3369,14 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		// {
 		// 	int i=0;
 		// 	RECT rc={info_minX, 10, option_mg.getWidth(), option_mg.getHeight()};
+		
+		auto [dragEnded, dragStart] = isRealese();
+		
 		int start_x = info_minX+4;
 		int start_y = max_minimap_y+16;
+		
+		int item_box_start_x = info_minX+4;
+		int item_box_start_y = max_minimap_y+16;
 
 		int tile_count = 0;
 		auto it = you.item_list.begin();
@@ -3486,7 +3515,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						}
 					}
 				}
-				else if(tile_count>=20 && tile_count < 72) {
+				else if(tile_count>=20 && tile_count < 72) {					
 					if(spell_skill_vector.size() > 0) {
 						int spell_tile_count = tile_count - 20;
 					    int id_ = 0;
@@ -3557,6 +3586,12 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					else {
 						bool equip_ = false, curse = false, throw_ = false, evokable = false;
 						int x_ = start_x+i*32, y_ = start_y+j*32+10;
+						if(tile_count == 20) {
+							item_box_start_x = x_;
+							item_box_start_y = y_;
+							
+						}
+					
 						if(it != you.item_list.end()) {
 							equip_ = (you.isequip(it)>0);
 							throw_ = (you.throw_weapon == &(*it));
@@ -3613,8 +3648,21 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 									mouseColor = it->item_color();
 									infoDrawPoint = MousePoint;
 
-									if(isClicked(LEFT_CLICK)) {
-										g_keyQueue->push(InputedKey(MKIND_ITEM,it->id,0));
+									if(dragEnded) {
+										if(dragStart.x > x_ - 16 && dragStart.x <= x_ + 16 &&
+											dragStart.y > y_ - 16 && dragStart.y <= y_ + 16) 
+											g_keyQueue->push(InputedKey(MKIND_ITEM,it->id,0));
+										}
+										else if((dragStart.x > item_box_start_x - 16 && dragStart.x <= item_box_start_x + 32*9 + 16 &&
+											dragStart.y > item_box_start_y - 16 && dragStart.y <= item_box_start_y + 32*4 + 16) ||
+											(dragStart.x > item_box_start_x - 16 && dragStart.x <= item_box_start_x + 32 + 16 &&
+											dragStart.y > item_box_start_y + 32*5 - 16 && dragStart.y <= item_box_start_y + 32*5 + 16)
+											)  {
+											int prev_id = getItemIdFromDragStart(item_box_start_x - 16, item_box_start_y - 16, dragStart.x, dragStart.y);
+											if(prev_id != 0)
+												g_keyQueue->push(InputedKey(MKIND_ITEM_SWAP,prev_id,it->id));
+											
+										}
 									}
 									else if(isClicked(RIGHT_CLICK)) {
 										g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,it->id,0));

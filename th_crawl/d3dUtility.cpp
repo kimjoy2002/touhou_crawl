@@ -534,6 +534,9 @@ bool isInScreen() {
 
 }
 
+
+
+
 bool isClicked(MOUSE_BUTTON button) {
 	if(!one_turn_click || GetForegroundWindow() != hwnd) {
 		return false;
@@ -582,8 +585,30 @@ bool isClicked(MOUSE_BUTTON button) {
 	return false;
 }
 
+std::pair<bool, POINT> isDragging()
+{
+	if ((CurrentMouseState.rgbButtons[0] & 0x80)) {
+		int dx = abs(MousePoint.x - prev_click_pos.x);
+		int dy = abs(MousePoint.y - prev_click_pos.y);
+		if (dx > 2 || dy > 2) {
+			return { true, prev_click_pos };
+		}
+	}
+	return { false, {} };
+}
 
+std::tuple<bool, POINT> isRealese()
+{
+	bool released = (!(CurrentMouseState.rgbButtons[0] & 0x80) && (PreviousMouseState.rgbButtons[0] & 0x80));
 
+	if (released) {
+		return { true, prev_click_pos };
+	}
+	return { false, {}, {} };
+}
+POINT prev_click_pos;
+
+POINT finish_click_pos;
 
 void InputUpdate()
 {
@@ -599,5 +624,16 @@ void InputUpdate()
 
 	GetCursorPos(&MousePoint);
 	ScreenToClient(hwnd, &MousePoint);
+		
+	// 드래그 시작점 저장
+	if ((CurrentMouseState.rgbButtons[0] & 0x80) && !(PreviousMouseState.rgbButtons[0] & 0x80)) {
+		prev_click_pos = MousePoint;
+	}
+
+	// 드래그 종료점 저장
+	if (!(CurrentMouseState.rgbButtons[0] & 0x80) && (PreviousMouseState.rgbButtons[0] & 0x80)) {
+		finish_click_pos = MousePoint;
+	}
+	
 	one_turn_click = true;
 }

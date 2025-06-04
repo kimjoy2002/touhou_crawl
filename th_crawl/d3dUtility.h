@@ -74,6 +74,7 @@ enum MOUSE_KIND {
 	MKIND_MAP_DESCRIPTION, //맵을 우클릭
 	MKIND_ITEM, //아이템창을 클릭
 	MKIND_ITEM_DESCRIPTION, //아이템을 우클릭
+	MKIND_ITEM_SWAP, //아이템을 우클릭
 	MKIND_PICK, //줍기
 	MKIND_PICK_DESCRIPTION, //줍지않고 정보보기
 	MKIND_SYSTEM, //시스템키
@@ -177,5 +178,6 @@ namespace d3d
 
 
 bool isClicked(MOUSE_BUTTON button);
-
+std::pair<bool, POINT> isDragging();
+std::tuple<bool, POINT> isRealese();
 #endif // __d3dUtilityH__

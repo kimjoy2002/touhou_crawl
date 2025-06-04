@@ -50,7 +50,7 @@ void SetJobs(job_type select_, unique_starting_type type);
 void TouhouPlayerble(unique_starting_type type, bool aptit_);
 void rightmenu_control();
 skill_type itemtoskill(item_type type_);
-
+bool changeItemHotkey(int prev_item, int new_id, int change);
 
 void Test_char_init(item_type item_, int bonus)	
 {
@@ -903,7 +903,15 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 				}
 			}
 		}
-	} else if (mouse_type == MKIND_ITEM_DESCRIPTION) {
+	} else if(mouse_type == MKIND_ITEM_SWAP) {
+		int old_id_ = val1%100;
+		int new_id_ = val2;
+		int change = val1 > 100? 1: -1;
+		
+		WaitForSingleObject(mutx, INFINITE);
+		changeItemHotkey(old_id_, new_id_, change);
+		ReleaseMutex(mutx);
+	}else if (mouse_type == MKIND_ITEM_DESCRIPTION) {
 		int key_ = val1;
 		iteminfor_(key_, false);
 		changedisplay(DT_GAME);

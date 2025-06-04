@@ -32,6 +32,150 @@ void discard(list<item>::iterator it, int number);
 
 void GetItemInfor(item *it, bool can_use_, set<char> *key);
 
+
+//true l이 r보다 크다
+bool compareAlphabet(char l_, char r_)
+{
+	bool l_small = l_ >= 'a' && l_ <= 'z';
+	bool r_small = l_ >= 'a' && l_ <= 'z';
+	if (l_small && !r_small)
+		return false;
+	else if(!l_small && r_small)
+		return true;
+	return l_ > r_;
+}
+
+void swap_list_items(list<item>& l, list<item>::iterator a, list<item>::iterator b)
+{
+	list<item>::iterator aPlus = a;
+	++aPlus; // after position of a, will not be invalidated
+	l.splice(b, l, a); // move a before b, invalidates a
+	l.splice(aPlus, l, b); // move b before aPlus (where A was)
+}
+
+void sortItemListByAlphabetOnly(std::list<item>& itemList) {
+	itemList.sort([](const item& a, const item& b) {
+		auto getOrder = [](char c) -> int {
+			if (c >= 'a' && c <= 'z') return c - 'a';
+			if (c >= 'A' && c <= 'Z') return 26 + (c - 'A');
+			return 999; // 기타 문자는 맨 뒤로
+		};
+		return getOrder(a.id) < getOrder(b.id);
+	});
+}
+
+
+
+bool changeItemHotkey(int prev_item, int new_id, int change) {
+	//you.item_list는 알파벳 순서여야함
+	//prev_item아이템을 new_id으로 바꿔야함
+	//만약 new_id가 이미 존재한다면:
+	//change가 0일땐  서로 알파벳으로 바꾸기
+	//change가 -1일땐 바로 앞 알파벳으로 하기
+	//change가 1일땐 바로 뒤 알파벳으로 하기
+	//change가 -1이나 1일땐 a-z,A-Z가 다 차있으면 해당 알파벳이 안될수도있음 (순서가 더 중요함)
+	list<item>::iterator old_;
+	list<item>::iterator new_;
+	for (old_ = you.item_list.begin(); old_ != you.item_list.end(); old_++)
+	{
+		if (old_->id == new_id)
+		{
+			break;
+		}
+	}
+	for (new_ = you.item_list.begin(); new_ != you.item_list.end(); new_++)
+	{
+		if (new_->id == prev_item)
+		{
+			break;
+		}
+	}
+	if (new_ == you.item_list.end())
+		return false;
+
+	if (old_ != you.item_list.end())
+	{
+		if(change == 0) {
+			old_->id = item_->id;
+			new_->id = alphabet_;
+			swap_list_items(you.item_list, old_, new_);
+
+			ostringstream ss;
+			ss << old_->id << " - " << old_->GetName() << ", ";
+			printlog(ss.str(), false, false, false, old_->item_color());
+		} else if (change == -1)  {
+			list<item>::iterator push_ = old_;
+			int current_id = new_id;
+			while(push_ != you.item_list.end()) {
+				if(push_->id == prev_item) {
+					//이미 바뀔 아이템의 id까지 돌아옴
+					break;
+				}
+				if(current_id != new_id) {
+					//빈자리 발견
+					break;
+				}
+				
+				push_++;
+				if(current_id == 'z')
+					current_id = 'A';
+				else 
+				    current_id++;
+			}
+			
+			if(push_ == you.item_list.end()) {
+				//미는데 실패함
+				//하지만 앞으로 밀 필요가 있음
+				return changeItemHotkey(prev_item, new_id, change*-1);
+			}
+			
+			new_->id = alphabet_;
+			for(list<item>::iterator it = old_; it != push_ && it != you.item_list.end(); it++) {
+				it->id++;
+				if(it == push_) {
+					ostringstream ss;
+					ss << old_->id << " - " << old_->GetName();
+					if(it == old_) {
+						ss << ", ";
+					} else {
+						ss << "... ";
+					}
+					printlog(ss.str(), false, false, false, old_->item_color());
+				}
+			}
+			sortItemListByAlphabetOnly(you.item_list);
+		} else {
+			printlog("change == 1 but not implememt", false, false, false, old_->item_color());
+			return false;
+		}
+	}
+	else
+	{
+		list<item>::iterator it;
+		for (it = you.item_list.begin(); it != you.item_list.end(); it++)
+		{
+			if (compareAlphabet(it->id, alphabet_))
+			{
+				new_->id = alphabet_;
+				you.item_list.splice(it, you.item_list, new_);
+				break;
+			}
+		}
+		if (it == you.item_list.end())
+		{
+			new_->id = alphabet_;
+			you.item_list.splice(it, you.item_list, new_);
+		}
+	}
+	ostringstream ss;
+	ss << new_->id << " - " << new_->GetName() << " ";
+	printlog(ss.str(), false, false, false, new_->item_color());
+	return true;
+}
+
+
+
+
 void memorize_action(int spell_)
 {
 	changedisplay(DT_GAME);
@@ -93,25 +237,6 @@ void memorize_action(int spell_)
 
 }
 
-//true l이 r보다 크다
-bool compareAlphabet(char l_, char r_)
-{
-	bool l_small = l_ >= 'a' && l_ <= 'z';
-	bool r_small = l_ >= 'a' && l_ <= 'z';
-	if (l_small && !r_small)
-		return false;
-	else if(!l_small && r_small)
-		return true;
-	return l_ > r_;
-}
-
-void swap_list_items(list<item>& l, list<item>::iterator a, list<item>::iterator b)
-{
-	list<item>::iterator aPlus = a;
-	++aPlus; // after position of a, will not be invalidated
-	l.splice(b, l, a); // move a before b, invalidates a
-	l.splice(aPlus, l, b); // move b before aPlus (where A was)
-}
 
 
 void _infor_(string str);
@@ -202,56 +327,9 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 						if ((alphabet_ >= 'a' && alphabet_ <= 'z') ||
 							(alphabet_ >= 'A' && alphabet_ <= 'Z'))
 						{
-							list<item>::iterator old_;
-							list<item>::iterator new_;
-							for (old_ = you.item_list.begin(); old_ != you.item_list.end(); old_++)
-							{
-								if (old_->id == alphabet_)
-								{
-									break;
-								}
-							}
-							for (new_ = you.item_list.begin(); new_ != you.item_list.end(); new_++)
-							{
-								if (new_->id == item_->id)
-								{
-									break;
-								}
-							}
-							if (new_ == you.item_list.end())
+							if(!changeItemHotkey(item_->id, alphabet_, 0)) {
 								break;
-
-							if (old_ != you.item_list.end())
-							{
-								old_->id = item_->id;
-								new_->id = alphabet_;
-								swap_list_items(you.item_list, old_, new_);
-
-								ostringstream ss;
-								ss << old_->id << " - " << old_->GetName() << ", ";
-								printlog(ss.str(), false, false, false, old_->item_color());
 							}
-							else
-							{
-								list<item>::iterator it;
-								for (it = you.item_list.begin(); it != you.item_list.end(); it++)
-								{
-									if (compareAlphabet(it->id, alphabet_))
-									{
-										new_->id = alphabet_;
-										you.item_list.splice(it, you.item_list, new_);
-										break;
-									}
-								}
-								if (it == you.item_list.end())
-								{
-									new_->id = alphabet_;
-									you.item_list.splice(it, you.item_list, new_);
-								}
-							}
-							ostringstream ss;
-							ss << new_->id << " - " << new_->GetName() << " ";
-							printlog(ss.str(), false, false, false, new_->item_color());
 						}
 					}
 					return true;

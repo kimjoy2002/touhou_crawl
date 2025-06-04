@@ -585,6 +585,9 @@ bool isClicked(MOUSE_BUTTON button) {
 	return false;
 }
 
+POINT prev_click_pos;
+POINT finish_click_pos;
+
 std::pair<bool, POINT> isDragging()
 {
 	if ((CurrentMouseState.rgbButtons[0] & 0x80)) {
@@ -604,11 +607,8 @@ std::tuple<bool, POINT> isRealese()
 	if (released) {
 		return { true, prev_click_pos };
 	}
-	return { false, {}, {} };
+	return { false, {} };
 }
-POINT prev_click_pos;
-
-POINT finish_click_pos;
 
 void InputUpdate()
 {

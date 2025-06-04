@@ -904,9 +904,9 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 			}
 		}
 	} else if(mouse_type == MKIND_ITEM_SWAP) {
-		int old_id_ = val1%100;
-		int new_id_ = val2;
-		int change = val1 > 100? 1: -1;
+		int old_id_ = val1;
+		int new_id_ = val2%1000;
+		int change = val2 > 1000? 1: -1;
 		
 		WaitForSingleObject(mutx, INFINITE);
 		changeItemHotkey(old_id_, new_id_, change);

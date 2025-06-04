@@ -67,6 +67,8 @@ void sortItemListByAlphabetOnly(std::list<item>& itemList) {
 
 
 bool changeItemHotkey(int prev_item, int new_id, int change) {
+	if(prev_item == new_id)
+		return false;
 	//you.item_list는 알파벳 순서여야함
 	//prev_item아이템을 new_id으로 바꿔야함
 	//만약 new_id가 이미 존재한다면:
@@ -74,102 +76,201 @@ bool changeItemHotkey(int prev_item, int new_id, int change) {
 	//change가 -1일땐 바로 앞 알파벳으로 하기
 	//change가 1일땐 바로 뒤 알파벳으로 하기
 	//change가 -1이나 1일땐 a-z,A-Z가 다 차있으면 해당 알파벳이 안될수도있음 (순서가 더 중요함)
-	list<item>::iterator old_;
-	list<item>::iterator new_;
-	for (old_ = you.item_list.begin(); old_ != you.item_list.end(); old_++)
-	{
-		if (old_->id == new_id)
+	ostringstream final_;
+	D3DCOLOR final_color_ = CL_normal;
+	if(change == 1) {
+		list<item>::reverse_iterator old_;
+		list<item>::reverse_iterator new_;
+		for (old_ = you.item_list.rbegin(); old_ != you.item_list.rend(); old_++)
 		{
-			break;
+			if (old_->id == new_id)
+			{
+				break;
+			}
 		}
-	}
-	for (new_ = you.item_list.begin(); new_ != you.item_list.end(); new_++)
-	{
-		if (new_->id == prev_item)
+		for (new_ = you.item_list.rbegin(); new_ != you.item_list.rend(); new_++)
 		{
-			break;
+			if (new_->id == prev_item)
+			{
+				break;
+			}
 		}
-	}
-	if (new_ == you.item_list.end())
-		return false;
+		if (new_ == you.item_list.rend())
+			return false;
 
-	if (old_ != you.item_list.end())
-	{
-		if(change == 0) {
-			old_->id = item_->id;
-			new_->id = alphabet_;
-			swap_list_items(you.item_list, old_, new_);
-
-			ostringstream ss;
-			ss << old_->id << " - " << old_->GetName() << ", ";
-			printlog(ss.str(), false, false, false, old_->item_color());
-		} else if (change == -1)  {
-			list<item>::iterator push_ = old_;
+		if (old_ != you.item_list.rend())
+		{
+			auto test_ = new_;
+			if(++test_ == old_) {
+				return false;
+			}
+			list<item>::reverse_iterator push_ = old_;
 			int current_id = new_id;
-			while(push_ != you.item_list.end()) {
+			while(push_ != you.item_list.rend()) {
 				if(push_->id == prev_item) {
 					//이미 바뀔 아이템의 id까지 돌아옴
 					break;
 				}
-				if(current_id != new_id) {
+				if(current_id != push_->id) {
 					//빈자리 발견
 					break;
 				}
 				
 				push_++;
-				if(current_id == 'z')
-					current_id = 'A';
+				if(current_id == 'A')
+					current_id = 'z';
 				else 
-				    current_id++;
+					current_id--;
 			}
 			
-			if(push_ == you.item_list.end()) {
+			if(push_ == you.item_list.rend() && you.item_list.begin()->id == 'a') {
 				//미는데 실패함
 				//하지만 앞으로 밀 필요가 있음
-				return changeItemHotkey(prev_item, new_id, change*-1);
+				if(old_ != you.item_list.rbegin()) {
+					old_--;
+					changeItemHotkey(prev_item, old_->id, change*-1);
+				}
+				return false;
 			}
 			
-			new_->id = alphabet_;
-			for(list<item>::iterator it = old_; it != push_ && it != you.item_list.end(); it++) {
-				it->id++;
+			new_->id = new_id;
+			final_ << new_->id << " - " << new_->GetName() << " ";
+			final_color_ = new_->item_color();
+			int move_ = 0;
+			for(list<item>::reverse_iterator it = old_; it != push_ && it != you.item_list.rend(); ) {
+				if(it->id == 'A')
+					it->id = 'z';
+				else 
+					it->id--;
+				list<item>::reverse_iterator temp = it++;
 				if(it == push_) {
 					ostringstream ss;
-					ss << old_->id << " - " << old_->GetName();
-					if(it == old_) {
+					ss << temp->id << " - " << temp->GetName();
+					if(move_ == 0) {
 						ss << ", ";
 					} else {
 						ss << "... ";
 					}
 					printlog(ss.str(), false, false, false, old_->item_color());
 				}
+				move_++;
 			}
 			sortItemListByAlphabetOnly(you.item_list);
-		} else {
-			printlog("change == 1 but not implememt", false, false, false, old_->item_color());
-			return false;
 		}
 	}
-	else
-	{
-		list<item>::iterator it;
-		for (it = you.item_list.begin(); it != you.item_list.end(); it++)
+	else {
+		list<item>::iterator old_;
+		list<item>::iterator new_;
+		for (old_ = you.item_list.begin(); old_ != you.item_list.end(); old_++)
 		{
-			if (compareAlphabet(it->id, alphabet_))
+			if (old_->id == new_id)
 			{
-				new_->id = alphabet_;
-				you.item_list.splice(it, you.item_list, new_);
 				break;
 			}
 		}
-		if (it == you.item_list.end())
+		for (new_ = you.item_list.begin(); new_ != you.item_list.end(); new_++)
 		{
-			new_->id = alphabet_;
-			you.item_list.splice(it, you.item_list, new_);
+			if (new_->id == prev_item)
+			{
+				break;
+			}
+		}
+		if (new_ == you.item_list.end())
+			return false;
+
+		if (old_ != you.item_list.end())
+		{
+			if(change == 0) {
+				old_->id = prev_item;
+				new_->id = new_id;
+				swap_list_items(you.item_list, old_, new_);
+
+				ostringstream ss;
+				ss << old_->id << " - " << old_->GetName() << ", ";
+				printlog(ss.str(), false, false, false, old_->item_color());
+			} else if (change == -1)  {
+				auto test_ = new_;
+				if(++test_ == old_) {
+					return false;
+				}
+
+
+				list<item>::iterator push_ = old_;
+				int current_id = new_id;
+				while(push_ != you.item_list.end()) {
+					if(push_->id == prev_item) {
+						//이미 바뀔 아이템의 id까지 돌아옴
+						break;
+					}
+					if(current_id != push_->id) {
+						//빈자리 발견
+						break;
+					}
+					
+					push_++;
+					if(current_id == 'z')
+						current_id = 'A';
+					else 
+						current_id++;
+				}
+				
+				if(push_ == you.item_list.end() && you.item_list.rbegin()->id == 'Z') {
+					//미는데 실패함
+					//하지만 앞으로 밀 필요가 있음
+					if(old_ != you.item_list.begin()) {
+						old_--;
+						changeItemHotkey(prev_item, old_->id, change*-1);
+					}
+					return false;
+				}
+				
+				new_->id = new_id;
+				final_ << new_->id << " - " << new_->GetName() << " ";
+				final_color_ = new_->item_color();
+				int move_ = 0;
+				for(list<item>::iterator it = old_; it != push_ && it != you.item_list.end(); ) {
+					if(it->id == 'z')
+						it->id = 'A';
+					else 
+						it->id++;
+					list<item>::iterator temp = it++;
+					if(it == push_) {
+						ostringstream ss;
+						ss << temp->id << " - " << temp->GetName();
+						if(move_ == 0) {
+							ss << ", ";
+						} else {
+							ss << "... ";
+						}
+						printlog(ss.str(), false, false, false, old_->item_color());
+					}
+					move_++;
+				}
+				sortItemListByAlphabetOnly(you.item_list);
+			}
+		}
+		else
+		{
+			list<item>::iterator it;
+			for (it = you.item_list.begin(); it != you.item_list.end(); it++)
+			{
+				if (compareAlphabet(it->id, new_id))
+				{
+					new_->id = new_id;
+					you.item_list.splice(it, you.item_list, new_);
+					break;
+				}
+			}
+			if (it == you.item_list.end())
+			{
+				new_->id = new_id;
+				final_ << new_->id << " - " << new_->GetName() << " ";
+				final_color_ = new_->item_color();
+				you.item_list.splice(it, you.item_list, new_);
+			}
 		}
 	}
-	ostringstream ss;
-	ss << new_->id << " - " << new_->GetName() << " ";
-	printlog(ss.str(), false, false, false, new_->item_color());
+	printlog(final_.str(), false, false, false, final_color_);
 	return true;
 }
 

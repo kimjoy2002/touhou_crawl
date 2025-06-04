@@ -22,6 +22,7 @@
 #include "tribe.h"
 
 
+extern int g_menu_select;
 extern HANDLE mutx;
 wiz_infor wiz_list;
 extern int create_bamboo_mon();
@@ -41,7 +42,7 @@ void create_and_kill(int floor, float percent_ = 1.0f) {
 			list<item>::iterator temp = it++;
 			if(percent_ > 0.0f && rand_float(0.0f,1.0f) <= percent_)
 			{
-				item->Identify();
+				temp->Identify();
 				env[current_level].AddItem(you.position, &(*temp));
 				env[floor].DeleteItem(&(*temp));
 			}

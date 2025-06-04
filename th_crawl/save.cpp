@@ -197,16 +197,17 @@ bool load_data_onlyinfo(wstring path, players& temp_player)
 		}
 		int magic_number;
 		LoadData<int>(fp, magic_number); //version 1.11부터 매직넘버로 시작한다
+		int current_level_temp;
 		if(magic_number != 1999) {
 			//ver1.1에선 첫 int가 1999임
-			current_level = magic_number;
+			current_level_temp = magic_number;
 		} else {
 			{
 				char temp[256];
 				LoadData<char>(fp, *temp);
 				//loading_version_string = temp;
 			}
-			LoadData<int>(fp, current_level);
+			LoadData<int>(fp, current_level_temp);
 		}
 		LoadData<int>(fp, temp_player.level);
 		LoadData<tribe_type>(fp, temp_player.tribe);

@@ -1751,25 +1751,32 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 int g_tile_size = 32;
 
 
-int getItemIdFromDragStart(int item_start_x, int item_start_y, int drag_start_x, int drag_start_y)
+int getItemIdFromDragStart(int item_start_x, int item_start_y, int drag_start_x, int drag_start_y, bool get_id)
 {
 	int rel_x = drag_start_x - item_start_x;
 	int rel_y = drag_start_y - item_start_y;
 
-	if (rel_x < 0 || rel_y < 0) return 0; // 밖
+	if (rel_x < 0 || rel_y < 0) return -1; // 밖
 	int col = rel_x / 32;
 	int row = rel_y / 32;
-	bool right = rel_x%32;
+	bool right = rel_x%32 >= 16;
 	
 	int tile_index = row * 10 + col;
 
-	if (tile_index >= 0 || row >= 52) return 0;
+	if (tile_index < 0 || tile_index >= 52) return -1;
+
+	if(!get_id) {
+		return tile_index + (right?100:0);
+	}
 
 	auto it = you.item_list.begin();
-	std::advance(it, tile_index);
-	if (it == you.item_list.end()) return 0;
+	if (it == you.item_list.end()) return -1;
+	for(int i = 0;i < tile_index; i++) {
+		it++;
+		if (it == you.item_list.end()) return -1;
+	}
 
-	return it->id + (right?100:0);
+	return it->id;
 }
 
 
@@ -3361,6 +3368,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 
 
+	item* dragging_item = nullptr;
 	//아이템 박스 그리기
 	{
 		// scale_x = (windowSize.right - windowSize.left) / (float)option_mg.getWidth();
@@ -3369,14 +3377,14 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		// {
 		// 	int i=0;
 		// 	RECT rc={info_minX, 10, option_mg.getWidth(), option_mg.getHeight()};
-		
-		auto [dragEnded, dragStart] = isRealese();
-		
+				
 		int start_x = info_minX+4;
 		int start_y = max_minimap_y+16;
 		
 		int item_box_start_x = info_minX+4;
 		int item_box_start_y = max_minimap_y+16;
+
+
 
 		int tile_count = 0;
 		auto it = you.item_list.begin();
@@ -3586,13 +3594,39 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					else {
 						bool equip_ = false, curse = false, throw_ = false, evokable = false;
 						int x_ = start_x+i*32, y_ = start_y+j*32+10;
+						int plus_x_ = 0;
+						int real_x_ = x_;
+						int real_y_ = y_;
+
 						if(tile_count == 20) {
 							item_box_start_x = x_;
 							item_box_start_y = y_;
+						}
+						auto [isDragging_, dragStart] = isDragging();
+						int draging_id = -1;
+						if(isDragging_) {
+							draging_id = getItemIdFromDragStart(item_box_start_x - 16, item_box_start_y - 16, MousePoint.x, MousePoint.y, false);
+							int start_id = getItemIdFromDragStart(item_box_start_x - 16, item_box_start_y - 16, dragStart.x, dragStart.y, false);
+							if(start_id > 100)
+								start_id -=100;
+							if(draging_id != -1 && start_id != -1) {
+								if(draging_id >= 100) {
+									draging_id = draging_id%100+1;
+								}
+
+								if(start_id != -1 && i == start_id%10 && j-2 == start_id/10 && it != you.item_list.end()) {
+									dragging_item = &(*it);
+								}
+								if(i >= draging_id%10 && j-2 == draging_id/10) {
+									plus_x_ = 10;
+								}
+							}
 							
 						}
+
 					
 						if(it != you.item_list.end()) {
+							x_ += plus_x_;
 							equip_ = (you.isequip(it)>0);
 							throw_ = (you.throw_weapon == &(*it));
 							curse = (it->identify_curse || equip_) && it->curse;
@@ -3641,26 +3675,27 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							}
 
 							{ //마우스
-								if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
-									MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
+								if (MousePoint.x > real_x_ - 16 && MousePoint.x <= real_x_ + 16 &&
+									MousePoint.y > real_y_ - 16 && MousePoint.y <= real_y_ + 16){
 									img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
 									mouseInfo = string(1,it->id) + " - " + it->GetName();
 									mouseColor = it->item_color();
 									infoDrawPoint = MousePoint;
+									auto [dragEnded, dragStartFromRealese] = isRealese();
 
 									if(dragEnded) {
-										if(dragStart.x > x_ - 16 && dragStart.x <= x_ + 16 &&
-											dragStart.y > y_ - 16 && dragStart.y <= y_ + 16) 
+										if(dragStartFromRealese.x > real_x_ - 16 && dragStartFromRealese.x <= real_x_ + 16 &&
+											dragStartFromRealese.y > real_y_ - 16 && dragStartFromRealese.y <= real_y_ + 16) {
 											g_keyQueue->push(InputedKey(MKIND_ITEM,it->id,0));
 										}
-										else if((dragStart.x > item_box_start_x - 16 && dragStart.x <= item_box_start_x + 32*9 + 16 &&
-											dragStart.y > item_box_start_y - 16 && dragStart.y <= item_box_start_y + 32*4 + 16) ||
-											(dragStart.x > item_box_start_x - 16 && dragStart.x <= item_box_start_x + 32 + 16 &&
-											dragStart.y > item_box_start_y + 32*5 - 16 && dragStart.y <= item_box_start_y + 32*5 + 16)
+										else if((dragStartFromRealese.x > item_box_start_x - 16 && dragStartFromRealese.x <= item_box_start_x + 32*9 + 16 &&
+											dragStartFromRealese.y > item_box_start_y - 16 && dragStartFromRealese.y <= item_box_start_y + 32*4 + 16) ||
+											(dragStartFromRealese.x > item_box_start_x - 16 && dragStartFromRealese.x <= item_box_start_x + 32 + 16 &&
+											dragStartFromRealese.y > item_box_start_y + 32*5 - 16 && dragStartFromRealese.y <= item_box_start_y + 32*5 + 16)
 											)  {
-											int prev_id = getItemIdFromDragStart(item_box_start_x - 16, item_box_start_y - 16, dragStart.x, dragStart.y);
-											if(prev_id != 0)
-												g_keyQueue->push(InputedKey(MKIND_ITEM_SWAP,prev_id,it->id));
+											int prev_id = getItemIdFromDragStart(item_box_start_x - 16, item_box_start_y - 16, dragStartFromRealese.x, dragStartFromRealese.y, true);
+											if(prev_id != -1)
+												g_keyQueue->push(InputedKey(MKIND_ITEM_SWAP,prev_id,it->id + (MousePoint.x >= real_x_?1000:0)));
 											
 										}
 									}
@@ -3860,6 +3895,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	}
 	drawInfoBox(pSprite, pfont);
 
+
+	if(dragging_item != nullptr){
+		img_item_empty_itembox.draw(pSprite,(float)MousePoint.x, (float)MousePoint.y, 128);
+		dragging_item->draw(pSprite, pfont, (float)MousePoint.x, (float)MousePoint.y, 1.0f, 128);
+	}
 	
 	if(!mouseInfo.empty()) {
 		LONG strWidth = PrintCharWidth(mouseInfo)*fontDesc.Width+fontDesc.Width;

@@ -111,15 +111,13 @@ int caculScore()
 
 
 
-bool Dump(int type, string *filename_)
+bool Dump(int type, wstring *filename_)
 {
 	if (ReplayClass.ReplayMode())
 		return false;
 
 
 	ostringstream ss;
-	char filename[256];
-	//char sql_[256];
 	_wmkdir(morgue_path_w.c_str());
 	FILE *fp;
 	struct tm t;
@@ -136,7 +134,7 @@ bool Dump(int type, string *filename_)
 		1900 + t.tm_year, t.tm_mon + 1, t.tm_mday,
 		t.tm_hour, t.tm_min, t.tm_sec);
 
-    *filename_ = ConvertUTF16ToUTF8(wfilename);
+    *filename_ = wfilename;
 	if(_wfopen_s(&fp, wfilename, L"wt") != 0 || !fp){
 		return false;  
 	}
@@ -1059,15 +1057,6 @@ bool Dump(int type, string *filename_)
 	fprintf_s(fp,"%s",ss.str().c_str());
 
 	fclose(fp);
-	//TODO) 파일로 변경
-	//if((isNormalGame() || isArena() || isSprint()) && type == 1 && !wiz_list.wizard_mode)
-	//	sendScore(sql_,filename);
-	if(filename_)
-	{
-		(*filename_) = filename;
-
-	}
-
 	return true;
 }
 string GetDumpActionString(dump_action_type type_)

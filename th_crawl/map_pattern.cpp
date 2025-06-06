@@ -54,10 +54,10 @@ const char* common_base_pattern(int floor_, map_dummy* map)
 	random_extraction<int> randomPattern;
 	//randomPattern.push(0, 1);
 	//randomPattern.push(63, 100);
-	for (int i = 0; i <= 105; i++)
+	for (int i = 0; i <= 106; i++)
 	{
 		int base_pe = 1;
-		if (i == 39 || i == 41 || i == 96)
+		if (i == 39 || i == 41 || i == 96 || i == 106)
 			base_pe = 3; //몇몇 특수 지형보정
 		randomPattern.push(i,base_pe);
 	}
@@ -2994,6 +2994,40 @@ T.....T\
 *___.....___[\
 *___*...[__[[\
 *****...[[[[[";
+		}
+		case 106:
+		{
+			if (!(floor_ >= EIENTEI_LEVEL && floor_ <= EIENTEI_LEVEL_LAST_LEVEL))
+				break;
+			bool hw_ = randA(1);
+			map->size_x = 5;
+			map->size_y = 5;
+			map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+			hw_ = randA(1);
+			map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+			map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+
+			for(int i = -1; i < 2; i++){
+
+				for(int j = -1; j < 2; j++){
+					map->monster_list.push_back(mapdummy_mon((i==0&&j==0)?MON_RABIT_GIANT:MON_RABIT_BOMB,0,coord_def(i,j)));
+				}
+			}
+
+			map->name = "EIENTEI_RABIT_GIANT";
+			return "\
+...........\
+...........\
+...........\
+...~~~~~...\
+...~...~...\
+...~...~...\
+...~...~...\
+...~~~~~...\
+...........\
+...........\
+...........";
 		}
 		}
 	}

@@ -168,6 +168,7 @@ public:
 	virtual bool GetMindReading(){return false;};
 	virtual int GetExhausted(){return 0;};
 	virtual char getAsciiDot() = 0;
+	virtual bool isRabbit(){return false;};
 	 
 
 

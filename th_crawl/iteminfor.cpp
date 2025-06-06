@@ -149,7 +149,7 @@ bool changeItemHotkey(int prev_item, int new_id, int change) {
 					if(move_ == 0) {
 						ss << ", ";
 					} else {
-						ss << "... ";
+						ss << " ... ";
 					}
 					printlog(ss.str(), false, false, false, old_->item_color());
 				}
@@ -240,7 +240,7 @@ bool changeItemHotkey(int prev_item, int new_id, int change) {
 						if(move_ == 0) {
 							ss << ", ";
 						} else {
-							ss << "... ";
+							ss << " ... ";
 						}
 						printlog(ss.str(), false, false, false, old_->item_color());
 					}

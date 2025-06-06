@@ -5230,6 +5230,8 @@ bool monster::isPassedBullet(unit* order)
 	}
 	else
 	{ //이것이 몬스터의 탄환일때
+		if(order->GetId() == MON_RABIT_GIANT && isRabbit()) //토끼 거인은 토끼를 관통해서 던진다.
+			return true;
 		if(flag & M_FLAG_PASSED_ENEMY  && isEnemyMonster((monster*)order))
 			return true;
 		else if(isShootingSprint()  && isEnemyMonster((monster*)order))
@@ -5689,6 +5691,19 @@ monster_state_simple monster::GetSimpleState()
 	if(isUserAlly())
 		temp = MSS_ALLY;
 	return temp;
+}
+bool monster::isRabbit() {
+	if(GetId() == MON_RABBIT ||
+		GetId() == MON_RABIT_ALCHEMIST ||
+		GetId() == MON_RABIT_BOMB ||
+		GetId() == MON_RABIT_MAGIC ||
+		GetId() == MON_RABIT_SPEAR ||
+		GetId() == MON_RABIT_SPEAR ||
+		GetId() == MON_RABIT_GIANT ||
+		GetId() == MON_UDONGE ||
+		GetId() == MON_TEWI)
+		return true;
+	return false;
 }
 D3DCOLOR monster::GetStateString(monster_state_simple state_, ostringstream& ss)
 {

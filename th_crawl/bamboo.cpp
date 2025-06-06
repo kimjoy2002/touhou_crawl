@@ -63,12 +63,14 @@ int create_bamboo_mon() {
 		percent_.push(MON_RABIT_SPEAR,60);//창병
 		percent_.push(MON_RABIT_SUPPORT,15);//지원병
 		percent_.push(MON_RABIT_MAGIC,20);//마법사
+		percent_.push(MON_RABIT_ALCHEMIST,10);//연금술사
 	}
 	else
 	{ //토끼들이 많아지면 지원병은 적어짐
 		percent_.push(MON_RABIT_SPEAR,65);//창병
 		percent_.push(MON_RABIT_SUPPORT,5);//지원병
 		percent_.push(MON_RABIT_MAGIC,25);//마법사
+		percent_.push(MON_RABIT_ALCHEMIST,10);//연금술사
 
 	}
 	return percent_.pop();

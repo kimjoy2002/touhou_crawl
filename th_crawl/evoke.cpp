@@ -901,6 +901,10 @@ string DreamSoulMonster(vector<int>& list_, int level_)
 			mon_list_.push(MON_RABIT_SUPPORT,3);
 		if(level_>15)
 			mon_list_.push(MON_RABIT_MAGIC,10);
+		if(level_>17)
+			mon_list_.push(MON_RABIT_ALCHEMIST,5);
+		if(level_>19)
+			mon_list_.push(MON_RABIT_GIANT,3);
 		msg_ = LocalzationManager::locString(LOC_SYSTEM_DUNGEON_BAMBOO);
 		break;
 	case 5: //지저

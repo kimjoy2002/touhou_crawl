@@ -112,7 +112,17 @@ void wiz_mode()
 				if(--g_menu_select<0)
 					g_menu_select = wizard_listkey.size()-1;
 				continue;
-			} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+			} else if(key_ == VK_UP){
+				if(g_menu_select-10>=0) {
+					g_menu_select -= 10;
+				}
+				continue;
+			} else if (key_ == VK_DOWN) {
+				if(g_menu_select+10<wizard_listkey.size()) {
+					g_menu_select += 10;
+				}
+				continue;
+			}  else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
 				if(wizard_listkey.size() > g_menu_select) {
 					key_ = wizard_listkey[g_menu_select];
 				} else {
@@ -540,6 +550,13 @@ void wiz_mode()
 				}
 			}
 			return;
+			case 'b':
+			{
+				item_infor t;
+				makeitem(ITM_BOOK, 0, &t, -1);
+				env[current_level].MakeItem(you.position, t);
+			}
+			return;
 			case 'a':
 			{
 				item_infor t;
@@ -723,6 +740,16 @@ void wiz_mode()
 					if(--g_menu_select<0)
 						g_menu_select = listkey.size()-1;
 					continue;
+				}  else if(key_ == VK_UP){
+					if(g_menu_select-10>=0) {
+						g_menu_select -= 10;
+					}
+					continue;
+				} else if (key_ == VK_DOWN) {
+					if(g_menu_select+10<wizard_listkey.size()) {
+						g_menu_select += 10;
+					}
+					continue;
 				} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
 					if(listkey.size() > g_menu_select) {
 						key_ = listkey[g_menu_select];
@@ -873,6 +900,16 @@ void wiz_mode()
 					if(--g_menu_select<0)
 						g_menu_select = listkey.size()-1;
 					continue;
+				} else if(key_ == VK_UP){
+					if(g_menu_select-10>=0) {
+						g_menu_select -= 10;
+					}
+					continue;
+				} else if (key_ == VK_DOWN) {
+					if(g_menu_select+10<wizard_listkey.size()) {
+						g_menu_select += 10;
+					}
+					continue;
 				} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
 					if(listkey.size() > g_menu_select) {
 						key_ = listkey[g_menu_select];
@@ -951,7 +988,17 @@ void wiz_mode()
 					if(--g_menu_select<0)
 						g_menu_select = listkey.size()-1;
 					continue;
-				} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+				}  else if(key_ == VK_UP){
+					if(g_menu_select-10>=0) {
+						g_menu_select -= 10;
+					}
+					continue;
+				} else if (key_ == VK_DOWN) {
+					if(g_menu_select+10<wizard_listkey.size()) {
+						g_menu_select += 10;
+					}
+					continue;
+				}  else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
 					if(listkey.size() > g_menu_select) {
 						key_ = listkey[g_menu_select];
 					} else {

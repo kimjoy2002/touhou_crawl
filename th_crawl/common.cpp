@@ -329,6 +329,20 @@ int GetDirecToChar(int pos_)
 	return VK_RETURN;
 }
 
+
+int GetLengthFromCenter(int x, int y, int cx, int cy)
+{
+    int dx = x - cx;
+    int dy = y - cy;
+    int dist_sq = dx * dx + dy * dy;
+
+    int length = 0;
+    while ((length + 1) * (length + 1) - 1 < dist_sq)
+        ++length;
+
+    return length;
+}
+
 int GetAngleToDirec(int angle)
 {
 	while(angle<0)angle+=360; 

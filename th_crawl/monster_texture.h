@@ -189,6 +189,8 @@ extern textures img_mons_haniwa_cavalry;
 extern textures img_mons_wolf_spirit;
 extern textures img_mons_eagle_spirit;
 extern textures img_mons_otter_spirit;
+extern textures img_mons_rabbit_giant;
+extern textures img_mons_rabbit_alchemist;
 
 extern textures img_mons_haniwa_equipments[];
 extern textures img_mons_stonetower[];

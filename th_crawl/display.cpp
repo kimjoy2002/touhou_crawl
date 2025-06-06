@@ -199,7 +199,7 @@ int display_manager::convertClickable(int id) {
 		case SPECIAL_CLINKABLE_N:
 			return 'N';
 		case SPECIAL_CLINKABLE_INFORMATION_CHARACTER: 
-			return '%';
+			return '@';
 		case SPECIAL_CLINKABLE_INFORMATION_FAITH: 
 			return '^';
 		case SPECIAL_CLINKABLE_INFORMATION_INDENTIFY: 
@@ -1763,7 +1763,7 @@ int getItemIdFromDragStart(int item_start_x, int item_start_y, int drag_start_x,
 	
 	int tile_index = row * 10 + col;
 
-	if (tile_index < 0 || tile_index >= 52) return -1;
+	if (tile_index < 0 || tile_index >= 60) return -1;
 
 	if(!get_id) {
 		return tile_index + (right?100:0);
@@ -3621,7 +3621,6 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 									plus_x_ = 10;
 								}
 							}
-							
 						}
 
 					
@@ -3696,7 +3695,6 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 											int prev_id = getItemIdFromDragStart(item_box_start_x - 16, item_box_start_y - 16, dragStartFromRealese.x, dragStartFromRealese.y, true);
 											if(prev_id != -1)
 												g_keyQueue->push(InputedKey(MKIND_ITEM_SWAP,prev_id,it->id + (MousePoint.x >= real_x_?1000:0)));
-											
 										}
 									}
 									else if(isClicked(RIGHT_CLICK)) {
@@ -3714,6 +3712,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					}
 				} else {
 					int x_ = start_x+i*32, y_ = start_y+j*32+10;
+
 					env[current_level].drawTile(pSprite, you.position.x, you.position.y, x_, y_, 1.0f, you.turn, 99999, true, true, false);
 					if(floor_items != env[current_level].item_list.end()) {
 						if(floor_items->position == you.position ) {
@@ -3738,6 +3737,14 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 								mouseColor = floor_items->item_color();
 								infoDrawPoint = MousePoint;
 
+								auto [dragEnded, dragStartFromRealese] = isRealese();
+
+								if(dragEnded) {
+									int prev_id = getItemIdFromDragStart(item_box_start_x - 16, item_box_start_y - 16, dragStartFromRealese.x, dragStartFromRealese.y, true);
+									if(prev_id != -1)
+										g_keyQueue->push(InputedKey(MKIND_ITEM_SWAP,prev_id,-1));
+								}
+
 								if(isClicked(LEFT_CLICK)) {
 									g_keyQueue->push(InputedKey(MKIND_PICK,tile_count-72,0));
 								}
@@ -3751,10 +3758,30 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							if(g_menu_select == tile_count) {
 								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 255, 0));
 							}
+							
+
+							if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
+								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
+								auto [dragEnded, dragStartFromRealese] = isRealese();
+								if(dragEnded) {
+									int prev_id = getItemIdFromDragStart(item_box_start_x - 16, item_box_start_y - 16, dragStartFromRealese.x, dragStartFromRealese.y, true);
+									if(prev_id != -1)
+										g_keyQueue->push(InputedKey(MKIND_ITEM_SWAP,prev_id,-1));
+								}
+							}
 						}
 					} else {
 						if(g_menu_select == tile_count) {
 							img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 0, 255, 0));
+						}
+						if (MousePoint.x > x_ - 16 && MousePoint.x <= x_ + 16 &&
+							MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
+							auto [dragEnded, dragStartFromRealese] = isRealese();
+							if(dragEnded) {
+								int prev_id = getItemIdFromDragStart(item_box_start_x - 16, item_box_start_y - 16, dragStartFromRealese.x, dragStartFromRealese.y, true);
+								if(prev_id != -1)
+									g_keyQueue->push(InputedKey(MKIND_ITEM_SWAP,prev_id,-1));
+							}
 						}
 					}
 				}
@@ -4524,10 +4551,13 @@ void display_manager::setPosition(int value_, int char_) {
 				value_ = max_position;
 			if(value_ > max_position)
 				value_ = 0;
-			if(item_pos[value_]-48 < 0)
-				move += item_pos[value_]-48;
-			else if(item_pos[value_] > option_mg.getHeight())
-				move += item_pos[value_] - option_mg.getHeight();
+
+			if(value_>=0 && value_ < item_pos.size()) {
+				if(item_pos[value_]-48 < 0)
+					move += item_pos[value_]-48;
+				else if(item_pos[value_] > option_mg.getHeight())
+					move += item_pos[value_] - option_mg.getHeight();
+			}
 			current_position = value_;
 		} 
 	}

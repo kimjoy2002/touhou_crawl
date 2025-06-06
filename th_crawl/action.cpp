@@ -161,7 +161,8 @@ void repeat_action()
 		action_turn_skip();
 		break;
 	case 'D': //마지막에 먹은 아이템 버리기
-		fast_discard();
+		fast_discard(you.final_item, you.final_num);
+		you.final_item = 0;
 		break;
 	case 'C': //문닫기
 		Close_door();
@@ -875,15 +876,21 @@ int Player_Move(const coord_def &c)
 }
 void search_monspell_view(monster* mon_)
 {
+	int current_position_temp = -1;
 	bool loop_ = true;
 					
+
 	while(loop_)
 	{
 		loop_ = false;
 		WaitForSingleObject(mutx, INFINITE);
 		GetMonsterInfor(mon_);
-		ReleaseMutex(mutx);
 		changedisplay(DT_SUB_TEXT);
+		if(current_position_temp != -1) {
+			DisplayManager.current_position = current_position_temp;
+		}
+		ReleaseMutex(mutx);
+
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey, true);
 
@@ -894,11 +901,13 @@ void search_monspell_view(monster* mon_)
 		if(key_ == VK_UP)
 		{
 			DisplayManager.addPosition(-1);
+			current_position_temp = DisplayManager.current_position;
 			loop_ = true;
 		}
 		else if(key_ == VK_DOWN)
 		{
 			DisplayManager.addPosition(1);
+			current_position_temp = DisplayManager.current_position;
 			loop_ = true;
 		}
 		else if(key_ == VK_PRIOR)

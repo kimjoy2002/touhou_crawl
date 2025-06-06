@@ -1127,12 +1127,64 @@ void tribe_property::gain(bool gain_)
 
 void PropertyView()
 {
-	changedisplay(DT_PROPERTY);
+	string blank(12,' ');
+
+	int current_position_temp = -1;
+
+
+
 	while(1)
 	{
+		WaitForSingleObject(mutx, INFINITE);
+		deletesub();
+		printsub("",true,CL_normal);
+		printsub("",true,CL_normal);
+		if(you.property_vector.empty())
+		{
+			printsub(blank,false,CL_normal);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_NO_PROPERTY),true,CL_normal);
+		} else {
+			printsub(blank,false,CL_normal);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW),true,CL_normal);
+			printsub("",true,CL_normal);
+			int i = 0;
+			for(auto it = you.property_vector.begin(); it != you.property_vector.end(); it++)
+			{
+				printsub(blank,false,CL_normal);
+				stringstream ss;
+				char sp_char = (i<26)?('a'+i):('A'+i-26);
+				ss << sp_char << " - " << it->GetInfor();
+				printsub(ss.str(),true,it->getColor(), sp_char);
+				i++;
+			}
+		}
+		changedisplay(DT_SUB_TEXT);
+		if(current_position_temp != -1) {
+			DisplayManager.current_position = current_position_temp;
+		}
+		ReleaseMutex(mutx);
+
+
+
 		InputedKey inputedKey;
+		
 		int key_ = waitkeyinput(inputedKey,true);
-		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+			key_ = DisplayManager.positionToChar();
+		}
+
+		if(key_ == VK_UP)
+		{
+			DisplayManager.addPosition(-1);
+			current_position_temp = DisplayManager.current_position;
+		}
+		else if(key_ == VK_DOWN)
+		{
+			DisplayManager.addPosition(1);
+			current_position_temp = DisplayManager.current_position;
+		}
+		else if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
 			if(num < you.property_vector.size())
@@ -1143,8 +1195,6 @@ void PropertyView()
 				changedisplay(DT_TEXT);
 				ReleaseMutex(mutx);
 				waitkeyinput();
-				changedisplay(DT_PROPERTY);
-				changemove(0);
 			}
 			else
 				break;

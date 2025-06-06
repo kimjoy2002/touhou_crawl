@@ -70,6 +70,7 @@ float GetPositionToAngle2(float start_x, float start_y, float target_x, float ta
 
 float GetBaseAngle(float angle);
 
+int GetLengthFromCenter(int x, int y, int cx, int cy);
 int GetPosToDirec(const coord_def &start, const coord_def &target);
 coord_def GetDirecToPos(int pos_);
 int GetDirecToChar(int pos_);

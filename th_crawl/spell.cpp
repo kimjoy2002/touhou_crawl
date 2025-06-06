@@ -60,6 +60,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_MOON_GUN:
 	case SPL_THROW_SWORD:
 	case SPL_THROW_KNIFE:
+	case SPL_THROW_RABBIT:
+	case SPL_THROW_POTION:
 		return (S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_LUMINUS_STRIKE:
 		return (S_FLAG_SPEAK | S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
@@ -342,6 +344,8 @@ int SpellLength(spell_list skill, bool isPlayer)
 	case SPL_HYPER_BEAM:
 	case SPL_KAGUYA_SPELL:
 	case SPL_TOUGUE:
+	case SPL_THROW_RABBIT:
+	case SPL_THROW_POTION:
 		length_ = 6;
 		break;
 	case SPL_FIRE_BALL:
@@ -784,6 +788,10 @@ string SpellString(spell_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_HOMING_TANMAC);
 	case SPL_ALLROUND_TANMAC:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_ALLROUND_TANMAC);
+	case SPL_THROW_RABBIT:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_THROW_RABBIT);
+	case SPL_THROW_POTION:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_THROW_POTION);
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_UKNOWN);
 	}
@@ -921,6 +929,8 @@ int SpellLevel(spell_list skill)
 	case SPL_SUMMON_GHOST:
 	case SPL_DISCORD:
 	case SPL_SMOKING:
+	case SPL_THROW_RABBIT:
+	case SPL_THROW_POTION:
 		return 6;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_STONE_FORM:
@@ -1044,6 +1054,8 @@ int SpellNoise(spell_list skill)
 	case SPL_SMOKING:
 	case SPL_GROW_VINE:
 	case SPL_HOMING_TANMAC:
+	case SPL_THROW_POTION:
+	case SPL_THROW_RABBIT:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -1515,6 +1527,10 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_ALLROUND_TANMAC:
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_THROW_POTION:
+		return num == 0 ? (SKT_ALCHEMY) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_THROW_RABBIT:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1690,6 +1706,8 @@ int SpellCap(spell_list skill)
 	case SPL_CLOSE_DOOR:
 	case SPL_SPEAKER_PHONE:
 	case SPL_ALLROUND_TANMAC:
+	case SPL_THROW_POTION:
+	case SPL_THROW_RABBIT:
 		return 200;
 	default:
 	case SPL_BLINK:
@@ -1978,6 +1996,21 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 		}
 	case SPL_TRACKING:
 		return ((!you.s_tracking && !mon->isUserAlly() && mon->target == &you) ?true:false);
+	case SPL_THROW_RABBIT:
+	{
+		rand_rect_iterator rect_(mon->position, 1, 1, true);
+		coord_def targetPos =mon->target?mon->target->position:mon->target_pos;
+		while(!rect_.end()) {
+			if(targetPos != *rect_) {
+				unit* unit_ = env[current_level].isMonsterPos(rect_->x, rect_->y, &you, NULL);
+				if(unit_ && unit_->isLive() && unit_->isRabbit() && unit_->GetId() != MON_RABIT_GIANT) {
+					return true;
+				}
+			}
+			rect_++;
+		}
+	}
+	return false;
 	default:
 		return true;
 	}

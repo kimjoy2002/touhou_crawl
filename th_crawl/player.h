@@ -659,7 +659,7 @@ void turn_skip();
 void action_turn_skip();
 void escape();
 void iteminfor_discard();
-void fast_discard();
+void fast_discard(int delete_id, int delete_num);
 void Eatting(char auto_);
 void Drinking(char auto_);
 //void Spelllcard_Declare();

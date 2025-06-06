@@ -904,13 +904,17 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 			}
 		}
 	} else if(mouse_type == MKIND_ITEM_SWAP) {
-		int old_id_ = val1;
-		int new_id_ = val2%1000;
-		int change = val2 > 1000? 1: -1;
-		
-		WaitForSingleObject(mutx, INFINITE);
-		changeItemHotkey(old_id_, new_id_, change);
-		ReleaseMutex(mutx);
+		if (val2 == -1) {
+			fast_discard(val1, 0);
+		} else {
+			int old_id_ = val1;
+			int new_id_ = val2%1000;
+			int change = val2 > 1000? 1: -1;
+			
+			WaitForSingleObject(mutx, INFINITE);
+			changeItemHotkey(old_id_, new_id_, change);
+			ReleaseMutex(mutx);
+		}
 	}else if (mouse_type == MKIND_ITEM_DESCRIPTION) {
 		int key_ = val1;
 		iteminfor_(key_, false);
@@ -1108,7 +1112,8 @@ void MainLoop()
 			iteminfor_discard();
 			break;
 		case 'D': //마지막에 먹은 아이템 버리기
-			fast_discard();
+			fast_discard(you.final_item, you.final_num);
+			you.final_item = 0;
 			break;
 		case 'w': //무기장착
 			Equip_Weapon();

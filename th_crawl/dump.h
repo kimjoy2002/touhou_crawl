@@ -39,7 +39,7 @@ public:
 string GetDumpActionString(dump_action_type type_);
 
 
-bool Dump(int type, string *filename_);
+bool Dump(int type, wstring *filename_);
 
 
 #endif // __DUMP_H__

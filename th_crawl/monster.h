@@ -289,6 +289,7 @@ public:
 	monster_state_simple GetSimpleState();
 	D3DCOLOR GetStateString(monster_state_simple state_, ostringstream& string_);
 	bool isplayer(){return false;};
+	bool isRabbit();
 	int GetId(){return id;};
 	int GetMapId(){return map_id;};
 	int GetLevel(){return level;};

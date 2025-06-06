@@ -2279,6 +2279,7 @@ LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ALMOST_OFF,현자의 돌은 거의 사라�
 LOC_SYSTEM_SPELL_UNLUCK_UFO,이럴수가! 하늘에서 UFO가 떨어졌다!
 LOC_SYSTEM_SPELL_UNLUCK_RECORVER,당신의 운세는 정상으로 돌아왔다.
 LOC_SYSTEM_SPELL_TOUGUE,{0:은|는} {1:을|를} 끌어당겼다.
+LOC_SYSTEM_SPELL_THROW,{0:은|는} {1:을|를} 집어던졌다!
 LOC_SYSTEM_SPL_MON_TANMAC_SMALL,소형 탄막
 LOC_SYSTEM_SPL_MON_TANMAC_MIDDLE,중형 탄막
 LOC_SYSTEM_SPL_MON_WATER_GUN,물총
@@ -2444,6 +2445,8 @@ LOC_SYSTEM_SPL_CLOSE_DOOR,문 잠그기
 LOC_SYSTEM_SPL_SPEAKER_PHONE,침입자 경보
 LOC_SYSTEM_SPL_HOMING_TANMAC,호밍탄
 LOC_SYSTEM_SPL_ALLROUND_TANMAC,전방위 탄막
+LOC_SYSTEM_SPL_THROW_POTION,물약 던지기
+LOC_SYSTEM_SPL_THROW_RABBIT,토끼 던지기
 LOC_SYSTEM_SPL_UKNOWN,알수없는 마법
 LOC_SYSTEM_SPL_DESCRIBE_NONE,존재하지 않는 마법이다.\n
 LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_SMALL,작은 탄막을 발사한다.\n
@@ -2612,6 +2615,8 @@ LOC_SYSTEM_SPL_DESCRIBE_CLOSE_DOOR,홍마관의 비상 방범시스템을 작동
 LOC_SYSTEM_SPL_DESCRIBE_SPEAKER_PHONE,큰 확성기를 이용해 아군에게 경보를 울린다.\n내부 홍마관 경비시스템에 연동되어있어서 아주 먼거리에 있는 일부 그룹이 듣고 찾아오게 된다.\n다만 단순히 경보를 울리는것이기때문에 어디까지나 걸어서 오기때문에 그 전에 도망칠 수 있다.\n소문에 의하면 같은 층의 메이드장은 마치 순간이동을 한 것마냥 찾아온다고 한다.\n
 LOC_SYSTEM_SPL_DESCRIBE_HOMING_TANMAC,에너지로 만들어진 작은 호밍 탄막 소환물을 2체 만들어낸다.\n호밍은 일반적인 탄막보다 느리기에 적에게 날라갈 시간이 필요하다.\n일단 적에게 도달하면 높은 명중률로 적을 공격하지만 날라갈 궤도가 필요하기때문에\n적과 너무 가깝거나 지형이 좁으면 벽에 부딪히거나 엉뚱한 경로로 날라갈 가능성이 있다.
 LOC_SYSTEM_SPL_DESCRIBE_ALLROUND_TANMAC,전방위의 적에게 탄막을 흩뿌리는 마법.\n사거리 내에 위협이 되는 적들을 자동으로 조준해서 중간 크기의 탄막을 뿌린다.\n사거리내의 적을 동시에 공격가능하지만, 적을 관통할수는 없다.
+LOC_SYSTEM_SPL_DESCRIBE_THROW_POTION,무작위 물약을 던지는 기술.\n물약은 무작위 속성 폭발을 일으키면서 폭발 위치에 3X3의 무작위 구름을 생성한다.
+LOC_SYSTEM_SPL_DESCRIBE_THROW_RABBIT,주변에 있는 토끼를 적에게 던지는 마법.\n영원정에서 미리 연습해둔 토끼들의 연계 공격이다.
 LOC_SYSTEM_SPL_DESCRIBE_UKNOWN,설명이 존재하지 않는 마법.\n
 LOC_SYSTEM_SPL_DESCRIBE_ALCHEMY,이 마법은 연금술 버프다. 연금술 버프끼리는 중첩되지않는다.\n다른 연금술 버프가 걸린 상태에서 이 마법을 시전하면 기존의 연금술 버프가 사라진다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMONING,이 마법은 최대 {0}마리까지 소환수를 소환할 수 있다.\n

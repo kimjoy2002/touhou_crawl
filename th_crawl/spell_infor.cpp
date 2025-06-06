@@ -521,6 +521,12 @@ string GetSpellInfor(spell_list spell, bool isPlayer)
 	case SPL_ALLROUND_TANMAC:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ALLROUND_TANMAC);
 		break;	
+	case SPL_THROW_POTION:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_POTION);
+		break;	
+	case SPL_THROW_RABBIT:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_RABBIT);
+		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_UKNOWN);
 		break;

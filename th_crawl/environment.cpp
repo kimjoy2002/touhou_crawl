@@ -1208,25 +1208,31 @@ void environment::MakeAfterimage(const coord_def &c, textures *t, int start_alph
 }
 
 
-bool environment::MakeSmoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, unit* parent_)
+bool environment::MakeSmoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, unit* parent_, bool override_)
 {
-
+	parent_type pt_temp = PRT_NEUTRAL;
+	if(parent_)
+	{
+		if(parent_->isplayer())
+		{
+			pt_temp = PRT_PLAYER;
+		}
+		else
+		{
+			pt_temp = PRT_ENEMY;
+		}
+	}
 	if(!isSmokePos(c.x,c.y) && isMove(c.x,c.y,true))
 	{
-		parent_type pt_temp = PRT_NEUTRAL;
-		if(parent_)
-		{
-			if(parent_->isplayer())
-			{
-				pt_temp = PRT_PLAYER;
-			}
-			else
-			{
-				pt_temp = PRT_ENEMY;
-			}
-		}
 		WaitForSingleObject(mutx, INFINITE);
 		smoke_list.push_back(smoke(c, t, type_, time_, expand_, pt_temp));
+		ReleaseMutex(mutx);
+		return true;
+	}
+	if(override_ && isSmokePos(c.x,c.y) && isMove(c.x,c.y,true)) {
+		smoke* s_ = isSmokePos2(c.x, c.y, nullptr);
+		WaitForSingleObject(mutx, INFINITE);
+		s_->init(c, t, type_, time_, expand_, pt_temp);
 		ReleaseMutex(mutx);
 		return true;
 	}

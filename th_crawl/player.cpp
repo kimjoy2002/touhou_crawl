@@ -5557,20 +5557,6 @@ bool players::PunishUpDown(int punish_, god_type god_ , bool absolutely_ )
 	
 }
 
-int GetLengthFromCenter(int x, int y, int cx, int cy)
-{
-    int dx = x - cx;
-    int dy = y - cy;
-    int dist_sq = dx * dx + dy * dy;
-
-    int length = 0;
-    while ((length + 1) * (length + 1) - 1 < dist_sq)
-        ++length;
-
-    return length;
-}
-
-
 bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_, beam_iterator& beam)
 {
 	//던질때 장비된 아이템이면 장비가 풀리도록 만들어야함

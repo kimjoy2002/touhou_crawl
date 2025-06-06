@@ -36,7 +36,6 @@
 extern HANDLE mutx;
 extern int map_effect;
 
-int GetLengthFromCenter(int x, int y, int cx, int cy);
 bool isMonsterhurtSpell(monster* use_, monster* target_, spell_list spell_)
 {
 	//이 마법이 이 몬스터에게 제대로 듣는지
@@ -130,16 +129,10 @@ bool isBandAlly(monster* order, monster* other)
 		}
 		return false;
 	case MON_RABIT_SUPPORT:
-		switch(other->id)
-		{
-		case MON_RABIT_MAGIC:
-		case MON_RABIT_BOMB:
-		case MON_RABIT_SPEAR:
+		if(other->isRabbit() && other->id != MON_RABIT_SUPPORT)
 			return true;
-		default:
-			break;
-		}
-		return false;
+		else 
+			return false;
 	case MON_SARIEL:
 		switch(other->id)
 		{
@@ -179,7 +172,7 @@ bool isBandAlly(monster* order, monster* other)
 
 bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 {
-	int length_ = pow((float)abs(order->position.x-target.x),2)+pow((float)abs(order->position.y-target.y),2);
+	int length_ = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 	if(order->position == target && !SpellFlagCheck(skill, S_FLAG_SEIF))
 		return false;
 
@@ -189,11 +182,11 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 			return false;
 
 	}
-	else if(SpellLength(skill, false) && length_ > SpellLength(skill, false)*SpellLength(skill, false))
+	else if(SpellLength(skill, false) && length_ > SpellLength(skill, false))
 		return false;
 	if(SpellFlagCheck(skill, S_FLAG_NO_COM))
 		return false;
-	else if(SpellFlagCheck(skill, S_FLAG_CLOSE_DANGER) && length_ <= 2)
+	else if(SpellFlagCheck(skill, S_FLAG_CLOSE_DANGER) && length_ <= 1)
 		return false;
 	if(SpellFlagCheck(skill, S_FLAG_CLOUD) && env[current_level].isSmokePos(target.x,target.y))
 		return false;
@@ -273,11 +266,12 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 	}
 	else if(!SpellFlagCheck(skill, S_FLAG_SMITE) && !SpellFlagCheck(skill, S_FLAG_IMMEDIATELY))
 	{
-		beam_iterator beam(order->position,order->position);
+		beam_iterator beam(order->position,target);
+		int max_length_ = beam.GetMaxLength();
 		
 		if(!CheckThrowPath(order->position,target, beam))
 			return false;
-		int max_length_ = SpellFlagCheck(skill, S_FLAG_PENETRATE)?SpellLength(skill, false):beam.GetMaxLength();
+		max_length_ = SpellFlagCheck(skill, S_FLAG_PENETRATE)?max_length_:beam.GetMaxLength();
 		
 		for(beam.init();max_length_>0/*!beam.end()*/;beam++)
 		{
@@ -388,7 +382,9 @@ void BaseBomb(coord_def pos, textures* t_ , attack_infor& att_, unit* except_)
 				}
 			}
 		}
-		Sleep(300);
+		if(env[current_level].isInSight(pos)) {
+				Sleep(300);
+		}
 		env[current_level].ClearEffect();
 	}
 }
@@ -5256,6 +5252,133 @@ bool skill_allround_tanmac(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
+bool skill_throw_potion(int power, bool short_, unit* order, coord_def target)
+{
+	textures *t_ = img_fog_normal;
+	smoke_type smoke_ = SMT_FOG;
+	random_extraction<int> rand_potion;
+	attack_type bomb_type;
+
+	rand_potion.push(PT_POISON, 3);
+	rand_potion.push(PT_CONFUSE, 3);
+	rand_potion.push(PT_SLOW);
+	rand_potion.push(PT_DOWN_STAT, 2);
+	rand_potion.push(PT_PARALYSIS, 2);
+
+	switch(rand_potion.choice())
+	{
+	case PT_POISON:
+	default:
+		t_ = img_fog_poison;
+		smoke_ = SMT_POISON;
+		bomb_type = ATT_POISON_BLAST;
+		break;
+	case PT_CONFUSE:
+		t_ = img_fog_poison;
+		smoke_ = SMT_CONFUSE;
+		bomb_type = ATT_NORMAL_BLAST;
+		break;
+	case PT_SLOW:
+		t_ = img_fog_slow;
+		smoke_ = SMT_SLOW;
+		bomb_type = ATT_NORMAL_BLAST;
+		break;
+	case PT_DOWN_STAT:
+		t_ = img_fog_cold;
+		smoke_ = SMT_COLD;
+		bomb_type = ATT_COLD_BLAST;
+		break;
+	case PT_PARALYSIS:
+		t_ = img_fog_fire;
+		smoke_ = SMT_FIRE;
+		bomb_type = ATT_FIRE_BLAST;
+		break;
+	}
+
+	beam_iterator beam(order->position,order->position);
+	int length_ = ceil(sqrt(pow((float)abs(order->position.x-target.x),2)+pow((float)abs(order->position.y-target.y),2)));
+	length_ = min(length_,SpellLength(SPL_THROW_POTION, order->isplayer()));
+	if(CheckThrowPath(order->position,target,beam))
+	{
+		beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor(LOC_SYSTEM_ITEM_POTION_POTION));
+
+
+		for(int i=0;i<(order->GetParadox()?2:1);i++)
+		{
+			if(env[current_level].isInSight(order->position)) {
+				soundmanager.playSound("throw");
+			}
+			coord_def pos = throwtanmac(27,beam,temp_infor,NULL, false);
+			int damage_ = 1+power/25;
+			attack_infor temp_att(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),bomb_type,name_infor(LOC_SYSTEM_ITEM_POTION_POTION));
+			
+			if (env[current_level].isInSight(order->position)) {
+				soundmanager.playSound("bomb");
+			}
+			BaseBomb(pos, t_,temp_att, nullptr);
+			for(int i=-1;i<=1;i++) {
+				for(int j=-1;j<=1;j++) {
+					env[current_level].MakeSmoke(coord_def(pos.x+i,pos.y+j),t_,smoke_,rand_int(3+power/16,10+power/16),0,&you, true);		
+				}
+			}
+		}
+		order->SetParadox(0); 
+		return true;
+	}
+	return false;
+}
+
+bool skill_throw_rabbit(int pow, bool short_, unit* order, coord_def target)
+{
+	if(order->isplayer())
+		return false;
+	rand_rect_iterator rect_(order->position, 1, 1, true);
+	monster* throwing_ = nullptr;
+	while(!rect_.end()) {
+		if(target != *rect_) {
+			unit* unit_ = env[current_level].isMonsterPos(rect_->x, rect_->y, &you, NULL);
+			if(unit_ && unit_->isLive() && unit_->isRabbit() && unit_->GetId() != MON_RABIT_GIANT) {
+				throwing_ = (monster*)unit_;
+				break;
+			}
+		}
+		rect_++;
+	}
+
+	beam_iterator beam(order->position,target);
+	if(CheckThrowPath(order->position,target,beam))
+	{
+		int damage_ = 6 + pow/15;
+		beam_infor temp_infor(randC(3,damage_),3*damage_,18,order,order->GetParentType(),SpellLength(SPL_THROW_RABBIT, order->isplayer()),1,BMT_PENETRATE,ATT_THROW_NORMAL,*throwing_->GetName());
+		if(short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+		
+		if (env[current_level].isInSight(order->position)) {
+			soundmanager.playSound("shoot_heavy");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_SPELL_THROW,false,false,false,CL_magic,
+				PlaceHolderHelper(order->GetName()->getName()),
+				PlaceHolderHelper(throwing_->GetName()->getName()));
+		}
+
+		coord_def final_ = throwtanmac(throwing_->image,beam,temp_infor,NULL);
+
+		dif_rect_iterator rit(final_,3);
+
+		for(;!rit.end();rit++)
+		{
+			if(!env[current_level].isMove(rit->x, rit->y))
+				continue; //움직일수없는 위치	
+			if(env[current_level].isMonsterPos(rit->x,rit->y)) 
+				continue; //이미 몬스터가 있는 위치
+
+			throwing_->SetXY(*rit);
+			throwing_->PlusTimeDelay(-throwing_->GetSpeed());
+			break;
+		}
+		return true;
+	}
+	return false;
+}
 
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
@@ -5768,8 +5891,8 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_HASTE_OTHER, 30));
 		break;
 	case MON_RABIT_MAGIC:
-		list->push_back(spell(SPL_FROST, 25));
-		list->push_back(spell(SPL_ICE_BOLT, 20));
+		list->push_back(spell(SPL_FROST, 20));
+		list->push_back(spell(SPL_ICE_BOLT, 25));
 		list->push_back(spell(SPL_BLINK, 30));
 		break;
 	case MON_RAIJUU:
@@ -6158,6 +6281,12 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_SANNYO:
 		list->push_back(spell(SPL_SMOKING, 30));
 		break;
+	case MON_RABIT_ALCHEMIST:
+		list->push_back(spell(SPL_THROW_POTION, 33));
+		break;
+	case MON_RABIT_GIANT:
+		list->push_back(spell(SPL_THROW_RABBIT, 35));
+		break;
 	default:
 		break;
 	}
@@ -6508,6 +6637,10 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_homing_tanmac(power, short_, order, target);
 	case SPL_ALLROUND_TANMAC:
 		return skill_allround_tanmac(power, short_, order, target);
+	case SPL_THROW_POTION:
+		return skill_throw_potion(power, short_, order, target);
+	case SPL_THROW_RABBIT:
+		return skill_throw_rabbit(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -7030,6 +7163,10 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_homing_tanmac(power, short_, &you, target);
 	case SPL_ALLROUND_TANMAC:
 		return skill_allround_tanmac(power, short_, &you, target);
+	case SPL_THROW_POTION:
+		return skill_throw_potion(power, short_, &you, target);
+	case SPL_THROW_RABBIT:
+		return skill_throw_rabbit(power, short_, &you, target);
 	default:
 		return false;
 	}

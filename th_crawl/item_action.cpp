@@ -490,7 +490,7 @@ void iteminfor_discard()
 	changedisplay(DT_GAME);
 }
 
-void fast_discard()
+void fast_discard(int delete_id, int delete_num)
 {	
 	if(you.s_lunatic)
 	{
@@ -501,16 +501,15 @@ void fast_discard()
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GHOST_PENALTY_DISCRAD), true, false, false, CL_normal);
 		return;
 	}
-	if(!you.final_item)
+	if(!delete_id)
 		return;
 	for(list<item>::iterator it = you.item_list.begin();it != you.item_list.end();it++)
 	{
-		if(it->id == you.final_item)
+		if(it->id == delete_id)
 		{
 			if(you.possibleunequip(it))
 			{
-				discard(it,you.final_num);
-				you.final_item = 0;
+				discard(it,delete_num);
 			}
 			you.SetPrevAction('D');
 			return;

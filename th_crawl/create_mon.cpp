@@ -198,6 +198,7 @@ mon_group normal_group[] = //일반몹 그룹
 
 	//영원정
 	{ 95,  EIENTEI_LEVEL,  EIENTEI_LEVEL, 10,  3}, //토끼들
+	{ 106, EIENTEI_LEVEL,  EIENTEI_LEVEL, 2,  3}, //토끼 거인
 
 
 
@@ -979,7 +980,7 @@ void create_id_to_mon(int id, int level, int strong)
 		break;
 	case 95:
 		for(int rand_ =rand_int(2,4), i=0;i<rand_;i++)
-			index.push_back(pair<monster_index, int>(randA(4)?MON_RABIT_SPEAR:randA(1)?MON_RABIT_MAGIC:MON_RABIT_BOMB, strong));
+			index.push_back(pair<monster_index, int>(randA(4)?MON_RABIT_SPEAR:randA(1)?MON_RABIT_MAGIC:MON_RABIT_ALCHEMIST, strong));
 		if(randA(3)==0)
 		{
 			index.push_back(pair<monster_index, int>(MON_RABIT_SUPPORT, strong));
@@ -1019,6 +1020,14 @@ void create_id_to_mon(int id, int level, int strong)
 		break;
 	case 104:
 		index.push_back(pair<monster_index, int>(MON_SECURITY_MAID_FIARY, strong));
+		break;
+	case 105:
+		index.push_back(pair<monster_index, int>(MON_RABIT_ALCHEMIST, strong));
+		break;
+	case 106:
+		for(int rand_ =rand_int(4,6), i=0;i<rand_;i++)
+			index.push_back(pair<monster_index, int>(randA(4)?MON_RABIT_SPEAR:randA(1)?MON_RABIT_MAGIC:MON_RABIT_BOMB, strong));
+		index.push_back(pair<monster_index, int>(MON_RABIT_GIANT, strong));
 		break;
 	}
 
@@ -2217,6 +2226,10 @@ void SetResistMonster(monster* mon)
 		mon->poison_resist = 1;
 		mon->confuse_resist = 1;
 		break;
+	case MON_RABIT_ALCHEMIST:
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
 	}
 }
 
@@ -2390,13 +2403,16 @@ int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 		rand_.push(MON_RABIT_SUPPORT, middle(power_));
 		rand_.push(MON_RABIT_MAGIC, middle(power_));
 		rand_.push(MON_RABIT_BOMB, strong(power_));
+		rand_.push(MON_RABIT_ALCHEMIST, strong(power_));
 	}
 	else if (level_ >= EIENTEI_LEVEL && level_ <= EIENTEI_LEVEL + MAX_EIENTEI_LEVEL) {
 		rand_.push(MON_RABIT_SPEAR, weak(power_));
 		rand_.push(MON_RABIT_SPEAR, middle(power_));
 		rand_.push(MON_RABIT_SUPPORT, middle(power_));
 		rand_.push(MON_RABIT_MAGIC, middle(power_));
-		rand_.push(MON_RABIT_BOMB, strong(power_));
+		rand_.push(MON_RABIT_BOMB, middle(power_));
+		rand_.push(MON_RABIT_ALCHEMIST, strong(power_));
+		rand_.push(MON_RABIT_GIANT, strong(power_));
 	}
 	else if (level_ >= SUBTERRANEAN_LEVEL && level_ <= SUBTERRANEAN_LEVEL + MAX_SUBTERRANEAN_LEVEL) {
 		rand_.push(MON_HELL_CROW, weak(power_));

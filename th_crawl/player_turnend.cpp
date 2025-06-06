@@ -1354,7 +1354,7 @@ void GameOver()
 	printlog("------------" + LocalzationManager::locString(LOC_SYSTEM_MORE) + "------------",true,false,false,CL_normal);
 
 	deadlog();
-	string dump_;
+	wstring dump_;
 	bool dump_ok = false;
 
 	if(isNormalGame() || isSprint())
@@ -1398,8 +1398,7 @@ void GameOver()
 		if(dump_ok)
 		{
 			FILE *fp;
-			std::wstring wfilename = ConvertUTF8ToUTF16(dump_);
-			if(_wfopen_s(&fp, wfilename.c_str(), L"rt") == 0 && fp)
+			if(_wfopen_s(&fp, dump_.c_str(), L"rt") == 0 && fp)
 			{
 				char temp[256];
 			
@@ -1409,10 +1408,18 @@ void GameOver()
 				changedisplay(DT_SUB_TEXT);
 				for(int i=0;i<26;i++)
 				{
-					fgets(temp,256,fp);
-					//fscanf(fp,"%s",temp);				
-					printsub(temp,true,CL_normal);
-				}			
+					if (fgets(temp, 256, fp))
+					{
+						// 첫 줄에서 UTF-8 BOM 제거
+						if (i == 0 && (unsigned char)temp[0] == 0xEF && (unsigned char)temp[1] == 0xBB && (unsigned char)temp[2] == 0xBF)
+						{
+							// temp[0]~[2]를 지우고 앞당김
+							memmove(temp, temp + 3, strlen(temp + 3) + 1);
+						}
+
+						printsub(temp, true, CL_normal);
+					}
+				}
 				printsub("",true,CL_magic);
 				if(you.dead_reason == DR_ESCAPE && you.haveOrb())
 				{

@@ -1013,6 +1013,10 @@ textures img_mons_wolf_spirit(&texture_monster02, 49, 255);
 textures img_mons_eagle_spirit(&texture_monster02, 50, 255);
 textures img_mons_otter_spirit(&texture_monster02, 51, 255);
 
+textures img_mons_rabbit_giant(&texture_monster02, 53, 255);
+textures img_mons_rabbit_alchemist(&texture_monster02, 54, 255);
+
+
 textures img_mons_haniwa_equipments[] =
 {
 	textures(&texture_monster02, 29, 255), //칼 (R)
@@ -3555,6 +3559,10 @@ int texturetoint(textures* input)
 		input == &img_tanmac_homing[5]||input == &img_tanmac_homing[6] ||
 		input == &img_tanmac_homing[7])
 		return 554;
+	else if(input == &img_mons_rabbit_giant)
+		return 555;
+	else if(input == &img_mons_rabbit_alchemist)
+		return 556;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -4691,6 +4699,10 @@ textures* inttotexture(int input)
 		return &img_tanmac_missle[1];
 	case 554:
 		return &img_tanmac_homing[1];
+	case 555:
+		return &img_mons_rabbit_giant;
+	case 556:
+		return &img_mons_rabbit_alchemist;
 	default:
 		return &img_mons_default;
 	}

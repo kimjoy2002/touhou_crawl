@@ -78,92 +78,24 @@ void saveandexit()
 void saveReplay_cpp();
 void saveandcheckexit()
 {
-	while(1)
-	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_SAVE_QUIT_YN),false,false,false,CL_help);
-		printlog(" (",false,false,false,CL_help);
-		printlog("Y",false,false,false,CL_help, 'Y');
-		printlog("/",false,false,false,CL_help);
-		printlog("N",false,false,false,CL_help, 'N');
-		printlog(") ",false,false,false,CL_help);
-		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-		
-		InputedKey inputedKey;
-		switch(waitkeyinput(inputedKey))
-		{
-		case 'Y':
-    	case GVK_BUTTON_A_LONG:
-			enterlog();	
-			if(!ReplayClass.ReplayMode()) {
-				saveReplay_cpp();
-				game_over = true;
-			}
-			endSelection();
-			return;
-		case -1:
-			if(inputedKey.isRightClick()) {
-				//ESC PASSTHORUGH
-			}
-			else {
-				break;
-			}
-		case 'N':
-		case VK_ESCAPE:
-		case GVK_BUTTON_B:
-		case GVK_BUTTON_B_LONG:
-			printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE_QUIT),true,false,false,CL_help);
-			endSelection();
-			return;
-		default:
-			enterlog();
-			printlog(LocalzationManager::locString(LOC_SYSTEM_PLEASE_SELECT_YN),true,false,false,CL_help);
-			break;
+	if(ynPrompt(LOC_SYSTEM_SAVE_QUIT_YN, LOC_SYSTEM_CANCLE_QUIT, CL_help, false,true,true,false)) {
+		enterlog();	
+		if(!ReplayClass.ReplayMode()) {
+			saveReplay_cpp();
+			game_over = true;
 		}
+	} else {
+		return;
 	}
-
 }
 void nosaveandexit()
 {	
-	while(1)
-	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_NONSAVE_QUIT_YN),false,false,false,CL_help);
-		printlog(" (",false,false,false,CL_help);
-		printlog("Y",false,false,false,CL_help, 'Y');
-		printlog("/",false,false,false,CL_help);
-		printlog("N",false,false,false,CL_help, 'N');
-		printlog(") ",false,false,false,CL_help);
-		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-		InputedKey inputedKey;
-		switch(waitkeyinput(inputedKey))
-		{
-		case 'Y':
-    	case GVK_BUTTON_A_LONG:
-			enterlog();
-			you.dead_reason = DR_QUIT;
-			GameOver();
-			endSelection();
-			//delete_file();
-			//PostQuitMessage(0);
-			return;			
-		case -1:
-			if(inputedKey.isRightClick()) {
-				//ESC PASSTHORUGH
-			}
-			else {
-				break;
-			}
-		case 'N':
-		case VK_ESCAPE:
-		case GVK_BUTTON_B:
-		case GVK_BUTTON_B_LONG:
-			printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE_QUIT),true,false,false,CL_help);
-			endSelection();
-			return;
-		default:
-			enterlog();
-			printlog(LocalzationManager::locString(LOC_SYSTEM_PLEASE_SELECT_YN),true,false,false,CL_help);
-			break;
-		}
+	if(ynPrompt(LOC_SYSTEM_NONSAVE_QUIT_YN, LOC_SYSTEM_CANCLE_QUIT, CL_help, false,true,true,false)) {
+		enterlog();
+		you.dead_reason = DR_QUIT;
+		GameOver();
+	} else {
+		return;
 	}
 }
 bool load_data(const std::wstring& path)

@@ -283,55 +283,15 @@ void memorize_action(int spell_)
 	if(spell_ == SPL_NONE)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_NON_EXIST),true,false,false,CL_normal);
 	else
-	{		
-		bool ok_ = true;
-		while(ok_)
-		{
-			printlog(SpellString((spell_list)spell_),false,false,false,CL_normal);
-			printlog(" " + LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_ASK),false,false,false,CL_help);
-			printlog(" (",false,false,false,CL_help);
-			printlog("y",false,false,false,CL_help, 'y');
-			printlog("/",false,false,false,CL_help);
-			printlog("n",false,false,false,CL_help, 'n');
-			printlog(") ",false,false,false,CL_help);
-			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-			ostringstream ss;
-			ss << " [" <<  LocalzationManager::locString(LOC_SYSTEM_FAILURE_RATE) << ": " << (100-you.GetSpellSuccess(spell_)) << "% " << 
-				LocalzationManager::locString(LOC_SYSTEM_REMAIN_SPELLPOINT) << ": " << you.remainSpellPoiont << "]"; 
-			
-			printlog(ss.str(),true,false,false,CL_warning);
-			InputedKey inputedKey;
-			int key_ = waitkeyinput(inputedKey);
-			switch(key_)
-			{
-			case 'Y':
-			case 'y':
-			case GVK_BUTTON_A:
-			case GVK_BUTTON_A_LONG:
-				you.Memorize(spell_);
-				endSelection();
-				ok_ = false;
-				break;
-			case -1:
-				if(inputedKey.isRightClick()) {
-					//ESC PASSTHORUGH
-				}
-				else {
-					break;
-				}
-			case 'N':
-			case 'n':
-			case VK_ESCAPE:
-			case GVK_BUTTON_B:
-			case GVK_BUTTON_B_LONG:
-				endSelection();
-				printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE),true,false,false,CL_help);
-				ok_ = false;
-				break;
-			default:
-				printlog(LocalzationManager::locString(LOC_SYSTEM_PLEASE_SELECT_YN),true,false,false,CL_help);
-				break;
-			}
+	{
+		printlog(SpellString((spell_list)spell_) + " ",false,false,false,CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_ASK),false,false,false,CL_help);
+		ostringstream ss;
+		ss << " [" <<  LocalzationManager::locString(LOC_SYSTEM_FAILURE_RATE) << ": " << (100-you.GetSpellSuccess(spell_)) << "% " << 
+			LocalzationManager::locString(LOC_SYSTEM_REMAIN_SPELLPOINT) << ": " << you.remainSpellPoiont << "] "; 
+		printlog(ss.str(),false,false,false,CL_warning);
+		if(ynPrompt(LOC_EMPTYSTRING, LOC_SYSTEM_DO_CANCLE, CL_help, false,false,true,false)) {
+			you.Memorize(spell_);
 		}
 	}
 	return;

@@ -262,6 +262,7 @@ int WINAPI WinMain(HINSTANCE hinstance,
 	steam_mg.steamInit();
 	init_save_paths();
 	init_localization();
+	joypadUtil::initJoypad();
 	//random_number = (unsigned int)time(NULL);
 	if(!d3d::InitD3D11(hinstance,
 		option_mg.getWidth(), option_mg.getHeight(), !option_mg.getFullscreen()))

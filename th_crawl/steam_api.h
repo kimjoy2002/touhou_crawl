@@ -11,6 +11,7 @@
 
 #include <string>
 #include <list>
+#include "joypad.h"
 
 using namespace std;
 
@@ -35,6 +36,7 @@ public:
 	void setCurrentMainMenuInfo();
 	void setCurrentInfo(string tribe, string job, string charname, int level, string which);
 	string getSteamLang();
+	GamepadType getCurrentGamepadType();
 	void achievement(achievement_enum achievement);
 	
 	void debugText();

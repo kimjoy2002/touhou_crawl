@@ -447,8 +447,13 @@ void charter_selete(bool first)
 		deque<monster*> dq;
 		env[current_level].EnterMap(0,dq);	
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL_START1),true,false,false,CL_warning);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL_START2),true,false,false,CL_warning);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL_START3),true,false,false,CL_warning);
+		if(joypadUtil::usingPad) {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL_START2_PAD, PlaceHolderHelper(joypadUtil::get("Y",GVK_BUTTON_Y))),true,false,false,CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL_START3_PAD),true,false,false,CL_warning);
+		} else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL_START2),true,false,false,CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL_START3),true,false,false,CL_warning);
+		}
 		steam_mg.setCurrentInfo();
 	}
 	else if(map_list.tutorial == GM_SPRINT1_AREANA)

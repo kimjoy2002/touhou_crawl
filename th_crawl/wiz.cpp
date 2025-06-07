@@ -60,32 +60,11 @@ void wiz_mode()
 
 	if(wiz_list.wizard_mode != 1)
 	{
-
-		
 		printlog("#### " + LocalzationManager::locString(LOC_SYSTEM_DEBUG_WARN) +" ### ",true,false,false,CL_danger);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_WARN_YN),false,false,false,CL_danger);
-		printlog(" (",false,false,false,CL_danger);
-		printlog("Y",false,false,false,CL_danger, 'Y');
-		printlog("/",false,false,false,CL_danger);
-		printlog("N",false,false,false,CL_danger, 'N');
-		printlog(") ",false,false,false,CL_danger);
-		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-
-		
-		int key_ = waitkeyinput();
-		switch(key_)
-		{
-		case 'Y':
-    	case GVK_BUTTON_A_LONG:
-			enterlog();
-			endSelection();
-			break;
-		default:
-			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_WIZARD_CANCLE),true,false,false,CL_help);
-			endSelection();
+		if(!ynPrompt(LOC_SYSTEM_DEBUG_WARN_YN, LOC_SYSTEM_DEBUG_WIZARD_CANCLE, CL_danger, false,true,false, false)) {
 			return;
 		}
-
+		enterlog();
 	}
 
 

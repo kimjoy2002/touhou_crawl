@@ -2904,34 +2904,9 @@ bool skill_controled_blink(int pow, bool short_, unit* order, coord_def target)
 	if(!order->Tele_check(true, true))
 		return false;	
 	if (current_level == ZIGURRAT_LEVEL) {
-		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CBLINK_NOT_CONTROL), false, true, false, CL_small_danger);
-		printlog(" (",false,true,false,CL_small_danger);
-		printlog("y",false,true,false,CL_small_danger, 'y');
-		printlog("/",false,true,false,CL_small_danger);
-		printlog("n",false,true,false,CL_small_danger, 'n');
-		printlog(") ",false,true,false,CL_small_danger);
-		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-
-		InputedKey inputedKey;
-		switch (waitkeyinput(inputedKey))
-		{
-		case 'Y':
-		case 'y':
-    	case GVK_BUTTON_A:
-    	case GVK_BUTTON_A_LONG:
-			break;			
-		case -1:
-		default:
-		case 'N':
-		case 'n':
-		case VK_ESCAPE:
-		case GVK_BUTTON_B:
-		case GVK_BUTTON_B_LONG:
-			printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, true, false, CL_normal);
-			endSelection();
+		if(!ynPrompt(LOC_SYSTEM_SPELL_CBLINK_NOT_CONTROL,LOC_SYSTEM_DO_CANCLE, CL_small_danger, false,false,false,true)) {
 			return false;
 		}
-		endSelection();
 		you.Blink(25);
 		return true;
 	}
@@ -6650,26 +6625,7 @@ bool CheckDangerSpell(int danger_)
 {	
 	if(danger_>=3)
 	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_TOO_DANGEROURS),false,false,false,CL_danger);
-		printlog(" (",false,false,false,CL_danger);
-		printlog("y",false,false,false,CL_danger, 'y');
-		printlog("/",false,false,false,CL_danger);
-		printlog("n",false,false,false,CL_danger, 'n');
-		printlog(") ",false,false,false,CL_danger);
-		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-		switch(waitkeyinput())
-		{
-		case 'Y':
-		case 'y':
-    	case GVK_BUTTON_A:
-    	case GVK_BUTTON_A_LONG:
-			enterlog();
-			endSelection();
-			break;
-		case 'N':
-		default:
-			printlog(LocalzationManager::locString(LOC_SYSTEM_WISDOM),true,false,false,CL_normal);
-			endSelection();
+		if(!ynPrompt(LOC_SYSTEM_SPELL_TOO_DANGEROURS,LOC_SYSTEM_WISDOM, CL_danger, false,false,false,false)) {
 			return false;
 		}
 	}
@@ -6756,29 +6712,10 @@ bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite
 
 		if(warning_)
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_SELF_HURT),false,false,false,CL_danger);
-			printlog(" (",false,false,false,CL_danger);
-			printlog("y",false,false,false,CL_danger, 'y');
-			printlog("/",false,false,false,CL_danger);
-			printlog("n",false,false,false,CL_danger, 'n');
-			printlog(") ",false,false,false,CL_danger);
-			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-			switch(waitkeyinput())
-			{
-			case 'Y':
-			case 'y':
-    		case GVK_BUTTON_A:
-    		case GVK_BUTTON_A_LONG:
-				enterlog();
-				endSelection();
-				break;
-			case 'N':
-			default:
-				printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE),true,false,false,CL_normal);
-				endSelection();
+			if(!ynPrompt(LOC_SYSTEM_SPELL_SELF_HURT, LOC_SYSTEM_DO_CANCLE, CL_danger, false,false,false, false)) {
 				return false;
 			}
-
+			enterlog();
 		}
 	}
 

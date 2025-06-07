@@ -581,30 +581,12 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 			return false;
 		}
 		
-		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_YN,false,false,true,CL_help,
-			PlaceHolderHelper(you.equipment[ET_ARMOR]->name.getName()));
-		printlog(" (",false,false,true,CL_help);
-		printlog("y",false,false,true,CL_help, 'y');
-		printlog("/",false,false,true,CL_help);
-		printlog("n",false,false,true,CL_help, 'n');
-		printlog(") ",false,false,true,CL_help);
-		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-		
-		
-		switch(waitkeyinput())
-		{
-		case 'Y':
-		case 'y':
-    	case GVK_BUTTON_A:
-    	case GVK_BUTTON_A_LONG:
-			break;
-		default:
-			printlog(LocalzationManager::locString(LOC_SYSTEM_BE_PRUDENT),true,false,false,CL_help);
-			endSelection();
+
+		if(!ynPrompt(LocalzationManager::formatString(LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_YN, PlaceHolderHelper(you.equipment[ET_ARMOR]->name.getName())),
+			LocalzationManager::locString(LOC_SYSTEM_BE_PRUDENT), CL_help, true,false,false,false)) {
 			return false;
 		}
-		endSelection();
-		
+
 		equipArmour((armour_kind)you.equipment[ET_ARMOR]->value5, -1);
 
 		you.equipment[ET_ARMOR]->value5=AMK_AUTUMN;
@@ -1502,32 +1484,13 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 		sample_dimention = true;
 
 	
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_DIMENSION_YN),false,false,false,CL_danger);
-		printlog(" (",false,false,false,CL_danger);
-		printlog("y",false,false,false,CL_danger, 'y');
-		printlog("/",false,false,false,CL_danger);
-		printlog("n",false,false,false,CL_danger, 'n');
-		printlog(") ",false,false,false,CL_danger);
-		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-		switch(waitkeyinput())
-		{
-		case 'Y':
-		case 'y':
-    	case GVK_BUTTON_A:
-    	case GVK_BUTTON_A_LONG:
-			enterlog();
-			endSelection();
-			break;
-		case 'N':
-		default:
-			printlog(LocalzationManager::locString(LOC_SYSTEM_BE_PRUDENT),true,false,false,CL_normal);
+
+		if(!ynPrompt(LOC_SYSTEM_GOD_YUKARI_DIMENSION_YN, LOC_SYSTEM_BE_PRUDENT, CL_danger, false,false,false,false)) {
 			widesearch = false;
 			you.search = false;
 			sample_dimention = false;
-			endSelection();
 			return false;
 		}
-
 
 		widesearch = false;
 		you.search = false;
@@ -2186,28 +2149,10 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 }
 bool sizuha_autumn_bread(int pow, bool short_, unit* order, coord_def target)
 {
-	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND_YN),false,false,false,CL_danger);
-	printlog(" (",false,false,false,CL_danger);
-	printlog("y",false,false,false,CL_danger, 'y');
-	printlog("/",false,false,false,CL_danger);
-	printlog("n",false,false,false,CL_danger, 'n');
-	printlog(") ",false,false,false,CL_danger);
-	startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-	switch(waitkeyinput())
-	{
-	case 'Y':
-	case 'y':
-    case GVK_BUTTON_A:
-    case GVK_BUTTON_A_LONG:
-		enterlog();
-		endSelection();
-		break;
-	case 'N':
-	default:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE_EX),true,false,false,CL_normal);
-		endSelection();
+	if(!ynPrompt(LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND_YN, LOC_SYSTEM_CANCLE_EX, CL_danger, false,false,false,false)) {
 		return false;
 	}
+	enterlog();
 
 	if(you.equipment[ET_WEAPON]  && (you.equipment[ET_WEAPON]->type>=ITM_WEAPON_FIRST && you.equipment[ET_WEAPON]->type<ITM_WEAPON_LAST) && !you.equipment[ET_WEAPON]->isArtifact())
 	{
@@ -2231,28 +2176,10 @@ bool sizuha_autumn_bread(int pow, bool short_, unit* order, coord_def target)
 }
 bool hina_curse_bread(int pow, bool short_, unit* order, coord_def target)
 {
-	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_CURSE_BRAND_YN),false,false,false,CL_danger);
-	printlog(" (",false,false,false,CL_danger);
-	printlog("y",false,false,false,CL_danger, 'y');
-	printlog("/",false,false,false,CL_danger);
-	printlog("n",false,false,false,CL_danger, 'n');
-	printlog(") ",false,false,false,CL_danger);
-	startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-	switch(waitkeyinput())
-	{
-	case 'Y':
-	case 'y':
-	case GVK_BUTTON_A:
-	case GVK_BUTTON_A_LONG:
-		enterlog();
-		endSelection();
-		break;
-	case 'N':
-	default:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE_EX),true,false,false,CL_normal);
-		endSelection();
+	if(!ynPrompt(LOC_SYSTEM_GOD_HINA_CURSE_BRAND_YN, LOC_SYSTEM_CANCLE_EX, CL_danger, false,false,false,false)) {
 		return false;
 	}
+	enterlog();
 
 	if(you.equipment[ET_WEAPON]  && (you.equipment[ET_WEAPON]->type>=ITM_WEAPON_FIRST && you.equipment[ET_WEAPON]->type<ITM_WEAPON_LAST) && !you.equipment[ET_WEAPON]->isArtifact())
 	{
@@ -2441,31 +2368,16 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 	bool junko_ = you.god_value[GT_JUNKO][3] != 0 && you.god == GT_JUNKO;
 	for (int i = 0; i < (junko_ ? 2 : 1); i++)
 	{
+		LOCALIZATION_ENUM_KEY key_ = LOC_SYSTEM_GOD_ABANDON_ASK;
 		if (i == 1)
-			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_ABANDON_ASK_PURIFICATION), false, false, false, CL_danger);
+			key_ = LOC_SYSTEM_GOD_ABANDON_ASK_PURIFICATION;
 		else if (sanae_)
-			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_ABANDON_ASK_SANAE), false, false, false, CL_danger);
-		else
-			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_ABANDON_ASK), false, false, false, CL_danger);
-		printlog(" (",false,false,false,CL_danger);
-		printlog("Y",false,false,false,CL_danger, 'Y');
-		printlog("/",false,false,false,CL_danger);
-		printlog("N",false,false,false,CL_danger, 'N');
-		printlog(") ",false,false,false,CL_danger);
-		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-		switch (waitkeyinput())
-		{
-		case 'Y':
-    	case GVK_BUTTON_A_LONG:
-			enterlog();
-			endSelection();
-			break;
-		case 'N':
-		default:
-			printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE_EX), true, false, false, CL_normal);
-			endSelection();
+			key_ = LOC_SYSTEM_GOD_ABANDON_ASK_SANAE;
+
+		if(!ynPrompt(key_, LOC_SYSTEM_CANCLE_EX, CL_danger, false,true,false,false)) {
 			return false;
 		}
+		enterlog();
 	}
 
 	if(you.god != GT_NONE) {
@@ -2586,29 +2498,13 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 		printlog(seija_god_string(next_, 0), true, false, true, CL_help);
 		printlog(seija_god_string(next_, 1), true, false, true, CL_small_danger);
 		printlog(seija_god_string(next_, 2), true, false, true, CL_small_danger);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_YN),false,false, true,CL_help);
-		printlog(" (",false,false,true,CL_help);
-		printlog("y",false,false,true,CL_help, 'y');
-		printlog("/",false,false,true,CL_help);
-		printlog("n",false,false,true,CL_help, 'n');
-		printlog(") ",false,false,true,CL_help);
-		startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-		switch(waitkeyinput())
-		{
-		case 'Y':
-		case 'y':
-    	case GVK_BUTTON_A:
-    	case GVK_BUTTON_A_LONG:
-			loop_ = false;
-			endSelection();
-			break;
-		case 'N':
-		default:
-			loop_ = true;
-			endSelection();
-			break;
-		}
 
+
+		if(ynPrompt(LOC_SYSTEM_GOD_SEIJA_GIFT_YN, LOC_SYSTEM_CANCLE_EX, CL_help, true,false,false,false)) {
+			loop_ = false;
+		} else {
+			loop_ = true;
+		}
 	}
 
 	if(you.god_value[GT_SEIJA][1] & (1 << next_))
@@ -3544,31 +3440,12 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		case 'D':	
 		{
 			endSelection();
-			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_REALLY), false, false, false, CL_help);
-			printlog(" (",false,false,false,CL_help);
-			printlog("y",false,false,false,CL_help, 'y');
-			printlog("/",false,false,false,CL_help);
-			printlog("n",false,false,false,CL_help, 'n');
-			printlog(") ",false,false,false,CL_help);
-			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-			
-			switch (waitkeyinput(inputedKey))
-			{
-			case 'y':
-			case 'Y':
-    		case GVK_BUTTON_A:
-    		case GVK_BUTTON_A_LONG:
-				endSelection();
+			if(ynPrompt(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_REALLY, LOC_SYSTEM_DO_CANCLE, CL_help, false,false,false,false)) {
 				you.PietyUpDown(-(you.piety-140));
 				you.god_value[GT_JUNKO][0] = 0;
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_DELAY), true, false, false, CL_normal);
 				return true;
-			case -1:
-			case 'n':
-			case 'N':
-			default:
-				printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_normal);
-				endSelection();
+			} else {
 				return false;
 			}
 		}
@@ -3618,20 +3495,9 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 					}
 					else
 					{
-						printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_ASK,
-						PlaceHolderHelper(skill_string((skill_type)num)),PlaceHolderHelper(to_string(you.GetSkillLevel(num, false)))), false, false, true, CL_danger);
-						printlog(" (",false,false,true,CL_danger);
-						printlog("y",false,false,true,CL_danger, 'y');
-						printlog("/",false,false,true,CL_danger);
-						printlog("n",false,false,true,CL_danger, 'n');
-						printlog(") ",false,false,true,CL_danger);
-						startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-						changedisplay(DT_GAME);
-
-						int key__ = waitkeyinput(true);
-						endSelection();
-						if (key__ == 'y' || key__ == 'Y' || key__ == GVK_BUTTON_A || key__ == GVK_BUTTON_A_LONG)
-						{
+						if(ynPrompt(LocalzationManager::formatString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_ASK,
+							PlaceHolderHelper(skill_string((skill_type)num)),PlaceHolderHelper(to_string(you.GetSkillLevel(num, false)))),
+							"", CL_danger, true,false,false,false)) {
 							you.SetPureSkill(num);
 							printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_SUCCESS, PlaceHolderHelper(skill_string((skill_type)num))), true, false, false, CL_junko);
 							AddNote(you.turn, CurrentLevelString(), LocalzationManager::formatString(LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_SKILL,PlaceHolderHelper(skill_string((skill_type)num))), CL_junko);
@@ -3755,19 +3621,8 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 				{
 					if ((item_->type >= ITM_WEAPON_FIRST && item_->type < ITM_WEAPON_LAST) || (item_->type >= ITM_ARMOR_FIRST && item_->type < ITM_ARMOR_LAST))
 					{
-						printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_WARNING, PlaceHolderHelper(item_->GetName())), false, false, true, CL_small_danger);
-						printlog(" (",false,false,true,CL_small_danger);
-						printlog("y",false,false,true,CL_small_danger, 'y');
-						printlog("/",false,false,true,CL_small_danger);
-						printlog("n",false,false,true,CL_small_danger, 'n');
-						printlog(") ",false,false,true,CL_small_danger);
-						startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-						changedisplay(DT_GAME);
-
-						int key__ = waitkeyinput(true);
-						endSelection();
-						if (key__ == 'y' || key__ == 'Y' || key__ == GVK_BUTTON_A || key__ == GVK_BUTTON_A_LONG)
-						{
+						if(ynPrompt(LocalzationManager::formatString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_WARNING, PlaceHolderHelper(item_->GetName()))
+							,"", CL_small_danger, true,false,false,false)) {
 							printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM_FINISH, PlaceHolderHelper(item_->GetName())), true, false, false, CL_junko);
 							AddNote(you.turn, CurrentLevelString(), LocalzationManager::formatString(LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_ITEM, PlaceHolderHelper(item_->GetName())), CL_junko);
 

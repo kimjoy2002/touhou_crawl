@@ -621,34 +621,9 @@ bool blink_scroll(bool pre_iden_)
 	changedisplay(DT_GAME);
 	if (current_level == ZIGURRAT_LEVEL ) {
 		if (pre_iden_) {
-			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_ZIGURRAT), false, true, false, CL_small_danger);
-			printlog(" (",false,true,false,CL_small_danger);
-			printlog("y",false,true,false,CL_small_danger, 'y');
-			printlog("/",false,true,false,CL_small_danger);
-			printlog("n",false,true,false,CL_small_danger, 'n');
-			printlog(") ",false,true,false,CL_small_danger);
-			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-
-			InputedKey inputedKey;
-			switch (waitkeyinput(inputedKey))
-			{
-			case 'Y':
-			case 'y':
-			case GVK_BUTTON_A:
-			case GVK_BUTTON_A_LONG:
-				break;
-			case -1:
-			case 'N':
-			case 'n':
-			case VK_ESCAPE:
-			case GVK_BUTTON_B:
-			case GVK_BUTTON_B_LONG:
-			default:
-				printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, true, false, CL_normal);
-				endSelection();
+			if(!ynPrompt(LOC_SYSTEM_ITEM_SCROLL_BLINK_ZIGURRAT, LOC_SYSTEM_DO_CANCLE, CL_small_danger, false,false,false,true)) {
 				return false;
 			}
-			endSelection();
 		}
 		you.Blink(25);
 		return true;
@@ -763,42 +738,18 @@ bool blink_scroll(bool pre_iden_)
 		case VK_ESCAPE:	
 		case GVK_BUTTON_B:
 		case GVK_BUTTON_B_LONG:
-			if(pre_iden_){
-				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_ASK),false,true,false,CL_help);
-			}
-			else{
-				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_WASTE_ASK),false,true,false,CL_help);
-			}
-			printlog(" (",false,true,false,CL_help);
-			printlog("y",false,true,false,CL_help, 'y');
-			printlog("/",false,true,false,CL_help);
-			printlog("n",false,true,false,CL_help, 'n');
-			printlog(") ",false,true,false,CL_help);
-			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-			bool repeat_ = true;
-			while(repeat_)
+		default:
+			if(ynPrompt(pre_iden_?LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_ASK:LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_WASTE_ASK, LOC_EMPTYSTRING, CL_help, false,false,true, true)) 
 			{
-				switch(waitkeyinput())
-				{
-				case 'Y':
-				case 'y':
-				case GVK_BUTTON_A:
-				case GVK_BUTTON_A_LONG:
-					deletelog();
-					you.search = false;
-					endSelection();
-					if(pre_iden_){
-						return false;
-					}
-					else{
-						return true;
-					}
-				case 'N':
-				case 'n':
-					endSelection();
-					repeat_ = false;
-				default:
-					break;
+				deletelog();
+				enterlog();
+				you.search = false;
+				endSelection();
+				if(pre_iden_){
+					return false;
+				}
+				else{
+					return true;
 				}
 			}
 		}
@@ -1223,38 +1174,21 @@ bool amnesia_scroll(bool pre_iden_)
 				{				
 					
 					changedisplay(DT_GAME);
-					LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_AMNESIA_ASK,false,false,false,CL_help,
-						PlaceHolderHelper(SpellString(spell_)));
-					printlog(" (",false,false,false,CL_help);
-					printlog("y",false,false,false,CL_help, 'y');
-					printlog("/",false,false,false,CL_help);
-					printlog("n",false,false,false,CL_help, 'n');
-					printlog(") ",false,false,false,CL_help);
-					startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-					switch(waitkeyinput())
-					{
-					case 'Y':
-					case 'y':
-					case GVK_BUTTON_A:
-					case GVK_BUTTON_A_LONG:
-						{
-							endSelection();
-							changedisplay(DT_GAME);
-							WaitForSingleObject(mutx, INFINITE);
-							you.MemorizeSpell[num] = 0;
-							you.remainSpellPoiont+=SpellLevel(spell_);
-							you.currentSpellNum--;
-							ReleaseMutex(mutx);
-							LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_AMNESIA_SUCCESS,true,false,false,CL_normal,
-								PlaceHolderHelper(SpellString(spell_)));
-							return true;
-						}
-					case 'N':
-					default:
+
+					if(ynPrompt(LocalzationManager::formatString(LOC_SYSTEM_ITEM_SCROLL_AMNESIA_ASK, PlaceHolderHelper(SpellString(spell_))),
+						"", CL_help, false,false,false,false)) {
 						endSelection();
+						changedisplay(DT_GAME);
+						WaitForSingleObject(mutx, INFINITE);
+						you.MemorizeSpell[num] = 0;
+						you.remainSpellPoiont+=SpellLevel(spell_);
+						you.currentSpellNum--;
+						ReleaseMutex(mutx);
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_AMNESIA_SUCCESS,true,false,false,CL_normal,
+							PlaceHolderHelper(SpellString(spell_)));
+						return true;
+					} else {
 						view_spell(LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL);
-						//changedisplay(DT_SPELL);
-						break;
 					}
 				}
 			}

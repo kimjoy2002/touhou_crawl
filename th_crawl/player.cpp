@@ -1153,145 +1153,33 @@ int players::move(short_move x_mov, short_move y_mov)
 
 		if (env[current_level].isForbidZone(move_x_, move_y_) && !env[current_level].isForbidZone(you.position.x, you.position.y))
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_FORBIDZONE_YN), false, false, false, CL_danger);
-			printlog(" (",false,false,false,CL_danger);
-			printlog("y",false,false,false,CL_danger, 'y');
-			printlog("/",false,false,false,CL_danger);
-			printlog("n",false,false,false,CL_danger, 'n');
-			printlog(") ",false,false,false,CL_danger);
-			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-			bool loop_ = true;
 			you.SetInter(IT_MAP_DANGER);
-			while (loop_)
-			{
-				InputedKey inputedKey;
-				switch (waitkeyinput(inputedKey))
-				{
-				case 'Y':
-				case 'y':
-				case GVK_BUTTON_A:
-				case GVK_BUTTON_A_LONG:
-					loop_ = false;
-					enterlog();
-					endSelection();
-					break;
-				case -1:
-					if(inputedKey.isRightClick()) {
-						//ESC PASSTHORUGH
-					}
-					else {
-						break;
-					}
-				case 'N':
-				case 'n':
-				case VK_ESCAPE:
-				case GVK_BUTTON_B:
-				case GVK_BUTTON_B_LONG:
-					loop_ = false;
-					printlog(LocalzationManager::locString(LOC_SYSTEM_WELL_THINK), true, false, false, CL_normal);
-					endSelection();
-					return 0;
-				default:
-					break;
-				}
+			if(!ynPrompt(LOC_SYSTEM_FORBIDZONE_YN, LOC_SYSTEM_WELL_THINK, CL_danger, false,false,true,false)) {
+				return 0;
 			}
+			enterlog();
 		}
 		else if(env[current_level].isSmokePos(move_x_,move_y_))
 		{
 			smoke* temp_smoke = env[current_level].isSmokePos2(move_x_,move_y_);
 			if(hp<temp_smoke->danger(this))
-			{		
-				printlog(LocalzationManager::locString(LOC_SYSTEM_FORBIDZONE_YN),false,false,false,CL_danger);
-				printlog(" (",false,false,false,CL_danger);
-				printlog("y",false,false,false,CL_danger, 'y');
-				printlog("/",false,false,false,CL_danger);
-				printlog("n",false,false,false,CL_danger, 'n');
-				printlog(") ",false,false,false,CL_danger);
-				startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-				bool loop_ = true;
+			{
 				you.SetInter(IT_SMOKE);
-				while(loop_)
-				{
-					InputedKey inputedKey;
-					switch(waitkeyinput(inputedKey))
-					{
-					case 'Y':
-					case 'y':
-					case GVK_BUTTON_A:
-					case GVK_BUTTON_A_LONG:
-						loop_ = false;
-						enterlog();
-						endSelection();
-						break;						
-					case -1:
-						if(inputedKey.isRightClick()) {
-							//ESC PASSTHORUGH
-						}
-						else {
-							break;
-						}
-					case 'N':
-					case 'n':
-					case VK_ESCAPE:
-					case GVK_BUTTON_B:
-					case GVK_BUTTON_B_LONG:
-						loop_ = false;
-						printlog(LocalzationManager::locString(LOC_SYSTEM_DANGER_MSG),true,false,false,CL_normal);
-						endSelection();
-						return 0;
-					default:
-						break;
-					}
+				if(!ynPrompt(LOC_SYSTEM_FORBIDZONE_YN, LOC_SYSTEM_DANGER_MSG, CL_danger, false,false,true,false)) {
+					return 0;
 				}
+				enterlog();
 			}
 		}
 		else if(floor_effect* temp_floor = env[current_level].isFloorEffectPos(move_x_,move_y_))
 		{
 			if(hp<temp_floor->danger(this))
 			{
-				printlog(LocalzationManager::locString(LOC_SYSTEM_FORBIDZONE_YN),false,false,false,CL_danger);
-				printlog(" (",false,false,false,CL_danger);
-				printlog("y",false,false,false,CL_danger, 'y');
-				printlog("/",false,false,false,CL_danger);
-				printlog("n",false,false,false,CL_danger, 'n');
-				printlog(") ",false,false,false,CL_danger);
-				startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-				bool loop_ = true;
-				
 				you.SetInter(IT_SMOKE);
-				while(loop_)
-				{
-					InputedKey inputedKey;
-					switch(waitkeyinput(inputedKey))
-					{
-					case 'Y':
-					case 'y':
-					case GVK_BUTTON_A:
-					case GVK_BUTTON_A_LONG:
-						loop_ = false;
-						enterlog();
-						endSelection();
-						break;
-					case -1:
-						if(inputedKey.isRightClick()) {
-							//ESC PASSTHORUGH
-						}
-						else {
-							break;
-						}
-					case 'N':
-					case 'n':
-					case VK_ESCAPE:
-					case GVK_BUTTON_B:
-					case GVK_BUTTON_B_LONG:
-						loop_ = false;
-						printlog(LocalzationManager::locString(LOC_SYSTEM_DANGER_MSG),true,false,false,CL_normal);
-						endSelection();
-						return 0;
-					default:
-						break;
-					}
+				if(!ynPrompt(LOC_SYSTEM_FORBIDZONE_YN, LOC_SYSTEM_DANGER_MSG, CL_danger, false,false,true,false)) {
+					return 0;
 				}
+				enterlog();
 			}
 		}
 		if (env[current_level].isDoor(move_x_, move_y_))
@@ -1606,47 +1494,10 @@ int players::OpenDoor(const coord_def &c, bool no_turn)
 	{
 		if (env[current_level].isForbidZone(c.x, c.y) && !env[current_level].isForbidZone(you.position.x, you.position.y))
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_REALLY_OPEN_DOOR), false, false, false, CL_danger);
-			printlog(" (",false,false,false,CL_danger);
-			printlog("y",false,false,false,CL_danger, 'y');
-			printlog("/",false,false,false,CL_danger);
-			printlog("n",false,false,false,CL_danger, 'n');
-			printlog(") ",false,false,false,CL_danger);
-			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-			bool loop_ = true;
-			while (loop_)
-			{
-				InputedKey inputedKey;
-				switch (waitkeyinput(inputedKey))
-				{
-				case 'Y':
-				case 'y':
-				case GVK_BUTTON_A:
-				case GVK_BUTTON_A_LONG:
-					loop_ = false;
-					enterlog();
-					endSelection();
-					break;					
-				case -1:
-					if(inputedKey.isRightClick()) {
-						//ESC PASSTHORUGH
-					}
-					else {
-						break;
-					}
-				case 'N':
-				case 'n':
-				case VK_ESCAPE:
-				case GVK_BUTTON_B:
-				case GVK_BUTTON_B_LONG:
-					loop_ = false;
-					printlog(LocalzationManager::locString(LOC_SYSTEM_WELL_THINK), true, false, false, CL_normal);
-					endSelection();
-					return -1;
-				default:
-					break;
-				}
+			if(!ynPrompt(LOC_SYSTEM_REALLY_OPEN_DOOR, LOC_SYSTEM_WELL_THINK, CL_danger, false,false,true,false)) {
+				return -1;
 			}
+			enterlog();
 		}
 
 		if(env[current_level].OpenDoor(c.x,c.y))
@@ -2191,23 +2042,8 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		else if(wiz_list.wizard_mode == 1)
 		{
 			MoreWait();
-			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_REVIVE_YN),false,false,false,CL_help);
-			printlog(" (",false,false,false,CL_help);
-			printlog("Y",false,false,false,CL_help, 'Y');
-			printlog("/",false,false,false,CL_help);
-			printlog("N",false,false,false,CL_help, 'N');
-			printlog(") ",false,false,false,CL_help);
-			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-			int key_ = waitkeyinput();
-			endSelection();
-			switch(key_)
-			{
-			case 'Y':
-    		case GVK_BUTTON_A_LONG:
-				break;
-			default:
+			if(!ynPrompt(LOC_SYSTEM_DEBUG_REVIVE_YN, LOC_EMPTYSTRING, CL_danger, false,true,false,false)) {
 				hp = max_hp;
-				break;
 			}
 		}
 		if(hp<=0)
@@ -4134,32 +3970,13 @@ bool players::Tele_check(bool preiden_, bool ctele_)
 		else
 		{
 			changedisplay(DT_GAME);
-			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_TELEPORT_YN),false,false,false,CL_danger);
-			printlog(" (",false,false,false,CL_danger);
-			printlog("y",false,false,false,CL_danger, 'y');
-			printlog("/",false,false,false,CL_danger);
-			printlog("n",false,false,false,CL_danger, 'n');
-			printlog(") ",false,false,false,CL_danger);
-			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-			switch(waitkeyinput())
-			{
-			case 'Y':
-			case 'y':
-			case GVK_BUTTON_A:
-			case GVK_BUTTON_A_LONG:
+			if(ynPrompt(LOC_SYSTEM_GOD_YUKARI_TELEPORT_YN, LOC_SYSTEM_DO_CANCLE, CL_danger, false,false,false,false)) {
 				enterlog();
-				endSelection();
 				if(you.god == GT_YUKARI)
 				{
 					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_MAGIC_RAGE),true,false,false,CL_small_danger);
 					you.PietyUpDown(-5);
 				}
-				break;
-			case 'N':
-			default:
-				printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE),true,false,false,CL_normal);
-				endSelection();
-				return false;
 			}
 		}
 	}
@@ -6153,33 +5970,8 @@ bool players::unequip(equip_type type_, bool force_)
 
 		if (!force_ && type_ == ET_NECK && getAmuletPercent() > 0)
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_UNEQUIP_AMULET_YN), false, false, false, CL_small_danger);
-			printlog(" (",false,false,false,CL_small_danger);
-			printlog("y",false,false,false,CL_small_danger, 'y');
-			printlog("/",false,false,false,CL_small_danger);
-			printlog("n",false,false,false,CL_small_danger, 'n');
-			printlog(") ",false,false,false,CL_small_danger);
-			startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
-			bool repeat_ = true;
-			while (repeat_)
-			{
-				switch (waitkeyinput())
-				{
-				case 'Y':
-				case 'y':
-				case GVK_BUTTON_A:
-				case GVK_BUTTON_A_LONG:
-					repeat_ = false;
-					endSelection();
-					break;
-				case 'N':
-				case 'n':
-					printlog(LocalzationManager::locString(LOC_SYSTEM_CONTINUE_CRAWL), false, false, false, CL_normal);
-					endSelection();
-					return false;
-				default:
-					break;
-				}
+			if(!ynPrompt(LOC_SYSTEM_UNEQUIP_AMULET_YN, LOC_SYSTEM_CONTINUE_CRAWL, CL_small_danger, false,false,false,false)) {
+				return false;
 			}
 		}
 

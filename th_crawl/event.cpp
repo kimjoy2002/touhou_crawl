@@ -142,29 +142,59 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	switch (id)
 	{
 		case 1:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL1), true, false, false, CL_warning);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL2), true, false, false, CL_warning);
+		if(joypadUtil::usingPad) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL2_PAD),true,false,false,CL_warning);
+		} else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL1), true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL2), true, false, false, CL_warning);
+		}
 		return 1;
 	case 2:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL3), true, false, false, CL_warning);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL4), true, false, false, CL_warning);
+		if(joypadUtil::usingPad) {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL3_PAD, PlaceHolderHelper(joypadUtil::get("A",GVK_BUTTON_A))),true,false,false,CL_warning);
+		}
+		else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL3), true, false, false, CL_warning);
+		}
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL4, PlaceHolderHelper(joypadUtil::get("o",GVK_RIGHT_BUMPER))), true, false, false, CL_warning);
 		return 1;
 	case 3:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL5), true, false, false, CL_warning);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL6), true, false, false, CL_warning);
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL5, PlaceHolderHelper(joypadUtil::get(",",GVK_BUTTON_A))), true, false, false, CL_warning);
+		if(joypadUtil::usingPad) {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL6_PAD, PlaceHolderHelper(joypadUtil::get("Y",GVK_BUTTON_Y)), PlaceHolderHelper(joypadUtil::get("A",GVK_BUTTON_A))), true, false, false, CL_warning);
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL6_PAD2, PlaceHolderHelper(joypadUtil::get("A",GVK_BUTTON_A))), true, false, false, CL_warning);
+		}
+		else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL6), true, false, false, CL_warning);
+		}
 		return 1;
 	case 4:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL7), true, false, false, CL_warning);
+		if(joypadUtil::usingPad) {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL7_PAD, PlaceHolderHelper(joypadUtil::get("TAB",GVK_LEFT_BUMPER))),true,false,false,CL_warning);
+		}
+		else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL7), true, false, false, CL_warning);
+		}
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL8), true, false, false, CL_warning);
 		return 1;
 	case 5:
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL9), true, false, false, CL_warning);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL10), true, false, false, CL_warning);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL11), true, false, false, CL_warning);
+		if(joypadUtil::usingPad) {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL10_PAD, PlaceHolderHelper(joypadUtil::get("A",GVK_BUTTON_A))), true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL11_PAD), true, false, false, CL_warning);
+		} else {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL10, PlaceHolderHelper(joypadUtil::get(".",GVK_BUTTON_A)), PlaceHolderHelper(joypadUtil::get("5",GVK_BUTTON_A_LONG))), true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL11), true, false, false, CL_warning);
+		}
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL12), true, false, false, CL_warning);
 		return 1;
 	case 6:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL13), true, false, false, CL_warning);
+		if(joypadUtil::usingPad) {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL13_PAD, PlaceHolderHelper(joypadUtil::get("A",GVK_BUTTON_A))), true, false, false, CL_warning);
+		}
+		else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL13), true, false, false, CL_warning);
+		}
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL14), true, false, false, CL_warning);
 		return 1;
 	case 7:
@@ -172,48 +202,91 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			you.PowUpDown(-(you.power - 150), true);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL15), true, false, false, CL_warning);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL16), true, false, false, CL_warning);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL17), true, false, false, CL_warning);
+		if(joypadUtil::usingPad) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL17_PAD), true, false, false, CL_warning);
+		} else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL17), true, false, false, CL_warning);
+		}
 		return 1;
 	case 8:
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL18), true, false, false, CL_warning);
 		return 1;
 	case 9:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL19), true, false, false, CL_warning);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL20), true, false, false, CL_warning);
+		if(joypadUtil::usingPad) {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL19_PAD, PlaceHolderHelper(joypadUtil::get("X",GVK_BUTTON_X))), true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL20_PAD), true, false, false, CL_warning);
+		}
+		else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL19), true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL20), true, false, false, CL_warning);
+		}
 		return 1;
 	case 10:
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL21), true, false, false, CL_warning);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL22), true, false, false, CL_warning);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL23), true, false, false, CL_warning);
+		if(joypadUtil::usingPad) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL22_PAD), true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL23_PAD), true, false, false, CL_warning);
+		} else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL22), true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL23), true, false, false, CL_warning);
+		}
 		return 1;
 	case 11:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL24), true, false, false, CL_warning);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL25), true, false, false, CL_warning);
+		if(joypadUtil::usingPad) {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL24_PAD, PlaceHolderHelper(joypadUtil::get("A",GVK_BUTTON_A))), true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL25_PAD), true, false, false, CL_warning);
+		} else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL24), true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL25), true, false, false, CL_warning);
+		}
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL26), true, false, false, CL_warning);
 		return 1;
 	case 12:
 		you.GiveSkillExp(SKT_SPELLCASTING, 20, true);
 		you.GiveSkillExp(SKT_CONJURE, 100, true);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL27), true, false, false, CL_warning);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL28), true, false, false, CL_warning);
+		if(joypadUtil::usingPad) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL28_PAD), true, false, false, CL_warning);
+		} else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL28), true, false, false, CL_warning);
+		}
 		return 1;
 	case 13:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL29), true, false, false, CL_warning);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL30), true, false, false, CL_warning);
+		if(joypadUtil::usingPad) {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL29_PAD, PlaceHolderHelper(joypadUtil::get("X",GVK_BUTTON_X))), true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL30_PAD), true, false, false, CL_warning);
+		}
+		else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL29), true, false, false, CL_warning);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL30), true, false, false, CL_warning);
+		}
 		return 1;
 	case 14:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL31), true, false, false, CL_warning);
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL31, PlaceHolderHelper(joypadUtil::get("<",GVK_BUTTON_A))), true, false, false, CL_warning);
 		return 1;
 	case 15:
 		printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_TEMPLE), true, false, false, CL_normal);
 		return 1;
 	case 16:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL32), true, false, false, CL_warning);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL33), true, false, false, CL_warning);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL34), true, false, false, CL_warning);
+		if(joypadUtil::usingPad) {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL32_PAD, PlaceHolderHelper(joypadUtil::get("A",GVK_BUTTON_A))), true, false, false, CL_warning);
+		} else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL32), true, false, false, CL_warning);
+		}
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL33, PlaceHolderHelper(joypadUtil::get("p",GVK_BUTTON_A))), true, false, false, CL_warning);
+		if(joypadUtil::usingPad) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL34_PAD), true, false, false, CL_warning);
+		} else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL34), true, false, false, CL_warning);
+		}
 		return 1;
 	case 17:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL35), true, false, false, CL_warning);
+		if(joypadUtil::usingPad) {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL35_PAD, PlaceHolderHelper(joypadUtil::get("Y",GVK_BUTTON_Y))), true, false, false, CL_warning);
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL36_PAD2, PlaceHolderHelper(joypadUtil::get("X",GVK_BUTTON_X))), true, false, false, CL_warning);
+		} else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL35), true, false, false, CL_warning);
+		}
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL36), true, false, false, CL_warning);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL37), true, false, false, CL_warning);
 		return 1;

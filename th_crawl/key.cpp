@@ -189,6 +189,82 @@ int waitkeyinput(bool direction_, bool immedity_, bool ablecursor) {
 
 
 
+bool ynPromptSimple(LOCALIZATION_ENUM_KEY prompt_key, LOCALIZATION_ENUM_KEY canclePrompt_key, D3DCOLOR promptColor) {
+
+	return ynPrompt(prompt_key, canclePrompt_key, promptColor, false, false, false,false);
+}
+bool ynPrompt(LOCALIZATION_ENUM_KEY prompt_key, LOCALIZATION_ENUM_KEY canclePrompt_key, D3DCOLOR promptColor, bool uppercase, bool temp, bool loop, bool log) {
+	return ynPrompt(LocalzationManager::locString(prompt_key), LocalzationManager::locString(canclePrompt_key), promptColor, temp, uppercase, loop, log);
+}
+bool ynPrompt(string prompt, string canclePrompt, D3DCOLOR promptColor, bool isuppercase, bool temp, bool loop, bool log) {
+	if(!prompt.empty()) {
+		printlog(prompt,false,log,temp,promptColor);
+		printlog(" (",false,log,temp,promptColor);
+	} else {
+		printlog("(",false,log,temp,promptColor);
+	}
+	printlog(joypadUtil::get(isuppercase?"Y":"y", isuppercase?GVK_BUTTON_A_LONG:GVK_BUTTON_A, PROMPT_YN),false,log,temp,promptColor, isuppercase?'Y':'y');
+	printlog("/",false,log,temp,promptColor);
+	printlog(joypadUtil::get(isuppercase?"N":"n", GVK_BUTTON_B, PROMPT_YN),false,log,temp,promptColor, isuppercase?'N':'n');
+	printlog(") ",false,log,temp,promptColor);
+	startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
+	while(true)
+	{
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey, true);
+		switch(key_)
+		{
+		case 'y':
+		case 'Y':
+		case GVK_BUTTON_A:
+		case GVK_BUTTON_A_LONG:
+			if(isuppercase && (key_ == 'y' || key_ == GVK_BUTTON_A))
+			{
+				//break-through
+			} else {
+				endSelection();
+				return true;
+			}
+		default:
+			if(loop)
+			{
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_YN, 
+					PlaceHolderHelper(joypadUtil::get(isuppercase?"Y":"y", isuppercase?GVK_BUTTON_A_LONG:GVK_BUTTON_A)), 
+					PlaceHolderHelper(joypadUtil::get(isuppercase?"N":"n", GVK_BUTTON_B))),false,log,temp,CL_normal);
+				//todo) YN를 수정가능하게
+				break;
+			}
+			else {
+				//break-through
+			}
+		case 'N':
+		case 'n':
+		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
+			if(!canclePrompt.empty()) {
+				printlog(canclePrompt,true,log,temp,CL_normal);
+			}
+			endSelection();
+			return false;
+		case -1: //마우스 처리
+			if(inputedKey.isRightClick() || !loop) {
+				if(!canclePrompt.empty()) {
+					printlog(canclePrompt,true,log,temp,CL_normal);
+				}
+				endSelection();
+				return false;
+			} else { //loop
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_YN, 
+					PlaceHolderHelper(joypadUtil::get(isuppercase?"Y":"y", isuppercase?GVK_BUTTON_A_LONG:GVK_BUTTON_A)), 
+					PlaceHolderHelper(joypadUtil::get(isuppercase?"N":"n", GVK_BUTTON_B))),false,log,temp,CL_normal);
+				break;
+			}
+		}
+	}
+}
+
+
 std::string utf8_from_codepoint(int codepoint) {
     std::string result;
     if (codepoint <= 0x7F) {

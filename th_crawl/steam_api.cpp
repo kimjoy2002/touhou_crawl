@@ -121,6 +121,34 @@ string steam_manager::getSteamLang() {
 	return "ENG";
 }
 
+
+
+GamepadType steam_manager::getCurrentGamepadType() {
+	if(!init || !SteamInput())
+        return GAMEPAD_XBOX;
+
+    InputHandle_t handles[STEAM_INPUT_MAX_COUNT];
+    int count = SteamInput()->GetConnectedControllers(handles);
+    if (count == 0) return GAMEPAD_UNKNOWN;
+
+    ESteamInputType type = SteamInput()->GetInputTypeForHandle(handles[0]);
+    switch (type) {
+    case k_ESteamInputType_XBox360Controller:
+    case k_ESteamInputType_XBoxOneController:
+        return GAMEPAD_XBOX;
+    case k_ESteamInputType_PS4Controller:
+    case k_ESteamInputType_PS5Controller:
+        return GAMEPAD_PS;
+    case k_ESteamInputType_SwitchJoyConPair:
+    case k_ESteamInputType_SwitchJoyConSingle:
+    case k_ESteamInputType_SwitchProController:
+        return GAMEPAD_NINTENDO;
+    default:
+        return GAMEPAD_UNKNOWN;
+    }
+}
+
+
 void steam_manager::achievement(achievement_enum achievement) {
 	if(!init)
 		return;

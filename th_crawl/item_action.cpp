@@ -118,23 +118,14 @@ void PickUpSelect(list<item>::iterator it, int num)
 			{
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_PICKUP_SELECT_ASK, false, false, false, CL_help,
 					PlaceHolderHelper((*temp).GetName(), (*temp).item_color(), (*temp).num > 1 ? true : false));
-					
-					
-				// 	PlaceHolderHelper("y"),
-				// 	PlaceHolderHelper("n"),
-				// 	PlaceHolderHelper("a"),
-				// 	PlaceHolderHelper("*?g,")
-				// );
-				// (Yes:{1} No:{2} All:{3} Choose:{4})
-				/// (예:{1} 아니오:{2} 모두:{3} 선택:{4})
 				printlog(" (",false,false,false,CL_help);
-				printlog(LocalzationManager::locString(LOC_SYSTEM_YES) + ":y",false,false,false,CL_help, 'y');
+				printlog(LocalzationManager::locString(LOC_SYSTEM_YES) + ":" + joypadUtil::get("y",GVK_BUTTON_A),false,false,false,CL_help, 'y');
 				printlog(" ",false,false,false,CL_help);
-				printlog(LocalzationManager::locString(LOC_SYSTEM_NO) + ":n",false,false,false,CL_help, 'n');
+				printlog(LocalzationManager::locString(LOC_SYSTEM_NO) + ":" + joypadUtil::get("n",GVK_BUTTON_B),false,false,false,CL_help, 'n');
 				printlog(" ",false,false,false,CL_help);
-				printlog(LocalzationManager::locString(LOC_SYSTEM_ALL) + ":a",false,false,false,CL_help, 'a');
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ALL) + ":" + joypadUtil::get("a",GVK_BUTTON_A_LONG),false,false,false,CL_help, 'a');
 				printlog(" ",false,false,false,CL_help);
-				printlog(LocalzationManager::locString(LOC_SYSTEM_SELECT) + ":*?g,",false,false,false,CL_help, '*');
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SELECT) + ":" + joypadUtil::get("*?g,",GVK_BUTTON_Y),false,false,false,CL_help, '*');
 				printlog(") ",true,false,false,CL_help);
 				startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N, 'a', '*'});
 				InputedKey inputedKey;

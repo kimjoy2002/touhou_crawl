@@ -1041,6 +1041,10 @@ B.B";
 			case DG_TEMPLE_JUNKO:
 				mon_ = MON_LUNATIC;
 				break;
+			case DG_TEMPLE_SHIKIEIKI:
+			case DG_TEMPLE_KEIKI:
+			case DG_TEMPLE_TENKYUU:
+				//TODO) 신구현
 			default:
 				break;
 			}

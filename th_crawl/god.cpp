@@ -80,6 +80,12 @@ string GetGodString(god_type god)
 		return LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA);
 	case GT_JUNKO:
 		return LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO);
+	case GT_SHIKIEIKI:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHIKIEIKI);
+	case GT_KEIKI:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI);
+	case GT_TENKYUU:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_TENKYUU);
 	}
 	return LocalzationManager::locString(LOC_SYSTEM_GOD_ERROR);
 }
@@ -986,6 +992,11 @@ bool GetGodAbility(int level, bool plus)
 			break;
 		}
 		return false;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
+		return false;
 	}
 	return false;
 }
@@ -1354,6 +1365,11 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			}
 		}
 		return false;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
+		return false;
 	}
 	return false;
 }
@@ -1387,6 +1403,11 @@ bool GodAccpect_Entering()
 	case GT_MIKO:
 	case GT_OKINA:
 	case GT_JUNKO:
+		return false;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
 		return false;
 	}
 	return false;
@@ -1461,6 +1482,11 @@ bool GodAccpect_GetPitem()
 	case GT_OKINA:
 	case GT_JUNKO:
 		return false;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
+		return false;
 	}
 	return false;
 }
@@ -1534,6 +1560,11 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 	case GT_OKINA:
 	case GT_JUNKO:
 		return false;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
+		return false;
 	}
 	return false;
 }
@@ -1575,6 +1606,11 @@ bool GodAccpect_UseSpell(spell_list spell_)
 	case GT_MIKO:
 	case GT_OKINA:
 	case GT_JUNKO:
+		return false;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
 		return false;
 	}
 	return false;
@@ -1619,6 +1655,11 @@ bool GodAccpect_Practice(int value, skill_type skill_)
 	case GT_OKINA:
 	case GT_JUNKO:
 	default:
+		return false;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
 		return false;
 	}
 	return false;
@@ -1677,6 +1718,11 @@ bool GodAccpect_Stair(bool down_, bool new_dungeon_)
 	break;
 	case GT_OKINA:
 	case GT_JUNKO:
+		return false;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
 		return false;
 	}
 	return false;
@@ -1777,6 +1823,11 @@ bool GodAccpect_Explore_100()
 	case GT_OKINA:
 	case GT_JUNKO:
 		return false;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
+		return false;
 	}
 	return false;
 }
@@ -1819,6 +1870,11 @@ bool GodAccpect_Exp_get()
 	case GT_MIKO:
 	case GT_OKINA:
 	case GT_JUNKO:
+		return false;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
 		return false;
 	}
 	return false;
@@ -1879,6 +1935,11 @@ bool GodAccpect_First_contact()
 	case GT_OKINA:
 	case GT_JUNKO:
 		return false;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
+		return false;
 	}
 	return false;
 }
@@ -1934,6 +1995,11 @@ bool GodAccpect_Abandon(god_type god)
 	case GT_MIKO:
 	case GT_OKINA:
 	case GT_JUNKO:
+		return false;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
 		return false;
 	}
 	return false;
@@ -2152,6 +2218,11 @@ bool GodAccpect_turn(int turn)
 		}
 		return false;
 	case GT_JUNKO:
+		return false;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
 		return false;
 	}
 	return false;
@@ -2728,6 +2799,10 @@ void GodInfor(god_type god)
 		printsub("", true, CL_normal);
 		break;
 	}
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
 	default: 
 	{
 		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_BUG_TITLE), true, CL_danger);
@@ -3214,6 +3289,11 @@ void God_AblilityShow(god_type god) {
 			}
 			break;
 		}
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
+		break;
 	}
 
 }
@@ -3336,6 +3416,11 @@ bool God_pray(const list<item>::iterator it)
 		break;
 	case GT_JUNKO:
 		break;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
+		return false;
 	}
 	return false;		
 }
@@ -4160,6 +4245,11 @@ bool god_punish(god_type god)
 			}
 		}
 		break;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
+		break;
 	}
 
 	if (summon_) {
@@ -4301,6 +4391,11 @@ void godAutoPickUp(god_type god_, bool belive_) {
 	case GT_JUNKO:
 	default:
 		break;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
+		break;
 	}
 }
 
@@ -4412,6 +4507,11 @@ void printReEnter()
 	case GT_NONE:
 	default:
 		printlog(LocalzationManager::locString(LOC_SYSTEM_WELCOME), true, false, false, CL_normal);
+		break;
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
 		break;
 	}
 
@@ -4949,6 +5049,11 @@ bool God_PraySpeak()
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_TALK), true, false, false, CL_junko);
 			return true;
 		}
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
+		break;
 	}
 	return false;
 

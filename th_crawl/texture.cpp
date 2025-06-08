@@ -58,6 +58,9 @@ const char *imgfile_god[GT_LAST] =
 	"./data/god/miko.png",//GT_MIKO,
 	"./data/god/okina.png",//GT_OKINA,
 	"./data/god/junko.png",//GT_JUNKO
+	"./data/god/junko.png",//GT_SHIKIEIKI
+	"./data/god/junko.png",//GT_KEIKI
+	"./data/god/junko.png",//GT_TENKYUU
 };
 
 
@@ -113,7 +116,10 @@ TextureFile(imgfile_god[15]),
 TextureFile(imgfile_god[16]),
 TextureFile(imgfile_god[17]),
 TextureFile(imgfile_god[18]),
-TextureFile(imgfile_god[19])
+TextureFile(imgfile_god[19]),
+TextureFile(imgfile_god[20]),
+TextureFile(imgfile_god[21]),
+TextureFile(imgfile_god[22])
 };
 
 
@@ -141,7 +147,10 @@ textures(&texture_god[15], 0, 0, 512, 512, 255),
 textures(&texture_god[16], 0, 0, 512, 512, 255),
 textures(&texture_god[17], 0, 0, 512, 512, 255),
 textures(&texture_god[18], 0, 0, 512, 512, 255),
-textures(&texture_god[19], 0, 0, 512, 512, 255)
+textures(&texture_god[19], 0, 0, 512, 512, 255),
+textures(&texture_god[20], 0, 0, 512, 512, 255),
+textures(&texture_god[21], 0, 0, 512, 512, 255),
+textures(&texture_god[22], 0, 0, 512, 512, 255)
 };
 
 
@@ -758,10 +767,10 @@ textures img_dungeon_object[][3] = {
 				{textures(&texture_item01, 173, 255), textures(&texture_item01, 173, 255), textures(&texture_item01, 173, 255) }, //미코
 				{textures(&texture_item02, 168, 255), textures(&texture_item02, 168, 255), textures(&texture_item02, 168, 255) }, //오키나
 				{textures(&texture_item02, 169, 255), textures(&texture_item02, 170, 255), textures(&texture_item02, 171, 255) }, //순호
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},  //시키에이키
+				{textures(&texture_item01, 120, 255),textures(&texture_item01, 120, 255),textures(&texture_item01, 120, 255)},  //시키에이키
 
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}, //케이키
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}, //텐큐
+				{textures(&texture_item03, 192, 255),textures(&texture_item03, 192, 255),textures(&texture_item03, 192, 255)}, //케이키
+				{textures(&texture_item03, 193, 255),textures(&texture_item03, 193, 255),textures(&texture_item03, 193, 255)}, //텐큐
 //textures img_command_wide_search(&texture_item03, 192, 255);
 //textures img_command_wide_search(&texture_item03, 193, 255);
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},

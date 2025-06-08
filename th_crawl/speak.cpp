@@ -1939,6 +1939,11 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 					}
 				}
 				break;
+				case GT_SHIKIEIKI:
+				case GT_KEIKI:
+				case GT_TENKYUU:
+					//TODO) 신구현
+					break;
 				}
 				break;				
 			case 2:

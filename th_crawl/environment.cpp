@@ -622,6 +622,9 @@ char environment::getAsciiDot(int x_, int y_)
 	case DG_TEMPLE_MIKO:
 	case DG_TEMPLE_OKINA:
 	case DG_TEMPLE_JUNKO:
+	case DG_TEMPLE_SHIKIEIKI:
+	case DG_TEMPLE_KEIKI:
+	case DG_TEMPLE_TENKYUU:
 		return '_';
 	case DG_WALL:
 	case DG_STONE_WALL:
@@ -709,6 +712,9 @@ string environment::getTileHelp(int x_, int y_)
 	case DG_TEMPLE_MIKO:
 	case DG_TEMPLE_OKINA:
 	case DG_TEMPLE_JUNKO:
+	case DG_TEMPLE_SHIKIEIKI:
+	case DG_TEMPLE_KEIKI:
+	case DG_TEMPLE_TENKYUU:
 		return LocalzationManager::formatString(LOC_SYSTEM_TILE_HELP_PRAY, PlaceHolderHelper(joypadUtil::get("p",GVK_BUTTON_A)));
 	default:
 		break;

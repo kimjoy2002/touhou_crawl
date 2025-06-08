@@ -119,6 +119,12 @@ D3DCOLOR GetGodColor(god_type god, int value)
 		return CL_junko;
 	case GT_MIKO:
 		return CL_miko;
+	case GT_SHIKIEIKI:
+		return CL_eiki;
+	case GT_KEIKI:
+		return CL_keiki;
+	case GT_TENKYUU:
+		return CL_tenkyuu;
 	}
 	return CL_normal;
 }

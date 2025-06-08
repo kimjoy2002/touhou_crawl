@@ -1202,7 +1202,9 @@ void map_algorithms_shooting_sprint(int num)
 	line_delay = 10;
 	for(int i=0;i<GT_LAST;i++)
 	{
-		shooting_god_dq.push_back(i);
+		if(i != GT_SHIKIEIKI && i != GT_TENKYUU && i != GT_KEIKI) {
+			shooting_god_dq.push_back(i);
+		}
 	}
 	rand_shuffle(shooting_god_dq.begin(),shooting_god_dq.end());
 	for (int x = 0; x < DG_MAX_X; x++)

@@ -197,6 +197,10 @@ string seija_god_string(int god, int num) {
 		case 1: return LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO2);
 		case 2: return LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO3);
 		}
+	case GT_SHIKIEIKI:
+	case GT_KEIKI:
+	case GT_TENKYUU:
+		//TODO) 신구현
 	case GT_ERROR:
 	case GT_NONE:
 	default:
@@ -432,6 +436,11 @@ void seija_real_gift(int key_)
 			}
 		}
 		break;
+		case GT_SHIKIEIKI:
+		case GT_KEIKI:
+		case GT_TENKYUU:
+			//TODO) 신구현
+			break;
 	}
 }
 
@@ -722,6 +731,11 @@ string seija_talk(god_type god_, int piety)
 			case 3:
 				return LocalzationManager::locString(LOC_SYSTEM_SEIJA_GOD_JUNKO4);
 			}
+			break;
+		case GT_SHIKIEIKI:
+		case GT_KEIKI:
+		case GT_TENKYUU:
+			//TODO) 신구현
 			break;
 		}
 	}

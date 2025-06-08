@@ -3703,6 +3703,9 @@ LOC_SYSTEM_GOD_LILLY,릴리
 LOC_SYSTEM_GOD_MIKO,미코
 LOC_SYSTEM_GOD_OKINA,오키나
 LOC_SYSTEM_GOD_JUNKO,순호
+LOC_SYSTEM_GOD_SHIKIEIKI,시키에이키
+LOC_SYSTEM_GOD_KEIKI,케이키
+LOC_SYSTEM_GOD_TENKYUU,텐큐
 LOC_SYSTEM_GOD_SUWAKO_TITLE,모리야 스와코 - 토착신의 정점
 LOC_SYSTEM_GOD_SUWAKO_DESCRIPTION,스와코는 곤(땅)을 창조하는 능력을 가진 토착신이다.\n스와코는 신자들에게 변덕스러운 권능을 준다.\n그 때문에 신자들은 다양한 권능을 받을 수 있지만 원하는 권능을 받지는 못한다.
 LOC_SYSTEM_GOD_MIMA_TITLE,미마 - 아득한 꿈에 운명을 맡긴 정신
@@ -4178,6 +4181,7 @@ LOC_SYSTEM_GOD_COMMON_ACCECPT,{0:은|는} 당신의 살생을 기뻐했다.
 LOC_SYSTEM_GOD_COMMON_PROTECT,보호되었다!
 LOC_SYSTEM_GOD_COMMON_RAGE,{0:은|는} 당신의 행동에 분노했다. 참회하라!
 LOC_SYSTEM_GOD_COMMON_NOT_EXIST_GOD,존재하지 않는 신입니다.
+LOC_SYSTEM_GOD_COMMON_NOT_READY_GOD,이 신은 아직 신도를 받아들일 준비가 안되었다.
 LOC_SYSTEM_GOD_COMMON_SEIJA_PANALTY,배신자에겐 입교란 없다!
 LOC_SYSTEM_GOD_COMMON_SEIJA_TOO_STRONG,세이자는 레벨9가 넘어간 강자를 신도로 받지 않습니다.
 LOC_SYSTEM_GOD_COMMON_ALREADY_GOD,이미 믿고 있는 신입니다.

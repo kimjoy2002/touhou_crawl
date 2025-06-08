@@ -847,8 +847,14 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, piety);
 	LoadData<punish_struct>(fp, *punish);
 	LoadData<int>(fp, god_turn);
-	for(int i=0;i<GT_LAST;i++)
-		LoadData<int>(fp, *(god_value[i]));
+	if(isPrevVersion(loading_version_string, "ver1.104")) {
+		//신이 20명
+		for(int i=0;i<20;i++)
+			LoadData<int>(fp, *(god_value[i]));
+	} else {
+		for(int i=0;i<GT_LAST;i++)
+			LoadData<int>(fp, *(god_value[i]));
+	}
 	LoadData<lilly_ally>(fp, *lilly_allys);	
 	LoadData<int>(fp, suwako_meet);
 	LoadData<int>(fp, *half_youkai);
@@ -4357,6 +4363,9 @@ interupt_type players::resetLOS(bool speak_)
 						case DG_TEMPLE_MIKO:
 						case DG_TEMPLE_OKINA:
 						case DG_TEMPLE_JUNKO:
+						case DG_TEMPLE_SHIKIEIKI:
+						case DG_TEMPLE_KEIKI:
+						case DG_TEMPLE_TENKYUU:
 						case DG_ZIGURRAT_STAIR:
 							switch(env[current_level].dgtile[check_pos_.x][check_pos_.y].tile)
 							{								
@@ -5221,6 +5230,12 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 {
 
 	if(god_<GT_FIRST || god_>=GT_LAST)
+	{
+		if(speak_)
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_COMMON_NOT_EXIST_GOD),true,false,false,CL_danger);
+		return false;
+	}
+	if( god_ == GT_SHIKIEIKI || god_ == GT_KEIKI || god_ == GT_TENKYUU)
 	{
 		if(speak_)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_COMMON_NOT_EXIST_GOD),true,false,false,CL_danger);

@@ -816,11 +816,12 @@ bool pickup_move() {
 	{
 		if(num==1)
 		{
-			LocalzationManager::printLogWithKey((*start_it).num > 1 ? LOC_SYSTEM_ON_THE_ITEM_MULTIPLE:LOC_SYSTEM_ON_THE_ITEM_SINGLE ,true,false,false,CL_normal, PlaceHolderHelper((*start_it).GetName(), (*start_it).item_color(), (*start_it).num>1));
+			LocalzationManager::printLogWithKey((*start_it).num > 1 ? LOC_SYSTEM_ON_THE_ITEM_MULTIPLE:LOC_SYSTEM_ON_THE_ITEM_SINGLE ,true,false,false,CL_normal, PlaceHolderHelper((*start_it).GetName(), (*start_it).item_color(), (*start_it).num>1),
+				PlaceHolderHelper(joypadUtil::get(",",GVK_BUTTON_A)));
 		}
 		else if(num<=4)
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_ON_THE_ITEM_SOME),true,false,false,CL_normal);
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_ON_THE_ITEM_SOME,PlaceHolderHelper(joypadUtil::get(",",GVK_BUTTON_A))),true,false,false,CL_normal);
 			while(num>0)
 			{
 				printlog((*start_it).GetName(),false,false,false,(*start_it).item_color());
@@ -831,7 +832,7 @@ bool pickup_move() {
 		}
 		else
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_ON_THE_ITEM_MANY),true,false,false,CL_normal);
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_ON_THE_ITEM_MANY,PlaceHolderHelper(joypadUtil::get(",",GVK_BUTTON_A))),true,false,false,CL_normal);
 		}
 	}
 	return pick_ups;

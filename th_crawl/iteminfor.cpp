@@ -341,7 +341,7 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 				_infor_(GetSpellInfor((spell_list)spell_, true));
 				_infor_("\n\n");
 				if(!onlyinfor) {
-					printsub(LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_HELP, PlaceHolderHelper("m")), false, CL_normal, 'm');
+					printsub(LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_HELP, PlaceHolderHelper(joypadUtil::get("m",GVK_BUTTON_A))), false, CL_normal, 'm');
 					_infor_("\n");
 				}
 				ReleaseMutex(mutx);

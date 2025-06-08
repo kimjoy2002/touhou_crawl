@@ -645,7 +645,7 @@ void wiz_mode()
 					chargingFinish((amulet_type)_item->value1, 1);
 					if (you.system_exp.value <= 0) {
 						if (isCanCharge((amulet_type)_item->value1)) {
-							printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH), true, false, false, CL_white_puple);
+							printlog(LocalzationManager::locString(joypadUtil::usingPad?LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PAD:LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH), true, false, false, CL_white_puple);
 						}
 						else {
 							printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PASSIVE), true, false, false, CL_white_puple);

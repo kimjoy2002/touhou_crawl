@@ -63,7 +63,7 @@ bool seija_gift()
 	else
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_ON) + " ",false,false,false,CL_seija);
-		printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_SEIJA_GIFT_HELP, PlaceHolderHelper("a")),true,false,false,CL_help);
+		printlog(LocalzationManager::formatString(joypadUtil::usingPad?LOC_SYSTEM_GOD_SEIJA_GIFT_HELP_PAD:LOC_SYSTEM_GOD_SEIJA_GIFT_HELP, PlaceHolderHelper("a")),true,false,false,CL_help);
 		MoreWait();
 
 		you.Ability(SKL_SEIJA_GIFT,true,false);

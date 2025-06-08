@@ -19,6 +19,7 @@
 #include "rect.h"
 
 
+extern int g_menu_select;
 extern HANDLE mutx;
 
 int GetSpellMlen(spell_list spell_, bool isplayer)
@@ -2095,20 +2096,43 @@ void SimpleSpellUse()
 	printlog(LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL_FIELD), false, false, true, CL_help);
 
 	printlog(" (",false,false,true,CL_help);
-	printlog(LocalzationManager::locString(LOC_SYSTEM_LETTER) + ":" + LocalzationManager::locString(LOC_SYSTEM_MAGIC),false,false,true,CL_help);
+	printlog((joypadUtil::usingPad?LocalzationManager::locString(LOC_SYSTEM_SELECT_WITH_CURSOR):LocalzationManager::locString(LOC_SYSTEM_LETTER)) + ":" + LocalzationManager::locString(LOC_SYSTEM_MAGIC),false,false,true,CL_help);
 	printlog(" ",false,false,true,CL_help);
 	if(prevSpell_) {
-		printlog(LocalzationManager::locString(LOC_SYSTEM_ENTER)+":"+SpellString(prev_spell_id),false,false,true,CL_help, VK_RETURN);
+		printlog(joypadUtil::get(LocalzationManager::locString(LOC_SYSTEM_ENTER),GVK_BUTTON_A)+":"+SpellString(prev_spell_id),false,false,true,CL_help, VK_RETURN);
 		printlog(" ",false,false,true,CL_help);
 	}
-	printlog("*:" + LocalzationManager::locString(LOC_SYSTEM_ALL_SPELL) ,false,false,true,CL_help, '*');
+	printlog(joypadUtil::get("*?",GVK_BUTTON_A_LONG) + ":" + LocalzationManager::locString(LOC_SYSTEM_ALL_SPELL) ,false,false,true,CL_help, '*');
 	printlog(") ",true,false,true,CL_help);
 	while(1)
 	{
 
 		InputedKey inputedKey;
 		startAbilGrid(select_list);
-		int key_ = waitkeyinput(inputedKey,true);
+
+		int key_ = 0;
+		g_menu_select = -1;
+		while(true) {
+			key_ = waitkeyinput(inputedKey,true);
+			if(key_ == VK_RIGHT){
+				++g_menu_select;
+				if(g_menu_select>20+select_list.size()-1 || g_menu_select<20)
+					g_menu_select = 20;
+				continue;
+			} else if (key_ == VK_LEFT) {
+				if(--g_menu_select<20)
+					g_menu_select = 20+select_list.size()-1;
+				continue;
+			} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+				if(g_menu_select >= 20 && g_menu_select < 20+select_list.size()) {
+					key_ = select_list[g_menu_select - 20];
+					break;
+				}
+			}
+			break;
+		}
+		g_menu_select = -1;
+
 		endAbilGrid();
 
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
@@ -2128,7 +2152,7 @@ void SimpleSpellUse()
 			}
 			return;
 		}
-		else if(key_ == '*' || key_ == GVK_BUTTON_A_LONG) {
+		else if(key_ == '*' || key_ == '?' || key_ == GVK_BUTTON_A_LONG) {
 			deletelog();
 			SpellUse(0, 0, false);
 			return;
@@ -2362,7 +2386,7 @@ void SpellUse(char auto_, int auto_direc_, bool only_char)
 			{
 				DisplayManager.addPosition(-1);
 			}
-			else if(key_ == '?')
+			else if(key_ == '?' || key_ == GVK_BUTTON_Y)
 			{
 				if(use_)
 				{

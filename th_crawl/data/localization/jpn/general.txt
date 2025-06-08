@@ -186,7 +186,7 @@ LOC_SYSTEM_MORE,次のページ
 LOC_SYSTEM_WIN,クリアおめでとうございます！そしてプレイしていただきありがとうございました！
 LOC_SYSTEM_WIN_WIZARDMODE,プレイありがとうございます！次はウィザードモードなしで挑戦してみましょう！
 LOC_SYSTEM_HELP_MORGUE,記録はゲームのmorgueフォルダに保存されています。
-LOC_SYSTEM_HELP_ESC,終了するにはEnterまたはESCを押してください。
+LOC_SYSTEM_HELP_ESC,終了するには{0}または{1}を押してください。
 LOC_SYSTEM_OR,{0}または{1}
 LOC_SYSTEM_LEVELUP_MESSGE,あなたのレベルが上がった！ レベル {0}
 LOC_SYSTEM_LEVELUP_STAT_MESSGE,上昇させたい能力値を選んでください。
@@ -735,10 +735,10 @@ LOC_SYSTEM_TERRAIN_SILENCE,静寂
 LOC_SYSTEM_TERRAIN_VIOLET,紫の結界
 LOC_SYSTEM_TERRAIN_SANCTUARY,聖域
 LOC_SYSTEM_ON_THE_TERRAIN,{0}の上に立っている。
-LOC_SYSTEM_ON_THE_ITEM_SINGLE,ここには{0}がある。（,キーで拾う）
-LOC_SYSTEM_ON_THE_ITEM_MULTIPLE,ここには{0}がある。（,キーで拾う）
-LOC_SYSTEM_ON_THE_ITEM_SOME,ここには以下のアイテムがある。（,キーで拾う）
-LOC_SYSTEM_ON_THE_ITEM_MANY,ここには多くのアイテムがある。（,キーで拾う）
+LOC_SYSTEM_ON_THE_ITEM_SINGLE,ここには{0}がある。（{1}キーで拾う）
+LOC_SYSTEM_ON_THE_ITEM_MULTIPLE,ここには{0}がある。（{1}キーで拾う）
+LOC_SYSTEM_ON_THE_ITEM_SOME,ここには以下のアイテムがある。（{0}キーで拾う）
+LOC_SYSTEM_ON_THE_ITEM_MANY,ここには多くのアイテムがある。（{0}キーで拾う）
 LOC_SYSTEM_ASK_DOOR,どちらの扉を開閉しますか？
 LOC_SYSTEM_DOOR_NONE,近くに開閉できるものがない。
 LOC_SYSTEM_ASK_CLOSE_DOOR,どちらの扉を閉めますか？
@@ -800,10 +800,10 @@ LOC_SYSTEM_DISPLAY_MANAGER_JUNKO,どのアイテムを浄化しますか？
 LOC_SYSTEM_DISPLAY_MANAGER_JUNKO_SKILL,どのスキルを浄化しますか？
 LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_SPELLCARD,どのスペルカードを充電しますか？
 LOC_SYSTEM_DISPLAY_MANAGER_THROW,何を投げますか？
-LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL,使用する魔法を選択してください。（?キーで説明表示）
+LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL,使用する魔法を選択してください。（{0}キーで説明表示）
 LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL_FIELD,使用する魔法を選択してください。
-LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL,忘れる魔法を選んでください。（?キーで説明表示）
-LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL,説明を見たい魔法を選んでください。（?キーで使用可能）
+LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL,忘れる魔法を選んでください。（{0}キーで説明表示）
+LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL,説明を見たい魔法を選んでください。（{0}キーで使用可能）
 LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL_SIMPLE,説明を見たい魔法を選んでください。
 LOC_SYSTEM_DISPLAY_MANAGER_IDEN_VIEW,識別済みアイテム＆自動取得設定
 LOC_SYSTEM_DISPLAY_MANAGER_NO_IDEN,識別済みのアイテムはありません。
@@ -1627,13 +1627,13 @@ LOC_SYSTEM_TUTORIAL_START3,神奈子は言った：「まず h j k l または�
 LOC_SYSTEM_TUTORIAL1,神奈子は言った：「ドアの横で Oキーを押すと開いて、Cキーで閉じられるわ」
 LOC_SYSTEM_TUTORIAL2,神奈子は言った：「方向キーで押せば自動で開くこともあるのよ」
 LOC_SYSTEM_TUTORIAL3,神奈子は言った：「テンキーや y u b n キーで斜めにも動けるわ」
-LOC_SYSTEM_TUTORIAL4,神奈子は言った：「oキーを押すと未探索の場所へ自動移動できるわよ」
-LOC_SYSTEM_TUTORIAL5,神奈子は言った：「, や g でアイテムを拾って装備してみて」
+LOC_SYSTEM_TUTORIAL4,神奈子は言った：「{0}キーを押すと未探索の場所へ自動移動できるわよ」
+LOC_SYSTEM_TUTORIAL5,神奈子は言った：「{0} でアイテムを拾って装備してみて」
 LOC_SYSTEM_TUTORIAL6,神奈子は言った：「wで武器、Wで防具を装備できるわ。iは説明、dは捨てるキーよ」
 LOC_SYSTEM_TUTORIAL7,神奈子は言った：「クロールは常に戦いの連続よ。攻撃は体当たりすればいいの」
 LOC_SYSTEM_TUTORIAL8,神奈子は言った：「弱い相手でも1対1で戦うのが有利だから、路地に誘いなさい」
 LOC_SYSTEM_TUTORIAL9,神奈子は言った：「戦いの後には必ず体力を回復する習慣をつけなさい」
-LOC_SYSTEM_TUTORIAL10,神奈子は言った：「.キーで1ターン、5キーで100ターン休憩できるわ」
+LOC_SYSTEM_TUTORIAL10,神奈子は言った：「{0}キーで1ターン、{1}キーで100ターン休憩できるわ」
 LOC_SYSTEM_TUTORIAL11,神奈子は言った：「mキーで開く画面では得たスキルの振り分けができるの」
 LOC_SYSTEM_TUTORIAL12,神奈子は言った：「パワーは空腹調整、能力使用、近接ダメージ強化に役立つわ」
 LOC_SYSTEM_TUTORIAL13,神奈子は言った：「階段を降りるには >キー、登るには <キーよ」
@@ -1654,9 +1654,9 @@ LOC_SYSTEM_TUTORIAL27,神奈子は言った：「魔法を使うには、まず�
 LOC_SYSTEM_TUTORIAL28,神奈子は言った：「まず本を拾って、Mキーで魔法弾幕を覚えてみて」
 LOC_SYSTEM_TUTORIAL29,神奈子は言った：「魔法を使うには zキーかZキーを押せばいいの」
 LOC_SYSTEM_TUTORIAL30,神奈子は言った：「使い方はお札と同じよ！さあ、魔法で敵を倒してみて」
-LOC_SYSTEM_TUTORIAL31,神奈子は言った：「<キーを押すと上の階に戻れるわ」
+LOC_SYSTEM_TUTORIAL31,神奈子は言った：「{0}キーを押すと上の階に戻れるわ」
 LOC_SYSTEM_TUTORIAL32,神奈子は言った：「戦った後は5キーで休憩、覚えてる？毒を受けたら治してね」
-LOC_SYSTEM_TUTORIAL33,神奈子は言った：「祭壇を見つけたら、pキーで祈ることができるわ」
+LOC_SYSTEM_TUTORIAL33,神奈子は言った：「祭壇を見つけたら、{0}キーで祈ることができるわ」
 LOC_SYSTEM_TUTORIAL34,神奈子は言った：「私の神殿だから、一度信仰してみて。信仰後は^キーで説明が見られるの」
 LOC_SYSTEM_TUTORIAL35,神奈子は言った：「aキーを押して神の力を使って戦ってみて」
 LOC_SYSTEM_TUTORIAL36,神奈子は言った：「信仰心が高まると使える力も増えていくの」
@@ -2061,9 +2061,9 @@ LOC_SYSTEM_TILE_STATUE,石像
 LOC_SYSTEM_TILE_BUDDHA_STATUE,地蔵菩薩像
 LOC_SYSTEM_TILE_DEEP_WATER,深い水
 LOC_SYSTEM_TILE_LAVA,溶岩
-LOC_SYSTEM_TILE_HELP_DOWN,(>キーで降りる)
-LOC_SYSTEM_TILE_HELP_UP,(<キーで登る)
-LOC_SYSTEM_TILE_HELP_PRAY,(pキーで祈る)
+LOC_SYSTEM_TILE_HELP_DOWN,({0}キーで降りる)
+LOC_SYSTEM_TILE_HELP_UP,({0}キーで登る)
+LOC_SYSTEM_TILE_HELP_PRAY,({0}キーで祈る)
 LOC_SYSTEM_FLOOR_EFFECT_AUTUMN,紅葉
 LOC_SYSTEM_FLOOR_EFFECT_STONE,岩の罠
 LOC_SYSTEM_FLOOR_EFFECT_SCHEMA,スキマ
@@ -4584,7 +4584,7 @@ LOC_SYSTEM_REPLAY_TIMELINE,{0}年{1}月{2}日 {3}時{4}分
 LOC_SYSTEM_REPLAY_NOTEXIST,ファイルが存在しません！
 LOC_SYSTEM_REPLAY_PAGE,{0}ページ
 LOC_SYSTEM_REPLAYING,リプレイモード中
-LOC_SYSTEM_REPLAY_KEY_HELP,({0}-一時停止 {1}-通常速度 {2}-倍速)
+LOC_SYSTEM_REPLAY_KEY_HELP,({0}-一時停止 {1}-通常速度 {2}-倍速 {3}-終了)
 LOC_SYSTEM_STEAM_INIT_SUCCESS,Steam連携に成功しました
 LOC_SYSTEM_STEAM_INIT_FAIL,Steam連携に失敗しました
 LOC_SYSTEM_DEBUG_WARN,警告！ウィザードモードはスコア登録ができず、楽しさが大幅に減少します。

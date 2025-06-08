@@ -2225,9 +2225,21 @@ void Pray()
 			D3DCOLOR color_ = you.god != GT_NONE ? CL_small_danger:CL_help;
 			printsub(LocalzationManager::locString(you.god != GT_NONE ? LOC_SYSTEM_GOD_PRAY_TEMPLE_CONVERSION_YN :LOC_SYSTEM_GOD_PRAY_TEMPLE_YN),false,color_);
 			printsub(" (",false,color_);
-			printsub(" y ",false,color_, 'y');
+			if(joypadUtil::usingPad) {
+				printsub(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_Y, 
+							PlaceHolderHelper(joypadUtil::get("y", GVK_BUTTON_A, PROMPT_YN))),false,color_, 'y');
+			}
+			else {
+				printsub(joypadUtil::get("y",GVK_BUTTON_A),false,color_, 'y');
+			}
 			printsub("/",false,color_);
-			printsub(" n ",false,color_, 'n');
+			if(joypadUtil::usingPad) {
+				printsub(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_N, 
+							PlaceHolderHelper(joypadUtil::get("n", GVK_BUTTON_B, PROMPT_YN))),false,color_, 'n');
+			}
+			else {
+				printsub(joypadUtil::get("n",GVK_BUTTON_B),false,color_, 'n');
+			}
 			printsub(") ",true,color_);
 			printsub("",true,CL_normal);
 			God_AblilityShow((god_type)(type-DG_TEMPLE_FIRST));
@@ -2280,9 +2292,21 @@ void Pray()
 						endSelection();
 						printsub(LocalzationManager::locString(junko_?LOC_SYSTEM_GOD_ABANDON_ASK_PURIFICATION:LOC_SYSTEM_GOD_PRAY_TEMPLE_CONVERSION_REALLY),false,CL_danger);
 						printsub(" (",false,CL_danger);
-						printsub("Y",false,CL_danger, 'Y');
+						if(joypadUtil::usingPad) {
+							printsub(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_Y, 
+										PlaceHolderHelper(joypadUtil::get("Y", GVK_BUTTON_A_LONG, PROMPT_YN))),false,color_, 'Y');
+						}
+						else {
+							printsub(joypadUtil::get("Y",GVK_BUTTON_A_LONG),false,color_, 'Y');
+						}
 						printsub("/",false,CL_danger);
-						printsub("n",false,CL_danger, 'n');
+						if(joypadUtil::usingPad) {
+							printsub(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_N, 
+										PlaceHolderHelper(joypadUtil::get("N", GVK_BUTTON_B, PROMPT_YN))),false,color_, 'N');
+						}
+						else {
+							printsub(joypadUtil::get("N",GVK_BUTTON_B),false,CL_danger, 'n');
+						}
 						printsub(") ",true,CL_danger);
 						changemove(-DisplayManager.max_y);
 						onemore = false;

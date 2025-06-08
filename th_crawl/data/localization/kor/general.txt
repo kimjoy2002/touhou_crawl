@@ -181,6 +181,7 @@ LOC_SYSTEM_NO,아니요
 LOC_SYSTEM_ALL,모두
 LOC_SYSTEM_SELECT,선택
 LOC_SYSTEM_LETTER,알파벳
+LOC_SYSTEM_SELECT_WITH_CURSOR,좌우선택
 LOC_SYSTEM_ENTER,엔터
 LOC_SYSTEM_ALL_SPELL,모든 마법 확인
 LOC_SYSTEM_DAMAGED_BY_POISON1,독의 데미지를 받고 있다.
@@ -197,7 +198,7 @@ LOC_SYSTEM_MORE,다음장
 LOC_SYSTEM_WIN,클리어 축하드립니다! 그리고 플레이해주셔서 감사합니다!
 LOC_SYSTEM_WIN_WIZARDMODE,플레이해주셔서 감사합니다! 다음엔 위자드모드없이 도전해봅시다!
 LOC_SYSTEM_HELP_MORGUE,기록은 게임의 morgue폴더에 저장되어있습니다.
-LOC_SYSTEM_HELP_ESC,종료하시려면 Enter나 ESC를 누르세요.
+LOC_SYSTEM_HELP_ESC,종료하시려면 {0}나 {1}를 누르세요.
 LOC_SYSTEM_OR,{0} 또는 {1}
 LOC_SYSTEM_LEVELUP_MESSGE,당신의 레벨이 올랐다! 레벨 {0}
 LOC_SYSTEM_LEVELUP_STAT_MESSGE,당신의 올릴 능력치를 고르세요.
@@ -213,6 +214,9 @@ LOC_SYSTEM_NONSAVE_QUIT_YN,저장하지않고 종료하시겠습니까?
 LOC_SYSTEM_FORBIDZONE_YN,정말 들어갈거야?
 LOC_SYSTEM_CANCLE_QUIT,종료를 취소.
 LOC_SYSTEM_PLEASE_SELECT_YN,Y와 N중에 선택해주세요.
+LOC_SYSTEM_PLEASE_SELECT_PAD,다시 입력해주세요.
+LOC_SYSTEM_PLEASE_SELECT_Y,예-{0}
+LOC_SYSTEM_PLEASE_SELECT_N,아니오-{0}
 LOC_SYSTEM_WRONG_CHOOSE,잘못된 선택입니다
 LOC_SYSTEM_RECORVER_STAT,당신은 잃어버린 능력치를 회복했다.
 LOC_SYSTEM_RECORVER_STAT_STR,잃어버린 힘이 회복되었다.
@@ -285,6 +289,7 @@ LOC_SYSTEM_ALREADY_FULL_POWER,당신은 이미 풀파워다!
 LOC_SYSTEM_IS_EQUIP_ITEM,장착중인 아이템이다.
 LOC_SYSTEM_PICKUP_PITEM,P가 증가했다.
 LOC_SYSTEM_PICKUP_RUNE,당신은 {0:을|를} 주웠다! ( ]키로 그동안 얻은 룬을 표시 )
+LOC_SYSTEM_PICKUP_RUNE_PAD,당신은 {0:을|를} 주웠다! ( ]키로 그동안 얻은 룬을 표시 )
 LOC_SYSTEM_PICKUP_SHOOTING_ABIL,당신은 {0:을|를} 얻었다!
 LOC_SYSTEM_PICKUP_YINYANG_ORB,당신은 음양옥을 주웠다. 던전1층으로 가지고 올라가면 승리한다
 LOC_SYSTEM_PICKUP_SELECT_ASK,{0:을|를} 줍습니까?
@@ -298,6 +303,7 @@ LOC_SYSTEM_DISCORVER_SOMETHING,{0:을|를} 발견했다.
 LOC_SYSTEM_AUTOTRAVEL_BAMBOO,이 곳에서는 자동으로 탐색할 수 없어 보인다.
 LOC_SYSTEM_AUTOPICKUP_ON,자동 줍기를 활성화했다.
 LOC_SYSTEM_AUTOPICKUP_OFF,자동 줍기를 해제했다. ({0} 키로 다시 활성화 가능)
+LOC_SYSTEM_AUTOPICKUP_OFF_PAD,자동 줍기를 해제했다. (우측 메뉴에서 다시 활성화 가능)
 LOC_SYSTEM_AUTOTANMAC_ON,자동 전투/적에게 접근시 항상 탄막을 사용합니다.
 LOC_SYSTEM_AUTOTANMAC_OFF,자동 전투/적에게 접근시 탄막을 사용하지않습니다.
 LOC_SYSTEM_AUTOTANMAC_AUTO,자동 전투/적에게 접근시 거리가 있으면 탄막을 사용합니다.
@@ -765,10 +771,10 @@ LOC_SYSTEM_TERRAIN_SILENCE,정적
 LOC_SYSTEM_TERRAIN_VIOLET,바이올렛필드
 LOC_SYSTEM_TERRAIN_SANCTUARY,성역
 LOC_SYSTEM_ON_THE_TERRAIN,{0}의 위에 서있다.
-LOC_SYSTEM_ON_THE_ITEM_SINGLE,여기엔 {0:이|가} 있다. (,키로 줍기)
-LOC_SYSTEM_ON_THE_ITEM_MULTIPLE,여기엔 {0:이|가} 있다. (,키로 줍기)
-LOC_SYSTEM_ON_THE_ITEM_SOME,여기엔 다음과 같은 물건이 있다. (,키로 줍기)
-LOC_SYSTEM_ON_THE_ITEM_MANY,여기엔 여러개의 물건이 있다. (,키로 줍기)
+LOC_SYSTEM_ON_THE_ITEM_SINGLE,여기엔 {0:이|가} 있다. ({1}로 줍기)
+LOC_SYSTEM_ON_THE_ITEM_MULTIPLE,여기엔 {0:이|가} 있다. ({1}로 줍기)
+LOC_SYSTEM_ON_THE_ITEM_SOME,여기엔 다음과 같은 물건이 있다. ({0}로 줍기)
+LOC_SYSTEM_ON_THE_ITEM_MANY,여기엔 여러개의 물건이 있다. ({0}로 줍기)
 LOC_SYSTEM_ASK_DOOR,어느 쪽 문을 여닫을거지?
 LOC_SYSTEM_DOOR_NONE,근처에 여닫을만한 것이 없다.
 LOC_SYSTEM_ASK_CLOSE_DOOR,어느 쪽 문을 닫을꺼지?
@@ -830,14 +836,16 @@ LOC_SYSTEM_DISPLAY_MANAGER_JUNKO,무슨 아이템을 순화할거야?
 LOC_SYSTEM_DISPLAY_MANAGER_JUNKO_SKILL,어떤 스킬을 순화할거지?
 LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_SPELLCARD,무슨 스펠카드를 충전하시겠습니까?
 LOC_SYSTEM_DISPLAY_MANAGER_THROW,무엇을 던지겠습니까?
-LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL,사용할 마법을 선택하세요. (?키로 설명을 볼 수 있다.)
+LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL,사용할 마법을 선택하세요. ({0}로 설명을 볼 수 있다.)
 LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL_FIELD,사용할 마법을 선택하세요.
-LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL,잊을 마법을 선택하세요. (?키로 설명을 볼 수 있다.)
-LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL,설명을 볼 마법을 선택하세요. (?키로 마법을 사용)
+LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL,잊을 마법을 선택하세요. ({0}로 설명을 볼 수 있다.)
+LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL_INFO,설명을 볼 마법을 선택하세요. ({0}로 마법 잊기.)
+LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL,설명을 볼 마법을 선택하세요. ({0}로 마법을 사용.)
 LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL_SIMPLE,설명을 볼 마법을 선택하세요.
 LOC_SYSTEM_DISPLAY_MANAGER_IDEN_VIEW,식별된 아이템 & 자동 줍기 설정
 LOC_SYSTEM_DISPLAY_MANAGER_NO_IDEN,식별된 아이템이 없습니다.
 LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW,당신의 특성들 (알파벳을 누르면 상세한 정보가 나옵니다.)
+LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW_PAD,당신의 특성들 ({0}를 누르면 상세한 정보가 나옵니다.)
 LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY,특성
 LOC_SYSTEM_DISPLAY_MANAGER_EFFECT,효과
 LOC_SYSTEM_DISPLAY_MANAGER_NO_PROPERTY,당신의 특성이 없습니다.
@@ -2225,9 +2233,9 @@ LOC_SYSTEM_TILE_GRAVE,묘비
 LOC_SYSTEM_TILE_SNOWMAN,눈사람
 LOC_SYSTEM_TILE_DEEP_WATER,깊은물
 LOC_SYSTEM_TILE_LAVA,용암
-LOC_SYSTEM_TILE_HELP_DOWN,(>키로 내려가기)
-LOC_SYSTEM_TILE_HELP_UP,(<키로 올라가기)
-LOC_SYSTEM_TILE_HELP_PRAY,(p키로 기도)
+LOC_SYSTEM_TILE_HELP_DOWN,({0}로 내려가기)
+LOC_SYSTEM_TILE_HELP_UP,({0}로 올라가기)
+LOC_SYSTEM_TILE_HELP_PRAY,({0}키로 기도)
 LOC_SYSTEM_FLOOR_EFFECT_AUTUMN,단풍잎
 LOC_SYSTEM_FLOOR_EFFECT_STONE,바위 압정
 LOC_SYSTEM_FLOOR_EFFECT_SCHEMA,틈새
@@ -2299,6 +2307,7 @@ LOC_SYSTEM_SPELL_ALCHEMY_BLADE_ON,당신은 손에 톱니를 새겨넣었다.
 LOC_SYSTEM_SPELL_ALCHEMY_BLADE_OFF,당신의 톱니는 사라졌다.
 LOC_SYSTEM_SPELL_ALCHEMY_BLADE_ALMOST_OFF,손에 감긴 연금술의 힘이 약해지고있다.
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON,당신은 현자의 돌을 연성해냈다. ({0}키로 추가 마법을 사용가능)
+LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON_PAD,당신은 현자의 돌을 연성해냈다. (능력으로 추가 마법을 사용가능)
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_OFF,당신의 현자의 돌은 이윽고 사라졌다.
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ALMOST_OFF,현자의 돌은 거의 사라져가고있다.
 LOC_SYSTEM_SPELL_UNLUCK_UFO,이럴수가! 하늘에서 UFO가 떨어졌다!
@@ -3165,6 +3174,7 @@ LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN7,말이 그려진 부적
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN8,양이 그려진 부적
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN9,원숭이가 그려진 부적
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH,부적의 힘이 모두 채워졌다! 이제 원할때 v로 발동할 수 있다.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PAD,부적의 힘이 모두 채워졌다! 이제 부적을 클릭해서 발동할 수 있다.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PASSIVE,부적의 힘이 모두 채워졌다!
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_PERFECT_REVIVE,그러나 완전 무결의 부적이 부숴지면서 힘이 돌아오는 것을 느꼈다!
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_HEAL,당신은 영력을 회복했다.
@@ -4460,6 +4470,7 @@ LOC_SYSTEM_GOD_SEIJA_ABIL_CATACLYSM,세이자는 모두의 시야를 뒤집어�
 LOC_SYSTEM_GOD_SEIJA_ABIL_CATACLYSM_FAIL,시야내에 뒤집어버릴 상대가 없다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_ON,이제 세이자로부터 선물을 요구할 수 있다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_HELP,({0}키로 선물을 요청)
+LOC_SYSTEM_GOD_SEIJA_GIFT_HELP_PAD,(능력으로 선물을 요청)
 LOC_SYSTEM_GOD_SEIJA_GIFT_ASK,세이자: 어느 신으로부터 훔친 선물을 줄까?
 LOC_SYSTEM_GOD_SEIJA_GIFT_CANCLE,마음이 변하기전에 고르는게 좋을걸?
 LOC_SYSTEM_GOD_SEIJA_GIFT_YN,이 신의 보물을 요구하겠습니까?
@@ -4800,7 +4811,7 @@ LOC_SYSTEM_REPLAY_TIMELINE,{0}년 {1}월 {2}일 {3}시 {4}분
 LOC_SYSTEM_REPLAY_NOTEXIST,파일이 없어요!
 LOC_SYSTEM_REPLAY_PAGE,{0}페이지
 LOC_SYSTEM_REPLAYING,리플레이 모드중
-LOC_SYSTEM_REPLAY_KEY_HELP,({0}-일시정지 {1}-보통속도 {2}-배속)
+LOC_SYSTEM_REPLAY_KEY_HELP,({0}-일시정지 {1}-보통속도 {2}-배속 {3}-종료)
 LOC_SYSTEM_STEAM_INIT_SUCCESS,스팀연동 성공
 LOC_SYSTEM_STEAM_INIT_FAIL,스팀연동 실패
 LOC_SYSTEM_DEBUG_WARN,경고! 위자드모드는 점수등록이 안되며 재미를 큰폭으로 떨어뜨립니다.

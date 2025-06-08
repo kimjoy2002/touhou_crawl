@@ -11,6 +11,7 @@
 #include "environment.h"
 #include "texture.h"
 #include "display.h"
+#include "joypad.h"
 #include "monster_texture.h"
 #include "player.h"
 #include "skill.h"
@@ -507,7 +508,7 @@ void display_manager::spell_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	RECT rc={50, 50, option_mg.getWidth(), option_mg.getHeight()};
 	stringstream ss;
 
-	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(item_view_message), -1, &rc, DT_NOCLIP,CL_normal);
+	DrawTextUTF8(pfont,pSprite,LocalzationManager::formatString(item_view_message, PlaceHolderHelper(joypadUtil::get("?", GVK_BUTTON_Y))), -1, &rc, DT_NOCLIP,CL_normal);
 	rc.top += fontDesc.Height*2;
 
 	DrawTextUTF8(pfont,pSprite, LocalzationManager::locString(LOC_SYSTEM_HOTKEY), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
@@ -900,7 +901,7 @@ void display_manager::property_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 		DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_NO_PROPERTY).c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		return;
 	}
-	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW).c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(joypadUtil::usingPad?LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW_PAD:LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW).c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.top += fontDesc.Height*2;
 	for(auto it = you.property_vector.begin(); it != you.property_vector.end(); it++)
 	{
@@ -3918,7 +3919,8 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		RECT rc={50, 400, option_mg.getWidth(), option_mg.getHeight()};
 		DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_REPLAYING), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 		rc.top += fontDesc.Height;	
-		DrawTextUTF8(pfont,pSprite,LocalzationManager::formatString(LOC_SYSTEM_REPLAY_KEY_HELP, PlaceHolderHelper("z"), PlaceHolderHelper("x"), PlaceHolderHelper("c")), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+		DrawTextUTF8(pfont,pSprite,LocalzationManager::formatString(LOC_SYSTEM_REPLAY_KEY_HELP, 
+			PlaceHolderHelper(joypadUtil::get("z", GVK_BUTTON_A)), PlaceHolderHelper(joypadUtil::get("x", GVK_LEFT_BUMPER)), PlaceHolderHelper(joypadUtil::get("c", GVK_RIGHT_BUMPER)), PlaceHolderHelper(joypadUtil::get("esc", GVK_BUTTON_B_LONG))), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 	}
 	drawInfoBox(pSprite, pfont);
 

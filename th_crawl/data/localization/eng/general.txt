@@ -194,7 +194,7 @@ LOC_SYSTEM_MORE,More
 LOC_SYSTEM_WIN,Congratulations on clearing! And thank you for playing!
 LOC_SYSTEM_WIN_WIZARDMODE,Thank you for playing! Next time, try it without Wizard Mode!
 LOC_SYSTEM_HELP_MORGUE,Your record is saved in the game's morgue folder.
-LOC_SYSTEM_HELP_ESC,Press Enter or ESC to quit.
+LOC_SYSTEM_HELP_ESC,Press {0} or {1} to quit.
 LOC_SYSTEM_OR,{0} or {1}
 LOC_SYSTEM_LEVELUP_MESSGE,Your level increased! Level {0}
 LOC_SYSTEM_LEVELUP_STAT_MESSGE,Choose a stat to increase.
@@ -754,10 +754,10 @@ LOC_SYSTEM_TERRAIN_SILENCE,Silent Field
 LOC_SYSTEM_TERRAIN_VIOLET,Violet Field
 LOC_SYSTEM_TERRAIN_SANCTUARY,Sanctuary
 LOC_SYSTEM_ON_THE_TERRAIN,You are standing on {0}.
-LOC_SYSTEM_ON_THE_ITEM_SINGLE,There is {0} here. (Press ',' to pick up)
-LOC_SYSTEM_ON_THE_ITEM_MULTIPLE,There are {0} here. (Press ',' to pick up)
-LOC_SYSTEM_ON_THE_ITEM_SOME,There are some items here. (Press ',' to pick up)
-LOC_SYSTEM_ON_THE_ITEM_MANY,There are several items here. (Press ',' to pick up)
+LOC_SYSTEM_ON_THE_ITEM_SINGLE,There is {0} here. (Press {1} to pick up)
+LOC_SYSTEM_ON_THE_ITEM_MULTIPLE,There are {0} here. (Press {1} to pick up)
+LOC_SYSTEM_ON_THE_ITEM_SOME,There are some items here. (Press {0} to pick up)
+LOC_SYSTEM_ON_THE_ITEM_MANY,There are several items here. (Press {0} to pick up)
 LOC_SYSTEM_ASK_DOOR,Which door do you want to open or close?
 LOC_SYSTEM_DOOR_NONE,There’s nothing nearby to open or close.
 LOC_SYSTEM_ASK_CLOSE_DOOR,Which door do you want to close?
@@ -819,10 +819,10 @@ LOC_SYSTEM_DISPLAY_MANAGER_JUNKO,Which item would you like to purify?
 LOC_SYSTEM_DISPLAY_MANAGER_JUNKO_SKILL,Which skill would you like to purify?
 LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_SPELLCARD,Which spell card would you like to recharge?
 LOC_SYSTEM_DISPLAY_MANAGER_THROW,What would you like to throw?
-LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL,Select a spell to use. (Press ? for details.)
+LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL,Select a spell to use. (Press {0} for details.)
 LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL_FIELD,Select the spell to use.
-LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL,Select a spell to forget. (Press ? for details.)
-LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL,Select a spell to view details. (? to cast)
+LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL,Select a spell to forget. (Press {0} for details.)
+LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL,Select a spell to view details. (Press {0} for cast.)
 LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL_SIMPLE,Select a spell to view details.
 LOC_SYSTEM_DISPLAY_MANAGER_IDEN_VIEW,Identified items & Auto-pickup settings
 LOC_SYSTEM_DISPLAY_MANAGER_NO_IDEN,No identified items.
@@ -1686,13 +1686,13 @@ LOC_SYSTEM_TUTORIAL_START3,Kanako says: You can move using h, j, k, l or arrow k
 LOC_SYSTEM_TUTORIAL1,Kanako said: To open a door, press O near it. To close it, press C.
 LOC_SYSTEM_TUTORIAL2,Kanako said: You can bump into doors with the arrow keys to open them automatically.
 LOC_SYSTEM_TUTORIAL3,Kanako said: Use the numpad or the Y, U, B, N keys to move diagonally.
-LOC_SYSTEM_TUTORIAL4,Kanako said: Press O to automatically move to unexplored areas.
-LOC_SYSTEM_TUTORIAL5,Kanako said: Press , or G to pick up items and try equipping them.
+LOC_SYSTEM_TUTORIAL4,Kanako said: Press {0} to automatically move to unexplored areas.
+LOC_SYSTEM_TUTORIAL5,Kanako said: Press {0} to pick up items and try equipping them.
 LOC_SYSTEM_TUTORIAL6,Kanako said: Press W to equip armor, w for weapons, I for info, and D to drop.
 LOC_SYSTEM_TUTORIAL7,Kanako said: Crawl is all about constant combat-just run into enemies to attack.
 LOC_SYSTEM_TUTORIAL8,Kanako said: Even weak enemies are easier to deal with one-on-one. Try luring them into corridors.
 LOC_SYSTEM_TUTORIAL9,Kanako said: Always get in the habit of healing after a fight.
-LOC_SYSTEM_TUTORIAL10,Kanako said: Press `.` to rest for 1 turn, or `5` to rest for 100 turns.
+LOC_SYSTEM_TUTORIAL10,Kanako said: Press {0} to rest for 1 turn, or {1} to rest for 100 turns.
 LOC_SYSTEM_TUTORIAL11,Kanako said: Press M to open the skill window and decide how to invest your skills.
 LOC_SYSTEM_TUTORIAL12,Kanako said: Power helps manage hunger, use abilities, and boost melee damage.
 LOC_SYSTEM_TUTORIAL13,Kanako said: Use `>` to go down stairs and `<` to come back up.
@@ -1713,9 +1713,9 @@ LOC_SYSTEM_TUTORIAL27,Kanako said: To learn magic, you first have to study a spe
 LOC_SYSTEM_TUTORIAL28,Kanako said: Pick up the book and use M to learn magic danmaku.
 LOC_SYSTEM_TUTORIAL29,Kanako said: To use magic, press Z or z.
 LOC_SYSTEM_TUTORIAL30,Kanako said: It works just like throwing a talisman! Try taking out a mob with magic.
-LOC_SYSTEM_TUTORIAL31,Kanako said: You can go back upstairs using the `<` key.
-LOC_SYSTEM_TUTORIAL32,Kanako said: Remember to rest with `5` after battle. If you're poisoned, cure it too.
-LOC_SYSTEM_TUTORIAL33,Kanako said: If you find an altar, you can pray on it by pressing P.
+LOC_SYSTEM_TUTORIAL31,Kanako said: You can go back upstairs using the {0} key.
+LOC_SYSTEM_TUTORIAL32,Kanako said: Remember to rest with press 5 after battle. If you're poisoned, cure it too.
+LOC_SYSTEM_TUTORIAL33,Kanako said: If you find an altar, you can pray on it by pressing {0}.
 LOC_SYSTEM_TUTORIAL34,Kanako said: It's my shrine, so trust me! Once you do, press `^` to view the explanation.
 LOC_SYSTEM_TUTORIAL35,Kanako said: Try using your power by pressing A to fight.
 LOC_SYSTEM_TUTORIAL36,Kanako said: Powers grow stronger as your faith increases.
@@ -2132,9 +2132,9 @@ LOC_SYSTEM_TILE_GRAVE,Gravestone
 LOC_SYSTEM_TILE_SNOWMAN,Snowman
 LOC_SYSTEM_TILE_DEEP_WATER,Deep Water
 LOC_SYSTEM_TILE_LAVA,Lava
-LOC_SYSTEM_TILE_HELP_DOWN,(Press `>` to go down)
-LOC_SYSTEM_TILE_HELP_UP,(Press `<` to go up)
-LOC_SYSTEM_TILE_HELP_PRAY,(Press P to pray)
+LOC_SYSTEM_TILE_HELP_DOWN,(Press {0} to go down)
+LOC_SYSTEM_TILE_HELP_UP,(Press {0} to go up)
+LOC_SYSTEM_TILE_HELP_PRAY,(Press {0} to pray)
 LOC_SYSTEM_FLOOR_EFFECT_AUTUMN,Fallen Leaves
 LOC_SYSTEM_FLOOR_EFFECT_STONE,Rock Spikes
 LOC_SYSTEM_FLOOR_EFFECT_SCHEMA,Crack
@@ -4689,7 +4689,7 @@ LOC_SYSTEM_REPLAY_TIMELINE,{0}-{1}-{2} {3}:{4}
 LOC_SYSTEM_REPLAY_NOTEXIST,The file doesn't exist!
 LOC_SYSTEM_REPLAY_PAGE,Page {0}
 LOC_SYSTEM_REPLAYING,Replaying Mode
-LOC_SYSTEM_REPLAY_KEY_HELP,({0}-Pause {1}-Normal Speed {2}-Fast Forward)
+LOC_SYSTEM_REPLAY_KEY_HELP,({0}-Pause {1}-Normal Speed {2}-Fast Forward {3}-Exit)
 LOC_SYSTEM_STEAM_INIT_SUCCESS,Steam integration successful
 LOC_SYSTEM_STEAM_INIT_FAIL,Steam integration failed
 LOC_SYSTEM_DEBUG_WARN,Warning! Wizard Mode disables score submission and significantly reduces the fun.

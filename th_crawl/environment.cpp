@@ -684,11 +684,11 @@ string environment::getTileHelp(int x_, int y_)
 	case DG_PANDEMONIUM_STAIR:
 	case DG_HAKUREI_STAIR:
 	case DG_ZIGURRAT_STAIR:
-		return LocalzationManager::locString(LOC_SYSTEM_TILE_HELP_DOWN);
+		return LocalzationManager::formatString(LOC_SYSTEM_TILE_HELP_DOWN, PlaceHolderHelper(joypadUtil::get(">",GVK_BUTTON_A)));
 	case DG_UP_STAIR:
-		return floor==0?LocalzationManager::locString(LOC_EMPTYSTRING):LocalzationManager::locString(LOC_SYSTEM_TILE_HELP_UP);
+		return floor==0?LocalzationManager::locString(LOC_EMPTYSTRING):LocalzationManager::formatString(LOC_SYSTEM_TILE_HELP_UP, PlaceHolderHelper(joypadUtil::get("<",GVK_BUTTON_A)));
 	case DG_RETURN_STAIR:
-		return LocalzationManager::locString(LOC_SYSTEM_TILE_HELP_UP);
+		return LocalzationManager::formatString(LOC_SYSTEM_TILE_HELP_UP, PlaceHolderHelper(joypadUtil::get("<",GVK_BUTTON_A)));
 	case DG_TEMPLE_JOON_AND_SION:
 	case DG_TEMPLE_BYAKUREN:
 	case DG_TEMPLE_KANAKO:
@@ -709,7 +709,7 @@ string environment::getTileHelp(int x_, int y_)
 	case DG_TEMPLE_MIKO:
 	case DG_TEMPLE_OKINA:
 	case DG_TEMPLE_JUNKO:
-		return LocalzationManager::locString(LOC_SYSTEM_TILE_HELP_PRAY);
+		return LocalzationManager::formatString(LOC_SYSTEM_TILE_HELP_PRAY, PlaceHolderHelper(joypadUtil::get("p",GVK_BUTTON_A)));
 	default:
 		break;
 	}

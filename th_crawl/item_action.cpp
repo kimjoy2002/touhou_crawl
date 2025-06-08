@@ -895,12 +895,12 @@ void Memorize_book(int key_) {
 				printsub(blank,false,CL_normal);
 				_infor_(GetSpellInfor((spell_list)spell_, true));
 				_infor_("\n\n");
-				printsub(LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_HELP, PlaceHolderHelper("m")), false, CL_normal, 'm');
+				printsub(LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_HELP, PlaceHolderHelper(joypadUtil::get("m",GVK_BUTTON_A))), false, CL_normal, 'm');
 				_infor_("\n");
 				ReleaseMutex(mutx);
 				int memory_ = waitkeyinput();
 
-				if(memory_ == 'm')
+				if(memory_ == 'm' || memory_ == VK_RETURN || memory_ == GVK_BUTTON_A || memory_ == GVK_BUTTON_A_LONG )
 				{
 					memorize_action(spell_);
 					return;

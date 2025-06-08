@@ -664,6 +664,7 @@ bool blink_scroll(bool pre_iden_)
 			is_move = Search_Move(coord_def(you.position.x+1,you.position.y-1), false,VT_BLINK);
 			break;
 		case VK_RETURN:
+		case GVK_BUTTON_A:
 			if(is_move)
 			{
 				if(!you.Tele_check(pre_iden_, true))
@@ -679,7 +680,18 @@ bool blink_scroll(bool pre_iden_)
 					return true;
 				}
 			}
-			break;			
+			break;
+		case GVK_BUTTON_A_LONG:
+		case 'v':
+			if(unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y))
+			{
+				if(!unit_->isplayer() && unit_->isView() && env[current_level].isInSight(you.search_pos))
+				{					
+					search_monspell_view((monster*)unit_);
+					changedisplay(DT_GAME);
+				}
+			}
+			break;
 		case -1:
 			if(inputedKey.mouse == MKIND_MAP) {
 				coord_def target_pos(inputedKey.val1, inputedKey.val2);
@@ -1158,6 +1170,7 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 bool amnesia_scroll(bool pre_iden_)
 {
 	
+	bool amnesia_ = true;
 
 	if(you.currentSpellNum)
 	{
@@ -1170,31 +1183,61 @@ bool amnesia_scroll(bool pre_iden_)
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
 				int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
-				if(spell_list spell_ = (spell_list)you.MemorizeSpell[num])
-				{				
-					
-					changedisplay(DT_GAME);
+				if(amnesia_)
+				{
+					if(spell_list spell_ = (spell_list)you.MemorizeSpell[num])
+					{				
 
-					if(ynPrompt(LocalzationManager::formatString(LOC_SYSTEM_ITEM_SCROLL_AMNESIA_ASK, PlaceHolderHelper(SpellString(spell_))),
-						"", CL_help, false,false,false,false)) {
-						endSelection();
 						changedisplay(DT_GAME);
-						WaitForSingleObject(mutx, INFINITE);
-						you.MemorizeSpell[num] = 0;
-						you.remainSpellPoiont+=SpellLevel(spell_);
-						you.currentSpellNum--;
-						ReleaseMutex(mutx);
-						LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_AMNESIA_SUCCESS,true,false,false,CL_normal,
-							PlaceHolderHelper(SpellString(spell_)));
-						return true;
-					} else {
-						view_spell(LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL);
+
+						if(ynPrompt(LocalzationManager::formatString(LOC_SYSTEM_ITEM_SCROLL_AMNESIA_ASK, PlaceHolderHelper(SpellString(spell_))),
+							"", CL_help, false,false,false,false)) {
+							endSelection();
+							changedisplay(DT_GAME);
+							WaitForSingleObject(mutx, INFINITE);
+							you.MemorizeSpell[num] = 0;
+							you.remainSpellPoiont+=SpellLevel(spell_);
+							you.currentSpellNum--;
+							ReleaseMutex(mutx);
+							LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_AMNESIA_SUCCESS,true,false,false,CL_normal,
+								PlaceHolderHelper(SpellString(spell_)));
+							return true;
+						} else {
+							view_spell(LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL);
+						}
+					}
+					else
+					{
+						if(spell_list spell__ = (spell_list)you.MemorizeSpell[num])
+						{
+							WaitForSingleObject(mutx, INFINITE);
+							SetText() = GetSpellInfor((spell_list)spell__, true);
+							ReleaseMutex(mutx);
+							changedisplay(DT_TEXT);
+							waitkeyinput();
+
+							view_spell(LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL);
+							//changedisplay(DT_SPELL);
+						}
 					}
 				}
 			}
 			else if(key_ == -1) {
 				if(inputedKey.isRightClick()) {
 					break;
+				}
+			}
+			else if(key_ == '?' || key_ == GVK_BUTTON_Y)
+			{
+				if(amnesia_)
+				{
+					view_spell(LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL_INFO);
+					amnesia_ = false;
+				}
+				else
+				{					
+					view_spell(LOC_SYSTEM_DISPLAY_MANAGER_FORGET_SPELL);
+					amnesia_ = true;
 				}
 			}
 			else if(key_ == VK_ESCAPE||

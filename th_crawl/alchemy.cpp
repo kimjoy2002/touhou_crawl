@@ -9,6 +9,7 @@
 #include "alchemy.h"
 #include "player.h"
 #include "skill_use.h"
+#include "joypad.h"
 
 
 
@@ -142,7 +143,7 @@ void alchemyonoff(ALCHEMY_LIST list_,bool onoff_)
 		you.Ability(SKL_PHILOSOPHERS_4,false,!onoff_);
 		you.Ability(SKL_PHILOSOPHERS_5,false,!onoff_);
 		if(onoff_)
-			printlog(LocalzationManager::formatString(LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON, PlaceHolderHelper("a")),true,false,false,CL_white_blue);
+			printlog(LocalzationManager::formatString(joypadUtil::usingPad?LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON_PAD:LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON, PlaceHolderHelper("a")),true,false,false,CL_white_blue);
 		else
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_OFF),false,false,false,CL_blue);
 		break;

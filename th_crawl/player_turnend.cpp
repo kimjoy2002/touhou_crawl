@@ -1429,7 +1429,9 @@ void GameOver()
 						printsub(LocalzationManager::locString(LOC_SYSTEM_WIN),true,CL_magic);
 				}
 				printsub(LocalzationManager::locString(LOC_SYSTEM_HELP_MORGUE),true,CL_help);
-				printsub(LocalzationManager::locString(LOC_SYSTEM_HELP_ESC),true,CL_help);
+				printsub(LocalzationManager::formatString(LOC_SYSTEM_HELP_ESC, 
+					PlaceHolderHelper(joypadUtil::get("Enter",GVK_BUTTON_A)), 
+					PlaceHolderHelper(joypadUtil::get("ESC",GVK_BUTTON_B))),true,CL_help);
 				bool end_ = false;
 				while(!end_)
 				{

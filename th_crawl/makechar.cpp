@@ -511,6 +511,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_CONJURE,20,false);
 		you.GiveSkillExp(SKT_TRANS,20,false);
 		you.Memorize(SPL_MAGIC_TANMAC,true);
+		you.prevSpell = 'a';
 		break;
 	case JOB_SHAMAN:
 		you.max_hp+=1;
@@ -566,6 +567,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_ALCHEMY,30,false);
 		you.GiveSkillExp(SKT_AIR,30,false);
 		you.Memorize(SPL_VEILING,true);
+		you.prevSpell = 'a';
 		break;
 	case JOB_BERSERKER:
 		you.max_hp+=2;
@@ -594,6 +596,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_CONJURE,20,false);
 		you.GiveSkillExp(SKT_FIRE,60,false);
 		you.Memorize(SPL_BURN,true);
+		you.prevSpell = 'a';
 		break;
 	case JOB_COLD_WIZARD:
 		you.max_hp-=1;
@@ -609,6 +612,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_CONJURE,20,false);
 		you.GiveSkillExp(SKT_COLD,60,false);
 		you.Memorize(SPL_FROZEN,true);
+		you.prevSpell = 'a';
 		break;
 	case JOB_EARTH_WIZARD:
 		you.max_hp-=1;
@@ -624,6 +628,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_ALCHEMY,20,false);
 		you.GiveSkillExp(SKT_EARTH,60,false);
 		you.Memorize(SPL_STONE_PUNCH,true);
+		you.prevSpell = 'a';
 		break;
 	case JOB_AIR_WIZARD:
 		you.max_mp+=2;
@@ -638,6 +643,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,20),false);
 		you.GiveSkillExp(SKT_AIR,80,false);
 		you.Memorize(SPL_SHOCK,true);
+		you.prevSpell = 'a';
 		break;
 	case JOB_LIGHT_WIZARD:
 		you.max_hp-=1;
@@ -652,6 +658,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,20),false);
 		you.GiveSkillExp(SKT_CONJURE,80,false);
 		you.Memorize(SPL_MAGIC_TANMAC,true);
+		you.prevSpell = 'a';
 		break;/*
 	case JOB_WATER_WIZARD:
 		you.max_hp-=1;
@@ -679,7 +686,8 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_STEALTH,30,false);
 		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,20),false);
 		you.GiveSkillExp(SKT_SUMMON,80,false);
-		you.Memorize(SPL_SUMMON_MOOK,true);		
+		you.Memorize(SPL_SUMMON_MOOK,true);
+		you.prevSpell = 'a';
 		break;
 	//case JOB_POISON_WIZARD:
 	//	you.max_hp-=1;
@@ -727,6 +735,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,30),false);
 		you.GiveSkillExp(SKT_ALCHEMY,30,false);
 		you.Memorize(SPL_STONE_PUNCH,true);		
+		you.prevSpell = 'a';
 		break;
 	case JOB_PSYCHOLOGIST:
 		you.max_hp-=1;
@@ -741,7 +750,8 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_STEALTH,30,false);
 		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,30),false);
 		you.GiveSkillExp(SKT_MENTAL,80,false);
-		you.Memorize(SPL_HYPNOSIS,true);		
+		you.Memorize(SPL_HYPNOSIS,true);
+		you.prevSpell = 'a';	
 		break;
 	case JOB_REAPER:
 		you.max_hp+=1;

@@ -203,9 +203,23 @@ bool ynPrompt(string prompt, string canclePrompt, D3DCOLOR promptColor, bool isu
 	} else {
 		printlog("(",false,log,temp,promptColor);
 	}
-	printlog(joypadUtil::get(isuppercase?"Y":"y", isuppercase?GVK_BUTTON_A_LONG:GVK_BUTTON_A, PROMPT_YN),false,log,temp,promptColor, isuppercase?'Y':'y');
+
+	if(joypadUtil::usingPad) {
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_Y, 
+					PlaceHolderHelper(joypadUtil::get(isuppercase?"Y":"y", isuppercase?GVK_BUTTON_A_LONG:GVK_BUTTON_A, PROMPT_YN))),false,log,temp,promptColor, isuppercase?'Y':'y');
+	}
+	else {
+		printlog(joypadUtil::get(isuppercase?"Y":"y", isuppercase?GVK_BUTTON_A_LONG:GVK_BUTTON_A, PROMPT_YN),false,log,temp,promptColor, isuppercase?'Y':'y');
+	}
+
 	printlog("/",false,log,temp,promptColor);
-	printlog(joypadUtil::get(isuppercase?"N":"n", GVK_BUTTON_B, PROMPT_YN),false,log,temp,promptColor, isuppercase?'N':'n');
+	if(joypadUtil::usingPad) {
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_N, 
+					PlaceHolderHelper(joypadUtil::get(isuppercase?"N":"n", GVK_BUTTON_B, PROMPT_YN))),false,log,temp,promptColor, isuppercase?'N':'n');
+	}
+	else {
+		printlog(joypadUtil::get(isuppercase?"N":"n", GVK_BUTTON_B, PROMPT_YN),false,log,temp,promptColor, isuppercase?'N':'n');
+	}
 	printlog(") ",false,log,temp,promptColor);
 	startSelection({SPECIAL_CLINKABLE_Y, SPECIAL_CLINKABLE_N});
 	while(true)
@@ -228,9 +242,11 @@ bool ynPrompt(string prompt, string canclePrompt, D3DCOLOR promptColor, bool isu
 		default:
 			if(loop)
 			{
-				printlog(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_YN, 
-					PlaceHolderHelper(joypadUtil::get(isuppercase?"Y":"y", isuppercase?GVK_BUTTON_A_LONG:GVK_BUTTON_A)), 
-					PlaceHolderHelper(joypadUtil::get(isuppercase?"N":"n", GVK_BUTTON_B))),false,log,temp,CL_normal);
+				if(joypadUtil::usingPad) {
+					printlog(LocalzationManager::locString(LOC_SYSTEM_PLEASE_SELECT_PAD),false,log,temp,CL_normal);
+				} else {
+					printlog(LocalzationManager::locString(LOC_SYSTEM_PLEASE_SELECT_YN),false,log,temp,CL_normal);
+				}
 				//todo) YN를 수정가능하게
 				break;
 			}
@@ -344,11 +360,14 @@ int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecurs
 				switch(msg.wParam)
 				{
 				case 'x':
+				case GVK_LEFT_BUMPER:
 					replay_speed = 1;
 					break;
 				case 'c':
+				case GVK_RIGHT_BUMPER:
 					replay_speed = 0;
 					break;
+				case GVK_BUTTON_A:
 				case 'z':
 					while(!g_shutdownRequested)
 					{
@@ -374,11 +393,21 @@ int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecurs
 						Sleep(1);
 					}
 					break;
+				case GVK_BUTTON_B_LONG:
+				case VK_ESCAPE:
+					game_over = true;
+					break;
 				}
 			}
 		}
 
-		if(game_over || g_shutdownRequested)
+		if(game_over) {
+			ReplayClass.auto_key = false;
+			ReplayClass.play = false;
+			ReplayClass.init = false;
+			return 0;
+		}
+		if(g_shutdownRequested)
 		{
 			throw 0;
 		}

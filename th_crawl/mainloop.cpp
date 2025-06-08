@@ -39,7 +39,7 @@ extern bool saveexit;
 
 extern HANDLE mutx;
 
-const char *version_string = "ver1.103";
+const char *version_string = "ver1.104";
 extern int g_tile_size;
 
 bool isPrevVersion(const string& versionstring, const string& targetstring);
@@ -735,7 +735,7 @@ void init_alldata() {
 }
 
 
-void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
+bool ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 	if(mouse_type == MKIND_MAP) {
 		coord_def target_pos(val1, val2);
 		if(target_pos == you.position) {
@@ -812,7 +812,7 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 			{
 				if(weapon_prev_fail())
 				{
-					return;
+					return true;
 				}
 				//무기->장착
 				else if(you.isequip(item_)>0) {
@@ -824,7 +824,7 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 			else if(item_->isSimpleType(ITMS_ARMOR)) {
 				//방어구->장착
 				if(armor_prev_fail()) {
-					return;
+					return true;
 				}
 				else if(you.isequip(item_)>0) {
 					you.unequiparmor(key_);
@@ -841,10 +841,10 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 					isCanEvoke((amulet_type)(*item_).value1) &&
 					you.getAmuletPercent()) {
 					evoke_logic(key_, 0);
-					return;
+					return true;
 				}
 				if(jewelry_prev_fail()) {
-					return;
+					return true;
 				}
 				else if(you.isequip(item_)>0) {
 					you.unequipjewerly(key_);
@@ -864,7 +864,7 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 			else if(item_->isSimpleType(ITMS_POTION)) {
 				//포션->마시기
 				if(drink_prev_fail()) {
-					return;
+					return true;
 				}
 				else {
 					drink_logic(key_);
@@ -873,7 +873,7 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 			else if(item_->isSimpleType(ITMS_BOOK)) {
 				//책->읽기
 				if(read_prev_fail()) {
-					return;
+					return true;
 				} else{
 					Memorize_book(key_);
 					changedisplay(DT_GAME);
@@ -881,28 +881,28 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 			} else if(item_->isSimpleType(ITMS_SCROLL)) {
 				//두루마리->읽기
 				if(read_prev_fail()) {
-					return;
+					return true;
 				} else{
 					Reading_logic(key_);
 				}
 			} else if(item_->isSimpleType(ITMS_FOOD)) {
 				//음식->먹기
 				if(eat_prev_fail()) {
-					return;
+					return true;
 				} else{
 					you.Eat(key_);
 				}
 			} else if(item_->isSimpleType(ITMS_SPELL)) {
 				//스펠카드->발동
 				if(evoke_prev_fail()) {
-					return;
+					return true;
 				} else{
 					evoke_logic(key_, 0);
 				}
 			} else if(item_->isSimpleType(ITMS_MISCELLANEOUS)) {
 				//발동템
 				if(evoke_prev_fail()) {
-					return;
+					return true;
 				} else{
 					evoke_logic(key_, 0);
 				}
@@ -922,8 +922,9 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 		}
 	}else if (mouse_type == MKIND_ITEM_DESCRIPTION) {
 		int key_ = val1;
-		iteminfor_(key_, false);
+		bool return_ = iteminfor_(key_, false);
 		changedisplay(DT_GAME);
+		return return_;
 	} else if(mouse_type == MKIND_SYSTEM) {
 		int key_ = val1;
 		switch(key_) {
@@ -993,7 +994,7 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 
 	} else if (mouse_type == MKIND_PICK  || mouse_type == MKIND_PICK_DESCRIPTION) {
 		if(mouse_type == MKIND_PICK && pickup_prev_fail(false)) {
-			return;
+			return true;
 		}
 
 		int key_ = val1;
@@ -1023,6 +1024,7 @@ void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 	} else if (mouse_type == MKIND_SCROLL_DOWN) {
 		scrollup(true, -1);
 	}
+	return true;
 }
 
 
@@ -1063,6 +1065,17 @@ void MainLoop()
 		you.prev_hp[1] = you.GetHp();
 		you.prev_mp[1] = you.GetMp();
 
+
+		if(char_ == GVK_BUTTON_X) {
+			char_ = -1;
+			inputedKey.mouse = MKIND_SYSTEM;
+			inputedKey.val1 = you.quickMenu1;
+		}
+		if(char_ == GVK_BUTTON_X_LONG) {
+			char_ = -1;
+			inputedKey.mouse = MKIND_SYSTEM;
+			inputedKey.val1 = you.quickMenu2;
+		}
 
 		switch(char_)
 		{
@@ -1316,7 +1329,6 @@ void MainLoop()
 			SkillUse(0);
 			break;
 		case GVK_BUTTON_Y://패드 X
-		case 'B':
 			rightmenu_control();
 			break;
 		case GVK_BUTTON_Y_LONG: //패드 X 길게

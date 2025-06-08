@@ -3502,6 +3502,15 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 						pixel_->draw(pSprite,x_,y_,255);
 
+						if(joypadUtil::usingPad) {
+							if(you.quickMenu1 == tile_count) {
+								img_command_quick_menu1.draw(pSprite,x_,y_,255);
+							}
+							if(you.quickMenu2 == tile_count) {
+								img_command_quick_menu2.draw(pSprite,x_,y_,255);
+							}
+						}
+
 						if(g_menu_select == tile_count) {
 							if(mouseInfo.empty()) {
 								mouseInfo = getCommandString(tile_count, value_);

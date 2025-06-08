@@ -602,7 +602,13 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 	else if(type_ == VT_THROW || type_ == VT_DEBUF || type_ == VT_SATORI)
 	{
 		printlog(LocalzationManager::formatString("({0}: ",PlaceHolderHelper(LOC_SYSTEM_COMMAND)),false,false,true,CL_help);
-		printlog(LocalzationManager::formatString("{0} - {1}", PlaceHolderHelper(joypadUtil::get("v", GVK_BUTTON_A_LONG)), PlaceHolderHelper(LOC_SYSTEM_DESCRIPTION)),false,false,true,CL_help, 'v');	
+		printlog(LocalzationManager::formatString("{0} - {1}", PlaceHolderHelper(joypadUtil::get("Enter", GVK_BUTTON_A)), PlaceHolderHelper(LOC_SYSTEM_USE)),false,false,true,CL_help, VK_RETURN);
+		printlog("   ",false,false,true,CL_help);
+		printlog(LocalzationManager::formatString("{0} - {1}", PlaceHolderHelper(joypadUtil::get("v", GVK_BUTTON_A_LONG)), PlaceHolderHelper(LOC_SYSTEM_DESCRIPTION)),false,false,true,CL_help, 'v');
+		if(type_ == VT_THROW) {
+			printlog("   ",false,false,true,CL_help);
+			printlog(LocalzationManager::formatString("{0} - {1}", PlaceHolderHelper(joypadUtil::get(".", GVK_BUTTON_X)), PlaceHolderHelper(LOC_SYSTEM_USE_SHORT)),false,false,true,CL_help, '.');
+		}
 		printlog(")",true,false,true,CL_help);
 	}
 	else
@@ -2370,7 +2376,7 @@ void stat_view()
 	changedisplay(DT_GAME);
 }
 
-void ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2);
+bool ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2);
 
 
 void rightmenu_control()
@@ -2378,6 +2384,71 @@ void rightmenu_control()
 	g_menu_select = you.lastSelectMenu;
 	while(1)
 	{
+		deletelog();
+		ostringstream ss;
+		ss << joypadUtil::get("Enter",GVK_BUTTON_A) << " - ";
+		if(g_menu_select >= 0 && g_menu_select < 20) {
+			int value_ = 0;
+			if(g_menu_select == SYSCMD_AUTOPICKUP) {
+				value_ = you.auto_pickup;
+			}
+			if(g_menu_select == SYSCMD_AUTOTANMAC) {
+				value_ = you.useMouseTammac;
+			}
+			ss << getCommandString(g_menu_select, value_);
+
+
+			ss << "  ";
+			ss << joypadUtil::get("x",GVK_BUTTON_X) << " - " << LocalzationManager::locString(LOC_SYSTEM_JOYPAD_QUICKMENU1);
+			ss << "  ";
+			ss << joypadUtil::get("X",GVK_BUTTON_X_LONG) << " - " << LocalzationManager::locString(LOC_SYSTEM_JOYPAD_QUICKMENU2);
+			ss << "  ";
+		} else if(g_menu_select >= 20 && g_menu_select < 72) {
+			int item_index = g_menu_select-20;
+			bool item_name_ = false;
+			for(auto it = you.item_list.begin(); it != you.item_list.end(); it++) {
+				if(item_index-- == 0) {
+					ss << it->GetName();
+					item_name_ = true;
+					break;
+				}
+			}
+			if(!item_name_) {
+				ss << LocalzationManager::locString(LOC_SYSTEM_UI_NONE);
+			}
+
+			ss << "  ";
+			ss << joypadUtil::get("?",GVK_BUTTON_A_LONG) << " - " << LocalzationManager::locString(LOC_SYSTEM_DESCRIPTION_VIEW);
+			ss << "  ";
+		} else if(g_menu_select >= 72) {
+			int item_index = g_menu_select-72;
+			list<item>::iterator floor_items = env[current_level].item_list.end(); 
+			for(auto it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();)
+			{
+				list<item>::iterator temp = it++; 
+				
+				if((*temp).position == you.position) {
+					floor_items = temp;
+					break;
+				}
+			}
+			
+			if(floor_items != env[current_level].item_list.end()) {
+				if(floor_items->position == you.position ) {
+					if(item_index-- == 0) {
+						ss << floor_items->GetName() << " " << LocalzationManager::locString(LOC_SYSTEM_PICK);
+					}
+				}
+			} else {
+				ss << LocalzationManager::locString(LOC_SYSTEM_UI_NONE);
+			}
+
+			ss << "  ";
+			ss << joypadUtil::get("?",GVK_BUTTON_A_LONG) << " - " << LocalzationManager::locString(LOC_SYSTEM_DESCRIPTION_VIEW);
+			ss << "  ";
+		}
+		ss << joypadUtil::get("ESC",GVK_BUTTON_B) << " - " << LocalzationManager::locString(LOC_SYSTEM_CANCLE);
+		printlog(ss.str(),true,false,true,CL_help);
 		InputedKey inputedKey;
 		int input = waitkeyinput(inputedKey, true);
 		switch(input)
@@ -2402,6 +2473,18 @@ void rightmenu_control()
 				g_menu_select++;
 			}
 			continue;
+		case 'x':
+		case GVK_BUTTON_X://퀵메뉴설정
+			if(g_menu_select >= 0 && g_menu_select  < SYSCMD_C_20){
+				you.quickMenu1 = (SYSTEM_COMMAND_KIND) g_menu_select;
+			}
+			continue;
+		case 'X':
+		case GVK_BUTTON_X_LONG: //패드 A 길게
+			if(g_menu_select >= 0 && g_menu_select  < SYSCMD_C_20){
+				you.quickMenu2 = (SYSTEM_COMMAND_KIND) g_menu_select;
+			}
+			continue;
 		case VK_RETURN:
 		case '?':
 		case GVK_BUTTON_A://패드 A
@@ -2418,18 +2501,23 @@ void rightmenu_control()
 				if(temp == SYSCMD_MORE_ITEM || temp == SYSCMD_MORE_VIEW) {
 					g_menu_select = 0;
 				}
+				deletelog();
 				ForMouseClick(MKIND_SYSTEM, temp, 0);
 				return;
 			} else if(g_menu_select>=20 && g_menu_select < 72) {
 				int item_index = g_menu_select-20;
+				bool return_ = false;
 				for(auto it = you.item_list.begin(); it != you.item_list.end(); it++) {
 					if(item_index-- == 0) {
 						you.lastSelectMenu = g_menu_select;
-						g_menu_select = -1;
-						ForMouseClick(long_?MKIND_ITEM_DESCRIPTION:MKIND_ITEM, it->id, 0);
-						return;
+						return_ = ForMouseClick(long_?MKIND_ITEM_DESCRIPTION:MKIND_ITEM, it->id, 0);
+						break;
 					}
 				}
+				if(!return_)
+					continue;
+				else
+					break;
 			} else {
 				int item_index = g_menu_select-72;
 				//땅에 떨어진거 줍기
@@ -2448,9 +2536,12 @@ void rightmenu_control()
 					if(floor_items->position == you.position ) {
 						if(item_index-- == 0) {
 							you.lastSelectMenu = g_menu_select;
-							g_menu_select = -1;
-							ForMouseClick(long_?MKIND_PICK_DESCRIPTION:MKIND_PICK, item_index+1, 0);
-							return;
+							if(ForMouseClick(long_?MKIND_PICK_DESCRIPTION:MKIND_PICK, item_index+1, 0)){
+								break;
+							}
+							else {
+								continue;
+							}
 						}
 						floor_items++;
 					}
@@ -2476,6 +2567,7 @@ void rightmenu_control()
 		}
 		break;
 	}
+	deletelog();
 	g_menu_select = -1;
 }
 

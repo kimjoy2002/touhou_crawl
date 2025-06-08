@@ -124,7 +124,7 @@ teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_re
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
 ,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0), prevSpell(0), lastSelectMenu(0), currentSkillNum(0),god(GT_NONE), piety(0), gift_count(0), god_turn(0), suwako_meet(0),
-sight_reset(false), target(NULL), useMouseTammac(0), throw_weapon(NULL),dead_order(NULL), dead_reason(DR_NONE)
+sight_reset(false), target(NULL), useMouseTammac(0), throw_weapon(NULL), quickMenu1(SYSCMD_QUICKTHROW), quickMenu2(SYSCMD_MAGIC), dead_order(NULL), dead_reason(DR_NONE)
 {
 	for(int i=0;i<2;i++)
 		prev_hp[i] = hp;
@@ -366,6 +366,8 @@ void players::init() {
 	target = NULL;
 	useMouseTammac = 0;
 	throw_weapon  = NULL;
+	quickMenu1 = SYSCMD_QUICKTHROW;
+	quickMenu2 = SYSCMD_MAGIC;
 	dead_order = NULL;
 	dead_reason = DR_NONE;
 }
@@ -591,6 +593,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, target);
 	SaveData<int>(fp, useMouseTammac);
 	SaveData<char>(fp, throw_weapon?throw_weapon->id:0);
+	SaveData<SYSTEM_COMMAND_KIND>(fp, quickMenu1);
+	SaveData<SYSTEM_COMMAND_KIND>(fp, quickMenu2);
 }
 void players::LoadDatas(FILE *fp)
 {
@@ -865,6 +869,10 @@ void players::LoadDatas(FILE *fp)
 			}
 		}
 		throw_weapon = temp_;
+	}
+	if(!isPrevVersion(loading_version_string, "ver1.103")) {
+		LoadData<SYSTEM_COMMAND_KIND>(fp, quickMenu1);
+		LoadData<SYSTEM_COMMAND_KIND>(fp, quickMenu2);
 	}
 }
 

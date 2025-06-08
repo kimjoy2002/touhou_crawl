@@ -213,7 +213,9 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		return 1;
 	case 9:
 		if(joypadUtil::usingPad) {
+			you.quickMenu2 = SYSCMD_QUICKTHROW;
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL19_PAD, PlaceHolderHelper(joypadUtil::get("X",GVK_BUTTON_X))), true, false, false, CL_warning);
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL19_PAD2, PlaceHolderHelper(joypadUtil::get("X",GVK_BUTTON_X))), true, false, false, CL_warning);
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL20_PAD), true, false, false, CL_warning);
 		}
 		else {
@@ -253,7 +255,9 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		return 1;
 	case 13:
 		if(joypadUtil::usingPad) {
+			you.quickMenu2 = SYSCMD_MAGIC;
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL29_PAD, PlaceHolderHelper(joypadUtil::get("X",GVK_BUTTON_X))), true, false, false, CL_warning);
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL29_PAD2), true, false, false, CL_warning);
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL30_PAD), true, false, false, CL_warning);
 		}
 		else {
@@ -282,8 +286,9 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		return 1;
 	case 17:
 		if(joypadUtil::usingPad) {
-			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL35_PAD, PlaceHolderHelper(joypadUtil::get("Y",GVK_BUTTON_Y))), true, false, false, CL_warning);
-			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL36_PAD2, PlaceHolderHelper(joypadUtil::get("X",GVK_BUTTON_X))), true, false, false, CL_warning);
+			you.quickMenu2 = SYSCMD_SKILL;
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL35_PAD, PlaceHolderHelper(joypadUtil::get("X",GVK_BUTTON_X))), true, false, false, CL_warning);
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL35_PAD2, PlaceHolderHelper(joypadUtil::get("X",GVK_BUTTON_X))), true, false, false, CL_warning);
 		} else {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL35), true, false, false, CL_warning);
 		}

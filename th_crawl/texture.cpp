@@ -1742,6 +1742,9 @@ textures img_command_number[25]= {
 	textures(&texture_item03, 161, 255)
 };
 
+textures img_command_quick_menu1(&texture_item03, 223, 255);
+textures img_command_quick_menu2(&texture_item03, 224, 255);
+
 
 
 textures img_effect_tanmac_middle[] = 
@@ -2241,6 +2244,8 @@ textures dot_mapping_wall(&texture_dot_mapping_wall, 0, 0, 1, 1, 255);
 textures sight_rect(&texture_sight_rect, 0, 0, 64, 64, 255);
 textures explore_forbid_small(&texture_item02, 217, 255);
 textures explore_forbid_big(&texture_item02, 216, 255);
+
+
 
 //-----------------------------------------------------------
 //TextureFile 클래스

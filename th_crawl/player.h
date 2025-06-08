@@ -376,6 +376,8 @@ public:
 	int target;
 	int useMouseTammac = 0;
 	item *throw_weapon;
+	SYSTEM_COMMAND_KIND quickMenu1;
+	SYSTEM_COMMAND_KIND quickMenu2;
 
 	attack_infor *dead_order;
 	damage_reason dead_reason;

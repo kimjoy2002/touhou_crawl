@@ -552,6 +552,8 @@ extern textures img_command_unequip_jewelry;
 extern textures img_command_alphabet_small[26];
 extern textures img_command_alphabet_large[26];
 extern textures img_command_number[25];
+extern textures img_command_quick_menu1;
+extern textures img_command_quick_menu2;
 
 
 

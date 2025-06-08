@@ -116,6 +116,8 @@ LOC_SYSTEM_OPTION_MENU_BGM,배경음 볼륨
 LOC_SYSTEM_OPTION_MENU_SE,효과음 볼륨
 LOC_SYSTEM_OPTION_MENU_BACK,뒤로가기
 LOC_SYSTEM_JOYPAD_HOLD,{0} 길게 누르기
+LOC_SYSTEM_JOYPAD_QUICKMENU1,퀵메뉴1 설정
+LOC_SYSTEM_JOYPAD_QUICKMENU2,퀵메뉴2 설정
 LOC_SYSTEM_SAVE_MENU_SLOT,{0}번 슬롯
 LOC_SYSTEM_SAVE_MENU_BROKEN,잘못된 세이브
 LOC_SYSTEM_SAVE_MENU_DELETE,삭제
@@ -390,6 +392,7 @@ LOC_SYSTEM_DRINK,마시기
 LOC_SYSTEM_READ,읽기
 LOC_SYSTEM_EAT,먹기
 LOC_SYSTEM_EVOKE,발동
+LOC_SYSTEM_PICK,줍기
 LOC_SYSTEM_DISCARD,버리기
 LOC_SYSTEM_THROW,탄막/던지기
 LOC_SYSTEM_EQUIP_WEAPON,무기장착
@@ -436,8 +439,11 @@ LOC_SYSTEM_INFORMATION_DUMP,게임 덤프
 LOC_SYSTEM_LEFT_HAND,왼손
 LOC_SYSTEM_RIGHT_HAND,오른손
 LOC_SYSTEM_EQUIP_TANMAC,탄막
+LOC_SYSTEM_USE,사용
+LOC_SYSTEM_USE_SHORT,사거리맞춰서 사용
 LOC_SYSTEM_PROJECTILE,발사물
 LOC_SYSTEM_OTTER_PROJECTILE,다른 발사물
+LOC_SYSTEM_OTHER_ENEMY,대상 변경
 LOC_SYSTEM_MAGIC,마법
 LOC_SYSTEM_PUNISH,징벌
 LOC_SYSTEM_CURRENT_EXP,현재
@@ -467,6 +473,7 @@ LOC_SYSTEM_GODS_HELP,신 도움말
 LOC_SYSTEM_PROCESS_NOTE,진행 노트
 LOC_SYSTEM_PROCESS_CREDIT,크레딧
 LOC_SYSTEM_DESCRIPTION,설명
+LOC_SYSTEM_DESCRIPTION_VIEW,설명보기
 LOC_SYSTEM_CANCLE,취소
 LOC_SYSTEM_EXPLORE,탐색
 LOC_SYSTEM_DANGER,위험구역설정
@@ -1735,7 +1742,8 @@ LOC_SYSTEM_TUTORIAL17,카나코는 말했다 : e키를 눌러서 빵을 먹으�
 LOC_SYSTEM_TUTORIAL17_PAD,카나코는 말했다 : 우측 메뉴에서 빵을 먹어서 파워를 회복할 수 있어.
 LOC_SYSTEM_TUTORIAL18,카나코는 말했다 : 원거리 공격은 언제나 편하지. 부적을 주워보렴.
 LOC_SYSTEM_TUTORIAL19,카나코는 말했다 : 원거리 무기를 던질때는 F키를 누르고 던질 템을 골라.
-LOC_SYSTEM_TUTORIAL19_PAD,카나코는 말했다 : 기본 설정에선 퀵메뉴키 {0}를 눌러서 던질 수 있단다.
+LOC_SYSTEM_TUTORIAL19_PAD,카나코는 말했다 : {0}는 우측 메뉴를 빠르게 쓸 수 있는 퀵메뉴키야.
+LOC_SYSTEM_TUTORIAL19_PAD2,카나코는 말했다 : 내가 {0}를 투척 키로 바꿔두었으니 써보렴
 LOC_SYSTEM_TUTORIAL20,카나코는 말했다 : f키론 준비되어있는 탄막을 바로 던질 수 있단다.
 LOC_SYSTEM_TUTORIAL20_PAD,카나코는 말했다 : 우측 메뉴에서도 투척 아이콘을 찾을 수 있어!
 LOC_SYSTEM_TUTORIAL21,카나코는 말했다 : 효과를 알 수 없는 장신구와 두루마리군. 일단 사용해보자.
@@ -1752,7 +1760,8 @@ LOC_SYSTEM_TUTORIAL27,카나코는 말했다 : 마법을 배우려면 책에서 
 LOC_SYSTEM_TUTORIAL28,카나코는 말했다 : 일단 책을 주워서 M키로 마법의탄막을 배워보자.
 LOC_SYSTEM_TUTORIAL28_PAD,카나코는 말했다 : 일단 책을 주워서 책을 선택해 마법의탄막을 배워보자.
 LOC_SYSTEM_TUTORIAL29,카나코는 말했다 : 마법을 사용하기위해선 z키나 Z키를 누르고 사용할수있어.
-LOC_SYSTEM_TUTORIAL29_PAD,카나코는 말했다 : 마법은 {0}를 길게 눌러서 사용할 수 있어.
+LOC_SYSTEM_TUTORIAL29_PAD,카나코는 말했다 : 내가 퀵메뉴를 마법으로 바꾸어두었단다. {0}로 써보렴.
+LOC_SYSTEM_TUTORIAL29_PAD2,카나코는 말했다 : 캐릭터마다 자주 쓰는 행동에 따라 퀵메뉴가 다르게 설정되어있지.
 LOC_SYSTEM_TUTORIAL30,카나코는 말했다 : 방법은 부적던지기와 똑같단다! 자 몹을 마법으로 잡아보렴.
 LOC_SYSTEM_TUTORIAL30_PAD,카나코는 말했다 : 방법은 부적던지기와 똑같단다! 자 몹을 마법으로 잡아보렴.
 LOC_SYSTEM_TUTORIAL31,카나코는 말했다 : {0}키로 다시 위층으로 올라갈 수 있어.
@@ -1762,8 +1771,8 @@ LOC_SYSTEM_TUTORIAL33,카나코는 말했다 : 제단을 찾으면 위에서 {0}
 LOC_SYSTEM_TUTORIAL34,카나코는 말했다 : 내 신전이니까 한번 믿어보렴. 믿고난후 ^키로 설명이 보여.
 LOC_SYSTEM_TUTORIAL34_PAD,카나코는 말했다 : 내 신전이니까 한번 믿어보렴.
 LOC_SYSTEM_TUTORIAL35,카나코는 말했다 : a키를 눌러서 권능을 한번 사용해서 싸워보렴.
-LOC_SYSTEM_TUTORIAL35_PAD,카나코는 말했다 : {0}를 누르고 우측 메뉴에서 권능 사용을 찾아서 눌러보렴
-LOC_SYSTEM_TUTORIAL36_PAD2,카나코는 말했다 : 아이콘에서 {0}키를 눌러서 퀵메뉴를 바꿀수있어. 자주 쓴다면 알아두렴
+LOC_SYSTEM_TUTORIAL35_PAD,카나코는 말했다 : 퀵메뉴는 우측 메뉴에서 {0}를 짧게, 길게 누르냐로 2개를 설정가능하지.
+LOC_SYSTEM_TUTORIAL35_PAD2,카나코는 말했다 : {0}를 길게 누르면 권능을 쓰도록 바꿔두었으니 써보렴.
 LOC_SYSTEM_TUTORIAL36,카나코는 말했다 : 권능은 일정 신앙심이 되면 점점 늘어나게되지.
 LOC_SYSTEM_TUTORIAL37,카나코는 말했다 : 특히 내 권능은 신앙심을 일정량 소모하니까 주의해서 써.
 LOC_SYSTEM_TUTORIAL38,카나코는 말했다 : 신마다 신앙심을 얻는 방법이 다르고 싫어하는 것도 있단다.

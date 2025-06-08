@@ -34,11 +34,34 @@ void throwstring(list<item>::iterator it, projectile_infor* infor_)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_PROJECTILE) + ":",false,false,true,CL_help);
 		printlog(it!=you.item_list.end()?it->GetName():LocalzationManager::locString(LOC_SYSTEM_PROJECTILE_NOT_EXIST),false,false,true,it!=you.item_list.end()?it->item_color():CL_danger);
 		
-		ss << "(i - " << LocalzationManager::locString(LOC_SYSTEM_INVENTORY);
-		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_INVENTORY)) < 10)
-			ss << std::string(10-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_INVENTORY)), ' ');
-		ss << " (,) - " << LocalzationManager::locString(LOC_SYSTEM_OTTER_PROJECTILE) << ")";
-		
+		ss << "(";
+		printlog(ss.str(),false,false,true,CL_help);
+		{
+			ostringstream ss_;
+			ss_ << joypadUtil::get("i",GVK_BUTTON_Y) << " - " << LocalzationManager::locString(LOC_SYSTEM_INVENTORY);
+			printlog(ss_.str(),false,false,true,CL_help,'i');
+		}
+		ss.str("");
+		ss.clear();
+		ss << "  ";
+		printlog(ss.str(),false,false,true,CL_help);
+		{
+			ostringstream ss_;
+			ss_ << joypadUtil::get("(",GVK_LEFT_BUMPER) << ","<< joypadUtil::get(")",GVK_RIGHT_BUMPER) << " - " << LocalzationManager::locString(LOC_SYSTEM_OTTER_PROJECTILE);
+			printlog(ss_.str(),false,false,true,CL_help,')');
+		}
+		ss.str("");
+		ss.clear();
+		ss << "  ";
+		printlog(ss.str(),false,false,true,CL_help);
+		{
+			ostringstream ss_;
+			ss_ << joypadUtil::get("-",GVK_LT) << ","<< joypadUtil::get("+",GVK_RT) << " - " << LocalzationManager::locString(LOC_SYSTEM_OTHER_ENEMY);
+			printlog(ss_.str(),false,false,true,CL_help,'+');
+		}
+		ss.str("");
+		ss.clear();
+		ss << ")";
 		printlog(ss.str(),true,false,true,CL_help);
 	}
 	else

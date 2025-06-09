@@ -1202,7 +1202,7 @@ void map_algorithms_shooting_sprint(int num)
 	line_delay = 10;
 	for(int i=0;i<GT_LAST;i++)
 	{
-		if(i != GT_SHIKIEIKI && i != GT_TENKYUU && i != GT_KEIKI) {
+		if(i != GT_SHIKIEIKI && i != GT_TENKYUU) {
 			shooting_god_dq.push_back(i);
 		}
 	}

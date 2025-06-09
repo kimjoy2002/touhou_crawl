@@ -11,9 +11,11 @@
 
 #include <iostream>
 #include "common.h"
+#include "enumMapBuilder.h"
 
 using namespace std;
 
+class monster;
 
 enum haniwa_abil_key {
 	HANIWA_A_SWORD,
@@ -91,8 +93,15 @@ public:
 
 
 public:
-	static vector<haniwa_abil_key> getAbleHaniwaAbils();
+	static const int max_piety = 160;
 
+	static random_extraction<haniwa_abil_key> getAbleHaniwaAbils();
+
+	static bool has_abil(haniwa_abil_key key);
+	static int getMaxHaniwa();
+
+	static monster* createHaniwa(int index, bool first_);
+	static void upgradeHaniwa(monster* mon);
 };
 
 

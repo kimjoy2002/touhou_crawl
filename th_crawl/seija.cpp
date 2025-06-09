@@ -197,8 +197,13 @@ string seija_god_string(int god, int num) {
 		case 1: return LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO2);
 		case 2: return LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO3);
 		}
-	case GT_SHIKIEIKI:
 	case GT_KEIKI:
+		switch (num) {
+		case 0: return LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_KEIKI1);
+		case 1: return LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_KEIKI2);
+		case 2: return LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_GIFT_KEIKI3);
+		}
+	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
 		//TODO) 신구현
 	case GT_ERROR:
@@ -437,7 +442,14 @@ void seija_real_gift(int key_)
 		}
 		break;
 		case GT_SHIKIEIKI:
+			//TODO) 신구현
+			break;
 		case GT_KEIKI:
+		{
+			item_infor t;
+			item* it = env[current_level].MakeItem(you.position, makeitem(ITM_SCROLL, 0, &t, SCT_SANTUARY)); //획득으로 변경
+			it->Identify();
+		}
 		case GT_TENKYUU:
 			//TODO) 신구현
 			break;
@@ -733,7 +745,21 @@ string seija_talk(god_type god_, int piety)
 			}
 			break;
 		case GT_SHIKIEIKI:
+			//TODO) 신구현
+			break;
 		case GT_KEIKI:
+			switch (randA(3))
+			{
+			case 0:
+				return LocalzationManager::locString(LOC_SYSTEM_SEIJA_GOD_KEIKI1);
+			case 1:
+				return LocalzationManager::locString(LOC_SYSTEM_SEIJA_GOD_KEIKI2);
+			case 2:
+				return LocalzationManager::locString(LOC_SYSTEM_SEIJA_GOD_KEIKI3);
+			case 3:
+				return LocalzationManager::locString(LOC_SYSTEM_SEIJA_GOD_KEIKI4);
+			}
+			break;
 		case GT_TENKYUU:
 			//TODO) 신구현
 			break;

@@ -10,6 +10,7 @@
 #include "environment.h"
 #include "god.h"
 #include "key.h"
+#include "keiki.h"
 #include "skill_use.h"
 #include "mon_infor.h"
 #include "potion.h"
@@ -993,7 +994,10 @@ bool GetGodAbility(int level, bool plus)
 		}
 		return false;
 	case GT_SHIKIEIKI:
+		//TODO) 신구현
+		return false;
 	case GT_KEIKI:
+		return false;
 	case GT_TENKYUU:
 		//TODO) 신구현
 		return false;
@@ -1366,7 +1370,10 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		}
 		return false;
 	case GT_SHIKIEIKI:
+		//TODO) 신구현
+		return false;
 	case GT_KEIKI:
+		return false;
 	case GT_TENKYUU:
 		//TODO) 신구현
 		return false;
@@ -1404,8 +1411,10 @@ bool GodAccpect_Entering()
 	case GT_OKINA:
 	case GT_JUNKO:
 		return false;
-	case GT_SHIKIEIKI:
 	case GT_KEIKI:
+		haniwa_abil::createHaniwa(0, false);
+		return true;
+	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
 		//TODO) 신구현
 		return false;
@@ -1481,9 +1490,9 @@ bool GodAccpect_GetPitem()
 	case GT_MIKO:
 	case GT_OKINA:
 	case GT_JUNKO:
+	case GT_KEIKI:
 		return false;
 	case GT_SHIKIEIKI:
-	case GT_KEIKI:
 	case GT_TENKYUU:
 		//TODO) 신구현
 		return false;
@@ -1559,9 +1568,9 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 	case GT_MIKO:
 	case GT_OKINA:
 	case GT_JUNKO:
+	case GT_KEIKI:
 		return false;
 	case GT_SHIKIEIKI:
-	case GT_KEIKI:
 	case GT_TENKYUU:
 		//TODO) 신구현
 		return false;
@@ -1606,9 +1615,9 @@ bool GodAccpect_UseSpell(spell_list spell_)
 	case GT_MIKO:
 	case GT_OKINA:
 	case GT_JUNKO:
+	case GT_KEIKI:
 		return false;
 	case GT_SHIKIEIKI:
-	case GT_KEIKI:
 	case GT_TENKYUU:
 		//TODO) 신구현
 		return false;
@@ -1654,10 +1663,10 @@ bool GodAccpect_Practice(int value, skill_type skill_)
 	case GT_MIKO:
 	case GT_OKINA:
 	case GT_JUNKO:
+	case GT_KEIKI:
 	default:
 		return false;
 	case GT_SHIKIEIKI:
-	case GT_KEIKI:
 	case GT_TENKYUU:
 		//TODO) 신구현
 		return false;
@@ -1718,9 +1727,9 @@ bool GodAccpect_Stair(bool down_, bool new_dungeon_)
 	break;
 	case GT_OKINA:
 	case GT_JUNKO:
+	case GT_KEIKI:
 		return false;
 	case GT_SHIKIEIKI:
-	case GT_KEIKI:
 	case GT_TENKYUU:
 		//TODO) 신구현
 		return false;
@@ -1749,7 +1758,7 @@ bool GodAccpect_Explore_100()
 	{
 		bool return_ = false;
 		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-			if (60 > randA(100))
+			if (40 > randA(100))
 			{
 				you.PietyUpDown(1);
 				return_ = true;
@@ -1765,7 +1774,7 @@ bool GodAccpect_Explore_100()
 	{
 		bool return_ = false;
 		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-			if (60 > randA(100))
+			if (40 > randA(100))
 			{
 				you.GiftCount(1);
 				you.PietyUpDown(1);
@@ -1786,7 +1795,7 @@ bool GodAccpect_Explore_100()
 	{
 		bool return_ = false;
 		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
-			if (40 > randA(100))
+			if (30 > randA(100))
 			{
 				you.PietyUpDown(1);
 				return_ = true;
@@ -1823,8 +1832,13 @@ bool GodAccpect_Explore_100()
 	case GT_OKINA:
 	case GT_JUNKO:
 		return false;
-	case GT_SHIKIEIKI:
 	case GT_KEIKI:
+		if(20>randA(100))
+		{
+			you.GiftCount(1);
+		}
+		return false;
+	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
 		//TODO) 신구현
 		return false;
@@ -1870,9 +1884,9 @@ bool GodAccpect_Exp_get()
 	case GT_MIKO:
 	case GT_OKINA:
 	case GT_JUNKO:
+	case GT_KEIKI:
 		return false;
 	case GT_SHIKIEIKI:
-	case GT_KEIKI:
 	case GT_TENKYUU:
 		//TODO) 신구현
 		return false;
@@ -1934,9 +1948,9 @@ bool GodAccpect_First_contact()
 	case GT_MIKO:
 	case GT_OKINA:
 	case GT_JUNKO:
+	case GT_KEIKI:
 		return false;
 	case GT_SHIKIEIKI:
-	case GT_KEIKI:
 	case GT_TENKYUU:
 		//TODO) 신구현
 		return false;
@@ -1967,7 +1981,7 @@ bool GodAccpect_Abandon(god_type god)
 	case GT_SEIJA:
 	default:
 		return false;
-	case GT_LILLY:		
+	case GT_LILLY:
 		{
 			int k = 0;
 			for(int i = 0; i < 5; i++)
@@ -1996,8 +2010,30 @@ bool GodAccpect_Abandon(god_type god)
 	case GT_OKINA:
 	case GT_JUNKO:
 		return false;
-	case GT_SHIKIEIKI:
 	case GT_KEIKI:
+		{
+			int k = 0;
+			int max_num =  haniwa_abil::getMaxHaniwa();
+			for(int i = 0; i < max_num; i++)
+			{
+				for(auto it = env[you.haniwa_allys[i].floor].mon_vector.begin(); it != env[you.haniwa_allys[i].floor].mon_vector.end();it++)
+				{
+					if(it->isLive() && it->isUserAlly() && it->map_id == you.haniwa_allys[i].map_id)
+					{
+						it->dead(PRT_NEUTRAL, false, true);
+						env[current_level].MakeSmoke(it->position, img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, NULL);
+						k++;
+						break;
+					}
+				}
+			}
+			if(k>0)
+			{
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_ABANDON), true,false,false,CL_small_danger);
+			}
+		}
+		return false;
+	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
 		//TODO) 신구현
 		return false;
@@ -2218,9 +2254,9 @@ bool GodAccpect_turn(int turn)
 		}
 		return false;
 	case GT_JUNKO:
+	case GT_KEIKI:
 		return false;
 	case GT_SHIKIEIKI:
-	case GT_KEIKI:
 	case GT_TENKYUU:
 		//TODO) 신구현
 		return false;
@@ -2365,7 +2401,7 @@ void Pray()
 						printsub(" (",false,CL_danger);
 						if(joypadUtil::usingPad) {
 							printsub(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_Y, 
-										PlaceHolderHelper(joypadUtil::get("Y", GVK_BUTTON_A_LONG, PROMPT_YN))),false,color_, 'Y');
+										PlaceHolderHelper(joypadUtil::get("Y", GVK_BUTTON_A_LONG, PROMPT_YN))),false,CL_danger, 'Y');
 						}
 						else {
 							printsub(joypadUtil::get("Y",GVK_BUTTON_A_LONG),false,color_, 'Y');
@@ -2373,7 +2409,7 @@ void Pray()
 						printsub("/",false,CL_danger);
 						if(joypadUtil::usingPad) {
 							printsub(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_N, 
-										PlaceHolderHelper(joypadUtil::get("N", GVK_BUTTON_B, PROMPT_YN))),false,color_, 'N');
+										PlaceHolderHelper(joypadUtil::get("N", GVK_BUTTON_B, PROMPT_YN))),false,CL_danger, 'N');
 						}
 						else {
 							printsub(joypadUtil::get("N",GVK_BUTTON_B),false,CL_danger, 'n');
@@ -2799,8 +2835,25 @@ void GodInfor(god_type god)
 		printsub("", true, CL_normal);
 		break;
 	}
-	case GT_SHIKIEIKI:
 	case GT_KEIKI:
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_TITLE), true, CL_keiki);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+		
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
+		break;
+	}
+	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
 		//TODO) 신구현
 	default: 
@@ -3290,7 +3343,14 @@ void God_AblilityShow(god_type god) {
 			break;
 		}
 	case GT_SHIKIEIKI:
+		break;
 	case GT_KEIKI:
+		if (you.piety >= haniwa_abil::max_piety) {
+			printGodAbility(GT_KEIKI, level_, 0, false, LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY1, vector<subability>(), LOC_EMPTYSTRING, false);
+		} else {
+			printGodAbility(GT_KEIKI, level_, 0, false, LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_SOMETIME);
+		}
+		break;
 	case GT_TENKYUU:
 		//TODO) 신구현
 		break;
@@ -3417,7 +3477,10 @@ bool God_pray(const list<item>::iterator it)
 	case GT_JUNKO:
 		break;
 	case GT_SHIKIEIKI:
+		//TODO) 신구현
+		return false;
 	case GT_KEIKI:
+		break;
 	case GT_TENKYUU:
 		//TODO) 신구현
 		return false;
@@ -4246,7 +4309,46 @@ bool god_punish(god_type god)
 		}
 		break;
 	case GT_SHIKIEIKI:
+		//TODO) 신구현
+		break;
 	case GT_KEIKI:
+		{
+			random_extraction<int> rand_;
+			rand_.push(0,100);//하니와
+			switch(rand_.pop())
+			{
+			case 0:
+				{
+					random_extraction<int> haniwa_;
+					haniwa_.push(MON_HANIWA, 10);
+					if(you.level>12) {
+						haniwa_.push(MON_HANIWA_SPEARMAN, 3);
+					}
+					if(you.level>15) {
+						haniwa_.push(MON_HANIWA_ARCHER, 2);
+					}
+					if(you.level>18) {
+						haniwa_.push(MON_HANIWA_CAVALRY, 2);
+					}
+
+
+					int i = rand_int(1,3+you.level/9);
+					for(; i>0 ; i--)
+					{
+						int summon_ = haniwa_.choice();
+						if(monster *mon_ = BaseSummon(summon_, rand_int(90,120), true, true, 2, NULL, you.position, SKD_OTHER, -1))
+						{
+							if(summon_ == MON_HANIWA) {
+								mon_->LevelUpdown(you.level/2);
+							}
+						}
+					}
+					summon_ = true;
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_PUNISH_SUMMON),true,false,false,CL_keiki);
+				}
+				break;
+			}
+		}
 	case GT_TENKYUU:
 		//TODO) 신구현
 		break;
@@ -4389,10 +4491,10 @@ void godAutoPickUp(god_type god_, bool belive_) {
 	case GT_MIKO:
 	case GT_OKINA:
 	case GT_JUNKO:
+	case GT_KEIKI:
 	default:
 		break;
 	case GT_SHIKIEIKI:
-	case GT_KEIKI:
 	case GT_TENKYUU:
 		//TODO) 신구현
 		break;
@@ -4509,7 +4611,11 @@ void printReEnter()
 		printlog(LocalzationManager::locString(LOC_SYSTEM_WELCOME), true, false, false, CL_normal);
 		break;
 	case GT_SHIKIEIKI:
+		//TODO) 신구현
+		break;
 	case GT_KEIKI:
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_WELCOME), true, false, false, CL_keiki);
+		break;
 	case GT_TENKYUU:
 		//TODO) 신구현
 		break;
@@ -5050,7 +5156,34 @@ bool God_PraySpeak()
 			return true;
 		}
 	case GT_SHIKIEIKI:
+		//TODO) 신구현
+		break;
 	case GT_KEIKI:
+		switch (level_)
+		{
+		default:
+		case 0:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_TALK1), true, false, false, CL_keiki);
+			return true;
+		case 1:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_TALK2), true, false, false, CL_keiki);
+			return true;
+		case 2:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_TALK3), true, false, false, CL_keiki);
+			return true;
+		case 3:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_TALK4), true, false, false, CL_keiki);
+			return true;
+		case 4:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_TALK5), true, false, false, CL_keiki);
+			return true;
+		case 5:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_TALK6), true, false, false, CL_keiki);
+			return true;
+		case 6:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_TALK7), true, false, false, CL_keiki);
+			return true;
+		}
 	case GT_TENKYUU:
 		//TODO) 신구현
 		break;

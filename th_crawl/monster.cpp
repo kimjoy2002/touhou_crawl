@@ -15,6 +15,7 @@
 #include "save.h"
 #include "god.h"
 #include "skill_use.h"
+#include "keiki.h"
 #include "smoke.h"
 #include "floor.h"
 #include "note.h"
@@ -2786,7 +2787,16 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		}
 	}
 
-
+	if(you.god == GT_KEIKI) {
+		int max_num = haniwa_abil::getMaxHaniwa();
+		for(int i = 0; i < max_num; i++)
+		{
+			if(you.haniwa_allys[i].map_id == map_id && you.haniwa_allys[i].floor == current_level)
+			{
+				you.haniwa_allys[i].cooldown = haniwa_abil::has_abil(HANIWA_A_FAST_REVIVE)?rand_int(25,35):rand_int(90,110); //부활준비
+			}
+		}
+	}
 
 	if(!(flag & M_FLAG_SUMMON) && !remove_ && !(flag & M_FLAG_UNHARM))
 	{

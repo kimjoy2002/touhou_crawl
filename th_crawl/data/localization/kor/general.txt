@@ -1550,6 +1550,10 @@ LOC_SYSTEM_SEIJA_GOD_JUNKO1,세이자: 역시 아이템 강화는 가장 중요�
 LOC_SYSTEM_SEIJA_GOD_JUNKO2,세이자: 계속 누굴 죽인다고 중얼거리다니 기분나쁜 놈이네
 LOC_SYSTEM_SEIJA_GOD_JUNKO3,세이자: 순화가 축복이라고? 아이템을 쓰질못한다면 무슨 소용인거지?
 LOC_SYSTEM_SEIJA_GOD_JUNKO4,세이자: 순수한 힘엔 못미치지만 우리에겐 머리와 아이템이 있지
+LOC_SYSTEM_SEIJA_GOD_KEIKI1,세이자: 최고의 두루마리지! 한개밖에 없으니 신중하게 쓰라고!
+LOC_SYSTEM_SEIJA_GOD_KEIKI2,세이자: 이런 신을 만들어내고는 우상에 의존하다니 멍청하네~
+LOC_SYSTEM_SEIJA_GOD_KEIKI3,세이자: 누군가 공들여 만든 무언가를 보면 부수고 싶어지지. 안그래?
+LOC_SYSTEM_SEIJA_GOD_KEIKI4,세이자: 이런 신에 의존해서는 약자에서 벗어나긴 글렀지.
 LOC_SYSTEM_SEIJA_WELCOME1,세이자: 새로운 레지스탕스의 탄생이군! 환영한다!
 LOC_SYSTEM_SEIJA_WELCOME2,세이자: 우린 최고의 팀이 될거야!
 LOC_SYSTEM_SEIJA_WELCOME3,세이자: 콧대만 높은 그 녀석들에게 한방 먹이자고!
@@ -3746,6 +3750,8 @@ LOC_SYSTEM_GOD_OKINA_TITLE,마타라 오키나 - 궁극의 절대비신
 LOC_SYSTEM_GOD_OKINA_DESCRIPTION,마타라 오키나는 배후에 숨어있는 비신으로 자세한 정체는 알려져있지않다.\n그녀는 자신의 일을 맡길 부하를 찾고있으며, 당신이 그 일을 할수도 있다.\n그녀의 신도가 되는 것으로 그녀의 문을 만드는 힘을 이용한 권능을 받을 수 있다.\n문을 자유자재로 타고다닐수도있고, 적의 등뒤에서 갑자기 등장할수도 있다.\n또한 다른 동료들을 부르는 것으로 생명력과 정신력을 끌어올릴수도 있다.\n그녀는 전투에서 승리하여 신의 존재감을 널리 알리는 것을 좋아한다.
 LOC_SYSTEM_GOD_JUNKO_TITLE,순호
 LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,순호는 원한이 순화된 신령으로 자신의 원한을 갚기위해 신도를 모집하고 있다.\n그녀의 신도가 된다면 단순하지만 강력한 순화의 능력을 받을 수 있다.\n그녀의 권능은 신앙심도 소모하지않지만 사용하게되면 일시적으로 순화상태에 빠지고\n순화 단계가 올라갈수록 소모품의 사용에 제한되는 패널티가 생긴다.\n기본적으로 권능에 의한 순화상태는 시간이 지나면 돌아오지만 순호가 아끼는 신도에게는 영구적인 순화를 내릴 수 있다.\n그녀의 축복은 너무 무겁기에 패널티도 크고 배신조차 허용되지않지만 그에 비견할만한 새로운 축복이 내려진다.\n그녀는 원한을 갚기위해 보이는 적을 모조리 죽이는 것을 좋아한다.
+LOC_SYSTEM_GOD_KEIKI_TITLE,하니야스신 케이키 - 고립무원이 빚어낸 조형신
+LOC_SYSTEM_GOD_KEIKI_DESCRIPTION,케이키는 인간령들이 만들어낸 조형신이다.\n우상을 만들어내어 만들어낸 우상에 생명을 부여할 수 있다.\n그는 신도들을 보호하기위해 믿는 즉시 작은 하니와를 내려주며\n탐험을 하면서 점차 하니와를 신도의 입맛에 맞게 개조해나갈 수 있다.\n역으로 우상에 지배당하지 않도록!
 LOC_SYSTEM_GOD_BUG_TITLE,버그신
 LOC_SYSTEM_GOD_BUG_DESCRIPTION,이 신은 버그다!\n버그신은 동방크롤에서 가장 악한 신이다.\n버그신은 게임 플레이에 지대한 영향을 주며 당신에게 깊은 스트레스를 준다.\n이 신이 존재하는 것만으로도 게임이 크래쉬가 날 수 있으며 당신의 캐릭터를 삭제시킬지도 모른다.\n버그신의 분노를 가라앉히려면 제작자에게 보고하는 수 밖에 없다.\n
 LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY0_ADD,당신은 역병신과 빈곤신의 저주로 소모품을 낭비하며 잃어버린다.
@@ -4032,6 +4038,8 @@ LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY2,당신은 카나코님의 기둥을 구현�
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3,당신은 카나코님의 바람의 힘을 휘감을 수 있다.
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY4,당신은 가끔씩 카나코로부터 무기를 선물 받는다.
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY5,당신은 가끔씩 카나코로부터 탄막을 선물 받는다.
+LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY1,당신은 케이키로부터 선물받은 하니와를 강화할 수 있다.
+LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY1_1,당신은 하니와를 전부 강화했다.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_JUMP,당신은 짧은 거리를 점프할 수 있다.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_TEMPLE,당신은 신전을 세워 신앙심을 벌 수 있다.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_WATER_GUN,당신은 멀리있는 적에 물의 탄막을 날릴 수 있다.
@@ -4249,6 +4257,18 @@ LOC_SYSTEM_GOD_KANAKO_PUNISH_STRIKE,카나코는 당신에게 강력한 일격�
 LOC_SYSTEM_GOD_KANAKO_PUNISH_ONBASIRA,카나코는 당신에게 강력한 일격을 날렸다!
 LOC_SYSTEM_GOD_KANAKO_PUNISH_RECALL,카나코는 당신을 전투로 강제로 이끌었다!
 LOC_SYSTEM_GOD_KANAKO_PUNISH_RECALL_FAIL,카나코는 당신을 전투로 이끌려했지만 적당한 적이 없었다.
+LOC_SYSTEM_GOD_KEIKI_TALK1,케이키: 당신의 미적 감각을 시험해봐야겠네.
+LOC_SYSTEM_GOD_KEIKI_TALK2,케이키: 그런 선택을 한단 말이지?
+LOC_SYSTEM_GOD_KEIKI_TALK3,케이키: 이 부분은 이렇게 깎아내면...
+LOC_SYSTEM_GOD_KEIKI_TALK4,케이키: 점점 괜찮아지고있어!
+LOC_SYSTEM_GOD_KEIKI_TALK5,케이키: 괜찮은 센스야!
+LOC_SYSTEM_GOD_KEIKI_TALK6,케이키: 마지막으로 이 부분만 다듬으면...
+LOC_SYSTEM_GOD_KEIKI_TALK7,케이키: 한점의 티도 없는 완벽한 우상이야!
+LOC_SYSTEM_GOD_KEIKI_CREATE,케이키가 당신에게 {0:을|를} 선물했다!
+LOC_SYSTEM_GOD_KEIKI_REVIVE,{0:은|는} 다시 만들어졌다!
+LOC_SYSTEM_GOD_KEIKI_WELCOME,케이키: 완벽한 우상을 만들어줄게!
+LOC_SYSTEM_GOD_KEIKI_PUNISH_SUMMON,케이키를 적대적인 하니와를 조형해냈다!
+LOC_SYSTEM_GOD_KEIKI_ABANDON,케이키를 배신하여 하니와가 사라졌다!
 LOC_SYSTEM_GOD_SWAWKO_WELCOME,스와코: 하하하! 재밌어졌어
 LOC_SYSTEM_GOD_SWAWKO_WELCOME_SANAE,스와코: 사나에! 요즘은 어때, 익숙해졌어?
 LOC_SYSTEM_GOD_SUWAKO_TALK1,스와코: 요괴퇴치의 시간이야 사나에!
@@ -4548,6 +4568,9 @@ LOC_SYSTEM_GOD_SEIJA_GIFT_OKINA3,응원하거나 당신의 체력과 영력을 �
 LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO1,순호: 무기강화와 방어구강화 두루마리를 여럿 받습니다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO2,순호는 징벌로 당신을 약화시키거나 감속을 시키거나 당신의 능력치를
 LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO3,일시적으로 감소시킵니다.
+LOC_SYSTEM_GOD_SEIJA_GIFT_KEIKI1,케이키: 획득의 두루마리를 하나 받습니다.
+LOC_SYSTEM_GOD_SEIJA_GIFT_KEIKI2,케이키는 징벌로 적대적인 하니와를 소환합니다.
+LOC_SYSTEM_GOD_SEIJA_GIFT_KEIKI3,레벨이 높아질수록 하니와의 강함과 수가 늘어납니다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_DEFAULT1,버그신: 잘못된 신입니다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_DEFAULT2,대부분은 버그입니다.
 LOC_SYSTEM_GOD_SEIJA_FINAL_GIFT,...세이자가 마지막 선물로 요술망치를 주고 갔다.
@@ -4836,7 +4859,7 @@ LOC_SYSTEM_ARENA_DRAW,무승부! 이번 대전은 무효다.
 LOC_SYSTEM_ARENA_TIMEOVER,시한초과! 무승부! 이번 대전은 무효다.
 LOC_SYSTEM_ARENA_GAMEOVER,당신의 기록은 {0}레벨이다. 다음에 더욱 높은 레벨에 도전하도록! ({1}로 기록확인)
 LOC_SYSTEM_SHOOTING_SPRINT_START1,슈팅&로그라이크에 온걸 환영한다! 쏟아지는 적들을 처리해라!
-LOC_SYSTEM_SHOOTING_SPRINT_START2,여기서는 .키를 눌러서 원거리 공격을 할 수 있다!
+LOC_SYSTEM_SHOOTING_SPRINT_START2,여기서는 {0}키를 눌러서 원거리 공격을 할 수 있다!
 LOC_SYSTEM_DUMP_SUCCESS,덤프에 성공했습니다.
 LOC_SYSTEM_DUMP_TITLE,동방크롤 {0} 덤프 파일
 LOC_SYSTEM_DUMP_PLACE_IN,당신은 {0}에 있다.

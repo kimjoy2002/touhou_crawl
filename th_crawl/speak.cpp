@@ -1940,7 +1940,27 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 				}
 				break;
 				case GT_SHIKIEIKI:
+					//TODO) 신구현
+					break;
 				case GT_KEIKI:
+				switch (randA(6))
+				{
+				case 0:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_GOD_KEIKI1), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 1:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_GOD_KEIKI2), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 2:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_GOD_KEIKI3), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 3:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_GOD_KEIKI4), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 4:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_GOD_KEIKI5), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 5:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_GOD_KEIKI6), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 6:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_GOD_KEIKI7), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+				break;
 				case GT_TENKYUU:
 					//TODO) 신구현
 					break;

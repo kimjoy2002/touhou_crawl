@@ -11,6 +11,7 @@
 #include "const.h"
 #include "save.h"
 #include "map.h"
+#include "keiki.h"
 #include "rect.h"
 #include "event.h"
 #include "mon_infor.h"
@@ -1372,6 +1373,28 @@ void environment::AllySafeClear(int new_floor_, coord_def pos_)
 			}
 		}
 	}
+	if(you.god == GT_KEIKI)
+	{
+		int max_num = haniwa_abil::getMaxHaniwa();
+		
+		for(int i = 0; i<max_num;i++)
+		{
+			for(auto it = mon_vector.begin();it != mon_vector.end();it++)
+			{
+				if(it->isLive() && (*it).isUserAlly() && it->map_id == you.haniwa_allys[i].map_id && floor == you.haniwa_allys[i].floor)
+				{
+					rand_rect_iterator rect_(pos_,2,2);				
+					while(!rect_.end())
+					{
+						if(env[new_floor_].movingfloor((*rect_), floor, &(*it)))
+							break;
+						rect_++;
+					}
+					break;
+				}
+			}
+		}
+	}
 }
 void environment::ClearFloor()
 {
@@ -1566,6 +1589,20 @@ monster* environment::movingfloor(const coord_def &c, int prev_floor_, monster* 
 					you.lilly_allys[i].map_id = temp->map_id;
 					you.lilly_allys[i].floor = floor;
 				}
+			}
+			if(you.god == GT_KEIKI)
+			{
+				int max_num =  haniwa_abil::getMaxHaniwa();
+
+				for(int i = 0; i<max_num; i++)
+				{
+					if(you.god_value[GT_LILLY][i] && you.haniwa_allys[i].map_id == mon_->map_id && you.haniwa_allys[i].floor == prev_floor_ )
+					{
+						you.haniwa_allys[i].map_id = temp->map_id;
+						you.haniwa_allys[i].floor = floor;
+					}
+				}
+
 			}
 
 			mon_->hp = 0;

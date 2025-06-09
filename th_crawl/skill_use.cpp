@@ -2399,7 +2399,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 		random_extraction<int> rand_god;
 
 		for (int i = GT_FIRST; i < GT_LAST; i++) {
-			if (i != GT_SEIJA && i != GT_SHIKIEIKI && i != GT_TENKYUU && i != GT_KEIKI && !(you.god_value[GT_SEIJA][1] & (1 << i)))
+			if (i != GT_SEIJA && i != GT_SHIKIEIKI && i != GT_TENKYUU && !(you.god_value[GT_SEIJA][1] & (1 << i)))
 				rand_god.push(i);
 		}
 		for (int i = 0; i < 4; i++) {

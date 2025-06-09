@@ -523,7 +523,7 @@ void charter_selete(bool first)
 
 		steam_mg.setCurrentInfo();
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOOTING_SPRINT_START1),true,false,false,CL_help);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOOTING_SPRINT_START2),true,false,false,CL_help);
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_SHOOTING_SPRINT_START2, joypadUtil::get(".", GVK_BUTTON_A)),true,false,false,CL_help);
 		env[current_level].enterBgm(0);
 	}
 

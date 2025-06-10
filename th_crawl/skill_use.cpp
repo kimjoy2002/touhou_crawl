@@ -11,6 +11,7 @@
 #include "skill_use.h"
 #include "throw.h"
 #include "beam.h"
+#include "keiki.h"
 #include "monster.h"
 #include "smoke.h"
 #include "mon_infor.h"
@@ -4478,6 +4479,62 @@ bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
 	LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_GIFT,true,false,false,CL_miko,
 		 PlaceHolderHelper(LOC_SYSTEM_GOD_MIKO));
 	return true;
+}
+
+
+
+bool skill_haniwa_recall(int hiniwa_num, unit* order, coord_def target)
+{
+	if(!order->isplayer() || you.god != GT_KEIKI)
+		return false;
+		
+	bool exist_ = false;
+		
+	int max_num = haniwa_abil::getMaxHaniwa();
+	for(int i = 0; i < max_num; i++)
+	{
+		if(i == hiniwa_num) {
+			int k = 0;
+			for(auto it = env[you.haniwa_allys[i].floor].mon_vector.begin(); k == 0 && it != env[you.haniwa_allys[i].floor].mon_vector.end();it++)
+			{
+				if(it->isLive() && it->map_id == you.haniwa_allys[i].map_id)
+				{
+					exist_ = true;
+					dif_rect_iterator rit(target,2);
+					for(; k == 0 && !rit.end();rit++)
+					{
+						if(env[current_level].isMove(rit->x, rit->y,it->isFly(),it->isSwim()) && !env[current_level].isMonsterPos(rit->x,rit->y) &&  env[current_level].isInSight(coord_def(rit->x,rit->y)) && you.position != (*rit))
+						{
+							if(you.haniwa_allys[i].floor == current_level)
+							{
+								it->SetXY(rit->x,rit->y);
+								it->state.SetState(MS_FOLLOW);
+								it->wait = false;
+								k=1;
+							}
+							else
+							{								
+								if(env[current_level].movingfloor((*rit), you.haniwa_allys[i].floor, &(*it)))
+								{
+									it->state.SetState(MS_FOLLOW);
+									it->wait = false;
+									k=1;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	if(!exist_) {
+		//하니와가 없으므로 부활
+		haniwa_abil::createHaniwa(hiniwa_num, false);
+	}
+
+
+	return false;
 }
 
 

@@ -232,8 +232,8 @@ const mon_infor mondata[] = {
 	M_FLAG_SPEAK | M_FLAG_OPEN_DOOR,0,0,10,'d' },
 
 	{MON_KATPA_SPEAR,9,730,name_infor(MON_KATPA_SPEAR),&img_mons_new_kappa_spear,70,5,10,
-	{28,0,0},{ATT_SPEAR,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-	M_FLAG_SPEAK | M_FLAG_OPEN_DOOR | M_FLAG_SWIM,0,0,10,'K' },
+	{26,0,0},{ATT_SPEAR,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	M_FLAG_SPEAK | M_FLAG_OPEN_DOOR | M_FLAG_SWIM | M_FLAG_SPEAR_ATTACK,0,0,10,'K' },
 
 	{MON_KATPA_WATER_WIZARD,10,860,name_infor(MON_KATPA_WATER_WIZARD),&img_mons_new_kappa_wizard,45,4,10,
 	{4,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
@@ -1049,21 +1049,21 @@ const mon_infor mondata[] = {
 		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
 
-	{MON_HANIWA,2,4,name_infor(MON_HANIWA),&img_mons_haniwa,25,0,5,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
+	{MON_HANIWA,1,1,name_infor(MON_HANIWA),&img_mons_haniwa,10,1,10,
+		{3,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE | M_FLAG_CANT_NETURAL,1,0,10,'h'},
 
-	{MON_HANIWA_SPEARMAN,2,4,name_infor(MON_HANIWA_SPEARMAN),&img_mons_haniwa_spearman,25,0,5,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
+	{MON_HANIWA_SPEARMAN,11,900,name_infor(MON_HANIWA_SPEARMAN),&img_mons_haniwa_spearman,90,5,10,
+		{31,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE | M_FLAG_SPEAR_ATTACK,1,0,10,'h'},
 
-	{MON_HANIWA_ARCHER,2,4,name_infor(MON_HANIWA_ARCHER),&img_mons_haniwa_archer,25,0,5,
+	{MON_HANIWA_ARCHER,10,800,name_infor(MON_HANIWA_ARCHER),&img_mons_haniwa_archer,70,3,13,
 		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
+		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE | M_FLAG_RANGE_ATTACK,0,0,10,'h'},
 
-	{MON_HANIWA_CAVALRY,2,4,name_infor(MON_HANIWA_CAVALRY),&img_mons_haniwa_cavalry,25,0,5,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
+	{MON_HANIWA_CAVALRY,13,1200,name_infor(MON_HANIWA_CAVALRY),&img_mons_haniwa_cavalry,120,2,15,
+		{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE ,0,0,7,'h'},
 
 	{MON_WOLF_SPIRIT,2,4,name_infor(MON_WOLF_SPIRIT),&img_mons_wolf_spirit,25,0,5,
 		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},

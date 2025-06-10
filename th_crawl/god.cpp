@@ -1412,7 +1412,7 @@ bool GodAccpect_Entering()
 	case GT_JUNKO:
 		return false;
 	case GT_KEIKI:
-		haniwa_abil::createHaniwa(0, false);
+		haniwa_abil::createHaniwa(0, true);
 		return true;
 	case GT_SHIKIEIKI:
 	case GT_TENKYUU:

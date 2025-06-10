@@ -16,6 +16,7 @@
 #include "potion.h"
 #include "scroll.h"
 #include "key.h"
+#include "keiki.h"
 #include "save.h"
 #include "skill_use.h"
 #include "weapon.h"
@@ -33,6 +34,7 @@ extern players you;
 extern HANDLE mutx;
 
 extern display_manager DisplayManager;
+bool skill_haniwa_recall(int hiniwa_num, unit* order, coord_def target);
 
 bool CheckMonsterPassive(int turn)
 {
@@ -252,6 +254,22 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		SetInter(resetLOS()); //굉장히 연산이 많이 들어가는 작업이므로 필요할때만 불러야함
 	env[current_level].ClearShadow();
 	ReleaseMutex(mutx);
+
+	if(you.god == GT_KEIKI) {
+		int max_num = haniwa_abil::getMaxHaniwa();
+		for(int i = 0; i < max_num; i++) {
+			haniwa_allys[i].cooldown -= delay_;
+			if(haniwa_allys[i].cooldown < -100) { //대략 10턴간 시야에 안 보임
+				haniwa_allys[i].cooldown = 0;
+				skill_haniwa_recall(i, &you, you.position);
+
+			}
+		}
+
+	}
+
+
+
 	if(s_poison)
 	{
 		if(poison_percent(s_poison))

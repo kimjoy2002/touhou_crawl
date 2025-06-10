@@ -2230,6 +2230,15 @@ void SetResistMonster(monster* mon)
 		mon->poison_resist = 1;
 		mon->confuse_resist = 1;
 		break;
+	case MON_HANIWA:
+	case MON_HANIWA_ARCHER:
+	case MON_HANIWA_CAVALRY:
+	case MON_HANIWA_SPEARMAN:
+		mon->elec_resist = 1;
+		mon->fire_resist = 1;
+		mon->ice_resist = 1;
+		mon->poison_resist = 1;
+		break;
 	}
 }
 

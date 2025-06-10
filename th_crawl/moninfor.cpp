@@ -154,6 +154,10 @@ void GetMonsterInfor(monster *it)
 		_infor_(LocalzationManager::locString(LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_SEE_INVISIBLE));
 		_infor_("\n");
 	}
+	if(it->flag & M_FLAG_SPEAR_ATTACK) {
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_MONSTER_DESCRIPTION_SPEAR_ATTACK));
+		_infor_("\n");
+	}
 	if(it->flag & M_FLAG_INANIMATE) {
 		_infor_(LocalzationManager::locString(LOC_SYSTEM_MONSTER_DESCRIPTION_INANIMATE));
 		_infor_("\n");

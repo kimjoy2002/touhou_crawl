@@ -161,12 +161,12 @@ monster* haniwa_abil::createHaniwa(int index, bool first_) {
             you.haniwa_allys[index].map_id = haniwa_->map_id;
             you.haniwa_allys[index].floor = current_level;
 
+			upgradeHaniwa(haniwa_);
+
 			if (haniwa_->isYourShight())
 			{
 				LocalzationManager::printLogWithKey(first_?LOC_SYSTEM_GOD_KEIKI_CREATE:LOC_SYSTEM_GOD_KEIKI_REVIVE,true,false,false,CL_keiki,
 					 PlaceHolderHelper(haniwa_->name.getName()));
-				//if (mon_->CanSpeak())
-				//	printlog(fairy_speak(mon_, you.lilly_allys[i].personality, FS_REVIVE), true, false, false, CL_normal);
 			}
             return haniwa_;
         }
@@ -175,6 +175,108 @@ monster* haniwa_abil::createHaniwa(int index, bool first_) {
 }
 
 void haniwa_abil::upgradeHaniwa(monster* mon) {
+	float hp_rate = ((float)mon->hp)/mon->max_hp;
+
+	mon->level = you.level;
+	mon->max_hp = mondata[MON_HANIWA].max_hp + you.level*5;
+	mon->hp = hp_rate*mon->max_hp;
+
+	if(mon->hp < 0)
+		mon->hp = 1;
+	if(mon->hp > mon->max_hp)
+		mon->hp = mon->max_hp;
+
+	for(int i = 0; i<3;i++)
+	{
+		if(mondata[MON_HANIWA].atk[i])
+		{
+			mon->atk[i] = mondata[MON_HANIWA].atk[i]+ you.level;
+		}
+	}
+
+	
+	if(!has_abil(HANIWA_A_HORSE)) {
+		mon->image = &img_mons_haniwa;
+	}
+	else {
+		mon->image = &img_mons_horse_haniwa;
+	}
+
+	if(!has_abil(HANIWA_A_SPEAR)) {
+		mon->flag &= M_FLAG_SPEAR_ATTACK;
+	}
+}
+void haniwa_abil::upgradeHaniwa() {
+
+	int max_num = haniwa_abil::getMaxHaniwa();
+	for(int i = 0; i < max_num; i++) {
+		for(auto it = env[you.haniwa_allys[i].floor].mon_vector.begin(); it != env[you.haniwa_allys[i].floor].mon_vector.end();it++)
+		{
+			if(it->isLive() && it->map_id == you.haniwa_allys[i].map_id)
+			{
+				upgradeHaniwa(&(*it));
+				break;
+			}
+		}
+	}
+}
+
+
+extern shared_ptr<DirectX::SpriteBatch> g_pSprite;
+void haniwa_abil::haniwaDraw(float x_, float y_, float scale_) {
+
+	//0: 칼 (R)
+	//1: 방패 (L)
+	//2: 보조칼 (L)
+	//3: 지팡이 (R)
+	//4: 헬멧
+	//5: 활(LR)
+	//6: 창(LR)
+	//7: 응급상자(R)
+	//8: 황금방패(L)
+	//9: 칼 (R, 승마)
+	//10: 보조칼 (L, 승마)
+	//11: 지팡이 (R, 승마)
+	//12: 헬멧 (승마)
+	//13: 활 (LR, 승마)
+	//14: 창 (LR, 승마)
+	//15: 응급상자(R, 승마)
+	if(!has_abil(HANIWA_A_HORSE)) {
+		//	if(has_abil(HANIWA_A_SWORD))
+		img_mons_haniwa_equipments[0].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		if(has_abil(HANIWA_A_TANMAC))
+			img_mons_haniwa_equipments[3].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		else if(has_abil(HANIWA_A_BOW))
+			img_mons_haniwa_equipments[5].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		else if(has_abil(HANIWA_A_SPEAR))
+			img_mons_haniwa_equipments[6].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		else if(has_abil(HANIWA_A_HEAL))
+			img_mons_haniwa_equipments[7].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		
+		//왼손
+		if(has_abil(HANIWA_A_SHIELD2))
+			img_mons_haniwa_equipments[8].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		else if(has_abil(HANIWA_A_SHIELD1))
+			img_mons_haniwa_equipments[1].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		else if(has_abil(HANIWA_A_DOUBLE_SWORD))
+			img_mons_haniwa_equipments[2].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+
+	} else {
+		if(has_abil(HANIWA_A_SWORD))
+			img_mons_haniwa_equipments[9].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		else if(has_abil(HANIWA_A_TANMAC))
+			img_mons_haniwa_equipments[11].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		else if(has_abil(HANIWA_A_BOW))
+			img_mons_haniwa_equipments[13].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		else if(has_abil(HANIWA_A_SPEAR))
+			img_mons_haniwa_equipments[14].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		else if(has_abil(HANIWA_A_HEAL))
+			img_mons_haniwa_equipments[15].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+
+		//왼손
+		if(has_abil(HANIWA_A_DOUBLE_SWORD))
+			img_mons_haniwa_equipments[10].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+	}
 
 
 }

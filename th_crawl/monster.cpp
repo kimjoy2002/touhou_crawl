@@ -8,6 +8,7 @@
 
 
 #include "monster.h"
+#include "keiki.h"
 #include "mon_infor.h"
 #include "environment.h"
 #include "speak.h"
@@ -1943,6 +1944,16 @@ bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX:
 	if (id == MON_DANCING_ARMOUR || id == MON_DANCING_WEAPON) {
 		img_mons_dancing_weapon.draw(pSprite, x_, y_,0.0f,scale_,scale_, 255);
 	}
+
+	if (id == MON_HANIWA && you.god == GT_KEIKI) {
+		for(int i = 0; i < 3; i++) {
+			if(you.haniwa_allys[i].map_id == map_id && you.haniwa_allys[i].floor == current_level) {
+				haniwa_abil::haniwaDraw(x_, y_, scale_);
+			}
+		}
+	}
+
+
 	if (return_ && !(flag & M_FLAG_NO_STATE))
 	{
 
@@ -2500,8 +2511,40 @@ int monster::atkmove(int is_sight, bool only_move)
 			//}
 		}
 		coord_def c = target_pos-position;
-		if(!s_fear && !range_attack)
-			move_ = MoveToPos(target_pos, only_move);
+
+
+
+
+
+		if(!s_fear && !range_attack) {
+			bool attack_ = false;
+			if(target && !only_move && flag & M_FLAG_SPEAR_ATTACK && target->position == target_pos &&
+				(std::abs(c.x) > 1 || std::abs(c.y) > 1) &&  std::abs(c.x) <= 2 && std::abs(c.y) <= 2 && isMonsterSight(target_pos) ) {
+				if(target->isplayer())
+				{
+					if(!you.s_timestep && isEnemyUnit(target) && !(flag & M_FLAG_NO_ATK)) {
+						int num_=0;
+						for(int i=0;i<3;i++,num_++)
+							if(atk_type[i] == ATT_NONE)
+								break;
+						if(num_)
+						{
+							num_ = randA(num_-1);
+							attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
+							target->damage(temp_att, false);
+							attack_ = true;
+						}
+					}
+				}
+			} 
+			
+			if(!attack_) {
+				move_ = MoveToPos(target_pos, only_move);
+			} else {
+				move_ = 1;
+			}
+
+		}
 		if(s_fear)
 		{
 			int x_ =  (target_pos.x-position.x)>0?-1:(target_pos.x-position.x)<0?1:0;
@@ -2793,7 +2836,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		{
 			if(you.haniwa_allys[i].map_id == map_id && you.haniwa_allys[i].floor == current_level)
 			{
-				you.haniwa_allys[i].cooldown = haniwa_abil::has_abil(HANIWA_A_FAST_REVIVE)?rand_int(25,35):rand_int(90,110); //부활준비
+				you.haniwa_allys[i].cooldown = haniwa_abil::has_abil(HANIWA_A_FAST_REVIVE)?rand_int(250,350):rand_int(900,1100); //부활준비
 			}
 		}
 	}
@@ -2918,6 +2961,16 @@ int monster::action(int delay_)
 
 	while(time_delay>GetSpeed())
 	{
+		if(you.god == GT_KEIKI) {
+			for(int i = 0; i < 3; i++) {
+				if(you.haniwa_allys[i].map_id == map_id && current_level == you.haniwa_allys[i].floor) {
+					if(env[current_level].isInSight(position)) {
+						you.haniwa_allys[i].cooldown = 0;
+					}
+				}
+			}
+		}
+
 		if(s_poison)
 		{
 			if (poison_percent(s_poison) && !s_invincibility)
@@ -4058,7 +4111,7 @@ void monster::special_action(int delay_, bool smoke_)
 			}
 			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 			{
-				if (it->isLive() && isAllyMonster(&(*it)) && distan_coord(it->position, position) <= 8*8 && isMonsterSight(it->position)){
+				if (it->isLive() && isAllyMonster(&(*it)) && distan_coord(it->position, position) <= 8*8-1 && isMonsterSight(it->position)){
 					int heal = it->max_hp / 10;
 					it->HpUpDown(heal, DR_NONE);
 				}
@@ -4073,7 +4126,7 @@ void monster::special_action(int delay_, bool smoke_)
 			}
 			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 			{
-				if (it->isLive() && isAllyMonster(&(*it)) && distan_coord(it->position, position) <= 8 * 8 && isMonsterSight(it->position)){
+				if (it->isLive() && isAllyMonster(&(*it)) && distan_coord(it->position, position) <= 8*8-1 && isMonsterSight(it->position)){
 					it->SetClever(2);
 					//it->MpUpDown(randA(3) ? 1 : rand_int(1, 2));
 				}
@@ -5323,7 +5376,7 @@ bool monster::isMonsterSight(coord_def c, boolean okina)
 	bool intercept = false;
 	for(int i=RT_BEGIN;i!=RT_END;i++)
 	{
-		int length_ = 7;
+		int length_ = isShootingSprint()?20:7;
 		beam_iterator it(position,c,(round_type)i);
 		int block_cloud = 2;
 		while(!intercept && !it.end())

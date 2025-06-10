@@ -20,6 +20,7 @@
 #include "ring.h"
 #include "save.h"
 #include "key.h"
+#include "keiki.h"
 #include "weapon.h"
 #include "god.h"
 #include "steam_api.h"
@@ -4128,6 +4129,10 @@ void players::LevelUp(bool speak_)
 	remainSpellPoiont++;
 	LevelUpTribe(level);
 	CalcuHP();
+
+	if(god == GT_KEIKI) {
+		haniwa_abil::upgradeHaniwa();
+	}
 	
 	if(speak_)
 	{

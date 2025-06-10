@@ -1596,7 +1596,7 @@ monster* environment::movingfloor(const coord_def &c, int prev_floor_, monster* 
 
 				for(int i = 0; i<max_num; i++)
 				{
-					if(you.god_value[GT_LILLY][i] && you.haniwa_allys[i].map_id == mon_->map_id && you.haniwa_allys[i].floor == prev_floor_ )
+					if(you.haniwa_allys[i].map_id == mon_->map_id && you.haniwa_allys[i].floor == prev_floor_ )
 					{
 						you.haniwa_allys[i].map_id = temp->map_id;
 						you.haniwa_allys[i].floor = floor;

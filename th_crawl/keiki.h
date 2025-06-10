@@ -9,11 +9,11 @@
 #ifndef  __KEIKI_H__
 #define  __KEIKI_H__
 
-#include <iostream>
 #include "common.h"
 #include "enumMapBuilder.h"
 
 using namespace std;
+
 
 class monster;
 
@@ -102,6 +102,8 @@ public:
 
 	static monster* createHaniwa(int index, bool first_);
 	static void upgradeHaniwa(monster* mon);
+	static void upgradeHaniwa();
+	static void haniwaDraw(float x_, float y_, float scale_);
 };
 
 

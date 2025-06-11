@@ -4537,6 +4537,199 @@ bool skill_haniwa_recall(int hiniwa_num, unit* order, coord_def target)
 	return false;
 }
 
+bool skill_upgrade_haniwa(int power, bool short_, unit* order, coord_def target)
+{
+	if(!order->isplayer() || you.god != GT_KEIKI)
+		return false;
+	printlog("", true, false, true, CL_keiki);
+	printlog("", true, false, true, CL_keiki);
+	printlog("", true, false, true, CL_keiki);
+	printlog("", true, false, true, CL_keiki);
+	printlog("", true, false, true, CL_keiki);
+	printlog("", true, false, true, CL_keiki);
+	printlog("", true, false, true, CL_keiki);
+	printlog("", true, false, true, CL_keiki);
+	
+	
+	
+
+	haniwa_abil_key next_;
+	while(loop_)
+	{
+		deletelog();
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_GIFT_ASK),true,false,true,CL_keiki);
+
+		int num_ = 0;
+		haniwa_abil_key select_[3];
+		if(you.god_value[GT_KEIKI][3] != 0 || you.god_value[GT_KEIKI][4] != 0 || you.god_value[GT_KEIKI][5] != 0) {
+			select_[0] = god_value[GT_KEIKI][3];
+			select_[1] = god_value[GT_KEIKI][4];
+			select_[2] = god_value[GT_KEIKI][5];
+		} else {			
+			random_extraction<haniwa_abil_key> able_abils = getAbleHaniwaAbils();
+			for (int i = 0; i < 3; i++) {
+				select_[i] = able_abils.pop();
+				god_value[GT_KEIKI][3+i] = select_[i];
+			}
+		}
+		for (int i = 0; i < 3; i++) {
+			ostringstream ss;
+			ss << string(1,(char)(num_+'a')) << " - " << LocalzationManager::locString(haniwa_abil_list[select_[i]].name) << ": " << LocalzationManager::locString(haniwa_abil_list[select_[i]].infor) << " (" << LocalzationManager::locString(LOC_SYSTEM_COST) << ": " << haniwa_abil_list[select_[i]].getCostString() << ")";
+			printlog(ss.str(), true, false, true, CL_help,(char)(num_+'a'));
+		}
+		
+		
+		startSelection({'a', 'b', 'c', VK_ESCAPE});
+
+
+		int key_;
+		g_menu_select = -1;
+		while(true) {
+			key_ = waitkeyinput(true);
+
+			if(key_ == VK_RIGHT){
+				if(++g_menu_select>3)
+					g_menu_select = 0;
+				continue;
+			} else if (key_ == VK_LEFT) {
+				if(--g_menu_select<0)
+					g_menu_select = 3;
+				continue;
+			} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+				switch(g_menu_select) {
+					case 0:
+						key_ = 'a';
+						break;
+					case 1:
+						key_ = 'b';
+						break;
+					case 2:
+						key_ = 'c';
+						break;
+					default:
+						break;
+				}
+			}
+			endSelection();
+			break;
+		}
+		g_menu_select = -1;
+
+
+		switch (key_)
+		{
+		case 'a':
+		case 'A':
+			next_ = select_[0];
+			break;
+		case 'b':
+		case 'B':
+			next_ = select_[1];
+			break;
+		case 'c':
+		case 'C':
+			next_ = select_[2];
+			break;
+		default:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_GIFT_CANCLE), true, false, false, CL_keiki);
+			return false;
+		}
+		deletelog();
+		
+		ostringstream ss;
+		ss << LocalzationManager::locString(haniwa_abil_list[next_].name) << ": " << LocalzationManager::locString(haniwa_abil_list[next_].infor) << " (" << LocalzationManager::locString(LOC_SYSTEM_COST) << ": " << haniwa_abil_list[next_].getCostString() << ")";
+		printlog(ss.str(), true, false, false, CL_help);
+		
+		if(ynPrompt(LOC_SYSTEM_GOD_KEIKI_GIFT_ASK, LOC_SYSTEM_CANCLE_EX, CL_help, true,false,false,false)) {
+			loop_ = false;
+		} else {
+			loop_ = true;
+		}
+	}
+
+	if(haniwa_abil::has_abil(next_))
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_GIFT_ALREADY),true,false,false,CL_normal);
+		return false;
+	}
+
+	AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_KEIKI_GIFT, PlaceHolderHelper(haniwa_abil_list[next_].name),CL_help);
+	you.god_value[GT_KEIKI][3] = 0;
+	you.god_value[GT_KEIKI][4] = 0;
+	you.god_value[GT_KEIKI][5] = 0;
+	MoreWait();
+
+	you.gift_count = GetGodGiftTime(GT_KEIKI);
+	
+	haniwa_abil::set_abil(next_);
+	haniwa_abil::upgradeHaniwa();
+
+	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_UPGRADE),true,false,false,CL_keiki);
+
+	you.PietyUpDown(haniwa_abil_list[next_].cost, false);
+	
+	if(pietyLevel(you.piety) == 6)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_FINISH),true,false,false,CL_keiki);
+	}
+
+	you.Ability(SKL_UPGRADE_HANIWA,true,true);
+	you.Ability(SKL_DELAY_HANIWA,true,true);
+
+	return true;
+}
+
+bool skill_delay_haniwa(int power, bool short_, unit* order, coord_def target)
+{
+	if(!order->isplayer() || you.god != GT_KEIKI)
+		return false;
+	
+	if(!ynPrompt(LOC_SYSTEM_GOD_KEIKI_DELAY_ASK, LOC_SYSTEM_CANCLE_EX, CL_small_danger, true,false,false,false)) {
+		return false;
+	}
+	
+	AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_KEIKI_GIFT_DELAY),CL_help);
+	you.god_value[GT_KEIKI][3] = 0;
+	you.god_value[GT_KEIKI][4] = 0;
+	you.god_value[GT_KEIKI][5] = 0;
+	MoreWait();
+
+	you.gift_count = GetGodGiftTime(GT_KEIKI)*1.5f;
+
+	switch(randA(2)){
+		default:
+		case 0:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_DELAY1),true,false,false,CL_keiki);
+		break;
+		case 1:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_DELAY2),true,false,false,CL_keiki);
+		break;
+		case 2:
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_DELAY3),true,false,false,CL_keiki);
+		break;
+	}
+	you.Ability(SKL_UPGRADE_HANIWA,true,true);
+	you.Ability(SKL_DELAY_HANIWA,true,true);
+	
+	return true;
+}
+
+bool skill_draw_card(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
+
+bool skill_hard_sell(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
+bool skill_create_shop(int power, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+
 
 bool skill_jump_attack(int power, bool short_, unit* order, coord_def target);
 
@@ -4875,6 +5068,21 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_MIKO_6:
 		return skill_miko_6(power, short_, &you, target);
+		break;
+	case SKL_UPGRADE_HANIWA:
+		return skill_upgrade_haniwa(power, short_, &you, target);
+		break;
+	case SKL_DELAY_HANIWA:
+		return skill_delay_haniwa(power, short_, &you, target);
+		break;
+	case SKL_DRAW_CARD:
+		return skill_draw_card(power, short_, &you, target);
+		break;
+	case SKL_HARD_SELL:
+		return skill_hard_sell(power, short_, &you, target);
+		break;
+	case SKL_CREATE_SHOP:
+		return skill_create_shop(power, short_, &you, target);
 		break;
 	default:
 		break;

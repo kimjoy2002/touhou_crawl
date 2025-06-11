@@ -1229,6 +1229,8 @@ LOC_SYSTEM_NOTE_GOD_FORGIVE,{0:으로|로}부터 용서받았다.
 LOC_SYSTEM_NOTE_GOD_GIFT,{0}에게 선물을 받았다.
 LOC_SYSTEM_NOTE_GOD_ABANDON,{0:을|를} 버렸다.
 LOC_SYSTEM_NOTE_GOD_ABANDONED,{0:으로|로}부터 버려졌다.
+LOC_SYSTEM_NOTE_KEIKI_GIFT,케이키로부터 하니와를 강화했다. ({0})
+LOC_SYSTEM_NOTE_KEIKI_GIFT_DELAY,하니와 강화를 다음으로 미뤘다.
 LOC_SYSTEM_NOTE_SATORI_REUNION,사토리와 재회했다.
 LOC_SYSTEM_NOTE_SATORI_WORSHIP,사토리의 애완동물이 되었다.
 LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN,반요 변이발현
@@ -2821,6 +2823,11 @@ LOC_SYSTEM_SKL_MIKO_5,빨간망토 파란망토
 LOC_SYSTEM_SKL_MIKO_6,인기폭발
 LOC_SYSTEM_SKL_SOULSHOT,영격
 LOC_SYSTEM_SKL_SUPER_GRAZE,근성회피
+LOC_SYSTEM_SKL_UPGRADE_HANIWA,하니와 강화
+LOC_SYSTEM_SKL_DELAY_HANIWA,하니와 강화 지연
+LOC_SYSTEM_SKL_DRAW_CARD,카드 구매
+LOC_SYSTEM_SKL_HARD_SELL,카드 강매
+LOC_SYSTEM_SKL_CREATE_SHOP,상점 생성
 LOC_SYSTEM_SKL_UKNOWN,알수없는 능력
 LOC_SYSTEM_SKL_DESCRIBE_NONE,존재하지 않는 능력이다.\n
 LOC_SYSTEM_SKL_DESCRIBE_KANAKO_1,카나코님의 힘을 구현화하여 상대에게 순간적인 돌진을 할 수 있게된다.\n자신의 근접공격력, 신앙심과 거리에 비례해서 데미지가 들어가며\n사용후 이동속도가 느려지는 버프를 받게된다.\n이 버프중엔 건신초래돌을 추가적으로 사용할 수 없다.\n
@@ -2914,6 +2921,11 @@ LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_4,주변에 커다란 에메랄드로 된 �
 LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_5,원하는 위치의 대지에 마법을 걸어 빠른 속도로 융기시키는 마법.\n뾰족한 바위가 올라오면서 작은 범위에 큰 데미지를 준다.\n파워가 낮으면 범위안에서도 폭발이 안일어날 수 있다.\n
 LOC_SYSTEM_SKL_DESCRIBE_SOULSHOT,주변의 적에게 저항할 수 없는 짧은 마비를 건다.\n또한 일반적인 영격보다 훨씬 범위가 큰 주변 5칸의 적을 마비시킨다.\n
 LOC_SYSTEM_SKL_DESCRIBE_SUPER_GRAZE,일정시간 회피가능한 모든 공격을 100% 회피한다.\n
+LOC_SYSTEM_SKL_DESCRIBE_UPGRADE_HANIWA,가지고 있는 하니와에 새로운 능력을 부여한다.\n선택시 3가지의 선택지가 주어지고 원하는 강화를 선택할 수 있다.\n하니와의 강화에는 크게 전사, 법사, 지원가의 세 스타일이 있어서 강화할수록 해당 방향에 집중된다.\n하니와를 강화할수록 케이키의 신앙심이 오르며 가득차면 하니와의 강화도 끝이 난다.
+LOC_SYSTEM_SKL_DESCRIBE_DELAY_HANIWA,하니와 강화를 다음번으로 미룬다.\n3가지 선택지가 마음에 들지 않는다면 해당 선택지를 선택하여 다음 선택지를 기다릴 수 있다.\n이러한 행동은 평소 기다려야하는 하니와의 강화보다 더 오래 기다려야하므로 신중히 선택해야한다.
+LOC_SYSTEM_SKL_DESCRIBE_DRAW_CARD,
+LOC_SYSTEM_SKL_DESCRIBE_HARD_SELL,
+LOC_SYSTEM_SKL_DESCRIBE_CREATE_SHOP,
 LOC_SYSTEM_SKL_DESCRIBE_UKNOWN,모르는 능력.\n
 LOC_SYSTEM_ITEM_CATEGORY_WEAPON,무기
 LOC_SYSTEM_ITEM_CATEGORY_TANMAC,탄막
@@ -4265,6 +4277,19 @@ LOC_SYSTEM_GOD_KEIKI_TALK4,케이키: 점점 괜찮아지고있어!
 LOC_SYSTEM_GOD_KEIKI_TALK5,케이키: 괜찮은 센스야!
 LOC_SYSTEM_GOD_KEIKI_TALK6,케이키: 마지막으로 이 부분만 다듬으면...
 LOC_SYSTEM_GOD_KEIKI_TALK7,케이키: 한점의 티도 없는 완벽한 우상이야!
+LOC_SYSTEM_GOD_KEIKI_GIFT_ON,케이키로부터 하니와 강화에 대한 청사진을 받았다.
+LOC_SYSTEM_GOD_KEIKI_GIFT_HELP,({0}키로 강화를 선택)
+LOC_SYSTEM_GOD_KEIKI_GIFT_HELP_PAD,(능력으로 강화를 선택)
+LOC_SYSTEM_GOD_KEIKI_GIFT_ASK,케이키: 어떻게 조각해줄까?
+LOC_SYSTEM_GOD_KEIKI_DELAY_ASK,강화를 미루게되면 평소보다 더 오래 걸립니다. 진짜로 미룹니까?
+LOC_SYSTEM_GOD_KEIKI_GIFT_CANCLE,케이키: 천천히 생각해!
+LOC_SYSTEM_GOD_KEIKI_GIFT_YN,이 능력으로 하니와를 강화하시겠습니까?
+LOC_SYSTEM_GOD_KEIKI_GIFT_ALREADY,이미 강화했던 능력이다.
+LOC_SYSTEM_GOD_KEIKI_UPGRADE,{Create!|Complete!|Upgrade!}
+LOC_SYSTEM_GOD_KEIKI_DELAY1,케이키: 이게 마음에 들지 않는거야? 
+LOC_SYSTEM_GOD_KEIKI_DELAY2,케이키는 뾰로통한 표정을 지었다.
+LOC_SYSTEM_GOD_KEIKI_DELAY3,케이키: 난 이게 좋은데...
+LOC_SYSTEM_GOD_KEIKI_FINISH,케이키는 당신의 완벽한 우상에 만족했다!
 LOC_SYSTEM_GOD_KEIKI_CREATE,케이키가 당신에게 {0:을|를} 선물했다!
 LOC_SYSTEM_GOD_KEIKI_REVIVE,{0:이|가} 다시 만들어졌다!
 LOC_SYSTEM_GOD_KEIKI_WELCOME,케이키: 완벽한 우상을 만들어줄게!

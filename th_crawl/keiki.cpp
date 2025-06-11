@@ -71,9 +71,40 @@ haniwa_abil haniwa_abil_list[HANIWA_A_MAX] = {
 };
 
 
+bool keiki_gift()
+{
+	int temp = you.Ability(SKL_UPGRADE_HANIWA,true,true);
+	
+	if(!temp)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_GIFT_ON) + " ",false,false,false,CL_keiki);
+		printlog(LocalzationManager::formatString(joypadUtil::usingPad?LOC_SYSTEM_GOD_KEIKI_GIFT_HELP_PAD:LOC_SYSTEM_GOD_KEIKI_GIFT_HELP, PlaceHolderHelper("a")),true,false,false,CL_help);
+		MoreWait();
+
+		you.Ability(SKL_UPGRADE_HANIWA,true,false);
+		you.Ability(SKL_DELAY_HANIWA,true,false);
+		return true;
+	}
+	return false;
+}
+
+
+
 bool haniwa_abil::has_abil(haniwa_abil_key key) {
     int idx = static_cast<int>(key);
     return (idx < 32) ? (( you.god_value[GT_KEIKI][0] >> idx) & 1) : ((you.god_value[GT_KEIKI][1] >> (idx - 32)) & 1);
+};
+
+bool haniwa_abil::set_abil(haniwa_abil_key key) {
+    int idx = static_cast<int>(key);
+    if (idx < 32) {
+        you.god_value[GT_KEIKI][0] |= (1 << idx);
+    } else if (idx < 64) {
+        you.god_value[GT_KEIKI][1] |= (1 << (idx - 32));
+    } else {
+		return false;
+	}
+    return true;
 };
 
 

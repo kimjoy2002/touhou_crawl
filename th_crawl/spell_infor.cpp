@@ -874,6 +874,21 @@ string GetSkillInfor(skill_list skill)
 	case SKL_SUPER_GRAZE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SUPER_GRAZE);
 		break;
+	case SKL_UPGRADE_HANIWA:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_UPGRADE_HANIWA);
+		break;
+	case SKL_DELAY_HANIWA:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_DELAY_HANIWA);
+		break;
+	case SKL_DRAW_CARD:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_DRAW_CARD);
+		break;
+	case SKL_HARD_SELL:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_HARD_SELL);
+		break;
+	case SKL_CREATE_SHOP:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_CREATE_SHOP);
+		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_UKNOWN);
 		break;

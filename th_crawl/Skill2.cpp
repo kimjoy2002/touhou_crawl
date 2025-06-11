@@ -102,6 +102,9 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_MIKO_4:
 	case SKL_MIKO_5:
 	case SKL_MIKO_6:
+	case SKL_DRAW_CARD:
+	case SKL_HARD_SELL:
+	case SKL_CREATE_SHOP:
 		return ((S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_GOD) & flag);
 	case SKL_PHILOSOPHERS_1:
 	case SKL_PHILOSOPHERS_2:	
@@ -123,6 +126,8 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_SEIJA_GIFT:
+	case SKL_UPGRADE_HANIWA:
+	case SKL_DELAY_HANIWA:
 		return ((S_FLAG_IMMEDIATELY | S_FLAG_GOD) & flag);
 	case SKL_GRAZE:
 	case SKL_LEVITATION:
@@ -249,6 +254,11 @@ int SkillLength(skill_list skill)
 	case SKL_MIKO_6:
 	case SKL_SOULSHOT:
 	case SKL_SUPER_GRAZE:
+	case SKL_UPGRADE_HANIWA:
+	case SKL_DELAY_HANIWA:
+	case SKL_DRAW_CARD:
+	case SKL_HARD_SELL:
+	case SKL_CREATE_SHOP:
 	default:
 		return 0;
 	}
@@ -442,6 +452,16 @@ string SkillString(skill_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_SOULSHOT);
 	case SKL_SUPER_GRAZE:
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_SUPER_GRAZE);
+	case SKL_UPGRADE_HANIWA:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_UPGRADE_HANIWA);
+	case SKL_DELAY_HANIWA:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_DELAY_HANIWA);
+	case SKL_DRAW_CARD:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_DRAW_CARD);
+	case SKL_HARD_SELL:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_HARD_SELL);
+	case SKL_CREATE_SHOP:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_CREATE_SHOP);
 	case SKL_NONE:
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_UKNOWN);
@@ -547,6 +567,11 @@ int SkillCap(skill_list skill)
 	case SKL_MIKO_4:
 	case SKL_MIKO_5:
 	case SKL_MIKO_6:
+	case SKL_UPGRADE_HANIWA:
+	case SKL_DELAY_HANIWA:
+	case SKL_DRAW_CARD:
+	case SKL_HARD_SELL:
+	case SKL_CREATE_SHOP:
 	default:
 		return 0;
 	}
@@ -585,6 +610,10 @@ int SkillNoise(skill_list skill)
 	case SKL_MIKO_3:
 	case SKL_MIKO_4:
 	case SKL_MIKO_5:
+	case SKL_UPGRADE_HANIWA:
+	case SKL_DELAY_HANIWA:
+	case SKL_DRAW_CARD:
+	case SKL_CREATE_SHOP:
 		return 0;
 	case SKL_YUUGI_2:
 	case SKL_YUUGI_3:
@@ -638,6 +667,7 @@ int SkillNoise(skill_list skill)
 	case SKL_MIKO_6:
 	case SKL_SOULSHOT:
 	case SKL_SUPER_GRAZE:
+	case SKL_HARD_SELL:
 		return 8;
 	case SKL_YUUGI_4:
 	case SKL_SWAKO_DIGGING:
@@ -771,6 +801,11 @@ int SkillPow(skill_list skill)
 	case SKL_PHILOSOPHERS_3:
 	case SKL_PHILOSOPHERS_4:
 	case SKL_PHILOSOPHERS_5:
+	case SKL_UPGRADE_HANIWA:
+	case SKL_DELAY_HANIWA:
+	case SKL_DRAW_CARD:
+	case SKL_HARD_SELL:
+	case SKL_CREATE_SHOP:
 	default:
 		return 0;
 	}
@@ -885,6 +920,11 @@ int SkillDiffer(skill_list skill)
 	case SKL_MIKO_6:
 	case SKL_SOULSHOT:
 	case SKL_SUPER_GRAZE:
+	case SKL_UPGRADE_HANIWA:
+	case SKL_DELAY_HANIWA:
+	case SKL_DRAW_CARD:
+	case SKL_HARD_SELL:
+	case SKL_CREATE_SHOP:
 		return 100;
 	case SKL_NONE:
 	default:
@@ -969,6 +1009,11 @@ int SkillMana(skill_list skill)
 	case SKL_MIKO_4:
 	case SKL_MIKO_5:
 	case SKL_MIKO_6:
+	case SKL_UPGRADE_HANIWA:
+	case SKL_DELAY_HANIWA:
+	case SKL_DRAW_CARD:
+	case SKL_HARD_SELL:
+	case SKL_CREATE_SHOP:
 		return 0;		
 	case SKL_SWAKO_WATER_GUN:
 	case SKL_JUNKO_1:
@@ -1623,6 +1668,11 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_PHILOSOPHERS_3:
 	case SKL_PHILOSOPHERS_4:
 	case SKL_PHILOSOPHERS_5:
+	case SKL_UPGRADE_HANIWA:
+	case SKL_DELAY_HANIWA:
+	case SKL_DRAW_CARD:
+	case SKL_HARD_SELL:
+	case SKL_CREATE_SHOP:
 	default:
 		return true;
 	}
@@ -1821,6 +1871,16 @@ string SkillCostString(skill_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_BIG);
 	case SKL_SUPER_GRAZE:
 		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_BIG);
+	case SKL_UPGRADE_HANIWA:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_NONE);
+	case SKL_DELAY_HANIWA:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_NONE);
+	case SKL_DRAW_CARD:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_NONE);
+	case SKL_HARD_SELL:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_NONE);
+	case SKL_CREATE_SHOP:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_NONE);
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:

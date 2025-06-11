@@ -10,6 +10,7 @@
 #include "environment.h"
 #include "god.h"
 #include "key.h"
+#include "keiki.h"
 #include "skill_use.h"
 #include "mon_infor.h"
 #include "potion.h"
@@ -64,6 +65,12 @@ int GetGodGiftTime(god_type god)
 	case GT_SEIJA:
 		return 10;
 	case GT_LILLY:
+		return 0;
+	case GT_SHIKIEIKI:
+		return 0;
+	case GT_KEIKI:
+		return 20;
+	case GT_TENKYUU:
 		return 0;
 	}
 	return 0;
@@ -204,6 +211,16 @@ bool GodGift(god_type god, int piety)
 	case GT_SEIJA:
 		return seija_gift();
 	case GT_LILLY:
+		return false;
+	case GT_SHIKIEIKI:
+		return false;
+	case GT_KEIKI:
+		if(pietyLevel(you.piety) != 6)
+		{
+			return keiki_gift();
+		}
+		return false;
+	case GT_TENKYUU:
 		return false;
 	}
 	return false;

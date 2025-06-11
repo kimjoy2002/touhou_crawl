@@ -90,7 +90,8 @@ public:
 	vector<haniwa_abil_key> except_abil;
 	
 	haniwa_abil(LOCALIZATION_ENUM_KEY name, LOCALIZATION_ENUM_KEY infor, haniwa_abil_type type, int cost, int percent, vector<haniwa_abil_key> must_abil, vector<haniwa_abil_key> need_abil, vector<haniwa_abil_key> except_abil);
-
+	
+	string getCostString();
 
 public:
 	static const int max_piety = 160;
@@ -98,6 +99,7 @@ public:
 	static random_extraction<haniwa_abil_key> getAbleHaniwaAbils();
 
 	static bool has_abil(haniwa_abil_key key);
+	static bool set_abil(haniwa_abil_key key);
 	static int getMaxHaniwa();
 
 	static monster* createHaniwa(int index, bool first_);
@@ -106,7 +108,7 @@ public:
 	static void haniwaDraw(float x_, float y_, float scale_);
 };
 
-
+bool keiki_gift();
 extern haniwa_abil haniwa_abil_list[HANIWA_A_MAX];
 
 #endif // __KEIKI_H__

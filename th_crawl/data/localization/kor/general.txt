@@ -449,6 +449,11 @@ LOC_SYSTEM_PUNISH,징벌
 LOC_SYSTEM_CURRENT_EXP,현재
 LOC_SYSTEM_ATTIT,적성
 LOC_SYSTEM_COST,비용
+LOC_SYSTEM_COST_VERY_LOW,미미
+LOC_SYSTEM_COST_LOW,적음
+LOC_SYSTEM_COST_MIDDLE,보통
+LOC_SYSTEM_COST_HIGH,높음
+LOC_SYSTEM_COST_VERY_HIGH,아주 높음
 LOC_SYSTEM_SKILL_JUNKA,순화
 LOC_SYSTEM_MP_PURITY,마력순화
 LOC_SYSTEM_SUCCESS_RATE,성공률
@@ -1158,7 +1163,6 @@ LOC_SYSTEM_MAGIC_WINDFLAW,{0:은|는} 강한 바람에 의해 튕겨져나갔다
 LOC_SYSTEM_MAGIC_FOG,안개의 호수에 안개가 드리워졌다.
 LOC_SYSTEM_MAGIC_SMOKING,{0:은|는} {1}에게 담배 연기를 뿜었다.
 LOC_SYSTEM_HIT_DEFAULT,{0:은|는} {1:을|를} 공격했다.
-LOC_SYSTEM_HIT_DEFAULT,{0:은|는} {1:을|를} 공격했다.
 LOC_SYSTEM_HIT_NORMAL,{0}의 {1:은|는} {2}에게 명중했다.
 LOC_SYSTEM_HIT_DREAM,{0:은|는} {1}의 꿈을 먹었다.
 LOC_SYSTEM_HIT_FIRE,{0}의 {1:은|는} {2}에게 명중하고 불타올랐다.
@@ -1301,7 +1305,6 @@ LOC_SYSTEM_UNIQUE_KEINE_TRANSFORM,체력을 잃은 케이네가 백택으로 변
 LOC_SYSTEM_UNIQUE_YUMA_TRANSFORM,허기를 참지 못한 유마가 그리드몬스터로 변화하였다!
 LOC_SYSTEM_UNIQUE_YUMA_ABSORB,{0:이|가} 바닥에 있는 {1:을|를} 흡수하고 회복했다.
 LOC_SYSTEM_UNIQUE_YUMA_ABSORB_MANY,{0:이|가} 바닥에 있는 {1}개의 아이템들을 흡수하고 회복했다.
-LOC_SYSTEM_UNIQUE_YUMA_ABSORB,{0:이|가} 바닥에 있는 {1:을|를} 흡수하고 회복했다.
 LOC_SYSTEM_UNIQUE_EIKA_REGA_DISTANCE,멀리있는 누군가의 분노가 느껴진다.
 LOC_SYSTEM_UNIQUE_EIKA_REGA,{0:이|가} 분노했다! {0:이|가} 강해졌다.
 LOC_SYSTEM_UNIQUE_KOGASA_REGA,{0:이|가} 당신의 행동에 분노했다! ...그러나 아무런 일도 일어나지 않았다.
@@ -1709,6 +1712,7 @@ LOC_SYSTEM_ATT_SPORK,스포크
 LOC_SYSTEM_ATT_OIL_BALL,석유방울
 LOC_SYSTEM_ATT_BEARTRAP,덫
 LOC_SYSTEM_ATT_POLE,봉
+LOC_SYSTEM_ATT_ARROW,화살
 LOC_SYSTEM_THAT,그것
 LOC_SYSTEM_SOMETHING,무언가
 LOC_SYSTEM_FIND_ONE,{0:을|를} 발견했다.
@@ -2496,6 +2500,10 @@ LOC_SYSTEM_SPL_HOMING_TANMAC,호밍탄
 LOC_SYSTEM_SPL_ALLROUND_TANMAC,전방위 탄막
 LOC_SYSTEM_SPL_THROW_POTION,물약 던지기
 LOC_SYSTEM_SPL_THROW_RABBIT,토끼 던지기
+LOC_SYSTEM_SPL_ARROW,화살 발사
+LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC,소형 탄막
+LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC2,중형 탄막
+LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC3,대형 탄막
 LOC_SYSTEM_SPL_UKNOWN,알수없는 마법
 LOC_SYSTEM_SPL_DESCRIBE_NONE,존재하지 않는 마법이다.\n
 LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_SMALL,작은 탄막을 발사한다.\n
@@ -2666,6 +2674,10 @@ LOC_SYSTEM_SPL_DESCRIBE_HOMING_TANMAC,에너지로 만들어진 작은 호밍 �
 LOC_SYSTEM_SPL_DESCRIBE_ALLROUND_TANMAC,전방위의 적에게 탄막을 흩뿌리는 마법.\n사거리 내에 위협이 되는 적들을 자동으로 조준해서 중간 크기의 탄막을 뿌린다.\n사거리내의 적을 동시에 공격가능하지만, 적을 관통할수는 없다.
 LOC_SYSTEM_SPL_DESCRIBE_THROW_POTION,무작위 물약을 던지는 기술.\n물약은 무작위 속성 폭발을 일으키면서 폭발 위치에 3X3의 무작위 구름을 생성한다.
 LOC_SYSTEM_SPL_DESCRIBE_THROW_RABBIT,주변에 있는 토끼를 적에게 던지는 마법.\n영원정에서 미리 연습해둔 토끼들의 연계 공격이다.
+LOC_SYSTEM_SPL_DESCRIBE_ARROW,하니와가 활을 이용해 멀리 있는 적을 공격한다.
+LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC,멀리 있는 적에게 날라가는 작은 마법의 탄막이다.
+LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC2,멀리 있는 적에게 날라가는 마법의 탄막이다.\n적당한 크기로 위력이 증가하였다.
+LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC3,멀리 있는 적에게 날라가는 큰 마법의 탄막이다.\n꽤나 강력한 위력을 낸다.
 LOC_SYSTEM_SPL_DESCRIBE_UKNOWN,설명이 존재하지 않는 마법.\n
 LOC_SYSTEM_SPL_DESCRIBE_ALCHEMY,이 마법은 연금술 버프다. 연금술 버프끼리는 중첩되지않는다.\n다른 연금술 버프가 걸린 상태에서 이 마법을 시전하면 기존의 연금술 버프가 사라진다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMONING,이 마법은 최대 {0}마리까지 소환수를 소환할 수 있다.\n
@@ -3764,7 +3776,7 @@ LOC_SYSTEM_GOD_OKINA_DESCRIPTION,마타라 오키나는 배후에 숨어있는 �
 LOC_SYSTEM_GOD_JUNKO_TITLE,순호
 LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,순호는 원한이 순화된 신령으로 자신의 원한을 갚기위해 신도를 모집하고 있다.\n그녀의 신도가 된다면 단순하지만 강력한 순화의 능력을 받을 수 있다.\n그녀의 권능은 신앙심도 소모하지않지만 사용하게되면 일시적으로 순화상태에 빠지고\n순화 단계가 올라갈수록 소모품의 사용에 제한되는 패널티가 생긴다.\n기본적으로 권능에 의한 순화상태는 시간이 지나면 돌아오지만 순호가 아끼는 신도에게는 영구적인 순화를 내릴 수 있다.\n그녀의 축복은 너무 무겁기에 패널티도 크고 배신조차 허용되지않지만 그에 비견할만한 새로운 축복이 내려진다.\n그녀는 원한을 갚기위해 보이는 적을 모조리 죽이는 것을 좋아한다.
 LOC_SYSTEM_GOD_KEIKI_TITLE,하니야스신 케이키 - 고립무원이 빚어낸 조형신
-LOC_SYSTEM_GOD_KEIKI_DESCRIPTION,케이키는 인간령들이 만들어낸 조형신이다.\n우상을 만들어내어 만들어낸 우상에 생명을 부여할 수 있다.\n그는 신도들을 보호하기위해 믿는 즉시 작은 하니와를 내려주며\n탐험을 하면서 점차 하니와를 신도의 입맛에 맞게 개조해나갈 수 있다.\n역으로 우상에 지배당하지 않도록!
+LOC_SYSTEM_GOD_KEIKI_DESCRIPTION,케이키는 인간령들이 만들어낸 조형신이다.\n우상을 만들어내어 만들어낸 우상에 생명을 부여할 수 있다.\n그는 신도들을 보호하기위해 믿는 즉시 작은 하니와를 내려주며\n탐험을 하면서 점차 하니와를 신도의 입맛에 맞게 개조해나갈 수 있다.\n케이키는 우상을 만들기위해 당신의 경험치를 일부 가져갈 것이다.\n역으로 우상에 지배당하지 않도록!
 LOC_SYSTEM_GOD_BUG_TITLE,버그신
 LOC_SYSTEM_GOD_BUG_DESCRIPTION,이 신은 버그다!\n버그신은 동방크롤에서 가장 악한 신이다.\n버그신은 게임 플레이에 지대한 영향을 주며 당신에게 깊은 스트레스를 준다.\n이 신이 존재하는 것만으로도 게임이 크래쉬가 날 수 있으며 당신의 캐릭터를 삭제시킬지도 모른다.\n버그신의 분노를 가라앉히려면 제작자에게 보고하는 수 밖에 없다.\n
 LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY0_ADD,당신은 역병신과 빈곤신의 저주로 소모품을 낭비하며 잃어버린다.
@@ -4285,6 +4297,8 @@ LOC_SYSTEM_GOD_KEIKI_DELAY_ASK,강화를 미루게되면 평소보다 더 오래
 LOC_SYSTEM_GOD_KEIKI_GIFT_CANCLE,케이키: 천천히 생각해!
 LOC_SYSTEM_GOD_KEIKI_GIFT_YN,이 능력으로 하니와를 강화하시겠습니까?
 LOC_SYSTEM_GOD_KEIKI_GIFT_ALREADY,이미 강화했던 능력이다.
+LOC_SYSTEM_GOD_KEIKI_AFTER_PIETY,강화 후 신앙심: {0}
+LOC_SYSTEM_GOD_KEIKI_AFTER_PIETY_WARN,주의) 이 강화가 마지막 강화가 됩니다.
 LOC_SYSTEM_GOD_KEIKI_UPGRADE,{Create!|Complete!|Upgrade!}
 LOC_SYSTEM_GOD_KEIKI_DELAY1,케이키: 이게 마음에 들지 않는거야? 
 LOC_SYSTEM_GOD_KEIKI_DELAY2,케이키는 뾰로통한 표정을 지었다.
@@ -4295,6 +4309,7 @@ LOC_SYSTEM_GOD_KEIKI_REVIVE,{0:이|가} 다시 만들어졌다!
 LOC_SYSTEM_GOD_KEIKI_WELCOME,케이키: 완벽한 우상을 만들어줄게!
 LOC_SYSTEM_GOD_KEIKI_PUNISH_SUMMON,케이키를 적대적인 하니와를 조형해냈다!
 LOC_SYSTEM_GOD_KEIKI_ABANDON,케이키를 배신하여 하니와가 사라졌다!
+LOC_SYSTEM_GOD_UI_KEIKI,===당신이 선택한 하니와 강화 목록===
 LOC_SYSTEM_GOD_SWAWKO_WELCOME,스와코: 하하하! 재밌어졌어
 LOC_SYSTEM_GOD_SWAWKO_WELCOME_SANAE,스와코: 사나에! 요즘은 어때, 익숙해졌어?
 LOC_SYSTEM_GOD_SUWAKO_TALK1,스와코: 요괴퇴치의 시간이야 사나에!

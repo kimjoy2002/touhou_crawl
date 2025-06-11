@@ -7,7 +7,9 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "keiki.h"
+#include "key.h"
 #include "environment.h"
+#include "joypad.h"
 #include "enum.h"
 #include "mon_infor.h"
 #include "skill_use.h"
@@ -21,59 +23,64 @@
 #include "event.h"
 #include "soundmanager.h"
 
+//왼손
+//HANIWA_A_SWORD, HANIWA_A_SPEAR, HANIWA_A_BOW, HANIWA_A_SHIELD2, HANIWA_A_TANMAC, HANIWA_A_HEAL
+//오른손
+//HANIWA_A_DOUBLE_SWORD, HANIWA_A_SPEAR, HANIWA_A_BOW, HANIWA_A_SHIELD1
+
 haniwa_abil haniwa_abil_list[HANIWA_A_MAX] = {
-	{LOC_SYSTEM_HANIWA_A_SWORD_NAME,LOC_SYSTEM_HANIWA_A_SWORD_INFO,HANIWA_T_COMBAT,30,10,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_DOUBLE_SWORD_NAME,LOC_SYSTEM_HANIWA_A_DOUBLE_SWORD_INFO,HANIWA_T_COMBAT,20,20,{HANIWA_A_SWORD},{},{}},
-	{LOC_SYSTEM_HANIWA_A_SPEAR_NAME,LOC_SYSTEM_HANIWA_A_SPEAR_INFO,HANIWA_T_COMBAT,30,10,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_BOW_NAME,LOC_SYSTEM_HANIWA_A_BOW_INFO,HANIWA_T_COMBAT,30,10,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_SHIELD1_NAME,LOC_SYSTEM_HANIWA_A_SHIELD1_INFO,HANIWA_T_COMBAT,30,10,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_SHIELD2_NAME,LOC_SYSTEM_HANIWA_A_SHIELD2_INFO,HANIWA_T_COMBAT,60,20,{HANIWA_A_SHIELD1},{},{}},
-	{LOC_SYSTEM_HANIWA_A_EXPLOSION_NAME,LOC_SYSTEM_HANIWA_A_EXPLOSION_INFO,HANIWA_T_COMBAT,15,10,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_ARMY1_NAME,LOC_SYSTEM_HANIWA_A_ARMY1_INFO,HANIWA_T_COMBAT,60,5,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_ARMY2_NAME,LOC_SYSTEM_HANIWA_A_ARMY2_INFO,HANIWA_T_COMBAT,60,15,{HANIWA_A_ARMY1},{},{}},
-	{LOC_SYSTEM_HANIWA_A_CLEAVE_NAME,LOC_SYSTEM_HANIWA_A_CLEAVE_INFO,HANIWA_T_COMBAT,90,5,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_FIRE_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_FIRE_ENCHANT_INFO,HANIWA_T_COMBAT,20,5,{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW},{HANIWA_A_FIRE_ENCHANT,HANIWA_A_COLD_ENCHANT,HANIWA_A_ELEC_ENCHANT,HANIWA_A_POISON_ENCHANT}},
-	{LOC_SYSTEM_HANIWA_A_COLD_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_COLD_ENCHANT_INFO,HANIWA_T_COMBAT,20,5,{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW},{HANIWA_A_FIRE_ENCHANT,HANIWA_A_COLD_ENCHANT,HANIWA_A_ELEC_ENCHANT,HANIWA_A_POISON_ENCHANT}},
-	{LOC_SYSTEM_HANIWA_A_ELEC_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_ELEC_ENCHANT_INFO,HANIWA_T_COMBAT,20,5,{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW},{HANIWA_A_FIRE_ENCHANT,HANIWA_A_COLD_ENCHANT,HANIWA_A_ELEC_ENCHANT,HANIWA_A_POISON_ENCHANT}},
-	{LOC_SYSTEM_HANIWA_A_POISON_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_POISON_ENCHANT_INFO,HANIWA_T_COMBAT,20,5,{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW},{HANIWA_A_FIRE_ENCHANT,HANIWA_A_COLD_ENCHANT,HANIWA_A_ELEC_ENCHANT,HANIWA_A_POISON_ENCHANT}},
-	{LOC_SYSTEM_HANIWA_A_SLOW_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_SLOW_ENCHANT_INFO,HANIWA_T_COMBAT,40,20,{HANIWA_A_POISON_ENCHANT},{},{}},
-	{LOC_SYSTEM_HANIWA_A_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_TANMAC_INFO,HANIWA_T_MAGIC,30,30,{},{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW}},
-	{LOC_SYSTEM_HANIWA_A_FIRE_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_FIRE_TANMAC_INFO,HANIWA_T_MAGIC,20,5,{},{HANIWA_A_TANMAC},{HANIWA_A_FIRE_TANMAC,HANIWA_A_COLD_TANMAC,HANIWA_A_ELEC_TANMAC}},
-	{LOC_SYSTEM_HANIWA_A_COLD_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_COLD_TANMAC_INFO,HANIWA_T_MAGIC,20,5,{},{HANIWA_A_TANMAC},{HANIWA_A_FIRE_TANMAC,HANIWA_A_COLD_TANMAC,HANIWA_A_ELEC_TANMAC}},
-	{LOC_SYSTEM_HANIWA_A_ELEC_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_ELEC_TANMAC_INFO,HANIWA_T_MAGIC,20,5,{},{HANIWA_A_TANMAC},{HANIWA_A_FIRE_TANMAC,HANIWA_A_COLD_TANMAC,HANIWA_A_ELEC_TANMAC}},
-	{LOC_SYSTEM_HANIWA_A_MIDDLE_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_MIDDLE_TANMAC_INFO,HANIWA_T_MAGIC,30,20,{HANIWA_A_TANMAC},{},{}},
-	{LOC_SYSTEM_HANIWA_A_BIG_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_BIG_TANMAC_INFO,HANIWA_T_MAGIC,30,20,{HANIWA_A_MIDDLE_TANMAC},{},{}},
-	{LOC_SYSTEM_HANIWA_A_BURST_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_BURST_TANMAC_INFO,HANIWA_T_MAGIC,30,10,{},{HANIWA_A_TANMAC},{HANIWA_A_PENTAN}},
-	{LOC_SYSTEM_HANIWA_A_BLINK_NAME,LOC_SYSTEM_HANIWA_A_BLINK_INFO,HANIWA_T_MAGIC,20,10,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_SLOW_NAME,LOC_SYSTEM_HANIWA_A_SLOW_INFO,HANIWA_T_MAGIC,30,10,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_CONFUSE_NAME,LOC_SYSTEM_HANIWA_A_CONFUSE_INFO,HANIWA_T_MAGIC,30,20,{HANIWA_A_SLOW},{},{}},
-	{LOC_SYSTEM_HANIWA_A_PENTAN_NAME,LOC_SYSTEM_HANIWA_A_PENTAN_INFO,HANIWA_T_MAGIC,30,10,{},{HANIWA_A_TANMAC},{HANIWA_A_BURST_TANMAC}},
-	{LOC_SYSTEM_HANIWA_A_HASTE_NAME,LOC_SYSTEM_HANIWA_A_HASTE_INFO,HANIWA_T_MAGIC,60,10,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_MAGICIAN_NAME,LOC_SYSTEM_HANIWA_A_MAGICIAN_INFO,HANIWA_T_MAGIC,50,10,{},{HANIWA_A_TANMAC,HANIWA_A_SLOW},{}},
-	{LOC_SYSTEM_HANIWA_A_CREATE_P_NAME,LOC_SYSTEM_HANIWA_A_CREATE_P_INFO,HANIWA_T_SUPPORT,30,10,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_CREATE_WEAPON_NAME,LOC_SYSTEM_HANIWA_A_CREATE_WEAPON_INFO,HANIWA_T_SUPPORT,30,5,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_CREATE_WEAPON_ARTIFACT_NAME,LOC_SYSTEM_HANIWA_A_CREATE_WEAPON_ARTIFACT_INFO,HANIWA_T_SUPPORT,90,20,{HANIWA_A_CREATE_WEAPON},{},{}},
-	{LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_NAME,LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_INFO,HANIWA_T_SUPPORT,50,5,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_ARTIFACT_NAME,LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_ARTIFACT_INFO,HANIWA_T_SUPPORT,90,20,{HANIWA_A_CREATE_ARMOUR},{},{}},
-	{LOC_SYSTEM_HANIWA_A_CREATE_POTION_NAME,LOC_SYSTEM_HANIWA_A_CREATE_POTION_INFO,HANIWA_T_SUPPORT,60,5,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_CREATE_SCROLL_NAME,LOC_SYSTEM_HANIWA_A_CREATE_SCROLL_INFO,HANIWA_T_SUPPORT,60,5,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_WARN_NAMED_NAME,LOC_SYSTEM_HANIWA_A_WARN_NAMED_INFO,HANIWA_T_SUPPORT,10,5,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_IDEN_NAME,LOC_SYSTEM_HANIWA_A_IDEN_INFO,HANIWA_T_SUPPORT,10,5,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_HEAL_NAME,LOC_SYSTEM_HANIWA_A_HEAL_INFO,HANIWA_T_SUPPORT,50,10,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_HARDEN1_NAME,LOC_SYSTEM_HANIWA_A_HARDEN1_INFO,HANIWA_T_COMMON,20,20,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_HARDEN2_NAME,LOC_SYSTEM_HANIWA_A_HARDEN2_INFO,HANIWA_T_COMMON,20,20,{HANIWA_A_HARDEN1},{},{}},
-	{LOC_SYSTEM_HANIWA_A_HARDEN3_NAME,LOC_SYSTEM_HANIWA_A_HARDEN3_INFO,HANIWA_T_COMMON,20,20,{HANIWA_A_HARDEN3},{},{}},
-	{LOC_SYSTEM_HANIWA_A_FAST_REVIVE_NAME,LOC_SYSTEM_HANIWA_A_FAST_REVIVE_INFO,HANIWA_T_COMMON,30,10,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_HORSE_NAME,LOC_SYSTEM_HANIWA_A_HORSE_INFO,HANIWA_T_COMMON,60,10,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_FLY_NAME,LOC_SYSTEM_HANIWA_A_FLY_INFO,HANIWA_T_COMMON,20,10,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_TALK_NAME,LOC_SYSTEM_HANIWA_A_TALK_INFO,HANIWA_T_COMMON,0,1,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_GIRL_NAME,LOC_SYSTEM_HANIWA_A_GIRL_INFO,HANIWA_T_COMMON,0,1,{},{},{}}
+	{LOC_SYSTEM_HANIWA_A_SWORD_NAME,LOC_SYSTEM_HANIWA_A_SWORD_INFO,HANIWA_T_COMBAT,30,10,false,{},{},{HANIWA_A_SWORD, HANIWA_A_SPEAR, HANIWA_A_BOW, HANIWA_A_SHIELD2, HANIWA_A_TANMAC, HANIWA_A_HEAL}},
+	{LOC_SYSTEM_HANIWA_A_DOUBLE_SWORD_NAME,LOC_SYSTEM_HANIWA_A_DOUBLE_SWORD_INFO,HANIWA_T_COMBAT,20,20,false,{HANIWA_A_SWORD},{},{HANIWA_A_DOUBLE_SWORD, HANIWA_A_SPEAR, HANIWA_A_BOW, HANIWA_A_SHIELD1}},
+	{LOC_SYSTEM_HANIWA_A_SPEAR_NAME,LOC_SYSTEM_HANIWA_A_SPEAR_INFO,HANIWA_T_COMBAT,30,10,false,{},{},{HANIWA_A_SWORD, HANIWA_A_SPEAR, HANIWA_A_BOW, HANIWA_A_SHIELD1, HANIWA_A_TANMAC, HANIWA_A_HEAL}},
+	{LOC_SYSTEM_HANIWA_A_BOW_NAME,LOC_SYSTEM_HANIWA_A_BOW_INFO,HANIWA_T_COMBAT,30,10,false,{},{},{HANIWA_A_SWORD, HANIWA_A_SPEAR, HANIWA_A_BOW, HANIWA_A_SHIELD1, HANIWA_A_TANMAC, HANIWA_A_HEAL}},
+	{LOC_SYSTEM_HANIWA_A_SHIELD1_NAME,LOC_SYSTEM_HANIWA_A_SHIELD1_INFO,HANIWA_T_COMBAT,30,10,false,{},{},{HANIWA_A_DOUBLE_SWORD, HANIWA_A_SPEAR, HANIWA_A_BOW, HANIWA_A_SHIELD1}},
+	{LOC_SYSTEM_HANIWA_A_SHIELD2_NAME,LOC_SYSTEM_HANIWA_A_SHIELD2_INFO,HANIWA_T_COMBAT,60,20,false,{HANIWA_A_SHIELD1},{},{}},
+	{LOC_SYSTEM_HANIWA_A_EXPLOSION_NAME,LOC_SYSTEM_HANIWA_A_EXPLOSION_INFO,HANIWA_T_COMBAT,15,10,false,{},{},{}},
+	{LOC_SYSTEM_HANIWA_A_ARMY1_NAME,LOC_SYSTEM_HANIWA_A_ARMY1_INFO,HANIWA_T_COMBAT,60,5,false,{},{},{HANIWA_A_CREATE_P,HANIWA_A_CREATE_WEAPON,HANIWA_A_CREATE_ARMOUR,HANIWA_A_CREATE_POTION,HANIWA_A_CREATE_SCROLL}},
+	{LOC_SYSTEM_HANIWA_A_ARMY2_NAME,LOC_SYSTEM_HANIWA_A_ARMY2_INFO,HANIWA_T_COMBAT,60,15,false,{HANIWA_A_ARMY1},{},{}},
+	{LOC_SYSTEM_HANIWA_A_CLEAVE_NAME,LOC_SYSTEM_HANIWA_A_CLEAVE_INFO,HANIWA_T_COMBAT,90,5,true,{},{},{HANIWA_A_SPEAR, HANIWA_A_BOW}},
+	{LOC_SYSTEM_HANIWA_A_FIRE_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_FIRE_ENCHANT_INFO,HANIWA_T_COMBAT,20,5,false,{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW},{HANIWA_A_FIRE_ENCHANT,HANIWA_A_COLD_ENCHANT,HANIWA_A_ELEC_ENCHANT,HANIWA_A_POISON_ENCHANT}},
+	{LOC_SYSTEM_HANIWA_A_COLD_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_COLD_ENCHANT_INFO,HANIWA_T_COMBAT,20,5,false,{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW},{HANIWA_A_FIRE_ENCHANT,HANIWA_A_COLD_ENCHANT,HANIWA_A_ELEC_ENCHANT,HANIWA_A_POISON_ENCHANT}},
+	{LOC_SYSTEM_HANIWA_A_ELEC_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_ELEC_ENCHANT_INFO,HANIWA_T_COMBAT,20,5,false,{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW},{HANIWA_A_FIRE_ENCHANT,HANIWA_A_COLD_ENCHANT,HANIWA_A_ELEC_ENCHANT,HANIWA_A_POISON_ENCHANT}},
+	{LOC_SYSTEM_HANIWA_A_POISON_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_POISON_ENCHANT_INFO,HANIWA_T_COMBAT,20,5,false,{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW},{HANIWA_A_FIRE_ENCHANT,HANIWA_A_COLD_ENCHANT,HANIWA_A_ELEC_ENCHANT,HANIWA_A_POISON_ENCHANT}},
+	{LOC_SYSTEM_HANIWA_A_SLOW_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_SLOW_ENCHANT_INFO,HANIWA_T_COMBAT,40,20,false,{HANIWA_A_POISON_ENCHANT},{},{}},
+	{LOC_SYSTEM_HANIWA_A_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_TANMAC_INFO,HANIWA_T_MAGIC,30,30,false,{},{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW}},
+	{LOC_SYSTEM_HANIWA_A_FIRE_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_FIRE_TANMAC_INFO,HANIWA_T_MAGIC,20,5,false,{},{HANIWA_A_TANMAC},{HANIWA_A_FIRE_TANMAC,HANIWA_A_COLD_TANMAC,HANIWA_A_ELEC_TANMAC}},
+	{LOC_SYSTEM_HANIWA_A_COLD_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_COLD_TANMAC_INFO,HANIWA_T_MAGIC,20,5,false,{},{HANIWA_A_TANMAC},{HANIWA_A_FIRE_TANMAC,HANIWA_A_COLD_TANMAC,HANIWA_A_ELEC_TANMAC}},
+	{LOC_SYSTEM_HANIWA_A_ELEC_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_ELEC_TANMAC_INFO,HANIWA_T_MAGIC,20,5,false,{},{HANIWA_A_TANMAC},{HANIWA_A_FIRE_TANMAC,HANIWA_A_COLD_TANMAC,HANIWA_A_ELEC_TANMAC}},
+	{LOC_SYSTEM_HANIWA_A_MIDDLE_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_MIDDLE_TANMAC_INFO,HANIWA_T_MAGIC,30,20,false,{HANIWA_A_TANMAC},{},{}},
+	{LOC_SYSTEM_HANIWA_A_BIG_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_BIG_TANMAC_INFO,HANIWA_T_MAGIC,30,20,false,{HANIWA_A_MIDDLE_TANMAC},{},{}},
+	{LOC_SYSTEM_HANIWA_A_BURST_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_BURST_TANMAC_INFO,HANIWA_T_MAGIC,30,10,false,{},{HANIWA_A_TANMAC},{HANIWA_A_PENTAN}},
+	{LOC_SYSTEM_HANIWA_A_BLINK_NAME,LOC_SYSTEM_HANIWA_A_BLINK_INFO,HANIWA_T_MAGIC,20,10,false,{},{},{}},
+	{LOC_SYSTEM_HANIWA_A_SLOW_NAME,LOC_SYSTEM_HANIWA_A_SLOW_INFO,HANIWA_T_MAGIC,30,10,false,{},{},{}},
+	{LOC_SYSTEM_HANIWA_A_CONFUSE_NAME,LOC_SYSTEM_HANIWA_A_CONFUSE_INFO,HANIWA_T_MAGIC,30,20,false,{HANIWA_A_SLOW},{},{}},
+	{LOC_SYSTEM_HANIWA_A_PENTAN_NAME,LOC_SYSTEM_HANIWA_A_PENTAN_INFO,HANIWA_T_MAGIC,30,10,false,{},{HANIWA_A_TANMAC},{HANIWA_A_BURST_TANMAC}},
+	{LOC_SYSTEM_HANIWA_A_HASTE_NAME,LOC_SYSTEM_HANIWA_A_HASTE_INFO,HANIWA_T_MAGIC,60,10,false,{},{},{}},
+	{LOC_SYSTEM_HANIWA_A_MAGICIAN_NAME,LOC_SYSTEM_HANIWA_A_MAGICIAN_INFO,HANIWA_T_MAGIC,50,10,true,{},{HANIWA_A_TANMAC,HANIWA_A_SLOW},{}},
+	{LOC_SYSTEM_HANIWA_A_CREATE_P_NAME,LOC_SYSTEM_HANIWA_A_CREATE_P_INFO,HANIWA_T_SUPPORT,30,10,false,{},{},{HANIWA_A_ARMY1}},
+	{LOC_SYSTEM_HANIWA_A_CREATE_WEAPON_NAME,LOC_SYSTEM_HANIWA_A_CREATE_WEAPON_INFO,HANIWA_T_SUPPORT,30,5,false,{},{},{HANIWA_A_ARMY1}},
+	{LOC_SYSTEM_HANIWA_A_CREATE_WEAPON_ARTIFACT_NAME,LOC_SYSTEM_HANIWA_A_CREATE_WEAPON_ARTIFACT_INFO,HANIWA_T_SUPPORT,90,20,false,{HANIWA_A_CREATE_WEAPON},{},{}},
+	{LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_NAME,LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_INFO,HANIWA_T_SUPPORT,50,5,false,{},{},{HANIWA_A_ARMY1}},
+	{LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_ARTIFACT_NAME,LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_ARTIFACT_INFO,HANIWA_T_SUPPORT,90,20,false,{HANIWA_A_CREATE_ARMOUR},{},{}},
+	{LOC_SYSTEM_HANIWA_A_CREATE_POTION_NAME,LOC_SYSTEM_HANIWA_A_CREATE_POTION_INFO,HANIWA_T_SUPPORT,60,5,false,{},{},{HANIWA_A_ARMY1}},
+	{LOC_SYSTEM_HANIWA_A_CREATE_SCROLL_NAME,LOC_SYSTEM_HANIWA_A_CREATE_SCROLL_INFO,HANIWA_T_SUPPORT,60,5,false,{},{},{HANIWA_A_ARMY1}},
+	{LOC_SYSTEM_HANIWA_A_WARN_NAMED_NAME,LOC_SYSTEM_HANIWA_A_WARN_NAMED_INFO,HANIWA_T_SUPPORT,10,5,false,{},{},{}},
+	{LOC_SYSTEM_HANIWA_A_IDEN_NAME,LOC_SYSTEM_HANIWA_A_IDEN_INFO,HANIWA_T_SUPPORT,10,5,false,{},{},{}},
+	{LOC_SYSTEM_HANIWA_A_HEAL_NAME,LOC_SYSTEM_HANIWA_A_HEAL_INFO,HANIWA_T_SUPPORT,50,10,false,{},{},{}},
+	{LOC_SYSTEM_HANIWA_A_HARDEN1_NAME,LOC_SYSTEM_HANIWA_A_HARDEN1_INFO,HANIWA_T_COMMON,20,20,false,{},{},{}},
+	{LOC_SYSTEM_HANIWA_A_HARDEN2_NAME,LOC_SYSTEM_HANIWA_A_HARDEN2_INFO,HANIWA_T_COMMON,20,20,false,{HANIWA_A_HARDEN1},{},{}},
+	{LOC_SYSTEM_HANIWA_A_HARDEN3_NAME,LOC_SYSTEM_HANIWA_A_HARDEN3_INFO,HANIWA_T_COMMON,20,20,false,{HANIWA_A_HARDEN3},{},{}},
+	{LOC_SYSTEM_HANIWA_A_FAST_REVIVE_NAME,LOC_SYSTEM_HANIWA_A_FAST_REVIVE_INFO,HANIWA_T_COMMON,30,10,false,{},{},{}},
+	{LOC_SYSTEM_HANIWA_A_HORSE_NAME,LOC_SYSTEM_HANIWA_A_HORSE_INFO,HANIWA_T_COMMON,60,10,false,{},{},{HANIWA_A_FLY}},
+	{LOC_SYSTEM_HANIWA_A_FLY_NAME,LOC_SYSTEM_HANIWA_A_FLY_INFO,HANIWA_T_COMMON,20,10,false,{},{},{HANIWA_A_HORSE}},
+	{LOC_SYSTEM_HANIWA_A_TALK_NAME,LOC_SYSTEM_HANIWA_A_TALK_INFO,HANIWA_T_COMMON,0,1,false,{},{},{}},
+	{LOC_SYSTEM_HANIWA_A_GIRL_NAME,LOC_SYSTEM_HANIWA_A_GIRL_INFO,HANIWA_T_COMMON,0,1,false,{},{},{}}
 };
 
 
 bool keiki_gift()
 {
-	int temp = you.Ability(SKL_UPGRADE_HANIWA,true,true);
+	bool temp = you.HasAbility(SKL_UPGRADE_HANIWA);
 	
 	if(!temp)
 	{
@@ -88,8 +95,25 @@ bool keiki_gift()
 	return false;
 }
 
-
-
+string haniwa_abil::getCostString() {
+	if(cost == 0) {
+		return LocalzationManager::locString(LOC_SYSTEM_NONE_STRING);
+	}
+	else if(cost <= 10) {
+		return LocalzationManager::locString(LOC_SYSTEM_COST_VERY_LOW);
+	} else if(cost <= 20) {
+		return LocalzationManager::locString(LOC_SYSTEM_COST_LOW);
+	} else if(cost <= 30) {
+		return LocalzationManager::locString(LOC_SYSTEM_COST_MIDDLE);
+	} else if(cost <= 60) {
+		return LocalzationManager::locString(LOC_SYSTEM_COST_HIGH);
+	} else {
+		return LocalzationManager::locString(LOC_SYSTEM_COST_VERY_HIGH);
+	}
+}
+bool haniwa_abil::isEmpty_abil() {
+	return you.god_value[GT_KEIKI][0] == 0 && you.god_value[GT_KEIKI][1] == 0;
+}
 bool haniwa_abil::has_abil(haniwa_abil_key key) {
     int idx = static_cast<int>(key);
     return (idx < 32) ? (( you.god_value[GT_KEIKI][0] >> idx) & 1) : ((you.god_value[GT_KEIKI][1] >> (idx - 32)) & 1);
@@ -104,6 +128,14 @@ bool haniwa_abil::set_abil(haniwa_abil_key key) {
     } else {
 		return false;
 	}
+
+	if(key == HANIWA_A_ARMY1) {
+		haniwa_abil::createHaniwa(1, true);
+	}
+	if(key == HANIWA_A_ARMY2) {
+		haniwa_abil::createHaniwa(2, true);
+	}
+
     return true;
 };
 
@@ -112,10 +144,42 @@ int haniwa_abil::getMaxHaniwa() {
     return 1+(has_abil(HANIWA_A_ARMY1)?1:0)+(has_abil(HANIWA_A_ARMY2)?1:0);
 }
 
-random_extraction<haniwa_abil_key> haniwa_abil::getAbleHaniwaAbils() {
+haniwa_abil_type haniwa_abil::currentType() {
+	int num_[HANIWA_T_COMMON+1] = {0};
+	for(int i = 0; i < HANIWA_A_MAX; i++) {
+		if(has_abil((haniwa_abil_key)i)) {
+			num_[haniwa_abil_list[i].type]++;
+		}
+	}
+
+
+    int max_count = 0;
+    int max_count_type = -1;
+    bool duplicate = false;
+
+    for (int i = 0; i <= HANIWA_T_COMMON; i++) {
+        if (num_[i] > max_count) {
+            max_count = num_[i];
+            max_count_type = i;
+            duplicate = false;
+        } else if (num_[i] == max_count && max_count > 0) {
+            duplicate = true;
+        }
+    }
+
+    if (max_count == 0 || duplicate) {
+        return HANIWA_T_COMMON;
+    }
+
+    return static_cast<haniwa_abil_type>(max_count_type);
+}
+
+
+random_extraction<haniwa_abil_key> haniwa_abil::getAbleHaniwaAbils(int type) {
     random_extraction<haniwa_abil_key> result;
 
     int current_cost_ = you.piety;
+	haniwa_abil_type current_type = currentType();
 
     if (current_cost_ >= 160) return result;
 
@@ -126,6 +190,13 @@ random_extraction<haniwa_abil_key> haniwa_abil::getAbleHaniwaAbils() {
         // 이미 배운 능력은 스킵
         if (has_abil(static_cast<haniwa_abil_key>(i)))
             continue;
+
+		if(type != -1 && abil.type != (haniwa_abil_type)type)
+            continue;
+
+		if(abil.specific && abil.type != current_type)  {
+            continue;
+		}
 
         // except 조건
         bool excepted = false;
@@ -172,8 +243,8 @@ random_extraction<haniwa_abil_key> haniwa_abil::getAbleHaniwaAbils() {
 
 
 
-haniwa_abil::haniwa_abil(LOCALIZATION_ENUM_KEY name, LOCALIZATION_ENUM_KEY infor, haniwa_abil_type type, int cost, int percent, vector<haniwa_abil_key> must_abil, vector<haniwa_abil_key> need_abil, vector<haniwa_abil_key> except_abil) :
-name(name), infor(infor), type(type), cost(cost), percent(percent), must_abil(must_abil), need_abil(need_abil), except_abil(except_abil)
+haniwa_abil::haniwa_abil(LOCALIZATION_ENUM_KEY name, LOCALIZATION_ENUM_KEY infor, haniwa_abil_type type, int cost, int percent, bool specific, vector<haniwa_abil_key> must_abil, vector<haniwa_abil_key> need_abil, vector<haniwa_abil_key> except_abil) :
+name(name), infor(infor), type(type), cost(cost), percent(percent), specific(specific), must_abil(must_abil), need_abil(need_abil), except_abil(except_abil)
 {
 	
 	
@@ -182,7 +253,6 @@ name(name), infor(infor), type(type), cost(cost), percent(percent), must_abil(mu
 
 
 monster* haniwa_abil::createHaniwa(int index, bool first_) {
-
 	dif_rect_iterator rit(you.position, 2);
 	for (; !rit.end(); rit++)
 	{
@@ -210,6 +280,56 @@ void haniwa_abil::upgradeHaniwa(monster* mon) {
 
 	mon->level = you.level;
 	mon->max_hp = mondata[MON_HANIWA].max_hp + you.level*5;
+	mon->ac = mondata[MON_HANIWA].ac;
+	int att =  mondata[MON_HANIWA].atk[0] + you.level;
+
+	if(has_abil(HANIWA_A_BOW)) {
+		att = att*4/3; //33% //근접공격을 안하기에
+	}
+	if(has_abil(HANIWA_A_DOUBLE_SWORD)) {
+		att = att*3/2; //50%
+	}
+	else if(has_abil(HANIWA_A_SWORD)) {
+		att = att*6/5; //20%
+	}
+
+	if(has_abil(HANIWA_A_FIRE_ENCHANT) || has_abil(HANIWA_A_COLD_ENCHANT) || has_abil(HANIWA_A_COLD_ENCHANT) || has_abil(HANIWA_A_ELEC_ENCHANT)) {
+		att = att*6/5; //20%
+	}
+
+	if(has_abil(HANIWA_A_SHIELD1)) {
+		mon->max_hp = mon->max_hp*11/10; //10%증가
+		mon->ac+=5;
+	}
+	if(has_abil(HANIWA_A_SHIELD2)) {
+		mon->flag |= M_FLAG_SAVE_PLAYER;
+		mon->ac+=10;
+	}
+
+	if(has_abil(HANIWA_A_HARDEN1)) {
+		mon->max_hp = mon->max_hp*13/10; //30%증가
+		mon->ac++;
+	}
+	if(has_abil(HANIWA_A_HARDEN2)) {
+		mon->max_hp = mon->max_hp*13/10; //30%증가
+		mon->ac+=2;
+	}
+	if(has_abil(HANIWA_A_HARDEN3)) {
+		mon->max_hp = mon->max_hp*14/10; //40%증가
+		mon->ac+=3;
+	}
+
+	if(has_abil(HANIWA_A_ARMY2)) {
+		mon->level = mon->level*2/3+1;
+		mon->max_hp = mon->max_hp*2/3+1;
+		att = att*2/3+1;
+	}
+	else if(has_abil(HANIWA_A_ARMY1)) {
+		mon->level = mon->level*3/4+1;
+		mon->max_hp = mon->max_hp*3/4+1;
+		att = att*3/4+1;
+	}
+
 	mon->hp = hp_rate*mon->max_hp;
 
 	if(mon->hp < 0)
@@ -219,22 +339,91 @@ void haniwa_abil::upgradeHaniwa(monster* mon) {
 
 	for(int i = 0; i<3;i++)
 	{
-		if(mondata[MON_HANIWA].atk[i])
+		if(has_abil(HANIWA_A_DOUBLE_SWORD) && i == 1) {
+			mon->atk_type[i] = ATT_NORMAL;
+			if(has_abil(HANIWA_A_FIRE_ENCHANT)) {
+				mon->atk_type[i] = ATT_FIRE;
+			} if(has_abil(HANIWA_A_COLD_ENCHANT)) {
+				mon->atk_type[i] = ATT_COLD;
+			} if(has_abil(HANIWA_A_ELEC_ENCHANT)) {
+				mon->atk_type[i] = ATT_ELEC;
+			}
+			if(has_abil(HANIWA_A_SLOW_ENCHANT)) {
+				mon->atk_type[i] = ATT_SLOW_POISON;
+			} else if(has_abil(HANIWA_A_POISON_ENCHANT)) {
+				mon->atk_type[i] = ATT_S_POISON;
+			}
+			mon->atk_name[i] = name_infor(LOC_SYSTEM_ATT_NORMAL);
+			mon->atk[i] = att;
+		}
+		else if(mondata[MON_HANIWA].atk[i])
 		{
-			mon->atk[i] = mondata[MON_HANIWA].atk[i]+ you.level;
+			if(has_abil(HANIWA_A_FIRE_ENCHANT)) {
+				mon->atk_type[i] = ATT_FIRE;
+			} if(has_abil(HANIWA_A_COLD_ENCHANT)) {
+				mon->atk_type[i] = ATT_COLD;
+			} if(has_abil(HANIWA_A_ELEC_ENCHANT)) {
+				mon->atk_type[i] = ATT_ELEC;
+			}
+			
+			if(has_abil(HANIWA_A_SLOW_ENCHANT)) {
+				mon->atk_type[i] = ATT_M_POISON;
+			} else if(has_abil(HANIWA_A_POISON_ENCHANT)) {
+				mon->atk_type[i] = ATT_S_POISON;
+			}
+			mon->atk[i] = att;
 		}
 	}
+	mon->spell_lists.clear();
 
+	float spell_rate =has_abil(HANIWA_A_MAGICIAN)?1.2f:1.0f;
+	if(has_abil(HANIWA_A_BOW)) {
+		mon->spell_lists.push_back(spell(SPL_ARROW, 40));
+	}
+
+	if(has_abil(HANIWA_A_BIG_TANMAC)) {
+		mon->spell_lists.push_back(spell(SPL_HANIWA_MAGIC_TANMAC3, 25*spell_rate));
+	} else if(has_abil(HANIWA_A_MIDDLE_TANMAC)) {
+		mon->spell_lists.push_back(spell(SPL_HANIWA_MAGIC_TANMAC2, 25*spell_rate));
+	} else if(has_abil(HANIWA_A_TANMAC)) {
+		mon->spell_lists.push_back(spell(SPL_HANIWA_MAGIC_TANMAC, 25*spell_rate));
+	}
+
+	if(has_abil(HANIWA_A_HASTE)) {
+		mon->spell_lists.push_back(spell(SPL_HASTE, 15*spell_rate));
+	}
+
+	if(has_abil(HANIWA_A_BLINK)) {
+		mon->spell_lists.push_back(spell(SPL_BLINK, 15*spell_rate));
+	}
+
+	if(has_abil(HANIWA_A_CONFUSE)) {
+		mon->spell_lists.push_back(spell(SPL_CONFUSE, 20*spell_rate));
+	}
+	else if(has_abil(HANIWA_A_SLOW)) {
+		mon->spell_lists.push_back(spell(SPL_SLOW, 20*spell_rate));
+	}
 	
 	if(!has_abil(HANIWA_A_HORSE)) {
 		mon->image = &img_mons_haniwa;
 	}
 	else {
 		mon->image = &img_mons_horse_haniwa;
+		mon->speed = 7;
+	}
+
+	if(has_abil(HANIWA_A_FLY)) {
+		mon->walk_speed_bonus = 2;
+	}
+	
+
+	if(has_abil(HANIWA_A_BOW) || has_abil(HANIWA_A_MAGICIAN)) {
+		mon->flag |= M_FLAG_NO_ATK;
+		mon->flag |= M_FLAG_RANGE_ATTACK;
 	}
 
 	if(!has_abil(HANIWA_A_SPEAR)) {
-		mon->flag &= M_FLAG_SPEAR_ATTACK;
+		mon->flag |= M_FLAG_SPEAR_ATTACK;
 	}
 }
 void haniwa_abil::upgradeHaniwa() {
@@ -273,8 +462,8 @@ void haniwa_abil::haniwaDraw(float x_, float y_, float scale_) {
 	//14: 창 (LR, 승마)
 	//15: 응급상자(R, 승마)
 	if(!has_abil(HANIWA_A_HORSE)) {
-		//	if(has_abil(HANIWA_A_SWORD))
-		img_mons_haniwa_equipments[0].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		if(has_abil(HANIWA_A_SWORD))
+			img_mons_haniwa_equipments[0].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
 		if(has_abil(HANIWA_A_TANMAC))
 			img_mons_haniwa_equipments[3].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
 		else if(has_abil(HANIWA_A_BOW))
@@ -292,6 +481,12 @@ void haniwa_abil::haniwaDraw(float x_, float y_, float scale_) {
 		else if(has_abil(HANIWA_A_DOUBLE_SWORD))
 			img_mons_haniwa_equipments[2].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
 
+		//머리
+		if(has_abil(HANIWA_A_HARDEN1)) 
+		{
+			img_mons_haniwa_equipments[4].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		}
+
 	} else {
 		if(has_abil(HANIWA_A_SWORD))
 			img_mons_haniwa_equipments[9].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
@@ -307,7 +502,11 @@ void haniwa_abil::haniwaDraw(float x_, float y_, float scale_) {
 		//왼손
 		if(has_abil(HANIWA_A_DOUBLE_SWORD))
 			img_mons_haniwa_equipments[10].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+	
+		//머리
+		if(has_abil(HANIWA_A_HARDEN1)) 
+		{
+			img_mons_haniwa_equipments[12].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		}
 	}
-
-
 }

@@ -1186,8 +1186,8 @@ bool players::isEnemyMonster(const monster* monster_info)
 {
 	return !monster_info->isUserAlly();
 }
-bool players::isPassedBullet(unit* order) {
-	if(isShootingSprint()) {
+bool players::isPassedBullet(unit* order, bool really) {
+	if(isShootingSprint() || really) {
 		if(order->isUserAlly()) {
 			return true;
 		}

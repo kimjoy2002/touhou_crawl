@@ -1833,7 +1833,7 @@ bool GodAccpect_Explore_100()
 	case GT_JUNKO:
 		return false;
 	case GT_KEIKI:
-		if(20>randA(100))
+		if(25>randA(100))
 		{
 			you.GiftCount(1);
 		}
@@ -2012,6 +2012,7 @@ bool GodAccpect_Abandon(god_type god)
 		return false;
 	case GT_KEIKI:
 		{
+			you.god_value[GT_KEIKI][2] = you.piety;
 			int k = 0;
 			int max_num =  haniwa_abil::getMaxHaniwa();
 			for(int i = 0; i < max_num; i++)
@@ -3345,8 +3346,30 @@ void God_AblilityShow(god_type god) {
 	case GT_SHIKIEIKI:
 		break;
 	case GT_KEIKI:
+		if(you.god == GT_KEIKI)
+		{
+			printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_UI_KEIKI),true,CL_keiki);
+			printsub("",true,CL_normal);
+			bool first_ = true;
+			for(int i = 0; i < HANIWA_A_MAX; i++) {
+				if(haniwa_abil::has_abil((haniwa_abil_key)i)) {
+					if(!first_) {
+						printsub(", " + LocalzationManager::locString(haniwa_abil_list[i].name),false,CL_keiki);
+					} else {
+						printsub(LocalzationManager::locString(haniwa_abil_list[i].name),false,CL_keiki);
+					}
+					first_ = false;
+				}
+			}
+			if(first_) {
+				printsub(LocalzationManager::locString(LOC_SYSTEM_NONE_STRING),false,CL_keiki);
+			}
+			printsub("",true,CL_normal);
+			printsub("",true,CL_normal);
+			printsub("",true,CL_normal);
+		}
 		if (you.piety >= haniwa_abil::max_piety) {
-			printGodAbility(GT_KEIKI, level_, 0, false, LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY1, vector<subability>(), LOC_EMPTYSTRING, false);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY1_1),true,CL_keiki);
 		} else {
 			printGodAbility(GT_KEIKI, level_, 0, false, LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_SOMETIME);
 		}

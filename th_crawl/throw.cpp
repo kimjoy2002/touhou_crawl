@@ -457,7 +457,7 @@ bool ThrowTamacInstance::oneturn(coord_def& hit_pos_) {
 		for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
 		{
 			if((*it).isLive() && (*it).position.x == (*beam).x && (*it).position.y == (*beam).y &&
-				!(*it).isPassedBullet(infor_.order)
+				!(*it).isPassedBullet(infor_.order, true)
 				)
 			{
 				attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
@@ -468,7 +468,7 @@ bool ThrowTamacInstance::oneturn(coord_def& hit_pos_) {
 			}
 		}
 		if(!infor_.order->isplayer() && you.position.x == (*beam).x && you.position.y == (*beam).y &&				
-			!you.isPassedBullet(infor_.order)
+			!you.isPassedBullet(infor_.order, true)
 			) //플레이어는 자기자신에게 맞지않는 조건은 나중에 지울까?
 		{
 			attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
@@ -635,7 +635,7 @@ coord_def throwtanmac_temp(int graphic_type, textures* t_, beam_iterator& beam, 
 			for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
 			{
 				if((*it).isLive() && (*it).position.x == (*beam).x && (*it).position.y == (*beam).y &&
-					!(*it).isPassedBullet(infor_.order)
+					!(*it).isPassedBullet(infor_.order, true)
 					)
 				{
 					attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
@@ -644,7 +644,7 @@ coord_def throwtanmac_temp(int graphic_type, textures* t_, beam_iterator& beam, 
 				}
 			}
 			if(!infor_.order->isplayer() && you.position.x == (*beam).x && you.position.y == (*beam).y &&				
-				!you.isPassedBullet(infor_.order)
+				!you.isPassedBullet(infor_.order, true)
 				) //플레이어는 자기자신에게 맞지않는 조건은 나중에 지울까?
 			{
 				attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
@@ -765,7 +765,7 @@ bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &targe
 	for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
 	{
 		if((*it).isLive() && (*it).position.x == target.x && (*it).position.y == target.y &&
-			!(*it).isPassedBullet(infor_.order)
+			!(*it).isPassedBullet(infor_.order, true)
 			)
 		{
 			attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
@@ -773,7 +773,7 @@ bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &targe
 		}
 	}
 	if(!infor_.order->isplayer() && you.position.x == target.x && you.position.y == target.y &&
-		!you.isPassedBullet(infor_.order)
+		!you.isPassedBullet(infor_.order, true)
 		) //플레이어는 자기자신에게 맞지않는 조건은 나중에 지울까?
 	{
 		attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
@@ -846,7 +846,7 @@ bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_,
 					for(vector<monster>::iterator it2=env[current_level].mon_vector.begin();it2!=env[current_level].mon_vector.end();it2++)
 					{
 						if((*it2).isLive() && (*it2).position.x == it->pos.x && (*it2).position.y == it->pos.y &&
-							!(*it2).isPassedBullet(infor_.order)
+							!(*it2).isPassedBullet(infor_.order, true)
 							)
 						{
 							attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);

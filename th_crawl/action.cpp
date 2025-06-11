@@ -571,6 +571,11 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 			you.search_pos.y-= you.position.y -c.y;
 	}
 
+	//안전장치
+	if(you.search_pos.x < 0) you.search_pos.x = 0;
+	if(you.search_pos.x >= DG_MAX_X) you.search_pos.x = DG_MAX_X - 1;
+	if(you.search_pos.y < 0) you.search_pos.y = 0;
+	if(you.search_pos.y >= DG_MAX_Y) you.search_pos.y = DG_MAX_Y - 1;
 
 
 	if(type_ == VT_NORMAL)

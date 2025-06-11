@@ -46,7 +46,7 @@ s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0
 s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
 force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), s_oil(0), s_fire(0), fire_reason(PRT_NEUTRAL), s_none_move(0), debuf_boost(0),
-	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0), time_delay(0), 
+	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0),walk_speed_bonus(0), time_delay(0), 
 	speed(10), memory_time(0), first_contact(true), strong(1), special_value(0), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(),
 	direction(-1), sm_info(), state(MS_NORMAL), random_spell(false), wait(false)
 {
@@ -138,6 +138,7 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, elec_resist);
 	SaveData<int>(fp, confuse_resist);
 	SaveData<int>(fp, wind_resist);
+	SaveData<int>(fp, walk_speed_bonus);
 	SaveData<int>(fp, time_delay);
 	SaveData<int>(fp, speed);
 	SaveData<int>(fp, memory_time);
@@ -261,6 +262,9 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, elec_resist);
 	LoadData<int>(fp, confuse_resist);
 	LoadData<int>(fp, wind_resist);
+	if(!isPrevVersion(loading_version_string, "ver1.105")) {
+		LoadData<int>(fp, walk_speed_bonus);
+	}
 	LoadData<int>(fp, time_delay);
 	LoadData<int>(fp, speed);
 	LoadData<int>(fp, memory_time);
@@ -394,6 +398,7 @@ void monster::init()
 	elec_resist = 0;
 	confuse_resist = 0;
 	wind_resist = 0;
+	walk_speed_bonus = 0;
 	time_delay = 0;
 	speed = 10; 
 	memory_time = 0; 
@@ -1052,6 +1057,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_ELEC:
 	case ATT_ELEC_WEAK:
 	case ATT_S_POISON:
+	case ATT_SLOW_POISON:
 	case ATT_M_POISON:
 	case ATT_SICK:
 	case ATT_THROW_NORMAL:
@@ -1084,6 +1090,11 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_THROW_STRONG_POISON:
 	case ATT_OIL_BLAST:
 	case ATT_BEARTRAP:
+	case ATT_THROW_FIRE_PYSICAL:
+	case ATT_THROW_COLD_PYSICAL:
+	case ATT_THROW_ELEC_PYSICAL:
+	case ATT_THROW_POISON_PYSICAL:
+	case ATT_THROW_SLOW_POISON:
 	default:
 		damage_ -= randA(ac);
 		if(damage_<0)
@@ -1113,18 +1124,21 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	{
 	case ATT_FIRE:
 	case ATT_FIRE_WEAK:
+	case ATT_THROW_FIRE_PYSICAL:
 		bonus_damage = damage_ / 3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetFireResist();
 		break;
 	case ATT_COLD:
 	case ATT_COLD_WEAK:
+	case ATT_THROW_COLD_PYSICAL:
 		bonus_damage = damage_ / 3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetColdResist();
 		break;
 	case ATT_ELEC:
 	case ATT_ELEC_WEAK:
+	case ATT_THROW_ELEC_PYSICAL:
 		bonus_damage = damage_ / 3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetColdResist();
@@ -1207,6 +1221,7 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_SPEAR:
 		case ATT_S_POISON:
 		case ATT_M_POISON:
+		case ATT_SLOW_POISON:
 		case ATT_SICK:
 		case ATT_VAMP:
 		case ATT_LUNATIC:
@@ -1223,6 +1238,8 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_THROW_MIDDLE_POISON:
 		case ATT_THROW_STRONG_POISON:
 		case ATT_THROW_NONE_DAMAGE:
+		case ATT_THROW_POISON_PYSICAL:
+		case ATT_THROW_SLOW_POISON:
 		case ATT_BEARTRAP:
 			if(a.order) {
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,CL_normal,
@@ -1254,6 +1271,7 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			break;
 		case ATT_FIRE:
 		case ATT_FIRE_WEAK:
+		case ATT_THROW_FIRE_PYSICAL:
 			if(a.order) {
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_FIRE,false,false,false,CL_normal,
 					PlaceHolderHelper(name_.getName()),
@@ -1263,6 +1281,7 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			break;
 		case ATT_COLD:
 		case ATT_COLD_WEAK:
+		case ATT_THROW_COLD_PYSICAL:
 			if(a.order) {
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_COLD,false,false,false,CL_normal,
 					PlaceHolderHelper(name_.getName()),
@@ -1390,6 +1409,7 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			break;
 		case ATT_ELEC:
 		case ATT_ELEC_WEAK:
+		case ATT_THROW_ELEC_PYSICAL:
 			if (a.order) {
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_ELEC,false,false,false,CL_normal,
 					PlaceHolderHelper(name_.getName()),
@@ -1473,6 +1493,7 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_ELEC_WEAK:
 	case ATT_S_POISON:
 	case ATT_M_POISON:
+	case ATT_SLOW_POISON:
 	case ATT_LUNATIC:
 	case ATT_SLEEP:
 	case ATT_SICK:
@@ -1492,6 +1513,11 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_THROW_ELEC:
 	case ATT_NORMAL_HIT:
 	case ATT_BEARTRAP:
+	case ATT_THROW_FIRE_PYSICAL:
+	case ATT_THROW_COLD_PYSICAL:
+	case ATT_THROW_ELEC_PYSICAL:
+	case ATT_THROW_POISON_PYSICAL:
+	case ATT_THROW_SLOW_POISON:
 	default:
 		printlog(LocalzationManager::locString(LOC_SYSTEM_BUT_NO_DAMAGE),true,false,false,CL_normal);
 		break;
@@ -1817,6 +1843,12 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			SetPoison(15+randA(10), 50, false);
 			SetPoisonReason(a.p_type);
 		}
+		if(a.type == ATT_SLOW_POISON) {
+			SetPoison(20+randA(10), 150, false);
+			if(!(flag & M_FLAG_INANIMATE) && randA(2)>1) {
+				SetSlow(randA(10));
+			}
+		}
 		if(a.type == ATT_M_POISON && randA(1))
 		{
 			SetPoison(40+randA(15), 100, false);
@@ -1847,6 +1879,14 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		{
 			SetPoison(70+randA(20), 150, true);
 			SetPoisonReason(a.p_type);
+		}
+		if(a.type == ATT_THROW_POISON_PYSICAL)
+			SetPoison(15+randA(10), 50, false);
+		if(a.type == ATT_THROW_SLOW_POISON) {
+			SetPoison(25+randA(10), 150, false);
+			if(!(flag & M_FLAG_INANIMATE) && randA(2)>1) {
+				SetSlow(randA(10));
+			}
 		}
 		if(a.type == ATT_CURSE && randA(1))
 		{	
@@ -2649,6 +2689,7 @@ bool monster::CanSpeak()
 	}
 	return false;
 }
+bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target, bool hurt_ally);
 bool monster::dead(parent_type reason_, bool message_, bool remove_)
 {
 	bool sight_ = false;
@@ -2770,6 +2811,8 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		}
 	}
 
+
+
 	if((id == MON_STONETOWER || id == MON_CLUMSY_STONE_TOWER) && (reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !remove_)
 	{
 		int owner_ = (id == MON_STONETOWER)?MON_EIKA:MON_KOGASA;
@@ -2837,6 +2880,9 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			if(you.haniwa_allys[i].map_id == map_id && you.haniwa_allys[i].floor == current_level)
 			{
 				you.haniwa_allys[i].cooldown = haniwa_abil::has_abil(HANIWA_A_FAST_REVIVE)?rand_int(250,350):rand_int(900,1100); //부활준비
+				if( haniwa_abil::has_abil(HANIWA_A_EXPLOSION)) {
+					skill_suicide_bomb(level*5,false,this,position, false);
+				}
 			}
 		}
 	}
@@ -5268,7 +5314,7 @@ bool monster::isEnemyMonster(const monster* monster_info)
 	}
 	return true;
 }
-bool monster::isPassedBullet(unit* order)
+bool monster::isPassedBullet(unit* order, bool really)
 {
 	
 	if(!order)
@@ -5609,6 +5655,14 @@ bool monster::isSaveSummoner(unit* order)
 			}
 		}
 	}
+	if(flag & M_FLAG_SAVE_PLAYER){
+		if(distan_coord(position, order->position) <=2)
+		{
+			if(sm_info.parent_map_id == order->GetMapId() && randA(3)){
+				return true;
+			}
+		}
+	}
 	if(id == MON_GOLEM){
 		if(distan_coord(position, order->position) <=2)
 		{
@@ -5627,6 +5681,12 @@ bool monster::isSaveSummoner(unit* order)
 	}
 	return false;
 }
+int monster::GetWalkDelay() {
+	int speed_ = GetSpeed() - walk_speed_bonus;
+	if(speed_ <= 0)
+		speed_ = 1; 
+	return speed_;
+};
 float monster::GetFireResist(bool cloud_)
 {
 	if(fire_resist <= -2)

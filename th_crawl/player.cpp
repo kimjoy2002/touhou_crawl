@@ -2492,7 +2492,12 @@ bool players::GetExp(int exper_, bool speak_)
 	{
 		exper_ = max<int>(1,exper_*0.7f);
 		GetFairyExp(max(1,exper_/2));
+	}
+	if(you.god == GT_KEIKI)
+	{
+		exper_ = max<int>(1,exper_*0.8f);
 	} 
+
 
 	exper += exper_;
 	skill_exper += exper_;
@@ -5184,6 +5189,13 @@ bool players::isMemorize(int spell)
 	}
 	return false;
 }
+bool players::HasAbility(int skill_) {
+	for (int i = 0; i < 52; i++) {
+		if (MemorizeSkill[i] == skill_)
+			return true;
+	}
+	return false;
+}
 int players::Ability(int skill_, bool god_, bool unset_, int immediately)
 {
 	int set_=-1;
@@ -5321,9 +5333,13 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 
 	you.Ability(SKL_ABANDON_GOD,true,false);
 	GetGodAbility(0, true);
-	PietyUpDown(
-		god == GT_MIKO ? 0 :
-		(isTutorial() || god == GT_SEIJA)?160:piety_,true);
+	if(god == GT_KEIKI) {
+		PietyUpDown(you.god_value[GT_KEIKI][2],true); //케이키는 항상 신앙심을 유지한다.
+	} else {
+		PietyUpDown(
+			god == GT_MIKO ? 0 :
+			(isTutorial() || god == GT_SEIJA)?160:piety_,true);
+	}
 	godAutoPickUp(god, true);
 	if(isTutorial())
 	{

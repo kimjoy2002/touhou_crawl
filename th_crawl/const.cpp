@@ -208,7 +208,7 @@ const D3DCOLOR CL_joon_and_sion = D3DCOLOR_RGBA(255, 200, 0, 200);
 const D3DCOLOR CL_joon = D3DCOLOR_RGBA(255, 255, 0, 255);
 const D3DCOLOR CL_sion = D3DCOLOR_RGBA(50, 50, 255, 255);
 const D3DCOLOR CL_eiki = D3DCOLOR_RGBA(255, 180, 130, 255);
-const D3DCOLOR CL_keiki = D3DCOLOR_RGBA(255, 180, 130, 255);
+const D3DCOLOR CL_keiki = D3DCOLOR_RGBA(0, 160, 130, 255);
 const D3DCOLOR CL_tenkyuu = D3DCOLOR_RGBA(255, 180, 130, 255);
 
 const name_infor string_that(LOC_SYSTEM_THAT);

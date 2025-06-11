@@ -1270,7 +1270,6 @@ LOC_SYSTEM_UNIQUE_KEINE_TRANSFORM,Wounded Keine transforms into a White-Haired B
 LOC_SYSTEM_UNIQUE_YUMA_TRANSFORM,Overwhelmed by hunger, Yuma transformed into a Grid Monster!
 LOC_SYSTEM_UNIQUE_YUMA_ABSORB,{0} absorbed {1} from the ground and recovered.
 LOC_SYSTEM_UNIQUE_YUMA_ABSORB_MANY,{0} absorbed {1} items from the ground and recovered.
-LOC_SYSTEM_UNIQUE_YUMA_ABSORB,{0} absorbed {1} from the ground and recovered.
 LOC_SYSTEM_UNIQUE_EIKA_REGA_DISTANCE,You feel the anger of someone from afar.
 LOC_SYSTEM_UNIQUE_EIKA_REGA,{0} is enraged! {0} has grown stronger.
 LOC_SYSTEM_UNIQUE_KOGASA_REGA,{0} was angered by your actions! ...But nothing happened.

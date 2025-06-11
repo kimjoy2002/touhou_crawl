@@ -75,7 +75,6 @@ enum haniwa_abil_type {
 };
 
 
-
 class haniwa_abil {
 public:
 	LOCALIZATION_ENUM_KEY name;
@@ -84,23 +83,26 @@ public:
 	haniwa_abil_type type;
 	int cost;
 	int percent;
+	bool specific;
 	
 	vector<haniwa_abil_key> must_abil;
 	vector<haniwa_abil_key> need_abil;
 	vector<haniwa_abil_key> except_abil;
 	
-	haniwa_abil(LOCALIZATION_ENUM_KEY name, LOCALIZATION_ENUM_KEY infor, haniwa_abil_type type, int cost, int percent, vector<haniwa_abil_key> must_abil, vector<haniwa_abil_key> need_abil, vector<haniwa_abil_key> except_abil);
+	haniwa_abil(LOCALIZATION_ENUM_KEY name, LOCALIZATION_ENUM_KEY infor, haniwa_abil_type type, int cost, int percent, bool specific, vector<haniwa_abil_key> must_abil, vector<haniwa_abil_key> need_abil, vector<haniwa_abil_key> except_abil);
 	
 	string getCostString();
 
 public:
 	static const int max_piety = 160;
 
-	static random_extraction<haniwa_abil_key> getAbleHaniwaAbils();
+	static random_extraction<haniwa_abil_key> getAbleHaniwaAbils(int type);
 
+	static bool isEmpty_abil();
 	static bool has_abil(haniwa_abil_key key);
 	static bool set_abil(haniwa_abil_key key);
 	static int getMaxHaniwa();
+	static haniwa_abil_type currentType();
 
 	static monster* createHaniwa(int index, bool first_);
 	static void upgradeHaniwa(monster* mon);

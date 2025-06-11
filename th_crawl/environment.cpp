@@ -355,6 +355,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 	env[current_level].popular = -1;
 	current_level = floor;
 
+	ReleaseMutex(mutx);
 	if(current_level >= PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL)
 	{
 		while(1)
@@ -371,6 +372,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 		you.SetXY((prev_level>floor && !isLastFloor(floor))?stair_down[num_]:stair_up[num_]);
 	else
 		you.SetXY(pos_);
+	WaitForSingleObject(mutx, INFINITE);
 	you.prev_position = you.position;
 	{
 		//미코에 의한 버프 초기화

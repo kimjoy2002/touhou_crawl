@@ -25,6 +25,7 @@
 #include "map.h"
 #include "event.h"
 #include "key.h"
+#include "keiki.h"
 #include "rand_shuffle.h"
 #include "evoke.h"
 #include "armour.h"
@@ -2498,7 +2499,7 @@ bool skill_summon_flandre(int pow, bool short_, unit* order, coord_def target)
 	return return_;
 
 }
-bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target)
+bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target, bool hurt_ally)
 {
 	if(1)
 	{
@@ -2530,7 +2531,7 @@ bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target)
 					{
 						if(unit* hit_ = env[current_level].isMonsterPos(rit->x,rit->y))
 						{	
-							if(hit_ != order)
+							if(hit_ != order && (hurt_ally || hit_->isEnemyUnit(order)))
 							{
 								int att_ = randC(4,13+power/20);
 								int m_att_ = 4*(13+power/20);
@@ -2543,12 +2544,16 @@ bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target)
 				}
 			}
 		}
-		Sleep(300);
+		if (env[current_level].isInSight(order->position)) {
+			Sleep(300);
+		}
 		env[current_level].ClearEffect();
 		if(!order->isplayer())
 		{
 			monster* mon_ = (monster*)order;
-			mon_->dead(PRT_NEUTRAL,true);
+			if(mon_->isLive()) {
+				mon_->dead(PRT_NEUTRAL,true);
+			}
 		}
 		else
 		{
@@ -2558,6 +2563,9 @@ bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target)
 		return true;
 	}
 	return false;
+}
+bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target) {
+	return skill_suicide_bomb(power, short_, order, target, true);
 }
 bool skill_rabbit_horn(int pow, bool short_, unit* order, coord_def target)
 {
@@ -5355,6 +5363,167 @@ bool skill_throw_rabbit(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
+bool skill_arrow(int pow, bool short_, unit* order, coord_def target) {
+	beam_iterator beam(order->position,order->position);
+	if (CheckThrowPath(order->position, target, beam))
+	{
+		attack_type type_ = ATT_THROW_NORMAL;
+
+		if(order->GetId() == MON_HANIWA) {
+			if(haniwa_abil::has_abil(HANIWA_A_FIRE_ENCHANT)) {
+				type_ = ATT_THROW_FIRE_PYSICAL;
+			}
+			if(haniwa_abil::has_abil(HANIWA_A_COLD_ENCHANT)) {
+				type_ = ATT_THROW_COLD_PYSICAL;
+			}
+			if(haniwa_abil::has_abil(HANIWA_A_ELEC_ENCHANT)) {
+				type_ = ATT_THROW_ELEC_PYSICAL;
+			}
+			if(haniwa_abil::has_abil(HANIWA_A_POISON_ENCHANT)) {
+				type_ = ATT_THROW_POISON_PYSICAL;
+			}
+			if(haniwa_abil::has_abil(HANIWA_A_SLOW_ENCHANT)) {
+				type_ = ATT_THROW_SLOW_POISON;
+			}
+		}
+
+		beam_infor temp_infor(order->GetAttack(false), order->GetAttack(true), order->GetHit(), order, order->GetParentType(), SpellLength(SPL_ARROW, order->isplayer()), 1, BMT_NORMAL, type_, name_infor(LOC_SYSTEM_ATT_ARROW));
+		if (short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+		
+
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			if(env[current_level].isInSight(order->position)) {
+				soundmanager.playSound("shoot");
+			}
+			throwtanmac(19, beam, temp_infor, NULL);
+		}
+		order->SetParadox(0);	
+		return true;
+	}
+	return false;
+}
+bool skill_haniwa_magic_tanmac(int pow, bool short_, unit* order, coord_def target) {
+	beam_iterator beam(order->position,order->position);
+	if (CheckThrowPath(order->position, target, beam))
+	{
+		int damage_ = 7 + pow / 10;
+
+		attack_type type_ = ATT_THROW_NORMAL;
+		bool is_pentan_ = haniwa_abil::has_abil(HANIWA_A_PENTAN)?true:false;
+		int color_ = rand_int(30, 35);
+		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC) || haniwa_abil::has_abil(HANIWA_A_COLD_TANMAC) || haniwa_abil::has_abil(HANIWA_A_ELEC_TANMAC)) {
+			damage_ = damage_ * 1.3f;
+		}
+		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC)) {
+			type_ = ATT_THROW_FIRE;
+			color_ = 30;
+		}
+		if(haniwa_abil::has_abil(HANIWA_A_COLD_TANMAC)) {
+			type_ = ATT_THROW_COLD;
+			color_ = 34;
+		}
+		if(haniwa_abil::has_abil(HANIWA_A_ELEC_TANMAC)) {
+			type_ = ATT_THROW_ELEC;
+			color_ = 32;
+		}
+
+		beam_infor temp_infor(randA_1(7 + pow / 10), 7 + pow / 10, 17, order, order->GetParentType(), SpellLength(SPL_HANIWA_MAGIC_TANMAC, order->isplayer()), is_pentan_?7:1, is_pentan_?BMT_PENETRATE:BMT_NORMAL, type_, name_infor(LOC_SYSTEM_ATT_TANMAC));
+		if (short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+		
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			if(env[current_level].isInSight(order->position)) {
+				soundmanager.playSound("shoot");
+			}
+			throwtanmac(color_, beam, temp_infor, NULL);
+		}
+		order->SetParadox(0);	
+		return true;
+	}
+	return false;
+}
+bool skill_haniwa_magic_tanmac2(int pow, bool short_, unit* order, coord_def target) {
+	beam_iterator beam(order->position,order->position);
+	if (CheckThrowPath(order->position, target, beam))
+	{
+		int damage_ = 7 + pow / 15;
+
+		attack_type type_ = ATT_THROW_NORMAL;
+		bool is_pentan_ = haniwa_abil::has_abil(HANIWA_A_PENTAN)?true:false;
+		int color_ = rand_int(10, 15);
+		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC) || haniwa_abil::has_abil(HANIWA_A_COLD_TANMAC) || haniwa_abil::has_abil(HANIWA_A_ELEC_TANMAC)) {
+			damage_ = damage_ * 1.3f;
+		}
+		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC)) {
+			type_ = ATT_THROW_FIRE;
+			color_ = 10;
+		}
+		if(haniwa_abil::has_abil(HANIWA_A_COLD_TANMAC)) {
+			type_ = ATT_THROW_COLD;
+			color_ = 14;
+		}
+		if(haniwa_abil::has_abil(HANIWA_A_ELEC_TANMAC)) {
+			type_ = ATT_THROW_ELEC;
+			color_ = 12;
+		}
+
+		beam_infor temp_infor(randC(2,damage_), 2*(damage_), 17, order, order->GetParentType(), SpellLength(SPL_HANIWA_MAGIC_TANMAC2, order->isplayer()), is_pentan_?7:1, is_pentan_?BMT_PENETRATE:BMT_NORMAL, type_, name_infor(LOC_SYSTEM_ATT_TANMAC));
+		if (short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+		
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			if(env[current_level].isInSight(order->position)) {
+				soundmanager.playSound("shoot");
+			}
+			throwtanmac(rand_int(10, 15), beam, temp_infor, NULL);
+		}
+		order->SetParadox(0);	
+		return true;
+	}
+	return false;
+}
+bool skill_haniwa_magic_tanmac3(int pow, bool short_, unit* order, coord_def target) {
+	beam_iterator beam(order->position,order->position);
+	if (CheckThrowPath(order->position, target, beam))
+	{
+		int damage_ = 9 + pow / 12;
+
+		attack_type type_ = ATT_THROW_NORMAL;
+		bool is_pentan_ = haniwa_abil::has_abil(HANIWA_A_PENTAN)?true:false;
+		int color_ = rand_int(10, 15);
+		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC) || haniwa_abil::has_abil(HANIWA_A_COLD_TANMAC) || haniwa_abil::has_abil(HANIWA_A_ELEC_TANMAC)) {
+			damage_ = damage_ * 1.3f;
+		}
+		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC)) {
+			type_ = ATT_THROW_FIRE;
+			color_ = 10;
+		}
+		if(haniwa_abil::has_abil(HANIWA_A_COLD_TANMAC)) {
+			type_ = ATT_THROW_COLD;
+			color_ = 14;
+		}
+		if(haniwa_abil::has_abil(HANIWA_A_ELEC_TANMAC)) {
+			type_ = ATT_THROW_ELEC;
+			color_ = 15;
+		}
+
+		beam_infor temp_infor(randC(3,damage_), 3*(damage_), 17, order, order->GetParentType(), SpellLength(SPL_HANIWA_MAGIC_TANMAC3, order->isplayer()), is_pentan_?7:1, is_pentan_?BMT_PENETRATE:BMT_NORMAL, type_, name_infor(LOC_SYSTEM_ATT_TANMAC));
+		if (short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+		
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			if(env[current_level].isInSight(order->position)) {
+				soundmanager.playSound("shoot_heavy");
+			}
+			throwtanmac(rand_int(10, 15), beam, temp_infor, NULL);
+		}
+		order->SetParadox(0);	
+		return true;
+	}
+	return false;
+}
+
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
 	list<spell> *list =  &(mon_->spell_lists);
@@ -6262,6 +6431,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_RABIT_GIANT:
 		list->push_back(spell(SPL_THROW_RABBIT, 35));
 		break;
+	case MON_HANIWA_ARCHER:
+		list->push_back(spell(SPL_ARROW, 40));
+		break;
 	default:
 		break;
 	}
@@ -6616,6 +6788,14 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_throw_potion(power, short_, order, target);
 	case SPL_THROW_RABBIT:
 		return skill_throw_rabbit(power, short_, order, target);
+	case SPL_ARROW:
+		return skill_arrow(power, short_, order, target);
+	case SPL_HANIWA_MAGIC_TANMAC:
+		return skill_haniwa_magic_tanmac(power, short_, order, target);
+	case SPL_HANIWA_MAGIC_TANMAC2:
+		return skill_haniwa_magic_tanmac2(power, short_, order, target);
+	case SPL_HANIWA_MAGIC_TANMAC3:
+		return skill_haniwa_magic_tanmac3(power, short_, order, target);
 	default:
 		return false;
 	}
@@ -7104,6 +7284,14 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_throw_potion(power, short_, &you, target);
 	case SPL_THROW_RABBIT:
 		return skill_throw_rabbit(power, short_, &you, target);
+	case SPL_ARROW:
+		return skill_arrow(power, short_, &you, target);
+	case SPL_HANIWA_MAGIC_TANMAC:
+		return skill_haniwa_magic_tanmac(power, short_, &you, target);
+	case SPL_HANIWA_MAGIC_TANMAC2:
+		return skill_haniwa_magic_tanmac2(power, short_, &you, target);
+	case SPL_HANIWA_MAGIC_TANMAC3:
+		return skill_haniwa_magic_tanmac3(power, short_, &you, target);
 	default:
 		return false;
 	}

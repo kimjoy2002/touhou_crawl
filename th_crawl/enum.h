@@ -801,6 +801,7 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_d
 	ATT_ELEC_WEAK,
 	ATT_S_POISON,
 	ATT_M_POISON,
+	ATT_SLOW_POISON,
 	ATT_SICK,
 	ATT_CURSE,
 	ATT_WEATHER,
@@ -820,6 +821,11 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_d
 	ATT_THROW_WEAK_POISON,
 	ATT_THROW_MIDDLE_POISON,
 	ATT_THROW_STRONG_POISON,
+	ATT_THROW_FIRE_PYSICAL,
+	ATT_THROW_COLD_PYSICAL,
+	ATT_THROW_ELEC_PYSICAL,
+	ATT_THROW_POISON_PYSICAL,
+	ATT_THROW_SLOW_POISON,
 	ATT_THROW_LAST, //사용안함. 그레이즈가 되는 공격들
 	ATT_THROW_ELEC, //그레이즈는 안 되는데 가드는 된다.
 	ATT_NO_GUARD,//여기부터 폭발형(실드로 가드가 안된다.)

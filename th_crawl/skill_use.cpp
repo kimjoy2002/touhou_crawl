@@ -4554,28 +4554,45 @@ bool skill_upgrade_haniwa(int power, bool short_, unit* order, coord_def target)
 	
 
 	haniwa_abil_key next_;
+	bool loop_ = true;
 	while(loop_)
 	{
 		deletelog();
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_GIFT_ASK),true,false,true,CL_keiki);
 
-		int num_ = 0;
 		haniwa_abil_key select_[3];
 		if(you.god_value[GT_KEIKI][3] != 0 || you.god_value[GT_KEIKI][4] != 0 || you.god_value[GT_KEIKI][5] != 0) {
-			select_[0] = god_value[GT_KEIKI][3];
-			select_[1] = god_value[GT_KEIKI][4];
-			select_[2] = god_value[GT_KEIKI][5];
-		} else {			
-			random_extraction<haniwa_abil_key> able_abils = getAbleHaniwaAbils();
-			for (int i = 0; i < 3; i++) {
-				select_[i] = able_abils.pop();
-				god_value[GT_KEIKI][3+i] = select_[i];
+			select_[0] = (haniwa_abil_key)you.god_value[GT_KEIKI][3];
+			select_[1] = (haniwa_abil_key)you.god_value[GT_KEIKI][4];
+			select_[2] = (haniwa_abil_key)you.god_value[GT_KEIKI][5];
+		} else if (haniwa_abil::isEmpty_abil()) {
+			//첫번째
+			select_[0] = haniwa_abil::getAbleHaniwaAbils(HANIWA_T_COMBAT).choice();
+			select_[1] = haniwa_abil::getAbleHaniwaAbils(HANIWA_T_MAGIC).choice();
+			select_[2] = haniwa_abil::getAbleHaniwaAbils(HANIWA_T_SUPPORT).choice();
+			you.god_value[GT_KEIKI][3] = select_[0];
+			you.god_value[GT_KEIKI][4] = select_[1];
+			you.god_value[GT_KEIKI][5] = select_[2];
+		} else {
+			haniwa_abil_type current_type = haniwa_abil::currentType();
+			int limit_ = 100;
+			while(limit_-->0) {
+				random_extraction<haniwa_abil_key> able_abils = haniwa_abil::getAbleHaniwaAbils(-1);
+				for (int i = 0; i < 3; i++) {
+					select_[i] = able_abils.pop();
+				}
+				if(current_type == HANIWA_T_COMMON || haniwa_abil_list[select_[0]].type == current_type || haniwa_abil_list[select_[1]].type == current_type || haniwa_abil_list[select_[2]].type == current_type) {
+					break;
+				} 
 			}
+			you.god_value[GT_KEIKI][3] = select_[0];
+			you.god_value[GT_KEIKI][4] = select_[1];
+			you.god_value[GT_KEIKI][5] = select_[2];
 		}
 		for (int i = 0; i < 3; i++) {
 			ostringstream ss;
-			ss << string(1,(char)(num_+'a')) << " - " << LocalzationManager::locString(haniwa_abil_list[select_[i]].name) << ": " << LocalzationManager::locString(haniwa_abil_list[select_[i]].infor) << " (" << LocalzationManager::locString(LOC_SYSTEM_COST) << ": " << haniwa_abil_list[select_[i]].getCostString() << ")";
-			printlog(ss.str(), true, false, true, CL_help,(char)(num_+'a'));
+			ss << string(1,(char)(i+'a')) << " - " << LocalzationManager::locString(haniwa_abil_list[select_[i]].name) << ": " << LocalzationManager::locString(haniwa_abil_list[select_[i]].infor) << " (" << LocalzationManager::locString(LOC_SYSTEM_COST) << ": " << haniwa_abil_list[select_[i]].getCostString() << ")";
+			printlog(ss.str(), true, false, true, CL_help,(char)(i+'a'));
 		}
 		
 		
@@ -4640,7 +4657,20 @@ bool skill_upgrade_haniwa(int power, bool short_, unit* order, coord_def target)
 		ss << LocalzationManager::locString(haniwa_abil_list[next_].name) << ": " << LocalzationManager::locString(haniwa_abil_list[next_].infor) << " (" << LocalzationManager::locString(LOC_SYSTEM_COST) << ": " << haniwa_abil_list[next_].getCostString() << ")";
 		printlog(ss.str(), true, false, false, CL_help);
 		
-		if(ynPrompt(LOC_SYSTEM_GOD_KEIKI_GIFT_ASK, LOC_SYSTEM_CANCLE_EX, CL_help, true,false,false,false)) {
+		int after_piety = you.piety + haniwa_abil_list[next_].cost;
+		ss.str("");
+		ss.clear();
+		
+		ostringstream ss_piety;
+		ss_piety << (pietyLevel(after_piety)>=1?'*':'.') << (pietyLevel(after_piety)>=2?'*':'.') << (pietyLevel(after_piety)>=3?'*':'.') << (pietyLevel(after_piety)>=4?'*':'.') << (pietyLevel(after_piety)>=5?'*':'.') << (pietyLevel(after_piety)>=6?'*':'.');
+		ss << LocalzationManager::formatString(LOC_SYSTEM_GOD_KEIKI_AFTER_PIETY, PlaceHolderHelper(ss_piety.str()));
+		if(pietyLevel(after_piety) >= 6) {
+			ss << " " << LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_AFTER_PIETY_WARN);
+		}
+		printlog(ss.str(), true, false, false, CL_help);
+
+
+		if(ynPrompt(LOC_SYSTEM_GOD_KEIKI_GIFT_YN, LOC_SYSTEM_CANCLE_EX, CL_help, true,false,false,false)) {
 			loop_ = false;
 		} else {
 			loop_ = true;
@@ -4653,18 +4683,17 @@ bool skill_upgrade_haniwa(int power, bool short_, unit* order, coord_def target)
 		return false;
 	}
 
-	AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_KEIKI_GIFT, PlaceHolderHelper(haniwa_abil_list[next_].name),CL_help);
+	AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_KEIKI_GIFT, PlaceHolderHelper(haniwa_abil_list[next_].name)),CL_help);
 	you.god_value[GT_KEIKI][3] = 0;
 	you.god_value[GT_KEIKI][4] = 0;
 	you.god_value[GT_KEIKI][5] = 0;
-	MoreWait();
 
 	you.gift_count = GetGodGiftTime(GT_KEIKI);
 	
 	haniwa_abil::set_abil(next_);
 	haniwa_abil::upgradeHaniwa();
 
-	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_UPGRADE),true,false,false,CL_keiki);
+	printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_KEIKI_UPGRADE),true,false,false,CL_keiki);
 
 	you.PietyUpDown(haniwa_abil_list[next_].cost, false);
 	
@@ -4692,7 +4721,6 @@ bool skill_delay_haniwa(int power, bool short_, unit* order, coord_def target)
 	you.god_value[GT_KEIKI][3] = 0;
 	you.god_value[GT_KEIKI][4] = 0;
 	you.god_value[GT_KEIKI][5] = 0;
-	MoreWait();
 
 	you.gift_count = GetGodGiftTime(GT_KEIKI)*1.5f;
 

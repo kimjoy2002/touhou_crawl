@@ -103,6 +103,7 @@ public:
 	int elec_resist;
 	int confuse_resist;
 	int wind_resist;
+	int walk_speed_bonus; //이속증가
 
 
 	int time_delay; //누적되어있는시간
@@ -256,7 +257,7 @@ public:
 	bool isYourShight();
 	bool isEnemyUnit(unit* unit_info);
 	bool isEnemyMonster(const monster* monster_info); //이 몹이 적인지
-	bool isPassedBullet(unit* order);//이 공격이 관통되는지
+	bool isPassedBullet(unit* order, bool really = false);//이 공격이 관통되는지
 	bool isAllyMonster(const monster* monster_info); //이 몹이 아군인지
 	bool isUserAlly() const; //유저에 친밀한가?
 	bool isCompleteNeutral() const; //완전한 중립인가?
@@ -277,7 +278,7 @@ public:
 	int GetSaved(){return s_saved;};
 	int SetStrong() { return strong; };
 	bool isSaveSummoner(unit* order);
-	int GetWalkDelay(){return GetSpeed();};
+	int GetWalkDelay();
 	bool GetMindReading(){return (s_mind_reading!=0);};
 	int GetExhausted(){return s_exhausted;};
 	int GetPoisonResist(){return poison_resist;};

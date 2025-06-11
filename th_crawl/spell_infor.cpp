@@ -527,6 +527,18 @@ string GetSpellInfor(spell_list spell, bool isPlayer)
 	case SPL_THROW_RABBIT:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_RABBIT);
 		break;
+	case SPL_ARROW:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ARROW);
+		break;
+	case SPL_HANIWA_MAGIC_TANMAC:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC);
+		break;
+	case SPL_HANIWA_MAGIC_TANMAC2:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC2);
+		break;
+	case SPL_HANIWA_MAGIC_TANMAC3:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC3);
+		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_UKNOWN);
 		break;

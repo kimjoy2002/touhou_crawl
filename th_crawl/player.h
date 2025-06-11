@@ -593,6 +593,7 @@ public:
 	bool Read(char id_);
 	bool Memorize(int spell, bool immediately = false);
 	bool isMemorize(int spell);
+	bool HasAbility(int skill_);
 	int Ability(int skill_, bool god_, bool unset_, int immediately = 0);
 	bool Belief(god_type god_, int piety_, bool speak_=true);
 	bool StepUpDownPiety(int level_);
@@ -636,7 +637,7 @@ public:
 	bool isEnemyUnit(unit* unit_info);
 	bool isEnemyMonster(const monster* monster_info);
 	bool isUserAlly() const {return true;}
-	bool isPassedBullet(unit* order);
+	bool isPassedBullet(unit* order, bool really = false);
 	bool isMemorizeSpell(int spell_);
 	bool CanMemorizeSpell(int spell_);
 	bool isView(){return true;};

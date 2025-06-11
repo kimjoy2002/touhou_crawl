@@ -1169,9 +1169,13 @@ void wiz_mode()
 		}
 		break;
 		case '^':
+		if(you.god == GT_KEIKI) {
+			you.GiftCount(GetGodGiftTime(GT_KEIKI));
+		} else {
 			if(you.god != GT_SEIJA)
 				you.PietyUpDown(10);
 			you.GiftCount(10);
+		}
 			break;
 		case 'q':
 		{

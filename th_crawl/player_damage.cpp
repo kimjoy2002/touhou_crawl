@@ -429,6 +429,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_ELEC_WEAK:
 	case ATT_S_POISON:
 	case ATT_M_POISON:
+	case ATT_SLOW_POISON:
 	case ATT_SICK:
 	case ATT_VAMP:
 	case ATT_LUNATIC:
@@ -460,6 +461,11 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_THROW_WEAK_POISON:
 	case ATT_THROW_MIDDLE_POISON:
 	case ATT_THROW_STRONG_POISON:
+	case ATT_THROW_FIRE_PYSICAL:
+	case ATT_THROW_COLD_PYSICAL:
+	case ATT_THROW_ELEC_PYSICAL:
+	case ATT_THROW_POISON_PYSICAL:
+	case ATT_THROW_SLOW_POISON:
 	case ATT_BEARTRAP:
 	default:
 		{//데미지 계산공식
@@ -516,18 +522,21 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	{
 	case ATT_FIRE:
 	case ATT_FIRE_WEAK:
+	case ATT_THROW_FIRE_PYSICAL:
 		bonus_damage = damage_/3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetFireResist();
 		break;
 	case ATT_COLD:
 	case ATT_COLD_WEAK:
+	case ATT_THROW_COLD_PYSICAL:
 		bonus_damage = damage_/3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetColdResist();
 		break;
 	case ATT_ELEC:
 	case ATT_ELEC_WEAK:
+	case ATT_THROW_ELEC_PYSICAL:
 		bonus_damage = damage_/3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetElecResist();
@@ -612,6 +621,7 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_SPEAR:
 	case ATT_S_POISON:
 	case ATT_M_POISON:
+	case ATT_SLOW_POISON:
 	case ATT_SICK:
 	case ATT_VAMP:
 	case ATT_LUNATIC:
@@ -630,6 +640,8 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_THROW_STRONG_POISON:
 	case ATT_THROW_NONE_DAMAGE:
 	case ATT_BEARTRAP:
+	case ATT_THROW_POISON_PYSICAL:
+	case ATT_THROW_SLOW_POISON:
 		if(a.order)
 		{
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
@@ -661,6 +673,7 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 		break;
 	case ATT_FIRE:
 	case ATT_FIRE_WEAK:
+	case ATT_THROW_FIRE_PYSICAL:
 		if(a.order)
 		{
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_FIRE,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
@@ -671,6 +684,7 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 		break;
 	case ATT_COLD:
 	case ATT_COLD_WEAK:
+	case ATT_THROW_COLD_PYSICAL:
 		if(a.order)
 		{
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_COLD,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
@@ -816,6 +830,7 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 		break;
 	case ATT_ELEC:
 	case ATT_ELEC_WEAK:
+	case ATT_THROW_ELEC_PYSICAL:
 		if(a.order)
 		{
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_ELEC,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
@@ -1031,6 +1046,12 @@ bool players::damage(attack_infor &a, bool perfect_)
 				SetPoison(15+randA(10), 50, false);
 			if(a.type == ATT_M_POISON && randA(1))
 				SetPoison(40+randA(15), 100, false);
+			if(a.type == ATT_SLOW_POISON) {
+				SetPoison(20+randA(10), 150, false);
+				if(randA(2)>1) {
+					SetSlow(randA(10));
+				}
+			}
 			if(a.type == ATT_SICK && randA(1))
 			{
 
@@ -1043,6 +1064,14 @@ bool players::damage(attack_infor &a, bool perfect_)
 				SetPoison(40+randA(15), 100, false);
 			if(a.type == ATT_THROW_STRONG_POISON)
 				SetPoison(70+randA(20), 150, true);
+			if(a.type == ATT_THROW_POISON_PYSICAL)
+				SetPoison(15+randA(10), 50, false);
+			if(a.type == ATT_THROW_SLOW_POISON) {
+				SetPoison(25+randA(10), 150, false);
+				if(randA(2)>1) {
+					SetSlow(randA(10));
+				}
+			}
 			if(a.type == ATT_POISON_BLAST)
 				SetPoison(70+randA(20), 150, true);
 			if (a.type == ATT_SLEEP) {

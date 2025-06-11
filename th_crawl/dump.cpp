@@ -225,6 +225,7 @@ bool Dump(int type, wstring *filename_)
 				case ATT_NORMAL:
 				case ATT_S_POISON:
 				case ATT_M_POISON:
+				case ATT_SLOW_POISON:
 				case ATT_SICK:
 				case ATT_NORMAL_HIT:
 				case ATT_CURSE:
@@ -233,6 +234,8 @@ bool Dump(int type, wstring *filename_)
 				case ATT_CHOAS:
 				case ATT_LUNATIC:
 				case ATT_SLEEP:
+				case ATT_THROW_POISON_PYSICAL:
+				case ATT_THROW_SLOW_POISON:
 					if (you.dead_order->order) {
 						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NORMAL_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
@@ -313,6 +316,7 @@ bool Dump(int type, wstring *filename_)
 				case ATT_CLOUD_FIRE:
 				case ATT_FIRE_BLAST:
 				case ATT_FIRE_PYSICAL_BLAST:
+				case ATT_THROW_FIRE_PYSICAL:
 					if (you.dead_order->order) {
 						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_FIRE_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
@@ -325,6 +329,7 @@ bool Dump(int type, wstring *filename_)
 				case ATT_CLOUD_COLD:
 				case ATT_COLD_BLAST:
 				case ATT_COLD_PYSICAL_BLAST:
+				case ATT_THROW_COLD_PYSICAL:
 					if (you.dead_order->order) {
 						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_COLD_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {
@@ -335,6 +340,7 @@ bool Dump(int type, wstring *filename_)
 				case ATT_ELEC_WEAK:
 				case ATT_CLOUD_ELEC:
 				case ATT_ELEC_BLAST:
+				case ATT_THROW_ELEC_PYSICAL:
 					if (you.dead_order->order) {
 						death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_ELEC_BY, PlaceHolderHelper(CurrentLevelString()), PlaceHolderHelper(temp_reason.str()));
 					} else {

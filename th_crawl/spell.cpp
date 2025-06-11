@@ -187,6 +187,9 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_WATER_CANNON:
 	case SPL_SCHEMA_TANMAC:
 	case SPL_AIR_STRIKE:
+	case SPL_HANIWA_MAGIC_TANMAC:
+	case SPL_HANIWA_MAGIC_TANMAC2:
+	case SPL_HANIWA_MAGIC_TANMAC3:
 		return (S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_THROW_OIL:
 		return (S_FLAG_RANGE_ATTACK) & flag;
@@ -194,6 +197,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_NESY_CANNON:
 	case SPL_THROW_DISH:
 	case SPL_THROW_AMULET:
+	case SPL_ARROW:
 		return (S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_JUMP_ATTACK:
 	case SPL_WARP_KICK:
@@ -315,6 +319,10 @@ int SpellLength(spell_list skill, bool isPlayer)
 	case SPL_WARP_KICK:
 	case SPL_TRACKING:
 	case SPL_HOMING_TANMAC:
+	case SPL_ARROW:
+	case SPL_HANIWA_MAGIC_TANMAC:
+	case SPL_HANIWA_MAGIC_TANMAC2:
+	case SPL_HANIWA_MAGIC_TANMAC3:
 		length_ = 7;
 		break;
 	case SPL_FLAME:	
@@ -793,6 +801,14 @@ string SpellString(spell_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_THROW_RABBIT);
 	case SPL_THROW_POTION:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_THROW_POTION);
+	case SPL_ARROW:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_ARROW);
+	case SPL_HANIWA_MAGIC_TANMAC:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC);
+	case SPL_HANIWA_MAGIC_TANMAC2:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC2);
+	case SPL_HANIWA_MAGIC_TANMAC3:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC3);
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_UKNOWN);
 	}
@@ -836,6 +852,8 @@ int SpellLevel(spell_list skill)
 	case SPL_DRAW_POWER:
 	case SPL_SPEAKER_PHONE:
 	case SPL_HOMING_TANMAC:
+	case SPL_ARROW:
+	case SPL_HANIWA_MAGIC_TANMAC:
 		return 2;
 	case SPL_CONFUSE:
 	case SPL_FREEZE:
@@ -878,6 +896,7 @@ int SpellLevel(spell_list skill)
 	case SPL_WINDFLAW:
 	case SPL_CREATE_FOG:
 	case SPL_CLOSE_DOOR:
+	case SPL_HANIWA_MAGIC_TANMAC2:
 		return 4;
 	case SPL_SILENCE:
 	case SPL_VENOM_BOLT:
@@ -932,6 +951,7 @@ int SpellLevel(spell_list skill)
 	case SPL_SMOKING:
 	case SPL_THROW_RABBIT:
 	case SPL_THROW_POTION:
+	case SPL_HANIWA_MAGIC_TANMAC3:
 		return 6;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_STONE_FORM:
@@ -1057,6 +1077,8 @@ int SpellNoise(spell_list skill)
 	case SPL_HOMING_TANMAC:
 	case SPL_THROW_POTION:
 	case SPL_THROW_RABBIT:
+	case SPL_ARROW:
+	case SPL_HANIWA_MAGIC_TANMAC:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -1122,6 +1144,8 @@ int SpellNoise(spell_list skill)
 	case SPL_DISCORD:
 	case SPL_CLOSE_DOOR:
 	case SPL_ALLROUND_TANMAC:
+	case SPL_HANIWA_MAGIC_TANMAC2:
+	case SPL_HANIWA_MAGIC_TANMAC3:
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
@@ -1532,6 +1556,14 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_ALCHEMY) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_THROW_RABBIT:
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_ARROW:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_HANIWA_MAGIC_TANMAC:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_HANIWA_MAGIC_TANMAC2:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_HANIWA_MAGIC_TANMAC3:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1709,6 +1741,10 @@ int SpellCap(spell_list skill)
 	case SPL_ALLROUND_TANMAC:
 	case SPL_THROW_POTION:
 	case SPL_THROW_RABBIT:
+	case SPL_ARROW:
+	case SPL_HANIWA_MAGIC_TANMAC:
+	case SPL_HANIWA_MAGIC_TANMAC2:
+	case SPL_HANIWA_MAGIC_TANMAC3:
 		return 200;
 	default:
 	case SPL_BLINK:

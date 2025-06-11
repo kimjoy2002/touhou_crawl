@@ -2002,7 +2002,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						coord_def tile_coorddef(i + x_, j + y_); 				
 						if(DisplayManager.prev_map_view != tile_coorddef) {
 							DisplayManager.prev_map_view = tile_coorddef;
-							g_keyQueue->push(InputedKey(MKIND_MAP_CURSOR,i + x_,j + y));
+							g_keyQueue->push(InputedKey(MKIND_MAP_CURSOR,i + x_,j + y_));
 						}
 					}
 				}

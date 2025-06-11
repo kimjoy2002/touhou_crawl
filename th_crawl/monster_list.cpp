@@ -1058,8 +1058,8 @@ const mon_infor mondata[] = {
 		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE | M_FLAG_SPEAR_ATTACK,1,0,10,'h'},
 
 	{MON_HANIWA_ARCHER,10,800,name_infor(MON_HANIWA_ARCHER),&img_mons_haniwa_archer,70,3,13,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE | M_FLAG_RANGE_ATTACK,0,0,10,'h'},
+		{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE | M_FLAG_NO_ATK | M_FLAG_RANGE_ATTACK,0,0,10,'h'},
 
 	{MON_HANIWA_CAVALRY,13,1200,name_infor(MON_HANIWA_CAVALRY),&img_mons_haniwa_cavalry,120,2,15,
 		{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},

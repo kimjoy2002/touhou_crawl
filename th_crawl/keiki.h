@@ -98,6 +98,7 @@ public:
 
 	static random_extraction<haniwa_abil_key> getAbleHaniwaAbils(int type);
 
+	static monster* getHaniwa(int haniwa_);
 	static bool isEmpty_abil();
 	static bool has_abil(haniwa_abil_key key);
 	static bool set_abil(haniwa_abil_key key);
@@ -108,6 +109,9 @@ public:
 	static void upgradeHaniwa(monster* mon);
 	static void upgradeHaniwa();
 	static void haniwaDraw(float x_, float y_, float scale_);
+
+	static int getGiftCount(int index_);
+	static void increaseGift(int haniwa_, int index_);
 };
 
 bool keiki_gift();

@@ -1293,8 +1293,23 @@ bool shooing_fire_effect(coord_def pos_, int rand_graphic_, bool burst_, bool ic
 	unit* unit_ = env[current_level].isMonsterPos(pos_.x, pos_.y);
 	if(unit_) {
 		if(burst_) {
-			attack_infor temp_infor(you.GetAttack(false)*burst_multi_,you.GetAttack(true)*burst_multi_,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_BURST));
-			BaseBomb_forAlly(pos_, &img_blast[rand_graphic_],temp_infor, &you, ice_);	
+
+			attack_type att_ = ATT_NORMAL_BLAST;
+			if(you.equipment[ET_WEAPON]) {
+				switch(GetAttType((weapon_brand)you.equipment[ET_WEAPON]->value5)) {
+					case ATT_FIRE:
+						att_ = ATT_FIRE_ENCHANT_BLAST;
+					case ATT_COLD:
+						att_ = ATT_COLD_ENCHANT_BLAST;
+					case ATT_S_POISON:
+						att_ = ATT_POISON_ENCHANT_BLAST;
+					default:
+						break;
+				}
+			}
+
+			attack_infor temp_infor(you.GetAttack(false)*burst_multi_,you.GetAttack(true)*burst_multi_,99,&you,you.GetParentType(),att_,name_infor(LOC_SYSTEM_ATT_BURST));
+			BaseBomb_forAlly(pos_, &img_blast[rand_graphic_],temp_infor, &you, 10, ice_);	
 		}
 		if(!burst_ && ice_) {
 			unit_->SetFrozen(10);

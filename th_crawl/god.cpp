@@ -1373,6 +1373,25 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		//TODO) 신구현
 		return false;
 	case GT_KEIKI:
+		if (type_ == PRT_PLAYER || type_ == PRT_ALLY)
+		{
+			if (!mon_->isUserAlly())
+			{
+				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+					if (getPietyPercent(0, mon_->SetStrong()))
+					{
+						int max_ = haniwa_abil::getMaxHaniwa();
+						for(int j = 0; j < max_; j++) {
+							for(int k = 0; k < 9; k++) {
+								if(haniwa_abil::getGiftCount(k) > 0) {
+									haniwa_abil::increaseGift(i, k);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
 		return false;
 	case GT_TENKYUU:
 		//TODO) 신구현
@@ -2313,6 +2332,15 @@ void Pray()
 	}
 	else if(altar)
 	{
+		if( type == DG_TEMPLE_SHIKIEIKI || type == DG_TEMPLE_TENKYUU)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_COMMON_NOT_READY_GOD),true,false,false,CL_danger);
+			return;
+		}
+
+
+
+
 		enterlog();
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_PRAY_TEMPLE),true,false,false,CL_warning);
 		MoreWait();

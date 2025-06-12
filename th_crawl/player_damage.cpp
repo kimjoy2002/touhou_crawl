@@ -451,6 +451,9 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_COLD_BLAST: 
 	case ATT_ELEC_BLAST:
 	case ATT_POISON_BLAST:
+	case ATT_FIRE_ENCHANT_BLAST:
+	case ATT_COLD_ENCHANT_BLAST:
+	case ATT_ELEC_ENCHANT_BLAST:
 	case ATT_FIRE_PYSICAL_BLAST:
 	case ATT_COLD_PYSICAL_BLAST:
 	case ATT_OIL_BLAST:
@@ -467,6 +470,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_THROW_POISON_PYSICAL:
 	case ATT_THROW_SLOW_POISON:
 	case ATT_BEARTRAP:
+	case ATT_POISON_ENCHANT_BLAST:
 	default:
 		{//데미지 계산공식
 			//최종데미지  :  1d(percent_*damage_) - 0d(ac_dec)
@@ -523,6 +527,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_FIRE:
 	case ATT_FIRE_WEAK:
 	case ATT_THROW_FIRE_PYSICAL:
+	case ATT_FIRE_ENCHANT_BLAST:
 		bonus_damage = damage_/3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetFireResist();
@@ -530,6 +535,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_COLD:
 	case ATT_COLD_WEAK:
 	case ATT_THROW_COLD_PYSICAL:
+	case ATT_COLD_ENCHANT_BLAST:
 		bonus_damage = damage_/3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetColdResist();
@@ -537,6 +543,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_ELEC:
 	case ATT_ELEC_WEAK:
 	case ATT_THROW_ELEC_PYSICAL:
+	case ATT_ELEC_ENCHANT_BLAST:
 		bonus_damage = damage_/3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetElecResist();
@@ -768,6 +775,10 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_ELEC_BLAST:
 	case ATT_POISON_BLAST:
 	case ATT_OIL_BLAST:
+	case ATT_FIRE_ENCHANT_BLAST:
+	case ATT_COLD_ENCHANT_BLAST:
+	case ATT_ELEC_ENCHANT_BLAST:
+	case ATT_POISON_ENCHANT_BLAST:
 		if(a.order)
 		{
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BLAST,false,false,false,CL_normal,
@@ -1074,6 +1085,10 @@ bool players::damage(attack_infor &a, bool perfect_)
 			}
 			if(a.type == ATT_POISON_BLAST)
 				SetPoison(70+randA(20), 150, true);
+
+			if(a.type == ATT_POISON_ENCHANT_BLAST && randA(1))
+				SetPoison(15+randA(10), 50, false);
+
 			if (a.type == ATT_SLEEP) {
 				SetSleep(rand_int(10, 25));
 			}
@@ -1099,9 +1114,11 @@ bool players::damage(attack_infor &a, bool perfect_)
 			if(s_oil > 0 && (a.type == ATT_FIRE ||
 				a.type == ATT_FIRE_WEAK ||
 				a.type == ATT_THROW_FIRE ||
+				a.type == ATT_THROW_FIRE_PYSICAL ||
 				a.type == ATT_CLOUD_FIRE ||
 				a.type == ATT_FIRE_BLAST ||
-				a.type == ATT_FIRE_PYSICAL_BLAST)) { 
+				a.type == ATT_FIRE_PYSICAL_BLAST ||
+			    a.type == ATT_FIRE_ENCHANT_BLAST)) { 
 				you.SetFire(s_oil, true);
 				s_oil = 0;
 			}

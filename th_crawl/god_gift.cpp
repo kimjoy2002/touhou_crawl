@@ -449,6 +449,8 @@ void kanako_gift(bool speak_)
 }
 
 
+
+
 item* armour_gift(bool speak_, bool artifact_)
 {
 	random_extraction<int> rand_;

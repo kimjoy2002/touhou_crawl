@@ -131,8 +131,13 @@ struct haniwa_ally
 	int floor;
 	int id;
 	int cooldown; //부활시간
+	int item_count[9]; //아이템처리
 	
-	haniwa_ally():map_id(0),floor(0),id(0),cooldown(0){};
+	haniwa_ally():map_id(0),floor(0),id(0),cooldown(0){
+
+		for(int i = 0; i < 9; i++)
+			item_count[i] = 0;
+	};
 };
 
 struct current_max

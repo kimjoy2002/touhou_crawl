@@ -3776,7 +3776,7 @@ LOC_SYSTEM_GOD_OKINA_DESCRIPTION,마타라 오키나는 배후에 숨어있는 �
 LOC_SYSTEM_GOD_JUNKO_TITLE,순호
 LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,순호는 원한이 순화된 신령으로 자신의 원한을 갚기위해 신도를 모집하고 있다.\n그녀의 신도가 된다면 단순하지만 강력한 순화의 능력을 받을 수 있다.\n그녀의 권능은 신앙심도 소모하지않지만 사용하게되면 일시적으로 순화상태에 빠지고\n순화 단계가 올라갈수록 소모품의 사용에 제한되는 패널티가 생긴다.\n기본적으로 권능에 의한 순화상태는 시간이 지나면 돌아오지만 순호가 아끼는 신도에게는 영구적인 순화를 내릴 수 있다.\n그녀의 축복은 너무 무겁기에 패널티도 크고 배신조차 허용되지않지만 그에 비견할만한 새로운 축복이 내려진다.\n그녀는 원한을 갚기위해 보이는 적을 모조리 죽이는 것을 좋아한다.
 LOC_SYSTEM_GOD_KEIKI_TITLE,하니야스신 케이키 - 고립무원이 빚어낸 조형신
-LOC_SYSTEM_GOD_KEIKI_DESCRIPTION,케이키는 인간령들이 만들어낸 조형신이다.\n우상을 만들어내어 만들어낸 우상에 생명을 부여할 수 있다.\n그는 신도들을 보호하기위해 믿는 즉시 작은 하니와를 내려주며\n탐험을 하면서 점차 하니와를 신도의 입맛에 맞게 개조해나갈 수 있다.\n케이키는 우상을 만들기위해 당신의 경험치를 일부 가져갈 것이다.\n역으로 우상에 지배당하지 않도록!
+LOC_SYSTEM_GOD_KEIKI_DESCRIPTION,케이키는 인간령들이 만들어낸 조형신이다.\n우상을 만들어내어 만들어낸 우상에 생명을 부여할 수 있다.\n그는 신도들을 보호하기위해 믿는 즉시 작은 하니와를 내려주며\n탐험을 하면서 점차 하니와를 신도의 입맛에 맞게 개조해나갈 수 있다.\n케이키는 우상을 만들기위해 당신의 경험치를 일부 가져갈 것이다.
 LOC_SYSTEM_GOD_BUG_TITLE,버그신
 LOC_SYSTEM_GOD_BUG_DESCRIPTION,이 신은 버그다!\n버그신은 동방크롤에서 가장 악한 신이다.\n버그신은 게임 플레이에 지대한 영향을 주며 당신에게 깊은 스트레스를 준다.\n이 신이 존재하는 것만으로도 게임이 크래쉬가 날 수 있으며 당신의 캐릭터를 삭제시킬지도 모른다.\n버그신의 분노를 가라앉히려면 제작자에게 보고하는 수 밖에 없다.\n
 LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY0_ADD,당신은 역병신과 빈곤신의 저주로 소모품을 낭비하며 잃어버린다.
@@ -4306,6 +4306,11 @@ LOC_SYSTEM_GOD_KEIKI_DELAY3,케이키: 난 이게 좋은데...
 LOC_SYSTEM_GOD_KEIKI_FINISH,케이키는 당신의 완벽한 우상에 만족했다!
 LOC_SYSTEM_GOD_KEIKI_CREATE,케이키가 당신에게 {0:을|를} 선물했다!
 LOC_SYSTEM_GOD_KEIKI_REVIVE,{0:이|가} 다시 만들어졌다!
+LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_P,하니와가 P아이템을 만들어냈다.
+LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_WEAPON,하니와가 무기를 만들어냈다.
+LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_ARMOUR,하니와가 방어구를 만들어냈다.
+LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_POTION,하니와가 물약을 만들어냈다.
+LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_SCROLL,하니와가 두루마리를 만들어냈다.
 LOC_SYSTEM_GOD_KEIKI_WELCOME,케이키: 완벽한 우상을 만들어줄게!
 LOC_SYSTEM_GOD_KEIKI_PUNISH_SUMMON,케이키를 적대적인 하니와를 조형해냈다!
 LOC_SYSTEM_GOD_KEIKI_ABANDON,케이키를 배신하여 하니와가 사라졌다!

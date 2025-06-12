@@ -226,7 +226,7 @@ string SkillCostString(skill_list skill);//코스트표현문장
 
 monster* BaseSummon(int id_, int time_, bool targeting_, bool random_, int range_, unit* order, coord_def target, SUMMON_KIND kind_, int max_num_);
 
-void BaseBomb_forAlly(coord_def pos, textures* t_, attack_infor& att_, unit* order_, bool frozen_);
+void BaseBomb_forAlly(coord_def pos, textures* t_, attack_infor& att_, unit* order_, int sleep_, bool frozen_);
 void BaseBomb(coord_def pos, textures* t_, attack_infor& att_, unit* except_ = NULL);
 int GetSpellBombRange(skill_list skill);//폭발넓이
 int GetSpellBombRange(spell_list spell);

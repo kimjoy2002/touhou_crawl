@@ -10,6 +10,7 @@
 #include "key.h"
 #include "environment.h"
 #include "joypad.h"
+#include "scroll.h"
 #include "enum.h"
 #include "mon_infor.h"
 #include "skill_use.h"
@@ -29,25 +30,25 @@
 //HANIWA_A_DOUBLE_SWORD, HANIWA_A_SPEAR, HANIWA_A_BOW, HANIWA_A_SHIELD1
 
 haniwa_abil haniwa_abil_list[HANIWA_A_MAX] = {
-	{LOC_SYSTEM_HANIWA_A_SWORD_NAME,LOC_SYSTEM_HANIWA_A_SWORD_INFO,HANIWA_T_COMBAT,30,10,false,{},{},{HANIWA_A_SWORD, HANIWA_A_SPEAR, HANIWA_A_BOW, HANIWA_A_SHIELD2, HANIWA_A_TANMAC, HANIWA_A_HEAL}},
-	{LOC_SYSTEM_HANIWA_A_DOUBLE_SWORD_NAME,LOC_SYSTEM_HANIWA_A_DOUBLE_SWORD_INFO,HANIWA_T_COMBAT,20,20,false,{HANIWA_A_SWORD},{},{HANIWA_A_DOUBLE_SWORD, HANIWA_A_SPEAR, HANIWA_A_BOW, HANIWA_A_SHIELD1}},
-	{LOC_SYSTEM_HANIWA_A_SPEAR_NAME,LOC_SYSTEM_HANIWA_A_SPEAR_INFO,HANIWA_T_COMBAT,30,10,false,{},{},{HANIWA_A_SWORD, HANIWA_A_SPEAR, HANIWA_A_BOW, HANIWA_A_SHIELD1, HANIWA_A_TANMAC, HANIWA_A_HEAL}},
-	{LOC_SYSTEM_HANIWA_A_BOW_NAME,LOC_SYSTEM_HANIWA_A_BOW_INFO,HANIWA_T_COMBAT,30,10,false,{},{},{HANIWA_A_SWORD, HANIWA_A_SPEAR, HANIWA_A_BOW, HANIWA_A_SHIELD1, HANIWA_A_TANMAC, HANIWA_A_HEAL}},
-	{LOC_SYSTEM_HANIWA_A_SHIELD1_NAME,LOC_SYSTEM_HANIWA_A_SHIELD1_INFO,HANIWA_T_COMBAT,30,10,false,{},{},{HANIWA_A_DOUBLE_SWORD, HANIWA_A_SPEAR, HANIWA_A_BOW, HANIWA_A_SHIELD1}},
+	{LOC_SYSTEM_HANIWA_A_SWORD_NAME,LOC_SYSTEM_HANIWA_A_SWORD_INFO,HANIWA_T_COMBAT,30,10,false,{},{},{ HANIWA_A_SPEAR, HANIWA_A_BOW, HANIWA_A_SHIELD2, HANIWA_A_TANMAC, HANIWA_A_HEAL}},
+	{LOC_SYSTEM_HANIWA_A_DOUBLE_SWORD_NAME,LOC_SYSTEM_HANIWA_A_DOUBLE_SWORD_INFO,HANIWA_T_COMBAT,20,20,false,{HANIWA_A_SWORD},{},{HANIWA_A_SPEAR, HANIWA_A_BOW, HANIWA_A_SHIELD1}},
+	{LOC_SYSTEM_HANIWA_A_SPEAR_NAME,LOC_SYSTEM_HANIWA_A_SPEAR_INFO,HANIWA_T_COMBAT,30,10,false,{},{},{HANIWA_A_SWORD, HANIWA_A_BOW, HANIWA_A_SHIELD1, HANIWA_A_TANMAC, HANIWA_A_HEAL}},
+	{LOC_SYSTEM_HANIWA_A_BOW_NAME,LOC_SYSTEM_HANIWA_A_BOW_INFO,HANIWA_T_COMBAT,30,10,false,{},{},{HANIWA_A_SWORD, HANIWA_A_SPEAR, HANIWA_A_SHIELD1, HANIWA_A_TANMAC, HANIWA_A_HEAL}},
+	{LOC_SYSTEM_HANIWA_A_SHIELD1_NAME,LOC_SYSTEM_HANIWA_A_SHIELD1_INFO,HANIWA_T_COMBAT,30,10,false,{},{},{HANIWA_A_DOUBLE_SWORD, HANIWA_A_SPEAR, HANIWA_A_BOW}},
 	{LOC_SYSTEM_HANIWA_A_SHIELD2_NAME,LOC_SYSTEM_HANIWA_A_SHIELD2_INFO,HANIWA_T_COMBAT,60,20,false,{HANIWA_A_SHIELD1},{},{}},
 	{LOC_SYSTEM_HANIWA_A_EXPLOSION_NAME,LOC_SYSTEM_HANIWA_A_EXPLOSION_INFO,HANIWA_T_COMBAT,15,10,false,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_ARMY1_NAME,LOC_SYSTEM_HANIWA_A_ARMY1_INFO,HANIWA_T_COMBAT,60,5,false,{},{},{HANIWA_A_CREATE_P,HANIWA_A_CREATE_WEAPON,HANIWA_A_CREATE_ARMOUR,HANIWA_A_CREATE_POTION,HANIWA_A_CREATE_SCROLL}},
+	{LOC_SYSTEM_HANIWA_A_ARMY1_NAME,LOC_SYSTEM_HANIWA_A_ARMY1_INFO,HANIWA_T_COMBAT,60,5,false,{},{},{}},
 	{LOC_SYSTEM_HANIWA_A_ARMY2_NAME,LOC_SYSTEM_HANIWA_A_ARMY2_INFO,HANIWA_T_COMBAT,60,15,false,{HANIWA_A_ARMY1},{},{}},
 	{LOC_SYSTEM_HANIWA_A_CLEAVE_NAME,LOC_SYSTEM_HANIWA_A_CLEAVE_INFO,HANIWA_T_COMBAT,90,5,true,{},{},{HANIWA_A_SPEAR, HANIWA_A_BOW}},
-	{LOC_SYSTEM_HANIWA_A_FIRE_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_FIRE_ENCHANT_INFO,HANIWA_T_COMBAT,20,5,false,{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW},{HANIWA_A_FIRE_ENCHANT,HANIWA_A_COLD_ENCHANT,HANIWA_A_ELEC_ENCHANT,HANIWA_A_POISON_ENCHANT}},
-	{LOC_SYSTEM_HANIWA_A_COLD_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_COLD_ENCHANT_INFO,HANIWA_T_COMBAT,20,5,false,{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW},{HANIWA_A_FIRE_ENCHANT,HANIWA_A_COLD_ENCHANT,HANIWA_A_ELEC_ENCHANT,HANIWA_A_POISON_ENCHANT}},
-	{LOC_SYSTEM_HANIWA_A_ELEC_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_ELEC_ENCHANT_INFO,HANIWA_T_COMBAT,20,5,false,{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW},{HANIWA_A_FIRE_ENCHANT,HANIWA_A_COLD_ENCHANT,HANIWA_A_ELEC_ENCHANT,HANIWA_A_POISON_ENCHANT}},
-	{LOC_SYSTEM_HANIWA_A_POISON_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_POISON_ENCHANT_INFO,HANIWA_T_COMBAT,20,5,false,{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW},{HANIWA_A_FIRE_ENCHANT,HANIWA_A_COLD_ENCHANT,HANIWA_A_ELEC_ENCHANT,HANIWA_A_POISON_ENCHANT}},
+	{LOC_SYSTEM_HANIWA_A_FIRE_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_FIRE_ENCHANT_INFO,HANIWA_T_COMBAT,20,5,false,{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW},{HANIWA_A_COLD_ENCHANT,HANIWA_A_ELEC_ENCHANT,HANIWA_A_POISON_ENCHANT}},
+	{LOC_SYSTEM_HANIWA_A_COLD_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_COLD_ENCHANT_INFO,HANIWA_T_COMBAT,20,5,false,{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW},{HANIWA_A_FIRE_ENCHANT,HANIWA_A_ELEC_ENCHANT,HANIWA_A_POISON_ENCHANT}},
+	{LOC_SYSTEM_HANIWA_A_ELEC_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_ELEC_ENCHANT_INFO,HANIWA_T_COMBAT,20,5,false,{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW},{HANIWA_A_FIRE_ENCHANT,HANIWA_A_COLD_ENCHANT,HANIWA_A_POISON_ENCHANT}},
+	{LOC_SYSTEM_HANIWA_A_POISON_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_POISON_ENCHANT_INFO,HANIWA_T_COMBAT,20,5,false,{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW},{HANIWA_A_FIRE_ENCHANT,HANIWA_A_COLD_ENCHANT,HANIWA_A_ELEC_ENCHANT}},
 	{LOC_SYSTEM_HANIWA_A_SLOW_ENCHANT_NAME,LOC_SYSTEM_HANIWA_A_SLOW_ENCHANT_INFO,HANIWA_T_COMBAT,40,20,false,{HANIWA_A_POISON_ENCHANT},{},{}},
 	{LOC_SYSTEM_HANIWA_A_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_TANMAC_INFO,HANIWA_T_MAGIC,30,30,false,{},{},{HANIWA_A_SWORD,HANIWA_A_SPEAR,HANIWA_A_BOW}},
-	{LOC_SYSTEM_HANIWA_A_FIRE_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_FIRE_TANMAC_INFO,HANIWA_T_MAGIC,20,5,false,{},{HANIWA_A_TANMAC},{HANIWA_A_FIRE_TANMAC,HANIWA_A_COLD_TANMAC,HANIWA_A_ELEC_TANMAC}},
-	{LOC_SYSTEM_HANIWA_A_COLD_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_COLD_TANMAC_INFO,HANIWA_T_MAGIC,20,5,false,{},{HANIWA_A_TANMAC},{HANIWA_A_FIRE_TANMAC,HANIWA_A_COLD_TANMAC,HANIWA_A_ELEC_TANMAC}},
-	{LOC_SYSTEM_HANIWA_A_ELEC_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_ELEC_TANMAC_INFO,HANIWA_T_MAGIC,20,5,false,{},{HANIWA_A_TANMAC},{HANIWA_A_FIRE_TANMAC,HANIWA_A_COLD_TANMAC,HANIWA_A_ELEC_TANMAC}},
+	{LOC_SYSTEM_HANIWA_A_FIRE_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_FIRE_TANMAC_INFO,HANIWA_T_MAGIC,20,5,false,{},{HANIWA_A_TANMAC},{HANIWA_A_COLD_TANMAC,HANIWA_A_ELEC_TANMAC}},
+	{LOC_SYSTEM_HANIWA_A_COLD_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_COLD_TANMAC_INFO,HANIWA_T_MAGIC,20,5,false,{},{HANIWA_A_TANMAC},{HANIWA_A_FIRE_TANMAC,HANIWA_A_ELEC_TANMAC}},
+	{LOC_SYSTEM_HANIWA_A_ELEC_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_ELEC_TANMAC_INFO,HANIWA_T_MAGIC,20,5,false,{},{HANIWA_A_TANMAC},{HANIWA_A_FIRE_TANMAC,HANIWA_A_COLD_TANMAC}},
 	{LOC_SYSTEM_HANIWA_A_MIDDLE_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_MIDDLE_TANMAC_INFO,HANIWA_T_MAGIC,30,20,false,{HANIWA_A_TANMAC},{},{}},
 	{LOC_SYSTEM_HANIWA_A_BIG_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_BIG_TANMAC_INFO,HANIWA_T_MAGIC,30,20,false,{HANIWA_A_MIDDLE_TANMAC},{},{}},
 	{LOC_SYSTEM_HANIWA_A_BURST_TANMAC_NAME,LOC_SYSTEM_HANIWA_A_BURST_TANMAC_INFO,HANIWA_T_MAGIC,30,10,false,{},{HANIWA_A_TANMAC},{HANIWA_A_PENTAN}},
@@ -110,6 +111,16 @@ string haniwa_abil::getCostString() {
 	} else {
 		return LocalzationManager::locString(LOC_SYSTEM_COST_VERY_HIGH);
 	}
+}
+monster* haniwa_abil::getHaniwa(int haniwa_) {
+	for(auto it = env[you.haniwa_allys[haniwa_].floor].mon_vector.begin(); it != env[you.haniwa_allys[haniwa_].floor].mon_vector.end();it++)
+	{
+		if(it->isLive() && it->map_id == you.haniwa_allys[haniwa_].map_id)
+		{
+			return &(*it);
+		}
+	}
+	return nullptr;
 }
 bool haniwa_abil::isEmpty_abil() {
 	return you.god_value[GT_KEIKI][0] == 0 && you.god_value[GT_KEIKI][1] == 0;
@@ -206,6 +217,19 @@ random_extraction<haniwa_abil_key> haniwa_abil::getAbleHaniwaAbils(int type) {
                 break;
             }
         }
+		for(int j = 0; j < HANIWA_A_MAX; j++) {
+       		if (excepted)
+				break;
+			if(has_abil((haniwa_abil_key)j)) {
+				for (auto& ex : haniwa_abil_list[j].except_abil) {
+					if (ex == type) {
+						excepted = true;
+						break;
+					}
+				}
+			}
+		}
+
         if (excepted) continue;
 
         // must 조건
@@ -415,7 +439,6 @@ void haniwa_abil::upgradeHaniwa(monster* mon) {
 	if(has_abil(HANIWA_A_FLY)) {
 		mon->walk_speed_bonus = 2;
 	}
-	
 
 	if(has_abil(HANIWA_A_BOW) || has_abil(HANIWA_A_MAGICIAN)) {
 		mon->flag |= M_FLAG_NO_ATK;
@@ -507,6 +530,176 @@ void haniwa_abil::haniwaDraw(float x_, float y_, float scale_) {
 		if(has_abil(HANIWA_A_HARDEN1)) 
 		{
 			img_mons_haniwa_equipments[12].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		}
+	}
+}
+
+int haniwa_abil::getGiftCount(int index_) {
+	switch(index_) {
+	case 0:
+		return has_abil(HANIWA_A_CREATE_P)?15:0;
+	case 1:
+		return has_abil(HANIWA_A_CREATE_WEAPON)?(has_abil(HANIWA_A_CREATE_WEAPON_ARTIFACT)?100:40):0;
+	case 2:
+		return has_abil(HANIWA_A_CREATE_ARMOUR)?(has_abil(HANIWA_A_CREATE_ARMOUR_ARTIFACT)?120:50):0;
+	case 3:
+		return has_abil(HANIWA_A_CREATE_POTION)?40:0;
+	case 4:
+		return has_abil(HANIWA_A_CREATE_SCROLL)?40:0;
+	}
+	return 0;
+}
+
+
+void han_weapon_gift(bool speak_)
+{
+	
+	random_extraction<int> rand_;
+
+	for(int i=SKT_SHORTBLADE;i<=SKT_SPEAR;i++)
+	{
+		rand_.push(i-SKT_SHORTBLADE, you.GetSkillLevel(i, true)+1);
+	}
+
+	item_infor t;
+	item* it = env[current_level].MakeItem(you.position,makeitem((item_type)(rand_.pop()), 1, &t));
+	//it->value3 += rand_int(-1,6);
+	it->value4 += rand_int(-2,6);
+	if(!it->value5 && randA(2)>1)
+		it->value5 = GetNewBrand(0); //카나코는 신의 브랜드는 선물하지 않는다.
+	if(randA(3) == 0)
+		MakeArtifact(it,1);
+	if(speak_)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
+
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_GIFT, PlaceHolderHelper(LOC_SYSTEM_GOD_KANAKO)),CL_help);
+
+		MoreWait();
+	}
+}
+
+
+void haniwa_abil::increaseGift(int haniwa_, int index_) {
+	you.haniwa_allys[haniwa_].item_count[index_]++;
+	int require_count_ = getGiftCount(index_);
+	if(require_count_ != 0 && require_count_ < you.haniwa_allys[haniwa_].item_count[index_] && you.haniwa_allys[haniwa_].floor == current_level) {
+		monster* haniwa_mon_ = getHaniwa(haniwa_);
+		if(haniwa_mon_ != nullptr && env[current_level].isInSight(haniwa_mon_->position)) {
+			you.haniwa_allys[haniwa_].item_count[index_]-=require_count_;
+			switch(index_) {
+			case 0:
+				if(has_abil(HANIWA_A_CREATE_P)) {
+					item_infor temp;
+					env[current_level].MakeItem(haniwa_mon_->position, makePitem(MON_MOOK, 1, &temp));
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_P) + " ", false, false, false, CL_normal);
+				}
+				break;
+			case 1:
+				if(has_abil(HANIWA_A_CREATE_WEAPON)) {
+					random_extraction<int> rand_;
+
+					for(int i=SKT_SHORTBLADE;i<=SKT_SPEAR;i++)
+					{
+						rand_.push(i-SKT_SHORTBLADE, you.GetSkillLevel(i, true)+1);
+					}
+
+					item_infor t;
+					item* it = env[current_level].MakeItem(haniwa_mon_->position,makeitem((item_type)(rand_.pop()), 1, &t));
+					it->value4 += rand_int(-2,4);
+					if(!it->value5 && randA(2)>1)
+						it->value5 = GetNewBrand(0);
+
+					if(has_abil(HANIWA_A_CREATE_WEAPON_ARTIFACT)) {
+						MakeArtifact(it,1);
+					}
+
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_WEAPON) + " ", false, false, false, CL_normal);
+				}
+				break;
+			case 2:
+				if(has_abil(HANIWA_A_CREATE_ARMOUR)) {
+					random_extraction<int> rand_;
+					rand_.push(0,5); //아머
+					rand_.push(1, you.GetSkillLevel(SKT_SHIELD, true)>=1?3:1); //방패
+					rand_.push(2,you.equipment[ET_HELMET]==NULL?5:1); //머리
+					rand_.push(3,you.equipment[ET_CLOAK]==NULL?5:1); //망토
+					rand_.push(4,you.equipment[ET_GLOVE]==NULL?5:1); //손
+					rand_.push(5,you.equipment[ET_BOOTS]==NULL?5:1); //발
+					item* it = NULL;
+					int armour_ = rand_.pop();
+					switch(armour_)
+					{
+					case 0:
+						{
+							bool dodge_ = (you.GetSkillLevel(SKT_DODGE, true)>you.GetSkillLevel(SKT_ARMOUR, true)*2 || you.GetSkillLevel(SKT_ARMOUR, true) < 5);
+							bool heavy_ = (you.GetSkillLevel(SKT_ARMOUR, true)>you.GetSkillLevel(SKT_DODGE, true) *2 || you.GetSkillLevel(SKT_ARMOUR, true) >= 15);
+							random_extraction<int> rand2_;
+
+							rand2_.push(ITM_ARMOR_BODY_ARMOUR_0,dodge_?10:1); //로브
+							rand2_.push(ITM_ARMOR_BODY_ARMOUR_1,dodge_?8:4); //가죽
+							rand2_.push(ITM_ARMOR_BODY_ARMOUR_2,heavy_?8:4); //체인
+							rand2_.push(ITM_ARMOR_BODY_ARMOUR_3,heavy_?10:1); //판금
+					
+							int select_ = rand2_.pop();
+							item_infor t;
+							it = env[current_level].MakeItem(haniwa_mon_->position,makeitem((item_type)select_, 1, &t,-1));
+						}
+						break;
+					case 1:
+						{
+							random_extraction<int> rand2_;
+
+							rand2_.push(0, you.GetSkillLevel(SKT_SHIELD, true) <=5?5:1); //버클러
+							rand2_.push(28, you.GetSkillLevel(SKT_SHIELD, true) >=10?5:1); //실드
+							rand2_.push(30, you.GetSkillLevel(SKT_SHIELD, true) >=20?10:1); //카이트
+							
+							int select_ = rand2_.pop();
+							
+							item_infor t;
+							it = env[current_level].MakeItem(haniwa_mon_->position,makeitem(ITM_ARMOR_SHIELD, 1, &t,select_));
+						}
+						break;
+					case 2:
+					case 3:
+					case 4:
+					case 5:
+						{
+							random_extraction<int> rand2_;		
+							
+							item_infor t;
+							it = env[current_level].MakeItem(haniwa_mon_->position,makeitem((item_type)(ITM_ARMOR_HEAD+armour_-2), 1, &t));
+						}
+						break;
+					}
+					if(has_abil(HANIWA_A_CREATE_ARMOUR_ARTIFACT)) {
+						MakeArtifact(it,1);
+					}
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_ARMOUR) + " ", false, false, false, CL_normal);
+				}
+				break;
+			case 3:
+				if(has_abil(HANIWA_A_CREATE_POTION)) {
+					potion_type type_= goodbadpotion(randA(2)>1?1:(randA(20)?2:3));
+					int num = 1;
+					item_infor t;
+					for(int i=0;i<num;i++)
+						env[current_level].MakeItem(haniwa_mon_->position,makeitem(ITM_POTION, 0, &t,(int)type_));
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_POTION) + " ", false, false, false, CL_normal);
+
+				}
+				break;
+			case 4:
+				if(has_abil(HANIWA_A_CREATE_SCROLL)) {
+					scroll_type type_= goodbadscroll(randA(2)>1?1:(randA(20)?2:3));
+					int num = 1;
+					item_infor t;
+					for(int i=0;i<num;i++)
+						env[current_level].MakeItem(haniwa_mon_->position,makeitem(ITM_SCROLL, 0, &t,(int)type_));
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_SCROLL) + " ", false, false, false, CL_normal);
+				}
+				break;
+			}
 		}
 	}
 }

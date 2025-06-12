@@ -333,7 +333,7 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 }
 
 
-void BaseBomb_forAlly(coord_def pos, textures* t_ , attack_infor& att_, unit* order_, bool frozen_)
+void BaseBomb_forAlly(coord_def pos, textures* t_ , attack_infor& att_, unit* order_, int sleep_, bool frozen_)
 {
 	{
 		for(int i=-1;i<=1;i++)
@@ -358,7 +358,7 @@ void BaseBomb_forAlly(coord_def pos, textures* t_ , attack_infor& att_, unit* or
 				}
 			}
 		}
-		Sleep(10);
+		Sleep(sleep_);
 	}
 }
 
@@ -1220,19 +1220,23 @@ bool base_bomb(int damage, int max_damage, int size, attack_type type, unit* ord
 	case ATT_FIRE_BLAST:
 	case ATT_BURST:
 	case ATT_FIRE_PYSICAL_BLAST:
+	case ATT_FIRE_ENCHANT_BLAST:
 	case ATT_SUN_BLAST:
 		image_ = &img_blast[0];
 		break;
 	case ATT_COLD_BLAST:
 	case ATT_COLD_PYSICAL_BLAST:
+	case ATT_COLD_ENCHANT_BLAST:
 		image_ = &img_blast[4];
 		break;		
 	case ATT_NORMAL_BLAST:		
 	case ATT_AC_REDUCE_BLAST:
 	case ATT_ELEC_BLAST:
+	case ATT_ELEC_ENCHANT_BLAST:
 		image_ = &img_blast[2];
 		break;
 	case ATT_POISON_BLAST:
+	case ATT_POISON_ENCHANT_BLAST:
 		image_ = &img_blast[3];
 		break;
 	case ATT_OIL_BLAST:
@@ -2499,7 +2503,7 @@ bool skill_summon_flandre(int pow, bool short_, unit* order, coord_def target)
 	return return_;
 
 }
-bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target, bool hurt_ally)
+bool skill_suicide_bomb(int base_damage, int power, bool short_, unit* order, coord_def target, bool hurt_ally)
 {
 	if(1)
 	{
@@ -2533,8 +2537,8 @@ bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target, b
 						{	
 							if(hit_ != order && (hurt_ally || hit_->isEnemyUnit(order)))
 							{
-								int att_ = randC(4,13+power/20);
-								int m_att_ = 4*(13+power/20);
+								int att_ = randC(4,base_damage+power/20);
+								int m_att_ = 4*(base_damage+power/20);
 
 								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_SUICIDE));
 								hit_->damage(temp_att, true);
@@ -2565,7 +2569,7 @@ bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target, b
 	return false;
 }
 bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target) {
-	return skill_suicide_bomb(power, short_, order, target, true);
+	return skill_suicide_bomb(13, power, short_, order, target, true);
 }
 bool skill_rabbit_horn(int pow, bool short_, unit* order, coord_def target)
 {
@@ -5403,120 +5407,79 @@ bool skill_arrow(int pow, bool short_, unit* order, coord_def target) {
 	}
 	return false;
 }
-bool skill_haniwa_magic_tanmac(int pow, bool short_, unit* order, coord_def target) {
+bool skill_haniwa_magic_tanmac(int pow, bool short_, unit* order, coord_def target, int size_) {
 	beam_iterator beam(order->position,order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		int damage_ = 7 + pow / 10;
+		bool burst_ = haniwa_abil::has_abil(HANIWA_A_BURST_TANMAC);
+		int damage_ =  0;
+		int dam_multi_ = 1;
+		int color_offset = 30;
+		spell_list spell__ = SPL_HANIWA_MAGIC_TANMAC;
+		switch(size_) {
+		case 0:
+			damage_ =  7 + pow / 10;
+			dam_multi_ = 1;
+			color_offset = 30;
+			spell__  = SPL_HANIWA_MAGIC_TANMAC;
+			break;
+		case 1:
+			damage_ =  7 + pow / 15;
+			dam_multi_ = 2;
+			color_offset = 10;
+			spell__  = SPL_HANIWA_MAGIC_TANMAC2;
+			break;
+		case 2:
+			damage_ =  9 + pow / 12;
+			dam_multi_ = 3;
+			color_offset = 10;
+			spell__  = SPL_HANIWA_MAGIC_TANMAC3;
+			break;
+
+		}
+
+
+
 
 		attack_type type_ = ATT_THROW_NORMAL;
+		attack_type burst_type_ = ATT_NORMAL_BLAST;
 		bool is_pentan_ = haniwa_abil::has_abil(HANIWA_A_PENTAN)?true:false;
-		int color_ = rand_int(30, 35);
+		int color_ = color_offset + rand_int(0, 5);
 		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC) || haniwa_abil::has_abil(HANIWA_A_COLD_TANMAC) || haniwa_abil::has_abil(HANIWA_A_ELEC_TANMAC)) {
 			damage_ = damage_ * 1.3f;
 		}
 		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC)) {
 			type_ = ATT_THROW_FIRE;
-			color_ = 30;
+			burst_type_ = ATT_FIRE_ENCHANT_BLAST;
+			color_ = color_offset;
 		}
 		if(haniwa_abil::has_abil(HANIWA_A_COLD_TANMAC)) {
 			type_ = ATT_THROW_COLD;
-			color_ = 34;
+			burst_type_ = ATT_COLD_ENCHANT_BLAST;
+			color_ = color_offset+4;
 		}
 		if(haniwa_abil::has_abil(HANIWA_A_ELEC_TANMAC)) {
 			type_ = ATT_THROW_ELEC;
-			color_ = 32;
+			burst_type_ = ATT_ELEC_ENCHANT_BLAST;
+			color_ = color_offset+2;
 		}
 
-		beam_infor temp_infor(randA_1(7 + pow / 10), 7 + pow / 10, 17, order, order->GetParentType(), SpellLength(SPL_HANIWA_MAGIC_TANMAC, order->isplayer()), is_pentan_?7:1, is_pentan_?BMT_PENETRATE:BMT_NORMAL, type_, name_infor(LOC_SYSTEM_ATT_TANMAC));
+		beam_infor temp_infor(burst_?0:randC(dam_multi_,damage_), burst_?0:(damage_*dam_multi_), 17, order, order->GetParentType(), SpellLength(spell__, order->isplayer()), is_pentan_?7:1, is_pentan_?BMT_PENETRATE:BMT_NORMAL, type_, name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if(env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot");
+				soundmanager.playSound(size_==2?"shoot_heavy":"shoot");
 			}
-			throwtanmac(color_, beam, temp_infor, NULL);
-		}
-		order->SetParadox(0);	
-		return true;
-	}
-	return false;
-}
-bool skill_haniwa_magic_tanmac2(int pow, bool short_, unit* order, coord_def target) {
-	beam_iterator beam(order->position,order->position);
-	if (CheckThrowPath(order->position, target, beam))
-	{
-		int damage_ = 7 + pow / 15;
+			coord_def c_ = throwtanmac(color_, beam, temp_infor, NULL);
 
-		attack_type type_ = ATT_THROW_NORMAL;
-		bool is_pentan_ = haniwa_abil::has_abil(HANIWA_A_PENTAN)?true:false;
-		int color_ = rand_int(10, 15);
-		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC) || haniwa_abil::has_abil(HANIWA_A_COLD_TANMAC) || haniwa_abil::has_abil(HANIWA_A_ELEC_TANMAC)) {
-			damage_ = damage_ * 1.3f;
-		}
-		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC)) {
-			type_ = ATT_THROW_FIRE;
-			color_ = 10;
-		}
-		if(haniwa_abil::has_abil(HANIWA_A_COLD_TANMAC)) {
-			type_ = ATT_THROW_COLD;
-			color_ = 14;
-		}
-		if(haniwa_abil::has_abil(HANIWA_A_ELEC_TANMAC)) {
-			type_ = ATT_THROW_ELEC;
-			color_ = 12;
-		}
-
-		beam_infor temp_infor(randC(2,damage_), 2*(damage_), 17, order, order->GetParentType(), SpellLength(SPL_HANIWA_MAGIC_TANMAC2, order->isplayer()), is_pentan_?7:1, is_pentan_?BMT_PENETRATE:BMT_NORMAL, type_, name_infor(LOC_SYSTEM_ATT_TANMAC));
-		if (short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
-		
-		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
-			if(env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot");
+			if(burst_) {
+				attack_infor temp_infor(randC(dam_multi_,damage_),damage_*dam_multi_,99,&you,you.GetParentType(),burst_type_,name_infor(LOC_SYSTEM_ATT_BURST));
+				BaseBomb_forAlly(c_, &img_blast[color_-color_offset],temp_infor, &you, 100, false);
+				env[current_level].ClearEffect();
 			}
-			throwtanmac(rand_int(10, 15), beam, temp_infor, NULL);
-		}
-		order->SetParadox(0);	
-		return true;
-	}
-	return false;
-}
-bool skill_haniwa_magic_tanmac3(int pow, bool short_, unit* order, coord_def target) {
-	beam_iterator beam(order->position,order->position);
-	if (CheckThrowPath(order->position, target, beam))
-	{
-		int damage_ = 9 + pow / 12;
 
-		attack_type type_ = ATT_THROW_NORMAL;
-		bool is_pentan_ = haniwa_abil::has_abil(HANIWA_A_PENTAN)?true:false;
-		int color_ = rand_int(10, 15);
-		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC) || haniwa_abil::has_abil(HANIWA_A_COLD_TANMAC) || haniwa_abil::has_abil(HANIWA_A_ELEC_TANMAC)) {
-			damage_ = damage_ * 1.3f;
-		}
-		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC)) {
-			type_ = ATT_THROW_FIRE;
-			color_ = 10;
-		}
-		if(haniwa_abil::has_abil(HANIWA_A_COLD_TANMAC)) {
-			type_ = ATT_THROW_COLD;
-			color_ = 14;
-		}
-		if(haniwa_abil::has_abil(HANIWA_A_ELEC_TANMAC)) {
-			type_ = ATT_THROW_ELEC;
-			color_ = 15;
-		}
-
-		beam_infor temp_infor(randC(3,damage_), 3*(damage_), 17, order, order->GetParentType(), SpellLength(SPL_HANIWA_MAGIC_TANMAC3, order->isplayer()), is_pentan_?7:1, is_pentan_?BMT_PENETRATE:BMT_NORMAL, type_, name_infor(LOC_SYSTEM_ATT_TANMAC));
-		if (short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
-		
-		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
-			if(env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot_heavy");
-			}
-			throwtanmac(rand_int(10, 15), beam, temp_infor, NULL);
 		}
 		order->SetParadox(0);	
 		return true;
@@ -6791,11 +6754,11 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 	case SPL_ARROW:
 		return skill_arrow(power, short_, order, target);
 	case SPL_HANIWA_MAGIC_TANMAC:
-		return skill_haniwa_magic_tanmac(power, short_, order, target);
+		return skill_haniwa_magic_tanmac(power, short_, order, target, 0);
 	case SPL_HANIWA_MAGIC_TANMAC2:
-		return skill_haniwa_magic_tanmac2(power, short_, order, target);
+		return skill_haniwa_magic_tanmac(power, short_, order, target, 1);
 	case SPL_HANIWA_MAGIC_TANMAC3:
-		return skill_haniwa_magic_tanmac3(power, short_, order, target);
+		return skill_haniwa_magic_tanmac(power, short_, order, target, 2);
 	default:
 		return false;
 	}
@@ -7287,11 +7250,11 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 	case SPL_ARROW:
 		return skill_arrow(power, short_, &you, target);
 	case SPL_HANIWA_MAGIC_TANMAC:
-		return skill_haniwa_magic_tanmac(power, short_, &you, target);
+		return skill_haniwa_magic_tanmac(power, short_, &you, target, 0);
 	case SPL_HANIWA_MAGIC_TANMAC2:
-		return skill_haniwa_magic_tanmac2(power, short_, &you, target);
+		return skill_haniwa_magic_tanmac(power, short_, &you, target, 1);
 	case SPL_HANIWA_MAGIC_TANMAC3:
-		return skill_haniwa_magic_tanmac3(power, short_, &you, target);
+		return skill_haniwa_magic_tanmac(power, short_, &you, target, 2);
 	default:
 		return false;
 	}

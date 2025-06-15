@@ -735,6 +735,13 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	printsub("",true,CL_normal);
 	printsub(blank,false,CL_normal);
 
+	bool fixed_artifact_ = false;
+
+	if(it->fixed_artifact != FIXED_ARTIFACT_NONE) {
+		_infor_(GetFixedArtifact(it->fixed_artifact));
+		fixed_artifact_ = true;
+	}
+
 	switch (it->type)
 	{
 		//case ITM_WEAPON_DAGGER:
@@ -748,104 +755,106 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		//case ITM_WEAPON_BOW:
 	{
 		skill_type ski_ = SKT_MACE;
-		switch (it->type)
-		{
-		case ITM_WEAPON_SHORTBLADE:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE));
-			ski_ = SKT_SHORTBLADE;
-			switch (it->value0)
+		if(!fixed_artifact_) {
+			switch (it->type)
 			{
-			case 0:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_DAGGER));
+			case ITM_WEAPON_SHORTBLADE:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE));
+				ski_ = SKT_SHORTBLADE;
+				switch (it->value0)
+				{
+				case 0:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_DAGGER));
+					break;
+				case 1:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_THROWING_KNIFE));
+					break;
+				case 2:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_SHORTBLADE_SHORTSWORD));
+					break;
+				}
 				break;
-			case 1:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_THROWING_KNIFE));
+			case ITM_WEAPON_LONGBLADE:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE));
+				ski_ = SKT_LONGBLADE;
+				switch (it->value0)
+				{
+				case 0:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_KATANA));
+					break;
+				case 1:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_SCIMITAR));
+					break;
+				case 2:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_GREATSWORD));
+					break;
+				case 3:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_CHAKRAM));
+					break;
+				}
 				break;
-			case 2:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SHORTBLADE_SHORTBLADE_SHORTSWORD));
+			case ITM_WEAPON_MACE:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE));
+				switch (it->value0)
+				{
+				case 0:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_GOHEI));
+					break;
+				case 1:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_BROOMSTICK));
+					break;
+				case 2:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_UMBRELLA));
+					break;
+				case 3:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_DAUZING_ROD));
+					break;
+				case 4:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_ONBASIRA));
+					break;
+				}
+				ski_ = SKT_MACE;
+				break;
+			case ITM_WEAPON_SPEAR:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR));
+				ski_ = SKT_SPEAR;
+				switch (it->value0)
+				{
+				case 0:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_SPEAR));
+					break;
+				case 1:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_JAVELIN));
+					break;
+				case 2:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_SCYTHE));
+					break;
+				case 3:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_TRIDENT));
+					break;
+				case 4:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_BAMBOO_SPEAR));
+					break;
+				}
+				break;
+			case ITM_WEAPON_AXE:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE));
+				switch (it->value0)
+				{
+				case 0:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_HANDAXE));
+					break;
+				case 1:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_BATTLEAXE));
+					break;
+				case 2:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_ANCHOR));
+					break;
+				}
+				break;
+			default:
 				break;
 			}
-			break;
-		case ITM_WEAPON_LONGBLADE:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE));
-			ski_ = SKT_LONGBLADE;
-			switch (it->value0)
-			{
-			case 0:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_KATANA));
-				break;
-			case 1:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_SCIMITAR));
-				break;
-			case 2:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_GREATSWORD));
-				break;
-			case 3:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_LONGBLADE_CHAKRAM));
-				break;
-			}
-			break;
-		case ITM_WEAPON_MACE:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE));
-			switch (it->value0)
-			{
-			case 0:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_GOHEI));
-				break;
-			case 1:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_BROOMSTICK));
-				break;
-			case 2:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_UMBRELLA));
-				break;
-			case 3:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_DAUZING_ROD));
-				break;
-			case 4:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_MACE_ONBASIRA));
-				break;
-			}
-			ski_ = SKT_MACE;
-			break;
-		case ITM_WEAPON_SPEAR:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR));
-			ski_ = SKT_SPEAR;
-			switch (it->value0)
-			{
-			case 0:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_SPEAR));
-				break;
-			case 1:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_JAVELIN));
-				break;
-			case 2:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_SCYTHE));
-				break;
-			case 3:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_TRIDENT));
-				break;
-			case 4:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_SPEAR_BAMBOO_SPEAR));
-				break;
-			}
-			break;
-		case ITM_WEAPON_AXE:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE));
-			switch (it->value0)
-			{
-			case 0:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_HANDAXE));
-				break;
-			case 1:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_BATTLEAXE));
-				break;
-			case 2:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_ANCHOR));
-				break;
-			}
-			break;
-		default:
-			break;
 		}
 
 		if (it->value5 && it->value6)
@@ -1018,51 +1027,53 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	case ITM_ARMOR_BODY_ARMOUR_2:
 	case ITM_ARMOR_BODY_ARMOUR_3:
 	{
-		switch (it->value5)
-		{
-		case AMK_NORMAL:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_NORMAL));
-			break;
-		case AMK_MIKO:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MIKO));
-			break;
-		case AMK_WING:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_WING));
-			break;
-		case AMK_KAPPA:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_KAPPA));
-			break;
-		case AMK_FIRE:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_FIRE));
-			break;
-		case AMK_MAID:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MAID));
-			break;
-		case AMK_POISON:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_POISON));
-			break;
-		case AMK_AUTUMN:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_AUTUMN));
-			break;
-		default:
-			break;
-		}
-		switch (it->type)
-		{
-		case ITM_ARMOR_BODY_ARMOUR_0:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL0));
-			break;
-		case ITM_ARMOR_BODY_ARMOUR_1:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL1));
-			break;
-		case ITM_ARMOR_BODY_ARMOUR_2:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL2));
-			break;
-		case ITM_ARMOR_BODY_ARMOUR_3:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL3));
-			break;
-		default:
-			break;
+		if(!fixed_artifact_) {
+			switch (it->value5)
+			{
+			case AMK_NORMAL:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_NORMAL));
+				break;
+			case AMK_MIKO:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MIKO));
+				break;
+			case AMK_WING:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_WING));
+				break;
+			case AMK_KAPPA:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_KAPPA));
+				break;
+			case AMK_FIRE:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_FIRE));
+				break;
+			case AMK_MAID:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MAID));
+				break;
+			case AMK_POISON:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_POISON));
+				break;
+			case AMK_AUTUMN:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_AUTUMN));
+				break;
+			default:
+				break;
+			}
+			switch (it->type)
+			{
+			case ITM_ARMOR_BODY_ARMOUR_0:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL0));
+				break;
+			case ITM_ARMOR_BODY_ARMOUR_1:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL1));
+				break;
+			case ITM_ARMOR_BODY_ARMOUR_2:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL2));
+				break;
+			case ITM_ARMOR_BODY_ARMOUR_3:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL3));
+				break;
+			default:
+				break;
+			}
 		}
 		
 		ostringstream ss;
@@ -1134,7 +1145,9 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	}
 	case ITM_ARMOR_SHIELD:
 	{
-		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SHIELD));
+		if(!fixed_artifact_) {
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SHIELD));
+		}
 		
 		
 		ostringstream ss;
@@ -1213,7 +1226,8 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->type)
 		{
 		case ITM_ARMOR_HEAD:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_HEAD));
+			if(!fixed_artifact_)
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_HEAD));
 			if (can_use_)
 			{
 				if (you.equipment[ET_HELMET] != it)
@@ -1229,7 +1243,8 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			}
 			break;
 		case ITM_ARMOR_CLOAK:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_CLOAK));
+			if(!fixed_artifact_)
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_CLOAK));
 			if (can_use_)
 			{
 				if (you.equipment[ET_CLOAK] != it)
@@ -1245,7 +1260,8 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			}
 			break;
 		case ITM_ARMOR_GLOVE:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE));
+			if(!fixed_artifact_)
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE));
 			if (can_use_)
 			{
 				if (you.equipment[ET_GLOVE] != it)
@@ -1261,7 +1277,8 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			}
 			break;
 		case ITM_ARMOR_BOOT:
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE));
+			if(!fixed_artifact_)
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE));
 			if (can_use_)
 			{
 				if (you.equipment[ET_BOOTS] != it)
@@ -1493,47 +1510,49 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	break;
 	case ITM_AMULET:
 	{
-		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET));
-		if ((it->isArtifact() && it->identify) || iden_list.amulet_list[it->value1].iden == 2)
-		{
-			switch (it->value1)
+		if(!fixed_artifact_){
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET));
+			if ((it->isArtifact() && it->identify) || iden_list.amulet_list[it->value1].iden == 2)
 			{
-			case AMT_PERFECT:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PERFECT));
-				break;
-			case AMT_BLOSSOM:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BLOSSOM));
-				break;
-			case AMT_TIMES:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIMES));
-				break;
-			case AMT_FAITH:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH));
-				break;
-			case AMT_WAVE:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE));
-				break;
-			case AMT_SPIRIT:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT));
-				break;
-			case AMT_GRAZE:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE));
-				break;
-			case AMT_WEATHER:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER));
-				break;
-			case AMT_OCCULT:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT));
-				break;
-			default:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG));
-				break;
+				switch (it->value1)
+				{
+				case AMT_PERFECT:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PERFECT));
+					break;
+				case AMT_BLOSSOM:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BLOSSOM));
+					break;
+				case AMT_TIMES:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIMES));
+					break;
+				case AMT_FAITH:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH));
+					break;
+				case AMT_WAVE:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE));
+					break;
+				case AMT_SPIRIT:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT));
+					break;
+				case AMT_GRAZE:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE));
+					break;
+				case AMT_WEATHER:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER));
+					break;
+				case AMT_OCCULT:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT));
+					break;
+				default:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG));
+					break;
+				}
 			}
+			else
+			{
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_UKNOWN));
+			}		
 		}
-		else
-		{
-			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_UKNOWN));
-		}		
 
 		if (can_use_)
 		{
@@ -1554,68 +1573,70 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	{
 		if ((it->isArtifact() && it->identify) || iden_list.ring_list[it->value1].iden == 2)
 		{
-			switch (it->value1)
-			{
-			case RGT_STR:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_STR));
-				break;
-			case RGT_DEX:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_DEX));
-				break;
-			case RGT_INT:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_INT));
-				break;
-			case RGT_HUNGRY:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_HUNGRY));
-				break;
-			case RGT_FULL:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_FULL));
-				break;
-			case RGT_TELEPORT:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_TELEPORT));
-				break;
-			case RGT_POISON_RESIS:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_POISON_RESIS));
-				break;
-			case RGT_FIRE_RESIS:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_FIRE_RESIS));
-				break;
-			case RGT_ICE_RESIS:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_ICE_RESIS));
-				break;
-			case RGT_SEE_INVISIBLE:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_SEE_INVISIBLE));
-				break;
-			case RGT_LEVITATION:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_LEVITATION));
-				break;
-			case RGT_INVISIBLE:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_INVISIBLE));
-				break;
-			case RGT_MANA:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_MANA));
-				break;
-			case RGT_MAGACIAN:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGACIAN));
-				break;
-			case RGT_AC:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_AC));
-				break;
-			case RGT_EV:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_EV));
-				break;
-			case RGT_CONFUSE_RESIS:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_CONFUSE_RESIS));
-				break;
-			case RGT_ELEC_RESIS:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_ELEC_RESIS));
-				break;
-			case RGT_MAGIC_RESIS:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGIC_RESIS));
-				break;
-			default:
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_BUG));
-				break;
+			if(!fixed_artifact_){
+				switch (it->value1)
+				{
+				case RGT_STR:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_STR));
+					break;
+				case RGT_DEX:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_DEX));
+					break;
+				case RGT_INT:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_INT));
+					break;
+				case RGT_HUNGRY:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_HUNGRY));
+					break;
+				case RGT_FULL:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_FULL));
+					break;
+				case RGT_TELEPORT:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_TELEPORT));
+					break;
+				case RGT_POISON_RESIS:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_POISON_RESIS));
+					break;
+				case RGT_FIRE_RESIS:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_FIRE_RESIS));
+					break;
+				case RGT_ICE_RESIS:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_ICE_RESIS));
+					break;
+				case RGT_SEE_INVISIBLE:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_SEE_INVISIBLE));
+					break;
+				case RGT_LEVITATION:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_LEVITATION));
+					break;
+				case RGT_INVISIBLE:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_INVISIBLE));
+					break;
+				case RGT_MANA:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_MANA));
+					break;
+				case RGT_MAGACIAN:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGACIAN));
+					break;
+				case RGT_AC:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_AC));
+					break;
+				case RGT_EV:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_EV));
+					break;
+				case RGT_CONFUSE_RESIS:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_CONFUSE_RESIS));
+					break;
+				case RGT_ELEC_RESIS:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_ELEC_RESIS));
+					break;
+				case RGT_MAGIC_RESIS:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGIC_RESIS));
+					break;
+				default:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_BUG));
+					break;
+				}
 			}
 		}
 		else
@@ -1829,7 +1850,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		_infor_("\n\n");
 		for(auto it2 = it->atifact_vector.begin(); it2 != it->atifact_vector.end(); it2++)
 		{
-			_infor_(GetAtifactInfor((ring_type)it2->kind, it2->value));
+			_infor_(GetAtifactInfor((artifact_type)it2->kind, it2->value));
 			_infor_("\n");
 		}
 	}

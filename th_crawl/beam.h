@@ -14,6 +14,7 @@
 
 class beam_iterator
 {
+public:
 	coord_def start;
 	coord_def target;
 	coord_def current;

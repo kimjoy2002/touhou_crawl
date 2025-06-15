@@ -331,6 +331,8 @@ public:
 	int s_fire;
 	int s_tracking;
 	int s_shooting_turn;
+	int s_overheat;
+	int s_overheat_turn;
 	shield_struct s_shield;
 
 
@@ -561,6 +563,7 @@ public:
 	bool SetFire(int value_, bool from_oil);
 	bool SetTracking(int value_);
 	bool SetShield(int percent_, int turn_);
+	bool SetOverheat(int overheat_, int turn_);
 	int AbsorbShield(int damage_);
 	
 	int GetInvisible();

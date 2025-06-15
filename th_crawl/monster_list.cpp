@@ -178,7 +178,7 @@ const mon_infor mondata[] = {
 	{15,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_FLY,1,1,10,'t' },
 
-	{MON_ONI,14,1412,name_infor(MON_ONI),&img_mons_oni,120,10,2,
+	{MON_ONI,14,1412,name_infor(MON_ONI),&img_mons_oni,120,8,2,
 	{40,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,2,1,10,'O' },
 
@@ -249,7 +249,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_FLY,1,1,10,'T' },
 
 
-	{MON_BLUE_ONI,14,1412,name_infor(MON_BLUE_ONI),&img_mons_blue_oni,120,10,2,
+	{MON_BLUE_ONI,14,1412,name_infor(MON_BLUE_ONI),&img_mons_blue_oni,120,8,2,
 	{40,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,2,1,10,'O' },
 
@@ -413,15 +413,15 @@ const mon_infor mondata[] = {
 	
 	{MON_EAGLE,9,921,name_infor(MON_EAGLE),&img_mons_eagle,80,1,10,
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-	M_FLAG_SPEAK | M_FLAG_FLY | M_FLAG_ANIMAL | M_FLAG_CAN_SEE_INVI,0,1,10,'C'},
+	M_FLAG_SPEAK | M_FLAG_FLY | M_FLAG_ANIMAL | M_FLAG_CAN_SEE_INVI,0,1,10,'b'},
 	
 	{MON_TIGER,11,1180,name_infor(MON_TIGER),&img_mons_tiger,103,4,6,
 	{35,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-	M_FLAG_SPEAK | M_FLAG_ANIMAL ,0,1,10,'C'},
+	M_FLAG_SPEAK | M_FLAG_ANIMAL ,0,1,10,'T'},
 	
 	{MON_RAIJUU,10,950,name_infor(MON_RAIJUU),&img_mons_raijuu,60,1,15,
 	{18,0,0},{ATT_M_POISON,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-	M_FLAG_ANIMAL,0,1,8,'C'},
+	M_FLAG_ANIMAL,0,1,8,'r'},
 	
 	{MON_DRAGON_BABY,15,1260,name_infor(MON_DRAGON_BABY),&img_mons_dragon_baby,110,10,6,
 	{14,14,27},{ATT_NORMAL,ATT_NONE,ATT_FIRE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_BITE)},
@@ -1040,14 +1040,13 @@ const mon_infor mondata[] = {
 		{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,0,2,10,'f'},
 
+	{MON_GIANT_SLIME,12,1343,name_infor(MON_GIANT_SLIME),&img_mons_big_slime,150,15,3,
+		{30,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,0,12,'S'},
 
-	{MON_GIANT_SLIME,2,4,name_infor(MON_GIANT_SLIME),&img_mons_big_slime,25,0,5,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
-
-	{MON_SMALL_SLIME,2,4,name_infor(MON_SMALL_SLIME),&img_mons_small_slime,25,0,5,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
+	{MON_SMALL_SLIME,6,150,name_infor(MON_SMALL_SLIME),&img_mons_small_slime,50,3,1,
+		{13,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,10,'s'},
 
 	{MON_HANIWA,1,1,name_infor(MON_HANIWA),&img_mons_haniwa,10,1,10,
 		{3,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
@@ -1065,17 +1064,17 @@ const mon_infor mondata[] = {
 		{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE ,0,0,7,'h'},
 
-	{MON_WOLF_SPIRIT,2,4,name_infor(MON_WOLF_SPIRIT),&img_mons_wolf_spirit,25,0,5,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
+	{MON_WOLF_SPIRIT,14,1130,name_infor(MON_WOLF_SPIRIT),&img_mons_wolf_spirit,95,3,12,
+		{35,35,20},{ATT_NORMAL,ATT_NORMAL,ATT_LUNATIC},{name_infor(LOC_SYSTEM_ATT_BITE),name_infor(LOC_SYSTEM_ATT_BITE),name_infor(LOC_SYSTEM_ATT_LUNATIC_BITE)},
+		M_FLAG_SPEAK | M_FLAG_ANIMAL,0,0,10,'D'},	
 
-	{MON_EAGLE_SPIRIT,2,4,name_infor(MON_EAGLE_SPIRIT),&img_mons_eagle_spirit,25,0,5,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
+	{MON_EAGLE_SPIRIT,15,1450,name_infor(MON_EAGLE_SPIRIT),&img_mons_eagle_spirit,120,1,15,
+		{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI | M_FLAG_ANIMAL,1,1,10,'b'},
 
-	{MON_OTTER_SPIRIT,2,4,name_infor(MON_OTTER_SPIRIT),&img_mons_otter_spirit,25,0,5,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'y'},
+	{MON_OTTER_SPIRIT,13,860,name_infor(MON_OTTER_SPIRIT),&img_mons_otter_spirit,100,5,10,
+		{32,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_ANIMAL,1,0,10,'o'},
 
 	{MON_SONBITEN_SPINTOWIN,13,3100,name_infor(MON_SONBITEN_SPINTOWIN),&img_mons_sonbiten_spintowin,170,5,15,
 		{35,45,0},{ATT_NORMAL,ATT_NORMAL,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_POLE),name_infor(LOC_SYSTEM_ATT_POLE),name_infor()},
@@ -1087,11 +1086,11 @@ const mon_infor mondata[] = {
 
 	{ MON_MISSLE, 1, 0, name_infor(MON_MISSLE), &img_tanmac_missle[1], 1, 10, 0,
 	{ 0, 0, 0 }, { ATT_NORMAL, ATT_NONE, ATT_NONE }, { name_infor(LOC_SYSTEM_ATT_NORMAL), name_infor(), name_infor() },
-	M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_STATE | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY, 99, 0, 7 ,')' },
+	M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_STATE | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY | M_FLAG_MISSLE, 99, 0, 7 ,')' },
 
 	{ MON_HOMING, 1, 0, name_infor(MON_HOMING), &img_tanmac_homing[1], 1, 10, 0,
 	{ 9, 0, 0 }, { ATT_NORMAL, ATT_NONE, ATT_NONE }, { name_infor(LOC_SYSTEM_ATT_NORMAL), name_infor(), name_infor() },
-	M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_STATE | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY, 99, 0, 2 ,'*' },
+	M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_STATE | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_MISSLE, 99, 0, 2 ,'*' },
 
 	{MON_RABIT_GIANT,15,1375,name_infor(MON_RABIT_GIANT),&img_mons_rabbit_giant,110,10,5,
 	{40,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},

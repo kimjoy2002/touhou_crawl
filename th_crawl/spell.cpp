@@ -248,6 +248,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_MISTIA_SONG:
 	case SPL_MESS_CONFUSION:
 	case SPL_ALLROUND_TANMAC:
+	case SPL_BLINK_AWAY:
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;
 	case SPL_SPEAKER_PHONE:
 		return (S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_DELAYED) & flag;	
@@ -323,6 +324,7 @@ int SpellLength(spell_list skill, bool isPlayer)
 	case SPL_HANIWA_MAGIC_TANMAC:
 	case SPL_HANIWA_MAGIC_TANMAC2:
 	case SPL_HANIWA_MAGIC_TANMAC3:
+	case SPL_BLINK_AWAY:
 		length_ = 7;
 		break;
 	case SPL_FLAME:	
@@ -809,6 +811,8 @@ string SpellString(spell_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC2);
 	case SPL_HANIWA_MAGIC_TANMAC3:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC3);
+	case SPL_BLINK_AWAY:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_BLINK_AWAY);
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_UKNOWN);
 	}
@@ -854,6 +858,7 @@ int SpellLevel(spell_list skill)
 	case SPL_HOMING_TANMAC:
 	case SPL_ARROW:
 	case SPL_HANIWA_MAGIC_TANMAC:
+	case SPL_BLINK_AWAY:
 		return 2;
 	case SPL_CONFUSE:
 	case SPL_FREEZE:
@@ -1029,6 +1034,7 @@ int SpellNoise(spell_list skill)
 	case SPL_MAMIZO_EVADE:
 	case SPL_PRISM_CALL:
 	case SPL_SLEEP_SMITE:
+	case SPL_BLINK_AWAY:
 		return 0;//소음없음
 	case SPL_SHOCK:
 	case SPL_VEILING:
@@ -1564,6 +1570,8 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_HANIWA_MAGIC_TANMAC3:
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_BLINK_AWAY:
+		return num == 0 ? (SKT_TRANS) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1753,6 +1761,7 @@ int SpellCap(spell_list skill)
 	case SPL_HASTE:
 	case SPL_RECALL:
 	case SPL_TELEPORT_SELF:
+	case SPL_BLINK_AWAY:
 		return 0;
 	}
 }
@@ -2045,6 +2054,15 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 				}
 			}
 			rect_++;
+		}
+	}
+	return false;
+	case SPL_BLINK_AWAY:
+	{
+		if(mon->target) {
+			int length_ = GetLengthFromCenter(mon->target->position.x, mon->target->position.y, mon->position.x, mon->position.y);
+			if(length_ <= 1)
+				return true;
 		}
 	}
 	return false;

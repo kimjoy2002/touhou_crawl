@@ -676,7 +676,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			int damage_ = min(s_eirin_poison,(s_eirin_poison/s_eirin_poison_time+1));
 			HpUpDown(GetHp() <= damage_ ? -(GetHp() - 1) : -damage_, DR_EFFECT);
 			s_eirin_poison -= damage_;
-			SetInter(IT_POISON);		
+			SetInter(IT_POISON);
 			if(s_eirin_poison<=0)
 			{
 				s_eirin_poison = 0;
@@ -1001,6 +1001,13 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	if(s_tracking) 
 	{
 		s_tracking--;
+	}
+	if(s_overheat_turn) 
+	{
+		s_overheat_turn--;
+		if(s_overheat_turn == 0) {
+			s_overheat = 0;
+		}
 	}
 	if(s_shield.turn < s_shield.max_turn) {
 		s_shield.turn++;

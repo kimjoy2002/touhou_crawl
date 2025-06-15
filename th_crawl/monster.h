@@ -172,6 +172,8 @@ public:
 	bool isSmartMove();
 	bool isMoveNotInturrpt(monster* mon_);
 	bool smartmove(short_move x_mov, short_move y_mov, int num_, set<int>& already_move); //아군이 자리를 잡을 수 있게 길을 비켜주는 인공지능
+	int AttackToYou(bool force_);
+	int AttackToMon(monster* mon_, bool force_);
 	int move(short_move x_mov, short_move y_mov, bool only_move);
 	int move(const coord_def &c, bool only_move);
 	bool offsetmove(const coord_def &c);

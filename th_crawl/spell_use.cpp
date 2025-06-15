@@ -2033,6 +2033,12 @@ bool skill_spark(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
+		if(order->isplayer()) {
+			if(!you.SetOverheat(rand_int(1,3), 10)) {
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CASTFAIL_OVERHEAT) + " ", false, false, false, CL_danger);
+				return false;
+			}
+		}
 		if (env[current_level].isInSight(order->position)) {
 			soundmanager.playSound("spark");
 		}
@@ -2627,13 +2633,23 @@ bool skill_luminus_strike(int power, bool short_, unit* order, coord_def target)
 			if (env[current_level].isInSight(order->position)) {
 				soundmanager.playSound("shoot_heavy");
 			}
-			coord_def pos = throwtanmac(12,beam,temp_infor,NULL);	
-			unit* hit_mon = env[current_level].isMonsterPos(pos.x,pos.y,order);
-			int max_len_ = max(abs(order->position.x - pos.x),abs( order->position.y - pos.y));
-			if(max_len_ >= 3)
-			{
-				attack_infor temp_att(randC(1,damage_),1*(damage_),99,order,order->GetParentType(),ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_BURST));
-				BaseBomb(pos, &img_blast[2],temp_att,hit_mon);
+			unit* hit_mon = throwtanmac_check_hit(12,beam,temp_infor,NULL, true, false, [](attack_infor& attack, ThrowTamacInstance* instance_){
+				if(instance_->beam.cur_length == 1) {
+					attack.damage = attack.damage/2;
+					attack.max_damage = attack.max_damage/2;
+				}
+				else if(instance_->beam.cur_length == 2) {
+					attack.damage = attack.damage*2/3;
+					attack.max_damage = attack.max_damage*2/3;
+				}
+			});	
+			if(hit_mon != nullptr) {
+				int max_len_ = max(abs(order->position.x - hit_mon->position.x),abs( order->position.y - hit_mon->position.y));
+				if(max_len_ >= 3)
+				{
+					attack_infor temp_att(randC(1,damage_),1*(damage_),99,order,order->GetParentType(),ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_BURST));
+					BaseBomb(hit_mon->position, &img_blast[2],temp_att,hit_mon);
+				}
 			}
 		}
 		order->SetParadox(0); 
@@ -4719,7 +4735,7 @@ bool skill_tougue(int pow, bool short_, unit* order, coord_def target)
 		{
 			beam.init();
 			
-			while(beam.end() && (*beam) == hit_->position) {
+			while(!beam.end() && (*beam) != hit_->position) {
 
 				if(env[current_level].isMove(coord_def(beam->x,beam->y),hit_->isFly(),hit_->isSwim(),false))
 				{
@@ -4730,6 +4746,10 @@ bool skill_tougue(int pow, bool short_, unit* order, coord_def target)
 							PlaceHolderHelper(hit_->GetName()->getName()));
 					}
 					hit_->SetXY(*beam);
+					if(hit_->isplayer()) {
+						you.SetSwift(-3);
+					}
+					
 					hit_->AttackedTarget(order);
 					return true;
 				}
@@ -5485,6 +5505,18 @@ bool skill_haniwa_magic_tanmac(int pow, bool short_, unit* order, coord_def targ
 		return true;
 	}
 	return false;
+}
+
+bool skill_blink_away(int pow, bool short_, unit* order, coord_def target)
+{
+	if(!order->Tele_check(true, false))
+		return false; 
+	if (env[current_level].isInSight(order->position)) {
+		soundmanager.playSound("blink");
+	}
+	order->Blink(25);
+
+	return true;
 }
 
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
@@ -6397,6 +6429,14 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_HANIWA_ARCHER:
 		list->push_back(spell(SPL_ARROW, 40));
 		break;
+	case MON_EAGLE_SPIRIT:
+		list->push_back(spell(SPL_THUNDER, 20));
+		list->push_back(spell(SPL_BLINK, 25));
+		break;
+	case MON_OTTER_SPIRIT:
+		list->push_back(spell(SPL_INVISIBLE, 35));
+		list->push_back(spell(SPL_JUMP_ATTACK, 15));
+		break;
 	default:
 		break;
 	}
@@ -6759,6 +6799,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_haniwa_magic_tanmac(power, short_, order, target, 1);
 	case SPL_HANIWA_MAGIC_TANMAC3:
 		return skill_haniwa_magic_tanmac(power, short_, order, target, 2);
+	case SPL_BLINK_AWAY:
+		return skill_blink_away(power,short_,order,target);
 	default:
 		return false;
 	}
@@ -7255,6 +7297,8 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_haniwa_magic_tanmac(power, short_, &you, target, 1);
 	case SPL_HANIWA_MAGIC_TANMAC3:
 		return skill_haniwa_magic_tanmac(power, short_, &you, target, 2);
+	case SPL_BLINK_AWAY:
+		return skill_blink_away(power,short_,&you,target);
 	default:
 		return false;
 	}

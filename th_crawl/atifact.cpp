@@ -40,36 +40,37 @@ void atifact_infor::LoadDatas(FILE *fp)
 }
 
 
-int GetAtifactValue(ring_type ring_, int good_bad_)
+int GetAtifactValue(artifact_type ring_, int good_bad_)
 {	
 	int a_ = good_bad_>=0?1:-1;
 	switch(ring_)
 	{
-	case RGT_STR:
-	case RGT_DEX:
-	case RGT_INT:
-	case RGT_AC:
-	case RGT_EV:
+	case ART_STR:
+	case ART_DEX:
+	case ART_INT:
+	case ART_AC:
+	case ART_EV:
 			return (1+randA(5))*a_;
-	case RGT_HUNGRY:
-	case RGT_FULL:
-	case RGT_TELEPORT:
-	case RGT_POISON_RESIS:
-	case RGT_SEE_INVISIBLE:
-	//case RGT_GRAZE:
-	case RGT_LEVITATION:
-	case RGT_INVISIBLE:
-	case RGT_MANA:
-	case RGT_MAGACIAN:
-	case RGT_CONFUSE_RESIS:
-	case RGT_ELEC_RESIS:
+	case ART_HUNGRY:
+	case ART_FULL:
+	case ART_TELEPORT:
+	case ART_POISON_RESIS:
+	case ART_SEE_INVISIBLE:
+	case ART_LEVITATION:
+	case ART_INVISIBLE:
+	case ART_MANA:
+	case ART_MAGACIAN:
+	case ART_CONFUSE_RESIS:
+	case ART_ELEC_RESIS:
+	case ART_MAGICBOOST:
+	case ART_ANTIOVERHEAT:
 			return 1;
-	case RGT_FIRE_RESIS:
-	case RGT_ICE_RESIS:
+	case ART_FIRE_RESIS:
+	case ART_ICE_RESIS:
 		return a_>0?(randA(4)?1:(randA(10)?2:3)):-1;
-	case RGT_MAGIC_RESIS:
+	case ART_MAGIC_RESIS:
 		return randA(2)?1:rand_int(2,3);
-	case RGT_SKILL_UP:
+	case ART_SKILL_UP:
 		{
 			int skill_ = 0;
 			do
@@ -86,33 +87,33 @@ int GetAtifactValue(ring_type ring_, int good_bad_)
 	return 1;
 }
 
-string GetAtifactString(ring_type ring_, int value_)
+string GetAtifactString(artifact_type ring_, int value_)
 {	
     std::ostringstream oss;
 	switch(ring_)
 	{
-	case RGT_STR:
+	case ART_STR:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_STR, PlaceHolderHelper(((value_ < 0) ? "" : "+") + to_string(value_)));
 		break;
-	case RGT_DEX:
+	case ART_DEX:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_DEX, PlaceHolderHelper(((value_ < 0) ? "" : "+") + to_string(value_)));
 		break;
-	case RGT_INT:
+	case ART_INT:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INT, PlaceHolderHelper(((value_ < 0) ? "" : "+") + to_string(value_)));
 		break;
-	case RGT_HUNGRY:
+	case ART_HUNGRY:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HUNGRY);
 		break;
-	case RGT_FULL:
+	case ART_FULL:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_FULL);
 		break;
-	case RGT_TELEPORT:
+	case ART_TELEPORT:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_TELEPORT);
 		break;
-	case RGT_POISON_RESIS:
+	case ART_POISON_RESIS:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_POISON_RESIST, PlaceHolderHelper((value_>0?"+":"-")));
 		break;
-	case RGT_FIRE_RESIS:
+	case ART_FIRE_RESIS:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_FIRE_RESIST, PlaceHolderHelper((value_==3?"+++":
 			(value_==2?"++":
 			(value_==1?"+":
@@ -121,7 +122,7 @@ string GetAtifactString(ring_type ring_, int value_)
 			(value_==-3?"---":"?"
 			))))))));
 		break;
-	case RGT_ICE_RESIS:
+	case ART_ICE_RESIS:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_COLD_RESIST, PlaceHolderHelper((value_==3?"+++":
 			(value_==2?"++":
 			(value_==1?"+":
@@ -130,37 +131,43 @@ string GetAtifactString(ring_type ring_, int value_)
 			(value_==-3?"---":"?"
 			))))))));
 		break;
-	case RGT_SEE_INVISIBLE:
+	case ART_SEE_INVISIBLE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_SEE_INVISIBLE);
 		break;
-	case RGT_LEVITATION:
+	case ART_LEVITATION:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_FLIGHT);
 		break;
-	case RGT_INVISIBLE:
+	case ART_INVISIBLE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INVISIBLE);
 		break;
-	case RGT_MANA:
+	case ART_MANA:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_MANA);
 		break;
-	case RGT_MAGACIAN:
+	case ART_MAGACIAN:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_MAGICIAN);
 		break;
-	case RGT_AC:
+	case ART_AC:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_AC, PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
 		break;
-	case RGT_EV:
+	case ART_EV:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_EV, PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
 		break;
-	case RGT_CONFUSE_RESIS:
+	case ART_CONFUSE_RESIS:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_CONFUSE_RESIST);
 		break;
-	case RGT_ELEC_RESIS:
+	case ART_ELEC_RESIS:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_ELEC_RESIST);
 		break;
-	case RGT_MAGIC_RESIS:
+	case ART_MAGIC_RESIS:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_MAGIC_RESIST);
 		break;
-	case RGT_SKILL_UP:
+	case ART_MAGICBOOST:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_MAGICBOOST);
+		break;
+	case ART_ANTIOVERHEAT:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_ANTIOVERHEAT);
+		break;
+	case ART_SKILL_UP:
 		oss << skill_string((skill_type)(value_ %100)) << "+" << value_/100;
 		break;
 	default:
@@ -170,36 +177,36 @@ string GetAtifactString(ring_type ring_, int value_)
 }
 
 
-std::string GetAtifactInfor(ring_type ring_, int value_)
+std::string GetAtifactInfor(artifact_type ring_, int value_)
 {
     std::ostringstream oss;
 	switch(ring_)
 	{
-	case RGT_STR:
+	case ART_STR:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_STR,
 			PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
 		break;
-	case RGT_DEX:
+	case ART_DEX:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_DEX,
 			PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
 		break;
-	case RGT_INT:
+	case ART_INT:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_INT,
 			PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
 		break;
-	case RGT_HUNGRY:
+	case ART_HUNGRY:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_HUNGRY);
 		break;
-	case RGT_FULL:
+	case ART_FULL:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_FULL);
 		break;
-	case RGT_TELEPORT:
+	case ART_TELEPORT:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_TELEPORT);
 		break;
-	case RGT_POISON_RESIS:
+	case ART_POISON_RESIS:
 		oss << LocalzationManager::locString(value_>0?LOC_SYSTEM_ITEM_ARTIFACT_INFO_POISON_RESIST_GOOD:LOC_SYSTEM_ITEM_ARTIFACT_INFO_POISON_RESIST_BAD);
 		break;
-	case RGT_FIRE_RESIS:
+	case ART_FIRE_RESIS:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_FIRE_RESIST,
 			PlaceHolderHelper((value_==3?"+++":
 				(value_==2?"++":
@@ -209,7 +216,7 @@ std::string GetAtifactInfor(ring_type ring_, int value_)
 				(value_==-3?"---":"?"
 				))))))));
 		break;
-	case RGT_ICE_RESIS:	
+	case ART_ICE_RESIS:	
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_COLD_RESIST,
 			PlaceHolderHelper((value_==3?"+++":
 				(value_==2?"++":
@@ -219,40 +226,46 @@ std::string GetAtifactInfor(ring_type ring_, int value_)
 				(value_==-3?"---":"?"
 				))))))));
 		break;
-	case RGT_SEE_INVISIBLE:
+	case ART_SEE_INVISIBLE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_SEE_INVISIBLE);
 		break;
-	case RGT_LEVITATION:
+	case ART_LEVITATION:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_FLIGHT);
 		break;
-	case RGT_INVISIBLE:
+	case ART_INVISIBLE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_INVISIBLE);
 		break;
-	case RGT_MANA:
+	case ART_MANA:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_MANA);
 		break;
-	case RGT_MAGACIAN:
+	case ART_MAGACIAN:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGICIAN);
 		break;
-	case RGT_AC:
+	case ART_AC:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_AC,
 			PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
 		break;
-	case RGT_EV:
+	case ART_EV:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_EV,
 			PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
 		break;
-	case RGT_CONFUSE_RESIS:
+	case ART_CONFUSE_RESIS:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_CONFUSE_RESIST);
 		break;
-	case RGT_ELEC_RESIS:
+	case ART_ELEC_RESIS:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_ELEC_RESIST);
 		break;
-	case RGT_MAGIC_RESIS:
+	case ART_MAGIC_RESIS:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGIC_RESIST,
 			PlaceHolderHelper(to_string(20+value_*20)));
 		break;
-	case RGT_SKILL_UP:
+	case ART_MAGICBOOST:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_MAGICBOOST_INFO);
+		break;
+	case ART_ANTIOVERHEAT:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_ANTIOVERHEAT_INFO);
+		break;
+	case ART_SKILL_UP:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_SKILL_UP,
 			PlaceHolderHelper(skill_string((skill_type)(value_ % 100)) + to_string(value_ / 100)));
 		break;
@@ -263,54 +276,90 @@ std::string GetAtifactInfor(ring_type ring_, int value_)
 }
 
 
-bool effectartifact(ring_type kind, int value)
+artifact_type ring_to_artifact(ring_type kind)
 {
 	switch(kind)
 	{
 	case RGT_STR:
+		return ART_STR;
+	case RGT_DEX:
+		return ART_DEX;
+	case RGT_INT:
+		return ART_INT;
+	case RGT_HUNGRY:
+		return ART_HUNGRY;
+	case RGT_FULL:
+		return ART_FULL;
+	case RGT_TELEPORT:
+		return ART_TELEPORT;
+	case RGT_POISON_RESIS:
+		return ART_POISON_RESIS;
+	case RGT_FIRE_RESIS:
+		return ART_FIRE_RESIS;
+	case RGT_ICE_RESIS:
+		return ART_ICE_RESIS;
+	case RGT_SEE_INVISIBLE:
+		return ART_SEE_INVISIBLE;
+	case RGT_LEVITATION:
+		return ART_LEVITATION;
+	case RGT_INVISIBLE:
+		return ART_INVISIBLE;
+	case RGT_MANA:
+		return ART_MANA;
+	case RGT_MAGACIAN:
+		return ART_MAGACIAN;
+	case RGT_AC:
+		return ART_AC;
+	case RGT_EV:
+		return ART_EV;
+	case RGT_CONFUSE_RESIS:
+		return ART_CONFUSE_RESIS;
+	case RGT_ELEC_RESIS:
+		return ART_ELEC_RESIS;
+	case RGT_MAGIC_RESIS:
+		return ART_MAGIC_RESIS;
+	default:
+		break;
+	}
+	return ART_POISON_RESIS;
+}
+
+
+bool effectartifact(artifact_type kind, int value)
+{
+	switch(kind)
+	{
+	case ART_STR:
 		you.StatUpDown(value, STAT_STR);
 		return true;
-	case RGT_DEX:
+	case ART_DEX:
 		you.StatUpDown(value, STAT_DEX);
 		return true;
-	case RGT_INT:
+	case ART_INT:
 		you.StatUpDown(value, STAT_INT);
 		return true;
-	case RGT_HUNGRY:
+	case ART_HUNGRY:
 		you.ResistUpDown(value*-1,RST_POWER);
 		return false;
-	case RGT_FULL:
+	case ART_FULL:
 		you.ResistUpDown(value,RST_POWER);
 		return false;
-	case RGT_TELEPORT:
+	case ART_TELEPORT:
 		you.teleport_curse += value;
 		return true;		
-	case RGT_POISON_RESIS:
+	case ART_POISON_RESIS:
 		you.ResistUpDown(value,RST_POISON);
 		return false;
-	case RGT_FIRE_RESIS:
+	case ART_FIRE_RESIS:
 		you.ResistUpDown(value,RST_FIRE);
 		return false;
-	case RGT_ICE_RESIS:
+	case ART_ICE_RESIS:
 		you.ResistUpDown(value,RST_ICE);
 		return false;
-	case RGT_SEE_INVISIBLE:
+	case ART_SEE_INVISIBLE:
 		you.ResistUpDown(value,RST_INVISIBLE);
 		return false;
-	/*case RGT_GRAZE:
-		{	
-			int temp = you.Ability(SKL_GRAZE_OFF,false,true); //그레이즈 해제를 삭제하고 수를 리턴
-			temp += you.Ability(SKL_GRAZE,false,true); //그레이즈 발동도 해제하고 수를 리턴
-
-			temp+=value;
-			you.Ability(you.s_graze?SKL_GRAZE_OFF:SKL_GRAZE,false,temp<=0?true:false,temp);
-			if(temp <= 0 && you.s_graze && !you.isGrazeAmulet())
-			{
-				you.s_graze=0; 
-			}
-			return true;
-		}*/
-	case RGT_LEVITATION:
+	case ART_LEVITATION:
 		{
 			int temp = you.Ability(SKL_LEVITATION_OFF,false,true);
 			temp += you.Ability(SKL_LEVITATION,false,true);
@@ -323,7 +372,7 @@ bool effectartifact(ring_type kind, int value)
 			}
 			return true;
 		}
-	case RGT_INVISIBLE:
+	case ART_INVISIBLE:
 		{
 			int temp = you.Ability(SKL_INVISIBLE_OFF,false,true);
 			temp += you.Ability(SKL_INVISIBLE,false,true);
@@ -336,30 +385,34 @@ bool effectartifact(ring_type kind, int value)
 			}
 			return true;
 		}
-	case RGT_MANA:
+	case ART_MANA:
 		you.max_mp += 9*value;
 		if(you.mp > you.max_mp)
 			you.mp = you.max_mp;
 		return true;
-	case RGT_MAGACIAN:
+	case ART_MAGACIAN:
 		you.magician_bonus += value;
 		return false;
-	case RGT_AC:
+	case ART_AC:
 		you.AcUpDown(0,value);
 		return true;
-	case RGT_EV:
+	case ART_EV:
 		you.EvUpDown(0,value);
 		return true;
-	case RGT_CONFUSE_RESIS:
+	case ART_CONFUSE_RESIS:
 		you.ResistUpDown(value,RST_CONFUSE);
 		return false;
-	case RGT_ELEC_RESIS:
+	case ART_ELEC_RESIS:
 		you.ResistUpDown(value,RST_ELEC);
 		break;
-	case RGT_MAGIC_RESIS:
+	case ART_MAGIC_RESIS:
 		you.MRUpDown((value>0?1:-1)*(20+abs(value)*20));
 		break;
-	case RGT_SKILL_UP:
+	case ART_MAGICBOOST:
+		break;
+	case ART_ANTIOVERHEAT:
+		break;
+	case ART_SKILL_UP:
 	{
 		int value_ = abs(value);
 		you.BonusSkillUpDown(value_ % 100, (value>0?1:-1) *value_ / 100);
@@ -381,17 +434,17 @@ int ArmourExceptopn(armour_kind type)
 	case AMK_NORMAL:		
 		break;		
 	case AMK_MIKO:
-		return RGT_CONFUSE_RESIS;
+		return ART_CONFUSE_RESIS;
 	case AMK_WING:
-		return RGT_ELEC_RESIS;
+		return ART_ELEC_RESIS;
 	case AMK_KAPPA:
-		return RGT_ICE_RESIS;
+		return ART_ICE_RESIS;
 	case AMK_FIRE:
-		return RGT_FIRE_RESIS;
+		return ART_FIRE_RESIS;
 	case AMK_MAID:
-		return RGT_MAGIC_RESIS;
+		return ART_MAGIC_RESIS;
 	case AMK_POISON:
-		return RGT_POISON_RESIS;
+		return ART_POISON_RESIS;
 	case AMK_AUTUMN:
 		break;
 	default:
@@ -406,7 +459,7 @@ void MakeArtifact(item* item_, int good_bad_)
 {
 	int num_ = 1+randA(good_bad_ +randA(3));
 	deque<int> temp;
-	for(int i=0; i<RGT_MAX_ATIFACT; i++)
+	for(int i=0; i<ART_MAX_ATIFACT; i++)
 	{
 		if(item_->type >= ITM_ARMOR_BODY_FIRST && item_->type < ITM_ARMOR_BODY_LAST)
 		{
@@ -414,7 +467,7 @@ void MakeArtifact(item* item_, int good_bad_)
 				continue;
 		}
 		if (isSprint() && 
-			(i == RGT_TELEPORT || i == RGT_HUNGRY || i == RGT_FULL || i == RGT_LEVITATION)) {
+			(i == ART_TELEPORT || i == ART_HUNGRY || i == ART_FULL || i == ART_LEVITATION)) {
 			continue;
 		}
 
@@ -426,7 +479,7 @@ void MakeArtifact(item* item_, int good_bad_)
 		if(item_->value1 != temp[i] || item_->type != ITM_RING)
 		{
 			int gb_ = randA(3)?good_bad_:good_bad_*-1;
-			item_->atifact_vector.push_back(atifact_infor(temp[i],GetAtifactValue((ring_type)temp[i],gb_)));
+			item_->atifact_vector.push_back(atifact_infor(temp[i],GetAtifactValue((artifact_type)temp[i],gb_)));
 		}
 		else
 			num_++;
@@ -493,4 +546,49 @@ void MakeArtifact(item* item_, int good_bad_)
 	}
 	item_->second_name= name_infor(LOC_SYSTEM_ITEM_ARTIFACT);
 
+}
+
+
+std::string GetFixedArtifact(fixed_artifact_type fixed_artifact) {
+	switch(fixed_artifact) {
+	case FIXED_ARTIFACT_HAKKERO:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_DESCRIBE);
+	default:
+		break;
+	}
+	return "";
+}
+
+void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
+	item_->fixed_artifact = fixed_artifact;
+	item_->identify = true;
+	item_->identify_curse = true;
+	switch(fixed_artifact) {
+	case FIXED_ARTIFACT_HAKKERO:
+		item_->type = ITM_WEAPON_MACE;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 0;
+		item_->value1 = 4;
+		item_->value2 = 7;
+		item_->value6 = 0;
+		item_->value7 = 10;
+		item_->value8 = 5;
+		item_->can_throw = false;
+		item_->image = &img_item_artifact_broomstick;
+		item_->equip_image = &img_play_item_weapon[0];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_NAME);
+		item_->weight = 2.0f;
+		item_->value = 50;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_MAGICBOOST,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_ANTIOVERHEAT,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_MANA,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_FIRE_RESIS,2));
+		break;
+	case FIXED_ARTIFACT_GUNGNIR:
+		break;
+	default:
+		break;
+	}
 }

@@ -418,7 +418,7 @@ void haniwa_abil::upgradeHaniwa(monster* mon) {
 	}
 
 	if(has_abil(HANIWA_A_BLINK)) {
-		mon->spell_lists.push_back(spell(SPL_BLINK, 15*spell_rate));
+		mon->spell_lists.push_back(spell(SPL_BLINK_AWAY, 25*spell_rate));
 	}
 
 	if(has_abil(HANIWA_A_CONFUSE)) {

@@ -658,6 +658,7 @@ LOC_SYSTEM_BUFF_STAT_OIL,기름
 LOC_SYSTEM_BUFF_STAT_FIRE,화염
 LOC_SYSTEM_BUFF_STAT_TRACKING,추적
 LOC_SYSTEM_BUFF_STAT_SHIELD,실드({0})
+LOC_SYSTEM_BUFF_STAT_OVERHEAT,과열({0})
 LOC_SYSTEM_BUFF_DESCRIBE_RISK,위험도는 얼마나 현재 상황이 위험한지에 대한 수치입니다.
 LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY1,갑옷과 방패가 너무 무겁습니다! 패널티만큼 회피, 은밀, 마법, 명중, 이동속도가 감소되고, 행동속도가 2배로 느려집니다.
 LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY2,갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피, 은밀, 마법성공율, 명중, 이동속도가 감소합니다.
@@ -761,6 +762,7 @@ LOC_SYSTEM_BUFF_DESCRIBE_STAT_OIL,당신은 기름을 뒤집어 썼습니다. �
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_FIRE,당신은 불타고 있습니다!
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_TRACKING,당신은 추적당하고 있습니다. 맵의 모든 적이 당신의 위치를 정확히 쫓습니다.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_SHIELD,모든 데미지를 실드가 대신 막아줍니다. 일정 시간 데미지를 받지않으면 재생합니다.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_OVERHEAT,마법의 강한 반동을 받고 있습니다. 과열 수치가 추가로 올라갈때마다 과열 수치만큼 데미지를 받습니다.
 LOC_SYSTEM_SMOKE_NORMAL,옅은 연기
 LOC_SYSTEM_SMOKE_FOG,안개 구름
 LOC_SYSTEM_SMOKE_FIRE,화염 구름
@@ -1162,6 +1164,7 @@ LOC_SYSTEM_MAGIC_DIMENSIONAL_RIFT,{0:은|는} {1}에게 순간적으로 이동�
 LOC_SYSTEM_MAGIC_WINDFLAW,{0:은|는} 강한 바람에 의해 튕겨져나갔다.
 LOC_SYSTEM_MAGIC_FOG,안개의 호수에 안개가 드리워졌다.
 LOC_SYSTEM_MAGIC_SMOKING,{0:은|는} {1}에게 담배 연기를 뿜었다.
+LOC_SYSTEM_MAGIC_SLIME_SPLIT,{0:은|는} 데미지를 받아서 분열하여 {1:을|를} 만들어냈다.
 LOC_SYSTEM_HIT_DEFAULT,{0:은|는} {1:을|를} 공격했다.
 LOC_SYSTEM_HIT_NORMAL,{0}의 {1:은|는} {2}에게 명중했다.
 LOC_SYSTEM_HIT_DREAM,{0:은|는} {1}의 꿈을 먹었다.
@@ -1615,6 +1618,7 @@ LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION_SHOUT,리저렉션!
 LOC_SYSTEM_ATT_NORMAL,공격
 LOC_SYSTEM_ATT_CLAW,할퀴기
 LOC_SYSTEM_ATT_BITE,물기
+LOC_SYSTEM_ATT_LUNATIC_BITE,광기의 물기
 LOC_SYSTEM_ATT_SMASH,스매쉬
 LOC_SYSTEM_ATT_BODYCHECK,철산고
 LOC_SYSTEM_ATT_DRILL,드릴
@@ -2333,6 +2337,7 @@ LOC_SYSTEM_SPELL_UNLUCK_UFO,이럴수가! 하늘에서 UFO가 떨어졌다!
 LOC_SYSTEM_SPELL_UNLUCK_RECORVER,당신의 운세는 정상으로 돌아왔다.
 LOC_SYSTEM_SPELL_TOUGUE,{0:은|는} {1:을|를} 끌어당겼다.
 LOC_SYSTEM_SPELL_THROW,{0:은|는} {1:을|를} 집어던졌다!
+LOC_SYSTEM_SPELL_CASTFAIL_OVERHEAT,당신은 이 마법을 쓰기엔 너무 과열되어있다.
 LOC_SYSTEM_SPL_MON_TANMAC_SMALL,소형 탄막
 LOC_SYSTEM_SPL_MON_TANMAC_MIDDLE,중형 탄막
 LOC_SYSTEM_SPL_MON_WATER_GUN,물총
@@ -2345,7 +2350,7 @@ LOC_SYSTEM_SPL_SMITE,강타
 LOC_SYSTEM_SPL_FLAME,화염의 탄막
 LOC_SYSTEM_SPL_SUMMON_BUG,곤충 소환
 LOC_SYSTEM_SPL_SELF_HEAL,소회복
-LOC_SYSTEM_SPL_BLINK,블링크
+LOC_SYSTEM_SPL_BLINK,점멸
 LOC_SYSTEM_SPL_BURN,불꽃
 LOC_SYSTEM_SPL_FROZEN,냉기
 LOC_SYSTEM_SPL_FIRE_WALL,화염기둥
@@ -2504,6 +2509,7 @@ LOC_SYSTEM_SPL_ARROW,화살 발사
 LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC,소형 탄막
 LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC2,중형 탄막
 LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC3,대형 탄막
+LOC_SYSTEM_SPL_BLINK_AWAY,점멸 도주
 LOC_SYSTEM_SPL_UKNOWN,알수없는 마법
 LOC_SYSTEM_SPL_DESCRIBE_NONE,존재하지 않는 마법이다.\n
 LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_SMALL,작은 탄막을 발사한다.\n
@@ -2564,8 +2570,8 @@ LOC_SYSTEM_SPL_DESCRIBE_HYPNOSIS,상대가 인지못할정도의 작은 최면�
 LOC_SYSTEM_SPL_DESCRIBE_MUTE,상대를 마법으로 짧은 실어증을 만든다.\n마법에 의한 실어증으로 이는 배우고 있는 마법자체를 잠시동안 잊게 하여 마법을 못쓰게한다.\n상대가 말을 안하고 마법을 쓸 수 있어도 마법에 의한 실어증이므로 이 동안은 마법을 쓸 수 없다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SELF_INJURY,상대를 자해하게 만든다. 상대의 데미지가 높을수록 큰데미지를 입힌다.\n상대가 강할수록 효과가 좋지만 상대가 강할수록 저항할 확률도 높아지므로 조심해야한다.\n
 LOC_SYSTEM_SPL_DESCRIBE_CHARM,상대를 마법으로 일시적인 아군으로 만든다.\n일시적인 아군이 되면 주변의 무리들과 싸우게 된다. 시간이 지나면 다시 적으로 돌아가게 된다.\n
-LOC_SYSTEM_SPL_DESCRIBE_LASER,일직선으로 데미지를 주는 순수 요술마법.\n적을 관통할 수 있으므로 유용하다.\n
-LOC_SYSTEM_SPL_DESCRIBE_SPARK,강력하고 거대한 빔을 쏘는 마법.\n스파크와 레이저는 로망이다. 탄막은 화력이다.\n
+LOC_SYSTEM_SPL_DESCRIBE_LASER,일직선으로 데미지를 주는 순수 빛속성 마법.\n적을 관통할 수 있으므로 유용하다.\n
+LOC_SYSTEM_SPL_DESCRIBE_SPARK,강력하고 거대한 빔을 쏘는 마법. 탄막은 화력이다.\n강력한 위력의 댓가로 사용자에게 큰 부담을 준다.\n한번 사용하는건 괜찮지만 연속으로 사용하게되면 과열수치만큼 자기 자신에게 데미지를 입힌다.
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_UNZAN,거대한 운잔을 소환하는 마법.\n마법이라기보단 기본이다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_UNZAN_PUNCH,운잔이 자신의 주먹을 상대 옆에 소환하는 마법.\n주먹에 맞으면 매우 아프다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_ZOMBIE_FAIRY,상대 주변에 좀비페어리를 소환하는 마법.\n굉장히 많은 좀비페어리들이 소환되므로 귀찮다.\n
@@ -2587,7 +2593,7 @@ LOC_SYSTEM_SPL_DESCRIBE_BURST,적을 원거리에서 터트려버린다. 저항�
 LOC_SYSTEM_SPL_DESCRIBE_SUICIDE_BOMB,공격할시 자동으로 자폭한다.\n
 LOC_SYSTEM_SPL_DESCRIBE_RABBIT_HORN,토끼가 큰 나팔을 이용하여 아군을 소집한다.\n사용직후 잠시동안 죽림의 몬스터 리젠율이 오른다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_LESSOR_DEMON,마계의 약한 마족을 소환한다.\n
-LOC_SYSTEM_SPL_DESCRIBE_LUMINUS_STRIKE,그레이즈 되지않는한 필중이며 빠르고 강력한 무속성 구체를 발사한다.\n일정 거리 이상의 적에게 명중시 작은 폭발이 일어나서 주변에 약한 광역데미지를 준다.\n그러나 거리가 멀어진다고 단일 타겟의 데미지는 증가하진않는다.\n
+LOC_SYSTEM_SPL_DESCRIBE_LUMINUS_STRIKE,빠르고 강력한 무속성 구체를 발사한다.\n사거리가 멀어질수록 제 위력을 발휘하며 2칸 이내의 너무 가까운 적에게 명중시 화력이 반감된다.\n일정 거리 이상의 적에게 명중시 작은 폭발이 일어나서 주변에 약한 광역데미지를 준다.
 LOC_SYSTEM_SPL_DESCRIBE_FIRE_STORM,선택한 위치에서 거대한 화염 폭풍이 일어난다.\n폭발한 범위 내에선 잠시간 화염구름이 남는다.\n절반 정도의 물리데미지가 있어서 화염저항이 높은 상대에도 잘 먹힌다.\n
 LOC_SYSTEM_SPL_DESCRIBE_BLIZZARD,선택한 위치에서 강력한 얼음 가시가 떨어지도록 한다.\n순간 데미지는 낮지만 지속적으로 맞출 경우 엄청난 데미지를 주며 물리데미지도 겸비한다.\n사용시 해당 위치에 있는 모든 구름을 걷어낸다.\n
 LOC_SYSTEM_SPL_DESCRIBE_PERFERT_FREEZE,화면상의 모든 적에게 강력한 냉기를 방출하는 마법.\n사용한 적들에게 강력한 빙결 상태이상을 부여한다.\n다만 순수 냉기 속성이므로 냉기저항이 있는 적에겐 데미지가 거의 안들어간다.\n
@@ -2959,6 +2965,7 @@ LOC_SYSTEM_ITEM_SELECTED_USED,선택사용
 LOC_SYSTEM_ITEM_SPELLCARD_USED,사용횟수: {0}
 LOC_SYSTEM_ITEM_SPELLCARD_EMPTY,비어있음
 LOC_SYSTEM_ITEM_SPELLCARD_CHARGED,충전됨
+LOC_SYSTEM_ITEM_FIXED_ARTIFACT,고정 아티팩트
 LOC_SYSTEM_ITEM_NOT_EXIST,존재하지 않는 아이템입니다.
 LOC_SYSTEM_SPELLCARD,스펠카드
 LOC_SYSTEM_SPELLCARD_IDENTIFY,{0}의 스펠카드
@@ -3106,6 +3113,12 @@ LOC_SYSTEM_ITEM_ARTIFACT_INFO_CONFUSE_RESIST,혼란에 저항이 생긴다.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_ELEC_RESIST,전기에 저항이 생긴다.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGIC_RESIST,마법 저항이 생긴다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_SKILL_UP,지정된 스킬레벨이 올라간다.({0})
+LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_NAME,미니팔괘로
+LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_DESCRIBE,미니팔괘로의 설명
+LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_MAGICBOOST,마력증폭
+LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_MAGICBOOST_INFO,스펠파워가 1.5배 증가한다.
+LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_ANTIOVERHEAT,과열방지
+LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_ANTIOVERHEAT_INFO,일부 마법의 과열 효과를 받지 않는다.
 LOC_SYSTEM_ITEM_JEWELRY_RING,반지
 LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_STR,{0}힘의 반지
 LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_DEX,{0}민첩의 반지
@@ -4821,7 +4834,7 @@ LOC_SYSTEM_HANIWA_A_ELEC_TANMAC_NAME,전기 탄막
 LOC_SYSTEM_HANIWA_A_MIDDLE_TANMAC_NAME,중형 탄막 발사
 LOC_SYSTEM_HANIWA_A_BIG_TANMAC_NAME,대형 탄막 발사
 LOC_SYSTEM_HANIWA_A_BURST_TANMAC_NAME,폭발성 탄막
-LOC_SYSTEM_HANIWA_A_BLINK_NAME,블링크 사용
+LOC_SYSTEM_HANIWA_A_BLINK_NAME,점멸 사용
 LOC_SYSTEM_HANIWA_A_SLOW_NAME,감속 사용
 LOC_SYSTEM_HANIWA_A_CONFUSE_NAME,혼란 사용
 LOC_SYSTEM_HANIWA_A_PENTAN_NAME,관통 탄막
@@ -4867,7 +4880,7 @@ LOC_SYSTEM_HANIWA_A_ELEC_TANMAC_INFO,공격 마법에 전기 속성이 부여된
 LOC_SYSTEM_HANIWA_A_MIDDLE_TANMAC_INFO,탄막 마법이 강화된다.
 LOC_SYSTEM_HANIWA_A_BIG_TANMAC_INFO,탄막 마법이 더욱 강화된다.
 LOC_SYSTEM_HANIWA_A_BURST_TANMAC_INFO,탄막 마법이 착탄시 폭발한다.
-LOC_SYSTEM_HANIWA_A_BLINK_INFO,적에게 밀착하면 블링크 마법을 사용한다.
+LOC_SYSTEM_HANIWA_A_BLINK_INFO,적에게 밀착하면 점멸 마법을 사용한다.
 LOC_SYSTEM_HANIWA_A_SLOW_INFO,하니와가 감속 마법을 사용한다.
 LOC_SYSTEM_HANIWA_A_CONFUSE_INFO,감속 대신 혼란 마법을 사용한다.
 LOC_SYSTEM_HANIWA_A_PENTAN_INFO,공격 마법이 적을 관통한다.

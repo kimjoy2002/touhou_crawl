@@ -52,8 +52,11 @@ public:
 	beam_iterator beam;
 	const beam_infor infor_;
 	item* item_;
+	unit* last_hit;
 	bool effect_delete;
 	bool mimic_;
+	void (*attack_prefix)(attack_infor& attack, ThrowTamacInstance* instance_);
+	//람다 추가(int반환 ThrowTamacInstance입력
 
 
 private:
@@ -76,6 +79,9 @@ public:
 
 coord_def throwtanmac(textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete = true, bool mimic_ = false);
 coord_def throwtanmac(int graphic_type,beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete = true, bool mimic_ = false);
+unit* throwtanmac_check_hit(textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_, void (*attack_prefix_)(attack_infor& attack, ThrowTamacInstance* instance_));
+unit* throwtanmac_check_hit(int graphic_type,beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_, void (*attack_prefix_)(attack_infor& attack, ThrowTamacInstance* instance_));
+
 bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &target, const beam_infor &infor_);
 bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_, float sector_ , function<void(coord_def)> func_, bool reverse_, bool effect_delete = true);
 

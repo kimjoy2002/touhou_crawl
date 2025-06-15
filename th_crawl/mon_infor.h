@@ -70,7 +70,8 @@ enum monster_flag : uint64_t
 	M_FLAG_RANGE_ATTACK = 1ull << 31, //원거리 공격 위주로 싸움 (거리를 유지하려함)
 	M_FLAG_MAGICIAN = 1ull << 32, //매지션 (마법이 강해짐)
 	M_FLAG_SPEAR_ATTACK = 1ull << 33, //한칸 멀리서 공격
-	M_FLAG_SAVE_PLAYER = 1ull << 34 //주인을 지킨다.
+	M_FLAG_SAVE_PLAYER = 1ull << 34, //주인을 지킨다.
+	M_FLAG_MISSLE = 1ull << 35 //미사일이라 공격할 수 없고, 밀착하면 사라져버림
 };
 
 

@@ -133,11 +133,12 @@ void wiz_mode()
 			printlog("a-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_ARMOUR) + " ", false, false, false, CL_help, 'a');
 			printlog("R-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET) + " ", false, false, false, CL_help, 'R');
 			printlog("f-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_TANMAC), true, false, false, CL_help, 'f');
+			printlog("!-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_FIXED_ARTIFACT), true, false, false, CL_help, '!');
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_ITEM), false, false, false, CL_help);
 			
 			
 			vector<int> create_listkey = {
-				'p','s','e','v','r','b','a','R','f', VK_ESCAPE
+				'p','s','e','v','r','b','a','R','f','!', VK_ESCAPE
 			};
 			startSelection(create_listkey);
 			g_menu_select = -1;
@@ -616,6 +617,17 @@ void wiz_mode()
 				item_infor t;
 				makeitem(ITM_THROW_TANMAC, 0, &t, -1);
 				env[current_level].MakeItem(you.position, t);
+			}
+			return;
+			case '!':
+			{
+				// for(int i = 1; i < FIXED_ARTIFACT_MAX; i++) {
+				for(int i = 1; i < 2; i++) {
+					item_infor t;
+					makeitem(ITM_ETC, 0, &t, 0);
+					item * item_ = env[current_level].MakeItem(you.position, t);
+					MakeFixedArtifact(item_, (fixed_artifact_type)i);
+				}
 			}
 			return;
 			default:

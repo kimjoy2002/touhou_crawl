@@ -2964,6 +2964,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 
 
+
 			if (you.drowned)
 			{
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_DROWNING), CL_danger, LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_DROWNING), this);
@@ -3069,6 +3070,12 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				ss << LocalzationManager::locString(LOC_SYSTEM_BUFF_EIRIN_POISON) << "(" << you.tension_gauge << ")"; 
 				stateDraw.addState(ss.str(), color_,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_EIRIN_POISON), this);
+			}
+			
+			if(you.s_overheat_turn > 0) {
+				bool risk_ = (you.s_overheat >= you.GetHp());
+				stateDraw.addState(LocalzationManager::formatString(LOC_SYSTEM_BUFF_STAT_OVERHEAT, PlaceHolderHelper(to_string(you.s_overheat))),risk_?CL_danger:CL_warning,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_OVERHEAT), this);
 			}
 			if(you.s_stasis)
 			{				

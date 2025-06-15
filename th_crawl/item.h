@@ -192,7 +192,7 @@ public:
 	
 	int value8; //value8 - 무기 - 최소공속
 
-	
+	fixed_artifact_type fixed_artifact;
 	vector<atifact_infor> atifact_vector;
 
 	item();

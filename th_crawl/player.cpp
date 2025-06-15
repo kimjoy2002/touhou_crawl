@@ -120,7 +120,7 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
 force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
-s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_oil(0), s_fire(0), s_tracking(0), s_shooting_turn(0), s_shield(), alchemy_buff(ALCT_NONE), alchemy_time(0),
+s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_oil(0), s_fire(0), s_tracking(0), s_shooting_turn(0), s_overheat(0), s_overheat_turn(0), s_shield(), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -307,6 +307,8 @@ void players::init() {
 	s_fire = 0;
 	s_tracking = 0;
 	s_shooting_turn = 0;
+	s_overheat = 0;
+	s_overheat_turn = 0;
 	s_shield.percent = 0;
 	s_shield.value = 0;
 	s_shield.turn = 0;
@@ -546,6 +548,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_fire);
 	SaveData<int>(fp, s_tracking);
 	SaveData<int>(fp, s_shooting_turn);
+	SaveData<int>(fp, s_overheat);
+	SaveData<int>(fp, s_overheat_turn);
 	SaveData<shield_struct>(fp, s_shield);
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
@@ -808,6 +812,10 @@ void players::LoadDatas(FILE *fp)
 	if(!isPrevVersion(loading_version_string, "ver1.101")) {
 		LoadData<int>(fp, s_shooting_turn);
 	}
+	if(!isPrevVersion(loading_version_string, "ver1.106")) {
+		LoadData<int>(fp, s_overheat);
+		LoadData<int>(fp, s_overheat_turn);
+	}
 	if(!isPrevVersion(loading_version_string, "ver1.11")) {
 		LoadData<shield_struct>(fp, s_shield);
 	}
@@ -1059,8 +1067,12 @@ int players::move(short_move x_mov, short_move y_mov)
 		monster* mon_ = (monster*)env[current_level].isMonsterPos(move_x_,move_y_,this);
 
 
-
-		if(mon_)
+		if(mon_ && mon_->flag & M_FLAG_MISSLE) {
+			//이건 미사일류 몬스터라 사라져야함
+			mon_->AttackToYou(true);
+			mon_->dead(PRT_NEUTRAL, false);
+		}
+		else if(mon_)
 		{
 			if(mon_->isUserAlly() && !(mon_->flag & M_FLAG_NONE_MOVE))
 			{
@@ -3864,6 +3876,18 @@ bool players::SetShield(int percent_, int turn_) {
 
 	return true;
 }
+bool players::SetOverheat(int overheat_, int turn_) {
+	if(s_overheat > 0) {
+		if(s_overheat >= GetHp()) {
+			return false;
+		}
+		HpUpDown(-s_overheat, DR_EFFECT);
+		SetInter(IT_POISON);
+	}
+	s_overheat += overheat_;
+	s_overheat_turn = turn_;
+	return true;
+}
 int players::AbsorbShield(int damage_) {
 	if(!damage_ || s_shield.percent == 0)
 		return damage_;
@@ -6257,7 +6281,7 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 	{
 		for(auto it2 = (*it).atifact_vector.begin(); it2 != (*it).atifact_vector.end(); it2++)
 		{
-			effectartifact((ring_type)it2->kind, it2->value * plus_);
+			effectartifact((artifact_type)it2->kind, it2->value * plus_);
 		}
 		(*it).identify = true;
 	}

@@ -45,7 +45,7 @@ item::item()
 :name(LOC_SYSTEM_NONE_STRING), second_name(LOC_NONE), image(NULL), equip_image(NULL), position(0,0),prev_position(0,0), type(ITM_WEAPON_FIRST), weight(0), value(0),
 is_pile(false), num(0), id('a'), prev_sight(false), not_find(true), now_find(false), curse(false), identify(false), identify_curse(false), 
 can_throw(false), drop(false), throw_item(false), hamme_gift(false), waste(10000), delay_turn(0), value0(0), value1(0), value2(0), value3(0), value4(0), value5(0), value6(0), value7(0), value8(0),
-atifact_vector()
+fixed_artifact(FIXED_ARTIFACT_NONE), atifact_vector()
 {
 
 }
@@ -87,6 +87,7 @@ item::item(const coord_def &c, const item_infor &t)
 	value6 = t.value6;
 	value7 = t.value7;
 	value8 = t.value8;
+	fixed_artifact = FIXED_ARTIFACT_NONE;
 	waste = 10000;
 
 }
@@ -110,7 +111,7 @@ void item_infor::SaveDatas(FILE *fp)
 	SaveData<int>(fp, value5);
 	SaveData<int>(fp, value6);
 	SaveData<int>(fp, value7);
-	SaveData<int>(fp, value8);	
+	SaveData<int>(fp, value8);
 	SaveData<bool>(fp, curse);
 	SaveData<bool>(fp, artifact);
 }
@@ -137,7 +138,7 @@ void item_infor::LoadDatas(FILE *fp)
 	LoadData<int>(fp, value5);
 	LoadData<int>(fp, value6);
 	LoadData<int>(fp, value7);
-	LoadData<int>(fp, value8);	
+	LoadData<int>(fp, value8);
 	LoadData<bool>(fp, curse);
 	LoadData<bool>(fp, artifact);
 }
@@ -178,6 +179,7 @@ void item::SaveDatas(FILE *fp)
 	SaveData<int>(fp, value6);
 	SaveData<int>(fp, value7);
 	SaveData<int>(fp, value8);
+	SaveData<fixed_artifact_type>(fp, fixed_artifact);
 	
 	SaveData<int>(fp, atifact_vector.size());
 	for(vector<atifact_infor>::iterator it=atifact_vector.begin();it!=atifact_vector.end();it++)
@@ -227,6 +229,9 @@ void item::LoadDatas(FILE *fp)
 	LoadData<int>(fp, value6);
 	LoadData<int>(fp, value7);
 	LoadData<int>(fp, value8);
+	if(!isPrevVersion(loading_version_string, "ver1.106")) {
+		LoadData<fixed_artifact_type>(fp, fixed_artifact);
+	}
 
 	int size_;
 	LoadData<int>(fp, size_);
@@ -420,7 +425,7 @@ string item::GetName(int num_, bool simple_)
 			}
 			if(type==ITM_RING)
 			{			
-				arti_ += GetAtifactString((ring_type)value1,value2);
+				arti_ += GetAtifactString((artifact_type)value1,value2);
 				base_ = true;
 			}
 			if(type >= ITM_ARMOR_BODY_FIRST && type < ITM_ARMOR_BODY_LAST)
@@ -428,7 +433,7 @@ string item::GetName(int num_, bool simple_)
 				int t_ = ArmourExceptopn((armour_kind)value5);
 				if(t_ != -1)
 				{
-					arti_ += GetAtifactString((ring_type)t_,1);
+					arti_ += GetAtifactString((artifact_type)t_,1);
 					base_ = true;
 				}
 			}
@@ -438,7 +443,7 @@ string item::GetName(int num_, bool simple_)
 					arti_ += ", ";
 				else
 					base_ = true;
-				arti_ += GetAtifactString((ring_type)it->kind,it->value);
+				arti_ += GetAtifactString((artifact_type)it->kind,it->value);
 			}
 			arti_ += "}";
 			temp+=arti_;

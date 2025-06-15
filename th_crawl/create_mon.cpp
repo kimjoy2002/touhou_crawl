@@ -190,6 +190,7 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 47,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 5,  3}, //마법책
 	{ 37,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 3,  4}, //레밀리아 윳쿠리
 	{ 60,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 3,  5}, //홉고블린 악마술사
+	{ 107,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3, 3,  5}, //빅 슬라임
 	
 	{ 52,  SCARLET_LEVEL+3,  SCARLET_LEVEL+3, 5,  5}, //추파카브라
 	
@@ -251,19 +252,25 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 100,  MOON_LEVEL,  MOON_LEVEL, 10,  3}, //큐리오시티
 	
 	//지저
-	{ 87,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+2, 10,  3}, //제등요괴
 	{ 68,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+3, 10,  1}, //요정대부대
 	{ 62,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+3, 10,  2}, //흡혈박쥐
 	{ 60,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL+4, 2,  3}, //홉고블린 악마술사
 	{ 76,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 10,  1}, //원령때
 	{ 78,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 10,  3}, //츠치구모
 	{ 34,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 10,  3}, //오니
+	{ 108,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 3,  3}, //늑대령
+	{ 109,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 3,  3}, //독수리령
+	{ 110,  SUBTERRANEAN_LEVEL,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 3,  3}, //수달령
 
 	{ 79,  SUBTERRANEAN_LEVEL+1,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  4}, //핏빛원령
 	{ 43,  SUBTERRANEAN_LEVEL+1,  SUBTERRANEAN_LEVEL_LAST_LEVEL-1, 10,  4}, //아오오니
 	{ 32,  SUBTERRANEAN_LEVEL+1,  SUBTERRANEAN_LEVEL+4, 7,  2}, //고양이
 
 	{ 80,  SUBTERRANEAN_LEVEL+2,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  30}, //지옥개
+	{ 108,  SUBTERRANEAN_LEVEL+2,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  3}, //늑대령
+	{ 109,  SUBTERRANEAN_LEVEL+2,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  3}, //독수리령
+	{ 110,  SUBTERRANEAN_LEVEL+2,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 10,  3}, //수달령
+
 
 	{ 77,  SUBTERRANEAN_LEVEL+3,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 3,  5}, //화차
 	{ 34,  SUBTERRANEAN_LEVEL+3,  SUBTERRANEAN_LEVEL_LAST_LEVEL, 5,  4}, //오니
@@ -1028,6 +1035,21 @@ void create_id_to_mon(int id, int level, int strong)
 		for(int rand_ =rand_int(4,6), i=0;i<rand_;i++)
 			index.push_back(pair<monster_index, int>(randA(4)?MON_RABIT_SPEAR:randA(1)?MON_RABIT_MAGIC:MON_RABIT_BOMB, strong));
 		index.push_back(pair<monster_index, int>(MON_RABIT_GIANT, strong));
+		break;
+	case 107:
+		index.push_back(pair<monster_index, int>(MON_GIANT_SLIME, strong));
+		break;
+	case 108:
+		for (int rand_ = rand_int(3, 5), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_WOLF_SPIRIT, strong));
+		break;
+	case 109:
+		for (int rand_ = rand_int(2, 3), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_EAGLE_SPIRIT, strong));
+		break;
+	case 110:
+		for (int rand_ = rand_int(3, 5), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_OTTER_SPIRIT, strong));
 		break;
 	}
 
@@ -2239,6 +2261,21 @@ void SetResistMonster(monster* mon)
 		mon->ice_resist = 1;
 		mon->poison_resist = 1;
 		break;
+	case MON_GIANT_SLIME:
+	case MON_SMALL_SLIME:
+		mon->poison_resist = 1;
+		break;
+	case MON_WOLF_SPIRIT:
+		mon->fire_resist = 2;
+		mon->confuse_resist = 1;
+		break;
+	case MON_EAGLE_SPIRIT:
+		mon->elec_resist = 2;
+		mon->wind_resist=1;
+		break;
+	case MON_OTTER_SPIRIT:
+		mon->ice_resist = 2;
+		break;
 	}
 }
 
@@ -2396,6 +2433,7 @@ int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 		rand_.push(MON_MAGIC_BOOK, middle(power_));
 		rand_.push(MON_VAMPIER_BAT, middle(power_));
 		rand_.push(MON_HOBGOBRIN_TEMP, strong(power_));
+		rand_.push(MON_GIANT_SLIME, strong(power_));
 		rand_.push(MON_CHUPARCABRA, strong(power_));
 	}
 	else if (level_ >= SCARLET_LIBRARY_LEVEL && level_ <= SCARLET_LIBRARY_LEVEL + MAX_SCARLET_LIBRARY_LEVEL) {
@@ -2430,7 +2468,9 @@ int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 		rand_.push(MON_HELL_SPIDER, middle(power_));
 		rand_.push(MON_HELL_HOUND, middle(power_));
 		rand_.push(MON_HOBGOBRIN_LIBRARIAN, middle(power_));
-		rand_.push(MON_LANTERN_YOUKAI, middle(power_));
+		rand_.push(MON_WOLF_SPIRIT, middle(power_));
+		rand_.push(MON_EAGLE_SPIRIT, middle(power_));
+		rand_.push(MON_OTTER_SPIRIT, middle(power_));
 		rand_.push(MON_BLOOD_HAUNT, middle(power_));
 		rand_.push(MON_ONI, middle(power_));
 		rand_.push(MON_BLUE_ONI, middle(power_));

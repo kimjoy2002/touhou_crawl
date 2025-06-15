@@ -1852,7 +1852,7 @@ bool GodAccpect_Explore_100()
 	case GT_JUNKO:
 		return false;
 	case GT_KEIKI:
-		if(25>randA(100))
+		if(35>randA(100))
 		{
 			you.GiftCount(1);
 		}

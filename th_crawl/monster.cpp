@@ -1773,6 +1773,20 @@ bool monster::damage(attack_infor &a, bool perfect_)
 				}
 			}
 
+			if(id == MON_GIANT_SLIME && hp> 0 && special_value == 0 )
+			{
+				//데미지 20%당 1개 증가. 최대 3ro
+				int max_num = std::max(1, std::min(3, damage_*100/max_hp/20));
+				for(int i = 0 ; i < max_num; i++) {
+					BaseSummon(MON_SMALL_SLIME, rand_int(10,20), true, false, 2, this, position, SKD_OTHER, -1);
+					special_value++;
+				};
+				
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_SLIME_SPLIT,true,false,false,CL_magic,
+					PlaceHolderHelper(GetName()->getName()),
+					PlaceHolderHelper(mondata[MON_SMALL_SLIME].name.getName()));
+			}
+
 			if(a.type == ATT_THROW_FREEZING)
 			{
 				int frozen_ = randA_1(10);
@@ -1851,7 +1865,6 @@ bool monster::damage(attack_infor &a, bool perfect_)
 					rect_++;
 				}
 			}
-
 
 		}
 		else
@@ -2178,6 +2191,61 @@ bool monster::smartmove(short_move x_mov, short_move y_mov, int num_, set<int>& 
 	return false;
 }
 
+int monster::AttackToYou(bool force_) {
+	if(you.s_timestep)
+		return 0;
+	if(!force_ && (isUserAlly() || isCompleteNeutral()))
+		return 0;
+	if(flag & M_FLAG_NO_ATK)
+		return 1;
+	int num_=0;
+	for(int i=0;i<3;i++,num_++)
+		if(atk_type[i] == ATT_NONE)
+			break;
+	if(isHaveSpell(SPL_SUICIDE_BOMB))
+	{
+		MonsterUseSpell(SPL_SUICIDE_BOMB, false, this, you.position);
+		return 1;
+	}
+	else if(num_)
+	{
+		num_ = randA(num_-1);
+		attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
+		you.damage(temp_att);
+		multipleAttack(&you, temp_att);
+		enterlog();
+		return 1;
+	}
+	return 0;
+}
+
+
+
+int monster::AttackToMon(monster* mon_, bool force_) {
+	if(flag & M_FLAG_NO_ATK)
+		return 1;
+	int num_=0;
+	for(int i=0;i<3;i++,num_++)
+		if(atk_type[i] == ATT_NONE)
+			break;
+	if(isHaveSpell(SPL_SUICIDE_BOMB))
+	{
+		MonsterUseSpell(SPL_SUICIDE_BOMB, false, this, you.position);
+		return 1;
+	}
+	else if(num_)
+	{
+		num_ = randA(num_-1);
+		attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
+		mon_->damage(temp_att);
+		multipleAttack(mon_, temp_att);
+		enterlog();
+		return 1;
+	}
+	return 0;
+}
+
+
 int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 {	
 	if(!x_mov && !y_mov)
@@ -2210,35 +2278,18 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 		{
 			if(only_move)
 				return 0;
-			if(you.s_timestep)
-				return 0;
-			if(isUserAlly() || isCompleteNeutral())
-				return 0;
-			if(flag & M_FLAG_NO_ATK)
-				return 1;
-			int num_=0;
-			for(int i=0;i<3;i++,num_++)
-				if(atk_type[i] == ATT_NONE)
-					break;
-			if(isHaveSpell(SPL_SUICIDE_BOMB))
-			{
-				MonsterUseSpell(SPL_SUICIDE_BOMB, false, this, you.position);
-				return 1;
-			}
-			else if(num_)
-			{
-				num_ = randA(num_-1);
-				attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
-				you.damage(temp_att);
-				multipleAttack(&you, temp_att);
-				enterlog();
-				return 1;
-			}
-			return 0;
+			return AttackToYou(false);
 		}
 		for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
 		{
-			if((*it).isLive() && (*it).position.x == position.x+x_mov && (*it).position.y == position.y+y_mov)
+			bool isExistMon_ = (*it).isLive() && (*it).position.x == position.x+x_mov && (*it).position.y == position.y+y_mov;
+
+			if(isExistMon_ && (*it).flag & M_FLAG_MISSLE && !isMoveNotInturrpt(&(*it))) {
+				//이건 미사일류 몬스터라 사라져야함
+				AttackToMon(&(*it), true);
+				it->dead(PRT_NEUTRAL, false);
+			}
+			else if(isExistMon_)
 			{
 				if(isMoveNotInturrpt(&(*it))) {
 					coord_def able[2];
@@ -2273,27 +2324,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 				{
 					if(only_move)
 						return 0;
-					if(flag & M_FLAG_NO_ATK)
-						return 1;
-					int num_=0;
-					for(int i=0;i<3;i++,num_++)
-						if(atk_type[i] == ATT_NONE)
-							break;
-					if(isHaveSpell(SPL_SUICIDE_BOMB))
-					{
-						MonsterUseSpell(SPL_SUICIDE_BOMB, false, this, you.position);
-						return 1;
-					}
-					else if(num_)
-					{
-						num_ = randA(num_-1);
-						attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
-						(*it).damage(temp_att);
-						multipleAttack(&(*it), temp_att);
-						enterlog();
-						return 1;
-					}
-					return 0;
+					return AttackToMon(&(*it), false);
 				}
 				else if (id == MON_SUMIREKO && !it->isplayer() && it->isAllyMonster(this))
 				{
@@ -4365,6 +4396,13 @@ void monster::special_action(int delay_, bool smoke_)
 			}
 		}
 		break;
+	case MON_GIANT_SLIME:
+		if (!smoke_) {
+			if(special_value > 0) {
+				special_value--;
+			}
+		}
+		break;
 	default:
 		break;
 	}
@@ -5342,6 +5380,11 @@ bool monster::isEnemyMonster(const monster* monster_info)
 	{
 		if(s_lunatic ||	(s_neutrality != monster_info->s_neutrality))
 			return true;
+		if((id == MON_WOLF_SPIRIT && (monster_info->id == MON_EAGLE_SPIRIT || monster_info->id == MON_OTTER_SPIRIT)) || 
+			(id == MON_EAGLE_SPIRIT && (monster_info->id == MON_OTTER_SPIRIT || monster_info->id == MON_WOLF_SPIRIT)) || 
+			(id == MON_OTTER_SPIRIT && (monster_info->id == MON_WOLF_SPIRIT || monster_info->id == MON_EAGLE_SPIRIT))) {
+
+		}
 		return false;
 	}
 	return true;

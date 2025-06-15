@@ -539,6 +539,9 @@ string GetSpellInfor(spell_list spell, bool isPlayer)
 	case SPL_HANIWA_MAGIC_TANMAC3:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC3);
 		break;
+	case SPL_BLINK_AWAY:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_BLINK_AWAY);
+		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_UKNOWN);
 		break;

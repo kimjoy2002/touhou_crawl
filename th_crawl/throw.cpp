@@ -410,7 +410,7 @@ LOCALIZATION_ENUM_KEY GetTanmacKey(int type)
 
 
 ThrowTamacInstance::ThrowTamacInstance(textures* t_, int graphic_type, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_):
- t_(t_), graphic_type(graphic_type), beam(beam), infor_(infor_), item_(item_), effect_delete(effect_delete), mimic_(mimic_)
+ t_(t_), graphic_type(graphic_type), beam(beam), infor_(infor_), item_(item_), last_hit(nullptr), effect_delete(effect_delete), mimic_(mimic_), attack_prefix(nullptr)
 {
 	init();
 }
@@ -423,6 +423,7 @@ void ThrowTamacInstance::init() {
 	direc = beam.GetDirec();
 	length = 1;
 	count = 0;
+	last_hit = nullptr;
 	path = 8;
 	switch(infor_.type1)
 	{
@@ -461,8 +462,12 @@ bool ThrowTamacInstance::oneturn(coord_def& hit_pos_) {
 				)
 			{
 				attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+				if(attack_prefix != nullptr) {
+					attack_prefix(temp_att, this);
+				}
 				if((*it).damage(temp_att)) {
 					hit_pos_ = (*beam);
+					last_hit = &(*it);
 					penetrate--;
 				}
 			}
@@ -472,8 +477,12 @@ bool ThrowTamacInstance::oneturn(coord_def& hit_pos_) {
 			) //플레이어는 자기자신에게 맞지않는 조건은 나중에 지울까?
 		{
 			attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+			if(attack_prefix != nullptr) {
+				attack_prefix(temp_att, this);
+			}
 			if(you.damage(temp_att)) {
 				hit_pos_ = (*beam);
+				last_hit = &you;
 				penetrate--;
 			}
 		}
@@ -598,8 +607,21 @@ coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, cons
 	return throw_instance.endShoot(true, false);
 }
 
-
-
+unit* throwtanmac_check_hit_(int graphic_type, textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_, void (*attack_prefix_)(attack_infor& attack, ThrowTamacInstance* instance_))
+{
+	ThrowTamacInstance throw_instance(t_, graphic_type, beam, infor_, item_, effect_delete, mimic_);
+	throw_instance.attack_prefix = attack_prefix_;
+	while(true) {
+		coord_def hit_pos_;
+		if(throw_instance.oneturn(hit_pos_))
+			break;
+		Sleep(16);
+		if(throw_instance.oneturn_after(false))
+			break;
+	}
+	throw_instance.endShoot(true, false);
+	return throw_instance.last_hit;
+}
 
 
 
@@ -725,6 +747,17 @@ coord_def throwtanmac(int graphic_type, beam_iterator& beam, const beam_infor &i
 {
 	return throwtanmac_(graphic_type, NULL, beam, infor_, item_, effect_delete, mimic_);
 }
+
+unit* throwtanmac_check_hit(textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_, void (*attack_prefix_)(attack_infor& attack, ThrowTamacInstance* instance_))
+{
+	return throwtanmac_check_hit_(0, t_, beam, infor_, item_, effect_delete, mimic_, attack_prefix_);
+}
+
+unit* throwtanmac_check_hit(int graphic_type, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_, void (*attack_prefix_)(attack_infor& attack, ThrowTamacInstance* instance_))
+{
+	return throwtanmac_check_hit_(graphic_type, NULL, beam, infor_, item_, effect_delete, mimic_, attack_prefix_);
+}
+
 
 
 bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &target, const beam_infor &infor_)

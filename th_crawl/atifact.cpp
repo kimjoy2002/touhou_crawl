@@ -64,6 +64,16 @@ int GetAtifactValue(artifact_type ring_, int good_bad_)
 	case ART_ELEC_RESIS:
 	case ART_MAGICBOOST:
 	case ART_ANTIOVERHEAT:
+	case ART_PENTAN:
+	case ART_COUNTER:
+	case ART_PERMAINVI:
+	case ART_UNCONSCIOUS:
+	case ART_LUNATIC:
+	case ART_HALO:
+	case ART_RAD:
+	case ART_FIREBALL:
+	case ART_GLUTTON:
+	case ART_SILVER:
 			return 1;
 	case ART_FIRE_RESIS:
 	case ART_ICE_RESIS:
@@ -167,6 +177,36 @@ string GetAtifactString(artifact_type ring_, int value_)
 	case ART_ANTIOVERHEAT:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_ANTIOVERHEAT);
 		break;
+	case ART_PENTAN:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_PENTAN);
+		break;
+	case ART_COUNTER:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_COUNTER);
+		break;
+	case ART_PERMAINVI:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_PERMAINVI);
+		break;
+	case ART_UNCONSCIOUS:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_UNCONSCIOUS);
+		break;
+	case ART_LUNATIC:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_LUNATIC);
+		break;
+	case ART_HALO:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_HALO);
+		break;
+	case ART_RAD:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_RAD);
+		break;
+	case ART_FIREBALL:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_FIREBALL);
+		break;
+	case ART_GLUTTON:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_GLUTTON);
+		break;
+	case ART_SILVER:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_SILVER);
+		break;
 	case ART_SKILL_UP:
 		oss << skill_string((skill_type)(value_ %100)) << "+" << value_/100;
 		break;
@@ -264,6 +304,36 @@ std::string GetAtifactInfor(artifact_type ring_, int value_)
 		break;
 	case ART_ANTIOVERHEAT:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_ANTIOVERHEAT_INFO);
+		break;
+	case ART_PENTAN:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_PENTAN_INFO);
+		break;
+	case ART_COUNTER:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_COUNTER_INFO);
+		break;
+	case ART_PERMAINVI:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_PERMAINVI_INFO);
+		break;
+	case ART_UNCONSCIOUS:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_UNCONSCIOUS_INFO);
+		break;
+	case ART_LUNATIC:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_LUNATIC_INFO);
+		break;
+	case ART_HALO:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_HALO_INFO);
+		break;
+	case ART_RAD:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_RAD_INFO);
+		break;
+	case ART_FIREBALL:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_FIREBALL_INFO);
+		break;
+	case ART_GLUTTON:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_GLUTTON_INFO);
+		break;
+	case ART_SILVER:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_SILVER_INFO);
 		break;
 	case ART_SKILL_UP:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_SKILL_UP,
@@ -411,6 +481,16 @@ bool effectartifact(artifact_type kind, int value)
 	case ART_MAGICBOOST:
 		break;
 	case ART_ANTIOVERHEAT:
+	case ART_PENTAN:
+	case ART_COUNTER:
+	case ART_PERMAINVI:
+	case ART_UNCONSCIOUS:
+	case ART_LUNATIC:
+	case ART_HALO:
+	case ART_RAD:
+	case ART_FIREBALL:
+	case ART_GLUTTON:
+	case ART_SILVER:
 		break;
 	case ART_SKILL_UP:
 	{
@@ -593,12 +673,15 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value0 = 0;
 		item_->value1 = 4;
 		item_->value2 = 7;
+		item_->value3 = 0;
+		item_->value4 = 0;
+		item_->value5 = 0;
 		item_->value6 = 0;
 		item_->value7 = 10;
 		item_->value8 = 5;
 		item_->can_throw = false;
-		item_->image = &img_item_artifact_broomstick;
-		item_->equip_image = &img_play_item_weapon[0];
+		item_->image = &img_item_fixed_artifact_hakkero;
+		item_->equip_image = &img_play_item_fixed_artifact[0];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_NAME);
 		item_->weight = 0.2f;
 		item_->value = 900;
@@ -615,27 +698,268 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value0 = 4;
 		item_->value1 = -3;
 		item_->value2 = 15;
+		item_->value3 = 0;
+		item_->value4 = 6;
+		item_->value5 = 0;
 		item_->value6 = 0;
 		item_->value7 = 18;
 		item_->value8 = 7;
 		item_->can_throw = true;
-		item_->image = &img_item_weapon_bamboo_spear;
-		item_->equip_image = &img_play_item_weapon[19];
+		item_->image = &img_item_fixed_artifact_gungnir;
+		item_->equip_image = &img_play_item_fixed_artifact[1];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_NAME);
 		item_->weight = 8.0f;
 		item_->value = 900;
 		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_PENTAN,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_STR,6));
+		item_->atifact_vector.push_back(atifact_infor(ART_EV,6));
 		break;
 	case FIXED_ARTIFACT_ROUKANKEN:
+		item_->type = ITM_WEAPON_LONGBLADE;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 0;
+		item_->value1 = 1;
+		item_->value2 = 9;
+		item_->value3 = 0;
+		item_->value4 = 8;
+		item_->value5 = 2;
+		item_->value6 = -1;
+		item_->value7 = 13;
+		item_->value8 = 7;
+		item_->can_throw = false;
+		item_->image = &img_item_fixed_artifact_roukanken;
+		item_->equip_image = &img_play_item_fixed_artifact[2];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_ROUKANKEN_NAME);
+		item_->weight = 4.0f;
+		item_->value = 600;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_ICE_RESIS,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_DEX,5));
+		break;
 	case FIXED_ARTIFACT_HAKUROUKEN:
+		item_->type = ITM_ARMOR_SHIELD;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 0;
+		item_->value1 = 3;
+		item_->value2 = -1;
+		item_->value3 = 0;
+		item_->value4 = 5;
+		item_->value5 = 0;
+		item_->value6 = 0;
+		item_->value7 = 0;
+		item_->value8 = 0;
+		item_->can_throw = false;
+		item_->image = &img_item_fixed_artifact_hakurouken;
+		item_->equip_image = &img_play_item_fixed_artifact[3];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_NAME);
+		item_->weight = 3.0f;
+		item_->value = 300;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_COUNTER,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_ICE_RESIS,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_STR,5));
+		break;
 	case FIXED_ARTIFACT_KOISHIHAT:
+		item_->type = ITM_ARMOR_HEAD;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 0;
+		item_->value1 = 1;
+		item_->value2 = 0;
+		item_->value3 = 0;
+		item_->value4 = 3;
+		item_->value5 = 0;
+		item_->value6 = 0;
+		item_->value7 = 0;
+		item_->value8 = 0;
+		item_->can_throw = false;
+		item_->image = &img_item_fixed_artifact_koishihat;
+		item_->equip_image = &img_play_item_fixed_artifact[4];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_NAME);
+		item_->weight = 3.0f;
+		item_->value = 500;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_PERMAINVI,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_UNCONSCIOUS,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_ELEC_RESIS,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_CONFUSE_RESIS,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_TELEPORT,1));
+		break;
 	case FIXED_ARTIFACT_MIKOCLOAK:
+		item_->type = ITM_ARMOR_CLOAK;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 0;
+		item_->value1 = 1;
+		item_->value2 = 0;
+		item_->value3 = 0;
+		item_->value4 = -1;
+		item_->value5 = 0;
+		item_->value6 = 0;
+		item_->value7 = 0;
+		item_->value8 = 0;
+		item_->can_throw = false;
+		item_->image = &img_item_fixed_artifact_mikocloak;
+		item_->equip_image = &img_play_item_fixed_artifact[5];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_MIKOCLOAK_NAME);
+		item_->weight = 5.0f;
+		item_->value = 600;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_FIRE_RESIS,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_ICE_RESIS,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_ELEC_RESIS,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_MAGIC_RESIS,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_SEE_INVISIBLE,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_FULL,1));
+		break;
 	case FIXED_ARTIFACT_LUNATICTORCH:
+		item_->type = ITM_WEAPON_MACE;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 2;
+		item_->value1 = 2;
+		item_->value2 = 8;
+		item_->value3 = 0;
+		item_->value4 = 13;
+		item_->value5 = 1;
+		item_->value6 = -1;
+		item_->value7 = 13;
+		item_->value8 = 7;
+		item_->can_throw = false;
+		item_->image = &img_item_fixed_artifact_lunatictorch;
+		item_->equip_image = &img_play_item_fixed_artifact[6];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_NAME);
+		item_->weight = 5.0f;
+		item_->value = 600;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_LUNATIC,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_HALO,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_MAGACIAN,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_FIRE_RESIS,2));
+		break;
 	case FIXED_ARTIFACT_MOONGEM:
+		item_->type = ITM_AMULET;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 0;
+		item_->value1 = AMT_BLOSSOM; //TODO
+		item_->value2 = 0;
+		item_->value3 = 0;
+		item_->value4 = 0;
+		item_->value5 = 0;
+		item_->value6 = 0;
+		item_->value7 = 0;
+		item_->value8 = 0;
+		item_->can_throw = false;
+		item_->image = &img_item_fixed_artifact_moongem;
+		item_->equip_image = NULL;
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_MOONGEM_NAME);
+		item_->weight = 1.0f;
+		item_->value = 400;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_CONFUSE_RESIS,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_MAGIC_RESIS,2));
+		break;
 	case FIXED_ARTIFACT_NUCLEARBOOT:
+		item_->type = ITM_ARMOR_BOOT;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 0;
+		item_->value1 = 1;
+		item_->value2 = 0;
+		item_->value3 = 0;
+		item_->value4 = 1;
+		item_->value5 = 0;
+		item_->value6 = 0;
+		item_->value7 = 0;
+		item_->value8 = 0;
+		item_->can_throw = false;
+		item_->image = &img_item_fixed_artifact_nuclearboot;
+		item_->equip_image = &img_play_item_fixed_artifact[7];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_NAME);
+		item_->weight = 4.0f;
+		item_->value = 450;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_RAD,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_FIRE_RESIS,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_LEVITATION,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_AC,5));
+		break;
 	case FIXED_ARTIFACT_CONTROLROD:
+		item_->type = ITM_WEAPON_MACE;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 4;
+		item_->value1 = -6;
+		item_->value2 = 18;
+		item_->value3 = 0;
+		item_->value4 = 7;
+		item_->value5 = 0;
+		item_->value6 = 0;
+		item_->value7 = 21;
+		item_->value8 = 8;
+		item_->can_throw = false;
+		item_->image = &img_item_fixed_artifact_controlrod;
+		item_->equip_image = &img_play_item_fixed_artifact[8];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_NAME);
+		item_->weight = 20.0f;
+		item_->value = 1200;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_FIREBALL,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_FIRE_RESIS,3));
+		break;
 	case FIXED_ARTIFACT_PICKANDSHOVELS:
+		item_->type = ITM_WEAPON_AXE;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 2;
+		item_->value1 = -5;
+		item_->value2 = 15;
+		item_->value3 = 0;
+		item_->value4 = 3;
+		item_->value5 = 3;
+		item_->value6 = -1;
+		item_->value7 = 17;
+		item_->value8 = 7;
+		item_->can_throw = false;
+		item_->image = &img_item_fixed_artifact_pickandshovels;
+		item_->equip_image = &img_play_item_fixed_artifact[9];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_NAME);
+		item_->weight = 12.0f;
+		item_->value = 1100;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_GLUTTON,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_HUNGRY,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_POISON_RESIS,1));
+		break;
 	case FIXED_ARTIFACT_SILVERKNIFE:
+		item_->type = ITM_WEAPON_SHORTBLADE;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 1;
+		item_->value1 = 5;
+		item_->value2 = 6;
+		item_->value3 = 0;
+		item_->value4 = 9;
+		item_->value5 = 0;
+		item_->value6 = 0;
+		item_->value7 = 10;
+		item_->value8 = 5;
+		item_->can_throw = true;
+		item_->image = &img_item_fixed_artifact_silverknife;
+		item_->equip_image = &img_play_item_fixed_artifact[10];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_NAME);
+		item_->weight = 1.5f;
+		item_->value = 500;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_SILVER,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_EV,8));
+		item_->atifact_vector.push_back(atifact_infor(ART_MAGIC_RESIS,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_SKILL_UP,SKT_TRANS+400));
+		break;
 	default:
 		break;
 	}

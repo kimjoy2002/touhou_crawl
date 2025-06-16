@@ -1321,6 +1321,19 @@ textures img_play_item_tribe[1] = {
 };
 
 
+textures img_play_item_fixed_artifact[11] = {
+	textures(&texture_players01, 321),//0, 팔괘로
+	textures(&texture_players01, 322),//1, 궁니르
+	textures(&texture_players01, 323),//2, 누관검
+	textures(&texture_players01, 324),//3, 백루검
+	textures(&texture_players01, 325),//4, 코이시모자
+	textures(&texture_players01, 326),//5, 위정자망토
+	textures(&texture_players01, 327),//6, 횃불
+	textures(&texture_players01, 328),//7, 핵융합의다리
+	textures(&texture_players01, 329),//8, 제어봉
+	textures(&texture_players01, 330),//9, 곡괭이와 삽
+	textures(&texture_players01, 331)//10, 실버나이프
+};
 
 
 
@@ -1422,8 +1435,18 @@ textures img_item_artifact_knife(&texture_item02, 238, 255);
 textures img_item_artifact_dauzing_rod(&texture_item02, 239, 255);
 textures img_item_artifact_javelin(&texture_item02, 207, 255);
 
-
-
+textures img_item_fixed_artifact_hakkero(&texture_item03, 227, 255);
+textures img_item_fixed_artifact_gungnir(&texture_item03, 228, 255);
+textures img_item_fixed_artifact_roukanken(&texture_item03, 229, 255);
+textures img_item_fixed_artifact_hakurouken(&texture_item03, 230, 255);
+textures img_item_fixed_artifact_koishihat(&texture_item03, 231, 255);
+textures img_item_fixed_artifact_mikocloak(&texture_item03, 232, 255);
+textures img_item_fixed_artifact_lunatictorch(&texture_item03, 233, 255);
+textures img_item_fixed_artifact_moongem(&texture_item03, 234, 255);
+textures img_item_fixed_artifact_nuclearboot(&texture_item03, 235, 255);
+textures img_item_fixed_artifact_controlrod(&texture_item03, 236, 255);
+textures img_item_fixed_artifact_pickandshovels(&texture_item03, 237, 255);
+textures img_item_fixed_artifact_silverknife(&texture_item03, 238, 255);
 
 
 textures img_item_food_bread(&texture_item01, 0, 255);
@@ -1753,6 +1776,8 @@ textures img_command_number[25]= {
 
 textures img_command_quick_menu1(&texture_item03, 223, 255);
 textures img_command_quick_menu2(&texture_item03, 224, 255);
+textures img_command_quick_menu3(&texture_item03, 225, 255);
+textures img_command_quick_menu4(&texture_item03, 226, 255);
 
 
 
@@ -3577,6 +3602,52 @@ int texturetoint(textures* input)
 		return 555;
 	else if(input == &img_mons_rabbit_alchemist)
 		return 556;
+	else if(input == &img_item_fixed_artifact_hakkero)
+		return 557;
+	else if(input == &img_item_fixed_artifact_gungnir)
+		return 558;
+	else if(input == &img_item_fixed_artifact_roukanken)
+		return 559;
+	else if(input == &img_item_fixed_artifact_hakurouken)
+		return 560;
+	else if(input == &img_item_fixed_artifact_koishihat)
+		return 561;
+	else if(input == &img_item_fixed_artifact_mikocloak)
+		return 562;
+	else if(input == &img_item_fixed_artifact_lunatictorch)
+		return 563;
+	else if(input == &img_item_fixed_artifact_moongem)
+		return 564;
+	else if(input == &img_item_fixed_artifact_nuclearboot)
+		return 565;
+	else if(input == &img_item_fixed_artifact_controlrod)
+		return 566;
+	else if(input == &img_item_fixed_artifact_pickandshovels)
+		return 567;
+	else if(input == &img_item_fixed_artifact_silverknife)
+		return 568;
+	else if(input == &img_play_item_fixed_artifact[0])
+		return 569;
+	else if(input == &img_play_item_fixed_artifact[1])
+		return 570;
+	else if(input == &img_play_item_fixed_artifact[2])
+		return 571;
+	else if(input == &img_play_item_fixed_artifact[3])
+		return 572;
+	else if(input == &img_play_item_fixed_artifact[4])
+		return 573;
+	else if(input == &img_play_item_fixed_artifact[5])
+		return 574;
+	else if(input == &img_play_item_fixed_artifact[6])
+		return 575;
+	else if(input == &img_play_item_fixed_artifact[7])
+		return 576;
+	else if(input == &img_play_item_fixed_artifact[8])
+		return 577;
+	else if(input == &img_play_item_fixed_artifact[9])
+		return 578;
+	else if(input == &img_play_item_fixed_artifact[10])
+		return 579;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -4717,6 +4788,52 @@ textures* inttotexture(int input)
 		return &img_mons_rabbit_giant;
 	case 556:
 		return &img_mons_rabbit_alchemist;
+	case 557:
+		return &img_item_fixed_artifact_hakkero;
+	case 558:
+		return &img_item_fixed_artifact_gungnir;
+	case 559:
+		return &img_item_fixed_artifact_roukanken;
+	case 560:
+		return &img_item_fixed_artifact_hakurouken;
+	case 561:
+		return &img_item_fixed_artifact_koishihat;
+	case 562:
+		return &img_item_fixed_artifact_mikocloak;
+	case 563:
+		return &img_item_fixed_artifact_lunatictorch;
+	case 564:
+		return &img_item_fixed_artifact_moongem;
+	case 565:
+		return &img_item_fixed_artifact_nuclearboot;
+	case 566:
+		return &img_item_fixed_artifact_controlrod;
+	case 567:
+		return &img_item_fixed_artifact_pickandshovels;
+	case 568:
+		return &img_item_fixed_artifact_silverknife;
+	case 569:
+		return &img_play_item_fixed_artifact[0];
+	case 570:
+		return &img_play_item_fixed_artifact[1];
+	case 571:
+		return &img_play_item_fixed_artifact[2];
+	case 572:
+		return &img_play_item_fixed_artifact[3];
+	case 573:
+		return &img_play_item_fixed_artifact[4];
+	case 574:
+		return &img_play_item_fixed_artifact[5];
+	case 575:
+		return &img_play_item_fixed_artifact[6];
+	case 576:
+		return &img_play_item_fixed_artifact[7];
+	case 577:
+		return &img_play_item_fixed_artifact[8];
+	case 578:
+		return &img_play_item_fixed_artifact[9];
+	case 579:
+		return &img_play_item_fixed_artifact[10];
 	default:
 		return &img_mons_default;
 	}

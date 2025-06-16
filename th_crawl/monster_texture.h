@@ -320,6 +320,7 @@ extern textures img_play_item_hat[];
 extern textures img_play_item_shield[];
 extern textures img_play_item_weapon[];
 extern textures img_play_item_tribe[];
+extern textures img_play_item_fixed_artifact[];
 
 
 
@@ -402,6 +403,19 @@ extern textures img_item_artifact_umbrella;
 extern textures img_item_artifact_knife;
 extern textures img_item_artifact_dauzing_rod;
 extern textures img_item_artifact_javelin;
+
+extern textures img_item_fixed_artifact_hakkero;
+extern textures img_item_fixed_artifact_gungnir;
+extern textures img_item_fixed_artifact_roukanken;
+extern textures img_item_fixed_artifact_hakurouken;
+extern textures img_item_fixed_artifact_koishihat;
+extern textures img_item_fixed_artifact_mikocloak;
+extern textures img_item_fixed_artifact_lunatictorch;
+extern textures img_item_fixed_artifact_moongem;
+extern textures img_item_fixed_artifact_nuclearboot;
+extern textures img_item_fixed_artifact_controlrod;
+extern textures img_item_fixed_artifact_pickandshovels;
+extern textures img_item_fixed_artifact_silverknife;
 
 
 
@@ -554,6 +568,8 @@ extern textures img_command_alphabet_large[26];
 extern textures img_command_number[25];
 extern textures img_command_quick_menu1;
 extern textures img_command_quick_menu2;
+extern textures img_command_quick_menu3;
+extern textures img_command_quick_menu4;
 
 
 

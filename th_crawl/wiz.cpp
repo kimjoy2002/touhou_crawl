@@ -622,7 +622,7 @@ void wiz_mode()
 			case '!':
 			{
 				// for(int i = 1; i < FIXED_ARTIFACT_MAX; i++) {
-				for(int i = 1; i < 2; i++) {
+				for(int i = 1; i < FIXED_ARTIFACT_MAX; i++) {
 					item_infor t;
 					makeitem(ITM_ETC, 0, &t, 0);
 					item * item_ = env[current_level].MakeItem(you.position, t);

@@ -274,6 +274,10 @@ string item::GetName(int num_, bool simple_)
 			temp += second_name.getName() + " ";
 		}
 	}
+	
+	if(fixed_artifact != FIXED_ARTIFACT_NONE) {
+		temp += second_name.getName() + "★";
+	}
 
 	if(type==ITM_POTION) {		
 		if(iden_list.potion_list[value1].iden)  {

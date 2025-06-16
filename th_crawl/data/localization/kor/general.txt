@@ -37,7 +37,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI1,자동탐색 & 자동공격형. O와 T
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI2,적성보너스) 장검적성 +1
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,보너스) +2,+2 언월도, +2 철방패, +2 사슬 중갑옷, 상처치료물약 2개, 힘물약 2개, 투명감지 반지
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI4,초보자팁) tab은 자동공격, o는 자동탐색으로 편하게 진행 가능합니다. 위기엔 q로 포션을 마시세요.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI1,본포! 당신의 뒤에 있어요. 무의식의 힘으로 모두 암살해라!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI1,본포! 당신의 뒤에 있어요. 무의식의 힘으로 모두 암살하라!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI2,적성보너스) 단검적성 +2, 정신마법정석 +2
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI3,보너스) 영구투명특성, 파워보존특성, 15렙에 허찌르기(혼란을 유발하는 근접공격)
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI4,초보자팁) 전투중이 아닐땐 항상 투명이 된 상태입니다. 조심하세요! 전투중에는 투명이 풀립니다.\n 자고있는 상대를 찌르면 암습과 단검스킬에 비례해서 치명적인 큰 데미지가 들어갑니다.\n x를 누른 상태에서 몬스터위에 커서를 두고 v를 누르면 정보가 뜹니다. 투명보기가 있는지 확인하세요!
@@ -267,10 +267,10 @@ LOC_SYSTEM_DROWNED_PENALTY_MAGIC,물에 빠진 상태에선 마법은 쓸 수 �
 LOC_SYSTEM_CURSED_PENALTY,저주에 걸려 있어서 장비를 벗을 수 없다.
 LOC_SYSTEM_SHOUT_MENU,무엇을 외치겠습니까?
 LOC_SYSTEM_SHOUT_MENU_ALLY,아군에게 명령
-LOC_SYSTEM_SHOUT_MENU_ATTACK,공격해라!
+LOC_SYSTEM_SHOUT_MENU_ATTACK,공격해!
 LOC_SYSTEM_SHOUT_MENU_STOP,공격을 멈춰!
-LOC_SYSTEM_SHOUT_MENU_WAIT,대기해라.
-LOC_SYSTEM_SHOUT_MENU_COME,따라와라.
+LOC_SYSTEM_SHOUT_MENU_WAIT,대기해.
+LOC_SYSTEM_SHOUT_MENU_COME,따라와.
 LOC_SYSTEM_SHOUT_MENU_OTHRE,그외의 키
 LOC_SYSTEM_SHOUT_MENU_SILENCE,조용히 한다.
 LOC_SYSTEM_SHOUT,소리 지르기
@@ -3120,15 +3120,15 @@ LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_MAGICBOOST_INFO,스펠파워가 1.5배 증가�
 LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_ANTIOVERHEAT,과열방지
 LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_ANTIOVERHEAT_INFO,일부 마법의 과열 효과를 받지 않는다.
 LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_NAME,궁니르
-LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_DESCRIBE,홍마관의 흡혈귀가 사용하는 거대한 붉은 창이다.\n특히 투척으로 사용할수도 있으며 투척시 모든 적을 꿰뚫으며 데미지를 준다.\n투척시 적당히 던지는것이 불가능해 항상 최대사거리로 날라가며, 마법으로 회수하기엔 너무 거대하다.
+LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_DESCRIBE,홍마관의 흡혈귀가 사용하는 거대한 붉은 창이다.\n들고 사용하는것보다 투척시 더 강한 힘을 내며 모든 적을 꿰뚫어 데미지를 준다.\n투척시 적당히 던지는것이 불가능해 항상 최대사거리로 날라가며, 마법으로 회수하기엔 너무 거대하다.
 LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_PENTAN,관통
-LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_PENTAN_INFO,이 아이템은 투척시 적들을 관통한다. 또한 항상 최대 사거리로 날라간다.
+LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_PENTAN_INFO,이 아이템은 투척시 더 높은 데미지를 주고 적들을 관통한다. 또한 항상 최대 사거리로 날라간다.
 LOC_SYSTEM_ITEM_ARTIFACT_ROUKANKEN_NAME,누관검
 LOC_SYSTEM_ITEM_ARTIFACT_ROUKANKEN_DESCRIBE,요괴가 재련했다 전해지는 장검. 검집에 작은 꽃이 묶여있다.\n열 마리의 유령을 잡을 수 있(다고 주장하)는 이 검은 숙련되지않으면 쓰기 힘들 정도의 장검이다.\n
 LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_NAME,백루검
 LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_DESCRIBE,상대의 미혹을 끊을 수 있다고 전해지는 짧은 칼.\n이 실체가 애매한 짧은 칼은 날이 잘 듣지 않아서, 적을 공격하기엔 부적합하다.\n대신 다른 손에 들고 방패처럼 적의 공격을 튕겨내고 사용하는데 적합해보인다.
-LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_PENTAN,반격
-LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_PENTAN_INFO,상대 공격을 막았을때 주무기로 반격한다.
+LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_COUNTER,반격
+LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_COUNTER_INFO,상대 공격을 막았을때 주무기로 반격한다.
 LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_NAME,코이시의 모자
 LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_DESCRIBE,무의식을 다룬다는 어느 사토리 요괴의 모자.\n이 모자를 쓰게되면 존재감이 옅어지게되어 항상 투명한 상태가 된다.\n대신 착용한 사람의 의식조차 옅게 만들어서 가끔 자기가 원치않는 방향으로 움직이는 일이 생긴다.\n몽유병같은 느낌일지도?
 LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_PERMAINVI,영구투명
@@ -3138,8 +3138,8 @@ LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_UNCONSCIOUS_INFO,가끔씩 원치않은 방�
 LOC_SYSTEM_ITEM_ARTIFACT_MIKOCLOAK_NAME,위정자의 망토
 LOC_SYSTEM_ITEM_ARTIFACT_MIKOCLOAK_DESCRIBE,선인인 토요사토미미노 미코가 사용했다고 하는 망토.\n왠지 끼고만 있어도 카리스마가 생기는듯한 기분이다.
 LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_NAME,광기의 횃불
-LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_DESCRIBE,어느 요정이 들고있던 횃불. 이 횃불은 보는 사람을 미치게 만드는 능력이 있다.\n이 횃불 근처에 있는 모든 생명체는 제정신을 잃고 주변을 공격하게 될것이다.\n주의해라! 광기에 물든 자는 평소보다 더 강한 공격을 하게될 것이다.
-LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_LUNATIC,광기
+LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_DESCRIBE,어느 요정이 들고있던 횃불. 이 횃불은 보는 사람을 미치게 만드는 능력이 있다.\n이 횃불 근처에 있는 모든 생명체는 제정신을 잃고 주변을 공격하게 될것이다.\n주의하라! 광기에 물든 자는 평소보다 더 강한 공격을 하게될 것이다.
+LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_LUNATIC,광기+
 LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_LUNATIC_INFO,시야내의 모든 생명체들을 가끔 광기에 물들이게 한다. 심지어 사용자도!
 LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_HALO,후광
 LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_HALO_INFO,주위 작은 범위에 빛을 내서 명중률을 올리고 투명을 보이게 한다.
@@ -4767,7 +4767,7 @@ LOC_SYSTEM_GOD_OKINA_WELCOME,오키나: 이 세계에서 나를 각인시키도�
 LOC_SYSTEM_GOD_OKINA_TALK1,오키나: 네가 제 수행원으로 맡는지 테스트해볼거야.
 LOC_SYSTEM_GOD_OKINA_TALK2,오키나: 면접은 없어, 실전 테스트로 채용을 결정하지
 LOC_SYSTEM_GOD_OKINA_TALK3,오키나: 나의 존재는 항상 알려져야만 한다
-LOC_SYSTEM_GOD_OKINA_TALK4,오키나: 등 뒤의 문으로 내 힘을 받도록 해라
+LOC_SYSTEM_GOD_OKINA_TALK4,오키나: 등 뒤의 문으로 내 힘을 받도록 하라
 LOC_SYSTEM_GOD_OKINA_TALK5,오키나: 슬슬 마이와 사토노는 해방시켜줄까 생각중이다
 LOC_SYSTEM_GOD_OKINA_TALK6,오키나: 실로 네 부하에 맞는 인재로구나. 합격이다!
 LOC_SYSTEM_GOD_OKINA_TALK7,오키나: 보라! 들으라! 말하라! 비신의 진정한 마력을 받아라!
@@ -4959,7 +4959,7 @@ LOC_SYSTEM_ARENA_LEFT_LIFE,남은 기회 {0}
 LOC_SYSTEM_ARENA_DRAW,무승부! 이번 대전은 무효다.
 LOC_SYSTEM_ARENA_TIMEOVER,시한초과! 무승부! 이번 대전은 무효다.
 LOC_SYSTEM_ARENA_GAMEOVER,당신의 기록은 {0}레벨이다. 다음에 더욱 높은 레벨에 도전하도록! ({1}로 기록확인)
-LOC_SYSTEM_SHOOTING_SPRINT_START1,슈팅&로그라이크에 온걸 환영한다! 쏟아지는 적들을 처리해라!
+LOC_SYSTEM_SHOOTING_SPRINT_START1,슈팅&로그라이크에 온걸 환영한다! 쏟아지는 적들을 처리하라!
 LOC_SYSTEM_SHOOTING_SPRINT_START2,여기서는 {0}키를 눌러서 원거리 공격을 할 수 있다!
 LOC_SYSTEM_DUMP_SUCCESS,덤프에 성공했습니다.
 LOC_SYSTEM_DUMP_TITLE,동방크롤 {0} 덤프 파일

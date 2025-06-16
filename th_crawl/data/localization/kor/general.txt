@@ -3114,11 +3114,53 @@ LOC_SYSTEM_ITEM_ARTIFACT_INFO_ELEC_RESIST,전기에 저항이 생긴다.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGIC_RESIST,마법 저항이 생긴다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_SKILL_UP,지정된 스킬레벨이 올라간다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_NAME,미니팔괘로
-LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_DESCRIBE,미니팔괘로의 설명
+LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_DESCRIBE,요리용의 작은 불씨부터 산 하나를 전소시킬 화력까지 다재다능한 마법 아이템.\n무기 대신 한 손에 들고 마법의 화력을 올려주는 역할을 한다.\n또한 스파크와 같이 그냥 사용하면 시전자에 과열을 발생하는 강력한 마법도 자유자재로 사용이 가능하다.
 LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_MAGICBOOST,마력증폭
 LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_MAGICBOOST_INFO,스펠파워가 1.5배 증가한다.
 LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_ANTIOVERHEAT,과열방지
 LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_ANTIOVERHEAT_INFO,일부 마법의 과열 효과를 받지 않는다.
+LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_NAME,궁니르
+LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_DESCRIBE,홍마관의 흡혈귀가 사용하는 거대한 붉은 창이다.\n특히 투척으로 사용할수도 있으며 투척시 모든 적을 꿰뚫으며 데미지를 준다.\n투척시 적당히 던지는것이 불가능해 항상 최대사거리로 날라가며, 마법으로 회수하기엔 너무 거대하다.
+LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_PENTAN,관통
+LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_PENTAN_INFO,이 아이템은 투척시 적들을 관통한다. 또한 항상 최대 사거리로 날라간다.
+LOC_SYSTEM_ITEM_ARTIFACT_ROUKANKEN_NAME,누관검
+LOC_SYSTEM_ITEM_ARTIFACT_ROUKANKEN_DESCRIBE,요괴가 재련했다 전해지는 장검. 검집에 작은 꽃이 묶여있다.\n열 마리의 유령을 잡을 수 있(다고 주장하)는 이 검은 숙련되지않으면 쓰기 힘들 정도의 장검이다.\n
+LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_NAME,백루검
+LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_DESCRIBE,상대의 미혹을 끊을 수 있다고 전해지는 짧은 칼.\n이 실체가 애매한 짧은 칼은 날이 잘 듣지 않아서, 적을 공격하기엔 부적합하다.\n대신 다른 손에 들고 방패처럼 적의 공격을 튕겨내고 사용하는데 적합해보인다.
+LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_PENTAN,반격
+LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_PENTAN_INFO,상대 공격을 막았을때 주무기로 반격한다.
+LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_NAME,코이시의 모자
+LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_DESCRIBE,무의식을 다룬다는 어느 사토리 요괴의 모자.\n이 모자를 쓰게되면 존재감이 옅어지게되어 항상 투명한 상태가 된다.\n대신 착용한 사람의 의식조차 옅게 만들어서 가끔 자기가 원치않는 방향으로 움직이는 일이 생긴다.\n몽유병같은 느낌일지도?
+LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_PERMAINVI,영구투명
+LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_PERMAINVI_INFO,항상 투명한 상태가 된다.
+LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_UNCONSCIOUS,무의식
+LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_UNCONSCIOUS_INFO,가끔씩 원치않은 방향으로 이동한다. 이 효과는 시야내에 적이 있을때만 발휘한다.
+LOC_SYSTEM_ITEM_ARTIFACT_MIKOCLOAK_NAME,위정자의 망토
+LOC_SYSTEM_ITEM_ARTIFACT_MIKOCLOAK_DESCRIBE,선인인 토요사토미미노 미코가 사용했다고 하는 망토.\n왠지 끼고만 있어도 카리스마가 생기는듯한 기분이다.
+LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_NAME,광기의 횃불
+LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_DESCRIBE,어느 요정이 들고있던 횃불. 이 횃불은 보는 사람을 미치게 만드는 능력이 있다.\n이 횃불 근처에 있는 모든 생명체는 제정신을 잃고 주변을 공격하게 될것이다.\n주의해라! 광기에 물든 자는 평소보다 더 강한 공격을 하게될 것이다.
+LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_LUNATIC,광기
+LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_LUNATIC_INFO,시야내의 모든 생명체들을 가끔 광기에 물들이게 한다. 심지어 사용자도!
+LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_HALO,후광
+LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_HALO_INFO,주위 작은 범위에 빛을 내서 명중률을 올리고 투명을 보이게 한다.
+LOC_SYSTEM_ITEM_ARTIFACT_MOONGEM_NAME,달의 보옥
+LOC_SYSTEM_ITEM_ARTIFACT_MOONGEM_DESCRIBE,주변의 더러움을 제거한다고 하는 달의 주민의 필수품.\n주변의 영적 더러움을 천천히 씻어낸다고 한다. 공기청정기?\n사용시 자신에 걸린 대부분의 디버프를 해제할 수 있다.
+LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_NAME,핵융합의 다리
+LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_DESCRIBE,오른 신발의 분해의 다리와 왼쪽 신발의 융합의 다리로 합쳐진 한 쌍의 신발.\n두 힘을 합쳐서 핵융합을 일으킬 수 있다고 한다.\n두가지의 단점이 있는데 하나는 착용자가 방사능에 노출된다는 점, 또 하나는 짝짝이라는 점이다.
+LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_RAD,방사능
+LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_RAD_INFO,데미지를 받았을때 낮은 확률로 일시적인 나쁜 특성을 받는다.
+LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_NAME,제어봉
+LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_DESCRIBE,팔에 낄 수 있는 거대한 제어봉, 제 3의 다리라고도 부른다.\n착용하고 직접 휘두를 수도 있고, 파워를 댓가로 내부에서 화염을 발사할수도 있다.\n숨겨진 효과로 어디선가 핵융합의 방사능을 막아준다고 한다.
+LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_FIREBALL,화염구
+LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_FIREBALL_INFO,파워를 소모하여 팔에서 화염구를 발사할 수 있다. 위력은 발동술에 비례한다.
+LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_NAME,지네의 삽 곡괭이
+LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_DESCRIBE,홍룡동에서 살고있는 오오무카데의 삽과 곡괭이.\n황금빛을 뛰고 있으며 산을 깍아낼 정도로 단단하다.\n삽과 곡괭이가 한 쌍이다보니 양손을 사용하여 들어야한다.\n사용자가 독을 지닌 지네이다보니까, 그녀의 장비에도 독이 스며든것처럼 보인다.
+LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_GLUTTON,폭식
+LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_GLUTTON_INFO,무기를 사용해 적을 죽일때마다 일시적인 전투력 버프를 얻는다.
+LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_NAME,메이드 특제 나이프
+LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_DESCRIBE,홍마관의 메이드장이 사용한다는 은제 나이프.\n투척에도 쓸 수 있고 근접 전투용으로도 쓸만하다.\n가격이 비싸기 때문에 회수에는 신경쓰자.
+LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_SILVER,은
+LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_SILVER_INFO,20%의 추가데미지를 주며 소환수와 흡혈귀에게는 대신 100%의 추가 데미지를 준다.
 LOC_SYSTEM_ITEM_JEWELRY_RING,반지
 LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_STR,{0}힘의 반지
 LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_DEX,{0}민첩의 반지

@@ -553,6 +553,28 @@ std::string GetFixedArtifact(fixed_artifact_type fixed_artifact) {
 	switch(fixed_artifact) {
 	case FIXED_ARTIFACT_HAKKERO:
 		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_DESCRIBE);
+	case FIXED_ARTIFACT_GUNGNIR:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_DESCRIBE);
+	case FIXED_ARTIFACT_ROUKANKEN:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_ROUKANKEN_DESCRIBE);
+	case FIXED_ARTIFACT_HAKUROUKEN:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_DESCRIBE);
+	case FIXED_ARTIFACT_KOISHIHAT:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_DESCRIBE);
+	case FIXED_ARTIFACT_MIKOCLOAK:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_MIKOCLOAK_DESCRIBE);
+	case FIXED_ARTIFACT_LUNATICTORCH:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_DESCRIBE);
+	case FIXED_ARTIFACT_MOONGEM:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_MOONGEM_DESCRIBE);
+	case FIXED_ARTIFACT_NUCLEARBOOT:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_DESCRIBE);
+	case FIXED_ARTIFACT_CONTROLROD:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_DESCRIBE);
+	case FIXED_ARTIFACT_PICKANDSHOVELS:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_DESCRIBE);
+	case FIXED_ARTIFACT_SILVERKNIFE:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_DESCRIBE);
 	default:
 		break;
 	}
@@ -578,8 +600,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->image = &img_item_artifact_broomstick;
 		item_->equip_image = &img_play_item_weapon[0];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_NAME);
-		item_->weight = 2.0f;
-		item_->value = 50;
+		item_->weight = 0.2f;
+		item_->value = 900;
 		item_->curse = false;
 		item_->atifact_vector.push_back(atifact_infor(ART_MAGICBOOST,1));
 		item_->atifact_vector.push_back(atifact_infor(ART_ANTIOVERHEAT,1));
@@ -587,7 +609,33 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->atifact_vector.push_back(atifact_infor(ART_FIRE_RESIS,2));
 		break;
 	case FIXED_ARTIFACT_GUNGNIR:
+		item_->type = ITM_WEAPON_SPEAR;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 4;
+		item_->value1 = -3;
+		item_->value2 = 15;
+		item_->value6 = 0;
+		item_->value7 = 18;
+		item_->value8 = 7;
+		item_->can_throw = true;
+		item_->image = &img_item_weapon_bamboo_spear;
+		item_->equip_image = &img_play_item_weapon[19];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_NAME);
+		item_->weight = 8.0f;
+		item_->value = 900;
+		item_->curse = false;
 		break;
+	case FIXED_ARTIFACT_ROUKANKEN:
+	case FIXED_ARTIFACT_HAKUROUKEN:
+	case FIXED_ARTIFACT_KOISHIHAT:
+	case FIXED_ARTIFACT_MIKOCLOAK:
+	case FIXED_ARTIFACT_LUNATICTORCH:
+	case FIXED_ARTIFACT_MOONGEM:
+	case FIXED_ARTIFACT_NUCLEARBOOT:
+	case FIXED_ARTIFACT_CONTROLROD:
+	case FIXED_ARTIFACT_PICKANDSHOVELS:
+	case FIXED_ARTIFACT_SILVERKNIFE:
 	default:
 		break;
 	}

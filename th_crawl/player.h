@@ -418,6 +418,7 @@ public:
 	void SetPrevAction(int key, char item = 0, int num = 0);
 	void maybeAction();
 	coord_def GetDisplayPos();
+	bool attack(monster* mons_, bool counter_);
 	int move(short_move x_mov, short_move y_mov);
 	int move(const coord_def &c);
 	bool offsetmove(const coord_def &c);
@@ -570,6 +571,7 @@ public:
 	int GetSaved(){return true;};
 	int GetParadox(){return s_paradox;}
 	int GetResist();
+	int GetArtifactProperty(artifact_type type);
 	int GetSpellcard(){return s_spellcard;};
 	int GetProperty(tribe_proper_type type_);
 	int GetExhausted(){return s_exhausted;};

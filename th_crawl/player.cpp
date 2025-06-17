@@ -1032,6 +1032,85 @@ coord_def players::GetDisplayPos()
 		return coord_def(god_value[GT_YUKARI][0],god_value[GT_YUKARI][1]);
 	}
 }
+
+bool players::attack(monster* mons_, bool counter_)
+{
+	if (s_evoke_ghost) {
+		return false;
+	}
+			
+	attack_type brand_ = ATT_NORMAL;
+	if(equipment[ET_WEAPON])
+		brand_ = (attack_type)GetAttType((weapon_brand)equipment[ET_WEAPON]->value5);
+	attack_infor temp_att(GetAttack(false),GetAttack(true),GetHit(),this,GetParentType(),brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
+	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
+	{
+		doingActionDump(DACT_MELEE, equipment[ET_WEAPON]->name.getName());
+		//doingActionDump(DACT_MELEE, skill_string(itemtoskill(equipment[ET_WEAPON]->type)));
+		//나중에 무기 이름으로 바꾸기
+	}
+	else if(!equipment[ET_WEAPON])
+	{
+		doingActionDump(DACT_MELEE, LocalzationManager::locString(LOC_SYSTEM_UI_UNARMED));
+		//doingActionDump(DACT_MELEE, skill_string(SKT_UNWEAPON));
+	}
+	else
+	{
+		doingActionDump(DACT_MELEE, LocalzationManager::locString(LOC_SYSTEM_UI_INEFFICIENT));
+	}
+
+
+	if(mon_->damage(temp_att))
+	{
+		if(mon_->isLive()&& you.god == GT_YUUGI && !you.GetPunish(GT_YUUGI) && pietyLevel(you.piety)>=2 && randA(10) == 0)
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_YUUGI_CATCH,false,false,false,CL_yuigi,
+				PlaceHolderHelper(mon_->GetName()->getName()));
+			you.SetCatch(mon_);
+		}
+		if(alchemy_buff == ALCT_STONE_FIST)
+		{
+			alchemy_buff = ALCT_NONE;
+			alchemy_time = 0;
+		}
+	}
+	you.SetBattleCount(30);
+	youAttack(mon_);
+	if(mon_->isLive() && you.GetProperty(TPT_HORN))
+	{
+		int attack_ = 10;
+		int hit_ = 12+level/3;
+		if((equipment[ET_WEAPON] && randA(3)<1) || (!equipment[ET_WEAPON] && randA(2)<1))
+		{//무기가 있으면 25%로 무기가 없으면 33%의 확률로 박치기가 나간다.
+			attack_infor temp_att_(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor(LOC_SYSTEM_ATT_HEADBUTT));
+			mon_->damage(temp_att_, false);
+		}
+	}
+	if(mon_->isLive() && you.GetProperty(TPT_JAW))
+	{
+		int attack_ = 10;
+		int hit_ = 12+level/3;
+		if(randA(3)<1)
+		{
+			attack_infor temp_att_(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor(LOC_SYSTEM_ATT_CRUNCH));
+			mon_->damage(temp_att_, false);
+		}
+	}
+	if(s_wind)
+	{					
+		for(rect_iterator rlt(you.position,1,1);!rlt.end();rlt++)
+		{
+			unit *unit_ = env[current_level].isMonsterPos(rlt->x,rlt->y,&you);
+			if(unit_ && unit_ != mon_ && !unit_->isUserAlly())
+			{
+				unit_->damage(temp_att, false);
+
+			}
+		}
+	}
+    return true;
+}
+
 int players::move(short_move x_mov, short_move y_mov)
 {
 	int sight_ = 7;
@@ -1099,81 +1178,14 @@ int players::move(short_move x_mov, short_move y_mov)
 				return 0;
 			}
 
-
-
-			attack_type brand_ = ATT_NORMAL;
-			if(equipment[ET_WEAPON])
-				brand_ = (attack_type)GetAttType((weapon_brand)equipment[ET_WEAPON]->value5);
-			attack_infor temp_att(GetAttack(false),GetAttack(true),GetHit(),this,GetParentType(),brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
-			if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
-			{
-				doingActionDump(DACT_MELEE, equipment[ET_WEAPON]->name.getName());
-				//doingActionDump(DACT_MELEE, skill_string(itemtoskill(equipment[ET_WEAPON]->type)));
-				//나중에 무기 이름으로 바꾸기
+			if(attack(mons_, false)) {
+				time_delay += GetAtkDelay();
+				return 1;
 			}
-			else if(!equipment[ET_WEAPON])
-			{
-				doingActionDump(DACT_MELEE, LocalzationManager::locString(LOC_SYSTEM_UI_UNARMED));
-				//doingActionDump(DACT_MELEE, skill_string(SKT_UNWEAPON));
-			}
-			else
-			{
-				doingActionDump(DACT_MELEE, LocalzationManager::locString(LOC_SYSTEM_UI_INEFFICIENT));
+			else {
+				return 0;
 			}
 
-
-			if(mon_->damage(temp_att))
-			{
-				if(mon_->isLive()&& you.god == GT_YUUGI && !you.GetPunish(GT_YUUGI) && pietyLevel(you.piety)>=2 && randA(10) == 0)
-				{
-					LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_YUUGI_CATCH,false,false,false,CL_yuigi,
-						PlaceHolderHelper(mon_->GetName()->getName()));
-					you.SetCatch(mon_);
-				}
-				if(alchemy_buff == ALCT_STONE_FIST)
-				{
-					alchemy_buff = ALCT_NONE;
-					alchemy_time = 0;
-				}
-			}
-			you.SetBattleCount(30);
-			youAttack(mon_);
-			if(mon_->isLive() && you.GetProperty(TPT_HORN))
-			{
-				int attack_ = 10;
-				int hit_ = 12+level/3;
-				if((equipment[ET_WEAPON] && randA(3)<1) || (!equipment[ET_WEAPON] && randA(2)<1))
-				{//무기가 있으면 25%로 무기가 없으면 33%의 확률로 박치기가 나간다.
-					attack_infor temp_att_(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor(LOC_SYSTEM_ATT_HEADBUTT));
-					mon_->damage(temp_att_, false);
-				}
-			}
-			if(mon_->isLive() && you.GetProperty(TPT_JAW))
-			{
-				int attack_ = 10;
-				int hit_ = 12+level/3;
-				if(randA(3)<1)
-				{
-					attack_infor temp_att_(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor(LOC_SYSTEM_ATT_CRUNCH));
-					mon_->damage(temp_att_, false);
-				}
-			}
-			if(s_wind)
-			{					
-				for(rect_iterator rlt(you.position,1,1);!rlt.end();rlt++)
-				{
-					unit *unit_ = env[current_level].isMonsterPos(rlt->x,rlt->y,&you);
-					if(unit_ && unit_ != mon_ && !unit_->isUserAlly())
-					{
-						unit_->damage(temp_att, false);
-
-					}
-				}
-			}
-
-
-			time_delay += GetAtkDelay();
-			return 1;
 		}
 
 
@@ -1723,7 +1735,10 @@ int players::GetSpellPower(int s1_, int s2_, int s3_)
 	{
 		power_ *= 1.5f;
 	}
-
+	
+	if(GetArtifactProperty(ART_MAGICBOOST) > 0) {
+		power_ *= 1.5f;
+	}
 
 	return power_;
 }
@@ -3877,6 +3892,10 @@ bool players::SetShield(int percent_, int turn_) {
 	return true;
 }
 bool players::SetOverheat(int overheat_, int turn_) {
+	if(GetArtifactProperty(ART_ANTIOVERHEAT) > 0) {
+		return true;
+	}
+		
 	if(s_overheat > 0) {
 		if(s_overheat >= GetHp()) {
 			return false;
@@ -3906,6 +3925,20 @@ int players::GetInvisible()
 int players::GetResist()
 {
 	return level * 6 + 100+magic_resist;
+}
+int players::GetArtifactProperty(artifact_type type)
+{
+	int num_ = 0;
+	for(int i = 0; i < ET_LAST; i++) {
+		if(equipment[i]) {
+			for(auto& infor : equipment[i].atifact_vector) {
+				if(infor.kind == type) {
+					num_ += infor.value;
+				}				
+			}
+		}
+	}
+	return num_;
 }
 bool players::GetPunish(god_type god_)
 {
@@ -5477,9 +5510,18 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 
 
 		int type_ = 0;
+		bool pent
+		
 		int pentan_ = s_wind?getThrowLength():1;
+		
 		tanmac_type tanmac_type_ = TMT_WEAPON;
 		beam_type beam_type_ = s_wind?BMT_PENETRATE:BMT_NORMAL;
+		if((*it).GetArtifactProperty(ART_PENTAN)) {
+			pentan_ = 7;
+			beam_type_ = BMT_PENETRATE;
+			short_ = false;
+			type_ = 16; //큰불
+		}
 		if ((*it).type == ITM_THROW_TANMAC && (*it).value4 == TMT_DOGGOJEO) {
 			pentan_ = getThrowLength();
 			beam_type_ = BMT_PENETRATE;

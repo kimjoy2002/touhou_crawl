@@ -777,6 +777,16 @@ int item::GetValue(int i)
 		return 0;
 	}
 }
+int item::GetArtifactProperty(artifact_type type)
+{
+	int num_ = 0;
+	for(auto& infor : atifact_vector) {
+		if(infor.kind == type) {
+			num_ += infor.value;
+		}
+	}
+	return num_;
+}
 void item::TurnSave()
 {
 	delay_turn = you.turn;

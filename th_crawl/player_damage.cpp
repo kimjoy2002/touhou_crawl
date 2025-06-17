@@ -323,6 +323,11 @@ int players::GetThrowAttack(const item* it, bool max_)
 
 
 	int atk_ = rand_int((int)round(min_atk_),(int)round(max_atk_));
+	if(it->fixed_artifact == FIXED_ARTIFACT_GUNGNIR) {
+		atk_ *= 3;//궁니르 보완
+	}
+	
+	
 	return max_?(int)round(max_atk_):atk_;
 }
 
@@ -966,7 +971,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 
 	{//실드 공식
      //breaking 기본 30
-	 //만약 그레이즈가능한 공격일 경우 5을 뺀다.
+	 //만약 그레이즈가능한 공격일 경우 15을 뺀다.
      // (SH / breaking+SH)의 확률로 가드!
 	 //단 실드가 통하지 않는 공격일경우 최종확률이 0이됨(나중에 넣기)
 		float breaking = 75;
@@ -1193,12 +1198,38 @@ bool players::damage(attack_infor &a, bool perfect_)
 			}
 			if(a.order)	
 			{
+				std::string shield_str = "";
+				
+				if(!equipment[ET_SHIELD]) {
+					shield_str = LocalzationManager::locString(LOC_SYSTEM_BLOCK_BODY);
+				} else if(equipment[ET_SHIELD]->fixed_artifact == FIXED_ARTIFACT_HAKUROUKEN) {
+					shield_str = LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_NAME);
+				} else {
+					shield_str = LocalzationManager::locString(LOC_SYSTEM_BLOCK_SHIELD);
+				}
+				
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_BLOCK,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
 					PlaceHolderHelper(name.getName()),
 					PlaceHolderHelper(name_.getName()),
-					PlaceHolderHelper(a.name.getName()));
+					PlaceHolderHelper(a.name.getName()),
+					PlaceHolderHelper(shield_str));
 				soundmanager.playSound("block");
+				if(GetArtifactProperty(ART_COUNTER))
+				{
+					int length_ = GetLengthFromCenter(position.x, position.y, a.order->position.x, a.order->position.y);
+					if(length_ <= 1) {
+						//근접함
+						int delay_ = GetAtkDelay();
+						while(delay_ > 0) {
+							if(rand_int(1,10) <= delay_ && mons_->isLive()) {
+								attack(mons_, true);
+							}
+							delay_-=10;
+						}
+					}
+				}
 			}
+			
 		}
 	}
 	else

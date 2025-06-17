@@ -1082,7 +1082,7 @@ LOC_SYSTEM_MON_ABIL_SPEAEKER_PHONE,{0} used a loudspeaker to call allies on the 
 LOC_SYSTEM_MON_DROWNED,{0} drowns.
 LOC_SYSTEM_MON_FALL_LAVA,{0} falls into lava.
 LOC_SYSTEM_MON_FALL_OIL,{0} landed in a pool of oil.
-LOC_SYSTEM_FIGHT_BLOCK,{0} block{0!=you?s:} {1}{1==you?r:'s} {2} with a shield.
+LOC_SYSTEM_FIGHT_BLOCK,{0} block{0!=you?s:} {1}{1==you?r:'s} {2} with a {3}.
 LOC_SYSTEM_FIGHT_EVADE,{0} evade{0!=you?s:} {1}{1==you?r:'s} {2}.
 LOC_SYSTEM_FIGHT_GRAZE,{0} graze{0!=you?s:} {1}{1==you?r:'s} {2}.
 LOC_SYSTEM_FIGHT_MISS,{0}{0==you?r:'s} {1} misses {2}.

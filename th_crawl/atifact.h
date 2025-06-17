@@ -68,6 +68,15 @@ enum fixed_artifact_type {
 	FIXED_ARTIFACT_CONTROLROD,//제어봉
 	FIXED_ARTIFACT_PICKANDSHOVELS,//지네의 삽과 곡괭이
 	FIXED_ARTIFACT_SILVERKNIFE,//메이드 특제 나이프
+	FIXED_ARTIFACT_FIREFLYCLOAK,//+2 반딧불 망토 {*벌레, 독저항}
+	FIXED_ARTIFACT_ICEFAIRYRING,//얼음 요정의 반지 {냉기저항+, 화염저항-, 냉기마법+4}
+	FIXED_ARTIFACT_LAEVATEIN,// +11 레바테인 {화염+, AC-4)
+	FIXED_ARTIFACT_LILYRING,//은방울꽃 반지 (독면역, AC+5)
+	FIXED_ARTIFACT_GALECLOGS,//+0 질풍 나막신 {질풍, EV+4}
+	FIXED_ARTIFACT_HELLTSHIRT,//+6 지옥 티셔츠 {STR+6 INT-6 DEX+6}
+	FIXED_ARTIFACT_KAPPAFULLARMOR,//+12 풀무장 캇파옷 {+미사일, *자폭, 화염저항+, 냉기저항+}
+	FIXED_ARTIFACT_MAIDUNIFORM,//+4 마계 메이드옷 {}
+	FIXED_ARTIFACT_IBUKISAKE,//+7 이부키효 {음주, 체력재생++, 독저항}
 	FIXED_ARTIFACT_MAX
 };
 

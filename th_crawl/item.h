@@ -213,6 +213,7 @@ public:
 	bool SameItem(const item &item_);
 	float GetStabPercent();
 	int GetValue(int i);
+	int GetArtifactProperty(artifact_type type);
 
 	void TurnSave();//다른층으로 도망쳤다.
 	void TurnLoad();//다른층에서 도망왔다.

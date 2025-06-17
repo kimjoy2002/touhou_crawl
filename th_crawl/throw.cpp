@@ -79,13 +79,13 @@ attack_type GetWeapontoTanmac(weapon_brand brand)
 	switch(brand)
 	{
 		case WB_FIRE:
-			att_type = ATT_THROW_FIRE;
+			att_type = ATT_THROW_FIRE_PYSICAL;
 			break;
 		case WB_COLD:
-			att_type = ATT_THROW_COLD;
+			att_type = ATT_THROW_COLD_PYSICAL;
 			break;
 		case WB_POISON:
-			att_type = ATT_THROW_WEAK_POISON;
+			att_type = ATT_THROW_POISON_PYSICAL;
 			break;		
 		case WB_CURSE:		
 		case WB_WEATHER	:

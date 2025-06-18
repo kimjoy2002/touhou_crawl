@@ -416,6 +416,15 @@ extern textures img_item_fixed_artifact_nuclearboot;
 extern textures img_item_fixed_artifact_controlrod;
 extern textures img_item_fixed_artifact_pickandshovels;
 extern textures img_item_fixed_artifact_silverknife;
+extern textures img_item_fixed_artifact_fireflycloak;
+extern textures img_item_fixed_artifact_icefairyring;
+extern textures img_item_fixed_artifact_laevatein;
+extern textures img_item_fixed_artifact_lilyring;
+extern textures img_item_fixed_artifact_galeclogs;
+extern textures img_item_fixed_artifact_helltshirt;
+extern textures img_item_fixed_artifact_kappafullarmor;
+extern textures img_item_fixed_artifact_maiduniform;
+extern textures img_item_fixed_artifact_ibukisake;
 
 
 

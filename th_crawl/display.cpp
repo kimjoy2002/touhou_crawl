@@ -1480,7 +1480,7 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST);
 	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST)) < 8)
 		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST)), ' ');
-	ss << ": " << (resist_>=100?'∞':(resist_>=1?'+':(resist_<=-1?'-':'.')));
+	ss << ": " << (resist_>=100?"∞":(resist_>=1?"+":(resist_<=-1?"-":".")));
 	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	//sprintf_s(temp,100,"SH:%4d",you.sh);

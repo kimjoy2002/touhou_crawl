@@ -76,6 +76,7 @@ TextureFile texture_players01(imgfile_players01);
 TextureFile texture_item01(imgfile_item01);
 TextureFile texture_item02(imgfile_item02);
 TextureFile texture_item03(imgfile_item03);
+TextureFile texture_item04(imgfile_item04);
 TextureFile texture_laser(imgfile_laser);
 TextureFile texture_dot_floor(imgfile_dot_floor);
 TextureFile texture_dot_wall(imgfile_dot_wall);
@@ -1321,7 +1322,7 @@ textures img_play_item_tribe[1] = {
 };
 
 
-textures img_play_item_fixed_artifact[11] = {
+textures img_play_item_fixed_artifact[18] = {
 	textures(&texture_players01, 321),//0, 팔괘로
 	textures(&texture_players01, 322),//1, 궁니르
 	textures(&texture_players01, 323),//2, 누관검
@@ -1332,7 +1333,14 @@ textures img_play_item_fixed_artifact[11] = {
 	textures(&texture_players01, 328),//7, 핵융합의다리
 	textures(&texture_players01, 329),//8, 제어봉
 	textures(&texture_players01, 330),//9, 곡괭이와 삽
-	textures(&texture_players01, 331)//10, 실버나이프
+	textures(&texture_players01, 331),//10, 실버나이프
+	textures(&texture_players01, 332),//11, 반딧불 망토
+	textures(&texture_players01, 333),//12, 레바테인
+	textures(&texture_players01, 334),//13, 질풍 나막신
+	textures(&texture_players01, 335),//14, 지옥 티셔츠
+	textures(&texture_players01, 336),//15, 풀무장 캇파옷
+	textures(&texture_players01, 337),//16, 마계 메이드옷
+	textures(&texture_players01, 338),//17, 이부키효
 };
 
 
@@ -1447,6 +1455,17 @@ textures img_item_fixed_artifact_nuclearboot(&texture_item03, 235, 255);
 textures img_item_fixed_artifact_controlrod(&texture_item03, 236, 255);
 textures img_item_fixed_artifact_pickandshovels(&texture_item03, 237, 255);
 textures img_item_fixed_artifact_silverknife(&texture_item03, 238, 255);
+
+textures img_item_fixed_artifact_fireflycloak(&texture_item03, 239, 255);
+textures img_item_fixed_artifact_icefairyring(&texture_item04, 0, 255);
+textures img_item_fixed_artifact_laevatein(&texture_item04, 1, 255);
+textures img_item_fixed_artifact_lilyring(&texture_item04, 2, 255);
+textures img_item_fixed_artifact_galeclogs(&texture_item04, 3, 255);
+textures img_item_fixed_artifact_helltshirt(&texture_item04, 4, 255);
+textures img_item_fixed_artifact_kappafullarmor(&texture_item04, 5, 255);
+textures img_item_fixed_artifact_maiduniform(&texture_item04, 6, 255);
+textures img_item_fixed_artifact_ibukisake(&texture_item04, 7, 255);
+
 
 
 textures img_item_food_bread(&texture_item01, 0, 255);
@@ -3648,6 +3667,38 @@ int texturetoint(textures* input)
 		return 578;
 	else if(input == &img_play_item_fixed_artifact[10])
 		return 579;
+	else if(input == &img_play_item_fixed_artifact[11])
+		return 580;
+	else if(input == &img_play_item_fixed_artifact[12])
+		return 581;
+	else if(input == &img_play_item_fixed_artifact[13])
+		return 582;
+	else if(input == &img_play_item_fixed_artifact[14])
+		return 583;
+	else if(input == &img_play_item_fixed_artifact[15])
+		return 584;
+	else if(input == &img_play_item_fixed_artifact[16])
+		return 585;
+	else if(input == &img_play_item_fixed_artifact[17])
+		return 586;
+	else if(input == &img_item_fixed_artifact_fireflycloak)
+		return 587;
+	else if(input == &img_item_fixed_artifact_icefairyring)
+		return 588;
+	else if(input == &img_item_fixed_artifact_laevatein)
+		return 589;
+	else if(input == &img_item_fixed_artifact_lilyring)
+		return 590;
+	else if(input == &img_item_fixed_artifact_galeclogs)
+		return 591;
+	else if(input == &img_item_fixed_artifact_helltshirt)
+		return 592;
+	else if(input == &img_item_fixed_artifact_kappafullarmor)
+		return 593;
+	else if(input == &img_item_fixed_artifact_maiduniform)
+		return 594;
+	else if(input == &img_item_fixed_artifact_ibukisake)
+		return 595;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -4834,6 +4885,38 @@ textures* inttotexture(int input)
 		return &img_play_item_fixed_artifact[9];
 	case 579:
 		return &img_play_item_fixed_artifact[10];
+	case 580:
+		return &img_play_item_fixed_artifact[11];
+	case 581:
+		return &img_play_item_fixed_artifact[12];
+	case 582:
+		return &img_play_item_fixed_artifact[13];
+	case 583:
+		return &img_play_item_fixed_artifact[14];
+	case 584:
+		return &img_play_item_fixed_artifact[15];
+	case 585:
+		return &img_play_item_fixed_artifact[16];
+	case 586:
+		return &img_play_item_fixed_artifact[17];
+	case 587:
+		return &img_item_fixed_artifact_fireflycloak;
+	case 588:
+		return &img_item_fixed_artifact_icefairyring;
+	case 589:
+		return &img_item_fixed_artifact_laevatein;
+	case 590:
+		return &img_item_fixed_artifact_lilyring;
+	case 591:
+		return &img_item_fixed_artifact_galeclogs;
+	case 592:
+		return &img_item_fixed_artifact_helltshirt;
+	case 593:
+		return &img_item_fixed_artifact_kappafullarmor;
+	case 594:
+		return &img_item_fixed_artifact_maiduniform;
+	case 595:
+		return &img_item_fixed_artifact_ibukisake;
 	default:
 		return &img_mons_default;
 	}

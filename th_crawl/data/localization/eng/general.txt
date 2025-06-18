@@ -2937,7 +2937,7 @@ LOC_SYSTEM_ITEM_ARTIFACT_INFO_INT,Intelligence changes by the value. ({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_HUNGRY,Power is consumed rapidly.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_FULL,Power is consumed slowly.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_TELEPORT,You teleport randomly.
-LOC_SYSTEM_ITEM_ARTIFACT_INFO_POISON_RESIST_GOOD,You gain immunity to poison.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_POISON_RESIST_GOOD,You gain resistance to poison.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_POISON_RESIST_BAD,You become vulnerable to poison.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_FIRE_RESIST,Increases or decreases fire resistance. ({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_COLD_RESIST,Increases or decreases cold resistance. ({0})

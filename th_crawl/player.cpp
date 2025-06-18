@@ -120,7 +120,7 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
 force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
-s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_oil(0), s_fire(0), s_tracking(0), s_shooting_turn(0), s_overheat(0), s_overheat_turn(0)
+s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_oil(0), s_fire(0), s_tracking(0), s_shooting_turn(0), s_overheat(0), s_overheat_turn(0),
 s_regen(0), s_selfdestruct(0), s_glutton(0), s_glutton_turn(0), s_shield(), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
@@ -1048,7 +1048,7 @@ coord_def players::GetDisplayPos()
 	}
 }
 
-bool players::attack(monster* mons_, bool counter_)
+bool players::attack(monster* mon_, bool counter_)
 {
 	if (s_evoke_ghost) {
 		return false;
@@ -1132,7 +1132,7 @@ int players::move(short_move x_mov, short_move y_mov)
 	if(!x_mov && !y_mov)
 		return 0;
 	int drunken_ = randA(10);
-	 (GetArtifactProperty(ART_PERMAINVI) > 0 && ) //벽이 없는 방향으로 움직임 구현해야함
+	// (GetArtifactProperty(ART_PERMAINVI) > 0 && ) //벽이 없는 방향으로 움직임 구현해야함
 	if(s_confuse || (s_drunken && drunken_==0))
 	{
 		do
@@ -1194,7 +1194,7 @@ int players::move(short_move x_mov, short_move y_mov)
 				return 0;
 			}
 
-			if(attack(mons_, false)) {
+			if(attack(mon_, false)) {
 				time_delay += GetAtkDelay();
 				return 1;
 			}
@@ -3963,7 +3963,7 @@ int players::GetArtifactProperty(artifact_type type)
 	int num_ = 0;
 	for(int i = 0; i < ET_LAST; i++) {
 		if(equipment[i]) {
-			for(auto& infor : equipment[i].atifact_vector) {
+			for(auto& infor : equipment[i]->atifact_vector) {
 				if(infor.kind == type) {
 					num_ += infor.value;
 				}				
@@ -5541,9 +5541,7 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 			return false;
 
 
-		int type_ = 0;
-		bool pent
-		
+		int type_ = 0;		
 		int pentan_ = s_wind?getThrowLength():1;
 		
 		tanmac_type tanmac_type_ = TMT_WEAPON;

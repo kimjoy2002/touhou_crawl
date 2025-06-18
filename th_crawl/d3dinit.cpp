@@ -154,6 +154,8 @@ bool Setup()
 		return_ = false;
 	if (!texture_item03.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
+	if (!texture_item04.loading(g_pd3dDevice, g_pImmediateContext))
+		return_ = false;
 	if(!texture_laser.loading(g_pd3dDevice, g_pImmediateContext))
 		return_ = false;
 	

@@ -6275,8 +6275,8 @@ void shadow::SaveDatas(FILE *fp)
 	SaveData<int>(fp, original_id);
 	SaveData<bool>(fp, unharm);
 	
-	char temp[100];
-	sprintf_s(temp, 100,"%s",name.c_str());
+	char temp[512];
+	sprintf_s(temp, 512,"%s",name.c_str());
 	SaveData<char>(fp,*temp, strlen(temp)+1);
 }
 void shadow::LoadDatas(FILE *fp)

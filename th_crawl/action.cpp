@@ -4561,8 +4561,8 @@ void floorMove()
 	int num_ = 0;
 	std::vector<int> listkey;
 	for (auto it = enter_.begin(); it != enter_.end(); it++) {
-		char temp[100];
-		sprintf_s(temp, 100, "%c - %s  ", it->first, it->second.c_str());
+		char temp[512];
+		sprintf_s(temp, 512, "%c - %s  ", it->first, it->second.c_str());
 		printlog(temp, false, false, false, CL_help, it->first);
 		listkey.push_back(it->first);
 		num_++;

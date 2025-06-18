@@ -14,7 +14,9 @@
 #include "potion.h"
 #include "scroll.h"
 #include "smoke.h"
+#include "summon.h"
 #include "skill.h"
+#include "skill_use.h"
 #include "ring.h"
 #include "save.h"
 #include "key.h"
@@ -1234,15 +1236,15 @@ bool players::damage(attack_infor &a, bool perfect_)
 					PlaceHolderHelper(a.name.getName()),
 					PlaceHolderHelper(shield_str));
 				soundmanager.playSound("block");
-				if(GetArtifactProperty(ART_COUNTER))
+				if(GetArtifactProperty(ART_COUNTER) && !a.order->isplayer())
 				{
 					int length_ = GetLengthFromCenter(position.x, position.y, a.order->position.x, a.order->position.y);
 					if(length_ <= 1) {
 						//근접함
 						int delay_ = GetAtkDelay();
 						while(delay_ > 0) {
-							if(rand_int(1,10) <= delay_ && mons_->isLive()) {
-								attack(mons_, true);
+							if(rand_int(1,10) <= delay_ && a.order->isLive()) {
+								attack((monster*)a.order, true);
 							}
 							delay_-=10;
 						}

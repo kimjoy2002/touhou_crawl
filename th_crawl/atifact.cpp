@@ -1170,8 +1170,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value7 = 0;
 		item_->value8 = 0;
 		item_->can_throw = false;
-		item_->image = &img_item_fixed_artifact_mikocloak;
-		item_->equip_image = &img_play_item_fixed_artifact[5];
+		item_->image = &img_item_fixed_artifact_fireflycloak;
+		item_->equip_image = &img_play_item_fixed_artifact[11];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_FIREFLYCLOAK_NAME);
 		item_->weight = 5.0f;
 		item_->value = 300;
@@ -1193,7 +1193,7 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value7 = 0;
 		item_->value8 = 0;
 		item_->can_throw = false;
-		item_->image = &img_item_artifact_ring;
+		item_->image = &img_item_fixed_artifact_icefairyring;
 		item_->equip_image = NULL;
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_ICEFAIRYRING_NAME);
 		item_->weight = 1.0f;
@@ -1216,8 +1216,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value7 = 16;
 		item_->value8 = 7;
 		item_->can_throw = false;
-		item_->image = &img_item_artifact_greatsword;
-		item_->equip_image = &img_play_item_fixed_artifact[2];
+		item_->image = &img_item_fixed_artifact_laevatein;
+		item_->equip_image = &img_play_item_fixed_artifact[12];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_LAEVATEIN_NAME);
 		item_->weight = 12.0f;
 		item_->value = 950;
@@ -1239,7 +1239,7 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value7 = 0;
 		item_->value8 = 0;
 		item_->can_throw = false;
-		item_->image = &img_item_artifact_ring;
+		item_->image = &img_item_fixed_artifact_lilyring;
 		item_->equip_image = NULL;
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_LILYRING_NAME);
 		item_->weight = 1.0f;
@@ -1261,8 +1261,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value7 = 0;
 		item_->value8 = 0;
 		item_->can_throw = false;
-		item_->image = &img_item_fixed_artifact_nuclearboot;
-		item_->equip_image = &img_play_item_fixed_artifact[7];
+		item_->image = &img_item_fixed_artifact_galeclogs;
+		item_->equip_image = &img_play_item_fixed_artifact[13];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_GALECLOGS_NAME);
 		item_->weight = 4.0f;
 		item_->value = 300;
@@ -1285,8 +1285,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value7 = 0;
 		item_->value8 = 0;
 		item_->can_throw = false;
-		item_->image = &img_item_fixed_artifact_nuclearboot;
-		item_->equip_image = &img_play_item_fixed_artifact[7];
+		item_->image = &img_item_fixed_artifact_helltshirt;
+		item_->equip_image = &img_play_item_fixed_artifact[14];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_HELLTSHIRT_NAME);
 		item_->weight = 6.0f;
 		item_->value = 500;
@@ -1311,8 +1311,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value7 = 0;
 		item_->value8 = 0;
 		item_->can_throw = false;
-		item_->image = &img_item_fixed_artifact_nuclearboot;
-		item_->equip_image = &img_play_item_fixed_artifact[7];
+		item_->image = &img_item_fixed_artifact_kappafullarmor;
+		item_->equip_image = &img_play_item_fixed_artifact[15];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_NAME);
 		item_->weight = 30.0f;
 		item_->value = 1200;
@@ -1335,8 +1335,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value7 = 0;
 		item_->value8 = 0;
 		item_->can_throw = false;
-		item_->image = &img_item_fixed_artifact_nuclearboot;
-		item_->equip_image = &img_play_item_fixed_artifact[7];
+		item_->image = &img_item_fixed_artifact_maiduniform;
+		item_->equip_image = &img_play_item_fixed_artifact[16];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_NAME);
 		item_->weight = 16.0f;
 		item_->value = 900;
@@ -1360,8 +1360,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value7 = 0;
 		item_->value8 = 0;
 		item_->can_throw = false;
-		item_->image = &img_item_fixed_artifact_shield;
-		item_->equip_image = &img_play_item_shield[1];
+		item_->image = &img_item_fixed_artifact_ibukisake;
+		item_->equip_image = &img_play_item_fixed_artifact[17];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_IBUKISAKE_NAME);
 		item_->weight = 5.0f;
 		item_->value = 500;

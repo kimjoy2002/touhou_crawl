@@ -1480,7 +1480,7 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST);
 	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST)) < 8)
 		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST)), ' ');
-	ss << ": " << (resist_>=1?'+':(resist_<=-1?'-':'.'));
+	ss << ": " << (resist_>=100?'∞':(resist_>=1?'+':(resist_<=-1?'-':'.')));
 	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
 	//sprintf_s(temp,100,"SH:%4d",you.sh);
@@ -3077,6 +3077,10 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				stateDraw.addState(LocalzationManager::formatString(LOC_SYSTEM_BUFF_STAT_OVERHEAT, PlaceHolderHelper(to_string(you.s_overheat))),risk_?CL_danger:CL_warning,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_OVERHEAT), this);
 			}
+			if(you.s_glutton_turn > 0) {
+				stateDraw.addState(LocalzationManager::formatString(LOC_SYSTEM_BUFF_STAT_GLUTTON, PlaceHolderHelper(to_string(you.s_glutton))),CL_white_blue,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_GLUTTON), this);
+			}
 			if(you.s_stasis)
 			{				
 				D3DCOLOR color_ = CL_danger;
@@ -3292,7 +3296,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				bool oil_ = (you.s_oil);
 				bool fire_ = (you.s_fire);
 				bool tracking_ = you.s_tracking;
-				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_INVISIBLE), (glow_ || oil_ || fire_ || tracking_) ? CL_bad : (you.togle_invisible ? CL_speak : you.s_invisible>10 ? CL_white_blue : CL_blue),
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_INVISIBLE), (glow_ || oil_ || fire_ || tracking_) ? CL_bad : ((you.togle_invisible || you.s_invisible == -1) ? CL_speak : you.s_invisible>10 ? CL_white_blue : CL_blue),
 					glow_? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_INVISIBLE_MEANLESS) : LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_INVISIBLE), this);
 			}
 			if(you.s_tracking) {

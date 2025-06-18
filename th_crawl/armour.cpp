@@ -73,7 +73,9 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 	t->value3 = GetMaterial(material,AMV_MIN_EV);
 	t->value4 = 0;
 	t->value5 = type;
-	t->value6 = 0;	
+	t->value6 = 0;
+	t->value7 = 0;
+	t->value8 = 0;
 	t->is_pile = false;
 	t->can_throw = false;
 

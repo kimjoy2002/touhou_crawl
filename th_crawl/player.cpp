@@ -120,7 +120,8 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
 force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
-s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_oil(0), s_fire(0), s_tracking(0), s_shooting_turn(0), s_overheat(0), s_overheat_turn(0), s_shield(), alchemy_buff(ALCT_NONE), alchemy_time(0),
+s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_oil(0), s_fire(0), s_tracking(0), s_shooting_turn(0), s_overheat(0), s_overheat_turn(0)
+s_regen(0), s_selfdestruct(0), s_glutton(0), s_glutton_turn(0), s_shield(), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -309,6 +310,10 @@ void players::init() {
 	s_shooting_turn = 0;
 	s_overheat = 0;
 	s_overheat_turn = 0;
+	s_regen = 0;
+	s_selfdestruct = 0;
+	s_glutton = 0;
+	s_glutton_turn = 0;
 	s_shield.percent = 0;
 	s_shield.value = 0;
 	s_shield.turn = 0;
@@ -550,6 +555,10 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_shooting_turn);
 	SaveData<int>(fp, s_overheat);
 	SaveData<int>(fp, s_overheat_turn);
+	SaveData<int>(fp, s_regen);
+	SaveData<int>(fp, s_selfdestruct);
+	SaveData<int>(fp, s_glutton);
+	SaveData<int>(fp, s_glutton_turn);
 	SaveData<shield_struct>(fp, s_shield);
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
@@ -815,6 +824,12 @@ void players::LoadDatas(FILE *fp)
 	if(!isPrevVersion(loading_version_string, "ver1.106")) {
 		LoadData<int>(fp, s_overheat);
 		LoadData<int>(fp, s_overheat_turn);
+	}
+	if(!isPrevVersion(loading_version_string, "ver1.107")) {
+		LoadData<int>(fp, s_regen);
+		LoadData<int>(fp, s_selfdestruct);
+		LoadData<int>(fp, s_glutton);
+		LoadData<int>(fp, s_glutton_turn);
 	}
 	if(!isPrevVersion(loading_version_string, "ver1.11")) {
 		LoadData<shield_struct>(fp, s_shield);
@@ -1117,6 +1132,7 @@ int players::move(short_move x_mov, short_move y_mov)
 	if(!x_mov && !y_mov)
 		return 0;
 	int drunken_ = randA(10);
+	 (GetArtifactProperty(ART_PERMAINVI) > 0 && ) //벽이 없는 방향으로 움직임 구현해야함
 	if(s_confuse || (s_drunken && drunken_==0))
 	{
 		do
@@ -1929,6 +1945,9 @@ int players::HpRecoverDelay(int delay_)
 	//}
 	{
 		cacul_ += 100 * you.GetBuffOk(BUFFSTAT_REGEN);
+	}
+	if(s_regen) {
+		cacul_ += s_regen;
 	}
 	if(GetProperty(TPT_REGEN)>0)
 	{
@@ -3005,6 +3024,8 @@ bool players::SetPoison(int poison_, int max_, bool strong_)
 		return false;
 	if(poison_resist>0 && !strong_)
 		return false;
+	if(poison_resist >= 100)
+		return false;
 	if(s_poison >= max_)
 		return false;
 	else if(poison_resist<0)
@@ -3345,6 +3366,9 @@ bool players::SetBattleCount(int count_)
 {
 	if(count_<0)
 		return false;
+	if(s_glutton_turn > 0) {
+		s_glutton_turn = count_;
+	}
 	if(battle_count == 0 && count_>0)
 	{
 		ChangeBattleCount(true);
@@ -3905,6 +3929,14 @@ bool players::SetOverheat(int overheat_, int turn_) {
 	}
 	s_overheat += overheat_;
 	s_overheat_turn = turn_;
+	return true;
+}
+bool players::SetGlutton(int glutton_, int turn_) {
+	s_glutton += glutton_;
+	if(s_glutton > 9) {
+		s_glutton = 9;
+	}
+	s_glutton_turn = turn_;
 	return true;
 }
 int players::AbsorbShield(int damage_) {

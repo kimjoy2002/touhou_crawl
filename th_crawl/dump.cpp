@@ -639,7 +639,7 @@ bool Dump(int type, wstring *filename_)
 		poison_resist_string = std::string(max_length_fcep-PrintCharWidth(poison_resist_string), ' ') + poison_resist_string;
 	}
 	offset1_ = PrintCharWidth(poison_resist_string) +  PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_SHIELD)); 
-	ss << poison_resist_string << ": " << (resist_>=1?('+'):(resist_<=-1?'-':'.'));
+	ss << poison_resist_string << ": " << (resist_>=100?('∞'):(resist_>=1?('+'):(resist_<=-1?'-':'.')));
 	if(offset1_ < 44)
 		ss << std::string(44-offset1_, ' ');
 	ss << LocalzationManager::locString(LOC_SYSTEM_UI_SHIELD) << ": ";

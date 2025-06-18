@@ -628,7 +628,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			SetInter(IT_STAT);
 		}
 	}
-	if(s_invisible)
+	if(s_invisible > 0)
 	{
 		s_invisible--;
 		if(!s_invisible)
@@ -1007,6 +1007,13 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_overheat_turn--;
 		if(s_overheat_turn == 0) {
 			s_overheat = 0;
+		}
+	}
+	if(s_glutton_turn) 
+	{
+		s_glutton_turn--;
+		if(s_glutton_turn == 0) {
+			s_glutton = 0;
 		}
 	}
 	if(s_shield.turn < s_shield.max_turn) {

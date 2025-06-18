@@ -14,6 +14,8 @@
 #include "rand_shuffle.h"
 #include "environment.h"
 
+int GetMaterial(material_kind kind_, armour_value ac_);
+
 atifact_infor::atifact_infor(int kind_, int value_)
 	:kind(kind_), value(value_)
 {
@@ -50,6 +52,7 @@ int GetAtifactValue(artifact_type ring_, int good_bad_)
 	case ART_INT:
 	case ART_AC:
 	case ART_EV:
+	case ART_SLAY:
 			return (1+randA(5))*a_;
 	case ART_HUNGRY:
 	case ART_FULL:
@@ -74,6 +77,15 @@ int GetAtifactValue(artifact_type ring_, int good_bad_)
 	case ART_FIREBALL:
 	case ART_GLUTTON:
 	case ART_SILVER:
+	case ART_BUG:
+	case ART_FIREPLUS:
+	case ART_POISONIMMUNE:
+	case ART_SWIFT:
+	case ART_MISSLE:
+	case ART_SELFDESTRUCT:
+	case ART_SUMMONRESIST:
+	case ART_DRUNK:
+	case ART_HP_REGEN:
 			return 1;
 	case ART_FIRE_RESIS:
 	case ART_ICE_RESIS:
@@ -207,6 +219,42 @@ string GetAtifactString(artifact_type ring_, int value_)
 	case ART_SILVER:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_SILVER);
 		break;
+	case ART_BUG:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_FIREFLYCLOAK_BUG);
+		break;
+	case ART_FIREPLUS:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LAEVATEIN_FIREPLUS);
+		break;
+	case ART_POISONIMMUNE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LILYRING_POISONIMMUNE);
+		break;
+	case ART_SWIFT:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_GALECLOGS_SWIFT);
+		break;
+	case ART_MISSLE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_MISSILE);
+		break;
+	case ART_SELFDESTRUCT:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_SELFDESTRUCT);
+		break;
+	case ART_SUMMONRESIST:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_SUMMONRES);
+		break;
+	case ART_DRUNK:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_IBUKISAKE_DRUNK);
+		break;
+	case ART_SLAY:
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_SLAY, PlaceHolderHelper(((value_ < 0) ? "" : "+") + to_string(value_)));
+		break;
+	case ART_HP_REGEN:
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_HP_REGEN, PlaceHolderHelper((value_==3?"+++":
+			(value_==2?"++":
+			(value_==1?"+":
+			(value_==-1?"-":
+			(value_==-2?"--":
+			(value_==-3?"---":"?"
+			))))))));
+		break;
 	case ART_SKILL_UP:
 		oss << skill_string((skill_type)(value_ %100)) << "+" << value_/100;
 		break;
@@ -335,6 +383,42 @@ std::string GetAtifactInfor(artifact_type ring_, int value_)
 	case ART_SILVER:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_SILVER_INFO);
 		break;
+	case ART_BUG:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_FIREFLYCLOAK_BUG_INFO);
+		break;
+	case ART_FIREPLUS:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LAEVATEIN_FIREPLUS_INFO);
+		break;
+	case ART_POISONIMMUNE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LILYRING_POISONIMMUNE_INFO);
+		break;
+	case ART_SWIFT:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_GALECLOGS_SWIFT_INFO);
+		break;
+	case ART_MISSLE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_MISSILE_INFO);
+		break;
+	case ART_SELFDESTRUCT:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_SELFDESTRUCT_INFO);
+		break;
+	case ART_SUMMONRESIST:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_SUMMONRES_INFO);
+		break;
+	case ART_DRUNK:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_IBUKISAKE_DRUNK_INFO);
+		break;
+	case ART_SLAY:
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_SLAY, PlaceHolderHelper(((value_ < 0) ? "" : "+") + to_string(value_)));
+		break;
+	case ART_HP_REGEN:
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_HP_REGEN, PlaceHolderHelper((value_==3?"+++":
+			(value_==2?"++":
+			(value_==1?"+":
+			(value_==-1?"-":
+			(value_==-2?"--":
+			(value_==-3?"---":"?"
+			))))))));
+		break;
 	case ART_SKILL_UP:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_SKILL_UP,
 			PlaceHolderHelper(skill_string((skill_type)(value_ % 100)) + to_string(value_ / 100)));
@@ -395,6 +479,61 @@ artifact_type ring_to_artifact(ring_type kind)
 }
 
 
+
+
+
+int isGenerateRandart(artifact_type type_) {
+	switch(type_) {
+		case ART_STR:
+		case ART_DEX:
+		case ART_INT:
+		case ART_HUNGRY:
+		case ART_FULL:
+		case ART_TELEPORT:
+		case ART_POISON_RESIS:
+		case ART_FIRE_RESIS:
+		case ART_ICE_RESIS:
+		case ART_SEE_INVISIBLE:
+		case ART_LEVITATION:
+		case ART_MANA:
+		case ART_CONFUSE_RESIS:
+		case ART_ELEC_RESIS:
+		case ART_MAGIC_RESIS:
+			return 10;
+		case ART_AC:
+		case ART_EV:
+		case ART_MAGACIAN:
+		case ART_INVISIBLE:
+			return 7;
+		case ART_SKILL_UP:
+		case ART_SLAY:
+		case ART_HP_REGEN:
+			return 3;
+		case ART_MAGICBOOST:
+		case ART_ANTIOVERHEAT:
+		case ART_PENTAN:
+		case ART_COUNTER:
+		case ART_PERMAINVI:
+		case ART_UNCONSCIOUS:
+		case ART_LUNATIC:
+		case ART_HALO:
+		case ART_RAD:
+		case ART_FIREBALL:
+		case ART_GLUTTON:
+		case ART_SILVER:
+		case ART_BUG:
+		case ART_FIREPLUS:
+		case ART_POISONIMMUNE:
+		case ART_SWIFT:
+		case ART_MISSLE:
+		case ART_SELFDESTRUCT:
+		case ART_SUMMONRESIST:
+		case ART_DRUNK:
+		default:
+			return 0;
+	}
+}
+
 bool effectartifact(artifact_type kind, int value)
 {
 	switch(kind)
@@ -416,7 +555,7 @@ bool effectartifact(artifact_type kind, int value)
 		return false;
 	case ART_TELEPORT:
 		you.teleport_curse += value;
-		return true;		
+		return true;
 	case ART_POISON_RESIS:
 		you.ResistUpDown(value,RST_POISON);
 		return false;
@@ -474,31 +613,66 @@ bool effectartifact(artifact_type kind, int value)
 		return false;
 	case ART_ELEC_RESIS:
 		you.ResistUpDown(value,RST_ELEC);
-		break;
+		return false;
 	case ART_MAGIC_RESIS:
 		you.MRUpDown((value>0?1:-1)*(20+abs(value)*20));
-		break;
+		return false;
 	case ART_MAGICBOOST:
-		break;
+		return true;
 	case ART_ANTIOVERHEAT:
+		return true;
 	case ART_PENTAN:
+		return true;
 	case ART_COUNTER:
+		return true;
 	case ART_PERMAINVI:
+		you.s_invisible = value>0?-1:0;
+		return true;
 	case ART_UNCONSCIOUS:
+		return true;
 	case ART_LUNATIC:
+		break;
 	case ART_HALO:
+		break;
 	case ART_RAD:
+		break;
 	case ART_FIREBALL:
+		break;
 	case ART_GLUTTON:
+		return true;
 	case ART_SILVER:
 		break;
+	case ART_BUG:
+		return true;
+	case ART_FIREPLUS:
+		break;
+	case ART_POISONIMMUNE:
+		you.ResistUpDown(value*1000,RST_POISON);
+		return true;
+	case ART_SWIFT:
+		you.speed -= value*2;
+		return true;
+	case ART_MISSLE:
+		break;
+	case ART_SELFDESTRUCT:
+		break;
+	case ART_SUMMONRESIST:
+		return true;
+	case ART_DRUNK:
+		break;
+	case ART_SLAY:
+		you.s_slaying += value;
+		return false;
+	case ART_HP_REGEN:
+		you.s_regen += value;
+		return false;
 	case ART_SKILL_UP:
 	{
 		int value_ = abs(value);
 		you.BonusSkillUpDown(value_ % 100, (value>0?1:-1) *value_ / 100);
 
 	}
-		break;
+		return true;
 	default:
 		break;
 	}
@@ -538,7 +712,7 @@ int ArmourExceptopn(armour_kind type)
 void MakeArtifact(item* item_, int good_bad_)
 {
 	int num_ = 1+randA(good_bad_ +randA(3));
-	deque<int> temp;
+	random_extraction<artifact_type> temp;
 	for(int i=0; i<ART_MAX_ATIFACT; i++)
 	{
 		if(item_->type >= ITM_ARMOR_BODY_FIRST && item_->type < ITM_ARMOR_BODY_LAST)
@@ -550,16 +724,20 @@ void MakeArtifact(item* item_, int good_bad_)
 			(i == ART_TELEPORT || i == ART_HUNGRY || i == ART_FULL || i == ART_LEVITATION)) {
 			continue;
 		}
+		if(isGenerateRandart((artifact_type)i) <= 0) {
+			continue;
+		}
 
-		temp.push_back(i);
+		temp.push((artifact_type)i, isGenerateRandart((artifact_type)i));
 	}
-	rand_shuffle(temp.begin(),temp.end());
+	
 	for(int i = 0; i < num_ ; i++)
 	{
-		if(item_->value1 != temp[i] || item_->type != ITM_RING)
+		int poped_ = temp.pop();
+		if(ring_to_artifact((ring_type)item_->value1) != poped_ || item_->type != ITM_RING)
 		{
 			int gb_ = randA(3)?good_bad_:good_bad_*-1;
-			item_->atifact_vector.push_back(atifact_infor(temp[i],GetAtifactValue((artifact_type)temp[i],gb_)));
+			item_->atifact_vector.push_back(atifact_infor(poped_,GetAtifactValue((artifact_type)poped_,gb_)));
 		}
 		else
 			num_++;
@@ -655,6 +833,24 @@ std::string GetFixedArtifact(fixed_artifact_type fixed_artifact) {
 		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_DESCRIBE);
 	case FIXED_ARTIFACT_SILVERKNIFE:
 		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_DESCRIBE);
+	case FIXED_ARTIFACT_FIREFLYCLOAK:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_FIREFLYCLOAK_DESCRIBE);
+	case FIXED_ARTIFACT_ICEFAIRYRING:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_ICEFAIRYRING_DESCRIBE);
+	case FIXED_ARTIFACT_LAEVATEIN:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LAEVATEIN_DESCRIBE);
+	case FIXED_ARTIFACT_LILYRING:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LILYRING_DESCRIBE);
+	case FIXED_ARTIFACT_GALECLOGS:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_GALECLOGS_DESCRIBE);
+	case FIXED_ARTIFACT_HELLTSHIRT:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HELLTSHIRT_DESCRIBE);
+	case FIXED_ARTIFACT_KAPPAFULLARMOR:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_DESCRIBE);
+	case FIXED_ARTIFACT_MAIDUNIFORM:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_DESCRIBE);
+	case FIXED_ARTIFACT_IBUKISAKE:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_IBUKISAKE_DESCRIBE);
 	default:
 		break;
 	}
@@ -760,7 +956,7 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->curse = false;
 		item_->atifact_vector.push_back(atifact_infor(ART_COUNTER,1));
 		item_->atifact_vector.push_back(atifact_infor(ART_ICE_RESIS,1));
-		item_->atifact_vector.push_back(atifact_infor(ART_STR,5));
+		item_->atifact_vector.push_back(atifact_infor(ART_SLAY,5));
 		break;
 	case FIXED_ARTIFACT_KOISHIHAT:
 		item_->type = ITM_ARMOR_HEAD;
@@ -959,6 +1155,220 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->atifact_vector.push_back(atifact_infor(ART_EV,8));
 		item_->atifact_vector.push_back(atifact_infor(ART_MAGIC_RESIS,1));
 		item_->atifact_vector.push_back(atifact_infor(ART_SKILL_UP,SKT_TRANS+400));
+		break;
+	case FIXED_ARTIFACT_FIREFLYCLOAK:
+		item_->type = ITM_ARMOR_CLOAK;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 0;
+		item_->value1 = 1;
+		item_->value2 = 0;
+		item_->value3 = 0;
+		item_->value4 = 2;
+		item_->value5 = 0;
+		item_->value6 = 0;
+		item_->value7 = 0;
+		item_->value8 = 0;
+		item_->can_throw = false;
+		item_->image = &img_item_fixed_artifact_mikocloak;
+		item_->equip_image = &img_play_item_fixed_artifact[5];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_FIREFLYCLOAK_NAME);
+		item_->weight = 5.0f;
+		item_->value = 300;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_BUG,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_POISON_RESIS,1));
+		break;
+	case FIXED_ARTIFACT_ICEFAIRYRING:
+		item_->type = ITM_RING;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 0;
+		item_->value1 = RGT_ICE_RESIS;
+		item_->value2 = 1;
+		item_->value3 = 0;
+		item_->value4 = 0;
+		item_->value5 = 0;
+		item_->value6 = 0;
+		item_->value7 = 0;
+		item_->value8 = 0;
+		item_->can_throw = false;
+		item_->image = &img_item_artifact_ring;
+		item_->equip_image = NULL;
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_ICEFAIRYRING_NAME);
+		item_->weight = 1.0f;
+		item_->value = 500;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_FIRE_RESIS,-1));
+		item_->atifact_vector.push_back(atifact_infor(ART_SKILL_UP,SKT_COLD+400));
+		break;
+	case FIXED_ARTIFACT_LAEVATEIN:
+		item_->type = ITM_WEAPON_LONGBLADE;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 2;
+		item_->value1 = -4;
+		item_->value2 = 14;
+		item_->value3 = 0;
+		item_->value4 = 11;
+		item_->value5 = 1;
+		item_->value6 = -1;
+		item_->value7 = 16;
+		item_->value8 = 7;
+		item_->can_throw = false;
+		item_->image = &img_item_artifact_greatsword;
+		item_->equip_image = &img_play_item_fixed_artifact[2];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_LAEVATEIN_NAME);
+		item_->weight = 12.0f;
+		item_->value = 950;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_FIREPLUS,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_AC,-4));
+		break;
+	case FIXED_ARTIFACT_LILYRING:
+		item_->type = ITM_RING;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 0;
+		item_->value1 = RGT_AC;
+		item_->value2 = 5;
+		item_->value3 = 0;
+		item_->value4 = 0;
+		item_->value5 = 0;
+		item_->value6 = 0;
+		item_->value7 = 0;
+		item_->value8 = 0;
+		item_->can_throw = false;
+		item_->image = &img_item_artifact_ring;
+		item_->equip_image = NULL;
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_LILYRING_NAME);
+		item_->weight = 1.0f;
+		item_->value = 400;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_POISONIMMUNE,1));
+		break;
+	case FIXED_ARTIFACT_GALECLOGS:
+		item_->type = ITM_ARMOR_BOOT;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 0;
+		item_->value1 = 1;
+		item_->value2 = 0;
+		item_->value3 = 0;
+		item_->value4 = 0;
+		item_->value5 = 0;
+		item_->value6 = 0;
+		item_->value7 = 0;
+		item_->value8 = 0;
+		item_->can_throw = false;
+		item_->image = &img_item_fixed_artifact_nuclearboot;
+		item_->equip_image = &img_play_item_fixed_artifact[7];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_GALECLOGS_NAME);
+		item_->weight = 4.0f;
+		item_->value = 300;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_SWIFT,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_EV,4));
+		break;
+	case FIXED_ARTIFACT_HELLTSHIRT:
+	{
+		item_->type = ITM_ARMOR_BODY_ARMOUR_0;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 0;
+		item_->value1 = GetMaterial(MTK_ROBE,AMV_AC);
+		item_->value2 = GetMaterial(MTK_ROBE,AMV_MAX_EV);
+		item_->value3 = GetMaterial(MTK_ROBE,AMV_MIN_EV);
+		item_->value4 = 6;
+		item_->value5 = AMK_NORMAL;
+		item_->value6 = 0;
+		item_->value7 = 0;
+		item_->value8 = 0;
+		item_->can_throw = false;
+		item_->image = &img_item_fixed_artifact_nuclearboot;
+		item_->equip_image = &img_play_item_fixed_artifact[7];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_HELLTSHIRT_NAME);
+		item_->weight = 6.0f;
+		item_->value = 500;
+		item_->curse = false;
+		int rand_ = rand_int(0,2);
+		item_->atifact_vector.push_back(atifact_infor(ART_STR,6*(rand_==0?-1:1)));
+		item_->atifact_vector.push_back(atifact_infor(ART_DEX,6*(rand_==1?-1:1)));
+		item_->atifact_vector.push_back(atifact_infor(ART_INT,6*(rand_==2?-1:1)));
+		break;
+	}
+	case FIXED_ARTIFACT_KAPPAFULLARMOR:
+		item_->type = ITM_ARMOR_BODY_ARMOUR_3;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 0;
+		item_->value1 = GetMaterial(MTK_PLATE,AMV_AC);
+		item_->value2 = GetMaterial(MTK_PLATE,AMV_MAX_EV);
+		item_->value3 = GetMaterial(MTK_PLATE,AMV_MIN_EV);
+		item_->value4 = 12;
+		item_->value5 = AMK_KAPPA;
+		item_->value6 = 0;
+		item_->value7 = 0;
+		item_->value8 = 0;
+		item_->can_throw = false;
+		item_->image = &img_item_fixed_artifact_nuclearboot;
+		item_->equip_image = &img_play_item_fixed_artifact[7];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_NAME);
+		item_->weight = 30.0f;
+		item_->value = 1200;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_MISSLE,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_SELFDESTRUCT,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_FIRE_RESIS,1));
+		break;
+	case FIXED_ARTIFACT_MAIDUNIFORM:
+		item_->type = ITM_ARMOR_BODY_ARMOUR_2;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 0;
+		item_->value1 = GetMaterial(MTK_CHAIN,AMV_AC);
+		item_->value2 = GetMaterial(MTK_CHAIN,AMV_MAX_EV);
+		item_->value3 = GetMaterial(MTK_CHAIN,AMV_MIN_EV);
+		item_->value4 = 4;
+		item_->value5 = AMK_MAID;
+		item_->value6 = 0;
+		item_->value7 = 0;
+		item_->value8 = 0;
+		item_->can_throw = false;
+		item_->image = &img_item_fixed_artifact_nuclearboot;
+		item_->equip_image = &img_play_item_fixed_artifact[7];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_NAME);
+		item_->weight = 16.0f;
+		item_->value = 900;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_SUMMONRESIST,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_EV,5));
+		item_->atifact_vector.push_back(atifact_infor(ART_INT,5));
+		item_->atifact_vector.push_back(atifact_infor(ART_MAGACIAN,1));
+		break;
+	case FIXED_ARTIFACT_IBUKISAKE:
+		item_->type = ITM_ARMOR_SHIELD;
+		item_->is_pile = false;
+		item_->num = 1;
+		item_->value0 = 0;
+		item_->value1 = 7;
+		item_->value2 = -3;
+		item_->value3 = 0;
+		item_->value4 = 7;
+		item_->value5 = 0;
+		item_->value6 = 0;
+		item_->value7 = 0;
+		item_->value8 = 0;
+		item_->can_throw = false;
+		item_->image = &img_item_fixed_artifact_shield;
+		item_->equip_image = &img_play_item_shield[1];
+		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_IBUKISAKE_NAME);
+		item_->weight = 5.0f;
+		item_->value = 500;
+		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_DRUNK,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_HP_REGEN,2));
+		item_->atifact_vector.push_back(atifact_infor(ART_POISON_RESIS,1));
 		break;
 	default:
 		break;

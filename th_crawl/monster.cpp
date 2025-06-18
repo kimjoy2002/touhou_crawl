@@ -2955,6 +2955,9 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		if (reason_ == PRT_PLAYER && s_fear != -1 && !(flag & M_FLAG_COMPLETE_NETURALY)) //플레이어가 죽였다.
 		{
 			you.GetExp(exper);
+			if(you.GetArtifactProperty(ART_GLUTTON) > 0) {
+				you.SetGlutton(1, 30);
+			}
 		}
 		else if (reason_ == PRT_ALLY && s_fear != -1 && !(flag & M_FLAG_COMPLETE_NETURALY)) //동맹이 죽였다.
 		{
@@ -3720,6 +3723,11 @@ int monster::action(int delay_)
 						if (flag & M_FLAG_SUMMON && you.god == GT_SHINKI && !you.GetPunish(GT_SHINKI) && pietyLevel(you.piety) >= 3)
 						{
 							//신키는 소환수를 방해한다.
+							if (randA(1))
+								break;
+						}
+						if(flag & M_FLAG_SUMMON && you.GetArtifactProperty(ART_SUMMONRESIST)) {
+							//소환물저항
 							if (randA(1))
 								break;
 						}

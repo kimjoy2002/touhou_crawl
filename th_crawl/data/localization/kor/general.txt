@@ -661,6 +661,7 @@ LOC_SYSTEM_BUFF_STAT_FIRE,화염
 LOC_SYSTEM_BUFF_STAT_TRACKING,추적
 LOC_SYSTEM_BUFF_STAT_SHIELD,실드({0})
 LOC_SYSTEM_BUFF_STAT_OVERHEAT,과열({0})
+LOC_SYSTEM_BUFF_STAT_GLUTTON,폭식({0})
 LOC_SYSTEM_BUFF_DESCRIBE_RISK,위험도는 얼마나 현재 상황이 위험한지에 대한 수치입니다.
 LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY1,갑옷과 방패가 너무 무겁습니다! 패널티만큼 회피, 은밀, 마법, 명중, 이동속도가 감소되고, 행동속도가 2배로 느려집니다.
 LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY2,갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피, 은밀, 마법성공율, 명중, 이동속도가 감소합니다.
@@ -765,6 +766,7 @@ LOC_SYSTEM_BUFF_DESCRIBE_STAT_FIRE,당신은 불타고 있습니다!
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_TRACKING,당신은 추적당하고 있습니다. 맵의 모든 적이 당신의 위치를 정확히 쫓습니다.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_SHIELD,모든 데미지를 실드가 대신 막아줍니다. 일정 시간 데미지를 받지않으면 재생합니다.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_OVERHEAT,마법의 강한 반동을 받고 있습니다. 과열 수치가 추가로 올라갈때마다 과열 수치만큼 데미지를 받습니다.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_GLUTTON,당신은 폭식 수치만큼 공격력과 명중률이 상승합니다. 전투를 하지않으면 사라집니다.
 LOC_SYSTEM_SMOKE_NORMAL,옅은 연기
 LOC_SYSTEM_SMOKE_FOG,안개 구름
 LOC_SYSTEM_SMOKE_FIRE,화염 구름
@@ -3094,6 +3096,8 @@ LOC_SYSTEM_ITEM_ARTIFACT_EV,EV{0}
 LOC_SYSTEM_ITEM_ARTIFACT_CONFUSE_RESIST,혼란저항
 LOC_SYSTEM_ITEM_ARTIFACT_ELEC_RESIST,전기저항
 LOC_SYSTEM_ITEM_ARTIFACT_MAGIC_RESIST,마법저항
+LOC_SYSTEM_ITEM_ARTIFACT_SLAY,전투력{0}
+LOC_SYSTEM_ITEM_ARTIFACT_HP_REGEN,체력재생{0}
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_STR,힘이 수치만큼 증감한다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_DEX,민첩이 수치만큼 증감한다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_INT,지능이 수치만큼 증감한다.({0})
@@ -3114,6 +3118,8 @@ LOC_SYSTEM_ITEM_ARTIFACT_INFO_EV,회피가 증감한다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_CONFUSE_RESIST,혼란에 저항이 생긴다.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_ELEC_RESIST,전기에 저항이 생긴다.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGIC_RESIST,마법 저항이 생긴다.({0})
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_SLAY,공격력과 명중률이 증감한다.({0})
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_HP_REGEN.체력 재생 속도가 증감한다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_SKILL_UP,지정된 스킬레벨이 올라간다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_NAME,미니팔괘로
 LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_DESCRIBE,요리용의 작은 불씨부터 산 하나를 전소시킬 화력까지 다재다능한 마법 아이템.\n무기 대신 한 손에 들고 마법의 화력을 올려주는 역할을 한다.\n또한 스파크와 같이 그냥 사용하면 시전자에 과열을 발생하는 강력한 마법도 자유자재로 사용이 가능하다.
@@ -3190,7 +3196,9 @@ LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_MISSILE_INFO,P를 소모하여 미사일
 LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_SELFDESTRUCT,*자폭
 LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_SELFDESTRUCT_INFO,큰 데미지를 받으면 잠시후 자동으로 자폭한다. 자신을 포함해 주변에 범위 데미지를 준다.
 LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_NAME,마계 메이드옷
-LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_DESCRIBE,마계에서 마족이 입는 특수한 메이드복.\n아마 마계신의 취향이 들어간것으로 보인다.
+LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_DESCRIBE,마계에서 마족이 입는 특수한 메이드복.\n아마 디자인에 마계의 창조신의 취향이 들어간것으로 보인다.\n마법의 메카인 마계에서 만든 물건답게, 단단한 옷임에도 마법을 사용하는데 큰 도움을 준다.\n특히 창조신의 전속 메이드를 위한 옷이기에, 다른 마족들을 다루는 가호도 붙어있는듯하다.
+LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_SUMMONRES,소환물저항
+LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_SUMMONRES_INFO,소환수의 공격을 받을때 50% 확률로 공격을 받지 않는다.
 LOC_SYSTEM_ITEM_ARTIFACT_IBUKISAKE_NAME,이부키효
 LOC_SYSTEM_ITEM_ARTIFACT_IBUKISAKE_DESCRIBE,이부키 스이카가 애용하는 전통의 술병.\n무기론 사용할 수 없지만 왼손에 들고 방패처럼 활용할 수 있다.\n사용자에게 큰 회복력을 주지만 마시는 물약이 술이 되어버린다.
 LOC_SYSTEM_ITEM_ARTIFACT_IBUKISAKE_DRUNK,음주

@@ -94,6 +94,10 @@ int players::GetAttack(bool max_)
 	{
 		max_atk_+=s_slaying;
 	}
+	if(s_glutton && s_glutton_turn)
+	{
+		max_atk_+=s_glutton;
+	}
 	max_atk_ += you.GetBuffOk(BUFFSTAT_DAM);
 	if(GetProperty(TPT_SLAY))
 	{
@@ -188,6 +192,10 @@ int players::GetHit()
 	if(s_slaying)
 	{
 		hit_+=s_slaying;
+	}
+	if(s_glutton && s_glutton_turn)
+	{
+		hit_+=s_glutton;
 	}
 	hit_ += you.GetBuffOk(BUFFSTAT_ACC);
 	if(GetProperty(TPT_SLAY))
@@ -1062,15 +1070,14 @@ bool players::damage(attack_infor &a, bool perfect_)
 				SetPoison(15+randA(10), 50, false);
 			if(a.type == ATT_M_POISON && randA(1))
 				SetPoison(40+randA(15), 100, false);
-			if(a.type == ATT_SLOW_POISON) {
+			if(a.type == ATT_SLOW_POISON && poison_resist < 100) {
 				SetPoison(20+randA(10), 150, false);
 				if(randA(2)>1) {
 					SetSlow(randA(10));
 				}
 			}
-			if(a.type == ATT_SICK && randA(1))
+			if(a.type == ATT_SICK && randA(1) && poison_resist < 100)
 			{
-
 				SetPoison(40+randA(15), 100, false);
 				SetSick(rand_int(10,20));
 			}
@@ -1082,7 +1089,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 				SetPoison(70+randA(20), 150, true);
 			if(a.type == ATT_THROW_POISON_PYSICAL)
 				SetPoison(15+randA(10), 50, false);
-			if(a.type == ATT_THROW_SLOW_POISON) {
+			if(a.type == ATT_THROW_SLOW_POISON && poison_resist < 100) {
 				SetPoison(25+randA(10), 150, false);
 				if(randA(2)>1) {
 					SetSlow(randA(10));
@@ -1149,6 +1156,19 @@ bool players::damage(attack_infor &a, bool perfect_)
 					a.order->damage(attack_infor_, true);
 					s_veiling = 0;
 					s_value_veiling = 0;
+				}
+			}
+			
+			
+			if(GetArtifactProperty(ART_BUG) > 0 && GetHp()>0 && damage_ >0)
+			{
+				//25%피해에서 100%
+				int rate_ = damage_*400/you.GetMaxHp();
+				if(randA(99) < rate_) {
+					int time_ = rand_int(20,60);
+					if(monster *mon_ = BaseSummon(MON_FIREFLY, time_, true, true, 1, &you, you.position, SKD_OTHER, -1))
+					{
+					}
 				}
 			}
 

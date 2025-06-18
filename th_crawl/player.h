@@ -333,6 +333,10 @@ public:
 	int s_shooting_turn;
 	int s_overheat;
 	int s_overheat_turn;
+	int s_regen;
+	int s_selfdestruct;
+	int s_glutton;
+	int s_glutton_turn;
 	shield_struct s_shield;
 
 
@@ -565,6 +569,7 @@ public:
 	bool SetTracking(int value_);
 	bool SetShield(int percent_, int turn_);
 	bool SetOverheat(int overheat_, int turn_);
+	bool SetGlutton(int glutton_, int turn_);
 	int AbsorbShield(int damage_);
 	
 	int GetInvisible();

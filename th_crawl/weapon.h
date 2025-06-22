@@ -24,6 +24,8 @@ enum weapon_brand
 	WB_MANA_REGEN,
 	WB_FAST_CAST,
 	WB_PROTECT,
+	WB_FIREPLUS,
+	WB_SILVER,
 	WB_MAX
 };
 

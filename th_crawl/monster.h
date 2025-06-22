@@ -152,6 +152,7 @@ public:
 	void SetXY(int x_, int y_);
 	void SetXY(int map_num_, int x_, int y_, bool init_);
 	void SetXY(coord_def pos_);
+	void SetXYPassFloor(int prev_floor, int new_floor, int x_, int y_);
 	void AfterMove(int map_num_, int x_, int y_);
 	char getAsciiDot();
 	void LevelUpdown(int level_, float hp_ = 6.0f, float atk_ = 2.0f);
@@ -215,7 +216,7 @@ public:
 	bool SetElec(int elec_);
 	bool SetParalyse(int paralyse_);
 	bool SetLevitation(int levitation_);
-	bool SetGlow(int glow_, bool no_speak = false);
+	bool SetGlow(int glow_, bool no_speak = false, bool setting = false);
 	bool SetGraze(int graze_);
 	bool SetSilence(int silence_, int silence_range_);
 	bool SetSick(int sick_);
@@ -266,6 +267,7 @@ public:
 	bool isSightnonblocked(coord_def c); //여기까지 공격이 닿는지
 	bool isSpecialSight(coord_def c);//몬스터 특수시야
 	bool isMonsterSight(coord_def c, boolean okina = false);//해당 위치에 몬스터의 시야에 들어왔는가?
+	bool isVulnerableSilver();
 	bool CanChase();
 	bool special_move(bool is_sight_for_monster, bool can_bounce, float angle_);
 	bool special_state(bool is_sight_for_monster);//모든 상태를 무시하고 자신만의 상태를 가짐

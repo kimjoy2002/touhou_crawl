@@ -35,6 +35,7 @@ extern HANDLE mutx;
 
 extern display_manager DisplayManager;
 bool skill_haniwa_recall(int hiniwa_num, unit* order, coord_def target);
+bool skill_suicide_bomb(int base_damage, int power, bool short_, unit* order, coord_def target, bool hurt_ally, bool self_hurt);
 
 bool CheckMonsterPassive(int turn)
 {
@@ -89,11 +90,24 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 	if(s_tele || teleport_curse)
 	{
-		if(s_tele == 1 || (teleport_curse && !randA(400)))
+		bool tele_curse_ =  teleport_curse && !randA(400);
+		if(s_tele == 1 || tele_curse_)
 		{
+			coord_def prev_pos = position;
 			Teleport();
 			soundmanager.playSound("blink");
-			printlog(LocalzationManager::locString(LOC_SYSTEM_TURN_TELEPORT),false,false,false,CL_normal);
+			if(GetArtifactProperty(ART_UNCONSCIOUS) > 0 && tele_curse_) {
+				if(env[current_level].isInSight(prev_pos))
+						printlog(LocalzationManager::locString(LOC_SYSTEM_TURN_TELEPORT_WITH_UNCONSCIOUS_SAME),false,false,false,CL_normal);
+					else
+						printlog(LocalzationManager::locString(LOC_SYSTEM_TURN_TELEPORT_WITH_UNCONSCIOUS),false,false,false,CL_normal);
+			}
+			else {
+				if(env[current_level].isInSight(prev_pos))
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TURN_TELEPORT_SAME),false,false,false,CL_normal);
+				else
+					printlog(LocalzationManager::locString(LOC_SYSTEM_TURN_TELEPORT),false,false,false,CL_normal);
+			}
 			SetInter(IT_TELE);
 		}
 		if(s_tele)
@@ -425,6 +439,8 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	}
 	if(env[current_level].isViolet(you.position))
 		you.SetLunatic(2);
+	if(env[current_level].isHalo(you.position))
+		you.SetGlow(2, true, true);
 	if(s_lunatic)
 	{
 		s_lunatic--;
@@ -968,6 +984,36 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 
 	}
+	if(s_selfdestruct)
+	{
+		s_selfdestruct--;
+
+		if(s_selfdestruct == 3)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SELFDESTRUCT_3) + " ",false,false,false,CL_warning);
+			SetInter(IT_STAT);
+		}
+		if(s_selfdestruct == 2)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SELFDESTRUCT_2) + " ",false,false,false,CL_small_danger);
+			SetInter(IT_STAT);
+		}
+		if(s_selfdestruct == 1)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SELFDESTRUCT_1) + " ",false,false,false,CL_danger);
+			SetInter(IT_STAT);
+		}
+		if(s_selfdestruct == 0)
+		{
+			ReleaseMutex(mutx);
+			s_selfdestruct = 1; //연속 자폭 방지
+			skill_suicide_bomb(8, 50,false,&you,you.position, true, true);
+			s_selfdestruct = 0;
+			WaitForSingleObject(mutx, INFINITE);
+		}
+	}
+
+
 	if(s_oil)
 	{
 		s_oil--;
@@ -1020,6 +1066,21 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_shield.turn++;
 		if(s_shield.max_turn == s_shield.turn && s_shield.value < GetMaxHp()*s_shield.percent/100) {
 			s_shield.value = GetMaxHp()*s_shield.percent/100;
+		}
+	}
+	if(GetArtifactProperty(ART_LUNATIC) > 0) {
+		if(randA(400) == 0) {
+			you.SetLunatic(rand_int(5, 10));
+		}
+		random_extraction<monster*> mon_list;
+		vector<monster>::iterator it;
+		it = env[current_level].mon_vector.begin();
+		for(int i=0;i<MON_MAX_IN_FLOOR && it != env[current_level].mon_vector.end() ;i++,it++)
+		{
+			if((*it).isLive() && env[current_level].isInSight((*it).position) && randA(15) == 0)
+			{
+				(*it).SetLunatic(rand_int(5, 10));
+			}
 		}
 	}
 

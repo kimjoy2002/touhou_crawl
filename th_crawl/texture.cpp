@@ -1615,6 +1615,7 @@ textures(&texture_item02, 194, 255)
 };
 
 textures img_item_artifact_ring(&texture_item02, 197, 255);
+textures img_item_artifact_amulet(&texture_item01, 16, 128);
 
 textures img_item_goal(&texture_item01, 135, 255);
 textures img_item_cat_tree(&texture_item02, 163, 255);
@@ -3699,6 +3700,8 @@ int texturetoint(textures* input)
 		return 594;
 	else if(input == &img_item_fixed_artifact_ibukisake)
 		return 595;
+	else if(input == &img_item_artifact_amulet)
+		return 596;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -4917,6 +4920,8 @@ textures* inttotexture(int input)
 		return &img_item_fixed_artifact_maiduniform;
 	case 595:
 		return &img_item_fixed_artifact_ibukisake;
+	case 596:
+		return &img_item_artifact_amulet;
 	default:
 		return &img_mons_default;
 	}

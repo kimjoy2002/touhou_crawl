@@ -350,8 +350,6 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 	enterBgm(first_);
 	WaitForSingleObject(mutx, INFINITE);
 	int prev_level = current_level;
-	if(you.s_silence)
-		env[current_level].MakeSilence(you.position, you.s_silence_range, false);
 	env[current_level].popular = -1;
 	current_level = floor;
 
@@ -363,23 +361,21 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 			int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
 			if(env[current_level].isMove(x_,y_) && !env[current_level].isMonsterPos(x_,y_))
 			{
-				you.SetXY(x_,y_);
+				you.SetXYPassFloor(prev_level, current_level, x_,y_);
 				break;
 			}
 		}
 	}
 	else if(num_>=0 && num_ <3)
-		you.SetXY((prev_level>floor && !isLastFloor(floor))?stair_down[num_]:stair_up[num_]);
+		you.SetXYPassFloor(prev_level, current_level, (prev_level>floor && !isLastFloor(floor))?stair_down[num_]:stair_up[num_]);
 	else
-		you.SetXY(pos_);
+		you.SetXYPassFloor(prev_level, current_level, pos_);
 	WaitForSingleObject(mutx, INFINITE);
 	you.prev_position = you.position;
 	{
 		//미코에 의한 버프 초기화
 		you.reSetMikoBuff();
 	}
-	if(you.s_silence)
-		env[current_level].MakeSilence(you.position, you.s_silence_range, true);
 
 	if(monster* temp_unit = (monster*)isMonsterPos(you.position.x,you.position.y,&you))
 	{	
@@ -414,7 +410,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 		{
 			if(movingfloor((*dit), prev_level, dq[dq_n]))
 			{
-					dq_n++;
+				dq_n++;
 			}
 			if(dq.size() == dq_n)
 				break;
@@ -977,6 +973,11 @@ void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x,
 		img_effect_slience.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(80, 255, 128, 255));
 	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_SANCTUARY)
 		img_effect_slience.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(80, 255, 255, 0));
+	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_HALO && !(you.s_weather == 3 && you.s_weather_turn > 0))
+		img_effect_sun.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(20, 255, 255, 255));
+
+
+
 	if(!onlyTile && draw_mouse){
 		if (MousePoint.x <= max_mouseX &&
 			MousePoint.x > x - scale*16 && MousePoint.x <= x + scale*16 &&
@@ -1082,7 +1083,7 @@ monster* environment::AddMonster(int id_, uint64_t flag_, coord_def position_, i
 	ReleaseMutex(mutx);
 	return NULL;
 }
-monster* environment::AddMonster(monster *mon_, coord_def position_, int time_)
+monster* environment::AddMonsterWithMoving(monster *mon_, int prev_floor, coord_def position_, int time_)
 {
 	WaitForSingleObject(mutx, INFINITE);
 	vector<monster>::iterator it;
@@ -1095,7 +1096,7 @@ monster* environment::AddMonster(monster *mon_, coord_def position_, int time_)
 			if(all_monster_id<1)
 				all_monster_id = 1;
 			mon_vector.back().map_id = all_monster_id++;
-			mon_vector.back().SetXY(position_);
+			mon_vector.back().SetXYPassFloor(prev_floor, floor, position_.x, position_.y);
 			mon_vector.back().prev_sight = false;
 			ReleaseMutex(mutx);
 			return &mon_vector.back();
@@ -1104,7 +1105,7 @@ monster* environment::AddMonster(monster *mon_, coord_def position_, int time_)
 		{
 			(*it) = *mon_;
 			(*it).map_id = all_monster_id++;
-			(*it).SetXY(position_);
+			(*it).SetXYPassFloor(prev_floor, floor, position_.x, position_.y);
 			(*it).prev_sight = false;
 			ReleaseMutex(mutx);
 			return &(*it);
@@ -1404,12 +1405,7 @@ void environment::ClearFloor()
 	{	
 		for(int y=0; y<DG_MAX_Y; y++)
 		{
-			dgtile[x][y].tile = DG_FLOOR;
-			for (int i = 0; i < AUTOTILE_MAX; i++)
-				dgtile[x][y].autotile_bitmap[i] = 0;
-			dgtile[x][y].flag = 0;
-			dgtile[x][y].silence_count = 0;
-			dgtile[x][y].violet_count = 0;
+			dgtile[x][y].init();
 		}
 	}
 	stair_vector.clear();
@@ -1573,12 +1569,8 @@ monster* environment::movingfloor(const coord_def &c, int prev_floor_, monster* 
 {
 	if(isMove(c.x,c.y,mon_->isFly(),mon_->isSwim()) && !isMonsterPos(c.x,c.y) && you.position != c)
 	{
-		if(monster* temp = AddMonster(mon_, c))
-		{/*
-			if(temp->s_silence)
-				env[current_level].MakeSilence(temp->position, temp->s_silence_range, true);*/
-			if(mon_->s_silence)
-				env[prev_floor_].MakeSilence(mon_->position, mon_->s_silence_range, false);
+		if(monster* temp = AddMonsterWithMoving(mon_, prev_floor_, c))
+		{
 			if(temp->id == MON_ENSLAVE_GHOST && you.god == GT_YUYUKO)
 			{	
 				you.god_value[GT_YUYUKO][0] = temp->map_id;
@@ -1900,9 +1892,7 @@ bool environment::MakeSilence(coord_def center_, int length_, bool on_)
 		}
 	}
 	return true;
-	
 }
-
 bool environment::MakeViolet(coord_def center_, int length_, bool on_)
 {
 	length_++;
@@ -1952,6 +1942,29 @@ bool environment::MakeSantuary(coord_def center_, int length_, bool on_)
 
 }
 
+bool environment::MakeHalo(coord_def center_, int length_, bool on_)
+{
+	length_++;
+	for(int i=-length_/2;i<=length_/2;i++) //나중에 원형반복자만들면 고치기?
+	{
+		for(int j=-length_/2;j<=length_/2;j++)
+		{
+			if(i*i+j*j<=length_*length_/4)
+			{
+				if(on_)
+					dgtile[center_.x+i][center_.y+j].halo_count++;
+				else if(dgtile[center_.x+i][center_.y+j].halo_count>0)
+					dgtile[center_.x+i][center_.y+j].halo_count--;
+
+				if(dgtile[center_.x+i][center_.y+j].halo_count)
+					dgtile[center_.x+i][center_.y+j].flag |= FLAG_HALO;
+				else
+					dgtile[center_.x+i][center_.y+j].flag &= ~FLAG_HALO;
+			}
+		}
+	}
+	return true;
+}
 
 void environment::MakeForbid(coord_def pos,  bool center_, bool on_)
 {
@@ -2294,6 +2307,10 @@ bool environment::isViolet(coord_def pos_)
 bool environment::isSanctuary(coord_def pos_)
 {
 	return dgtile[pos_.x][pos_.y].flag & FLAG_SANCTUARY;
+}
+bool environment::isHalo(coord_def pos_)
+{
+	return dgtile[pos_.x][pos_.y].flag & FLAG_HALO;
 }
 unit* environment::isMonsterPos(int x_,int y_, const unit* excep_, int* map_id_)
 {

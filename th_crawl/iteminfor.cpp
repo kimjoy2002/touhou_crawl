@@ -851,10 +851,33 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_AXE_ANCHOR));
 					break;
 				}
+				ski_ = SKT_AXE;
 				break;
 			default:
 				break;
 			}
+		} else {
+			switch (it->type)
+			{
+			case ITM_WEAPON_SHORTBLADE:
+				ski_ = SKT_SHORTBLADE;
+				break;
+			case ITM_WEAPON_LONGBLADE:
+				ski_ = SKT_LONGBLADE;
+				break;
+			case ITM_WEAPON_MACE:
+				ski_ = SKT_MACE;
+				break;
+			case ITM_WEAPON_SPEAR:
+				ski_ = SKT_SPEAR;
+				break;
+			case ITM_WEAPON_AXE:
+				ski_ = SKT_AXE;
+				break;
+			default:
+				break;
+			}
+
 		}
 
 		if (it->value5 && it->value6)
@@ -931,6 +954,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 					PlaceHolderHelper(to_string(you.GetSkillLevel(SKT_TANMAC, true)))));
 		}
 
+		if(!fixed_artifact_)
 		{
 			_infor_("\n\n");
 			_infor_(LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT, 
@@ -1122,9 +1146,11 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			
 		ss <<  LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO6, 
 			PlaceHolderHelper(to_string(you.GetPenaltyMinus(3)))) << "\n\n";
-			
-		ss << "\n" << LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT, 
-			PlaceHolderHelper("+" + to_string(it->value1)));
+		
+		if(!fixed_artifact_) {
+			ss << "\n" << LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT, 
+				PlaceHolderHelper("+" + to_string(it->value1)));
+		}
 		_infor_(ss.str());
 
 
@@ -1198,8 +1224,10 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		ss <<  LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO6, 
 			PlaceHolderHelper(to_string(you.GetPenaltyMinus(3)))) << "\n\n";
 			
-		ss << "\n" << LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT, 
-			PlaceHolderHelper("+" + to_string(it->value1 <= 4 ? 3 : (it->value1 <= 8 ? 6 : 9))));
+		if(!fixed_artifact_) {
+			ss << "\n" << LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT, 
+				PlaceHolderHelper("+" + to_string(it->value1 <= 4 ? 3 : (it->value1 <= 8 ? 6 : 9))));
+		}
 		_infor_(ss.str());
 		
 
@@ -1299,9 +1327,11 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		
 		ostringstream ss;
 		ss << "\n\n" << LocalzationManager::locString(LOC_SYSTEM_DEFAULT_DEFENSE) << ": " << it->value1;
-		ss << "\n\n" << LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT, 
-			PlaceHolderHelper("+2"));
-			
+		
+		if(!fixed_artifact_) {
+			ss << "\n\n" << LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_CAN_ENCHANT, 
+				PlaceHolderHelper("+2"));
+		}
 		_infor_(ss.str());
 	}
 	break;
@@ -1543,6 +1573,9 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 				case AMT_OCCULT:
 					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT));
 					break;
+				case AMT_PURIFTY:
+					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PURIFTY));
+					break;
 				default:
 					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG));
 					break;
@@ -1573,7 +1606,10 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	{
 		if ((it->isArtifact() && it->identify) || iden_list.ring_list[it->value1].iden == 2)
 		{
-			if(!fixed_artifact_){
+			if(fixed_artifact_){
+				_infor_("\n\n");
+			}
+			//if(!fixed_artifact_){
 				switch (it->value1)
 				{
 				case RGT_STR:
@@ -1637,7 +1673,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_BUG));
 					break;
 				}
-			}
+			//}
 		}
 		else
 		{
@@ -1771,8 +1807,8 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 	case ITM_GOAL:
 	
-	if(it->value1 >= 100 && it->value1 < 100+(TPT_STG_LAST-TPT_STG_START+1)) {
-		_infor_(getTribePropertyInfo((tribe_proper_type)(it->value1-100+TPT_STG_START), 1));
+	if(it->value1 >= TPT_STG_START && it->value1 < (TPT_STG_LAST+1)) {
+		_infor_(getTribePropertyInfo((tribe_proper_type)(it->value1), 1));
 	} else {
 		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RUNE));
 

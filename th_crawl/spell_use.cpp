@@ -2509,7 +2509,7 @@ bool skill_summon_flandre(int pow, bool short_, unit* order, coord_def target)
 	return return_;
 
 }
-bool skill_suicide_bomb(int base_damage, int power, bool short_, unit* order, coord_def target, bool hurt_ally)
+bool skill_suicide_bomb(int base_damage, int power, bool short_, unit* order, coord_def target, bool hurt_ally, bool self_hurt)
 {
 	if(1)
 	{
@@ -2541,12 +2541,12 @@ bool skill_suicide_bomb(int base_damage, int power, bool short_, unit* order, co
 					{
 						if(unit* hit_ = env[current_level].isMonsterPos(rit->x,rit->y))
 						{	
-							if(hit_ != order && (hurt_ally || hit_->isEnemyUnit(order)))
+							if((self_hurt || hit_ != order) && (hurt_ally || hit_->isEnemyUnit(order)))
 							{
 								int att_ = randC(4,base_damage+power/20);
 								int m_att_ = 4*(base_damage+power/20);
 
-								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_SUICIDE));
+								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor(LOC_SYSTEM_ATT_SUICIDE));
 								hit_->damage(temp_att, true);
 							}
 						}
@@ -2575,7 +2575,7 @@ bool skill_suicide_bomb(int base_damage, int power, bool short_, unit* order, co
 	return false;
 }
 bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target) {
-	return skill_suicide_bomb(13, power, short_, order, target, true);
+	return skill_suicide_bomb(13, power, short_, order, target, true, false);
 }
 bool skill_rabbit_horn(int pow, bool short_, unit* order, coord_def target)
 {

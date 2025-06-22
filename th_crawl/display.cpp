@@ -712,6 +712,9 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		}
 		else if (i >= IDEN_CHECK_AMULET_START && i < IDEN_CHECK_AMULET_END) {
 			int cur_ = i - IDEN_CHECK_AMULET_START;
+			if(!isGenerateAmulet((amulet_type)cur_)) {
+				continue;
+			}
 			if (i == IDEN_CHECK_AMULET_START) {
 				first_ = true;
 			}
@@ -3057,7 +3060,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_MANA_DELAY), CL_warning,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_MANA_DELAY), this);
 			}
-			if (env[current_level].isSilence(you.position))
+			if (env[current_level].isSilence(you.position) && !you.s_silence)
 			{
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SILENCE_FIELD), CL_white_blue,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SILENCE_FIELD), this);

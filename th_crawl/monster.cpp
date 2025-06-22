@@ -798,46 +798,52 @@ void monster::SetXY(int x_, int y_)
 }
 void monster::SetXY(int map_num_, int x_, int y_, bool init_)
 {
-	if(position.x == x_ && position.y == y_)
-		return;
-
-
-	if(!init_) {
-		if(s_silence)
-			env[map_num_].MakeSilence(position, s_silence_range, false);
-		if(s_catch)
-			you.SetCatch(NULL);
-
-		if (flag & M_FLAG_NONE_MOVE && flag & M_FLAG_UNHARM)
-		{
-			env[map_num_].dgtile[position.x][position.y].flag &= ~FLAG_BLOCK;
-		}
-		AfterMove(map_num_, x_, y_);
-	}
-
-	position.set(x_,y_);
-	for(auto it = env[map_num_].floor_list.begin(); it != env[map_num_].floor_list.end();it++)
-	{
-		if(it->position == position)
-			it->onWalk(this);
-	}
-	if(s_silence)
-		env[map_num_].MakeSilence(position, s_silence_range, true);
-
-	if (flag & M_FLAG_NONE_MOVE && flag & M_FLAG_UNHARM)
-	{
-		env[map_num_].dgtile[position.x][position.y].flag |= FLAG_BLOCK;
-	}
+	SetXYPassFloor(init_ ? -1 : map_num_, map_num_, x_, y_);
 
 }
 void monster::SetXY(coord_def pos_)
 {
 	SetXY(pos_.x,pos_.y);
 }
+void monster::SetXYPassFloor(int prev_floor, int new_floor, int x_, int y_) {
+	if(position.x == x_ && position.y == y_ && prev_floor == new_floor)
+		return;
+
+
+	if(prev_floor != -1) {
+		if(s_silence)
+			env[prev_floor].MakeSilence(position, s_silence_range, false);
+		if(s_catch)
+			you.SetCatch(NULL);
+
+		if (flag & M_FLAG_NONE_MOVE && flag & M_FLAG_UNHARM)
+		{
+			env[prev_floor].dgtile[position.x][position.y].flag &= ~FLAG_BLOCK;
+		}
+		AfterMove(prev_floor, x_, y_);
+	}
+
+	position.set(x_,y_);
+	for(auto it = env[new_floor].floor_list.begin(); it != env[new_floor].floor_list.end();it++)
+	{
+		if(it->position == position)
+			it->onWalk(this);
+	}
+	if(s_silence)
+		env[new_floor].MakeSilence(position, s_silence_range, true);
+
+	if (flag & M_FLAG_NONE_MOVE && flag & M_FLAG_UNHARM)
+	{
+		env[new_floor].dgtile[position.x][position.y].flag |= FLAG_BLOCK;
+	}
+}
 void monster::AfterMove(int map_num_, int x_, int y_) {
 	switch(id) {
 	case MON_HOMING:
 		env[map_num_].MakeAfterimage(coord_def(position.x, position.y), image, 30, 3);
+		break;
+	case MON_MISSLE:
+		env[map_num_].MakeSmoke(coord_def(position.x, position.y), img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, this);
 		break;
 	default:
 		break;
@@ -1063,6 +1069,8 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_NOISE:
 	case ATT_FIRE:
 	case ATT_FIRE_WEAK:
+	case ATT_SILVER:
+	case ATT_FIREPLUS:
 	case ATT_COLD:
 	case ATT_COLD_WEAK:
 	case ATT_ELEC:
@@ -1072,6 +1080,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_M_POISON:
 	case ATT_SICK:
 	case ATT_THROW_NORMAL:
+	case ATT_THROW_SILVER:
 	case ATT_VAMP:
 	case ATT_LUNATIC:
 	case ATT_SLEEP:
@@ -1135,12 +1144,20 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_DROWNING:
 		break;
 	}
+
+	if(type_ == ATT_SILVER || type_ == ATT_THROW_SILVER) {
+		if(isVulnerableSilver()) {
+			damage_ = damage_*2.0f/1.2f;
+		}
+	}
+
 	switch(type_)
 	{
 	case ATT_FIRE:
 	case ATT_FIRE_WEAK:
 	case ATT_THROW_FIRE_PYSICAL:
 	case ATT_FIRE_ENCHANT_BLAST:
+	case ATT_FIREPLUS:
 		bonus_damage = damage_ / 3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetFireResist();
@@ -1266,6 +1283,29 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 					PlaceHolderHelper(GetName()->getName()));
 			}
 			break;
+		case ATT_SILVER:
+		case ATT_THROW_SILVER:
+			if (!isVulnerableSilver())
+			{
+				if (a.order)
+				{
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,CL_normal,
+						PlaceHolderHelper(name_.getName()),
+						PlaceHolderHelper(a.name.getName()),
+						PlaceHolderHelper(GetName()->getName()));
+				}
+			}
+			else
+			{
+				if (a.order)
+				{
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_SILVER,false,false,false,CL_normal,
+						PlaceHolderHelper(name_.getName()),
+						PlaceHolderHelper(a.name.getName()),
+						PlaceHolderHelper(GetName()->getName()));
+				}
+			}
+			break;
 		case ATT_SLEEP:
 			if (state.GetState() != MS_SLEEP)
 			{
@@ -1290,6 +1330,7 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_FIRE:
 		case ATT_FIRE_WEAK:
 		case ATT_THROW_FIRE_PYSICAL:
+		case ATT_FIREPLUS:
 			if(a.order) {
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_FIRE,false,false,false,CL_normal,
 					PlaceHolderHelper(name_.getName()),
@@ -1525,6 +1566,7 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_AUTUMN:
 	case ATT_CHOAS:
 	case ATT_THROW_NORMAL:
+	case ATT_THROW_SILVER:
 	case ATT_THROW_FIRE:
 	case ATT_THROW_COLD:
 	case ATT_THROW_WATER:
@@ -1540,6 +1582,8 @@ void monster::print_no_damage_message(attack_infor &a)
 	case ATT_THROW_ELEC_PYSICAL:
 	case ATT_THROW_POISON_PYSICAL:
 	case ATT_THROW_SLOW_POISON:
+	case ATT_SILVER:
+	case ATT_FIREPLUS:
 	default:
 		printlog(LocalzationManager::locString(LOC_SYSTEM_BUT_NO_DAMAGE),true,false,false,CL_normal);
 		break;
@@ -1965,6 +2009,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		}
 
 		if(s_oil > 0 && (a.type == ATT_FIRE ||
+			a.type == ATT_FIREPLUS ||
 			a.type == ATT_FIRE_WEAK ||
 			a.type == ATT_THROW_FIRE ||
 			a.type == ATT_THROW_FIRE_PYSICAL ||
@@ -1974,6 +2019,12 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			a.type == ATT_FIRE_ENCHANT_BLAST)) { 
 			SetFire(s_oil, a.p_type, true);
 			s_oil = 0;
+		}
+		if(a.type == ATT_FIREPLUS&& randA(2) == 0) {
+			if(a.order != nullptr && env[current_level].isMove(position.x, position.y, true))
+			{
+				env[current_level].MakeSmoke(position,img_fog_fire,SMT_FIRE,rand_int(3,4),0,a.order);
+			}
 		}
 
 		//잠자는건 공격당한 후에 적용됨
@@ -2109,7 +2160,7 @@ bool monster::isSmartMove() {
 	return false;
 }
 bool monster::isMoveNotInturrpt(monster* mon) {
-	if(id == MON_HOMING && mon->id == MON_HOMING)
+	if(flag & M_FLAG_MISSLE && mon->flag & M_FLAG_MISSLE)
 		return true;
 	if(mon->flag & M_FLAG_NONE_MOVE && !canSwap(mon) && mon->position != target_pos)
 		return true;
@@ -2320,7 +2371,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 				}
 
 
-				if((*it).isEnemyMonster(this) || s_confuse || (*it).id == MON_BUSH) //적일때
+				if(isEnemyMonster(&(*it)) || s_confuse || (*it).id == MON_BUSH) //적일때
 				{
 					if(only_move)
 						return 0;
@@ -2752,7 +2803,7 @@ bool monster::CanSpeak()
 	}
 	return false;
 }
-bool skill_suicide_bomb(int base_damage, int power, bool short_, unit* order, coord_def target, bool hurt_ally);
+bool skill_suicide_bomb(int base_damage, int power, bool short_, unit* order, coord_def target, bool hurt_ally, bool self_hurt);
 bool monster::dead(parent_type reason_, bool message_, bool remove_)
 {
 	bool sight_ = false;
@@ -2944,7 +2995,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			{
 				you.haniwa_allys[i].cooldown = haniwa_abil::has_abil(HANIWA_A_FAST_REVIVE)?rand_int(250,350):rand_int(900,1100); //부활준비
 				if( haniwa_abil::has_abil(HANIWA_A_EXPLOSION)) {
-					skill_suicide_bomb(3+level/3, level*5,false,this,position, false);
+					skill_suicide_bomb(3+level/3, level*5,false,this,position, false, false);
 				}
 			}
 		}
@@ -3341,6 +3392,9 @@ int monster::action(int delay_)
 		
 		if(env[current_level].isViolet(position))
 			SetLunatic(2);
+		
+		if(env[current_level].isHalo(position))
+			SetGlow(2, true, true);
 		if(s_lunatic)
 		{
 			s_lunatic--;
@@ -3726,7 +3780,7 @@ int monster::action(int delay_)
 							if (randA(1))
 								break;
 						}
-						if(flag & M_FLAG_SUMMON && you.GetArtifactProperty(ART_SUMMONRESIST)) {
+						if(flag & M_FLAG_SUMMON && you.GetArtifactProperty(ART_SUMMONRESIST) > 0) {
 							//소환물저항
 							if (randA(1))
 								break;
@@ -4360,14 +4414,19 @@ void monster::special_action(int delay_, bool smoke_)
 		}
 		break;
 	case MON_MISSLE:
-		if (smoke_){
-		} else {
+		if (!smoke_){
 			image = &img_tanmac_missle[GetAngleToDirec(direction)];
+			if(isUserAlly() && !env[current_level].isInSight(position) && summon_time > 0) {
+				summon_time = std::max(1, summon_time-40);
+			}
 		}
 		break;
 	case MON_HOMING:
 		if (!smoke_){
 			image = &img_tanmac_homing[GetAngleToDirec(direction)];
+			if(isUserAlly() && !env[current_level].isInSight(position) && summon_time > 0) {
+				summon_time = std::max(1, summon_time-10);
+			}
 		}
 		break;
 	case MON_ENSLAVE_GHOST:
@@ -4767,12 +4826,17 @@ bool monster::SetLevitation(int levitation_)
 {
 	return false;
 }
-bool monster::SetGlow(int glow_, bool no_speak)
+bool monster::SetGlow(int glow_, bool no_speak, bool setting)
 {
 	if(!glow_)
 		return false;
 	bool _prev_glow = s_glow;
-	s_glow += glow_;
+	if(setting) {
+		if(s_glow < glow_)
+			s_glow = glow_;
+	}
+	else
+		s_glow += glow_;
 	if(isYourShight()) {
 		if(s_invisible && you.auto_pickup==0)
 			auto_pick_onoff(true);
@@ -5559,6 +5623,12 @@ bool monster::isMonsterSight(coord_def c, boolean okina)
 	}
 	return true;
 }
+bool monster::isVulnerableSilver() {
+	if(flag & M_FLAG_SUMMON || id == MON_REMILIA || id == MON_REMILIAYUKKURI || id == MON_FLAN || id == MON_FLAN_BUNSIN || id == MON_VAMPIER_BAT) {
+		return true;
+	}
+	return false;
+}
 bool monster::CanChase()
 {
 	if(state.GetState() == MS_REST || state.GetState() == MS_SLEEP || state.GetState() == MS_NORMAL || state.GetState() == MS_FIND)
@@ -5643,10 +5713,18 @@ bool monster::special_state(bool is_sight_for_monster) {
 	{
 		if(special_move(is_sight_for_monster, false, 45)) {
 			bool ice_ =  you.GetProperty(TPT_STG_ICE_SHOT);
-			int damage_ = 3 +level/3;
-			attack_infor temp_infor(randC(2,damage_),damage_*2,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_BURST));
-			BaseBomb_forAlly(position, &img_blast[ice_?4:0],temp_infor, &you, 10, ice_);
+			if(isShootingSprint()) {
+				int damage_ = 3 +level/3;
+				attack_infor temp_infor(randC(2,damage_),damage_*2,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_MISSLE));
+				BaseBomb_forAlly(position, &img_blast[ice_?4:0],temp_infor, &you, 10, ice_);
+			}
+			else {
+				int damage_ = 6 +level/2;
+				attack_infor temp_infor(randC(2,damage_),damage_*2,99,this,GetParentType(),ATT_FIRE_BLAST,name_infor(LOC_SYSTEM_ATT_MISSLE));
+				BaseBomb(position, &img_blast[ice_?4:0],temp_infor, this);
+			}
 			Sleep(30);
+			env[current_level].MakeNoise(position, 8, this);
 			env[current_level].ClearEffect();
 			dead(PRT_NEUTRAL, false);
 		}

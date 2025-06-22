@@ -332,12 +332,19 @@ string item::GetName(int num_, bool simple_)
 	}
 	if(type==ITM_AMULET)
 	{
-		if(iden_list.amulet_list[value1].iden == 2)  {
-			temp += LocalzationManager::locString(amulet_iden_string[value1]);
-		} else {
-			temp += LocalzationManager::locString(amulet_uniden_string[iden_list.amulet_list[value1].type]);
+		if(!isArtifact())
+		{
+			if(iden_list.amulet_list[value1].iden == 2)  {
+				temp += LocalzationManager::locString(amulet_iden_string[value1]);
+			} else {
+				temp += LocalzationManager::locString(amulet_uniden_string[iden_list.amulet_list[value1].type]);
+			}
+			overwriteName = true;
 		}
-		overwriteName = true;
+		else if(!second_name.isEmpty())
+		{
+			temp += second_name.getName() + " ";
+		}
 	}
 	if(!isArtifact() && type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST && value6)
 	{
@@ -429,7 +436,12 @@ string item::GetName(int num_, bool simple_)
 			}
 			if(type==ITM_RING)
 			{			
-				arti_ += GetAtifactString((artifact_type)value1,value2);
+				arti_ += GetAtifactString((artifact_type)ring_to_artifact((ring_type)value1),value2);
+				base_ = true;
+			}
+			if(type==ITM_AMULET)
+			{			
+				arti_ += GetShortAmuletString((amulet_type)value1);
 				base_ = true;
 			}
 			if(type >= ITM_ARMOR_BODY_FIRST && type < ITM_ARMOR_BODY_LAST)

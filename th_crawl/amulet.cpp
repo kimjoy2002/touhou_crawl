@@ -29,7 +29,8 @@ LOCALIZATION_ENUM_KEY amulet_uniden_string[AMT_MAX] =
 	LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN6,
 	LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN7,
 	LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN8,
-	LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN9
+	LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN9,
+	LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN10
 };
 
 LOCALIZATION_ENUM_KEY amulet_iden_string[AMT_MAX] =
@@ -42,11 +43,42 @@ LOCALIZATION_ENUM_KEY amulet_iden_string[AMT_MAX] =
 	LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_SPIRIT,
 	LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_GRAZE,
 	LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_WEATHER,
-	LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_OCCULT
+	LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_OCCULT,
+	LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PURIFTY
 };
 
 
+string GetShortAmuletString(amulet_type amulet_) {
+	switch(amulet_) {
+	case AMT_PERFECT:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PERFECT_SHORT);
+	case AMT_BLOSSOM:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_BLOSSOM_SHORT);
+	case AMT_TIMES:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIMES_SHORT);
+	case AMT_FAITH:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_FAITH_SHORT);
+	case AMT_WAVE:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_WAVE_SHORT);
+	case AMT_SPIRIT:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_SPIRIT_SHORT);
+	case AMT_GRAZE:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_GRAZE_SHORT);
+	case AMT_WEATHER:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_WEATHER_SHORT);
+	case AMT_OCCULT:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_OCCULT_SHORT);
+	case AMT_PURIFTY:
+		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PURIFTY_SHORT);
+	default:
+		break;
+	}
+	return "";
+}
 
+bool isGenerateAmulet(amulet_type amulet_) {
+	return amulet_ != AMT_PURIFTY;
+}
 int isAmuletGotValue(amulet_type amulet_)
 {
 	return 0;
@@ -55,7 +87,13 @@ int isAmuletGotValue(amulet_type amulet_)
 
 amulet_type goodbadamulet(int good_bad)
 {
-	return (amulet_type) randA(AMT_MAX - 1);
+	random_extraction<amulet_type> rand_amulet;
+	for(int i = 0; i < AMT_MAX; i++) {
+		if(isGenerateAmulet((amulet_type)i)) {
+			rand_amulet.push((amulet_type)i);
+		}
+	}
+	return rand_amulet.pop();
 }
 
 int isGoodAmulet(amulet_type kind, int value)
@@ -84,6 +122,7 @@ float getAmuletCharge(amulet_type kind)
 	case AMT_SPIRIT:
 	case AMT_GRAZE:
 	case AMT_WAVE:
+	case AMT_PURIFTY:
 		return 1.0f;
 	case AMT_WEATHER:
 	case AMT_TIMES:
@@ -285,6 +324,63 @@ bool evokeAmulet(amulet_type kind, int value_)
 		default:
 			break;
 		}
+		break;
+	case AMT_PURIFTY:
+	{
+		bool up_ = false;
+		
+		if(you.s_confuse)
+		{
+			you.s_confuse = 0;
+			up_ = true;
+		}
+		if(you.s_poison)
+		{
+			you.s_poison = 0;
+			up_ = true;
+		}
+		if(you.s_sick)
+		{
+			you.s_sick = 0;
+			up_ = true;
+		}
+		if(you.s_frozen)
+		{
+			you.s_frozen = 0;
+			up_ = true;
+		}
+		if(you.s_glow)
+		{
+			you.s_glow = 0;
+			up_ = true;
+		}
+		if(you.s_slow)
+		{
+			you.s_slow = 0;
+			up_ = true;
+		}
+		if(you.s_oil)
+		{
+			you.s_oil = 0;
+			up_ = true;
+		}
+		if(you.s_fire)
+		{
+			you.s_fire = 0;
+			up_ = true;
+		}
+
+		if(up_)
+		{
+			soundmanager.playSound("buff");
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_CURE),true,false,false,CL_white_blue);
+			return true;
+		}
+		else{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_CURE_FAIL),true,false,false,CL_normal);
+			return false;	
+		}
+	}
 		break;
 	default:
 		break;

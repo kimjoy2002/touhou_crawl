@@ -419,6 +419,8 @@ public:
 	void SetY(int y_);
 	void SetXY(int x_, int y_);
 	void SetXY(coord_def pos_);
+	void SetXYPassFloor(int prev_floor, int new_floor, coord_def pos_);
+	void SetXYPassFloor(int prev_floor, int new_floor, int x_, int y_);
 	void SetPrevAction(int key, char item = 0, int num = 0);
 	void maybeAction();
 	coord_def GetDisplayPos();
@@ -517,7 +519,7 @@ public:
 	bool SetElec(int elec_);
 	bool SetParalyse(int paralyse_);
 	bool SetLevitation(int levitation_);
-	bool SetGlow(int glow_, bool no_speak = false);
+	bool SetGlow(int glow_, bool no_speak = false, bool setting = false);
 	bool SetGraze(int graze_);
 	bool SetSilence(int silence_, int silence_range_);
 	bool SetSick(int sick_);
@@ -643,6 +645,7 @@ public:
 	int GetMapId(){return -2;};
 	int GetLevel(){return level;};
 	bool isplayer(){return true;};
+	bool isVulnerableSilver();
 	int GetPoisonResist(){return poison_resist;};
 	float GetFireResist(bool cloud_ = false);
 	float GetColdResist(bool cloud_ = false);

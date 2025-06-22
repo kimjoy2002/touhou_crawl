@@ -109,7 +109,10 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_PHILOSOPHERS_1:
 	case SKL_PHILOSOPHERS_2:	
 	case SKL_PHILOSOPHERS_3:
+	case SKL_FIREBALL:
 		return (S_FLAG_RANGE_ATTACK) & flag;
+	case SKL_MISSLE:
+		return (S_FLAG_RANGE_ATTACK | S_FLAG_SMITE) & flag;
 	case SKL_PHILOSOPHERS_4:
 		return (S_FLAG_IMMEDIATELY) & flag;
 	case SKL_PHILOSOPHERS_5:
@@ -170,6 +173,7 @@ int SkillLength(skill_list skill)
 	case SKL_YUUGI_3_THROW:
 	case SKL_PHILOSOPHERS_5:
 	case SKL_JUNKO_1:
+	case SKL_FIREBALL:
 		return 6;
 	case SKL_SATORI_1:
 	case SKL_SATORI_2:
@@ -189,6 +193,7 @@ int SkillLength(skill_list skill)
 	case SKL_OKINA_1:
 	case SKL_OKINA_2:
 	case SKL_JOON_AND_SION_4:
+	case SKL_MISSLE:
 		return 7;
 	case SKL_YUUGI_2:
 	case SKL_YUUGI_3:
@@ -462,6 +467,10 @@ string SkillString(skill_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_HARD_SELL);
 	case SKL_CREATE_SHOP:
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_CREATE_SHOP);
+	case SKL_FIREBALL:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_FIREBALL);
+	case SKL_MISSLE:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_MISSLE);
 	case SKL_NONE:
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_UKNOWN);
@@ -545,6 +554,8 @@ int SkillCap(skill_list skill)
 	case SKL_JOON_AND_SION_OFF:
 	case SKL_SOULSHOT:
 	case SKL_SUPER_GRAZE:
+	case SKL_FIREBALL:
+	case SKL_MISSLE:
 		return 200;
 	case SKL_LEVITATION:
 		return 75;
@@ -668,6 +679,8 @@ int SkillNoise(skill_list skill)
 	case SKL_SOULSHOT:
 	case SKL_SUPER_GRAZE:
 	case SKL_HARD_SELL:
+	case SKL_FIREBALL:
+	case SKL_MISSLE:
 		return 8;
 	case SKL_YUUGI_4:
 	case SKL_SWAKO_DIGGING:
@@ -788,6 +801,8 @@ int SkillPow(skill_list skill)
 		return you.piety;
 	case SKL_LEVITATION:
 	case SKL_INVISIBLE:
+	case SKL_FIREBALL:
+	case SKL_MISSLE:
 		return you.GetSkillLevel(SKT_EVOCATE, true) *5;
 	case SKL_GRAZE:
 	case SKL_GRAZE_OFF:
@@ -818,6 +833,10 @@ int SkillDiffer(skill_list skill)
 		return SkillDiffer_simple(-4,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
 	case SKL_INVISIBLE:
 		return SkillDiffer_simple(0,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
+	case SKL_FIREBALL:
+		return SkillDiffer_simple(-3,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
+	case SKL_MISSLE:
+		return SkillDiffer_simple(-2,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
 	case SKL_BYAKUREN_1:
 		return 100;
 		//return SkillDiffer_simple(-3,SKT_SPELLCASTING,SKT_ERROR,SKT_ERROR);
@@ -1014,7 +1033,9 @@ int SkillMana(skill_list skill)
 	case SKL_DRAW_CARD:
 	case SKL_HARD_SELL:
 	case SKL_CREATE_SHOP:
-		return 0;		
+	case SKL_FIREBALL:
+	case SKL_MISSLE:
+		return 0;
 	case SKL_SWAKO_WATER_GUN:
 	case SKL_JUNKO_1:
 		return 1;
@@ -1383,7 +1404,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 			you.PowUpDown(-(12+randA(8)),true);
 			//you.PietyUpDown(-4);
 		}
-		return true;	
+		return true;
 	case SKL_YUUGI_4:
 		if(check_ && you.power<100)
 		{
@@ -1649,6 +1670,30 @@ bool SkillPlusCost(skill_list skill,bool check_)
 			you.PietyUpDown(-getMikoPiety(4));
 		return true;
 	}
+	case SKL_FIREBALL:
+		if(check_ && you.power<100)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
+			return false;
+		}
+		if(!check_)
+		{
+			you.PowUpDown(-(22+randA(8)),true);
+			//you.PietyUpDown(-4);
+		}
+		return true;
+	case SKL_MISSLE:
+		if(check_ && you.power<100)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
+			return false;
+		}
+		if(!check_)
+		{
+			you.PowUpDown(-(10+randA(5)),true);
+			//you.PietyUpDown(-4);
+		}
+		return true;
 	case SKL_JOON_AND_SION_1:
 	case SKL_JOON_AND_SION_2:
 	case SKL_JOON_AND_SION_3:
@@ -1881,6 +1926,10 @@ string SkillCostString(skill_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_NONE);
 	case SKL_CREATE_SHOP:
 		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_NONE);
+	case SKL_FIREBALL:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_SOME);
+	case SKL_MISSLE:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_LITTLE);
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:
@@ -1902,6 +1951,7 @@ int GetSpellBombRange(skill_list skill)
 	case SKL_EIRIN_0:
 	case SKL_PHILOSOPHERS_1:
 	case SKL_PHILOSOPHERS_5:
+	case SKL_FIREBALL:
 		return 1;
 	default:
 		break;

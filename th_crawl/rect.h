@@ -12,7 +12,13 @@
 #include "common.h"
 #include "enum.h"
 
-class rect_iterator //원하는 사각형을 출력한다.
+
+class rect_iterator_interface
+{
+	virtual coord_def operator *() const = 0;
+	virtual const coord_def* operator->() const = 0;
+};
+class rect_iterator : public rect_iterator_interface
 {
 	coord_def start;
 	coord_def current;
@@ -31,7 +37,7 @@ public:
 
 
 
-class rand_rect_iterator //특정 범위안을 무작위순서로 추출해낸다.
+class rand_rect_iterator  : public rect_iterator_interface //특정 범위안을 무작위순서로 추출해낸다.
 {
 	coord_def start;
 	int current;
@@ -49,7 +55,7 @@ public:
 };
 
 
-class dif_rect_iterator //특정 위치부터 점차 퍼지면서 무작위로 추출한다.
+class dif_rect_iterator  : public rect_iterator_interface //특정 위치부터 점차 퍼지면서 무작위로 추출한다.
 {
 	coord_def start;
 	int current;

@@ -49,9 +49,7 @@ enum artifact_type
 	ART_RAD,
 	ART_FIREBALL,
 	ART_GLUTTON,
-	ART_SILVER,
 	ART_BUG,
-	ART_FIREPLUS,
 	ART_POISONIMMUNE,
 	ART_SWIFT,
 	ART_MISSLE,
@@ -111,6 +109,7 @@ bool effectartifact(artifact_type kind, int value);
 void MakeArtifact(item* item_, int good_bad_);
 
 std::string GetFixedArtifact(fixed_artifact_type fixed_artifact);
-void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact);
+bool IsTypeOfFixedArtifact(fixed_artifact_type fixed_artifact, item_type itemType);
+void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz);
 
 #endif // __ATIFACT_H__

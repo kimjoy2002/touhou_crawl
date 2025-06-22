@@ -418,7 +418,8 @@ enum dungeon_tile_flag
 	FLAG_SANCTUARY = 1 << 12, //성역
 	FLAG_DONT_DOOR = 1 << 13, //몬스터가 열 수 없는 문
 	FLAG_FORBID = 1 << 14, //포비든 영역
-	FLAG_BLOCK = 1 << 15 //고정된 지형으로 이동하기 어려움
+	FLAG_BLOCK = 1 << 15, //고정된 지형으로 이동하기 어려움
+    FLAG_HALO = 1<<16 //헤일로
 };
 
 
@@ -790,7 +791,9 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_d
 	ATT_SMASH,
 	ATT_BLOOD,
 	ATT_NOISE,
+	ATT_SILVER,
 	ATT_FIRE,
+	ATT_FIREPLUS,
 	ATT_FIRE_WEAK,
 	ATT_COLD,
 	ATT_COLD_WEAK,
@@ -810,6 +813,7 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_d
 	ATT_HOOF,
 	ATT_BEARTRAP,
 	ATT_THROW_NORMAL, //여기부터 그레이즈가 됨
+	ATT_THROW_SILVER,
 	ATT_THROW_NONE_MASSAGE,
 	ATT_THROW_NONE_DAMAGE,
 	ATT_THROW_FIRE,

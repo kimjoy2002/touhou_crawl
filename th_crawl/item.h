@@ -140,6 +140,7 @@ public:
 	ring_iden ring_list[RGT_MAX];
 	amulet_iden amulet_list[AMT_MAX];
 	spellcard_iden spellcard_list[SPC_V_MAX];
+	bool fixed_artifact[FIXED_ARTIFACT_MAX];
 	bool books_list[BOOK_LAST];
 	bool autopickup[IDEN_CHECK_END];
 };

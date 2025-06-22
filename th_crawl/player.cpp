@@ -999,28 +999,40 @@ void players::SetY(int y_)
 }
 void players::SetXY(int x_, int y_)
 {
-	if(position.x == x_ && position.y == y_)
+	SetXYPassFloor(current_level, current_level, x_, y_);
+}
+void players::SetXY(coord_def pos_)
+{
+	SetXY(pos_.x,pos_.y);
+}
+void players::SetXYPassFloor(int prev_floor, int new_floor, coord_def pos_) {
+	SetXYPassFloor(prev_floor, new_floor, pos_.x, pos_.y);
+}
+void players::SetXYPassFloor(int prev_floor, int new_floor, int x_, int y_) {
+	if(position.x == x_ && position.y == y_ && prev_floor == new_floor)
 	{
 		resetLOS();
 		return;
 	}
 	if(s_silence)
-		env[current_level].MakeSilence(position, s_silence_range, false);
+		env[prev_floor].MakeSilence(position, s_silence_range, false);
+	if(you.GetArtifactProperty(ART_HALO) > 0 ) {
+		env[prev_floor].MakeHalo(position, 4, false);
+	}
 	if(s_catch)	
 		SetCatch(NULL);
 	position.set(x_,y_);
-	for(auto it = env[current_level].floor_list.begin(); it != env[current_level].floor_list.end();it++)
+	for(auto it = env[new_floor].floor_list.begin(); it != env[new_floor].floor_list.end();it++)
 	{
 		if(it->position == position)
 			it->onWalk(this);
 	}
 	if(s_silence)
-		env[current_level].MakeSilence(position, s_silence_range, true);	
+		env[new_floor].MakeSilence(position, s_silence_range, true);	
+	if(you.GetArtifactProperty(ART_HALO) > 0 ) {
+		env[new_floor].MakeHalo(position, 4, true);
+	}
 	resetLOS();
-}
-void players::SetXY(coord_def pos_)
-{
-	SetXY(pos_.x,pos_.y);
 }
 void players::SetPrevAction(int key, char item, int num)
 {
@@ -1057,7 +1069,13 @@ bool players::attack(monster* mon_, bool counter_)
 	attack_type brand_ = ATT_NORMAL;
 	if(equipment[ET_WEAPON])
 		brand_ = (attack_type)GetAttType((weapon_brand)equipment[ET_WEAPON]->value5);
-	attack_infor temp_att(GetAttack(false),GetAttack(true),GetHit(),this,GetParentType(),brand_,alchemy_buff == ALCT_STONE_FIST?name_infor(LOC_SYSTEM_ATT_STONE_PUNCH):name_infor(LOC_SYSTEM_ATT_NORMAL));
+	LOCALIZATION_ENUM_KEY att_name = LOC_SYSTEM_ATT_NORMAL;
+	if(counter_) {
+		att_name = LOC_SYSTEM_ATT_COUNTER;
+	} else if (alchemy_buff == ALCT_STONE_FIST) {
+		att_name = LOC_SYSTEM_ATT_STONE_PUNCH;
+	}
+	attack_infor temp_att(GetAttack(false),GetAttack(true),GetHit(),this,GetParentType(),brand_,name_infor(att_name));
 	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
 	{
 		doingActionDump(DACT_MELEE, equipment[ET_WEAPON]->name.getName());
@@ -1123,6 +1141,24 @@ bool players::attack(monster* mon_, bool counter_)
 			}
 		}
 	}
+	if(GetArtifactProperty(ART_LUNATIC) > 0) {
+		if(randA(40) == 0) {
+			you.SetLunatic(rand_int(5, 10));
+		}
+	}
+	int overheat_val = GetProperty(TPT_OVERHEAT);
+	if(overheat_val > 0) {
+		if(randA(7-overheat_val) == 0) {
+			you.SetOverheat(rand_int(1, 2), 10);
+			
+			rand_rect_iterator rand_rect(you.position, 2, 2);
+			for(int i=rand_int(2,4)+overheat_val;i>0;i--){ 
+				env[current_level].MakeSmoke((*rand_rect), img_fog_normal, SMT_FOG, rand_int(5, 10), 0, NULL);
+				rand_rect++;
+			}
+					
+		}
+	}
     return true;
 }
 
@@ -1132,7 +1168,21 @@ int players::move(short_move x_mov, short_move y_mov)
 	if(!x_mov && !y_mov)
 		return 0;
 	int drunken_ = randA(10);
-	// (GetArtifactProperty(ART_PERMAINVI) > 0 && ) //벽이 없는 방향으로 움직임 구현해야함
+	bool unconscious = false;
+	if(GetArtifactProperty(ART_UNCONSCIOUS) > 0 && randA(20) == 0) {
+		if(env[current_level].insight_mon(MET_ENEMY)) {
+			rand_rect_iterator rand_coord(coord_def(0, 0), 1, 1);
+			while(!rand_coord.end()) {
+				if((x_mov != (*rand_coord).x || y_mov != (*rand_coord).y) && env[current_level].isMove(you.position+(*rand_coord), isFly(), isSwim())) {
+					x_mov = (short_move)(*rand_coord).x;
+					y_mov = (short_move)(*rand_coord).y;
+					unconscious = true;
+					break;
+				}
+				rand_coord++;
+			}
+		}
+	}
 	if(s_confuse || (s_drunken && drunken_==0))
 	{
 		do
@@ -1300,7 +1350,7 @@ int players::move(short_move x_mov, short_move y_mov)
 		}
 	}
 	else {
-		if (s_confuse || (s_drunken && drunken_ == 0))
+		if (s_confuse || (s_drunken && drunken_ == 0) || unconscious)
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_OUCH), true, false, false, CL_normal);
 			time_delay += GetWalkDelay();
@@ -1338,6 +1388,7 @@ bool shooing_fire_effect(coord_def pos_, int rand_graphic_, bool burst_, bool ic
 			if(you.equipment[ET_WEAPON]) {
 				switch(GetAttType((weapon_brand)you.equipment[ET_WEAPON]->value5)) {
 					case ATT_FIRE:
+					case ATT_FIREPLUS:
 						att_ = ATT_FIRE_ENCHANT_BLAST;
 					case ATT_COLD:
 						att_ = ATT_COLD_ENCHANT_BLAST;
@@ -1516,6 +1567,7 @@ bool players::shooing_fire(float bonus_)
 			if(missle_ != nullptr) {
 				missle_->LevelUpdown(you.level-1,0,0);
 				missle_->direction = GetPositionToAngle(position.x, position.y, missle_->position.x, missle_->position.y);
+				missle_->image = &img_tanmac_missle[GetAngleToDirec(missle_->direction)];
 			}
 		}
 		s_shooting_turn = 0;
@@ -1599,7 +1651,7 @@ void players::CalcuHP()
 {
 	int fight_= GetSkillLevel(SKT_FIGHT, true);
 	int level_=level;
-	int aptit_=10+GetProperty(TPT_HP);
+	int aptit_=10+GetProperty(TPT_HP)-GetProperty(TPT_HP_LOSS);
 	int next_hp_ = floor((8 + floor((1+3*fight_)/2.0f)+floor(9*level_/2.0f)+floor(fight_*level_/14.0f))*(aptit_/10.0f));
 	hp = hp*next_hp_/max_hp;
 	max_hp = next_hp_;
@@ -2740,6 +2792,25 @@ void players::ExpRecovery(int exper_)
 
 		}
 
+
+		{
+			random_extraction<tribe_proper_type> rad_;
+			for(tribe_property proper : you.property_vector) {
+				if(isRadProperty(proper.id)) {
+					rad_.push(proper.id, proper.value);
+				}
+			}
+			if(rad_.GetSize() > 0) {
+				tribe_proper_type remove_rad_ = rad_.pop();
+				int val_ = GetProperty(remove_rad_);
+				DeleteProperty(remove_rad_);
+				if(val_ > 1) {
+					SetProperty(remove_rad_, val_-1);
+				}
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_YOU_RAD_CURE, PlaceHolderHelper(getTribePropertyKey(remove_rad_, val_))),true,false,false,CL_white_blue);
+			}
+		}
+
 		FairyRevive(true);
 
 
@@ -3252,18 +3323,24 @@ bool players::SetLevitation(int levitation_)
 		s_levitation = 100;
 	return true;
 }
-bool players::SetGlow(int glow_, bool no_speak)
+bool players::SetGlow(int glow_, bool no_speak, bool setting)
 {
 	if(!glow_)
 		return false;
-	if(!s_glow)
-		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_GLOW) + " ",false,false,false,CL_small_danger);
-	else
-	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_GLOW) + " ",false,false,false,CL_small_danger);
-		glow_ /=2;
+	if(!no_speak) {
+		if(!s_glow)
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_GLOW) + " ",false,false,false,CL_small_danger);
+		else
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_GLOW) + " ",false,false,false,CL_small_danger);
+		}
 	}
-	s_glow += glow_;
+	if(setting) {
+		if(s_glow < glow_)
+			s_glow = glow_;
+	}
+	else
+		s_glow += glow_;
 	if(s_glow>100)
 		s_glow = 100;
 	return true;
@@ -4687,8 +4764,8 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 			AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GET_ITEM, 
 				PlaceHolderHelper(rune_string[t->value1])),CL_warning);
 			rune[t->value1]++;
-		} else if(t->value1 >= 100 && t->value1 < 100+(TPT_STG_LAST-TPT_STG_START+1)) { //100부터는 슈팅 스프린트용 
-			tribe_proper_type add_abil = (tribe_proper_type)(TPT_STG_START+t->value1-100);
+		} else if(t->value1 >= TPT_STG_START && t->value1 < (TPT_STG_LAST+1)) { //100부터는 슈팅 스프린트용 
+			tribe_proper_type add_abil = (tribe_proper_type)(t->value1);
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_PICKUP_SHOOTING_ABIL, 
 				PlaceHolderHelper(getTribeProperty(add_abil, 1))),true,false,false,CL_good);
 
@@ -4972,7 +5049,25 @@ bool players::Drink(char id_)
 				if(!you.isequip(it))
 				{
 					int use_num_ = 1;
-					if(!you.GetPunish(GT_EIRIN) || randA(1))
+					
+					if(you.GetPunish(GT_EIRIN) && randA(1))
+					{
+						soundmanager.playSound("potion");
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_POTION_CHANGE),true,false,false,CL_small_danger);
+						drinkpotion(PT_WATER, false);
+					}
+					else if(you.GetArtifactProperty(ART_DRUNK) > 0) {
+						soundmanager.playSound("potion");
+						if(iden_list.potion_list[(*it).value1].iden == false)
+						{		
+							printlog(LocalzationManager::formatString(LOC_SYSTEM_IDENTIFY_ITEM, PlaceHolderHelper(potion_iden_string[(*it).value1])), false,false,false,CL_normal);		
+						}
+						iden_list.potion_list[(*it).value1].iden = true;
+						(*it).identify = true;
+						printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_IBUKISAKE_POTION_CHANGE),true,false,false,CL_small_danger);
+						drinkpotion(PT_ALCOHOL, false);
+					}
+					else
 					{
 						if (you.god == GT_JOON_AND_SION || you.GetPunish(GT_JOON_AND_SION))
 						{
@@ -5012,11 +5107,6 @@ bool players::Drink(char id_)
 						}
 						iden_list.potion_list[(*it).value1].iden = true;
 						(*it).identify = true;
-					}
-					else
-					{
-						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_POTION_CHANGE),true,false,false,CL_small_danger);
-						drinkpotion(PT_WATER, false);
 					}
 
 					if (use_num_ > 1) {
@@ -5589,7 +5679,7 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 		}
 		else
 		{
-			int length_ = ceil(sqrt(pow((float)abs(you.position.x-target_pos_.x),2)+pow((float)abs(you.position.y-target_pos_.y),2)));
+			int length_ = GetLengthFromCenter(target_pos_.x, target_pos_.y, you.position.x, you.position.y);
 		
 			if(short_)
 				temp_infor.length = length_;
@@ -6243,6 +6333,12 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 				AcUpDown(0,5);
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_PROTECT),true,false,false,CL_white_blue);	
 				break;
+			case WB_FIREPLUS:
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_FIREPLUS),true,false,false,CL_white_blue);	
+				break;
+			case WB_SILVER:
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_SILVER),true,false,false,CL_white_blue);	
+				break;
 			default:			
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_BUG),true,false,false,CL_danger);	
 				break;		
@@ -6286,6 +6382,12 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 				case WB_PROTECT:
 					AcUpDown(0,-5);
 					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_PROTECT),true,false,false,CL_white_blue);	
+					break;
+				case WB_FIREPLUS:
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FIREPLUS),true,false,false,CL_white_blue);	
+					break;
+				case WB_SILVER:
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_SILVER),true,false,false,CL_white_blue);	
 					break;
 				default:			
 					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_BUG),true,false,false,CL_danger);	
@@ -6452,6 +6554,9 @@ float players::GetElecResist(bool cloud_)
 		return_ *= 0.5f;
 
 	return return_;
+}
+bool players::isVulnerableSilver() {
+	return tribe == TRI_VAMPIRE;
 }
 bool players::GetCloudResist()
 {

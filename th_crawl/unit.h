@@ -117,7 +117,7 @@ public:
 	virtual bool SetElec(int elec_)=0;
 	virtual bool SetParalyse(int paralyse_)=0;
 	virtual bool SetLevitation(int levitation_)=0;
-	virtual bool SetGlow(int glow_, bool no_speak = false)=0;
+	virtual bool SetGlow(int glow_, bool no_speak = false, bool setting = false)=0;
 	virtual bool SetGraze(int graze_)=0;
 	virtual bool SetSilence(int silence_, int silence_range_)=0;
 	virtual bool SetSick(int sick_)=0;
@@ -183,6 +183,7 @@ public:
 	virtual bool Tele_check(bool preiden_, bool ctele_){return true;};
 	virtual attack_weapon_type GetAttackType()=0;
 	virtual int HpUpDown(int value_,damage_reason reason, unit *order_ = nullptr)=0;
+	virtual bool isVulnerableSilver() = 0;
 	virtual bool isEnemyUnit(unit* unit_info) = 0;
 	virtual bool isEnemyMonster(const monster* monster_info)=0;
 	virtual bool isUserAlly() const {return false;}

@@ -752,6 +752,8 @@ int Search_Move(const coord_def &c, bool wide, view_type type_, int value_)
 			s += " (" + LocalzationManager::locString(LOC_SYSTEM_TERRAIN_VIOLET) + ")";
 		if (env[current_level].isSanctuary(you.search_pos))
 			s += " (" + LocalzationManager::locString(LOC_SYSTEM_TERRAIN_SANCTUARY) + ")";
+		if(env[current_level].isHalo(you.search_pos))
+			s += " (" + LocalzationManager::locString(LOC_SYSTEM_TERRAIN_HALO) + ")";
 		floor_effect* floor_ = env[current_level].isFloorEffectPos(you.search_pos.x,you.search_pos.y);
 		if(env[current_level].isInSight(coord_def(you.search_pos.x,you.search_pos.y)) && floor_)
 		{

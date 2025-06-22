@@ -1172,7 +1172,16 @@ void init_identify() //미식별아이템을 구별못하게 섞음
 			iden_list.amulet_list[i].type = dq[i];
 		}
 	}//끝
+	{//고정아티팩트
+		for(int i=0;i<FIXED_ARTIFACT_MAX;i++)
+		{
+			iden_list.fixed_artifact[i] = false;
+		}
+	}
 
+
+
+	
 
 
 

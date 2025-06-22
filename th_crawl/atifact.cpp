@@ -13,6 +13,7 @@
 #include "armour.h"
 #include "rand_shuffle.h"
 #include "environment.h"
+#include "weapon.h"
 
 int GetMaterial(material_kind kind_, armour_value ac_);
 
@@ -76,9 +77,7 @@ int GetAtifactValue(artifact_type ring_, int good_bad_)
 	case ART_RAD:
 	case ART_FIREBALL:
 	case ART_GLUTTON:
-	case ART_SILVER:
 	case ART_BUG:
-	case ART_FIREPLUS:
 	case ART_POISONIMMUNE:
 	case ART_SWIFT:
 	case ART_MISSLE:
@@ -216,14 +215,8 @@ string GetAtifactString(artifact_type ring_, int value_)
 	case ART_GLUTTON:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_GLUTTON);
 		break;
-	case ART_SILVER:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_SILVER);
-		break;
 	case ART_BUG:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_FIREFLYCLOAK_BUG);
-		break;
-	case ART_FIREPLUS:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LAEVATEIN_FIREPLUS);
 		break;
 	case ART_POISONIMMUNE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LILYRING_POISONIMMUNE);
@@ -380,14 +373,8 @@ std::string GetAtifactInfor(artifact_type ring_, int value_)
 	case ART_GLUTTON:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_GLUTTON_INFO);
 		break;
-	case ART_SILVER:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_SILVER_INFO);
-		break;
 	case ART_BUG:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_FIREFLYCLOAK_BUG_INFO);
-		break;
-	case ART_FIREPLUS:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LAEVATEIN_FIREPLUS_INFO);
 		break;
 	case ART_POISONIMMUNE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LILYRING_POISONIMMUNE_INFO);
@@ -520,9 +507,7 @@ int isGenerateRandart(artifact_type type_) {
 		case ART_RAD:
 		case ART_FIREBALL:
 		case ART_GLUTTON:
-		case ART_SILVER:
 		case ART_BUG:
-		case ART_FIREPLUS:
 		case ART_POISONIMMUNE:
 		case ART_SWIFT:
 		case ART_MISSLE:
@@ -633,19 +618,19 @@ bool effectartifact(artifact_type kind, int value)
 	case ART_LUNATIC:
 		break;
 	case ART_HALO:
-		break;
+		env[current_level].MakeHalo(you.position, 4, value> 0);
+		return true;
 	case ART_RAD:
 		break;
 	case ART_FIREBALL:
-		break;
+		{
+			you.Ability(SKL_FIREBALL,false,value<0);
+			return true;
+		}
 	case ART_GLUTTON:
 		return true;
-	case ART_SILVER:
-		break;
 	case ART_BUG:
 		return true;
-	case ART_FIREPLUS:
-		break;
 	case ART_POISONIMMUNE:
 		you.ResistUpDown(value*1000,RST_POISON);
 		return true;
@@ -653,7 +638,10 @@ bool effectartifact(artifact_type kind, int value)
 		you.speed -= value*2;
 		return true;
 	case ART_MISSLE:
-		break;
+		{
+			you.Ability(SKL_MISSLE,false,value<0);
+			return true;
+		}
 	case ART_SELFDESTRUCT:
 		break;
 	case ART_SUMMONRESIST:
@@ -711,6 +699,23 @@ int ArmourExceptopn(armour_kind type)
 
 void MakeArtifact(item* item_, int good_bad_)
 {
+	if(good_bad_ > 0) {
+		random_extraction<fixed_artifact_type> able_fixed_arti;
+		for(int i = 1; i < FIXED_ARTIFACT_MAX; i++) {
+			if(!iden_list.fixed_artifact[i] && IsTypeOfFixedArtifact((fixed_artifact_type)i, item_->type)) {
+				able_fixed_arti.push((fixed_artifact_type)i);
+			}
+		}
+		if(able_fixed_arti.GetSize()>0) {
+			//고정아티 존재함
+			//기본 고정아티 확률 1/15
+			if(randA(19-5*good_bad_) == 0) {
+				MakeFixedArtifact(item_, able_fixed_arti.pop(), false);
+				return;
+			}
+		}
+	}
+
 	int num_ = 1+randA(good_bad_ +randA(3));
 	random_extraction<artifact_type> temp;
 	for(int i=0; i<ART_MAX_ATIFACT; i++)
@@ -802,6 +807,10 @@ void MakeArtifact(item* item_, int good_bad_)
 	{
 		item_->image = &img_item_artifact_ring;
 	}
+	if (item_->type == ITM_AMULET)
+	{
+		item_->image = &img_item_artifact_amulet;
+	}
 	item_->second_name= name_infor(LOC_SYSTEM_ITEM_ARTIFACT);
 
 }
@@ -857,10 +866,66 @@ std::string GetFixedArtifact(fixed_artifact_type fixed_artifact) {
 	return "";
 }
 
-void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
+
+bool IsTypeOfFixedArtifact(fixed_artifact_type fixed_artifact, item_type itemType) {
+	switch(fixed_artifact) {
+	case FIXED_ARTIFACT_HAKKERO:
+		return itemType==ITM_WEAPON_MACE;
+	case FIXED_ARTIFACT_GUNGNIR:
+		return itemType==ITM_WEAPON_SPEAR;
+	case FIXED_ARTIFACT_ROUKANKEN:
+		return itemType==ITM_WEAPON_LONGBLADE;
+	case FIXED_ARTIFACT_HAKUROUKEN:
+		return itemType==ITM_ARMOR_SHIELD;
+	case FIXED_ARTIFACT_KOISHIHAT:
+		return itemType==ITM_ARMOR_HEAD;
+	case FIXED_ARTIFACT_MIKOCLOAK:
+		return itemType==ITM_ARMOR_CLOAK;
+	case FIXED_ARTIFACT_LUNATICTORCH:
+		return itemType==ITM_WEAPON_MACE;
+	case FIXED_ARTIFACT_MOONGEM:
+		return itemType==ITM_AMULET;
+	case FIXED_ARTIFACT_NUCLEARBOOT:
+		return itemType==ITM_ARMOR_BOOT;
+	case FIXED_ARTIFACT_CONTROLROD:
+		return itemType==ITM_WEAPON_MACE;
+	case FIXED_ARTIFACT_PICKANDSHOVELS:
+		return itemType==ITM_WEAPON_AXE;
+	case FIXED_ARTIFACT_SILVERKNIFE:
+		return itemType==ITM_WEAPON_SHORTBLADE;
+	case FIXED_ARTIFACT_FIREFLYCLOAK:
+		return itemType==ITM_ARMOR_CLOAK;
+	case FIXED_ARTIFACT_ICEFAIRYRING:
+		return itemType==ITM_RING;
+	case FIXED_ARTIFACT_LAEVATEIN:
+		return itemType==ITM_WEAPON_LONGBLADE;
+	case FIXED_ARTIFACT_LILYRING:
+		return itemType==ITM_RING;
+	case FIXED_ARTIFACT_GALECLOGS:
+		return itemType==ITM_ARMOR_BOOT;
+	case FIXED_ARTIFACT_HELLTSHIRT:
+		return itemType==ITM_ARMOR_BODY_ARMOUR_0;
+	case FIXED_ARTIFACT_KAPPAFULLARMOR:
+		return itemType==ITM_ARMOR_BODY_ARMOUR_3;
+	case FIXED_ARTIFACT_MAIDUNIFORM:
+		return itemType==ITM_ARMOR_BODY_ARMOUR_2;
+	case FIXED_ARTIFACT_IBUKISAKE:
+		return itemType==ITM_ARMOR_SHIELD;
+	default:
+		return false;
+	}
+}
+
+
+
+void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz) {
 	item_->fixed_artifact = fixed_artifact;
 	item_->identify = true;
 	item_->identify_curse = true;
+	item_->atifact_vector.clear();
+	if(!wiz) {
+		iden_list.fixed_artifact[fixed_artifact] = true;
+	}
 	switch(fixed_artifact) {
 	case FIXED_ARTIFACT_HAKKERO:
 		item_->type = ITM_WEAPON_MACE;
@@ -920,7 +985,7 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value2 = 9;
 		item_->value3 = 0;
 		item_->value4 = 8;
-		item_->value5 = 2;
+		item_->value5 = WB_COLD;
 		item_->value6 = -1;
 		item_->value7 = 13;
 		item_->value8 = 7;
@@ -1020,7 +1085,7 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value2 = 8;
 		item_->value3 = 0;
 		item_->value4 = 13;
-		item_->value5 = 1;
+		item_->value5 = WB_FIRE;
 		item_->value6 = -1;
 		item_->value7 = 13;
 		item_->value8 = 7;
@@ -1041,7 +1106,7 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->is_pile = false;
 		item_->num = 1;
 		item_->value0 = 0;
-		item_->value1 = AMT_BLOSSOM; //TODO
+		item_->value1 = AMT_PURIFTY;
 		item_->value2 = 0;
 		item_->value3 = 0;
 		item_->value4 = 0;
@@ -1067,7 +1132,7 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value1 = 1;
 		item_->value2 = 0;
 		item_->value3 = 0;
-		item_->value4 = 1;
+		item_->value4 = 6;
 		item_->value5 = 0;
 		item_->value6 = 0;
 		item_->value7 = 0;
@@ -1080,9 +1145,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value = 450;
 		item_->curse = false;
 		item_->atifact_vector.push_back(atifact_infor(ART_RAD,1));
-		item_->atifact_vector.push_back(atifact_infor(ART_FIRE_RESIS,1));
-		item_->atifact_vector.push_back(atifact_infor(ART_LEVITATION,1));
-		item_->atifact_vector.push_back(atifact_infor(ART_AC,5));
+		item_->atifact_vector.push_back(atifact_infor(ART_FIRE_RESIS,2));
+		item_->atifact_vector.push_back(atifact_infor(ART_ELEC_RESIS,1));
 		break;
 	case FIXED_ARTIFACT_CONTROLROD:
 		item_->type = ITM_WEAPON_MACE;
@@ -1105,7 +1169,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value = 1200;
 		item_->curse = false;
 		item_->atifact_vector.push_back(atifact_infor(ART_FIREBALL,1));
-		item_->atifact_vector.push_back(atifact_infor(ART_FIRE_RESIS,3));
+		item_->atifact_vector.push_back(atifact_infor(ART_FIRE_RESIS,1));
+		item_->atifact_vector.push_back(atifact_infor(ART_CONFUSE_RESIS,1));
 		break;
 	case FIXED_ARTIFACT_PICKANDSHOVELS:
 		item_->type = ITM_WEAPON_AXE;
@@ -1116,7 +1181,7 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value2 = 15;
 		item_->value3 = 0;
 		item_->value4 = 3;
-		item_->value5 = 3;
+		item_->value5 = WB_POISON;
 		item_->value6 = -1;
 		item_->value7 = 17;
 		item_->value8 = 7;
@@ -1140,8 +1205,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value2 = 6;
 		item_->value3 = 0;
 		item_->value4 = 9;
-		item_->value5 = 0;
-		item_->value6 = 0;
+		item_->value5 = WB_SILVER;
+		item_->value6 = -1;
 		item_->value7 = 10;
 		item_->value8 = 5;
 		item_->can_throw = true;
@@ -1151,7 +1216,6 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->weight = 1.5f;
 		item_->value = 500;
 		item_->curse = false;
-		item_->atifact_vector.push_back(atifact_infor(ART_SILVER,1));
 		item_->atifact_vector.push_back(atifact_infor(ART_EV,8));
 		item_->atifact_vector.push_back(atifact_infor(ART_MAGIC_RESIS,1));
 		item_->atifact_vector.push_back(atifact_infor(ART_SKILL_UP,SKT_TRANS+400));
@@ -1199,8 +1263,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->weight = 1.0f;
 		item_->value = 500;
 		item_->curse = false;
-		item_->atifact_vector.push_back(atifact_infor(ART_FIRE_RESIS,-1));
-		item_->atifact_vector.push_back(atifact_infor(ART_SKILL_UP,SKT_COLD+400));
+		item_->atifact_vector.push_back(atifact_infor(ART_INT,-9));
+		item_->atifact_vector.push_back(atifact_infor(ART_SKILL_UP,SKT_COLD+900));
 		break;
 	case FIXED_ARTIFACT_LAEVATEIN:
 		item_->type = ITM_WEAPON_LONGBLADE;
@@ -1211,7 +1275,7 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value2 = 14;
 		item_->value3 = 0;
 		item_->value4 = 11;
-		item_->value5 = 1;
+		item_->value5 = WB_FIREPLUS;
 		item_->value6 = -1;
 		item_->value7 = 16;
 		item_->value8 = 7;
@@ -1222,7 +1286,6 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->weight = 12.0f;
 		item_->value = 950;
 		item_->curse = false;
-		item_->atifact_vector.push_back(atifact_infor(ART_FIREPLUS,1));
 		item_->atifact_vector.push_back(atifact_infor(ART_AC,-4));
 		break;
 	case FIXED_ARTIFACT_LILYRING:
@@ -1317,9 +1380,9 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->weight = 30.0f;
 		item_->value = 1200;
 		item_->curse = false;
+		item_->atifact_vector.push_back(atifact_infor(ART_FIRE_RESIS,2));
 		item_->atifact_vector.push_back(atifact_infor(ART_MISSLE,1));
 		item_->atifact_vector.push_back(atifact_infor(ART_SELFDESTRUCT,1));
-		item_->atifact_vector.push_back(atifact_infor(ART_FIRE_RESIS,1));
 		break;
 	case FIXED_ARTIFACT_MAIDUNIFORM:
 		item_->type = ITM_ARMOR_BODY_ARMOUR_2;
@@ -1367,7 +1430,7 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact) {
 		item_->value = 500;
 		item_->curse = false;
 		item_->atifact_vector.push_back(atifact_infor(ART_DRUNK,1));
-		item_->atifact_vector.push_back(atifact_infor(ART_HP_REGEN,2));
+		item_->atifact_vector.push_back(atifact_infor(ART_HP_REGEN,3));
 		item_->atifact_vector.push_back(atifact_infor(ART_POISON_RESIS,1));
 		break;
 	default:

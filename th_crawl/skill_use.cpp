@@ -4759,6 +4759,33 @@ bool skill_create_shop(int power, bool short_, unit* order, coord_def target)
 }
 
 
+bool skill_missle(int power, bool short_, unit* order, coord_def target)
+{
+	if(!order)
+		return false;
+	int num_ = 2+(randA(50)<power?1:0)+(randA(50)+50<power?1:0);
+	for(int i = 0; i<num_ ; i++)
+	{
+		monster* missle_ = BaseSummon(MON_MISSLE, rand_int(30,60), true, true, 1, order, order->position, SKD_OTHER, -1);
+		if(missle_ != nullptr) {
+			missle_->LevelUpdown(10+power/12,0,0);
+			unit* unit_hit_ = env[current_level].isMonsterPos(target.x, target.y);
+			if(unit_hit_) {	
+				missle_->FoundTarget(unit_hit_, missle_->FoundTime());
+			}
+			else if(env[current_level].isInSight(missle_->position))
+				missle_->CheckSightNewTarget();
+			else {
+				missle_->memory_time = missle_->FoundTime();
+				missle_->target_pos = target;
+			}
+			missle_->direction = GetPositionToAngle(order->position.x, order->position.y, missle_->position.x, missle_->position.y);
+			missle_->image = &img_tanmac_missle[GetAngleToDirec(missle_->direction)];
+		}
+	}
+	return true;
+}
+
 bool skill_jump_attack(int power, bool short_, unit* order, coord_def target);
 
 
@@ -5111,6 +5138,12 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_CREATE_SHOP:
 		return skill_create_shop(power, short_, &you, target);
+		break;
+	case SKL_FIREBALL:
+		return skill_fire_ball(power, short_, &you, target);
+		break;
+	case SKL_MISSLE:
+		return skill_missle(power, short_, &you, target);
 		break;
 	default:
 		break;

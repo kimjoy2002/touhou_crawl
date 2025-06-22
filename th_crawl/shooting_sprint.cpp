@@ -488,7 +488,7 @@ void shooting_reward_random_init()
 	able_amulet.push(AMT_SPIRIT);
 	able_amulet.push(AMT_GRAZE);
 	able_amulet.push(AMT_WEATHER);
-	able_amulet.push(AMT_OCCULT);
+	//able_amulet.push(AMT_OCCULT);
 
 	for(int i = 0; i < 4; i++) {
 		addToRandomStage(1, 4, 1, ITM_AMULET, able_amulet.pop(), 2);
@@ -1330,10 +1330,10 @@ bool shooting_event(int num)
 				random_extraction<int> rand_reward;
 				for(int i = TPT_STG_START; i < TPT_STG_DEFAULT_ABIL; i++) {
 					if( i == TPT_STG_OPTION && you.GetProperty((tribe_proper_type)i)<3) {
-						rand_reward.push(100+i-TPT_STG_START);
+						rand_reward.push(i);
 					}
 					else if(!you.GetProperty((tribe_proper_type)i)) {
-						rand_reward.push(100+i-TPT_STG_START);
+						rand_reward.push(i);
 					}
 				}
 
@@ -1341,7 +1341,7 @@ bool shooting_event(int num)
 					item_infor t;
 					int value1 = rand_reward.pop();
 					makeitem(ITM_GOAL, 0, &t, value1);
-					t.name = name_infor(getTribePropertyKey((tribe_proper_type)(value1-100+TPT_STG_START), 1));
+					t.name = name_infor(getTribePropertyKey((tribe_proper_type)(value1), 1));
 					env[num].MakeItem(coord_def(DG_MAX_X/2-4+i*4, DG_MAX_Y/2-7), t);
 				}
 

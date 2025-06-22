@@ -41,10 +41,11 @@ public:
 	char silence_count;
 	char violet_count;
 	char santuary_count;
+	char halo_count;
 	char forbid_count;
 	char forbid_count2;
 	unsigned char autotile_bitmap[AUTOTILE_MAX]; //하나는 벽, 하나는 물
-	dungeon_tile():tile(DG_FLOOR),flag(0),silence_count(0),violet_count(0),santuary_count(0),forbid_count(0),forbid_count2(0){init();};
+	dungeon_tile():tile(DG_FLOOR),flag(0),silence_count(0),violet_count(0),santuary_count(0), halo_count(0),forbid_count(0),forbid_count2(0){init();};
 	dungeon_tile(dungeon_tile_type tile_, char flag_){init();tile = tile_;flag = flag_;};
 	void init()
 	{
@@ -52,6 +53,8 @@ public:
 		flag = 0;
 		silence_count = 0;
 		violet_count = 0;
+		santuary_count = 0;
+		halo_count = 0;
 		forbid_count = 0;
 		forbid_count2 = 0;
 		for(int i = 0; i<AUTOTILE_MAX;i++) {
@@ -278,7 +281,7 @@ public:
 	bool changeTile(coord_def c, dungeon_tile_type tile, bool noAutoCacul = false);
 	int CloseDoor(int x_,int y_); //0은 문없음 1은 닫음 -1은 어딘가 걸려있음
 	monster* AddMonster(int id_, uint64_t flag_, coord_def position_, int time_ = 0);
-	monster* AddMonster(monster *mon_, coord_def position_, int time_ = 0);
+	monster* AddMonsterWithMoving(monster *mon_, int prev_floor, coord_def position_, int time_ = 0);
 	monster* AddMonster_Summon(int id_, uint64_t flag_, coord_def position_, summon_info &info_ , int time_);
 	void SummonClear(int map_id_);
 	void MakeShadow(const coord_def &c, textures *t, int original_id_, shadow_type type_= SWT_MONSTER, const string &name_ = "");
@@ -319,6 +322,7 @@ public:
 	bool MakeSilence(coord_def center_, int length_, bool on_);
 	bool MakeViolet(coord_def center_, int length_, bool on_);
 	bool MakeSantuary(coord_def center_, int length_, bool on_);
+	bool MakeHalo(coord_def center_, int length_, bool on_);
 	bool AddForbid(coord_def center_);
 	void MakeForbid(coord_def pos, bool center_, bool on_);
 	bool MakeForbid(coord_def center_, int length_, bool on_, list<coord_def> &stack_);
@@ -332,6 +336,7 @@ public:
 	bool isSilence(coord_def pos_);
 	bool isViolet(coord_def pos_);
 	bool isSanctuary(coord_def pos_);
+	bool isHalo(coord_def pos_);
 	unit* isMonsterPos(int x_,int y_, const unit* excep_ = NULL, int* map_id_ = NULL);//해당 위치에 이미 몬스터가 있냐 ㅇ벗냐
 	shadow* isShadowPos(int x_, int y_);//해당 위치에 그림자있는지 확인
 	bool isForbidZone(int x_, int y_);

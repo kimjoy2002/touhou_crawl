@@ -67,6 +67,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 �
 	{27,5,SCARLET_LEVEL_LAST_LEVEL,4,1},//아티펙트무기
 	{28,5,SCARLET_LEVEL_LAST_LEVEL,4,1},//아티펙트방어구
 	{29,5,SCARLET_LEVEL_LAST_LEVEL,4,1},//아티펙트반지
+	{32,5,SCARLET_LEVEL_LAST_LEVEL,1,1},//아티펙트장신구
 	{30,5,SCARLET_LEVEL_LAST_LEVEL,3,1},//발동템
 
 
@@ -84,6 +85,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 �
 	{27,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,3,1},//아티펙트무기
 	{28,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,3,1},//아티펙트방어구
 	{29,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,3,1},//아티펙트반지
+	{32,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,1,1},//아티펙트장신구
 	{30,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,1,1},//발동템
 
 	
@@ -103,6 +105,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 �
 	{27,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1},//아티펙트무기
 	{28,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1},//아티펙트방어구
 	{29,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,10,1},//아티펙트반지
+	{32,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,3,1},//아티펙트장신구
 	{30,YUKKURI_LAST_LEVEL,YUKKURI_LAST_LEVEL,15,1},//발동템
 
 
@@ -123,6 +126,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 �
 	{27,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//아티펙트무기
 	{28,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//아티펙트방어구
 	{29,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//아티펙트반지
+	{32,DEPTH_LEVEL,DEPTH_LAST_LEVEL,1,1},//아티펙트장신구
 	{30,DEPTH_LEVEL,DEPTH_LAST_LEVEL,4,1},//발동템
 	
 	//달의도시
@@ -140,6 +144,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 �
 	{27,MOON_LEVEL,MOON_LAST_LEVEL,5,1},//아티펙트무기
 	{28,MOON_LEVEL,MOON_LAST_LEVEL,20,1},//아티펙트방어구
 	{29,MOON_LEVEL,MOON_LAST_LEVEL,5,1},//아티펙트반지
+	{32,MOON_LEVEL,MOON_LAST_LEVEL,1,1},//아티펙트장신구
 	{30,MOON_LEVEL,MOON_LAST_LEVEL,3,1},//발동템
 	
 	//지저
@@ -157,6 +162,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 �
 	{27,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1},//아티펙트무기
 	{28,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1},//아티펙트방어구
 	{29,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,10,1},//아티펙트반지
+	{32,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,3,1},//아티펙트장신구
 	{30,SUBTERRANEAN_LEVEL,SUBTERRANEAN_LEVEL_LAST_LEVEL,3,1},//발동템
 
 	//판데모니엄
@@ -175,6 +181,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 �
 	{27,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,4,1},//아티펙트무기
 	{28,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,4,1},//아티펙트방어구
 	{29,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,4,1},//아티펙트반지
+	{32,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,1,1},//아티펙트장신구
 	{30,PANDEMONIUM_LEVEL,PANDEMONIUM_LAST_LEVEL,4,1},//발동템
 	
 
@@ -391,6 +398,10 @@ item_infor& id_to_item(int id, item_infor* item_)
 	case 31://사토리
 		makeitem(ITM_ETC,1,item_, EIT_SATORI);
 		break;
+	case 32://아티펙트 장신구
+		makeitem(ITM_AMULET,randA(9)?1:-1,item_);
+		item_->artifact = true;
+		break;
 	default:
 		break;
 	}
@@ -432,7 +443,7 @@ void create_id_to_item(int id, int level)
 		{
 			if((item_->type>=ITM_WEAPON_FIRST && item_->type< ITM_WEAPON_LAST)||(item_->type>=ITM_ARMOR_FIRST && item_->type< ITM_ARMOR_LAST)||(item_->type>=ITM_JEWELRY_FIRST && item_->type< ITM_JEWELRY_LAST))
 			{ //아티펙트 만들기
-					MakeArtifact(item_,item_->curse?-1:1);
+				MakeArtifact(item_,item_->curse?-1:1);
 			}
 		}
 

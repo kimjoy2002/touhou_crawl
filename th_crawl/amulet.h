@@ -24,6 +24,7 @@ enum amulet_type
 	AMT_GRAZE, //그레이즈, 100%가 되면 그레이즈상태, 발동시 근성회피
 	AMT_WEATHER, //날씨, 사용시 무작위 날씨 발동 + 체젠증가
 	AMT_OCCULT, //오컬트, 100%가 되면 소환물 추방가능 + 소환하기
+	AMT_PURIFTY, //순수, 100%가 되면 디버프 해제
 	AMT_MAX,
 };
 //부적은 컨셉플레이에 맞게 바꾸는게 맞을 것 같음
@@ -47,7 +48,8 @@ enum occult_type
 extern LOCALIZATION_ENUM_KEY amulet_uniden_string[AMT_MAX];
 extern LOCALIZATION_ENUM_KEY amulet_iden_string[AMT_MAX];
 
-
+string GetShortAmuletString(amulet_type amulet_);
+bool isGenerateAmulet(amulet_type amulet_);
 int isAmuletGotValue(amulet_type amulet_);
 amulet_type goodbadamulet(int good_bad);
 int isGoodAmulet(amulet_type kind, int value);

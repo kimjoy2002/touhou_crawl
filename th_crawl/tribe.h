@@ -67,7 +67,13 @@ enum tribe_proper_type
 	TPT_PURE_POWER,
 	TPT_PURE_LIFE,
 	TPT_PURE_SYSTEM,
-	TPT_STG_START,
+	TPT_HP_LOSS,
+	TPT_WEAK,
+	TPT_OVERHEAT,
+	TPT_AC_AND_SLAY,
+	TPT_FIREUP_COLDDOWN,
+	TPT_ORIGINAL_MAX,
+	TPT_STG_START = 100,
 	TPT_STG_SPREAD_SHOT = TPT_STG_START,
 	TPT_STG_TRIPLE_SHOT,
 	TPT_STG_BACK_SHOT,
@@ -114,6 +120,8 @@ public:
 LOCALIZATION_ENUM_KEY getTribePropertyKey(tribe_proper_type id, int value);
 string getTribeProperty(tribe_proper_type id, int value);
 string getTribePropertyInfo(tribe_proper_type id, int value);
+bool isRadProperty(tribe_proper_type type);
+int getRadValue();
 void SetTribe(tribe_type select_);
 void PropertyView();
 void LevelUpTribe(int level_);

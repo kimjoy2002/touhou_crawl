@@ -904,6 +904,12 @@ string GetSkillInfor(skill_list skill)
 	case SKL_CREATE_SHOP:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_CREATE_SHOP);
 		break;
+	case SKL_FIREBALL:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_FIREBALL);
+		break;
+	case SKL_MISSLE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_MISSLE);
+		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_UKNOWN);
 		break;

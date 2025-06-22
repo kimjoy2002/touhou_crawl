@@ -479,10 +479,11 @@ void wiz_mode()
 					printlog(ss.str(),false, false, false, CL_help, (char)('a'+i));
 					listkey.push_back('a'+i);
 				}
-				listkey.push_back(VK_ESCAPE);	
 				ss.str("");
 				ss.clear();
 				ss << string(1,'!') << "-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT);
+				listkey.push_back('!');
+				listkey.push_back(VK_ESCAPE);
 				printlog(ss.str(),true, false, false, CL_help);
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_RING), false, false, false, CL_help);
 				startSelection(listkey);
@@ -555,7 +556,7 @@ void wiz_mode()
 			{
 				int list[AMT_MAX] = { AMT_PERFECT, AMT_BLOSSOM, AMT_TIMES, AMT_FAITH, AMT_WAVE, AMT_SPIRIT, AMT_GRAZE,
 					AMT_WEATHER, AMT_OCCULT };
-				LOCALIZATION_ENUM_KEY keylist[AMT_MAX] = {
+				LOCALIZATION_ENUM_KEY keylist[AMT_MAX-1] = {
 					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PERFECT_SHORT,
 					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_BLOSSOM_SHORT,
 					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIMES_SHORT,
@@ -568,14 +569,19 @@ void wiz_mode()
 				};
 				enterlog();
 				std::vector<int> listkey;
-				for(int i = 0; i < AMT_MAX; i++) {
+				for(int i = 0; i < AMT_MAX-1; i++) {
 					ss.str("");
 					ss.clear();
 					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
-					printlog(ss.str(), (i==AMT_MAX-1?true:false), false, false, CL_help, (char)('a'+i));
+					printlog(ss.str(), (i==AMT_MAX-2?true:false), false, false, CL_help, (char)('a'+i));
 					listkey.push_back('a'+i);
 				}
+				ss.str("");
+				ss.clear();
+				ss << string(1,'!') << "-" << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT);
+				listkey.push_back('!');
 				listkey.push_back(VK_ESCAPE);
+				printlog(ss.str(),true, false, false, CL_help);
 				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_AMULET), false, false, false, CL_help);
 				startSelection(listkey);
 				g_menu_select = -1;
@@ -607,6 +613,15 @@ void wiz_mode()
 					env[current_level].MakeItem(you.position, t);
 					enterlog();
 				}
+				else if (key_ == '!')
+				{
+					item_infor t;
+					makeitem(ITM_AMULET, randA(9) ? 1 : -1, &t);
+					t.artifact = true;
+					item *it_ = env[current_level].MakeItem(you.position, t);
+					MakeArtifact(it_, it_->curse ? -1 : 1);
+					enterlog();
+				}
 				else {
 					printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
 				}
@@ -626,7 +641,7 @@ void wiz_mode()
 					item_infor t;
 					makeitem(ITM_ETC, 0, &t, 0);
 					item * item_ = env[current_level].MakeItem(you.position, t);
-					MakeFixedArtifact(item_, (fixed_artifact_type)i);
+					MakeFixedArtifact(item_, (fixed_artifact_type)i, true);
 				}
 			}
 			return;

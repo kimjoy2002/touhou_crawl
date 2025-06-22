@@ -34,6 +34,7 @@ int GetPulsDamage(weapon_brand brand, int damage)
 	switch(brand)
 	{
 		case WB_FIRE:
+		case WB_FIREPLUS:
 		case WB_COLD:
 			damage += damage/3;
 			break;
@@ -41,6 +42,9 @@ int GetPulsDamage(weapon_brand brand, int damage)
 			if (you.s_weather) {
 				damage += damage / 2;
 			}
+			break;
+		case WB_SILVER:
+			damage *= 1.2f;
 			break;
 		default:
 			break;
@@ -69,6 +73,12 @@ int GetAttType(weapon_brand brand)
 			break;
 		case WB_AUTUMN:
 			att_type = ATT_AUTUMN;
+			break;
+		case WB_FIREPLUS:
+			att_type = ATT_FIREPLUS;
+			break;
+		case WB_SILVER:
+			att_type = ATT_SILVER;
 			break;
 		case WB_MANA_REGEN:
 		case WB_FAST_CAST:
@@ -100,6 +110,10 @@ LOCALIZATION_ENUM_KEY GetBrandString(weapon_brand brand, bool artifact_)
 			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_FASTCAST:LOC_SYSTEM_ITEM_WEAPON_BRAND_FASTCAST;
 		case WB_PROTECT:
 			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_PROTECT:LOC_SYSTEM_ITEM_WEAPON_BRAND_PROTECT;
+		case WB_FIREPLUS:
+			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_FIREPLUS:LOC_SYSTEM_ITEM_ARTIFACT_LAEVATEIN_FIREPLUS;
+		case WB_SILVER:
+			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_SILVER:LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_SILVER;
 		default:
 			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_BUG:LOC_SYSTEM_ITEM_WEAPON_BRAND_BUG;
 	}	
@@ -128,6 +142,10 @@ string GetBrandInfor(weapon_brand brand)
 			return LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_FASTCAST);
 		case WB_PROTECT:
 			return LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_PROTECT);
+		case WB_FIREPLUS:
+			return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LAEVATEIN_FIREPLUS_INFO);
+		case WB_SILVER:
+			return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_SILVER_INFO);
 		default:
 			return LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_BUG);	
 	}	

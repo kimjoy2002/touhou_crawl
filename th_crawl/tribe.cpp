@@ -200,6 +200,16 @@ LOCALIZATION_ENUM_KEY tribe_property::GetNameKey()
 		return LOC_SYSTEM_TRIBE_PROPERTY_PURE_LIFE;
 	case TPT_PURE_SYSTEM:
 		return LOC_SYSTEM_TRIBE_PROPERTY_PURE_SYSTEM;
+	case TPT_HP_LOSS:
+		return LOC_SYSTEM_TRIBE_PROPERTY_HP_LOSS;
+	case TPT_WEAK:
+		return LOC_SYSTEM_TRIBE_PROPERTY_WEAK;
+	case TPT_OVERHEAT:
+		return LOC_SYSTEM_TRIBE_PROPERTY_OVERHEAT;
+	case TPT_AC_AND_SLAY:
+		return LOC_SYSTEM_TRIBE_PROPERTY_AC_AND_SLAY;
+	case TPT_FIREUP_COLDDOWN:
+		return LOC_SYSTEM_TRIBE_PROPERTY_FIREUP_COLDDOWN;
 	case TPT_STG_SPREAD_SHOT:
 		return LOC_SYSTEM_TRIBE_PROPERTY_STG_SPREAD_SHOT;
 	case TPT_STG_TRIPLE_SHOT:
@@ -534,6 +544,16 @@ string tribe_property::GetInfor()
 		return value>1?LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_LIFE1):LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_LIFE2); 
 	case TPT_PURE_SYSTEM:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_SYSTEM);
+	case TPT_HP_LOSS:
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP_LOSS, PlaceHolderHelper("-" + to_string(value*10)), PlaceHolderHelper("+" + to_string(value*3)));
+	case TPT_WEAK:
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_WEAK, PlaceHolderHelper("+" + to_string(value*2)), PlaceHolderHelper("-" + to_string(value*2)));
+	case TPT_OVERHEAT:
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_OVERHEAT, PlaceHolderHelper("+" + to_string(value)));
+	case TPT_AC_AND_SLAY:
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_AC_AND_SLAY, PlaceHolderHelper("+" + to_string(value*3)), PlaceHolderHelper("-" + to_string(value*3)));
+	case TPT_FIREUP_COLDDOWN:
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIREUP_COLDDOWN, PlaceHolderHelper(std::string(value, '+')), PlaceHolderHelper(std::string(value,'-')));
 	case TPT_STG_SPREAD_SHOT:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SPREAD_SHOT);
 	case TPT_STG_TRIPLE_SHOT:
@@ -797,6 +817,16 @@ string tribe_property::GetDetail()
 		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_LIFE, PlaceHolderHelper(value>1?"2":"1"));
 	case TPT_PURE_SYSTEM:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_SYSTEM);
+	case TPT_HP_LOSS:
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_HP_LOSS, PlaceHolderHelper("-" + to_string(value*10)), PlaceHolderHelper("+" + to_string(value*3)));	
+	case TPT_WEAK:
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_WEAK, PlaceHolderHelper("+" + to_string(value*2)), PlaceHolderHelper("-" + to_string(value*2)));	
+	case TPT_OVERHEAT:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_OVERHEAT);	
+	case TPT_AC_AND_SLAY:
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_AC_AND_SLAY, PlaceHolderHelper("+" + to_string(value*3)), PlaceHolderHelper("-" + to_string(value*3)));
+	case TPT_FIREUP_COLDDOWN:
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIREUP_COLDDOWN, PlaceHolderHelper(to_string(value)), PlaceHolderHelper(to_string(value)));
 	case TPT_STG_SPREAD_SHOT:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SPREAD_SHOT);
 	case TPT_STG_TRIPLE_SHOT:
@@ -844,6 +874,12 @@ D3DCOLOR tribe_property::getColor()
 
 	switch (id)
 	{
+	case TPT_HP_LOSS:
+	case TPT_WEAK:
+	case TPT_OVERHEAT:
+	case TPT_AC_AND_SLAY:
+	case TPT_FIREUP_COLDDOWN:
+		return CL_small_danger;
 	case TPT_FIRE_IMUNE:
 	case TPT_COLD_IMUNE:
 	case TPT_ELEC_IMUNE:
@@ -959,7 +995,7 @@ void tribe_property::gain(bool gain_)
 		you.ResistUpDown(value_,RST_INVISIBLE);
 		return;
 	case TPT_FUR:
-		you.AcUpDown(0,value_>0?3:-3);		
+		you.AcUpDown(0,value_>0?3:-3);
 		you.ResistUpDown(value_,RST_ICE);
 		return;
 	case TPT_REGEN:
@@ -1050,6 +1086,22 @@ void tribe_property::gain(bool gain_)
 		return;
 	case TPT_PURE_SYSTEM:
 		return;
+	case TPT_HP_LOSS:
+		you.EvUpDown(0,value_*3);
+	case TPT_WEAK:
+		you.StatUpDown(value_*2, STAT_STR);
+		you.StatUpDown(value_*-2, STAT_DEX);
+		you.StatUpDown(value_*-2, STAT_INT);
+	case TPT_OVERHEAT:
+		return;
+	case TPT_AC_AND_SLAY:
+		you.AcUpDown(0,value_*-3);
+		you.s_slaying += value_*3;
+		return;
+	case TPT_FIREUP_COLDDOWN:
+		you.ResistUpDown(value_, RST_FIRE);
+		you.ResistUpDown(-value_, RST_ICE);
+		return;
 	case TPT_STG_SPREAD_SHOT:
 		return;
 	case TPT_STG_TRIPLE_SHOT:
@@ -1125,6 +1177,30 @@ void tribe_property::gain(bool gain_)
 }
 
 
+bool isRadProperty(tribe_proper_type type) {
+	switch(type) {
+	case TPT_HP_LOSS:
+	case TPT_WEAK:
+	case TPT_OVERHEAT:
+	case TPT_AC_AND_SLAY:
+	case TPT_FIREUP_COLDDOWN:
+		return true;
+	default:
+		return false;
+	}
+}
+
+
+int getRadValue() {
+	int value = 0;
+	for(tribe_property proper : you.property_vector) {
+		if(isRadProperty(proper.id)) {
+			value += proper.value;
+		}
+	}
+	return value;
+}
+
 void PropertyView()
 {
 	string blank(12,' ');
@@ -1193,6 +1269,9 @@ void PropertyView()
 				WaitForSingleObject(mutx, INFINITE);
 				SetText() = LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY) + " : " + you.property_vector[num].GetName();
 				SetText() += "\n\n" + LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_EFFECT) + " : " + you.property_vector[num].GetDetail();
+				if(isRadProperty(you.property_vector[num].id)) {
+					SetText() += "\n\n" + LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_RAD);
+				}
 				changedisplay(DT_TEXT);
 				ReleaseMutex(mutx);
 				waitkeyinput();

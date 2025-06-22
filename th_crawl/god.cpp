@@ -18,6 +18,7 @@
 #include "floor.h"
 #include "tensi.h"
 #include "steam_api.h"
+#include "soundmanager.h"
 #include "swako.h"
 #include "note.h"
 #include "rand_shuffle.h"
@@ -1564,8 +1565,10 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 					
 				if(percent_>=rand_int(25,50) && percent_>left_percent_)
 				{
+					coord_def prev_pos = you.position;
 					you.Teleport();
-					if(env[current_level].isInSight(you.position))
+					soundmanager.playSound("blink");
+					if(env[current_level].isInSight(prev_pos))
 						printlog(LocalzationManager::locString(LOC_SYSTEM_TURN_TELEPORT_SAME),false,false,false,CL_normal);
 					else
 						printlog(LocalzationManager::locString(LOC_SYSTEM_TURN_TELEPORT),false,false,false,CL_normal);
@@ -1573,6 +1576,7 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 				else
 				{
 					you.Blink(30);
+					soundmanager.playSound("blink");
 				}
 			}
 		}

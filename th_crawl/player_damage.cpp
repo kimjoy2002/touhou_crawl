@@ -438,6 +438,8 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_SPEAR:
 	case ATT_FIRE:
 	case ATT_FIRE_WEAK:
+	case ATT_SILVER:
+	case ATT_FIREPLUS:
 	case ATT_COLD:
 	case ATT_COLD_WEAK:
 	case ATT_ELEC:
@@ -454,6 +456,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_AUTUMN:
 	case ATT_CHOAS:
 	case ATT_THROW_NORMAL:
+	case ATT_THROW_SILVER:
 	case ATT_CLOUD_NORMAL:
 	case ATT_CLOUD_CURSE:
 	case ATT_VEILING:
@@ -536,6 +539,11 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 		break;
 	}
 
+	if(type_ == ATT_SILVER || type_ == ATT_THROW_SILVER) {
+		if(isVulnerableSilver()) {
+			damage_ = damage_*2.0f/1.2f;
+		}
+	}
 	
 	switch(type_)
 	{
@@ -543,6 +551,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_FIRE_WEAK:
 	case ATT_THROW_FIRE_PYSICAL:
 	case ATT_FIRE_ENCHANT_BLAST:
+	case ATT_FIREPLUS:
 		bonus_damage = damage_/3;
 		damage_ -= bonus_damage;
 		bonus_damage *= GetFireResist();
@@ -672,6 +681,29 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 				 PlaceHolderHelper(name.getName()));
 		}
 		break;
+	case ATT_SILVER:
+	case ATT_THROW_SILVER:
+		if (!isVulnerableSilver())
+		{
+			if (a.order)
+			{
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
+					 PlaceHolderHelper(name_.getName()),
+					 PlaceHolderHelper(a.name.getName()),
+					 PlaceHolderHelper(name.getName()));
+			}
+		}
+		else
+		{
+			if (a.order)
+			{
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_SILVER,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
+					 PlaceHolderHelper(name_.getName()),
+					 PlaceHolderHelper(a.name.getName()),
+					 PlaceHolderHelper(name.getName()));
+			}
+		}
+		break;
 	case ATT_SLEEP:
 		if (you.s_sleep >= 0)
 		{
@@ -696,6 +728,7 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_FIRE:
 	case ATT_FIRE_WEAK:
 	case ATT_THROW_FIRE_PYSICAL:
+	case ATT_FIREPLUS:
 		if(a.order)
 		{
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_FIRE,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
@@ -1126,6 +1159,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 				you.SetOil(10, 50);
 			}
 			if(s_oil > 0 && (a.type == ATT_FIRE ||
+				a.type == ATT_FIREPLUS ||
 				a.type == ATT_FIRE_WEAK ||
 				a.type == ATT_THROW_FIRE ||
 				a.type == ATT_THROW_FIRE_PYSICAL ||
@@ -1135,6 +1169,12 @@ bool players::damage(attack_infor &a, bool perfect_)
 			    a.type == ATT_FIRE_ENCHANT_BLAST)) { 
 				you.SetFire(s_oil, true);
 				s_oil = 0;
+			}
+			if(a.type == ATT_FIREPLUS&& randA(2) == 0) {
+				if(a.order != nullptr && env[current_level].isMove(you.position.x, you.position.y, true))
+				{
+					env[current_level].MakeSmoke(you.position,img_fog_fire,SMT_FIRE,rand_int(3,4),0,a.order);
+				}
 			}
 
 
@@ -1168,8 +1208,43 @@ bool players::damage(attack_infor &a, bool perfect_)
 				int rate_ = damage_*400/you.GetMaxHp();
 				if(randA(99) < rate_) {
 					int time_ = rand_int(20,60);
-					if(monster *mon_ = BaseSummon(MON_FIREFLY, time_, true, true, 1, &you, you.position, SKD_OTHER, -1))
+					if(monster *mon_ = BaseSummon(MON_FIREFLY, time_, true, true, 2, &you, you.position, SKD_OTHER, -1))
 					{
+					}
+				}
+			}
+			if(GetArtifactProperty(ART_SELFDESTRUCT) > 0 && damage_ >0 && s_selfdestruct == 0)
+			{
+				//33%피해에서 자폭
+				int rate_ = damage_*100/you.GetMaxHp();
+				if(rate_ >= 33) {
+					printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SELFDESTRUCT) + " ",true,false,false,CL_danger);
+					MoreWait();
+					s_selfdestruct = 4;
+				}
+			}
+			if(GetArtifactProperty(ART_RAD) > 0 && GetHp()>0 && damage_ >0)
+			{
+				//100%피해에서 33%
+				int rate_ = damage_*100/you.GetMaxHp();
+				if(randA(299) < rate_) {
+					//이미 얻은 RAD갯수만큼 확률 곱하기
+					if(randA(getRadValue()) == 0) {
+						random_extraction<tribe_proper_type> rad_;
+						for(int i = 0; i < TPT_ORIGINAL_MAX; i++) {
+							if(isRadProperty((tribe_proper_type)i)) {
+								rad_.push((tribe_proper_type)i);
+							}
+						}
+						if(rad_.GetSize() > 0) {
+							tribe_proper_type get_rad_ = rad_.pop();
+							int prev_val_ = GetProperty(get_rad_);
+							if(prev_val_ > 0) {
+								you.DeleteProperty(get_rad_);
+							}
+							you.SetProperty(get_rad_,prev_val_+1);
+							printlog(LocalzationManager::formatString(LOC_SYSTEM_YOU_RAD, PlaceHolderHelper(getTribePropertyKey(get_rad_, prev_val_+1))),true,false,false,CL_small_danger);
+						}
 					}
 				}
 			}

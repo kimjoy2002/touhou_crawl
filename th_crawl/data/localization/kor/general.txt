@@ -293,7 +293,7 @@ LOC_SYSTEM_ALREADY_FULL_POWER,당신은 이미 풀파워다!
 LOC_SYSTEM_IS_EQUIP_ITEM,장착중인 아이템이다.
 LOC_SYSTEM_PICKUP_PITEM,P가 증가했다.
 LOC_SYSTEM_PICKUP_RUNE,당신은 {0:을|를} 주웠다! ( ]키로 그동안 얻은 룬을 표시 )
-LOC_SYSTEM_PICKUP_RUNE_PAD,당신은 {0:을|를} 주웠다! ( ]키로 그동안 얻은 룬을 표시 )
+LOC_SYSTEM_PICKUP_RUNE_PAD,당신은 {0:을|를} 주웠다!
 LOC_SYSTEM_PICKUP_SHOOTING_ABIL,당신은 {0:을|를} 얻었다!
 LOC_SYSTEM_PICKUP_YINYANG_ORB,당신은 음양옥을 주웠다. 던전1층으로 가지고 올라가면 승리한다
 LOC_SYSTEM_PICKUP_SELECT_ASK,{0:을|를} 줍습니까?

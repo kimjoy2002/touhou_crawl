@@ -7,7 +7,7 @@ LOC_SYSTEM_MAINMENU_GAMESTART,Start Game
 LOC_SYSTEM_MAINMENU_TUTORIAL,Tutorial
 LOC_SYSTEM_MAINMENU_MINIGAME,Mini Game
 LOC_SYSTEM_MAINMENU_ARENA,Arena
-LOC_SYSTEM_MAINMENU_SPRINT,Sprint
+LOC_SYSTEM_MAINMENU_SPRINT,Sprint 1: Mini Touhou Crawl
 LOC_SYSTEM_MAINMENU_SPRINT2,Sprint 2: Shooting & Roguelike
 LOC_SYSTEM_MAINMENU_ETC,Etc
 LOC_SYSTEM_MAINMENU_OPTION,Option
@@ -2971,15 +2971,15 @@ LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_2,Fires compressed water that pushes the en
 LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_3,Shoots a fast air bullet.\nIt’s not strong or piercing, but casts much faster than other spells-about twice as fast.\n
 LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_4,Erupts large emerald walls around you.\nDeals damage to nearby enemies.\n
 LOC_SYSTEM_SKL_DESCRIBE_PHILOSOPHERS_5,Raises spiked earth at a location.\nDeals heavy damage in a small area.\nMay fail if Power is too low.\n
-LOC_SYSTEM_SKL_DESCRIBE_SOULSHOT,Inflicts a short paralysis that enemies cannot resist.\nAffects all enemies within 5 tiles.
-LOC_SYSTEM_SKL_DESCRIBE_SUPER_GRAZE,Evades all avoidable attacks 100% for a short time.
+LOC_SYSTEM_SKL_DESCRIBE_SOULSHOT,Inflicts a short paralysis that enemies cannot resist.\nAffects all enemies within 5 tiles.\n
+LOC_SYSTEM_SKL_DESCRIBE_SUPER_GRAZE,Evades all avoidable attacks 100% for a short time.\n
 LOC_SYSTEM_SKL_DESCRIBE_UPGRADE_HANIWA,Grants your Haniwa a new ability.\nChoose from three options and focus on Warrior, Mage, or Support paths.\nThe more you enhance, the more devoted to that path the Haniwa becomes.\nKeiki's favor increases with each enhancement, ending when full.
-LOC_SYSTEM_SKL_DESCRIBE_DELAY_HANIWA,Postpones the Haniwa upgrade.\nUse this if none of the 3 options are suitable.\nWaiting time will be longer than usual.
+LOC_SYSTEM_SKL_DESCRIBE_DELAY_HANIWA,Postpones the Haniwa upgrade.\nUse this if none of the 3 options are suitable.\nWaiting time will be longer than usual.\n
 LOC_SYSTEM_SKL_DESCRIBE_DRAW_CARD,Not implemented.
 LOC_SYSTEM_SKL_DESCRIBE_HARD_SELL,Not implemented.
 LOC_SYSTEM_SKL_DESCRIBE_CREATE_SHOP,Not implemented.
-LOC_SYSTEM_SKL_DESCRIBE_FIREBALL,Concentrates power through the control rod to launch a fireball.\nSuccess rate and damage scale with activation skill.
-LOC_SYSTEM_SKL_DESCRIBE_MISSLE,Fires a missile from the modified Kappa suit.\nMissiles have strong tracking but travel slowly.\nCaution: they can cause splash damage if space is limited.\nSuccess rate and damage scale with activation skill.
+LOC_SYSTEM_SKL_DESCRIBE_FIREBALL,Concentrates power through the control rod to launch a fireball.\nSuccess rate and damage scale with activation skill.\n
+LOC_SYSTEM_SKL_DESCRIBE_MISSLE,Fires a missile from the modified Kappa suit.\nMissiles have strong tracking but travel slowly.\nCaution: they can cause splash damage if space is limited.\nSuccess rate and damage scale with activation skill.\n
 LOC_SYSTEM_SKL_DESCRIBE_UKNOWN,An unknown ability.\n
 LOC_SYSTEM_ITEM_CATEGORY_WEAPON,Weapon
 LOC_SYSTEM_ITEM_CATEGORY_TANMAC,Danmaku
@@ -3727,7 +3727,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,A charm said to have revived the Crown
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE,A charm filled with the essence of Graze.\nWhile equipped, gradually charges and provides Graze ability at full charge.\nPress 'v' to dodge all avoidable attacks for a few turns.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,A charm infused with a delinquent celestial's sword energy.\nCharges with ambient weather energy and randomly triggers a weather effect.\nRestores HP regen greatly upon activation.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT,A charm powered by the Occult Ball that manifests urban legends.\nCharges with occult energy and can banish all summoned enemies in sight.\nAlso grants a random yokai effect.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PURIFTY,An amulet imbued with the power of the lunar city.\nWhen fully charged (100%), press V to instantly purify harmful effects.
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PURIFTY,An amulet imbued with the power of the lunar city.\nWhen fully charged (100%), press V to instantly purify harmful effects.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG,This bugged charm is neither stylish nor useful.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_UKNOWN,The powers of this charm are unknown.\nEquip it to find out what it does.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_STR,A ring that increases or decreases the wearer's Strength.\nEffect depends on the ring’s value.\n
@@ -3751,37 +3751,37 @@ LOC_SYSTEM_ITEM_DESCRIPTION_RING_ELEC_RESIS,A ring that increases electric resis
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGIC_RESIS,A ring that increases magic resistance.\nDoesn’t reduce damage, but protects against debuff spells.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_BUG,A ring infused with bug energy.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_UNKNOWN,A ring of unknown power.\nSome reveal their effect when worn, others don’t.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CUSTOM,A book containing various spells.\nIt may not be a named tome, but still offers useful magic.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_FIRE_BASE,A book of basic fire magic.\nRecommended for beginners in fire magic.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_COLD_BASE,A book of basic cold magic.\nRecommended for beginners in cold magic.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_POISON_BASE,A book of basic poison magic.\nRecommended for beginners in poison magic.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_WIZARD_BASE,A book of diverse and cost-effective low-level spells.\nIt lacks high-tier spells but has a solid lineup.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_EARTH_BASE,A book of basic earth magic.\nRecommended for beginners in earth magic.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_BASE,A book of basic air magic.\nRecommended for beginners in air magic.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_BASE,A book of basic summoning magic.\nRecommended for beginners in summoning.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMIST_BASE,A book teaching alchemy.\nIt seems to let you experiment with simple alchemy through magic.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_PSYCHOLOGIST_BASE,A book of basic mind control magic.\nRecommended for beginners in psychology magic.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_BRAND_BASE,A magic book made for novice battlemages.\nFilled with useful spells for warriors.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_BASE,A book of proper maid conduct, distributed by the Scarlet Devil Mansion.\nThe path of a maid is long and arduous.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SHOCK,A book filled with various electric spells.\nJust touching it sends a tingle through your body.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_PRACTICE,A magic book for practicing basic elemental skills.\nBut no more Victory Dance!
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUB,A book of various support spells.\nGreat for aspiring mages.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_STALKING,A magic book for those dreaming of becoming magical assassins.\nStill lacking in spells for now.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CLOUD,A magic book containing cloud creation techniques.\nThe book itself feels oddly damp.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CONJURE,A book of basic destructive magic.\nDanmaku is power!
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_HEX,A book of mental magic spells.\nYoukai are said to be weak to mental attacks.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEFENSE,A book filled with defensive spells.\nSurvival is top priority.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ENCHANT,A book compiled by Mononobe no Futo, expert in geomancy.\nCovers wind, earth, water manipulation, and fortune control.\nMysteriously includes an appendix on arson.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TRANSITION,A magic book on teleportation.\nHandling time and space is always dangerous.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TENSI,A spellbook handwritten by the delinquent celestial Tenshi.\nUnpredictable as she is, her earth-manipulating skills are worth learning.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TEST_ANNIHILATE,The ultimate spellbook of destruction written by Mima.\nThe dream tome for every destruction mage.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEBUF,A book written by Satori of the Underworld on mental domination.\nIt feels like the book is reading your mind.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_ULTI,A legendary book said to have been created by the chief maid of the Scarlet Devil Mansion to train elite maids.\nAside from Sakuya, no one could understand it.\nIncludes appendices on cleaning, laundry, and more.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ICE_ULTI,A book written by a certain ice fairy from the lake to prove her ultimate strength.\nIt’s filled with wiggly handwriting and drawings like a picture book.\nIts abstract explanations make it surprisingly hard to understand-only someone with great insight might comprehend it.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_ULTI,A book said to be often carried by the puppeteer living in the Forest of Magic.\nIt details intricate methods of controlling dolls that can also apply to summoning.\nStrangely, it includes notes on handling explosives and cursing others... Let’s pretend we didn’t see that.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_ULTI,A thrilling adventure manga featuring a tengu as the protagonist.\nThe story is exciting, and the protagonist’s techniques seem worth imitating.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMY_ULTI,A tome containing all of alchemy, found in a massive library inside a mansion.\nThe vague and messy handwriting makes it hard to understand unless you’re a true alchemy master.\nJudging from the scribbles, even the original owner probably didn’t understand it well.
-LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_LIGHT_BASE,A basic tome for danmaku combat using light projectiles.\nUsed by everyone from stray fairies to skilled magicians.
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CUSTOM,A book containing various spells.\nIt may not be a named tome, but still offers useful magic.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_FIRE_BASE,A book of basic fire magic.\nRecommended for beginners in fire magic.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_COLD_BASE,A book of basic cold magic.\nRecommended for beginners in cold magic.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_POISON_BASE,A book of basic poison magic.\nRecommended for beginners in poison magic.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_WIZARD_BASE,A book of diverse and cost-effective low-level spells.\nIt lacks high-tier spells but has a solid lineup.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_EARTH_BASE,A book of basic earth magic.\nRecommended for beginners in earth magic.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_BASE,A book of basic air magic.\nRecommended for beginners in air magic.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_BASE,A book of basic summoning magic.\nRecommended for beginners in summoning.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMIST_BASE,A book teaching alchemy.\nIt seems to let you experiment with simple alchemy through magic.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_PSYCHOLOGIST_BASE,A book of basic mind control magic.\nRecommended for beginners in psychology magic.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_BRAND_BASE,A magic book made for novice battlemages.\nFilled with useful spells for warriors.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_BASE,A book of proper maid conduct, distributed by the Scarlet Devil Mansion.\nThe path of a maid is long and arduous.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SHOCK,A book filled with various electric spells.\nJust touching it sends a tingle through your body.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_PRACTICE,A magic book for practicing basic elemental skills.\nBut no more Victory Dance!\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUB,A book of various support spells.\nGreat for aspiring mages.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_STALKING,A magic book for those dreaming of becoming magical assassins.\nStill lacking in spells for now.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CLOUD,A magic book containing cloud creation techniques.\nThe book itself feels oddly damp.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_CONJURE,A book of basic destructive magic.\nDanmaku is power!\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_HEX,A book of mental magic spells.\nYoukai are said to be weak to mental attacks.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEFENSE,A book filled with defensive spells.\nSurvival is top priority.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ENCHANT,A book compiled by Mononobe no Futo, expert in geomancy.\nCovers wind, earth, water manipulation, and fortune control.\nMysteriously includes an appendix on arson.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TRANSITION,A magic book on teleportation.\nHandling time and space is always dangerous.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TENSI,A spellbook handwritten by the delinquent celestial Tenshi.\nUnpredictable as she is, her earth-manipulating skills are worth learning.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_TEST_ANNIHILATE,The ultimate spellbook of destruction written by Mima.\nThe dream tome for every destruction mage.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_DEBUF,A book written by Satori of the Underworld on mental domination.\nIt feels like the book is reading your mind.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_MAID_ULTI,A legendary book said to have been created by the chief maid of the Scarlet Devil Mansion to train elite maids.\nAside from Sakuya, no one could understand it.\nIncludes appendices on cleaning, laundry, and more.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ICE_ULTI,A book written by a certain ice fairy from the lake to prove her ultimate strength.\nIt’s filled with wiggly handwriting and drawings like a picture book.\nIts abstract explanations make it surprisingly hard to understand-only someone with great insight might comprehend it.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_ULTI,A book said to be often carried by the puppeteer living in the Forest of Magic.\nIt details intricate methods of controlling dolls that can also apply to summoning.\nStrangely, it includes notes on handling explosives and cursing others... Let’s pretend we didn’t see that.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_ULTI,A thrilling adventure manga featuring a tengu as the protagonist.\nThe story is exciting, and the protagonist’s techniques seem worth imitating.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMY_ULTI,A tome containing all of alchemy, found in a massive library inside a mansion.\nThe vague and messy handwriting makes it hard to understand unless you’re a true alchemy master.\nJudging from the scribbles, even the original owner probably didn’t understand it well.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_LIGHT_BASE,A basic tome for danmaku combat using light projectiles.\nUsed by everyone from stray fairies to skilled magicians.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA,A lost pagoda infused with great power.\nWhen activated, releases stored energy as a laser.\nDamage increases with higher Activation skill.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL,A scripture once used by a wandering monk.\nConsumes Power to rapidly restore MP.\nMP restored increases with higher Activation skill.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL,A soul that wandered from the dream world.\nSummons allies from the dream world for a short time.\nStronger allies with higher Activation skill.\n
@@ -3918,7 +3918,7 @@ LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,Junko is a divine spirit purified by hatred, se
 LOC_SYSTEM_GOD_KEIKI_TITLE,Keiki the God of Haniyasushin - Sculptor Deity Born from Isolation
 LOC_SYSTEM_GOD_KEIKI_DESCRIPTION,Keiki is a god of creation born from human spirits.\nShe grants life to crafted idols.\nShe gives a small Haniwa upon faith and allows you to customize it as you explore.\nKeiki takes a portion of your experience to create idols.
 LOC_SYSTEM_GOD_BUG_TITLE,Bug God
-LOC_SYSTEM_GOD_BUG_DESCRIPTION,This god is a bug!\nThe Bug God is the most evil deity in TouhouCrawl.\nIt deeply affects gameplay and causes immense stress.\nIts mere existence might crash the game or delete your character.\nTo appease it, report the bug to the developers.
+LOC_SYSTEM_GOD_BUG_DESCRIPTION,This god is a bug!\nThe Bug God is the most evil deity in TouhouCrawl.\nIt deeply affects gameplay and causes immense stress.\nIts mere existence might crash the game or delete your character.\nTo appease it, report the bug to the developers.\n
 LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY0_ADD,You begin to waste and lose consumables due to the curses of the Plague and Poverty gods.
 LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY1_ADD,You can now possess Joon or Shion.
 LOC_SYSTEM_GOD_JOON_AND_SION_GAIN_ABLILITY1_REMOVE,You can no longer possess Joon or Shion.

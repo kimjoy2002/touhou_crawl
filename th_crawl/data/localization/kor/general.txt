@@ -3170,7 +3170,7 @@ LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_DESCRIBE,홍마관의 흡혈귀가 사용하는
 LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_PENTAN,관통
 LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_PENTAN_INFO,이 아이템은 투척시 더 높은 데미지를 주고 적들을 관통한다. 또한 항상 최대 사거리로 날라간다.
 LOC_SYSTEM_ITEM_ARTIFACT_ROUKANKEN_NAME,누관검
-LOC_SYSTEM_ITEM_ARTIFACT_ROUKANKEN_DESCRIBE,요괴가 재련했다 전해지는 장검. 검집에 작은 꽃이 묶여있다.\n열 마리의 유령을 잡을 수 있(다고 주장하)는 이 검은 숙련되지않으면 쓰기 힘들 정도의 장검이다.\n
+LOC_SYSTEM_ITEM_ARTIFACT_ROUKANKEN_DESCRIBE,요괴가 재련했다 전해지는 장검. 검집에 작은 꽃이 묶여있다.\n열 마리의 유령을 잡을 수 있(다고 주장하)는 이 검은 숙련되지않으면 쓰기 힘들 정도의 장검이다.
 LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_NAME,백루검
 LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_DESCRIBE,상대의 미혹을 끊을 수 있다고 전해지는 짧은 칼.\n이 실체가 애매한 짧은 칼은 날이 잘 듣지 않아서, 적을 공격하기엔 부적합하다.\n대신 다른 손에 들고 방패처럼 적의 공격을 튕겨내고 사용하는데 적합해보인다.
 LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_COUNTER,반격

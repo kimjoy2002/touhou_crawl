@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <iomanip>
 #include "environment.h"
+#include "steam_api.h"
 #include "display.h"
 #include "localization.h"
 #include "key.h"
@@ -2077,6 +2078,18 @@ void Stair_move(bool down)
 			if(you.haveOrb())
 			{				
 				you.dead_reason = DR_ESCAPE;
+				if(isNormalGame()) {
+					steam_mg.achievement(ACHIEVEMENT_PERFECT_INK_BLACK_DUNGEON);
+					if(you.haveGoal() == 10) {
+						steam_mg.achievement(ACHIEVEMENT_PURELY_DUNGEON_HELL);
+					}
+				} else if(isArena()) {
+					steam_mg.achievement(ACHIEVEMENT_DUNGEON_JUDGEMENT);
+				} else if(isMiniSprint()) {
+					steam_mg.achievement(ACHIEVEMENT_DUNGEONS_GAME_OF_LIFE);
+				} else if(isShootingSprint()) {
+					steam_mg.achievement(ACHIEVEMENT_BOUNDARY_OF_SHOOTING_AND_ROGUELIKE);
+				}
 				GameOver();
 				break;
 			}
@@ -2197,6 +2210,9 @@ void Stair_move(bool down)
 				floor_return = map_list.dungeon_enter[ZIGURRAT].floor;
 				//지구랏에서 나오면 지구랏 1층으로 초기화
 				//you.ziggurat_level = 0;
+				if(isNormalGame() && you.ziggurat_level == 27) {
+					steam_mg.achievement(ACHIEVEMENT_NIGHTMARE_OF_DUNGEON);
+				}
 				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[ZIGURRAT].pos;
 				break;

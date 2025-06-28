@@ -4763,6 +4763,9 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 				PlaceHolderHelper(rune_string[t->value1])),true,false,false,CL_good);
 			AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GET_ITEM, 
 				PlaceHolderHelper(rune_string[t->value1])),CL_warning);
+			if(isNormalGame()) {
+				steam_mg.achievement(ACHIEVEMENT_DUNGEON_HARVESTER);
+			}
 			rune[t->value1]++;
 		} else if(t->value1 >= TPT_STG_START && t->value1 < (TPT_STG_LAST+1)) { //100부터는 슈팅 스프린트용 
 			tribe_proper_type add_abil = (tribe_proper_type)(t->value1);

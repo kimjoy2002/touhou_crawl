@@ -71,6 +71,20 @@ const char* steam_manager::getAchievementId(achievement_enum enum_) {
     switch (enum_) {
         case ACHIEVEMENT_DUNGEON_OF_FAITH:
             return "ACHIEVEMENT_DUNGEON_OF_FAITH";
+	    case ACHIEVEMENT_PERFECT_INK_BLACK_DUNGEON:
+            return "ACHIEVEMENT_PERFECT_INK_BLACK_DUNGEON";
+	    case ACHIEVEMENT_DUNGEON_HARVESTER:
+            return "ACHIEVEMENT_DUNGEON_HARVESTER";
+	    case ACHIEVEMENT_PURELY_DUNGEON_HELL:
+            return "ACHIEVEMENT_PURELY_DUNGEON_HELL";
+	    case ACHIEVEMENT_NIGHTMARE_OF_DUNGEON:
+            return "ACHIEVEMENT_NIGHTMARE_OF_DUNGEON";
+	    case ACHIEVEMENT_DUNGEON_JUDGEMENT:
+            return "ACHIEVEMENT_DUNGEON_JUDGEMENT";
+	    case ACHIEVEMENT_DUNGEONS_GAME_OF_LIFE:
+            return "ACHIEVEMENT_DUNGEONS_GAME_OF_LIFE";
+	    case ACHIEVEMENT_BOUNDARY_OF_SHOOTING_AND_ROGUELIKE:
+            return "ACHIEVEMENT_BOUNDARY_OF_SHOOTING_AND_ROGUELIKE";
         default:
             return "";
     }

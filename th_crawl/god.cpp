@@ -2459,7 +2459,9 @@ void Pray()
 							abandon_god();
 						}
 						if(you.Belief((god_type)(type-DG_TEMPLE_FIRST),15)) {
-							steam_mg.achievement(ACHIEVEMENT_DUNGEON_OF_FAITH);
+							if(isNormalGame()) {
+								steam_mg.achievement(ACHIEVEMENT_DUNGEON_OF_FAITH);
+							}
 							MoreWait();
 						}
 						ok_ = false;

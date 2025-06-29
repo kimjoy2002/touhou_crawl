@@ -204,7 +204,7 @@ void drinkpotion(potion_type kind, bool waste_)
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_SOULSHOT),true,false,false,CL_white_blue);
 				ReleaseMutex(mutx);
 				changedisplay(DT_GAME);
-				soundmanager.playSound("soul_shot");
+				PlaySE("soul_shot");
 				skill_soul_shot(0, &you, you.position);
 				WaitForSingleObject(mutx, INFINITE);
 			}

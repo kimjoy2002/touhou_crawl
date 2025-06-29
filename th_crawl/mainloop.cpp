@@ -1482,7 +1482,7 @@ bool option_menu(int value_)
 				if(se_<0)
 					se_ = 0;
 				SetSEVolume(se_);
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 			}
 		}
 		else if(input_ == VK_ESCAPE ||

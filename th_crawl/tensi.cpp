@@ -206,7 +206,7 @@ void tensi_potion(bool good_)
 		you_drink_ = bad_list_[randA(4)];
 
 
-	soundmanager.playSound("potion");
+	PlaySE("potion");
 	drinkpotion(you_drink_, false);
 }
 
@@ -217,7 +217,7 @@ void tensi_potion(bool good_)
 
 void tensi_weather(int type_, int good_)
 {
-	soundmanager.playSound("spellcard");
+	PlaySE("spellcard");
 	switch (type_)
 	{
 	case 1:
@@ -300,7 +300,7 @@ void tensi_summon(int good_)
 
 	if(!summon_vector.empty())
 	{
-		soundmanager.playSound("summon");
+		PlaySE("summon");
 		dif_rect_iterator rit(you.position,2);
 		int i = randC(abs(good_),3); 
 		for(;!rit.end() && i> 0;rit++)
@@ -327,7 +327,7 @@ void tensi_summon(int good_)
 
 void tensi_kaname(int good_)
 {
-	soundmanager.playSound("summon");
+	PlaySE("summon");
 	for (int i = rand_int(1 + 2 * abs(good_), 1 + 3 * abs(good_));  i> 0; i--)
 	{
 		uint64_t flag_ = M_FLAG_SUMMON;
@@ -394,7 +394,7 @@ void tensi_tele(bool good_)
 	}
 	if(env[current_level].isMove(final.x,final.y) && !env[current_level].isMonsterPos(final.x,final.y))
 	{
-		soundmanager.playSound("blink");
+		PlaySE("blink");
 		env[current_level].MakeSmoke(you.position, img_fog_normal, SMT_NORMAL, 4, 0, &you);
 		you.SetXY(final);
 	}
@@ -438,13 +438,13 @@ void tensi_earthquake(int good_)
 		}
 	}//모든 몬스터에게 데미지를 줌
 
-	soundmanager.playSound("earthquake"); 
+	PlaySE("earthquake"); 
 	env[current_level].MakeNoise(you.position,30,NULL); //거대한 소음을 만든다. 텐시는 아무도 없을때 지진을 쓰기도 하지!
 	you.resetLOS();
 }
 void tensi_munyum(int good_)
 {
-	soundmanager.playSound("buff");
+	PlaySE("buff");
 	you.SetAlchemyBuff(ALCT_STONE_FORM,rand_int(100,200));
 	//텐시의 무념무상 버프는 길다!
 }
@@ -515,7 +515,7 @@ void tensi_burst(int good_)
 								}
 								attack_infor temp_att(att_, m_att_, 99, &you, you.GetParentType(), ATT_NORMAL_BLAST, name_infor(LOC_SYSTEM_GOD_TENSI));
 								hit_->damage(temp_att, true);
-								soundmanager.playSound("bomb");
+								PlaySE("bomb");
 							}
 						}
 					}
@@ -576,7 +576,7 @@ void tensi_field(int doing_)
 }
 void tensi_blind(int doing_)
 {
-	soundmanager.playSound("laugh");
+	PlaySE("laugh");
 	you.SetNightSight(1, rand_int(20,40), true);
 }
 void tensi_buf_debuf(int doing_)
@@ -600,7 +600,7 @@ void tensi_buf_debuf(int doing_)
 }
 void tensi_sucide(int doing_)
 {
-	soundmanager.playSound("summon");
+	PlaySE("summon");
 	for (int i = randA_1(you.level/6+1); i> 0; i--)
 	{
 		int id_ = MON_RABIT_BOMB;

@@ -237,7 +237,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 		ReleaseMutex(mutx);
 		bool return_ = blink_scroll(waste_ ? false : pre_iden_);
 		if (return_) {
-			soundmanager.playSound("blink");
+			PlaySE("blink");
 		}
 		iden_list.scroll_list[kind].iden = 3;
 		WaitForSingleObject(mutx, INFINITE);
@@ -322,7 +322,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 			changedisplay(DT_GAME);
 			you.PowUpDown(-100,true);
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_SOULSHOT) + " ",false,false,false,CL_white_blue);
-			soundmanager.playSound("soul_shot");
+			PlaySE("soul_shot");
 			skill_soul_shot(0, &you, you.position);
 			WaitForSingleObject(mutx, INFINITE);
 		}

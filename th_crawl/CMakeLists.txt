@@ -48,6 +48,18 @@ set(DirectXTK_LIB DirectXTK)
 
 
 
+
+set(FMOD "C:/Program Files (x86)/FMOD SoundSystem/FMOD Studio API Windows")
+include_directories(${FMOD}/api/core/inc)
+if (CMAKE_SIZEOF_VOID_P EQUAL 8)
+    link_directories(${FMOD}/api/core/lib/x64)
+    set(FMOD_LIB fmod_vc)
+else()
+    link_directories(${FMOD}/api/core/lib/x68)
+    set(FMOD_LIB fmod_vc)
+endif()
+
+
 set(STEAMWORKS_SDK "E:/steamworks_sdk/sdk")
 include_directories(${STEAMWORKS_SDK}/public)
 if (CMAKE_SIZEOF_VOID_P EQUAL 8)
@@ -63,7 +75,7 @@ add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE WIN32 _WINDOWS)
 target_link_options(${PROJECT_NAME} PRIVATE /SUBSYSTEM:WINDOWS)
-target_link_libraries(${PROJECT_NAME} d3d11 ${STEAM_API_LIB} ${DirectXTK_LIB})
+target_link_libraries(${PROJECT_NAME} d3d11 ${STEAM_API_LIB} ${DirectXTK_LIB} ${FMOD_LIB})
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     message("Debug Build")
@@ -110,6 +122,7 @@ endif()
 
 set(DLL_FILES
 "${CMAKE_SOURCE_DIR}/dll/steam_api64.dll"
+"${CMAKE_SOURCE_DIR}/dll/fmod.dll"
 )
 
 foreach(DLL ${DLL_FILES})

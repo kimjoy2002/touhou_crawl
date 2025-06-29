@@ -1567,7 +1567,7 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 				{
 					coord_def prev_pos = you.position;
 					you.Teleport();
-					soundmanager.playSound("blink");
+					PlaySE("blink");
 					if(env[current_level].isInSight(prev_pos))
 						printlog(LocalzationManager::locString(LOC_SYSTEM_TURN_TELEPORT_SAME),false,false,false,CL_normal);
 					else
@@ -1576,7 +1576,7 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 				else
 				{
 					you.Blink(30);
-					soundmanager.playSound("blink");
+					PlaySE("blink");
 				}
 			}
 		}

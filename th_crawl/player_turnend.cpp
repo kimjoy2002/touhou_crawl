@@ -95,7 +95,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		{
 			coord_def prev_pos = position;
 			Teleport();
-			soundmanager.playSound("blink");
+			PlaySE("blink");
 			if(GetArtifactProperty(ART_UNCONSCIOUS) > 0 && tele_curse_) {
 				if(env[current_level].isInSight(prev_pos))
 						printlog(LocalzationManager::locString(LOC_SYSTEM_TURN_TELEPORT_WITH_UNCONSCIOUS_SAME),false,false,false,CL_normal);
@@ -797,7 +797,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			}
 		}
 		if (you.power <= 0) {
-			soundmanager.playSound("ufo");
+			PlaySE("ufo");
 			you.s_evoke_ghost = 0;
 			printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_GHOST_BALL_END) + " ", false, false, false, CL_danger);
 			SetInter(IT_STAT);
@@ -819,7 +819,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 						if (env[current_level].isSight(pos_) && env[current_level].isInSight(pos_))
 						{
 							ReleaseMutex(mutx);
-							soundmanager.playSound("thunder");
+							PlaySE("thunder");
 							int damage_ = you.GetMaxHp() / 3;
 							attack_infor temp_att(randC(3, damage_ / 3), damage_, 99, &you, you.GetParentType(), ATT_ELEC_BLAST, name_infor(LOC_SYSTEM_ATT_THUNDER));
 							BaseBomb(pos_, &img_blast[2], temp_att);
@@ -841,7 +841,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 						if (env[current_level].isSight(pos_) && env[current_level].isInSight(pos_))
 						{
 							ReleaseMutex(mutx);
-							soundmanager.playSound("thunder");
+							PlaySE("thunder");
 							int damage_ = you.GetMaxHp() / 3;
 							attack_infor temp_att(randC(3, damage_ / 3), damage_, 99, &you, you.GetParentType(), ATT_ELEC_BLAST, name_infor(LOC_SYSTEM_ATT_THUNDER));
 							BaseBomb(pos_, &img_blast[2], temp_att);

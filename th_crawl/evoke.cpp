@@ -282,7 +282,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 					temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
 				for (int i = 0; i < (you.GetParadox() ? 2 : 1); i++) {
-					soundmanager.playSound("laser");
+					PlaySE("laser");
 					throwtanmac(29, beam, temp_infor, NULL);
 				}
 				you.SetParadox(0); 
@@ -292,7 +292,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 		}	
 	case EVK_AIR_SCROLL:
 		{
-			soundmanager.playSound("buff");
+			PlaySE("buff");
 			printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_AIRSCROLL),false,false,false,CL_normal);
 			int value_ = 8 + level_ / 3 + randA(3 + level_ / 3);
 			you.MpUpDown(value_);
@@ -310,7 +310,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 
 				}
 			}
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_EVOKE_DREAM_SOUL,true,false,false,CL_normal,
 				 PlaceHolderHelper(s_.c_str()));
 			return true;
@@ -380,7 +380,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 					case 'A':
 					{
 						if (randA(percent_)) {
-							soundmanager.playSound("buff");
+							PlaySE("buff");
 							you.HpUpDown(you.GetMaxHp() - you.GetHp(), DR_EFFECT);
 							if (!you.pure_mp)
 								you.MpUpDown(you.GetMaxMp() - you.GetMp());
@@ -391,7 +391,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 							you.HpUpDown(-you.GetHp() * 2 / 3, DR_EFFECT);
 							if (!you.pure_mp)
 								you.MpUpDown(-you.GetMp());
-							soundmanager.playSound("laugh");
+							PlaySE("laugh");
 							printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_HEAL_BACKFIRE), true, false, false, CL_danger);
 							loop_ = false;
 						}
@@ -400,7 +400,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 					case 'b':
 					case 'B':
 						if (randA(percent_)) {
-							soundmanager.playSound("buff");
+							PlaySE("buff");
 							you.SetForceStrong(true, rand_int(30, 60), true);
 							printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_BUFF), true, false, false, CL_good);
 							loop_ = false;
@@ -409,7 +409,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 							int time_ = rand_int(30, 60);
 							you.SetSlow(time_);
 							you.SetForceStrong(false, time_, true);
-							soundmanager.playSound("laugh");
+							PlaySE("laugh");
 							printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_BUFF_BACKFIRE), true, false, false, CL_danger);
 							loop_ = false;
 						}
@@ -441,11 +441,11 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 							}
 						}
 						if (good_) {
-							soundmanager.playSound("buff");
+							PlaySE("buff");
 							printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_SUMMON), true, false, false, CL_good);
 						}
 						else {
-							soundmanager.playSound("laugh");
+							PlaySE("laugh");
 							printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_SUMMON_BACKFIRE), true, false, false, CL_danger);
 						}
 						loop_ = false;
@@ -456,7 +456,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 					{
 						if (randA(percent_)) {
 							HammerPresent();
-							soundmanager.playSound("buff");
+							PlaySE("buff");
 							printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_PRESENT), true, false, false, CL_good);
 						}
 						else {
@@ -479,7 +479,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 									mon_->PlusTimeDelay(-2 * mon_->GetWalkDelay());
 								}
 							}
-							soundmanager.playSound("laugh");
+							PlaySE("laugh");
 							printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_MAGIC_HAMMER_PRESENT_BACKFIRE), true, false, false, CL_danger);
 						}
 
@@ -527,7 +527,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 		}
 		if (env[current_level].dgtile[final_postion_.x][final_postion_.y].tile == DG_SEA || 
 			env[current_level].dgtile[final_postion_.x][final_postion_.y].tile == DG_LAVA) {
-			soundmanager.playSound("water");
+			PlaySE("water");
 			printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_FOUR_FOOR_MAGIC_BOMB_DROWN), true, false, false, CL_normal);
 
 		}
@@ -541,7 +541,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 	}
 	case EVK_GHOST_BALL:
 	{
-		soundmanager.playSound("ufo");
+		PlaySE("ufo");
 		if (you.s_evoke_ghost) {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_GHOST_BALL_CANCLE), true, false, false, CL_magic);
 			you.PowUpDown(50, true);
@@ -566,7 +566,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
 			for (int i = 0; i < (you.GetParadox() ? 2 : 1); i++) {
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 				throwtanmac(19, beam, temp_infor, NULL);
 			}
 			you.SetParadox(0);
@@ -618,7 +618,7 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 						monster* mon_ = (monster*)unit_;
 						env[current_level].MakeNoise(you.position, 8, NULL);
 						printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_CAMERA_SHUTTER) + " ", false, false, false, CL_warning);
-						soundmanager.playSound("camera");
+						PlaySE("camera");
 
 						if (mon_->id == MON_SAKUYA && !mon_->s_confuse
 							&& !mon_->s_paralyse &&  mon_->state.GetState() != MS_SLEEP)
@@ -676,7 +676,7 @@ bool evoke_bomb(int power, bool short_, unit* order, coord_def target)
 	if (1)
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("nuke");
+			PlaySE("nuke");
 		}
 		textures* t_ = &img_blast[0];
 		{

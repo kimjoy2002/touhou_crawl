@@ -1452,7 +1452,7 @@ void Open_Close_door()
 		if((close_ = env[current_level].CloseDoor(temp.x,temp.y)) == 1)
 		{
 			if(env[current_level].isInSight(temp))
-				soundmanager.playSound("door");
+				PlaySE("door");
 			printlog(LocalzationManager::locString(LOC_SYSTEM_CLOSE_DOOR) + " ",false,false,false,CL_normal);
 			you.time_delay += you.GetNormalDelay();
 			you.TurnEnd();
@@ -1570,7 +1570,7 @@ void Close_door()
 		if((close_ = env[current_level].CloseDoor(temp.x,temp.y)) == 1)
 		{
 			if(env[current_level].isInSight(temp))
-				soundmanager.playSound("door");
+				PlaySE("door");
 			printlog(LocalzationManager::locString(LOC_SYSTEM_CLOSE_DOOR) + " ",false,false,false,CL_normal);
 			you.time_delay += you.GetNormalDelay();
 			you.TurnEnd();
@@ -1900,7 +1900,7 @@ void Stair_move(bool down)
 					env[current_level+1].EnterMap(i,dq);
 					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_DOWN),true,false,false,CL_normal);
 					GodAccpect_Stair(true, false);
-					soundmanager.playSound("stair");
+					PlaySE("stair");
 					//you.resetLOS(false);
 					you.TurnEnd();
 					break;
@@ -2020,7 +2020,7 @@ void Stair_move(bool down)
 			env[next_].EnterMap(0,dq); 
 			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_DOWN),true,false,false,CL_normal);
 			GodAccpect_Stair(true, true);
-			soundmanager.playSound("stair");
+			PlaySE("stair");
 			//you.resetLOS(false);
 			you.TurnEnd();
 			break;
@@ -2064,7 +2064,7 @@ void Stair_move(bool down)
 					env[current_level-1].EnterMap(i,dq);
 					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_UP),true,false,false,CL_normal);
 					GodAccpect_Stair(false, false);
-					soundmanager.playSound("stair");
+					PlaySE("stair");
 					//you.resetLOS(false);
 					you.TurnEnd();
 					break;
@@ -2248,7 +2248,7 @@ void Stair_move(bool down)
 			env[floor_return].EnterMap(-1,dq,pos_return);
 			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_RETURN),true,false,false,CL_normal);
 			GodAccpect_Stair(false, true);
-			soundmanager.playSound("stair");
+			PlaySE("stair");
 			//you.resetLOS(false);
 			you.TurnEnd();
 			break;

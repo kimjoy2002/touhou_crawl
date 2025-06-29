@@ -1771,7 +1771,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		else if(damage_)
 		{
 			if ((sight_ || only_invisible_) && a.type < ATT_THROW_NORMAL) {
-				soundmanager.playSound("hit");
+				PlaySE("hit");
 			}
 
 			enterlog();
@@ -1856,10 +1856,10 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			{
 				if (sight_) {
 					if (flag & M_FLAG_UNIQUE && id != MON_ENSLAVE_GHOST) {
-						soundmanager.playSound("kill_named");
+						PlaySE("kill_named");
 					}
 					else {
-						soundmanager.playSound("kill");
+						PlaySE("kill");
 					}
 				}
 				if(a.order)
@@ -2471,7 +2471,7 @@ bool monster::OpenDoor(const coord_def &c)
 		{
 			if(env[current_level].isInSight(c))
 			{
-				soundmanager.playSound("door");
+				PlaySE("door");
 				if(env[current_level].isInSight(position))
 				{
 					LocalzationManager::printLogWithKey(LOC_SYSTEM_MONSTER_OPEN_DOOR,true,false,false,CL_normal,
@@ -2828,10 +2828,10 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 	{
 		if (sight_){
 			if (flag & M_FLAG_UNIQUE && id != MON_ENSLAVE_GHOST) {
-				soundmanager.playSound("kill_named");
+				PlaySE("kill_named");
 			}
 			else {
-				soundmanager.playSound("kill");
+				PlaySE("kill");
 			}
 			{
 				string str_  = Get_Speak(id, this, MST_DEAD);
@@ -3114,7 +3114,7 @@ int monster::action(int delay_)
 				if (is_sight && id != MON_TRASH) {
 					LocalzationManager::printLogWithKey(LOC_SYSTEM_DEAD_SUMMON,true,false,false,CL_bad,
 						PlaceHolderHelper(GetName()->getName()));
-					soundmanager.playSound("kill_banashed");
+					PlaySE("kill_banashed");
 				}
 			}
 			env[current_level].SummonClear(map_id);

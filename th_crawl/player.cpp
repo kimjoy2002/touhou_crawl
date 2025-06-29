@@ -1450,21 +1450,21 @@ bool players::shooing_fire(float bonus_)
 	// }
 
 	if(ice_ && laser_) {
-		soundmanager.playSound("cold");
+		PlaySE("cold");
 		graphic_ = 18;
 		rand_graphic_ = 4;
 	} else if(laser_) {
-		soundmanager.playSound("laser");
+		PlaySE("laser");
 		graphic_ = 29;
 		rand_graphic_ = 3;
 	}
 	else if(ice_) {
-		soundmanager.playSound("cold");
+		PlaySE("cold");
 		rand_graphic_ = 4;
 		graphic_ = 10 + rand_graphic_;
 	}
 	else {
-		soundmanager.playSound("shoot");
+		PlaySE("shoot");
 	}
 	tanmac_list.push_back(make_shared<ThrowTamacInstance>(texture_, graphic_, beam, temp_infor, nullptr, false));
 
@@ -1524,7 +1524,7 @@ bool players::shooing_fire(float bonus_)
 				shooing_fire_effect(pos_, rand_graphic_, burst_, ice_, burst_multi_);
 				if(burst_) {
 					if(!do_burst_)
-						soundmanager.playSound("bomb");
+						PlaySE("bomb");
 					do_burst_ = true;
 				}
 
@@ -1533,7 +1533,7 @@ bool players::shooing_fire(float bonus_)
 				shooing_fire_effect(hit_pos_, rand_graphic_, burst_, ice_, burst_multi_);
 				if(burst_) {
 					if(!do_burst_)
-						soundmanager.playSound("bomb");
+						PlaySE("bomb");
 					do_burst_ = true;
 				}
 			}
@@ -1546,7 +1546,7 @@ bool players::shooing_fire(float bonus_)
 				shooing_fire_effect(pos_, rand_graphic_, burst_, ice_, burst_multi_);
 				if(burst_) {
 					if(!do_burst_)
-						soundmanager.playSound("bomb");
+						PlaySE("bomb");
 					do_burst_ = true;
 				}
 				tanmac_list.erase(temp);
@@ -1633,7 +1633,7 @@ int players::OpenDoor(const coord_def &c, bool no_turn)
 			env[current_level].CheckForbid(c);
 			if (no_turn == false) {	
 				if(env[current_level].isInSight(c))
-					soundmanager.playSound("door");
+					PlaySE("door");
 				printlog(LocalzationManager::locString(LOC_SYSTEM_OPEN_DOOR) + " ", false, false, false, CL_normal);
 				time_delay += GetWalkDelay();
 			}
@@ -2096,7 +2096,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		if (equipment[ET_NECK] && equipment[ET_NECK]->value1 == AMT_PERFECT && getAmuletPercent() >= 100)
 		{
 			deadlog();
-			soundmanager.playSound("gameover");
+			PlaySE("gameover");
 			MoreWait();
 			resurectionlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PERFECT));
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_PERFECT_REVIVE), true, false, false, CL_white_blue);
@@ -2114,7 +2114,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		else if(GetProperty(TPT_9_LIFE))
 		{
 			deadlog();
-			soundmanager.playSound("gameover");
+			PlaySE("gameover");
 			resurectionlog(LocalzationManager::locString(LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION));
 			printlog(LocalzationManager::locString(LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION_SHOUT),true,false,false,CL_white_blue);
 			skill_suicide_bomb(level*8,false,&you,position);
@@ -2127,7 +2127,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		else if(GetProperty(TPT_18_LIFE))
 		{			
 			deadlog();
-			soundmanager.playSound("gameover");
+			PlaySE("gameover");
 			resurectionlog(LocalzationManager::locString(LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION));
 			printlog(LocalzationManager::locString(LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION_SHOUT),true,false,false,CL_white_blue);
 			skill_suicide_bomb(level*8,false,&you,position);
@@ -2140,7 +2140,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		else if (GetProperty(TPT_PURE_LIFE) && reason != DR_JUNKO)
 		{
 			deadlog();
-			soundmanager.playSound("gameover");
+			PlaySE("gameover");
 			resurectionlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_LIFE_PURITY));
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_LIFE_PURITY_REVIVE), true, false, false, CL_white_blue);
 			MoreWait();
@@ -2162,7 +2162,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 			&& sionResurrection())
 		{
 			deadlog();
-			soundmanager.playSound("gameover");
+			PlaySE("gameover");
 			MoreWait();
 			resurectionlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SION));
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_REVIVE), true, false, false, CL_sion);
@@ -2183,13 +2183,13 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 		if(hp<=0)
 		{
 			dead_reason = reason;
-			soundmanager.playSound("gameover");
+			PlaySE("gameover");
 			GameOver();
 		}
 	}
 	else if (prev_value_ < 0 &&  GetHp() <= GetDangerHp()) {
 		if (prev_hp_ > GetDangerHp()) {
-			soundmanager.playSound("lowhp");
+			PlaySE("lowhp");
 			ostringstream ss;
 			ss << "============ " << LocalzationManager::locString(LOC_SYSTEM_LOW_HEALTH_WARNING) << " ============";
 			printlog(ss.str(), true, false, false, CL_danger);
@@ -2712,7 +2712,7 @@ void players::ExpRecovery(int exper_)
 			if (_item && _item->type == ITM_AMULET){
 				chargingFinish((amulet_type)_item->value1, 1);
 				if (system_exp.value <= 0) {
-					soundmanager.playSound("charge");
+					PlaySE("charge");
 					if (isCanCharge((amulet_type)_item->value1)) {
 						printlog(LocalzationManager::locString(joypadUtil::usingPad?LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PAD:LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH), true, false, false, CL_white_puple);
 					}
@@ -4197,7 +4197,7 @@ void players::LevelUp(bool speak_)
 	if(speak_)
 	{
 		printlog(LocalzationManager::formatString(LOC_SYSTEM_LEVELUP_MESSGE, PlaceHolderHelper(to_string(you.level))),true,false,false,CL_good);
-		soundmanager.playSound("levelup");
+		PlaySE("levelup");
 		string temp = "레벨업! (" + to_string( you.level) +")";
 		LOG_MESSAGE(temp);
 		if(!isShootingSprint())
@@ -4751,7 +4751,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 		}
 		ReleaseMutex(mutx);
 		if (speak_)
-			soundmanager.playSound("pickup");
+			PlaySE("pickup");
 		GodAccpect_GetPitem();
 		return 1;
 	}
@@ -4830,7 +4830,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 		}
 		ReleaseMutex(mutx);
 		if (speak_)
-			soundmanager.playSound("rune");
+			PlaySE("rune");
 		return 1;
 	}
 	if(t->type == ITM_ORB)
@@ -4840,7 +4840,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 		AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_GET_YINYANG_ORB),CL_warning);
 		ReleaseMutex(mutx);
 		if (speak_)
-			soundmanager.playSound("rune");
+			PlaySE("rune");
 		reimu_turn = 100;
 		rune[RUNE_HAKUREI_ORB]++;
 		return 1;
@@ -4890,7 +4890,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 					final_num = t->num;
 					ReleaseMutex(mutx);
 					if (speak_)
-						soundmanager.playSound("pickup");
+						PlaySE("pickup");
 					return 1;
 			}
 		}
@@ -4927,7 +4927,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 		final_num = t->num;
 		ReleaseMutex(mutx);
 		if (speak_)
-			soundmanager.playSound("pickup");
+			PlaySE("pickup");
 		return 1;
 	}
 	else
@@ -4986,7 +4986,7 @@ bool players::Eat(char id_)
 					if((*it).value1 == 0)
 						(*it).value3 = 100;
 					printlog(LocalzationManager::locString(LOC_SYSTEM_EAT_STARTING),true,false,false,CL_bad);
-					soundmanager.playSound("powerup");
+					PlaySE("powerup");
 					time_delay += you.GetNormalDelay();
 					TurnEnd();
 					
@@ -5055,12 +5055,12 @@ bool players::Drink(char id_)
 					
 					if(you.GetPunish(GT_EIRIN) && randA(1))
 					{
-						soundmanager.playSound("potion");
+						PlaySE("potion");
 						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_POTION_CHANGE),true,false,false,CL_small_danger);
 						drinkpotion(PT_WATER, false);
 					}
 					else if(you.GetArtifactProperty(ART_DRUNK) > 0) {
-						soundmanager.playSound("potion");
+						PlaySE("potion");
 						if(iden_list.potion_list[(*it).value1].iden == false)
 						{		
 							printlog(LocalzationManager::formatString(LOC_SYSTEM_IDENTIFY_ITEM, PlaceHolderHelper(potion_iden_string[(*it).value1])), false,false,false,CL_normal);		
@@ -5087,7 +5087,7 @@ bool players::Drink(char id_)
 							return false;
 						}
 
-						soundmanager.playSound("potion");
+						PlaySE("potion");
 						drinkpotion((potion_type)(*it).value1, false);
 
 						if (use_num_ > 1) {
@@ -5254,7 +5254,7 @@ bool players::Read(char id_)
 				WaitForSingleObject(mutx, INFINITE);
 				if((*it).type == ITM_SCROLL)
 				{
-					soundmanager.playSound("scroll");
+					PlaySE("scroll");
 					LocalzationManager::printLogWithKey(LOC_SYSTEM_READ_SCROLL,true,false,false,CL_normal,
 						 PlaceHolderHelper(it->GetName(-2)));
 					bool pre_iden_ = (iden_list.scroll_list[(*it).value1].iden == 3);
@@ -5499,7 +5499,7 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 
 
 	if(speak_)
-		soundmanager.playSound("god");
+		PlaySE("god");
 
 	if(god == GT_SATORI)
 	{
@@ -5578,7 +5578,7 @@ bool players::PietyUpDown(int piety_, bool absolutely_)
 		if (prev_piety_ != 200) {
 			if (you.god == GT_MIKO) {
 				enterlog();
-				soundmanager.playSound("spellcard");
+				PlaySE("spellcard");
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIKO_POPULARITY_BURST), true, false, false, CL_miko);
 			}
 		}
@@ -5672,11 +5672,11 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 			temp_infor.length = length_;
 			for(int i=0;i<(you.GetParadox()?2:1);i++)
 			{
-				soundmanager.playSound("throw");
+				PlaySE("throw");
 				coord_def c_ = throwtanmac(type_,beam,temp_infor,&(*it));
 				int power_ = GetSkillLevel(SKT_TANMAC, true)*5;
 				attack_infor temp_att(randC(3,5+power_/8),3*(5+power_/8),99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_KIKU_SPRAY));
-				soundmanager.playSound("bomb"); 
+				PlaySE("bomb"); 
 				BaseBomb(c_,&img_fog_cold[0],temp_att);
 			}
 		}
@@ -5688,7 +5688,7 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 				temp_infor.length = length_;
 			for(int i=0;i<(you.GetParadox()?2:1);i++)
 			{
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 				throwtanmac(type_,beam,temp_infor,&(*it), true, (you.GetParadox()&&i==0)?true:false);
 			}
 		}
@@ -5820,7 +5820,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 			return 0;
 		}
 		if(speak_)
-			soundmanager.playSound("equip");
+			PlaySE("equip");
 		WaitForSingleObject(mutx, INFINITE);
 		//자동식별 추가
 		(*it).equipIdentify();

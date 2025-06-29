@@ -61,7 +61,12 @@
         "mutex": "cpp",
         "thread": "cpp",
         "*.rh": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "forward_list": "cpp",
+        "any": "cpp",
+        "optional": "cpp",
+        "string_view": "cpp",
+        "valarray": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }

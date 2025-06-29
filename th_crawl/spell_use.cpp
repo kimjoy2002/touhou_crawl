@@ -443,7 +443,7 @@ bool skill_tanmac_small(int pow, bool short_, unit* order, coord_def target)
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if(env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 			}
 			throwtanmac(rand_int(30, 35), beam, temp_infor, NULL);
 		}
@@ -465,7 +465,7 @@ bool skill_tanmac_middle(int pow, bool short_, unit* order, coord_def target)
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 			}
 			throwtanmac(rand_int(10, 15), beam, temp_infor, NULL);
 		}
@@ -485,7 +485,7 @@ bool skill_water_gun(int pow, bool short_, unit* order, coord_def target)
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 			}
 			throwtanmac(34, beam, temp_infor, NULL);
 		}
@@ -505,7 +505,7 @@ bool skill_burn(int pow, bool short_, unit* order, coord_def target)
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("fire");
+				PlaySE("fire");
 			}
 			throwtanmac(17, beam, temp_infor, NULL);
 		}
@@ -527,7 +527,7 @@ bool skill_flame(int pow, bool short_, unit* order, coord_def target)
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("fire");
+				PlaySE("fire");
 			}
 			throwtanmac(17, beam, temp_infor, NULL);
 		}
@@ -547,7 +547,7 @@ bool skill_frozen(int pow, bool short_, unit* order, coord_def target)
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("cold");
+				PlaySE("cold");
 			}
 			throwtanmac(19, beam, temp_infor, NULL);
 		}
@@ -569,7 +569,7 @@ bool skill_frost(int pow, bool short_, unit* order, coord_def target)
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("cold");
+				PlaySE("cold");
 			}
 			throwtanmac(19, beam, temp_infor, NULL);
 		}
@@ -589,7 +589,7 @@ bool skill_freeze(int pow, bool short_, unit* order, coord_def target)
 		attack_infor temp_att(randC(2,13+pow/6),2*(13+pow/6),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor(LOC_SYSTEM_ATT_COLD));
 		target_unit->damage(temp_att, true);
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("cold");
+			PlaySE("cold");
 		}
 		//beam_infor temp_infor(randC(2,8+pow/6),2*(8+pow/6),99,order,order->GetParentType(),SpellLength(SPL_FREEZE, order->isplayer()),1,BMT_NORMAL,ATT_THROW_FREEZING,name_infor(LOC_SYSTEM_ATT_COLD));
 		//if(short_)
@@ -610,7 +610,7 @@ bool skill_sting(int pow, bool short_, unit* order, coord_def target)
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 			}
 			throwtanmac(20, beam, temp_infor, NULL);
 		}
@@ -625,7 +625,7 @@ bool skill_medicine_cloud(int pow, bool short_, unit* order, coord_def target)
 	{
 		MakeCloud(target, img_fog_slow, SMT_SLOW, rand_int(8,10), 4+pow/10,0,5, order);
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("wind");
+			PlaySE("wind");
 		}
 		return true;
 	}
@@ -650,7 +650,7 @@ bool skill_fire_wall(int pow, bool short_, unit* order, coord_def target)
 		env[current_level].MakeSmoke(target, img_fog_fire, SMT_FIRE, rand_int(7,13)+pow/4,  0, order);
 
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("fire");
+			PlaySE("fire");
 
 		}
 		return true;
@@ -670,7 +670,7 @@ bool skill_twist(int pow, bool short_, unit* order, coord_def target)
 		env[current_level].MakeSmoke(target, img_fog_tonado, SMT_TWIST, rand_int(3,8)+pow/5,  0, order);
 
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("wind");
+			PlaySE("wind");
 		}
 		return true;
 	}
@@ -687,7 +687,7 @@ bool skill_cold_beam(int pow, bool short_, unit* order, coord_def target)
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("cold");
+				PlaySE("cold");
 			}
 			throwtanmac(18, beam, temp_infor, NULL); //얼음탄막 모양 하나 더 만들고 바꾸기
 		}
@@ -719,7 +719,7 @@ bool skill_summon_bug(int pow, bool short_, unit* order, coord_def target)
 	} 
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 	}
 	return return_;
@@ -775,7 +775,7 @@ bool skill_blink(int pow, bool short_, unit* order, coord_def target)
 	if(!order->Tele_check(true, false))
 		return false; 
 	if (env[current_level].isInSight(order->position)) {
-		soundmanager.playSound("blink");
+		PlaySE("blink");
 	}
 	order->Blink(25);
 
@@ -809,7 +809,7 @@ bool skill_smite(int pow, bool short_, unit* order, coord_def target)
 		attack_infor temp_att(randA_1(11+pow/7),11+pow/7,99,order,order->GetParentType(),ATT_SMITE,name_infor(LOC_SYSTEM_ATT_SMITE));
 		
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("smite");
+			PlaySE("smite");
 		}
 		target_unit->damage(temp_att, true);
 		return true;
@@ -827,7 +827,7 @@ bool skill_summon_mook(int pow, bool short_, unit* order, coord_def target)
 	}
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 	}
 	return return_;
@@ -844,7 +844,7 @@ bool skill_fire_bread(int pow, bool short_, unit* order, coord_def target)
 			you.equipment[ET_WEAPON]->value5 = WB_FIRE;
 			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+pow/3; 
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("fire");
+				PlaySE("fire");
 			}
 		}
 		else if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && you.equipment[ET_WEAPON]->value5 == WB_FIRE && you.equipment[ET_WEAPON]->value6>0)
@@ -855,7 +855,7 @@ bool skill_fire_bread(int pow, bool short_, unit* order, coord_def target)
 			if(you.equipment[ET_WEAPON]->value6>50)
 				you.equipment[ET_WEAPON]->value6 = 50; 
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("fire");
+				PlaySE("fire");
 			}
 		}
 		else
@@ -876,7 +876,7 @@ bool skill_cold_bread(int pow, bool short_, unit* order, coord_def target)
 			you.equipment[ET_WEAPON]->value5 = WB_COLD;
 			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+pow/3; 
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("cold");
+				PlaySE("cold");
 			}
 		}
 		else if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && you.equipment[ET_WEAPON]->value5 == WB_COLD && you.equipment[ET_WEAPON]->value6>0)
@@ -887,7 +887,7 @@ bool skill_cold_bread(int pow, bool short_, unit* order, coord_def target)
 			if(you.equipment[ET_WEAPON]->value6>50)
 				you.equipment[ET_WEAPON]->value6 = 50; 
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("cold");
+				PlaySE("cold");
 			}
 		}
 		else
@@ -909,7 +909,7 @@ bool skill_poison_bread(int pow, bool short_, unit* order, coord_def target)
 			you.equipment[ET_WEAPON]->value5 = WB_POISON;
 			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+pow/3; 
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("fire");
+				PlaySE("fire");
 			}
 		}
 		else if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && you.equipment[ET_WEAPON]->value5 == WB_POISON && you.equipment[ET_WEAPON]->value6>0)
@@ -920,7 +920,7 @@ bool skill_poison_bread(int pow, bool short_, unit* order, coord_def target)
 			if(you.equipment[ET_WEAPON]->value6>50)
 				you.equipment[ET_WEAPON]->value6 = 50; 
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("fire");
+				PlaySE("fire");
 			}
 		}
 		else
@@ -984,7 +984,7 @@ bool skill_elec(int power, bool short_, unit* order, coord_def target)
 	{
 		
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("elec");
+			PlaySE("elec");
 		}
 		beam_infor temp_infor(randA_1(10+power/6),10+power/6,99,order,order->GetParentType(),SpellLength(SPL_SHOCK, order->isplayer()),1,BMT_NORMAL,ATT_THROW_ELEC,name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		ThrowShock(21,order->position,hit_mon->position,temp_infor); 
@@ -1047,7 +1047,7 @@ bool skill_elec_passive(int power, unit* order)
 	if(hit_mon)
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("elec");
+			PlaySE("elec");
 		}
 		beam_infor temp_infor(randA_1(9+power/3),9+power/3,99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		ThrowShock(21,order->position,hit_mon->position,temp_infor); 
@@ -1105,7 +1105,7 @@ bool skill_elec_ball_bomb(int power, unit* order)
 	if (hit_mon)
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("elec");
+			PlaySE("elec");
 		}
 		beam_infor temp_infor(randC(3, 8 + power * 1 / 6), 3 * (8 + power * 1 / 6), 99, order, order->GetParentType(), spell_length_, 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		ThrowShock(42, order->position, hit_mon->position, temp_infor);
@@ -1172,7 +1172,7 @@ bool skill_lightning(int power, unit* order, coord_def *start, int& direc, int c
 	if(hit_mon)
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("elec");
+			PlaySE("elec");
 		}
 		beam_infor temp_infor(randC(2,8+power*1/4),2*(8+power*1/4),99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		if(ThrowShock(42,(*start),hit_mon->position,temp_infor))
@@ -1283,7 +1283,7 @@ bool base_bomb(int damage, int max_damage, int size, attack_type type, unit* ord
 bool skill_discharge(int pow, bool short_, unit* order, coord_def target)
 {
 	if (env[current_level].isInSight(order->position)) {
-		soundmanager.playSound("elec");
+		PlaySE("elec");
 	}
 	order->SetElec(15+pow/5);
 	return true;
@@ -1292,7 +1292,7 @@ bool skill_discharge(int pow, bool short_, unit* order, coord_def target)
 bool skill_levitation(int pow, bool short_, unit* order, coord_def target)
 {
 	if (env[current_level].isInSight(order->position)) {
-		soundmanager.playSound("wind");
+		PlaySE("wind");
 	}
 	order->SetLevitation(rand_int(30,50)+pow/2);
 	return true;
@@ -1325,7 +1325,7 @@ bool skill_graze(int pow, bool short_, unit* order, coord_def target)
 bool skill_veiling(int pow, bool short_, unit* order, coord_def target)
 {
 	if (env[current_level].isInSight(order->position)) {
-		soundmanager.playSound("wind");
+		PlaySE("wind");
 	}
 	order->SetVeiling(10+pow/7,12+pow/4);
 	return true;
@@ -1334,7 +1334,7 @@ bool skill_veiling(int pow, bool short_, unit* order, coord_def target)
 bool skill_invisible(int pow, bool short_, unit* order, coord_def target)
 {
 	if (env[current_level].isInSight(order->position)) {
-		soundmanager.playSound("spellcard");
+		PlaySE("spellcard");
 	}
 	order->SetInvisible(rand_int(30,80));
 	return true;
@@ -1360,7 +1360,7 @@ bool skill_santuary(int pow, bool short_, unit* order, coord_def target)
 	if (order && order->GetExhausted())
 		return false;
 	if (env[current_level].isInSight(target)) {
-		soundmanager.playSound("spellcard");
+		PlaySE("spellcard");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_SANTUARY), true, false, false, CL_warning);
 	}
 	env[current_level].MakeEvent(EVL_SANTUARY, coord_def(target.x, target.y), EVT_ALWAYS, rand_int(10, 20));
@@ -1389,7 +1389,7 @@ bool skill_magic_tanmac(int pow, bool short_, unit* order, coord_def target)
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 			}
 			throwtanmac(rand_int(30, 35), beam, temp_infor, NULL);
 		}
@@ -1413,7 +1413,7 @@ bool skill_fire_ball(int power, bool short_, unit* order, coord_def target)
 			attack_infor temp_att(randC(3,7+power/12),3*(7+power/12),99,order,order->GetParentType(),ATT_FIRE_BLAST,name_infor(LOC_SYSTEM_ATT_FIREBALL));
 			
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("bomb");
+				PlaySE("bomb");
 			}
 			BaseBomb(pos, &img_blast[0],temp_att);
 		}
@@ -1435,7 +1435,7 @@ bool skill_fire_bolt(int pow, bool short_, unit* order, coord_def target)
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("fire");
+				PlaySE("fire");
 			}
 			throwtanmac(16, beam, temp_infor, NULL);
 		}
@@ -1457,7 +1457,7 @@ bool skill_ice_bolt(int pow, bool short_, unit* order, coord_def target)
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("cold");
+				PlaySE("cold");
 			}
 			throwtanmac(22, beam, temp_infor, NULL);
 		}
@@ -1477,7 +1477,7 @@ bool skill_venom_bolt(int pow, bool short_, unit* order, coord_def target)
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 			}
 			throwtanmac(23, beam, temp_infor, NULL);
 		}
@@ -1499,7 +1499,7 @@ bool skill_confuse_cloud(int power, bool short_, unit* order, coord_def target)
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 		{
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 			}
 			
 			coord_def pos = throwtanmac(20,beam,temp_infor,NULL, false);
@@ -1529,7 +1529,7 @@ bool skill_poison_cloud(int pow, bool short_, unit* order, coord_def target)
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("wind");
+			PlaySE("wind");
 		}
 		MakeCloud(target, img_fog_poison, SMT_POISON, rand_int(8,10), rand_int(7,10)+randA(pow/10),0,5, order);
 		return true;
@@ -1541,7 +1541,7 @@ bool skill_ice_cloud(int pow, bool short_, unit* order, coord_def target)
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("cold");
+			PlaySE("cold");
 		}
 		MakeCloud(target, img_fog_cold, SMT_COLD, rand_int(8,10), rand_int(7,10)+randA(pow/10),0,5, order);
 		return true;
@@ -1580,7 +1580,7 @@ bool skill_summon_bird(int pow, bool short_, unit* order, coord_def target)
 	} 
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 	}
 	return return_;
@@ -1658,7 +1658,7 @@ bool skill_whirlwind(int pow, bool short_, unit* order, coord_def target)
 		
 		if (env[current_level].isInSight(target)) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("wind");
+				PlaySE("wind");
 			}
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_WHIRLWIND) + " ", false, false, false, CL_normal);
 		}
@@ -1719,7 +1719,7 @@ bool skill_summon_pendulum(int pow, bool short_, unit* order, coord_def target)
 	} 
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("cold");
+			PlaySE("cold");
 		}
 	}
 	return return_;
@@ -1738,7 +1738,7 @@ bool skill_summon_sekibanki(int pow, bool short_, unit* order, coord_def target)
 	}
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("laugh");
+			PlaySE("laugh");
 		}
 	}
 	return return_;
@@ -1757,7 +1757,7 @@ bool skill_water_cannon(int pow, bool short_, unit* order, coord_def target)
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 		{
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot_heavy");
+				PlaySE("shoot_heavy");
 			}
 			coord_def temp = throwtanmac(22,beam,temp_infor,NULL);
 			unit* unit_ = env[current_level].isMonsterPos(temp.x,temp.y,order);		
@@ -1800,7 +1800,7 @@ bool skill_kyoko_smite(int pow, bool short_, unit* order, coord_def target)
 	if(target_unit)
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("smite");
+			PlaySE("smite");
 		}
 		attack_infor temp_att(randA_1(10+pow/4),10+pow/4,99,order,order->GetParentType(),ATT_NOISE,name_infor(LOC_SYSTEM_ATT_NOISE));
 		target_unit->damage(temp_att, true);
@@ -1825,7 +1825,7 @@ bool skill_summon_option(int pow, bool short_, unit* order, coord_def target)
 	} 
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 	}
 	return return_;
@@ -1846,7 +1846,7 @@ bool skill_summon_golem(int pow, bool short_, unit* order, coord_def target)
 	} 
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 	}
 	return return_;
@@ -1867,7 +1867,7 @@ bool skill_hypnosis(int pow, bool short_, unit* order, coord_def target)
 			if(hit_) //벽에 부딪혔다.
 			{
 				if (env[current_level].isInSight(order->position)) {
-					soundmanager.playSound("stone");
+					PlaySE("stone");
 				}
 				attack_infor temp_att(randC(1,13+pow/6),(13+pow/6),99,NULL,order->GetParentType(),ATT_WALL,name_infor(LOC_SYSTEM_ATT_CRASH));
 				hit_mon->damage(temp_att, true);
@@ -1875,7 +1875,7 @@ bool skill_hypnosis(int pow, bool short_, unit* order, coord_def target)
 			else if(unit_)
 			{ //유닛에 부딪히면 둘에게 데미지 
 				if (env[current_level].isInSight(order->position)) {
-					soundmanager.playSound("stone");
+					PlaySE("stone");
 				}
 				{
 					attack_infor temp_att(randC(1,13+pow/6),(13+pow/6),99,unit_,order->GetParentType(),ATT_WALL,name_infor(LOC_SYSTEM_ATT_CRASH));
@@ -2018,7 +2018,7 @@ bool skill_laser(int pow, bool short_, unit* order, coord_def target)
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("laser");
+				PlaySE("laser");
 			}
 			throwtanmac(29, beam, temp_infor, NULL);
 		}
@@ -2040,7 +2040,7 @@ bool skill_spark(int pow, bool short_, unit* order, coord_def target)
 			}
 		}
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("spark");
+			PlaySE("spark");
 		}
 		beam_infor temp_infor(randC(5,9+pow/18),5*(9+pow/18),99,order,order->GetParentType(),SpellLength(SPL_SPARK, order->isplayer()),8,BMT_PENETRATE,ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_SPARK));
 		ThrowSector(46,beam,temp_infor,GetSpellSector(SPL_SPARK),[&](coord_def c_){
@@ -2063,7 +2063,7 @@ bool skill_summon_unzan(int pow, bool short_, unit* order, coord_def target)
 	}
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("ufo");
+			PlaySE("ufo");
 		}
 	}
 	return return_;
@@ -2084,7 +2084,7 @@ bool skill_summon_unzan_punch(int pow, bool short_, unit* order, coord_def targe
 	} 
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 	}
 	return return_;
@@ -2103,7 +2103,7 @@ bool skill_summon_zombie_fairy(int pow, bool short_, unit* order, coord_def targ
 	} 
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 	}
 	return return_;
@@ -2123,7 +2123,7 @@ bool skill_summon_ufo(int pow, bool short_, unit* order, coord_def target)
 	}
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("ufo");
+			PlaySE("ufo");
 		}
 	}
 	return return_;
@@ -2250,7 +2250,7 @@ bool skill_mind_bending(int pow, bool short_, unit* order, coord_def target)
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 		{
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 			}
 			coord_def c_ =throwtanmac(19,beam,temp_infor,NULL);
 			unit* hit_mon = env[current_level].isMonsterPos(c_.x,c_.y,order);
@@ -2300,7 +2300,7 @@ bool skill_stone_arrow(int pow, bool short_, unit* order, coord_def target)
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("stone");
+				PlaySE("stone");
 			}
 			throwtanmac(26, beam, temp_infor, NULL);
 		}
@@ -2341,7 +2341,7 @@ bool skill_stone_uplift(int pow, bool short_, unit* order, coord_def target)
 	if(env[current_level].isMove(target.x, target.y))
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("earthquake");
+			PlaySE("earthquake");
 		}
 		vector<coord_def> vt_;
 		{
@@ -2395,7 +2395,7 @@ bool skill_kaname_drill(int pow, bool short_, unit* order, coord_def target)
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("stone");
+				PlaySE("stone");
 			}
 			throwtanmac(28, beam, temp_infor, NULL);
 		}
@@ -2409,7 +2409,7 @@ bool skill_diamond_hardness(int pow, bool short_, unit* order, coord_def target)
 	if(order == &you)
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("stone");
+			PlaySE("stone");
 		}
 		you.SetAlchemyBuff(ALCT_DIAMOND_HARDNESS,rand_int(30,50)+pow/3);
 		return true;
@@ -2430,7 +2430,7 @@ bool skill_stone_form(int pow, bool short_, unit* order, coord_def target)
 	if(order == &you)
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("spellcard");
+			PlaySE("spellcard");
 		}
 		you.SetAlchemyBuff(ALCT_STONE_FORM,rand_int(30,50)+pow/3);
 		return true;
@@ -2452,7 +2452,7 @@ bool skill_burst(int pow, bool short_, unit* order, coord_def target)
 	if(env[current_level].isMove(target.x, target.y))
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("bomb");
+			PlaySE("bomb");
 		}
 		vector<coord_def> vt_;
 		{
@@ -2503,7 +2503,7 @@ bool skill_summon_flandre(int pow, bool short_, unit* order, coord_def target)
 	} 
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("laugh");
+			PlaySE("laugh");
 		}
 	}
 	return return_;
@@ -2514,7 +2514,7 @@ bool skill_suicide_bomb(int base_damage, int power, bool short_, unit* order, co
 	if(1)
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("bomb");
+			PlaySE("bomb");
 		}
 		textures* t_ = &img_blast[0];
 		{
@@ -2609,7 +2609,7 @@ bool skill_summon_lessor_demon(int pow, bool short_, unit* order, coord_def targ
 	} 
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 	}
 	return return_;
@@ -2631,7 +2631,7 @@ bool skill_luminus_strike(int power, bool short_, unit* order, coord_def target)
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 		{
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot_heavy");
+				PlaySE("shoot_heavy");
 			}
 			unit* hit_mon = throwtanmac_check_hit(12,beam,temp_infor,NULL, true, false, [](attack_infor& attack, ThrowTamacInstance* instance_){
 				if(instance_->beam.cur_length == 1) {
@@ -2664,7 +2664,7 @@ bool skill_fire_storm(int power, bool short_, unit* order, coord_def target)
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("nuke");
+			PlaySE("nuke");
 		}
 		textures* t_ = &img_blast[0];
 		{
@@ -2719,8 +2719,8 @@ bool skill_blizzard(int power, bool short_, unit* order, coord_def target)
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("wind");
-			soundmanager.playSound("cold");
+			PlaySE("wind");
+			PlaySE("cold");
 		}
 		if(env[current_level].isInSight(target))
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_BLIZZARD) + " ",false,false,false,CL_normal);
@@ -2776,7 +2776,7 @@ bool skill_perfect_freeze(int pow, bool short_, unit* order, coord_def target)
 		if(it->isLive() && env[current_level].isInSight(it->position) && order->isSightnonblocked(it->position))
 		{
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("timestop");
+				PlaySE("timestop");
 			}
 			int att_ = 10+pow/7;				
 			attack_infor temp_att(randC(5,att_),5*(att_),99,order,order->GetParentType(),ATT_COLD_BLAST,name_infor(LOC_SYSTEM_ATT_COLD));
@@ -2883,7 +2883,7 @@ bool skill_field_violet(int power, bool short_, unit* order, coord_def target)
 		}
 	} 
 	if (env[current_level].isInSight(order->position)) {
-		soundmanager.playSound("spellcard");
+		PlaySE("spellcard");
 	}
 	if(env[current_level].isInSight(target))
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_FILED_VIOLET) + " ",false,false,false,CL_normal);
@@ -2942,7 +2942,7 @@ bool skill_controled_blink(int pow, bool short_, unit* order, coord_def target)
 	if(you.control_blink(you.search_pos))
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("blink");
+			PlaySE("blink");
 		}
 		you.SetTransPanalty(rand_int(1,2));
 		return true;
@@ -2955,7 +2955,7 @@ bool skill_the_world(int power, bool short_, unit* order, coord_def target)
 	if(order->isplayer())
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("timestop");
+			PlaySE("timestop");
 		}
 		you.SetTransPanalty(rand_int(3,4));
 		you.SetTheWorld(rand_int(5+power/50,max(10,6+power/30)));
@@ -3068,7 +3068,7 @@ bool skill_moon_gun(int power, bool short_, unit* order, coord_def target)
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 			}
 			throwtanmac(19, beam, temp_infor, NULL);
 		}
@@ -3167,7 +3167,7 @@ bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
 	} 
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 	}
 
@@ -3181,7 +3181,7 @@ bool skill_mana_drain(int power, bool short_, unit* order, coord_def target)
 	{
 		//더 이상 데미지를 주지 않음
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("wind");
+			PlaySE("wind");
 		}
 		if(target_unit->isplayer()) //이 공격은 지능으로 감소가 가능하다.
 		{
@@ -3237,7 +3237,7 @@ bool skill_blood_smite(int power, bool short_, unit* order, coord_def target)
 				 PlaceHolderHelper(target_unit->GetName()->getName()));
 		}
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("smite");
+			PlaySE("smite");
 		}
 
 		int damage_ = target_unit->GetMaxHp()*rand_int(10,20)/100;
@@ -3265,7 +3265,7 @@ bool skill_call_hound(int power, bool short_, unit* order, coord_def target)
 	if(order->GetExhausted())
 		return false; 
 	if (env[current_level].isInSight(order->position)) {
-		soundmanager.playSound("howl");
+		PlaySE("howl");
 	}
 
 	order->SetCommunication(rand_int(2,4));
@@ -3286,7 +3286,7 @@ bool skill_canon(int power, bool short_, unit* order, coord_def target)
 			attack_infor temp_att(randC(3,6+power/12),3*(6+power/12),99,order,order->GetParentType(),ATT_AC_REDUCE_BLAST,name_infor(LOC_SYSTEM_ATT_YINYANG_TANMAC));
 			
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("bomb");
+				PlaySE("bomb");
 			}
 			BaseBomb(pos, &img_blast[5],temp_att,order);
 		}
@@ -3313,7 +3313,7 @@ bool skill_dolls_war(int power, bool short_, unit* order, coord_def target)
 	}
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 	}
 	return return_;
@@ -3341,7 +3341,7 @@ bool skill_fire_spread(int power, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("fire");
+			PlaySE("fire");
 		}
 		beam_infor temp_infor(0,0,99,order,order->GetParentType(),SpellLength(SPL_FIRE_SPREAD, order->isplayer()),8,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor(LOC_SYSTEM_ATT_SEAOFFIRE));
 		ThrowSector(0,beam,temp_infor,GetSpellSector(SPL_FIRE_SPREAD),[&](coord_def c_){
@@ -3408,7 +3408,7 @@ bool skill_jump_attack(int power, bool short_, unit* order, coord_def target)
 			order->SetXY((*rit));
 			
 			if (env[current_level].isInSight((*rit))) {
-				soundmanager.playSound("howl");
+				PlaySE("howl");
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_JUMP_ATTACK,false,false,false,CL_normal,
 					 PlaceHolderHelper(order->GetName()->getName()),
 					 PlaceHolderHelper(unit_->GetName()->getName()));
@@ -3430,7 +3430,7 @@ bool skill_jump_attack(int power, bool short_, unit* order, coord_def target)
 bool skill_alert_noise(int power, bool short_, unit* order, coord_def target)
 {
 	{
-		soundmanager.playSound("warning");
+		PlaySE("warning");
 		if(order && !order->isplayer())
 		{
 			order->SetExhausted(rand_int(10,20));
@@ -3453,7 +3453,7 @@ bool skill_summon_namaz(int power, bool short_, unit* order, coord_def target)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_NAMAZ_READY) + " ",false,false,false,CL_normal);
 	env[current_level].MakeEvent(EVL_NAMAZ,coord_def(target.x,target.y),EVT_COUNT,4);
 	if (env[current_level].isInSight(order->position)) {
-		soundmanager.playSound("namaz");
+		PlaySE("namaz");
 	}
 	return true;
 }
@@ -3463,7 +3463,7 @@ bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target)
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("earthquake");
+			PlaySE("earthquake");
 		}
 		textures* t_ = &img_blast[1];
 		{
@@ -3522,7 +3522,7 @@ bool skill_schema_tanmac(int pow, bool short_, unit* order, coord_def target)
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 			}
 			throwtanmac(randA(2) ? (randA(1) ? 19 : 20) : 17, beam, temp_infor, NULL);
 
@@ -3616,7 +3616,7 @@ bool skill_thunder(int power, bool short_, unit* order, coord_def target)
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("thunder");
+			PlaySE("thunder");
 		}
 		vector<coord_def> vt_;
 		{
@@ -3656,7 +3656,7 @@ bool skill_air_strike(int power, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("wind");
+			PlaySE("wind");
 		}
 		int damage_ = 2*(8+power/8);
 		beam_infor temp_infor(randC(1,damage_),damage_,15+power/15,order,order->GetParentType(),SpellLength(SPL_AIR_STRIKE, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_AIRSTRIKE));
@@ -3694,7 +3694,7 @@ bool skill_summon_racoon(int power, bool short_, unit* order, coord_def target)
 	}
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 	}
 	return return_;
@@ -3718,7 +3718,7 @@ bool skill_summon_youkai(int power, bool short_, unit* order, coord_def target)
 	}
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("cold");
+			PlaySE("cold");
 		}
 	}
 	return return_;
@@ -3768,7 +3768,7 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 	if(env[current_level].isMove(target.x, target.y))
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("wind");
+			PlaySE("wind");
 		}
 		vector<coord_def> vt_;
 		{
@@ -3817,7 +3817,7 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 bool skill_shatter(int power, bool short_, unit* order, coord_def target)
 {
 	if (env[current_level].isInSight(order->position)) {
-		soundmanager.playSound("earthquake");
+		PlaySE("earthquake");
 	}
 	printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_EARTHQUAKE),false,false,false,CL_normal);
 	map_effect = 2;
@@ -3888,7 +3888,7 @@ bool skill_summon_yoshika(int power, bool short_, unit* order, coord_def target)
 	else
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 		if(monster* mon_=BaseSummon(MON_YOSIKA, 100, false, false, 2, order, order->position, SKD_OTHER, -1))
 		{
@@ -3920,7 +3920,7 @@ bool skill_nesy_cannon(int power, bool short_, unit* order, coord_def target)
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 		{
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot_heavy");
+				PlaySE("shoot_heavy");
 			}
 			throwtanmac(22,beam,temp_infor,NULL);
 		}
@@ -3971,7 +3971,7 @@ bool skill_emerald_city(int power, bool short_, unit* order, coord_def target)
 	if(env[current_level].isMove(target.x, target.y))
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("stone");
+			PlaySE("stone");
 		}
 		vector<coord_def> vt_;
 		{
@@ -4035,7 +4035,7 @@ bool skill_summon_anchor(int power, bool short_, unit* order, coord_def target)
 	for (; i > 0; i--)
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("spellcard");
+			PlaySE("spellcard");
 		}
 		if (monster *mon_ = BaseSummon(MON_ANCHOR, rand_int(20, 30), true, false, 2, order, target, SKD_SUMMON_ANCHOR, GetSummonMaxNumber(SPL_SUMMON_ANCHOR)))
 		{
@@ -4061,7 +4061,7 @@ bool skill_reaper_met(int power, bool short_, unit* order, coord_def target)
 				env[current_level].isMonsterPos(beam->x, beam->y) == NULL)
 			{
 				if (env[current_level].isInSight(order->position)) {
-					soundmanager.playSound("wind");
+					PlaySE("wind");
 				}
 				hit_mon->SetXY(*beam);
 				hit_mon->AttackedTarget(order);
@@ -4085,7 +4085,7 @@ bool skill_afterlife(int power, bool short_, unit* order, coord_def target)
 	if (order && hit_mon)
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("sickle");
+			PlaySE("sickle");
 		}
 		int damage_ = hit_mon->GetHp() / 2;
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_AFTERLIFE,true,false,false,CL_small_danger,
@@ -4155,7 +4155,7 @@ bool skill_psychokinesis(int power, bool short_, unit* order, coord_def target)
 			}
 		} 
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("blink");
+			PlaySE("blink");
 		}
 		target_unit->Blink(25);
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_PSYCHOKINESIS,true,false,false,CL_normal,
@@ -4184,7 +4184,7 @@ bool skill_summon_trash(int power, bool short_, unit* order, coord_def target)
 	}
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 	}
 	return return_;
@@ -4229,7 +4229,7 @@ bool skill_trash_rush(int power, bool short_, unit* order, coord_def target)
 	//최대 4개까지 날림
 	for (int i = 0; i < 4 && monster_list.GetSize() != 0; i++) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("shoot_heavy");
+			PlaySE("shoot_heavy");
 		}
 		if (max_ == 0 && order->isYourShight()) {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_TRASH_RUSH), true, false, false, CL_normal);
@@ -4291,7 +4291,7 @@ bool skill_kokoro_roulette(int power, bool short_, unit* order, coord_def target
 	int mask_ = id_ == MON_KOKORO1 ? MON_MASK_ANGRY: id_ == MON_KOKORO2 ? MON_MASK_SAD: MON_MASK_HAPPY;
 	
 	if (env[current_level].isInSight(order->position)) {
-		soundmanager.playSound("spellcard");
+		PlaySE("spellcard");
 	}
 	mon_->ChangeMonster(id_, 0);
 	if(id_ == MON_KOKORO1) {
@@ -4323,7 +4323,7 @@ bool skill_thunder_bolt(int pow, bool short_, unit* order, coord_def target)
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("elec");
+				PlaySE("elec");
 			}
 			throwtanmac(38, beam, temp_infor, NULL);
 		}
@@ -4344,7 +4344,7 @@ bool skill_mistia_song(int pow, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(target)) {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_MYSTIA_SONG) + " ", false, false, false, CL_normal); 
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("laugh");
+				PlaySE("laugh");
 			}
 			you.SetNightSight(1, turn_, false);
 			order->SetExhausted(turn_ - rand_int(0, 2));
@@ -4370,7 +4370,7 @@ bool skill_throw_dish(int pow, bool short_, unit* order, coord_def target)
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 			}
 			throwtanmac(34, beam, temp_infor, NULL);
 		}
@@ -4413,7 +4413,7 @@ bool skill_abusion(int power, bool short_, unit* order, coord_def target)
 		}
 	} 
 	if (env[current_level].isInSight(order->position)) {
-		soundmanager.playSound("wind");
+		PlaySE("wind");
 	}
 	return true;
 }
@@ -4425,7 +4425,7 @@ bool skill_sleep_smite(int power, bool short_, unit* order, coord_def target)
 	if (target_unit)
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("smite");
+			PlaySE("smite");
 		}
 		if(order && order->isYourShight()) {
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_SLEEP_SMITE,false,false,false,CL_normal,
@@ -4447,7 +4447,7 @@ bool skill_target_elec(int power, bool short_, unit* order, coord_def target)
 	if (target_unit)
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("elec");
+			PlaySE("elec");
 		}
 		beam_infor temp_infor(randA_1(10 + power / 6), 10 + power / 6, 99, order, order->GetParentType(), SpellLength(SPL_SHOCK, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		ThrowShock(21, order->position, target_unit->position, temp_infor);
@@ -4473,7 +4473,7 @@ bool skill_summon_elec_ball(int pow, bool short_, unit* order, coord_def target)
 	}
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("elec");
+			PlaySE("elec");
 		}
 	}
 	return return_;
@@ -4519,7 +4519,7 @@ bool skill_dream_call(int pow, bool short_, unit* order, coord_def target)
 	if (send_ == true) {
 		if (env[current_level].isInSight(order->position)) {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_DREAM_CALL) + " ", false, false, false, CL_normal);
-			soundmanager.playSound("blink");
+			PlaySE("blink");
 		}
 	}
 	return true;
@@ -4535,7 +4535,7 @@ bool skill_hyper_beam(int pow, bool short_, unit* order, coord_def target)
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot_heavy");
+				PlaySE("shoot_heavy");
 			}
 			throwtanmac(29, beam, temp_infor, NULL);
 		}
@@ -4560,7 +4560,7 @@ bool skill_kaguya_spell(int pow, bool short_, unit* order, coord_def target)
 	}
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 	}
 	return return_;
@@ -4578,7 +4578,7 @@ bool skill_throw_sword(int pow, bool short_, unit* order, coord_def target)
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("knife");
+				PlaySE("knife");
 			}
 			throwtanmac(47, beam, temp_infor, NULL);
 		}
@@ -4600,7 +4600,7 @@ bool skill_throw_knife(int pow, bool short_, unit* order, coord_def target)
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("knife");
+				PlaySE("knife");
 			}
 			throwtanmac(48, beam, temp_infor, NULL);
 		}
@@ -4617,7 +4617,7 @@ bool skill_throw_player(int pow, bool short_, unit* order, coord_def target)
 	if (target_unit)
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("earthquake");
+			PlaySE("earthquake");
 		}
 		target_unit->Blink(40);
 		int damage_ = 70;
@@ -4641,7 +4641,7 @@ bool skill_throw_amulet(int pow, bool short_, unit* order, coord_def target)
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 			}
 			throwtanmac(2, beam, temp_infor, NULL);
 		}
@@ -4680,7 +4680,7 @@ bool skill_warp_kick(int power, bool short_, unit* order, coord_def target)
 			order->SetXY((*rit));
 
 			if (env[current_level].isInSight((*rit))) {
-				soundmanager.playSound("blink");
+				PlaySE("blink");
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_DIMENSIONAL_RIFT,false,false,false,CL_normal,
 					 PlaceHolderHelper(order->GetName()->getName()),
 					 PlaceHolderHelper(unit_->GetName()->getName()));
@@ -4709,7 +4709,7 @@ bool skill_reimu_barrier(int pow, bool short_, unit* order, coord_def target)
 		you.god_value[GT_YUKARI][0] = target.x;
 		you.god_value[GT_YUKARI][1] = target.y;
 		you.SetDimension(rand_int(15, 25));
-		soundmanager.playSound("timestop");
+		PlaySE("timestop");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_REIMU_BARRIER) + " ", false, false, false, CL_danger);
 		//((monster*)order)
 		if (order)
@@ -4739,7 +4739,7 @@ bool skill_tougue(int pow, bool short_, unit* order, coord_def target)
 
 				if(env[current_level].isMove(coord_def(beam->x,beam->y),hit_->isFly(),hit_->isSwim(),false))
 				{
-					soundmanager.playSound("debuf");
+					PlaySE("debuf");
 					if (env[current_level].isInSight(*beam) || env[current_level].isInSight(hit_->position)) {
 						LocalzationManager::printLogWithKey(LOC_SYSTEM_SPELL_TOUGUE,true,false,false,CL_normal,
 							PlaceHolderHelper(order->GetName()->getName()),
@@ -4772,7 +4772,7 @@ bool skill_windflaw(int pow, bool short_, unit* order, coord_def target)
 			}
 		} 
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("wind");
+			PlaySE("wind");
 		}
 		target_unit->Blink(10);
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_WINDFLAW,true,false,false,CL_normal,
@@ -4802,7 +4802,7 @@ bool skill_summon_ghost(int pow, bool short_, unit* order, coord_def target)
 	} 
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 	}
 	return return_;
@@ -4819,7 +4819,7 @@ bool skill_megaton_kick(int pow, bool short_, unit* order, coord_def target)
 		bool hit_ = target_unit->damage(temp_att, true);
 		if(hit_) {
 			if (env[current_level].isInSight(order->position) || env[current_level].isInSight(target)) {
-				soundmanager.playSound("shoot_heavy");
+				PlaySE("shoot_heavy");
 			}
 			beam_iterator beam(order->position, order->position);
 			if (CheckThrowPath(order->position, target, beam))
@@ -4871,7 +4871,7 @@ bool skill_throw_oil(int power, bool short_, unit* order, coord_def target)
 			attack_infor temp_att(randC(3,damage),3*(damage),99,order,order->GetParentType(),ATT_OIL_BLAST,name_infor(LOC_SYSTEM_ATT_OIL_BALL));
 			
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("bomb");
+				PlaySE("bomb");
 			}
 			BaseBomb(pos, &img_blast[6],temp_att, order);
 		}
@@ -4886,7 +4886,7 @@ bool skill_heavenly_storm(int pow, bool short_, unit* order, coord_def target)
 	if (order->isplayer() || (order->GetId() != MON_SONBITEN && order->GetId() != MON_ENSLAVE_GHOST))
 		return false;
 	if (env[current_level].isInSight(order->position)) {
-		soundmanager.playSound("wind");
+		PlaySE("wind");
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_UNIQUE_SONBITEN,true,false,false,CL_small_danger,
 			PlaceHolderHelper(order->GetName()->getName()));
 	}
@@ -4912,7 +4912,7 @@ bool skill_tracking(int pow, bool short_, unit* order, coord_def target)
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_TRACKING) + " ", false, false, false, CL_normal); 
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("laugh");
+				PlaySE("laugh");
 			}
 			you.SetTracking(turn_);
 		}
@@ -4933,7 +4933,7 @@ bool skill_smoking(int pow, bool short_, unit* order, coord_def target)
 	if(target_unit)
 	{
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("wind");
+			PlaySE("wind");
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_SMOKING,false,false,false,CL_normal,
 				 PlaceHolderHelper(order->GetName()->getName()),
 				 PlaceHolderHelper(target_unit->GetName()->getName()));
@@ -4984,7 +4984,7 @@ bool skill_smoking(int pow, bool short_, unit* order, coord_def target)
 bool skill_create_fog(int pow, bool short_, unit* order, coord_def target)
 {
 	if(target == you.position) {
-		soundmanager.playSound("spellcard");
+		PlaySE("spellcard");
 		you.SetWeather(1, 30);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_MAGIC_FOG), true, false, false, CL_small_danger);
 		return true;
@@ -5006,7 +5006,7 @@ bool skill_grow_vine(int pow, bool short_, unit* order, coord_def target)
 	} 
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 	}
 	return return_;
@@ -5059,7 +5059,7 @@ bool skill_close_door(int pow, bool short_, unit* order, coord_def target_)
 						printlog(LocalzationManager::formatString(LOC_SYSTEM_MON_LOCKED_DOOR, PlaceHolderHelper(order->GetName()->getName())),true, false, false, CL_small_danger);
 					}
 					create_door = true;
-					soundmanager.playSound("block");
+					PlaySE("block");
 					mon_->LevelUpdown(pow/20, 10);
 				}
 			}
@@ -5140,7 +5140,7 @@ bool skill_homing_tanmac(int pow, bool short_, unit* order, coord_def target)
 	}
 	if (return_) {
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("shoot_heavy");
+			PlaySE("shoot_heavy");
 		}
 	}
 	return return_;
@@ -5211,7 +5211,7 @@ bool skill_allround_tanmac(int pow, bool short_, unit* order, coord_def target)
 	if(!able_unit_vector.empty()) {
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 			}
 			list<shared_ptr<ThrowTamacInstance>> tanmac_list;
 
@@ -5313,14 +5313,14 @@ bool skill_throw_potion(int power, bool short_, unit* order, coord_def target)
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 		{
 			if(env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("throw");
+				PlaySE("throw");
 			}
 			coord_def pos = throwtanmac(27,beam,temp_infor,NULL, false);
 			int damage_ = 1+power/25;
 			attack_infor temp_att(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),bomb_type,name_infor(LOC_SYSTEM_ITEM_POTION_POTION));
 			
 			if (env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("bomb");
+				PlaySE("bomb");
 			}
 			BaseBomb(pos, t_,temp_att, nullptr);
 			for(int i=-1;i<=1;i++) {
@@ -5361,7 +5361,7 @@ bool skill_throw_rabbit(int pow, bool short_, unit* order, coord_def target)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
 		if (env[current_level].isInSight(order->position)) {
-			soundmanager.playSound("shoot_heavy");
+			PlaySE("shoot_heavy");
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_SPELL_THROW,false,false,false,CL_magic,
 				PlaceHolderHelper(order->GetName()->getName()),
 				PlaceHolderHelper(throwing_->GetName()->getName()));
@@ -5418,7 +5418,7 @@ bool skill_arrow(int pow, bool short_, unit* order, coord_def target) {
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if(env[current_level].isInSight(order->position)) {
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 			}
 			throwtanmac(19, beam, temp_infor, NULL);
 		}
@@ -5490,7 +5490,7 @@ bool skill_haniwa_magic_tanmac(int pow, bool short_, unit* order, coord_def targ
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if(env[current_level].isInSight(order->position)) {
-				soundmanager.playSound(size_==2?"shoot_heavy":"shoot");
+				PlaySE(size_==2?"shoot_heavy":"shoot");
 			}
 			coord_def c_ = throwtanmac(color_, beam, temp_infor, NULL);
 
@@ -5512,7 +5512,7 @@ bool skill_blink_away(int pow, bool short_, unit* order, coord_def target)
 	if(!order->Tele_check(true, false))
 		return false; 
 	if (env[current_level].isInSight(order->position)) {
-		soundmanager.playSound("blink");
+		PlaySE("blink");
 	}
 	order->Blink(25);
 

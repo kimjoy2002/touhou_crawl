@@ -40,7 +40,7 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 	}
 
 
-	soundmanager.playSound("spellcard");
+	PlaySE("spellcard");
 
 	if(!SpellcardFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
@@ -248,7 +248,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 		beam_iterator beam(you.position, target);
 		if (CheckThrowPath(you.position, target, beam))
 		{
-			soundmanager.playSound("fire");
+			PlaySE("fire");
 			beam_infor temp_infor(0, 0, 99, &you, you.GetParentType(), SpellcardLength(kind), 8, BMT_PENETRATE, ATT_THROW_FIRE, name_infor(LOC_SYSTEM_ATT_V_FIRE));
 			ThrowSector(0, beam, temp_infor, GetSpellSector(SPL_FIRE_SPREAD), [&](coord_def c_) {
 				if (you.isSightnonblocked(c_))
@@ -271,7 +271,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
 			for (int i = 0; i < (you.GetParadox() ? 2 : 1); i++) {
-				soundmanager.playSound("cold");
+				PlaySE("cold");
 				throwtanmac(22, beam, temp_infor, NULL);
 			}
 			you.SetParadox(0);
@@ -294,11 +294,11 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 
 			for (int k = 0; k < (you.GetParadox() ? 2 : 1); k++)
 			{
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 				coord_def pos = throwtanmac(26, beam, temp_infor, NULL);
 				if (env[current_level].dgtile[pos.x][pos.y].isBreakable())
 				{
-					soundmanager.playSound("stone");
+					PlaySE("stone");
 					for (int i = -1; i <= 1; i++)
 						for (int j = -1; j <= 1; j++)
 							env[current_level].MakeEffect(coord_def(pos.x + i, pos.y + j), &img_blast[1], false);
@@ -350,7 +350,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 
 			for (int i = 0; i < (you.GetParadox() ? 2 : 1); i++)
 			{
-				soundmanager.playSound("wind");
+				PlaySE("wind");
 				ThrowSector(25, beam, temp_infor, SpellcardSector(SPC_V_AIR), [&](coord_def c_) {
 					if (unit* unit_ = env[current_level].isMonsterPos(c_.x, c_.y))
 					{
@@ -405,7 +405,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
 			for (int i = 0; i < (you.GetParadox() ? 6 : 3); i++) {
-				soundmanager.playSound("shoot");
+				PlaySE("shoot");
 				throwtanmac(45, beam, temp_infor, NULL);
 			}
 			you.SetParadox(0);

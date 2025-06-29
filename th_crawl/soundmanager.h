@@ -14,109 +14,58 @@
 #include <math.h>
 #include <map>
 #include <string>
+#include <fmod.hpp>
 #pragma comment (lib, "dsound")
 using namespace std;
 
 
-enum
-{
-	SOUND_BUFFER_MAX = 20
-};
-
-
-
-class SOUNDBUFFER
-{
+class FMODSoundManager {
+	float bgmFadeVolume = 1.0f;
+	float bgmTargetVolume = 1.0f;
+	bool bgmFadingOut = false;
+	std::string pendingBgmName;
+	std::string lastErrorString;
 public:
-	IDirectSoundBuffer8* SoundBuffer;
-	IDirectSoundBuffer* PlusBuffer[SOUND_BUFFER_MAX];
-	bool IsPlaying;
-	bool IsLooping;
-	bool IsStreaming;
-	bool IsOverlab;
-	bool lazy_loading;
-	bool quite;
-	long Volume;
-	int Up_time;
-	int Down_time;
-	int stream_limit; //자동으로 곡이 끊기는 시간
-	int play_time; //플레이 함수로 플레이후 지난시간
-	string path;
+    FMODSoundManager();
+    ~FMODSoundManager();
 
-	SOUNDBUFFER();
-	~SOUNDBUFFER();
-
-	void Load(IDirectSound8* Sound, const char* WaveFileName, bool Streaming, bool Looping, bool overlab);
-	void Unload();
-	void BufferUpdate();
-	void PlaySound();
-	boolean StopSound();
-	void SetVolume();
+    void Initialize();
+    void Update();
+    void addSound(const std::string& name, const std::string& path, bool loop = false);
+    void addBgm(const std::string& name, const std::string& path);
+	void addBgm(const std::string& name, const std::string& path, unsigned int loopStartMs, unsigned int loopEndMs);
+	void loadBgmFromJson(const std::string& filename);
+    void playSound(const std::string& name);
+    bool playBgm(const std::string& name);
+    void stopCurrentBGM(const std::string& except = "");
+    void setBgmVolume(int vol); // 0~100
+    void setSEVolume(int vol);  // 0~100
 
 private:
-	HMMIO hmmio;
-	DWORD WaveSize;
-	DWORD BufferSize;
-	DWORD DataStart;
-	DWORD DataCursor;
-	DWORD BytesRead;
+    FMOD::System* system;
+    std::map<std::string, FMOD::Sound*> soundList;
+    std::map<std::string, FMOD::Sound*> bgmList;
+    FMOD::Channel* currentBgmChannel;
+    std::string currentBgmName;
+    int seVolume;
+    int bgmVolume;
 };
 
 
-class SOUNDMANAGER
-{
-public:
-	IDirectSound8* Sound;
-	SOUNDBUFFER* stop_bgm;
-	SOUNDBUFFER* current_bgm;
-
-	bool bgm_on;
-	bool se_on;
-
-	float BackgroundVolume;
-	float VoiceVolume;
-	float EffectVolume;
-
-	map<std::string, SOUNDBUFFER*> bgmList;
-	map<std::string, SOUNDBUFFER*> soundList;
-
-
-	SOUNDMANAGER();
-	~SOUNDMANAGER();
-
-	void Initialize(HWND WindowHandle);
-	//void Duplicate(SOUNDBUFFER **buffer_);
-	void Update();
-
-	void addSound(const char* name, const char* path, bool Looping, bool overlab);
-	void addBgm(const char* name, const char* path);
-
-	void playSound(const char* name);
-	boolean playBgm(const char* name);
-
-	void stopCurrentBGM(const char* except);
-
-	void SetBgmOn(bool on_) { bgm_on = on_; };
-	void SetBgmOnOff() { bgm_on = !bgm_on; };
-	void SetSeOn(bool on_) { se_on = on_; };
-	void SetSeOnOff() { se_on = !se_on; };
-};
 
 //
-extern SOUNDMANAGER soundmanager;
 
+
+extern FMODSoundManager fmodsoundmanager;
 
 
 void InitSound(HWND windowhandle_);
 
-void VolumeUp();
-void VolumeDown();
 void SetBgmVolume(int value_);
 void SetSEVolume(int value_);
 
 void PlaySE(const char* name);
 boolean PlayBGM(const char* name);
-void StopBGM(SOUNDBUFFER* sound_);
 void StopCurrentBGM(const char* except = NULL);
 
 void UpdateBGM();

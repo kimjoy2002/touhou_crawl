@@ -206,7 +206,7 @@ bool chargingFinish(amulet_type kind, int value)
 	case AMT_TIMES:
 	if (value > 0)
 	{
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		rand_rect_iterator rand_(you.position,2,2);
 		int rand_num_ = rand_int(2, 4);
 		while (!rand_.end()) {
@@ -248,27 +248,27 @@ bool evokeAmulet(amulet_type kind, int value_)
 		//발동하지않음
 		break;
 	case AMT_BLOSSOM:
-		soundmanager.playSound("soul_shot");
+		PlaySE("soul_shot");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_SOULSHOT) + " ", false, false, false, CL_white_blue);
 		skill_soul_shot(0, &you, you.position);
 		break;
 	case AMT_WAVE:
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_HEAL) + " ", false, false, false, CL_normal);
 		you.MpUpDown(rand_int(3, 5) + you.GetMaxMp()*rand_float(0.4f, 0.6f));
 		break;
 	case AMT_SPIRIT:
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		return recharging_scroll(true, true, false);
 		break;
 	case AMT_GRAZE:
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		you.SetSuperGraze(rand_int(10, 15));
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER), false, false, false, CL_white_blue);
 		break;
 	case AMT_WEATHER:
 		{
-			soundmanager.playSound("buff");
+			PlaySE("buff");
 			int weather_ = rand_int(1, 3);
 			int time_ = rand_int(50, 80);
 			you.SetBuff(BUFFSTAT_REGEN, BUFF_DUPLE, 3, time_);
@@ -292,7 +292,7 @@ bool evokeAmulet(amulet_type kind, int value_)
 		}
 		break;
 	case AMT_OCCULT:
-		soundmanager.playSound("summon");
+		PlaySE("summon");
 		skill_abusion(you.level * 5, false, &you, you.position);
 		switch (value_)
 		{
@@ -372,7 +372,7 @@ bool evokeAmulet(amulet_type kind, int value_)
 
 		if(up_)
 		{
-			soundmanager.playSound("buff");
+			PlaySE("buff");
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_CURE),true,false,false,CL_white_blue);
 			return true;
 		}

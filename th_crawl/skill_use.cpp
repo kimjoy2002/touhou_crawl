@@ -84,7 +84,7 @@ bool skill_kanako_might(int pow, bool short_, unit* order, coord_def target)
 					multy_*=(9.0f+temp.GetCurLength())/9; //거리가 6기준으로 1.66배 데미지를 준다.
 					//multy_*=(13.0f+pow/5)/13;
 
-					soundmanager.playSound("wind");
+					PlaySE("wind");
 					attack_infor temp_att(you.GetAttack(false)*multy_,you.GetAttack(true),you.GetHit()+10,&you,you.GetParentType(),ATT_RUSH,name_infor(LOC_SYSTEM_ATT_RUSH));
 					unit_->damage(temp_att,false);
 					printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_CHARGE_TO_ENEMY),true,false,false,CL_normal);	
@@ -109,7 +109,7 @@ bool skill_kanako_2(int pow, bool short_, unit* order, coord_def target)
 	if(order->isplayer())
 	{
 		if (BaseSummon(MON_ONBASIRA, 20 + randA_1(pow), true, false, 0, order, target, SKD_SUMMON_ONBASIRA, -1)) {
-			soundmanager.playSound("stone");
+			PlaySE("stone");
 			return true;
 		}
 		else
@@ -123,7 +123,7 @@ bool skill_kanako_haste(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		you.SetWind(50+randA_1(pow));
 	}
 	return true;
@@ -188,7 +188,7 @@ bool skill_turn_invisible(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer() && !you.s_invisible)
 	{
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		you.SetInvisible(rand_int(15,25)+pow/2);
 		int temp = you.Ability(SKL_INVISIBLE,false,true,1);
 		you.Ability(SKL_INVISIBLE_OFF,false,false,temp);
@@ -214,7 +214,7 @@ bool skill_off_invisible(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_soul_shot(int power, unit* order, coord_def target)
 {
-	soundmanager.playSound("soul_shot");
+	PlaySE("soul_shot");
 	for(int i=-2;i<=2;i++)
 		for(int j=-2;j<=2;j++)
 			if(abs(i)+abs(j)<4 && env[current_level].isMove(order->position.x+i,order->position.y+j,true))
@@ -305,10 +305,10 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 							
 							for(int k=0;k<(order->GetParadox()?2:1);k++)
 							{
-								soundmanager.playSound("throw");
+								PlaySE("throw");
 								coord_def pos = throwtanmac(27,beam,temp_infor,NULL, false);
 								{
-									soundmanager.playSound("bomb");
+									PlaySE("bomb");
 									for(int i=-1;i<=1;i++)
 										for(int j=-1;j<=1;j++)
 											if(env[current_level].isMove(pos.x+i,pos.y+j,true))
@@ -484,7 +484,7 @@ bool skill_eirin_move_stat(int pow, bool short_, unit* order, coord_def target)
 		}
 
 
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		you.SetStatBoost(stat_, max(1,pietyLevel(you.piety)-1));
 		if(stat_)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_BOOST),true,false,false,CL_good);
@@ -502,7 +502,7 @@ bool skill_eirin_heal(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_HEAL),true,false,false,CL_help);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_HEAL_WARN),true,false,false,CL_danger);
 		you.SetEirinHeal(you.GetMaxHp()*rand_int(70,80)/100,false);
@@ -515,7 +515,7 @@ bool skill_byakuren_smart(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		int time_ = rand_int(10+randA_1(pow/10),20+randA_1(pow/10));
 		you.SetClever(time_);
 		you.SetManaRegen(time_);
@@ -528,7 +528,7 @@ bool skill_byakuren_leg(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		int time_ = rand_int(15,15+pow/5);
 		you.SetSuperMan(time_);
 	}
@@ -563,7 +563,7 @@ bool skill_sizuha_confuse(int pow, bool short_, unit* order, coord_def target)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_CONFUSE_FAIL),true,false,false,CL_normal);
 		return false;
 	}
-	soundmanager.playSound("spellcard");
+	PlaySE("spellcard");
 	return true;
 
 }
@@ -617,7 +617,7 @@ bool skill_sizuha_autumn_armour(int pow, bool short_, unit* order, coord_def tar
 		default:
 			break;
 		}
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR),true,false,false,CL_normal);
 	}
 	else
@@ -692,7 +692,7 @@ bool skill_minoriko_restore(int pow, bool short_, unit* order, coord_def target)
 		}
 		if(up_)
 		{
-			soundmanager.playSound("buff");
+			PlaySE("buff");
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_CURE),true,false,false,CL_white_blue);
 			return true;
 		}
@@ -743,7 +743,7 @@ bool skill_minoriko_heal(int pow, bool short_, unit* order, coord_def target)
 						int bonus_ = (*it).value5 / 10;
 						order->HpUpDown(rand_int(10+bonus_,15+bonus_)+order->GetMaxHp()*rand_float(0.15f,0.25f),DR_NONE);
 						you.DeleteItem(it,1);
-						soundmanager.playSound("buff");
+						PlaySE("buff");
 						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_FOOD_HEAL),true,false,false,CL_white_blue);
 						return true;	
 					}
@@ -833,7 +833,7 @@ bool skill_yuugi_drink(int pow, bool short_, unit* order, coord_def target)
 					{
 						if((*it).type == ITM_POTION)
 						{
-							soundmanager.playSound("potion");
+							PlaySE("potion");
 							drinkpotion(PT_ALCOHOL, false);	
 							you.DeleteItem(it,1);
 							return true;	
@@ -916,7 +916,7 @@ bool skill_yuugi_german(int pow, bool short_, unit* order, coord_def target)
 			int damage_ = you.GetAttack(false)*10/you.GetAtkDelay()*(1+pow/100.0f)+randC(2,2+pow/20);
 			int max_damage_ = you.GetAttack(true)*10/you.GetAtkDelay()*(1+pow/100.0f)+2*(2+pow/20);				
 
-			soundmanager.playSound("stone");
+			PlaySE("stone");
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX) + " ",false,false,false,CL_yuigi);
 			attack_infor temp_att(damage_,max_damage_,99,&you,you.GetParentType(),ATT_NORMAL_HIT,name_infor(LOC_SYSTEM_ATT_GERMANSUPLEX));
 			unit_->damage(temp_att,true);
@@ -967,7 +967,7 @@ bool skill_yuugi_throw(int power, bool short_, unit* order, coord_def target)
 				}
 				attack_infor temp_att(randC(3,3+power/15),3*(3+power/15),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_SHOCKWAVE));
 
-				soundmanager.playSound("bomb"); 
+				PlaySE("bomb"); 
 				BaseBomb(final_, &img_blast[2],temp_att,&you);
 
 				
@@ -1022,11 +1022,11 @@ bool skill_yuugi_sambo(int power, bool short_, unit* order, coord_def target)
 	for(int i = 0; i < 3; i++)
 	{
 		if(i==0)
-			soundmanager.playSound("stone");
+			PlaySE("stone");
 		else if (i == 1)
-			soundmanager.playSound("bomb");
+			PlaySE("bomb");
 		else if (i == 2)
-			soundmanager.playSound("nuke");
+			PlaySE("nuke");
 
 
 
@@ -1099,14 +1099,14 @@ bool skill_satori_trauma(int power, bool short_, unit* order, coord_def target)
 		
 		if (hit_mon->GetMindReading() || base2 < percent_)
 		{
-			soundmanager.playSound("laugh");
+			PlaySE("laugh");
 			hit_mon->SetFear(-1);
 			you.GetExp(((monster*)hit_mon)->exper / 2);
 			env[current_level].SummonClear(((monster*)hit_mon)->map_id);
 		}
 		else if (base < percent_)
 		{
-			soundmanager.playSound("laugh");
+			PlaySE("laugh");
 			hit_mon->SetFear(rand_int(25,40));
 		}
 		else if(hit_mon->isYourShight())
@@ -1178,7 +1178,7 @@ bool skill_satori_mind_reading(int power, bool short_, unit* order, coord_def ta
 			}
 			else
 			{
-				soundmanager.playSound("debuf");
+				PlaySE("debuf");
 				mon_->SetMindReading(1);
 			}
 			return true;
@@ -1200,7 +1200,7 @@ bool skill_shinki_low_demon(int power, bool short_, unit* order, coord_def targe
 	}
 	if(return_)
 	{
-		soundmanager.playSound("summon");
+		PlaySE("summon");
 		printlog( LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_SUMMON_LOW_DEMONS) ,true,false,false,CL_magic);
 	}
 	return return_;
@@ -1214,14 +1214,14 @@ bool skill_shinki_mid_demon(int power, bool short_, unit* order, coord_def targe
 			PlaceHolderHelper(mon_->name.getName()));
 		if(randA(99)<=3)
 		{
-			soundmanager.playSound("laugh");
+			PlaySE("laugh");
 			
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SHINKI_SUMMON_FAIL,false,false,false,CL_danger,
 				PlaceHolderHelper(mon_->name.getName()));
 			mon_->ReturnEnemy();			
 		}
 		else {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 		return_ = true;
 		enterlog();
@@ -1239,13 +1239,13 @@ bool skill_shinki_high_demon(int power, bool short_, unit* order, coord_def targ
 			PlaceHolderHelper(mon_->name.getName()));
 		if(randA(99)<=(id_==MON_YUKI?5:id_==MON_MAI?5:3))
 		{
-			soundmanager.playSound("laugh");
+			PlaySE("laugh");
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SHINKI_SUMMON_FAIL,false,false,false,CL_danger,
 				PlaceHolderHelper(mon_->name.getName()));
 			mon_->ReturnEnemy();			
 		}
 		else {
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 		}
 		return_ = true;
 		enterlog();
@@ -1256,7 +1256,7 @@ bool skill_yuyuko_on(int power, bool short_, unit* order, coord_def target)
 {	
 	if(order->isplayer() && !you.s_ghost)
 	{
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_GHOST_START),true,false,false,CL_normal);
 		you.SetGhost(1);
 		int temp = you.Ability(SKL_YUYUKO_ON,true,true,1);
@@ -1348,7 +1348,7 @@ bool skill_yuyuko_recall(int power, bool short_, unit* order, coord_def target)
 		}
 		if(j>0)
 		{
-			soundmanager.playSound("summon");
+			PlaySE("summon");
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_YUYUKO_RECALL,true,false,false,CL_normal,
 				 PlaceHolderHelper(unit_->GetName()->getName()));
 			unit_->AttackedTarget(order);
@@ -1367,7 +1367,7 @@ bool skill_yuyuko_boost(int power, bool short_, unit* order, coord_def target)
 {	
 	if(order->isplayer())
 	{
-		soundmanager.playSound("spellcard");
+		PlaySE("spellcard");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUYUKO_GHOST_MUST_TARGET_TO_UNIT),true,false,false,CL_white_blue);
 		int time_ = rand_int(35,45);
 		you.SetGhost(time_);
@@ -1396,7 +1396,7 @@ bool skill_yuyuko_enslave(int power, bool short_, unit* order, coord_def target)
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
 				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 		}*/
-		soundmanager.playSound("debuf");
+		PlaySE("debuf");
 		hit_mon->AttackedTarget(order);
 		return true;
 	}
@@ -1417,7 +1417,7 @@ bool skill_yukari_supporter(int power, bool short_, unit* order, coord_def targe
 				{
 					mon_->LevelUpdown(you.level,3);
 					hit_eff->time = 0;
-					soundmanager.playSound("summon");
+					PlaySE("summon");
 					return true;
 				}
 				else
@@ -1442,7 +1442,7 @@ bool skill_yukari_schema(int power, bool short_, unit* order, coord_def target)
 			{
 				if(you.control_blink(target))
 				{
-					soundmanager.playSound("blink");
+					PlaySE("blink");
 					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_SHOULD_SCHEMA), true,false,false,CL_normal);
 					hit_eff->time = 0;
 					return true;
@@ -1463,7 +1463,7 @@ bool skill_yukari_shield(int power, bool short_, unit* order, coord_def target)
 {	
 	if(order == &you)
 	{
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		you.SetBuff(BUFFSTAT_SH,BUFF_YUKARI,15,rand_int(70,100));
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_SHIELD),true,false,false,CL_white_blue);
 		return true;
@@ -1500,7 +1500,7 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 		you.god_value[GT_YUKARI][0] = target.x;
 		you.god_value[GT_YUKARI][1] = target.y;
 		you.SetDimension(rand_int(50,70));
-		soundmanager.playSound("timestop");
+		PlaySE("timestop");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_DIMENSION_FIX),false,false,false,CL_white_blue);
 		return true;
 	}
@@ -1516,7 +1516,7 @@ bool skill_swako_jump(int power, bool short_, unit* order, coord_def target)
 		if(env[current_level].isMove(target.x,target.y) && !env[current_level].isMonsterPos(target.x,target.y))
 		{
 			you.SetXY(target.x,target.y);
-			soundmanager.playSound("jump");
+			PlaySE("jump");
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_JUMP) + " " ,false,false,false,CL_normal);
 			return true;
 		}
@@ -1529,7 +1529,7 @@ bool skill_swako_temple(int power, bool short_, unit* order, coord_def target)
 
 	if(tile_ >= DG_FLOOR && tile_ <= DG_FLOOR_END)
 	{
-		soundmanager.playSound("stone");
+		PlaySE("stone");
 		env[current_level].changeTile(order->position, DG_TEMPLE_SUWAKO);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_ALTAR1) + " ",false,false,false,CL_swako);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_ALTAR2),true,false,false,CL_swako);
@@ -1551,7 +1551,7 @@ bool skill_swako_water_gun(int power, bool short_, unit* order, coord_def target
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
-			soundmanager.playSound("shoot");
+			PlaySE("shoot");
 			throwtanmac(14, beam, temp_infor, NULL);
 		}
 		order->SetParadox(0); 
@@ -1572,7 +1572,7 @@ bool skill_swako_tongue(int power, bool short_, unit* order, coord_def target)
 
 			if(env[current_level].isMove(coord_def(beam->x,beam->y),hit_mon->isFly(),hit_mon->isSwim(),false))
 			{
-				soundmanager.playSound("debuf");
+				PlaySE("debuf");
 				hit_mon->SetXY(*beam);
 				hit_mon->AttackedTarget(order);
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SWAWKO_TOUGUE_FULL,true,false,false,CL_normal,
@@ -1593,7 +1593,7 @@ bool skill_swako_curse(int power, bool short_, unit* order, coord_def target)
 		int level_ = min(10,max(0,order->GetLevel() - hit_mon->GetLevel() + 5));
 		if(hit_mon->isYourShight())
 		{
-			soundmanager.playSound("curse");
+			PlaySE("curse");
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SWAWKO_CURSE_MSG,true,false,false,CL_swako,
 				 PlaceHolderHelper(hit_mon->GetName()->getName()));
 			hit_mon->SetSlow(rand_int(2,10)+randA(level_*3));
@@ -1639,7 +1639,7 @@ bool skill_swako_digging(int power, bool short_, unit* order, coord_def target)
 			beam++;
 			length_--;
 		}
-		soundmanager.playSound("stone");
+		PlaySE("stone");
 		return true;
 	}
 
@@ -1656,7 +1656,7 @@ bool skill_swako_summon_flog(int power, bool short_, unit* order, coord_def targ
 		enterlog();
 	}
 	if (return_) {
-		soundmanager.playSound("summon");
+		PlaySE("summon");
 	}
 	return return_;
 }
@@ -1668,7 +1668,7 @@ bool skill_swako_statue(int power, bool short_, unit* order, coord_def target)
 	{		
 		if(!env[current_level].isMonsterPos(target.x,target.y))
 		{
-			soundmanager.playSound("stone");
+			PlaySE("stone");
 			env[current_level].changeTile(target, DG_STATUE);
 			env[current_level].MakeEvent(EVL_FLOOR, target, EVT_COUNT,rand_int(30,50));
 			return true;
@@ -1708,14 +1708,14 @@ bool skill_swako_rain(int power, bool short_, unit* order, coord_def target)
 		rit++;
 	}
 
-	soundmanager.playSound("spellcard");
+	PlaySE("spellcard");
 	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_RAIN),true,false,false,CL_magic);	
 	
 	return true;
 }
 bool skill_swako_sleep(int power, bool short_, unit* order, coord_def target)
 {
-	soundmanager.playSound("spellcard");
+	PlaySE("spellcard");
 	you.SetTimeStep(100);
 	return true;
 }
@@ -1727,7 +1727,7 @@ bool skill_swako_misyaguzi(int power, bool short_, unit* order, coord_def target
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_SUMMON,false,false,false,CL_magic,
 			PlaceHolderHelper(mon_->name.getName()));
 
-		soundmanager.playSound("summon");
+		PlaySE("summon");
 		return_ = true;
 		enterlog();
 	}
@@ -1772,7 +1772,7 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 							{
 								if(((*it).type>=ITM_WEAPON_FIRST && (*it).type<ITM_WEAPON_LAST) && (it->value4 < 0))
 								{
-									soundmanager.playSound("curse");
+									PlaySE("curse");
 									int value4_ = it->value4;
 									//if(value3_<0)
 									//	it->Enchant(ET_WEAPON, value3_*-2);
@@ -1783,7 +1783,7 @@ bool skill_hina_plusminus(int power, bool short_, unit* order, coord_def target)
 								}
 								else if(((*it).type>=ITM_ARMOR_FIRST && (*it).type<ITM_ARMOR_LAST) && (it->value4 < 0))
 								{
-									soundmanager.playSound("curse");
+									PlaySE("curse");
 									if(it->value4<0)
 										it->Enchant(ET_ARMOR,it->value4*-2);
 									printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_HINA_ABIL_ARMOUR_MINUS_TO_PLUS),true,false,false,CL_hina);
@@ -1874,7 +1874,7 @@ bool skill_hina_curse_weapon(int power, bool short_, unit* order, coord_def targ
 		{
 			if(you.equipment[ET_WEAPON] && !you.equipment[ET_WEAPON]->isArtifact() && !you.equipment[ET_WEAPON]->value5)
 			{
-				soundmanager.playSound("curse");
+				PlaySE("curse");
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON,true,false,false,CL_hina,
 					 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 				you.equipment[ET_WEAPON]->value5 = WB_CURSE;
@@ -1882,7 +1882,7 @@ bool skill_hina_curse_weapon(int power, bool short_, unit* order, coord_def targ
 			}
 			else
 			{
-				soundmanager.playSound("curse");
+				PlaySE("curse");
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_MIGHT,true,false,false,CL_small_danger,
 					 PlaceHolderHelper(before_name));
 				you.SetMight(rand_int(80,100));
@@ -1940,7 +1940,7 @@ bool skill_hina_curse_armour(int power, bool short_, unit* order, coord_def targ
 									string before_name = you.equipment[i]->GetName(); //저주받기전 이름
 									if(it->Curse(true,i))
 									{
-										soundmanager.playSound("curse");
+										PlaySE("curse");
 										int time_ = rand_int(25,40);
 										LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_MIRROR,true,false,false,CL_small_danger,
 											 PlaceHolderHelper(before_name));
@@ -2073,7 +2073,7 @@ bool skill_hina_curse_ring(int power, bool short_, unit* order, coord_def target
 									string before_name = you.equipment[i]->GetName(); //저주받기전 이름
 									if(it->Curse(true,i))
 									{
-										soundmanager.playSound("curse");
+										PlaySE("curse");
 										int bonus_ = rand_int(10,15)+you.GetMaxHp()*rand_float(0.25f,0.35f);
 										LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_HEAL,true,false,false,CL_small_danger,
 											 PlaceHolderHelper(before_name));	
@@ -2157,7 +2157,7 @@ bool sizuha_autumn_bread(int pow, bool short_, unit* order, coord_def target)
 
 	if(you.equipment[ET_WEAPON]  && (you.equipment[ET_WEAPON]->type>=ITM_WEAPON_FIRST && you.equipment[ET_WEAPON]->type<ITM_WEAPON_LAST) && !you.equipment[ET_WEAPON]->isArtifact())
 	{
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND,true,false,false,CL_autumn,
 			 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 		you.equipment[ET_WEAPON]->value5 = WB_AUTUMN;
@@ -2184,7 +2184,7 @@ bool hina_curse_bread(int pow, bool short_, unit* order, coord_def target)
 
 	if(you.equipment[ET_WEAPON]  && (you.equipment[ET_WEAPON]->type>=ITM_WEAPON_FIRST && you.equipment[ET_WEAPON]->type<ITM_WEAPON_LAST) && !you.equipment[ET_WEAPON]->isArtifact())
 	{
-		soundmanager.playSound("curse");
+		PlaySE("curse");
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_HINA_CURSE_BRAND,true,false,false,CL_hina,
 			 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 		you.equipment[ET_WEAPON]->value5 = WB_CURSE;
@@ -2244,7 +2244,7 @@ bool skill_breath(int power, bool short_, unit* order, coord_def target)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
-			soundmanager.playSound("fire");
+			PlaySE("fire");
 			throwtanmac(graphic_, beam, temp_infor, NULL);
 		}
 		order->SetParadox(0); 
@@ -2265,7 +2265,7 @@ bool skill_torment(int pow, bool short_, unit* order, coord_def target)
 	{	
 		if(it->isLive() && env[current_level].isInSight(it->position) && order->isSightnonblocked(it->position))
 		{
-			soundmanager.playSound("sickle");
+			PlaySE("sickle");
 			it->hp=it->hp/2;	
 			it->AttackedTarget(order);
 			//int att_ = 13+pow/15;
@@ -2280,7 +2280,7 @@ bool skill_torment(int pow, bool short_, unit* order, coord_def target)
 bool skill_soulshot(int pow, bool short_, unit* order, coord_def target)
 {
 	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_SOULSHOT) + " ", false, false, false, CL_white_blue);
-	soundmanager.playSound("soul_shot");
+	PlaySE("soul_shot");
 	for(int i=-4;i<=4;i++)
 		for(int j=-4;j<=4;j++)
 			if(i*i+j*j<24 && env[current_level].isMove(order->position.x+i,order->position.y+j,true))
@@ -2307,7 +2307,7 @@ bool skill_soulshot(int pow, bool short_, unit* order, coord_def target)
 
 bool skill_super_graze(int pow, bool short_, unit* order, coord_def target)
 {
-	soundmanager.playSound("buff");
+	PlaySE("buff");
 	you.SetSuperGraze(rand_int(10, 15));
 	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER), false, false, false, CL_white_blue);
 	return true;
@@ -2568,7 +2568,7 @@ bool skill_seija_1(int power, bool short_, unit* order, coord_def target)
 		hit_mon->SetXY(you.position.x,you.position.y);
 		you.SetXY(target.x,target.y);
 
-		soundmanager.playSound("blink");
+		PlaySE("blink");
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP,true,false,false,CL_normal,
 			 PlaceHolderHelper(hit_mon->GetName()->getName()));
 		hit_mon->AttackedTarget(order);
@@ -2603,7 +2603,7 @@ bool skill_seija_2(int power, bool short_, unit* order, coord_def target)
 	}
 	if(ok_)
 	{
-		soundmanager.playSound("laugh");
+		PlaySE("laugh");
 		return true;
 	}
 	else
@@ -2696,7 +2696,7 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 						}
 					}
 				}
-				soundmanager.playSound("warning");
+				PlaySE("warning");
 				you.lilly_allys[i].personality = person_;
 				you.lilly_allys[i].cooldown = 0;
 				
@@ -2838,7 +2838,7 @@ bool skill_lilly_2(int power, bool short_, unit* order, coord_def target)
 
 	if(j>0)
 	{
-		soundmanager.playSound("summon");
+		PlaySE("summon");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_CALL),true,false,false,CL_normal);
 		return true;
 	}
@@ -2873,7 +2873,7 @@ bool skill_lilly_3(int power, bool short_, unit* order, coord_def target)
 						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_LILLY_ABIL_HEAL_NOT_ALLY),true,false,false,CL_normal);
 						return false;
 					}
-					soundmanager.playSound("buff");
+					PlaySE("buff");
 					
 					hit_mon->HpUpDown(max(1,hit_mon->max_hp*rand_int(10,35)/100),DR_NONE);
 					LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_LILLY_ABIL_HEAL,true,false,false,CL_lilly,
@@ -2924,7 +2924,7 @@ bool skill_lilly_4(int power, bool short_, unit* order, coord_def target)
 	enterlog();
 	if(speak_)
 	{
-		soundmanager.playSound("spellcard");
+		PlaySE("spellcard");
 		you.SetForceStrong(false, rand_int(20,40),true);
 		return true;
 	}
@@ -2967,7 +2967,7 @@ bool skill_okina_1(int power, bool short_, unit* order, coord_def target)
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_OKINA_ABIL_MAKE_DOOR,true,false,false,CL_okina,
 					PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[target.x][target.y].tile]));
 
-				soundmanager.playSound("stone");
+				PlaySE("stone");
 				env[current_level].changeTile(target, DG_CLOSE_DOOR);
 				return true;
 			}
@@ -3033,7 +3033,7 @@ bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
 			
 			if (monster *mon_ = BaseSummon(MON_CLOSE_DOOR, 30 + randA_1(power / 10), true, false, 0, order, target, SKD_OTHER, -1))
 			{
-				soundmanager.playSound("block");
+				PlaySE("block");
 				mon_->LevelUpdown(you.level, 6);
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_LOCKED_DOOR_YOU),true, false, false, CL_okina);
 				return true;
@@ -3092,7 +3092,7 @@ bool skill_okina_3(int power, bool short_, unit* order, coord_def target)
 				return false;
 			}
 
-			soundmanager.playSound("blink");
+			PlaySE("blink");
 			env[current_level].changeTile((*beam), DG_OPEN_DOOR);
 			you.SetXY(beam->x, beam->y);
 			unit_->LostTarget();
@@ -3221,7 +3221,7 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 	enterlog();
 	if (speak_)
 	{
-		soundmanager.playSound("summon");
+		PlaySE("summon");
 		if (speak_->GetId() == MON_MAI2) {
 			printlog(LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MAI2_CHEERING), PlaceHolderHelper(speak_->GetName()->getName())) , true, false, false, CL_normal);
 		}
@@ -3251,7 +3251,7 @@ bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 
 	//log에 오키나레벨로 도착함을 저장
 	deque<monster*> dq;
-	soundmanager.playSound("blink");
+	PlaySE("blink");
 	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE), true, false, false, CL_okina);
 	for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 	{
@@ -3291,7 +3291,7 @@ bool skill_junko_1(int power, bool short_, unit* order, coord_def target)
 
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
-			soundmanager.playSound("shoot");
+			PlaySE("shoot");
 			throwtanmac(rand_int(10, 15), beam, temp_infor, NULL);
 		}
 		order->SetParadox(0);
@@ -3304,7 +3304,7 @@ bool skill_junko_2(int power, bool short_, unit* order, coord_def target)
 {
 	if (order->isplayer())
 	{
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		int time_ = 25 + power / 5 + randA_1(power / 2);
 		you.SetMight(time_);
 		you.SetPureTurn(10, time_);
@@ -3331,7 +3331,7 @@ bool skill_junko_3(int power, bool short_, unit* order, coord_def target)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_ABIL_HASTE_FAIL), true, false, false, CL_normal);
 			return false;
 		}
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		int time_ = 25 + power / 5 + randA_1(power / 2);
 		you.SetPureHaste(time_);
 		you.SetPureTurn(20, time_);
@@ -3725,7 +3725,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 
 
 
-	soundmanager.playSound("levelup");
+	PlaySE("levelup");
 	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_TALK), true, false, false, CL_junko);
 	you.god_value[GT_JUNKO][3] = kind_;
 	you.Ability(SKL_JUNKO_1, true, true);
@@ -3844,7 +3844,7 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 			break;
 		}
 
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		you.god_value[GT_JOON_AND_SION][0] = 1;
 		you.god_value[GT_JOON_AND_SION][1] = rand_int(150, 200);
 		you.Ability(SKL_JOON_AND_SION_1, true, true);
@@ -3877,7 +3877,7 @@ bool skill_joon_and_sion_1(int power, bool short_, unit* order, coord_def target
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_S_TALK4), true, false, false, CL_sion);
 			break;
 		}
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		you.god_value[GT_JOON_AND_SION][0] = 2;
 		you.god_value[GT_JOON_AND_SION][1] = rand_int(150, 200);
 		you.Ability(SKL_JOON_AND_SION_1, true, true);
@@ -3913,7 +3913,7 @@ bool skill_joon_and_sion_2(int power, bool short_, unit* order, coord_def target
 		if (it->isLive() && !it->isUserAlly() && env[current_level].isInSight(it->position))
 		{
 			if (!ok_) {
-				soundmanager.playSound("bomb");
+				PlaySE("bomb");
 				map_effect = 2;
 				Sleep(500);
 				map_effect = 0;
@@ -3949,7 +3949,7 @@ bool skill_joon_and_sion_2(int power, bool short_, unit* order, coord_def target
 }
 bool skill_joon_and_sion_3(int power, bool short_, unit* order, coord_def target)
 {
-	soundmanager.playSound("curse");
+	PlaySE("curse");
 	map_effect = 3;
 	Sleep(500);
 	map_effect = 0;
@@ -3983,7 +3983,7 @@ bool skill_joon_and_sion_4(int power, bool short_, unit* order, coord_def target
 	{
 		beam_infor temp_infor(0, 0, 99, order, order->GetParentType(), SkillLength(SKL_JOON_AND_SION_4), 1, BMT_PENETRATE, ATT_THROW_NONE_DAMAGE, name_infor(LOC_SYSTEM_ATT_SION));
 
-		soundmanager.playSound("wind");
+		PlaySE("wind");
 		coord_def c_ = throwtanmac(44, beam, temp_infor, NULL);
 		unit* hit_mon = env[current_level].isMonsterPos(c_.x, c_.y, order);
 		if (hit_mon && !hit_mon->isplayer())
@@ -3995,7 +3995,7 @@ bool skill_joon_and_sion_4(int power, bool short_, unit* order, coord_def target
 					 PlaceHolderHelper(hit_mon->GetName()->getName()));
 				return true;
 			}
-			soundmanager.playSound("smite");
+			PlaySE("smite");
 			mon_->level = 1;
 			for (int i = 0; i<3; i++)
 			{
@@ -4087,7 +4087,7 @@ bool skill_miko_1(int power, bool short_, unit* order, coord_def target)
 		you.PietyUpDown(piety_);
 		printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_MIKO_DRAIN_CRAVING, PlaceHolderHelper(to_string(ok_))), true, false, false, CL_miko);
 		env[current_level].popular = 0;
-		soundmanager.playSound("powerup");
+		PlaySE("powerup");
 		return true;
 	}
 	else
@@ -4102,7 +4102,7 @@ bool skill_miko_2(int power, bool short_, unit* order, coord_def target)
 	if (!order->Tele_check(true, false))
 		return false;
 	if (env[current_level].isInSight(order->position)) {
-		soundmanager.playSound("blink");
+		PlaySE("blink");
 	}
 	order->Blink(25);
 
@@ -4117,7 +4117,7 @@ bool skill_miko_3(int power, bool short_, unit* order, coord_def target)
 		return false;
 	}
 	else {
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_GIFT,true,false,false,CL_miko,
 			 PlaceHolderHelper(LOC_SYSTEM_GOD_MIKO));
 		return true;
@@ -4269,7 +4269,7 @@ bool skill_miko_4(int power, bool short_, unit* order, coord_def target)
 		return false;
 	}
 	else {
-		soundmanager.playSound("buff");
+		PlaySE("buff");
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_GIFT,true,false,false,CL_miko,
 			 PlaceHolderHelper(LOC_SYSTEM_GOD_MIKO));
 		return true;
@@ -4369,7 +4369,7 @@ bool skill_miko_5(int power, bool short_, unit* order, coord_def target)
 		you.SetBuff(BUFFSTAT_MREGEN, BUFF_MIKO_MREGEN, 1, -1);
 		break;
 	}
-	soundmanager.playSound("buff");
+	PlaySE("buff");
 	LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_GIFT,true,false,false,CL_miko,
 		 PlaceHolderHelper(LOC_SYSTEM_GOD_MIKO));
 	return true;
@@ -4475,7 +4475,7 @@ bool skill_miko_6(int power, bool short_, unit* order, coord_def target)
 		you.SetBuff(BUFFSTAT_HASTE, BUFF_MIKO_ULTI, 1, -1);
 		break;
 	}
-	soundmanager.playSound("buff");
+	PlaySE("buff");
 	LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_GIFT,true,false,false,CL_miko,
 		 PlaceHolderHelper(LOC_SYSTEM_GOD_MIKO));
 	return true;

@@ -1058,9 +1058,9 @@ bool players::damage(attack_infor &a, bool perfect_)
 
 				if (hp > 0) {
 					if(a.type == ATT_DROWNING)
-						soundmanager.playSound("water");
+						PlaySE("water");
 					else
-						soundmanager.playSound("damaged");
+						PlaySE("damaged");
 				}
 
 				dead_order = NULL;
@@ -1310,7 +1310,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 					PlaceHolderHelper(name_.getName()),
 					PlaceHolderHelper(a.name.getName()),
 					PlaceHolderHelper(shield_str));
-				soundmanager.playSound("block");
+				PlaySE("block");
 				if(GetArtifactProperty(ART_COUNTER) && !a.order->isplayer())
 				{
 					int length_ = GetLengthFromCenter(position.x, position.y, a.order->position.x, a.order->position.y);
@@ -1345,7 +1345,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 					PlaceHolderHelper(name_.getName()),
 					PlaceHolderHelper(a.name.getName()));
 			}
-			soundmanager.playSound("evade");
+			PlaySE("evade");
 			//if(GetArmourPanlty()<=2)
 			//	SkillTraining(SKT_DODGE,3+GetArmourPanlty());
 		}

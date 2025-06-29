@@ -1,0 +1,81 @@
+[
+  {
+    "name": "dungeon",
+    "path": "sound\\bgm\\dungeon.mp3",
+    "loop_start": 18716,
+    "loop_end": 151000
+  },
+  {
+    "name": "mistlake",
+    "path": "sound\\bgm\\mistlake.mp3",
+    "loop_start": 4000,
+    "loop_end": 164104
+  },
+  {
+    "name": "youkaimountain",
+    "path": "sound\\bgm\\youkaimountain.mp3",
+    "loop_start": 16187,
+    "loop_end": 344581
+  },
+  {
+    "name": "scarlet",
+    "path": "sound\\bgm\\scarlet.mp3",
+    "loop_start": 16826,
+    "loop_end": 298695
+  },
+  {
+    "name": "bamboo",
+    "path": "sound\\bgm\\bamboo.mp3",
+    "loop_start": 502,
+    "loop_end": 337212
+  },
+  {
+    "name": "depth",
+    "path": "sound\\bgm\\depth.mp3",
+    "loop_start": 7123,
+    "loop_end": 288695
+	
+  },
+  {
+    "name": "dream",
+    "path": "sound\\bgm\\dream.mp3",
+	"loop_start": 7272,
+	"loop_end": 226004
+  },
+  {
+    "name": "pandemonium",
+    "path": "sound\\bgm\\pandemonium.mp3",
+    "loop_start": 500,
+    "loop_end": 240112
+  },
+  {
+    "name": "subterranean",
+    "path": "sound\\bgm\\subterranean.mp3",
+	 "loop_start": 6939,
+	 "loop_end": 270501
+  },
+  {
+    "name": "hakurei",
+    "path": "sound\\bgm\\hakurei.mp3",
+    "loop_start": 6503,
+    "loop_end": 168232
+  },
+  {
+    "name": "sprint",
+    "path": "sound\\bgm\\sprint.mp3",
+    "loop_start": 1000,
+    "loop_end": 188000
+  },
+  {
+    "name": "ziggurat",
+    "path": "sound\\bgm\\ziggurat.mp3",
+    "loop_start": 2500,
+    "loop_end": 357500
+  },
+  {
+    "name": "stage1",
+    "path": "sound\\bgm\\stage1.mp3",
+    "loop_start": 1364,
+    "loop_end": 144461
+  }
+]

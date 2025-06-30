@@ -203,12 +203,29 @@ void FMODSoundManager::loadBgmFromJson(const std::string& filename) {
 }
 
 void FMODSoundManager::playSound(const std::string& name) {
-    auto it = soundList.find(name);
-    if (it != soundList.end()) {
-        FMOD::Channel* channel = nullptr;
-        system->playSound(it->second, 0, false, &channel);
+ auto it = soundList.find(name);
+    if (it == soundList.end()) return;
+
+    auto chIt = playingSE.find(name);
+    if (chIt != playingSE.end() && chIt->second) {
+        bool isPlaying = false;
+        chIt->second->isPlaying(&isPlaying);
+        if (isPlaying) {
+            chIt->second->stop(); // 재시작을 위해 중단
+        }
+    }
+
+
+    FMOD::Channel* channel = nullptr;
+    FMOD_RESULT result = system->playSound(it->second, 0, false, &channel);
+	if(result != FMOD_OK) {
+		lastErrorString = FMOD_ErrorString(result);
+	}
+
+    if (channel) {
         float vol = seVolume / 100.0f;
-        if (channel) channel->setVolume(vol);
+        channel->setVolume(vol);
+        playingSE[name] = channel;
     }
 }
 

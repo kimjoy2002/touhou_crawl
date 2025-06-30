@@ -25,6 +25,7 @@ class FMODSoundManager {
 	bool bgmFadingOut = false;
 	std::string pendingBgmName;
 	std::string lastErrorString;
+    std::map<std::string, FMOD::Channel*> playingSE;
 public:
     FMODSoundManager();
     ~FMODSoundManager();

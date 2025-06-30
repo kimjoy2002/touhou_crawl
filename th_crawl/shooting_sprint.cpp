@@ -26,7 +26,7 @@
 void set_sprint_map(map_dummy* map_dummy_);
 
 bool PixedMap(map_dummy* map, const char *temp);
-void scrollup(bool down, int need_y);
+void scrollup(bool down, int need_y, bool replay);
 
 deque<int> shooting_god_dq;
 SHOOTING_STAGE_LEVEL current_base_level;
@@ -1223,7 +1223,7 @@ void map_algorithms_shooting_sprint(int num)
 	env[num].stair_up[0].y = DG_MAX_Y/2+6;
 	map_list.god_num=0;
 	env[num].MakeEvent(EVL_SHOOTING_SPRINT,coord_def(0,0),EVT_ALWAYS);
-	scrollup(false, 7);
+	scrollup(false, 7, true);
 }
 
 bool pickup_move();

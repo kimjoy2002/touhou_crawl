@@ -178,7 +178,7 @@ const mon_infor mondata[] = {
 	{15,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_FLY,1,1,10,'t' },
 
-	{MON_ONI,14,1412,name_infor(MON_ONI),&img_mons_oni,120,8,2,
+	{MON_ONI,14,1412,name_infor(MON_ONI),&img_mons_oni,120,6,2,
 	{40,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,2,1,10,'O' },
 
@@ -249,7 +249,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_FLY,1,1,10,'T' },
 
 
-	{MON_BLUE_ONI,14,1412,name_infor(MON_BLUE_ONI),&img_mons_blue_oni,120,8,2,
+	{MON_BLUE_ONI,14,1412,name_infor(MON_BLUE_ONI),&img_mons_blue_oni,120,6,2,
 	{40,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,2,1,10,'O' },
 
@@ -419,7 +419,7 @@ const mon_infor mondata[] = {
 	{35,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_SPEAK | M_FLAG_ANIMAL ,0,1,10,'T'},
 	
-	{MON_RAIJUU,10,950,name_infor(MON_RAIJUU),&img_mons_raijuu,60,1,15,
+	{MON_RAIJUU,10,950,name_infor(MON_RAIJUU),&img_mons_raijuu,45,1,15,
 	{18,0,0},{ATT_M_POISON,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_ANIMAL,0,1,8,'r'},
 	
@@ -490,7 +490,7 @@ const mon_infor mondata[] = {
 	{MON_RACCON,7,224,name_infor(MON_RACCON),&img_mons_raccoon,65,1,16,
 	{13,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,1,10,'X' },
-	{MON_LANTERN_YOUKAI,15,1333,name_infor(MON_LANTERN_YOUKAI),&img_mons_lantern_youkai,92,8,8,
+	{MON_LANTERN_YOUKAI,15,1333,name_infor(MON_LANTERN_YOUKAI),&img_mons_lantern_youkai,45,8,8,
 	{28,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,2,1,10,'P' },
 	{MON_YINYAN,30,8000,name_infor(MON_YINYAN),&img_mons_yinyan,300,0,0,
@@ -633,7 +633,7 @@ const mon_infor mondata[] = {
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_SPEAK,0,1,10,'G' },
 	
-	{MON_HELL_HOUND,9,512,name_infor(MON_HELL_HOUND),&img_mons_hell_dog,72,4,16,
+	{MON_HELL_HOUND,9,512,name_infor(MON_HELL_HOUND),&img_mons_hell_dog,52,2,14,
 	{29,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_BITE),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,1,10,'D' },
 	
@@ -1064,11 +1064,11 @@ const mon_infor mondata[] = {
 		{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE ,0,0,7,'h'},
 
-	{MON_WOLF_SPIRIT,14,1130,name_infor(MON_WOLF_SPIRIT),&img_mons_wolf_spirit,95,3,12,
+	{MON_WOLF_SPIRIT,14,1130,name_infor(MON_WOLF_SPIRIT),&img_mons_wolf_spirit,110,3,12,
 		{35,35,20},{ATT_NORMAL,ATT_NORMAL,ATT_LUNATIC},{name_infor(LOC_SYSTEM_ATT_BITE),name_infor(LOC_SYSTEM_ATT_BITE),name_infor(LOC_SYSTEM_ATT_LUNATIC_BITE)},
 		M_FLAG_SPEAK | M_FLAG_ANIMAL,0,0,10,'D'},	
 
-	{MON_EAGLE_SPIRIT,15,1450,name_infor(MON_EAGLE_SPIRIT),&img_mons_eagle_spirit,120,1,15,
+	{MON_EAGLE_SPIRIT,15,1450,name_infor(MON_EAGLE_SPIRIT),&img_mons_eagle_spirit,80,1,15,
 		{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI | M_FLAG_ANIMAL,1,1,10,'b'},
 

@@ -328,7 +328,7 @@ std::string inputedkey_to_string(int key_, const InputedKey& input) {
 
     return oss.str();
 }
-
+void scrollup(bool down, int need_y, bool replay) ;
 
 int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecursor)
 {
@@ -393,11 +393,23 @@ int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecurs
 						Sleep(1);
 					}
 					break;
+				case '+':
+				case GVK_RT://오른쪽 트리거
+					scrollup(false, -1, true);
+					break;
+				case '-':
+				case GVK_LT: //왼쪽 트리거
+					scrollup(true, -1, true);
+					break;
 				case GVK_BUTTON_B_LONG:
 				case VK_ESCAPE:
 					game_over = true;
 					break;
 				}
+			} else  if (inputedkey.mouse == MKIND_SCROLL_UP) {
+				scrollup(false, -1, true);
+			} else if (inputedkey.mouse == MKIND_SCROLL_DOWN) {
+				scrollup(true, -1, true);
 			}
 		}
 

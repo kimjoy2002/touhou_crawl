@@ -643,10 +643,12 @@ bool useAutoTanmac(unit* mon_) {
 	return false;
 }
 
-void scrollup(bool down, int need_y) {
+void scrollup(bool down, int need_y, bool replay) {
+	if (!replay && ReplayClass.ReplayMode())
+		return;
 	vector<int> ablesize = {23,32,47,64,95,128};
 
-	if((need_y == 0 && isShootingSprint()) || ReplayClass.play) {
+	if((need_y == 0 && isShootingSprint())) {
 		return;
 	}
 
@@ -1020,9 +1022,9 @@ bool ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 			}
 		}
 	} else if (mouse_type == MKIND_SCROLL_UP) {
-		scrollup(false, -1);
+		scrollup(false, -1, false);
 	} else if (mouse_type == MKIND_SCROLL_DOWN) {
-		scrollup(true, -1);
+		scrollup(true, -1, false);
 	}
 	return true;
 }
@@ -1246,11 +1248,11 @@ void MainLoop()
 			Pray();
 			break;
 		case '+':
-			scrollup(false, -1);
+			scrollup(false, -1, false);
 			//VolumeUp();
 			break;
 		case '-':
-			scrollup(true, -1);
+			scrollup(true, -1, false);
 			//VolumeDown();
 			break;
 		case '#':
@@ -1341,10 +1343,10 @@ void MainLoop()
 			auto_Move();
 			break;
 		case GVK_LT: //왼쪽 트리거
-			scrollup(true, -1);
+			scrollup(true, -1, false);
 			break;
 		case GVK_RT://오른쪽 트리거
-			scrollup(false, -1);
+			scrollup(false, -1, false);
 			break;
 		default:
 			break;

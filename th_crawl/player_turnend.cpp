@@ -260,8 +260,25 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			}
 		}
 	}
-
 	ReleaseMutex(mutx);
+	if(alchemy_buff == ALCT_PHILOSOPHERS_STONE)
+	{
+		if((you.pure_mp && you.GetMp() > 0) || 
+			(!you.pure_mp && you.GetMp() >= 0 )) {
+			int power_=min(SpellCap(SPL_PHILOSOPHERS_STONE),you.GetSpellPower(SpellSchool(SPL_PHILOSOPHERS_STONE,0),SpellSchool(SPL_PHILOSOPHERS_STONE,1),SpellSchool(SPL_PHILOSOPHERS_STONE,2)));
+			if(randA(4)<4) {
+				if(skill_philosopher_passive(power_,&you)) {
+					you.MpUpDown(-1);
+				}
+				if(randA(2)<1) { //보너스
+					if(skill_philosopher_passive(power_,&you)) {
+						you.MpUpDown(-1);
+					}
+				}
+			}
+		}
+	}
+
 	env[current_level].ActionMonster(delay_);
 	WaitForSingleObject(mutx, INFINITE);
 	if(sight_reset) //몬스터가 만들어낸 구름에 시야가 가릴 경우가 생길경우

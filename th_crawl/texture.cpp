@@ -2058,6 +2058,15 @@ textures(&texture_laser, 147, 255),
 textures(&texture_laser, 148, 255)
 };
 
+textures img_tanmac_homing_cyan[] = { textures(&texture_laser, 149, 255),
+textures(&texture_laser, 150, 255),
+textures(&texture_laser, 151, 255),
+textures(&texture_laser, 152, 255),
+textures(&texture_laser, 153, 255),
+textures(&texture_laser, 154, 255),
+textures(&texture_laser, 155, 255),
+textures(&texture_laser, 156, 255)
+};
 
 
 textures img_tanmac_small[6][4] =
@@ -3702,6 +3711,12 @@ int texturetoint(textures* input)
 		return 595;
 	else if(input == &img_item_artifact_amulet)
 		return 596;
+	else if(input == &img_tanmac_homing_cyan[0] ||
+		input == &img_tanmac_homing_cyan[1]||input == &img_tanmac_homing_cyan[2] ||
+		input == &img_tanmac_homing_cyan[3]||input == &img_tanmac_homing_cyan[4] ||
+		input == &img_tanmac_homing_cyan[5]||input == &img_tanmac_homing_cyan[6] ||
+		input == &img_tanmac_homing_cyan[7])
+		return 567;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -4922,6 +4937,8 @@ textures* inttotexture(int input)
 		return &img_item_fixed_artifact_ibukisake;
 	case 596:
 		return &img_item_artifact_amulet;
+	case 597:
+		return &img_tanmac_homing_cyan[1];
 	default:
 		return &img_mons_default;
 	}

@@ -10,9 +10,12 @@
 #include "steam_api.h"
 #include "common.h"
 #include <stdio.h>
+#include "soundmanager.h"
 #include <sys/stat.h>
 
 optionManager option_mg;
+
+
 
 
 vector<screen_info> able_screens = { 
@@ -82,9 +85,11 @@ void optionManager::init(wstring fileName) {
 
 		GetPrivateProfileStringW(_T(L"config"), _T(L"bgm_volume"), _T(L"70"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		bgm_volume = std::stoi(szBuf);
+		fmodsoundmanager.setBgmVolume(bgm_volume);
 
 		GetPrivateProfileStringW(_T(L"config"), _T(L"se_volume"), _T(L"70"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		se_volume = std::stoi(szBuf);
+		fmodsoundmanager.setSEVolume(se_volume);
 
 		// GetPrivateProfileString(_T("config"), _T("server_ip"), _T("joy1999.codns.com"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		// server_ip = TCHARToString(szBuf);
@@ -186,6 +191,7 @@ void optionManager::setHeight(int h_value) {
 
 void optionManager::setBgmVolume(int value) {
     bgm_volume = value;  // lang이 string일 경우
+	fmodsoundmanager.setBgmVolume(bgm_volume);
 
 	if(!fileName.empty()) {
 		CStringW strW(to_string(bgm_volume).c_str());
@@ -195,6 +201,7 @@ void optionManager::setBgmVolume(int value) {
 
 void optionManager::setSeVolume(int value) {
     se_volume = value;  // lang이 string일 경우
+	fmodsoundmanager.setSEVolume(se_volume);
 
 	if(!fileName.empty()) {
 		CStringW strW(to_string(se_volume).c_str());

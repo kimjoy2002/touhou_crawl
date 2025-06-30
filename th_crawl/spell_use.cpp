@@ -3968,33 +3968,33 @@ bool skill_mermaid_song(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_emerald_city(int power, bool short_, unit* order, coord_def target)
 {
-	if(env[current_level].isMove(target.x, target.y))
+	vector<coord_def> vt_;
+	{
+		rect_iterator rit(order->position,1,1);
+		for(;!rit.end();rit++)
+		{
+			if((*rit) != order->position)
+			{
+				textures* t_ = &img_effect_emerald_uplift[randA(1)];
+				if(env[current_level].isMove(rit->x,rit->y))
+				{
+					env[current_level].MakeEffect(*rit,&img_blast[3],false);
+					env[current_level].MakeEffect(*rit,t_,false);
+					vt_.push_back(*rit);
+				}
+			}
+		}
+	}
+	if(!vt_.empty())
 	{
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("stone");
-		}
-		vector<coord_def> vt_;
-		{
-			rect_iterator rit(order->position,1,1);
-			for(;!rit.end();rit++)
-			{
-				if((*rit) != target)
-				{
-					textures* t_ = &img_effect_emerald_uplift[randA(1)];
-					if(env[current_level].isMove(rit->x,rit->y))
-					{
-						env[current_level].MakeEffect(*rit,&img_blast[3],false);
-						env[current_level].MakeEffect(*rit,t_,false);
-						vt_.push_back(*rit);
-					}
-				}
-			}
 		}
 		for(auto it = vt_.begin();it != vt_.end();it++)
 		{
 			if(env[current_level].isMove(it->x,it->y))
 			{
-				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
+				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y, order))
 				{
 					int damage_ = 10+power/6;
 					attack_infor attack_infor_(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_EMERALD));
@@ -5084,7 +5084,7 @@ bool skill_speaker_phone(int pow, bool short_, unit* order, coord_def target)
 }
 
 
-bool skill_homing_tanmac(int pow, bool short_, unit* order, coord_def target)
+bool skill_homing_tanmac(int pow, bool short_, int base_damage, int type, unit* order, coord_def target)
 {
 	if(target == order->position) {
 		return false;
@@ -5128,10 +5128,12 @@ bool skill_homing_tanmac(int pow, bool short_, unit* order, coord_def target)
 						mon_->memory_time = mon_->FoundTime();
 						mon_->target_pos = target;
 					}
+					mon_->atk[0] = base_damage;
+					mon_->special_value = type;
 					mon_->LevelUpdown(pow/15,0.0f,2.0f);
 				}
 				mon_->direction = GetPositionToAngle(order->position.x, order->position.y, mon_->position.x, mon_->position.y);
-				mon_->image = &img_tanmac_homing[GetAngleToDirec(mon_->direction)];
+				mon_->image = type==1?&img_tanmac_homing_cyan[GetAngleToDirec(mon_->direction)]:&img_tanmac_homing[GetAngleToDirec(mon_->direction)];
 				mon_->PlusTimeDelay(-you.GetSpellDelay()+2*mon_->GetWalkDelay());
 				return_ = true;
 				break;
@@ -5518,6 +5520,163 @@ bool skill_blink_away(int pow, bool short_, unit* order, coord_def target)
 
 	return true;
 }
+
+bool skill_earth_bolt(int pow, bool short_, unit* order, coord_def target)
+{
+	beam_iterator beam(order->position,order->position);
+	if(CheckThrowPath(order->position,target,beam))
+	{
+		int mon_panlty_ = order->isplayer()?0:2;
+		int damage_ = 9+pow/6-mon_panlty_;
+		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),5,5,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_ROCK));
+		if(short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+		
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			if (env[current_level].isInSight(order->position)) {
+				PlaySE("earthquake");
+			}
+			throwtanmac(50, beam, temp_infor, NULL);
+		}
+		order->SetParadox(0); 
+		return true;
+	}
+	return false;
+}
+
+bool skill_philosopher_passive(int power, unit* order)
+{
+	int rand_ = randA(4); //5개
+
+
+	int min_length_ = 1;
+	int max_length_ = 7;
+	bool can_pentan = false;
+
+	switch (rand_) {
+		case 0:
+			//화염구 - 거리2~6: (가로막히면 안됨)
+			min_length_ = 2;
+			max_length_ = 6;
+			can_pentan = false;
+			break;
+		case 1:
+			//워터캐논  - 거래1~6: (가로막히면 안됨)
+			min_length_ = 1;
+			max_length_ = 6;
+			can_pentan = false;
+			break;
+		case 2:
+			//윈드호밍 - 거리 3-7: 원거리 발사 호밍탄(가로막히면 안됨)
+			min_length_ = 3;
+			max_length_ = 7;
+			can_pentan = false;
+			break;
+		case 3:
+			//에메랄드
+			min_length_ = 1;
+			max_length_ = 1;
+			can_pentan = false;
+			break;
+		case 4:
+			//대지분쇄 - 거리 1~5: 관통 (가로막혀도됨)
+			min_length_ = 1;
+			max_length_ = 5;
+			can_pentan = true;
+			break;
+	}
+
+
+	random_extraction<unit*> able_unit_vector;
+
+	for(vector<monster>::iterator it = env[current_level].mon_vector.begin(); it!=env[current_level].mon_vector.end(); it++)
+	{	
+		if(it->isLive() && order->isEnemyUnit(&(*it)) && !(it->flag & M_FLAG_UNHARM) && 
+				!it->isPassedBullet(order)
+			&& env[current_level].isInSight(it->position) && order->isSightnonblocked(it->position))
+		{
+			int len_ = GetLengthFromCenter(it->position.x, it->position.y, order->position.x, order->position.y);
+			if(len_ < min_length_ || len_ > max_length_) {
+				continue;
+			}
+			
+			if((it->position - order->position).abs() <= 2 || can_pentan) {
+				able_unit_vector.push(&(*it));
+			} else {
+				beam_iterator beam(it->position, order->position);
+				if (CheckThrowPath(it->position, order->position, beam)) {
+					beam.init();
+					int len_ = 0;
+					while (!beam.end())
+					{
+						unit *unit_ = env[current_level].isMonsterPos(beam->x, beam->y, order->isplayer()?&you:nullptr);
+						if (unit_ && !unit_->isPassedBullet(order))
+						{
+							break;
+						}
+						len_++;
+						beam++;
+					}
+					if (beam.end() && len_ != 0) {
+						able_unit_vector.push(&(*it));
+					}
+				}
+			}
+		}
+	}
+	if(!order->isplayer()) {
+		monster* mon_ = (monster*) order;
+		if(mon_->isEnemyUnit(&you) && mon_->isMonsterSight(you.position) && mon_->isSightnonblocked(you.position)) {
+
+			int len_ = GetLengthFromCenter(you.position.x, you.position.y, order->position.x, order->position.y);
+			if(!(len_ < min_length_ || len_ > max_length_)) {
+				beam_iterator beam(order->position, you.position);
+				if (CheckThrowPath(order->position, you.position, beam)) {
+					beam.init();
+					int len_ = 0;
+					while (!beam.end())
+					{
+						unit *unit_ = env[current_level].isMonsterPos(beam->x, beam->y, order->isplayer()?&you:nullptr);
+						if (unit_)
+						{
+							break;
+						}
+						len_++;
+						beam++;
+					}
+					if (beam.end() && len_ != 0) {
+						able_unit_vector.push(&(you));
+					}
+				}
+			}
+		}
+	}
+
+	if(able_unit_vector.GetSize() > 0) {
+		switch (rand_) {
+			case 0:
+				return skill_fire_ball(power,true,order,able_unit_vector.pop()->position);
+				break;
+			case 1:
+				return skill_water_cannon(power,true,order,able_unit_vector.pop()->position);
+				break;
+			case 2:
+				return skill_homing_tanmac(power,true, 23, 1,order,able_unit_vector.pop()->position);	
+				break;
+			case 3:
+				return skill_emerald_city(power,true,order,able_unit_vector.pop()->position);
+				break;
+			case 4:
+				return skill_earth_bolt(power,false,order,able_unit_vector.pop()->position);
+				break;
+		}
+		return false;
+	}
+	return false;
+}
+
+
+
 
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
@@ -6784,7 +6943,7 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 	case SPL_SPEAKER_PHONE:
 		return skill_speaker_phone(power, short_, order, target);
 	case SPL_HOMING_TANMAC:
-		return skill_homing_tanmac(power, short_, order, target);
+		return skill_homing_tanmac(power, short_, 9, 0, order, target);
 	case SPL_ALLROUND_TANMAC:
 		return skill_allround_tanmac(power, short_, order, target);
 	case SPL_THROW_POTION:
@@ -7282,7 +7441,7 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 	case SPL_SPEAKER_PHONE:
 		return skill_speaker_phone(power, short_, &you, target);
 	case SPL_HOMING_TANMAC:
-		return skill_homing_tanmac(power, short_, &you, target);
+		return skill_homing_tanmac(power, short_, 9, 0, &you, target);
 	case SPL_ALLROUND_TANMAC:
 		return skill_allround_tanmac(power, short_, &you, target);
 	case SPL_THROW_POTION:

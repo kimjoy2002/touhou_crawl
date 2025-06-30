@@ -2361,8 +2361,7 @@ LOC_SYSTEM_SPELL_ALCHEMY_ENLIGHTENMENT_ALMOST_OFF,무념무상의 경지가 끝�
 LOC_SYSTEM_SPELL_ALCHEMY_BLADE_ON,당신은 손에 톱니를 새겨넣었다.
 LOC_SYSTEM_SPELL_ALCHEMY_BLADE_OFF,당신의 톱니는 사라졌다.
 LOC_SYSTEM_SPELL_ALCHEMY_BLADE_ALMOST_OFF,손에 감긴 연금술의 힘이 약해지고있다.
-LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON,당신은 현자의 돌을 연성해냈다. ({0}키로 추가 마법을 사용가능)
-LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON_PAD,당신은 현자의 돌을 연성해냈다. (능력으로 추가 마법을 사용가능)
+LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON,당신은 현자의 돌을 연성해냈다.
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_OFF,당신의 현자의 돌은 이윽고 사라졌다.
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ALMOST_OFF,현자의 돌은 거의 사라져가고있다.
 LOC_SYSTEM_SPELL_UNLUCK_UFO,이럴수가! 하늘에서 UFO가 떨어졌다!
@@ -2668,7 +2667,7 @@ LOC_SYSTEM_SPL_DESCRIBE_NESY_CANNON,네시에 탑재되어있는 강력한 물�
 LOC_SYSTEM_SPL_DESCRIBE_MERMAID_SONG,와카사기히메가 자랑하는 애창곡.\n인어의 노래엔 특수한 효과가 있어서 그 아름다운 노래에 자동으로 발이 끌려가게 된다.\n노래를 들을수록 1칸씩 와카사기히메에게 이끌리듯이 걸어가지만 깊은물에 빠지진않는다.\n마법저항으론 막을 수 없지만 혼란저항이 있다면 인어의 노래의 영향을 받지않게된다.\n
 LOC_SYSTEM_SPL_DESCRIBE_EMERALD_CITY,연금술을 이용한 에메랄드의 벽을 만들어내는 마법.\n주변 8타일에 강한 물리데미지를 입힐 수 있다.\n
 LOC_SYSTEM_SPL_DESCRIBE_AUTUMN_BLADE,연금술로 무기나 맨손에 강철 톱니날을 붙인다.\n사용중엔 모든 근접공격 데미지가 3배가 되는 심플하면서 강력한 마법.\n
-LOC_SYSTEM_SPL_DESCRIBE_PHILOSOPHERS_STONE,연금술의 궁극적인 목표로 현자의 돌을 만들어내는 연금술 최종 마법.\n현자의 돌이 시전되고 있는 동안엔 다양한 학파의 마법을 아주 적은 영력만으로 난사할 수 있다.\n화염구, 워터캐논, 질풍선, 에메랄드시티, 지반융기 마법을 연금술에 비례한 파워로 사용한다.\n시전후 a를 통한 능력사용으로 속성 마법을 사용가능하다.\n이 방법으로 사용되는 마법은 소리를 낼 수 없는 상황에서도 사용이 가능하다.\n
+LOC_SYSTEM_SPL_DESCRIBE_PHILOSOPHERS_STONE,연금술의 궁극적인 목표로 현자의 돌을 만들어내는 연금술 최종 마법.\n현자의 돌이 시전되고 있는 동안엔 다양한 학파의 마법을 아주 적은 영력만으로 난사하게 된다.\n지속시간동안 각 다섯 속성에 해당하는 랜덤한 마법을 시야내의 무작위 적에게 자동으로 시전한다.\n시전에는 마나가 자동으로 1 소모되며 이 방법으로 사용되는 마법은 소리를 낼 수 없는 상황에서도 사용이 가능하다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_ANCHOR,목표로 한 적의 바로 근처에 거대한 닻을 떨어뜨린다.\n닻 자체에는 데미지나 공격기능이 없지만 닻에 꽂힌 상대는 움직임을 봉인당한다.\n움직이기위해서는 먼저 닻을 파괴하던지 닻이 자연스럽게 사라질때까지 기다려야한다.\n
 LOC_SYSTEM_SPL_DESCRIBE_REAPER_MET,멀리 있는 상대와 자신의 거리를 조절하여 순식간에 눈 앞으로 끌어당긴다.\n끌어당김과 동시에 상대의 발을 묶기 때문에 이동속도 또한 일정시간동안 감소한다.\n
 LOC_SYSTEM_SPL_DESCRIBE_AFTERLITE,거리안의 지정한 대상의 남은 체력을 문답무용으로 절반 깎아 버리는 무시무시한 기술.\n이 기술에 저항하는건 불가능하지만 사용 후에는 딜레이가 생기므로 연속으로 사용할 순 없다.\n

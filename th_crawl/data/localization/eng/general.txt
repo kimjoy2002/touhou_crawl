@@ -2361,8 +2361,7 @@ LOC_SYSTEM_SPELL_ALCHEMY_ENLIGHTENMENT_ALMOST_OFF,Your serenity is fading.
 LOC_SYSTEM_SPELL_ALCHEMY_BLADE_ON,You engraved gears onto your hands.
 LOC_SYSTEM_SPELL_ALCHEMY_BLADE_OFF,The gears have vanished.
 LOC_SYSTEM_SPELL_ALCHEMY_BLADE_ALMOST_OFF,The alchemical power on your hands is weakening.
-LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON,You've transmuted the Philosopher's Stone. (Use additional magic with {0})
-LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON_PAD,You have synthesized the Philosopher's Stone. (Gain access to additional spells)
+LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON,You've transmuted the Philosopher's Stone.
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_OFF,Your Philosopher's Stone has finally vanished.
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ALMOST_OFF,The Philosopher's Stone is nearly gone.
 LOC_SYSTEM_SPELL_UNLUCK_UFO,Unbelievable! A UFO fell from the sky!
@@ -2668,7 +2667,7 @@ LOC_SYSTEM_SPL_DESCRIBE_NESY_CANNON,A powerful water cannon mounted on Neshie.\n
 LOC_SYSTEM_SPL_DESCRIBE_MERMAID_SONG,Wakasagihime's favorite song.\nThe magical melody pulls enemies toward her one tile at a time.\nCannot be blocked by magic resistance but is nullified by confusion resistance.\n
 LOC_SYSTEM_SPL_DESCRIBE_EMERALD_CITY,Creates emerald walls using alchemy.\nDeals heavy physical damage in the surrounding 8 tiles.\n
 LOC_SYSTEM_SPL_DESCRIBE_AUTUMN_BLADE,Attaches steel saw blades to your weapon or fists using alchemy.\nTriples all melee damage while active-simple and deadly.\n
-LOC_SYSTEM_SPL_DESCRIBE_PHILOSOPHERS_STONE,The ultimate alchemy spell that creates the Philosopher's Stone.\nWhile active, you can rapidly cast elemental spells with minimal MP cost, based on your alchemy power.\nAllows silent casting of certain spells like Fireball, Water Cannon, Wind Blade, Emerald City, and Ground Raise using the 'a' key.\n
+LOC_SYSTEM_SPL_DESCRIBE_PHILOSOPHERS_STONE,The ultimate goal of alchemy—casting the Philosopher's Stone, the pinnacle of alchemical magic.\nWhile active, you can unleash a barrage of spells from various schools at a minimal MP cost.\nDuring the duration, random spells from all five elements are automatically cast at random enemies within your line of sight.\nEach cast consumes 1 MP automatically, and spells cast this way can be used even when you are silenced.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_ANCHOR,Drops a giant anchor near the targeted enemy.\nThe anchor itself does no damage but pins the target in place.\nThe enemy must destroy the anchor or wait for it to disappear to move again.\n
 LOC_SYSTEM_SPL_DESCRIBE_REAPER_MET,Instantly pulls a distant enemy toward you and binds their feet, reducing their movement speed for a short time.\n
 LOC_SYSTEM_SPL_DESCRIBE_AFTERLITE,Halves the remaining HP of a target within range without question.\nCannot be resisted but has a cooldown, so it can’t be used in succession.\n

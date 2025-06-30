@@ -137,13 +137,8 @@ void alchemyonoff(ALCHEMY_LIST list_,bool onoff_)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_BLADE_OFF),false,false,false,CL_blue);
 		break;
 	case ALCT_PHILOSOPHERS_STONE:
-		you.Ability(SKL_PHILOSOPHERS_1,false,!onoff_);
-		you.Ability(SKL_PHILOSOPHERS_2,false,!onoff_);
-		you.Ability(SKL_PHILOSOPHERS_3,false,!onoff_);
-		you.Ability(SKL_PHILOSOPHERS_4,false,!onoff_);
-		you.Ability(SKL_PHILOSOPHERS_5,false,!onoff_);
 		if(onoff_)
-			printlog(LocalzationManager::formatString(joypadUtil::usingPad?LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON_PAD:LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON, PlaceHolderHelper("a")),true,false,false,CL_white_blue);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON),true,false,false,CL_white_blue);
 		else
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_OFF),false,false,false,CL_blue);
 		break;

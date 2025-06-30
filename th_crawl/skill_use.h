@@ -235,6 +235,7 @@ int GetSpellBombRange(skill_list skill);//폭발넓이
 int GetSpellBombRange(spell_list spell);
 
 
+bool skill_philosopher_passive(int power, unit* order);
 bool skill_elec_passive(int power, unit* order);
 bool skill_elec_ball_bomb(int power, unit* order);
 

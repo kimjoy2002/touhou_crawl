@@ -4423,7 +4423,7 @@ void monster::special_action(int delay_, bool smoke_)
 		break;
 	case MON_HOMING:
 		if (!smoke_){
-			image = &img_tanmac_homing[GetAngleToDirec(direction)];
+			image = special_value==1?&img_tanmac_homing_cyan[GetAngleToDirec(direction)]:&img_tanmac_homing[GetAngleToDirec(direction)];
 			if(isUserAlly() && !env[current_level].isInSight(position) && summon_time > 0) {
 				summon_time = std::max(1, summon_time-10);
 			}

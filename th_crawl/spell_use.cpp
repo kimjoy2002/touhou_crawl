@@ -5521,6 +5521,19 @@ bool skill_blink_away(int pow, bool short_, unit* order, coord_def target)
 	return true;
 }
 
+bool skill_elemental_harvester(int pow, bool short_, unit* order, coord_def target)
+{
+
+	return false;
+}
+
+bool skill_nightmare_manifest(int pow, bool short_, unit* order, coord_def target)
+{
+
+	return false;
+}
+
+
 bool skill_earth_bolt(int pow, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
@@ -6960,6 +6973,10 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_haniwa_magic_tanmac(power, short_, order, target, 2);
 	case SPL_BLINK_AWAY:
 		return skill_blink_away(power,short_,order,target);
+	case SPL_ELEMENTAL_HARVESTER:
+		return skill_elemental_harvester(power,short_,order,target);
+	case SPL_NIGHTMARE_MANIFEST:
+		return skill_nightmare_manifest(power,short_,order,target);
 	default:
 		return false;
 	}
@@ -7458,6 +7475,10 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_haniwa_magic_tanmac(power, short_, &you, target, 2);
 	case SPL_BLINK_AWAY:
 		return skill_blink_away(power,short_,&you,target);
+	case SPL_ELEMENTAL_HARVESTER:
+		return skill_elemental_harvester(power,short_,&you,target);
+	case SPL_NIGHTMARE_MANIFEST:
+		return skill_nightmare_manifest(power,short_,&you,target);
 	default:
 		return false;
 	}

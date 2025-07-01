@@ -540,7 +540,13 @@ string GetSpellInfor(spell_list spell, bool isPlayer)
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC3);
 		break;
 	case SPL_BLINK_AWAY:
-		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_BLINK_AWAY);
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_BLINK_AWAY);
+		break;
+	case SPL_ELEMENTAL_HARVESTER:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ELEMENTAL_HARVESTER);
+		break;
+	case SPL_BLINK_AWAY:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_NIGHTMARE_MANIFEST);
 		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_UKNOWN);

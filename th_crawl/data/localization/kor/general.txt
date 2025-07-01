@@ -2541,6 +2541,8 @@ LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC,소형 탄막
 LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC2,중형 탄막
 LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC3,대형 탄막
 LOC_SYSTEM_SPL_BLINK_AWAY,점멸 도주
+LOC_SYSTEM_SPL_ELEMENTAL_HARVESTER,엘리멘탈 하베스터
+LOC_SYSTEM_SPL_NIGHTMARE_MANIFEST,악몽의 구현
 LOC_SYSTEM_SPL_UKNOWN,알수없는 마법
 LOC_SYSTEM_SPL_DESCRIBE_NONE,존재하지 않는 마법이다.\n
 LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_SMALL,작은 탄막을 발사한다.\n
@@ -2715,6 +2717,9 @@ LOC_SYSTEM_SPL_DESCRIBE_ARROW,하니와가 활을 이용해 멀리 있는 적을
 LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC,멀리 있는 적에게 날라가는 작은 마법의 탄막이다.
 LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC2,멀리 있는 적에게 날라가는 마법의 탄막이다.\n적당한 크기로 위력이 증가하였다.
 LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC3,멀리 있는 적에게 날라가는 큰 마법의 탄막이다.\n꽤나 강력한 위력을 낸다.
+LOC_SYSTEM_SPL_DESCRIBE_BLINK_AWAY,적과 거리가 멀어지도록 사용하는 점멸 마법.\n가까이 있을때만 사용이 가능하며 적과 거리를 두도록 멀어진다.\n
+LOC_SYSTEM_SPL_DESCRIBE_ELEMENTAL_HARVESTER,커다란 톱니를 만들어내는 금속의 연금술 마법.\n만들어진 톱니는 천천히 경로를 따라 이동하면서 주변의 모든 적에 데미지를 준다.\n경로를 누군가 막게되면 해당 물체에 약한 데미지를 주고 사라지기에 적과 비껴나가도록 사용해야한다.\n 
+LOC_SYSTEM_SPL_DESCRIBE_NIGHTMARE_MANIFEST,자고있는 적의 악몽을 구현화하는 마법.\n사거리 안의 자고 있는 상대방을 깨우면서 적의 악몽이 소환물로서 적의 주변에 소환된다.\n소환된 소환물은 악몽의 주인을 우선적으로 공격하며 적이 사라질때까지 유지된다.\n파워에 비례하여 강한 소환물이 등장하며, 디버프 체크에 성공시 무작위 상태이상을 부여하기도 한다.\n
 LOC_SYSTEM_SPL_DESCRIBE_UKNOWN,설명이 존재하지 않는 마법.\n
 LOC_SYSTEM_SPL_DESCRIBE_ALCHEMY,이 마법은 연금술 버프다. 연금술 버프끼리는 중첩되지않는다.\n다른 연금술 버프가 걸린 상태에서 이 마법을 시전하면 기존의 연금술 버프가 사라진다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMONING,이 마법은 최대 {0}마리까지 소환수를 소환할 수 있다.\n

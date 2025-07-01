@@ -90,6 +90,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 		return (S_FLAG_PENETRATE | S_FLAG_SPEAK | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_HYPER_BEAM:
 		return (S_FLAG_PENETRATE | S_FLAG_RANGE_ATTACK) & flag;
+	case SPL_ELEMENTAL_HARVESTER:
+		return (S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK | S_FLAG_SUMMON | S_FLAG_SPEAK) & flag;
 	case SPL_SUMMON_BUG:
 	case SPL_SUMMON_PENDULUM:
 	case SPL_SUMMON_SEKIBANKI:
@@ -160,6 +162,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_TARGET_ELEC:
 	case SPL_REIMU_BARRIER:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK) & flag);
+	case SPL_NIGHTMARE_MANIFEST:
+		return ((S_FLAG_SMITE | S_FLAG_SPEAK | S_FLAG_DEBUF) & flag);
 	case SPL_WINDFLAW:
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK | S_FLAG_DELAYED) & flag);	
 	case SPL_MERMAID_SONG:
@@ -325,6 +329,7 @@ int SpellLength(spell_list skill, bool isPlayer)
 	case SPL_HANIWA_MAGIC_TANMAC2:
 	case SPL_HANIWA_MAGIC_TANMAC3:
 	case SPL_BLINK_AWAY:
+	case SPL_ELEMENTAL_HARVESTER:
 		length_ = 7;
 		break;
 	case SPL_FLAME:	
@@ -379,6 +384,7 @@ int SpellLength(spell_list skill, bool isPlayer)
 		length_ = 5;
 		break;
 	case SPL_SMOKING:
+	case SPL_NIGHTMARE_MANIFEST:
 		length_ = 4;
 		break;
 	case SPL_BURN:
@@ -813,6 +819,10 @@ string SpellString(spell_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC3);
 	case SPL_BLINK_AWAY:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_BLINK_AWAY);
+	case SPL_ELEMENTAL_HARVESTER:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_ELEMENTAL_HARVESTER);
+	case SPL_NIGHTMARE_MANIFEST:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_NIGHTMARE_MANIFEST);
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_UKNOWN);
 	}
@@ -926,6 +936,7 @@ int SpellLevel(spell_list skill)
 	case SPL_THROW_AMULET:
 	case SPL_TRACKING:
 	case SPL_ALLROUND_TANMAC:
+	case SPL_NIGHTMARE_MANIFEST:
 		return 5;
 	case SPL_COLD_BEAM:
 	case SPL_CHAIN_LIGHTNING:
@@ -957,6 +968,7 @@ int SpellLevel(spell_list skill)
 	case SPL_THROW_RABBIT:
 	case SPL_THROW_POTION:
 	case SPL_HANIWA_MAGIC_TANMAC3:
+	case SPL_ELEMENTAL_HARVESTER:
 		return 6;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_STONE_FORM:
@@ -1035,6 +1047,7 @@ int SpellNoise(spell_list skill)
 	case SPL_PRISM_CALL:
 	case SPL_SLEEP_SMITE:
 	case SPL_BLINK_AWAY:
+	case SPL_NIGHTMARE_MANIFEST:
 		return 0;//소음없음
 	case SPL_SHOCK:
 	case SPL_VEILING:
@@ -1152,6 +1165,7 @@ int SpellNoise(spell_list skill)
 	case SPL_ALLROUND_TANMAC:
 	case SPL_HANIWA_MAGIC_TANMAC2:
 	case SPL_HANIWA_MAGIC_TANMAC3:
+	case SPL_ELEMENTAL_HARVESTER:
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
@@ -1572,6 +1586,10 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_BLINK_AWAY:
 		return num == 0 ? (SKT_TRANS) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_ELEMENTAL_HARVESTER:
+		return num == 0 ? (SKT_EARTH) : num == 1 ? (SKT_ALCHEMY) : (SKT_ERROR);
+	case SPL_NIGHTMARE_MANIFEST:
+		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_SUMMON) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1753,6 +1771,8 @@ int SpellCap(spell_list skill)
 	case SPL_HANIWA_MAGIC_TANMAC:
 	case SPL_HANIWA_MAGIC_TANMAC2:
 	case SPL_HANIWA_MAGIC_TANMAC3:
+	case SPL_ELEMENTAL_HARVESTER:
+	case SPL_NIGHTMARE_MANIFEST:
 		return 200;
 	default:
 	case SPL_BLINK:
@@ -1939,7 +1959,7 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 	case SPL_SLEEP_SMITE:
 		if (!mon->isUserAlly()) {
 			if (you.s_sleep < 0)
-				return false;\
+				return false;
 		}
 		return true;
 	case SPL_SUMMON_YOSHIKA:
@@ -2066,6 +2086,14 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 		}
 	}
 	return false;
+	case SPL_NIGHTMARE_MANIFEST:
+		if (mon->target) {
+			if (mon->target->isPlayer() && you.s_sleep >= 0)
+				return false;
+			if (!(mon->target->isPlayer()) && ((monster*)(mon->target))->GetState() != MS_SLEEP)
+				return false;
+		}
+		return true;
 	default:
 		return true;
 	}

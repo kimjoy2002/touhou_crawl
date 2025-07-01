@@ -2541,6 +2541,8 @@ LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC,Small Danmaku
 LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC2,Medium Danmaku
 LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC3,Large Danmaku
 LOC_SYSTEM_SPL_BLINK_AWAY,Blink Away
+LOC_SYSTEM_SPL_ELEMENTAL_HARVESTER,Elemental Harvester
+LOC_SYSTEM_SPL_NIGHTMARE_MANIFEST,Nightmare Manifest
 LOC_SYSTEM_SPL_UKNOWN,Unknown Magic
 LOC_SYSTEM_SPL_DESCRIBE_NONE,This magic doesn’t exist.\n
 LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_SMALL,Fires a small danmaku.\n
@@ -2715,6 +2717,9 @@ LOC_SYSTEM_SPL_DESCRIBE_ARROW,The Haniwa uses a bow to attack distant enemies.
 LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC,A small magical danmaku that flies toward distant enemies.
 LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC2,A magical danmaku that flies toward distant enemies.\nModerate size with increased power.
 LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC3,A large magical danmaku for distant targets.\nDelivers considerable power.
+LOC_SYSTEM_SPL_DESCRIBE_BLINK_AWAY,A blink spell used to put distance between you and an enemy.\nCan only be used when close to a target, and teleports you away to create space.\n
+LOC_SYSTEM_SPL_DESCRIBE_ELEMENTAL_HARVESTER,A metal alchemy spell that creates a large rotating saw.\nThe saw slowly travels along a path, damaging all nearby enemies.\nIf the path is blocked, it deals slight damage to the obstacle\n and disappears—so aim carefully to avoid obstructions.\n
+LOC_SYSTEM_SPL_DESCRIBE_NIGHTMARE_MANIFEST,A spell that manifests the nightmare of a sleeping enemy.\nTargets a sleeping enemy within range, waking them and summoning their nightmare nearby.\nThe summoned entity prioritizes attacking its origin and remains until the target is gone.\nThe stronger your Power, the stronger the nightmare; it may also inflict a random debuff if the debuff check succeeds.\n
 LOC_SYSTEM_SPL_DESCRIBE_UKNOWN,A spell with no existing description.\n
 LOC_SYSTEM_SPL_DESCRIBE_ALCHEMY,This spell is an alchemy buff.\nOnly one alchemy buff can be active at a time.\nCasting another will overwrite the previous one.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMONING,This spell can summon up to {0} creatures.\n

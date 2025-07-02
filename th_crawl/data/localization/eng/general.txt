@@ -358,7 +358,9 @@ LOC_SYSTEM_READ_SCROLL,You read {0}.
 LOC_SYSTEM_READ_CANT_READ,You can’t read this.
 LOC_SYSTEM_HEALED,{0} is healed.
 LOC_SYSTEM_HEALED2,You are healed.
+LOC_SYSTEM_HEAL_OTHER,{0} healed {1}.
 LOC_SYSTEM_IDENTIFY_ITEM,This is {0}.
+LOC_SYSTEM_IDENTIFY_HANIWA,Haniwa identified {0}.
 LOC_SYSTEM_UNEQUIP_ITEM,You unequip {0}.
 LOC_SYSTEM_EQUIP_PANALTY1,Your armor is fairly comfortable.
 LOC_SYSTEM_EQUIP_PANALTY2,Your armor is uncomfortable.

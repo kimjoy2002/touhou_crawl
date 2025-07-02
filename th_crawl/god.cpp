@@ -1860,6 +1860,21 @@ bool GodAccpect_Explore_100()
 		{
 			you.GiftCount(1);
 		}
+		if (haniwa_abil::has_abil(HANIWA_A_TALK) && 5 > randA(100))
+		{
+			int max_num = haniwa_abil::getMaxHaniwa();
+			for (int i = 0; i < max_num; i++)
+			{
+				for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+				{
+					if (it->isLive() && (*it).isUserAlly() && it->map_id == you.haniwa_allys[i].map_id && current_level == you.haniwa_allys[i].floor  &&  env[current_level].isInSight(coord_def(it->position.x, it->position.y)))
+					{
+						printlog(haniwa_speak(&(*it), HS_NORMAL), true, false, false, CL_normal);
+						return true;
+					}
+				}
+			}
+		}
 		return false;
 	case GT_SHIKIEIKI:
 	case GT_TENKYUU:

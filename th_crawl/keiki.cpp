@@ -65,7 +65,7 @@ haniwa_abil haniwa_abil_list[HANIWA_A_MAX] = {
 	{LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_ARTIFACT_NAME,LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_ARTIFACT_INFO,HANIWA_T_SUPPORT,90,20,false,{HANIWA_A_CREATE_ARMOUR},{},{}},
 	{LOC_SYSTEM_HANIWA_A_CREATE_POTION_NAME,LOC_SYSTEM_HANIWA_A_CREATE_POTION_INFO,HANIWA_T_SUPPORT,60,5,false,{},{},{HANIWA_A_ARMY1}},
 	{LOC_SYSTEM_HANIWA_A_CREATE_SCROLL_NAME,LOC_SYSTEM_HANIWA_A_CREATE_SCROLL_INFO,HANIWA_T_SUPPORT,60,5,false,{},{},{HANIWA_A_ARMY1}},
-	{LOC_SYSTEM_HANIWA_A_WARN_NAMED_NAME,LOC_SYSTEM_HANIWA_A_WARN_NAMED_INFO,HANIWA_T_SUPPORT,10,5,false,{},{},{}},
+	{LOC_SYSTEM_HANIWA_A_WARN_NAMED_NAME,LOC_SYSTEM_HANIWA_A_WARN_NAMED_INFO,HANIWA_T_SUPPORT,10,0,false,{},{},{}},
 	{LOC_SYSTEM_HANIWA_A_IDEN_NAME,LOC_SYSTEM_HANIWA_A_IDEN_INFO,HANIWA_T_SUPPORT,10,5,false,{},{},{}},
 	{LOC_SYSTEM_HANIWA_A_HEAL_NAME,LOC_SYSTEM_HANIWA_A_HEAL_INFO,HANIWA_T_SUPPORT,50,10,false,{},{},{}},
 	{LOC_SYSTEM_HANIWA_A_HARDEN1_NAME,LOC_SYSTEM_HANIWA_A_HARDEN1_INFO,HANIWA_T_COMMON,20,20,false,{},{},{}},
@@ -145,6 +145,21 @@ bool haniwa_abil::set_abil(haniwa_abil_key key) {
 	}
 	if(key == HANIWA_A_ARMY2) {
 		haniwa_abil::createHaniwa(2, true);
+	}
+	if(key == HANIWA_A_TALK) {
+		int max_num = haniwa_abil::getMaxHaniwa();
+		for (int i = 0; i < max_num; i++)
+		{
+			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+			{
+				if (it->isLive() && (*it).isUserAlly() && it->map_id == you.haniwa_allys[i].map_id && current_level == you.haniwa_allys[i].floor  &&  env[current_level].isInSight(coord_def(it->position.x, it->position.y)))
+				{
+					printlog(haniwa_speak(&(*it), HS_ENTER), true, false, false, CL_normal);
+					i = max_num;
+					break;
+				}
+			}
+		}
 	}
 
     return true;
@@ -290,8 +305,12 @@ monster* haniwa_abil::createHaniwa(int index, bool first_) {
 
 			if (haniwa_->isYourShight())
 			{
-				LocalzationManager::printLogWithKey(first_?LOC_SYSTEM_GOD_KEIKI_CREATE:LOC_SYSTEM_GOD_KEIKI_REVIVE,true,false,false,CL_keiki,
-					 PlaceHolderHelper(haniwa_->name.getName()));
+				if(has_abil(HANIWA_A_TALK)) {
+					printlog(haniwa_speak(haniwa_, HS_REVIVE), true, false, false, CL_normal);
+				} else {
+					LocalzationManager::printLogWithKey(first_?LOC_SYSTEM_GOD_KEIKI_CREATE:LOC_SYSTEM_GOD_KEIKI_REVIVE,true,false,false,CL_keiki,
+						PlaceHolderHelper(haniwa_->name.getName()));
+				}
 			}
             return haniwa_;
         }
@@ -429,10 +448,18 @@ void haniwa_abil::upgradeHaniwa(monster* mon) {
 	}
 	
 	if(!has_abil(HANIWA_A_HORSE)) {
-		mon->image = &img_mons_haniwa;
+		if(has_abil(HANIWA_A_GIRL)) {
+			mon->image = &img_mons_haniwa_human;
+		} else {
+			mon->image = &img_mons_haniwa;
+		}
 	}
 	else {
-		mon->image = &img_mons_horse_haniwa;
+		if(has_abil(HANIWA_A_GIRL)) {
+			mon->image = &img_mons_haniwa_human_horse;
+		} else {
+			mon->image = &img_mons_horse_haniwa;
+		}
 		mon->speed = 7;
 	}
 
@@ -484,7 +511,33 @@ void haniwa_abil::haniwaDraw(float x_, float y_, float scale_) {
 	//13: 활 (LR, 승마)
 	//14: 창 (LR, 승마)
 	//15: 응급상자(R, 승마)
-	if(!has_abil(HANIWA_A_HORSE)) {
+	if(has_abil(HANIWA_A_GIRL)) {
+		if(has_abil(HANIWA_A_SWORD))
+			img_mons_haniwa_human_equipments[0].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		if(has_abil(HANIWA_A_TANMAC))
+			img_mons_haniwa_human_equipments[3].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		else if(has_abil(HANIWA_A_BOW))
+			img_mons_haniwa_human_equipments[5].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		else if(has_abil(HANIWA_A_SPEAR))
+			img_mons_haniwa_human_equipments[6].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		else if(has_abil(HANIWA_A_HEAL))
+			img_mons_haniwa_human_equipments[7].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		
+		//왼손
+		if(has_abil(HANIWA_A_SHIELD2))
+			img_mons_haniwa_human_equipments[8].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		else if(has_abil(HANIWA_A_SHIELD1))
+			img_mons_haniwa_human_equipments[1].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		else if(has_abil(HANIWA_A_DOUBLE_SWORD))
+			img_mons_haniwa_human_equipments[2].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+
+		//머리
+		if(has_abil(HANIWA_A_HARDEN1)) 
+		{
+			img_mons_haniwa_human_equipments[4].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
+		}
+	}
+	else if(!has_abil(HANIWA_A_HORSE)) {
 		if(has_abil(HANIWA_A_SWORD))
 			img_mons_haniwa_equipments[0].draw(g_pSprite, x_, y_,0.0f,scale_,scale_, 255);
 		if(has_abil(HANIWA_A_TANMAC))
@@ -578,6 +631,64 @@ void han_weapon_gift(bool speak_)
 		MoreWait();
 	}
 }
+
+
+
+
+
+string haniwa_speak(monster* monster_info, HANIWA_SPEAK type)
+{
+	
+	switch(type)
+	{
+	case HS_NORMAL:
+			switch(randA(7))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HANIWA_FREIND1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+			{
+				haniwa_abil_type currenttype_ = haniwa_abil::currentType();
+				switch(currenttype_) {
+					case HANIWA_T_COMBAT:
+					case HANIWA_T_COMMON:
+					default:
+						return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HANIWA_FREIND2), PlaceHolderHelper(monster_info->GetName()->getName()));	
+					case HANIWA_T_MAGIC:
+						return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HANIWA_FREIND3), PlaceHolderHelper(monster_info->GetName()->getName()));	
+					case HANIWA_T_SUPPORT:
+						return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HANIWA_FREIND4), PlaceHolderHelper(monster_info->GetName()->getName()));	
+				}
+			}
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HANIWA_FREIND5), PlaceHolderHelper(monster_info->GetName()->getName()));			
+			case 3:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HANIWA_FREIND6), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 4:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HANIWA_FREIND7), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 5:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HANIWA_FREIND8), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 6:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HANIWA_FREIND9), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 7:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HANIWA_FREIND10), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+	case HS_ENTER:
+		return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HANIWA_ENTER), PlaceHolderHelper(monster_info->GetName()->getName()));
+	case HS_REVIVE: 
+			switch(randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HANIWA_REVIVE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HANIWA_REVIVE2), PlaceHolderHelper(monster_info->GetName()->getName()));		
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HANIWA_REVIVE3), PlaceHolderHelper(monster_info->GetName()->getName()));			
+			}
+	}
+	return "";
+}
+
 
 
 void haniwa_abil::increaseGift(int haniwa_, int index_) {

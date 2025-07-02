@@ -75,6 +75,13 @@ enum haniwa_abil_type {
 };
 
 
+enum HANIWA_SPEAK
+{
+	HS_NORMAL,
+	HS_ENTER,
+	HS_REVIVE
+};
+
 class haniwa_abil {
 public:
 	LOCALIZATION_ENUM_KEY name;
@@ -115,6 +122,7 @@ public:
 };
 
 bool keiki_gift();
+string haniwa_speak(monster* monster_info, HANIWA_SPEAK type);
 extern haniwa_abil haniwa_abil_list[HANIWA_A_MAX];
 
 #endif // __KEIKI_H__

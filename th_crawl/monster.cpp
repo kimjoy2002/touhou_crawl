@@ -3135,6 +3135,20 @@ int monster::action(int delay_)
 				if(you.haniwa_allys[i].map_id == map_id && current_level == you.haniwa_allys[i].floor) {
 					if(env[current_level].isInSight(position)) {
 						you.haniwa_allys[i].cooldown = 0;
+						
+
+						if(haniwa_abil::has_abil(HANIWA_A_HEAL)) {
+							if(randA(9) == 0) {
+								if(you.GetHp() < you.GetMaxHp() &&  env[current_level].insight_mon(MET_ENEMY) == 0) {
+									if(env[current_level].isInSight(position)) {
+										LocalzationManager::printLogWithKey(LOC_SYSTEM_HEAL_OTHER,false,false,false,CL_normal,
+											PlaceHolderHelper(GetName()->getName()),
+											PlaceHolderHelper(you.GetName()->getName()));
+									}
+									you.HpUpDown(rand_int(5,9), DR_EFFECT);
+								}
+							}
+						}
 					}
 				}
 			}

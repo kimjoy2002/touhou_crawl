@@ -4845,6 +4845,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 		rune[RUNE_HAKUREI_ORB]++;
 		return 1;
 	}
+	
 	if(t->type == ITM_BOOK)
 	{
 		t->Identify(); //책은 항상 줍자마자 식별
@@ -4858,6 +4859,27 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 		}
 	}
 
+	if(you.god == GT_KEIKI && haniwa_abil::has_abil(HANIWA_A_IDEN) && t->identify == false && t->drop == false) {
+		int max_num = haniwa_abil::getMaxHaniwa();
+		for(int i = 0; i < max_num; i++)
+		{
+			int k = 0;
+			if(you.haniwa_allys[i].floor == current_level) {
+				for(auto it = env[you.haniwa_allys[i].floor].mon_vector.begin(); k == 0 && it != env[you.haniwa_allys[i].floor].mon_vector.end();it++)
+				{
+					if(it->isLive() && it->map_id == you.haniwa_allys[i].map_id)
+					{
+						if(randA(2) == 0) {
+							printlog(LocalzationManager::formatString(LOC_SYSTEM_IDENTIFY_HANIWA, PlaceHolderHelper(t->GetName())) + " ",false,false,false,CL_normal);
+							t->Identify();
+						}
+						break;
+					}
+
+				}
+			}
+		}
+	}
 
 
 	if(t->is_pile)

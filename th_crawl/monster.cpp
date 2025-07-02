@@ -5736,7 +5736,9 @@ bool monster::special_state(bool is_sight_for_monster) {
 				attack_infor temp_infor(randC(2,damage_),damage_*2,99,this,GetParentType(),ATT_FIRE_BLAST,name_infor(LOC_SYSTEM_ATT_MISSLE));
 				BaseBomb(position, &img_blast[ice_?4:0],temp_infor, this);
 			}
-			Sleep(30);
+			if(env[current_level].isInSight(position)) {
+				Sleep(30);
+			}
 			env[current_level].MakeNoise(position, 8, this);
 			env[current_level].ClearEffect();
 			dead(PRT_NEUTRAL, false);

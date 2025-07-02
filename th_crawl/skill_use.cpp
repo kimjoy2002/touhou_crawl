@@ -215,10 +215,17 @@ bool skill_off_invisible(int pow, bool short_, unit* order, coord_def target)
 bool skill_soul_shot(int power, unit* order, coord_def target)
 {
 	PlaySE("soul_shot");
-	for(int i=-2;i<=2;i++)
-		for(int j=-2;j<=2;j++)
-			if(abs(i)+abs(j)<4 && env[current_level].isMove(order->position.x+i,order->position.y+j,true))
+	bool effect_ = false;
+	for(int i=-2;i<=2;i++) {
+		for(int j=-2;j<=2;j++) {
+			if(abs(i)+abs(j)<4 && env[current_level].isMove(order->position.x+i,order->position.y+j,true)) {
 				env[current_level].MakeEffect(coord_def(order->position.x+i,order->position.y+j),&img_blast[3],false);
+				if(env[current_level].isInSight(coord_def(order->position.x+i,order->position.y+j))) {
+					effect_ = true;
+				}
+			}
+		}
+	}
 	for(int i=-2;i<=2;i++)
 	{
 		for(int j=-2;j<=2;j++)
@@ -233,7 +240,9 @@ bool skill_soul_shot(int power, unit* order, coord_def target)
 			}
 		}
 	}
-	Sleep(300);
+	if(effect_) {
+		Sleep(300);
+	}
 	env[current_level].ClearEffect();
 
 	return false;

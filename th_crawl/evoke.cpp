@@ -678,6 +678,8 @@ bool evoke_bomb(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("nuke");
 		}
+
+		bool effect_insight = false;
 		textures* t_ = &img_blast[0];
 		{
 			rect_iterator rit(order->position, 2, 2);
@@ -688,6 +690,9 @@ bool evoke_bomb(int power, bool short_, unit* order, coord_def target)
 					if (order->isSightnonblocked(*rit))
 					{
 						env[current_level].MakeEffect(*rit, t_, false);
+						if(env[current_level].isInSight(*rit)) {
+							effect_insight = true;
+						}
 					}
 				}
 		}
@@ -716,7 +721,9 @@ bool evoke_bomb(int power, bool short_, unit* order, coord_def target)
 				}
 			}
 		}
-		Sleep(300);
+		if (effect_insight) {
+			Sleep(300);
+		}
 		env[current_level].ClearEffect();
 		return true;
 	}

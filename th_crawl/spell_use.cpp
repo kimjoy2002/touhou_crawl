@@ -336,10 +336,17 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 void BaseBomb_forAlly(coord_def pos, textures* t_ , attack_infor& att_, unit* order_, int sleep_, bool frozen_)
 {
 	{
-		for(int i=-1;i<=1;i++)
-			for(int j=-1;j<=1;j++)
-				if(env[current_level].isMove(pos.x+i,pos.y+j,true))
+		bool effect_ = false;
+		for(int i=-1;i<=1;i++) {
+			for(int j=-1;j<=1;j++) {
+				if(env[current_level].isMove(pos.x+i,pos.y+j,true)) {
 					env[current_level].MakeEffect(coord_def(pos.x+i,pos.y+j),t_,false);
+					if(env[current_level].isInSight(coord_def(pos.x+i,pos.y+j))) {
+						effect_ = true;
+					}
+				}
+			}
+		}
 		for(int i=-1;i<=1;i++)
 		{
 			for(int j=-1;j<=1;j++)
@@ -358,17 +365,26 @@ void BaseBomb_forAlly(coord_def pos, textures* t_ , attack_infor& att_, unit* or
 				}
 			}
 		}
-		Sleep(sleep_);
+		if(effect_) {
+			Sleep(sleep_);
+		}
 	}
 }
 
 void BaseBomb(coord_def pos, textures* t_ , attack_infor& att_, unit* except_)
 {
 	{
-		for(int i=-1;i<=1;i++)
-			for(int j=-1;j<=1;j++)
-				if(env[current_level].isMove(pos.x+i,pos.y+j,true))
+		bool effect_ = false;
+		for(int i=-1;i<=1;i++) {
+			for(int j=-1;j<=1;j++) {
+				if(env[current_level].isMove(pos.x+i,pos.y+j,true)) {
 					env[current_level].MakeEffect(coord_def(pos.x+i,pos.y+j),t_,false);
+					if(env[current_level].isInSight(coord_def(pos.x+i,pos.y+j))) {
+						effect_ = true;
+					}
+				}
+			}
+		}
 		for(int i=-1;i<=1;i++)
 		{
 			for(int j=-1;j<=1;j++)
@@ -383,8 +399,8 @@ void BaseBomb(coord_def pos, textures* t_ , attack_infor& att_, unit* except_)
 				}
 			}
 		}
-		if(env[current_level].isInSight(pos)) {
-				Sleep(300);
+		if(effect_) {
+			Sleep(300);
 		}
 		env[current_level].ClearEffect();
 	}
@@ -988,7 +1004,9 @@ bool skill_elec(int power, bool short_, unit* order, coord_def target)
 		}
 		beam_infor temp_infor(randA_1(10+power/6),10+power/6,99,order,order->GetParentType(),SpellLength(SPL_SHOCK, order->isplayer()),1,BMT_NORMAL,ATT_THROW_ELEC,name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		ThrowShock(21,order->position,hit_mon->position,temp_infor); 
-		Sleep(120);
+		if(env[current_level].isInSight(order->position) || env[current_level].isInSight(hit_mon->position)) {
+			Sleep(120);
+		}
 		env[current_level].ClearEffect(); 
 		return true;
 	}
@@ -1051,7 +1069,9 @@ bool skill_elec_passive(int power, unit* order)
 		}
 		beam_infor temp_infor(randA_1(9+power/3),9+power/3,99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		ThrowShock(21,order->position,hit_mon->position,temp_infor); 
-		Sleep(120);
+		if(env[current_level].isInSight(order->position) || env[current_level].isInSight(hit_mon->position)) {
+			Sleep(120);
+		}
 		env[current_level].ClearEffect();
 		return true;
 	}
@@ -1109,7 +1129,9 @@ bool skill_elec_ball_bomb(int power, unit* order)
 		}
 		beam_infor temp_infor(randC(3, 8 + power * 1 / 6), 3 * (8 + power * 1 / 6), 99, order, order->GetParentType(), spell_length_, 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		ThrowShock(42, order->position, hit_mon->position, temp_infor);
-		Sleep(120);
+		if(env[current_level].isInSight(order->position) || env[current_level].isInSight(hit_mon->position)) {
+			Sleep(120);
+		}
 		env[current_level].ClearEffect();
 		return true;
 	}
@@ -1205,7 +1227,9 @@ bool skill_chain_lightning(int power, bool short_, unit* order, coord_def target
 		if(chain--<1)
 			break;
 	}
-	Sleep(120);
+	if(env[current_level].isInSight(order->position)) {
+		Sleep(120);
+	}
 	env[current_level].ClearEffect();
 	return hit_;
 
@@ -1252,10 +1276,17 @@ bool base_bomb(int damage, int max_damage, int size, attack_type type, unit* ord
 		ball_size -= size;
 	if(size == 4)
 		ball_size -= 2*size;
-	for(int i=-1*size;i<=size;i++)
-		for(int j=-1*size;j<=size;j++)
-			if(abs(i)*abs(j)<ball_size && env[current_level].isMove(target.x+i,target.y+j,true))
+	bool effect_ = false;
+	for(int i=-1*size;i<=size;i++) {
+		for(int j=-1*size;j<=size;j++) {
+			if(abs(i)*abs(j)<ball_size && env[current_level].isMove(target.x+i,target.y+j,true)) {
 				env[current_level].MakeEffect(coord_def(target.x+i,target.y+j),image_,false);
+				if(env[current_level].isInSight(coord_def(target.x+i,target.y+j))) {
+					effect_ = true;
+				}
+			}
+		}
+	}
 	for(int i=-1*size;i<=size;i++)
 	{
 		for(int j=-1*size;j<=size;j++)
@@ -1274,7 +1305,9 @@ bool base_bomb(int damage, int max_damage, int size, attack_type type, unit* ord
 			}
 		}
 	}
-	Sleep(300);
+	if(effect_) {
+		Sleep(300);
+	}
 	env[current_level].ClearEffect();
 
 	return false;
@@ -1512,7 +1545,9 @@ bool skill_confuse_cloud(int power, bool short_, unit* order, coord_def target)
 					for(int j=-1;j<=1;j++)
 							env[current_level].MakeSmoke(coord_def(pos.x+k,pos.y+j),img_fog_poison,SMT_CONFUSE,rand_int(6,12)+randA(power/15),0,order);
 
-				Sleep(300);
+				if(env[current_level].isInSight(pos)) {
+					Sleep(300);
+				}
 				env[current_level].ClearEffect();
 
 			}
@@ -2376,7 +2411,9 @@ bool skill_stone_uplift(int pow, bool short_, unit* order, coord_def target)
 
 			}
 		}
-		Sleep(300);
+		if(env[current_level].isInSight(target)) {
+			Sleep(300);
+		}
 		env[current_level].ClearEffect();
 		return true;
 	}
@@ -2482,7 +2519,9 @@ bool skill_burst(int pow, bool short_, unit* order, coord_def target)
 				}
 			}
 		}
-		Sleep(300);
+		if(env[current_level].isInSight(target)) {
+			Sleep(300);
+		}
 		env[current_level].ClearEffect();
 		return true;
 	}
@@ -2707,7 +2746,9 @@ bool skill_fire_storm(int power, bool short_, unit* order, coord_def target)
 				}
 			}
 		}
-		Sleep(300);
+		if(env[current_level].isInSight(target)) {
+			Sleep(300);
+		}
 		env[current_level].ClearEffect();
 		env[current_level].MakeNoise(target,16,NULL);	
 		return true;
@@ -2769,7 +2810,9 @@ bool skill_blizzard(int power, bool short_, unit* order, coord_def target)
 bool skill_perfect_freeze(int pow, bool short_, unit* order, coord_def target)
 {
 	map_effect = 1;
-	Sleep(500);
+	if(env[current_level].isInSight(order->position)) {
+		Sleep(500);
+	}
 	
 	for(vector<monster>::iterator it = env[current_level].mon_vector.begin(); it!=env[current_level].mon_vector.end(); it++)
 	{	
@@ -3499,7 +3542,9 @@ bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target)
 				}
 			}
 		}
-		Sleep(300);
+		if(env[current_level].isInSight(target)) {
+			Sleep(300);
+		}
 		env[current_level].ClearEffect();	
 		env[current_level].MakeNoise(target,12,NULL);		
 		BaseSummon(MON_NAMAZ, rand_int(20,40)+power/5, false, false, 2, order, target, SKD_SUMMON_NAMAZ, GetSummonMaxNumber(SPL_SUMMON_NAMAZ));
@@ -3644,7 +3689,9 @@ bool skill_thunder(int power, bool short_, unit* order, coord_def target)
 				}
 			}
 		}
-		Sleep(300);
+		if(env[current_level].isInSight(target)) {
+			Sleep(300);
+		}
 		env[current_level].ClearEffect();
 		return true;
 	}
@@ -3770,6 +3817,7 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("wind");
 		}
+		bool effect_ = false;
 		vector<coord_def> vt_;
 		{
 			rect_iterator rit(target,1,1);
@@ -3780,6 +3828,9 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 					if(env[current_level].isMove(rit->x,rit->y))
 					{
 						env[current_level].MakeEffect(*rit,&img_blast[4],false);
+						if(env[current_level].isInSight(*rit)) {
+							effect_ = true;
+						}
 						vt_.push_back(*rit);
 					}
 				}
@@ -3801,7 +3852,9 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 				env[current_level].MakeSmoke((*it),img_fog_tonado,SMT_WHIRLWIND,rand_int(6,12)+randA(power/15),0,order);
 			}
 		}
-		Sleep(300);
+		if(effect_) {
+			Sleep(300);
+		}
 		env[current_level].ClearEffect();
 		
 		you.SetXY(result_.pop());
@@ -3821,7 +3874,9 @@ bool skill_shatter(int power, bool short_, unit* order, coord_def target)
 	}
 	printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_EARTHQUAKE),false,false,false,CL_normal);
 	map_effect = 2;
-	Sleep(500);
+	if(env[current_level].isInSight(order->position)) {
+		Sleep(500);
+	}
 	
 	for(vector<monster>::iterator it = env[current_level].mon_vector.begin(); it!=env[current_level].mon_vector.end(); it++)
 	{	
@@ -4003,7 +4058,9 @@ bool skill_emerald_city(int power, bool short_, unit* order, coord_def target)
 
 			}
 		}
-		Sleep(300);
+		if(env[current_level].isInSight(order->position)) {
+			Sleep(300);
+		}
 		env[current_level].ClearEffect();
 		return true;
 	}
@@ -4451,7 +4508,9 @@ bool skill_target_elec(int power, bool short_, unit* order, coord_def target)
 		}
 		beam_infor temp_infor(randA_1(10 + power / 6), 10 + power / 6, 99, order, order->GetParentType(), SpellLength(SPL_SHOCK, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		ThrowShock(21, order->position, target_unit->position, temp_infor);
-		Sleep(120);
+		if(env[current_level].isInSight(order->position)) {
+			Sleep(120);
+		}
 		env[current_level].ClearEffect();
 		return true;
 	}
@@ -5238,7 +5297,9 @@ bool skill_allround_tanmac(int pow, bool short_, unit* order, coord_def target)
 						tanmac_list.erase(temp);
 					}
 				}
-				Sleep(16);
+				if(env[current_level].isInSight(order->position)) {
+					Sleep(16);
+				}
 				for(list<shared_ptr<ThrowTamacInstance>>::iterator it = tanmac_list.begin(); it != tanmac_list.end();) {
 					list<shared_ptr<ThrowTamacInstance>>::iterator temp = it++;
 					if((*temp)->oneturn_after(false)) {
@@ -5247,7 +5308,9 @@ bool skill_allround_tanmac(int pow, bool short_, unit* order, coord_def target)
 					}
 				}
 			}
-			Sleep(60);
+			if(env[current_level].isInSight(order->position)) {
+				Sleep(60);
+			}
 			env[current_level].ClearEffect();
 			return true;
 		}

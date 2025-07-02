@@ -567,8 +567,11 @@ coord_def ThrowTamacInstance::endShoot(bool sleep_, bool without_laser) {
 							env[current_level].MakeEffect(pos_, GetTanmacGraphic(graphic_type, direc, count++, path), false);
 						else if (item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
 							env[current_level].MakeEffect(pos_, item_->image, false);
-						if(sleep_)
-							Sleep(16);
+						if(sleep_) {
+							if(env[current_level].isInSight(pos_)) {
+								Sleep(16);
+							}
+						}
 						if(without_laser) {
 							env[current_level].ClearWithoutLaserEffect();
 						} else {
@@ -590,8 +593,11 @@ coord_def ThrowTamacInstance::endShoot(bool sleep_, bool without_laser) {
 		}
 		break;
 	}
-	if(sleep_)
-		Sleep(60);
+	if(sleep_) {
+		if(env[current_level].isInSight(*beam)) {
+			Sleep(60);
+		}
+	}
 	if(effect_delete)
 		env[current_level].ClearEffect();
 	return prev;
@@ -606,7 +612,9 @@ coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, cons
 		coord_def hit_pos_;
 		if(throw_instance.oneturn(hit_pos_))
 			break;
-		Sleep(16);
+		if(env[current_level].isInSight(*(throw_instance.beam))) {
+			Sleep(16);
+		}
 		if(throw_instance.oneturn_after(false))
 			break;
 	}
@@ -621,7 +629,9 @@ unit* throwtanmac_check_hit_(int graphic_type, textures* t_, beam_iterator& beam
 		coord_def hit_pos_;
 		if(throw_instance.oneturn(hit_pos_))
 			break;
-		Sleep(16);
+		if(env[current_level].isInSight(*(throw_instance.beam))) {
+			Sleep(16);
+		}
 		if(throw_instance.oneturn_after(false))
 			break;
 	}
@@ -643,6 +653,7 @@ coord_def throwtanmac_temp(int graphic_type, textures* t_, beam_iterator& beam, 
 	int length = 1;
 	int count = 0;
 	int path = 8;
+	bool effect_ = false;
 	switch(infor_.type1)
 	{
 	case BMT_NORMAL:
@@ -689,7 +700,10 @@ coord_def throwtanmac_temp(int graphic_type, textures* t_, beam_iterator& beam, 
 				env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path),false);
 			else if(item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
 				env[current_level].MakeEffect(postion_,item_->image,false);
-			Sleep(16);
+			if(env[current_level].isInSight(postion_)) {
+				effect_ = true;
+				Sleep(16);
+			}
 			length++;
 			if(pow((float)abs(beam.start_pos().x-(*beam).x),2)+pow((float)abs(beam.start_pos().y-(*beam).y),2)>(infor_.length+1)*(infor_.length+1)-1)
 				break;
@@ -720,7 +734,9 @@ coord_def throwtanmac_temp(int graphic_type, textures* t_, beam_iterator& beam, 
 							env[current_level].MakeEffect(pos_, GetTanmacGraphic(graphic_type, direc, count++, path), false);
 						else if (item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
 							env[current_level].MakeEffect(pos_, item_->image, false);
-						Sleep(16);
+						if(env[current_level].isInSight(pos_)) {
+							Sleep(16);
+						}
 						env[current_level].ClearEffect();
 						length--;
 					}
@@ -738,7 +754,9 @@ coord_def throwtanmac_temp(int graphic_type, textures* t_, beam_iterator& beam, 
 		}
 		break;
 	}
-	Sleep(60);
+	if(effect_) {
+		Sleep(60);
+	}
 	if(effect_delete)
 		env[current_level].ClearEffect();
 	return prev;
@@ -831,6 +849,7 @@ bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_,
 	int direc = beam.GetDirec();
 	int count = 0;
 	int path = 8;
+	bool effect_ = false;
 	switch(infor_.type1)
 	{
 	case BMT_NORMAL:
@@ -872,16 +891,22 @@ bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_,
 				if(it->length> temp_len_*temp_len_)
 				{
 					temp_len_++;
-					Sleep(16);
+					if(env[current_level].isInSight(it->pos)) {
+						Sleep(16);
+					}
 					if(infor_.type1 == BMT_NORMAL || infor_.type1 == BMT_WALL)
 						env[current_level].ClearEffect();
-				}	
+				}
+				if(env[current_level].isInSight(it->pos)) {
+					effect_ = true;
+				}
 				if(env[current_level].isMove(it->pos,true) && (!infor_.order || !infor_.order->isplayer() || env[current_level].isInSight(it->pos)) 
 					&& (!infor_.order ||  infor_.order->isSightnonblocked(it->pos)))
 				{
 					path = 10*GetPosToDirec(beam.start_pos(),it->pos);
-					if(graphic_type)
-							env[current_level].MakeEffect(it->pos,GetTanmacGraphic(graphic_type, direc, count++,path),false);
+					if(graphic_type) {
+						env[current_level].MakeEffect(it->pos,GetTanmacGraphic(graphic_type, direc, count++,path),false); 
+					}
 					for(vector<monster>::iterator it2=env[current_level].mon_vector.begin();it2!=env[current_level].mon_vector.end();it2++)
 					{
 						if((*it2).isLive() && (*it2).position.x == it->pos.x && (*it2).position.y == it->pos.y &&
@@ -938,11 +963,16 @@ bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_,
 		break;
 	}
 	if(infor_.type1 == BMT_NORMAL){		
-		Sleep(16);
+		if(effect_) {
+			Sleep(16);
+		}
 		env[current_level].ClearEffect();
 	}
-	else
-		Sleep(300);
+	else {
+		if(effect_) {
+			Sleep(300);
+		}
+	}
 	if(effect_delete)
 		env[current_level].ClearEffect();
 	return true;

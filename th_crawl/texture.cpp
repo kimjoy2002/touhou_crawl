@@ -22,45 +22,45 @@
 
 const char *imgfile_title[MAX_TITLE] = 
 {
-	"./data/title.png",
-	"./data/title2.png",
-	//"./data/title_0.png",
-	//"./data/title_1.png",
-	"./data/title_3.png",
-	"./data/title_4.png",
-	"./data/title_5.png",
-	"./data/title_6.png",
-	"./data/title_7.png"
+	"./data/title",
+	"./data/title2",
+	//"./data/title_0",
+	//"./data/title_1",
+	"./data/title_3",
+	"./data/title_4",
+	"./data/title_5",
+	"./data/title_6",
+	"./data/title_7"
 };
 
 const char *imgfile_god[GT_LAST] =
 {
-	"./data/god/joon_and_sion.png",//GT_JOON_SION = GT_FIRST,
-	"./data/god/byakuren.png",//GT_BYAKUREN,
-	"./data/god/kanako.png",//GT_KANAKO,
-	"./data/god/suwako.png",//GT_SUWAKO,
-	"./data/god/minoriko.png",//GT_MINORIKO,
+	"./data/god/joon_and_sion",//GT_JOON_SION = GT_FIRST,
+	"./data/god/byakuren",//GT_BYAKUREN,
+	"./data/god/kanako",//GT_KANAKO,
+	"./data/god/suwako",//GT_SUWAKO,
+	"./data/god/minoriko",//GT_MINORIKO,
 
-	"./data/god/mima.png",//GT_MIMA,
-	"./data/god/shinki.png",//GT_SHINKI,
-	"./data/god/yuugi.png",//GT_YUUGI,
-	"./data/god/shizuha.png",//GT_SHIZUHA,
-	"./data/god/hina.png",//GT_HINA,
+	"./data/god/mima",//GT_MIMA,
+	"./data/god/shinki",//GT_SHINKI,
+	"./data/god/yuugi",//GT_YUUGI,
+	"./data/god/shizuha",//GT_SHIZUHA,
+	"./data/god/hina",//GT_HINA,
 
-	"./data/god/yukari.png",//GT_YUKARI,
-	"./data/god/eirin.png",//GT_EIRIN,
-	"./data/god/yuyuko.png",//GT_YUYUKO,
-	"./data/god/satori.png",//GT_SATORI,
-	"./data/god/tensi.png",//GT_TENSI,
+	"./data/god/yukari",//GT_YUKARI,
+	"./data/god/eirin",//GT_EIRIN,
+	"./data/god/yuyuko",//GT_YUYUKO,
+	"./data/god/satori",//GT_SATORI,
+	"./data/god/tensi",//GT_TENSI,
 
-	"./data/god/seija.png",//GT_SEIJA,
-	"./data/god/lilly.png",//GT_LILLY,
-	"./data/god/miko.png",//GT_MIKO,
-	"./data/god/okina.png",//GT_OKINA,
-	"./data/god/junko.png",//GT_JUNKO
-	"./data/god/junko.png",//GT_SHIKIEIKI
-	"./data/god/keiki.png",//GT_KEIKI
-	"./data/god/junko.png",//GT_TENKYUU
+	"./data/god/seija",//GT_SEIJA,
+	"./data/god/lilly",//GT_LILLY,
+	"./data/god/miko",//GT_MIKO,
+	"./data/god/okina",//GT_OKINA,
+	"./data/god/junko",//GT_JUNKO
+	"./data/god/junko",//GT_SHIKIEIKI
+	"./data/god/keiki",//GT_KEIKI
+	"./data/god/junko",//GT_TENKYUU
 };
 
 
@@ -2351,27 +2351,65 @@ TextureFile::~TextureFile()
 //로딩
 bool TextureFile::loading(ID3D11Device* device, ID3D11DeviceContext* context)
 {
+    std::string pngName = std::string(name) + ".png";
+    std::string datName = std::string(name) + ".dat";
+
     struct stat st = {};
-    if (stat(name, &st) == -1) {
-        return false;
-	}
-	std::wstring wname = ConvertUTF8ToUTF16(name);
+    if (stat(pngName.c_str(), &st) == 0) {
+        // PNG 로딩
+        std::wstring wname = ConvertUTF8ToUTF16(pngName);
+        HRESULT hr = DirectX::CreateWICTextureFromFileEx(
+            device,
+            context,
+            wname.c_str(),
+            0,
+            D3D11_USAGE_DEFAULT,
+            D3D11_BIND_SHADER_RESOURCE,
+            0,
+            0,
+            DirectX::WIC_LOADER_FORCE_SRGB,
+            nullptr,
+            &pTexture
+        );
+        return SUCCEEDED(hr);
+    }
+    else if (stat(datName.c_str(), &st) == 0) {
+        // dat 파일 로딩
+        FILE* fp = fopen(datName.c_str(), "rb");
+        if (!fp) return false;
 
-    HRESULT hr = DirectX::CreateWICTextureFromFileEx(
-        device,
-        context,
-		wname.c_str(),
-		0,
-		D3D11_USAGE_DEFAULT,
-		D3D11_BIND_SHADER_RESOURCE,
-		0,
-		0,
-		DirectX::WIC_LOADER_FORCE_SRGB,
-        nullptr,
-        &pTexture
-    );
+        fseek(fp, 0, SEEK_END);
+        size_t fileSize = ftell(fp);
+        fseek(fp, 0, SEEK_SET);
 
-    return SUCCEEDED(hr);
+        std::vector<uint8_t> buffer(fileSize);
+        fread(buffer.data(), 1, fileSize, fp);
+        fclose(fp);
+
+        // XOR 복호화
+        const uint8_t key = 0xA5;
+        for (size_t i = 0; i < fileSize; ++i)
+            buffer[i] ^= key;
+
+		HRESULT hr = DirectX::CreateWICTextureFromMemoryEx(
+			device,
+			context,
+			buffer.data(),
+			buffer.size(),
+			0, // maxsize
+			D3D11_USAGE_DEFAULT,
+			D3D11_BIND_SHADER_RESOURCE,
+			0, // CPU access
+			0, // misc flags
+			DirectX::WIC_LOADER_FORCE_SRGB,
+			nullptr,
+			&pTexture
+		);
+        return SUCCEEDED(hr);
+    }
+
+    // 둘 다 실패
+    return false;
 }
 
 //-----------------------------------------------------------

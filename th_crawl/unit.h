@@ -152,7 +152,7 @@ public:
 		//현재는 몬스터의 timedelay만 변경할 수 있게 함
 		return 0;
 	}
-	virtual bool AttackedTarget(unit *order_){return false;};//공격받는다.
+	virtual bool AttackedTarget(unit *order_, bool nightmare_ = false){return false;};//공격받는다.
 	virtual bool LostTarget(){return false;};//타겟을 잃는다.
 	virtual void CheckSightNewTarget(){return;};//새로운 타겟을 찾는다.
 

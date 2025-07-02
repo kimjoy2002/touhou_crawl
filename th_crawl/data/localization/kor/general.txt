@@ -2340,6 +2340,9 @@ LOC_SYSTEM_SPELL_MYSTIA_SONG,밤참새의 노랫소리가 들려온다!
 LOC_SYSTEM_SPELL_DREAM_CALL,적들이 당신을 순식간에 둘러쌓았다!
 LOC_SYSTEM_SPELL_REIMU_BARRIER,레이무에 의해 도망칠 수 없는 결계가 쳐졌다!
 LOC_SYSTEM_SPELL_TRACKING,당신은 미지의 힘에 의해 추적당한다.
+LOC_SYSTEM_SPELL_ELEMENTAL_HARVESTER_FAIL,이 방향으론 톱니바퀴를 소환할 수 없다.
+LOC_SYSTEM_SPELL_NIGHTMARE_FAIL,자고 있는 대상에게만 사용가능하다.
+LOC_SYSTEM_SPELL_NIGHTMARE_SUCCESS,{0:은|는} {1}의 악몽을 끌어냈다!
 LOC_SYSTEM_SPELL_TOO_DANGEROURS,이 마법은 사용하기엔 너무 위험하다. 그래도 쓸건가?
 LOC_SYSTEM_SPELL_SELF_HURT,이 공격은 당신에게 피해를 줄 것이다. 그래도 쓸건가?
 LOC_SYSTEM_SPELL_BLOCK,여긴 막혀있다.

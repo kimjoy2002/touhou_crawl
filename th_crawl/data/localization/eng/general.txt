@@ -2340,6 +2340,9 @@ LOC_SYSTEM_SPELL_MYSTIA_SONG,You hear the song of the night sparrow!
 LOC_SYSTEM_SPELL_DREAM_CALL,Enemies have surrounded you in an instant!
 LOC_SYSTEM_SPELL_REIMU_BARRIER,A barrier set by Reimu prevents escape!
 LOC_SYSTEM_SPELL_TRACKING,You are being tracked by an unknown force.
+LOC_SYSTEM_SPELL_ELEMENTAL_HARVESTER_FAIL,You can't summon the cogwheel in that direction.
+LOC_SYSTEM_SPELL_NIGHTMARE_FAIL,This spell can only be used on sleeping targets.
+LOC_SYSTEM_SPELL_NIGHTMARE_SUCCESS,{0} draw{0!=you?s:} out {1}{1==you?r:'s} nightmare!
 LOC_SYSTEM_SPELL_TOO_DANGEROURS,This spell is too dangerous to use. Still want to use it?
 LOC_SYSTEM_SPELL_SELF_HURT,This attack will hurt you too. Still want to use it?
 LOC_SYSTEM_SPELL_BLOCK,This place is blocked.

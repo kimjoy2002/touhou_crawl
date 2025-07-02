@@ -52,7 +52,7 @@ MON_REMILIAYUKKURI,Yukkuri Remilia,A creepy lifeform with only a head. Their num
 MON_ALICEYUKKURI,Yukkuri Alice,A creepy lifeform with only a head. Their numbers have been rapidly increasing.\nA chic, urban-style yukkuri.
 MON_YOUMUYUKKURI,Yukkuri Youmu,A creepy lifeform with only a head. Their numbers have been rapidly increasing.\nMyon!
 MON_YAMABIKO,Yamabiko,A youkai of echoes that replies when voices are heard in the mountains.\nResembles a mix of dog and monkey.
-MON_KATPA_SPEAR,Kappa Spearman,A youkai from Genbu Marsh with skillful hands and the ability to manipulate water.\nOnce peaceful river dwellers, they've grown aggressive since the rivers vanished after the dungeon shift.\nThis kappa appears adept at wielding a spear.
+MON_KATPA_SPEAR,Kappa Spearman,A youkai from Genbu Marsh with skillful hands and the ability to manipulate water.\nOnce peaceful river dwellers, they've grown aggressive since the rivers vanished after the dungeon shift.\nThis kappa skillfully wields a spear, allowing it to attack enemies from 2 tiles away.
 MON_KATPA_WATER_WIZARD,Kappa Water Mage,A youkai from Genbu Marsh with skillful hands and the ability to manipulate water.\nOnce peaceful river dwellers, they've grown aggressive since the rivers vanished after the dungeon shift.\nSeems to have exceptional control over water.
 MON_YAMABUSH_TENGU,Yamabushi Tengu,A crow tengu from Youkai Mountain. Works in printing.
 MON_HANATACA_TENGU,Hanataka Tengu,A crow tengu from Youkai Mountain. Works in clerical tasks.\nKnown for a red face and a long nose.
@@ -266,3 +266,8 @@ MON_WOLF_SPIRIT,Wolf Spirit,A member of the Keiga gang, one of the four beast-re
 MON_EAGLE_SPIRIT,Eagle Spirit,A member of the Ganyoku Alliance, one of the four beast-realm factions.\nDominates aerial battles with size and arrogance.\nNormally acts freely, but now acts opportunistically amid the chaos underground.
 MON_OTTER_SPIRIT,Otter Spirit,A member of the Kiketsugyoku gang, one of the four beast-realm factions.\nExcels at ambushes and surprise attacks, despite a gentle appearance.\nSurprisingly, it's said to be the strongest among the beast spirits.
 MON_SECURIRY_DOOR,Security Bars,The security system of the Scarlet Devil Mansion has dropped iron bars to block passage.\nHowever, they seem softer than expected—maybe you could break through with force.
+MON_MISSLE,Missile,A homing missile that chases enemies.\nExplodes in a 3x3 area upon impact.
+MON_HOMING,Homing Shot,A homing projectile that chases a target.\nFlies toward its locked-on enemy, but may disappear if it crashes into walls in tight spaces.
+MON_RABIT_GIANT,Giant Rabbit,A giant rabbit with a muscular physique.\nThrough consistent nutrition and training, it developed an impressive body.\nRumor has it that Eirin's suspicious protein drinks may have helped...
+MON_RABIT_ALCHEMIST,Rabbit Alchemist,A rabbit wearing a gas mask and loaded with potions.\nStudied pharmaceutical alchemy under Eirin and discovered its own talent.\nDue to its master’s influence, it now acts more like a mad scientist.
+MON_COGWHEEL,Cogwheel,A gear created through alchemy.\nMoves around and deals damage to enemies in all 8 surrounding directions.

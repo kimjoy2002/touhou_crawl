@@ -245,7 +245,7 @@ public:
 		time_delay += delay_;
 		return time_delay;
 	}
-	bool AttackedTarget(unit *order_);
+	bool AttackedTarget(unit *order_, bool nightmare_ = false);
 	bool LostTarget()
 	{
 		state.StateTransition(MSI_LOST);

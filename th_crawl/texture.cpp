@@ -1026,6 +1026,10 @@ textures img_mons_otter_spirit(&texture_monster02, 51, 255);
 textures img_mons_rabbit_giant(&texture_monster02, 53, 255);
 textures img_mons_rabbit_alchemist(&texture_monster02, 54, 255);
 
+textures img_mons_elemental_harvester(&texture_monster02, 55, 255);
+textures img_mons_haniwa_human(&texture_monster02, 56, 255);
+textures img_mons_haniwa_human_horse(&texture_monster02, 66, 255);
+
 
 textures img_mons_haniwa_equipments[] =
 {
@@ -1045,6 +1049,20 @@ textures img_mons_haniwa_equipments[] =
 	textures(&texture_monster02, 41, 255), //활 (LR, 승마)
 	textures(&texture_monster02, 42, 255), //창 (LR, 승마)
 	textures(&texture_monster02, 47, 255), //응급상자(R, 승마)
+};
+
+
+textures img_mons_haniwa_human_equipments[] =
+{
+	textures(&texture_monster02, 57, 255), //칼 (R)
+	textures(&texture_monster02, 58, 255), //방패 (L)
+	textures(&texture_monster02, 59, 255), //보조칼 (L)
+	textures(&texture_monster02, 60, 255), //지팡이 (R)
+	textures(&texture_monster02, 61, 255), //헬멧
+	textures(&texture_monster02, 62, 255), //활(LR)
+	textures(&texture_monster02, 63, 255), //창(LR)
+	textures(&texture_monster02, 64, 255), //응급상자(R)
+	textures(&texture_monster02, 65, 255), //황금방패(L)
 };
 
 textures img_mons_stonetower[] =
@@ -3717,6 +3735,12 @@ int texturetoint(textures* input)
 		input == &img_tanmac_homing_cyan[5]||input == &img_tanmac_homing_cyan[6] ||
 		input == &img_tanmac_homing_cyan[7])
 		return 567;
+	else if(input == &img_mons_elemental_harvester)
+		return 598;
+	else if(input == &img_mons_haniwa_human)
+		return 599;
+	else if(input == &img_mons_haniwa_human_horse)
+		return 600;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -4939,6 +4963,12 @@ textures* inttotexture(int input)
 		return &img_item_artifact_amulet;
 	case 597:
 		return &img_tanmac_homing_cyan[1];
+	case 598:
+		return &img_mons_elemental_harvester;
+	case 599:
+		return &img_mons_haniwa_human;
+	case 600:
+		return &img_mons_haniwa_human_horse;
 	default:
 		return &img_mons_default;
 	}

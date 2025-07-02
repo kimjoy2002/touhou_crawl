@@ -5524,12 +5524,160 @@ bool skill_blink_away(int pow, bool short_, unit* order, coord_def target)
 bool skill_elemental_harvester(int pow, bool short_, unit* order, coord_def target)
 {
 
+	beam_iterator beam(order->position,order->position);
+	if(CheckThrowPath(order->position,target,beam))
+	{
+		beam.init();
+		coord_def summon_position = *beam;
+		int id_ = MON_COGWHEEL;
+		if(summon_check(summon_position, summon_position, mondata[id_].flag & M_FLAG_FLY, mondata[id_].flag & M_FLAG_SWIM))
+		{
+			uint64_t flag_=M_FLAG_SUMMON;
+			if(order)
+			{
+				if(order->GetParentType() == PRT_PLAYER || order->GetParentType() == PRT_ALLY)
+				{
+					flag_ |= M_FLAG_ALLY;
+				}
+			}
+			summon_info s_(order?order->GetMapId():-1,SKD_OTHER,-1);
+			monster* mon_=env[current_level].AddMonster_Summon(id_,flag_,summon_position,s_,10);
+
+			if(mon_){
+				if(order && !order->isplayer())
+				{
+					mon_->SetNeutrality(((monster*)order)->s_neutrality);
+				}
+				unit* unit_hit_ = env[current_level].isMonsterPos(target.x, target.y);
+				if(unit_hit_) {	
+					mon_->FoundTarget(unit_hit_, mon_->FoundTime());
+				}
+				else if(env[current_level].isInSight(summon_position))
+					mon_->CheckSightNewTarget();
+				else {
+					mon_->memory_time = mon_->FoundTime();
+					mon_->target_pos = target;
+				}
+				mon_->atk[0] = 25+pow/10;
+				mon_->LevelUpdown(pow/10,6.0f,1.0f);
+			}
+			
+			int len_ = SpellLength(SPL_ELEMENTAL_HARVESTER, order->isplayer());
+			beam++;
+			while(true) {
+				mon_->will_move.push_front(*beam);
+				if(short_ && *beam == target) {
+					break;
+				}
+				if(GetLengthFromCenter(order->position.x, order->position.y, beam->x,  beam->y) >= len_) {
+					break;
+				}
+				beam++;
+			}
+			mon_->PlusTimeDelay(-you.GetSpellDelay()+2*mon_->GetWalkDelay());
+			if (env[current_level].isInSight(summon_position)) {
+				PlaySE("sickle");
+			}
+			return true;
+		}
+	} else {
+		if (order->isplayer()) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ELEMENTAL_HARVESTER_FAIL), true, false, false, CL_normal);
+		}
+	}
 	return false;
 }
 
 bool skill_nightmare_manifest(int pow, bool short_, unit* order, coord_def target)
 {
+	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
+	
+	if(target_unit && order != target_unit)
+	{
+		if(target_unit->isplayer()) {
+			if(you.s_sleep >= 0) {
+				return false;
+			}
+		} else {
+			if(((monster*)target_unit)->state.GetState() != MS_SLEEP) {
+				if(order == &you) {
+					printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_NIGHTMARE_FAIL), true, false, false, CL_normal);
+				}
+				return false;
+			}
+		}
+		
+		if(order->isYourShight() && target_unit->isYourShight())
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_SPELL_NIGHTMARE_SUCCESS,true,false,false,CL_normal,
+				PlaceHolderHelper(order->GetName()->getName()),
+				PlaceHolderHelper(target_unit->GetName()->getName()));
+		}
+		if(target_unit->CalcuateMR(GetDebufPower(SPL_NIGHTMARE_MANIFEST,pow)))
+		{
+			switch(randA(5)) {
+			case 0:
+			case 1:
+				target_unit->SetConfuse(rand_int(3,8));
+				break;
+			case 2:
+			case 3:
+				target_unit->SetSlow(rand_int(15,30));
+				break;
+			case 4:
+				target_unit->SetFear(rand_int(20,40));
+				break;
+			case 5:
+				target_unit->SetMute(rand_int(10,20));
+				break;
+			}
+		}
+		else if(target_unit->isYourShight())
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_RESIST,true,false,false,CL_normal,
+				 PlaceHolderHelper(target_unit->GetName()->getName()));
+		}
 
+		random_extraction<int> rand_mon_;
+		rand_mon_.push(MON_HAUNT);
+		rand_mon_.push(MON_HAUNT);
+		rand_mon_.push(MON_HAUNT);
+		rand_mon_.push(MON_HAUNT);
+		rand_mon_.push(MON_SHEEP);
+		rand_mon_.push(MON_SHEEP);
+		rand_mon_.push(MON_SHEEP);
+		rand_mon_.push(MON_SHEEP);
+
+		if(pow > 80) {
+			rand_mon_.push(MON_LUNATIC, pow>=120?3:2);
+		}
+		if(pow > 100) {
+			rand_mon_.push(MON_NIGHTMARE, pow>=150?3:2);
+		}
+		if(pow > 130) {
+			rand_mon_.push(MON_LUNATIC, 1);
+		}
+		if(pow > 150) {
+			rand_mon_.push(MON_NIGHTMARE, 1);
+		}
+		
+	
+		int i = rand_int(2,4); 
+		for(; i>0 ; i--)
+		{
+			if(monster *mon_ = BaseSummon(rand_mon_.pop(), rand_int(15,20)+pow/15, true, false, 3, order, target, SKD_OTHER, GetSummonMaxNumber(SPL_NIGHTMARE_MANIFEST)))
+			{
+				mon_->sm_info.parent_map_id = target_unit->GetMapId();
+				mon_->FoundTarget(target_unit, mon_->FoundTime());
+				mon_->PlusTimeDelay(-mon_->GetWalkDelay()); 
+			}
+		} 
+		target_unit->AttackedTarget(order);
+		if (env[current_level].isInSight(order->position)) {
+			PlaySE("laugh");
+		}
+		return true;
+	}
 	return false;
 }
 

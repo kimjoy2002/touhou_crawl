@@ -842,6 +842,9 @@ void monster::AfterMove(int map_num_, int x_, int y_) {
 	case MON_HOMING:
 		env[map_num_].MakeAfterimage(coord_def(position.x, position.y), image, 30, 3);
 		break;
+	case MON_COGWHEEL:
+		env[map_num_].MakeAfterimage(coord_def(position.x, position.y), image, 30, 3);
+		break;
 	case MON_MISSLE:
 		env[map_num_].MakeSmoke(coord_def(position.x, position.y), img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, this);
 		break;
@@ -1024,7 +1027,7 @@ bool monster::isMultipleAttack(bool canAttackFreindly) {
 	if(id == MON_YUMA2) {
 		return true;
 	}
-	if(id == MON_SONBITEN_SPINTOWIN || (id == MON_ENSLAVE_GHOST && id2 == MON_SONBITEN_SPINTOWIN)) {
+	if(id == MON_SONBITEN_SPINTOWIN || id == MON_COGWHEEL || (id == MON_ENSLAVE_GHOST && id2 == MON_SONBITEN_SPINTOWIN)) {
 		return canAttackFreindly?false:true;
 	}
 
@@ -2160,6 +2163,9 @@ bool monster::isSmartMove() {
 	return false;
 }
 bool monster::isMoveNotInturrpt(monster* mon) {
+	if(id == MON_COGWHEEL) {
+		return false;
+	}
 	if(flag & M_FLAG_MISSLE && mon->flag & M_FLAG_MISSLE)
 		return true;
 	if(mon->flag & M_FLAG_NONE_MOVE && !canSwap(mon) && mon->position != target_pos)
@@ -4429,6 +4435,13 @@ void monster::special_action(int delay_, bool smoke_)
 			}
 		}
 		break;
+	case MON_COGWHEEL:
+		if (!smoke_){
+			if(isUserAlly() && !env[current_level].isInSight(position) && summon_time > 0) {
+				summon_time = std::max(1, summon_time-10);
+			}
+		}
+		break;
 	case MON_ENSLAVE_GHOST:
 	{
 		if(id2 == MON_SONBITEN_SPINTOWIN) {
@@ -5274,7 +5287,7 @@ bool monster::canSwap(monster* target_mon) {
 	}
 	return false;
 }
-bool monster::AttackedTarget(unit *order_)
+bool monster::AttackedTarget(unit *order_, bool nightmare_)
 {	
 	if(order_)
 	{
@@ -5304,7 +5317,7 @@ bool monster::AttackedTarget(unit *order_)
 			}
 			memory_time= FoundTime();
 		}
-		if(state.GetState() == MS_SLEEP) //자고있을때 깨어나면서 외칠 수 있음
+		if(state.GetState() == MS_SLEEP && !nightmare_) //자고있을때 깨어나면서 외칠 수 있음
 		{			
 			int percent_ = 1;
 			if(you.god == GT_SHIZUHA && !you.GetPunish(GT_SHIZUHA) )
@@ -5733,6 +5746,36 @@ bool monster::special_state(bool is_sight_for_monster) {
 	case MON_HOMING:
 	{
 		if(special_move(is_sight_for_monster, false, 45)) {
+			env[current_level].MakeAfterimage(coord_def(position.x, position.y), image, 50, 4);
+			dead(PRT_NEUTRAL, false);
+		}
+	}
+	return true;
+	case MON_COGWHEEL:
+	{
+		if(isMultipleAttack(false)) {
+			int num_=0;
+			for(int i=0;i<3;i++,num_++)
+				if(atk_type[i] == ATT_NONE)
+					break;
+			if(num_)
+			{
+				num_ = randA(num_-1);
+				attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
+				multipleAttack(nullptr, temp_att);
+			}
+		}
+		if(!will_move.empty()) {
+			coord_def c_ = will_move.back();
+			will_move.pop_back();
+
+			int success_ = move(c_, false);
+			if (success_ != 2) //이동실패
+			{
+				env[current_level].MakeAfterimage(coord_def(position.x, position.y), image, 50, 4);
+				dead(PRT_NEUTRAL, false);
+			}
+		} else {
 			env[current_level].MakeAfterimage(coord_def(position.x, position.y), image, 50, 4);
 			dead(PRT_NEUTRAL, false);
 		}

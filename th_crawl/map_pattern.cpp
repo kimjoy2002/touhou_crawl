@@ -2366,7 +2366,7 @@ T.....T\
 			if (!(floor_ >= YOUKAI_MOUNTAIN_LEVEL+1 && floor_ <= YOUKAI_MOUNTAIN_LAST_LEVEL))
 				break;
 			map->size_x = 6;
-			map->size_y = 4;
+			map->size_y = 3;
 			map->m_entrance.x = rand_int(-map->size_x, -map->size_x+2);
 			map->m_entrance.y = map->size_y;
 			map->m_exit.x = -map->size_x;

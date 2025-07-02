@@ -2276,6 +2276,12 @@ void SetResistMonster(monster* mon)
 	case MON_OTTER_SPIRIT:
 		mon->ice_resist = 2;
 		break;
+	case MON_COGWHEEL:
+		mon->fire_resist = 1;
+		mon->ice_resist = 3;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
 	}
 }
 

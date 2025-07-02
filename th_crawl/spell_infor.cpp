@@ -545,7 +545,7 @@ string GetSpellInfor(spell_list spell, bool isPlayer)
 	case SPL_ELEMENTAL_HARVESTER:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ELEMENTAL_HARVESTER);
 		break;
-	case SPL_BLINK_AWAY:
+	case SPL_NIGHTMARE_MANIFEST:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_NIGHTMARE_MANIFEST);
 		break;
 	default:

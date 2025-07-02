@@ -127,7 +127,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10,'h'},
 
 	{MON_HUMAM_SAMURI,8,210,name_infor(MON_HUMAM_SAMURI),&img_mons_human_samuri,50,6,8,
-	{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{17,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10,'h'},
 
 	{MON_FIREFLY,2,5,name_infor(MON_FIREFLY),&img_mons_firefly,18,1,10,
@@ -750,11 +750,11 @@ const mon_infor mondata[] = {
 	{ 22,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SWIM | M_FLAG_SPEAK,2,1,10,'&' },
 
-	{ MON_KEINE,15,4212,name_infor(MON_KEINE),&img_named_keine,165,12,5,
+	{ MON_KEINE,15,4212,name_infor(MON_KEINE),&img_named_keine,185,12,5,
 	{ 14,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,3,3,10,'&' },
 
-	{ MON_KEINE2,15,4212,name_infor(MON_KEINE2),&img_named_keine2,165,0,18,
+	{ MON_KEINE2,15,4212,name_infor(MON_KEINE2),&img_named_keine2,185,0,21,
 	{ 30,30,55 },{ ATT_NORMAL,ATT_NORMAL,ATT_NORMAL },{ name_infor(LOC_SYSTEM_ATT_NORMAL), name_infor(LOC_SYSTEM_ATT_NORMAL), name_infor(LOC_SYSTEM_ATT_HEADBUTT) },
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,1,0,7,'&' },
 
@@ -1099,4 +1099,8 @@ const mon_infor mondata[] = {
 	{MON_RABIT_ALCHEMIST,12,650,name_infor(MON_RABIT_ALCHEMIST),&img_mons_rabbit_alchemist,35,1,20,
 	{9,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_CAN_SEE_INVI |  M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,1,1,10,'R' },
+
+	{MON_COGWHEEL,1,0,name_infor(MON_COGWHEEL),&img_mons_elemental_harvester,50,1,10,
+	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_ATK | M_FLAG_NO_STATE | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_MISSLE,99,1,7,'X' }
 };

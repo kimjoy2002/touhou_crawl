@@ -622,6 +622,10 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				multi_ += min(penalty_turn_ - 1000, 4000) / 4000.0f;
 			}
 		}
+		int rate_ = 50-25*multi_;
+		if(current_level == SUBTERRANEAN_LEVEL_LAST_LEVEL) {
+			rate_ *= 2;
+		}
 		if (randA(50-25*multi_) == 0)
 		{
 			int arr_[] = { MON_HELL_SPIDER, MON_BLOOD_HAUNT, MON_LANTERN_YOUKAI, MON_HELL_HOUND, MON_ONI, MON_BLUE_ONI
@@ -1113,7 +1117,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			for (int j = -3; j < 4; j++)
 			{
 				if (randA(4) == 0)
-					env[current_level].MakeSmoke(coord_def(i + event_->position.x, j + event_->position.y), img_fog_normal, SMT_TWIST, rand_int(2, 3), 0, NULL);
+					env[current_level].MakeSmoke(coord_def(i + event_->position.x, j + event_->position.y), img_fog_tonado, SMT_TWIST, rand_int(2, 3), 0, NULL);
 			}
 		}
 		return 0;

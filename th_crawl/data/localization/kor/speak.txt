@@ -688,7 +688,7 @@ SPEAK_PARSI_DUNGEON_YOUKAI_MOUNTAIN2,{0:은|는} 외쳤다. "직장인 부러워
 SPEAK_PARSI_DUNGEON_YOUKAI_MOUNTAIN3,{0:은|는} 외쳤다. "조직생활은 현실에 충실한 애들 같아서 부러워!"
 SPEAK_PARSI_DUNGEON_YOUKAI_MOUNTAIN4,{0:은|는} 외쳤다. "캇파들의 도구 부러워!"
 SPEAK_PARSI_DUNGEON_YOUKAI_MOUNTAIN5,{0:은|는} 외쳤다. "텐구들의 스피드 부러워!"
-SPEAK_PARSI_DUNGEON_YOUKAI_MOUNTAIN6,{0:은|는} 외쳤다. "조금 전에 굉장한 캇파들의 비행기을 봤어! 부러워!"
+SPEAK_PARSI_DUNGEON_YOUKAI_MOUNTAIN6,{0:은|는} 외쳤다. "조금 전에 굉장한 캇파들의 비행기를 봤어! 부러워!"
 SPEAK_PARSI_DUNGEON_YOUKAI_MOUNTAIN7,{0:은|는} 외쳤다. "난 이 캇파 텐구들이 부러워!"
 SPEAK_PARSI_DUNGEON_SCARLET1,{0:은|는} 외쳤다. "이 큰 저택의 주인은 일 안해도 되겠지? 부러워!"
 SPEAK_PARSI_DUNGEON_SCARLET2,{0:은|는} 외쳤다. "메이드옷 귀여워서 부러워!"

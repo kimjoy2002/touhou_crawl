@@ -2088,9 +2088,9 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 	return false;
 	case SPL_NIGHTMARE_MANIFEST:
 		if (mon->target) {
-			if (mon->target->isPlayer() && you.s_sleep >= 0)
+			if (mon->target->isplayer() && you.s_sleep >= 0)
 				return false;
-			if (!(mon->target->isPlayer()) && ((monster*)(mon->target))->GetState() != MS_SLEEP)
+			if (!(mon->target->isplayer()) && ((monster*)(mon->target))->state.GetState() != MS_SLEEP)
 				return false;
 		}
 		return true;

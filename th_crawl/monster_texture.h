@@ -192,7 +192,12 @@ extern textures img_mons_otter_spirit;
 extern textures img_mons_rabbit_giant;
 extern textures img_mons_rabbit_alchemist;
 
+extern textures img_mons_elemental_harvester;
+extern textures img_mons_haniwa_human;
+extern textures img_mons_haniwa_human_horse;
+
 extern textures img_mons_haniwa_equipments[];
+extern textures img_mons_haniwa_human_equipments[];
 extern textures img_mons_stonetower[];
 extern textures img_mons_security_door;
 

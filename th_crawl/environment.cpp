@@ -9,6 +9,7 @@
 
 #include "environment.h"
 #include "const.h"
+#include "god.h"
 #include "save.h"
 #include "map.h"
 #include "keiki.h"
@@ -1723,6 +1724,19 @@ void environment::ActionMonster(int delay_)
 		}
 	}
 }
+void environment::ShadowMonster()
+{
+	vector<monster>::iterator it;
+	it = mon_vector.begin();
+	for(int i=0;i<MON_MAX_IN_FLOOR && it != mon_vector.end() ;i++,it++)
+	{
+		if((*it).isLive())
+		{
+			(*it).resetShadow();
+		}
+	}
+}
+
 void environment::ActionMonsterSpecial(int delay_)
 {
 	vector<monster>::iterator it;

@@ -3560,7 +3560,7 @@ bool skill_schema_tanmac(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int damage_ = order?1+order->GetLevel():6;
+		int damage_ = order?3+order->GetLevel()*1.5f:6;
 		beam_infor temp_infor(randC(2,damage_/2),damage_,99,order,order->GetParentType(),SpellLength(SPL_MAGIC_TANMAC, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));		

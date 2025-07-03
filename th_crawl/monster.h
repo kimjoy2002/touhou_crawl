@@ -193,6 +193,7 @@ public:
 	void print_no_damage_message(attack_infor &a);
 	bool damage(attack_infor &a, bool perfect_ = false);
 	bool dead(parent_type reason_, bool message_, bool remove_ = false); //remove는 증발시키기(아예 경험치나 관련도 없이)
+	void resetShadow();
 	int action(int delay_);
 	void sightcheck(bool is_sight_); //시야에 들어오면 덤빈다.
 	void special_action(int delay_, bool smoke_);

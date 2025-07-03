@@ -1508,7 +1508,30 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 
 		you.god_value[GT_YUKARI][0] = target.x;
 		you.god_value[GT_YUKARI][1] = target.y;
-		you.SetDimension(rand_int(50,70));
+		int time_ = rand_int(50,70);
+		you.SetDimension(time_);
+
+		you.resetLOS(false);
+		for(int x=0;x<DG_MAX_X;x++)
+		{
+			for(int y=0;y<DG_MAX_Y;y++)
+			{
+				if(env[current_level].dgtile[x][y].flag & FLAG_INSIGHT) {
+					if(floor_effect* hit_eff = env[current_level].isFloorEffectPos(x,y))
+					{
+						if(hit_eff->type == FLOORT_SCHEMA)
+						{
+							if(monster *mon_ = BaseSummon(MON_SCHEMA_EYE, time_, true, false, 0, order, hit_eff->position, SKD_OTHER, -1))
+							{
+								mon_->LevelUpdown(you.level,3);
+								hit_eff->time = 0;
+							}
+						}
+					}
+				}
+			}
+		}
+
 		PlaySE("timestop");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_DIMENSION_FIX),false,false,false,CL_white_blue);
 		return true;

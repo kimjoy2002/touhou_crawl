@@ -3898,6 +3898,8 @@ bool players::SetNightSight(int value_, int turn_, bool stong_)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_MORE_BLIND) + " ", false, false, false, CL_small_danger);
 	s_night_sight = value_;
 	s_night_sight_turn = turn_;
+	resetLOS();
+	env[current_level].ShadowMonster();
 	return true;
 }
 bool players::SetSleep(int value_)
@@ -3934,6 +3936,7 @@ bool players::SetWeather(int value_, int turn_)
 		s_glow = 1;
 	}
 	resetLOS();
+	env[current_level].ShadowMonster();
 	return true;
 }
 bool players::SetEvokeGhost(int turn_)

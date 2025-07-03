@@ -3075,6 +3075,24 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		GodAccpect_KillMonster(this,reason_);
 	return true;
 }
+void monster::resetShadow() {
+	bool in_sight_ = env[current_level].isInSight(position);
+
+	if(in_sight_)
+		prev_sight = true;
+	else if(prev_sight)
+	{
+		if(isView() && !(you.god == GT_SATORI && !you.GetPunish(GT_SATORI) && pietyLevel(you.piety)>=3 &&
+			GetPositionGap(position.x, position.y, you.position.x, you.position.y) <= satori_sight()))
+			env[current_level].MakeShadow(prev_position,image, id);
+		prev_sight = false;
+	}
+
+	prev_position = position;
+
+}
+
+
 int monster::action(int delay_)
 {
 	bool is_sight = false, is_sight_for_monster = false;
@@ -4071,24 +4089,7 @@ int monster::action(int delay_)
 			break;
 	}
 
-
-	bool in_sight_ = env[current_level].isInSight(position);
-
-	if(in_sight_)
-		prev_sight = true;
-	else if(prev_sight)
-	{
-		if(isView() && !(you.god == GT_SATORI && !you.GetPunish(GT_SATORI) && pietyLevel(you.piety)>=3 &&
-			GetPositionGap(position.x, position.y, you.position.x, you.position.y) <= satori_sight()))
-			env[current_level].MakeShadow(prev_position,image, id);
-		prev_sight = false;
-	}
-	
-
-
-
-	prev_position = position;
-
+	resetShadow();
 
 	if (env[current_level].dgtile[position.x][position.y].tile == DG_OIL &&
 		!isFly())

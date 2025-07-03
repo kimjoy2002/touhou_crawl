@@ -496,7 +496,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_FIGHT,30,false);
 		you.GiveSkillExp(SKT_ARMOUR,70,false);
 		you.GiveSkillExp(SKT_SHIELD,60,false);
-		you.quickMenu2 = SYSCMD_QUICKTHROW;
+		you.quickMenu1 = SYSCMD_QUICKTHROW;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_WIZARD:
@@ -509,12 +509,13 @@ void SetJobs(job_type select_, unique_starting_type type)
 			MakeStartItem(SIT_BOOK,1);
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_STEALTH,30,false);
+		you.skill[SKT_STEALTH].onoff = 0; //굳이 집중하진않는다.
 		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,60),false);
 		you.GiveSkillExp(SKT_CONJURE,20,false);
 		you.GiveSkillExp(SKT_TRANS,20,false);
 		you.Memorize(SPL_MAGIC_TANMAC,true);
 		you.prevSpell = 'a';
-		you.quickMenu2 = SYSCMD_MAGIC;
+		you.quickMenu1 = SYSCMD_MAGIC;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_SHAMAN:
@@ -532,7 +533,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 			you.Belief(GT_SUWAKO,35,false);
 		else if(type != UNIQ_START_REIMU) //레이무는 믿지않는다.
 			you.Belief(GT_KANAKO,35,false);
-		you.quickMenu2 = SYSCMD_QUICKTHROW;
+		you.quickMenu1 = SYSCMD_QUICKTHROW;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_GLADIATOR:
@@ -548,7 +549,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_TANMAC,30,false);
 		you.GiveSkillExp(SKT_SHIELD,30,false);
-		you.quickMenu2 = SYSCMD_QUICKTHROW;
+		you.quickMenu1 = SYSCMD_QUICKTHROW;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_MONK:
@@ -560,8 +561,9 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_FIGHT,60,false);
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_STEALTH,30,false);
+		you.skill[SKT_STEALTH].onoff = 0; //굳이 집중하진않는다.
 		you.GiveSkillExp(SKT_UNWEAPON,90,false);
-		you.quickMenu2 = SYSCMD_QUICKTHROW;
+		you.quickMenu1 = SYSCMD_QUICKTHROW;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_CRUSADER: //강화전사인지, 요술전사인지 선택하게하기
@@ -578,7 +580,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_AIR,30,false);
 		you.Memorize(SPL_VEILING,true);
 		you.prevSpell = 'a';
-		you.quickMenu2 = SYSCMD_MAGIC;
+		you.quickMenu1 = SYSCMD_MAGIC;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_BERSERKER:
@@ -593,7 +595,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_AXE,60,false);
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_ARMOUR,30,false);
-		you.quickMenu2 = SYSCMD_QUICKTHROW;
+		you.quickMenu1 = SYSCMD_QUICKTHROW;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_FIRE_WIZARD:
@@ -606,12 +608,13 @@ void SetJobs(job_type select_, unique_starting_type type)
 		MakeStartItem(SIT_BOOK,1);
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_STEALTH,30,false);
+		you.skill[SKT_STEALTH].onoff = 0; //굳이 집중하진않는다.
 		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,20),false);
 		you.GiveSkillExp(SKT_CONJURE,20,false);
 		you.GiveSkillExp(SKT_FIRE,60,false);
 		you.Memorize(SPL_BURN,true);
 		you.prevSpell = 'a';
-		you.quickMenu2 = SYSCMD_MAGIC;
+		you.quickMenu1 = SYSCMD_MAGIC;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_COLD_WIZARD:
@@ -624,12 +627,13 @@ void SetJobs(job_type select_, unique_starting_type type)
 		MakeStartItem(SIT_BOOK,1);
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_STEALTH,30,false);
+		you.skill[SKT_STEALTH].onoff = 0; //굳이 집중하진않는다.
 		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,20),false);
 		you.GiveSkillExp(SKT_CONJURE,20,false);
 		you.GiveSkillExp(SKT_COLD,60,false);
 		you.Memorize(SPL_FROZEN,true);
 		you.prevSpell = 'a';
-		you.quickMenu2 = SYSCMD_MAGIC;
+		you.quickMenu1 = SYSCMD_MAGIC;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_EARTH_WIZARD:
@@ -642,12 +646,13 @@ void SetJobs(job_type select_, unique_starting_type type)
 		MakeStartItem(SIT_BOOK,1);
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_STEALTH,30,false);
+		you.skill[SKT_STEALTH].onoff = 0; //굳이 집중하진않는다.
 		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,20),false);
 		you.GiveSkillExp(SKT_ALCHEMY,20,false);
 		you.GiveSkillExp(SKT_EARTH,60,false);
 		you.Memorize(SPL_STONE_PUNCH,true);
 		you.prevSpell = 'a';
-		you.quickMenu2 = SYSCMD_MAGIC;
+		you.quickMenu1 = SYSCMD_MAGIC;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_AIR_WIZARD:
@@ -660,11 +665,12 @@ void SetJobs(job_type select_, unique_starting_type type)
 		MakeStartItem(SIT_BOOK,2);
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_STEALTH,30,false);
+		you.skill[SKT_STEALTH].onoff = 0; //굳이 집중하진않는다.
 		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,20),false);
 		you.GiveSkillExp(SKT_AIR,80,false);
 		you.Memorize(SPL_SHOCK,true);
 		you.prevSpell = 'a';
-		you.quickMenu2 = SYSCMD_MAGIC;
+		you.quickMenu1 = SYSCMD_MAGIC;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_LIGHT_WIZARD:
@@ -677,11 +683,12 @@ void SetJobs(job_type select_, unique_starting_type type)
 		MakeStartItem(SIT_BOOK,1);
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_STEALTH,30,false);
+		you.skill[SKT_STEALTH].onoff = 0; //굳이 집중하진않는다.
 		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,20),false);
 		you.GiveSkillExp(SKT_CONJURE,80,false);
 		you.Memorize(SPL_MAGIC_TANMAC,true);
 		you.prevSpell = 'a';
-		you.quickMenu2 = SYSCMD_MAGIC;
+		you.quickMenu1 = SYSCMD_MAGIC;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;/*
 	case JOB_WATER_WIZARD:
@@ -708,11 +715,12 @@ void SetJobs(job_type select_, unique_starting_type type)
 		MakeStartItem(SIT_BOOK,1);
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_STEALTH,30,false);
+		you.skill[SKT_STEALTH].onoff = 0; //굳이 집중하진않는다.
 		you.GiveSkillExp(SKT_SPELLCASTING,max(nse,20),false);
 		you.GiveSkillExp(SKT_SUMMON,80,false);
 		you.Memorize(SPL_SUMMON_MOOK,true);
 		you.prevSpell = 'a';
-		you.quickMenu2 = SYSCMD_MAGIC;
+		you.quickMenu1 = SYSCMD_MAGIC;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	//case JOB_POISON_WIZARD:
@@ -762,7 +770,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_ALCHEMY,30,false);
 		you.Memorize(SPL_STONE_PUNCH,true);
 		you.prevSpell = 'a';
-		you.quickMenu2 = SYSCMD_MAGIC;
+		you.quickMenu1 = SYSCMD_MAGIC;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_PSYCHOLOGIST:
@@ -780,7 +788,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_MENTAL,80,false);
 		you.Memorize(SPL_HYPNOSIS,true);
 		you.prevSpell = 'a';
-		you.quickMenu2 = SYSCMD_MAGIC;
+		you.quickMenu1 = SYSCMD_MAGIC;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_REAPER:
@@ -794,7 +802,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_SPEAR,140,false);
 		you.GiveSkillExp(SKT_FIGHT,30,false);
 		you.GiveSkillExp(SKT_DODGE,30,false);
-		you.quickMenu2 = SYSCMD_QUICKTHROW;
+		you.quickMenu1 = SYSCMD_QUICKTHROW;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_FANATIC:
@@ -809,7 +817,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_FIGHT,90,false);
 		you.GiveSkillExp(SKT_ARMOUR,30,false);
 		you.GiveSkillExp(SKT_DODGE,30,false);
-		you.quickMenu2 = SYSCMD_QUICKTHROW;
+		you.quickMenu1 = SYSCMD_QUICKTHROW;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_ASSASSIN:
@@ -825,7 +833,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_TANMAC,30,false);
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_STEALTH,75,false);
-		you.quickMenu2 = SYSCMD_QUICKTHROW;
+		you.quickMenu1 = SYSCMD_QUICKTHROW;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_FARMER:
@@ -841,7 +849,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.Belief(GT_MINORIKO,35,false);
 		you.GiveSkillExp(SKT_FIGHT,60,false);
 		you.GiveSkillExp(SKT_DODGE,40,false);
-		you.quickMenu2 = SYSCMD_QUICKTHROW;
+		you.quickMenu1 = SYSCMD_QUICKTHROW;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_MADE:
@@ -859,7 +867,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_TANMAC,60,false);
 		you.GiveSkillExp(SKT_STEALTH,30,false);
 		you.GiveSkillExp(SKT_TRANS,30,false);
-		you.quickMenu2 = SYSCMD_QUICKTHROW;
+		you.quickMenu1 = SYSCMD_QUICKTHROW;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	case JOB_ENGINEER:
@@ -896,7 +904,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.GiveSkillExp(SKT_DODGE, 60, false);
 		you.GiveSkillExp(SKT_EVOCATE, 60, false);
 		you.GiveSkillExp(SKT_STEALTH, 60, false);
-		you.quickMenu2 = SYSCMD_QUICKTHROW;
+		you.quickMenu1 = SYSCMD_QUICKTHROW;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
 	default:

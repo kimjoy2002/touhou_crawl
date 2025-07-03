@@ -310,6 +310,7 @@ public:
 	void ClearShadow(const coord_def &c, shadow_type type_);
 	void CheckFloor();
 	void ActionMonster(int delay_);
+	void ShadowMonster();
 	void ActionMonsterSpecial(int delay_);
 	void ActionAfterimage(int delay_);
 	void ActionSmoke(int delay_);

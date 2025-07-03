@@ -492,7 +492,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,1,10,'X' },
 	{MON_LANTERN_YOUKAI,15,1333,name_infor(MON_LANTERN_YOUKAI),&img_mons_lantern_youkai,45,8,8,
 	{28,0,0},{ATT_FIRE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,2,1,10,'P' },
+	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,2,1,10,'P' },
 	{MON_YINYAN,30,8000,name_infor(MON_YINYAN),&img_mons_yinyan,300,0,0,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_NO_ATK | M_FLAG_FLY | M_FLAG_CAN_SEE_INVI | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE | M_FLAG_RANGE_ATTACK,99,2,9,'*' },

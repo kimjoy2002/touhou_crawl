@@ -4209,7 +4209,7 @@ const char* library_enter_pattern(map_dummy* map)
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		map->name = "LIBRARY_MAGIC_BOOK_ENTER";
-		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		map->monster_list.push_back(mapdummy_mon(MON_MAGIC_BOOK,M_FLAG_WAKE,coord_def(0,0)));
 		map->monster_list.push_back(mapdummy_mon(MON_MAGIC_BOOK,M_FLAG_WAKE,coord_def(-2,0)));
 		map->monster_list.push_back(mapdummy_mon(MON_MAGIC_BOOK,M_FLAG_WAKE,coord_def(2,0)));
@@ -4292,7 +4292,7 @@ const char* under_enter_pattern(map_dummy* map)
 		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		map->name = "UNDER_SKELETON_ENTER";
-		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 		rand_rect_iterator rand_rect(coord_def(0,0), 3,3,false);
 		for(int i = 0; i < 8 ; i++) {
 			item_infor t;
@@ -4397,19 +4397,14 @@ const char* bamboo_enter_pattern(map_dummy* map)
 	map->m_entrance.x = edge_cells[0].first;
 	map->m_entrance.y = edge_cells[0].second;
     maze[map->m_entrance.y][map->m_entrance.x] = '_';
-	map->m_entrance.x -= map->size_x;
-	map->m_entrance.y -= map->size_y;
-
 	map->m_exit.x = edge_cells[1].first;
 	map->m_exit.y = edge_cells[1].second;
     maze[map->m_exit.y][map->m_exit.x] = '_';
-	map->m_exit.x -= map->size_x;
-	map->m_exit.y -= map->size_y;
 
 	// 4. 막다른 길을 미궁 입구로
 	std::vector<std::pair<int, int>> real_dead_ends;
 	for (auto [x, y] : dead_ends) {
-		if ((x == start.x && y == start.y) || (x == end.x && y == end.y))
+		if ((x == map->m_entrance.x && y == map->m_entrance.y) || (x == map->m_exit.x && y == map->m_exit.y))
 			continue;
 
 		int open = 0;
@@ -4428,15 +4423,21 @@ const char* bamboo_enter_pattern(map_dummy* map)
 	}
 
     // 5. 문자열로 반환
-	std::string result;
+	static std::string result;
+	result.clear();
 	for (int y = 0; y < H; ++y) {
 		for (int x = 0; x < W; ++x)
 			result += maze[y][x];
 	}
 	
+	map->m_entrance.x -= map->size_x;
+	map->m_entrance.y -= map->size_y;
+	map->m_exit.x -= map->size_x;
+	map->m_exit.y -= map->size_y;
+
 	map->name = "BAMBOO_MAZE_ENTER";
 	map->flag = FLAG_NO_STAIR;
-    return result;
+    return result.c_str();
 }
 
 
@@ -4519,7 +4520,7 @@ const char* subterranean_enter_pattern(map_dummy* map)
 		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
 		map->name = "SUBTERRANEAN_STEAM_ENTER";
 		
-		random_extraction<int> rand_;
+		random_extraction<dungeon_tile_type> rand_;
 		rand_.push(DG_LAVA, 2);
 		rand_.push(DG_OIL, 2);
 		rand_.push(DG_SEA, 1);	

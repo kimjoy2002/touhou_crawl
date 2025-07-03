@@ -109,6 +109,16 @@ bool randB(int x, int point); /*0부터 X가 point를 작거나같을때 true리
 
 int randC(int dice, int x); /*(dice)d(x)*/
 
+
+template <typename T>
+void rand_shuffle(std::vector<T>& vec) {
+    for (int i = vec.size() - 1; i > 0; --i) {
+        int j = randA(i);
+        std::swap(vec[i], vec[j]);
+    }
+}
+
+
 template<typename K, typename V>
 class OrderedMap {
 public:

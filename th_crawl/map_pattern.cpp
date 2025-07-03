@@ -4172,6 +4172,275 @@ const char* youkai_enter_pattern(map_dummy* map)
 }
 
 
+const char* library_enter_pattern(map_dummy* map)
+{
+	switch (randA(2))
+	{
+	default:
+	case 0:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 3;
+		map->size_y = 3;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->name = "LIBRARY_BASE_ENTER";
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		return "\
+.......\
+.EE.EE.\
+.E...E.\
+...0...\
+.E...E.\
+.EE.EE.\
+.......";
+	}
+	case 1:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 4;
+		map->size_y = 3;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->name = "LIBRARY_MAGIC_BOOK_ENTER";
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR
+		map->monster_list.push_back(mapdummy_mon(MON_MAGIC_BOOK,M_FLAG_WAKE,coord_def(0,0)));
+		map->monster_list.push_back(mapdummy_mon(MON_MAGIC_BOOK,M_FLAG_WAKE,coord_def(-2,0)));
+		map->monster_list.push_back(mapdummy_mon(MON_MAGIC_BOOK,M_FLAG_WAKE,coord_def(2,0)));
+		return "\
+.........\
+.........\
+.=======.\
+.=.....=.\
+.===+===.\
+....0....\
+.........";
+	}
+	case 2:
+	{
+		map->size_x = 2;
+		map->size_y = 6;
+		map->m_entrance.x = 0;
+		map->m_entrance.y = map->size_y;
+		map->m_exit.x = 0;
+		map->m_exit.y = map->size_y;
+		map->name = "LIBRARY_BOOK_PATH_ENTER";
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		return "\
+#####\
+#E0E#\
+#...#\
+#E.E#\
+#...#\
+#E.E#\
+#...#\
+#E.E#\
+#...#\
+#E.E#\
+#...#\
+#E.E#\
+##+##";
+	}
+	}
+}
+
+
+const char* under_enter_pattern(map_dummy* map)
+{
+	switch (randA(2))
+	{
+	default:
+	case 0:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 5;
+		map->size_y = 5;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->name = "UNDER_BASE_ENTER";
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		return "\
+...........\
+.$$$$$$$$$.\
+.$.......$.\
+.$.$$$$$.$.\
+.$.$...$.$.\
+.$.$.0.$.$.\
+.$.$...$.$.\
+.$.$$+$$.$.\
+.$.......$.\
+.$$$$+$$$$.\
+...........";
+	}
+	case 1:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 3;
+		map->size_y = 3;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->name = "UNDER_SKELETON_ENTER";
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR
+		rand_rect_iterator rand_rect(coord_def(0,0), 3,3,false);
+		for(int i = 0; i < 8 ; i++) {
+			item_infor t;
+			makeitem(ITM_ETC, 0, &t, EIT_SKELETON);
+			map->item_list.push_back(mapdummy_item(t, *rand_rect));
+			rand_rect++;
+		}
+		return "\
+.......\
+.......\
+.......\
+...0...\
+.......\
+.......\
+.......";
+	}
+	case 2:
+	{
+		map->size_x = 3;
+		map->size_y = 3;
+		map->m_entrance.x = 0;
+		map->m_entrance.y = -map->size_y;
+		map->m_exit.x = 0;
+		map->m_exit.y = -map->size_y;
+		map->name = "UNDER_FIRE_ENTER";
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->event_list.push_back(mapdummy_event(EVL_FIRE_SMOKE, coord_def(-1, -1), EVT_ALWAYS));
+		map->event_list.push_back(mapdummy_event(EVL_FIRE_SMOKE, coord_def(1, -1), EVT_ALWAYS));
+		map->event_list.push_back(mapdummy_event(EVL_FIRE_SMOKE, coord_def(-1, 1), EVT_ALWAYS));
+		map->event_list.push_back(mapdummy_event(EVL_FIRE_SMOKE, coord_def(1, 1), EVT_ALWAYS));
+
+		return "\
+###+###\
+#.....#\
+#.....#\
+#..0..#\
+#.....#\
+#.....#\
+#######";
+	}
+	}
+}
+
+
+const char* bamboo_enter_pattern(map_dummy* map)
+{
+	map->size_x = rand_int(3,8);
+	map->size_y = rand_int(3,8);
+    const int W = 2*map->size_x+1;
+    const int H = 2*map->size_y+1;
+    std::vector<std::vector<char>> maze(H, std::vector<char>(W, '['));
+
+    // 1. 미로 초기화: 벽과 셀 구분
+    for (int y = 0; y < H; ++y)
+        for (int x = 0; x < W; ++x)
+            maze[y][x] = (x % 2 == 1 && y % 2 == 1) ? '_' : '[';
+
+    std::vector<std::pair<int, int>> stack;
+    std::vector<std::vector<bool>> visited(H, std::vector<bool>(W, false));
+
+    // 2. DFS 백트래킹으로 미로 생성
+    stack.emplace_back(1, 1);
+    visited[1][1] = true;
+    std::vector<std::pair<int, int>> dead_ends;
+
+    while (!stack.empty()) {
+        auto [x, y] = stack.back();
+        std::vector<std::pair<int, int>> directions = {{0, -2}, {0, 2}, {-2, 0}, {2, 0}};
+        rand_shuffle(directions);
+        bool moved = false;
+        for (auto [dx, dy] : directions) {
+            int nx = x + dx, ny = y + dy;
+            if (nx > 0 && ny > 0 && nx < W && ny < H && !visited[ny][nx]) {
+                visited[ny][nx] = true;
+                maze[y + dy / 2][x + dx / 2] = '_';
+                stack.emplace_back(nx, ny);
+                moved = true;
+                break;
+            }
+        }
+        if (!moved) {
+            dead_ends.emplace_back(x, y);
+            stack.pop_back();
+        }
+    }
+
+    // 3. 입구 / 출구 선택
+    std::vector<std::pair<int, int>> edge_cells;
+    for (int i = 1; i < W; i += 2) {
+        if (maze[1][i] == '_') edge_cells.emplace_back(i, 0);
+        if (maze[H - 2][i] == '_') edge_cells.emplace_back(i, H - 1);
+    }
+    for (int i = 1; i < H; i += 2) {
+        if (maze[i][1] == '_') edge_cells.emplace_back(0, i);
+        if (maze[i][W - 2] == '_') edge_cells.emplace_back(W - 1, i);
+    }
+
+    rand_shuffle(edge_cells);
+    if (edge_cells.size() < 2) //한번더
+		return bamboo_enter_pattern(map);
+
+	map->m_entrance.x = edge_cells[0].first;
+	map->m_entrance.y = edge_cells[0].second;
+    maze[map->m_entrance.y][map->m_entrance.x] = '_';
+	map->m_entrance.x -= map->size_x;
+	map->m_entrance.y -= map->size_y;
+
+	map->m_exit.x = edge_cells[1].first;
+	map->m_exit.y = edge_cells[1].second;
+    maze[map->m_exit.y][map->m_exit.x] = '_';
+	map->m_exit.x -= map->size_x;
+	map->m_exit.y -= map->size_y;
+
+	// 4. 막다른 길을 미궁 입구로
+	std::vector<std::pair<int, int>> real_dead_ends;
+	for (auto [x, y] : dead_ends) {
+		if ((x == start.x && y == start.y) || (x == end.x && y == end.y))
+			continue;
+
+		int open = 0;
+		for (auto [dx, dy] : std::vector<std::pair<int, int>>{{0, -1}, {0, 1}, {-1, 0}, {1, 0}}) {
+			int nx = x + dx, ny = y + dy;
+			if (nx >= 0 && ny >= 0 && nx < W && ny < H && maze[ny][nx] == '_')
+				open++;
+		}
+		if (open == 1)
+			real_dead_ends.emplace_back(x, y);
+	}
+
+	if (!real_dead_ends.empty()) {
+		auto [ix, iy] = real_dead_ends[randA(real_dead_ends.size() - 1)];
+		maze[iy][ix] = '0';
+	}
+
+    // 5. 문자열로 반환
+	std::string result;
+	for (int y = 0; y < H; ++y) {
+		for (int x = 0; x < W; ++x)
+			result += maze[y][x];
+	}
+	
+	map->name = "BAMBOO_MAZE_ENTER";
+	map->flag = FLAG_NO_STAIR;
+    return result;
+}
+
+
+
 const char* yukkuri_enter_pattern(map_dummy* map)
 {
 	switch (randA(0))
@@ -4203,6 +4472,102 @@ const char* yukkuri_enter_pattern(map_dummy* map)
 		break;
 	}
 }
+
+
+const char* subterranean_enter_pattern(map_dummy* map)
+{
+	switch (randA(2))
+	{
+	default:
+	case 0:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 5;
+		map->size_y = 5;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		
+		map->sp_tile_list.push_back(DG_HELL_WALL);
+		map->sp_tile_list.push_back(DG_HELL_FLOOR);
+		map->name = "SUBTERRANEAN_BASE_ENTER";
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		return "\
+...........\
+.111222111.\
+.122222221.\
+.122111221.\
+.221212122.\
+.221101122.\
+.221212122.\
+.122111221.\
+.122222221.\
+.111222111.\
+...........";
+	}
+	case 1:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 4;
+		map->size_y = 4;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->name = "SUBTERRANEAN_STEAM_ENTER";
+		
+		random_extraction<int> rand_;
+		rand_.push(DG_LAVA, 2);
+		rand_.push(DG_OIL, 2);
+		rand_.push(DG_SEA, 1);	
+		map->sp_tile_list.push_back(rand_.choice());
+		map->sp_tile_list.push_back(rand_.choice());
+		map->sp_tile_list.push_back(rand_.choice());
+		map->event_list.push_back(mapdummy_event(EVL_SMOKE, coord_def(2, -2), EVT_ALWAYS));
+		map->event_list.push_back(mapdummy_event(EVL_SMOKE, coord_def(-2, 2), EVT_ALWAYS));
+		map->event_list.push_back(mapdummy_event(EVL_SMOKE, coord_def(-3, -3), EVT_ALWAYS));
+		map->flag = FLAG_NO_STAIR;
+		return "\
+.........\
+.33...1..\
+.3...111.\
+......1..\
+....0....\
+.....33..\
+.22......\
+..22.....\
+.........";
+	}
+	case 2:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 6;
+		map->size_y = 3;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->name = "SUBTERRANEAN_LANTERN_ENTER";
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_STAIR;
+		
+		map->monster_list.push_back(mapdummy_mon(MON_LANTERN_YOUKAI,M_FLAG_WAKE,coord_def(4,0)));
+		map->monster_list.push_back(mapdummy_mon(MON_LANTERN_YOUKAI,M_FLAG_WAKE,coord_def(-4,0)));
+		return "\
+.............\
+.............\
+.;;;.....;;;.\
+.;.;..0..;.;.\
+.;;;.....;;;.\
+.............\
+.............";
+	}
+	}
+}
+
 
 
 const char* dream_enter_pattern(map_dummy* map)
@@ -4273,25 +4638,25 @@ const char* scarlet_library_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_SCARLET_L_STAIR);
-	return common_enter_pattern(map);
+	return library_enter_pattern(map);
 }
 const char* scarlet_under_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_SCARLET_U_STAIR);
-	return common_enter_pattern(map);
+	return under_enter_pattern(map);
 }
 const char* bamboo_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_BAMBOO_STAIR);
-	return common_enter_pattern(map);
+	return bamboo_enter_pattern(map);
 }
 const char* subterranean_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_SUBTERRANEAN_STAIR);
-	return common_enter_pattern(map);
+	return subterranean_enter_pattern(map);
 }
 const char* yukkuri_pattern(map_dummy* map)
 {

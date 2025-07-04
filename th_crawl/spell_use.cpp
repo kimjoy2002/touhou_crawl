@@ -1593,11 +1593,15 @@ bool skill_summon_bird(int pow, bool short_, unit* order, coord_def target)
 	int pow_ = pow/3+randA(pow*2/3);
 	int i = 2;
 
-	if(pow_<=20)//까마귀
+	if(pow_<=10)//까마귀
+	{
+		i = 1;
+	}
+	else if(pow_<=30)//까마귀
 	{
 		//i=(randA_1(20) < pow?3:2);
 	}
-	else if(pow_<=50)//나중에 까마귀에서 바꾸자
+	else if(pow_<=70)//나중에 까마귀에서 바꾸자
 	{
 		id_ = MON_CRANE;
 		i=1;
@@ -2661,7 +2665,7 @@ bool skill_luminus_strike(int power, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{		
 		float mon_panlty_ = order->isplayer()?1.0f:0.8f;//몬스터가 쓸때 패널티
-		int damage_ = (14+power/6)*mon_panlty_;
+		int damage_ = (11+power/8)*mon_panlty_;
 		beam_infor temp_infor(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),SpellLength(SPL_LUMINUS_STRIKE, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_LIGHTTANMAC));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
@@ -5899,8 +5903,18 @@ bool skill_philosopher_passive(int power, unit* order)
 	return false;
 }
 
-
-
+bool skill_royalflare(int power, bool short_, unit* order, coord_def target)
+{
+	if(order == &you)
+	{
+		if (env[current_level].isInSight(order->position)) {
+			PlaySE("royalflare");
+		}
+		you.SetAlchemyBuff(SPL_ROYALFLARE,30);
+		return true;
+	}
+	return false;
+}
 
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
@@ -7188,6 +7202,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_elemental_harvester(power,short_,order,target);
 	case SPL_NIGHTMARE_MANIFEST:
 		return skill_nightmare_manifest(power,short_,order,target);
+	case SPL_ROYALFLARE:
+		return skill_royalflare(power,short_,order,target);
 	default:
 		return false;
 	}
@@ -7690,6 +7706,8 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_elemental_harvester(power,short_,&you,target);
 	case SPL_NIGHTMARE_MANIFEST:
 		return skill_nightmare_manifest(power,short_,&you,target);
+	case SPL_ROYALFLARE:
+		return skill_royalflare(power,short_,&you,target);
 	default:
 		return false;
 	}

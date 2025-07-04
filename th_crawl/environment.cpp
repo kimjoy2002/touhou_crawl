@@ -976,6 +976,8 @@ void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x,
 		img_effect_slience.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(80, 255, 255, 0));
 	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_HALO && !(you.s_weather == 3 && you.s_weather_turn > 0))
 		img_effect_sun.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(20, 255, 255, 255));
+	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_ROYAL)
+		img_effect_slience.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(20, 255, 128, 128));
 
 
 
@@ -1980,6 +1982,31 @@ bool environment::MakeHalo(coord_def center_, int length_, bool on_)
 	return true;
 }
 
+bool environment::MakeRoyalflare(coord_def center_, int length_, bool on_)
+{
+	length_++;
+	for(int i=-length_/2;i<=length_/2;i++) //나중에 원형반복자만들면 고치기?
+	{
+		for(int j=-length_/2;j<=length_/2;j++)
+		{
+			if(i*i+j*j<=length_*length_/4)
+			{
+				if(on_)
+					dgtile[center_.x+i][center_.y+j].royal_count++;
+				else if(dgtile[center_.x+i][center_.y+j].royal_count>0)
+					dgtile[center_.x+i][center_.y+j].royal_count--;
+
+				if(dgtile[center_.x+i][center_.y+j].royal_count)
+					dgtile[center_.x+i][center_.y+j].flag |= FLAG_ROYAL;
+				else
+					dgtile[center_.x+i][center_.y+j].flag &= ~FLAG_ROYAL;
+			}
+		}
+	}
+	return true;
+}
+
+
 void environment::MakeForbid(coord_def pos,  bool center_, bool on_)
 {
 	if (on_) {
@@ -2325,6 +2352,10 @@ bool environment::isSanctuary(coord_def pos_)
 bool environment::isHalo(coord_def pos_)
 {
 	return dgtile[pos_.x][pos_.y].flag & FLAG_HALO;
+}
+bool environment::isRoyal(coord_def pos_)
+{
+	return dgtile[pos_.x][pos_.y].flag & FLAG_ROYAL;
 }
 unit* environment::isMonsterPos(int x_,int y_, const unit* excep_, int* map_id_)
 {

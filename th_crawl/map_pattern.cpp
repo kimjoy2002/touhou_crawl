@@ -986,7 +986,7 @@ EEEEEEE\
 			}
 		case 36: //숨겨진 보물창고
 			{
-				if(floor_ < 5)
+				if(floor_ < 5 || floor_ > 9)
 					break;
 				map->size_x = 4;
 				map->size_y = 2;
@@ -994,8 +994,8 @@ EEEEEEE\
 				map->m_entrance.y = -map->size_y;
 				map->m_exit.x = 0;
 				map->m_exit.y = -map->size_y;
-				map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
-				for(int i =0;i<3;i++)
+				map->flag = FLAG_NO_MONSTER | FLAG_NO_STAIR | FLAG_NO_ITEM;
+				for(int i =0;i<2;i++)
 				{
 					item_infor t;
 					makeitem(ITM_BOOK, 0, &t, -1);

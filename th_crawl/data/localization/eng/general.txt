@@ -574,6 +574,7 @@ LOC_SYSTEM_INVINCIBILITY,Invincible
 LOC_SYSTEM_NEUTRAL,Neutral
 LOC_SYSTEM_OIL,Oil
 LOC_SYSTEM_STICKY_FIRE,Fire
+LOC_SYSTEM_ROYALFLARE,Royale Flare
 LOC_SYSTEM_NONE_MOVE,Cannot Move
 LOC_SYSTEM_HP_VERY_LOW,Near Death
 LOC_SYSTEM_HP_LOW,Severely Wounded
@@ -639,7 +640,8 @@ LOC_SYSTEM_BUFF_STAT_DIAMOND,Diam
 LOC_SYSTEM_BUFF_STAT_POISON_BODY,PBody
 LOC_SYSTEM_BUFF_STAT_ENLIGHTENMENT,Enlig
 LOC_SYSTEM_BUFF_STAT_AUTUMN_BLADE,Blade
-LOC_SYSTEM_BUFF_STAT_PHILOSOPHERS,Philo
+LOC_SYSTEM_BUFF_STAT_PHILOSOPHERS,PhiloL
+LOC_SYSTEM_BUFF_STAT_ROYALFLARE,Royale
 LOC_SYSTEM_BUFF_STAT_UNLUCKY1,Kyou
 LOC_SYSTEM_BUFF_STAT_UNLUCKY2,Daikyou
 LOC_SYSTEM_BUFF_STAT_UNLUCKY3,BuddhaDeath
@@ -743,7 +745,8 @@ LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIAMOND,You gain extra defense for a short time.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_POISON_BODY,Continuously deals poison damage to enemies in the surrounding 8 tiles.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_ENLIGHTENMENT,Melee damage increases, damage taken is reduced to 66%, but your movement speed decreases to 0.77x.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTUMN_BLADE,Your melee attack power is tripled.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_PHILOSOPHERS,Using abilities (A key) allows cheaper access to the five elemental spells.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_PHILOSOPHERS,MP is consumed automatically to cast elemental spells at nearby enemies.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_ROYALFLARE,Your movement speed is reduced, and MP is heavily consumed to deal growing area fire damage.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY1,You are unlucky! This state can only be removed by gaining experience.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY2,You are very unlucky! This state can only be removed by gaining experience.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY3,You are terribly unlucky! This state can only be removed by gaining experience.
@@ -2369,6 +2372,8 @@ LOC_SYSTEM_SPELL_ALCHEMY_BLADE_ALMOST_OFF,The alchemical power on your hands is 
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON,You've transmuted the Philosopher's Stone.
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_OFF,Your Philosopher's Stone has finally vanished.
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ALMOST_OFF,The Philosopher's Stone is nearly gone.
+LOC_SYSTEM_SPELL_ALCHEMY_ROYALFLAR_ON,You began chanting Royale Flare.
+LOC_SYSTEM_SPELL_ALCHEMY_ROYALFLAR_OFF,Your Royale Flare chant has ended.
 LOC_SYSTEM_SPELL_UNLUCK_UFO,Unbelievable! A UFO fell from the sky!
 LOC_SYSTEM_SPELL_UNLUCK_RECORVER,Your fortune has returned to normal.
 LOC_SYSTEM_SPELL_TOUGUE,{0} pulled in {1}.
@@ -2548,6 +2553,7 @@ LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC3,Large Danmaku
 LOC_SYSTEM_SPL_BLINK_AWAY,Blink Away
 LOC_SYSTEM_SPL_ELEMENTAL_HARVESTER,Elemental Harvester
 LOC_SYSTEM_SPL_NIGHTMARE_MANIFEST,Nightmare Manifest
+LOC_SYSTEM_SPL_ROYALFLARE,Royale Flare
 LOC_SYSTEM_SPL_UKNOWN,Unknown Magic
 LOC_SYSTEM_SPL_DESCRIBE_NONE,This magic doesn’t exist.\n
 LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_SMALL,Fires a small danmaku.\n
@@ -2725,6 +2731,7 @@ LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC3,A large magical danmaku for distant
 LOC_SYSTEM_SPL_DESCRIBE_BLINK_AWAY,A blink spell used to put distance between you and an enemy.\nCan only be used when close to a target, and teleports you away to create space.\n
 LOC_SYSTEM_SPL_DESCRIBE_ELEMENTAL_HARVESTER,A metal alchemy spell that creates a large rotating saw.\nThe saw slowly travels along a path, damaging all nearby enemies.\nIf the path is blocked, it deals slight damage to the obstacle\n and disappears—so aim carefully to avoid obstructions.\n
 LOC_SYSTEM_SPL_DESCRIBE_NIGHTMARE_MANIFEST,A spell that manifests the nightmare of a sleeping enemy.\nTargets a sleeping enemy within range, waking them and summoning their nightmare nearby.\nThe summoned entity prioritizes attacking its origin and remains until the target is gone.\nThe stronger your Power, the stronger the nightmare; it may also inflict a random debuff if the debuff check succeeds.\n
+LOC_SYSTEM_SPL_DESCRIBE_ROYALFLARE,A spell that generates the power of the sun through alchemy.\nCreates a massive sun centered on the caster, burning everything nearby indiscriminately.\nThe area of effect starts small but expands over time and continues until your MP is fully drained.\nWhile casting, movement speed is reduced. Items can be used, but no other spells may be cast.\n
 LOC_SYSTEM_SPL_DESCRIBE_UKNOWN,A spell with no existing description.\n
 LOC_SYSTEM_SPL_DESCRIBE_ALCHEMY,This spell is an alchemy buff.\nOnly one alchemy buff can be active at a time.\nCasting another will overwrite the previous one.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMONING,This spell can summon up to {0} creatures.\n

@@ -574,6 +574,7 @@ LOC_SYSTEM_INVINCIBILITY,무적
 LOC_SYSTEM_NEUTRAL,중립
 LOC_SYSTEM_OIL,기름
 LOC_SYSTEM_STICKY_FIRE,화염
+LOC_SYSTEM_ROYALFLARE,로얄플레어
 LOC_SYSTEM_NONE_MOVE,이동불가
 LOC_SYSTEM_HP_VERY_LOW,죽기 직전
 LOC_SYSTEM_HP_LOW,심각한 부상
@@ -639,7 +640,8 @@ LOC_SYSTEM_BUFF_STAT_DIAMOND,다이아
 LOC_SYSTEM_BUFF_STAT_POISON_BODY,포이즌
 LOC_SYSTEM_BUFF_STAT_ENLIGHTENMENT,무념무상
 LOC_SYSTEM_BUFF_STAT_AUTUMN_BLADE,블레이드
-LOC_SYSTEM_BUFF_STAT_PHILOSOPHERS,현자의돌
+LOC_SYSTEM_BUFF_STAT_PHILOSOPHERS,현자
+LOC_SYSTEM_BUFF_STAT_ROYALFLARE,로얄
 LOC_SYSTEM_BUFF_STAT_UNLUCKY1,흉
 LOC_SYSTEM_BUFF_STAT_UNLUCKY2,대흉
 LOC_SYSTEM_BUFF_STAT_UNLUCKY3,불멸
@@ -743,7 +745,8 @@ LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIAMOND,잠깐동안 추가 방어력을 얻습니
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_POISON_BODY,주변 8타일의 적에게 지속적으로 독 데미지를 줍니다.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_ENLIGHTENMENT,근접 공격력이 상승하고 받는 데미지가 66%가 되지만 이동속도가 1.3배 느려집니다.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTUMN_BLADE,근접 공격력이 3배가 됩니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_PHILOSOPHERS,능력사용(a키)으로 5원소의 마법이 저렴하게 사용가능합니다.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_PHILOSOPHERS,자동으로 마나가 소모되어 주변 적에게 5원소의 마법이 사용됩니다.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_ROYALFLARE,이동 속도가 느려지고 마나를 크게 소모하여 점차 큰 범위에 화염 데미지를 줍니다.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY1,당신은 불행합니다! 이 상태는 경험치를 먹어야 사라집니다.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY2,당신은 아주 불행합니다! 이 상태는 경험치를 먹어야 사라집니다.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY3,당신은 끔찍하게 불행합니다! 이 상태는 경험치를 먹어야 사라집니다.
@@ -2369,6 +2372,8 @@ LOC_SYSTEM_SPELL_ALCHEMY_BLADE_ALMOST_OFF,손에 감긴 연금술의 힘이 약�
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ON,당신은 현자의 돌을 연성해냈다.
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_OFF,당신의 현자의 돌은 이윽고 사라졌다.
 LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ALMOST_OFF,현자의 돌은 거의 사라져가고있다.
+LOC_SYSTEM_SPELL_ALCHEMY_ROYALFLAR_ON,당신은 로얄 플레어를 영창하기 시작했다.
+LOC_SYSTEM_SPELL_ALCHEMY_ROYALFLAR_OFF,당신의 로얄 플레어 영창이 끝났다.
 LOC_SYSTEM_SPELL_UNLUCK_UFO,이럴수가! 하늘에서 UFO가 떨어졌다!
 LOC_SYSTEM_SPELL_UNLUCK_RECORVER,당신의 운세는 정상으로 돌아왔다.
 LOC_SYSTEM_SPELL_TOUGUE,{0:은|는} {1:을|를} 끌어당겼다.
@@ -2548,6 +2553,7 @@ LOC_SYSTEM_SPL_HANIWA_MAGIC_TANMAC3,대형 탄막
 LOC_SYSTEM_SPL_BLINK_AWAY,점멸 도주
 LOC_SYSTEM_SPL_ELEMENTAL_HARVESTER,엘리멘탈 하베스터
 LOC_SYSTEM_SPL_NIGHTMARE_MANIFEST,악몽의 구현
+LOC_SYSTEM_SPL_ROYALFLARE,로얄 플레어
 LOC_SYSTEM_SPL_UKNOWN,알수없는 마법
 LOC_SYSTEM_SPL_DESCRIBE_NONE,존재하지 않는 마법이다.\n
 LOC_SYSTEM_SPL_DESCRIBE_MON_TANMAC_SMALL,작은 탄막을 발사한다.\n
@@ -2725,6 +2731,7 @@ LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC3,멀리 있는 적에게 날라가�
 LOC_SYSTEM_SPL_DESCRIBE_BLINK_AWAY,적과 거리가 멀어지도록 사용하는 점멸 마법.\n가까이 있을때만 사용이 가능하며 적과 거리를 두도록 멀어진다.\n
 LOC_SYSTEM_SPL_DESCRIBE_ELEMENTAL_HARVESTER,커다란 톱니를 만들어내는 금속의 연금술 마법.\n만들어진 톱니는 천천히 경로를 따라 이동하면서 주변의 모든 적에 데미지를 준다.\n경로를 누군가 막게되면 해당 물체에 약한 데미지를 주고 사라지기에 적과 비껴나가도록 사용해야한다.\n 
 LOC_SYSTEM_SPL_DESCRIBE_NIGHTMARE_MANIFEST,자고있는 적의 악몽을 구현화하는 마법.\n사거리 안의 자고 있는 상대방을 깨우면서 적의 악몽이 소환물로서 적의 주변에 소환된다.\n소환된 소환물은 악몽의 주인을 우선적으로 공격하며 적이 사라질때까지 유지된다.\n파워에 비례하여 강한 소환물이 등장하며, 디버프 체크에 성공시 무작위 상태이상을 부여하기도 한다.\n
+LOC_SYSTEM_SPL_DESCRIBE_ROYALFLARE,연금술로 태양의 힘을 생성해내는 마법.\n시전하면 자신을 중심으로 거대한 태양을 생성하여 근처에 있는 모든 물체를 피아식별하지않고 태워버린다.\n처음엔 작은 범위로 시작하지만 시전동안 점차 범위가 넓어지며 영력이 다 떨어질때까지 지속된다.\n시전하는 동안에는 이동 속도가 느려지고 아이템 사용은 가능하나 다른 마법은 사용할 수 없음에 주의.\n
 LOC_SYSTEM_SPL_DESCRIBE_UKNOWN,설명이 존재하지 않는 마법.\n
 LOC_SYSTEM_SPL_DESCRIBE_ALCHEMY,이 마법은 연금술 버프다. 연금술 버프끼리는 중첩되지않는다.\n다른 연금술 버프가 걸린 상태에서 이 마법을 시전하면 기존의 연금술 버프가 사라진다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMONING,이 마법은 최대 {0}마리까지 소환수를 소환할 수 있다.\n

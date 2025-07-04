@@ -1016,6 +1016,8 @@ void players::SetXYPassFloor(int prev_floor, int new_floor, int x_, int y_) {
 	}
 	if(s_silence)
 		env[prev_floor].MakeSilence(position, s_silence_range, false);
+	if(alchemy_buff == ALCT_ROYAL)
+		env[current_level].MakeRoyalflare(position, GetRoyalRange(false), false);
 	if(you.GetArtifactProperty(ART_HALO) > 0 ) {
 		env[prev_floor].MakeHalo(position, 4, false);
 	}
@@ -1029,6 +1031,8 @@ void players::SetXYPassFloor(int prev_floor, int new_floor, int x_, int y_) {
 	}
 	if(s_silence)
 		env[new_floor].MakeSilence(position, s_silence_range, true);	
+	if(alchemy_buff == ALCT_ROYAL)
+		env[current_level].MakeRoyalflare(position, GetRoyalRange(false), true);
 	if(you.GetArtifactProperty(ART_HALO) > 0 ) {
 		env[new_floor].MakeHalo(position, 4, true);
 	}
@@ -1162,6 +1166,12 @@ bool players::attack(monster* mon_, bool counter_)
     return true;
 }
 
+
+
+int players::GetRoyalRange(bool prev_) {
+	return std::min(1+2*std::max(0,30-(alchemy_time+(prev_?1:0))), 7);	
+}
+
 int players::move(short_move x_mov, short_move y_mov)
 {
 	int sight_ = 7;
@@ -1253,6 +1263,7 @@ int players::move(short_move x_mov, short_move y_mov)
 			}
 
 		}
+
 
 
 
@@ -1742,6 +1753,8 @@ int players::GetWalkDelay()
 		speed_ += 1+as_penalty/2;
 	if(alchemy_buff == ALCT_STONE_FORM)
 		speed_ *= 1.3f;
+	if(alchemy_buff == ALCT_ROYAL)
+		speed_ *= 1.8f;
 	if(s_frozen)
 		speed_+=(s_frozen+1)*speed_/20;
 	if (drowned)

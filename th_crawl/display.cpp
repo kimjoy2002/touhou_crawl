@@ -3174,6 +3174,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_PHILOSOPHERS), CL_alchemy,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_PHILOSOPHERS), this);
 			}
+			if(you.alchemy_buff == ALCT_ROYAL)
+			{
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_ROYALFLARE), CL_alchemy,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_ROYALFLARE), this);
+			}
 			if(you.s_unluck > 0)
 			{
 				if(you.s_unluck <= 3)

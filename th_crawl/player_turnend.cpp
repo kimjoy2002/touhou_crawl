@@ -278,6 +278,32 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			}
 		}
 	}
+	if(alchemy_buff == ALCT_ROYAL)
+	{
+		auto mon_it = env[current_level].mon_vector.begin();
+		for(int i=0;i<MON_MAX_IN_FLOOR && mon_it != env[current_level].mon_vector.end() ;i++,mon_it++)
+		{
+			if((*mon_it).isLive() && env[current_level].isInSight((*mon_it).position)
+				&& (env[current_level].isInSight(coord_def(i,j))
+			    && env[current_level].dgtile[i][j].isRoyal())
+			{
+				int damage_ = 15;
+				attack_infor attack_infor_(randA_1(damage_),damage_,99,&you,you.GetParentType(),ATT_FIRE_BLAST,name_infor(LOC_SYSTEM_ROYALFLARE));
+				a.order->damage(attack_infor_, true);
+			}
+		}
+		
+		int mp_ = rand_int(4,5);
+		
+		if((you.pure_mp && you.GetMp() > mp_) || 
+			(!you.pure_mp && you.GetMp() >= mp_ )) {
+			you.MpUpDown(mp_);
+		} else {
+			alchemyonoff(alchemy_buff,false);
+			SetInter(IT_STAT);
+			alchemy_buff= ALCT_NONE;
+		}
+	}
 
 	env[current_level].ActionMonster(delay_);
 	WaitForSingleObject(mutx, INFINITE);
@@ -497,9 +523,6 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	}
 	if(alchemy_time)
 	{
-
-
-
 		alchemy_time--;
 		
 		if(alchemy_time == 0)
@@ -512,7 +535,6 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		{
 			alchemyalmostoff(alchemy_buff);
 		}
-
 
 	}
 
@@ -642,6 +664,21 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			SetInter(IT_STAT);
 		}
 	}
+	
+	
+	if(alchemy_buff == ALCT_ROYAL)
+	{
+		int prev_range_ = GetRoyalRange(true);
+		int range_ = GetRoyalRange(false);
+		
+		if(prev_range_ != range_)
+		{
+			env[current_level].MakeRoyalflare(position, prev_range_, false);
+			env[current_level].MakeRoyalflare(position, range_, true);
+		}
+	}
+	
+	
 	if(s_sick)
 	{
 		s_sick--;

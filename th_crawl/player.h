@@ -446,6 +446,7 @@ public:
 	int GetAttack(bool max);
 	int GetHit();
 	int GetAtkDelay();
+	int GetRoyalRange();
 	//int GetArmourPanlty();
 	//int GetShieldPanlty();
 	int ReSetASPanlty(); //새로운 아머실드 패널티를 지정

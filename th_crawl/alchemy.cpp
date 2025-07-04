@@ -14,10 +14,16 @@
 
 
 bool players::SetAlchemyBuff(ALCHEMY_LIST buff_, int time_)
-{
+{	
 	if(buff_ == alchemy_buff)
 	{
+		if(alchemy_buff == ALCT_ROYAL) {
+			env[current_level].MakeRoyalflare(you.position, GetRoyalRange(false), false);
+		}
 		alchemy_time += time_;
+		if(alchemy_buff == ALCT_ROYAL) {
+			env[current_level].MakeRoyalflare(you.position, GetRoyalRange(false), true);
+		}
 		if(Getalchemytime(buff_)<alchemy_time)
 			alchemy_time = Getalchemytime(buff_);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_LONG),false,false,false,CL_white_blue);
@@ -60,6 +66,8 @@ int Getalchemytime(ALCHEMY_LIST list_)
 		break;
 	case ALCT_PHILOSOPHERS_STONE:
 		break;
+	case ALCT_ROYALFLARE:
+		return 30;
 	}
 	return 100;
 }
@@ -90,6 +98,8 @@ void alchemyalmostoff(ALCHEMY_LIST list_)
 	case ALCT_PHILOSOPHERS_STONE:
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_ALMOST_OFF),false,false,false,CL_blue);
 		break;
+	case ALCT_ROYALFLARE:
+		break;		
 	}
 }
 void alchemyonoff(ALCHEMY_LIST list_,bool onoff_)
@@ -142,6 +152,14 @@ void alchemyonoff(ALCHEMY_LIST list_,bool onoff_)
 		else
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_PHILOSOPHERS_OFF),false,false,false,CL_blue);
 		break;
-
+	case ALCT_ROYALFLARE:
+	{
+		env[current_level].MakeRoyalflare(position, GetRoyalRange(false), onoff_);
+		if(onoff_)
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_ROYALFLAR_ON),true,false,false,CL_white_blue);
+		else
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_ROYALFLAR_OFF),false,false,false,CL_blue);
+		break;
+	}
 	}
 }

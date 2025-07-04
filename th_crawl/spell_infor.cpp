@@ -548,6 +548,9 @@ string GetSpellInfor(spell_list spell, bool isPlayer)
 	case SPL_NIGHTMARE_MANIFEST:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_NIGHTMARE_MANIFEST);
 		break;
+	case SPL_ROYALFLARE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ROYALFLARE);
+		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_UKNOWN);
 		break;

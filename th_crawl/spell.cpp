@@ -229,6 +229,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_KNIFE_COLLECT:
 	case SPL_AUTUMN_BLADE:
 	case SPL_PHILOSOPHERS_STONE:
+	case SPL_ROYALFLARE:
 		return (S_FLAG_BUF | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_HASTE_ALL:
 	case SPL_DISCORD:
@@ -464,6 +465,7 @@ int SpellLength(spell_list skill, bool isPlayer)
 	case SPL_CREATE_FOG:
 	case SPL_CLOSE_DOOR:
 	case SPL_SPEAKER_PHONE:
+	case SPL_ROYALFLARE:
 	default:
 		length_ = 0;
 		break;		
@@ -823,6 +825,8 @@ string SpellString(spell_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_ELEMENTAL_HARVESTER);
 	case SPL_NIGHTMARE_MANIFEST:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_NIGHTMARE_MANIFEST);
+	case SPL_ROYALFLARE:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_ROYALFLARE);
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_UKNOWN);
 	}
@@ -1002,6 +1006,7 @@ int SpellLevel(spell_list skill)
 	case SPL_KAGUYA_SPELL:
 	case SPL_HEAVENLY_STORM:
 	case SPL_MEGATON_KICK:
+	case SPL_ROYALFLARE:
 		return 8;
 	case SPL_FLAN_BUSIN:
 	case SPL_BURST:
@@ -1199,6 +1204,7 @@ int SpellNoise(spell_list skill)
 	case SPL_REIMU_BARRIER:
 	case SPL_HEAVENLY_STORM:
 	case SPL_SPEAKER_PHONE:
+	case SPL_ROYALFLARE:
 		return 16; //굉장한 소음
 	case SPL_ALERT_NOISE: 
 	case SPL_SHATTER:
@@ -1590,6 +1596,8 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_EARTH) : num == 1 ? (SKT_ALCHEMY) : (SKT_ERROR);
 	case SPL_NIGHTMARE_MANIFEST:
 		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_SUMMON) : (SKT_ERROR);
+	case SPL_ROYALFLARE:
+		return num == 0 ? (SKT_FIRE) : num == 1 ? (SKT_ALCHEMY) : (SKT_CONJURE);
 	default:
 		return SKT_ERROR;
 	}
@@ -1773,6 +1781,7 @@ int SpellCap(spell_list skill)
 	case SPL_HANIWA_MAGIC_TANMAC3:
 	case SPL_ELEMENTAL_HARVESTER:
 	case SPL_NIGHTMARE_MANIFEST:
+	case SPL_ROYALFLARE:
 		return 200;
 	default:
 	case SPL_BLINK:

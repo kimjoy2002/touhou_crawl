@@ -419,7 +419,8 @@ enum dungeon_tile_flag
 	FLAG_DONT_DOOR = 1 << 13, //몬스터가 열 수 없는 문
 	FLAG_FORBID = 1 << 14, //포비든 영역
 	FLAG_BLOCK = 1 << 15, //고정된 지형으로 이동하기 어려움
-    FLAG_HALO = 1<<16 //헤일로
+    FLAG_HALO = 1<<16, //헤일로
+    FLAG_ROYAL = 1<<17 //로얄 플레어
 };
 
 

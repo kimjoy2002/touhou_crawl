@@ -1880,6 +1880,12 @@ void Stair_move(bool down)
 
 			if(you.s_catch)
 				you.SetCatch(NULL);
+			if(you.alchemy_buff == ALCT_ROYAL)
+			{
+				alchemyonoff(alchemy_buff,false);
+				alchemy_buff= ALCT_NONE;
+			}
+			
 			for(int i=0;i<3;i++)
 			{
 				if(env[current_level].stair_down[i] == you.position)

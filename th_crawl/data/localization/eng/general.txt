@@ -2353,6 +2353,7 @@ LOC_SYSTEM_SPELL_SELF_HURT,This attack will hurt you too. Still want to use it?
 LOC_SYSTEM_SPELL_BLOCK,This place is blocked.
 LOC_SYSTEM_SPELL_EXHAUST,You're too exhausted to use this spell.
 LOC_SYSTEM_SPELL_CAST_FAIL,You failed to cast the spell.
+LOC_SYSTEM_SPELL_ALCHEMY_ROYAL_FAIL,You cannot cast other alchemy spells while channeling Royale Flare.
 LOC_SYSTEM_SPELL_ALCHEMY_LONG,The buff from your alchemy has been extended.
 LOC_SYSTEM_SPELL_ALCHEMY_STONEFIST_ON,Your fists have become as hard as stone.
 LOC_SYSTEM_SPELL_ALCHEMY_STONEFIST_OFF,Your fists have returned to normal.
@@ -2731,7 +2732,7 @@ LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC3,A large magical danmaku for distant
 LOC_SYSTEM_SPL_DESCRIBE_BLINK_AWAY,A blink spell used to put distance between you and an enemy.\nCan only be used when close to a target, and teleports you away to create space.\n
 LOC_SYSTEM_SPL_DESCRIBE_ELEMENTAL_HARVESTER,A metal alchemy spell that creates a large rotating saw.\nThe saw slowly travels along a path, damaging all nearby enemies.\nIf the path is blocked, it deals slight damage to the obstacle\n and disappears—so aim carefully to avoid obstructions.\n
 LOC_SYSTEM_SPL_DESCRIBE_NIGHTMARE_MANIFEST,A spell that manifests the nightmare of a sleeping enemy.\nTargets a sleeping enemy within range, waking them and summoning their nightmare nearby.\nThe summoned entity prioritizes attacking its origin and remains until the target is gone.\nThe stronger your Power, the stronger the nightmare; it may also inflict a random debuff if the debuff check succeeds.\n
-LOC_SYSTEM_SPL_DESCRIBE_ROYALFLARE,A spell that generates the power of the sun through alchemy.\nCreates a massive sun centered on the caster, burning everything nearby indiscriminately.\nThe area of effect starts small but expands over time and continues until your MP is fully drained.\nWhile casting, movement speed is reduced. Items can be used, but no other spells may be cast.\n
+LOC_SYSTEM_SPL_DESCRIBE_ROYALFLARE,A spell that generates the power of the sun through alchemy.\nCreates a massive sun centered on the caster, burning everything nearby indiscriminately.\nThe area of effect starts small but expands over time and continues until your MP is fully drained.\nNote: While casting, your movement speed is reduced and you cannot use other alchemy spells.\n
 LOC_SYSTEM_SPL_DESCRIBE_UKNOWN,A spell with no existing description.\n
 LOC_SYSTEM_SPL_DESCRIBE_ALCHEMY,This spell is an alchemy buff.\nOnly one alchemy buff can be active at a time.\nCasting another will overwrite the previous one.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMONING,This spell can summon up to {0} creatures.\n
@@ -3581,6 +3582,7 @@ LOC_SYSTEM_ITEM_BOOK_SUMMON_ULTI,Alice’s Book of Thaumaturgy
 LOC_SYSTEM_ITEM_BOOK_AIR_ULTI,Tengu’s Action Manga
 LOC_SYSTEM_ITEM_BOOK_ALCHMY_ULTI,Magnum Opus
 LOC_SYSTEM_ITEM_BOOK_LIGHT_BASE,Beginner's Light Magic Book
+LOC_SYSTEM_ITEM_BOOK_FIRE_EXTEND,Blazing Hellscape Guide
 LOC_SYSTEM_ITEM_BOOK_RANDOM1,Book with a Red Cover
 LOC_SYSTEM_ITEM_BOOK_RANDOM2,Book with a Green Cover
 LOC_SYSTEM_ITEM_BOOK_RANDOM3,Book with a Blue Cover
@@ -3798,6 +3800,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_SUMMON_ULTI,A book said to be often carried by 
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_ULTI,A thrilling adventure manga featuring a tengu as the protagonist.\nThe story is exciting, and the protagonist’s techniques seem worth imitating.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMY_ULTI,A tome containing all of alchemy, found in a massive library inside a mansion.\nThe vague and messy handwriting makes it hard to understand unless you’re a true alchemy master.\nJudging from the scribbles, even the original owner probably didn’t understand it well.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_LIGHT_BASE,A basic tome for danmaku combat using light projectiles.\nUsed by everyone from stray fairies to skilled magicians.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_FIRE_EXTEND,A popular magazine published in the Blazing Hellscape.\nPacked with fire-against-fire themed spells suited for the extreme heat of the inferno.\nIt also serves as a discussion forum for Gensokyo residents confident in their fire magic.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA,A lost pagoda infused with great power.\nWhen activated, releases stored energy as a laser.\nDamage increases with higher Activation skill.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL,A scripture once used by a wandering monk.\nConsumes Power to rapidly restore MP.\nMP restored increases with higher Activation skill.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL,A soul that wandered from the dream world.\nSummons allies from the dream world for a short time.\nStronger allies with higher Activation skill.\n

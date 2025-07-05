@@ -9,6 +9,7 @@
 #include <set>
 #include <algorithm>
 #include <iomanip>
+#include "alchemy.h"
 #include "environment.h"
 #include "steam_api.h"
 #include "display.h"
@@ -1880,10 +1881,10 @@ void Stair_move(bool down)
 
 			if(you.s_catch)
 				you.SetCatch(NULL);
-			if(you.alchemy_buff == ALCT_ROYAL)
+			if(you.alchemy_buff == ALCT_ROYALFLARE)
 			{
-				alchemyonoff(alchemy_buff,false);
-				alchemy_buff= ALCT_NONE;
+				alchemyonoff(you.alchemy_buff,false);
+				you.alchemy_buff= ALCT_NONE;
 			}
 			
 			for(int i=0;i<3;i++)
@@ -1938,6 +1939,11 @@ void Stair_move(bool down)
 
 			if(you.s_catch)
 				you.SetCatch(NULL);
+			if(you.alchemy_buff == ALCT_ROYALFLARE)
+			{
+				alchemyonoff(you.alchemy_buff,false);
+				you.alchemy_buff= ALCT_NONE;
+			}
 			deque<monster*> dq;
 			for(vector<monster>::iterator it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end();it++)
 			{
@@ -2052,6 +2058,11 @@ void Stair_move(bool down)
 
 			if(you.s_catch)
 				you.SetCatch(NULL);
+			if(you.alchemy_buff == ALCT_ROYALFLARE)
+			{
+				alchemyonoff(you.alchemy_buff,false);
+				you.alchemy_buff= ALCT_NONE;
+			}
 			for(int i=0;i<3;i++)
 			{
 				if(env[current_level].stair_up[i] == you.position)
@@ -2128,6 +2139,11 @@ void Stair_move(bool down)
 
 			if(you.s_catch)
 				you.SetCatch(NULL);
+			if(you.alchemy_buff == ALCT_ROYALFLARE)
+			{
+				alchemyonoff(you.alchemy_buff,false);
+				you.alchemy_buff= ALCT_NONE;
+			}
 			int floor_return=0;
 			coord_def pos_return(0,0);
 

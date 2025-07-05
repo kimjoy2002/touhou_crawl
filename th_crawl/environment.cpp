@@ -977,7 +977,7 @@ void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x,
 	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_HALO && !(you.s_weather == 3 && you.s_weather_turn > 0))
 		img_effect_sun.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(20, 255, 255, 255));
 	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_ROYAL)
-		img_effect_slience.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(20, 255, 128, 128));
+		img_effect_sun.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(80, 255, 100, 100));
 
 
 
@@ -1989,7 +1989,7 @@ bool environment::MakeRoyalflare(coord_def center_, int length_, bool on_)
 	{
 		for(int j=-length_/2;j<=length_/2;j++)
 		{
-			if(i*i+j*j<=length_*length_/4)
+			if(i*i+j*j<(length_/2+1)*(length_/2+1))
 			{
 				if(on_)
 					dgtile[center_.x+i][center_.y+j].royal_count++;

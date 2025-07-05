@@ -325,6 +325,7 @@ public:
 	bool MakeViolet(coord_def center_, int length_, bool on_);
 	bool MakeSantuary(coord_def center_, int length_, bool on_);
 	bool MakeHalo(coord_def center_, int length_, bool on_);
+	bool MakeRoyalflare(coord_def center_, int length_, bool on_);
 	bool AddForbid(coord_def center_);
 	void MakeForbid(coord_def pos, bool center_, bool on_);
 	bool MakeForbid(coord_def center_, int length_, bool on_, list<coord_def> &stack_);

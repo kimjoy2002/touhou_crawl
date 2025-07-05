@@ -37,9 +37,9 @@ enum ziggrrat_type
 
 
 
-int getZigurratMonster(int ziggurat_level, int named_percent, int type) {
+int getZigurratMonster(int ziggurat_level, int named_percent, int type, bool& dream_) {
 	random_extraction<int> monster_list;
-	if (randA(99) < named_percent || type == ZIGURRAT_NAMED) {
+	if ((!dream_ && randA(199) < named_percent) || type == ZIGURRAT_NAMED) {
 		monster_list.push(MON_KYOUKO, 1);
 		monster_list.push(MON_MISTIA, 1);
 		monster_list.push(MON_KEGERO, 1);
@@ -53,45 +53,52 @@ int getZigurratMonster(int ziggurat_level, int named_percent, int type) {
 		monster_list.push(MON_LUNAR, 1);
 		monster_list.push(MON_STAR, 1);
 		monster_list.push(MON_KOMACHI, 1);
+		dream_ = true;
 		return monster_list.pop();
 	}
 
 
  	switch (type) {
 	case ZIGURRAT_FAIRY:
-		monster_list.push(MON_FAIRY_GREEN_WARRIOR, 5);
-		monster_list.push(MON_FAIRY_BLUE_MAGICIAN, 5);
+		monster_list.push(MON_FAIRY_GREEN_WARRIOR, 7);
+		monster_list.push(MON_FAIRY_BLUE_MAGICIAN, 7);
 		monster_list.push(MON_FAIRY_HERO, 5);
 		monster_list.push(MON_FAIRY_SOCERER, 5);
-		monster_list.push(MON_FAIRY_SUN_FLOWER, 3);
+		monster_list.push(MON_DEAGAMA, 2);
+		monster_list.push(MON_TSUCHINOKO, 1);
+		monster_list.push(MON_FAIRY_SUN_FLOWER, 2);
 		break;
 	case ZIGURRAT_KAPPA_TENGU:
 		monster_list.push(MON_KATPA_SPEAR, 5);
 		monster_list.push(MON_KATPA_WATER_WIZARD, 5);
-		monster_list.push(MON_YAMABUSH_TENGU, 8);
+		monster_list.push(MON_YAMAWARO_NINJA, 3);
+		monster_list.push(MON_YAMAWARO_WAWRRIOR, 2);
+		monster_list.push(MON_YAMABUSH_TENGU, 3);
 		monster_list.push(MON_HANATACA_TENGU, 8);
-		monster_list.push(MON_SANPEI_FIGHTER, 3);
+		monster_list.push(MON_SANPEI_FIGHTER, 1);
 		break;
 	case ZIGURRAT_SCARLET:
-		monster_list.push(MON_HOBGOBRIN_LIBRARIAN, 8);
-		monster_list.push(MON_HOBGOBRIN_TEMP, 8);
+		monster_list.push(MON_MAID_FAIRY, 8);
+		monster_list.push(MON_HOBGOBRIN_LIBRARIAN, 6);
+		monster_list.push(MON_HOBGOBRIN_TEMP, 6);
 		monster_list.push(MON_HOBGOBRIN_MAID, 8);
-		monster_list.push(MON_CHUPARCABRA, 5);
+		monster_list.push(MON_CHUPARCABRA, 3);
+		monster_list.push(MON_GIANT_SLIME, 2);
 		monster_list.push(MON_VAMPIER_BAT, 5);
 		break;
 	case ZIGURRAT_BEAST:
 		monster_list.push(MON_NAMAZ, 5);
 		monster_list.push(MON_TIGER, 8);
-		monster_list.push(MON_RAIJUU, 8);
-		monster_list.push(MON_DRAGON_BABY, 3);
+		monster_list.push(MON_RAIJUU, 5);
+		monster_list.push(MON_DRAGON_BABY, 2);
 		monster_list.push(MON_EAGLE, 5);
-		monster_list.push(MON_DEAGAMA, 5);
+		monster_list.push(MON_DEAGAMA, 3);
 		break;
 	case ZIGURRAT_DREAM:
 		monster_list.push(MON_SHEEP, 7);
 		monster_list.push(MON_MAC, 3);
-		monster_list.push(MON_NIGHTMARE, 3);
-		monster_list.push(MON_LUNATIC, 3);
+		monster_list.push(MON_NIGHTMARE, 1);
+		monster_list.push(MON_LUNATIC, 2);
 		monster_list.push(MON_BLUE_UFO, 3);
 		monster_list.push(MON_RED_UFO, 3);
 		monster_list.push(MON_GREEN_UFO, 3);
@@ -101,38 +108,39 @@ int getZigurratMonster(int ziggurat_level, int named_percent, int type) {
 		break;
 	case ZIGURRAT_HELL:
 		monster_list.push(MON_HELL_CROW, 5);
-		monster_list.push(MON_VAMPIER_BAT, 5);
+		monster_list.push(MON_VAMPIER_BAT, 3);
 		monster_list.push(MON_HAUNT, 5);
+		monster_list.push(MON_WOLF_SPIRIT, 4);
+		monster_list.push(MON_OTTER_SPIRIT, 4);
+		monster_list.push(MON_EAGLE_SPIRIT, 2);
 		monster_list.push(MON_HELL_SPIDER, 5);
-		monster_list.push(MON_HELL_HOUND, 5);
-		monster_list.push(MON_LANTERN_YOUKAI, 3);
-		monster_list.push(MON_BLOOD_HAUNT, 2);
+		monster_list.push(MON_HELL_HOUND, 3);
+		monster_list.push(MON_BLOOD_HAUNT, 1);
 		monster_list.push(MON_ONI, 3);
-		monster_list.push(MON_FIRE_CAR, 3);
+		monster_list.push(MON_FIRE_CAR, 1);
 		break;
 	case ZIGURRAT_PANDEMONIUM:
 		monster_list.push(MON_SARA, 5);
 		monster_list.push(MON_LUIZE, 5);
 		monster_list.push(MON_ELIS, 5);
-		monster_list.push(MON_NIGHTMARE, 2);
+		monster_list.push(MON_NIGHTMARE, 1);
 		monster_list.push(MON_YUKI, 3);
 		monster_list.push(MON_MAI, 3);
 		monster_list.push(MON_SARIEL, 3);
 		monster_list.push(MON_YUUGENMAGAN, 3);
-		monster_list.push(MON_FIRE_CAR, 3);
 		break;
 	case ZIGURRAT_HAKUREI:
-		monster_list.push(MON_DRAGON_BABY, 8);
-		monster_list.push(MON_FLOWER_TANK, 8);
+		monster_list.push(MON_DRAGON_BABY, 6);
+		monster_list.push(MON_FLOWER_TANK, 6);
 		monster_list.push(MON_ONI, 5);
 		monster_list.push(MON_BLUE_ONI, 5);
 		monster_list.push(MON_SNOW_GIRL, 5);
-		monster_list.push(MON_FIRE_CAR, 3);
-		monster_list.push(MON_EVIL_EYE_TANK, 2);
+		monster_list.push(MON_FIRE_CAR, 2);
+		monster_list.push(MON_EVIL_EYE_TANK, 1);
 		break;
 	case ZIGURRAT_MECANIC:
 		monster_list.push(MON_SANPEI_FIGHTER, 5);
-		monster_list.push(MON_FLOWER_TANK, 10);
+		monster_list.push(MON_FLOWER_TANK, 8);
 		monster_list.push(MON_EVIL_EYE_TANK, 2);
 		monster_list.push(MON_BLUE_UFO, 4);
 		monster_list.push(MON_RED_UFO, 4);
@@ -142,7 +150,7 @@ int getZigurratMonster(int ziggurat_level, int named_percent, int type) {
 	case ZIGURRAT_SOUL:
 		monster_list.push(MON_DESIRE, 10);
 		monster_list.push(MON_HAUNT, 10);
-		monster_list.push(MON_LUNATIC, 4);
+		monster_list.push(MON_LUNATIC, 2);
 		monster_list.push(MON_NIGHTMARE, 4);
 		monster_list.push(MON_BLOOD_HAUNT, 2); 
 		break;
@@ -154,13 +162,17 @@ int getZigurratMonster(int ziggurat_level, int named_percent, int type) {
 		return monster_list.pop();
 }
 
-void addZigguratNamed(int num, int mon_id_, int x_, int y_, int level_)
+void addZigguratNamed(int num, int mon_id_, int x_, int y_, int level_, int type)
 {
 	monster* mon_ = env[num].AddMonster(mon_id_, 0, coord_def(x_, y_));
 	mon_->flag &= ~M_FLAG_UNIQUE;
 	mon_->flag |= M_FLAG_NONE_STAIR;
 	mon_->dream = true;
-	int level_up_ = min(9, randA(max(0,level_ - mon_->level/2)));
+	int level_up_ = min(9, randA(max(0,randA(level_) - mon_->level/2)));
+	if(type == ZIGURRAT_NAMED && randA(9)) { //네임드 타입은 아주 일부만 레벨업
+		level_up_ = 0;
+	}
+
 	mon_->name = name_infor(LOC_SYSTEM_MON_DREAM_UNIQUE, (monster_index)mon_id_);
 	if(level_up_ > 0) {
 		mon_->name.addPostFix("+" + to_string(level_up_));
@@ -191,7 +203,8 @@ int getZigguratType(int level)
 	type_list.push(ZIGURRAT_HAKUREI, 30);
 	type_list.push(ZIGURRAT_MECANIC, 30);
 	type_list.push(ZIGURRAT_SOUL, 30);
-	type_list.push(ZIGURRAT_NAMED, 10);
+	if(level == 26)
+		type_list.push(ZIGURRAT_NAMED, 100);
 
 	return type_list.pop();
 }
@@ -199,6 +212,7 @@ int getZigguratType(int level)
 void addZigguratMonster(int num, int x_, int y_, int monster_num)
 {
 	bool first_ = true;
+	bool dream_ = false;
 	int type_ = getZigguratType(you.ziggurat_level);
 	dif_rect_iterator rect_(coord_def(x_, y_), 7);
 
@@ -206,9 +220,8 @@ void addZigguratMonster(int num, int x_, int y_, int monster_num)
 	{
 		if (env[num].isMove((*rect_)))
 		{
-
 			int named_percent = randA(10+you.ziggurat_level);
-			int mon_id_ = getZigurratMonster(you.ziggurat_level, named_percent, type_);
+			int mon_id_ = getZigurratMonster(you.ziggurat_level, named_percent, type_, dream_);
 			if (first_ == true && you.ziggurat_level == 26) {
 				//마지막 층에서는 도레킹이 고정
 				mon_id_ = MON_DOREKING;
@@ -216,7 +229,7 @@ void addZigguratMonster(int num, int x_, int y_, int monster_num)
 
 			if (mon_id_ != MON_DOREKING && mondata[mon_id_].flag & M_FLAG_UNIQUE)
 			{
-				addZigguratNamed(num, mon_id_, rect_->x, rect_->y, 5+ you.ziggurat_level);
+				addZigguratNamed(num, mon_id_, rect_->x, rect_->y, 5+ you.ziggurat_level, type_);
 			}
 			else {
 				addZigguratMonsterInner(num, mon_id_, rect_->x, rect_->y);

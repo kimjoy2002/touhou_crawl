@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "alchemy.h"
+#include "environment.h"
 #include "player.h"
 #include "skill_use.h"
 #include "joypad.h"
@@ -17,11 +18,11 @@ bool players::SetAlchemyBuff(ALCHEMY_LIST buff_, int time_)
 {	
 	if(buff_ == alchemy_buff)
 	{
-		if(alchemy_buff == ALCT_ROYAL) {
+		if(alchemy_buff == ALCT_ROYALFLARE) {
 			env[current_level].MakeRoyalflare(you.position, GetRoyalRange(false), false);
 		}
 		alchemy_time += time_;
-		if(alchemy_buff == ALCT_ROYAL) {
+		if(alchemy_buff == ALCT_ROYALFLARE) {
 			env[current_level].MakeRoyalflare(you.position, GetRoyalRange(false), true);
 		}
 		if(Getalchemytime(buff_)<alchemy_time)
@@ -154,7 +155,7 @@ void alchemyonoff(ALCHEMY_LIST list_,bool onoff_)
 		break;
 	case ALCT_ROYALFLARE:
 	{
-		env[current_level].MakeRoyalflare(position, GetRoyalRange(false), onoff_);
+		env[current_level].MakeRoyalflare(you.position, you.GetRoyalRange(false), onoff_);
 		if(onoff_)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_ROYALFLAR_ON),true,false,false,CL_white_blue);
 		else

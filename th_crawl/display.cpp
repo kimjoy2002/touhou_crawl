@@ -507,25 +507,27 @@ void display_manager::spell_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 {
 	RECT rc={50, 50, option_mg.getWidth(), option_mg.getHeight()};
 	stringstream ss;
+	int array_[] = {50, 100, 300, 550, 700};
 
 	DrawTextUTF8(pfont,pSprite,LocalzationManager::formatString(item_view_message, PlaceHolderHelper(joypadUtil::get("?", GVK_BUTTON_Y))), -1, &rc, DT_NOCLIP,CL_normal);
 	rc.top += fontDesc.Height*2;
 
+	rc.left = array_[0];
 	DrawTextUTF8(pfont,pSprite, LocalzationManager::locString(LOC_SYSTEM_HOTKEY), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-	rc.left += 50;
+	rc.left = array_[1];
 	ss << "- " << LocalzationManager::locString(LOC_SYSTEM_NAME);
 	DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-	rc.left += 150;
+	rc.left = array_[2];
 	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_SCHOOL), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-	rc.left += 250;
+	rc.left = array_[3];
 	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_FAILURE_RATE), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-	rc.left += 150;
+	rc.left = array_[4];
 	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_LEVEL), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.top += fontDesc.Height;
-	rc.left = 50;
 	int spell_draw_ = 0;
 	for(int i=0;i<52;i++)
 	{
+		rc.left = array_[0];
 		if(you.MemorizeSpell[i])
 		{
 			RECT rc2={ rc.left, rc.top,  rc.right, (LONG)(rc.top+fontDesc.Height)};
@@ -540,19 +542,34 @@ void display_manager::spell_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 			ss.clear();
 			ss << sp_char;
 			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
-			rc.left += 50;
+			rc.left = array_[1];
 			ss.str("");
 			ss.clear();
 			ss << "- " << SpellString(spell_);
 			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
-			rc.left += 150;
+			if(rc.left + PrintCharWidth(ss.str()) *fontDesc.Width > array_[2]) {
+				rc.left += (PrintCharWidth(ss.str()) + 1) * fontDesc.Width;
+			}
+			else {
+				rc.left = array_[2];
+			}
 			DrawTextUTF8(pfont,pSprite,GetSpellSchoolString(spell_).c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
-			rc.left = 500;
+			if(rc.left + PrintCharWidth(GetSpellSchoolString(spell_).c_str()) *fontDesc.Width > array_[3]) {
+				rc.left += (PrintCharWidth(GetSpellSchoolString(spell_).c_str()) + 1) * fontDesc.Width;
+			}
+			else {
+				rc.left = array_[3];
+			}
 			ss.str("");
 			ss.clear();
 			ss << setw(3) << left << (100 - you.GetSpellSuccess(spell_)) << "%";
 			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, spell_color_);
-			rc.left += 150;
+			if(rc.left + PrintCharWidth(ss.str()) *fontDesc.Width > array_[4]) {
+				rc.left += (PrintCharWidth(ss.str()) + 1) * fontDesc.Width;
+			}
+			else {
+				rc.left = array_[4];
+			}
 			ss.str("");
 			ss.clear();
 			ss << SpellLevel(spell_);
@@ -579,7 +596,6 @@ void display_manager::spell_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 			}
 			
 			rc.top += fontDesc.Height;
-			rc.left = 50;
 		}
 	}
 }
@@ -3174,7 +3190,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_PHILOSOPHERS), CL_alchemy,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_PHILOSOPHERS), this);
 			}
-			if(you.alchemy_buff == ALCT_ROYAL)
+			if(you.alchemy_buff == ALCT_ROYALFLARE)
 			{
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_ROYALFLARE), CL_alchemy,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_ROYALFLARE), this);

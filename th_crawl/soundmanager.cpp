@@ -128,6 +128,7 @@ void FMODSoundManager::Update() {
     if (!bgmFadingOut && !pendingBgmName.empty()) {
         std::string next = pendingBgmName;
         pendingBgmName.clear();
+        currentBgmName.clear();
         playBgm(next);  // 자동으로 다시 재생 시도
     }
 }
@@ -203,7 +204,7 @@ void FMODSoundManager::loadBgmFromJson(const std::string& filename) {
 }
 
 void FMODSoundManager::playSound(const std::string& name) {
- auto it = soundList.find(name);
+    auto it = soundList.find(name);
     if (it == soundList.end()) return;
 
     auto chIt = playingSE.find(name);

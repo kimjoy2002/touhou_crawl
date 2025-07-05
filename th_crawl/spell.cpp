@@ -6,6 +6,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include "alchemy.h"
 #include "player.h"
 #include "skill_use.h"
 #include "throw.h"
@@ -1597,7 +1598,7 @@ skill_type SpellSchool(spell_list skill, int num)
 	case SPL_NIGHTMARE_MANIFEST:
 		return num == 0 ? (SKT_MENTAL) : num == 1 ? (SKT_SUMMON) : (SKT_ERROR);
 	case SPL_ROYALFLARE:
-		return num == 0 ? (SKT_FIRE) : num == 1 ? (SKT_ALCHEMY) : (SKT_CONJURE);
+		return num == 0 ? (SKT_FIRE) : num == 1 ? (SKT_ALCHEMY) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}

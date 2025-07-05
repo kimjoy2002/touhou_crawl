@@ -263,42 +263,47 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	ReleaseMutex(mutx);
 	if(alchemy_buff == ALCT_PHILOSOPHERS_STONE)
 	{
-		if((you.pure_mp && you.GetMp() > 0) || 
-			(!you.pure_mp && you.GetMp() >= 0 )) {
-			int power_=min(SpellCap(SPL_PHILOSOPHERS_STONE),you.GetSpellPower(SpellSchool(SPL_PHILOSOPHERS_STONE,0),SpellSchool(SPL_PHILOSOPHERS_STONE,1),SpellSchool(SPL_PHILOSOPHERS_STONE,2)));
-			if(randA(4)<4) {
+		int sight_mon_ = env[current_level].insight_mon(MET_ENEMY);
+		//3명부터 시야내적 확률이 2씩 증가, 최대 5배까지 증가
+		int rand_count = 3+randA(4+min(16,2*max(0,sight_mon_-3)));
+		rand_count = rand_count*delay_/10.0f; //딜레이 보정
+		while(rand_count > 4) {
+			if((you.pure_mp && you.GetMp() > 0) || 
+				(!you.pure_mp && you.GetMp() >= 0 )) {
+				int power_=min(SpellCap(SPL_PHILOSOPHERS_STONE),you.GetSpellPower(SpellSchool(SPL_PHILOSOPHERS_STONE,0),SpellSchool(SPL_PHILOSOPHERS_STONE,1),SpellSchool(SPL_PHILOSOPHERS_STONE,2)));
+				
 				if(skill_philosopher_passive(power_,&you)) {
 					you.MpUpDown(-1);
 				}
-				if(randA(2)<1) { //보너스
-					if(skill_philosopher_passive(power_,&you)) {
-						you.MpUpDown(-1);
-					}
-				}
 			}
+			rand_count--;
 		}
 	}
-	if(alchemy_buff == ALCT_ROYAL)
+	if(alchemy_buff == ALCT_ROYALFLARE)
 	{
+		float damage_delay_ = delay_/10.0f;
 		auto mon_it = env[current_level].mon_vector.begin();
 		for(int i=0;i<MON_MAX_IN_FLOOR && mon_it != env[current_level].mon_vector.end() ;i++,mon_it++)
 		{
 			if((*mon_it).isLive() && env[current_level].isInSight((*mon_it).position)
-				&& (env[current_level].isInSight(coord_def(i,j))
-			    && env[current_level].dgtile[i][j].isRoyal())
+			    && env[current_level].isRoyal((*mon_it).position))
 			{
-				int damage_ = 15;
-				attack_infor attack_infor_(randA_1(damage_),damage_,99,&you,you.GetParentType(),ATT_FIRE_BLAST,name_infor(LOC_SYSTEM_ROYALFLARE));
-				a.order->damage(attack_infor_, true);
+				int damage_ = 70*damage_delay_;
+				attack_infor attack_infor_(randC(3, damage_/3),damage_,99,&you,you.GetParentType(),ATT_FIRE_BLAST,name_infor(LOC_SYSTEM_ROYALFLARE));
+				(*mon_it).damage(attack_infor_, true);
 			}
 		}
 		
-		int mp_ = rand_int(4,5);
-		
-		if((you.pure_mp && you.GetMp() > mp_) || 
-			(!you.pure_mp && you.GetMp() >= mp_ )) {
-			you.MpUpDown(mp_);
-		} else {
+		int mp_ = rand_int(3,4)*damage_delay_;
+		if(you.pure_mp && you.GetMp() <= mp_) {
+			mp_ = you.GetMp()-1;
+		} 
+		if(!you.pure_mp && you.GetMp() < mp_ ) {
+			mp_ = you.GetMp();
+		}
+		you.MpUpDown(-mp_);
+		if((you.pure_mp && you.GetMp() == 1) || 
+			(!you.pure_mp && you.GetMp() == 0)) {
 			alchemyonoff(alchemy_buff,false);
 			SetInter(IT_STAT);
 			alchemy_buff= ALCT_NONE;
@@ -666,7 +671,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	}
 	
 	
-	if(alchemy_buff == ALCT_ROYAL)
+	if(alchemy_buff == ALCT_ROYALFLARE)
 	{
 		int prev_range_ = GetRoyalRange(true);
 		int range_ = GetRoyalRange(false);

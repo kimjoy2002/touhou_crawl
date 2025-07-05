@@ -1434,7 +1434,7 @@ bool skill_magic_tanmac(int pow, bool short_, unit* order, coord_def target)
 bool skill_fire_ball(int power, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
-	int length_ = ceil(sqrt(pow((float)abs(order->position.x-target.x),2)+pow((float)abs(order->position.y-target.y),2)));
+	int length_ = GetLengthFromCenter(order->position.x, order->position.y, target.x, target.y);
 	length_ = min(length_,SpellLength(SPL_FIRE_BALL, order->isplayer()));
 	if(CheckThrowPath(order->position,target,beam))
 	{
@@ -1522,7 +1522,7 @@ bool skill_venom_bolt(int pow, bool short_, unit* order, coord_def target)
 bool skill_confuse_cloud(int power, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
-	int length_ = ceil(sqrt(pow((float)abs(order->position.x-target.x),2)+pow((float)abs(order->position.y-target.y),2)));
+	int length_ =  GetLengthFromCenter(order->position.x, order->position.y, target.x, target.y);
 	length_ = min(length_,SpellLength(SPL_CONFUSE_CLOUD, order->isplayer()));
 	if(CheckThrowPath(order->position,target,beam))
 	{
@@ -2660,7 +2660,7 @@ bool skill_summon_lessor_demon(int pow, bool short_, unit* order, coord_def targ
 bool skill_luminus_strike(int power, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
-	int length_ = ceil(sqrt(pow((float)abs(order->position.x-target.x),2)+pow((float)abs(order->position.y-target.y),2)));
+	int length_ = GetLengthFromCenter(order->position.x, order->position.y, target.x, target.y);
 	length_ = min(length_,SpellLength(SPL_FIRE_BALL, order->isplayer()));
 	if(CheckThrowPath(order->position,target,beam))
 	{		
@@ -3321,7 +3321,7 @@ bool skill_call_hound(int power, bool short_, unit* order, coord_def target)
 bool skill_canon(int power, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
-	int length_ = ceil(sqrt(pow((float)abs(order->position.x-target.x),2)+pow((float)abs(order->position.y-target.y),2)));
+	int length_ = GetLengthFromCenter(order->position.x, order->position.y, target.x, target.y);
 	length_ = min(length_,SpellLength(SPL_CANNON, order->isplayer()));
 	if(CheckThrowPath(order->position,target,beam))
 	{
@@ -4921,7 +4921,7 @@ bool skill_megaton_kick(int pow, bool short_, unit* order, coord_def target)
 bool skill_throw_oil(int power, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
-	int length_ = ceil(sqrt(pow((float)abs(order->position.x-target.x),2)+pow((float)abs(order->position.y-target.y),2)));
+	int length_ =  GetLengthFromCenter(order->position.x, order->position.y, target.x, target.y);
 	length_ = min(length_,SpellLength(SPL_THROW_OIL, order->isplayer()));
 	if(CheckThrowPath(order->position,target,beam))
 	{
@@ -5372,7 +5372,7 @@ bool skill_throw_potion(int power, bool short_, unit* order, coord_def target)
 	}
 
 	beam_iterator beam(order->position,order->position);
-	int length_ = ceil(sqrt(pow((float)abs(order->position.x-target.x),2)+pow((float)abs(order->position.y-target.y),2)));
+	int length_ =  GetLengthFromCenter(order->position.x, order->position.y, target.x, target.y);
 	length_ = min(length_,SpellLength(SPL_THROW_POTION, order->isplayer()));
 	if(CheckThrowPath(order->position,target,beam))
 	{
@@ -5827,6 +5827,9 @@ bool skill_philosopher_passive(int power, unit* order)
 			if(len_ < min_length_ || len_ > max_length_) {
 				continue;
 			}
+			if(rand_ == 0 && it->fire_resist == 3)
+				continue;
+
 			
 			if((it->position - order->position).abs() <= 2 || can_pentan) {
 				able_unit_vector.push(&(*it));
@@ -5910,7 +5913,7 @@ bool skill_royalflare(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("royalflare");
 		}
-		you.SetAlchemyBuff(SPL_ROYALFLARE,30);
+		you.SetAlchemyBuff(ALCT_ROYALFLARE,30);
 		return true;
 	}
 	return false;
@@ -7322,7 +7325,10 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 	
 	
 	power=min(SpellCap(skill),max(0,power));
-
+	if(you.alchemy_buff == ALCT_ROYALFLARE) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_ROYAL_FAIL),true,false,false,CL_normal);	
+		return false;
+	}
 	if(!CheckDangerSpell(SpellMiscastingLevel(SpellLevel(skill),100-you.GetSpellSuccess(skill))))
 	{
 		return false;

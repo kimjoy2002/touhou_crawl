@@ -467,7 +467,7 @@ const mon_infor mondata[] = {
 	{18,25,0},{ATT_SPEAR,ATT_ELEC,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,2,1,10,'&' },
 	{MON_SANPEI_FIGHTER,12,1601,name_infor(MON_SANPEI_FIGHTER),&img_mons_sanpei_fighter,130,15,6,
-	{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_DRILL),name_infor(),name_infor()},
+	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_DRILL),name_infor(),name_infor()},
 	M_FLAG_FLY | M_FLAG_INANIMATE,99,1,8,'8' },
 	{MON_VAMPIER_BAT,9,824,name_infor(MON_VAMPIER_BAT),&img_mons_vamp_bat,65,0,20,
 	{18,0,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},

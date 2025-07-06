@@ -469,7 +469,7 @@ artifact_type ring_to_artifact(ring_type kind)
 
 
 
-int isGenerateRandart(artifact_type type_) {
+int isGenerateRandart(artifact_type type_, item_type type) {
 	switch(type_) {
 		case ART_STR:
 		case ART_DEX:
@@ -494,8 +494,14 @@ int isGenerateRandart(artifact_type type_) {
 			return 7;
 		case ART_SKILL_UP:
 		case ART_SLAY:
-		case ART_HP_REGEN:
 			return 3;
+		case ART_HP_REGEN:
+		{
+			if(type == ITM_RING) {
+				return 0;
+			}
+			return 3;
+		}
 		case ART_MAGICBOOST:
 		case ART_ANTIOVERHEAT:
 		case ART_PENTAN:
@@ -708,8 +714,8 @@ void MakeArtifact(item* item_, int good_bad_)
 		}
 		if(able_fixed_arti.GetSize()>0) {
 			//고정아티 존재함
-			//기본 고정아티 확률 1/15
-			if(randA(19-5*good_bad_) == 0) {
+			//기본 고정아티 확률 1/10
+			if(randA(13-3*good_bad_) == 0) {
 				MakeFixedArtifact(item_, able_fixed_arti.pop(), false);
 				return;
 			}

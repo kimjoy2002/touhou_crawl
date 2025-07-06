@@ -217,7 +217,7 @@ LOC_SYSTEM_SAVE_QUIT_YN,保存して終了しますか？
 LOC_SYSTEM_NONSAVE_QUIT_YN,保存せずに終了しますか？
 LOC_SYSTEM_FORBIDZONE_YN,本当に入りますか？
 LOC_SYSTEM_CANCLE_QUIT,終了をキャンセルしました。
-LOC_SYSTEM_PLEASE_SELECT_YN,YかNを選んでください。
+LOC_SYSTEM_PLEASE_SELECT_YN,{0}か{1}を選んでください。
 LOC_SYSTEM_PLEASE_SELECT_PAD,もう一度入力してください。
 LOC_SYSTEM_PLEASE_SELECT_Y,はい-{0}
 LOC_SYSTEM_PLEASE_SELECT_N,いいえ-{0}
@@ -332,7 +332,7 @@ LOC_SYSTEM_DUNGEON_DEPTH,獣道
 LOC_SYSTEM_DUNGEON_DREAM,夢の世界
 LOC_SYSTEM_DUNGEON_MOON,月の都
 LOC_SYSTEM_DUNGEON_SUBTERRANEAN,地底
-LOC_SYSTEM_DUNGEON_SUBRERRANEAN_LAST,灼熱地獄跡
+LOC_SYSTEM_DUNGEON_SUBTERRANEAN_LAST,灼熱地獄跡
 LOC_SYSTEM_DUNGEON_PANDEMONIUM,魔界
 LOC_SYSTEM_DUNGEON_PANDEMONIUM_LAST,パンデモニウム
 LOC_SYSTEM_DUNGEON_HOKKAI,法界
@@ -3897,7 +3897,7 @@ LOC_SYSTEM_GOD_TENKYUU,テンキュウ
 LOC_SYSTEM_GOD_SUWAKO_TITLE,洩矢諏訪子 - 土着神の頂点
 LOC_SYSTEM_GOD_SUWAKO_DESCRIPTION,諏訪子は「こん（土）」を創造する能力を持つ土着の神である。\n信者に対して気まぐれな権能を授けるため、様々な力を得られるが、望むものとは限らない。
 LOC_SYSTEM_GOD_MIMA_TITLE,魅魔 - 遥かな夢に運命を委ねる精神
-LOC_SYSTEM_GOD_MIMA_DESCRIPTION,魅魔は災厄をもたらす悪霊である。\n信者はそのもとに入り、強力な破壊魔法の支援と伝授を受ける。\n特に忠実な信徒になれば、究極の破壊魔法「スパーク」を伝授される。
+LOC_SYSTEM_GOD_MIMA_DESCRIPTION,魅魔は災厄をもたらす悪霊である。\n信者はそのもとに入り、強力な破壊魔法の支援と伝授を受ける。\n特に忠実な信徒になれば、究極の破壊魔法「スパーク」を伝授される。\nミマは自らの手で戦うことを重んじており、プレイヤーが自分で敵を倒すと信仰を得られる。
 LOC_SYSTEM_GOD_YUYUKO_TITLE,西行寺幽々子 - 冥界楼閣の亡霊少女
 LOC_SYSTEM_GOD_YUYUKO_DESCRIPTION,幽々子は白玉楼に住む西行寺の令嬢である。\n死を操る力を持ち、信者には死の力を授ける。\n信者となれば、死を操る力と多くの魂を得ることができる。
 LOC_SYSTEM_GOD_JOON_AND_SION_TITLE,依神女苑＆紫苑 - 最凶最悪の姉妹

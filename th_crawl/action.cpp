@@ -1033,6 +1033,24 @@ void Search()
 					search_monspell_view((monster*)unit_);
 					changedisplay(DT_GAME);
 				}
+			} else {
+				//아이템 있는지 확인
+				list<item>::iterator last = env[current_level].item_list.end();
+				list<item>::iterator it;
+
+				for(it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();it++)
+				{
+					if(it->position == you.search_pos) {
+						last = it;
+					} else if(last != env[current_level].item_list.end()) {
+						break;
+					}
+				}
+				
+				if(last != env[current_level].item_list.end()) {
+					iteminfor_(&(*last), true);
+					changedisplay(DT_GAME);
+				}
 			}
 			break;
 		case 'E':
@@ -1268,6 +1286,24 @@ void Wide_Search()
 				if(!unit_->isplayer() && unit_->isView() && env[current_level].isInSight(you.search_pos))
 				{
 					search_monspell_view((monster*)unit_);
+					changedisplay(DT_GAME);
+				}
+			} else {
+				//아이템 있는지 확인
+				list<item>::iterator last = env[current_level].item_list.end();
+				list<item>::iterator it;
+
+				for(it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();it++)
+				{
+					if(it->position == you.search_pos) {
+						last = it;
+					} else if(last != env[current_level].item_list.end()) {
+						break;
+					}
+				}
+				
+				if(last != env[current_level].item_list.end()) {
+					iteminfor_(&(*last), true);
 					changedisplay(DT_GAME);
 				}
 			}
@@ -2579,16 +2615,13 @@ void rightmenu_control()
 				
 				if(floor_items != env[current_level].item_list.end()) {
 					if(floor_items->position == you.position ) {
-						if(item_index-- == 0) {
-							you.lastSelectMenu = g_menu_select;
-							if(ForMouseClick(long_?MKIND_PICK_DESCRIPTION:MKIND_PICK, item_index+1, 0)){
-								break;
-							}
-							else {
-								continue;
-							}
+						you.lastSelectMenu = g_menu_select;
+						if(ForMouseClick(long_?MKIND_PICK_DESCRIPTION:MKIND_PICK, item_index, 0)){
+							break;
 						}
-						floor_items++;
+						else {
+							continue;
+						}
 					}
 				}
 			}
@@ -3481,9 +3514,9 @@ void dungeonView()
 								{
 									printsub(blank.str(),false,CL_warning);
 									printsub("│└",false,CL_normal);
-									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBRERRANEAN_LAST) + " ",false,CL_warning);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBTERRANEAN_LAST) + " ",false,CL_warning);
 				
-									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBRERRANEAN_LAST) + " " + LocalzationManager::locString(LOC_SYSTEM_DUNGEON_LAST_FLOOR) + "  ",false,CL_help);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBTERRANEAN) + " " + LocalzationManager::locString(LOC_SYSTEM_DUNGEON_LAST_FLOOR) + "  ",false,CL_help);
 
 									//***룬있음
 									oss.str("");
@@ -3496,8 +3529,8 @@ void dungeonView()
 								{
 									printsub(blank.str(),false,CL_warning);
 									printsub("│└",false,CL_normal);
-									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBRERRANEAN_LAST) + " ",false,CL_bad);
-									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBRERRANEAN_LAST) + " " + LocalzationManager::locString(LOC_SYSTEM_DUNGEON_LAST_FLOOR) + " ",true,CL_STAT);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBTERRANEAN_LAST) + " ",false,CL_bad);
+									printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBTERRANEAN) + " " + LocalzationManager::locString(LOC_SYSTEM_DUNGEON_LAST_FLOOR) + " ",true,CL_STAT);
 								}
 							}
 

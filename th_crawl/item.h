@@ -241,6 +241,7 @@ public:
 	void equipIdentify();
 	void income_view(); //시야에 들어오다.
 
+	void resetShadow();
 	int action(int delay_);
 	bool offsetmove(const coord_def &c);
 
@@ -269,7 +270,7 @@ bool iteminfor_(int key_, bool onlyinfor);
 void init_identify();
 item_infor& CreateFloorItem(int floor, item_infor* item_);
 void create_item(int floor, int num_);
-
+void create_id_to_item(int id, int level);
 
 extern Iden_collect iden_list;
 

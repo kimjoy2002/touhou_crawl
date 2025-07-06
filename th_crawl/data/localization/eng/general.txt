@@ -217,7 +217,7 @@ LOC_SYSTEM_SAVE_QUIT_YN,Do you want to save and quit?
 LOC_SYSTEM_NONSAVE_QUIT_YN,Do you want to quit without saving?
 LOC_SYSTEM_FORBIDZONE_YN,Are you really going in?
 LOC_SYSTEM_CANCLE_QUIT,Cancelled quitting.
-LOC_SYSTEM_PLEASE_SELECT_YN,Please choose between Y and N.
+LOC_SYSTEM_PLEASE_SELECT_YN,Please choose between {0} and {1}.
 LOC_SYSTEM_PLEASE_SELECT_PAD,Please enter again.
 LOC_SYSTEM_PLEASE_SELECT_Y,Yes - {0}
 LOC_SYSTEM_PLEASE_SELECT_N,No - {0}
@@ -332,7 +332,7 @@ LOC_SYSTEM_DUNGEON_DEPTH,Beastpath
 LOC_SYSTEM_DUNGEON_DREAM,Dream World
 LOC_SYSTEM_DUNGEON_MOON,Moon Capital
 LOC_SYSTEM_DUNGEON_SUBTERRANEAN,Subterranean
-LOC_SYSTEM_DUNGEON_SUBRERRANEAN_LAST,Blazing Hellgrounds
+LOC_SYSTEM_DUNGEON_SUBTERRANEAN_LAST,Blazing Hellgrounds
 LOC_SYSTEM_DUNGEON_PANDEMONIUM,Demon Realm
 LOC_SYSTEM_DUNGEON_PANDEMONIUM_LAST,Pandemonium
 LOC_SYSTEM_DUNGEON_HOKKAI,Hokkai
@@ -3897,7 +3897,7 @@ LOC_SYSTEM_GOD_TENKYUU,Tenkyuu
 LOC_SYSTEM_GOD_SUWAKO_TITLE,Moriya Suwako - Pinnacle of the Native Gods
 LOC_SYSTEM_GOD_SUWAKO_DESCRIPTION,Suwako is a native goddess with the power to create earth.\nShe grants her followers unpredictable blessings.\nAs a result, they receive various powers, though not necessarily the ones they want.
 LOC_SYSTEM_GOD_MIMA_TITLE,Mima - Spirit Who Entrusted Fate to a Distant Dream
-LOC_SYSTEM_GOD_MIMA_DESCRIPTION,Mima is a divine spirit of disaster and destruction.\nHer followers receive powerful destructive magic.\nHer most devoted disciples are granted her ultimate magic: Spark.
+LOC_SYSTEM_GOD_MIMA_DESCRIPTION,Mima is a divine spirit of disaster and destruction.\nHer followers receive powerful destructive magic.\nHer most devoted disciples are granted her ultimate spell: Spark.\nMima values strength through personal action, and grants faith when you defeat enemies yourself.
 LOC_SYSTEM_GOD_YUYUKO_TITLE,Saigyouji Yuyuko - Phantom Girl of the Nether Pavilion
 LOC_SYSTEM_GOD_YUYUKO_DESCRIPTION,Yuyuko is the lady of Saigyouji, residing in Hakugyokurou.\nShe wields the power of death and grants it to her followers.\nHer devotees gain control over death and receive many spirits.
 LOC_SYSTEM_GOD_JOON_AND_SION_TITLE,Yorigami Joon & Shion - The Most Wicked Sisters

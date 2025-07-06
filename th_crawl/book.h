@@ -38,6 +38,7 @@ extern LOCALIZATION_ENUM_KEY random_book_list[RANDOM_BOOK_NUM];
 bool isRareBook(book_list book_);
 string GetBookInfor(book_list book_);
 book_list SchoolToBook(skill_type skill_);
+book_list GetRandomBook(int good_);
 
 
 

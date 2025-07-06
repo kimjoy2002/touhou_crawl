@@ -381,7 +381,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		break;		
 	case ITM_BOOK:
 		{
-			int book= select_!=-1?select_:rand_int(BOOK_FIRST,BOOK_LAST-1);	
+			int book= select_!=-1?select_:GetRandomBook(good_bad);
 			int color_ = randA(RANDOM_BOOK_NUM-1);
 			t->name2 = name_infor(random_book_list[color_]);
 			t->value0 = book;

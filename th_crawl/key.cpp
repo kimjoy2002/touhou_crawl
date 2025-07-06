@@ -245,7 +245,9 @@ bool ynPrompt(string prompt, string canclePrompt, D3DCOLOR promptColor, bool isu
 				if(joypadUtil::usingPad) {
 					printlog(LocalzationManager::locString(LOC_SYSTEM_PLEASE_SELECT_PAD),false,log,temp,CL_normal);
 				} else {
-					printlog(LocalzationManager::locString(LOC_SYSTEM_PLEASE_SELECT_YN),false,log,temp,CL_normal);
+					printlog(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_YN, 
+						PlaceHolderHelper(joypadUtil::get(isuppercase?"Y":"y", isuppercase?GVK_BUTTON_A_LONG:GVK_BUTTON_A)), 
+						PlaceHolderHelper(joypadUtil::get(isuppercase?"N":"n", GVK_BUTTON_B))),false,log,temp,CL_normal);
 				}
 				//todo) YN를 수정가능하게
 				break;

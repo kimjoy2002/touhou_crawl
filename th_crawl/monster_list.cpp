@@ -270,7 +270,7 @@ const mon_infor mondata[] = {
 	{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,1,2,13,'t' },
 
-	{MON_MOMIZI,12,1923,name_infor(MON_MOMIZI),&img_named_momizi,162,12,2,
+	{MON_MOMIZI,12,1923,name_infor(MON_MOMIZI),&img_named_momizi,212,18,2,
 	{35,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,2,3,10,'&' },
 
@@ -319,11 +319,11 @@ const mon_infor mondata[] = {
 	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SHIELD | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY,2,1,10,'&' },
 	
-	{MON_KEGERO,10,1297,name_infor(MON_KEGERO),&img_named_kagero,150,3,15,
+	{MON_KEGERO,10,1297,name_infor(MON_KEGERO),&img_named_kagero,170,3,15,
 	{37,26,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_BITE),name_infor(LOC_SYSTEM_ATT_CLAW),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10,'&' },
 	
-	{MON_PARSI,9,925,name_infor(MON_PARSI),&img_named_parsi,140,8,15,
+	{MON_PARSI,9,925,name_infor(MON_PARSI),&img_named_parsi,160,8,15,
 	{27,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,1,10,'&' },
 	
@@ -523,7 +523,7 @@ const mon_infor mondata[] = {
 
 	{MON_MAGICAL_STAR,4,1,name_infor(MON_MAGICAL_STAR),&img_mons_option,10,0,5,
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-	M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,5,'*' },
+	M_FLAG_NO_ATK | M_FLAG_AUTO_TARGETING | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,5,'*' },
 
 	{MON_GOLEM,8,1,name_infor(MON_GOLEM),&img_mons_golem,80,10,0,
 	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
@@ -645,7 +645,7 @@ const mon_infor mondata[] = {
 	{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE | M_FLAG_RANGE_ATTACK,99,1,9,'8' },
 	
-	{MON_EVIL_EYE_TANK,28,5043,name_infor(MON_EVIL_EYE_TANK),&img_mons_evil_eye_tank,130,20,10,
+	{MON_EVIL_EYE_TANK,28,5043,name_infor(MON_EVIL_EYE_TANK),&img_mons_evil_eye_tank,210,20,10,
 	{0,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE | M_FLAG_RANGE_ATTACK,99,2,9,'8' },
 	
@@ -1016,7 +1016,7 @@ const mon_infor mondata[] = {
 		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,0,15,'&'},
 
-	{MON_SANNYO,13,3721,name_infor(MON_SANNYO),&img_mons_sannyo,160,10,5,
+	{MON_SANNYO,13,3721,name_infor(MON_SANNYO),&img_mons_sannyo,190,10,5,
 		{24,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_UNIQUE | M_FLAG_SPEAK,1,0,10,'&'},
 

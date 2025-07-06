@@ -240,7 +240,7 @@ public:
 	bool SetOil(int oil_, int max_);
 	bool SetFire(int fire_, parent_type type_, bool from_oil);
 	bool SetNoneMove(int s_none_move);
-	bool canSwap(monster* target_mon);
+	bool canSwap(monster* target_mon, bool able_enemy = false);
 	int PlusTimeDelay(int delay_)
 	{
 		time_delay += delay_;
@@ -263,6 +263,7 @@ public:
 	bool isEnemyMonster(const monster* monster_info); //이 몹이 적인지
 	bool isPassedBullet(unit* order, bool really = false);//이 공격이 관통되는지
 	bool isAllyMonster(const monster* monster_info); //이 몹이 아군인지
+	bool isCantInterupt(); //이동을 방해할 수 없는 몬스터
 	bool isUserAlly() const; //유저에 친밀한가?
 	bool isCompleteNeutral() const; //완전한 중립인가?
 	bool isSightnonblocked(coord_def c); //여기까지 공격이 닿는지

@@ -276,7 +276,7 @@ string item::GetName(int num_, bool simple_)
 	}
 	
 	if(fixed_artifact != FIXED_ARTIFACT_NONE) {
-		temp += second_name.getName() + "★";
+		temp += "★";
 	}
 
 	if(type==ITM_POTION) {		
@@ -1216,12 +1216,28 @@ bool item::pick()
 	prev_sight = false;
 	return return_;
 }
+
+
+void item::resetShadow() {
+	bool in_sight_ = env[current_level].isInSight(position);
+
+	if(in_sight_)
+		prev_sight = true;
+	else if(prev_sight)
+	{
+		env[current_level].MakeShadow(prev_position,image, value1,SWT_ITEM,GetName());
+		prev_sight = false;
+	}
+
+	prev_position = position;
+
+}
+
 int item::action(int delay_)
 {
 	if(env[current_level].isInSight(position))
 	{
 		income_view();
-		prev_sight = true;
 		if(now_find)
 			not_find = false;
 		now_find = true;
@@ -1240,11 +1256,6 @@ int item::action(int delay_)
 		}
 
 	}
-	else if(prev_sight)
-	{
-		env[current_level].MakeShadow(prev_position,image, value1,SWT_ITEM,GetName());
-		prev_sight = false;
-	}
 	if (now_find)
 	{
 		if (you.god == GT_JOON_AND_SION || you.GetPunish(GT_JOON_AND_SION))
@@ -1260,6 +1271,8 @@ int item::action(int delay_)
 		}
 	}
 	
+	resetShadow();
+
 	if(type == ITM_GOAL && value1 == -1)
 	{
 		env[current_level].DeleteItem(this);
@@ -1295,8 +1308,6 @@ int item::action(int delay_)
 			you.s_drunken = 15;
 		}
 	}
-
-	prev_position = position;
 	return 1;
 }
 

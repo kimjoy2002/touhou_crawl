@@ -38,7 +38,6 @@ mon_group normal_group[] = //일반몹 그룹
 	{  5,  1,  2,  2,  4}, //빨간요정 1
 	{ 23,  1,  5,  5,  3}, //반딧불이
 	{  8,  1,  4,  10,  3}, //거미 1
-	{  9,  1,  5,  10,  4}, //뱀 1
 	{ 11,  1,  4,  12,  2}, //초록요정1 파랑요정1
 	{ 12,  1,  5,  5,  2}, //초록요정1 빨강요정1
 	//{ 13,  1,  5,  40,  3}, //모옥2 까마귀4
@@ -47,16 +46,16 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 27,  1,  14,  8,  3}, //우산요괴
 	{ 28,  1,  5,  5,  2}, //초록모옥
 	
+	{  9,  2,  5,  10,  4}, //뱀 1
 	{ 15,  2,  9,  20,  1}, //초록요정2 파랑요정1 빨강요정1
 	{ 14,  2,  3,  8,  2}, //캇파2~3
 	{ 18,  2,  6,  25,  2}, //캇파4~5
-	{ 20,  2,  9,  7,  3}, //거미1 뱀1
 	{ 10,  2,  11,  10,  5}, //두루미 1
 	{ 24,  2,  4,  5,  2}, //인간부대(약함)
 	{ 29,  2,  7,  5,  2}, //주황모옥
 	{ 28,  2,  5,  10,  2}, //초록모옥
 
-	
+	{ 20,  3,  9,  4,  3}, //거미1 뱀1	
 	{ 10,  3,  14,  3,  4}, //두루미 1
 	{ 4,   3,  7,  10 , 1}, //까마귀3
 	{ 16,  3,  9,  10,  1}, //파랑요정2 빨강요정2
@@ -1682,9 +1681,9 @@ void SetResistMonster(monster* mon)
 		mon->poison_resist=1;
 		break;
 	case MON_MAGIC_BOOK:
-		mon->elec_resist=2;
-		mon->ice_resist=2;
-		mon->fire_resist=2;
+		mon->elec_resist=1;
+		mon->ice_resist=1;
+		mon->fire_resist=-1;
 		mon->poison_resist=1;
 		mon->confuse_resist=1;
 		break;
@@ -1738,7 +1737,6 @@ void SetResistMonster(monster* mon)
 		break;
 	case MON_GREEN_UFO:
 		mon->elec_resist=2;
-		mon->poison_resist=1;
 		break;
 	case MON_BLUE_UFO:
 		mon->ice_resist=2;
@@ -1748,8 +1746,7 @@ void SetResistMonster(monster* mon)
 		mon->poison_resist=1;
 		break;
 	case MON_SANPEI_FIGHTER:
-		mon->ice_resist=2;
-		mon->fire_resist=1;
+		mon->ice_resist=1;
 		mon->poison_resist=1;
 		mon->confuse_resist=1;
 		break;
@@ -1760,9 +1757,10 @@ void SetResistMonster(monster* mon)
 		mon->elec_resist=1;
 		break;
 	case MON_HELL_CROW:
-		mon->fire_resist=2;
+		mon->fire_resist=1;
 		break;
 	case MON_LANTERN_YOUKAI:
+		mon->ice_resist=-1;
 		mon->fire_resist=3;
 		mon->poison_resist=1;
 		break;
@@ -1863,19 +1861,16 @@ void SetResistMonster(monster* mon)
 		mon->confuse_resist=1;
 		break;
 	case MON_NIGHTMARE:
-		mon->elec_resist=2;
 		mon->ice_resist=1;
 		mon->poison_resist=1;
 		mon->confuse_resist=1;
 		break;
 	case MON_LUNATIC:
 		mon->elec_resist=2;
-		mon->fire_resist=1;
 		mon->poison_resist=1;
 		mon->confuse_resist=1;
 		break;
 	case MON_HAUNT:
-		mon->fire_resist=1;
 		mon->poison_resist=1;
 		break;
 	case MON_FIRE_CAR:
@@ -1913,8 +1908,8 @@ void SetResistMonster(monster* mon)
 	}
 		break;
 	case MON_FLOWER_TANK:
-		mon->ice_resist=1;
-		mon->elec_resist=2;
+		mon->fire_resist=1;
+		mon->elec_resist=1;
 		mon->poison_resist=1;
 		mon->confuse_resist=1;
 		break;
@@ -1981,14 +1976,13 @@ void SetResistMonster(monster* mon)
 		mon->fire_resist=3;
 		break;
 	case MON_NESI:
-		mon->fire_resist=2;
-		mon->ice_resist=2;
+		mon->fire_resist=1;
+		mon->ice_resist=1;
 		mon->poison_resist=1;
 		mon->confuse_resist=1;
 		break;
 	case MON_SANGHAI:
 	case MON_FAKE_SANGHAI:
-		mon->ice_resist=1;
 		mon->poison_resist=1;
 		mon->confuse_resist=1;
 		break;

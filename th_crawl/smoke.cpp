@@ -376,7 +376,7 @@ bool MakeCloud(const coord_def &c, random_extraction<textures*> rand_t, smoke_ty
 			{
 				if((*it) == node->pos)
 					continue;				
-				if(!env[current_level].isMove(it->x,it->y))
+				if(!env[current_level].isMove(it->x,it->y, true))
 					continue;
 				if(distan_coord(c,(*it))>=max_length*max_length)
 					continue;

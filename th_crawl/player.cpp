@@ -5399,7 +5399,7 @@ bool players::Memorize(int spell_, bool immediately)
 		}
 		printlog(LocalzationManager::locString(LOC_SYSTEM_MEMORIZE_SPELL_SUCCESS),true,false,false,CL_normal);
 
-		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_MEMORIZE_SPELL_REQUIRE_LEVEL,
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_MEMORIZE_SPELL,
 			PlaceHolderHelper(to_string(SpellLevel((spell_list)spell_))),
 			PlaceHolderHelper(SpellString((spell_list)spell_))
 		),CL_normal);

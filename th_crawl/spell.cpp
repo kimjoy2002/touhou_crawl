@@ -2532,6 +2532,22 @@ void SpellView()
 		{
 			InputedKey inputedKey;
 			int key_ = waitkeyinput(inputedKey,true);
+
+
+			if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+				int char_ = DisplayManager.positionToChar();
+				if(char_) {
+					if(key_ == GVK_BUTTON_A_LONG) {
+						key_ = -1;
+						inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+						inputedKey.val1 = char_;
+					} else {
+						key_ = char_;
+					}
+				}
+			}
+
+			
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
 				int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
@@ -2546,6 +2562,14 @@ void SpellView()
 					view_spell(LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL_SIMPLE);
 					//changedisplay(DT_SPELL);
 				}
+			}
+			else if(key_ == VK_DOWN)//-----이동키-------
+			{
+				DisplayManager.addPosition(1);
+			}
+			else if(key_ == VK_UP)
+			{
+				DisplayManager.addPosition(-1);
 			}
 			else if(key_ == -1) {
 				if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {

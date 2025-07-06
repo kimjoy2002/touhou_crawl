@@ -50,7 +50,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 �
 	{29,2,4,2,1},//아티펙트반지
 	{30,2,4,1,1},//발동템
 
-	{25,2,SCARLET_LEVEL_LAST_LEVEL,3,1}, //책
+	{34,2,SCARLET_LEVEL_LAST_LEVEL,4,1}, //초반용책
 	
 	{13,5,SCARLET_LEVEL_LAST_LEVEL,70,1}, //중반 잘나오는 좋은 물약들
 	{14,5,SCARLET_LEVEL_LAST_LEVEL,70,1}, //중반 잘나오는 좋은 두루마리들
@@ -58,7 +58,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 �
 	//{16,5,SCARLET_LEVEL_LAST_LEVEL,15,1}, //중반 잘나오는 나쁜 두루마리들
 	{17,5,SCARLET_LEVEL_LAST_LEVEL,80,1}, //중반용 무기들(가끔 저주)
 	{18,5,SCARLET_LEVEL_LAST_LEVEL,20,1}, //중반용 방어구
-	{19,5,SCARLET_LEVEL_LAST_LEVEL,10,1}, //중반용 좋은 반지, 아뮬렛들
+	{19,5,SCARLET_LEVEL_LAST_LEVEL,6,1}, //중반용 좋은 반지, 아뮬렛들
 	{20,5,SCARLET_LEVEL_LAST_LEVEL,1,1}, //중반용 나쁜 반지, 아뮬렛들
 	{22,5,SCARLET_LEVEL_LAST_LEVEL,10,1}, //중반용 방패
 	{23,5,SCARLET_LEVEL_LAST_LEVEL,0,1}, //중반용 빈칸
@@ -66,17 +66,18 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 �
 	{26,5,SCARLET_LEVEL_LAST_LEVEL,5,1}, //스펠카드
 	{27,5,SCARLET_LEVEL_LAST_LEVEL,4,1},//아티펙트무기
 	{28,5,SCARLET_LEVEL_LAST_LEVEL,4,1},//아티펙트방어구
-	{29,5,SCARLET_LEVEL_LAST_LEVEL,4,1},//아티펙트반지
+	{29,5,SCARLET_LEVEL_LAST_LEVEL,3,1},//아티펙트반지
 	{32,5,SCARLET_LEVEL_LAST_LEVEL,1,1},//아티펙트장신구
 	{30,5,SCARLET_LEVEL_LAST_LEVEL,3,1},//발동템
 
+	{25,MISTY_LAKE_LEVEL,SCARLET_LEVEL_LAST_LEVEL,1,1}, //후반가능한 책
 
 	{13,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,90,1}, //중반 잘나오는 좋은 물약들
 	{14,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,50,1}, //중반 잘나오는 좋은 두루마리들
 	{15,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,25,1}, //중반 잘나오는 나쁜 물약들
 	{17,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,50,1}, //중반용 무기들(가끔 저주)
 	{18,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,10,1}, //중반용 방어구
-	{19,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,10,1}, //중반용 좋은 반지, 아뮬렛들
+	{19,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,7,1}, //중반용 좋은 반지, 아뮬렛들
 	{20,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,1,1}, //중반용 나쁜 반지, 아뮬렛들
 	{22,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,5,1}, //중반용 방패
 	{23,EIENTEI_LEVEL,EIENTEI_LEVEL_LAST_LEVEL,0,1}, //중반용 빈칸
@@ -119,7 +120,7 @@ item_group item_index[] = //아이템 목록(꼭 2번째를 내림차순으로 �
 	{19,DEPTH_LEVEL,DEPTH_LAST_LEVEL,10,1}, //중반용 좋은 반지, 아뮬렛들
 	{0,DEPTH_LEVEL,DEPTH_LAST_LEVEL,20,1}, //잡 탄막들
 	{1,DEPTH_LEVEL,DEPTH_LAST_LEVEL,10,1}, //기타방어구들(장갑, 부츠, 망토등)
-	{25,DEPTH_LEVEL,DEPTH_LAST_LEVEL,10,1}, //책
+	{25,DEPTH_LEVEL,DEPTH_LAST_LEVEL,12,1}, //책
 	{26,DEPTH_LEVEL,DEPTH_LAST_LEVEL,3,1}, //스펠카드
 	{21,DEPTH_LEVEL,DEPTH_LAST_LEVEL,5,1}, //음식
 	{22,DEPTH_LEVEL,DEPTH_LAST_LEVEL,10,1}, //중반용 방패
@@ -401,6 +402,12 @@ item_infor& id_to_item(int id, item_infor* item_)
 	case 32://아티펙트 장신구
 		makeitem(ITM_AMULET,randA(9)?1:-1,item_);
 		item_->artifact = true;
+		break;
+	case 33: //치유포션
+		makeitem(ITM_POTION,0,item_, PT_HEAL);
+		break;
+	case 34://초반용 책
+		makeitem(ITM_BOOK,-1,item_, -1);
 		break;
 	default:
 		break;

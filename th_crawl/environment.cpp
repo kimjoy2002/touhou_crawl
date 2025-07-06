@@ -268,6 +268,9 @@ bool environment::MakeMap(bool return_)
 		{
 			create_mon(floor, GetLevelMonsterNum(floor,false));
 			create_item(floor,  GetLevelMonsterNum(floor,true));
+			if(floor == 0) {
+				create_id_to_item(33, 0);
+			}
 
 			if (you.god != GT_MIKO) {
 				popular = -1;
@@ -1728,13 +1731,23 @@ void environment::ActionMonster(int delay_)
 }
 void environment::ShadowMonster()
 {
-	vector<monster>::iterator it;
-	it = mon_vector.begin();
-	for(int i=0;i<MON_MAX_IN_FLOOR && it != mon_vector.end() ;i++,it++)
 	{
-		if((*it).isLive())
+		vector<monster>::iterator it;
+		it = mon_vector.begin();
+		for(int i=0;i<MON_MAX_IN_FLOOR && it != mon_vector.end() ;i++,it++)
 		{
-			(*it).resetShadow();
+			if((*it).isLive())
+			{
+				(*it).resetShadow();
+			}
+		}
+	}
+	{
+		list<item>::iterator it;
+		it = item_list.begin();
+		for(;it != item_list.end() ;it++)
+		{
+			it->resetShadow();
 		}
 	}
 }
@@ -2793,7 +2806,7 @@ string CurrentLevelString(int level)
 	else if(level_ >= SUBTERRANEAN_LEVEL && level_ < SUBTERRANEAN_LEVEL+MAX_SUBTERRANEAN_LEVEL)
 		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBTERRANEAN) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(level_+1-SUBTERRANEAN_LEVEL)));
 	else if(level_ == SUBTERRANEAN_LEVEL+MAX_SUBTERRANEAN_LEVEL)
-		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBRERRANEAN_LAST);
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBTERRANEAN_LAST);
 	else if(level_ >= YUKKURI_LEVEL && level_ <=  YUKKURI_LAST_LEVEL)
 		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_YUKKURI) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(level_+1-YUKKURI_LEVEL)));
 	else if(level_ >= DEPTH_LEVEL && level_ <=  DEPTH_LAST_LEVEL)		
@@ -2852,10 +2865,15 @@ int GetLevelMonsterNum(int level, bool item_)
 			return 15;
 		else if (level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)
 			return 12 * multi_;
+		else if(level_ == MOON_LEVEL)
+			return 13;
 		else
 			return 9 * multi_;
 	}
 	else{ //아이템
+		if(level_ == 0) {
+			return 11;//최소 한개의 치유 포션을 보장하기 위해서
+		}
 		if(level_ == TEMPLE_LEVEL || level_ == BAMBOO_LEVEL || level_ == YUKKURI_LAST_LEVEL || level_ == EIENTEI_LEVEL || level_ == MOON_LEVEL)
 			return 0;
 		if(level_ >= SUBTERRANEAN_LEVEL && level_ <= SUBTERRANEAN_LEVEL_LAST_LEVEL)

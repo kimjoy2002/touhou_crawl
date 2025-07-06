@@ -2166,9 +2166,12 @@ bool monster::isMoveNotInturrpt(monster* mon) {
 	if(id == MON_COGWHEEL) {
 		return false;
 	}
+	if(!isCantInterupt() && mon->isCantInterupt()) {
+		return true;
+	}
 	if(flag & M_FLAG_MISSLE && mon->flag & M_FLAG_MISSLE)
 		return true;
-	if(mon->flag & M_FLAG_NONE_MOVE && !canSwap(mon) && mon->position != target_pos)
+	if(mon->flag & M_FLAG_NONE_MOVE && !canSwap(mon, false) && mon->position != target_pos)
 		return true;
 	return false;
 }
@@ -2379,6 +2382,11 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 
 				if(isEnemyMonster(&(*it)) || s_confuse || (*it).id == MON_BUSH) //적일때
 				{
+					if(canSwap(&(*it), true)) {
+						it->SetXY(coord_def(position.x, position.y));
+						SetXY(coord_def(position.x + x_mov, position.y + y_mov));
+						return 2;
+					}
 					if(only_move)
 						return 0;
 					return AttackToMon(&(*it), false);
@@ -2404,7 +2412,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 				}
 				else
 				{
-					if(canSwap(&(*it))) {
+					if(canSwap(&(*it), false)) {
 						it->SetXY(coord_def(position.x, position.y));
 						SetXY(coord_def(position.x + x_mov, position.y + y_mov));
 						return 2;
@@ -3959,6 +3967,9 @@ int monster::action(int delay_)
 						}
 					}
 					sightcheck(is_sight_for_monster);
+					if(flag & M_FLAG_AUTO_TARGETING) {
+						CheckSightNewTarget();
+					}
 					break;
 				case MS_FIND:
 					{
@@ -5296,7 +5307,12 @@ bool monster::SetNoneMove(int s_none_move_) {
 		s_none_move = s_none_move_;
 	return true;
 }
-bool monster::canSwap(monster* target_mon) {
+bool monster::canSwap(monster* target_mon, bool able_enemy) {
+	if(!isCantInterupt() && target_mon->isCantInterupt()) {
+		return true;
+	}
+	if(able_enemy)
+		return false;
 	if(id == MON_TSUCHINOKO && target_mon->id == MON_VINE) {
 		return true;
 	}
@@ -5542,6 +5558,9 @@ bool monster::isAllyMonster(const monster* monster_info)
 		return true;
 	}
 	return false;
+}
+bool monster::isCantInterupt() {
+	return id == MON_MAGICAL_STAR || id == MON_ELEC_BALL;
 }
 bool monster::isUserAlly() const
 {

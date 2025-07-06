@@ -515,7 +515,7 @@ bool skill_burn(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,13+pow/6),13+pow/6,13,order,order->GetParentType(),SpellLength(SPL_BURN, order->isplayer()),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_BURN));
+		beam_infor temp_infor(randC(1,14+pow/6),14+pow/6,13,order,order->GetParentType(),SpellLength(SPL_BURN, order->isplayer()),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_BURN));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -557,7 +557,7 @@ bool skill_frozen(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,9+pow/6),9+pow/6,99,order,order->GetParentType(),SpellLength(SPL_FROZEN, order->isplayer()),1,BMT_NORMAL,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
+		beam_infor temp_infor(randC(1,10+pow/6),10+pow/6,99,order,order->GetParentType(),SpellLength(SPL_FROZEN, order->isplayer()),1,BMT_NORMAL,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -2073,7 +2073,7 @@ bool skill_spark(int pow, bool short_, unit* order, coord_def target)
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		if(order->isplayer()) {
-			if(!you.SetOverheat(rand_int(1,3), 10)) {
+			if(!you.SetOverheat(rand_int(1,2), 10)) {
 				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CASTFAIL_OVERHEAT) + " ", false, false, false, CL_danger);
 				return false;
 			}
@@ -4526,6 +4526,12 @@ bool skill_summon_elec_ball(int pow, bool short_, unit* order, coord_def target)
 	bool return_ = false;
 
 	int i = 2;
+	if(pow> 110 && randA(2)==0) {
+		i++;
+	}
+	if(pow> 160 && randA(4)==0) {
+		i++;
+	}
 	for (; i>0; i--)
 	{
 		if (monster *mon_ = BaseSummon(MON_ELEC_BALL, rand_int(30, 60), true, true, 2, order, target, SKD_OTHER, GetSummonMaxNumber(SPL_SUMMON_ELEC_BALL)))

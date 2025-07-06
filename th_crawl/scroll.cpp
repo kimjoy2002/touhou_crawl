@@ -637,7 +637,8 @@ bool blink_scroll(bool pre_iden_)
 	while(1)
 	{
 		InputedKey inputedKey;
-		switch(waitkeyinput(inputedKey))
+		int key_ = waitkeyinput(inputedKey,false,false, true);
+		switch(key_)
 		{
 		case 'k':
 			is_move = Search_Move(coord_def(you.position.x,you.position.y-1), false,VT_BLINK);  //위
@@ -750,7 +751,6 @@ bool blink_scroll(bool pre_iden_)
 		case VK_ESCAPE:	
 		case GVK_BUTTON_B:
 		case GVK_BUTTON_B_LONG:
-		default:
 			if(ynPrompt(pre_iden_?LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_ASK:LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_WASTE_ASK, LOC_EMPTYSTRING, CL_help, false,false,true, true)) 
 			{
 				deletelog();
@@ -764,6 +764,8 @@ bool blink_scroll(bool pre_iden_)
 					return true;
 				}
 			}
+		default:
+			break;
 		}
 	}
 
@@ -1180,6 +1182,21 @@ bool amnesia_scroll(bool pre_iden_)
 		{
 			InputedKey inputedKey;
 			int key_ = waitkeyinput(inputedKey,true);
+
+
+			if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+				int char_ = DisplayManager.positionToChar();
+				if(char_) {
+					if(key_ == GVK_BUTTON_A_LONG) {
+						key_ = -1;
+						inputedKey.mouse = MKIND_ITEM_DESCRIPTION;
+						inputedKey.val1 = char_;
+					} else {
+						key_ = char_;
+					}
+				}
+			}
+
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
 				int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
@@ -1221,6 +1238,14 @@ bool amnesia_scroll(bool pre_iden_)
 						}
 					}
 				}
+			}
+			else if(key_ == VK_DOWN)//-----이동키-------
+			{
+				DisplayManager.addPosition(1);
+			}
+			else if(key_ == VK_UP)
+			{
+				DisplayManager.addPosition(-1);
 			}
 			else if(key_ == -1) {
 				if(inputedKey.isRightClick()) {

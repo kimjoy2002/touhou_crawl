@@ -217,7 +217,7 @@ LOC_SYSTEM_SAVE_QUIT_YN,저장후 종료하시겠습니까?
 LOC_SYSTEM_NONSAVE_QUIT_YN,저장하지않고 종료하시겠습니까?
 LOC_SYSTEM_FORBIDZONE_YN,정말 들어갈거야?
 LOC_SYSTEM_CANCLE_QUIT,종료를 취소.
-LOC_SYSTEM_PLEASE_SELECT_YN,Y와 N중에 선택해주세요.
+LOC_SYSTEM_PLEASE_SELECT_YN,{0}와 {1}중에 선택해주세요.
 LOC_SYSTEM_PLEASE_SELECT_PAD,다시 입력해주세요.
 LOC_SYSTEM_PLEASE_SELECT_Y,예-{0}
 LOC_SYSTEM_PLEASE_SELECT_N,아니오-{0}
@@ -332,7 +332,7 @@ LOC_SYSTEM_DUNGEON_DEPTH,짐승길
 LOC_SYSTEM_DUNGEON_DREAM,꿈의 세계
 LOC_SYSTEM_DUNGEON_MOON,달의 도시
 LOC_SYSTEM_DUNGEON_SUBTERRANEAN,지저
-LOC_SYSTEM_DUNGEON_SUBRERRANEAN_LAST,작열지옥터
+LOC_SYSTEM_DUNGEON_SUBTERRANEAN_LAST,작열지옥터
 LOC_SYSTEM_DUNGEON_PANDEMONIUM,마계
 LOC_SYSTEM_DUNGEON_PANDEMONIUM_LAST,판데모니엄
 LOC_SYSTEM_DUNGEON_HOKKAI,법계
@@ -3333,7 +3333,7 @@ LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_MAGICIAN,당신은 마법 지식이 늘어난
 LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_MAGICIAN,당신의 마법 지식은 빠져갔다.
 LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_AC,당신은 보호되고있다.
 LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_AC,보호가 풀렸다.
-LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_EV,당신은 재빠라졌다.
+LOC_SYSTEM_ITEM_JEWELRY_RING_EQUIP_EV,당신은 재빨라졌다.
 LOC_SYSTEM_ITEM_JEWELRY_RING_UNEQUIP_EV,당신은 둔해졌다.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET,부적
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PERFECT,완전무결의 부적
@@ -3897,7 +3897,7 @@ LOC_SYSTEM_GOD_TENKYUU,텐큐
 LOC_SYSTEM_GOD_SUWAKO_TITLE,모리야 스와코 - 토착신의 정점
 LOC_SYSTEM_GOD_SUWAKO_DESCRIPTION,스와코는 곤(땅)을 창조하는 능력을 가진 토착신이다.\n스와코는 신자들에게 변덕스러운 권능을 준다.\n그 때문에 신자들은 다양한 권능을 받을 수 있지만 원하는 권능을 받지는 못한다.
 LOC_SYSTEM_GOD_MIMA_TITLE,미마 - 아득한 꿈에 운명을 맡긴 정신
-LOC_SYSTEM_GOD_MIMA_DESCRIPTION,미마는 재앙신격인 존재로 악령이다.\n신도들은 미마의 밑으로 들어가는 것으로 강력한 파괴 마법을 지원받고 전수받는다.\n특히 그녀의 충실한 추종자가 되었을때 궁극의 파괴 마법인 스파크를 전수받게된다.
+LOC_SYSTEM_GOD_MIMA_DESCRIPTION,미마는 재앙신격인 존재로 악령이다.\n신도들은 미마의 밑으로 들어가는 것으로 강력한 파괴 마법을 지원받고 전수받는다.\n특히 그녀의 충실한 추종자가 되었을때 궁극의 파괴 마법인 스파크를 전수받게된다.\n미마는 자신의 힘으로 싸우는걸 좋아하며 적을 자신이 직접 죽일때 신앙심을 얻는다.
 LOC_SYSTEM_GOD_YUYUKO_TITLE,사이교우지 유유코 - 저승누각의 망령소녀
 LOC_SYSTEM_GOD_YUYUKO_DESCRIPTION,유유코는 백옥루에 사는 사이교우지의 아가씨이다.\n그녀는 죽음을 조종 할 수 있는 강력한 능력을 가지고 있어서 신도들에게 죽음의 힘을 선물해준다.\n그녀의 신도가 되면 죽음을 다루는 능력과 많은 영혼들을 선물 받을 것이다.
 LOC_SYSTEM_GOD_JOON_AND_SION_TITLE,요리가미 죠온 & 시온 - 최흉최악의 자매

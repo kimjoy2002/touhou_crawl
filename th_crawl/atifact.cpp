@@ -735,11 +735,11 @@ void MakeArtifact(item* item_, int good_bad_)
 			(i == ART_TELEPORT || i == ART_HUNGRY || i == ART_FULL || i == ART_LEVITATION)) {
 			continue;
 		}
-		if(isGenerateRandart((artifact_type)i) <= 0) {
+		if(isGenerateRandart((artifact_type)i, item_->type ) <= 0) {
 			continue;
 		}
 
-		temp.push((artifact_type)i, isGenerateRandart((artifact_type)i));
+		temp.push((artifact_type)i, isGenerateRandart((artifact_type)i, item_->type ));
 	}
 	
 	for(int i = 0; i < num_ ; i++)

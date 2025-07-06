@@ -39,7 +39,7 @@ extern bool saveexit;
 
 extern HANDLE mutx;
 
-const char *version_string = "ver1.108";
+const char *version_string = "ver1.109";
 extern int g_tile_size;
 
 bool isPrevVersion(const string& versionstring, const string& targetstring);

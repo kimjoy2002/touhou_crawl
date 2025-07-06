@@ -125,7 +125,7 @@ s_regen(0), s_selfdestruct(0), s_glutton(0), s_glutton_turn(0), s_shield(), alch
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
-,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0), prevSpell(0), lastSelectMenu(0), currentSkillNum(0),god(GT_NONE), piety(0), gift_count(0), god_turn(0), suwako_meet(0),
+,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0), prevSpell(0), lastSelectMenu(0), lastExplore(0), currentSkillNum(0),god(GT_NONE), piety(0), gift_count(0), god_turn(0), suwako_meet(0),
 sight_reset(false), target(NULL), useMouseTammac(0), throw_weapon(NULL), quickMenu1(SYSCMD_QUICKTHROW), quickMenu2(SYSCMD_MAGIC), dead_order(NULL), dead_reason(DR_NONE)
 {
 	for(int i=0;i<2;i++)
@@ -351,6 +351,7 @@ void players::init() {
 	currentSpellNum = 0;
 	prevSpell = 0;
 	lastSelectMenu = 0;
+	lastExplore = 0;
 	for(int i=0;i<52;i++)
 		MemorizeSkill[i] = 0;
 	for(int i=0;i<52;i++)
@@ -592,6 +593,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, currentSpellNum);
 	SaveData<int>(fp, prevSpell);
 	SaveData<int>(fp, lastSelectMenu);
+	SaveData<char>(fp, lastExplore);
 	SaveData<int>(fp, *MemorizeSkill,52);
 	SaveData<int>(fp, *MemorizeSkill_num,52);
 	SaveData<int>(fp, currentSkillNum);
@@ -866,6 +868,9 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, currentSpellNum);
 	LoadData<int>(fp, prevSpell);
 	LoadData<int>(fp, lastSelectMenu);
+	if(!isPrevVersion(loading_version_string, "ver1.108")) {
+		LoadData<char>(fp, lastExplore);
+	}
 	LoadData<int>(fp, *MemorizeSkill);
 	LoadData<int>(fp, *MemorizeSkill_num);
 	LoadData<int>(fp, currentSkillNum);

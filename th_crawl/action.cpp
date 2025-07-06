@@ -4644,12 +4644,30 @@ void floorMove()
 			num_ = 0;
 		}
 	}
-	startSelection(listkey);
+
+
 
 	enterlog();
 	printlog(LocalzationManager::locString(LOC_SYSTEM_AUTOEXPLORE_WHERE), false, false, false, CL_help);
+	if(you.lastExplore != 0) {
+		for (auto& it : enter_) {
+			if(std::toupper(it.first) == std::toupper(you.lastExplore)) {
+				ostringstream ss;
+				ss << " (" << joypadUtil::get("Enter", GVK_BUTTON_A_LONG) << "-" << it.second << ")";
+				printlog(ss.str(), false, false, false, CL_help, you.lastExplore);
+			}
+		}
+	}
+
+	startSelection(listkey);
 	int key_ = waitkeyinput();
 	endSelection();
+	if(key_ == GVK_BUTTON_A_LONG || key_ == VK_RETURN)
+	{
+		if(you.lastExplore) {
+			key_ = you.lastExplore;
+		}
+	}
 
 	bool ok_ = false;
 	for (auto it = enter_.begin(); it != enter_.end(); it++) 
@@ -4664,6 +4682,7 @@ void floorMove()
 		printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
 		return;
 	}
+
 
 
 
@@ -4746,9 +4765,9 @@ void floorMove()
 		return;
 	}
 
-
 	queue<list<coord_def>> stairMap;
 	if (MapNode::searchRoad(current_level, (int)next_, &stairMap)) {
+		you.lastExplore = key_;
 
 		while (!stairMap.empty()) {
 			list<coord_def> list_ = stairMap.front();

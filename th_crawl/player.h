@@ -378,6 +378,7 @@ public:
 	int currentSpellNum;
 	int prevSpell;
 	int lastSelectMenu; //마지막에 선택했던 메뉴
+	char lastExplore; //마지막에 이동한 던전
 
 	int MemorizeSkill[52];
 	int MemorizeSkill_num[52];

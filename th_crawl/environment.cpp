@@ -145,8 +145,8 @@ void environment::SaveDatas(FILE *fp)
 	SaveData<int>(fp, speciel_map_name.size());
 	for (list<string>::iterator it = speciel_map_name.begin(); it != speciel_map_name.end(); it++)
 	{
-		char temp[100];
-		sprintf_s(temp,100, "%s", (*it).c_str());
+		char temp[256];
+		sprintf_s(temp,256, "%s", (*it).c_str());
 		SaveData<char>(fp, *temp, strlen(temp) + 1);
 	}
 	SaveData<int>(fp, forbid_list.size());
@@ -234,7 +234,7 @@ void environment::LoadDatas(FILE *fp)
 	LoadData<int>(fp, size_);
 	for (int i = 0; i<size_; i++)
 	{
-		char temp[100];
+		char temp[256];
 		LoadData<char>(fp, *temp);
 		string name = temp;
 		speciel_map_name.push_back(temp);

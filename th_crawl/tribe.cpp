@@ -210,6 +210,10 @@ LOCALIZATION_ENUM_KEY tribe_property::GetNameKey()
 		return LOC_SYSTEM_TRIBE_PROPERTY_AC_AND_SLAY;
 	case TPT_FIREUP_COLDDOWN:
 		return LOC_SYSTEM_TRIBE_PROPERTY_FIREUP_COLDDOWN;
+	case TPT_DUAL_WEAPON:
+		return LOC_SYSTEM_TRIBE_PROPERTY_DUAL_WEAPON;
+	case TPT_QUICK_DASH:
+		return LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH;
 	case TPT_STG_SPREAD_SHOT:
 		return LOC_SYSTEM_TRIBE_PROPERTY_STG_SPREAD_SHOT;
 	case TPT_STG_TRIPLE_SHOT:
@@ -554,6 +558,10 @@ string tribe_property::GetInfor()
 		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_AC_AND_SLAY, PlaceHolderHelper("+" + to_string(value*3)), PlaceHolderHelper("-" + to_string(value*3)));
 	case TPT_FIREUP_COLDDOWN:
 		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIREUP_COLDDOWN, PlaceHolderHelper(std::string(value, '+')), PlaceHolderHelper(std::string(value,'-')));
+	case TPT_DUAL_WEAPON:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_DUAL_WEAPON);
+	case TPT_QUICK_DASH:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_QUICK_DASH);
 	case TPT_STG_SPREAD_SHOT:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SPREAD_SHOT);
 	case TPT_STG_TRIPLE_SHOT:
@@ -827,6 +835,10 @@ string tribe_property::GetDetail()
 		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_AC_AND_SLAY, PlaceHolderHelper("+" + to_string(value*3)), PlaceHolderHelper("-" + to_string(value*3)));
 	case TPT_FIREUP_COLDDOWN:
 		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIREUP_COLDDOWN, PlaceHolderHelper(to_string(value)), PlaceHolderHelper(to_string(value)));
+	case TPT_DUAL_WEAPON:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_DUAL_WEAPON);
+	case TPT_QUICK_DASH:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_QUICK_DASH);
 	case TPT_STG_SPREAD_SHOT:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SPREAD_SHOT);
 	case TPT_STG_TRIPLE_SHOT:
@@ -906,6 +918,8 @@ D3DCOLOR tribe_property::getColor()
 	case TPT_STG_MISSLE:
 	case TPT_STG_COMSUMABLE:
 	case TPT_STG_DEFAULT_ABIL:
+	case TPT_DUAL_WEAPON:
+	case TPT_QUICK_DASH:
 		return CL_green;
 	default:
 		break;
@@ -1101,6 +1115,10 @@ void tribe_property::gain(bool gain_)
 	case TPT_FIREUP_COLDDOWN:
 		you.ResistUpDown(value_, RST_FIRE);
 		you.ResistUpDown(-value_, RST_ICE);
+		return;
+	case TPT_DUAL_WEAPON:
+		return;
+	case TPT_QUICK_DASH:
 		return;
 	case TPT_STG_SPREAD_SHOT:
 		return;

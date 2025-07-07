@@ -392,6 +392,12 @@ bool select_named(int value_)
 		break;
 	case 7:
 		return false;
+	case 8:
+		you.tribe = TRI_YOKAI;
+		you.job = JOB_GLADIATOR;
+		you.char_type = UNIQ_START_YOUMU;
+		you.image = &img_named_youmu;
+		break;
 	}						
 	WaitForSingleObject(mutx, INFINITE);
 	printsub("", true, CL_normal);
@@ -550,7 +556,7 @@ void start_mainmenu()
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("", true, CL_normal));
 
-		LOCALIZATION_ENUM_KEY charlist[8][3] = {
+		LOCALIZATION_ENUM_KEY charlist[9][3] = {
 			{LOC_SYSTEM_TRIBE_HUMAN,LOC_SYSTEM_JOB_SHAMAN,LOC_SYSTEM_PLAYER_REIMU},
 			{LOC_SYSTEM_TRIBE_HUMAN,LOC_SYSTEM_JOB_WIZARD,LOC_SYSTEM_PLAYER_MARISA},
 			{LOC_SYSTEM_TRIBE_HUMAN,LOC_SYSTEM_JOB_SHAMAN,LOC_SYSTEM_PLAYER_SANAE},
@@ -558,10 +564,11 @@ void start_mainmenu()
 			{LOC_SYSTEM_TRIBE_YOUKAI,LOC_SYSTEM_JOB_ASSASSIN,LOC_SYSTEM_PLAYER_KOISHI},
 			{LOC_SYSTEM_TRIBE_HUMAN,LOC_SYSTEM_JOB_MONK,LOC_SYSTEM_PLAYER_MOKOU},
 			{LOC_SYSTEM_TRIBE_KAPPA,LOC_SYSTEM_JOB_ENGINEER,LOC_SYSTEM_PLAYER_NITORI},
-			{LOC_SYSTEM_TRIBE_FAIRY,LOC_NONE,LOC_SYSTEM_PLAYER_THREE_FAIRIES}
+			{LOC_SYSTEM_TRIBE_FAIRY,LOC_NONE,LOC_SYSTEM_PLAYER_THREE_FAIRIES},
+			{LOC_SYSTEM_TRIBE_YOUKAI,LOC_SYSTEM_JOB_GLADIATOR,LOC_SYSTEM_PLAYER_YOUMU}
 		};
 
-		for(int i = 0; i < 8; i++) {
+		for(int i = 0; i < 9; i++) {
 			char hotkey_ = 'a' + i;
 			ostringstream ss;
 			ss << hotkey_ << " - " << LocalzationManager::locString(charlist[i][0]);
@@ -688,6 +695,19 @@ void start_mainmenu()
 		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
 		tempstr += "\n";
 		m_mgr.menu_input_puls(2, 'h', 5, tempstr, true, select_named, 7);
+		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_YOUMU);
+		tempstr += " : ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU1);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU2);
+		tempstr += "\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU3);
+		tempstr += "\n\n ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU4);
+		tempstr += "\n\n\n";	
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
+		tempstr += "\n";
+		m_mgr.menu_input_puls(2,'i',2,tempstr,true,select_named,8);
 		m_mgr.menu_input_puls(2,VK_ESCAPE,1,"",false,NULL,0);
 
 		

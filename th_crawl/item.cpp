@@ -697,7 +697,13 @@ bool item::isRightType(equip_type type_)
 	case ET_ARMOR:
 		return (type>=ITM_ARMOR_BODY_FIRST && type<ITM_ARMOR_BODY_LAST);
 	case ET_SHIELD:
-		return (type == ITM_ARMOR_SHIELD);
+	{
+		if(you.GetProperty(TPT_DUAL_WEAPON) > 0) {
+			return (type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST) || (type == ITM_ARMOR_SHIELD);
+		} else{
+			return (type == ITM_ARMOR_SHIELD);
+		}
+	}
 	case ET_HELMET:
 		return (type == ITM_ARMOR_HEAD);
 	case ET_CLOAK:
@@ -1006,6 +1012,9 @@ bool item::isNameAccent() {
 	if(type == ITM_ORB || type == ITM_GOAL)
 		return true;
 	return false;
+}
+bool item::isShield() const {
+	return type == ITM_ARMOR_SHIELD;
 }
 void item::Identify()
 {

@@ -414,7 +414,11 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 							printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
 							return true;
 						}
-						you.equip(item_->id, ET_WEAPON);
+						if(you.GetProperty(TPT_DUAL_WEAPON)) {
+							you.equipdualweapon(key_);
+						} else {
+							you.equip(item_->id, ET_WEAPON);
+						}
 					}
 					else if (item_->type >= ITM_ARMOR_BODY_FIRST &&item_->type < ITM_ARMOR_LAST)
 					{
@@ -452,7 +456,7 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 							printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY), true, false, false, CL_danger);
 							return true;
 						}
-						if (!you.unequip(ET_WEAPON))
+						if (!you.unequip(you.getequipslot(item_)))
 						{
 							printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY), true, false, false, CL_normal);
 						}
@@ -913,7 +917,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 			temp.str("");
 			temp.clear();
-			temp << LocalzationManager::locString(LOC_SYSTEM_CURRENT_ATTACK_SPEED) << ": " <<  (max<float>((it->value8)/100, (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)) / 10.0f);
+			temp << LocalzationManager::locString(LOC_SYSTEM_CURRENT_ATTACK_SPEED) << ": " <<  (max<float>((it->value8)/10.0f, (it->value7 - you.GetSkillLevel(ski_, true) / 2.0f)/ 10.0f) );
 			ss << temp.str();
 			if(PrintCharWidth(temp.str()) < 20)
 				ss << std::string(20-PrintCharWidth(temp.str()), ' ');

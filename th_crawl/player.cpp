@@ -1069,29 +1069,34 @@ coord_def players::GetDisplayPos()
 	}
 }
 
-bool players::attack(monster* mon_, bool counter_)
+bool players::attack(monster* mon_, equip_type type_, bool counter_)
 {
 	if (s_evoke_ghost) {
 		return false;
 	}
+	if(!mon_->isLive())
+		return false;
+	if(type_ < 0 || type_ >= ET_LAST) {
+		return false;
+	}
 			
 	attack_type brand_ = ATT_NORMAL;
-	if(equipment[ET_WEAPON])
-		brand_ = (attack_type)GetAttType((weapon_brand)equipment[ET_WEAPON]->value5);
+	if(equipment[type_])
+		brand_ = (attack_type)GetAttType((weapon_brand)equipment[type_]->value5);
 	LOCALIZATION_ENUM_KEY att_name = LOC_SYSTEM_ATT_NORMAL;
 	if(counter_) {
 		att_name = LOC_SYSTEM_ATT_COUNTER;
 	} else if (alchemy_buff == ALCT_STONE_FIST) {
 		att_name = LOC_SYSTEM_ATT_STONE_PUNCH;
 	}
-	attack_infor temp_att(GetAttack(false),GetAttack(true),GetHit(),this,GetParentType(),brand_,name_infor(att_name));
-	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
+	attack_infor temp_att(GetAttack(false, type_),GetAttack(true, type_),GetHit(type_),this,GetParentType(),brand_,name_infor(att_name));
+	if(equipment[type_] && equipment[type_]->type >= ITM_WEAPON_FIRST && equipment[type_]->type <= ITM_WEAPON_CLOSE)
 	{
-		doingActionDump(DACT_MELEE, equipment[ET_WEAPON]->name.getName());
+		doingActionDump(DACT_MELEE, equipment[type_]->name.getName());
 		//doingActionDump(DACT_MELEE, skill_string(itemtoskill(equipment[ET_WEAPON]->type)));
 		//나중에 무기 이름으로 바꾸기
 	}
-	else if(!equipment[ET_WEAPON])
+	else if(!equipment[type_])
 	{
 		doingActionDump(DACT_MELEE, LocalzationManager::locString(LOC_SYSTEM_UI_UNARMED));
 		//doingActionDump(DACT_MELEE, skill_string(SKT_UNWEAPON));
@@ -1122,7 +1127,7 @@ bool players::attack(monster* mon_, bool counter_)
 	{
 		int attack_ = 10;
 		int hit_ = 12+level/3;
-		if((equipment[ET_WEAPON] && randA(3)<1) || (!equipment[ET_WEAPON] && randA(2)<1))
+		if((equipment[type_] && randA(3)<1) || (!equipment[type_] && randA(2)<1))
 		{//무기가 있으면 25%로 무기가 없으면 33%의 확률로 박치기가 나간다.
 			attack_infor temp_att_(randA_1(attack_),attack_,hit_,this,GetParentType(),ATT_NORMAL,name_infor(LOC_SYSTEM_ATT_HEADBUTT));
 			mon_->damage(temp_att_, false);
@@ -1259,7 +1264,26 @@ int players::move(short_move x_mov, short_move y_mov)
 				return 0;
 			}
 
-			if(attack(mon_, false)) {
+			if(GetProperty(TPT_DUAL_WEAPON)) {
+				bool ok_ = false;
+				if(equipment[ET_WEAPON] || (!equipment[ET_WEAPON] && (!equipment[ET_SHIELD] || !equipment[ET_SHIELD]->isweapon()))) {
+					if(attack(mon_, ET_WEAPON, false)) {
+						ok_ = true;
+					}
+				}
+				if(equipment[ET_SHIELD] && equipment[ET_SHIELD]->isweapon()) {
+					if(attack(mon_, ET_SHIELD, false)) {
+						ok_ = true;
+					}
+				}
+				if(ok_) {
+					time_delay += GetAtkDelay();
+					return 1;
+				} else {
+					return 0;
+				}
+			}
+			else if(attack(mon_, ET_WEAPON, false)) {
 				time_delay += GetAtkDelay();
 				return 1;
 			}
@@ -4388,6 +4412,8 @@ string players::GetCharNameString(){
 		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_STAR);
 	case UNIQ_START_LUNA:
 		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_LUNA);
+	case UNIQ_START_YOUMU:
+		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_YOUMU);
 	default:
 		return "";
 	}
@@ -5912,7 +5938,16 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 			
 			if(type_ == ET_ARMOR)
 				time_delay += 5*you.GetNormalDelay();
-			else if(type_ >= ET_SHIELD && type_ <= ET_BOOTS)
+			else if(type_ == ET_SHIELD){
+				if((*it).isShield()) {
+					time_delay += 3*you.GetNormalDelay();
+				}
+				else {
+					time_delay  += you.GetNormalDelay()/2;
+				}
+
+			}
+			else if(type_ > ET_SHIELD && type_ <= ET_BOOTS)
 				time_delay += 3*you.GetNormalDelay();
 			else
 				time_delay += you.GetNormalDelay()/2;
@@ -5951,19 +5986,41 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 				if (you.equipment[ET_WEAPON] && you.equipment[ET_SHIELD])
 				{
 					enterlog();
-					switch (shieldPanaltyOfWeapon(you.equipment[ET_WEAPON]->type, you.equipment[ET_WEAPON]->value0))
+					int panelty = shieldPanaltyOfWeapon(you.equipment[ET_WEAPON]->type, you.equipment[ET_WEAPON]->value0);
+					if(you.equipment[ET_SHIELD]->isweapon()) {
+						panelty = std::max(panelty, shieldPanaltyOfWeapon(you.equipment[ET_SHIELD]->type, you.equipment[ET_SHIELD]->value0));
+					}
+					switch (panelty)
 					{
 					case 0:
 						break;
 					case 1:
-						printlog(LocalzationManager::locString(LOC_SYSTEM_SHEILD_PANALTY1), true, false, false, CL_normal);
+					{
+						if(you.equipment[ET_SHIELD]->isweapon()) {
+							printlog(LocalzationManager::locString(LOC_SYSTEM_DUAL_WEAPON_PANALTY1), true, false, false, CL_normal);
+						} else {
+							printlog(LocalzationManager::locString(LOC_SYSTEM_SHEILD_PANALTY1), true, false, false, CL_normal);
+						}
 						break;
+					}
 					case 2:
-						printlog(LocalzationManager::locString(LOC_SYSTEM_SHEILD_PANALTY2), true, false, false, CL_small_danger);
+					{
+						if(you.equipment[ET_SHIELD]->isweapon()) {
+							printlog(LocalzationManager::locString(LOC_SYSTEM_DUAL_WEAPON_PANALTY2), true, false, false, CL_normal);
+						} else {
+							printlog(LocalzationManager::locString(LOC_SYSTEM_SHEILD_PANALTY2), true, false, false, CL_small_danger);
+						}
 						break;
+					}
 					case 3:
-						printlog(LocalzationManager::locString(LOC_SYSTEM_SHEILD_PANALTY3), true, false, false, CL_danger);
+					{
+						if(you.equipment[ET_SHIELD]->isweapon()) {
+							printlog(LocalzationManager::locString(LOC_SYSTEM_DUAL_WEAPON_PANALTY3), true, false, false, CL_normal);
+						} else {
+							printlog(LocalzationManager::locString(LOC_SYSTEM_SHEILD_PANALTY3), true, false, false, CL_danger);
+						}
 						break;
+					}
 					}
 
 				}
@@ -6137,7 +6194,232 @@ bool players::equipjewerly(char id_)
 	return 0;
 }
 
+bool players::equipdualweapon(char id_)
+{
+	list<item>::iterator it;
+	for(it = item_list.begin(); it != item_list.end();it++)
+	{
+		if((*it).id == id_)
+		{
+			if(!(*it).isweapon())
+			{
+				printlog(LocalzationManager::locString(LOC_SYSTEM_CANT_EQUIP_LIKEIT),true,false,false,CL_normal);
+				return 0;
+			}
+			if(&(*it) == equipment[ET_WEAPON] || &(*it) == equipment[ET_SHIELD])
+			{
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ALREADY_EQUIP),true,false,false,CL_normal);
+				return 0;
+			}
 
+			equip_type type_ = ET_WEAPON;			
+			if(equipment[ET_WEAPON] && equipment[ET_SHIELD] && (!equipment[ET_WEAPON]->curse && !equipment[ET_SHIELD]->curse))
+			{
+				ostringstream ss;
+				changedisplay(DT_GAME);
+				ss << LocalzationManager::formatString(LOC_SYSTEM_OR, 
+				 	PlaceHolderHelper("<"),
+					PlaceHolderHelper(string(1, equipment[ET_WEAPON]->id))) << " - ";
+				printlog(ss.str(),false,false,false,CL_normal,'<');
+				printlog(equipment[ET_WEAPON]->GetName(),true,false,false,equipment[ET_WEAPON]->item_color(), '<');
+				
+				
+				ss.str("");
+				ss.clear();
+				ss << LocalzationManager::formatString(LOC_SYSTEM_OR, 
+				 	PlaceHolderHelper(">"),
+					PlaceHolderHelper(string(1, equipment[ET_SHIELD]->id))) << " - ";
+				printlog(ss.str(),false,false,false,CL_normal,'>');
+				printlog(equipment[ET_SHIELD]->GetName(),true,false,false,equipment[ET_SHIELD]->item_color(), '>');
+				startSelection({'<', '>', VK_ESCAPE});
+
+
+
+
+
+				g_menu_select = -1;
+				while(1)
+				{
+					InputedKey inputedKey;
+					int key_ = waitkeyinput(inputedKey,true);
+
+					if(key_ == VK_RIGHT){
+						if(++g_menu_select>2)
+							g_menu_select = 0;
+						continue;
+					} else if (key_ == VK_LEFT) {
+						if(--g_menu_select<0)
+							g_menu_select = 2;
+						continue;
+					}else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+						if(g_menu_select == 0) {
+							type_ = ET_WEAPON;
+							endSelection();
+							break;
+						}
+						else if(g_menu_select == 1) {
+							type_ = ET_SHIELD;
+							endSelection();
+							break;
+						}
+						else if(g_menu_select == 2) {
+							endSelection();
+							g_menu_select = -1;
+							return 0;
+						}
+					} if(key_ == '<' || key_ == equipment[ET_WEAPON]->id || key_ == GVK_LEFT_BUMPER)
+					{
+						type_ = ET_WEAPON;
+						endSelection();
+						break;
+					}
+					else if(key_ == '>' || key_ == equipment[ET_SHIELD]->id || key_ == GVK_RIGHT_BUMPER)
+					{
+						type_ = ET_SHIELD;
+						endSelection();
+						break;
+					}
+					else if(key_ == -1) {
+						if(inputedKey.isRightClick()) {
+							endSelection();
+							g_menu_select = -1;
+							return 0;
+						}
+					}
+					else if(key_ == VK_ESCAPE ||
+						key_ == GVK_BUTTON_B ||
+						key_ == GVK_BUTTON_B_LONG)
+					{
+						endSelection();
+						g_menu_select = -1;
+						return 0;
+					}
+				}
+				g_menu_select = -1;
+			}
+			else if (equipment[ET_WEAPON] && equipment[ET_SHIELD]) {
+				if (equipment[ET_WEAPON]->curse && equipment[ET_SHIELD]->curse) {
+					printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_ALLITEM_CURSE), true, false, false, CL_normal);
+					return 0;
+				}
+				else if (equipment[ET_WEAPON]->curse)
+					type_ = ET_SHIELD;
+				else if (equipment[ET_SHIELD]->curse)
+					type_ = ET_WEAPON;
+
+			}
+			else if(equipment[ET_WEAPON])
+				type_ = ET_SHIELD;
+			else
+				type_ = ET_WEAPON;
+			return equip(it,type_);
+		}
+	}
+	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_NOT_EXIST),true,false,false,CL_normal);
+	return 0;
+}
+
+bool players::unequipdualweapon() {
+	equip_type type_ = ET_WEAPON;
+	bool has_righthand_weapon = equipment[ET_SHIELD] && equipment[ET_SHIELD]->isweapon();
+	if(equipment[ET_WEAPON] && has_righthand_weapon && (!equipment[ET_WEAPON]->curse && !equipment[ET_SHIELD]->curse))
+	{
+		ostringstream ss;
+		changedisplay(DT_GAME);
+		ss << LocalzationManager::formatString(LOC_SYSTEM_OR, 
+		 	PlaceHolderHelper("<"),
+			PlaceHolderHelper(string(1, equipment[ET_WEAPON]->id))) << " - ";
+		printlog(ss.str(),false,false,false,CL_normal,'<');
+		printlog(equipment[ET_WEAPON]->GetName(),true,false,false,equipment[ET_WEAPON]->item_color(), '<');
+		
+		
+		ss.str("");
+		ss.clear();
+		ss << LocalzationManager::formatString(LOC_SYSTEM_OR, 
+		 	PlaceHolderHelper(">"),
+			PlaceHolderHelper(string(1, equipment[ET_SHIELD]->id))) << " - ";
+		printlog(ss.str(),false,false,false,CL_normal,'>');
+		printlog(equipment[ET_SHIELD]->GetName(),true,false,false,equipment[ET_SHIELD]->item_color(), '>');
+		startSelection({'<', '>', VK_ESCAPE});
+
+
+		g_menu_select = -1;
+		while(1)
+		{
+			InputedKey inputedKey;
+			int key_ = waitkeyinput(inputedKey,true);
+
+			if(key_ == VK_RIGHT){
+				if(++g_menu_select>2)
+					g_menu_select = 0;
+				continue;
+			} else if (key_ == VK_LEFT) {
+				if(--g_menu_select<0)
+					g_menu_select = 2;
+				continue;
+			}else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+				if(g_menu_select == 0) {
+					type_ = ET_WEAPON;
+					endSelection();
+					break;
+				}
+				else if(g_menu_select == 1) {
+					type_ = ET_SHIELD;
+					endSelection();
+					break;
+				}
+				else if(g_menu_select == 2) {
+					endSelection();
+					g_menu_select = -1;
+					return 0;
+				}
+			} if(key_ == '<' || key_ == equipment[ET_WEAPON]->id || key_ == GVK_LEFT_BUMPER)
+			{
+				type_ = ET_WEAPON;
+				endSelection();
+				break;
+			}
+			else if(key_ == '>' || key_ == equipment[ET_SHIELD]->id || key_ == GVK_RIGHT_BUMPER)
+			{
+				type_ = ET_SHIELD;
+				endSelection();
+				break;
+			}
+			else if(key_ == -1) {
+				if(inputedKey.isRightClick()) {
+					endSelection();
+					g_menu_select = -1;
+					return 0;
+				}
+			}
+			else if(key_ == VK_ESCAPE ||
+				key_ == GVK_BUTTON_B ||
+				key_ == GVK_BUTTON_B_LONG)
+			{
+				endSelection();
+				g_menu_select = -1;
+				return 0;
+			}
+		}
+		g_menu_select = -1;
+	}
+	else if (equipment[ET_WEAPON] && has_righthand_weapon) {
+		if (equipment[ET_WEAPON]->curse && equipment[ET_SHIELD]->curse) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_ALLITEM_CURSE), true, false, false, CL_normal);
+			return 0;
+		}
+		else if (equipment[ET_WEAPON]->curse)
+			type_ = ET_SHIELD;
+		else if (equipment[ET_SHIELD]->curse)
+			type_ = ET_WEAPON;
+
+	}
+	else if(equipment[ET_WEAPON] && has_righthand_weapon)
+		type_ = ET_SHIELD;
+	else
+		type_ = ET_WEAPON;
+	return unequip(type_);
+}
 
 
 bool players::unequip(char id_)
@@ -6191,6 +6473,17 @@ int players::isequip(list<item>::iterator it)
 		}
 	}	
 	return 0;
+}
+equip_type players::getequipslot(item* item_)
+{
+	for(equip_type i = ET_FIRST;i!=ET_LAST;i=(equip_type)(i+1))
+	{
+		if(equipment[i] == item_)
+		{
+			return i;
+		}
+	}	
+	return ET_LAST;
 }
 int players::isequip(item* item_)
 {
@@ -6256,6 +6549,9 @@ bool players::isImpossibeEquip(equip_type type_, bool massage_)
 }
 bool players::unequip(equip_type type_, bool force_)
 {
+	if(type_ < 0 || type_ >= ET_LAST) {
+		return true;
+	}
 	if(equipment[type_])
 	{
 		if(!force_ && equipment[type_]->curse && (type_ != ET_WEAPON || (equipment[type_]->type >= ITM_WEAPON_FIRST && equipment[type_]->type < ITM_WEAPON_LAST)))
@@ -6278,7 +6574,14 @@ bool players::unequip(equip_type type_, bool force_)
 		{
 			if(type_ == ET_ARMOR)
 				time_delay += 5*you.GetNormalDelay();
-			else if(type_ >= ET_SHIELD && type_ <= ET_BOOTS)
+			else if(type_ == ET_SHIELD) {
+				if(equipment[type_] && equipment[type_]->isweapon()){
+					time_delay = you.GetNormalDelay();
+				} else {
+					time_delay += 3*you.GetNormalDelay();
+				}
+			}
+			else if(type_ > ET_SHIELD && type_ <= ET_BOOTS)
 				time_delay += 3*you.GetNormalDelay();
 			else
 				time_delay += you.GetNormalDelay()/2;
@@ -6448,7 +6751,9 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 	{
 		if((*it).type == ITM_ARMOR_SHIELD)
 		{
-			ShUpDown((*it).value1 * plus_, (*it).value4 * plus_);
+			if((*it).isShield()) {
+				ShUpDown((*it).value1 * plus_, (*it).value4 * plus_);
+			}
 			//EvUpDown((*it).value2 * plus_);
 		}
 		else

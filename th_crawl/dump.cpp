@@ -134,7 +134,9 @@ bool Dump(int type, wstring *filename_)
 		1900 + t.tm_year, t.tm_mon + 1, t.tm_mday,
 		t.tm_hour, t.tm_min, t.tm_sec);
 
-    *filename_ = wfilename;
+	if(filename_ != nullptr) {
+	    *filename_ = wfilename;
+	}
 	if(_wfopen_s(&fp, wfilename, L"wt") != 0 || !fp){
 		return false;  
 	}
@@ -593,14 +595,15 @@ bool Dump(int type, wstring *filename_)
 	if(offset1_ < 23)
 		ss << std::string(23-offset1_, ' ');
 	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_SEE_INVISIBLE) << ": " << (resist2_>=1?'+':(resist2_<=-1?'-':'.'));
-	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_TANMAC)) < 16)
-		ss << std::string(16-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_TANMAC)), ' ');
-	ss << LocalzationManager::locString(LOC_SYSTEM_UI_TANMAC) << ": ";
-	if(you.throw_weapon) {
-		ss << you.throw_weapon->id << ") " << you.throw_weapon->GetName() << "\n";
+	bool isRightWeapon = you.equipment[ET_SHIELD] &&  you.equipment[ET_SHIELD]->isweapon();
+	if(PrintCharWidth(LocalzationManager::locString(isRightWeapon?LOC_SYSTEM_UI_WEAPON:LOC_SYSTEM_UI_SHIELD)) < 16)
+		ss << std::string(16-PrintCharWidth(LocalzationManager::locString(isRightWeapon?LOC_SYSTEM_UI_WEAPON:LOC_SYSTEM_UI_SHIELD)), ' ');
+	ss << LocalzationManager::locString(isRightWeapon?LOC_SYSTEM_UI_WEAPON:LOC_SYSTEM_UI_SHIELD) << ": ";
+	if(you.equipment[ET_SHIELD]) {
+		ss << you.equipment[ET_SHIELD]->id << ") " << you.equipment[ET_SHIELD]->GetName() << "\n";
 	}
 	else {
-		ss << LocalzationManager::locString(LOC_SYSTEM_UI_NONE) << "\n";
+		ss << (you.isImpossibeEquip(ET_SHIELD, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
 	}
 
 
@@ -625,15 +628,17 @@ bool Dump(int type, wstring *filename_)
 	if(offset1_ < 23)
 		ss << std::string(23-offset1_, ' ');
 	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER_KEEP) << ": " << (you.power == 1000 ? "∞": (resist2_>=1?"+ ":(resist2_<=-1?"- ":". ")));
-	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_BODY)) < 15)
-		ss << std::string(15-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_BODY)), ' ');
-	ss << LocalzationManager::locString(LOC_SYSTEM_UI_BODY) << ": ";
-	if(you.equipment[ET_ARMOR]) {
-		ss << you.equipment[ET_ARMOR]->id << ") " << you.equipment[ET_ARMOR]->GetName() << "\n";
+	
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_TANMAC)) < 15)
+		ss << std::string(15-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_TANMAC)), ' ');
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_TANMAC) << ": ";
+	if(you.throw_weapon) {
+		ss << you.throw_weapon->id << ") " << you.throw_weapon->GetName() << "\n";
 	}
 	else {
-		ss << (you.isImpossibeEquip(ET_ARMOR, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
+		ss << LocalzationManager::locString(LOC_SYSTEM_UI_NONE) << "\n";
 	}
+	
 
 	
 	resist_ = you.poison_resist;
@@ -645,12 +650,12 @@ bool Dump(int type, wstring *filename_)
 	ss << poison_resist_string << ": " << (resist_>=100?("∞"):(resist_>=1?("+"):(resist_<=-1?"-":".")));
 	if(offset1_ < 44)
 		ss << std::string(44-offset1_, ' ');
-	ss << LocalzationManager::locString(LOC_SYSTEM_UI_SHIELD) << ": ";
-	if(you.equipment[ET_SHIELD]) {
-		ss << you.equipment[ET_SHIELD]->id << ") " << you.equipment[ET_SHIELD]->GetName() << "\n";
+	ss << LocalzationManager::locString(LOC_SYSTEM_UI_BODY) << ": ";
+	if(you.equipment[ET_ARMOR]) {
+		ss << you.equipment[ET_ARMOR]->id << ") " << you.equipment[ET_ARMOR]->GetName() << "\n";
 	}
 	else {
-		ss << (you.isImpossibeEquip(ET_SHIELD, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
+		ss << (you.isImpossibeEquip(ET_ARMOR, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
 	}
 
 

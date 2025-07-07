@@ -2044,13 +2044,13 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		if(a.order && (sight_ || only_invisible_))
 		{			
 			if(!graze_) {
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_MISS,true,false,false,CL_bad,
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_MISS,false,false,false,CL_bad,
 					 PlaceHolderHelper(name_.getName()),
 					 PlaceHolderHelper(a.name.getName()),
 					 PlaceHolderHelper(GetName()->getName()));
 			}
 			else {
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_GRAZED,true,false,false,CL_bad,
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_GRAZED,false,false,false,CL_bad,
 					 PlaceHolderHelper(name_.getName()),
 					 PlaceHolderHelper(a.name.getName()),
 					 PlaceHolderHelper(GetName()->getName()));
@@ -5838,7 +5838,7 @@ int monster::GetSpeed()
 {
 	return (s_haste?0.7f:1)*(s_slow?1.5f:1)*speed+(s_frozen+2)*speed/30;;
 }
-int monster::GetAttack(bool max_)
+int monster::GetAttack(bool max_, equip_type type_)
 {
 	int num_=0;
 	for(int i=0;i<3;i++,num_++)
@@ -5868,7 +5868,7 @@ int monster::GetAttack(int num_, bool max_)
 	}
 	return atk_;
 }
-int monster::GetHit()
+int monster::GetHit(equip_type type_)
 {
 	if(id == MON_HOMING) {
 		return 99;

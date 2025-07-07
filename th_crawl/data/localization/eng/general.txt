@@ -21,37 +21,41 @@ LOC_SYSTEM_MAINMENU_MAINGAME_MODE_EASY_SELECT,Give me the best one.
 LOC_SYSTEM_MAINMENU_MAINGAME_MODE_NORMAL,Start with a custom character (NORMAL)
 LOC_SYSTEM_MAINMENU_MAINGAME_MODE_NORMAL_SELECT,Alright. No problem.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SELECT,Choose your character.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU1,Anti-pattern ultra homing type. Wipe out every enemy as the cowardly homing shrine maiden!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU2,Aptitude Bonus) Danmaku Aptitude +3, Evasion Aptitude +3
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU1,Anti-pattern Stress Super-homing Type. Wipe out every enemy as the cowardly homing shrine maiden!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU2,Aptitude Bonus) +3 Danmaku Aptitude, +3 Evasion Aptitude
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU3,Bonus) 24 Homing Amulets. Start without relying on the gods.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU4,Beginner Tip: Press 'f' to fire amulets. Always throw them before getting close!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA1,Infinite piercing & always-on attacks. Danmaku is power! Kill on sight!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA2,Aptitude Bonus) Spellcasting +2, Destruction Magic +3, Evasion +1
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA3,Bonus) +2,+2 Broom, MP Ring, Book of Destruction
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA1,Infinite piercing & Always-on Attacks. Danmaku is power! Kill on sight!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA2,Aptitude Bonus) +2 Spellcasting Aptitude, +3 Conjuration Magic Aptitude, +1 Dodge Aptitude
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA3,Bonus) +2 Broom, MP Ring, Book of Destruction
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA4,Beginner Tip: Use 'z' to cast spells and 'M' to learn new ones. Keep your MP full with the 5 key!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE1,High-power & wide explosion type. Just as Suwako commands!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE2,Aptitude Bonus) Combat +2, Evasion +1, Activation +3
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE1,High-power & Wide explosion type. Just as Suwako commands!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE2,Aptitude Bonus) +2 Fight Aptitude, +1 Dodge Aptitude, +3 Evoke Aptitude
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,Bonus) Spell Card of Earth (9), Spell Card of Air (9), Starts with faith in Suwako.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4,Beginner Tip: Press 'V' to use spell cards. Earth spell cards explode on walls for area damage!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI1,Auto-explore & auto-attack type. Let 'O' and 'TAB' guard you.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI2,Aptitude Bonus) Longsword +1
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,Bonus) +2,+2 Crescent Blade, +2 Iron Shield, +2 Chainmail, 2 Wound Healing Potions, 2 Strength Potions, Ring of Detect Invisibility
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI1,Auto-explore & Auto-attack Type. Let 'O' and 'TAB' guard you.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI2,Aptitude Bonus) +1 Longblade Aptitude
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,Bonus) +2 Crescent Blade, +2 Iron Shield, +2 Chainmail, 2 Wound Healing Potions, 2 Strength Potions, Ring of Detect Invisibility
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI4,Beginner Tip: 'TAB' for auto-attack, 'O' for auto-explore. Press 'Q' to drink a potion in emergencies!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI1,True Horror! Standing Right Behind You. Assassinate them all with the power of the unconscious!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI2,Aptitude Bonus) Shortsword +2, Mental Magic +2
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI2,Aptitude Bonus) +2 Shortblade Aptitude, +2 Mental Magic Aptitude
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI3,Bonus) Permanent Invisibility Trait, MP Preservation Trait, Lv15 Stab (Confusion-inducing melee attack)
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI4,Beginner Tip: You're always invisible outside combat. Be careful-it disappears during combat.\nStabbing sleeping enemies deals massive damage based on sneak and dagger skill.\nHold 'x' and hover over a monster, then press 'v' to check info. Make sure they can't see invisibility!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU1,Blaze! Human Inferno. Revive and break through even after death!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU2,Aptitude Bonus) HP +20%, Combat +2, Fire Magic +2
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU2,Aptitude Bonus) HP +20%, +2 Fight Aptitude, +2 Fire Magic Aptitude
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,Bonus) Can revive twice (removed at Lv9 and Lv18)
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4,Beginner Tip: You can revive twice after dying. When revived, you explode and restore HP and MP.\nIf you reach Lv9 and Lv18 without dying, the revive abilities disappear one by one. Don’t be afraid to die!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI1,Ancient! The triassic Kappa. Break through with the power of items!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2,Aptitude Bonus) Blunt Weapon +2, Activation +1
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2,Aptitude Bonus) +2 Mace Aptitude, +1 Evoke Aptitude
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI3,Bonus) Starts with Cloth Kappa Suit, Aerial Torpedo, and Neshii’s Occult Amulet
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4,Beginner Tip: Use 'V' to activate items. The aerial torpedo fires long-range danmaku.\nOccult amulets charge with XP. When fully charged, press 'V' to launch Neshii!\nActivatable items are permanent but consume lots of MP. Use them wisely in tough battles.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES1,Fairy Wars! The Three Fairies of Light. It's better to fight together!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES2,Bonus) Trust Lily and start with two fairy companions.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3,Beginner Tip: You’ll always fight with companions. They revive after gaining XP, even if they die.\nUse the 'a' key to invoke divine powers. Recruit or summon fairy allies!\nYou still get the same XP even if allies land the kill. Prioritize your survival!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU1,Fierce Iaido Slash Type. Cut down your enemies swiftly!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU2,Aptitude Bonus) +3 Longblade Aptitude, +2 Evasion Aptitude, -2 Armor Aptitude, -2 Shield Aptitude
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU3,Bonus) Dual Wielding and Quick Dash traits. Starts with two +0 Katana instead of a Venom Shuriken.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU4,Beginner Tip) A character with top-tier melee damage.\nHer weak defense means you should quickly close in and eliminate enemies.\nPay attention to tile effects to check when your movement speed increases.\nDon't forget: your approach ability is also useful for escaping.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT,Choose your race.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP_APTIT,? to see the racial aptitude chart
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP,See the race descriptions in capital letters.
@@ -168,6 +172,9 @@ LOC_SYSTEM_EQUIP_CANT_SPELLCARD,You can’t unequip a spell card while declaring
 LOC_SYSTEM_SHEILD_PANALTY1,You equipped a weapon and shield together. (Attack speed -0.1)
 LOC_SYSTEM_SHEILD_PANALTY2,This weapon is a bit awkward to use with a shield. (Attack speed -0.2)
 LOC_SYSTEM_SHEILD_PANALTY3,This weapon is very difficult to use with a shield. (Attack speed -0.3)
+LOC_SYSTEM_DUAL_WEAPON_PANALTY1,Holding two weapons. (Attack speed -0.1)
+LOC_SYSTEM_DUAL_WEAPON_PANALTY2,These weapons are a bit unwieldy together. (Attack speed -0.2)
+LOC_SYSTEM_DUAL_WEAPON_PANALTY3,These weapons are very difficult to dual-wield. (Attack speed -0.3)
 LOC_SYSTEM_CANT_EQUIP_LIKEIT,You can’t equip it like that.
 LOC_SYSTEM_CANT_EQUIP_HORN,Your horns prevent you from using this equipment.
 LOC_SYSTEM_CANT_EQUIP_GHOSTFOOT,You have no legs!
@@ -1632,6 +1639,7 @@ LOC_SYSTEM_PLAYER_THREE_FAIRIES,Three Fairies
 LOC_SYSTEM_PLAYER_SUNNY,Sunny
 LOC_SYSTEM_PLAYER_STAR,Star
 LOC_SYSTEM_PLAYER_LUNA,Luna
+LOC_SYSTEM_PLAYER_YOUMU,Youmu
 LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION,Resurrection
 LOC_SYSTEM_PLAYER_MOKOU_RESURRECTION_SHOUT,Resurrection!
 LOC_SYSTEM_ATT_NORMAL,Attack
@@ -2001,6 +2009,8 @@ LOC_SYSTEM_TRIBE_PROPERTY_WEAK,Birdbrain
 LOC_SYSTEM_TRIBE_PROPERTY_OVERHEAT,Overload
 LOC_SYSTEM_TRIBE_PROPERTY_AC_AND_SLAY,No Guard
 LOC_SYSTEM_TRIBE_PROPERTY_FIREUP_COLDDOWN,Hellfire
+LOC_SYSTEM_TRIBE_PROPERTY_DUAL_WEAPON,Dual Wielding
+LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH,Quick Dash
 LOC_SYSTEM_TRIBE_PROPERTY_STG_SPREAD_SHOT,Spread Shot
 LOC_SYSTEM_TRIBE_PROPERTY_STG_TRIPLE_SHOT,Triple Shot
 LOC_SYSTEM_TRIBE_PROPERTY_STG_BACK_SHOT,Rear Shot
@@ -2098,6 +2108,8 @@ LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_WEAK,You’ve become slightly dull. (STR {0},
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_OVERHEAT,You overheat with every attack. ({0})
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_AC_AND_SLAY,You don’t care about defense. (Combat Power {0}, AC {1})
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIREUP_COLDDOWN,Your body blazes with heat. (Fire Res {0}, Cold Res {1})
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_DUAL_WEAPON,You can wield two weapons.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_QUICK_DASH,You quickly dash toward enemies.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SPREAD_SHOT,Your shots spread out.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_TRIPLE_SHOT,You fire in triple bursts.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_BACK_SHOT,You also fire shots from behind.
@@ -2181,7 +2193,9 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_WEAK,You feel slightly dumbed down.\nGain {0} S
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_OVERHEAT,You heat up with every attack.\nYou may emit vision-blocking smoke and overheat.\nOverheat damage scales with existing stacks.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_AC_AND_SLAY,You’ve become attack-focused.\nGain {0} combat power, but lose {1} defense.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIREUP_COLDDOWN,Your body is now fire-adapted.\nGain {0} Fire Res, but lose {1} Cold Res.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_RAD,This trait is temporarily acquired from radiation.\nIt disappears after gaining some XP.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_RAD,This trait is temporarily acquired from radiation.\nIt disappears after gaining some EXP.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_DUAL_WEAPON,You can equip two weapons.\nWhen equipping a weapon while already holding one, the new weapon is equipped in the opposite hand.\nIf you're dual-wielding, both weapons are used to attack simultaneously.\nAttack speed is calculated as the average of both weapons.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_QUICK_DASH,Your movement speed doubles when approaching an enemy in your line of sight.\nTiles affected by this effect are marked with a special symbol on the ground.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SPREAD_SHOT,Fire 4 additional spread shots to the sides.\nThey deal the same damage but won’t hit the same target.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_TRIPLE_SHOT,Fire two extra shots alongside your main one.\nThey deal the same damage but target separately.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_BACK_SHOT,Fire three spread shots behind you.\nThey deal the same damage but target separately.

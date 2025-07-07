@@ -277,9 +277,9 @@ public:
 	bool isUnique();
 	attack_weapon_type GetAttackType();
 	int GetSpeed();
-	int GetAttack(bool max_);
+	int GetAttack(bool max_, equip_type type_ = ET_WEAPON);
 	int GetAttack(int num_, bool max_);
-	int GetHit();
+	int GetHit(equip_type type_ = ET_WEAPON);
 	int GetEv();
 	int GetSaved(){return s_saved;};
 	int SetStrong() { return strong; };

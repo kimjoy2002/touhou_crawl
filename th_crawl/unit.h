@@ -84,8 +84,8 @@ public:
 	virtual string GetNameString()=0;
 	virtual int GetHp()=0;
 	virtual int GetMaxHp()=0;	
-	virtual int GetAttack(bool max_)=0;
-	virtual int GetHit()=0;
+	virtual int GetAttack(bool max_, equip_type type_ = ET_WEAPON)=0;
+	virtual int GetHit(equip_type type_ = ET_WEAPON)=0;
 	virtual coord_def GetPrevPos()=0;
 	virtual void SetX(int x_){position.x = x_;};
 	virtual void SetY(int y_){position.y = y_;};

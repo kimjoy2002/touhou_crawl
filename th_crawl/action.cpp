@@ -2842,7 +2842,7 @@ void Armour_Show()
 	}
 
 	printlog(LocalzationManager::locString(LOC_SYSTEM_UI_SHIELD) + ": ",false,false,true,CL_normal);
-	if(you.equipment[ET_SHIELD])
+	if(you.equipment[ET_SHIELD] && you.equipment[ET_SHIELD]->isShield())
 	{
 		sprintf_s(temp,100,"%c) %s",you.equipment[ET_SHIELD]->id,you.equipment[ET_SHIELD]->GetName().c_str());
 		printlog(temp,true,false,true,you.equipment[ET_SHIELD]->item_color());
@@ -3907,7 +3907,13 @@ void More_Item_Action()
 		case '-':
 			endSelection();
 			deletelog();
-			if(!you.unequip(ET_WEAPON))
+			if(you.GetProperty(TPT_DUAL_WEAPON)) {
+				if(!you.unequipdualweapon())
+				{				
+					printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY),true,false,false,CL_normal);
+				}
+			}
+			else if(!you.unequip(ET_WEAPON))
 			{				
 				printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY),true,false,false,CL_normal);
 			}

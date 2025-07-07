@@ -39,18 +39,18 @@ extern int shieldPanaltyOfWeapon(item_type type, int weapon_kind);
 
 
 
-int players::GetAttack(bool max_)
+int players::GetAttack(bool max_, equip_type type_)
 {
 	float base_atk_ = s_str/3.0f+ s_dex/6.0f;
 	float max_atk_=0, min_atk_=0, stab_atk_=0;
 	skill_type skill_ = SKT_MACE;
 
-	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
+	if(equipment[type_] && equipment[type_]->type >= ITM_WEAPON_FIRST && equipment[type_]->type <= ITM_WEAPON_CLOSE)
 	{
-		skill_ = itemtoskill(equipment[ET_WEAPON]->type);
+		skill_ = itemtoskill(equipment[type_]->type);
 		if(skill_>SKT_ERROR)
 		{
-			max_atk_ = equipment[ET_WEAPON]->value2*(equipment[ET_WEAPON]->value4/18.0f+ GetSkillLevel(skill_, true)/20.0f+base_atk_/6.0f);
+			max_atk_ = equipment[type_]->value2*(equipment[type_]->value4/18.0f+ GetSkillLevel(skill_, true)/20.0f+base_atk_/6.0f);
 			min_atk_ = 0;//min(equipment[ET_WEAPON]->value2,skill[skill_].level/2);
 		}
 		else //여기는 버그 처리. 데미지가 없으면 버그임을 알수있음
@@ -59,7 +59,7 @@ int players::GetAttack(bool max_)
 			min_atk_ = 0; 
 		}
 	}
-	else if(!equipment[ET_WEAPON]) //맨손임
+	else if(!equipment[type_]) //맨손임
 	{
 		skill_ = SKT_UNWEAPON;
 		max_atk_ = base_atk_+ GetSkillLevel(skill_, true)*15.0f/20.0f;
@@ -86,7 +86,7 @@ int players::GetAttack(bool max_)
 	if(s_might || s_lunatic)
 		max_atk_+=randA_1(10);	
 	
-	if(!equipment[ET_WEAPON] && alchemy_buff == ALCT_STONE_FORM)
+	if(!equipment[type_] && alchemy_buff == ALCT_STONE_FORM)
 		max_atk_+=8;
 
 
@@ -134,10 +134,10 @@ int players::GetAttack(bool max_)
 		cacul_max_ += 10;
 	}
 
-	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->value5)//속성브랜드처리
+	if(equipment[type_] && equipment[type_]->value5)//속성브랜드처리
 	{
-		atk_ = GetPulsDamage((weapon_brand)equipment[ET_WEAPON]->value5,atk_);
-		cacul_max_ = GetPulsDamage((weapon_brand)equipment[ET_WEAPON]->value5,cacul_max_);
+		atk_ = GetPulsDamage((weapon_brand)equipment[type_]->value5,atk_);
+		cacul_max_ = GetPulsDamage((weapon_brand)equipment[type_]->value5,cacul_max_);
 	}
 	
 
@@ -153,7 +153,7 @@ int players::GetAttack(bool max_)
 	float plus_max_atk = max_atk_ - stab_atk_;
 
 	//max_atk_*=(1+(skill[skill_].level+skill[SKT_STEALTH].level)*0.1);
-	if(equipment[ET_WEAPON] && ( equipment[ET_WEAPON]->type == ITM_WEAPON_SHORTBLADE || equipment[ET_WEAPON]->value5 == WB_AUTUMN))
+	if(equipment[type_] && ( equipment[type_]->type == ITM_WEAPON_SHORTBLADE || equipment[type_]->value5 == WB_AUTUMN))
 	{ //단검 암습 보너스
 		stab_atk_+=(2+(GetSkillLevel(skill_, true) + GetSkillLevel(SKT_STEALTH, true))/2)*2;
 		stab_atk_*=(1+(GetSkillLevel(skill_, true) + GetSkillLevel(SKT_STEALTH, true))*0.1f);
@@ -171,22 +171,22 @@ int players::GetAttack(bool max_)
 }
 
 
-int players::GetHit()
+int players::GetHit(equip_type type_)
 {
 	int hit_ = 2+s_dex/3+ GetSkillLevel(SKT_FIGHT, true)/4;
-	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
+	if(equipment[type_] && equipment[type_]->type >= ITM_WEAPON_FIRST && equipment[type_]->type <= ITM_WEAPON_CLOSE)
 	{
-		skill_type skill_ = itemtoskill(equipment[ET_WEAPON]->type);
+		skill_type skill_ = itemtoskill(equipment[type_]->type);
 		if(skill_>SKT_ERROR)
 		{
-			hit_ += 1 + (equipment[ET_WEAPON]->value1 + equipment[ET_WEAPON]->value4 + GetSkillLevel(skill_, true)/3)*3/4;
+			hit_ += 1 + (equipment[type_]->value1 + equipment[type_]->value4 + GetSkillLevel(skill_, true)/3)*3/4;
 		}
 		else
 		{
 			hit_ = -99;
 		}
 	}
-	else if(!equipment[ET_WEAPON])
+	else if(!equipment[type_])
 	{
 		hit_ += s_dex/4;
 	}
@@ -218,29 +218,41 @@ int players::GetHit()
 }
 int players::GetAtkDelay()
 {
-	int delay_ = 6;
-	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->type >= ITM_WEAPON_FIRST && equipment[ET_WEAPON]->type <= ITM_WEAPON_CLOSE)
-	{
-		float real_delay_ = max<float>((equipment[ET_WEAPON]->value8) , 
-			(equipment[ET_WEAPON]->value7- GetSkillLevel(itemtoskill(equipment[ET_WEAPON]->type), true)/2.0f));
+	int loop_ = GetProperty(TPT_DUAL_WEAPON)?2:1;
 
-		if (equipment[ET_SHIELD])
-		{
-			real_delay_ += shieldPanaltyOfWeapon(equipment[ET_WEAPON]->type, equipment[ET_WEAPON]->value0);
+	int current_delay_ = 0;
+	for(int i = loop_; i > 0; i--) {
+		equip_type type_ = i==2?ET_WEAPON:ET_SHIELD;
+		if(type_ == ET_WEAPON && !equipment[ET_WEAPON] && equipment[ET_SHIELD] && equipment[ET_SHIELD]->isweapon()) {
+			loop_--;
+			continue;
+		}
+		if(type_ == ET_SHIELD && (!equipment[ET_SHIELD] || !equipment[ET_SHIELD]->isweapon() )) {
+			loop_--;
+			continue;
 		}
 
+		int delay_ = 6;
+		if(equipment[type_] && equipment[type_]->type >= ITM_WEAPON_FIRST && equipment[type_]->type <= ITM_WEAPON_CLOSE)
+		{
+			float real_delay_ = max<float>((equipment[type_]->value8) , 
+				(equipment[type_]->value7- GetSkillLevel(itemtoskill(equipment[type_]->type), true)/2.0f));
 
+			if (equipment[type_==ET_WEAPON?ET_SHIELD:ET_WEAPON])
+			{
+				real_delay_ += shieldPanaltyOfWeapon(equipment[type_]->type, equipment[type_]->value0);
+			}
 
-		delay_ = real_delay_+rand_float(0.99f,0.0f);
-	}
-	else if(equipment[ET_WEAPON])
-		delay_ = 10;
-	
-	if(delay_<2)
-		delay_ = 2;
+			delay_ = real_delay_+rand_float(0.99f,0.0f);
+		}
+		else if(equipment[ET_WEAPON])
+			delay_ = 10;
 		
-	return delay_;
-
+		if(delay_<2)
+			delay_ = 2;
+		current_delay_ += delay_;
+	}
+	return (current_delay_+1)/loop_;
 }
 
 int players::ReSetASPanlty()
@@ -256,7 +268,7 @@ int players::ReSetASPanlty()
 			panlty2_ = -armor_->value3;
 		panlty_ += panlty2_;
 	}	
-	if(shield_)
+	if(shield_ && shield_->isShield())
 	{
 		int panlty2_ = -shield_->value2;
 		panlty2_ -= GetSkillLevel(SKT_SHIELD, true)/3;
@@ -1297,7 +1309,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 			{
 				std::string shield_str = "";
 				
-				if(!equipment[ET_SHIELD]) {
+				if(!equipment[ET_SHIELD] || !equipment[ET_SHIELD]->isShield()) {
 					shield_str = LocalzationManager::locString(LOC_SYSTEM_BLOCK_BODY);
 				} else if(equipment[ET_SHIELD]->fixed_artifact == FIXED_ARTIFACT_HAKUROUKEN) {
 					shield_str = LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_NAME);
@@ -1319,7 +1331,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 						int delay_ = GetAtkDelay();
 						while(delay_ > 0) {
 							if(rand_int(1,10) <= delay_ && a.order->isLive()) {
-								attack((monster*)a.order, true);
+								attack((monster*)a.order, ET_WEAPON, true);
 							}
 							delay_-=10;
 						}

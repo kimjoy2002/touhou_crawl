@@ -425,7 +425,7 @@ public:
 	void SetPrevAction(int key, char item = 0, int num = 0);
 	void maybeAction();
 	coord_def GetDisplayPos();
-	bool attack(monster* mons_, bool counter_);
+	bool attack(monster* mons_, equip_type type_, bool counter_);
 	int move(short_move x_mov, short_move y_mov);
 	int move(const coord_def &c);
 	bool offsetmove(const coord_def &c);
@@ -444,8 +444,8 @@ public:
 	int GetDisplayEv();
 	int GetDisplayAc();
 	int GetDisplaySh();
-	int GetAttack(bool max);
-	int GetHit();
+	int GetAttack(bool max, equip_type type_ = ET_WEAPON);
+	int GetHit(equip_type type_ = ET_WEAPON);
 	int GetAtkDelay();
 	int GetRoyalRange(bool prev_);
 	//int GetArmourPanlty();
@@ -629,10 +629,13 @@ public:
 	bool equip(list<item>::iterator &it, equip_type type_, bool speak_ = true);
 	bool equiparmor(char id_, bool speak_ = true);
 	bool equipjewerly(char id_);
+	bool equipdualweapon(char id_);
+	bool unequipdualweapon();
 	bool unequip(char id_);
 	bool unequip(list<item>::iterator it, equip_type type_);
 	bool possibleunequip(list<item>::iterator it); //장착하고있다면 장비벗기. 장착안해도 실패처리는 아님
 	int isequip(list<item>::iterator it);
+	equip_type getequipslot(item* item_);
 	int isequip(item* item_);
 	int getThrowLength();
 	int haveGoal();

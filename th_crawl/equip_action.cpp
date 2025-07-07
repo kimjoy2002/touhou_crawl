@@ -11,6 +11,7 @@
 #include "key.h"
 #include "player.h"
 #include "beam.h"
+#include "tribe.h"
 #include "monster_texture.h"
 #include "option_manager.h"
 
@@ -60,7 +61,11 @@ void Equip_Weapon()
 		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 		{
 			changedisplay(DT_GAME);
-			you.equip(key_,ET_WEAPON);
+			if(you.GetProperty(TPT_DUAL_WEAPON)) {
+				you.equipdualweapon(key_);
+			} else {
+				you.equip(key_,ET_WEAPON);
+			}
 			break;
 		}
 		else if(key_ == VK_DOWN)//-----이동키-------
@@ -83,7 +88,15 @@ void Equip_Weapon()
 			view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_EQ_WEAPON);
 		else if(key_ == '-')
 		{
-			if(!you.unequip(ET_WEAPON))
+			if(you.GetProperty(TPT_DUAL_WEAPON)) {
+				changedisplay(DT_GAME);
+				if(!you.unequipdualweapon())
+				{
+					printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY),true,false,false,CL_normal);
+				}
+				return;
+			}
+			else if(!you.unequip(ET_WEAPON))
 			{				
 				printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY),true,false,false,CL_normal);
 			}

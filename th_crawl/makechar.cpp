@@ -187,7 +187,8 @@ void MakeStartItem(start_item_type select_, int num)
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
-		you.equip('a'+num,ET_WEAPON,false);
+		if(!you.equipment[ET_WEAPON])
+			you.equip('a'+num,ET_WEAPON,false);
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_LONGBLADE1:
@@ -195,7 +196,8 @@ void MakeStartItem(start_item_type select_, int num)
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
-		you.equip('a'+num,ET_WEAPON,false);
+		if(!you.equipment[ET_WEAPON])
+			you.equip('a'+num,ET_WEAPON,false);
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_LONGBLADE:
@@ -203,7 +205,8 @@ void MakeStartItem(start_item_type select_, int num)
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
-		you.equip('a'+num,ET_WEAPON,false);
+		if(!you.equipment[ET_WEAPON])
+			you.equip('a'+num,ET_WEAPON,false);
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_MACE:
@@ -211,7 +214,8 @@ void MakeStartItem(start_item_type select_, int num)
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
-		you.equip('a'+num,ET_WEAPON,false);
+		if(!you.equipment[ET_WEAPON])
+			you.equip('a'+num,ET_WEAPON,false);
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_AXE:
@@ -219,7 +223,8 @@ void MakeStartItem(start_item_type select_, int num)
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
-		you.equip('a'+num,ET_WEAPON,false);
+		if(!you.equipment[ET_WEAPON])
+			you.equip('a'+num,ET_WEAPON,false);
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_SPEAR:
@@ -227,7 +232,8 @@ void MakeStartItem(start_item_type select_, int num)
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
-		you.equip('a'+num,ET_WEAPON,false);
+		if(!you.equipment[ET_WEAPON])
+			you.equip('a'+num,ET_WEAPON,false);
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_GOHEY:
@@ -237,7 +243,8 @@ void MakeStartItem(start_item_type select_, int num)
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
-		you.equip('a'+num,ET_WEAPON,false);
+		if(!you.equipment[ET_WEAPON])
+			you.equip('a'+num,ET_WEAPON,false);
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_SICKLE:
@@ -248,7 +255,8 @@ void MakeStartItem(start_item_type select_, int num)
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
-		you.equip('a'+num,ET_WEAPON,false);
+		if(!you.equipment[ET_WEAPON])
+			you.equip('a'+num,ET_WEAPON,false);
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_BROOM:
@@ -256,7 +264,8 @@ void MakeStartItem(start_item_type select_, int num)
 		(*it).identify = true;
 		(*it).identify_curse = true;
 		you.additem(it,false);
-		you.equip('a'+num,ET_WEAPON,false);
+		if(!you.equipment[ET_WEAPON])
+			you.equip('a'+num,ET_WEAPON,false);
 		env[current_level].DeleteItem(it);
 		break;
 	case SIT_ROBE:
@@ -541,14 +550,26 @@ void SetJobs(job_type select_, unique_starting_type type)
 		you.StatUpDown(2,STAT_STR);
 		you.StatUpDown(-4,STAT_INT);
 		you.StatUpDown(2,STAT_DEX);
-		you.GiveSkillExp(WeaponSelect(0),60,false);
-		MakeStartItem(SIT_ARMOUR_0,1);
-		MakeStartItem(SIT_SMALL_SHIELD,2);
-		MakeStartItem(SIT_SPECIAL_TANMAC,3);
-		you.GiveSkillExp(SKT_FIGHT,30,false);
-		you.GiveSkillExp(SKT_DODGE,30,false);
-		you.GiveSkillExp(SKT_TANMAC,30,false);
-		you.GiveSkillExp(SKT_SHIELD,30,false);
+
+		if(type == UNIQ_START_YOUMU) {
+			MakeStartItem(SIT_LONGBLADE1,0);
+			MakeStartItem(SIT_LONGBLADE1,1);
+			MakeStartItem(SIT_ARMOUR_0,2);
+			you.GiveSkillExp(SKT_FIGHT,30,false);
+			you.GiveSkillExp(SKT_LONGBLADE,90,false);
+			you.GiveSkillExp(SKT_DODGE,60,false);
+
+		} else {		
+			you.GiveSkillExp(WeaponSelect(0),60,false);
+			MakeStartItem(SIT_ARMOUR_0,1);
+			MakeStartItem(SIT_SMALL_SHIELD,2);
+			MakeStartItem(SIT_SPECIAL_TANMAC,3);
+			you.GiveSkillExp(SKT_FIGHT,30,false);
+			you.GiveSkillExp(SKT_DODGE,30,false);
+			you.GiveSkillExp(SKT_TANMAC,30,false);
+			you.GiveSkillExp(SKT_SHIELD,30,false);
+		}
+
 		you.quickMenu1 = SYSCMD_QUICKTHROW;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
@@ -1206,5 +1227,23 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 				you.Ability(SKL_LILLY_1, true, true);
 			}
 		}
+	}
+	else if(type == UNIQ_START_YOUMU)
+	{
+		if(aptit_)
+		{
+			you.skill[SKT_LONGBLADE].aptit +=3;
+			you.skill[SKT_DODGE].aptit +=2;
+			you.skill[SKT_SHIELD].aptit -=2;
+			you.skill[SKT_ARMOUR].aptit -=1;
+		}
+		else
+		{
+			you.SetProperty(TPT_DUAL_WEAPON,1);
+			you.SetProperty(TPT_QUICK_DASH,1);
+			set_exist_named(MON_YOUMU);
+			you.equip('b',ET_SHIELD,false);
+		}
+
 	}
 }

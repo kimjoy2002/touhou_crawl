@@ -818,9 +818,13 @@ bool ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 				}
 				//무기->장착
 				else if(you.isequip(item_)>0) {
-					you.unequip(ET_WEAPON);
+					you.unequip(you.getequipslot(item_));
 				} else {
-					you.equip(key_,ET_WEAPON);
+					if(you.GetProperty(TPT_DUAL_WEAPON)) {
+						you.equipdualweapon(key_);
+					} else {
+						you.equip(key_,ET_WEAPON);
+					}
 				}
 			}
 			else if(item_->isSimpleType(ITMS_ARMOR)) {

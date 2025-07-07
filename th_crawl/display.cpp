@@ -1424,6 +1424,63 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	ss << ": " << (resist_>=1?'+':(resist_<=-1?'-':'.'));
 	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
 	rc.left += 150;
+
+	bool is_dule_weapon = false;
+	if(you.equipment[ET_SHIELD] && you.equipment[ET_SHIELD]->isweapon()) {
+		is_dule_weapon = true;
+	}
+
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(is_dule_weapon?LOC_SYSTEM_UI_WEAPON:LOC_SYSTEM_UI_SHIELD) << ": ";
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
+	rc.left += fontDesc.Width*(PrintCharWidth(ss.str()));
+	if(you.equipment[ET_SHIELD])
+	{
+		ss.str("");
+		ss.clear();
+		ss << you.equipment[ET_SHIELD]->id << ") " << you.equipment[ET_SHIELD]->GetName();
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_SHIELD]->item_color());
+	}
+	else
+	{
+		DrawTextUTF8(pfont,pSprite, you.isImpossibeEquip(ET_SHIELD, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+	}
+	rc.left = 30;
+	rc.top += fontDesc.Height;
+
+	
+	resist_ = you.elec_resist - you.uniden_elec_resist;	
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_ELEC_RESIST);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_ELEC_RESIST)) < 8)
+		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_ELEC_RESIST)), ' ');
+	if(resist_>=100) {
+		ss << ": ∞";
+	}
+	else {
+		ss << ": " << (resist_>=1?'+':(resist_<=-1?'-':'.')) << ' ' << (resist_>=2?'+':(resist_<=-2?'-':'.')) << ' ' << (resist_>=3?'+':(resist_<=-3?'-':'.'));
+	}
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+	rc.left += 150;
+	resist_ = you.power_keep- you.uniden_power_keep;
+
+	
+	
+	ss.str("");
+	ss.clear();
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER_KEEP);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER_KEEP)) < 8)
+		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER_KEEP)), ' ');
+	if(you.power == 1000) {
+		ss << ": ∞";
+	}
+	else {
+		ss << ": " << (resist_>=1?'+':(resist_<=-1?'-':'.'));
+	}
+	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+	rc.left += 150;
 	ss.str("");
 	ss.clear();
 	ss << LocalzationManager::locString(LOC_SYSTEM_UI_TANMAC) << ": ";
@@ -1443,35 +1500,19 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	rc.left = 30;
 	rc.top += fontDesc.Height;
 
-	resist_ = you.elec_resist - you.uniden_elec_resist;	
-	ss.str("");
-	ss.clear();
-	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_ELEC_RESIST);
-	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_ELEC_RESIST)) < 8)
-		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_ELEC_RESIST)), ' ');
-	if(resist_>=100) {
-		ss << ": ∞";
-	}
-	else {
-		ss << ": " << (resist_>=1?'+':(resist_<=-1?'-':'.')) << ' ' << (resist_>=2?'+':(resist_<=-2?'-':'.')) << ' ' << (resist_>=3?'+':(resist_<=-3?'-':'.'));
-	}
-	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
-	rc.left += 150;
-	resist_ = you.power_keep- you.uniden_power_keep;
 
 	
+	resist_ = you.poison_resist - you.uniden_poison_resist;
 	ss.str("");
 	ss.clear();
-	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER_KEEP);
-	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER_KEEP)) < 8)
-		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER_KEEP)), ' ');
-	if(you.power == 1000) {
-		ss << ": ∞";
-	}
-	else {
-		ss << ": " << (resist_>=1?'+':(resist_<=-1?'-':'.'));
-	}
+	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST);
+	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST)) < 8)
+		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST)), ' ');
+	ss << ": " << (resist_>=100?"∞":(resist_>=1?"+":(resist_<=-1?"-":".")));
 	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
+	rc.left += 150;
+	//sprintf_s(temp,100,"SH:%4d",you.sh);
+	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left += 150;
 	ss.str("");
 	ss.clear();
@@ -1491,38 +1532,7 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
-
 	
-	resist_ = you.poison_resist - you.uniden_poison_resist;
-	ss.str("");
-	ss.clear();
-	ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST);
-	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST)) < 8)
-		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POISON_RESIST)), ' ');
-	ss << ": " << (resist_>=100?"∞":(resist_>=1?"+":(resist_<=-1?"-":".")));
-	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, resist_>0?CL_good:(resist_<0?CL_danger:CL_normal));
-	rc.left += 150;
-	//sprintf_s(temp,100,"SH:%4d",you.sh);
-	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-	rc.left += 150;
-	ss.str("");
-	ss.clear();
-	ss << LocalzationManager::locString(LOC_SYSTEM_UI_SHIELD) << ": ";
-	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
-	rc.left += fontDesc.Width*(PrintCharWidth(ss.str()));
-	if(you.equipment[ET_SHIELD])
-	{
-		ss.str("");
-		ss.clear();
-		ss << you.equipment[ET_SHIELD]->id << ") " << you.equipment[ET_SHIELD]->GetName();
-		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_SHIELD]->item_color());
-	}
-	else
-	{
-		DrawTextUTF8(pfont,pSprite, you.isImpossibeEquip(ET_SHIELD, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
-	}
-	rc.left = 30;
-	rc.top += fontDesc.Height;
 
 	
 
@@ -1819,6 +1829,12 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	bool amulet_viewing = option_mg.getHeight() > 720;
 	bool tanmac_viewing = option_mg.getHeight() > 600;
 	bool weapon_viewing = option_mg.getHeight() > 600;
+	bool dule_viewing = false;
+	item * right_hand_ = you.equipment[ET_SHIELD];
+	if(right_hand_ && right_hand_->isweapon()) {
+		tanmac_viewing = false;
+		dule_viewing = true;
+	}
 
 
 	infobox.init();
@@ -1858,6 +1874,15 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			if (you.throw_weapon)
 				line_count += max(1, (int)SplitStringByFontWidth(
 					you.throw_weapon->GetName(-1, true), 28, 34).size());
+			else
+				line_count += 1;
+		}
+	
+		if(dule_viewing) { 
+			// Equipment: right_weapon
+			if (right_hand_)
+				line_count += max(1, (int)SplitStringByFontWidth(
+					right_hand_->GetName(-1, true), 28, 34).size());
 			else
 				line_count += 1;
 		}
@@ -2869,6 +2894,40 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				rc.top += fontDesc.Height;
 			}
 		}
+
+
+
+	
+		if(dule_viewing) { 
+			//rc.top += fontDesc.Height;
+			ss.str("");
+			ss.clear();
+			ss << LocalzationManager::locString(LOC_SYSTEM_UI_WEAPON);
+			ss << ": " ;
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+			rc.left += fontDesc.Width*PrintCharWidth(ss.str());
+			if(right_hand_)
+			{
+				ss.str("");
+				ss.clear();
+				ss << right_hand_->id << ") " << right_hand_->GetName(-1, true);
+				vector<string> tokens = SplitStringByFontWidth(ss.str(), 28, 34);
+
+				for (const string& token : tokens ) {
+					DrawTextUTF8(pfont,pSprite,token, -1, &rc, DT_SINGLELINE | DT_NOCLIP,right_hand_->item_color());
+					rc.left = info_minX;
+					rc.top +=fontDesc.Height;
+				}
+			}
+			else
+			{
+				DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_UI_NONE), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
+				rc.left = info_minX;
+				rc.top += fontDesc.Height;
+			}
+		}
+
+
 		
 		ss.str("");
 		ss.clear();

@@ -55,7 +55,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3,초보자팁) 항상 동료와 함께
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU1,맹공의 발도 타입. 빠르게 적들을 베어내라!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU2,적성보너스) 장검적성 +3, 회피적성 +2, 갑옷적성 -2, 방패적성 -2
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU3,보너스) 이도류, 고속접근 특성, 맹독수리검 대신 +0 도검 두자루를 들고 시작합니다.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU4,초보자팁) 누구보다 높은 근접 공격력을 지닌 캐릭터입니다\n 방어가 약하기때문에 적과 거리를 빠르게 좁혀서 처치하세요.\n 타일의 효과를 보고 이동속도가 빨라지는 조건을 확인 가능합니다.\n 접근 능력은 도망칠때도 사용할 수 있다는걸 알아두세요.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU4,초보자팁) 누구보다 높은 근접 공격력을 지닌 캐릭터입니다.\n 방어가 약하기때문에 적과 거리를 빠르게 좁혀서 처치하세요.\n 타일의 효과를 보고 이동속도가 빨라지는 조건을 확인 가능합니다.\n 접근 능력은 도망칠때도 사용할 수 있다는걸 알아두세요.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT,종족을 선택합니다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP_APTIT,?로 종족 적성표를 봅니다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP,각각 대문자로 종족 설명을 봅니다.

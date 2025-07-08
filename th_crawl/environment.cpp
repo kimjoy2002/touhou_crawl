@@ -981,7 +981,11 @@ void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x,
 		img_effect_sun.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(20, 255, 255, 255));
 	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_ROYAL)
 		img_effect_sun.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(80, 255, 100, 100));
+	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_QUICK_DASH)
+		img_effect_sun.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(80, 100, 255, 100));
 
+
+		
 
 
 	if(!onlyTile && draw_mouse){
@@ -1201,7 +1205,7 @@ void environment::MakeShadow(const coord_def &c, textures *t, int original_id_, 
 	ReleaseMutex(mutx);
 }
 
-void environment::MakeAfterimage(const coord_def &c, textures *t, int start_alpha, int turn_) {
+void environment::MakeAfterimage(const coord_def &c, textures *t, int start_alpha, int turn_, bool onTrun ) {
 
 	WaitForSingleObject(mutx, INFINITE);
 	list<afterimage>::iterator it;
@@ -1209,13 +1213,13 @@ void environment::MakeAfterimage(const coord_def &c, textures *t, int start_alph
 	{
 		if(it == afterimage_list.end() || (*it).position.y > c.y || ((*it).position.y == c.y && (*it).position.x > c.x) )
 		{
-			afterimage_list.insert(it,afterimage(c,t,turn_,(float)start_alpha));
+			afterimage_list.insert(it,afterimage(c,t,turn_,(float)start_alpha, onTrun));
 			ReleaseMutex(mutx);
 			return;
 		}
 		else if((*it).position.y == c.y && (*it).position.x == c.x)
 		{
-			afterimage_list.insert(it,afterimage(c,t,turn_,(float)start_alpha));
+			afterimage_list.insert(it,afterimage(c,t,turn_,(float)start_alpha, onTrun));
 			ReleaseMutex(mutx);
 			return;
 		}

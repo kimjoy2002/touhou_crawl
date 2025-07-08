@@ -458,7 +458,7 @@ public:
 	int GetThrowDelay(item_type type_, bool random_ = true);
 	int GetSpellDelay();
 	int GetNormalDelay();
-	int GetWalkDelay();
+	int GetWalkDelay(float multi_ = 1.0f);
 	int GetSpellPower(int s1_, int s2_, int s3_);
 	int GetSpellSuccess(int spell_);
 	int GetSpellHungry(int spell_);
@@ -666,7 +666,7 @@ public:
 	bool isView(){return true;};
 	bool isView(const monster* monster_info);
 	bool isYourShight(){return true;};	
-	bool isSightnonblocked(coord_def c);//보이는 이 위치가 실제로 공격가능한지?(유리벽)
+	bool isSightnonblocked(coord_def c, coord_def* return_firstpos = nullptr);//보이는 이 위치가 실제로 공격가능한지?(유리벽)
 	parent_type GetParentType();
 	interupt_type SetInter(interupt_type inter_);
 

@@ -213,7 +213,10 @@ LOCALIZATION_ENUM_KEY tribe_property::GetNameKey()
 	case TPT_DUAL_WEAPON:
 		return LOC_SYSTEM_TRIBE_PROPERTY_DUAL_WEAPON;
 	case TPT_QUICK_DASH:
-		return LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH;
+	if(value == 1) 
+		return LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH1;
+	else
+		return LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH2;
 	case TPT_STG_SPREAD_SHOT:
 		return LOC_SYSTEM_TRIBE_PROPERTY_STG_SPREAD_SHOT;
 	case TPT_STG_TRIPLE_SHOT:
@@ -561,7 +564,12 @@ string tribe_property::GetInfor()
 	case TPT_DUAL_WEAPON:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_DUAL_WEAPON);
 	case TPT_QUICK_DASH:
+	if(value == 1) {
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_QUICK_DASH);
+	}
+	else {
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_QUICK_DASH2);
+	}
 	case TPT_STG_SPREAD_SHOT:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SPREAD_SHOT);
 	case TPT_STG_TRIPLE_SHOT:
@@ -838,7 +846,7 @@ string tribe_property::GetDetail()
 	case TPT_DUAL_WEAPON:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_DUAL_WEAPON);
 	case TPT_QUICK_DASH:
-		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_QUICK_DASH);
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_QUICK_DASH, PlaceHolderHelper(to_string(1+value)));
 	case TPT_STG_SPREAD_SHOT:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SPREAD_SHOT);
 	case TPT_STG_TRIPLE_SHOT:
@@ -1897,6 +1905,12 @@ void LevelUpTribe(int level_)
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_KOISHI_CONFUSE_ATTACK),true,false,false,CL_small_danger);
 			you.SetProperty(TPT_CONFUSE_ATTACK,1);
+		}
+		if(level_ == 18 && you.char_type == UNIQ_START_YOUMU)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_YOUMU_QUICK_DASH),true,false,false,CL_white_blue);
+			you.DeleteProperty(TPT_QUICK_DASH);
+			you.SetProperty(TPT_QUICK_DASH,2);
 		}
 		break;
 	default:

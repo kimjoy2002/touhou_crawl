@@ -266,7 +266,7 @@ public:
 	bool isCantInterupt(); //이동을 방해할 수 없는 몬스터
 	bool isUserAlly() const; //유저에 친밀한가?
 	bool isCompleteNeutral() const; //완전한 중립인가?
-	bool isSightnonblocked(coord_def c); //여기까지 공격이 닿는지
+	bool isSightnonblocked(coord_def c, coord_def* return_firstpos = nullptr); //여기까지 공격이 닿는지
 	bool isSpecialSight(coord_def c);//몬스터 특수시야
 	bool isMonsterSight(coord_def c, boolean okina = false);//해당 위치에 몬스터의 시야에 들어왔는가?
 	bool isVulnerableSilver();
@@ -284,7 +284,7 @@ public:
 	int GetSaved(){return s_saved;};
 	int SetStrong() { return strong; };
 	bool isSaveSummoner(unit* order);
-	int GetWalkDelay();
+	int GetWalkDelay(float multi_ = 1.0f);
 	bool GetMindReading(){return (s_mind_reading!=0);};
 	int GetExhausted(){return s_exhausted;};
 	int GetPoisonResist(){return poison_resist;};
@@ -330,10 +330,11 @@ public:
 	int life_time;
 	float alpha;
 	float alpha_decrese;
-	afterimage():image(NULL),position(),life_time(10), alpha(0), alpha_decrese(0)
+	bool onTrun;
+	afterimage():image(NULL),position(),life_time(10), alpha(0), alpha_decrese(0), onTrun(false)
 	{}
-	afterimage(const coord_def &c, textures *t, int life_time, float alpha):
-	image(t),position(c),life_time(life_time*10), alpha(alpha), alpha_decrese(alpha/life_time){}
+	afterimage(const coord_def &c, textures *t, int life_time, float alpha, bool onTrun):
+	image(t),position(c),life_time(life_time*10), alpha(alpha), alpha_decrese(alpha/life_time), onTrun(onTrun){}
 
 	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x_, float y_, float scale_);
 	bool action(int delay);

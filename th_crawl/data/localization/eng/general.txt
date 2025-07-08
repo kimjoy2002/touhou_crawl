@@ -54,7 +54,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES2,Bonus) Trust Lily and start with two 
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3,Beginner Tip: You’ll always fight with companions. They revive after gaining XP, even if they die.\nUse the 'a' key to invoke divine powers. Recruit or summon fairy allies!\nYou still get the same XP even if allies land the kill. Prioritize your survival!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU1,Fierce Iaido Slash Type. Cut down your enemies swiftly!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU2,Aptitude Bonus) +3 Longblade Aptitude, +2 Evasion Aptitude, -2 Armor Aptitude, -2 Shield Aptitude
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU3,Bonus) Dual Wielding and Quick Dash traits. Starts with two +0 Katana instead of a Venom Shuriken.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU3,Bonus) Dual Wielding and Quick Dash(Enhances at level 18) traits. Starts with two +0 Katana instead of a Venom Shuriken.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU4,Beginner Tip) A character with top-tier melee damage.\nHer weak defense means you should quickly close in and eliminate enemies.\nPay attention to tile effects to check when your movement speed increases.\nDon't forget: your approach ability is also useful for escaping.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT,Choose your race.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP_APTIT,? to see the racial aptitude chart
@@ -1950,6 +1950,7 @@ LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_3_BLOOD_MAGIC,Your demon blood strengthen
 LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_MP_REGEN,The final trait of your demon blood has awakened. You’ve gained transcendent MP regeneration.
 LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_TORMENT,The final trait of your demon blood has awakened. You can now unleash the torment of hell.
 LOC_SYSTEM_TRIBE_GROW_KOISHI_CONFUSE_ATTACK,Your subconscious attacks confuse your enemies.
+LOC_SYSTEM_TRIBE_GROW_YOUMU_QUICK_DASH,Your Quick Dash ability has become even faster.
 LOC_SYSTEM_TRIBE_PROPERTY_BUG,Bug Trait
 LOC_SYSTEM_TRIBE_PROPERTY_FIRE_RESIST,Fire Resistance
 LOC_SYSTEM_TRIBE_PROPERTY_COLD_RESIST,Cold Resistance
@@ -2010,7 +2011,8 @@ LOC_SYSTEM_TRIBE_PROPERTY_OVERHEAT,Overload
 LOC_SYSTEM_TRIBE_PROPERTY_AC_AND_SLAY,No Guard
 LOC_SYSTEM_TRIBE_PROPERTY_FIREUP_COLDDOWN,Hellfire
 LOC_SYSTEM_TRIBE_PROPERTY_DUAL_WEAPON,Dual Wielding
-LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH,Quick Dash
+LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH1,Quick Dash 1
+LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH2,Quick Dash 2
 LOC_SYSTEM_TRIBE_PROPERTY_STG_SPREAD_SHOT,Spread Shot
 LOC_SYSTEM_TRIBE_PROPERTY_STG_TRIPLE_SHOT,Triple Shot
 LOC_SYSTEM_TRIBE_PROPERTY_STG_BACK_SHOT,Rear Shot
@@ -2110,6 +2112,7 @@ LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_AC_AND_SLAY,You don’t care about defense. (
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIREUP_COLDDOWN,Your body blazes with heat. (Fire Res {0}, Cold Res {1})
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_DUAL_WEAPON,You can wield two weapons.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_QUICK_DASH,You quickly dash toward enemies.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_QUICK_DASH2,You more quickly dash toward enemies.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SPREAD_SHOT,Your shots spread out.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_TRIPLE_SHOT,You fire in triple bursts.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_BACK_SHOT,You also fire shots from behind.
@@ -2195,7 +2198,7 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_AC_AND_SLAY,You’ve become attack-focused.\nGa
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIREUP_COLDDOWN,Your body is now fire-adapted.\nGain {0} Fire Res, but lose {1} Cold Res.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_RAD,This trait is temporarily acquired from radiation.\nIt disappears after gaining some EXP.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_DUAL_WEAPON,You can equip two weapons.\nWhen equipping a weapon while already holding one, the new weapon is equipped in the opposite hand.\nIf you're dual-wielding, both weapons are used to attack simultaneously.\nAttack speed is calculated as the average of both weapons.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_QUICK_DASH,Your movement speed doubles when approaching an enemy in your line of sight.\nTiles affected by this effect are marked with a special symbol on the ground.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_QUICK_DASH,Your movement speed increases by {0}× when approaching enemies in your line of sight.\nThis has little effect when sneaking up on sleeping enemies.\nTiles affected by this effect are marked with a special symbol on the ground.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SPREAD_SHOT,Fire 4 additional spread shots to the sides.\nThey deal the same damage but won’t hit the same target.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_TRIPLE_SHOT,Fire two extra shots alongside your main one.\nThey deal the same damage but target separately.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_BACK_SHOT,Fire three spread shots behind you.\nThey deal the same damage but target separately.

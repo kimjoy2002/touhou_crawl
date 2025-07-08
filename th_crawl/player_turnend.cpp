@@ -1235,6 +1235,53 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 
 
+	WaitForSingleObject(mutx, INFINITE);
+	if(GetProperty(TPT_QUICK_DASH)) {
+		bool can_dash[8], onMonster[8];
+		for(int i = 0;i < 8; i++) {
+			can_dash[i] = false;
+			onMonster[i] = false;
+		}
+		vector<monster>::iterator it;
+		it = env[current_level].mon_vector.begin();
+		for(int i=0;i<MON_MAX_IN_FLOOR && it != env[current_level]. mon_vector.end() ;i++,it++)
+		{
+			if((*it).isLive() && (*it).isYourShight() && (*it).isEnemyUnit(&you) && !((*it).flag & M_FLAG_UNHARM))
+			{
+				for(int i = 0;i < 8; i++) {
+					if((GetDirecToPos(i) + you.position) == (*it).position) {
+						onMonster[i] = true;
+					}
+				}
+				for(int i=RT_BEGIN;i!=RT_END;i++)
+				{
+					coord_def c_;
+					beam_iterator beam((*it).position,you.position,(round_type)i);
+					while(!beam.end())
+					{
+						c_ = (*beam++);
+						if(!env[current_level].isMove(*beam,true,true))
+						{
+							break;
+						}
+						if(beam.end() && env[current_level].isMove(c_,true,true)) {
+							can_dash[GetPosToDirec(you.position, c_)] = true;
+							env[current_level].dgtile[c_.x][c_.y].flag |= FLAG_QUICK_DASH;
+						}
+					}
+				}
+			}
+		}
+		
+		for(int i = 0;i < 8; i++) {
+			if(!can_dash[i] || onMonster[i]) {
+				coord_def c_ = GetDirecToPos(i);
+				env[current_level].dgtile[position.x + c_.x][position.y + c_.y].flag &= ~FLAG_QUICK_DASH;
+			} 
+		}
+	}
+	ReleaseMutex(mutx);
+
 
 	if(s_paralyse || you.s_sleep < 0)
 	{
@@ -1328,10 +1375,11 @@ bool players::isPassedBullet(unit* order, bool really) {
 	}
 	return false;
 }
-bool players::isSightnonblocked(coord_def c)
+bool players::isSightnonblocked(coord_def c, coord_def* return_firstpos)
 {
 	int sight_ = getThrowLength();
 	bool intercept = false;
+	coord_def first(0,0);
 	for(int i=RT_BEGIN;i!=RT_END;i++)
 	{
 		int length_ = getThrowLength();
@@ -1340,6 +1388,9 @@ bool players::isSightnonblocked(coord_def c)
 		{
 						
 			coord_def check_pos_ = (*it);
+			if(return_firstpos &&  first == coord_def(0,0)) {
+				first = check_pos_;
+			}
 						
 			if(you.s_dimension && you.god == GT_YUKARI)
 			{
@@ -1371,6 +1422,9 @@ bool players::isSightnonblocked(coord_def c)
 		}
 		else
 			intercept = false;
+	}
+	if(return_firstpos &&  first == coord_def(0,0)) {
+		(*return_firstpos) = first;
 	}
 	return true;
 }

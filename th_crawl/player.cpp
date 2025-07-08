@@ -1026,6 +1026,18 @@ void players::SetXYPassFloor(int prev_floor, int new_floor, int x_, int y_) {
 	if(you.GetArtifactProperty(ART_HALO) > 0 ) {
 		env[prev_floor].MakeHalo(position, 4, false);
 	}
+
+
+	if(GetProperty(TPT_QUICK_DASH)) {
+		for(int i = 0;i < 8; i++) {
+			coord_def c_ = GetDirecToPos(i);
+			env[prev_floor].dgtile[position.x + c_.x][position.y + c_.y].flag &= ~FLAG_QUICK_DASH; 
+		}
+	}
+
+
+
+
 	if(s_catch)	
 		SetCatch(NULL);
 	position.set(x_,y_);
@@ -1360,8 +1372,20 @@ int players::move(short_move x_mov, short_move y_mov)
 				env[current_level].dgtile[move_x_][move_y_].tile == DG_LAVA)
 			))
 		{
+			int quick_ = GetProperty(TPT_QUICK_DASH);
+			bool onQuick = env[current_level].dgtile[move_x_][move_y_].flag & FLAG_QUICK_DASH;
+			if(quick_ > 0 && onQuick) {
+				env[current_level].MakeAfterimage(position, image, 128, 3, true);
+			}
 			SetXY(coord_def(move_x_,move_y_));
-			time_delay += GetWalkDelay();//이동속도만큼 이동
+			if(quick_ > 0 && onQuick) {
+				if(quick_ == 1)
+					time_delay += GetWalkDelay(0.5f);//빠름
+				else
+					time_delay += GetWalkDelay(0.3f);//더 빠름
+			} else {
+				time_delay += GetWalkDelay();//이동속도만큼 이동
+			}
 			prev_action = ACTT_WALK;
 			return 2;
 		}
@@ -1379,8 +1403,21 @@ int players::move(short_move x_mov, short_move y_mov)
 			}
 			if (env[current_level].isMove(move_x_, move_y_, isFly(), isSwim() || drowned))
 			{
-				SetXY(coord_def(move_x_, move_y_));
-				time_delay += GetWalkDelay();//이동속도만큼 이동
+				int quick_ = GetProperty(TPT_QUICK_DASH);
+				bool onQuick = env[current_level].dgtile[move_x_][move_y_].flag & FLAG_QUICK_DASH;
+				if(quick_ > 0 && onQuick) {
+					env[current_level].MakeAfterimage(position, image, 128, 3);
+				}
+
+				SetXY(coord_def(move_x_,move_y_));
+				if(quick_ > 0 && onQuick) {
+					if(quick_ == 1)
+						time_delay += GetWalkDelay(0.5f);//빠름
+					else
+						time_delay += GetWalkDelay(0.3f);//더 빠름
+				} else {
+					time_delay += GetWalkDelay();//이동속도만큼 이동
+				}
 				prev_action = ACTT_WALK;
 				return 2;
 			}
@@ -1767,7 +1804,7 @@ int players::GetNormalDelay()
 {
 	return 10;
 }
-int players::GetWalkDelay()
+int players::GetWalkDelay(float multi_)
 {
 	int speed_ = s_superman?3:(speed-(s_swift>0?2:(s_swift<0?-6:0)));
 	if(GetProperty(TPT_STG_SPEED)==1)
@@ -1776,6 +1813,7 @@ int players::GetWalkDelay()
 		speed_ = speed_*8/10;
 	else if(GetProperty(TPT_SPEED)==-1)
 		speed_ = speed_*12/10;
+	speed_ = speed_*multi_;
 	if(speed_<3)
 		speed_ = 3;
 	if(as_penalty>GetPenaltyMinus(2))
@@ -4690,15 +4728,7 @@ interupt_type players::resetLOS(bool speak_)
 	env[current_level].ResetForbid();
 
 
-
 	return interrupt_;
-	//테스트
-	/*beam_iterator it(you.position,coord_def(5,6));
-	while(!it.end())
-	{
-		env[current_level].dgtile[(*it).x][(*it).y].flag = env[current_level].dgtile[(*it).x][(*it).y].flag | FLAG_LIGHT;
-		it++;
-	}*/
 }
 
 

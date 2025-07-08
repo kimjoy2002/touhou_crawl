@@ -164,7 +164,7 @@ public:
 	virtual int GetSaved() = 0;
 	virtual int GetParadox(){return 0;}
 	virtual bool isSaveSummoner(unit* order){return false;};
-	virtual int GetWalkDelay(){return 10;};
+	virtual int GetWalkDelay(float multi_ = 1.0f){return 10*multi_;};
 	virtual bool GetMindReading(){return false;};
 	virtual int GetExhausted(){return 0;};
 	virtual char getAsciiDot() = 0;
@@ -190,7 +190,7 @@ public:
 	virtual bool isCompleteNeutral() const {return false;}
 	virtual bool isPassedBullet(unit* order, bool really = false){return false;}; //해당 총이 이 캐릭터에게 관통 가능한지.
 	virtual parent_type GetParentType() = 0;
-	virtual bool isSightnonblocked(coord_def c) = 0;//보이는 이 위치가 실제로 공격가능한지?(유리벽)
+	virtual bool isSightnonblocked(coord_def c, coord_def* return_firstpos = nullptr) = 0;//보이는 이 위치가 실제로 공격가능한지?(유리벽)
 };
 
 

@@ -286,7 +286,7 @@ public:
 	monster* AddMonster_Summon(int id_, uint64_t flag_, coord_def position_, summon_info &info_ , int time_);
 	void SummonClear(int map_id_);
 	void MakeShadow(const coord_def &c, textures *t, int original_id_, shadow_type type_= SWT_MONSTER, const string &name_ = "");
-	void MakeAfterimage(const coord_def &c, textures *t, int start_alpha, int turn_);
+	void MakeAfterimage(const coord_def &c, textures *t, int start_alpha, int turn_, bool onTrun = false);
 	bool MakeSmoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, unit* parent_ = NULL, bool override_ = false);
 	bool MakeFloorEffect(const coord_def &c, textures *t,textures *t2, floor_type type_, int time_, unit* parent_ = NULL);
 	bool MakeEvent(int id_, coord_def position_, event_type type_, int count_ = -1, int value = 0);

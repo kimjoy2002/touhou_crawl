@@ -5570,17 +5570,18 @@ bool monster::isCompleteNeutral() const
 {
 	return s_neutrality == -1;
 }
-bool monster::isSightnonblocked(coord_def c)
+bool monster::isSightnonblocked(coord_def c, coord_def* return_firstpos)
 {
 	bool intercept = false;
+	coord_def first(c);
 	for(int i=RT_BEGIN;i!=RT_END;i++)
 	{
 		int length_ = 7;
 		beam_iterator it(position,c,(round_type)i);
 		while(!intercept && !it.end())
 		{
-						
 			coord_def check_pos_ = (*it);
+			first = check_pos_;
 
 			if(length_ == 0) //시야가 다 달았다.
 			{
@@ -5603,6 +5604,9 @@ bool monster::isSightnonblocked(coord_def c)
 		}
 		else
 			intercept = false;
+	}
+	if(return_firstpos && first != c) {
+		(*return_firstpos) = first;
 	}
 	return true;
 }
@@ -5921,8 +5925,9 @@ bool monster::isSaveSummoner(unit* order)
 	}
 	return false;
 }
-int monster::GetWalkDelay() {
+int monster::GetWalkDelay(float multi_) {
 	int speed_ = GetSpeed() - walk_speed_bonus;
+	speed_ *= multi_;
 	if(speed_ <= 0)
 		speed_ = 1; 
 	return speed_;
@@ -6459,6 +6464,9 @@ bool afterimage::draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x_, float 
 	return return_;
 }
 bool afterimage::action(int delay) {
+	if(onTrun) {
+		delay = 10;
+	}
 	int prev_turn = life_time/10;
 	life_time-=delay;
 	int next_turn = life_time/10;

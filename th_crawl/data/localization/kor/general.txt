@@ -54,7 +54,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES2,보너스) 릴리를 믿고 다른 �
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3,초보자팁) 항상 동료와 함께 싸울 수 있습니다. 동료는 죽어도 경험치를 먹다보면 부활합니다.\n a키로 신의 권능을 쓸 수 있습니다. 새로운 요정 동료를 얻거나 동료를 호출하면서 싸웁시다.\n 동료가 잡아도 얻는 경험치는 다르지않습니다. 자신의 안전을 최우선으로 지킵시다.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU1,맹공의 발도 타입. 빠르게 적들을 베어내라!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU2,적성보너스) 장검적성 +3, 회피적성 +2, 갑옷적성 -2, 방패적성 -2
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU3,보너스) 이도류, 고속접근 특성, 맹독수리검 대신 +0 도검 두자루를 들고 시작합니다.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU3,보너스) 이도류, 고속접근(18레벨에 강화) 특성, 맹독수리검 대신 +0 도검 두자루를 들고 시작합니다.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU4,초보자팁) 누구보다 높은 근접 공격력을 지닌 캐릭터입니다.\n 방어가 약하기때문에 적과 거리를 빠르게 좁혀서 처치하세요.\n 타일의 효과를 보고 이동속도가 빨라지는 조건을 확인 가능합니다.\n 접근 능력은 도망칠때도 사용할 수 있다는걸 알아두세요.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT,종족을 선택합니다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP_APTIT,?로 종족 적성표를 봅니다.
@@ -1950,6 +1950,7 @@ LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_3_BLOOD_MAGIC,악마의 혈통이 더욱 
 LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_MP_REGEN,악마의 마지막 특성이 발현되었다. 당신은 초월적인 영력회복속도를 얻었다.
 LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_TORMENT,악마의 마지막 특성이 발현되었다. 당신은 지옥의 고통을 불러올 수 있게 되었다.
 LOC_SYSTEM_TRIBE_GROW_KOISHI_CONFUSE_ATTACK,당신의 무의식적인 공격은 상대를 혼란하게 만든다.
+LOC_SYSTEM_TRIBE_GROW_YOUMU_QUICK_DASH,당신의 고속 접근 능력이 더욱 빨라졌다.
 LOC_SYSTEM_TRIBE_PROPERTY_BUG,버그특성
 LOC_SYSTEM_TRIBE_PROPERTY_FIRE_RESIST,화염저항
 LOC_SYSTEM_TRIBE_PROPERTY_COLD_RESIST,냉기저항
@@ -2010,7 +2011,8 @@ LOC_SYSTEM_TRIBE_PROPERTY_OVERHEAT,과부하
 LOC_SYSTEM_TRIBE_PROPERTY_AC_AND_SLAY,노가드
 LOC_SYSTEM_TRIBE_PROPERTY_FIREUP_COLDDOWN,지옥불
 LOC_SYSTEM_TRIBE_PROPERTY_DUAL_WEAPON,이도류
-LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH,고속접근
+LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH1,고속접근1
+LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH2,고속접근2
 LOC_SYSTEM_TRIBE_PROPERTY_STG_SPREAD_SHOT,확산사격
 LOC_SYSTEM_TRIBE_PROPERTY_STG_TRIPLE_SHOT,3발사격
 LOC_SYSTEM_TRIBE_PROPERTY_STG_BACK_SHOT,등뒤사격
@@ -2110,6 +2112,7 @@ LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_AC_AND_SLAY,당신은 방어에 신경쓰지�
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIREUP_COLDDOWN,당신의 몸은 뜨겁게 타오른다. (화염저항{0}, 냉기저항{1})
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_DUAL_WEAPON,당신은 무기를 2개 들 수 있다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_QUICK_DASH,당신은 적에게 빠르게 달려든다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_QUICK_DASH2,당신은 적에게 더욱 빠르게 달려든다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SPREAD_SHOT,당신의 사격이 확산된다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_TRIPLE_SHOT,당신의 사격이 3발씩 나간다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_BACK_SHOT,당신의 뒤에서도 사격이 나간다.
@@ -2195,7 +2198,7 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_AC_AND_SLAY,당신은 공격 일변도가 되�
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIREUP_COLDDOWN,당신의 몸은 불에 익숙해졌다.\n화염저항이 {0} 증가하는 대신 냉기에 취약해져 냉기저항이 {1} 감소한다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_RAD,이 능력은 방사능에 의해 일시적으로 획득한 특성이다.\n일정 경험치를 먹으면 사라진다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_DUAL_WEAPON,당신은 무기를 2개 낄 수 있다.\n무기를 착용시 이미 무기를 끼고있다면 반대편 손에 새로운 무기를 장착한다.\n무기를 2개 들고 있다면 공격시 두 개의 무기로 전부 공격한다.\n공격속도는 두 무기의 평균으로 계산한다.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_QUICK_DASH,당신은 시야의 적에 접근할때 이동 속도가 2배로 빨라진다.\n해당 효과를 받는 타일은 바닥에 특수한 표식이 생긴다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_QUICK_DASH,당신은 시야의 적에 접근할때 이동 속도가 {0}배로 빨라진다.\n자고 있는 적에게 은밀히 다가가는데는 큰 도움이 되지않는다.\n해당 효과를 받는 타일은 바닥에 특수한 표식이 생긴다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SPREAD_SHOT,당신의 양옆으로 넓게 퍼져나가는 확산사격을 4발 더 발사 할 수 있다.\n추가되는 사격은 기본 사격과 동일한 데미지를 가지나 동일한 적을 때리진 않는다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_TRIPLE_SHOT,당신은 기본 사격 바로 양옆에 동일한 사격을 발사 할 수 있다.\n추가되는 사격은 기본 사격과 동일한 데미지를 가지나 동일한 적을 때리진 않는다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_BACK_SHOT,당신은 자신의 아래로 발사하는 3발의 확산 사격을 추가로 발사한다.\n추가되는 사격은 기본 사격과 동일한 데미지를 가지나 동일한 적을 때리진 않는다.

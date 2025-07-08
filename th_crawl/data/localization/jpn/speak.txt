@@ -3,8 +3,8 @@ SPEAK_NORMAL,{0}は言った。
 SPEAK_MAGIC,{0}が呪文を唱えた。
 SPEAK_CONFUSE,{0}は混乱している。
 SPEAK_CAMERA,{0}はポーズを取った。
-SPEAK_PROPOSAL,{0:은|는} 팔기위한 상품을 나열했다.
-SPEAK_PROPOSAL_ACCEPT,{0:은|는} 상품을 팔았다.
+SPEAK_PROPOSAL,{0}は売るための商品を並べた。
+SPEAK_PROPOSAL_ACCEPT,{0}は商品を売った。
 SPEAK_YUKKURI_NORMAL,{0}は言った。「ゆっくりしていってね！！！」
 SPEAK_RUMIA_NORMAL1,{0}は言った。「そうなのかー」
 SPEAK_RUMIA_NORMAL2,{0}は言った。「{1}は食べてもいい{2}？」
@@ -655,13 +655,13 @@ SPEAK_PARSI_GOD_JUNKO12,{0}が言った。「パワー浄化？それで力は�
 SPEAK_PARSI_GOD_JUNKO13,{0}が言った。「生命浄化？そんなものを手に入れたら絶対に怠け者になるよ！」
 SPEAK_PARSI_GOD_JUNKO14,{0}が言った。「装備浄化？たかが装備のために自分を犠牲にしたの？」
 SPEAK_PARSI_GOD_JUNKO15,{0}が言った。「システム浄化？何を言ってるのかさっぱりわからないよ。」
-SPEAK_PARSI_GOD_KEIKI1,{0:은|는} 외쳤다. "그게 너의 인형 친구야? 부러워!"
-SPEAK_PARSI_GOD_KEIKI2,{0:은|는} 외쳤다. "그 우상이 혹시 집안일도 해주는거야? 부러워!"
-SPEAK_PARSI_GOD_KEIKI3,{0:은|는} 외쳤다. "난 조각같은건 잘 못하겠거든! 손재주가 부러워!"
-SPEAK_PARSI_GOD_KEIKI4,{0:은|는} 외쳤다. "그런 우상이랑 친구하는거보니까 혹시 친구가 없는거야?"
-SPEAK_PARSI_GOD_KEIKI5,{0:은|는} 외쳤다. "실수로 우상의 팔 하나 부러뜨린거같은데 괜찮지?"
-SPEAK_PARSI_GOD_KEIKI6,{0:은|는} 외쳤다. "내가 선택지 하나 골라봐도 될까? 나도 우상 하나 만들고 싶은데!"
-SPEAK_PARSI_GOD_KEIKI7,{0:은|는} 외쳤다. "우상 하나 쯤 가져가도 모르지않을까?"
+SPEAK_PARSI_GOD_KEIKI1,{0}は叫んだ。「それが君の人形の友達？羨ましいな！」
+SPEAK_PARSI_GOD_KEIKI2,{0}は叫んだ。「その偶像、家事もしてくれるの？羨ましい！」
+SPEAK_PARSI_GOD_KEIKI3,{0}は叫んだ。「私は彫刻とか苦手なんだよね！器用で羨ましいよ！」
+SPEAK_PARSI_GOD_KEIKI4,{0}は叫んだ。「そんな偶像と友達してるってことは、もしかして友達いないの？」
+SPEAK_PARSI_GOD_KEIKI5,{0}は叫んだ。「うっかり偶像の腕を一本折っちゃったかも、平気だよね？」
+SPEAK_PARSI_GOD_KEIKI6,{0}は叫んだ。「一つ選んでもいい？私も偶像を作ってみたいな！」
+SPEAK_PARSI_GOD_KEIKI7,{0}は叫んだ。「偶像一つくらい持っていってもバレないんじゃない？」
 SPEAK_PARSI_DUNGEON_NORMAL1,{0}が言った。「ダンジョンにはアイテムがたくさん落ちてて羨ましいな！」
 SPEAK_PARSI_DUNGEON_NORMAL2,{0}が言った。「私も別の階層に行ってみたい！羨ましい！他のダンジョンに連れてって！」
 SPEAK_PARSI_DUNGEON_NORMAL3,{0}が言った。「地上世界って羨ましいな！」
@@ -1488,224 +1488,224 @@ SPEAK_HATATE_CONFUSE2,{0}は混乱している。「全然ピントが合わな�
 SPEAK_HATATE_CONFUSE3,{0}は混乱して自傷しそうになっている。
 SPEAK_HATATE_MAGIC1,{0}はスマホカメラを敵に向けた。
 SPEAK_HATATE_CAMERA,{0}は言った。「逆取材された！」
-SPEAK_EIKA_NORMAL1,{0:은|는} 외쳤다. "여기서 날뛰지마!"
-SPEAK_EIKA_NORMAL2,{0:은|는} 외쳤다. "거기 옆에 돌탑 무너지지않게 조심해!"
-SPEAK_EIKA_NORMAL3,{0:은|는} 외쳤다. "너 같은건 지옥에 떨어져야해!"
-SPEAK_EIKA_NORMAL4,{0:은|는} 외쳤다. "조심해!"
-SPEAK_EIKA_NORMAL5,{0:은|는} 외쳤다. "넌 지금까지 부순 돌탑의 갯수를 기억해? 난 알아 {1}개다!"
-SPEAK_EIKA_NORMAL6,{0:은|는} 외쳤다. "좀 조심히 다녀줄래?"
-SPEAK_EIKA_NORMAL7,{0:은|는} 외쳤다. "돌탑 {1}개의 원수 용서못해! 죽어라!"
-SPEAK_EIKA_NORMAL8,{0:은|는} 외쳤다. "돌쌓기 콘테스트 같이 할래?"
-SPEAK_EIKA_NORMAL9,{0:은|는} 근처 돌탑을 바로 세우고있다.
-SPEAK_EIKA_CONFUSE1,{0:은|는} 혼란하고 있다. "어라~ 돌탑이 움직이고 있어~"
-SPEAK_EIKA_CONFUSE2,{0:은|는} 혼란하고 있다. "돌탑이 나에게 말을 걸고있어!"
-SPEAK_EIKA_CONFUSE3,{0:은|는} 혼란하여 돌탑을 제대로 쌓지못하고있다.
-SPEAK_EIKA_MAGIC1,{0:은|는} 돌탑을 쌓기 시작했다.
-SPEAK_EIKA_CAMERA,{0:은|는} 외쳤다. "돌탑을 배경으로 찍어줘!"
-SPEAK_URUMI_NORMAL1,{0:은|는} 외쳤다. "키우던 물고기가 배가 고프던 참인데"
-SPEAK_URUMI_NORMAL2,{0:은|는} 외쳤다. "나 대신 잠깐 이 아이 좀 맡아주겠어?"
-SPEAK_URUMI_NORMAL3,{0:은|는} 외쳤다. "저승으로 가는 길이 궁금해?"
-SPEAK_URUMI_NORMAL4,{0:은|는} 외쳤다. "오늘 고대어들이 포식하겠는걸"
-SPEAK_URUMI_NORMAL5,{0:은|는} 외쳤다. "오늘 먹이는 이걸로 할까"
-SPEAK_URUMI_NORMAL6,{0:은|는} 외쳤다. "조금 더 가까이 와볼래?"
-SPEAK_URUMI_NORMAL7,{0:은|는} 돌로 된 아이를 안은채로 웃고있다.
-SPEAK_URUMI_CONFUSE1,{0:은|는} 혼란하고 있다. "여기가 어디지?"
-SPEAK_URUMI_CONFUSE2,{0:은|는} 혼란하고 있다. "물고기 먹이 줄 시간인데!"
-SPEAK_URUMI_CONFUSE3,{0:은|는} 혼란하여 이리저리 움직이고 있다.
-SPEAK_URUMI_MAGIC1,{0:은|는} 주문을 외웠다.
-SPEAK_URUMI_CAMERA,{0:은|는} 외쳤다. "이상한걸 들고 있구나."
-SPEAK_KUTAKA_NORMAL1,{0:은|는} 말했다. "당신의 사명감을 테스트해보겠습니다."
-SPEAK_KUTAKA_NORMAL2,{0:은|는} 말했다. "실력이 좋으시네요."
-SPEAK_KUTAKA_NORMAL3,{0:은|는} 말했다. "염마님이 말씀한대로네요."
-SPEAK_KUTAKA_NORMAL4,{0:은|는} 말했다. "이 길목은 제가 지키고있어요."
-SPEAK_KUTAKA_NORMAL5,{0:은|는} 말했다. "현상 파악전에 간단히 지나가게 해드릴 순 없어요!"
-SPEAK_KUTAKA_NORMAL6,{0:은|는} 말했다. "방금 뭐라고 하셨죠?"
-SPEAK_KUTAKA_NORMAL7,{0:은|는} 날개를 크게 펼쳤다.
-SPEAK_KUTAKA_CONFUSE1,{0:은|는} 혼란하고 있다. "큰일이에요!"
-SPEAK_KUTAKA_CONFUSE2,{0:은|는} 혼란하고 있다. "이 어지러움부터 어떻게든..."
-SPEAK_KUTAKA_CONFUSE3,{0:은|는} 날개를 푸드덕 파닥이고 있다.
-SPEAK_KUTAKA_MAGIC1,{0:은|는} 호루라기를 불었다.
-SPEAK_KUTAKA_CAMERA,{0:은|는} 외쳤다. "여기서 촬영은 금지되어있어요."
-SPEAK_YACHIE_NORMAL1,{0:은|는} 말했다. "출구는 이곳으로 따라오시죠."
-SPEAK_YACHIE_NORMAL2,{0:은|는} 말했다. "귀걸조 두목, 킷초 야치에입니다. 인사는 이정도면 되었겠죠?"
-SPEAK_YACHIE_NORMAL3,{0:은|는} 말했다. "이 곳은 이미 귀걸조의 지배하에 있습니다."
-SPEAK_YACHIE_NORMAL4,{0:은|는} 말했다. "제 명령에 따를 기분은 드셨나요?"
-SPEAK_YACHIE_NORMAL5,{0:은|는} 말했다. "혹시라도 매복과 기습에 관심이 있다면 귀걸조에 들어오시죠."
-SPEAK_YACHIE_NORMAL6,{0:은|는} 말했다. "곧 지상도 우리 귀걸조의 손에 들어오게될겁니다."
-SPEAK_YACHIE_NORMAL7,{0:은|는} 커다란 꼬리를 흔들고있다.
-SPEAK_YACHIE_CONFUSE1,{0:은|는} 혼란하고 있다. "키-! 머리가 아파!"
-SPEAK_YACHIE_CONFUSE2,{0:은|는} 혼란하고 있다. "내 말이 통하지않는거야?"
-SPEAK_YACHIE_CONFUSE3,{0:은|는} 자기 자신의 꼬리를 물었다.
-SPEAK_YACHIE_MAGIC1,{0}의 거스를 수 없는 목소리가 울려퍼진다.
-SPEAK_YACHIE_CAMERA,{0:은|는} 말했다. "아, 꼬리도 같이 찍어주세요."
-SPEAK_MAYUMI_NORMAL1,{0:은|는} 외쳤다. "병사들! 모두 칩입자를 공격하라!"
-SPEAK_MAYUMI_NORMAL2,{0:은|는} 외쳤다. "1번 대열 돌격! 2번 대열은 엄호하도록!"
-SPEAK_MAYUMI_NORMAL3,{0:은|는} 외쳤다. "진을 펼쳐라!"
-SPEAK_MAYUMI_NORMAL4,{0:은|는} 외쳤다. "인간? 이곳은 위험해 얼른 돌아가라고!"
-SPEAK_MAYUMI_NORMAL5,{0:은|는} 외쳤다. "수에서라면 지지않아!"
-SPEAK_MAYUMI_NORMAL6,{0:은|는} 외쳤다. "육신을 지닌 인간이 이렇게나 강한 생물이라니!"
-SPEAK_MAYUMI_NORMAL7,{0:은|는} 외쳤다. "아무리 싸워도 지치지않는 군대를 어떻게 상대하겠어?"
-SPEAK_MAYUMI_NORMAL8,{0:은|는} 외쳤다. "돌격!"
-SPEAK_MAYUMI_NORMAL9,{0:은|는} 검을 뽑아 앞으로 뻗었다.
-SPEAK_MAYUMI_CONFUSE1,{0:은|는} 혼란하고 있다. "하니와 군대 창설이래 최대 위기야!"
-SPEAK_MAYUMI_CONFUSE2,{0:은|는} 혼란하고 있다. "군대가 와해되고있다!"
-SPEAK_MAYUMI_CONFUSE3,{0:은|는} 검을 검집에서 뽑지 못하고있다.
-SPEAK_MAYUMI_MAGIC1,{0:은|는} 검을 높게 들어올렸다.
-SPEAK_MAYUMI_CAMERA,{0:은|는} 말했다. "여긴 관광지가 아니라고!"
-SPEAK_SAKI_NORMAL1,{0:은|는} 외쳤다. "이 세상은 약육강식이다!"
-SPEAK_SAKI_NORMAL2,{0:은|는} 외쳤다. "내 발에 치이기라도 하고싶은거냐!"
-SPEAK_SAKI_NORMAL3,{0:은|는} 외쳤다. "이 곳은 우리 최강의 경아조가 지배중이다!"
-SPEAK_SAKI_NORMAL4,{0:은|는} 외쳤다. "거기 너, 강해보이는데 힘겨루기 한번 해보지않겠어?"
-SPEAK_SAKI_NORMAL5,{0:은|는} 외쳤다. "꽤 강하구만, 경아조에 들어오는건 어때?"
-SPEAK_SAKI_NORMAL6,{0:은|는} 외쳤다. "난폭한 자가 승리한다!"
-SPEAK_SAKI_NORMAL7,{0:은|는} 외쳤다. "이 주변에 강한 녀석과는 모두 싸워봤어. 너는 어떨까?"
-SPEAK_SAKI_CONFUSE1,{0:은|는} 혼란하고 있다. "이런 비겁한 술수를!"
-SPEAK_SAKI_CONFUSE2,{0:은|는} 혼란하고 있다. "귀걸조 녀석들 같은 짓을!"
-SPEAK_SAKI_CONFUSE3,{0:은|는} 발을 바닥에 차고있다.
-SPEAK_SAKI_MAGIC1,{0:은|는} 가볍게 워밍업했다.
-SPEAK_SAKI_CAMERA,{0:은|는} 말했다. "기념 촬영은 힘겨루기가 끝난 후에 하자고!"
-SPEAK_YUMA_NORMAL1,{0:은|는} 외쳤다. "하나 파내면 돈을 위해~ 둘 파내면 나라를 위해~"
-SPEAK_YUMA_NORMAL2,{0:은|는} 외쳤다. "셋 파내면 증오를 위해~"
-SPEAK_YUMA_NORMAL3,{0:은|는} 웃었다. "큭큭큭"
-SPEAK_YUMA_NORMAL4,{0:은|는} 외쳤다. "이 곳의 보물들은 전부 내거야!"
-SPEAK_YUMA_NORMAL5,{0:은|는} 외쳤다. "어떤 멍청이가 이런 곳에 관광을 오는거야?"
-SPEAK_YUMA_NORMAL6,{0:은|는} 말했다. "큭큭큭, 너의 탐욕이 느껴지네. 강욕동맹에 들어올래?"
-SPEAK_YUMA_NORMAL7,{0:은|는} 외쳤다. "이 곳의 석유는 한방울이라도 넘겨주지않아!"
-SPEAK_YUMA_NORMAL8,{0:은|는} 외쳤다. "너도 이 곳의 석유가 되어서 나에게 잡아 먹히라고"
-SPEAK_YUMA_NORMAL9,{0:은|는} 이빨을 드러내며 웃었다
-SPEAK_YUMA_CONFUSE1,{0:은|는} 혼란하고 있다. "배고파!"
-SPEAK_YUMA_CONFUSE2,{0:은|는} 혼란하고 있다. "이상한 재주를 부리는군!"
-SPEAK_YUMA_CONFUSE3,{0:은|는} 허공에 큰 숟가락을 휘두르고있다.
-SPEAK_YUMA_MAGIC1,{0:은|는} 숟가락으로 바닥의 석유를 크게 퍼올렸다.
-SPEAK_YUMA_CAMERA,{0:은|는} 외쳤다. "안돼! 사진으로라도 이 곳의 욕망을 가져가게 할 순 없어
-SPEAK_YUMA2_NORMAL1,{0:은|는} 외쳤다. "저주, 희열, 증오... 욕망!"
-SPEAK_YUMA2_NORMAL2,{0:은|는} 외쳤다. "느껴진다... 모두의 원망이 느껴져!"
-SPEAK_YUMA2_NORMAL3,{0:은|는} 외쳤다. "큭큭큭, 힘이 넘쳐흐른다!"
-SPEAK_YUMA2_NORMAL4,{0:은|는} 외쳤다. "아직 모자라... 더 나에게 줘! 좀 더!"
-SPEAK_YUMA2_NORMAL5,{0:은|는} 외쳤다. "배고프다! 모조리 먹어치워!"
-SPEAK_YUMA2_NORMAL6,{0:은|는} 주변의 모든 것을 빨아들이고 있다.
-SPEAK_YUMA2_CONFUSE1,{0:은|는} 혼란하고 있다. "상관없어!"
-SPEAK_YUMA2_CONFUSE2,{0:은|는} 혼란하고 있다. "참을 수 없어! 널 잡아먹을거야!"
-SPEAK_YUMA2_CONFUSE3,{0:은|는} 제정신이 아닌것 같다.
-SPEAK_YUMA2_MAGIC1,{0:은|는} 입을 크게 벌렸다.
-SPEAK_YUMA2_CAMERA,{0:은|는} 카메라에 반응하지 않는다.
-SPEAK_ENOKO_NORMAL1,{0:은|는} 외쳤다. "이 세상은 약육강식이다! 약하다면 죽어!"
-SPEAK_ENOKO_NORMAL2,{0:은|는} 말했다. "제법 강해졌네, 울면서 숲으로 도망치던 그 소녀론 보이지않아."
-SPEAK_ENOKO_NORMAL3,{0:은|는} 외쳤다. "오늘은 이 녀석과 싸워볼까!"
-SPEAK_ENOKO_NORMAL4,{0:은|는} 외쳤다. "잡았다!"
-SPEAK_ENOKO_NORMAL5,{0:은|는} 외쳤다. "도망칠 생각은 하지않는게 좋아!"
-SPEAK_ENOKO_NORMAL6,{0:은|는} 외쳤다. "이젠 움직일 수 없을껄!"
-SPEAK_ENOKO_NORMAL7,{0:은|는} 외쳤다. "내 덫에 잡히면 쉽게는 못 빠져나갈껄?"
-SPEAK_ENOKO_NORMAL8,{0:은|는} 외쳤다. "넌 이미 내 손바닥, 아니 덫 위에 있어!"
-SPEAK_ENOKO_NORMAL9,{0:은|는} 말했다. "몸 좀 풀어볼까?"
-SPEAK_ENOKO_CONFUSE1,{0:은|는} 혼란하고 있다. "무슨 짓이야!"
-SPEAK_ENOKO_CONFUSE2,{0:은|는} 혼란하고 있다. "깨갱!"
-SPEAK_ENOKO_CONFUSE3,{0:은|는} 실수로 자기 자신을 덫으로 잡았다.
-SPEAK_ENOKO_CAMERA,{0:은|는} 외쳤다. "여유가 있나봐?"
-SPEAK_CHIYARI_NORMAL1,{0:은|는} 외쳤다. "그러니까 츄파카브라가 아니라고!"
-SPEAK_CHIYARI_NORMAL2,{0:은|는} 외쳤다. "난 텐카진이야 텐카진!"
-SPEAK_CHIYARI_NORMAL3,{0:은|는} 외쳤다. "이래서 바깥에 나오기 싫었는데!"
-SPEAK_CHIYARI_NORMAL4,{0:은|는} 외쳤다. "왜 다들 날 츄파카브라 뭐시기라 부르는거야?"
-SPEAK_CHIYARI_NORMAL5,{0:은|는} 외쳤다. "너도 피를 먹는거야?"
-SPEAK_CHIYARI_NORMAL6,{0:은|는} 외쳤다. "네 피는 무슨 맛일까?"
-SPEAK_CHIYARI_NORMAL7,{0:은|는} 말했다. "뭐 재밌어보이면 상관없나"
-SPEAK_CHIYARI_NORMAL8,{0:은|는} 외쳤다. "일하기 싫어!"
-SPEAK_CHIYARI_CONFUSE1,{0:은|는} 혼란하고 있다. "난 츄파카브라야!"
-SPEAK_CHIYARI_CONFUSE2,{0:은|는} 혼란하고 있다. "일하고 싶어!"
-SPEAK_CHIYARI_CONFUSE3,{0:은|는} 뻣뻣하게 섰다.
-SPEAK_CHIYARI_MAGIC1,{0:은|는} 손위에 피를 모으고있다.
-SPEAK_CHIYARI_CAMERA,{0:은|는} 외쳤다. "눈부셔!"
-SPEAK_SONBITEN_NORMAL1,{0:은|는} 외쳤다. "환상향의 제천대성 등장!"
-SPEAK_SONBITEN_NORMAL2,{0:은|는} 외쳤다. "아앙? 여기가 어디라고 들락거리는거야!"
-SPEAK_SONBITEN_NORMAL3,{0:은|는} 외쳤다. "오늘은 누구를 때려볼까~"
-SPEAK_SONBITEN_NORMAL4,{0:은|는} 외쳤다. "거기 너, 오늘 아침 운동에 동참해줄래?"
-SPEAK_SONBITEN_NORMAL5,{0:은|는} 외쳤다. "오늘 컨디션도 최고라고!"
-SPEAK_SONBITEN_NORMAL6,{0:은|는} 외쳤다. "내 봉을 피할 수 있을까?"
-SPEAK_SONBITEN_NORMAL7,{0:은|는} 봉을 현란하게 휘두르고 있다.
-SPEAK_SONBITEN_CONFUSE1,{0:은|는} 혼란하고 있다. "머리가 아파!"
-SPEAK_SONBITEN_CONFUSE2,{0:은|는} 혼란하고 있다. "우끼!"
-SPEAK_SONBITEN_CONFUSE3,{0:은|는} 머리를 감싸고있다.
-SPEAK_SONBITEN_MAGIC1,{0:은|는} 봉을 머리위에서 돌렸다.
-SPEAK_SONBITEN_CAMERA,{0:은|는} 외쳤다. "깜짝이야!"
-SPEAK_HISAMI_NORMAL1,{0:은|는} 중얼거렸다. "아아, 잔무님 어디 계시나요..."
-SPEAK_HISAMI_NORMAL2,{0:은|는} 외쳤다. "저한테 도망칠 수 있을거라 생각하시나요?"
-SPEAK_HISAMI_NORMAL3,{0:은|는} 외쳤다. "후후, 지옥에선 도망치셔도 소용없답니다."
-SPEAK_HISAMI_NORMAL4,{0:은|는} 외쳤다. "지옥은 언제든지 누두근지 웰컴이옵니다."
-SPEAK_HISAMI_NORMAL5,{0:은|는} 중얼거렸다. "잔무님은 어째서 이런 잔챙이에 관심을 가지시는걸까~"
-SPEAK_HISAMI_NORMAL6,{0:은|는} 외쳤다. "지옥에 들어오는건 자유지만, 나간다면 죽어 마땅하죠!"
-SPEAK_HISAMI_NORMAL7,{0:은|는} 외쳤다. "더 깊은 곳으로 가려고하시는건가요? 죽는다면 더 쉽답니다~"
-SPEAK_HISAMI_CONFUSE1,{0:은|는} 혼란하고 있다. "하아하아 잔무님.."
-SPEAK_HISAMI_CONFUSE2,{0:은|는} 혼란하고 있다. "저를 벌해주세요 잔무님!"
-SPEAK_HISAMI_CONFUSE3,{0:은|는} 빙글빙글 돌고 있다.
-SPEAK_HISAMI_MAGIC1,{0:은|는} 팔을 벌리며 주문을 시전했다.
-SPEAK_HISAMI_CAMERA,{0:은|는} 외쳤다. "지옥에선 기념촬영도 웰컴이에요~"
-SPEAK_TSUKASA_NORMAL1,{0:은|는} 외쳤다. "이야기를 안 듣는 성격인가보네~"
-SPEAK_TSUKASA_NORMAL2,{0:은|는} 외쳤다. "가능하다면 말로 풀고 싶었지만... 어쩔 수 없네."
-SPEAK_TSUKASA_NORMAL3,{0:은|는} 외쳤다. "지금이라도 이야기를 한다면 들어줄 순 있는데."
-SPEAK_TSUKASA_NORMAL4,{0:은|는} 외쳤다. "협상 결렬이라고? 그럼 죽어라!"
-SPEAK_TSUKASA_NORMAL5,{0:은|는} 외쳤다. "그래 그럼 이제 볼일은 없어."
-SPEAK_TSUKASA_NORMAL6,{0:은|는} 외쳤다. "그렇게 쉽게 흘러가진않나보네."
-SPEAK_TSUKASA_CONFUSE1,{0:은|는} 혼란하고 있다. "미안해!"
-SPEAK_TSUKASA_CONFUSE2,{0:은|는} 혼란하고 있다. "도망쳐야해!"
-SPEAK_TSUKASA_CONFUSE3,{0:은|는} 귀를 숨기고 있다.
-SPEAK_TSUKASA_MAGIC1,{0:은|는} 달콤한 말을 속삭이고 있다.
-SPEAK_TSUKASA_CAMERA,{0:은|는} 말했다. "사진은 갑자기 왜?"
-SPEAK_TSUKASA_PROPOSAL1,{0:은|는} 말했다. "여기 좋은 제안이 있어요~"
-SPEAK_TSUKASA_PROPOSAL2,{0:은|는} 말했다. "이거 볼래요? 들어서 손해는 없어요."
-SPEAK_TSUKASA_PROPOSAL3,{0:은|는} 말했다. "이정도면 꽤 남는 장사라고 생각하는데요."
-SPEAK_TSUKASA_PROPOSAL_ACCEPT1,{0:은|는} 말했다. "훌륭한 생각입니다."
-SPEAK_TSUKASA_PROPOSAL_ACCEPT2,{0:은|는} 말했다. "제가 말한 대로죠?"
-SPEAK_TSUKASA_PROPOSAL_ACCEPT3,{0:은|는} 말했다. "탁월한 선택입니다."
-SPEAK_MIKE_NORMAL1,{0:은|는} 외쳤다. "마네키네코가 흰색이 아닌게 무슨 상관이야?"
-SPEAK_MIKE_NORMAL2,{0:은|는} 외쳤다. "손님이 왔네~ 뭐 돈이 없어? 그럼 줄건 없어!"
-SPEAK_MIKE_NORMAL3,{0:은|는} 외쳤다. "이봐 언니~ 잠깐 나 좀 보지않을래?"
-SPEAK_MIKE_NORMAL4,{0:은|는} 외쳤다. "여기저기 아이템을 줍고있어, 누군가 사주지않을까?"
-SPEAK_MIKE_NORMAL5,{0:은|는} 외쳤다. "내가 손을 흔들면 복이온다며? 그럼 두 손을 흔들어볼까."
-SPEAK_MIKE_NORMAL6,{0:은|는} 외쳤다. "저번에 다른 고양이 요괴가 싸움을 걸어왔어!"
-SPEAK_MIKE_NORMAL7,{0:은|는} 한 손을 흔들고 있다.
-SPEAK_MIKE_CONFUSE1,{0:은|는} 혼란하고 있다. "냐냥!"
-SPEAK_MIKE_CONFUSE2,{0:은|는} 혼란하고 있다. "그엑!"
-SPEAK_MIKE_CONFUSE3,{0:은|는} 손을 휘젓고 있다.
-SPEAK_MIKE_MAGIC1,{0:은|는} 두 손을 흔들고 있다.
-SPEAK_MIKE_CAMERA,{0:은|는} 말했다. "냥?"
-SPEAK_MIKE_PROPOSAL1,{0:은|는} 말했다. "거기 언니! 상품 좀 보지않을래?"
-SPEAK_MIKE_PROPOSAL2,{0:은|는} 말했다. "둘러보고가!"
-SPEAK_MIKE_PROPOSAL3,{0:은|는} 말했다. "후후, 시장이 열렸어!"
-SPEAK_MIKE_PROPOSAL_ACCEPT1,{0:은|는} 말했다. "복받아!"
-SPEAK_MIKE_PROPOSAL_ACCEPT2,{0:은|는} 말했다. "여기 물건!"
-SPEAK_MIKE_PROPOSAL_ACCEPT3,{0:은|는} 기뻐서 손을 흔들고 있다.
-SPEAK_TAKANE_NORMAL1,{0:은|는} 외쳤다. "지금 장사를 방해하는거야?"
-SPEAK_TAKANE_NORMAL2,{0:은|는} 외쳤다. "돈이 없으면 빨랑 빨랑 나가!"
-SPEAK_TAKANE_NORMAL3,{0:은|는} 외쳤다. "니토리, 우리 장사를 방해할 셈이야?"
-SPEAK_TAKANE_NORMAL4,{0:은|는} 외쳤다. "여기는 우리 상권이야!"
-SPEAK_TAKANE_NORMAL5,{0:은|는} 외쳤다. "흥, 강에서 벗어나지못한 캇파가 산속경제에 대해 뭘 알겠어?"
-SPEAK_TAKANE_NORMAL6,{0:은|는} 외쳤다. "이... 탄막광이!"
-SPEAK_TAKANE_NORMAL7,{0:은|는} 외쳤다. "이러지말고 정정당당하게 장사로 승부를 보자고 니토리!"
-SPEAK_TAKANE_NORMAL8,{0:은|는} 외쳤다. "난 쓸데없는 싸움보단 돈 버는 쪽이 좋은데"
-SPEAK_TAKANE_NORMAL9,{0:은|는} 상품을 정리하고있다.
-SPEAK_TAKANE_CONFUSE1,{0:은|는} 혼란하고 있다. "내 돈이!"
-SPEAK_TAKANE_CONFUSE2,{0:은|는} 혼란하고 있다. "어지러워!"
-SPEAK_TAKANE_CONFUSE3,{0:은|는} 넘어졌다.
-SPEAK_TAKANE_MAGIC1,{0:은|는} 주문을 외웠다.
-SPEAK_TAKANE_CAMERA,{0:은|는} 말했다. "사진을 찍으려면 돈을 내!"
-SPEAK_TAKANE_PROPOSAL1,{0:은|는} 말했다. "자 여기에 있는걸 골라봐!"
-SPEAK_TAKANE_PROPOSAL2,{0:은|는} 말했다. "모두 희귀품목이야! 지금 안 사면 후회한다!"
-SPEAK_TAKANE_PROPOSAL3,{0:은|는} 말했다. "야마와로 특제 상품이야!"
-SPEAK_TAKANE_PROPOSAL_ACCEPT1,{0:은|는} 말했다. "고마워!"
-SPEAK_TAKANE_PROPOSAL_ACCEPT2,{0:은|는} 말했다. "돈이 최고야!"
-SPEAK_TAKANE_PROPOSAL_ACCEPT3,{0:은|는} 말했다. "우수 고객 스탬프를 찍어줄게!"
-SPEAK_SANNYO_NORMAL1,{0:은|는} 외쳤다. "꺼져! 담배 맛 떨어진다."
-SPEAK_SANNYO_NORMAL2,{0:은|는} 외쳤다. "여긴 편하게 담배필 장소도 없나..."
-SPEAK_SANNYO_NORMAL3,{0:은|는} 외쳤다. "거기 우리 업소에서 난동피우지말라고"
-SPEAK_SANNYO_NORMAL4,{0:은|는} 외쳤다. "이런 진상을 냅둬서는 우리 가게 매상도 안 오르겠어"
-SPEAK_SANNYO_NORMAL5,{0:은|는} 외쳤다. "흥 손님이 아니잖아."
-SPEAK_SANNYO_NORMAL6,{0:은|는} 담배를 들이마시고 있다.
-SPEAK_SANNYO_NORMAL7,{0:은|는} 불편한 표정으로 담뱃재를 털고 있다.
-SPEAK_SANNYO_CONFUSE1,{0:은|는} 혼란하고 있다. "콜록콜록!"
-SPEAK_SANNYO_CONFUSE2,{0:은|는} 혼란하고 있다. "무슨 짓이야!"
-SPEAK_SANNYO_CONFUSE3,{0:은|는} 담뱃대를 떨어뜨렸다.
-SPEAK_SANNYO_MAGIC1,{0:은|는} 담배 연기를 내뿜었다.
-SPEAK_SANNYO_CAMERA,{0:은|는} 말했다. "우리 도박장에선 사진기 반입 금지야!"
+SPEAK_EIKA_NORMAL1,{0}は叫んだ。「ここで暴れないで！」
+SPEAK_EIKA_NORMAL2,{0}は叫んだ。「そこの石塔、崩さないように気をつけて！」
+SPEAK_EIKA_NORMAL3,{0}は叫んだ。「あんたみたいなのは地獄に落ちるべきよ！」
+SPEAK_EIKA_NORMAL4,{0}は叫んだ。「気をつけて！」
+SPEAK_EIKA_NORMAL5,{0}は叫んだ。「今まで壊した石塔の数覚えてる？私は知ってるよ、{1}個だよ！」
+SPEAK_EIKA_NORMAL6,{0}は叫んだ。「もっと丁寧に歩いてくれない？」
+SPEAK_EIKA_NORMAL7,{0}は叫んだ。「{1}個の石塔の仇、絶対に許さない！死ね！」
+SPEAK_EIKA_NORMAL8,{0}は叫んだ。「石積みコンテスト、一緒にやろうよ！」
+SPEAK_EIKA_NORMAL9,{0}は近くの石塔を立て直している。
+SPEAK_EIKA_CONFUSE1,{0}は混乱している。「あれ〜、石塔が動いてる〜」
+SPEAK_EIKA_CONFUSE2,{0}は混乱している。「石塔が私に話しかけてる！」
+SPEAK_EIKA_CONFUSE3,{0}は混乱していて、石塔をうまく積めていない。
+SPEAK_EIKA_MAGIC1,{0}は石塔を積み始めた。
+SPEAK_EIKA_CAMERA,{0}は叫んだ。「石塔を背景に撮って！」
+SPEAK_URUMI_NORMAL1,{0}は叫んだ。「ちょうど飼ってた魚が腹ペコだったところ」
+SPEAK_URUMI_NORMAL2,{0}は叫んだ。「ちょっとだけこの子、代わりに見ててくれる？」
+SPEAK_URUMI_NORMAL3,{0}は叫んだ。「あの世へ行く道、気になる？」
+SPEAK_URUMI_NORMAL4,{0}は叫んだ。「今日は古代魚たちのごちそうの日ね」
+SPEAK_URUMI_NORMAL5,{0}は叫んだ。「今日の餌はこれにしようか」
+SPEAK_URUMI_NORMAL6,{0}は叫んだ。「もう少し近くに来てみない？」
+SPEAK_URUMI_NORMAL7,{0}は石の子を抱きしめながら笑っている。
+SPEAK_URUMI_CONFUSE1,{0}は混乱している。「ここはどこ？」
+SPEAK_URUMI_CONFUSE2,{0}は混乱している。「魚の餌やりの時間なのに！」
+SPEAK_URUMI_CONFUSE3,{0}は混乱していて、うろうろしている。
+SPEAK_URUMI_MAGIC1,{0}は呪文を唱えた。
+SPEAK_URUMI_CAMERA,{0}は叫んだ。「変なもの持ってるね」
+SPEAK_KUTAKA_NORMAL1,{0}は言った。「あなたの使命感をテストさせていただきます」
+SPEAK_KUTAKA_NORMAL2,{0}は言った。「腕前が素晴らしいですね」
+SPEAK_KUTAKA_NORMAL3,{0}は言った。「閻魔様がおっしゃってた通りです」
+SPEAK_KUTAKA_NORMAL4,{0}は言った。「この道は私が守っています」
+SPEAK_KUTAKA_NORMAL5,{0}は言った。「状況を把握する前に簡単に通すわけにはいきません！」
+SPEAK_KUTAKA_NORMAL6,{0}は言った。「今、何とおっしゃいましたか？」
+SPEAK_KUTAKA_NORMAL7,{0}は大きく翼を広げた。
+SPEAK_KUTAKA_CONFUSE1,{0}は混乱している。「大変です！」
+SPEAK_KUTAKA_CONFUSE2,{0}は混乱している。「このめまいをどうにかしないと…」
+SPEAK_KUTAKA_CONFUSE3,{0}は羽をバタバタさせている。
+SPEAK_KUTAKA_MAGIC1,{0}はホイッスルを吹いた。
+SPEAK_KUTAKA_CAMERA,{0}は叫んだ。「ここでの撮影は禁止です」
+SPEAK_YACHIE_NORMAL1,{0}は言った。「出口はこちらです。ついてきてください」
+SPEAK_YACHIE_NORMAL2,{0}は言った。「鬼傑組組長、吉弔八千慧です。これで挨拶は十分でしょう？」
+SPEAK_YACHIE_NORMAL3,{0}は言った。「ここはすでに耳飾り組の支配下です」
+SPEAK_YACHIE_NORMAL4,{0}は言った。「私の命令に従う気になりましたか？」
+SPEAK_YACHIE_NORMAL5,{0}は言った。「待ち伏せや奇襲に興味があるなら、鬼傑組に入りなさい」
+SPEAK_YACHIE_NORMAL6,{0}は言った。「まもなく地上も私たち鬼傑組の手に落ちるでしょう」
+SPEAK_YACHIE_NORMAL7,{0}は大きな尾を振っている。
+SPEAK_YACHIE_CONFUSE1,{0}は混乱している。「キーッ！頭が痛い！」
+SPEAK_YACHIE_CONFUSE2,{0}は混乱している。「私の話が通じないのか？」
+SPEAK_YACHIE_CONFUSE3,{0}は自分の尻尾を噛んだ。
+SPEAK_YACHIE_MAGIC1,{0}の逆らえない声が響き渡る。
+SPEAK_YACHIE_CAMERA,{0}は言った。「あ、尻尾も一緒に撮ってください」
+SPEAK_MAYUMI_NORMAL1,{0}は叫んだ。「兵士たち！侵入者を全員攻撃せよ！」
+SPEAK_MAYUMI_NORMAL2,{0}は叫んだ。「第1列突撃！第2列は援護に回れ！」
+SPEAK_MAYUMI_NORMAL3,{0}は叫んだ。「陣形を組め！」
+SPEAK_MAYUMI_NORMAL4,{0}は叫んだ。「人間？ここは危険だからすぐ帰りなさい！」
+SPEAK_MAYUMI_NORMAL5,{0}は叫んだ。「数では負けない！」
+SPEAK_MAYUMI_NORMAL6,{0}は叫んだ。「肉体を持つ人間がこんなにも強い生き物だったとは！」
+SPEAK_MAYUMI_NORMAL7,{0}は叫んだ。「いくら戦っても疲れない軍をどうやって相手にするのさ？」
+SPEAK_MAYUMI_NORMAL8,{0}は叫んだ。「突撃！」
+SPEAK_MAYUMI_NORMAL9,{0}は剣を抜き、前方に突き出した。
+SPEAK_MAYUMI_CONFUSE1,{0}は混乱している。「埴輪軍創設以来の最大の危機よ！」
+SPEAK_MAYUMI_CONFUSE2,{0}は混乱している。「軍が崩壊しつつある！」
+SPEAK_MAYUMI_CONFUSE3,{0}は剣を鞘から抜けずにいる。
+SPEAK_MAYUMI_MAGIC1,{0}は剣を高く掲げた。
+SPEAK_MAYUMI_CAMERA,{0}は言った。「ここは観光地じゃないってば！」
+SPEAK_SAKI_NORMAL1,{0}は叫んだ。「この世は弱肉強食だ！」
+SPEAK_SAKI_NORMAL2,{0}は叫んだ。「私の足に踏まれたいのか！」
+SPEAK_SAKI_NORMAL3,{0}は叫んだ。「ここは我ら最強の獣牙組が支配している！」
+SPEAK_SAKI_NORMAL4,{0}は叫んだ。「そこのお前、強そうだな。力比べでもしてみるか？」
+SPEAK_SAKI_NORMAL5,{0}は叫んだ。「なかなか強いじゃないか、獣牙組に入らないか？」
+SPEAK_SAKI_NORMAL6,{0}は叫んだ。「乱暴な者が勝つんだ！」
+SPEAK_SAKI_NORMAL7,{0}は叫んだ。「この辺の強者とは一通り戦ってきた。お前はどうかな？」
+SPEAK_SAKI_CONFUSE1,{0}は混乱している。「こんな卑怯な手を！」
+SPEAK_SAKI_CONFUSE2,{0}は混乱している。「鬼傑組のやつらと同じことを！」
+SPEAK_SAKI_CONFUSE3,{0}は地面を足で叩いている。
+SPEAK_SAKI_MAGIC1,{0}は軽くウォーミングアップした。
+SPEAK_SAKI_CAMERA,{0}は言った。「記念撮影は力比べのあとでな！」
+SPEAK_YUMA_NORMAL1,{0}は叫んだ。「ひとつ掘れば金のため〜、ふたつ掘れば国のため〜」
+SPEAK_YUMA_NORMAL2,{0}は叫んだ。「みっつ掘れば憎しみのため〜」
+SPEAK_YUMA_NORMAL3,{0}は笑った。「ククク」
+SPEAK_YUMA_NORMAL4,{0}は叫んだ。「ここの宝は全部俺のものだ！」
+SPEAK_YUMA_NORMAL5,{0}は叫んだ。「こんな場所に観光に来るバカがいるのか？」
+SPEAK_YUMA_NORMAL6,{0}は言った。「ククク、お前の貪欲さが伝わってくる。強欲同盟に入らないか？」
+SPEAK_YUMA_NORMAL7,{0}は叫んだ。「ここの石油は一滴たりとも渡さない！」
+SPEAK_YUMA_NORMAL8,{0}は叫んだ。「お前もこの石油になって俺に喰われろ！」
+SPEAK_YUMA_NORMAL9,{0}は牙を見せて笑った。
+SPEAK_YUMA_CONFUSE1,{0}は混乱している。「腹減った！」
+SPEAK_YUMA_CONFUSE2,{0}は混乱している。「妙な芸当を使うな！」
+SPEAK_YUMA_CONFUSE3,{0}は空中に大きなスプーンを振り回している。
+SPEAK_YUMA_MAGIC1,{0}はスプーンで地面の石油を大きくすくい上げた。
+SPEAK_YUMA_CAMERA,{0}は叫んだ。「ダメだ！写真でもこの欲望を持ち帰らせるわけにはいかない！」
+SPEAK_YUMA2_NORMAL1,{0}は叫んだ。「呪い、歓喜、憎しみ…欲望！」
+SPEAK_YUMA2_NORMAL2,{0}は叫んだ。「感じる…みんなの怨念が伝わってくる！」
+SPEAK_YUMA2_NORMAL3,{0}は叫んだ。「ククク、力が溢れてくる！」
+SPEAK_YUMA2_NORMAL4,{0}は叫んだ。「まだ足りない…もっとよこせ！もっとだ！」
+SPEAK_YUMA2_NORMAL5,{0}は叫んだ。「腹が減った！全部喰らいつくしてやる！」
+SPEAK_YUMA2_NORMAL6,{0}は周囲のすべてを吸い込んでいる。
+SPEAK_YUMA2_CONFUSE1,{0}は混乱している。「どうでもいい！」
+SPEAK_YUMA2_CONFUSE2,{0}は混乱している。「もう我慢できない！お前を喰ってやる！」
+SPEAK_YUMA2_CONFUSE3,{0}は正気ではないようだ。
+SPEAK_YUMA2_MAGIC1,{0}は大きく口を開けた。
+SPEAK_YUMA2_CAMERA,{0}はカメラに反応しない。
+SPEAK_ENOKO_NORMAL1,{0}は叫んだ。「この世界は弱肉強食だ！弱けりゃ死ぬ！」
+SPEAK_ENOKO_NORMAL2,{0}は言った。「だいぶ強くなったな。泣きながら森に逃げたあの少女には見えないよ」
+SPEAK_ENOKO_NORMAL3,{0}は叫んだ。「今日はこいつと戦ってみるか！」
+SPEAK_ENOKO_NORMAL4,{0}は叫んだ。「捕まえた！」
+SPEAK_ENOKO_NORMAL5,{0}は叫んだ。「逃げようなんて思わない方がいいよ！」
+SPEAK_ENOKO_NORMAL6,{0}は叫んだ。「もう動けないんじゃないか？」
+SPEAK_ENOKO_NORMAL7,{0}は叫んだ。「私の罠にかかったら簡単には逃げられないよ？」
+SPEAK_ENOKO_NORMAL8,{0}は叫んだ。「お前はもう私の手のひら…いや、罠の上にいる！」
+SPEAK_ENOKO_NORMAL9,{0}は言った。「ちょっと体をほぐすか」
+SPEAK_ENOKO_CONFUSE1,{0}は混乱している。「何するんだよ！」
+SPEAK_ENOKO_CONFUSE2,{0}は混乱している。「きゃんっ！」
+SPEAK_ENOKO_CONFUSE3,{0}はうっかり自分で自分を罠にかけてしまった。
+SPEAK_ENOKO_CAMERA,{0}は叫んだ。「余裕あるってわけ？」
+SPEAK_CHIYARI_NORMAL1,{0}は叫んだ。「だからチュパカブラじゃないってば！」
+SPEAK_CHIYARI_NORMAL2,{0}は叫んだ。「私はテンカジンだよ、テンカジン！」
+SPEAK_CHIYARI_NORMAL3,{0}は叫んだ。「だから外に出たくなかったのに！」
+SPEAK_CHIYARI_NORMAL4,{0}は叫んだ。「なんでみんな私をチュパカブラって呼ぶのさ？」
+SPEAK_CHIYARI_NORMAL5,{0}は叫んだ。「君も血を吸うの？」
+SPEAK_CHIYARI_NORMAL6,{0}は叫んだ。「君の血はどんな味かな？」
+SPEAK_CHIYARI_NORMAL7,{0}は言った。「まあ、面白ければ別にいいけど」
+SPEAK_CHIYARI_NORMAL8,{0}は叫んだ。「働きたくないー！」
+SPEAK_CHIYARI_CONFUSE1,{0}は混乱している。「私はチュパカブラだー！」
+SPEAK_CHIYARI_CONFUSE2,{0}は混乱している。「働きたいー！」
+SPEAK_CHIYARI_CONFUSE3,{0}は棒立ちになった。
+SPEAK_CHIYARI_MAGIC1,{0}は手の上に血を集めている。
+SPEAK_CHIYARI_CAMERA,{0}は叫んだ。「まぶしいっ！」
+SPEAK_SONBITEN_NORMAL1,{0}は叫んだ。「幻想郷の斉天大聖、参上！」
+SPEAK_SONBITEN_NORMAL2,{0}は叫んだ。「あぁん？ここがどこだと思って出入りしてんだ！」
+SPEAK_SONBITEN_NORMAL3,{0}は叫んだ。「今日は誰をぶっ飛ばしてみようか～」
+SPEAK_SONBITEN_NORMAL4,{0}は叫んだ。「そこのお前、朝の運動に付き合ってくれるか？」
+SPEAK_SONBITEN_NORMAL5,{0}は叫んだ。「今日のコンディションも絶好調だぜ！」
+SPEAK_SONBITEN_NORMAL6,{0}は叫んだ。「俺の棒を避けられるかな？」
+SPEAK_SONBITEN_NORMAL7,{0}は棒を華麗に振り回している。
+SPEAK_SONBITEN_CONFUSE1,{0}は混乱している。「頭が痛い！」
+SPEAK_SONBITEN_CONFUSE2,{0}は混乱している。「ウッキ！」
+SPEAK_SONBITEN_CONFUSE3,{0}は頭を抱えている。
+SPEAK_SONBITEN_MAGIC1,{0}は頭上で棒を回した。
+SPEAK_SONBITEN_CAMERA,{0}は叫んだ。「ビックリした！」
+SPEAK_HISAMI_NORMAL1,{0}はつぶやいた。「ああ、残無様、どこにおいでですか…」
+SPEAK_HISAMI_NORMAL2,{0}は叫んだ。「私から逃げられるとでも思いましたか？」
+SPEAK_HISAMI_NORMAL3,{0}は叫んだ。「ふふ、地獄では逃げても無駄ですよ」
+SPEAK_HISAMI_NORMAL4,{0}は叫んだ。「地獄はいつでも、どこでもウェルカムでございます」
+SPEAK_HISAMI_NORMAL5,{0}はつぶやいた。「残無様はどうしてこんな小物に興味をお持ちなのかしら〜」
+SPEAK_HISAMI_NORMAL6,{0}は叫んだ。「地獄に入るのは自由ですが、出るなら死に値します！」
+SPEAK_HISAMI_NORMAL7,{0}は叫んだ。「もっと深いところに行きたいのですか？死んだほうが簡単ですよ〜」
+SPEAK_HISAMI_CONFUSE1,{0}は混乱している。「はあはあ…残無様…」
+SPEAK_HISAMI_CONFUSE2,{0}は混乱している。「私を罰してください、残無様！」
+SPEAK_HISAMI_CONFUSE3,{0}はくるくる回っている。
+SPEAK_HISAMI_MAGIC1,{0}は両手を広げ呪文を詠唱した。
+SPEAK_HISAMI_CAMERA,{0}は叫んだ。「地獄でも記念撮影はウェルカムですよ〜」
+SPEAK_TSUKASA_NORMAL1,{0}は叫んだ。「話を聞かない性格なのかな〜」
+SPEAK_TSUKASA_NORMAL2,{0}は叫んだ。「できれば話し合いで解決したかったけど…仕方ないね」
+SPEAK_TSUKASA_NORMAL3,{0}は叫んだ。「今からでも話すなら聞いてあげるけど」
+SPEAK_TSUKASA_NORMAL4,{0}は叫んだ。「交渉決裂？なら死ね！」
+SPEAK_TSUKASA_NORMAL5,{0}は叫んだ。「じゃあ、もう用はないね」
+SPEAK_TSUKASA_NORMAL6,{0}は叫んだ。「そう簡単には進まないってことか」
+SPEAK_TSUKASA_CONFUSE1,{0}は混乱している。「ごめん！」
+SPEAK_TSUKASA_CONFUSE2,{0}は混乱している。「逃げなきゃ！」
+SPEAK_TSUKASA_CONFUSE3,{0}は耳を隠している。
+SPEAK_TSUKASA_MAGIC1,{0}は甘い言葉をささやいている。
+SPEAK_TSUKASA_CAMERA,{0}は言った。「急に写真ってどうして？」
+SPEAK_TSUKASA_PROPOSAL1,{0}は言った。「いい提案があるんですよ〜」
+SPEAK_TSUKASA_PROPOSAL2,{0}は言った。「これ、見てみませんか？損はしませんよ」
+SPEAK_TSUKASA_PROPOSAL3,{0}は言った。「これならかなり儲けが出ると思いますけど」
+SPEAK_TSUKASA_PROPOSAL_ACCEPT1,{0}は言った。「素晴らしい判断です」
+SPEAK_TSUKASA_PROPOSAL_ACCEPT2,{0}は言った。「言った通りでしょ？」
+SPEAK_TSUKASA_PROPOSAL_ACCEPT3,{0}は言った。「見事な選択ですね」
+SPEAK_MIKE_NORMAL1,{0}は叫んだ。「招き猫が白じゃなくても別にいいでしょ？」
+SPEAK_MIKE_NORMAL2,{0}は叫んだ。「お客さん来たね〜 え、お金ないの？じゃあ何もあげない！」
+SPEAK_MIKE_NORMAL3,{0}は叫んだ。「ねえお姉さん〜ちょっとこっち見てくれない？」
+SPEAK_MIKE_NORMAL4,{0}は叫んだ。「あちこちでアイテム拾ってるの、誰か買ってくれないかな〜」
+SPEAK_MIKE_NORMAL5,{0}は叫んだ。「手を振れば福が来るって？じゃあ両手で振ってみようかな」
+SPEAK_MIKE_NORMAL6,{0}は叫んだ。「こないだ別の猫妖怪にケンカ売られたんだよ！」
+SPEAK_MIKE_NORMAL7,{0}は片手を振っている。
+SPEAK_MIKE_CONFUSE1,{0}は混乱している。「にゃにゃん！」
+SPEAK_MIKE_CONFUSE2,{0}は混乱している。「にゃぐっ！」
+SPEAK_MIKE_CONFUSE3,{0}は手を振り回している。
+SPEAK_MIKE_MAGIC1,{0}は両手を振っている。
+SPEAK_MIKE_CAMERA,{0}は言った。「にゃん？」
+SPEAK_MIKE_PROPOSAL1,{0}は言った。「そこのお姉さん！商品ちょっと見てかない？」
+SPEAK_MIKE_PROPOSAL2,{0}は言った。「見てくだけでもいいよ！」
+SPEAK_MIKE_PROPOSAL3,{0}は言った。「ふふ、市場が開かれたよ！」
+SPEAK_MIKE_PROPOSAL_ACCEPT1,{0}は言った。「福が来るよ！」
+SPEAK_MIKE_PROPOSAL_ACCEPT2,{0}は言った。「はい、商品こちら！」
+SPEAK_MIKE_PROPOSAL_ACCEPT3,{0}は喜んで手を振っている。
+SPEAK_TAKANE_NORMAL1,{0}は叫んだ。「今、商売の邪魔してるのか？」
+SPEAK_TAKANE_NORMAL2,{0}は叫んだ。「金がないならさっさと出てけ！」
+SPEAK_TAKANE_NORMAL3,{0}は叫んだ。「にとり、お前うちらの商売の邪魔する気か？」
+SPEAK_TAKANE_NORMAL4,{0}は叫んだ。「ここは私たちの商圏だ！」
+SPEAK_TAKANE_NORMAL5,{0}は叫んだ。「ふん、川から出られない河童が山の経済を語るな！」
+SPEAK_TAKANE_NORMAL6,{0}は叫んだ。「この…弾幕狂めが！」
+SPEAK_TAKANE_NORMAL7,{0}は叫んだ。「こんなことしてないで、正々堂々と商売で勝負しようぜ、にとり！」
+SPEAK_TAKANE_NORMAL8,{0}は叫んだ。「無駄な喧嘩より金儲けのほうが好きなんだ」
+SPEAK_TAKANE_NORMAL9,{0}は商品を整理している。
+SPEAK_TAKANE_CONFUSE1,{0}は混乱している。「私のお金が！」
+SPEAK_TAKANE_CONFUSE2,{0}は混乱している。「目が回る！」
+SPEAK_TAKANE_CONFUSE3,{0}は倒れてしまった。
+SPEAK_TAKANE_MAGIC1,{0}は呪文を唱えた。
+SPEAK_TAKANE_CAMERA,{0}は言った。「写真を撮るなら金払って！」
+SPEAK_TAKANE_PROPOSAL1,{0}は言った。「さあ、ここにある中から選んでみて！」
+SPEAK_TAKANE_PROPOSAL2,{0}は言った。「全部レアものだよ！今買わないと後悔するよ！」
+SPEAK_TAKANE_PROPOSAL3,{0}は言った。「山童特製の商品だよ！」
+SPEAK_TAKANE_PROPOSAL_ACCEPT1,{0}は言った。「ありがとう！」
+SPEAK_TAKANE_PROPOSAL_ACCEPT2,{0}は言った。「金が一番さ！」
+SPEAK_TAKANE_PROPOSAL_ACCEPT3,{0}は言った。「優良顧客スタンプ押してあげる！」
+SPEAK_SANNYO_NORMAL1,{0}は叫んだ。「どけ！タバコの味が落ちる」
+SPEAK_SANNYO_NORMAL2,{0}は叫んだ。「ここには落ち着いてタバコ吸える場所もないのか…」
+SPEAK_SANNYO_NORMAL3,{0}は叫んだ。「そこの奴、うちの店で暴れないでくれる？」
+SPEAK_SANNYO_NORMAL4,{0}は叫んだ。「こんな迷惑客放っといたら店の売上も上がらないわ」
+SPEAK_SANNYO_NORMAL5,{0}は叫んだ。「ふん、あんた客じゃないでしょ」
+SPEAK_SANNYO_NORMAL6,{0}はタバコを吸っている。
+SPEAK_SANNYO_NORMAL7,{0}は不機嫌そうな顔で灰を落としている。
+SPEAK_SANNYO_CONFUSE1,{0}は混乱している。「ゴホゴホッ！」
+SPEAK_SANNYO_CONFUSE2,{0}は混乱している。「何すんのよ！」
+SPEAK_SANNYO_CONFUSE3,{0}はキセルを落とした。
+SPEAK_SANNYO_MAGIC1,{0}は煙を吐き出した。
+SPEAK_SANNYO_CAMERA,{0}は言った。「うちの賭場ではカメラ持ち込み禁止だよ！」
 SPEAK_FAIRY_COMMON_FREIND1,{0}は言った。「いたずら嫌いな妖精なんていないよ。」
 SPEAK_FAIRY_COMMON_FREIND2,{0}は言った。「たまにはメイドごっこもしてみたくなるよね〜」
 SPEAK_FAIRY_COMMON_FREIND3,{0}は言った。「どんな悪戯より今が一番楽しい！」
@@ -1751,17 +1751,17 @@ SPEAK_FAIRY_ANNOY_FREIND6,{0}は言った。「楽しい！楽しい！」
 SPEAK_FAIRY_ANNOY_ENTER,{0}は言った。「ねえねえ、何して遊ぶのー？」
 SPEAK_FAIRY_ANNOY_FAIRY_WAR,{0}は言った。「新しい遊び？私も混ぜてー！」
 SPEAK_FAIRY_ANNOY_REVIVE,{0}は言った。「まだ終わりじゃないよね？もっと遊ぼう！」
-SPEAK_HANIWA_FREIND1,{0:은|는} 말했다. "맡길 일이 있으면 말하세요!"
-SPEAK_HANIWA_FREIND2,{0:은|는} 말했다. "전투요? 제 전문이죠!"
-SPEAK_HANIWA_FREIND3,{0:은|는} 말했다. "언제나 멀리서 지원 가능합니다!"
-SPEAK_HANIWA_FREIND4,{0:은|는} 말했다. "전투는 좋아하진 않지만 최선을 다할게요!"
-SPEAK_HANIWA_FREIND5,{0:은|는} 말했다. "세탁거리는 나중에 바구니에 넣어두세요!"
-SPEAK_HANIWA_FREIND6,{0:은|는} 말했다. "청소도 가능합니다!"
-SPEAK_HANIWA_FREIND7,{0:은|는} 외쳤다. "제가 정찰을 다녀올까요?"
-SPEAK_HANIWA_FREIND8,{0:은|는} 외쳤다. "주인님!"
-SPEAK_HANIWA_FREIND9,{0:은|는} 외쳤다. "제가 던전 계획표를 짜둘게요!"
-SPEAK_HANIWA_FREIND10,{0:은|는} 외쳤다. "방금엔 조금 위험하지않았나요?"
-SPEAK_HANIWA_ENTER,{0:은|는} 말했다. "안녕하세요. 주인님! 덕분에 말할 수 있게 되었어요!"
-SPEAK_HANIWA_REVIVE1,{0:은|는} 말했다. "부활했습니다!"
-SPEAK_HANIWA_REVIVE2,{0:은|는} 말했다. "조심히 다뤄주세요!"
-SPEAK_HANIWA_REVIVE3,{0:은|는} 말했다. "수리 완료입니다!"
+SPEAK_HANIWA_FREIND1,{0}は言った。「預けたい物があればお申し付けください！」
+SPEAK_HANIWA_FREIND2,{0}は言った。「戦闘ですか？得意分野です！」
+SPEAK_HANIWA_FREIND3,{0}は言った。「いつでも遠距離支援できます！」
+SPEAK_HANIWA_FREIND4,{0}は言った。「戦うのは好きじゃないけど、頑張ります！」
+SPEAK_HANIWA_FREIND5,{0}は言った。「洗濯物は後でカゴに入れてくださいね！」
+SPEAK_HANIWA_FREIND6,{0}は言った。「掃除もお任せください！」
+SPEAK_HANIWA_FREIND7,{0}は叫んだ。「私が偵察に行ってきましょうか？」
+SPEAK_HANIWA_FREIND8,{0}は叫んだ。「ご主人様！」
+SPEAK_HANIWA_FREIND9,{0}は叫んだ。「ダンジョンの計画表を作っておきますね！」
+SPEAK_HANIWA_FREIND10,{0}は叫んだ。「今のちょっと危なかったんじゃないですか？」
+SPEAK_HANIWA_ENTER,{0}は言った。「こんにちは、ご主人様！おかげさまで話せるようになりました！」
+SPEAK_HANIWA_REVIVE1,{0}は言った。「復活しました！」
+SPEAK_HANIWA_REVIVE2,{0}は言った。「丁寧に扱ってくださいね！」
+SPEAK_HANIWA_REVIVE3,{0}は言った。「修理完了です！」

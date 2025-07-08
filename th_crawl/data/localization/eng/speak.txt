@@ -3,8 +3,8 @@ SPEAK_NORMAL,{0} shouted.
 SPEAK_MAGIC,{0} cast a spell.
 SPEAK_CONFUSE,{0} looks confused.
 SPEAK_CAMERA,{0} struck a pose.
-SPEAK_PROPOSAL,{0:은|는} 팔기위한 상품을 나열했다.
-SPEAK_PROPOSAL_ACCEPT,{0:은|는} 상품을 팔았다.
+SPEAK_PROPOSAL,{0} displayed goods for sale.
+SPEAK_PROPOSAL_ACCEPT,{0} sold the goods.
 SPEAK_YUKKURI_NORMAL,{0} shouted."Take it easy!!!"
 SPEAK_RUMIA_NORMAL1,{0} shouted."Is that so-"
 SPEAK_RUMIA_NORMAL2,{0} shouted."Is it okay to eat {2} like {1}?"
@@ -655,13 +655,13 @@ SPEAK_PARSI_GOD_JUNKO12,{0} shouted. "Power purification? Did it make you strong
 SPEAK_PARSI_GOD_JUNKO13,{0} shouted. "Life purification? You'll just get lazy with that, obviously!"
 SPEAK_PARSI_GOD_JUNKO14,{0} shouted. "Gear purification? You sacrificed yourself for your gear?"
 SPEAK_PARSI_GOD_JUNKO15,{0} shouted. "System purification? I have no idea what that even means."
-SPEAK_PARSI_GOD_KEIKI1,{0:은|는} 외쳤다. "그게 너의 인형 친구야? 부러워!"
-SPEAK_PARSI_GOD_KEIKI2,{0:은|는} 외쳤다. "그 우상이 혹시 집안일도 해주는거야? 부러워!"
-SPEAK_PARSI_GOD_KEIKI3,{0:은|는} 외쳤다. "난 조각같은건 잘 못하겠거든! 손재주가 부러워!"
-SPEAK_PARSI_GOD_KEIKI4,{0:은|는} 외쳤다. "그런 우상이랑 친구하는거보니까 혹시 친구가 없는거야?"
-SPEAK_PARSI_GOD_KEIKI5,{0:은|는} 외쳤다. "실수로 우상의 팔 하나 부러뜨린거같은데 괜찮지?"
-SPEAK_PARSI_GOD_KEIKI6,{0:은|는} 외쳤다. "내가 선택지 하나 골라봐도 될까? 나도 우상 하나 만들고 싶은데!"
-SPEAK_PARSI_GOD_KEIKI7,{0:은|는} 외쳤다. "우상 하나 쯤 가져가도 모르지않을까?"
+SPEAK_PARSI_GOD_KEIKI1,{0} shouted, "Is that your doll friend? I'm jealous!"
+SPEAK_PARSI_GOD_KEIKI2,{0} shouted, "Does that idol do housework too? I'm jealous!"
+SPEAK_PARSI_GOD_KEIKI3,{0} shouted, "I'm terrible at carving! I envy your skill!"
+SPEAK_PARSI_GOD_KEIKI4,{0} shouted, "You talk to that idol like it's your friend—don't you have any real ones?"
+SPEAK_PARSI_GOD_KEIKI5,{0} shouted, "Oops, I think I broke the idol's arm. Is that okay?"
+SPEAK_PARSI_GOD_KEIKI6,{0} shouted, "Can I choose one? I want to make an idol too!"
+SPEAK_PARSI_GOD_KEIKI7,{0} shouted, "They won’t notice if I take just one idol, right?"
 SPEAK_PARSI_DUNGEON_NORMAL1,{0} shouted. "So many items in the dungeon... Jealous!"
 SPEAK_PARSI_DUNGEON_NORMAL2,{0} shouted. "I want to visit another floor. Take me to a new dungeon! Jealous!"
 SPEAK_PARSI_DUNGEON_NORMAL3,{0} shouted. "The surface world... Jealous!"
@@ -1488,224 +1488,224 @@ SPEAK_HATATE_CONFUSE2,{0} is confused. "None of the shots are in focus!"
 SPEAK_HATATE_CONFUSE3,{0} is confused and looks like she's about to self-destruct.
 SPEAK_HATATE_MAGIC1,{0} pointed her phone camera at the enemy.
 SPEAK_HATATE_CAMERA,{0} shouted. "Getting counter-interviewed?!"
-SPEAK_EIKA_NORMAL1,{0:은|는} 외쳤다. "여기서 날뛰지마!"
-SPEAK_EIKA_NORMAL2,{0:은|는} 외쳤다. "거기 옆에 돌탑 무너지지않게 조심해!"
-SPEAK_EIKA_NORMAL3,{0:은|는} 외쳤다. "너 같은건 지옥에 떨어져야해!"
-SPEAK_EIKA_NORMAL4,{0:은|는} 외쳤다. "조심해!"
-SPEAK_EIKA_NORMAL5,{0:은|는} 외쳤다. "넌 지금까지 부순 돌탑의 갯수를 기억해? 난 알아 {1}개다!"
-SPEAK_EIKA_NORMAL6,{0:은|는} 외쳤다. "좀 조심히 다녀줄래?"
-SPEAK_EIKA_NORMAL7,{0:은|는} 외쳤다. "돌탑 {1}개의 원수 용서못해! 죽어라!"
-SPEAK_EIKA_NORMAL8,{0:은|는} 외쳤다. "돌쌓기 콘테스트 같이 할래?"
-SPEAK_EIKA_NORMAL9,{0:은|는} 근처 돌탑을 바로 세우고있다.
-SPEAK_EIKA_CONFUSE1,{0:은|는} 혼란하고 있다. "어라~ 돌탑이 움직이고 있어~"
-SPEAK_EIKA_CONFUSE2,{0:은|는} 혼란하고 있다. "돌탑이 나에게 말을 걸고있어!"
-SPEAK_EIKA_CONFUSE3,{0:은|는} 혼란하여 돌탑을 제대로 쌓지못하고있다.
-SPEAK_EIKA_MAGIC1,{0:은|는} 돌탑을 쌓기 시작했다.
-SPEAK_EIKA_CAMERA,{0:은|는} 외쳤다. "돌탑을 배경으로 찍어줘!"
-SPEAK_URUMI_NORMAL1,{0:은|는} 외쳤다. "키우던 물고기가 배가 고프던 참인데"
-SPEAK_URUMI_NORMAL2,{0:은|는} 외쳤다. "나 대신 잠깐 이 아이 좀 맡아주겠어?"
-SPEAK_URUMI_NORMAL3,{0:은|는} 외쳤다. "저승으로 가는 길이 궁금해?"
-SPEAK_URUMI_NORMAL4,{0:은|는} 외쳤다. "오늘 고대어들이 포식하겠는걸"
-SPEAK_URUMI_NORMAL5,{0:은|는} 외쳤다. "오늘 먹이는 이걸로 할까"
-SPEAK_URUMI_NORMAL6,{0:은|는} 외쳤다. "조금 더 가까이 와볼래?"
-SPEAK_URUMI_NORMAL7,{0:은|는} 돌로 된 아이를 안은채로 웃고있다.
-SPEAK_URUMI_CONFUSE1,{0:은|는} 혼란하고 있다. "여기가 어디지?"
-SPEAK_URUMI_CONFUSE2,{0:은|는} 혼란하고 있다. "물고기 먹이 줄 시간인데!"
-SPEAK_URUMI_CONFUSE3,{0:은|는} 혼란하여 이리저리 움직이고 있다.
-SPEAK_URUMI_MAGIC1,{0:은|는} 주문을 외웠다.
-SPEAK_URUMI_CAMERA,{0:은|는} 외쳤다. "이상한걸 들고 있구나."
-SPEAK_KUTAKA_NORMAL1,{0:은|는} 말했다. "당신의 사명감을 테스트해보겠습니다."
-SPEAK_KUTAKA_NORMAL2,{0:은|는} 말했다. "실력이 좋으시네요."
-SPEAK_KUTAKA_NORMAL3,{0:은|는} 말했다. "염마님이 말씀한대로네요."
-SPEAK_KUTAKA_NORMAL4,{0:은|는} 말했다. "이 길목은 제가 지키고있어요."
-SPEAK_KUTAKA_NORMAL5,{0:은|는} 말했다. "현상 파악전에 간단히 지나가게 해드릴 순 없어요!"
-SPEAK_KUTAKA_NORMAL6,{0:은|는} 말했다. "방금 뭐라고 하셨죠?"
-SPEAK_KUTAKA_NORMAL7,{0:은|는} 날개를 크게 펼쳤다.
-SPEAK_KUTAKA_CONFUSE1,{0:은|는} 혼란하고 있다. "큰일이에요!"
-SPEAK_KUTAKA_CONFUSE2,{0:은|는} 혼란하고 있다. "이 어지러움부터 어떻게든..."
-SPEAK_KUTAKA_CONFUSE3,{0:은|는} 날개를 푸드덕 파닥이고 있다.
-SPEAK_KUTAKA_MAGIC1,{0:은|는} 호루라기를 불었다.
-SPEAK_KUTAKA_CAMERA,{0:은|는} 외쳤다. "여기서 촬영은 금지되어있어요."
-SPEAK_YACHIE_NORMAL1,{0:은|는} 말했다. "출구는 이곳으로 따라오시죠."
-SPEAK_YACHIE_NORMAL2,{0:은|는} 말했다. "귀걸조 두목, 킷초 야치에입니다. 인사는 이정도면 되었겠죠?"
-SPEAK_YACHIE_NORMAL3,{0:은|는} 말했다. "이 곳은 이미 귀걸조의 지배하에 있습니다."
-SPEAK_YACHIE_NORMAL4,{0:은|는} 말했다. "제 명령에 따를 기분은 드셨나요?"
-SPEAK_YACHIE_NORMAL5,{0:은|는} 말했다. "혹시라도 매복과 기습에 관심이 있다면 귀걸조에 들어오시죠."
-SPEAK_YACHIE_NORMAL6,{0:은|는} 말했다. "곧 지상도 우리 귀걸조의 손에 들어오게될겁니다."
-SPEAK_YACHIE_NORMAL7,{0:은|는} 커다란 꼬리를 흔들고있다.
-SPEAK_YACHIE_CONFUSE1,{0:은|는} 혼란하고 있다. "키-! 머리가 아파!"
-SPEAK_YACHIE_CONFUSE2,{0:은|는} 혼란하고 있다. "내 말이 통하지않는거야?"
-SPEAK_YACHIE_CONFUSE3,{0:은|는} 자기 자신의 꼬리를 물었다.
-SPEAK_YACHIE_MAGIC1,{0}의 거스를 수 없는 목소리가 울려퍼진다.
-SPEAK_YACHIE_CAMERA,{0:은|는} 말했다. "아, 꼬리도 같이 찍어주세요."
-SPEAK_MAYUMI_NORMAL1,{0:은|는} 외쳤다. "병사들! 모두 칩입자를 공격하라!"
-SPEAK_MAYUMI_NORMAL2,{0:은|는} 외쳤다. "1번 대열 돌격! 2번 대열은 엄호하도록!"
-SPEAK_MAYUMI_NORMAL3,{0:은|는} 외쳤다. "진을 펼쳐라!"
-SPEAK_MAYUMI_NORMAL4,{0:은|는} 외쳤다. "인간? 이곳은 위험해 얼른 돌아가라고!"
-SPEAK_MAYUMI_NORMAL5,{0:은|는} 외쳤다. "수에서라면 지지않아!"
-SPEAK_MAYUMI_NORMAL6,{0:은|는} 외쳤다. "육신을 지닌 인간이 이렇게나 강한 생물이라니!"
-SPEAK_MAYUMI_NORMAL7,{0:은|는} 외쳤다. "아무리 싸워도 지치지않는 군대를 어떻게 상대하겠어?"
-SPEAK_MAYUMI_NORMAL8,{0:은|는} 외쳤다. "돌격!"
-SPEAK_MAYUMI_NORMAL9,{0:은|는} 검을 뽑아 앞으로 뻗었다.
-SPEAK_MAYUMI_CONFUSE1,{0:은|는} 혼란하고 있다. "하니와 군대 창설이래 최대 위기야!"
-SPEAK_MAYUMI_CONFUSE2,{0:은|는} 혼란하고 있다. "군대가 와해되고있다!"
-SPEAK_MAYUMI_CONFUSE3,{0:은|는} 검을 검집에서 뽑지 못하고있다.
-SPEAK_MAYUMI_MAGIC1,{0:은|는} 검을 높게 들어올렸다.
-SPEAK_MAYUMI_CAMERA,{0:은|는} 말했다. "여긴 관광지가 아니라고!"
-SPEAK_SAKI_NORMAL1,{0:은|는} 외쳤다. "이 세상은 약육강식이다!"
-SPEAK_SAKI_NORMAL2,{0:은|는} 외쳤다. "내 발에 치이기라도 하고싶은거냐!"
-SPEAK_SAKI_NORMAL3,{0:은|는} 외쳤다. "이 곳은 우리 최강의 경아조가 지배중이다!"
-SPEAK_SAKI_NORMAL4,{0:은|는} 외쳤다. "거기 너, 강해보이는데 힘겨루기 한번 해보지않겠어?"
-SPEAK_SAKI_NORMAL5,{0:은|는} 외쳤다. "꽤 강하구만, 경아조에 들어오는건 어때?"
-SPEAK_SAKI_NORMAL6,{0:은|는} 외쳤다. "난폭한 자가 승리한다!"
-SPEAK_SAKI_NORMAL7,{0:은|는} 외쳤다. "이 주변에 강한 녀석과는 모두 싸워봤어. 너는 어떨까?"
-SPEAK_SAKI_CONFUSE1,{0:은|는} 혼란하고 있다. "이런 비겁한 술수를!"
-SPEAK_SAKI_CONFUSE2,{0:은|는} 혼란하고 있다. "귀걸조 녀석들 같은 짓을!"
-SPEAK_SAKI_CONFUSE3,{0:은|는} 발을 바닥에 차고있다.
-SPEAK_SAKI_MAGIC1,{0:은|는} 가볍게 워밍업했다.
-SPEAK_SAKI_CAMERA,{0:은|는} 말했다. "기념 촬영은 힘겨루기가 끝난 후에 하자고!"
-SPEAK_YUMA_NORMAL1,{0:은|는} 외쳤다. "하나 파내면 돈을 위해~ 둘 파내면 나라를 위해~"
-SPEAK_YUMA_NORMAL2,{0:은|는} 외쳤다. "셋 파내면 증오를 위해~"
-SPEAK_YUMA_NORMAL3,{0:은|는} 웃었다. "큭큭큭"
-SPEAK_YUMA_NORMAL4,{0:은|는} 외쳤다. "이 곳의 보물들은 전부 내거야!"
-SPEAK_YUMA_NORMAL5,{0:은|는} 외쳤다. "어떤 멍청이가 이런 곳에 관광을 오는거야?"
-SPEAK_YUMA_NORMAL6,{0:은|는} 말했다. "큭큭큭, 너의 탐욕이 느껴지네. 강욕동맹에 들어올래?"
-SPEAK_YUMA_NORMAL7,{0:은|는} 외쳤다. "이 곳의 석유는 한방울이라도 넘겨주지않아!"
-SPEAK_YUMA_NORMAL8,{0:은|는} 외쳤다. "너도 이 곳의 석유가 되어서 나에게 잡아 먹히라고"
-SPEAK_YUMA_NORMAL9,{0:은|는} 이빨을 드러내며 웃었다
-SPEAK_YUMA_CONFUSE1,{0:은|는} 혼란하고 있다. "배고파!"
-SPEAK_YUMA_CONFUSE2,{0:은|는} 혼란하고 있다. "이상한 재주를 부리는군!"
-SPEAK_YUMA_CONFUSE3,{0:은|는} 허공에 큰 숟가락을 휘두르고있다.
-SPEAK_YUMA_MAGIC1,{0:은|는} 숟가락으로 바닥의 석유를 크게 퍼올렸다.
-SPEAK_YUMA_CAMERA,{0:은|는} 외쳤다. "안돼! 사진으로라도 이 곳의 욕망을 가져가게 할 순 없어
-SPEAK_YUMA2_NORMAL1,{0:은|는} 외쳤다. "저주, 희열, 증오... 욕망!"
-SPEAK_YUMA2_NORMAL2,{0:은|는} 외쳤다. "느껴진다... 모두의 원망이 느껴져!"
-SPEAK_YUMA2_NORMAL3,{0:은|는} 외쳤다. "큭큭큭, 힘이 넘쳐흐른다!"
-SPEAK_YUMA2_NORMAL4,{0:은|는} 외쳤다. "아직 모자라... 더 나에게 줘! 좀 더!"
-SPEAK_YUMA2_NORMAL5,{0:은|는} 외쳤다. "배고프다! 모조리 먹어치워!"
-SPEAK_YUMA2_NORMAL6,{0:은|는} 주변의 모든 것을 빨아들이고 있다.
-SPEAK_YUMA2_CONFUSE1,{0:은|는} 혼란하고 있다. "상관없어!"
-SPEAK_YUMA2_CONFUSE2,{0:은|는} 혼란하고 있다. "참을 수 없어! 널 잡아먹을거야!"
-SPEAK_YUMA2_CONFUSE3,{0:은|는} 제정신이 아닌것 같다.
-SPEAK_YUMA2_MAGIC1,{0:은|는} 입을 크게 벌렸다.
-SPEAK_YUMA2_CAMERA,{0:은|는} 카메라에 반응하지 않는다.
-SPEAK_ENOKO_NORMAL1,{0:은|는} 외쳤다. "이 세상은 약육강식이다! 약하다면 죽어!"
-SPEAK_ENOKO_NORMAL2,{0:은|는} 말했다. "제법 강해졌네, 울면서 숲으로 도망치던 그 소녀론 보이지않아."
-SPEAK_ENOKO_NORMAL3,{0:은|는} 외쳤다. "오늘은 이 녀석과 싸워볼까!"
-SPEAK_ENOKO_NORMAL4,{0:은|는} 외쳤다. "잡았다!"
-SPEAK_ENOKO_NORMAL5,{0:은|는} 외쳤다. "도망칠 생각은 하지않는게 좋아!"
-SPEAK_ENOKO_NORMAL6,{0:은|는} 외쳤다. "이젠 움직일 수 없을껄!"
-SPEAK_ENOKO_NORMAL7,{0:은|는} 외쳤다. "내 덫에 잡히면 쉽게는 못 빠져나갈껄?"
-SPEAK_ENOKO_NORMAL8,{0:은|는} 외쳤다. "넌 이미 내 손바닥, 아니 덫 위에 있어!"
-SPEAK_ENOKO_NORMAL9,{0:은|는} 말했다. "몸 좀 풀어볼까?"
-SPEAK_ENOKO_CONFUSE1,{0:은|는} 혼란하고 있다. "무슨 짓이야!"
-SPEAK_ENOKO_CONFUSE2,{0:은|는} 혼란하고 있다. "깨갱!"
-SPEAK_ENOKO_CONFUSE3,{0:은|는} 실수로 자기 자신을 덫으로 잡았다.
-SPEAK_ENOKO_CAMERA,{0:은|는} 외쳤다. "여유가 있나봐?"
-SPEAK_CHIYARI_NORMAL1,{0:은|는} 외쳤다. "그러니까 츄파카브라가 아니라고!"
-SPEAK_CHIYARI_NORMAL2,{0:은|는} 외쳤다. "난 텐카진이야 텐카진!"
-SPEAK_CHIYARI_NORMAL3,{0:은|는} 외쳤다. "이래서 바깥에 나오기 싫었는데!"
-SPEAK_CHIYARI_NORMAL4,{0:은|는} 외쳤다. "왜 다들 날 츄파카브라 뭐시기라 부르는거야?"
-SPEAK_CHIYARI_NORMAL5,{0:은|는} 외쳤다. "너도 피를 먹는거야?"
-SPEAK_CHIYARI_NORMAL6,{0:은|는} 외쳤다. "네 피는 무슨 맛일까?"
-SPEAK_CHIYARI_NORMAL7,{0:은|는} 말했다. "뭐 재밌어보이면 상관없나"
-SPEAK_CHIYARI_NORMAL8,{0:은|는} 외쳤다. "일하기 싫어!"
-SPEAK_CHIYARI_CONFUSE1,{0:은|는} 혼란하고 있다. "난 츄파카브라야!"
-SPEAK_CHIYARI_CONFUSE2,{0:은|는} 혼란하고 있다. "일하고 싶어!"
-SPEAK_CHIYARI_CONFUSE3,{0:은|는} 뻣뻣하게 섰다.
-SPEAK_CHIYARI_MAGIC1,{0:은|는} 손위에 피를 모으고있다.
-SPEAK_CHIYARI_CAMERA,{0:은|는} 외쳤다. "눈부셔!"
-SPEAK_SONBITEN_NORMAL1,{0:은|는} 외쳤다. "환상향의 제천대성 등장!"
-SPEAK_SONBITEN_NORMAL2,{0:은|는} 외쳤다. "아앙? 여기가 어디라고 들락거리는거야!"
-SPEAK_SONBITEN_NORMAL3,{0:은|는} 외쳤다. "오늘은 누구를 때려볼까~"
-SPEAK_SONBITEN_NORMAL4,{0:은|는} 외쳤다. "거기 너, 오늘 아침 운동에 동참해줄래?"
-SPEAK_SONBITEN_NORMAL5,{0:은|는} 외쳤다. "오늘 컨디션도 최고라고!"
-SPEAK_SONBITEN_NORMAL6,{0:은|는} 외쳤다. "내 봉을 피할 수 있을까?"
-SPEAK_SONBITEN_NORMAL7,{0:은|는} 봉을 현란하게 휘두르고 있다.
-SPEAK_SONBITEN_CONFUSE1,{0:은|는} 혼란하고 있다. "머리가 아파!"
-SPEAK_SONBITEN_CONFUSE2,{0:은|는} 혼란하고 있다. "우끼!"
-SPEAK_SONBITEN_CONFUSE3,{0:은|는} 머리를 감싸고있다.
-SPEAK_SONBITEN_MAGIC1,{0:은|는} 봉을 머리위에서 돌렸다.
-SPEAK_SONBITEN_CAMERA,{0:은|는} 외쳤다. "깜짝이야!"
-SPEAK_HISAMI_NORMAL1,{0:은|는} 중얼거렸다. "아아, 잔무님 어디 계시나요..."
-SPEAK_HISAMI_NORMAL2,{0:은|는} 외쳤다. "저한테 도망칠 수 있을거라 생각하시나요?"
-SPEAK_HISAMI_NORMAL3,{0:은|는} 외쳤다. "후후, 지옥에선 도망치셔도 소용없답니다."
-SPEAK_HISAMI_NORMAL4,{0:은|는} 외쳤다. "지옥은 언제든지 누두근지 웰컴이옵니다."
-SPEAK_HISAMI_NORMAL5,{0:은|는} 중얼거렸다. "잔무님은 어째서 이런 잔챙이에 관심을 가지시는걸까~"
-SPEAK_HISAMI_NORMAL6,{0:은|는} 외쳤다. "지옥에 들어오는건 자유지만, 나간다면 죽어 마땅하죠!"
-SPEAK_HISAMI_NORMAL7,{0:은|는} 외쳤다. "더 깊은 곳으로 가려고하시는건가요? 죽는다면 더 쉽답니다~"
-SPEAK_HISAMI_CONFUSE1,{0:은|는} 혼란하고 있다. "하아하아 잔무님.."
-SPEAK_HISAMI_CONFUSE2,{0:은|는} 혼란하고 있다. "저를 벌해주세요 잔무님!"
-SPEAK_HISAMI_CONFUSE3,{0:은|는} 빙글빙글 돌고 있다.
-SPEAK_HISAMI_MAGIC1,{0:은|는} 팔을 벌리며 주문을 시전했다.
-SPEAK_HISAMI_CAMERA,{0:은|는} 외쳤다. "지옥에선 기념촬영도 웰컴이에요~"
-SPEAK_TSUKASA_NORMAL1,{0:은|는} 외쳤다. "이야기를 안 듣는 성격인가보네~"
-SPEAK_TSUKASA_NORMAL2,{0:은|는} 외쳤다. "가능하다면 말로 풀고 싶었지만... 어쩔 수 없네."
-SPEAK_TSUKASA_NORMAL3,{0:은|는} 외쳤다. "지금이라도 이야기를 한다면 들어줄 순 있는데."
-SPEAK_TSUKASA_NORMAL4,{0:은|는} 외쳤다. "협상 결렬이라고? 그럼 죽어라!"
-SPEAK_TSUKASA_NORMAL5,{0:은|는} 외쳤다. "그래 그럼 이제 볼일은 없어."
-SPEAK_TSUKASA_NORMAL6,{0:은|는} 외쳤다. "그렇게 쉽게 흘러가진않나보네."
-SPEAK_TSUKASA_CONFUSE1,{0:은|는} 혼란하고 있다. "미안해!"
-SPEAK_TSUKASA_CONFUSE2,{0:은|는} 혼란하고 있다. "도망쳐야해!"
-SPEAK_TSUKASA_CONFUSE3,{0:은|는} 귀를 숨기고 있다.
-SPEAK_TSUKASA_MAGIC1,{0:은|는} 달콤한 말을 속삭이고 있다.
-SPEAK_TSUKASA_CAMERA,{0:은|는} 말했다. "사진은 갑자기 왜?"
-SPEAK_TSUKASA_PROPOSAL1,{0:은|는} 말했다. "여기 좋은 제안이 있어요~"
-SPEAK_TSUKASA_PROPOSAL2,{0:은|는} 말했다. "이거 볼래요? 들어서 손해는 없어요."
-SPEAK_TSUKASA_PROPOSAL3,{0:은|는} 말했다. "이정도면 꽤 남는 장사라고 생각하는데요."
-SPEAK_TSUKASA_PROPOSAL_ACCEPT1,{0:은|는} 말했다. "훌륭한 생각입니다."
-SPEAK_TSUKASA_PROPOSAL_ACCEPT2,{0:은|는} 말했다. "제가 말한 대로죠?"
-SPEAK_TSUKASA_PROPOSAL_ACCEPT3,{0:은|는} 말했다. "탁월한 선택입니다."
-SPEAK_MIKE_NORMAL1,{0:은|는} 외쳤다. "마네키네코가 흰색이 아닌게 무슨 상관이야?"
-SPEAK_MIKE_NORMAL2,{0:은|는} 외쳤다. "손님이 왔네~ 뭐 돈이 없어? 그럼 줄건 없어!"
-SPEAK_MIKE_NORMAL3,{0:은|는} 외쳤다. "이봐 언니~ 잠깐 나 좀 보지않을래?"
-SPEAK_MIKE_NORMAL4,{0:은|는} 외쳤다. "여기저기 아이템을 줍고있어, 누군가 사주지않을까?"
-SPEAK_MIKE_NORMAL5,{0:은|는} 외쳤다. "내가 손을 흔들면 복이온다며? 그럼 두 손을 흔들어볼까."
-SPEAK_MIKE_NORMAL6,{0:은|는} 외쳤다. "저번에 다른 고양이 요괴가 싸움을 걸어왔어!"
-SPEAK_MIKE_NORMAL7,{0:은|는} 한 손을 흔들고 있다.
-SPEAK_MIKE_CONFUSE1,{0:은|는} 혼란하고 있다. "냐냥!"
-SPEAK_MIKE_CONFUSE2,{0:은|는} 혼란하고 있다. "그엑!"
-SPEAK_MIKE_CONFUSE3,{0:은|는} 손을 휘젓고 있다.
-SPEAK_MIKE_MAGIC1,{0:은|는} 두 손을 흔들고 있다.
-SPEAK_MIKE_CAMERA,{0:은|는} 말했다. "냥?"
-SPEAK_MIKE_PROPOSAL1,{0:은|는} 말했다. "거기 언니! 상품 좀 보지않을래?"
-SPEAK_MIKE_PROPOSAL2,{0:은|는} 말했다. "둘러보고가!"
-SPEAK_MIKE_PROPOSAL3,{0:은|는} 말했다. "후후, 시장이 열렸어!"
-SPEAK_MIKE_PROPOSAL_ACCEPT1,{0:은|는} 말했다. "복받아!"
-SPEAK_MIKE_PROPOSAL_ACCEPT2,{0:은|는} 말했다. "여기 물건!"
-SPEAK_MIKE_PROPOSAL_ACCEPT3,{0:은|는} 기뻐서 손을 흔들고 있다.
-SPEAK_TAKANE_NORMAL1,{0:은|는} 외쳤다. "지금 장사를 방해하는거야?"
-SPEAK_TAKANE_NORMAL2,{0:은|는} 외쳤다. "돈이 없으면 빨랑 빨랑 나가!"
-SPEAK_TAKANE_NORMAL3,{0:은|는} 외쳤다. "니토리, 우리 장사를 방해할 셈이야?"
-SPEAK_TAKANE_NORMAL4,{0:은|는} 외쳤다. "여기는 우리 상권이야!"
-SPEAK_TAKANE_NORMAL5,{0:은|는} 외쳤다. "흥, 강에서 벗어나지못한 캇파가 산속경제에 대해 뭘 알겠어?"
-SPEAK_TAKANE_NORMAL6,{0:은|는} 외쳤다. "이... 탄막광이!"
-SPEAK_TAKANE_NORMAL7,{0:은|는} 외쳤다. "이러지말고 정정당당하게 장사로 승부를 보자고 니토리!"
-SPEAK_TAKANE_NORMAL8,{0:은|는} 외쳤다. "난 쓸데없는 싸움보단 돈 버는 쪽이 좋은데"
-SPEAK_TAKANE_NORMAL9,{0:은|는} 상품을 정리하고있다.
-SPEAK_TAKANE_CONFUSE1,{0:은|는} 혼란하고 있다. "내 돈이!"
-SPEAK_TAKANE_CONFUSE2,{0:은|는} 혼란하고 있다. "어지러워!"
-SPEAK_TAKANE_CONFUSE3,{0:은|는} 넘어졌다.
-SPEAK_TAKANE_MAGIC1,{0:은|는} 주문을 외웠다.
-SPEAK_TAKANE_CAMERA,{0:은|는} 말했다. "사진을 찍으려면 돈을 내!"
-SPEAK_TAKANE_PROPOSAL1,{0:은|는} 말했다. "자 여기에 있는걸 골라봐!"
-SPEAK_TAKANE_PROPOSAL2,{0:은|는} 말했다. "모두 희귀품목이야! 지금 안 사면 후회한다!"
-SPEAK_TAKANE_PROPOSAL3,{0:은|는} 말했다. "야마와로 특제 상품이야!"
-SPEAK_TAKANE_PROPOSAL_ACCEPT1,{0:은|는} 말했다. "고마워!"
-SPEAK_TAKANE_PROPOSAL_ACCEPT2,{0:은|는} 말했다. "돈이 최고야!"
-SPEAK_TAKANE_PROPOSAL_ACCEPT3,{0:은|는} 말했다. "우수 고객 스탬프를 찍어줄게!"
-SPEAK_SANNYO_NORMAL1,{0:은|는} 외쳤다. "꺼져! 담배 맛 떨어진다."
-SPEAK_SANNYO_NORMAL2,{0:은|는} 외쳤다. "여긴 편하게 담배필 장소도 없나..."
-SPEAK_SANNYO_NORMAL3,{0:은|는} 외쳤다. "거기 우리 업소에서 난동피우지말라고"
-SPEAK_SANNYO_NORMAL4,{0:은|는} 외쳤다. "이런 진상을 냅둬서는 우리 가게 매상도 안 오르겠어"
-SPEAK_SANNYO_NORMAL5,{0:은|는} 외쳤다. "흥 손님이 아니잖아."
-SPEAK_SANNYO_NORMAL6,{0:은|는} 담배를 들이마시고 있다.
-SPEAK_SANNYO_NORMAL7,{0:은|는} 불편한 표정으로 담뱃재를 털고 있다.
-SPEAK_SANNYO_CONFUSE1,{0:은|는} 혼란하고 있다. "콜록콜록!"
-SPEAK_SANNYO_CONFUSE2,{0:은|는} 혼란하고 있다. "무슨 짓이야!"
-SPEAK_SANNYO_CONFUSE3,{0:은|는} 담뱃대를 떨어뜨렸다.
-SPEAK_SANNYO_MAGIC1,{0:은|는} 담배 연기를 내뿜었다.
-SPEAK_SANNYO_CAMERA,{0:은|는} 말했다. "우리 도박장에선 사진기 반입 금지야!"
+SPEAK_EIKA_NORMAL1,{0} shouted, "Don't go wild here!"
+SPEAK_EIKA_NORMAL2,{0} shouted, "Be careful not to knock over the stone tower!"
+SPEAK_EIKA_NORMAL3,{0} shouted, "You deserve to fall into hell!"
+SPEAK_EIKA_NORMAL4,{0} shouted, "Watch out!"
+SPEAK_EIKA_NORMAL5,{0} shouted, "Do you remember how many stone towers you've broken? I do—{1} of them!"
+SPEAK_EIKA_NORMAL6,{0} shouted, "Could you be a little more careful?"
+SPEAK_EIKA_NORMAL7,{0} shouted, "I won't forgive the destroyer of {1} towers! Die!"
+SPEAK_EIKA_NORMAL8,{0} shouted, "Wanna have a stone-stacking contest?"
+SPEAK_EIKA_NORMAL9,{0} is carefully rebuilding a nearby stone tower.
+SPEAK_EIKA_CONFUSE1,{0} is confused. "Huh? The tower's moving~"
+SPEAK_EIKA_CONFUSE2,{0} is confused. "The tower is talking to me!"
+SPEAK_EIKA_CONFUSE3,{0} is too confused to stack the tower properly.
+SPEAK_EIKA_MAGIC1,{0} began stacking a stone tower.
+SPEAK_EIKA_CAMERA,{0} shouted, "Take a picture with the tower in the background!"
+SPEAK_URUMI_NORMAL1,{0} shouted, "My pet fish just happened to be hungry."
+SPEAK_URUMI_NORMAL2,{0} shouted, "Can you watch this little one for me for a bit?"
+SPEAK_URUMI_NORMAL3,{0} shouted, "Curious about the path to the underworld?"
+SPEAK_URUMI_NORMAL4,{0} shouted, "Looks like the ancient fish are going to feast today."
+SPEAK_URUMI_NORMAL5,{0} shouted, "Shall we use this for today's feeding?"
+SPEAK_URUMI_NORMAL6,{0} shouted, "Why don’t you come a little closer?"
+SPEAK_URUMI_NORMAL7,{0} smiles while cradling a child made of stone.
+SPEAK_URUMI_CONFUSE1,{0} is confused. "Where am I?"
+SPEAK_URUMI_CONFUSE2,{0} is confused. "It's feeding time for the fish!"
+SPEAK_URUMI_CONFUSE3,{0} is wandering around in confusion.
+SPEAK_URUMI_MAGIC1,{0} chanted a spell.
+SPEAK_URUMI_CAMERA,{0} shouted, "You're holding something weird."
+SPEAK_KUTAKA_NORMAL1,{0} said, "I will test your sense of duty."
+SPEAK_KUTAKA_NORMAL2,{0} said, "You have impressive skills."
+SPEAK_KUTAKA_NORMAL3,{0} said, "Just like Lord Enma described."
+SPEAK_KUTAKA_NORMAL4,{0} said, "I'm guarding this path."
+SPEAK_KUTAKA_NORMAL5,{0} said, "I can't let you through without a proper assessment!"
+SPEAK_KUTAKA_NORMAL6,{0} said, "What did you just say?"
+SPEAK_KUTAKA_NORMAL7,{0} spread her wings wide.
+SPEAK_KUTAKA_CONFUSE1,{0} is confused. "This is bad!"
+SPEAK_KUTAKA_CONFUSE2,{0} is confused. "I need to deal with this dizziness first..."
+SPEAK_KUTAKA_CONFUSE3,{0} is flapping her wings wildly.
+SPEAK_KUTAKA_MAGIC1,{0} blew a whistle.
+SPEAK_KUTAKA_CAMERA,{0} shouted, "Photography is prohibited here!"
+SPEAK_YACHIE_NORMAL1,{0} said, "Follow me this way to the exit."
+SPEAK_YACHIE_NORMAL2,{0} said, "I am Yachie Kicchou, leader of the Kiketsu Family. That should suffice for an introduction."
+SPEAK_YACHIE_NORMAL3,{0} said, "This place is already under the Kiketsu Family's control."
+SPEAK_YACHIE_NORMAL4,{0} said, "Do you feel like following my orders yet?"
+SPEAK_YACHIE_NORMAL5,{0} said, "If you’re into ambushes and sneak attacks, consider joining the Kiketsu Family."
+SPEAK_YACHIE_NORMAL6,{0} said, "Soon, the surface world will be ours as well."
+SPEAK_YACHIE_NORMAL7,{0} is wagging her large tail.
+SPEAK_YACHIE_CONFUSE1,{0} is confused. "Ki—! My head hurts!"
+SPEAK_YACHIE_CONFUSE2,{0} is confused. "Are you not understanding me?"
+SPEAK_YACHIE_CONFUSE3,{0} bit her own tail.
+SPEAK_YACHIE_MAGIC1,The irresistible voice of {0} echoes throughout.
+SPEAK_YACHIE_CAMERA,{0} said, "Ah, make sure to get my tail in the shot too."
+SPEAK_MAYUMI_NORMAL1,{0} shouted, "Soldiers! Attack the intruder!"
+SPEAK_MAYUMI_NORMAL2,{0} shouted, "Squad One, charge! Squad Two, cover them!"
+SPEAK_MAYUMI_NORMAL3,{0} shouted, "Form up the formation!"
+SPEAK_MAYUMI_NORMAL4,{0} shouted, "A human? This place is dangerous—go back at once!"
+SPEAK_MAYUMI_NORMAL5,{0} shouted, "When it comes to numbers, we never lose!"
+SPEAK_MAYUMI_NORMAL6,{0} shouted, "I can't believe a flesh-and-blood human is this strong!"
+SPEAK_MAYUMI_NORMAL7,{0} shouted, "How do you plan to fight a tireless army?"
+SPEAK_MAYUMI_NORMAL8,{0} shouted, "Charge!"
+SPEAK_MAYUMI_NORMAL9,{0} drew her sword and thrust it forward.
+SPEAK_MAYUMI_CONFUSE1,{0} is confused. "This is the greatest crisis since the haniwa army was founded!"
+SPEAK_MAYUMI_CONFUSE2,{0} is confused. "The army is falling apart!"
+SPEAK_MAYUMI_CONFUSE3,{0} fumbles and fails to draw her sword.
+SPEAK_MAYUMI_MAGIC1,{0} raised her sword high.
+SPEAK_MAYUMI_CAMERA,{0} said, "This isn’t a tourist spot!"
+SPEAK_SAKI_NORMAL1,{0} shouted, "This world is survival of the fittest!"
+SPEAK_SAKI_NORMAL2,{0} shouted, "You wanna get stomped under my foot!?"
+SPEAK_SAKI_NORMAL3,{0} shouted, "This area is under the rule of our mighty Keiga Family!"
+SPEAK_SAKI_NORMAL4,{0} shouted, "Hey you, you look strong—wanna test our strength?"
+SPEAK_SAKI_NORMAL5,{0} shouted, "You're pretty tough. How about joining the Keiga Family?"
+SPEAK_SAKI_NORMAL6,{0} shouted, "The brutal ones are the ones who win!"
+SPEAK_SAKI_NORMAL7,{0} shouted, "I've fought every strong one around here. How about you?"
+SPEAK_SAKI_CONFUSE1,{0} is confused. "Such a cowardly trick!"
+SPEAK_SAKI_CONFUSE2,{0} is confused. "Just like those Kiketsu Family!"
+SPEAK_SAKI_CONFUSE3,{0} is stomping the ground in frustration.
+SPEAK_SAKI_MAGIC1,{0} did a light warm-up.
+SPEAK_SAKI_CAMERA,{0} said, "Let’s take the commemorative photo *after* our showdown!"
+SPEAK_YUMA_NORMAL1,{0} shouted, "Dig one for money~ Dig two for the country~"
+SPEAK_YUMA_NORMAL2,{0} shouted, "Dig three for hatred~"
+SPEAK_YUMA_NORMAL3,{0} laughed. "Heh heh heh."
+SPEAK_YUMA_NORMAL4,{0} shouted, "All the treasures here are mine!"
+SPEAK_YUMA_NORMAL5,{0} shouted, "What kind of idiot comes sightseeing in a place like this?"
+SPEAK_YUMA_NORMAL6,{0} said, "Heh heh, I can feel your greed. Want to join the Gouyoku Alliance?"
+SPEAK_YUMA_NORMAL7,{0} shouted, "I won’t give up a single drop of this oil!"
+SPEAK_YUMA_NORMAL8,{0} shouted, "You should become oil for me too—let me consume you!"
+SPEAK_YUMA_NORMAL9,{0} grinned, baring her teeth.
+SPEAK_YUMA_CONFUSE1,{0} is confused. "I'm hungry!"
+SPEAK_YUMA_CONFUSE2,{0} is confused. "What kind of weird trick is this!?"
+SPEAK_YUMA_CONFUSE3,{0} is wildly swinging a giant spoon in the air.
+SPEAK_YUMA_MAGIC1,{0} scooped up a large amount of oil from the ground with a spoon.
+SPEAK_YUMA_CAMERA,{0} shouted, "No! I won't let you take even the desire here in a photo!"
+SPEAK_YUMA2_NORMAL1,{0} shouted, "Curses, ecstasy, hatred... desire!"
+SPEAK_YUMA2_NORMAL2,{0} shouted, "I can feel it... everyone's resentment!"
+SPEAK_YUMA2_NORMAL3,{0} shouted, "Heh heh heh, power is overflowing!"
+SPEAK_YUMA2_NORMAL4,{0} shouted, "It's not enough yet... Give me more! More!"
+SPEAK_YUMA2_NORMAL5,{0} shouted, "I'm starving! I'll devour everything!"
+SPEAK_YUMA2_NORMAL6,{0} is absorbing everything around her.
+SPEAK_YUMA2_CONFUSE1,{0} is confused. "I don't care!"
+SPEAK_YUMA2_CONFUSE2,{0} is confused. "I can't hold back! I'm going to eat you!"
+SPEAK_YUMA2_CONFUSE3,{0} seems to have lost her mind.
+SPEAK_YUMA2_MAGIC1,{0} opened her mouth wide.
+SPEAK_YUMA2_CAMERA,{0} does not react to the camera.
+SPEAK_ENOKO_NORMAL1,{0} shouted, "This world is survival of the fittest! If you're weak, you die!"
+SPEAK_ENOKO_NORMAL2,{0} said, "You've gotten pretty strong—you’re not the girl who used to cry and run off into the woods."
+SPEAK_ENOKO_NORMAL3,{0} shouted, "Shall I fight this one today!"
+SPEAK_ENOKO_NORMAL4,{0} shouted, "Gotcha!"
+SPEAK_ENOKO_NORMAL5,{0} shouted, "Don't even think about running!"
+SPEAK_ENOKO_NORMAL6,{0} shouted, "You won't be moving anymore!"
+SPEAK_ENOKO_NORMAL7,{0} shouted, "Once you're caught in my trap, you won't get out that easily!"
+SPEAK_ENOKO_NORMAL8,{0} shouted, "You're already in the palm of my hand—no, on my trap!"
+SPEAK_ENOKO_NORMAL9,{0} said, "Shall I stretch a bit?"
+SPEAK_ENOKO_CONFUSE1,{0} is confused. "What did you do to me!?"
+SPEAK_ENOKO_CONFUSE2,{0} is confused. "Yipe!"
+SPEAK_ENOKO_CONFUSE3,{0} accidentally caught herself in her own trap.
+SPEAK_ENOKO_CAMERA,{0} shouted, "You seem pretty relaxed, huh?"
+SPEAK_CHIYARI_NORMAL1,{0} shouted, "I told you, I'm not a chupacabra!"
+SPEAK_CHIYARI_NORMAL2,{0} shouted, "I'm a Tenkajin! A Tenkajin!"
+SPEAK_CHIYARI_NORMAL3,{0} shouted, "This is why I hate going outside!"
+SPEAK_CHIYARI_NORMAL4,{0} shouted, "Why does everyone keep calling me some chupacabra-whatever?"
+SPEAK_CHIYARI_NORMAL5,{0} shouted, "Do you drink blood too?"
+SPEAK_CHIYARI_NORMAL6,{0} shouted, "I wonder what your blood tastes like."
+SPEAK_CHIYARI_NORMAL7,{0} said, "Guess anything's fine if it looks fun."
+SPEAK_CHIYARI_NORMAL8,{0} shouted, "I don't want to work!"
+SPEAK_CHIYARI_CONFUSE1,{0} is confused. "I'm a chupacabra!"
+SPEAK_CHIYARI_CONFUSE2,{0} is confused. "I want to work!"
+SPEAK_CHIYARI_CONFUSE3,{0} is standing stiffly.
+SPEAK_CHIYARI_MAGIC1,{0} is gathering blood into her hands.
+SPEAK_CHIYARI_CAMERA,{0} shouted, "So bright!"
+SPEAK_SONBITEN_NORMAL1,{0} shouted, "The Great Sage Equal to Heaven in Gensokyo has arrived!"
+SPEAK_SONBITEN_NORMAL2,{0} shouted, "Huh? What do you think you're doing coming in and out of here!?"
+SPEAK_SONBITEN_NORMAL3,{0} shouted, "Who should I beat up today~"
+SPEAK_SONBITEN_NORMAL4,{0} shouted, "Hey you! Wanna join me for some morning training?"
+SPEAK_SONBITEN_NORMAL5,{0} shouted, "I'm feeling great today too!"
+SPEAK_SONBITEN_NORMAL6,{0} shouted, "Can you dodge my staff?"
+SPEAK_SONBITEN_NORMAL7,{0} is twirling her staff flamboyantly.
+SPEAK_SONBITEN_CONFUSE1,{0} is confused. "My head hurts!"
+SPEAK_SONBITEN_CONFUSE2,{0} is confused. "Ookki!"
+SPEAK_SONBITEN_CONFUSE3,{0} is clutching her head.
+SPEAK_SONBITEN_MAGIC1,{0} spun her staff above her head.
+SPEAK_SONBITEN_CAMERA,{0} shouted, "Whoa, you scared me!"
+SPEAK_HISAMI_NORMAL1,{0} muttered, "Ah, Zanmu sama, where are you..."
+SPEAK_HISAMI_NORMAL2,{0} shouted, "Do you really think you can escape me?"
+SPEAK_HISAMI_NORMAL3,{0} shouted, "Hehe, escaping doesn't work in hell."
+SPEAK_HISAMI_NORMAL4,{0} shouted, "Hell is always open and welcoming!"
+SPEAK_HISAMI_NORMAL5,{0} muttered, "Why is Zanmu sama interested in such small fry~"
+SPEAK_HISAMI_NORMAL6,{0} shouted, "Entering hell is free, but leaving means death!"
+SPEAK_HISAMI_NORMAL7,{0} shouted, "Trying to go deeper? That’s easier—if you die~"
+SPEAK_HISAMI_CONFUSE1,{0} is confused. "Huff, huff... Zanmu sama..."
+SPEAK_HISAMI_CONFUSE2,{0} is confused. "Please punish me, Zanmu sama!"
+SPEAK_HISAMI_CONFUSE3,{0} is spinning around in circles.
+SPEAK_HISAMI_MAGIC1,{0} spread her arms and cast a spell.
+SPEAK_HISAMI_CAMERA,{0} shouted, "Even in hell, commemorative photos are welcome~"
+SPEAK_TSUKASA_NORMAL1,{0} shouted, "So you’re the type who doesn’t listen, huh~"
+SPEAK_TSUKASA_NORMAL2,{0} shouted, "I wanted to settle this with words if possible... but it can't be helped."
+SPEAK_TSUKASA_NORMAL3,{0} shouted, "If you’re willing to talk now, I’ll still listen."
+SPEAK_TSUKASA_NORMAL4,{0} shouted, "Negotiations failed? Then die!"
+SPEAK_TSUKASA_NORMAL5,{0} shouted, "Well then, we have nothing more to discuss."
+SPEAK_TSUKASA_NORMAL6,{0} shouted, "Seems it’s not going to go down so easily after all."
+SPEAK_TSUKASA_CONFUSE1,{0} is confused. "Sorry!"
+SPEAK_TSUKASA_CONFUSE2,{0} is confused. "I have to run!"
+SPEAK_TSUKASA_CONFUSE3,{0} is hiding her ears.
+SPEAK_TSUKASA_MAGIC1,{0} is whispering sweet words.
+SPEAK_TSUKASA_CAMERA,{0} said, "Why the photo all of a sudden?"
+SPEAK_TSUKASA_PROPOSAL1,{0} said, "I've got a great proposal for you~"
+SPEAK_TSUKASA_PROPOSAL2,{0} said, "Wanna check this out? It won't hurt to listen."
+SPEAK_TSUKASA_PROPOSAL3,{0} said, "I think this is quite a profitable deal."
+SPEAK_TSUKASA_PROPOSAL_ACCEPT1,{0} said, "An excellent decision."
+SPEAK_TSUKASA_PROPOSAL_ACCEPT2,{0} said, "Just like I said, right?"
+SPEAK_TSUKASA_PROPOSAL_ACCEPT3,{0} said, "A brilliant choice."
+SPEAK_MIKE_NORMAL1,{0} shouted, "So what if a maneki-neko isn’t white?"
+SPEAK_MIKE_NORMAL2,{0} shouted, "A customer? What, no money? Then no deal!"
+SPEAK_MIKE_NORMAL3,{0} shouted, "Hey sis~ Mind giving me a moment?"
+SPEAK_MIKE_NORMAL4,{0} shouted, "I’m picking up items all over—maybe someone will buy them?"
+SPEAK_MIKE_NORMAL5,{0} shouted, "They say waving one paw brings fortune, right? Then how about waving both?"
+SPEAK_MIKE_NORMAL6,{0} shouted, "Another cat yokai challenged me to a fight the other day!"
+SPEAK_MIKE_NORMAL7,{0} is waving one paw.
+SPEAK_MIKE_CONFUSE1,{0} is confused. "Nyaa-nya!"
+SPEAK_MIKE_CONFUSE2,{0} is confused. "Gweh!"
+SPEAK_MIKE_CONFUSE3,{0} is flailing her hands.
+SPEAK_MIKE_MAGIC1,{0} is waving both hands.
+SPEAK_MIKE_CAMERA,{0} said, "Nyaa?"
+SPEAK_MIKE_PROPOSAL1,{0} said, "Hey sis! Wanna check out my goods?"
+SPEAK_MIKE_PROPOSAL2,{0} said, "Take a look around before you go!"
+SPEAK_MIKE_PROPOSAL3,{0} said, "Hehe, the market is open!"
+SPEAK_MIKE_PROPOSAL_ACCEPT1,{0} said, "May you be blessed!"
+SPEAK_MIKE_PROPOSAL_ACCEPT2,{0} said, "Here you go!"
+SPEAK_MIKE_PROPOSAL_ACCEPT3,{0} is happily waving her hand.
+SPEAK_TAKANE_NORMAL1,{0} shouted, "Are you interfering with my business!?"
+SPEAK_TAKANE_NORMAL2,{0} shouted, "If you don’t have money, get out fast!"
+SPEAK_TAKANE_NORMAL3,{0} shouted, "Nitori, are you trying to ruin our business?"
+SPEAK_TAKANE_NORMAL4,{0} shouted, "This is our market territory!"
+SPEAK_TAKANE_NORMAL5,{0} shouted, "Hmph, what would a kappa stuck in the river know about the mountain economy?"
+SPEAK_TAKANE_NORMAL6,{0} shouted, "You... you crazy bulletphile!"
+SPEAK_TAKANE_NORMAL7,{0} shouted, "Let’s settle this with honest business, Nitori!"
+SPEAK_TAKANE_NORMAL8,{0} shouted, "I’d rather make money than fight pointless battles."
+SPEAK_TAKANE_NORMAL9,{0} is organizing merchandise.
+SPEAK_TAKANE_CONFUSE1,{0} is confused. "My money!"
+SPEAK_TAKANE_CONFUSE2,{0} is confused. "So dizzy!"
+SPEAK_TAKANE_CONFUSE3,{0} fell over.
+SPEAK_TAKANE_MAGIC1,{0} chanted a spell.
+SPEAK_TAKANE_CAMERA,{0} said, "If you want a picture, pay up!"
+SPEAK_TAKANE_PROPOSAL1,{0} said, "Come on, pick anything you like!"
+SPEAK_TAKANE_PROPOSAL2,{0} said, "All rare items! You'll regret not buying now!"
+SPEAK_TAKANE_PROPOSAL3,{0} said, "These are Yamawaro exclusive specials!"
+SPEAK_TAKANE_PROPOSAL_ACCEPT1,{0} said, "Thanks!"
+SPEAK_TAKANE_PROPOSAL_ACCEPT2,{0} said, "Money rules!"
+SPEAK_TAKANE_PROPOSAL_ACCEPT3,{0} said, "I'll stamp your VIP card!"
+SPEAK_SANNYO_NORMAL1,{0} shouted, "Buzz off! You're ruining the flavor of my smoke."
+SPEAK_SANNYO_NORMAL2,{0} shouted, "Is there nowhere around here to smoke in peace...?"
+SPEAK_SANNYO_NORMAL3,{0} shouted, "Hey! Don’t cause trouble in our place!"
+SPEAK_SANNYO_NORMAL4,{0} shouted, "Letting a nuisance like this go? Our shop’s revenue will tank!"
+SPEAK_SANNYO_NORMAL5,{0} shouted, "Hmph, you're not even a customer."
+SPEAK_SANNYO_NORMAL6,{0} is taking a drag on her cigarette.
+SPEAK_SANNYO_NORMAL7,{0} is flicking her ashes with an annoyed look.
+SPEAK_SANNYO_CONFUSE1,{0} is confused. "Cough, cough!"
+SPEAK_SANNYO_CONFUSE2,{0} is confused. "What the hell!?"
+SPEAK_SANNYO_CONFUSE3,{0} dropped her cigarette holder.
+SPEAK_SANNYO_MAGIC1,{0} exhaled cigarette smoke.
+SPEAK_SANNYO_CAMERA,{0} said, "No cameras allowed in our casino!"
 SPEAK_FAIRY_COMMON_FREIND1,{0} said. "No fairy hates pranks."
 SPEAK_FAIRY_COMMON_FREIND2,{0} said. "Sometimes I wonder if I should try being a maid too."
 SPEAK_FAIRY_COMMON_FREIND3,{0} said. "This is more fun than any prank!"
@@ -1751,17 +1751,17 @@ SPEAK_FAIRY_ANNOY_FREIND6,{0} shouted. "This is so fun! So fun!"
 SPEAK_FAIRY_ANNOY_ENTER,{0} said. "Hey hey, what are we playing today??"
 SPEAK_FAIRY_ANNOY_FAIRY_WAR,{0} said. "A new game? Count me in, count me in!"
 SPEAK_FAIRY_ANNOY_REVIVE,{0} said. "We're not done yet, right? Let's keep playing!"
-SPEAK_HANIWA_FREIND1,{0:은|는} 말했다. "맡길 일이 있으면 말하세요!"
-SPEAK_HANIWA_FREIND2,{0:은|는} 말했다. "전투요? 제 전문이죠!"
-SPEAK_HANIWA_FREIND3,{0:은|는} 말했다. "언제나 멀리서 지원 가능합니다!"
-SPEAK_HANIWA_FREIND4,{0:은|는} 말했다. "전투는 좋아하진 않지만 최선을 다할게요!"
-SPEAK_HANIWA_FREIND5,{0:은|는} 말했다. "세탁거리는 나중에 바구니에 넣어두세요!"
-SPEAK_HANIWA_FREIND6,{0:은|는} 말했다. "청소도 가능합니다!"
-SPEAK_HANIWA_FREIND7,{0:은|는} 외쳤다. "제가 정찰을 다녀올까요?"
-SPEAK_HANIWA_FREIND8,{0:은|는} 외쳤다. "주인님!"
-SPEAK_HANIWA_FREIND9,{0:은|는} 외쳤다. "제가 던전 계획표를 짜둘게요!"
-SPEAK_HANIWA_FREIND10,{0:은|는} 외쳤다. "방금엔 조금 위험하지않았나요?"
-SPEAK_HANIWA_ENTER,{0:은|는} 말했다. "안녕하세요. 주인님! 덕분에 말할 수 있게 되었어요!"
-SPEAK_HANIWA_REVIVE1,{0:은|는} 말했다. "부활했습니다!"
-SPEAK_HANIWA_REVIVE2,{0:은|는} 말했다. "조심히 다뤄주세요!"
-SPEAK_HANIWA_REVIVE3,{0:은|는} 말했다. "수리 완료입니다!"
+SPEAK_HANIWA_FREIND1,{0} said, "Let me know if you need something held!"
+SPEAK_HANIWA_FREIND2,{0} said, "Combat? That's my specialty!"
+SPEAK_HANIWA_FREIND3,{0} said, "I'm always ready to support from a distance!"
+SPEAK_HANIWA_FREIND4,{0} said, "I don't like fighting, but I'll do my best!"
+SPEAK_HANIWA_FREIND5,{0} said, "Put your laundry in the basket later!"
+SPEAK_HANIWA_FREIND6,{0} said, "I can clean too!"
+SPEAK_HANIWA_FREIND7,{0} shouted, "Shall I go scout ahead?"
+SPEAK_HANIWA_FREIND8,{0} shouted, "Master!"
+SPEAK_HANIWA_FREIND9,{0} shouted, "I'll draw up the dungeon plan!"
+SPEAK_HANIWA_FREIND10,{0} shouted, "Wasn't that a bit dangerous just now?"
+SPEAK_HANIWA_ENTER,{0} said, "Hello, Master! Thanks to you, I can talk now!"
+SPEAK_HANIWA_REVIVE1,{0} said, "I'm back!"
+SPEAK_HANIWA_REVIVE2,{0} said, "Please handle me gently!"
+SPEAK_HANIWA_REVIVE3,{0} said, "Repairs complete!"

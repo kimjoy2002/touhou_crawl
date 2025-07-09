@@ -96,7 +96,9 @@ void FMODSoundManager::Initialize() {
 	addSound("knife", "sound\\se\\knife.mp3");
 	addSound("thunder", "sound\\se\\thunder.mp3");
 	addSound("door", "sound\\se\\door.mp3");
+	addSound("royalflare", "sound\\se\\royalflare.mp3");
 
+    
 	loadBgmFromJson("sound\\bgm\\bgm.json");
 }
 

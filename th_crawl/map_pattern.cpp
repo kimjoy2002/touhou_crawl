@@ -453,9 +453,9 @@ $$$...$$$";
 			break;
 		case 15:
 			{
-				if(!((floor_ >= 2 && floor_ <=7) ||
-					(floor_ >= YUKKURI_LEVEL && floor_ <=YUKKURI_LAST_LEVEL)))
-					break;
+			if(!((floor_ >= 2 && floor_ <=7) ||
+				(floor_ >= YUKKURI_LEVEL && floor_ <=YUKKURI_LAST_LEVEL)))
+				break;
 			bool hw_ = randA(1);
 			map->size_x = 6;
 			map->size_y = 3;	

@@ -220,11 +220,12 @@ int players::GetAtkDelay()
 {
 	int loop_ = GetProperty(TPT_DUAL_WEAPON)?2:1;
 
+	int may_loop_ = 2-loop_;
+
 	int current_delay_ = 0;
-	for(int i = loop_; i > 0; i--) {
+	for(int i = 2; i > may_loop_; i--) {
 		equip_type type_ = i==2?ET_WEAPON:ET_SHIELD;
 		if(type_ == ET_WEAPON && !equipment[ET_WEAPON] && equipment[ET_SHIELD] && equipment[ET_SHIELD]->isweapon()) {
-			loop_--;
 			continue;
 		}
 		if(type_ == ET_SHIELD && (!equipment[ET_SHIELD] || !equipment[ET_SHIELD]->isweapon() )) {

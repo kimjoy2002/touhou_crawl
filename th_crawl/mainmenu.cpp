@@ -487,6 +487,7 @@ bool select_job(int value_)
 }
 
 bool replay_menu(int value_);
+bool morgue_menu(int value_);
 bool save_menu(int value_);
 
 bool quit_menu(int value_)
@@ -522,6 +523,7 @@ void start_mainmenu()
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("o - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_OPTION), true, CL_normal, 'o'));
 		temp->push_back(menu_string("s - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_SAVE), true, CL_normal, 's'));
+		temp->push_back(menu_string("m - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MORGUE), true, CL_normal, 'm'));
 		temp->push_back(menu_string("R - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_REPLAY), true, CL_normal, 'R'));
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("X - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_QUIT), true, CL_normal, 'X'));
@@ -534,6 +536,7 @@ void start_mainmenu()
 		m_mgr.menu_input_puls(0, 'e', 1, "", false, sprint3s, 0);
 		m_mgr.menu_input_puls(0,'o',-3,"",false,option_menu,0);
 		m_mgr.menu_input_puls(0,'s',0,"",false,save_menu,0);
+		m_mgr.menu_input_puls(0,'m',0,"",false,morgue_menu,0);
 		m_mgr.menu_input_puls(0,'R',0,"",false,replay_menu,0);
 		m_mgr.menu_input_puls(0,'X',0,"",false,quit_menu,0);
 		

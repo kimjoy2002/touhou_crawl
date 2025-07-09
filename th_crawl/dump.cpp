@@ -148,16 +148,12 @@ bool Dump(int type, wstring *filename_)
 	if (type == 1)
 	{
 		stringstream death_reason;
-
-		if (wiz_list.wizard_mode == 1)
-		{
-			ss << "*" << LocalzationManager::locString(LOC_SYSTEM_WIZARD_MODE) << "*\n";
-		}
-		else if (wiz_list.wizard_mode == 2)
-		{
-			ss << "*" << LocalzationManager::locString(LOC_SYSTEM_SAVEREMAIN_MODE) << "*\n";
+		if(you.haveOrb()){
+			ss << "*";
 		}
 		ss << caculScore() << "    " << LocalzationManager::locString(LOC_SYSTEM_LEVEL) << " " << you.level << " " << LocalzationManager::locString(tribe_type_string[you.tribe]) << LocalzationManager::locString(job_type_string[you.job]) << " " << you.GetCharNameString() << " \"" << you.user_name << "\" (HP " << you.GetHp() << "/" << you.GetMaxHp() << ")\n";
+
+		
 		ss << "             ";
 		switch (you.dead_reason)
 		{
@@ -457,14 +453,34 @@ bool Dump(int type, wstring *filename_)
 
 
 		ss << death_reason.str() << "\n             ";
-		ss << LocalzationManager::locString(LOC_SYSTEM_FINAL_TURN) <<  ' ' << you.turn << "\n\n";
-
+		ss << LocalzationManager::locString(LOC_SYSTEM_FINAL_TURN) <<  ' ' << you.turn << "\n";
+		if (wiz_list.wizard_mode == 1)
+		{
+			ss << "*" << LocalzationManager::locString(LOC_SYSTEM_WIZARD_MODE) << "*\n";
+		}
+		else if (wiz_list.wizard_mode == 2)
+		{
+			ss << "*" << LocalzationManager::locString(LOC_SYSTEM_SAVEREMAIN_MODE) << "*\n";
+		}
+		ss << "\n";
 		//스팀 API로 변경
 		// sprintf_s(sql_, 256, "'%s'|%d|%d|'%s'|'%s'|'%s'|'%s'|%d|'%s'|%d|'%s'|'%s'", you.user_name.c_str(), you.level, caculScore(), LocalzationManager::locString(tribe_type_string[you.tribe]).c_str(), LocalzationManager::locString(job_type_string[you.job]).c_str(), you.GetCharNameString().c_str(), death_reason.str().c_str(),
 		// 	you.turn, (you.god == GT_NONE) ? "" : GetGodString(you.god).c_str(), you.haveGoal(), version_string, isNormalGame() ? "normal" : (isArena() ? "arean" : (isSprint() ? "sprint" : "unknown"))
 		// );
 
 
+	} else {
+		ss <<"-    " << LocalzationManager::locString(LOC_SYSTEM_LEVEL) << " " << you.level << " " << LocalzationManager::locString(tribe_type_string[you.tribe]) << LocalzationManager::locString(job_type_string[you.job]) << " " << you.GetCharNameString() << " \"" << you.user_name << "\" (HP " << you.GetHp() << "/" << you.GetMaxHp() << ")\n";
+		if (wiz_list.wizard_mode == 1)
+		{
+			ss << "*" << LocalzationManager::locString(LOC_SYSTEM_WIZARD_MODE) << "*\n";
+		}
+		else if (wiz_list.wizard_mode == 2)
+		{
+			ss << "*" << LocalzationManager::locString(LOC_SYSTEM_SAVEREMAIN_MODE) << "*\n";
+		}
+		
+		ss <<"\n";
 	}
 
 	if(!you.GetCharNameString().empty()) {

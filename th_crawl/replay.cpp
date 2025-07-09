@@ -23,6 +23,7 @@ typedef struct _finddata_t  FILE_SEARCH;
 
 extern const char *version_string;
 extern wstring replay_path_w;
+extern std::wstring morgue_path_w;
 
 replay_class ReplayClass;
 
@@ -518,3 +519,259 @@ bool replay_menu(int value_)
 }
 
 
+
+bool show_morgue(std::wstring wfilename)
+{
+	deletesub();
+	FILE* fp;
+	if (_wfopen_s(&fp, wfilename.c_str(), L"rt") != 0 || !fp) {
+        printsub(LocalzationManager::locString(LOC_SYSTEM_MORGUE_FAIL), true, CL_danger);
+		return false;
+	}
+
+	char line[512];
+	bool first_line = true;
+	while (fgets(line, sizeof(line), fp)) {
+		size_t len = strlen(line);
+
+		if (first_line && len >= 3 &&
+			(unsigned char)line[0] == 0xEF &&
+			(unsigned char)line[1] == 0xBB &&
+			(unsigned char)line[2] == 0xBF) {
+			memmove(line, line + 3, len - 2);
+		}
+		first_line = false;
+
+		len = strlen(line);
+		while (len > 0 && (line[len - 1] == '\n' || line[len - 1] == '\r')) {
+			line[--len] = '\0';
+		}
+
+		printsub(line, true, CL_normal);
+	}
+	fclose(fp);
+	changedisplay(DT_SUB_TEXT);
+	setDisplayMove(DisplayManager.max_y);
+	bool loop_ = true;
+	while(loop_)
+	{
+		InputedKey inputedKey;
+		switch(waitkeyinput(inputedKey,true))
+		{
+		case VK_UP:
+			changemove(1);  //위
+			break;
+		case VK_DOWN:
+			changemove(-1); //아래
+			break;
+		case VK_PRIOR:
+			changemove(DisplayManager.log_length);
+			break;
+		case VK_NEXT:
+			changemove(-DisplayManager.log_length);
+			break;
+		case -1:
+			if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(1);  //아래
+				break;
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(-1);  //위
+				break;
+			} else if(inputedKey.isRightClick()) {
+				//ESC PASSTHORUGH
+			}
+			else {
+				break;
+			}
+		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
+			loop_ = false;
+			break;
+		default:
+			continue;
+		}
+	}
+
+	return false;
+}
+
+
+bool morgue_menu(int value_)
+{
+    char blank[32];
+    sprintf_s(blank, 32, "            ");
+
+    WIN32_FIND_DATAW findFileData;
+    HANDLE hFind = FindFirstFileW((morgue_path_w + L"/*.txt").c_str(), &findFileData);
+
+    std::vector<replay_sort> file_vector;
+
+    if (hFind != INVALID_HANDLE_VALUE)
+    {
+        do {
+            std::wstring wfull_path = morgue_path_w + L"/" + findFileData.cFileName;
+            std::string utf8_path = ConvertUTF16ToUTF8(wfull_path);
+            std::wstring wfilename = wfull_path;
+
+            FILE* fp;
+            if (_wfopen_s(&fp, wfilename.c_str(), L"rt") == 0 && fp)
+            {
+                char line[512];
+                std::string summary;
+
+                for (int i = 0; i < 3; ++i)
+                {
+                    if (!fgets(line, sizeof(line), fp))
+                        break;
+                    if (i == 2) {
+                        summary = line;
+                        break;
+                    }
+                }
+
+                fclose(fp);
+
+                if (!summary.empty())
+                {
+                    FILETIME localtime_;
+                    FileTimeToLocalFileTime(&findFileData.ftCreationTime, &localtime_);
+                    file_vector.emplace_back(findFileData.cFileName, summary, localtime_);
+                }
+            }
+        } while (FindNextFileW(hFind, &findFileData) != 0);
+    }
+
+    std::sort(file_vector.begin(), file_vector.end());
+    int page = 0;
+    int file_num = file_vector.size();
+    int max_page = (file_num + 6) / 7;
+
+    while (1)
+    {
+        deletesub();
+        printsub("", true, CL_normal);
+        printsub("", true, CL_normal);
+        printsub("", true, CL_normal);
+        printsub(blank, false, CL_warning);
+        printsub(LocalzationManager::locString(LOC_SYSTEM_MORGUE_LIST), true, CL_help);
+        printsub("", true, CL_normal);
+        printsub("", true, CL_normal);
+
+
+
+        if (file_num)
+        {
+            char char_ = 'a';
+            for (int i = 0; i < 7; i++)
+            {
+                int cur = page * 7 + i;
+                if (cur >= file_num)
+                    break;
+
+                ostringstream ss;
+                ss << char_ << " - " << ConvertUTF16ToUTF8(file_vector[cur].path);
+                SYSTEMTIME stC;
+                FileTimeToSystemTime(&file_vector[cur].localtime, &stC);
+
+                printsub(ss.str(), false, CL_normal, char_);
+                if (60 - PrintCharWidth(ss.str()) > 0)
+                    printsub(string(60 - PrintCharWidth(ss.str()), ' '), false, CL_normal);
+                else
+                    printsub(" ", false, CL_normal);
+
+                ostringstream date_ss;
+                date_ss << LocalzationManager::formatString(LOC_SYSTEM_REPLAY_TIMELINE,
+                    PlaceHolderHelper(to_string(stC.wYear)),
+                    PlaceHolderHelper(to_string(stC.wMonth)),
+                    PlaceHolderHelper(to_string(stC.wDay)),
+                    PlaceHolderHelper(to_string(stC.wHour)),
+                    PlaceHolderHelper(to_string(stC.wMinute)));
+                printsub(date_ss.str(), true, CL_help);
+
+                printsub(blank, false, CL_warning);
+				D3DCOLOR color = CL_small_danger;
+				if(!(file_vector[cur].infor.empty())){
+					if(file_vector[cur].infor.at(0) == '-') { //일반morgue
+						color = CL_normal;
+					} else if(file_vector[cur].infor.at(0) == '*') { //승리
+						color = CL_green;
+					}
+				}
+                printsub(file_vector[cur].infor, true, color);
+                printsub("", true, CL_normal);
+
+                char_++;
+            }
+        }
+        else
+        {
+            printsub(blank, false, CL_warning);
+            printsub(LocalzationManager::locString(LOC_SYSTEM_REPLAY_NOTEXIST), true, CL_danger);
+            printsub("", true, CL_normal);
+        }
+
+        printsub(blank, false, CL_warning);
+        printsub("←", false, CL_danger, VK_LEFT);
+        printsub("  ", false, CL_warning);
+        printsub(LocalzationManager::formatString(LOC_SYSTEM_REPLAY_PAGE, PlaceHolderHelper(to_string(page + 1))), false, CL_help);
+        printsub("  ", false, CL_warning);
+        printsub("→", true, CL_danger, VK_RIGHT);
+        printsub("", true, CL_normal);
+        printsub("esc - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BACK), true, CL_normal, VK_ESCAPE);
+
+        changedisplay(DT_SUB_TEXT);
+        InputedKey inputedKey;
+        int input_;
+
+        while (1)
+        {
+            input_ = waitkeyinput(inputedKey, true);
+            if (input_ == VK_UP)
+                DisplayManager.addPosition(-1);
+            else if (input_ == VK_DOWN)
+                DisplayManager.addPosition(1);
+            else if (input_ == VK_RETURN || input_ == GVK_BUTTON_A || input_ == GVK_BUTTON_A_LONG)
+            {
+                input_ = DisplayManager.positionToChar();
+                break;
+            }
+            else
+                break;
+        }
+
+        bool out_ = false;
+        if (input_ >= 'a' && input_ <= 'h')
+        {
+            int select_ = page * 7 + (input_ - 'a');
+            if (select_ < file_num)
+            {
+                std::wstring wpath = morgue_path_w + L"/" + file_vector[select_].path;
+				show_morgue(wpath);
+            }
+        }
+        else if (input_ == VK_LEFT && page > 0)
+            page--;
+        else if (input_ == VK_RIGHT && page + 1 < max_page)
+            page++;
+        else if (input_ == -1)
+        {
+            if (inputedKey.mouse == MKIND_SCROLL_UP && page > 0)
+                page--;
+            else if (inputedKey.mouse == MKIND_SCROLL_DOWN && page + 1 < max_page)
+                page++;
+            else if (inputedKey.isRightClick())
+                out_ = true;
+        }
+        else if (input_ == VK_ESCAPE || input_ == GVK_BUTTON_B || input_ == GVK_BUTTON_B_LONG)
+        {
+            out_ = true;
+        }
+
+        if (out_)
+            break;
+    }
+
+    changedisplay(DT_SUB_TEXT);
+    return false;
+}

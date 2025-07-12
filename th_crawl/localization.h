@@ -57,30 +57,37 @@ struct localizationInfo {
 
 
 class LocalzationManager {
-private:
+public:
     static OrderedMap<string, localizationInfo> localization_type;
+private:
 // 전역 변수로 사용
 	static unordered_map<string, LOCALIZATION_ENUM_KEY> localization_enum_map;
 	static unordered_map<LOCALIZATION_ENUM_KEY, string> localization_enum_reverse_map;
-	static unordered_map<LOCALIZATION_ENUM_KEY, string> localization_map;
-	static unordered_map<string, SPEAK_ENUM_KEY> speak_enum_map;
-	static unordered_map<SPEAK_ENUM_KEY, string> speak_map;
+    static unordered_map<string, SPEAK_ENUM_KEY> speak_enum_map;
     static unordered_map<string, monster_index> monster_enum_map;
     static unordered_map<monster_index, string> monster_enum_reverse_map;
-	static unordered_map<monster_index, string> monster_name_map;
-	static unordered_map<monster_index, string> monster_description_map;
-	static vector<TextHelper> help_command;
-	static vector<TextHelper> help_pad_command;
-	static vector<TextHelper> help_credit;
-	static vector<TextHelper> help_wizard;
-	static vector<TextHelper> help_character;
-	static vector<int> helpline_character;
-	static vector<TextHelper> help_gods;
-	static vector<int> helpline_gods;
 
 	static unordered_set<string> korean_verbs;
 	static unordered_set<string> english_verbs;
 	static unordered_set<string> english_article;
+
+    class LocalzationData {
+    public:
+	    unordered_map<LOCALIZATION_ENUM_KEY, string> localization_map;
+	    unordered_map<SPEAK_ENUM_KEY, string> speak_map;
+	    unordered_map<monster_index, string> monster_name_map;
+	    unordered_map<monster_index, string> monster_description_map;
+	    vector<TextHelper> help_command;
+	    vector<TextHelper> help_pad_command;
+	    vector<TextHelper> help_credit;
+	    vector<TextHelper> help_wizard;
+	    vector<TextHelper> help_character;
+	    vector<int> helpline_character;
+	    vector<TextHelper> help_gods;
+	    vector<int> helpline_gods;
+    };
+
+    static OrderedMap<string, shared_ptr<LocalzationData>> localizationVector;
 
 private:
     static D3DCOLOR getColorFromCode(const string& code);
@@ -171,7 +178,9 @@ public:
     static string current_lang;
 
     static string baseLang(){return "ENG";};
+	static void setLang(string type){current_lang = type;};
     static void initLocalization();
+	static void allinit(string type);
 	static void init(string type, bool init_);
 
 
@@ -180,16 +189,18 @@ public:
     static string getPrevLang(string cur);
 	static string getCurrentFont();
 	static const string& locString(LOCALIZATION_ENUM_KEY key);
+	static const string& locString(string lang, LOCALIZATION_ENUM_KEY key);
 	static const string& speakString(SPEAK_ENUM_KEY key);
 	static const string& monString(monster_index key);
+	static const string& monString(string lang, monster_index key);
     static const string& monDecsriptionString(monster_index key);
-	static const vector<TextHelper>& getHelpCommand(){return help_command;};
-	static const vector<TextHelper>& getHelpPadCommand(){return help_pad_command;};
-	static const vector<TextHelper>& getHelpCredit(){return help_credit;};
-	static const vector<TextHelper>& getHelpWizard(){return help_wizard;};
-	static const vector<TextHelper>& getHelpCharacter(){return help_character;};
+	static const vector<TextHelper>& getHelpCommand(){return localizationVector.find(current_lang)->help_command;};
+	static const vector<TextHelper>& getHelpPadCommand(){return localizationVector.find(current_lang)->help_pad_command;};
+	static const vector<TextHelper>& getHelpCredit(){return localizationVector.find(current_lang)->help_credit;};
+	static const vector<TextHelper>& getHelpWizard(){return localizationVector.find(current_lang)->help_wizard;};
+	static const vector<TextHelper>& getHelpCharacter(){return localizationVector.find(current_lang)->help_character;};
 	static int getHelpCharacterLine(int index);
-	static const vector<TextHelper>& getHelpGods(){return help_gods;};
+	static const vector<TextHelper>& getHelpGods(){return localizationVector.find(current_lang)->help_gods;};
 	static int getHelpGodsLine(int index);
     
 
@@ -212,8 +223,22 @@ public:
 	}
 
 	template<typename... Args>
+	static std::string formatString(string lang, monster_index template_key, Args... args) {
+		std::string template_str = monString(lang, template_key);
+		std::vector<PlaceHolderHelper> values = { std::forward<Args>(args)...};
+		return processTags(template_str, values);
+	}
+
+	template<typename... Args>
 	static std::string formatString(LOCALIZATION_ENUM_KEY template_key, Args... args) {
 		std::string template_str = locString(template_key);
+		std::vector<PlaceHolderHelper> values = { std::forward<Args>(args)...};
+		return processTags(template_str, values);
+	}
+    
+	template<typename... Args>
+	static std::string formatString(string lang, LOCALIZATION_ENUM_KEY template_key, Args... args) {
+		std::string template_str = locString(lang, template_key);
 		std::vector<PlaceHolderHelper> values = { std::forward<Args>(args)...};
 		return processTags(template_str, values);
 	}

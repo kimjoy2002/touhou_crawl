@@ -344,6 +344,25 @@ bool MapNode::searchRoad(int start_level, int goal_level, queue<list<coord_def>>
 		printlog(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_UKNOWN) + " ", false, false, false, CL_help);
 		return false;
 	}
+	
+	if (start == goal) {
+		while (start_level != goal_level) {
+			if (goal_level > start_level) {
+				if (!SetStairToStack(stairMap, start_level, false)) {
+					printlog(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_CANT_FINE_PATH), false, false, false, CL_help);
+					return false;
+				}
+				start_level++;
+			} else {
+				if (!SetStairToStack(stairMap, start_level, true)) {
+					printlog(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_CANT_FINE_PATH), false, false, false, CL_help);
+					return false;
+				}
+				start_level--;
+			}
+		}
+		return true;
+	}
 
 	bool return_ = getShortCut(&stackMap, start, goal, -1, 0);
 	stackMap.push(start);
@@ -406,10 +425,6 @@ bool MapNode::searchRoad(int start_level, int goal_level, queue<list<coord_def>>
 			//printlog(temp, false, false, false, CL_magic);
 		}
 	}
-
-
-
-
 
 	if(return_)
 	{

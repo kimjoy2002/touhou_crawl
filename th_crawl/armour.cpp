@@ -78,6 +78,25 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 	t->value8 = 0;
 	t->is_pile = false;
 	t->can_throw = false;
+	t->item_tag.push_back(LOC_SYSTEM_TAG_ARMOUR);
+	t->item_tag.push_back(LOC_SYSTEM_TAG_BODY);
+	switch(material)
+	{
+	case MTK_ROBE: //천
+		t->item_tag.push_back(LOC_SYSTEM_TAG_BODY0);
+		break;
+	case MTK_LEATHER: //가죽
+		t->item_tag.push_back(LOC_SYSTEM_TAG_BODY1);
+		break;
+	case MTK_CHAIN: //사슬
+		t->item_tag.push_back(LOC_SYSTEM_TAG_BODY2);
+		break;
+	case MTK_PLATE: //판금
+		t->item_tag.push_back(LOC_SYSTEM_TAG_BODY3);
+		break;
+	default:
+		break;
+	}
 
 
 	switch(type)

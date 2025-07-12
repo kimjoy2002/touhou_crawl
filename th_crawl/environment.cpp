@@ -258,9 +258,15 @@ void environment::LoadDatas(FILE *fp)
 
 
 }
+
+
+bool environment::isInstanceMap()
+{
+	return (env[floor].isBamboo() || env[floor].isPandemonium() || floor == DREAM_LEVEL || floor == ZIGURRAT_LEVEL);
+}
 bool environment::MakeMap(bool return_)
 {
-	if(!make || ((env[floor].isBamboo() || env[floor].isPandemonium() || floor == DREAM_LEVEL || floor == ZIGURRAT_LEVEL) && !return_))
+	if(!make || (isInstanceMap() && !return_))
 	{
 		map_algorithms(floor);
 		allCalculateAutoTile();

@@ -639,3 +639,66 @@ void replaceAll(string& str, const string& from, const string& to) {
 		start_pos += to.length();
 	}
 }
+
+string trim(const string& s) {
+    size_t start = 0;
+    while (start < s.size() && isspace(static_cast<unsigned char>(s[start]))) ++start;
+
+    if (start == s.size()) return "";
+
+    size_t end = s.size() - 1;
+    while (end > start && isspace(static_cast<unsigned char>(s[end]))) --end;
+
+    return s.substr(start, end - start + 1);
+}
+
+vector<string> split_by_delimiter(const string& str, const string& delim) {
+    vector<string> result;
+    size_t pos = 0, prev = 0;
+    while ((pos = str.find(delim, prev)) != string::npos) {
+        result.push_back(str.substr(prev, pos - prev));
+        prev = pos + delim.size();
+    }
+    result.push_back(str.substr(prev));
+    return result;
+}
+
+vector<string> split_by_or(const string& str) {
+    return split_by_delimiter(str, "||");
+}
+
+vector<string> split_by_and(const string& str) {
+    return split_by_delimiter(str, "&&");
+}
+string tolower_ascii(const string& str) {
+    string result;
+    result.reserve(str.size());
+    for (unsigned char ch : str)
+        result += tolower(ch);
+    return result;
+}
+std::string shorten_utf8(const std::string& input, size_t max_chars) {
+    size_t char_count = 0;
+    size_t i = 0;
+    while (i < input.size() && char_count < max_chars) {
+        unsigned char c = input[i];
+        size_t char_len = 1;
+
+        if ((c & 0x80) == 0x00)       char_len = 1; // ASCII
+        else if ((c & 0xE0) == 0xC0)  char_len = 2;
+        else if ((c & 0xF0) == 0xE0)  char_len = 3;
+        else if ((c & 0xF8) == 0xF0)  char_len = 4;
+        else                          break; // invalid UTF-8
+
+        if (i + char_len > input.size())
+            break;
+
+        i += char_len;
+        ++char_count;
+    }
+
+    if (i < input.size())
+        return input.substr(0, i) + "...";
+    else
+        return input;
+}

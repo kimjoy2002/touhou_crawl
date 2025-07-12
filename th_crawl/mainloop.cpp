@@ -39,7 +39,7 @@ extern bool saveexit;
 
 extern HANDLE mutx;
 
-const char *version_string = "ver1.109";
+const char *version_string = "ver1.110";
 extern int g_tile_size;
 
 bool isPrevVersion(const string& versionstring, const string& targetstring);
@@ -270,11 +270,8 @@ string getDefaultLang() {
 
 void init_localization() {
 	LocalzationManager::initLocalization();
-	LocalzationManager::init(LocalzationManager::baseLang(), true);
 	string defaultLang = getDefaultLang();
-	if(defaultLang != LocalzationManager::baseLang()) {
-		LocalzationManager::init(defaultLang, false);
-	}
+	LocalzationManager::allinit(defaultLang);
 }
 vector<int> g_selected;
 
@@ -1188,6 +1185,9 @@ void MainLoop()
 		case 'S': //체크후 종료
 			saveandcheckexit();
 			break;
+		case 0x06: //아이템 검색
+			findItem();
+			break;
 		case 0x07: //전체층 이동
 			if (isNormalGame())
 				floorMove();
@@ -1293,10 +1293,6 @@ void MainLoop()
 		case '&': //위자드모드!
 			//waitkeyinput();
 			wiz_mode();
-			break;
-		case '0': //입력 디버깅
-			getKeyboardInputString();
-			enterlog();
 			break;
 		case '_': //스팀 디버깅
 			steam_mg.debugText();
@@ -1496,10 +1492,7 @@ bool option_menu(int value_)
 		input_ == GVK_BUTTON_B_LONG  || (input_ == -1 && inputedKey.isRightClick()))
 		{
 			if(lang != LocalzationManager::current_lang) {
-				LocalzationManager::init(LocalzationManager::baseLang(), true);
-				if(lang != LocalzationManager::baseLang()) {
-					LocalzationManager::init(lang, false);
-				}
+				LocalzationManager::setLang(lang);
 				option_mg.setLang(lang);
 				if(!LocalzationManager::getCurrentFont().empty()) {
 					loading_font(LocalzationManager::getCurrentFont());

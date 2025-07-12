@@ -81,6 +81,7 @@ item_infor& makePitem(monster_index mon_id, int num, item_infor* t)
 	t->value8 = 0;
 	t->is_pile = true;
 	t->can_throw = false;
+	t->item_tag.push_back(LOC_SYSTEM_TAG_FOOD);
 	t->image = &img_item_food_p_item;
 	t->name = name_infor(LOC_SYSTEM_ITEM_FOOD_P_ITEM);
 	t->name2 = name_infor();
@@ -124,6 +125,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 	t->num = 1;
 	t->curse = false;
 	t->name2 = name_infor();
+	t->item_tag.clear();
 	switch(type)
 	{
 	case ITM_WEAPON_SHORTBLADE:
@@ -159,6 +161,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value8 = 0;
 		t->is_pile = false;
 		t->can_throw = false;
+		t->item_tag.push_back(LOC_SYSTEM_TAG_ARMOUR);
+		t->item_tag.push_back(LOC_SYSTEM_TAG_HEAD);
 		t->image = &img_item_armor_helmet[type_];
 		t->equip_image = &img_play_item_hat[type_];
 		t->name = name_infor((type_==1 || type_ == 4)?LOC_SYSTEM_ITEM_ARMOUR_HEAD_RIBBON:((type_ == 2)?LOC_SYSTEM_ITEM_ARMOUR_HEAD_HEADBAND :LOC_SYSTEM_ITEM_ARMOUR_HEAD_HAT));
@@ -177,6 +181,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value8 = 0;
 		t->is_pile = false;
 		t->can_throw = false;
+		t->item_tag.push_back(LOC_SYSTEM_TAG_ARMOUR);
+		t->item_tag.push_back(LOC_SYSTEM_TAG_HEAD);
 		t->image = &img_item_armor_cloak;
 		t->equip_image = &img_play_item_cloak[0];
 		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_CLOAK);
@@ -194,6 +200,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value8 = 0;
 		t->is_pile = false;
 		t->can_throw = false;
+		t->item_tag.push_back(LOC_SYSTEM_TAG_ARMOUR);
+		t->item_tag.push_back(LOC_SYSTEM_TAG_HAND);
 		t->image = &img_item_armor_glove;
 		t->equip_image = &img_play_item_glove[0];
 		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_GLOVE);
@@ -211,6 +219,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value8 = 0;
 		t->is_pile = false;
 		t->can_throw = false;
+		t->item_tag.push_back(LOC_SYSTEM_TAG_ARMOUR);
+		t->item_tag.push_back(LOC_SYSTEM_TAG_FOOT);
 		t->image = &img_item_armor_boot;
 		t->equip_image = &img_play_item_boot[0];
 		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_SHOES);
@@ -235,6 +245,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value8 = 0;
 		t->is_pile = false;
 		t->can_throw = false;
+		t->item_tag.push_back(LOC_SYSTEM_TAG_JEWELRY);
+		t->item_tag.push_back(LOC_SYSTEM_TAG_RING);
 		t->image = &img_item_ring[iden_list.ring_list[t->value1].type];
 		t->name = name_infor(LOC_SYSTEM_ITEM_JEWELRY_RING);
 		t->weight = 1.0f;
@@ -251,6 +263,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value8 = 0;
 		t->is_pile = false;
 		t->can_throw = false;
+		t->item_tag.push_back(LOC_SYSTEM_TAG_EVOKE);
+		t->item_tag.push_back(LOC_SYSTEM_TAG_SPELLCARD);
 		t->image = &img_item_spellcard;
 		t->name = name_infor(LOC_SYSTEM_SPELLCARD);
 		t->weight = 2.0f;
@@ -270,12 +284,15 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->is_pile = false;
 		t->can_throw = false;
 		t->image = &img_item_amulet;
+		t->item_tag.push_back(LOC_SYSTEM_TAG_JEWELRY);
+		t->item_tag.push_back(LOC_SYSTEM_TAG_AMULET);
 		t->name = name_infor(LOC_SYSTEM_ITEM_JEWELRY_AMULET);
 		t->weight = 1.0f;
 		t->value = 200;
 		break;
 	}
 	case ITM_FOOD:
+		t->item_tag.push_back(LOC_SYSTEM_TAG_FOOD);
 		switch(select_!=-1?select_:randA(1))
 		{
 		case 0:
@@ -358,6 +375,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value8 = 0;
 		t->is_pile = true;
 		t->can_throw = false;
+		t->item_tag.push_back(LOC_SYSTEM_TAG_POTION);
 		t->image = &img_item_potion[iden_list.potion_list[t->value1].color];
 		t->name = name_infor(LOC_SYSTEM_ITEM_POTION_POTION);
 		t->weight = 4.0f;
@@ -374,6 +392,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value8 = 0;
 		t->is_pile = true;
 		t->can_throw = false;
+		t->item_tag.push_back(LOC_SYSTEM_TAG_SCROLL);
 		t->image = &img_item_scroll;
 		t->name = name_infor(LOC_SYSTEM_ITEM_SCROLL_SCROLL);
 		t->weight = 2.0f;
@@ -395,6 +414,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->value8 = static_book_list[book].spell[7];
 			t->is_pile = false;
 			t->can_throw = false;
+			t->item_tag.push_back(LOC_SYSTEM_TAG_BOOK);
 			t->image = &img_item_book[color_];
 			t->name = name_infor(static_book_list[book].key);
 			t->weight = 5.0f;
@@ -402,6 +422,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		}
 		break;
 	case ITM_MISCELLANEOUS:	
+		t->item_tag.push_back(LOC_SYSTEM_TAG_EVOKE);
 		MakeEvokeItem(t,select_);
 		break;
 	case ITM_GOAL:
@@ -415,6 +436,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value8 = 0;
 		t->is_pile = true;
 		t->can_throw = false;
+		t->item_tag.push_back(LOC_SYSTEM_TAG_KEY);
 		t->image = &img_item_rune;
 		t->name = name_infor(LOC_SYSTEM_ITEM_RUNE_RUNE);
 		t->weight = 1.0f;
@@ -431,6 +453,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->value8 = 0;
 		t->is_pile = true;
 		t->can_throw = false;
+		t->item_tag.push_back(LOC_SYSTEM_TAG_KEY);
 		t->image = &img_mons_yinyan;
 		t->name = name_infor(LOC_SYSTEM_ITEM_YINYANG);
 		t->weight = 1.0f;
@@ -639,6 +662,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 	t->value4 = good_bad?randA_1(randA_1(4))*(good_bad>=0?1:-1):0;
 	t->value5 = (good_bad>0 && randA(2)>1)?GetNewBrand(15):0;
 	t->name2 = name_infor();
+	t->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON);
 	if(good_bad)
 	{
 		t->name2 = name_infor(LOC_SYSTEM_ITEM_ARMOUR_RUNED);		
@@ -650,6 +674,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 	case ITM_WEAPON_SHORTBLADE:
 		{
 			int i = pixed_type>0?pixed_type:randA_1(25);
+			t->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON_SHORTBLADE);
 			if(i<=10)
 			{
 				t->value0 = 0;
@@ -676,6 +701,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->value7 = 10;
 				t->value8 = 5;
 				t->can_throw = true;
+				t->item_tag.push_back(LOC_SYSTEM_TAG_THROWABLE);
 				t->image = &img_item_weapon_knife;
 				t->equip_image = &img_play_item_weapon[1];
 				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_THROWING_KNIFE);
@@ -702,6 +728,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 		}
 	case ITM_WEAPON_LONGBLADE:
 		{
+			t->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON_LONGBLADE);
 			int i = pixed_type>0?pixed_type:randA_1(30);
 			if(i<=10)
 			{
@@ -769,7 +796,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 			}
 		}
 	case ITM_WEAPON_AXE:
-		{		
+		{
+			t->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON_AXE);
 			int i = pixed_type>0?pixed_type:randA_1(22);
 			if(i<=10)
 			{
@@ -821,7 +849,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 			}
 		}
 	case ITM_WEAPON_MACE:
-		{		
+		{
+			t->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON_MACE);
 			int i = pixed_type>0?pixed_type:randA_1(43);
 			if(i<=10)
 			{
@@ -906,7 +935,8 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 			}
 		}
 	case ITM_WEAPON_SPEAR:
-		{		
+		{
+			t->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON_SPEAR);
 			int i = pixed_type>0?pixed_type:randA_1(43);
 			if(i<=10)
 			{
@@ -933,6 +963,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 				t->value7 = 16;
 				t->value8 = 8;
 				t->can_throw = true;
+				t->item_tag.push_back(LOC_SYSTEM_TAG_THROWABLE);
 				t->image = &img_item_weapon_javelin;
 				t->equip_image = &img_play_item_weapon[16];
 				t->name = name_infor(LOC_SYSTEM_ITEM_WEAPON_SPEAR_JAVELIN);
@@ -1001,6 +1032,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 	t->value7 = 13;
 	t->value8 = 7;
 	t->can_throw = true;
+	t->item_tag.push_back(LOC_SYSTEM_TAG_THROWABLE);
 	t->image = &img_item_weapon_knife;
 	t->name = name_infor(LOC_SYSTEM_BUG);
 	t->weight = 1.0f;
@@ -1016,6 +1048,8 @@ void ShieldMake(item_type type, int good_bad, item_infor* t, int select_)
 	t->value4 = good_bad?randA_1(randA_1(3))*(good_bad>=0?1:-1):0;
 	t->is_pile = false;
 	t->name2 = name_infor();
+	t->item_tag.push_back(LOC_SYSTEM_TAG_SHIELD);
+	t->item_tag.push_back(LOC_SYSTEM_TAG_ARMOUR);
 	
 	if(good_bad)
 	{

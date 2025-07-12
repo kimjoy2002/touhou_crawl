@@ -330,7 +330,17 @@ std::string inputedkey_to_string(int key_, const InputedKey& input) {
 
     return oss.str();
 }
+
 void scrollup(bool down, int need_y, bool replay) ;
+
+void clearKey() {
+	if(ReplayClass.auto_key == false)
+	{
+		g_keyQueue->clear();
+		shift_check = false;
+		ctrl_check = false;
+	}
+}
 
 int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecursor)
 {
@@ -467,7 +477,7 @@ string GetClipboardTextUTF8() {
     return result;
 }
 
-string getKeyboardInputString() {
+string getKeyboardInputString(bool& cancle) {
     string temp;
 
     while (true) {
@@ -477,10 +487,19 @@ string getKeyboardInputString() {
 
 		if(input_ == -1) {
 			//무시
+			if(inputed.isRightClick()) {
+				deletelog();
+				cancle = true;
+				return "";
+			}
 		}
+        else if (input_ == VK_ESCAPE) {
+			deletelog();
+			cancle = true;
+            return "";
+        }
         else if (input_ == VK_RETURN) {
 			deletelog();
-			printlog(temp, false, false, false, CL_normal);
             return temp;
         }
         else if (input_ == VK_BACK) {
@@ -549,6 +568,12 @@ bool KeyInputQueue::empty() {
 	return queue_.empty();
 }
 
+void KeyInputQueue::clear() {
+    std::lock_guard<std::mutex> lock(mutex_);
+	while (!queue_.empty()) {
+		queue_.pop();
+	}
+}
 
 int MoreWait()
 {

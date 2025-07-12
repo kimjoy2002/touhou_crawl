@@ -184,6 +184,12 @@ LOC_SYSTEM_CANT_UNEQUIP_EXIST,You have nothing to unequip.
 LOC_SYSTEM_CANT_BRAND,You can't brand anything here.
 LOC_SYSTEM_NOT_EQUIP_ITEM,You’re not wearing that!
 LOC_SYSTEM_UNEQUIP_AMULET_YN,Are you sure you want to unequip the charged amulet? Charge will be lost!
+LOC_SYSTEM_SEARCH_ITEM,Searching for the following items. (.: current floor) :
+LOC_SYSTEM_SEARCH_ITEM_ENTER,Searching for the following items. (.: current floor, empty value: {0}) :
+LOC_SYSTEM_SEARCH_ITEM_FAIL_NOSTRING,Please enter a valid search term.
+LOC_SYSTEM_SEARCH_ITEM_FAIL_EMPTY,No matching items found.
+LOC_SYSTEM_SEARCH_ITEM_FAIL_TOO_MANY,Too many items matched. Please narrow your search.
+LOC_SYSTEM_SEARCH_ITEM_FAIL_BAMBOO,You cannot search for items in this area.
 LOC_SYSTEM_DO_CANCLE,Cancelled.
 LOC_SYSTEM_ASK_SUICIDE,Are you going to commit suicide?
 LOC_SYSTEM_YES,Yes
@@ -914,6 +920,37 @@ LOC_SYSTEM_UI_RIGHT_RING,Right Ring
 LOC_SYSTEM_UI_DUNGEON_VIEW,Dungeon Progress
 LOC_SYSTEM_UI_LEARN_SPELL_REMAIN,You have learned {0} spells and have {1} magic levels remaining.
 LOC_SYSTEM_UI_NOT_LEARN_SPELL,You are not learning spell.
+LOC_SYSTEM_TAG,Tag
+LOC_SYSTEM_TAG_WEAPON,Weapon
+LOC_SYSTEM_TAG_WEAPON_SHORTBLADE,Dagger
+LOC_SYSTEM_TAG_WEAPON_LONGBLADE,Longsword
+LOC_SYSTEM_TAG_WEAPON_AXE,Axe
+LOC_SYSTEM_TAG_WEAPON_MACE,Mace
+LOC_SYSTEM_TAG_WEAPON_SPEAR,Spear
+LOC_SYSTEM_TAG_ARMOUR,Armor
+LOC_SYSTEM_TAG_BODY,Body Armor
+LOC_SYSTEM_TAG_BODY0,Cloth
+LOC_SYSTEM_TAG_BODY1,Leather
+LOC_SYSTEM_TAG_BODY2,Chain
+LOC_SYSTEM_TAG_BODY3,Plate
+LOC_SYSTEM_TAG_HEAD,Helmet
+LOC_SYSTEM_TAG_SHIELD,Shield
+LOC_SYSTEM_TAG_CLOAK,Cloak
+LOC_SYSTEM_TAG_HAND,Gloves
+LOC_SYSTEM_TAG_FOOT,Footgear
+LOC_SYSTEM_TAG_THROWABLE,Throwable
+LOC_SYSTEM_TAG_JEWELRY,Jewelry
+LOC_SYSTEM_TAG_RING,Ring
+LOC_SYSTEM_TAG_AMULET,Amulet
+LOC_SYSTEM_TAG_EVOKE,Evocable Item
+LOC_SYSTEM_TAG_SPELLCARD,Spell Card
+LOC_SYSTEM_TAG_FOOD,Food
+LOC_SYSTEM_TAG_POTION,Potion
+LOC_SYSTEM_TAG_SCROLL,Scroll
+LOC_SYSTEM_TAG_BOOK,Spellbook
+LOC_SYSTEM_TAG_KEY,Key Item
+LOC_SYSTEM_TAG_RANDART,Random Artifact
+LOC_SYSTEM_TAG_FIXDART,Fixed Artifact
 LOC_SYSTEM_WELL_THINK,Wise choice.
 LOC_SYSTEM_WISDOM,Very wise!
 LOC_SYSTEM_CONTINUE_CRAWL,Carry on!

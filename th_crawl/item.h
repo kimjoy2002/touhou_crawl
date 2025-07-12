@@ -44,9 +44,11 @@ struct item_infor
 	bool curse;
 
 	bool artifact;
+	vector<LOCALIZATION_ENUM_KEY> item_tag;
+	
 	item_infor():name(LOC_SYSTEM_NONE_STRING), name2(LOC_NONE) ,image(NULL), equip_image(NULL),type(ITM_WEAPON_FIRST),weight(0),value(0),is_pile(false),
 		num(1),value0(0),value1(0),value2(0),value3(0),value4(0),value5(0),value6(0), value7(0), value8(0)
-		, curse(false), artifact(false)
+		, curse(false), artifact(false), item_tag()
 	{};
 	item_infor(item* item_);
 	item_infor(item* item_, int num_);
@@ -146,6 +148,11 @@ public:
 };
 
 
+class SearchField {
+public:
+	int level;
+};
+
 class item
 {
 public:
@@ -195,6 +202,9 @@ public:
 
 	fixed_artifact_type fixed_artifact;
 	vector<atifact_infor> atifact_vector;
+	vector<LOCALIZATION_ENUM_KEY> item_tag; //검색에 사용하는 아이템 태그
+
+	SearchField search_field;
 
 	item();
 	item(const coord_def &c, const item_infor &t);
@@ -202,7 +212,9 @@ public:
 	void LoadDatas(FILE *fp);
 	
 	string GetName(int num_ = -1, bool simple_ = false);
-	string GetNameString();
+	string GetNameString(string lang = "");
+	bool matches(const string& term);
+	bool checkString(string str);
 	name_infor GetNameInfor();
 	textures *GetEquipTexture();
 	const D3DCOLOR item_color();
@@ -245,7 +257,6 @@ public:
 	void resetShadow();
 	int action(int delay_);
 	bool offsetmove(const coord_def &c);
-
 };
 
 

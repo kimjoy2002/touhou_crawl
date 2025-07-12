@@ -233,6 +233,7 @@ public:
 	
 	list<buff_class> buff_list;
 	list<item> item_list;
+	list<item> search_list; //검색용 매번 지웠다 삭제했다 해야함
 	vector<tribe_property> property_vector;
 	vector<action_class> action_vector;
 
@@ -379,6 +380,7 @@ public:
 	int prevSpell;
 	int lastSelectMenu; //마지막에 선택했던 메뉴
 	char lastExplore; //마지막에 이동한 던전
+	string lastSearch; //마지막 검색한 단어
 
 	int MemorizeSkill[52];
 	int MemorizeSkill_num[52];
@@ -732,6 +734,7 @@ void run_spell();
 void shout(char auto_);
 void auto_pick_onoff(bool auto_);
 void floorMove();
+void findItem();
 
 void wiz_mode();
 

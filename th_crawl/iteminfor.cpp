@@ -1896,6 +1896,20 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	}
 
 
+	if(!it->item_tag.empty()) {
+		_infor_("\n\n" + LocalzationManager::locString(LOC_SYSTEM_TAG) + ": ");
+		bool first_ = true;
+		for(auto it2 = it->item_tag.begin(); it2 != it->item_tag.end(); it2++)
+		{
+			if(!first_)
+				_infor_(", ");
+			_infor_(LocalzationManager::locString(*it2));
+			first_ = false;
+		}
+		_infor_("\n");
+	}
+
+
 	_infor_("\n\n\n");
 	bool first_ = true;
 	for(auto& use_text : use_text_) {

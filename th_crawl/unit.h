@@ -38,7 +38,7 @@ public:
 	name_infor(LOCALIZATION_ENUM_KEY system_key, monster_index name_param){this->system_key=system_key; this->name_param = name_param;}
 	name_infor(LOCALIZATION_ENUM_KEY system_key, LOCALIZATION_ENUM_KEY param){this->system_key=system_key; this->param = param;}
 	name_infor(const name_infor &t){name_key=t.name_key;system_key=t.system_key;name_param=t.name_param;param=t.param;}
-	string getName() const;
+	string getName(string lang = "") const;
 
 	void addPostFix(string postfix) {this->postfix+=postfix;}
 	LOCALIZATION_ENUM_KEY getSystemKey(){return system_key;}

@@ -45,7 +45,7 @@ item::item()
 :name(LOC_SYSTEM_NONE_STRING), second_name(LOC_NONE), image(NULL), equip_image(NULL), position(0,0),prev_position(0,0), type(ITM_WEAPON_FIRST), weight(0), value(0),
 is_pile(false), num(0), id('a'), prev_sight(false), not_find(true), now_find(false), curse(false), identify(false), identify_curse(false), 
 can_throw(false), drop(false), throw_item(false), hamme_gift(false), waste(10000), delay_turn(0), value0(0), value1(0), value2(0), value3(0), value4(0), value5(0), value6(0), value7(0), value8(0),
-fixed_artifact(FIXED_ARTIFACT_NONE), atifact_vector()
+fixed_artifact(FIXED_ARTIFACT_NONE), atifact_vector(), item_tag(), search_field()
 {
 
 }
@@ -88,6 +88,10 @@ item::item(const coord_def &c, const item_infor &t)
 	value7 = t.value7;
 	value8 = t.value8;
 	fixed_artifact = FIXED_ARTIFACT_NONE;
+	atifact_vector.clear();
+	item_tag.clear();
+	search_field = SearchField();
+	item_tag = t.item_tag;
 	waste = 10000;
 
 }
@@ -114,6 +118,11 @@ void item_infor::SaveDatas(FILE *fp)
 	SaveData<int>(fp, value8);
 	SaveData<bool>(fp, curse);
 	SaveData<bool>(fp, artifact);
+	SaveData<int>(fp, item_tag.size());
+	for(auto& tag : item_tag)
+	{
+		SaveData<LOCALIZATION_ENUM_KEY>(fp, tag);
+	}
 }
 void item_infor::LoadDatas(FILE *fp)
 {
@@ -141,6 +150,17 @@ void item_infor::LoadDatas(FILE *fp)
 	LoadData<int>(fp, value8);
 	LoadData<bool>(fp, curse);
 	LoadData<bool>(fp, artifact);
+	if(!isPrevVersion(loading_version_string, "ver1.109")) {
+
+		int size_;
+		LoadData<int>(fp, size_);
+		for(int i = 0; i < size_; i++)
+		{
+			LOCALIZATION_ENUM_KEY temp;
+			LoadData<LOCALIZATION_ENUM_KEY>(fp, temp);
+			item_tag.push_back(temp);
+		}
+	}
 }
 void item::SaveDatas(FILE *fp)
 {
@@ -187,6 +207,13 @@ void item::SaveDatas(FILE *fp)
 		(*it).SaveDatas(fp);
 	}
 
+	SaveData<int>(fp, item_tag.size());
+	for(auto& tag : item_tag)
+	{
+		SaveData<LOCALIZATION_ENUM_KEY>(fp, tag);
+	}
+
+	//search_field는 저장하지않음
 	
 }
 void item::LoadDatas(FILE *fp)
@@ -233,13 +260,26 @@ void item::LoadDatas(FILE *fp)
 		LoadData<fixed_artifact_type>(fp, fixed_artifact);
 	}
 
-	int size_;
-	LoadData<int>(fp, size_);
-	for(int i = 0; i < size_; i++)
 	{
-		atifact_infor temp;
-		temp.LoadDatas(fp);
-		atifact_vector.push_back(temp);
+		int size_;
+		LoadData<int>(fp, size_);
+		for(int i = 0; i < size_; i++)
+		{
+			atifact_infor temp;
+			temp.LoadDatas(fp);
+			atifact_vector.push_back(temp);
+		}
+	}
+	if(!isPrevVersion(loading_version_string, "ver1.109")) {
+
+		int size_;
+		LoadData<int>(fp, size_);
+		for(int i = 0; i < size_; i++)
+		{
+			LOCALIZATION_ENUM_KEY temp;
+			LoadData<LOCALIZATION_ENUM_KEY>(fp, temp);
+			item_tag.push_back(temp);
+		}
 	}
 }
 
@@ -320,8 +360,11 @@ string item::GetName(int num_, bool simple_)
 	}
 	
 
-
-
+	if(type==ITM_GOAL && value1 >= 0 && value1 < 10)
+	{
+		temp += LocalzationManager::locString(rune_string[value1]);
+		overwriteName = true;
+	}
 
 	if(type==ITM_SPELL)
 	{
@@ -478,11 +521,55 @@ string item::GetName(int num_, bool simple_)
 	return temp;
 }
 
-string item::GetNameString() {
+string item::GetNameString(string lang) {
 	if(type == ITM_BOOK && !identify)
-		return second_name.getName();
+		return second_name.getName(lang);
 	else
-		return name.getName();
+		return name.getName(lang);
+}
+
+
+bool item::matches(const string& term_raw) {
+    string term = tolower_ascii(term_raw);
+
+    for (auto it : LocalzationManager::localization_type.ordered_entries()) {
+        string name = tolower_ascii(GetNameString(it.first));
+        if (name.find(term) != string::npos)
+            return true;
+
+        for (LOCALIZATION_ENUM_KEY tag : item_tag) {
+            string tag_string = tolower_ascii(LocalzationManager::locString(it.first, tag));
+            if (tag_string.find(term) != string::npos)
+                return true;
+        }
+    }
+
+    string base_name = tolower_ascii(GetNameString());
+    return base_name.find(term) != string::npos;
+}
+
+
+bool item::checkString(string str) {
+    str = trim(str);
+
+    vector<string> or_conditions = split_by_or(str);
+    for (const string& or_term : or_conditions) {
+        vector<string> and_conditions = split_by_and(or_term);
+        bool all_and_match = true;
+
+        for (const string& term : and_conditions) {
+            string trimmed = trim(term);
+            if (!matches(trimmed)) {
+                all_and_match = false;
+                break;
+            }
+        }
+
+        if (all_and_match)
+            return true;
+    }
+
+    return false;
 }
 
 name_infor item::GetNameInfor()
@@ -744,10 +831,7 @@ equip_type item::GetArmorType()
 
 bool item::SameItem(const item &item_)
 {
-	if(type == ITM_GOAL)
-		return (type == item_.type && value2 == item_.value2 && value3 == item_.value3 && value4 == item_.value4 && value5 == item_.value5 && value6 == item_.value6 &&  value7 == item_.value7 && value8 == item_.value8);
-	else
-		return (type == item_.type && value1 == item_.value1 && value2 == item_.value2 && value3 == item_.value3 && value4 == item_.value4 && value5 == item_.value5 && value6 == item_.value6 &&  value7 == item_.value7 && value8 == item_.value8);
+	return (type == item_.type && value1 == item_.value1 && value2 == item_.value2 && value3 == item_.value3 && value4 == item_.value4 && value5 == item_.value5 && value6 == item_.value6 &&  value7 == item_.value7 && value8 == item_.value8);
 }
 float item::GetStabPercent()
 {

@@ -143,6 +143,14 @@ public:
         }
         return V();
     }
+    bool has(const K& key) {
+        auto it = map_.find(key);
+        if (it != map_.end()) {
+            return true;
+        }
+        return false;
+    }
+
 
 private:
     std::vector<std::pair<K, V>> entries_;
@@ -395,4 +403,11 @@ vector<string> SplitStringByFontWidth(const wstring& wtext, int firstLength, int
 vector<string> SplitStringByFontWidth(const string& text, int firstLength, int nextLength);
 
 void replaceAll(string& str, const string& from, const string& to);
+string trim(const string& s);
+vector<string> split_by_delimiter(const string& str, const string& delim);
+vector<string> split_by_or(const string& str);
+vector<string> split_by_and(const string& str);
+string tolower_ascii(const string& str);
+
+std::string shorten_utf8(const std::string& input, size_t max_chars);
 #endif // __COMMON_H__

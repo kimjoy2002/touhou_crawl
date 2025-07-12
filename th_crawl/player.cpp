@@ -80,23 +80,26 @@ void name_infor::LoadDatas(FILE *fp)
 	postfix = temp;
 }
 
-string name_infor::getName() const {
+string name_infor::getName(string lang) const {
+	if(lang.empty()) {
+		lang = LocalzationManager::current_lang;
+	}
 	string return_string;
 	if(system_key != LOC_NONE) {
 		if(name_param != MON_NONE_MONSTER) {
-			return_string = LocalzationManager::formatString(system_key, PlaceHolderHelper(LocalzationManager::monString(name_param)));
+			return_string = LocalzationManager::formatString(lang, system_key, PlaceHolderHelper(LocalzationManager::monString(name_param)));
 		} else if (param != LOC_NONE){
-			return_string = LocalzationManager::formatString(system_key, PlaceHolderHelper(param));
+			return_string = LocalzationManager::formatString(lang, system_key, PlaceHolderHelper(param));
 		} else {
-			return_string = LocalzationManager::locString(system_key);
+			return_string = LocalzationManager::locString(lang, system_key);
 		}
 	} else if(name_key != MON_NONE_MONSTER)  {
 		if(name_param != MON_NONE_MONSTER) {
-			return_string = LocalzationManager::formatString(name_key, PlaceHolderHelper(LocalzationManager::monString(name_param)));
+			return_string = LocalzationManager::formatString(lang, name_key, PlaceHolderHelper(LocalzationManager::monString(name_param)));
 		} else if (param != LOC_NONE){
-			return_string = LocalzationManager::formatString(name_key, PlaceHolderHelper(param));
+			return_string = LocalzationManager::formatString(lang, name_key, PlaceHolderHelper(param));
 		} else {
-			return_string = LocalzationManager::monString(name_key);
+			return_string = LocalzationManager::monString(lang, name_key);
 		}
 	}
 	if(!postfix.empty()) {
@@ -125,7 +128,7 @@ s_regen(0), s_selfdestruct(0), s_glutton(0), s_glutton_turn(0), s_shield(), alch
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
-,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0), prevSpell(0), lastSelectMenu(0), lastExplore(0), currentSkillNum(0),god(GT_NONE), piety(0), gift_count(0), god_turn(0), suwako_meet(0),
+,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0), prevSpell(0), lastSelectMenu(0), lastExplore(0), lastSearch(), currentSkillNum(0),god(GT_NONE), piety(0), gift_count(0), god_turn(0), suwako_meet(0),
 sight_reset(false), target(NULL), useMouseTammac(0), throw_weapon(NULL), quickMenu1(SYSCMD_QUICKTHROW), quickMenu2(SYSCMD_MAGIC), dead_order(NULL), dead_reason(DR_NONE)
 {
 	for(int i=0;i<2;i++)
@@ -221,6 +224,7 @@ void players::init() {
 	search_pos = coord_def(0,0);
 	buff_list.clear();
 	item_list.clear();
+	search_list.clear();
 	property_vector.clear();
 	action_vector.clear();
 	item_weight = 0;
@@ -352,6 +356,7 @@ void players::init() {
 	prevSpell = 0;
 	lastSelectMenu = 0;
 	lastExplore = 0;
+	lastSearch = "";
 	for(int i=0;i<52;i++)
 		MemorizeSkill[i] = 0;
 	for(int i=0;i<52;i++)
@@ -396,8 +401,8 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, prev_position.y);
 	name.SaveDatas(fp);
 	{
-		char temp[100];
-		sprintf_s(temp,100,"%s",user_name.c_str());
+		char temp[256];
+		sprintf_s(temp,256,"%s",user_name.c_str());
 		SaveData<char>(fp,*temp, strlen(temp)+1);
 	}
 	SaveData<int>(fp, texturetoint(image));
@@ -594,6 +599,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, prevSpell);
 	SaveData<int>(fp, lastSelectMenu);
 	SaveData<char>(fp, lastExplore);
+	SaveData<char>(fp, *lastSearch.c_str(), lastSearch.size() + 1);
 	SaveData<int>(fp, *MemorizeSkill,52);
 	SaveData<int>(fp, *MemorizeSkill_num,52);
 	SaveData<int>(fp, currentSkillNum);
@@ -618,6 +624,7 @@ void players::SaveDatas(FILE *fp)
 void players::LoadDatas(FILE *fp)
 {
 	item_list.clear();
+	search_list.clear();
 
 	//필수 정보
 	LoadData<int>(fp, level);
@@ -632,7 +639,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, prev_position.y);
 	name.LoadDatas(fp);
 	{
-		char temp[100];
+		char temp[256];
 		LoadData<char>(fp, *temp);
 		user_name = temp;
 	}
@@ -870,6 +877,9 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, lastSelectMenu);
 	if(!isPrevVersion(loading_version_string, "ver1.108")) {
 		LoadData<char>(fp, lastExplore);
+	}
+	if(!isPrevVersion(loading_version_string, "ver1.109")) {
+		lastSearch = loadString(fp);
 	}
 	LoadData<int>(fp, *MemorizeSkill);
 	LoadData<int>(fp, *MemorizeSkill_num);

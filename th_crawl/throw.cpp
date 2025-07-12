@@ -121,7 +121,7 @@ bool TanmacDeleteRand(tanmac_type type, bool isCanDelete_)
 }
 void MakeTanmac(item_infor* t, int select_)
 {
-
+	t->value0 = 0;
 	tanmac_type type = TMT_AMULET;
 	
 	random_extraction<tanmac_type> rand_;
@@ -137,6 +137,7 @@ void MakeTanmac(item_infor* t, int select_)
 	if(select_ != -1)
 		type = (tanmac_type)select_;
 
+	t->item_tag.push_back(LOC_SYSTEM_TAG_THROWABLE);
 	switch(type)
 	{
 	case TMT_AMULET:

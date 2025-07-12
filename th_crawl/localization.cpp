@@ -23,21 +23,9 @@ string LocalzationManager::current_lang = "ENG";
 OrderedMap<string, localizationInfo> LocalzationManager::localization_type;
 unordered_map<string, LOCALIZATION_ENUM_KEY> LocalzationManager::localization_enum_map = createEnumMap();
 unordered_map<LOCALIZATION_ENUM_KEY, string> LocalzationManager::localization_enum_reverse_map = createEnumReverseMap();
-unordered_map<LOCALIZATION_ENUM_KEY, string> LocalzationManager::localization_map;
 unordered_map<string, SPEAK_ENUM_KEY> LocalzationManager::speak_enum_map = createSpeakEnumMap();
-unordered_map<SPEAK_ENUM_KEY, string> LocalzationManager::speak_map;
 unordered_map<string, monster_index> LocalzationManager::monster_enum_map = createMonsterEnumMap();
 unordered_map<monster_index, string> LocalzationManager::monster_enum_reverse_map = createMonsterEnumReverseMap();
-unordered_map<monster_index, string> LocalzationManager::monster_name_map;
-unordered_map<monster_index, string> LocalzationManager::monster_description_map;
-vector<TextHelper> LocalzationManager::help_command;
-vector<TextHelper> LocalzationManager::help_pad_command;
-vector<TextHelper> LocalzationManager::help_credit;
-vector<TextHelper> LocalzationManager::help_wizard;
-vector<TextHelper> LocalzationManager::help_character;
-vector<int> LocalzationManager::helpline_character;
-vector<TextHelper> LocalzationManager::help_gods;
-vector<int> LocalzationManager::helpline_gods;
 
 unordered_set<string> LocalzationManager::korean_verbs = {
 	"은|는", "이|가", "을|를", "과|와", "으로|로", "이라|라", "이다|다", "이고|고"
@@ -49,44 +37,57 @@ unordered_set<string> LocalzationManager::english_article = {
 	"a|an"
 };
 
+OrderedMap<string, shared_ptr<LocalzationManager::LocalzationData>> LocalzationManager::localizationVector;
+
+void LocalzationManager::allinit(string type) {
+	for (auto it : localization_type.ordered_entries()) {
+		LocalzationManager::init(it.first, true);
+	}
+	current_lang = type;
+}
 
 void LocalzationManager::init(string type, bool init_) {
-	current_lang = type;
 	string filePath;
+	string type_ = type;
 
-	if(init_) {
-		localization_map.clear();
-		speak_map.clear();
-		monster_name_map.clear();
-		monster_description_map.clear();
-		help_command.clear();
-		help_credit.clear();
+
+	if(!localizationVector.has(type))  {
+		localizationVector.insert(type, make_shared<LocalzationManager::LocalzationData>());
 	}
-	std::transform(type.begin(), type.end(), type.begin(),
+	if(init_) {
+		localizationVector.find(type)->localization_map.clear();
+		localizationVector.find(type)->speak_map.clear();
+		localizationVector.find(type)->monster_name_map.clear();
+		localizationVector.find(type)->monster_description_map.clear();
+		localizationVector.find(type)->help_command.clear();
+		localizationVector.find(type)->help_credit.clear();
+	}
+	
+	std::transform(type_.begin(), type_.end(), type_.begin(),
 		[](unsigned char c) { return std::tolower(c); });
 	
-	filePath = "./data/localization/" +  type + "/";
+	filePath = "./data/localization/" +  type_ + "/";
 
-	initFileSimple(filePath, "help.txt", help_command, nullptr);
-	initFileSimple(filePath, "help_pad.txt", help_pad_command, nullptr);
-	initFileSimple(filePath, "credit.txt", help_credit, nullptr);
-	initFileSimple(filePath, "wizardhelp.txt", help_wizard, nullptr);
-	initFileSimple(filePath, "character.txt", help_character, &helpline_character);
-	initFileSimple(filePath, "gods.txt", help_gods, &helpline_gods);
+	initFileSimple(filePath, "help.txt", localizationVector.find(type)->help_command, nullptr);
+	initFileSimple(filePath, "help_pad.txt", localizationVector.find(type)->help_pad_command, nullptr);
+	initFileSimple(filePath, "credit.txt", localizationVector.find(type)->help_credit, nullptr);
+	initFileSimple(filePath, "wizardhelp.txt", localizationVector.find(type)->help_wizard, nullptr);
+	initFileSimple(filePath, "character.txt", localizationVector.find(type)->help_character, &localizationVector.find(type)->helpline_character);
+	initFileSimple(filePath, "gods.txt", localizationVector.find(type)->help_gods, &localizationVector.find(type)->helpline_gods);
 
-	initFile<LOCALIZATION_ENUM_KEY>(filePath, "general.txt", localization_enum_map, 1, [](LOCALIZATION_ENUM_KEY key, vector<string> values, vector<string> prev_values) {
-		localization_map[key] = values[0];
-		replaceAll(localization_map[key], "\\n", "\n");
+	initFile<LOCALIZATION_ENUM_KEY>(filePath, "general.txt", localization_enum_map, 1, [type](LOCALIZATION_ENUM_KEY key, vector<string> values, vector<string> prev_values) {
+		localizationVector.find(type)->localization_map[key] = values[0];
+		replaceAll(localizationVector.find(type)->localization_map[key], "\\n", "\n");
 	});
 
-	initFile<SPEAK_ENUM_KEY>(filePath, "speak.txt", speak_enum_map, 1, [](SPEAK_ENUM_KEY key, vector<string> values, vector<string> prev_values) {
-		speak_map[key] = values[0];
+	initFile<SPEAK_ENUM_KEY>(filePath, "speak.txt", speak_enum_map, 1, [type](SPEAK_ENUM_KEY key, vector<string> values, vector<string> prev_values) {
+		localizationVector.find(type)->speak_map[key] = values[0];
 	});
 
-	initFile<monster_index>(filePath, "monsters.txt", monster_enum_map, 2, [](monster_index key, vector<string> values, vector<string> prev_values) {
-		monster_name_map[key] = (!values[0].empty())?values[0]:prev_values[0];
-		monster_description_map[key] = (!values[1].empty())?values[1]:prev_values[1];
-		replaceAll(monster_description_map[key], "\\n", "\n");
+	initFile<monster_index>(filePath, "monsters.txt", monster_enum_map, 2, [type](monster_index key, vector<string> values, vector<string> prev_values) {
+		localizationVector.find(type)->monster_name_map[key] = (!values[0].empty())?values[0]:prev_values[0];
+		localizationVector.find(type)->monster_description_map[key] = (!values[1].empty())?values[1]:prev_values[1];
+		replaceAll(localizationVector.find(type)->monster_description_map[key], "\\n", "\n");
 	});
 }
 
@@ -280,17 +281,40 @@ string LocalzationManager::getCurrentFont() {
 }
 
 const string& LocalzationManager::locString(LOCALIZATION_ENUM_KEY key) { //TODO) {} 문법이 이쓰면 formatString으로 바꾸기
-	if(localization_map.find(key) != localization_map.end()) {
-		return localization_map[key];
+	if(localizationVector.find(current_lang)->localization_map.find(key) != localizationVector.find(current_lang)->localization_map.end()) {
+		return localizationVector.find(current_lang)->localization_map[key];
 	}
-	return localization_map[LOC_NONE];
+	if(baseLang() != current_lang) {
+		if(localizationVector.find(baseLang())->localization_map.find(key) != localizationVector.find(baseLang())->localization_map.end()) {
+			return localizationVector.find(baseLang())->localization_map[key];
+		}
+	}
+	return localizationVector.find(current_lang)->localization_map[LOC_NONE];
 }
 
-const string& LocalzationManager::speakString(SPEAK_ENUM_KEY key) {
-	if(speak_map.find(key) != speak_map.end()) {
-		return speak_map[key];
+
+const string& LocalzationManager::locString(string lang, LOCALIZATION_ENUM_KEY key) {
+	if(localizationVector.find(lang)->localization_map.find(key) != localizationVector.find(lang)->localization_map.end()) {
+		return localizationVector.find(lang)->localization_map[key];
 	}
-	return speak_map[SPEAK_NORMAL];
+	if(baseLang() != lang) {
+		if(localizationVector.find(baseLang())->localization_map.find(key) != localizationVector.find(baseLang())->localization_map.end()) {
+			return localizationVector.find(baseLang())->localization_map[key];
+		}
+	}
+	return localizationVector.find(lang)->localization_map[LOC_NONE];
+}
+
+
+
+const string& LocalzationManager::speakString(SPEAK_ENUM_KEY key) {
+	if(localizationVector.find(current_lang)->speak_map.find(key) != localizationVector.find(current_lang)->speak_map.end()) {
+		return localizationVector.find(current_lang)->speak_map[key];
+	}
+	if(localizationVector.find(baseLang())->speak_map.find(key) != localizationVector.find(baseLang())->speak_map.end()) {
+		return localizationVector.find(baseLang())->speak_map[key];
+	}
+	return localizationVector.find(current_lang)->speak_map[SPEAK_NORMAL];
 }
 
 const string& LocalzationManager::getMonsterEnumString(monster_index key) {
@@ -407,28 +431,45 @@ std::string LocalzationManager::verb(const std::string& text, const std::string&
 	return only_verb?verb:text + verb;
 }
 const string& LocalzationManager::monString(monster_index key) {
-	if(monster_name_map.find(key) != monster_name_map.end()) {
-		return monster_name_map[key];
+	if(localizationVector.find(current_lang)->monster_name_map.find(key) != localizationVector.find(current_lang)->monster_name_map.end()) {
+		return localizationVector.find(current_lang)->monster_name_map[key];
 	}
-	return monster_name_map[MON_REIMUYUKKURI];
+	if(localizationVector.find(baseLang())->monster_name_map.find(key) != localizationVector.find(baseLang())->monster_name_map.end()) {
+		return localizationVector.find(baseLang())->monster_name_map[key];
+	}
+	return localizationVector.find(current_lang)->monster_name_map[MON_REIMUYUKKURI];
+}
+const string& LocalzationManager::monString(string lang, monster_index key) {
+	if(localizationVector.find(lang)->monster_name_map.find(key) != localizationVector.find(lang)->monster_name_map.end()) {
+		return localizationVector.find(lang)->monster_name_map[key];
+	}
+	if(lang != baseLang()) {
+		if(localizationVector.find(baseLang())->monster_name_map.find(key) != localizationVector.find(baseLang())->monster_name_map.end()) {
+			return localizationVector.find(baseLang())->monster_name_map[key];
+		}
+	}
+	return localizationVector.find(lang)->monster_name_map[MON_REIMUYUKKURI];
 }
 const string& LocalzationManager::monDecsriptionString(monster_index key) {
-	if(monster_description_map.find(key) != monster_description_map.end()) {
-		return monster_description_map[key];
+	if(localizationVector.find(current_lang)->monster_description_map.find(key) != localizationVector.find(current_lang)->monster_description_map.end()) {
+		return localizationVector.find(current_lang)->monster_description_map[key];
 	}
-	return monster_description_map[MON_REIMUYUKKURI];
+	if(localizationVector.find(baseLang())->monster_description_map.find(key) != localizationVector.find(baseLang())->monster_description_map.end()) {
+		return localizationVector.find(baseLang())->monster_description_map[key];
+	}
+	return localizationVector.find(current_lang)->monster_description_map[MON_REIMUYUKKURI];
 }
 
 int LocalzationManager::getHelpCharacterLine(int index) {
-	if(helpline_character.size() > index) {
-		return helpline_character[index];
+	if(localizationVector.find(current_lang)->helpline_character.size() > index) {
+		return localizationVector.find(current_lang)->helpline_character[index];
 	} else {
 		return 0;
 	}
 }
 int LocalzationManager::getHelpGodsLine(int index) {
-	if(helpline_gods.size() > index) {
-		return helpline_gods[index];
+	if(localizationVector.find(current_lang)->helpline_gods.size() > index) {
+		return localizationVector.find(current_lang)->helpline_gods[index];
 	} else {
 		return 0;
 	}

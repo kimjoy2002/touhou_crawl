@@ -58,6 +58,9 @@ void LoadData(FILE *fp, T &output)
 	}
 	//delete[] temp;
 }
+
+std::string loadString(FILE* fp);
+
 void delete_file();
 void saveandexit();
 void saveandcheckexit();

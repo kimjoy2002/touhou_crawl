@@ -22,12 +22,13 @@ struct InputedKey;
 
 int waitkeyinput(InputedKey& key, bool direction_ = false, bool immedity_ = false, bool ablecursor = false);
 int waitkeyinput(bool direction_ = false, bool immedity_ = false, bool ablecursor = false);
+void clearKey();
 bool ynPromptSimple(LOCALIZATION_ENUM_KEY prompt_key, LOCALIZATION_ENUM_KEY canclePrompt_key, D3DCOLOR promptColor);
 bool ynPrompt(LOCALIZATION_ENUM_KEY prompt_key, LOCALIZATION_ENUM_KEY canclePrompt_key, D3DCOLOR promptColor, bool temp, bool uppercase, bool loop, bool log);
 bool ynPrompt(string prompt, string canclePrompt, D3DCOLOR promptColor, bool temp, bool isuppercase, bool loop, bool log);
 int MoreWait();
 bool isKeyinput();
-string getKeyboardInputString();
+string getKeyboardInputString(bool& cancle);
 
 extern bool game_over;
 

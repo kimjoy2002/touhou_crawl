@@ -642,6 +642,7 @@ void wiz_mode()
 					makeitem(ITM_ETC, 0, &t, 0);
 					item * item_ = env[current_level].MakeItem(you.position, t);
 					MakeFixedArtifact(item_, (fixed_artifact_type)i, true);
+					item_->item_tag.push_back(LOC_SYSTEM_TAG_FIXDART);
 				}
 			}
 			return;

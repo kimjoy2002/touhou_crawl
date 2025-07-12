@@ -716,7 +716,9 @@ void MakeArtifact(item* item_, int good_bad_)
 			//고정아티 존재함
 			//기본 고정아티 확률 1/10
 			if(randA(13-3*good_bad_) == 0) {
+				item_->item_tag.clear();
 				MakeFixedArtifact(item_, able_fixed_arti.pop(), false);
+				item_->item_tag.push_back(LOC_SYSTEM_TAG_FIXDART);
 				return;
 			}
 		}
@@ -817,6 +819,7 @@ void MakeArtifact(item* item_, int good_bad_)
 	{
 		item_->image = &img_item_artifact_amulet;
 	}
+	item_->item_tag.push_back(LOC_SYSTEM_TAG_RANDART);
 	item_->second_name= name_infor(LOC_SYSTEM_ITEM_ARTIFACT);
 
 }
@@ -950,6 +953,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_hakkero;
 		item_->equip_image = &img_play_item_fixed_artifact[0];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON_MACE);
 		item_->weight = 0.2f;
 		item_->value = 900;
 		item_->curse = false;
@@ -975,6 +980,9 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_gungnir;
 		item_->equip_image = &img_play_item_fixed_artifact[1];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON_SPEAR);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_THROWABLE);
 		item_->weight = 8.0f;
 		item_->value = 900;
 		item_->curse = false;
@@ -999,6 +1007,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_roukanken;
 		item_->equip_image = &img_play_item_fixed_artifact[2];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_ROUKANKEN_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON_LONGBLADE);
 		item_->weight = 4.0f;
 		item_->value = 600;
 		item_->curse = false;
@@ -1022,6 +1032,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_hakurouken;
 		item_->equip_image = &img_play_item_fixed_artifact[3];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_ARMOUR);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_SHIELD);
 		item_->weight = 3.0f;
 		item_->value = 300;
 		item_->curse = false;
@@ -1046,6 +1058,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_koishihat;
 		item_->equip_image = &img_play_item_fixed_artifact[4];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_ARMOUR);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_HEAD);
 		item_->weight = 3.0f;
 		item_->value = 500;
 		item_->curse = false;
@@ -1072,6 +1086,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_mikocloak;
 		item_->equip_image = &img_play_item_fixed_artifact[5];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_MIKOCLOAK_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_ARMOUR);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_CLOAK);
 		item_->weight = 5.0f;
 		item_->value = 600;
 		item_->curse = false;
@@ -1099,6 +1115,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_lunatictorch;
 		item_->equip_image = &img_play_item_fixed_artifact[6];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON_MACE);
 		item_->weight = 5.0f;
 		item_->value = 600;
 		item_->curse = false;
@@ -1124,6 +1142,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_moongem;
 		item_->equip_image = NULL;
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_MOONGEM_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_JEWELRY);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_AMULET);
 		item_->weight = 1.0f;
 		item_->value = 400;
 		item_->curse = false;
@@ -1147,6 +1167,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_nuclearboot;
 		item_->equip_image = &img_play_item_fixed_artifact[7];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_ARMOUR);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_FOOT);
 		item_->weight = 4.0f;
 		item_->value = 450;
 		item_->curse = false;
@@ -1171,6 +1193,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_controlrod;
 		item_->equip_image = &img_play_item_fixed_artifact[8];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON_MACE);
 		item_->weight = 20.0f;
 		item_->value = 1200;
 		item_->curse = false;
@@ -1195,6 +1219,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_pickandshovels;
 		item_->equip_image = &img_play_item_fixed_artifact[9];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON_AXE);
 		item_->weight = 12.0f;
 		item_->value = 1100;
 		item_->curse = false;
@@ -1219,6 +1245,9 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_silverknife;
 		item_->equip_image = &img_play_item_fixed_artifact[10];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON_SHORTBLADE);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_THROWABLE);
 		item_->weight = 1.5f;
 		item_->value = 500;
 		item_->curse = false;
@@ -1243,6 +1272,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_fireflycloak;
 		item_->equip_image = &img_play_item_fixed_artifact[11];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_FIREFLYCLOAK_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_ARMOUR);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_CLOAK);
 		item_->weight = 5.0f;
 		item_->value = 300;
 		item_->curse = false;
@@ -1266,6 +1297,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_icefairyring;
 		item_->equip_image = NULL;
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_ICEFAIRYRING_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_JEWELRY);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_RING);
 		item_->weight = 1.0f;
 		item_->value = 500;
 		item_->curse = false;
@@ -1289,6 +1322,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_laevatein;
 		item_->equip_image = &img_play_item_fixed_artifact[12];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_LAEVATEIN_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_WEAPON_LONGBLADE);
 		item_->weight = 12.0f;
 		item_->value = 950;
 		item_->curse = false;
@@ -1311,6 +1346,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_lilyring;
 		item_->equip_image = NULL;
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_LILYRING_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_JEWELRY);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_RING);
 		item_->weight = 1.0f;
 		item_->value = 400;
 		item_->curse = false;
@@ -1333,6 +1370,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->image = &img_item_fixed_artifact_galeclogs;
 		item_->equip_image = &img_play_item_fixed_artifact[13];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_GALECLOGS_NAME);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_ARMOUR);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_FOOT);
 		item_->weight = 4.0f;
 		item_->value = 300;
 		item_->curse = false;
@@ -1354,6 +1393,9 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->value7 = 0;
 		item_->value8 = 0;
 		item_->can_throw = false;
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_ARMOUR);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_BODY);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_BODY0);
 		item_->image = &img_item_fixed_artifact_helltshirt;
 		item_->equip_image = &img_play_item_fixed_artifact[14];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_HELLTSHIRT_NAME);
@@ -1381,6 +1423,9 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->value8 = 0;
 		item_->can_throw = false;
 		item_->image = &img_item_fixed_artifact_kappafullarmor;
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_ARMOUR);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_BODY);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_BODY3);
 		item_->equip_image = &img_play_item_fixed_artifact[15];
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_NAME);
 		item_->weight = 30.0f;
@@ -1406,6 +1451,9 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->can_throw = false;
 		item_->image = &img_item_fixed_artifact_maiduniform;
 		item_->equip_image = &img_play_item_fixed_artifact[16];
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_ARMOUR);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_BODY);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_BODY2);
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_NAME);
 		item_->weight = 16.0f;
 		item_->value = 900;
@@ -1431,6 +1479,8 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->can_throw = false;
 		item_->image = &img_item_fixed_artifact_ibukisake;
 		item_->equip_image = &img_play_item_fixed_artifact[17];
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_ARMOUR);
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_SHIELD);
 		item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_IBUKISAKE_NAME);
 		item_->weight = 5.0f;
 		item_->value = 500;

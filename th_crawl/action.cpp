@@ -92,6 +92,7 @@ int Move(const coord_def &c)
 
 void Long_Move(const coord_def &c, bool speak_)
 {
+	clearKey();
 	while(!you.will_move.empty())
 		you.will_move.pop();
 	//이렇게 해도되려나?
@@ -2666,7 +2667,7 @@ void rune_Show()
 		remain -= PrintCharWidth(LocalzationManager::locString(rune_string[i]));
 		for(;remain>0;remain--)
 			SetText() += " ";
-		SetText() += LocalzationManager::formatString(LOC_SYSTEM_UI_RUNE_NAME, PlaceHolderHelper(rune_string[i]));
+		SetText() += LocalzationManager::locString(rune_string[i]);
 		SetText() += " :";
 
 
@@ -4603,6 +4604,75 @@ void auto_tanmac_onoff()
 	}
 }
 
+
+void verylongMove(int level, coord_def pos)
+{
+	if (current_level != level) { 
+		bool onemore = false;
+		do {
+			queue<list<coord_def>> stairMap;
+			if (MapNode::searchRoad(current_level, (int)level, &stairMap)) {
+				onemore = true;
+				while (!stairMap.empty()) {
+					list<coord_def> list_ = stairMap.front();
+					enterlog();
+					coord_def next_;
+					int length = 9999;
+					for (auto it = list_.begin(); it != list_.end(); it++)
+					{
+						stack<coord_def> stacks;
+						if ((env[current_level].isExplore(it->x, it->y) ||
+							env[current_level].isMapping(it->x, it->y)
+							)
+							&& env[current_level].isStair(it->x, it->y)
+							&& PathSearch(you.position, *it, stacks, ST_NORMAL))
+						{
+							if (length > stacks.size()) {
+								next_ = (*it);
+								length = stacks.size();
+							}
+						}
+					}
+
+					Long_Move(next_, true);
+					if (you.position == next_) {
+						switch (env[current_level].getStairKind(you.position.x, you.position.y)) 
+						{
+						case STAIR_KIND_NOT_STAIR:
+							return;
+						case STAIR_KIND_UP_BASE:
+						case STAIR_KIND_UP_SPECIAL:
+							Stair_move(false);
+							break;
+						case STAIR_KIND_DOWN_BASE:
+						case STAIR_KIND_DOWN_SPECIAL:
+							Stair_move(true);
+							break;
+						}
+					}
+					else {
+						break;
+					}
+					stairMap.pop();
+				}
+			}
+			if(onemore && current_level == level) {
+				onemore = false;
+			}
+		} while(onemore);
+	}
+
+	if (current_level == level) { 
+		if(pos != coord_def(-1, -1)) {
+			Long_Move(pos, true);
+		}
+		if(pos == coord_def(-1, -1) || pos == you.position) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_DONE_EXPLORE), true, false, false, CL_normal);
+		}
+	}
+	
+}
+
 void floorMove()
 {
 	dungeon_level next_ = TEMPLE_LEVEL;
@@ -4771,52 +4841,144 @@ void floorMove()
 		return;
 	}
 
-	queue<list<coord_def>> stairMap;
-	if (MapNode::searchRoad(current_level, (int)next_, &stairMap)) {
-		you.lastExplore = key_;
 
-		while (!stairMap.empty()) {
-			list<coord_def> list_ = stairMap.front();
-			enterlog();
-			coord_def next_;
-			int length = 9999;
-			for (auto it = list_.begin(); it != list_.end(); it++)
-			{
-				stack<coord_def> stacks;
-				if ((env[current_level].isExplore(it->x, it->y) ||
-					env[current_level].isMapping(it->x, it->y)
-					)
-					&& env[current_level].isStair(it->x, it->y)
-					&& PathSearch(you.position, *it, stacks, ST_NORMAL))
-				{
-					if (length > stacks.size()) {
-						next_ = (*it);
-						length = stacks.size();
+	you.lastExplore = key_;
+	verylongMove(next_, coord_def(-1,-1));
+
+}
+
+bool iteminfor_(item *item_, bool onlyinfor);
+void verylongMove(int level, coord_def pos);
+void findItem() {
+	if(env[current_level].isBamboo()) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SEARCH_ITEM_FAIL_BAMBOO), true, false, false, CL_help);
+		return;
+	}
+	enterlog();
+	if(you.lastSearch.empty()) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SEARCH_ITEM), true, false, false, CL_help);
+	} else {
+		string short_string = shorten_utf8(you.lastSearch, 6);
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_SEARCH_ITEM_ENTER,
+			PlaceHolderHelper(short_string)), true, false, false, CL_help);
+	}
+	bool cancle = false;
+	string enterString = getKeyboardInputString(cancle);
+	if(enterString.empty())
+		enterString = you.lastSearch;
+	enterlog();
+	you.search_list.clear();
+	enterString = trim(enterString);
+	if(enterString.empty() || cancle) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DO_CANCLE), true, false, false, CL_help);
+		return;
+	}
+
+	int num = 0;
+	if(enterString == ".") {
+		for(auto& item_find : env[current_level].item_list) {
+			if(env[current_level].isExplore(item_find.position.x, item_find.position.y)) {
+				item item_ = item_find; //복사
+				item_.search_field.level = current_level;
+				item_.id = numtoasc(num++);
+				you.search_list.push_back(item_);
+			}
+		}
+	} else {
+		for(int i = 0; i < MAXLEVEL;i ++) {
+			if(env[i].make && (i == current_level || !env[i].isInstanceMap())) {
+				for(auto& item_find : env[i].item_list) {
+					if(env[i].isExplore(item_find.position.x, item_find.position.y)) {
+						if(item_find.checkString(enterString)) {
+							item item_ = item_find; //복사
+							item_.search_field.level = i;
+							item_.id = numtoasc(num++);
+							you.search_list.push_back(item_);
+						}
 					}
 				}
 			}
-
-			Long_Move(next_, true);
-			if (you.position == next_) {
-				switch (env[current_level].getStairKind(you.position.x, you.position.y)) 
-				{
-				case STAIR_KIND_NOT_STAIR:
-					return;
-				case STAIR_KIND_UP_BASE:
-				case STAIR_KIND_UP_SPECIAL:
-					Stair_move(false);
-					break;
-				case STAIR_KIND_DOWN_BASE:
-				case STAIR_KIND_DOWN_SPECIAL:
-					Stair_move(true);
-					break;
-				}
-			}
-			else {
-				return;
-			}
-			stairMap.pop();
 		}
 	}
+	you.lastSearch = trim(enterString);
 
+	if(you.search_list.empty()) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SEARCH_ITEM_FAIL_EMPTY), true, false, false, CL_help);
+		you.search_list.clear();
+		return;
+	}
+	if(you.search_list.size() > 52) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SEARCH_ITEM_FAIL_TOO_MANY), true, false, false, CL_help);
+		you.search_list.clear();
+		return;
+	}
+
+	view_item(IVT_SEARCH,LOC_SYSTEM_DISPLAY_MANAGER_ITEMINFOR);
+	while(1)
+	{
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey,true);
+
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+			int char_ = DisplayManager.positionToChar();
+			if(char_) {
+				key_ = char_;
+			}
+		}
+
+		if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
+		{
+			int num_ = asctonum(key_);
+			//int get_item_move_ = getDisplayMove();
+			item* item_ = &*std::next(you.search_list.begin(), num_);
+			if(item_ != nullptr) {
+				changedisplay(DT_GAME);
+				verylongMove(item_->search_field.level, item_->position);
+				break;
+			}
+		}
+		else if(key_ == VK_DOWN)//-----이동키-------
+		{
+			DisplayManager.addPosition(1);
+		}
+		else if(key_ == VK_UP)
+		{
+			DisplayManager.addPosition(-1);
+		}
+		else if(key_ == VK_PRIOR)
+		{
+			changemove(-option_mg.getHeight());
+		}
+		else if(key_ == VK_NEXT)
+		{
+			changemove(option_mg.getHeight());
+		}						//-----이동키끝-------
+		else if(key_ == -1) {
+			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
+				int num_ = asctonum(inputedKey.val1);
+				//int get_item_move_ = getDisplayMove();
+				if(you.search_list.size() > num_) {
+					item* item_ = &*std::next(you.search_list.begin(), num_);
+					if(item_ != nullptr) {
+						iteminfor_(item_, true);
+						view_item(IVT_SEARCH,LOC_SYSTEM_DISPLAY_MANAGER_ITEMINFOR);
+					}
+				}
+			} else if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(-32);  //아래
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(32);  //위
+			} else if (inputedKey.isRightClick()) {
+				break;
+			}
+		}
+		else if(key_ == VK_ESCAPE ||
+				key_ == GVK_BUTTON_B ||
+				key_ == GVK_BUTTON_B_LONG) {
+			break;
+		}
+	}
+	changedisplay(DT_GAME);
+	you.search_list.clear();
+	enterlog();
 }

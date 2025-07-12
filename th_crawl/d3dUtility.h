@@ -145,6 +145,7 @@ public:
     InputedKey pop(int timeout_ms = 500); // timeout_ms: 허용된 최대 지연 시간
     bool try_pop(InputedKey& key);
     bool empty();
+	void clear();
 
 private:
     std::queue<TimedKey> queue_;

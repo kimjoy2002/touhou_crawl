@@ -28,9 +28,10 @@
 §yw§d      - Equip weapon (use '-' for unarmed)         §y+/-§d - Zoom In/Out screen
 §yW/T§d    - Equip/unequip armor
 §yP/R§d    - Equip/unequip accessory
-§cctrl-A§d - Toggle auto-pickup                         §b<Cheat Mode>§d
-§y'§d      - Swap weapon (a, b hotkeys)                 §y&§d - Wizard mode
-                                                    §y_§d - Save-preserving quit
+§cctrl-A§d - Toggle auto-pickup
+§y'§d      - Swap weapon (a, b hotkeys)
+§cctrl-f§d - Item Search
+
                                                        
 §b<Abilities>§d                                        
 §yp§d - Pray                                            

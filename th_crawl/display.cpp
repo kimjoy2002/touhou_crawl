@@ -4186,19 +4186,25 @@ void display_manager::item_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				
 
 
-				string temp;
-				temp+=(*it).id;
-				temp+=item_view[asctonum((*it).id)]?(item_num[asctonum((*it).id)]?" # ":" + "):" - ";
-				temp+=(*it).GetName().c_str();
+				ostringstream temp;
+				temp << (*it).id;
+				temp <<  (item_view[asctonum((*it).id)]?(item_num[asctonum((*it).id)]?" # ":" + "):" - ");
+				temp  << (*it).GetName();
 				if(equip)
-					temp += (equip==1?("(" + LocalzationManager::locString(LOC_SYSTEM_EQUIP) + ")"):
+					temp  << (equip==1?("(" + LocalzationManager::locString(LOC_SYSTEM_EQUIP) + ")"):
 					(equip==2?("(" + LocalzationManager::locString(LOC_SYSTEM_LEFT_HAND) + ")"):
 					("(" + LocalzationManager::locString(LOC_SYSTEM_RIGHT_HAND) + ")")));
-				it->draw(pSprite, pfont, rc.left - 24, rc.top + 8);
-				//(*it).image->draw(pSprite,rc.left-24,rc.top+8,D3DCOLOR_XRGB(255,255,255));
-				DrawTextUTF8(pfont,pSprite,temp.c_str(), -1, &rc, DT_NOCLIP,(*it).item_color());
 
-				RECT rc2={ rc.left - 40, rc.top - 8, (LONG)(rc.left+PrintCharWidth(temp)*fontDesc.Width)+8,  rc.top + 24};
+				if(item_vt == IVT_SEARCH) {
+					temp << "(" << CurrentLevelString((*it).search_field.level) << ")"; 
+				}
+
+				it->draw(pSprite, pfont, rc.left - 24, rc.top + 8);
+				std::string item_string = temp.str();
+				//(*it).image->draw(pSprite,rc.left-24,rc.top+8,D3DCOLOR_XRGB(255,255,255));
+				DrawTextUTF8(pfont,pSprite,item_string.c_str(), -1, &rc, DT_NOCLIP,(*it).item_color());
+
+				RECT rc2={ rc.left - 40, rc.top - 8, (LONG)(rc.left+PrintCharWidth(item_string)*fontDesc.Width)+8,  rc.top + 24};
 
 				if(next_item_-- == 0) {
 					DrawRectOutline(pSprite, rc2, 2, D3DCOLOR_ARGB(255, 0, 255, 0));
@@ -4499,6 +4505,10 @@ bool display_manager::makeItemForItemDraw(list<item>::iterator& first, list<item
 			end = temp;
 			break;
 		}
+	case IVT_SEARCH:
+		first = you.search_list.begin();
+		end = you.search_list.end();
+		break;
 	default:
 		return false;
 		break;

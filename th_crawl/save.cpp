@@ -56,6 +56,30 @@ void init_save_paths() {
     }
 }
 
+std::string loadString(FILE* fp) {
+	int size;
+	fscanf_s(fp, "%d", &size);
+	fgetc(fp); // 공백 제거
+
+	std::string result(size, '\0'); 
+	for(int i=0;i<size;i++)
+	{
+		int temp_int = fgetc(fp);
+		if(temp_int != -1)
+		{
+			result[i] = temp_int;
+		}
+		else
+		{
+			result[i] = 0;
+		}
+	}
+	if (!result.empty() && result.back() == '\0') {
+		result.pop_back();
+	}
+	return result;
+}
+
 void delete_file(int slot)
 {
 	DeleteFileW(save_file_w[slot-1].c_str());

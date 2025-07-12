@@ -180,8 +180,9 @@ public:
 	bool hamme_gift; //망치의 반대효과가 발동되면 전부 뺏어감
 	int waste;
 	int delay_turn;
+	int artifact_guid;
 
-	int value0; //비상용 - 책-종류(이 것은 필요한 아이템아니면 사용하지 않는 변수다.)
+	int value0; //비상용 - 책-종류(이 것은 필요한 아이템아니면 사용하지 않는 변수다.) 아티팩트-아티팩트 id
 
 	
 	int value1; //value1 - 무기,탄막-명중력 방어구-AC 방패-SH 음식,물약,스크롤,링-종류 책-마법 스펠카드-횟수 발동템-종류
@@ -211,7 +212,7 @@ public:
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
 	
-	string GetName(int num_ = -1, bool simple_ = false);
+	string GetName(int num_ = -1, bool simple_ = false, string lang = "");
 	string GetNameString(string lang = "");
 	bool matches(const string& term);
 	bool checkString(string str);

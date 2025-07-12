@@ -1,0 +1,14 @@
+--BASE
+{0} of Gensokyo
+{0} of the Shrine
+{0} of the Youkai
+{0} of Humans
+Cool {0}
+Hot {0}
+Approaching {0}
+--WORD
+Destruction
+Flight
+Danmaku
+Flame
+Frost

@@ -4096,6 +4096,10 @@ void display_manager::drawInfoBox(shared_ptr<DirectX::SpriteBatch> pSprite, shar
 			rc_.right -= i;
 		}
 
+		int max_len = infobox.x_size/fontDesc.Width;
+
+		vector<string> tokens = SplitStringByFontWidth(infobox.info, max_len, max_len);
+		infobox.y_size = std::max( (int)( fontDesc.Height + 5), (int)( fontDesc.Height*tokens.size() + 5));
 
 		dot_floor.draw(pSprite, (float)rc_.left, (float)rc_.top, 0.0f, infobox.x_size, infobox.y_size, D3DCOLOR_ARGB(200, 255, 255, 255));
 		// rc_.left -= infobox.x_comma;
@@ -4103,9 +4107,6 @@ void display_manager::drawInfoBox(shared_ptr<DirectX::SpriteBatch> pSprite, shar
 		// rc_.right -= infobox.x_comma;
 		// rc_.bottom -= infobox.y_comma;
 
-		int max_len = infobox.x_size/fontDesc.Width;
-
-		vector<string> tokens = SplitStringByFontWidth(infobox.info, max_len, max_len);
 
 		for(const string& token : tokens) {
 			DrawTextUTF8(pfont,pSprite, token.c_str(), -1, &rc_, DT_WORDBREAK, CL_none);

@@ -306,6 +306,7 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 	int get_item_move_ = getDisplayMove();
 	string blank(12,' ');
 	int save_position = -1;
+	int save_move = -1;
 	while(1)
 	{
 		set<char> ket_list;
@@ -319,6 +320,9 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 		changedisplay(DT_SUB_TEXT);
 		if(save_position != -1) {
 			DisplayManager.setPosition(save_position);
+		}
+		if(save_move != -1) {
+			setDisplayMove(save_move);
 		}
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey,true);
@@ -371,6 +375,29 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 			DisplayManager.addPosition(-1);
 			save_position = DisplayManager.current_position;
 			continue;
+		}
+		else if(key_ == VK_PRIOR)
+		{
+			changemove(DisplayManager.log_length);
+			save_move = getDisplayMove();
+			continue;
+		}
+		else if(key_ == VK_NEXT)
+		{
+			changemove(-DisplayManager.log_length);
+			save_move = getDisplayMove();
+			continue;
+		}
+		else if(key_ == -1) {
+			if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(1);  //아래
+				save_move = getDisplayMove();
+				continue;
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(-1);  //위
+			save_move = getDisplayMove();
+				continue;
+			}
 		}
 		else if (!ket_list.empty())
 		{
@@ -680,7 +707,7 @@ void iteminfor(bool gameover)
 		else if(key_ == VK_NEXT)
 		{
 			changemove(option_mg.getHeight());
-		}						//-----이동키끝-------
+		}//-----이동키끝-------
 		else if(key_ == -1) {
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
 				int get_item_move_ = getDisplayMove();

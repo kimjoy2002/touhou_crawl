@@ -74,6 +74,7 @@ void LocalzationManager::init(string type, bool init_) {
 	initFileSimple(filePath, "wizardhelp.txt", localizationVector.find(type)->help_wizard, nullptr);
 	initFileSimple(filePath, "character.txt", localizationVector.find(type)->help_character, &localizationVector.find(type)->helpline_character);
 	initFileSimple(filePath, "gods.txt", localizationVector.find(type)->help_gods, &localizationVector.find(type)->helpline_gods);
+	initFileArtifact(filePath, "artifact.txt", localizationVector.find(type)->randart_name_base, localizationVector.find(type)->randart_name_word);
 
 	initFile<LOCALIZATION_ENUM_KEY>(filePath, "general.txt", localization_enum_map, 1, [type](LOCALIZATION_ENUM_KEY key, vector<string> values, vector<string> prev_values) {
 		localizationVector.find(type)->localization_map[key] = values[0];
@@ -216,6 +217,46 @@ void LocalzationManager::initLocalization() {
 
 }
 
+
+
+void LocalzationManager::initFileArtifact(const string& path, const string& filename, vector<string>& baseVector, vector<string>& wordVector) {
+	ifstream file(path + filename);
+	if (!file) {
+		return;
+	}
+
+	baseVector.clear();
+	wordVector.clear();
+	string line;
+	bool first_line = true;
+	int current_line = 0;
+	int type = 0;
+	while (getline(file, line)) {
+		if (first_line) {
+			//BOM제거
+			first_line = false;
+			if (!line.empty() && static_cast<unsigned char>(line[0]) == 0xEF &&
+				line.size() >= 3 &&
+				static_cast<unsigned char>(line[1]) == 0xBB &&
+				static_cast<unsigned char>(line[2]) == 0xBF) {
+				line = line.substr(3); // BOM 제거
+			}
+		}
+		if(line == "--BASE") {
+			type = 1;
+		} else if (line == "--WORD") {
+			type = 2;
+		} else if(type == 1) {
+			baseVector.push_back(line);
+		} else if(type == 2) {
+			wordVector.push_back(line);
+		}
+
+		current_line++;
+	}
+}
+
+
 void LocalzationManager::initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector, vector<int>* helpline) {
 	ifstream file(path + filename);
 	if (!file) {
@@ -294,6 +335,9 @@ const string& LocalzationManager::locString(LOCALIZATION_ENUM_KEY key) { //TODO)
 
 
 const string& LocalzationManager::locString(string lang, LOCALIZATION_ENUM_KEY key) {
+	if(lang == "") {
+		lang = current_lang;
+	}
 	if(localizationVector.find(lang)->localization_map.find(key) != localizationVector.find(lang)->localization_map.end()) {
 		return localizationVector.find(lang)->localization_map[key];
 	}
@@ -305,6 +349,32 @@ const string& LocalzationManager::locString(string lang, LOCALIZATION_ENUM_KEY k
 	return localizationVector.find(lang)->localization_map[LOC_NONE];
 }
 
+string LocalzationManager::artifactString(string lang, int artifact_guid) {
+	if(lang == "") {
+		lang = current_lang;
+	}
+	int val1 = (artifact_guid >> 16) & 0xFFFF; // 상위 16비트
+	int val2 = artifact_guid & 0xFFFF;         // 하위 16비트
+	
+	string text;
+	if(localizationVector.find(lang)->randart_name_base.size() > 0 && localizationVector.find(lang)->randart_name_word.size() > 0) {
+		int index_ = val1%localizationVector.find(lang)->randart_name_base.size();
+		int index2_ = val2%localizationVector.find(lang)->randart_name_word.size();
+		string val1_ = localizationVector.find(lang)->randart_name_base[index_];
+		string val2_ = localizationVector.find(lang)->randart_name_word[index2_];
+		text = formatString(val1_, val2_);		
+		return text;
+	}
+	else if(localizationVector.find(baseLang())->randart_name_base.size() > 0 && localizationVector.find(baseLang())->randart_name_word.size() > 0) {
+		int index_ = val1%localizationVector.find(baseLang())->randart_name_base.size();
+		int index2_ = val2%localizationVector.find(baseLang())->randart_name_word.size();
+		string val1_ = localizationVector.find(baseLang())->randart_name_base[index_];
+		string val2_ = localizationVector.find(baseLang())->randart_name_word[index2_];
+		text = formatString(val1_, val2_);		
+		return text;
+	}
+	return "";
+}
 
 
 const string& LocalzationManager::speakString(SPEAK_ENUM_KEY key) {
@@ -347,11 +417,14 @@ LOCALIZATION_ENUM_KEY LocalzationManager::getLocalizationEnumKey(const string& s
 
 // 태그를 처리하는 함수
 string LocalzationManager::processTags(const string& template_str, const vector<PlaceHolderHelper>& values) {
-    string result = template_str;
+    string result;
+    string::const_iterator searchStart = template_str.cbegin();
     regex placeholder_regex(R"(\{(\d+(?::[^}]+)?)\}|\{([^0-9{:|}]+(?:\|[^0-9{:|}]+)+)\})");
     smatch match;
 
-    while (regex_search(result, match, placeholder_regex)) {
+    while (regex_search(searchStart, template_str.end(), match, placeholder_regex)) {
+		result.append(searchStart, match[0].first);
+
 		string replacement;
 		if (match[1].matched) {
 			auto pair_placeholder = extractPlaceholder("{" + match[1].str() + "}");
@@ -374,12 +447,15 @@ string LocalzationManager::processTags(const string& template_str, const vector<
 			while (std::getline(ss, item, '|')) {
 				options.push_back(item);
 			}
-			replacement = options[randA_nonlogic(options.size() - 1)];
+			if (!options.empty()) {
+				replacement = options[randA_nonlogic(options.size() - 1)];
+			}
 		}
 
-		result.replace(match.position(), match.length(), replacement);
+        result += replacement;
+        searchStart = match.suffix().first;
     }
-
+    result.append(searchStart, template_str.cend());
     return result;
 }
 
@@ -440,6 +516,9 @@ const string& LocalzationManager::monString(monster_index key) {
 	return localizationVector.find(current_lang)->monster_name_map[MON_REIMUYUKKURI];
 }
 const string& LocalzationManager::monString(string lang, monster_index key) {
+	if(lang == "") {
+		lang = current_lang;
+	}
 	if(localizationVector.find(lang)->monster_name_map.find(key) != localizationVector.find(lang)->monster_name_map.end()) {
 		return localizationVector.find(lang)->monster_name_map[key];
 	}

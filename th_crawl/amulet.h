@@ -48,7 +48,7 @@ enum occult_type
 extern LOCALIZATION_ENUM_KEY amulet_uniden_string[AMT_MAX];
 extern LOCALIZATION_ENUM_KEY amulet_iden_string[AMT_MAX];
 
-string GetShortAmuletString(amulet_type amulet_);
+string GetShortAmuletString(string lang, amulet_type amulet_);
 bool isGenerateAmulet(amulet_type amulet_);
 int isAmuletGotValue(amulet_type amulet_);
 amulet_type goodbadamulet(int good_bad);
@@ -60,6 +60,6 @@ bool isCanCharge(amulet_type kind);
 bool isCanEvoke(amulet_type kind);
 bool chargingFinish(amulet_type kind, int value);
 bool evokeAmulet(amulet_type kind, int value_);
-string getOccultName(occult_type kind);
+LOCALIZATION_ENUM_KEY getOccultName(occult_type kind);
 
 #endif // __AMULET_H__

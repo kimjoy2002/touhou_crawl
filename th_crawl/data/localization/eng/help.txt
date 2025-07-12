@@ -33,6 +33,6 @@
 §cctrl-f§d - Item Search
 
                                                        
-§b<Abilities>§d                                        
-§yp§d - Pray                                            
+§b<Abilities>§d
+§yp§d - Pray
 §ya§d - Use god powers or abilities

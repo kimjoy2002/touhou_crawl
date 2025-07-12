@@ -48,28 +48,28 @@ LOCALIZATION_ENUM_KEY amulet_iden_string[AMT_MAX] =
 };
 
 
-string GetShortAmuletString(amulet_type amulet_) {
+string GetShortAmuletString(string lang,amulet_type amulet_) {
 	switch(amulet_) {
 	case AMT_PERFECT:
-		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PERFECT_SHORT);
+		return LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PERFECT_SHORT);
 	case AMT_BLOSSOM:
-		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_BLOSSOM_SHORT);
+		return LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_BLOSSOM_SHORT);
 	case AMT_TIMES:
-		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIMES_SHORT);
+		return LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIMES_SHORT);
 	case AMT_FAITH:
-		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_FAITH_SHORT);
+		return LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_FAITH_SHORT);
 	case AMT_WAVE:
-		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_WAVE_SHORT);
+		return LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_WAVE_SHORT);
 	case AMT_SPIRIT:
-		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_SPIRIT_SHORT);
+		return LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_SPIRIT_SHORT);
 	case AMT_GRAZE:
-		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_GRAZE_SHORT);
+		return LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_GRAZE_SHORT);
 	case AMT_WEATHER:
-		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_WEATHER_SHORT);
+		return LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_WEATHER_SHORT);
 	case AMT_OCCULT:
-		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_OCCULT_SHORT);
+		return LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_OCCULT_SHORT);
 	case AMT_PURIFTY:
-		return LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PURIFTY_SHORT);
+		return LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PURIFTY_SHORT);
 	default:
 		break;
 	}
@@ -388,24 +388,24 @@ bool evokeAmulet(amulet_type kind, int value_)
 	return true;
 }
 
-string getOccultName(occult_type kind)
+LOCALIZATION_ENUM_KEY getOccultName(occult_type kind)
 {
 	switch (kind)
 	{
 	case OCT_NESI:
-		return LocalzationManager::locString(LOC_SYSTEM_ITEM_OCCULT_NESI);
+		return LOC_SYSTEM_ITEM_OCCULT_NESI;
 	case OCT_LONG:
-		return LocalzationManager::locString(LOC_SYSTEM_ITEM_OCCULT_LONG);
+		return LOC_SYSTEM_ITEM_OCCULT_LONG;
 	case OCT_SHORT:
-		return LocalzationManager::locString(LOC_SYSTEM_ITEM_OCCULT_SHORT);
+		return LOC_SYSTEM_ITEM_OCCULT_SHORT;
 	case OCT_DISH:
-		return LocalzationManager::locString(LOC_SYSTEM_ITEM_OCCULT_DISH);
+		return LOC_SYSTEM_ITEM_OCCULT_DISH;
 	case OCT_KUNEKUNE:
-		return LocalzationManager::locString(LOC_SYSTEM_ITEM_OCCULT_KUNEKUNE);
+		return LOC_SYSTEM_ITEM_OCCULT_KUNEKUNE;
 	default:
 		break;
 	}
-	return LocalzationManager::locString(LOC_SYSTEM_ITEM_OCCULT_UNKNOWN);
+	return LOC_SYSTEM_ITEM_OCCULT_UNKNOWN;
 }
 
 bool skill_summon_occult_nesi(int power, bool short_, unit* order, coord_def target) {

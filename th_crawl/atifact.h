@@ -102,7 +102,7 @@ public:
 };
 
 artifact_type ring_to_artifact(ring_type kind);
-std::string GetAtifactString(artifact_type ring_, int value_);
+std::string GetAtifactString(std::string lang, artifact_type ring_, int value_);
 std::string GetAtifactInfor(artifact_type ring_, int value_);
 int isGenerateRandart(artifact_type ring_, item_type type);
 bool effectartifact(artifact_type kind, int value);

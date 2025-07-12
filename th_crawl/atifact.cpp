@@ -108,34 +108,34 @@ int GetAtifactValue(artifact_type ring_, int good_bad_)
 	return 1;
 }
 
-string GetAtifactString(artifact_type ring_, int value_)
+string GetAtifactString(std::string lang, artifact_type ring_, int value_)
 {	
     std::ostringstream oss;
 	switch(ring_)
 	{
 	case ART_STR:
-		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_STR, PlaceHolderHelper(((value_ < 0) ? "" : "+") + to_string(value_)));
+		oss << LocalzationManager::formatString(lang, LOC_SYSTEM_ITEM_ARTIFACT_STR, PlaceHolderHelper(((value_ < 0) ? "" : "+") + to_string(value_)));
 		break;
 	case ART_DEX:
-		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_DEX, PlaceHolderHelper(((value_ < 0) ? "" : "+") + to_string(value_)));
+		oss << LocalzationManager::formatString(lang, LOC_SYSTEM_ITEM_ARTIFACT_DEX, PlaceHolderHelper(((value_ < 0) ? "" : "+") + to_string(value_)));
 		break;
 	case ART_INT:
-		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INT, PlaceHolderHelper(((value_ < 0) ? "" : "+") + to_string(value_)));
+		oss << LocalzationManager::formatString(lang, LOC_SYSTEM_ITEM_ARTIFACT_INT, PlaceHolderHelper(((value_ < 0) ? "" : "+") + to_string(value_)));
 		break;
 	case ART_HUNGRY:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HUNGRY);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_HUNGRY);
 		break;
 	case ART_FULL:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_FULL);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_FULL);
 		break;
 	case ART_TELEPORT:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_TELEPORT);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_TELEPORT);
 		break;
 	case ART_POISON_RESIS:
-		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_POISON_RESIST, PlaceHolderHelper((value_>0?"+":"-")));
+		oss << LocalzationManager::formatString(lang, LOC_SYSTEM_ITEM_ARTIFACT_POISON_RESIST, PlaceHolderHelper((value_>0?"+":"-")));
 		break;
 	case ART_FIRE_RESIS:
-		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_FIRE_RESIST, PlaceHolderHelper((value_==3?"+++":
+		oss << LocalzationManager::formatString(lang, LOC_SYSTEM_ITEM_ARTIFACT_FIRE_RESIST, PlaceHolderHelper((value_==3?"+++":
 			(value_==2?"++":
 			(value_==1?"+":
 			(value_==-1?"-":
@@ -144,7 +144,7 @@ string GetAtifactString(artifact_type ring_, int value_)
 			))))))));
 		break;
 	case ART_ICE_RESIS:
-		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_COLD_RESIST, PlaceHolderHelper((value_==3?"+++":
+		oss << LocalzationManager::formatString(lang, LOC_SYSTEM_ITEM_ARTIFACT_COLD_RESIST, PlaceHolderHelper((value_==3?"+++":
 			(value_==2?"++":
 			(value_==1?"+":
 			(value_==-1?"-":
@@ -153,94 +153,94 @@ string GetAtifactString(artifact_type ring_, int value_)
 			))))))));
 		break;
 	case ART_SEE_INVISIBLE:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_SEE_INVISIBLE);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_SEE_INVISIBLE);
 		break;
 	case ART_LEVITATION:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_FLIGHT);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_FLIGHT);
 		break;
 	case ART_INVISIBLE:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INVISIBLE);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_INVISIBLE);
 		break;
 	case ART_MANA:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_MANA);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_MANA);
 		break;
 	case ART_MAGACIAN:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_MAGICIAN);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_MAGICIAN);
 		break;
 	case ART_AC:
-		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_AC, PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
+		oss << LocalzationManager::formatString(lang, LOC_SYSTEM_ITEM_ARTIFACT_AC, PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
 		break;
 	case ART_EV:
-		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_EV, PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
+		oss << LocalzationManager::formatString(lang, LOC_SYSTEM_ITEM_ARTIFACT_EV, PlaceHolderHelper((value_<0?"":"+") + to_string(value_)));
 		break;
 	case ART_CONFUSE_RESIS:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_CONFUSE_RESIST);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_CONFUSE_RESIST);
 		break;
 	case ART_ELEC_RESIS:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_ELEC_RESIST);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_ELEC_RESIST);
 		break;
 	case ART_MAGIC_RESIS:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_MAGIC_RESIST);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_MAGIC_RESIST);
 		break;
 	case ART_MAGICBOOST:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_MAGICBOOST);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_MAGICBOOST);
 		break;
 	case ART_ANTIOVERHEAT:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_ANTIOVERHEAT);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_ANTIOVERHEAT);
 		break;
 	case ART_PENTAN:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_PENTAN);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_PENTAN);
 		break;
 	case ART_COUNTER:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_COUNTER);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_COUNTER);
 		break;
 	case ART_PERMAINVI:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_PERMAINVI);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_PERMAINVI);
 		break;
 	case ART_UNCONSCIOUS:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_UNCONSCIOUS);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_UNCONSCIOUS);
 		break;
 	case ART_LUNATIC:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_LUNATIC);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_LUNATIC);
 		break;
 	case ART_HALO:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_HALO);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_HALO);
 		break;
 	case ART_RAD:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_RAD);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_RAD);
 		break;
 	case ART_FIREBALL:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_FIREBALL);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_FIREBALL);
 		break;
 	case ART_GLUTTON:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_GLUTTON);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_GLUTTON);
 		break;
 	case ART_BUG:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_FIREFLYCLOAK_BUG);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_FIREFLYCLOAK_BUG);
 		break;
 	case ART_POISONIMMUNE:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LILYRING_POISONIMMUNE);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_LILYRING_POISONIMMUNE);
 		break;
 	case ART_SWIFT:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_GALECLOGS_SWIFT);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_GALECLOGS_SWIFT);
 		break;
 	case ART_MISSLE:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_MISSILE);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_MISSILE);
 		break;
 	case ART_SELFDESTRUCT:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_SELFDESTRUCT);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_SELFDESTRUCT);
 		break;
 	case ART_SUMMONRESIST:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_SUMMONRES);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_SUMMONRES);
 		break;
 	case ART_DRUNK:
-		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_IBUKISAKE_DRUNK);
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_IBUKISAKE_DRUNK);
 		break;
 	case ART_SLAY:
-		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_SLAY, PlaceHolderHelper(((value_ < 0) ? "" : "+") + to_string(value_)));
+		oss << LocalzationManager::formatString(lang, LOC_SYSTEM_ITEM_ARTIFACT_SLAY, PlaceHolderHelper(((value_ < 0) ? "" : "+") + to_string(value_)));
 		break;
 	case ART_HP_REGEN:
-		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_HP_REGEN, PlaceHolderHelper((value_==3?"+++":
+		oss << LocalzationManager::formatString(lang, LOC_SYSTEM_ITEM_ARTIFACT_HP_REGEN, PlaceHolderHelper((value_==3?"+++":
 			(value_==2?"++":
 			(value_==1?"+":
 			(value_==-1?"-":
@@ -821,6 +821,7 @@ void MakeArtifact(item* item_, int good_bad_)
 	}
 	item_->item_tag.push_back(LOC_SYSTEM_TAG_RANDART);
 	item_->second_name= name_infor(LOC_SYSTEM_ITEM_ARTIFACT);
+	item_->artifact_guid = randA(~(1 << 31));
 
 }
 

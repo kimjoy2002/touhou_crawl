@@ -44,7 +44,7 @@ value3(item_->value3), value4(item_->value4), value5(item_->value5), value6(item
 item::item()
 :name(LOC_SYSTEM_NONE_STRING), second_name(LOC_NONE), image(NULL), equip_image(NULL), position(0,0),prev_position(0,0), type(ITM_WEAPON_FIRST), weight(0), value(0),
 is_pile(false), num(0), id('a'), prev_sight(false), not_find(true), now_find(false), curse(false), identify(false), identify_curse(false), 
-can_throw(false), drop(false), throw_item(false), hamme_gift(false), waste(10000), delay_turn(0), value0(0), value1(0), value2(0), value3(0), value4(0), value5(0), value6(0), value7(0), value8(0),
+can_throw(false), drop(false), throw_item(false), hamme_gift(false), waste(10000), delay_turn(0), artifact_guid(0), value0(0), value1(0), value2(0), value3(0), value4(0), value5(0), value6(0), value7(0), value8(0),
 fixed_artifact(FIXED_ARTIFACT_NONE), atifact_vector(), item_tag(), search_field()
 {
 
@@ -78,6 +78,9 @@ item::item(const coord_def &c, const item_infor &t)
 	drop = false;
 	throw_item = false;
 	hamme_gift = false;
+	waste = 10000;
+	delay_turn = 0;
+	artifact_guid = 0;
 	value0 = t.value0;
 	value1 = t.value1;
 	value2 = t.value2;
@@ -92,7 +95,6 @@ item::item(const coord_def &c, const item_infor &t)
 	item_tag.clear();
 	search_field = SearchField();
 	item_tag = t.item_tag;
-	waste = 10000;
 
 }
 void item_infor::SaveDatas(FILE *fp)
@@ -190,6 +192,7 @@ void item::SaveDatas(FILE *fp)
 	SaveData<bool>(fp, hamme_gift);
 	SaveData<int>(fp, waste);
 	SaveData<int>(fp, delay_turn);
+	SaveData<int>(fp, artifact_guid);
 	SaveData<int>(fp, value0);
 	SaveData<int>(fp, value1);
 	SaveData<int>(fp, value2);
@@ -245,8 +248,11 @@ void item::LoadDatas(FILE *fp)
 	LoadData<bool>(fp, drop);
 	LoadData<bool>(fp, throw_item);
 	LoadData<bool>(fp, hamme_gift);
-	LoadData<int>(fp, delay_turn);
 	LoadData<int>(fp, waste);
+	LoadData<int>(fp, delay_turn);
+	if(!isPrevVersion(loading_version_string, "ver1.109")) {
+		LoadData<int>(fp, artifact_guid);
+	}
 	LoadData<int>(fp, value0);
 	LoadData<int>(fp, value1);
 	LoadData<int>(fp, value2);
@@ -283,7 +289,7 @@ void item::LoadDatas(FILE *fp)
 	}
 }
 
-string item::GetName(int num_, bool simple_)
+string item::GetName(int num_, bool simple_, string lang)
 {
 	bool overwriteName = false;
 	string temp;
@@ -296,10 +302,6 @@ string item::GetName(int num_, bool simple_)
 			ss << (value4 >= 0 ? '+' : '-') << abs(value4) << " ";
 			temp += ss.str();
 		}
-		else if(!value6 && !second_name.isEmpty())
-		{
-			temp += second_name.getName() + " ";
-		}
 	}
 	if(type>=ITM_ARMOR_FIRST && type<ITM_ARMOR_LAST)
 	{		
@@ -309,29 +311,47 @@ string item::GetName(int num_, bool simple_)
 			ss << (value4 >= 0 ? '+' : '-') << abs(value4) << " ";
 			temp += ss.str();
 		}
-		else if(!second_name.isEmpty())
-		{
-			temp += second_name.getName() + " ";
-		}
 	}
 	
 	if(fixed_artifact != FIXED_ARTIFACT_NONE) {
 		temp += "★";
 	}
+	else if(isArtifact()) {
+		temp += "☆";
+	}
+
+
+	if(type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST)
+	{	
+		if(!identify && !value6 && !second_name.isEmpty())
+		{
+			temp += second_name.getName(lang) + " ";
+		}
+	}
+	if(type>=ITM_ARMOR_FIRST && type<ITM_ARMOR_LAST)
+	{		
+		if(!identify && !second_name.isEmpty())
+		{
+			temp += second_name.getName(lang) + " ";
+		}
+	}
+
+
+
 
 	if(type==ITM_POTION) {		
 		if(iden_list.potion_list[value1].iden)  {
-			temp += LocalzationManager::locString(potion_iden_string[value1]);
+			temp += LocalzationManager::locString(lang, potion_iden_string[value1]);
 		} else {
-			temp += LocalzationManager::locString(potion_uniden_string[iden_list.potion_list[value1].color]);				
+			temp += LocalzationManager::locString(lang, potion_uniden_string[iden_list.potion_list[value1].color]);				
 		}
 		overwriteName = true;
 	}
 	if(type==ITM_SCROLL) {
 		if(iden_list.scroll_list[value1].iden == 3)  {
-			temp += LocalzationManager::locString(scroll_iden_string[value1]);
+			temp += LocalzationManager::locString(lang, scroll_iden_string[value1]);
 		} else {
-			temp += LocalzationManager::locString(scroll_uniden_string[iden_list.scroll_list[value1].type]);				
+			temp += LocalzationManager::locString(lang, scroll_uniden_string[iden_list.scroll_list[value1].type]);				
 		}
 		overwriteName = true;
 	}
@@ -342,34 +362,34 @@ string item::GetName(int num_, bool simple_)
 			if(isRingGotValue((ring_type)value1) && iden_list.ring_list[value1].iden == 2 && identify)
 			{
 				if(iden_list.ring_list[value1].iden == 2)  {
-					temp += LocalzationManager::formatString(ring_iden_string[value1], PlaceHolderHelper((value2>=0?"+":"-")+ to_string(abs(value2)) + " "));
+					temp += LocalzationManager::formatString(lang, ring_iden_string[value1], PlaceHolderHelper((value2>=0?"+":"-")+ to_string(abs(value2)) + " "));
 				} else {
-					temp += LocalzationManager::formatString(ring_uniden_string[iden_list.ring_list[value1].type], PlaceHolderHelper((value2>=0?"+":"-")+ to_string(abs(value2)) + " "));				
+					temp += LocalzationManager::formatString(lang, ring_uniden_string[iden_list.ring_list[value1].type], PlaceHolderHelper((value2>=0?"+":"-")+ to_string(abs(value2)) + " "));				
 				}
 			} else if(iden_list.ring_list[value1].iden == 2)  {
-				temp += LocalzationManager::formatString(ring_iden_string[value1],"");
+				temp += LocalzationManager::formatString(lang, ring_iden_string[value1],"");
 			} else {
-				temp += LocalzationManager::locString(ring_uniden_string[iden_list.ring_list[value1].type]);				
+				temp += LocalzationManager::locString(lang, ring_uniden_string[iden_list.ring_list[value1].type]);				
 			}
 			overwriteName = true;
 		}
-		else if(!second_name.isEmpty())
+		else if(!second_name.isEmpty() && (!isArtifact() || !identify))
 		{
-			temp += second_name.getName() + " ";
+			temp += second_name.getName(lang) + " ";
 		}
 	}
 	
 
 	if(type==ITM_GOAL && value1 >= 0 && value1 < 10)
 	{
-		temp += LocalzationManager::locString(rune_string[value1]);
+		temp += LocalzationManager::locString(lang, rune_string[value1]);
 		overwriteName = true;
 	}
 
 	if(type==ITM_SPELL)
 	{
 		if(iden_list.spellcard_list[value2].iden == 2) {
-			temp+=LocalzationManager::formatString(LOC_SYSTEM_SPELLCARD_IDENTIFY, SpellcardName((spellcard_evoke_type)value2));
+			temp+=LocalzationManager::formatString(lang, LOC_SYSTEM_SPELLCARD_IDENTIFY, SpellcardName((spellcard_evoke_type)value2));
 			overwriteName = true;
 		}
 	}
@@ -378,24 +398,36 @@ string item::GetName(int num_, bool simple_)
 		if(!isArtifact())
 		{
 			if(iden_list.amulet_list[value1].iden == 2)  {
-				temp += LocalzationManager::locString(amulet_iden_string[value1]);
+				temp += LocalzationManager::locString(lang, amulet_iden_string[value1]);
 			} else {
-				temp += LocalzationManager::locString(amulet_uniden_string[iden_list.amulet_list[value1].type]);
+				temp += LocalzationManager::locString(lang, amulet_uniden_string[iden_list.amulet_list[value1].type]);
 			}
 			overwriteName = true;
 		}
-		else if(!second_name.isEmpty())
+		else if(!second_name.isEmpty() && (!isArtifact() || !identify))
 		{
-			temp += second_name.getName() + " ";
+			temp += second_name.getName(lang) + " ";
 		}
 	}
 	if(!isArtifact() && type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST && value6)
 	{
-		temp += LocalzationManager::formatString(GetBrandString((weapon_brand)value5, false), PlaceHolderHelper(name.getName()));
+		temp += LocalzationManager::formatString(lang, GetBrandString((weapon_brand)value5, false), PlaceHolderHelper(name.getName()));
 		overwriteName = true;
 	}
+
+
+	if(fixed_artifact == FIXED_ARTIFACT_NONE && isArtifact() && identify) {
+		string randart_name = LocalzationManager::artifactString(lang, artifact_guid);
+		if(!randart_name.empty()) {
+			temp += randart_name;
+			overwriteName = true;
+		}
+	}
+
+
+
 	if(!overwriteName) {
-		temp += name.getName();
+		temp += name.getName(lang);
 	}
 
 
@@ -405,11 +437,11 @@ string item::GetName(int num_, bool simple_)
 		{
 			if(curse || !isArtifact()) {
 				if(curse) {
-					temp = LocalzationManager::formatString(LOC_SYSTEM_ITEM_CURSED,
+					temp = LocalzationManager::formatString(lang, LOC_SYSTEM_ITEM_CURSED,
 						PlaceHolderHelper(temp));
 				} else {		
 					if(!simple_) {
-						temp = LocalzationManager::formatString(LOC_SYSTEM_ITEM_UNCURSED,
+						temp = LocalzationManager::formatString(lang, LOC_SYSTEM_ITEM_UNCURSED,
 							PlaceHolderHelper(temp));
 					}
 				}
@@ -418,7 +450,7 @@ string item::GetName(int num_, bool simple_)
 	}
 	if(is_pile && num >1 && num_ != -2)
 	{
-		temp = LocalzationManager::formatString(LOC_SYSTEM_ITEM_PILED, 
+		temp = LocalzationManager::formatString(lang, LOC_SYSTEM_ITEM_PILED, 
 			PlaceHolderHelper(to_string(num_!=-1?num_!=0?num_:num:num)),
 			PlaceHolderHelper(temp));
 	}
@@ -427,14 +459,14 @@ string item::GetName(int num_, bool simple_)
 	{
 		if (iden_list.amulet_list[value1].iden == 2 && value1 == AMT_OCCULT && value3 > 0) {
 			temp += " {";
-			temp += getOccultName((occult_type)value2);
+			temp += LocalzationManager::locString(lang, getOccultName((occult_type)value2));
 			temp += "}";
 		}
 	}
 	if(!isArtifact() && ((type==ITM_SCROLL && iden_list.scroll_list[value1].iden == 1) || (type==ITM_RING && iden_list.ring_list[value1].iden == 1)))
-		temp += "("+LocalzationManager::locString(LOC_SYSTEM_ITEM_USED)+")";
+		temp += "("+LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_USED)+")";
 	if(!isArtifact() && (type==ITM_SCROLL && iden_list.scroll_list[value1].iden == 2))
-		temp += "("+LocalzationManager::locString(LOC_SYSTEM_ITEM_SELECTED_USED)+")";
+		temp += "("+LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_SELECTED_USED)+")";
 	if(type==ITM_SPELL)
 	{
 		if(identify)
@@ -447,17 +479,17 @@ string item::GetName(int num_, bool simple_)
 		{
 			std::ostringstream ss;
 			if(value3>0)
-				ss<<"("<<LocalzationManager::formatString(LOC_SYSTEM_ITEM_SPELLCARD_USED, PlaceHolderHelper(to_string(value3))) << ")";
+				ss<<"("<<LocalzationManager::formatString(lang,LOC_SYSTEM_ITEM_SPELLCARD_USED, PlaceHolderHelper(to_string(value3))) << ")";
 			else if(value3 == -1)
-				ss<<"("<<LocalzationManager::locString(LOC_SYSTEM_ITEM_SPELLCARD_EMPTY) << ")";
+				ss<<"("<<LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_SPELLCARD_EMPTY) << ")";
 			else if(value3 == -2)
-				ss<<"("<<LocalzationManager::locString(LOC_SYSTEM_ITEM_SPELLCARD_CHARGED) << ")";
+				ss<<"("<<LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_SPELLCARD_CHARGED) << ")";
 			temp += ss.str();
 		}
 	}
 	if(type==ITM_MISCELLANEOUS)
 	{
-		temp += " {" + LocalzationManager::locString(LOC_SYSTEM_ITEM_EVOKE) + "}";
+		temp += " {" + LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_EVOKE) + "}";
 	}
 	if (type == ITM_AMULET && you.equipment[ET_NECK] == this)
 	{
@@ -474,17 +506,17 @@ string item::GetName(int num_, bool simple_)
 			bool base_ = false;
 			if(type>=ITM_WEAPON_FIRST && type<ITM_WEAPON_LAST && value6)
 			{
-				arti_ += LocalzationManager::locString(GetBrandString((weapon_brand)value5, true));
+				arti_ += LocalzationManager::locString(lang,GetBrandString((weapon_brand)value5, true));
 				base_ = true;
 			}
 			if(type==ITM_RING)
 			{			
-				arti_ += GetAtifactString((artifact_type)ring_to_artifact((ring_type)value1),value2);
+				arti_ += GetAtifactString(lang,(artifact_type)ring_to_artifact((ring_type)value1),value2);
 				base_ = true;
 			}
 			if(type==ITM_AMULET)
 			{			
-				arti_ += GetShortAmuletString((amulet_type)value1);
+				arti_ += GetShortAmuletString(lang,(amulet_type)value1);
 				base_ = true;
 			}
 			if(type >= ITM_ARMOR_BODY_FIRST && type < ITM_ARMOR_BODY_LAST)
@@ -492,7 +524,7 @@ string item::GetName(int num_, bool simple_)
 				int t_ = ArmourExceptopn((armour_kind)value5);
 				if(t_ != -1)
 				{
-					arti_ += GetAtifactString((artifact_type)t_,1);
+					arti_ += GetAtifactString(lang,(artifact_type)t_,1);
 					base_ = true;
 				}
 			}
@@ -502,20 +534,20 @@ string item::GetName(int num_, bool simple_)
 					arti_ += ", ";
 				else
 					base_ = true;
-				arti_ += GetAtifactString((artifact_type)it->kind,it->value);
+				arti_ += GetAtifactString(lang,(artifact_type)it->kind,it->value);
 			}
 			arti_ += "}";
 			temp+=arti_;
 		}
 		else
 		{
-			temp+=" {"+ LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT) +"}";
+			temp+=" {"+ LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_ARTIFACT) +"}";
 		}
 	}
 
 
 	if (type == ITM_BOOK && !iden_list.books_list[value0]) {
-		temp = second_name.getName() + " ";
+		temp = second_name.getName(lang) + " ";
 	}
 
 	return temp;
@@ -533,7 +565,7 @@ bool item::matches(const string& term_raw) {
     string term = tolower_ascii(term_raw);
 
     for (auto it : LocalzationManager::localization_type.ordered_entries()) {
-        string name = tolower_ascii(GetNameString(it.first));
+        string name = tolower_ascii(GetName(-1, false, it.first));
         if (name.find(term) != string::npos)
             return true;
 

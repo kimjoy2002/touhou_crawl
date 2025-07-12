@@ -118,7 +118,7 @@ LOC_SYSTEM_OPTION_MENU_DISPLAY,Display
 LOC_SYSTEM_OPTION_MENU_FULLSCREEN,Fullscreen
 LOC_SYSTEM_OPTION_MENU_WINDOWED,Windowed
 LOC_SYSTEM_OPTION_MENU_BGM,BGM Volume
-LOC_SYSTEM_OPTION_MENU_SE,Sound Effect Volume
+LOC_SYSTEM_OPTION_MENU_SE,SE Volume
 LOC_SYSTEM_OPTION_MENU_BACK,back
 LOC_SYSTEM_JOYPAD_HOLD,Hold {0}
 LOC_SYSTEM_JOYPAD_QUICKMENU1,Quick Menu 1 Settings
@@ -2736,7 +2736,7 @@ LOC_SYSTEM_SPL_DESCRIBE_NESY_CANNON,A powerful water cannon mounted on Neshie.\n
 LOC_SYSTEM_SPL_DESCRIBE_MERMAID_SONG,Wakasagihime's favorite song.\nThe magical melody pulls enemies toward her one tile at a time.\nCannot be blocked by magic resistance but is nullified by confusion resistance.\n
 LOC_SYSTEM_SPL_DESCRIBE_EMERALD_CITY,Creates emerald walls using alchemy.\nDeals heavy physical damage in the surrounding 8 tiles.\n
 LOC_SYSTEM_SPL_DESCRIBE_AUTUMN_BLADE,Attaches steel saw blades to your weapon or fists using alchemy.\nTriples all melee damage while active-simple and deadly.\n
-LOC_SYSTEM_SPL_DESCRIBE_PHILOSOPHERS_STONE,The ultimate goal of alchemy—casting the Philosopher's Stone, the pinnacle of alchemical magic.\nWhile active, you can unleash a barrage of spells from various schools at a minimal MP cost.\nDuring the duration, random spells from all five elements are automatically cast at random enemies within your line of sight.\nEach cast consumes 1 MP automatically, and spells cast this way can be used even when you are silenced.\n
+LOC_SYSTEM_SPL_DESCRIBE_PHILOSOPHERS_STONE,The ultimate goal of alchemy-casting the Philosopher's Stone, the pinnacle of alchemical magic.\nWhile active, you can unleash a barrage of spells from various schools at a minimal MP cost.\nDuring the duration, random spells from all five elements are automatically cast at random enemies within your line of sight.\nEach cast consumes 1 MP automatically, and spells cast this way can be used even when you are silenced.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_ANCHOR,Drops a giant anchor near the targeted enemy.\nThe anchor itself does no damage but pins the target in place.\nThe enemy must destroy the anchor or wait for it to disappear to move again.\n
 LOC_SYSTEM_SPL_DESCRIBE_REAPER_MET,Instantly pulls a distant enemy toward you and binds their feet, reducing their movement speed for a short time.\n
 LOC_SYSTEM_SPL_DESCRIBE_AFTERLITE,Halves the remaining HP of a target within range without question.\nCannot be resisted but has a cooldown, so it can’t be used in succession.\n
@@ -2785,7 +2785,7 @@ LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC,A small magical danmaku that flies t
 LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC2,A magical danmaku that flies toward distant enemies.\nModerate size with increased power.
 LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC3,A large magical danmaku for distant targets.\nDelivers considerable power.
 LOC_SYSTEM_SPL_DESCRIBE_BLINK_AWAY,A blink spell used to put distance between you and an enemy.\nCan only be used when close to a target, and teleports you away to create space.\n
-LOC_SYSTEM_SPL_DESCRIBE_ELEMENTAL_HARVESTER,A metal alchemy spell that creates a large rotating saw.\nThe saw slowly travels along a path, damaging all nearby enemies.\nIf the path is blocked, it deals slight damage to the obstacle\n and disappears—so aim carefully to avoid obstructions.\n
+LOC_SYSTEM_SPL_DESCRIBE_ELEMENTAL_HARVESTER,A metal alchemy spell that creates a large rotating saw.\nThe saw slowly travels along a path, damaging all nearby enemies.\nIf the path is blocked, it deals slight damage to the obstacle\n and disappears-so aim carefully to avoid obstructions.\n
 LOC_SYSTEM_SPL_DESCRIBE_NIGHTMARE_MANIFEST,A spell that manifests the nightmare of a sleeping enemy.\nTargets a sleeping enemy within range, waking them and summoning their nightmare nearby.\nThe summoned entity prioritizes attacking its origin and remains until the target is gone.\nThe stronger your Power, the stronger the nightmare; it may also inflict a random debuff if the debuff check succeeds.\n
 LOC_SYSTEM_SPL_DESCRIBE_ROYALFLARE,A spell that generates the power of the sun through alchemy.\nCreates a massive sun centered on the caster, burning everything nearby indiscriminately.\nThe area of effect starts small but expands over time and continues until your MP is fully drained.\nNote: While casting, your movement speed is reduced and you cannot use other alchemy spells.\n
 LOC_SYSTEM_SPL_DESCRIBE_UKNOWN,A spell with no existing description.\n
@@ -3233,9 +3233,9 @@ LOC_SYSTEM_ITEM_ARTIFACT_INFO_HP_REGEN,Increases health regeneration speed. ({0}
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_SKILL_UP,The specified skill level increases ({0}).
 LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_NAME,Mini Hakkero
 LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_DESCRIBE,A versatile magical item capable of anything from kindling a fire to burning down mountains.\nHeld in one hand to boost spell power instead of using a weapon.\nCan freely cast strong spells like Spark that cause Overheat on use.
-LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_MAGICBOOST,Magic Boost
+LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_MAGICBOOST,SpellBoost
 LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_MAGICBOOST_INFO,Spell power is increased by 1.5x.
-LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_ANTIOVERHEAT,Overheat Prevention
+LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_ANTIOVERHEAT,rOverheat
 LOC_SYSTEM_ITEM_ARTIFACT_HAKKERO_ANTIOVERHEAT_INFO,Immune to Overheat effects from certain spells.
 LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_NAME,Gungnir
 LOC_SYSTEM_ITEM_ARTIFACT_GUNGNIR_DESCRIBE,A massive crimson spear used by the vampire of the Scarlet Devil Mansion.\nStronger when thrown than wielded, piercing all enemies in its path.\nAlways travels max distance when thrown and is too large to retrieve magically.
@@ -3249,23 +3249,23 @@ LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_COUNTER,Counter
 LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_COUNTER_INFO,Counterattack with your main weapon after blocking an enemy strike.
 LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_NAME,Koishi’s Hat
 LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_DESCRIBE,A hat once worn by a satori youkai who controlled the unconscious.\nWearing it makes you permanently invisible due to diminished presence.\nHowever, it also affects your own mind, sometimes causing involuntary movement.\nLike sleepwalking, perhaps?
-LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_PERMAINVI,Permanent Invisibility
+LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_PERMAINVI,PermaInv
 LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_PERMAINVI_INFO,Grants permanent invisibility.
-LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_UNCONSCIOUS,Unconscious
+LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_UNCONSCIOUS,Uncon
 LOC_SYSTEM_ITEM_ARTIFACT_KOISHIHAT_UNCONSCIOUS_INFO,Occasionally moves in unintended directions when enemies are nearby.
 LOC_SYSTEM_ITEM_ARTIFACT_MIKOCLOAK_NAME,Regent’s Cloak
 LOC_SYSTEM_ITEM_ARTIFACT_MIKOCLOAK_DESCRIBE,A cloak said to have been worn by the hermit Toyosatomimi no Miko.\nJust wearing it seems to radiate charisma.
 LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_NAME,Torch of Madness
 LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_DESCRIBE,A torch once held by a fairy. Its light drives those who see it insane.\nAll living beings nearby lose their sanity and attack at random.\nBeware! The mad become far more aggressive.
-LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_LUNATIC,*Madness
-LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_LUNATIC_INFO,Occasionally induces madness in all visible lifeforms—including the user!
+LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_LUNATIC,*Mad
+LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_LUNATIC_INFO,Occasionally induces madness in all visible lifeforms-including the user!
 LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_HALO,Halo
 LOC_SYSTEM_ITEM_ARTIFACT_LUNATICTORCH_HALO_INFO,Emits light in a small radius, improving accuracy and revealing invisibility.
 LOC_SYSTEM_ITEM_ARTIFACT_MOONGEM_NAME,Moon Jewel
-LOC_SYSTEM_ITEM_ARTIFACT_MOONGEM_DESCRIBE,A lunar artifact said to cleanse impurities from its surroundings.\nCleanses spiritual filth over time—like an air purifier?\nUse to remove most debuffs from yourself.
+LOC_SYSTEM_ITEM_ARTIFACT_MOONGEM_DESCRIBE,A lunar artifact said to cleanse impurities from its surroundings.\nCleanses spiritual filth over time-like an air purifier?\nUse to remove most debuffs from yourself.
 LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_NAME,Legs of Fusion
-LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_DESCRIBE,A mismatched pair—one ‘leg of separation’ and one ‘leg of fusion’—combined into one.\nSaid to unleash nuclear fusion when together.\nDrawbacks: exposes wearer to radiation, and they're mismatched shoes.
-LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_RAD,Radiation
+LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_DESCRIBE,A mismatched pair-one ‘leg of separation’ and one ‘leg of fusion’-combined into one.\nSaid to unleash nuclear fusion when together.\nDrawbacks: exposes wearer to radiation, and they're mismatched shoes.
+LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_RAD,Rad
 LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_RAD_INFO,Taking damage has a small chance to inflict temporary negative traits.
 LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_NAME,Control Rod
 LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_DESCRIBE,A giant rod worn on the arm, also called a third leg.\nCan be swung or used to launch fire using Power.\nSecretly protects against radiation from nuclear fusion.
@@ -3291,7 +3291,7 @@ LOC_SYSTEM_ITEM_ARTIFACT_LAEVATEIN_FIREPLUS,Flame+
 LOC_SYSTEM_ITEM_ARTIFACT_LAEVATEIN_FIREPLUS_INFO,Adds 1/3 flame damage and sometimes creates a fire cloud at the target's feet.
 LOC_SYSTEM_ITEM_ARTIFACT_LILYRING_NAME,Lily of the Valley Ring
 LOC_SYSTEM_ITEM_ARTIFACT_LILYRING_DESCRIBE,A ring found in a field full of lily of the valley.\nSaid to neutralize their poison.
-LOC_SYSTEM_ITEM_ARTIFACT_LILYRING_POISONIMMUNE,Poison Immunity
+LOC_SYSTEM_ITEM_ARTIFACT_LILYRING_POISONIMMUNE,rP+∞
 LOC_SYSTEM_ITEM_ARTIFACT_LILYRING_POISONIMMUNE_INFO,Grants immunity to all poison.
 LOC_SYSTEM_ITEM_ARTIFACT_GALECLOGS_NAME,Gale Geta
 LOC_SYSTEM_ITEM_ARTIFACT_GALECLOGS_DESCRIBE,Lightweight tengu sandals for fast movement.\nImproves evasion and lets you move as quickly as a tengu.
@@ -3303,11 +3303,11 @@ LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_NAME,Fully Armed Kappa Suit
 LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_DESCRIBE,A combat suit showcasing Kappa engineering.\nOverloaded with quirky features like missile launchers.\nWarning: pressing the red button initiates self-destruct.
 LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_MISSILE,+Missile
 LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_MISSILE_INFO,Consumes P to launch a missile.
-LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_SELFDESTRUCT,*Self-Destruct
+LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_SELFDESTRUCT,*SelfDes
 LOC_SYSTEM_ITEM_ARTIFACT_KAPPAFULLARMOR_SELFDESTRUCT_INFO,Triggers self-destruction after heavy damage, dealing AoE damage including yourself.
-LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_NAME,Netherworld Maid Outfit
-LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_DESCRIBE,A special maid outfit worn by demons in the Netherworld.\nLikely designed with the preferences of the Creator God in mind.\nThough sturdy, it enhances magic use.\nAlso seems to offer blessings for commanding other demons.
-LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_SUMMONRES,Summon Resistance
+LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_NAME,Makai Maid Outfit
+LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_DESCRIBE,A special maid outfit worn by demons in the Makai.\nLikely designed with the preferences of the Creator God in mind.\nThough sturdy, it enhances magic use.\nAlso seems to offer blessings for commanding other demons.
+LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_SUMMONRES,rSummon+
 LOC_SYSTEM_ITEM_ARTIFACT_MAIDUNIFORM_SUMMONRES_INFO,50% chance to nullify summon attacks.
 LOC_SYSTEM_ITEM_ARTIFACT_IBUKISAKE_NAME,Ibuki Gourd
 LOC_SYSTEM_ITEM_ARTIFACT_IBUKISAKE_DESCRIBE,A traditional sake gourd favored by Suika Ibuki.\nCan’t be used as a weapon, but works as a shield in the left hand.\nGreatly enhances recovery but turns all potions into sake.
@@ -3953,7 +3953,7 @@ LOC_SYSTEM_GOD_SUWAKO_TITLE,Moriya Suwako - Pinnacle of the Native Gods
 LOC_SYSTEM_GOD_SUWAKO_DESCRIPTION,Suwako is a native goddess with the power to create earth.\nShe grants her followers unpredictable blessings.\nAs a result, they receive various powers, though not necessarily the ones they want.
 LOC_SYSTEM_GOD_MIMA_TITLE,Mima - Spirit Who Entrusted Fate to a Distant Dream
 LOC_SYSTEM_GOD_MIMA_DESCRIPTION,Mima is a divine spirit of disaster and destruction.\nHer followers receive powerful destructive magic.\nHer most devoted disciples are granted her ultimate spell: Spark.\nMima values strength through personal action, and grants faith when you defeat enemies yourself.
-LOC_SYSTEM_GOD_YUYUKO_TITLE,Saigyouji Yuyuko - Phantom Girl of the Nether Pavilion
+LOC_SYSTEM_GOD_YUYUKO_TITLE,Saigyouji Yuyuko - Ghost Girl in the Netherworld Tower
 LOC_SYSTEM_GOD_YUYUKO_DESCRIPTION,Yuyuko is the lady of Saigyouji, residing in Hakugyokurou.\nShe wields the power of death and grants it to her followers.\nHer devotees gain control over death and receive many spirits.
 LOC_SYSTEM_GOD_JOON_AND_SION_TITLE,Yorigami Joon & Shion - The Most Wicked Sisters
 LOC_SYSTEM_GOD_JOON_AND_SION_DESCRIPTION,Joon and Shion are goddesses of waste and poverty, bringing misfortune to their followers.\nJoon causes wealth to be wasted, while Shion brings poverty.\nJust believing in them causes you to lose items and resources.\nHowever, devout worshipers are directly possessed and can wield their powers.\nTheir powers are strong, but so is the misfortune they bring.\nYou gain faith by killing enemies and taking their money.

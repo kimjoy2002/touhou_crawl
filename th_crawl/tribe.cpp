@@ -1247,7 +1247,7 @@ void PropertyView()
 			printsub(LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_NO_PROPERTY),true,CL_normal);
 		} else {
 			printsub(blank,false,CL_normal);
-			printsub(LocalzationManager::formatString(joypadUtil::usingPad?LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW_PAD:LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW,
+			printsub(LocalzationManager::formatString(joypadUtil::isUsingPad()?LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW_PAD:LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW,
 				PlaceHolderHelper(joypadUtil::get("Enter", GVK_BUTTON_A))),true,CL_normal);
 			printsub("",true,CL_normal);
 			int i = 0;

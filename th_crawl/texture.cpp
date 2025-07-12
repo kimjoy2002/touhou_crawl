@@ -1723,6 +1723,10 @@ textures img_command_unequip_armour(&texture_item03, 186, 255);
 textures img_command_equip_jewelry(&texture_item03, 187, 255);
 textures img_command_unequip_jewelry(&texture_item03, 188, 255);
 
+textures img_command_one_sleep(&texture_item04, 8, 255);
+textures img_command_stair(&texture_item04, 9, 255);
+textures img_command_find_item(&texture_item04, 10, 255);
+
 
 textures img_command_alphabet_small[26] = {
 	textures(&texture_item03, 85, 255),

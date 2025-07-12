@@ -515,7 +515,6 @@ void reward_random_init()
 	rand_potion_option.push(PT_CLEVER, 3);
 	rand_potion_option.push(PT_AGILITY, 3);
 	rand_potion_option.push(PT_MAGIC, 1);
-	rand_potion_option.push(PT_RECOVER_STAT, 5);
 
 	
 	rand_ring_necessary.push(RGT_ELEC_RESIS, 1);

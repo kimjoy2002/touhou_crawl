@@ -123,6 +123,10 @@ LOC_SYSTEM_OPTION_MENU_BACK,back
 LOC_SYSTEM_JOYPAD_HOLD,Hold {0}
 LOC_SYSTEM_JOYPAD_QUICKMENU1,Quick Menu 1 Settings
 LOC_SYSTEM_JOYPAD_QUICKMENU2,Quick Menu 2 Settings
+LOC_SYSTEM_OPTION_MENU_INPUT_PROMPTS,Input Prompts
+LOC_SYSTEM_INPUT_PROMPTS_AUTO,Auto Detect
+LOC_SYSTEM_INPUT_PROMPTS_KEYBOARD,Keyboard
+LOC_SYSTEM_INPUT_PROMPTS_JOYPAD,Gamepad
 LOC_SYSTEM_SAVE_MENU_SLOT,Slot {0}
 LOC_SYSTEM_SAVE_MENU_BROKEN,Corrupted Save
 LOC_SYSTEM_SAVE_MENU_DELETE,Delete
@@ -421,6 +425,7 @@ LOC_SYSTEM_EQUIP_ARMOUR,Equip Armor
 LOC_SYSTEM_UNEQUIP_ARMOUR,Unequip Armor
 LOC_SYSTEM_EQUIP_JEWELRY,Equip Jewelry
 LOC_SYSTEM_UNEQUIP_JEWELRY,Unequip Jewelry
+LOC_SYSTEM_FIND_ITEM,Search Item
 LOC_SYSTEM_ITEM_COMMAND,Item Commands
 LOC_SYSTEM_CMD_AUTOTRAVEL,Auto Explore
 LOC_SYSTEM_CMD_AUTOATTACK,Auto Attack
@@ -430,6 +435,7 @@ LOC_SYSTEM_CMD_SKILL,Activation
 LOC_SYSTEM_CMD_SHOUT,Shout
 LOC_SYSTEM_CMD_DOOR,Open/Close Door
 LOC_SYSTEM_CMD_PRAY,Pray
+LOC_SYSTEM_CMD_STAIR,Walking the stairs
 LOC_SYSTEM_CMD_MORE_ITEM,More Item Commands
 LOC_SYSTEM_CMD_AUTOPICKUP_ON,Auto Item Pickup Enabled
 LOC_SYSTEM_CMD_AUTOPICKUP_OFF,Manual Item Pickup Enabled
@@ -3461,7 +3467,7 @@ LOC_SYSTEM_ITEM_POTION_POTION_IDEN_CONFUSE,Potion of Confuse
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_SLOW,Potion of Slow
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_PARALYSIS,Potion of Paralysis
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_CLEVER,Potion of Intelligence
-LOC_SYSTEM_ITEM_POTION_POTION_IDEN_AGILITY,Potion of Dexterity
+LOC_SYSTEM_ITEM_POTION_POTION_IDEN_AGILITY,Potion of Gliding
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_MAGIC,Potion of Mana
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_LEVETATION,Potion of Levitation
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_POWER,Potion of Power
@@ -3478,7 +3484,7 @@ LOC_SYSTEM_ITEM_POTION_POTION_IDEN_CONFUSE_SHORT,Confuse
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_SLOW_SHORT,Slow
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_PARALYSIS_SHORT,Paralysis
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_CLEVER_SHORT,Intelligence
-LOC_SYSTEM_ITEM_POTION_POTION_IDEN_AGILITY_SHORT,Dexterity
+LOC_SYSTEM_ITEM_POTION_POTION_IDEN_AGILITY_SHORT,Gliding
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_MAGIC_SHORT,Mana
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_LEVETATION_SHORT,Levitation
 LOC_SYSTEM_ITEM_POTION_POTION_IDEN_POWER_SHORT,Power
@@ -3740,7 +3746,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_CLOAK,A stylish cloak worn over the body.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE,Gloves for your hands. Cursed gloves must be worn before rings.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_BOOT,Shoes that protect your feet. Don’t walk barefoot in the dungeon-wear these!\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_WATER,A bottle filled with plain water.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL,A healing potion. Recovers confusion, poison, sickness, and some HP.\nInstant effect upon drinking-truly mysterious.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL,A healing potion that cures confusion, poison, sickness, and drunkenness, while also restoring a small amount of HP.\nAlso partially restores temporarily lost stats.\nA mysterious potion whose effects take place immediately upon drinking.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_POISON,A potion filled with poison. It tastes awful and causes severe poisoning.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL_WOUND,A potion that heals wounds. Instantly restores a lot of HP,\nbut doesn’t cure status effects.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_MIGHT,A potion that grants temporary super strength. Also increases attack power.\n
@@ -3749,13 +3755,13 @@ LOC_SYSTEM_ITEM_DESCRIPTION_POTION_CONFUSE,A potion that confuses the mind.\nIf 
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_SLOW,A potion that slows you down. All movement and actions are halved.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_PARALYSIS,A potion that causes paralysis for several turns. Very dangerous.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_CLEVER,A potion that temporarily boosts intelligence.\nAlso increases magic success rate and power.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_AGILITY,A potion that temporarily boosts agility.\nAlso increases evasion.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_AGILITY,A potion that grants temporary flight when consumed.\nYour nimble movements make it easier to dodge enemy attacks.\nGrants flight, increased agility, and improved evasion.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_MAGIC,A magic potion that instantly restores MP.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_LEVETATION,A potion that lets you fly for a while.\nWhile flying, you can cross deep water.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_POWER,A potion that increases Power.\nImmediately increases P by 1.00 when consumed.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_DOWN_STAT,Disgusting potion that temporarily lowers stats.\nRandomly reduces one of Strength, Intelligence, or Agility. Wears off over time.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_RECOVER_STAT,A potion that temporarily restores lost stats.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_POTION_ALCOHOL,This is alcohol. Drinking it gets you drunk.\nWhile drunk, movement becomes difficult.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_POTION_ALCOHOL,This is alcohol. Drinking it will make you drunk.\nWhile intoxicated, it's hard to move straight.\nAlso restores a small amount of Power.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_BUG,This is a bug potion. Horrifying!\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_UNKNOWN,A bottle containing a suspicious liquid. You won’t know what it does until you drink it.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_FOOD,Edible food. Suspicious how it’s just lying around the dungeon, but it looks edible enough.\n

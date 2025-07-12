@@ -379,7 +379,6 @@ void shooting_reward_random_init()
 	addToRandomStage(0, 4, rand_int(3,5), ITM_POTION, PT_CLEVER);
 	addToRandomStage(0, 4, rand_int(3,5), ITM_POTION, PT_AGILITY);
 	addToRandomStage(0, 4, rand_int(3,5), ITM_POTION, PT_HASTE);
-	addToRandomStage(0, 4, rand_int(3,5), ITM_POTION, PT_RECOVER_STAT);
 	addToRandomStage(0, 4, rand_int(1,3), ITM_POTION, PT_MAGIC);
 
 	addToRandomStage(1, 5, rand_int(3,5), ITM_SCROLL, SCT_BLINK);

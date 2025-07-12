@@ -714,6 +714,7 @@ void Unequip_Jewelry();
 void Open_Close_door();
 void Close_door();
 void Open_door();
+void Stair_move_all();
 void Stair_move(bool down);
 void view_log();
 void skill_view();

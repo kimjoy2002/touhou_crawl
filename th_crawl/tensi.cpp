@@ -195,7 +195,7 @@ int GetHazard()
 
 void tensi_potion(bool good_)
 {
-	potion_type good_list_[6] = {PT_MIGHT,PT_HASTE,PT_HEAL_WOUND, PT_CLEVER,PT_AGILITY,PT_RECOVER_STAT};
+	potion_type good_list_[5] = {PT_MIGHT,PT_HASTE,PT_HEAL_WOUND, PT_CLEVER,PT_AGILITY};
 	potion_type bad_list_[5] = {PT_POISON, PT_CONFUSE, PT_SLOW, PT_DOWN_STAT,PT_ALCOHOL};
 
 	potion_type you_drink_ = PT_WATER;

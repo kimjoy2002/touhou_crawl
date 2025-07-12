@@ -142,7 +142,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	switch (id)
 	{
 		case 1:
-		if(joypadUtil::usingPad) {
+		if(joypadUtil::isUsingPad()) {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL2_PAD),true,false,false,CL_warning);
 		} else {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL1), true, false, false, CL_warning);
@@ -150,7 +150,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		}
 		return 1;
 	case 2:
-		if(joypadUtil::usingPad) {
+		if(joypadUtil::isUsingPad()) {
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL3_PAD, PlaceHolderHelper(joypadUtil::get("A",GVK_BUTTON_A))),true,false,false,CL_warning);
 		}
 		else {
@@ -160,7 +160,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		return 1;
 	case 3:
 		printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL5, PlaceHolderHelper(joypadUtil::get(",",GVK_BUTTON_A))), true, false, false, CL_warning);
-		if(joypadUtil::usingPad) {
+		if(joypadUtil::isUsingPad()) {
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL6_PAD, PlaceHolderHelper(joypadUtil::get("Y",GVK_BUTTON_Y)), PlaceHolderHelper(joypadUtil::get("A",GVK_BUTTON_A))), true, false, false, CL_warning);
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL6_PAD2, PlaceHolderHelper(joypadUtil::get("A",GVK_BUTTON_A))), true, false, false, CL_warning);
 		}
@@ -169,7 +169,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		}
 		return 1;
 	case 4:
-		if(joypadUtil::usingPad) {
+		if(joypadUtil::isUsingPad()) {
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL7_PAD, PlaceHolderHelper(joypadUtil::get("TAB",GVK_LEFT_BUMPER))),true,false,false,CL_warning);
 		}
 		else {
@@ -179,7 +179,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		return 1;
 	case 5:
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL9), true, false, false, CL_warning);
-		if(joypadUtil::usingPad) {
+		if(joypadUtil::isUsingPad()) {
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL10_PAD, PlaceHolderHelper(joypadUtil::get("A",GVK_BUTTON_A))), true, false, false, CL_warning);
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL11_PAD), true, false, false, CL_warning);
 		} else {
@@ -189,7 +189,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL12), true, false, false, CL_warning);
 		return 1;
 	case 6:
-		if(joypadUtil::usingPad) {
+		if(joypadUtil::isUsingPad()) {
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL13_PAD, PlaceHolderHelper(joypadUtil::get("A",GVK_BUTTON_A))), true, false, false, CL_warning);
 		}
 		else {
@@ -202,7 +202,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			you.PowUpDown(-(you.power - 150), true);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL15), true, false, false, CL_warning);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL16), true, false, false, CL_warning);
-		if(joypadUtil::usingPad) {
+		if(joypadUtil::isUsingPad()) {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL17_PAD), true, false, false, CL_warning);
 		} else {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL17), true, false, false, CL_warning);
@@ -212,7 +212,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL18), true, false, false, CL_warning);
 		return 1;
 	case 9:
-		if(joypadUtil::usingPad) {
+		if(joypadUtil::isUsingPad()) {
 			you.quickMenu2 = SYSCMD_QUICKTHROW;
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL19_PAD, PlaceHolderHelper(joypadUtil::get("X",GVK_BUTTON_X))), true, false, false, CL_warning);
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL19_PAD2, PlaceHolderHelper(joypadUtil::get("X",GVK_BUTTON_X))), true, false, false, CL_warning);
@@ -225,7 +225,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		return 1;
 	case 10:
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL21), true, false, false, CL_warning);
-		if(joypadUtil::usingPad) {
+		if(joypadUtil::isUsingPad()) {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL22_PAD), true, false, false, CL_warning);
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL23_PAD), true, false, false, CL_warning);
 		} else {
@@ -234,7 +234,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		}
 		return 1;
 	case 11:
-		if(joypadUtil::usingPad) {
+		if(joypadUtil::isUsingPad()) {
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL24_PAD, PlaceHolderHelper(joypadUtil::get("A",GVK_BUTTON_A))), true, false, false, CL_warning);
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL25_PAD), true, false, false, CL_warning);
 		} else {
@@ -247,14 +247,14 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		you.GiveSkillExp(SKT_SPELLCASTING, 20, true);
 		you.GiveSkillExp(SKT_CONJURE, 100, true);
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL27), true, false, false, CL_warning);
-		if(joypadUtil::usingPad) {
+		if(joypadUtil::isUsingPad()) {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL28_PAD), true, false, false, CL_warning);
 		} else {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL28), true, false, false, CL_warning);
 		}
 		return 1;
 	case 13:
-		if(joypadUtil::usingPad) {
+		if(joypadUtil::isUsingPad()) {
 			you.quickMenu2 = SYSCMD_MAGIC;
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL29_PAD, PlaceHolderHelper(joypadUtil::get("X",GVK_BUTTON_X))), true, false, false, CL_warning);
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL29_PAD2), true, false, false, CL_warning);
@@ -272,20 +272,20 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_TEMPLE), true, false, false, CL_normal);
 		return 1;
 	case 16:
-		if(joypadUtil::usingPad) {
+		if(joypadUtil::isUsingPad()) {
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL32_PAD, PlaceHolderHelper(joypadUtil::get("A",GVK_BUTTON_A))), true, false, false, CL_warning);
 		} else {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL32), true, false, false, CL_warning);
 		}
 		printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL33, PlaceHolderHelper(joypadUtil::get("p",GVK_BUTTON_A))), true, false, false, CL_warning);
-		if(joypadUtil::usingPad) {
+		if(joypadUtil::isUsingPad()) {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL34_PAD), true, false, false, CL_warning);
 		} else {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL34), true, false, false, CL_warning);
 		}
 		return 1;
 	case 17:
-		if(joypadUtil::usingPad) {
+		if(joypadUtil::isUsingPad()) {
 			you.quickMenu2 = SYSCMD_SKILL;
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL35_PAD, PlaceHolderHelper(joypadUtil::get("X",GVK_BUTTON_X))), true, false, false, CL_warning);
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL35_PAD2, PlaceHolderHelper(joypadUtil::get("X",GVK_BUTTON_X))), true, false, false, CL_warning);

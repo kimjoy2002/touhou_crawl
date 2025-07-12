@@ -96,6 +96,10 @@ void optionManager::init(wstring fileName) {
 
 		// GetPrivateProfileString(_T("config"), _T("server_port"), _T("12345"), szBuf, MAX_STR_SIZE, fileName.c_str());
 		// server_port = _tstoi(szBuf);
+		
+		GetPrivateProfileStringW(_T(L"config"), _T(L"inputprompt"), _T(L"0"), szBuf, MAX_STR_SIZE, fileName.c_str());
+		input_prompt =  std::stoi(szBuf);
+
 
 		GetPrivateProfileStringW(_T(L"config"), _T(L"language"), _T(ConvertUTF8ToUTF16(steam_lang).c_str()), szBuf, MAX_STR_SIZE, fileName.c_str());
 		lang = wcharToUtf8(szBuf);
@@ -127,6 +131,9 @@ void optionManager::createNewFile(wstring fileName) {
 
 	std::wstring steam_lang_w = ConvertUTF8ToUTF16(steam_lang);
 	WritePrivateProfileStringW(_T(L"config"), _T(L"language"), steam_lang_w.c_str(), fileName.c_str());
+
+	std::wstring input_prompt_w = L"0";
+	WritePrivateProfileStringW(_T(L"config"), _T(L"inputprompt"), input_prompt_w.c_str(), fileName.c_str());
 }
 
 void optionManager::calcTileXY() {
@@ -166,7 +173,7 @@ void optionManager::setSaveSlot(int currentsaveslot) {
 
 	if(!fileName.empty()) {
 		CStringW str(to_string(current_saveslot).c_str());
-		WritePrivateProfileStringW(_T(L"config"), _T(L"false"), str, fileName.c_str());
+		WritePrivateProfileStringW(_T(L"config"), _T(L"saveslot"), str, fileName.c_str());
 	}
 }
 
@@ -206,6 +213,15 @@ void optionManager::setSeVolume(int value) {
 	if(!fileName.empty()) {
 		CStringW strW(to_string(se_volume).c_str());
 		WritePrivateProfileStringW(_T(L"config"), _T(L"se_volume"), strW, fileName.c_str());
+	}
+}
+
+void optionManager::setInputPrompt(int input_prompt_) {
+    input_prompt = input_prompt_; 
+
+	if(!fileName.empty()) {
+		CStringW str(to_string(input_prompt).c_str());
+		WritePrivateProfileStringW(_T(L"config"), _T(L"inputprompt"), str, fileName.c_str());
 	}
 }
 

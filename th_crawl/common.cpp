@@ -472,7 +472,7 @@ char numtoasc(int a)
 {
 	if(a<0 || a >= 52)
 		return 0;
-	return a<26?a+'a':a+'A';
+	return a<26?a+'a':a-26+'A';
 }
 
 int randA(int x)

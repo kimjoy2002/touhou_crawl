@@ -204,7 +204,7 @@ bool ynPrompt(string prompt, string canclePrompt, D3DCOLOR promptColor, bool isu
 		printlog("(",false,log,temp,promptColor);
 	}
 
-	if(joypadUtil::usingPad) {
+	if(joypadUtil::isUsingPad()) {
 		printlog(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_Y, 
 					PlaceHolderHelper(joypadUtil::get(isuppercase?"Y":"y", isuppercase?GVK_BUTTON_A_LONG:GVK_BUTTON_A, PROMPT_YN))),false,log,temp,promptColor, isuppercase?'Y':'y');
 	}
@@ -213,7 +213,7 @@ bool ynPrompt(string prompt, string canclePrompt, D3DCOLOR promptColor, bool isu
 	}
 
 	printlog("/",false,log,temp,promptColor);
-	if(joypadUtil::usingPad) {
+	if(joypadUtil::isUsingPad()) {
 		printlog(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_N, 
 					PlaceHolderHelper(joypadUtil::get(isuppercase?"N":"n", GVK_BUTTON_B, PROMPT_YN))),false,log,temp,promptColor, isuppercase?'N':'n');
 	}
@@ -242,7 +242,7 @@ bool ynPrompt(string prompt, string canclePrompt, D3DCOLOR promptColor, bool isu
 		default:
 			if(loop)
 			{
-				if(joypadUtil::usingPad) {
+				if(joypadUtil::isUsingPad()) {
 					printlog(LocalzationManager::locString(LOC_SYSTEM_PLEASE_SELECT_PAD),false,log,temp,CL_normal);
 				} else {
 					printlog(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_YN, 

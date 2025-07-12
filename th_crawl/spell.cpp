@@ -2188,7 +2188,7 @@ void SimpleSpellUse()
 	printlog(LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL_FIELD), false, false, true, CL_help);
 
 	printlog(" (",false,false,true,CL_help);
-	printlog((joypadUtil::usingPad?LocalzationManager::locString(LOC_SYSTEM_SELECT_WITH_CURSOR):LocalzationManager::locString(LOC_SYSTEM_LETTER)) + ":" + LocalzationManager::locString(LOC_SYSTEM_MAGIC),false,false,true,CL_help);
+	printlog((joypadUtil::isUsingPad()?LocalzationManager::locString(LOC_SYSTEM_SELECT_WITH_CURSOR):LocalzationManager::locString(LOC_SYSTEM_LETTER)) + ":" + LocalzationManager::locString(LOC_SYSTEM_MAGIC),false,false,true,CL_help);
 	printlog(" ",false,false,true,CL_help);
 	if(prevSpell_) {
 		printlog(joypadUtil::get(LocalzationManager::locString(LOC_SYSTEM_ENTER),GVK_BUTTON_A)+":"+SpellString(prev_spell_id),false,false,true,CL_help, VK_RETURN);

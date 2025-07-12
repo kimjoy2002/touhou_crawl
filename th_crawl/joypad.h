@@ -48,6 +48,7 @@ class joypadUtil {
     static bool isGamepadConnected();
 public:
     static bool usingPad;
+    static bool isUsingPad();
     static void initJoypad();
     static std::string get(const std::string& kbKey, wchar_t gamepadKey, PromptType promptType = PROMPT_NONE);
 };

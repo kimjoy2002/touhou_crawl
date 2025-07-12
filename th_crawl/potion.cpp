@@ -64,7 +64,7 @@ potion_type goodbadpotion(int good_bad)
 	}
 	else if(good_bad==2)
 	{
-		potion_type list_[7] = {PT_MIGHT,PT_HASTE,PT_CLEVER,PT_AGILITY,PT_LEVETATION,PT_RECOVER_STAT, PT_ALCOHOL};
+		potion_type list_[5] = {PT_MIGHT,PT_HASTE,PT_CLEVER,PT_AGILITY, PT_ALCOHOL};
 		return list_[randA(6)];
 	}
 	else if(good_bad==3)
@@ -93,9 +93,9 @@ int isGoodPotion(potion_type kind)
 	case PT_LEVETATION:
 	case PT_MAGIC:
 	case PT_RECOVER_STAT:
+	case PT_ALCOHOL:
 		return 1;
 	case PT_WATER:
-	case PT_ALCOHOL:
 		return 0;
 	case PT_CONFUSE:
 	case PT_SLOW:
@@ -108,6 +108,18 @@ int isGoodPotion(potion_type kind)
 	}
 	return 1;
 }
+bool cantGeneratePotion(potion_type kind) {
+
+	switch(kind)
+	{
+	case PT_LEVETATION:
+	case PT_RECOVER_STAT:
+		return true;
+	default:
+		break;
+	}
+	return false;
+}
 
 void drinkpotion(potion_type kind, bool waste_)
 {
@@ -119,12 +131,36 @@ void drinkpotion(potion_type kind, bool waste_)
 		//you.HungerApply(50);
 		return;
 	case PT_HEAL:
-		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_HEAL) + " ",false,false,false,CL_normal);
-		you.HpUpDown(6+randA_1(9+bonus*10),DR_POTION);
-		//you.HungerApply(50);
-		you.s_confuse = 0;
-		you.s_poison = 0;
-		you.s_sick = 0;
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_HEAL) + " ",false,false,false,CL_normal);
+			you.HpUpDown(6+randA_1(9+bonus*10),DR_POTION);
+			//you.HungerApply(50);
+			you.s_confuse = 0;
+			you.s_poison = 0;
+			you.s_sick = 0;
+			you.s_drunken = 0;
+		
+			bool up_ = false;
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_RECOVER_STAT) + " ",false,false,false,CL_normal);
+			if(you.s_str < you.m_str)
+			{
+				you.StatUpDown(std::min(you.m_str-you.s_str,rand_int(1,5)),STAT_STR,true);
+				up_ = true;
+			}
+			if(you.s_dex < you.m_dex)
+			{
+				you.StatUpDown(std::min(you.m_dex-you.s_dex,rand_int(1,5)),STAT_DEX,true);
+				up_ = true;
+			}
+			if(you.s_int < you.m_int)
+			{
+				you.StatUpDown(std::min(you.m_int-you.s_int,rand_int(1,5)),STAT_INT,true);
+				up_ = true;
+			}
+			if(up_)
+				printlog(LocalzationManager::locString(LOC_SYSTEM_RECORVER_STAT) + " ",false,false,false,CL_blue);
+			//you.HungerApply(50);
+		}
 		return;
 	case PT_POISON:
 		{
@@ -215,9 +251,13 @@ void drinkpotion(potion_type kind, bool waste_)
 		//you.HungerApply(50);
 		return;
 	case PT_AGILITY:
-		you.SetAgility(rand_int(50,80)+bonus*30);
+	{
+		int levi = rand_int(50,80)+bonus*30;
+		you.SetAgility(levi);
+		you.SetLevitation(levi);
 		//you.HungerApply(50);
 		return;
+	}
 	case PT_MAGIC:
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_MAGIC) + " ",false,false,false,CL_normal);
 		you.MpUpDown(9+bonus*5+randA_1(15));
@@ -277,6 +317,8 @@ void drinkpotion(potion_type kind, bool waste_)
 			if(you.god == GT_YUUGI && !you.GetPunish(GT_YUUGI))
 				you.SetBuff(BUFFSTAT_EV, BUFF_DUPLE, 10, turn_);
 			you.SetDrunken(turn_);
+			int power_ = rand_int(20,40)+bonus*30;
+			you.PowUpDown(power_);
 		}
 		return;
 	default:

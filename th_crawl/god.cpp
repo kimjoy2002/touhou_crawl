@@ -2380,7 +2380,7 @@ void Pray()
 			D3DCOLOR color_ = you.god != GT_NONE ? CL_small_danger:CL_help;
 			printsub(LocalzationManager::locString(you.god != GT_NONE ? LOC_SYSTEM_GOD_PRAY_TEMPLE_CONVERSION_YN :LOC_SYSTEM_GOD_PRAY_TEMPLE_YN),false,color_);
 			printsub(" (",false,color_);
-			if(joypadUtil::usingPad) {
+			if(joypadUtil::isUsingPad()) {
 				printsub(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_Y, 
 							PlaceHolderHelper(joypadUtil::get("y", GVK_BUTTON_A, PROMPT_YN))),false,color_, 'y');
 			}
@@ -2388,7 +2388,7 @@ void Pray()
 				printsub(joypadUtil::get("y",GVK_BUTTON_A),false,color_, 'y');
 			}
 			printsub("/",false,color_);
-			if(joypadUtil::usingPad) {
+			if(joypadUtil::isUsingPad()) {
 				printsub(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_N, 
 							PlaceHolderHelper(joypadUtil::get("n", GVK_BUTTON_B, PROMPT_YN))),false,color_, 'n');
 			}
@@ -2447,7 +2447,7 @@ void Pray()
 						endSelection();
 						printsub(LocalzationManager::locString(junko_?LOC_SYSTEM_GOD_ABANDON_ASK_PURIFICATION:LOC_SYSTEM_GOD_PRAY_TEMPLE_CONVERSION_REALLY),false,CL_danger);
 						printsub(" (",false,CL_danger);
-						if(joypadUtil::usingPad) {
+						if(joypadUtil::isUsingPad()) {
 							printsub(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_Y, 
 										PlaceHolderHelper(joypadUtil::get("Y", GVK_BUTTON_A_LONG, PROMPT_YN))),false,CL_danger, 'Y');
 						}
@@ -2455,7 +2455,7 @@ void Pray()
 							printsub(joypadUtil::get("Y",GVK_BUTTON_A_LONG),false,color_, 'Y');
 						}
 						printsub("/",false,CL_danger);
-						if(joypadUtil::usingPad) {
+						if(joypadUtil::isUsingPad()) {
 							printsub(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_N, 
 										PlaceHolderHelper(joypadUtil::get("N", GVK_BUTTON_B, PROMPT_YN))),false,CL_danger, 'N');
 						}

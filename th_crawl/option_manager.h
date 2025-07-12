@@ -40,6 +40,8 @@ class optionManager {
 
 	int bgm_volume;
 	int se_volume;
+	
+	int input_prompt;
 
 	string lang;
 
@@ -71,6 +73,9 @@ public:
 	int getSeVolume() { return se_volume; };
 	void setBgmVolume(int value);
 	void setSeVolume(int value);
+
+	int getInputPrompt() { return input_prompt; };
+	void setInputPrompt(int input_prompt);
 
 	void setLang(const string& lang_value);
 	string getLang() { return lang; };

@@ -349,6 +349,11 @@ bool evokeAmulet(amulet_type kind, int value_)
 			you.s_frozen = 0;
 			up_ = true;
 		}
+		if(you.s_drunken)
+		{
+			you.s_drunken = 0;
+			up_ = true;
+		}
 		if(you.s_glow)
 		{
 			you.s_glow = 0;
@@ -367,6 +372,33 @@ bool evokeAmulet(amulet_type kind, int value_)
 		if(you.s_fire)
 		{
 			you.s_fire = 0;
+			up_ = true;
+		}
+		if(you.s_eirin_poison_time)
+		{
+			you.s_eirin_poison = 0;
+			you.s_eirin_poison_time = 0;
+			up_ = true;
+		}
+		if(you.s_sleep)
+		{
+			you.s_sleep = 0;
+			up_ = true;
+		}
+		if(you.s_night_sight_turn)
+		{
+			you.s_night_sight = 0;
+			you.s_night_sight_turn = 0;
+			up_ = true;
+		}
+		if(you.s_tracking)
+		{
+			you.s_tracking = 0;
+			up_ = true;
+		}
+		if(you.s_overheat_turn) {
+			you.s_overheat = 0;
+			you.s_overheat_turn = 0;
 			up_ = true;
 		}
 

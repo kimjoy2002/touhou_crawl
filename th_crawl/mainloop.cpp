@@ -36,6 +36,7 @@
 
 
 extern bool saveexit;
+extern bool ableWiz;
 
 extern HANDLE mutx;
 
@@ -444,7 +445,7 @@ void charter_selete(bool first)
 		deque<monster*> dq;
 		env[current_level].EnterMap(0,dq);	
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL_START1),true,false,false,CL_warning);
-		if(joypadUtil::usingPad) {
+		if(joypadUtil::isUsingPad()) {
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_TUTORIAL_START2_PAD, PlaceHolderHelper(joypadUtil::get("Y",GVK_BUTTON_Y))),true,false,false,CL_warning);
 			printlog(LocalzationManager::locString(LOC_SYSTEM_TUTORIAL_START3_PAD),true,false,false,CL_warning);
 		} else {
@@ -967,6 +968,9 @@ bool ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 			case SYSCMD_MORE_ITEM:
 				More_Item_Action();
 				break;
+			case SYSCMD_STAIR:
+				Stair_move_all();
+				break;
 			case SYSCMD_AUTOPICKUP:
 				auto_pick_onoff(false);
 				break;
@@ -989,8 +993,10 @@ bool ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 				saveandcheckexit();
 				break;
 			case SYSCMD_WIZARD:
+			if(ableWiz || wiz_list.wizard_mode == 1) {
 				wiz_mode();
 				break;
+			}
 			default: 
 				break;
 		}
@@ -1291,11 +1297,9 @@ void MainLoop()
 			weapon_swap();
 			break;
 		case '&': //위자드모드!
-			//waitkeyinput();
+		if(ableWiz || wiz_list.wizard_mode == 1) {
 			wiz_mode();
-			break;
-		case '_': //스팀 디버깅
-			steam_mg.debugText();
+		}
 			break;
 		case 0x8B:
 			auto_pick_onoff(false);
@@ -1375,6 +1379,8 @@ bool option_menu(int value_)
 	int origin_w = width_, origin_h = height_;
 	int origin_bgm_ = bgm_, origin_se_ = se_;
 	int current_pos_ = option_mg.getCurrentPos();
+	int input_prompt = option_mg.getInputPrompt(), origin_prompt_ = option_mg.getInputPrompt();
+	LOCALIZATION_ENUM_KEY input_prompt_str = input_prompt==0?LOC_SYSTEM_INPUT_PROMPTS_AUTO:(input_prompt==1?LOC_SYSTEM_INPUT_PROMPTS_KEYBOARD:LOC_SYSTEM_INPUT_PROMPTS_JOYPAD);  
 	
 	DisplayManager.current_position = 0;
 	while(1)
@@ -1402,6 +1408,8 @@ bool option_menu(int value_)
 		printsub("d <-> D - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BGM) + ": " + to_string(bgm_),true,CL_normal,'D');
 		printsub(blank,false,CL_warning);
 		printsub("e <-> E - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_SE) + ": " + to_string(se_),true,CL_normal,'E');
+		printsub(blank,false,CL_warning);
+		printsub("f - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_INPUT_PROMPTS) + ": " + LocalzationManager::locString(input_prompt_str),true,CL_normal,'f');
 		printsub("",true,CL_normal);
 		printsub(blank,false,CL_warning);
 		printsub("esc - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BACK),true,CL_normal,VK_ESCAPE);
@@ -1419,7 +1427,7 @@ bool option_menu(int value_)
 			}
 			else if(input_ == -1) {
 				if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {
-					if(inputedKey.val1 >= 'a' && inputedKey.val1 <= 'e' ) {
+					if(inputedKey.val1 >= 'a' && inputedKey.val1 <= 'f' ) {
 						right_ = true;
 						input_ = inputedKey.val1 + 'A' - 'a';
 					} else if(inputedKey.val1 >= 'A' && inputedKey.val1 <= 'Z' ) {
@@ -1454,7 +1462,7 @@ bool option_menu(int value_)
 			}
 		}
 
-		if((input_ >= 'a' && input_ <= 'e') || (input_ >= 'A' && input_ <= 'E'))
+		if((input_ >= 'a' && input_ <= 'f') || (input_ >= 'A' && input_ <= 'F'))
 		{
 			if(input_ == 'a' || input_ == 'A') {
 				lang = right_?LocalzationManager::getNextLang(lang):LocalzationManager::getPrevLang(lang);
@@ -1486,6 +1494,18 @@ bool option_menu(int value_)
 				SetSEVolume(se_);
 				PlaySE("shoot");
 			}
+			else if(input_ == 'f' || input_ == 'F') {
+				if(input_ == 'f') {
+					input_prompt++;
+				} else {
+					input_prompt--;
+				}
+				if(input_prompt < 0)
+					input_prompt = 2;
+				if(input_prompt > 2)
+					input_prompt = 0;
+				input_prompt_str = input_prompt==0?LOC_SYSTEM_INPUT_PROMPTS_AUTO:(input_prompt==1?LOC_SYSTEM_INPUT_PROMPTS_KEYBOARD:LOC_SYSTEM_INPUT_PROMPTS_JOYPAD);  
+			}
 		}
 		else if(input_ == VK_ESCAPE ||
 		input_ == GVK_BUTTON_B ||
@@ -1514,6 +1534,9 @@ bool option_menu(int value_)
 			}
 			if(origin_se_ != se_) {
 				option_mg.setSeVolume(se_);
+			}
+			if(origin_prompt_ != input_prompt) {
+				option_mg.setInputPrompt(input_prompt);
 			}
 			
 			if(should_reload) {

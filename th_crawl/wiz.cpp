@@ -26,6 +26,14 @@ extern int g_menu_select;
 extern HANDLE mutx;
 wiz_infor wiz_list;
 extern int create_bamboo_mon();
+bool ableWiz = false;
+
+void checkWizardModeFromCmdLine(const char* cmdLine) {
+    std::string cmd(cmdLine);
+    if (cmd.find("--wizard") != std::string::npos) {
+        ableWiz = true;
+    }
+}
 
 bool skill_summon_bug(int pow, bool short_, unit* order, coord_def target);
 
@@ -673,7 +681,7 @@ void wiz_mode()
 					chargingFinish((amulet_type)_item->value1, 1);
 					if (you.system_exp.value <= 0) {
 						if (isCanCharge((amulet_type)_item->value1)) {
-							printlog(LocalzationManager::locString(joypadUtil::usingPad?LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PAD:LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH), true, false, false, CL_white_puple);
+							printlog(LocalzationManager::locString(joypadUtil::isUsingPad()?LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PAD:LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH), true, false, false, CL_white_puple);
 						}
 						else {
 							printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PASSIVE), true, false, false, CL_white_puple);

@@ -46,7 +46,7 @@ extern shared_ptr<DirectX::SpriteBatch> g_pSprite; //스프라이트포인터
 extern shared_ptr<DirectX::SpriteFont> g_pfont;
 extern HANDLE mutx;
 extern HWND hwnd;
-
+extern bool ableWiz;
 extern POINT MousePoint;
 
 display_manager DisplayManager;
@@ -245,6 +245,8 @@ int display_manager::convertClickable(int id) {
 			return 'P';
 		case SPECIAL_CLINKABLE_UNEQUIP_JEWELRY:
 			return 'R';
+		case SPECIAL_CLINKABLE_FIND_ITEM:
+			return 'f';
 		default:
 			return id;
 	}
@@ -313,6 +315,8 @@ textures* display_manager::getSelectTexure(int id) {
 			return &img_command_equip_jewelry;
 		case SPECIAL_CLINKABLE_UNEQUIP_JEWELRY:
 			return &img_command_unequip_jewelry;
+		case SPECIAL_CLINKABLE_FIND_ITEM:
+			return &img_command_find_item;
 		case 'Y':
 			return &img_command_Y;
 		case 'N':
@@ -920,7 +924,7 @@ void display_manager::property_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 		DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_DISPLAY_MANAGER_NO_PROPERTY).c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 		return;
 	}
-	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(joypadUtil::usingPad?LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW_PAD:LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW).c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(joypadUtil::isUsingPad()?LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW_PAD:LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW).c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.top += fontDesc.Height*2;
 	for(auto it = you.property_vector.begin(); it != you.property_vector.end(); it++)
 	{
@@ -3548,11 +3552,14 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							case SYSCMD_DOOR_OPENCLOSE:
 								pixel_ = &img_command_door;
 								break;
-							case SYSCMD_PRAY:
-								pixel_ = &img_command_pray;
+							case SYSCMD_STAIR:
+								pixel_ = &img_command_stair; 
 								break;
 							case SYSCMD_MORE_ITEM:
 								pixel_ = &img_command_more_item; 
+								break;
+							case SYSCMD_PRAY:
+								pixel_ = &img_command_pray;
 								break;
 							case SYSCMD_AUTOPICKUP:
 								pixel_ = (you.auto_pickup>0?&img_command_pickon:
@@ -3581,13 +3588,15 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 								pixel_ = &img_command_quit;
 								break;
 							case SYSCMD_1TURN:
-								pixel_ = &img_command_number[23];
+								pixel_ = &img_command_one_sleep;
 								break;
 							case SYSCMD_QUICKTHROW:
 								pixel_ = &img_command_throw;
 								break;
 							case SYSCMD_WIZARD:
-								pixel_ = &img_command_number[21];
+								if(ableWiz || wiz_list.wizard_mode == 1) {
+									pixel_ = &img_command_number[21];
+								}
 								break;
 							default:
 								 break;
@@ -3596,7 +3605,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 						pixel_->draw(pSprite,x_,y_,255);
 
-						if(joypadUtil::usingPad) {
+						if(joypadUtil::isUsingPad()) {
 							if(you.quickMenu1 == tile_count) {
 								img_command_quick_menu1.draw(pSprite,x_,y_,255);
 							}
@@ -4795,6 +4804,8 @@ string getCilnkableString(int kind) {
 		return LocalzationManager::locString(LOC_SYSTEM_EQUIP_JEWELRY);
 	case SPECIAL_CLINKABLE_UNEQUIP_JEWELRY:
 		return LocalzationManager::locString(LOC_SYSTEM_UNEQUIP_JEWELRY);
+	case SPECIAL_CLINKABLE_FIND_ITEM:
+		return LocalzationManager::locString(LOC_SYSTEM_FIND_ITEM);
 	default:
 		return "";
 	}
@@ -4816,6 +4827,8 @@ string getCommandString(int kind, int value) {
 		return LocalzationManager::locString(LOC_SYSTEM_CMD_SHOUT);
 	case SYSCMD_DOOR_OPENCLOSE:
 		return LocalzationManager::locString(LOC_SYSTEM_CMD_DOOR);
+	case SYSCMD_STAIR:
+		return LocalzationManager::locString(LOC_SYSTEM_CMD_STAIR);
 	case SYSCMD_PRAY:
 		return LocalzationManager::locString(LOC_SYSTEM_CMD_PRAY);
 	case SYSCMD_MORE_ITEM:
@@ -4839,7 +4852,9 @@ string getCommandString(int kind, int value) {
 	case SYSCMD_QUICKTHROW:
 		return LocalzationManager::locString(LOC_SYSTEM_CMD_QUICKTHROW);
 	case SYSCMD_WIZARD:
+	if(ableWiz || wiz_list.wizard_mode == 1) {
 		return LocalzationManager::locString(LOC_SYSTEM_CMD_WIZARD);
+	}
 	default:
 		return "";
 	}

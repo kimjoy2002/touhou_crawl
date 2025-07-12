@@ -249,13 +249,14 @@ extern void init_save_paths();
 //
 void init_localization();
 
-
+void checkWizardModeFromCmdLine(const char* cmdLine);
 
 int WINAPI WinMain(HINSTANCE hinstance,
 				   HINSTANCE prevInstance, 
 				   PSTR cmdLine,
 				   int showCmd)
 {
+    checkWizardModeFromCmdLine(cmdLine);
 	map_list.random_number = (unsigned long)time(NULL);
 	init_nonlogic_seed((unsigned long)time(NULL));
 	srand((unsigned int)map_list.random_number);

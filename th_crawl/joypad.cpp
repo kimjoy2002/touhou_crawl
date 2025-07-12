@@ -52,6 +52,12 @@ constexpr bool ENABLE_REPEAT_FOR[6] = {
     true  // RB
 };
 
+bool joypadUtil::isUsingPad() {
+    if(option_mg.getInputPrompt() == 0) {
+        return usingPad;
+    }
+    return option_mg.getInputPrompt()==2?true:false;
+}
 void joypadUtil::initJoypad() {
     usingPad = isGamepadConnected();
 }
@@ -63,7 +69,7 @@ bool joypadUtil::isGamepadConnected() {
 }
 
 std::string joypadUtil::get(const std::string& kbKey, wchar_t gamepadKey, PromptType promptType) {
-    if (!usingPad)
+    if (!isUsingPad())
         return kbKey;
 
     GamepadType type = steam_mg.getCurrentGamepadType();

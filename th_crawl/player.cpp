@@ -2804,7 +2804,7 @@ void players::ExpRecovery(int exper_)
 				if (system_exp.value <= 0) {
 					PlaySE("charge");
 					if (isCanCharge((amulet_type)_item->value1)) {
-						printlog(LocalzationManager::locString(joypadUtil::usingPad?LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PAD:LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH), true, false, false, CL_white_puple);
+						printlog(LocalzationManager::locString(joypadUtil::isUsingPad()?LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PAD:LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH), true, false, false, CL_white_puple);
 					}
 					else {
 						printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PASSIVE), true, false, false, CL_white_puple);
@@ -4846,7 +4846,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 	if(t->type == ITM_GOAL)
 	{
 		if(t->value1 >=0 && t->value1 < RUNE_MAX) {
-			printlog(LocalzationManager::formatString(joypadUtil::usingPad?LOC_SYSTEM_PICKUP_RUNE_PAD:LOC_SYSTEM_PICKUP_RUNE, 
+			printlog(LocalzationManager::formatString(joypadUtil::isUsingPad()?LOC_SYSTEM_PICKUP_RUNE_PAD:LOC_SYSTEM_PICKUP_RUNE, 
 				PlaceHolderHelper(rune_string[t->value1])),true,false,false,CL_good);
 			AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GET_ITEM, 
 				PlaceHolderHelper(rune_string[t->value1])),CL_warning);
@@ -5044,7 +5044,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 		printlog(LocalzationManager::locString(LOC_SYSTEM_PICKUP_LIMIT),true,false,false,CL_normal);
 		you.SetInter(IT_MAX_ITEM);
 		if(g_auto) {
-			printlog(LocalzationManager::formatString(joypadUtil::usingPad?LOC_SYSTEM_AUTOPICKUP_OFF_PAD:LOC_SYSTEM_AUTOPICKUP_OFF,PlaceHolderHelper("Ctrl + a")),true,false,false,CL_small_danger);
+			printlog(LocalzationManager::formatString(joypadUtil::isUsingPad()?LOC_SYSTEM_AUTOPICKUP_OFF_PAD:LOC_SYSTEM_AUTOPICKUP_OFF,PlaceHolderHelper("Ctrl + a")),true,false,false,CL_small_danger);
 			you.auto_pickup = false;
 		}
 		ReleaseMutex(mutx);
@@ -5168,7 +5168,7 @@ bool players::Drink(char id_)
 						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_POTION_CHANGE),true,false,false,CL_small_danger);
 						drinkpotion(PT_WATER, false);
 					}
-					else if(you.GetArtifactProperty(ART_DRUNK) > 0) {
+					else if(you.GetArtifactProperty(ART_DRUNK) > 0 && (*it).value1 != PT_ALCOHOL) {
 						PlaySE("potion");
 						if(iden_list.potion_list[(*it).value1].iden == false)
 						{		

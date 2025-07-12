@@ -578,6 +578,9 @@ extern textures img_command_equip_armour;
 extern textures img_command_unequip_armour;
 extern textures img_command_equip_jewelry;
 extern textures img_command_unequip_jewelry;
+extern textures img_command_one_sleep;
+extern textures img_command_stair;
+extern textures img_command_find_item;
 
 extern textures img_command_alphabet_small[26];
 extern textures img_command_alphabet_large[26];

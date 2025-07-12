@@ -1882,6 +1882,7 @@ void Stair_move_all() {
 		Stair_move(false);
 		break;
 	default:
+		printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_EMPTY),true,false,false,CL_normal);
 		break;
 	}
 }
@@ -2557,13 +2558,13 @@ void rightmenu_control()
 			continue;
 		case 'x':
 		case GVK_BUTTON_X://퀵메뉴설정
-			if(g_menu_select >= 0 && g_menu_select  < SYSCMD_C_20){
+			if(g_menu_select >= 0 && g_menu_select  < SYSCMD_MAX){
 				you.quickMenu1 = (SYSTEM_COMMAND_KIND) g_menu_select;
 			}
 			continue;
 		case 'X':
 		case GVK_BUTTON_X_LONG: //패드 A 길게
-			if(g_menu_select >= 0 && g_menu_select  < SYSCMD_C_20){
+			if(g_menu_select >= 0 && g_menu_select  < SYSCMD_MAX){
 				you.quickMenu2 = (SYSTEM_COMMAND_KIND) g_menu_select;
 			}
 			continue;
@@ -3776,7 +3777,7 @@ void dungeonView()
 
 void More_Item_Action()
 {
-	const int max_command = 13;
+	const int max_command = 14;
 	vector<int> selectionList;
 	pair<pair<int,char>,LOCALIZATION_ENUM_KEY> command_list[max_command] = {
 		make_pair(make_pair(SPECIAL_CLINKABLE_INVENTORY,'i'),LOC_SYSTEM_INVENTORY),
@@ -3791,7 +3792,8 @@ void More_Item_Action()
 		make_pair(make_pair(SPECIAL_CLINKABLE_EQUIP_ARMOUR,'W'),LOC_SYSTEM_EQUIP_ARMOUR),
 		make_pair(make_pair(SPECIAL_CLINKABLE_UNEQUIP_ARMOUR,'T'),LOC_SYSTEM_UNEQUIP_ARMOUR),
 		make_pair(make_pair(SPECIAL_CLINKABLE_EQUIP_JEWELRY,'P'),LOC_SYSTEM_EQUIP_JEWELRY),
-		make_pair(make_pair(SPECIAL_CLINKABLE_UNEQUIP_JEWELRY,'R'),LOC_SYSTEM_UNEQUIP_JEWELRY)
+		make_pair(make_pair(SPECIAL_CLINKABLE_UNEQUIP_JEWELRY,'R'),LOC_SYSTEM_UNEQUIP_JEWELRY),
+		make_pair(make_pair(SPECIAL_CLINKABLE_FIND_ITEM,'f'),LOC_SYSTEM_FIND_ITEM)
 	};
 	
 	enterlog();
@@ -3942,6 +3944,12 @@ void More_Item_Action()
 			endSelection();
 			deletelog();
 			Unequip_Jewelry();
+			g_menu_select = -1;
+			return;
+		case 'f':
+			endSelection();
+			deletelog();
+			findItem();
 			g_menu_select = -1;
 			return;
 		case -1:

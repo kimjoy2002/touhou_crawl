@@ -11,10 +11,13 @@
 #include <stdio.h>
 #include <io.h> 
 #include <time.h>
+#include "dump.h"
 #include "replay.h"
+#include "god.h"
 #include "map.h"
 #include "save.h"
 #include "key.h"
+#include "steam_api.h"
 #include <windows.h>
 extern std::atomic<bool> g_saveandexit;
 
@@ -773,5 +776,152 @@ bool morgue_menu(int value_)
     }
 
     changedisplay(DT_SUB_TEXT);
+    return false;
+}
+string versionToString(int version);
+
+
+
+bool score_menu(int value_)
+{
+    constexpr int ENTRIES_PER_PAGE = 10;
+    constexpr int MAX_ENTRIES = 999;
+    int page = 0;
+    deletesub();
+
+    printsub("", true, CL_normal);
+    printsub("     ", false, CL_warning);
+    printsub(LocalzationManager::locString(LOC_SYSTEM_SCORE_LIST), true, CL_help);
+    printsub("", true, CL_normal);
+    printsub(LocalzationManager::locString(LOC_SYSTEM_SCORE_LOADING), true, CL_danger);
+    printsub("", true, CL_normal);
+
+    std::vector<ScoreEntry> scores;
+    if(steam_mg.getScoreBoard(scores)) {
+		if (scores.size() > MAX_ENTRIES)
+			scores.resize(MAX_ENTRIES);
+    	int total_pages = (scores.size() + ENTRIES_PER_PAGE - 1) / ENTRIES_PER_PAGE;
+
+		while (true)
+		{
+			deletesub();
+
+			printsub("", true, CL_normal);
+			printsub("     ", false, CL_warning);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_SCORE_LIST), true, CL_help);
+			printsub("", true, CL_normal);
+
+			if (!scores.empty())
+			{
+				{
+					std::ostringstream ss;
+					ss <<  WithBlankString(LocalzationManager::locString(LOC_SYSTEM_SCORE_RANK),4)  << "|"
+						<< WithBlankString(LocalzationManager::locString(LOC_SYSTEM_SCORE_NAME),12) << "|"
+						<< WithBlankString(LocalzationManager::locString(LOC_SYSTEM_SCORE_SCORE),9)  << "|"
+						<< WithBlankString(LocalzationManager::locString(LOC_SYSTEM_SCORE_CHAR),20)  << "|"
+						<< WithBlankString(LocalzationManager::locString(LOC_SYSTEM_SCORE_LEVEL),5)  << "|"
+						<< WithBlankString(LocalzationManager::locString(LOC_SYSTEM_SCORE_TURN),10)  << "|"
+						<< WithBlankString(LocalzationManager::locString(LOC_SYSTEM_SCORE_GOD),12) << "|"
+						<< WithBlankString(LocalzationManager::locString(LOC_SYSTEM_SCORE_RUNE),4)  << "|";
+					printsub("     ", false, CL_normal);
+					printsub(ss.str(), true, CL_normal);
+				}
+				int start = page * ENTRIES_PER_PAGE;
+				int end = std::min<int>(start + ENTRIES_PER_PAGE, scores.size());
+
+				for (int i = start; i < end; ++i)
+				{
+					const auto& entry = scores[i];
+					{
+						std::ostringstream ss;
+						ss << WithBlankString(std::to_string(i + 1),4) << "|" 
+						<< WithBlankString(entry.username,12) << "|"
+						<< WithBlankString(to_string(std::min(999999999,entry.score)),9) << "|";
+
+						if(entry.charname == UNIQ_START_NONE) {
+							ss << WithBlankString(LocalzationManager::locString(tribe_type_string[entry.tribe]) 
+							+ " " 
+							+ LocalzationManager::locString(job_type_string[entry.job]),20) << "|";
+						} else {
+						ss << WithBlankString(GetUniqueCharString(entry.charname),20) << "|";
+						}
+						ss << WithBlankString(to_string(entry.level),5) << "|" 
+						<< WithBlankString(to_string(entry.turn),10) << "|" 
+						<< WithBlankString(GetGodString((god_type)entry.god),12) << "|" 
+						<< WithBlankString(to_string(entry.rune),4) << "|";
+						printsub("     ", false, CL_normal);
+						printsub(ss.str(), true, CL_normal);
+					}
+					{
+						std::time_t timestamp = static_cast<time_t>(entry.timestamp);
+						std::tm* timeinfo = std::localtime(&timestamp);
+						char time_str[64];
+						strftime(time_str, sizeof(time_str), "%Y-%m-%d", timeinfo);
+						stringstream death_reason;
+						GetDeathReason(death_reason, 
+							(damage_reason )entry.damage_reason,
+							entry.att_type, nullptr, 
+							entry.damage_source, 
+							entry.last_damage, 
+							entry.dungeon_level,
+							entry.rune >= 100,
+							entry.rune % 100);
+
+						printsub("     ", false, CL_normal);
+						printsub(WithBlankString(death_reason.str(), 61), false,entry.rune >= 100?CL_green: CL_warning);
+						std::ostringstream ss;
+						ss << "|"
+							<< WithBlankString(time_str, 10) << "|"
+							<< WithBlankString(versionToString(entry.version),10)  << "|";
+						printsub(ss.str(), true,CL_normal);
+					}
+				}
+				printsub("     ", false, CL_normal);
+				std::ostringstream ss;
+				ss << "←";
+				ss << "  " << LocalzationManager::formatString(LOC_SYSTEM_REPLAY_PAGE, PlaceHolderHelper(std::to_string(page + 1))) << "  ";
+				ss << "→";
+				printsub(ss.str(), true, CL_help);
+			}
+			else
+			{
+				printsub("            ", false, CL_normal);
+				printsub(LocalzationManager::locString(LOC_SYSTEM_SCORE_EMPTY), true, CL_danger);
+			}
+
+			printsub("            ", false, CL_normal);
+			printsub("esc - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BACK), true, CL_normal, VK_ESCAPE);
+			changedisplay(DT_SUB_TEXT);
+
+			InputedKey inputedKey;
+			int input_ = waitkeyinput(inputedKey, true);
+
+			if (input_ == VK_ESCAPE  || input_ == VK_RETURN || input_ == GVK_BUTTON_A|| input_ == GVK_BUTTON_A_LONG || input_ == GVK_BUTTON_B || input_ == GVK_BUTTON_B_LONG || inputedKey.isRightClick())
+				break;
+			else if (input_ == VK_LEFT || inputedKey.mouse == MKIND_SCROLL_UP)
+			{
+				if (page > 0) page--;
+			}
+			else if (input_ == VK_RIGHT || inputedKey.mouse == MKIND_SCROLL_DOWN)
+			{
+				if (page + 1 < total_pages) page++;
+			}
+		}
+	} else {
+		printsub("            ", false, CL_normal);
+		printsub(LocalzationManager::locString(LOC_SYSTEM_SCORE_EMPTY), true, CL_danger);
+
+		printsub("            ", false, CL_normal);
+		printsub("esc - " + LocalzationManager::locString(LOC_SYSTEM_OPTION_MENU_BACK), true, CL_normal, VK_ESCAPE);
+		changedisplay(DT_SUB_TEXT);
+
+		InputedKey inputedKey;
+		while (1)
+		{
+			int input_ = waitkeyinput(inputedKey, true);
+			if (input_ == VK_ESCAPE || input_ == VK_RETURN || input_ == GVK_BUTTON_A || input_ == GVK_BUTTON_A_LONG || input_ == GVK_BUTTON_B || input_ == GVK_BUTTON_B_LONG || inputedKey.isRightClick())
+				break;
+		}
+	}
     return false;
 }

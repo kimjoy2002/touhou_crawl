@@ -4438,7 +4438,9 @@ void players::LevelUp(bool speak_)
 	}
 	steam_mg.setCurrentInfo();
 }
-string players::GetCharNameString(){
+
+
+string GetUniqueCharString(int char_type){
 	switch(char_type) {
 	case UNIQ_START_REIMU:
 		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_REIMU);
@@ -4465,6 +4467,10 @@ string players::GetCharNameString(){
 	default:
 		return "";
 	}
+}
+
+string players::GetCharNameString(){
+	return GetUniqueCharString(char_type);
 };
 list<item>::iterator players::GetThrowIter()
 {

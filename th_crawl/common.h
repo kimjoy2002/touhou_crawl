@@ -395,6 +395,7 @@ int distan_coord(const coord_def& a, const coord_def& b);
 
 wstring ConvertUTF8ToUTF16(const string& utf8Str);
 string ConvertUTF16ToUTF8(const wstring& utf16Str);
+string WithBlankString(const string& str, int size, bool left = true);
 
 int PrintCharWidth(const wstring& text);
 int PrintCharWidth(const string& text);

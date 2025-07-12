@@ -10,6 +10,7 @@
 #include "environment.h"
 #include "replay.h"
 #include "option_manager.h"
+#include "steam_api.h"
 #include "key.h"
 #include "soundmanager.h"
 #include "joypad.h"
@@ -411,6 +412,8 @@ unsigned int WINAPI SoundLoop(void *arg)
 				UpdateBGM();
 
 				Sleep(16);
+				
+			    SteamAPI_RunCallbacks();
 				/*
 				currTime = timeGetTime();
 				while (currTime - lastTime < 16)

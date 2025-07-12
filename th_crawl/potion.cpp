@@ -65,7 +65,7 @@ potion_type goodbadpotion(int good_bad)
 	else if(good_bad==2)
 	{
 		potion_type list_[5] = {PT_MIGHT,PT_HASTE,PT_CLEVER,PT_AGILITY, PT_ALCOHOL};
-		return list_[randA(6)];
+		return list_[randA(4)];
 	}
 	else if(good_bad==3)
 	{

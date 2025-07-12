@@ -9,6 +9,10 @@
 #ifndef  __DUMP_H__
 #define  __DUMP_H__
 
+#include <stdio.h>
+#include <iostream>
+#include "enum.h"
+#include "unit.h"
 
 enum dump_action_type
 {
@@ -21,6 +25,8 @@ enum dump_action_type
 	DACT_USE,
 	DACT_MAX
 };
+
+using namespace std;
 
 class action_class
 {
@@ -38,6 +44,8 @@ public:
 
 string GetDumpActionString(dump_action_type type_);
 
+
+void GetDeathReason(stringstream& death_reason, damage_reason dead_reason, int att_type, attack_infor* dead_order, int mon_id, int damage, int level, bool orb, int rune);
 
 bool Dump(int type, wstring *filename_);
 

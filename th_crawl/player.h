@@ -674,7 +674,7 @@ public:
 
 };
 void GameOver();
-
+string GetUniqueCharString(int char_type);
 extern players you;
 
 int action_Move(int key, const coord_def &c); //메인루프에서의 이동

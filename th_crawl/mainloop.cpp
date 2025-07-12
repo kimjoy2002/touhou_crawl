@@ -29,6 +29,9 @@
 #include "mapsearching.h"
 #include "soundmanager.h"
 #include "localization.h"
+#include <string>
+#include <sstream>
+#include <iomanip>
 
 #include "option_manager.h"
 
@@ -43,6 +46,29 @@ extern HANDLE mutx;
 const char *version_string = "ver1.110";
 extern int g_tile_size;
 
+int version_string_to_int() {
+	// "ver1.110" → 1.110 → 1110
+	string ver = version_string;
+	if (ver.rfind("ver", 0) == 0) {
+		ver = ver.substr(3); // remove "ver"
+	}
+
+	int major = 0, minor = 0;
+	size_t dot = ver.find('.');
+	if (dot != string::npos) {
+		major = stoi(ver.substr(0, dot));
+		minor = stoi(ver.substr(dot + 1));
+	}
+	return major * 1000 + minor;
+}
+string versionToString(int version) {
+	int major = version / 1000;
+	int minor = version % 1000;
+
+	ostringstream ss;
+	ss << "ver" << major << "." << std::setfill('0') << std::setw(3) << minor;
+	return ss.str();
+}
 bool isPrevVersion(const string& versionstring, const string& targetstring);
 void Initialize();
 

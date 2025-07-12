@@ -544,6 +544,60 @@ string ConvertUTF16ToUTF8(const wstring& utf16Str) {
 	return utf8Str;
 	
 }
+string WithBlankString(const string& str, int size, bool left) {
+	std::string result;
+	int display_width = PrintCharWidth(str);
+
+	if (display_width > size) {
+		// 문자열을 자르고 .. 추가
+		std::string trimmed;
+		int current_width = 0;
+		for (size_t i = 0; i < str.size(); ++i) {
+			// 현재 문자 단위
+			unsigned char c = (unsigned char)str[i];
+			int char_len = 1;
+
+			if (c >= 0xC2 && c <= 0xF4) {
+				// 멀티바이트 문자 시작
+				if (c < 0xE0) char_len = 2;
+				else if (c < 0xF0) char_len = 3;
+				else char_len = 4;
+			}
+
+			std::string ch = str.substr(i, char_len);
+			int ch_width = PrintCharWidth(ch);
+
+			if (current_width + ch_width > size - 2) // 2는 '..' 크기
+				break;
+
+			trimmed += ch;
+			current_width += ch_width;
+			i += char_len - 1; // 루프에서 ++i가 있으므로 -1
+		}
+		trimmed += "..";
+
+		if (left && size - PrintCharWidth(trimmed) > 0)
+			result += std::string(size - PrintCharWidth(trimmed), ' ');
+
+		result += trimmed;
+
+		if (!left && size - PrintCharWidth(trimmed) > 0)
+			result += std::string(size - PrintCharWidth(trimmed), ' ');
+
+		return result;
+	}
+
+	// 기존: 크기 충분할 때는 그대로 패딩
+	if (left && size - display_width > 0)
+		result += std::string(size - display_width, ' ');
+
+	result += str;
+
+	if (!left && size - display_width > 0)
+		result += std::string(size - display_width, ' ');
+
+	return result;
+}
 
 bool IsCJKWideChar(wchar_t ch)
 {

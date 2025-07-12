@@ -16,7 +16,6 @@
 #include <string>
 #include <sstream>
 #include <iosfwd>
-#include <steam/steam_api.h>
 
 steam_manager steam_mg;
 
@@ -220,4 +219,180 @@ void steam_manager::debugText() {
     if (count == 0) {
         printlog("달성된 도전과제가 없습니다.", true, false, false, CL_help);
     }
+}
+
+bool steam_manager::sendScore(const ScoreEntry& entry)
+{
+    if (!init) return false;
+    std::lock_guard<std::mutex> lock(score_mutex);
+    
+    if (m_CurrentLeaderboard == 0)
+    {
+        SteamAPICall_t hAPICall = SteamUserStats()->FindOrCreateLeaderboard(
+            "touhoucrawl_scoreboard",
+            k_ELeaderboardSortMethodDescending,
+            k_ELeaderboardDisplayTypeNumeric
+        );
+        ready_score = std::make_shared<ScoreEntry>(entry);
+        m_callFindLeaderboard.Set(hAPICall, this, &steam_manager::OnFindLeaderboard);
+        return false;
+    }
+
+
+    int timestamp = static_cast<int>(std::time(nullptr));
+    // 리더보드 핸들 얻
+    int details[16] = {
+        entry.level,         // 0
+        entry.tribe,         // 1
+        entry.job,           // 2
+        entry.charname,      // 3
+        entry.turn,          // 4
+        entry.last_damage,   // 5
+        entry.damage_source, // 6
+        entry.damage_reason, // 7
+        entry.rune,          // 8
+        entry.hp,            // 9
+        entry.max_hp,        // 10
+        entry.god,           // 11
+        entry.version,       // 12
+        timestamp,           // 13
+        entry.dungeon_level, // 14
+        entry.att_type       // 15 
+    };
+
+    // 스코어 업로드 (score + details)
+    SteamUserStats()->UploadLeaderboardScore(
+        m_CurrentLeaderboard,
+        k_ELeaderboardUploadScoreMethodKeepBest,
+        entry.score,
+        details,
+        16
+    );
+    return true;
+}
+
+void steam_manager::OnFindLeaderboard(LeaderboardFindResult_t* pResult, bool bIOFailure)
+{
+    if (bIOFailure || !pResult->m_bLeaderboardFound) {
+        return;
+    }
+
+    m_CurrentLeaderboard = pResult->m_hSteamLeaderboard;
+
+    if(ready_score) {
+        ScoreEntry retry = *ready_score;
+        ready_score = nullptr;
+        sendScore(retry);
+    }
+}
+
+bool steam_manager::getScoreBoard(std::vector<ScoreEntry>& out_entries)
+{
+    if (!init) return false;
+
+
+
+    // 1. 리더보드 핸들이 없다면 요청
+    if (m_CurrentLeaderboard == 0)
+    {
+        SteamAPICall_t hAPICall = SteamUserStats()->FindOrCreateLeaderboard(
+            "touhoucrawl_scoreboard",
+            k_ELeaderboardSortMethodDescending,
+            k_ELeaderboardDisplayTypeNumeric
+        );
+
+        m_scoreReceived = false;
+        m_callFindLeaderboard.Set(hAPICall, this, &steam_manager::OnFindLeaderboardForQuery);
+
+        int count = 60 * 10; // 10초 대기
+        while (count-- > 0)
+        {
+            SteamAPI_RunCallbacks();
+            Sleep(16);
+            std::lock_guard<std::mutex> lock(score_mutex);
+            if (m_scoreReceived && m_CurrentLeaderboard != 0) break;
+        }
+
+        if (m_CurrentLeaderboard == 0)
+        {
+            return false;
+        }
+    }
+
+    {
+        std::lock_guard<std::mutex> lock(score_mutex);
+        m_tempEntries.clear();
+        m_scoreReceived = false;
+    }
+
+    SteamAPICall_t hAPICall = SteamUserStats()->DownloadLeaderboardEntries(
+        m_CurrentLeaderboard,
+        k_ELeaderboardDataRequestGlobal,
+        1, 10
+    );
+
+    m_callDownloadLeaderboard.Set(hAPICall, this, &steam_manager::OnDownloadLeaderboard);
+
+    int count = 60 * 10; // 10초 대기 (16ms * 600회)
+    while (count-- > 0) {
+        SteamAPI_RunCallbacks();
+        Sleep(16);
+
+        std::lock_guard<std::mutex> lock(score_mutex);
+        if (m_scoreReceived) {
+            out_entries = m_tempEntries;
+            return true;
+        }
+    }
+
+    return false; // timeout
+}
+
+void steam_manager::OnFindLeaderboardForQuery(LeaderboardFindResult_t* pResult, bool bIOFailure) {
+    if (!bIOFailure && pResult->m_bLeaderboardFound)
+    {
+        m_CurrentLeaderboard = pResult->m_hSteamLeaderboard;
+    }
+    m_scoreReceived = true;  // 결과 도착
+}
+
+void steam_manager::OnDownloadLeaderboard(LeaderboardScoresDownloaded_t* pResult, bool bIOFailure) {
+    if (bIOFailure || !pResult || pResult->m_cEntryCount <= 0) {
+        m_scoreReceived = true;
+        return;
+    }
+
+    m_tempEntries.clear();
+    for (int i = 0; i < pResult->m_cEntryCount; ++i)
+    {
+        LeaderboardEntry_t entry;
+        int details[16] = {};
+        if (SteamUserStats()->GetDownloadedLeaderboardEntry(
+            pResult->m_hSteamLeaderboardEntries, i, &entry, details, 16))
+        {
+            ScoreEntry score;
+            score.username = SteamFriends()->GetFriendPersonaName(entry.m_steamIDUser);
+            score.score = entry.m_nScore;
+            score.level = details[0];
+            score.tribe = details[1];
+            score.job = details[2];
+            score.charname = details[3];
+            score.turn = details[4];
+            score.last_damage = details[5];
+            score.damage_source = details[6];
+            score.damage_reason = details[7];
+            score.rune = details[8];
+            score.hp = details[9];
+            score.max_hp = details[10];
+            score.god = details[11];
+            score.version = details[12];
+            score.timestamp = details[13];
+            score.dungeon_level= details[14];
+            score.att_type = details[15];
+
+            m_tempEntries.push_back(score);
+        }
+    }
+
+    m_scoreReceived = true;
 }

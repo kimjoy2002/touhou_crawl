@@ -1733,7 +1733,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 							PlaceHolderHelper(it->GetName()->getName()),
 							PlaceHolderHelper(GetName()->getName())),true,false,false,CL_magic);
 					}
-					PositionSwap(&(*it));
+					//PositionSwap(&(*it));
 					return it->damage(a,perfect_);
 					break;
 				}

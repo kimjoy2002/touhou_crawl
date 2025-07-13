@@ -765,7 +765,7 @@ LOC_SYSTEM_BUFF_DESCRIBE_STAT_STONEFIST,Your next unarmed attack deals extra dam
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIAMOND,You gain extra defense for a short time.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_POISON_BODY,Continuously deals poison damage to enemies in the surrounding 8 tiles.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_ENLIGHTENMENT,Melee damage increases, damage taken is reduced to 66%, but your movement speed decreases to 0.77x.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTUMN_BLADE,Your melee attack power is tripled.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTUMN_BLADE,Melee attack damage is increased by {0}×. If unarmed, it increases by {1}×.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_PHILOSOPHERS,MP is consumed automatically to cast elemental spells at nearby enemies.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_ROYALFLARE,Your movement speed is reduced, and MP is heavily consumed to deal growing area fire damage.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY1,You are unlucky! This state can only be removed by gaining experience.
@@ -2742,7 +2742,7 @@ LOC_SYSTEM_SPL_DESCRIBE_SUMMON_YOSHIKA,Seiga’s signature technique that summon
 LOC_SYSTEM_SPL_DESCRIBE_NESY_CANNON,A powerful water cannon mounted on Neshie.\nHigh water pressure used to knock back enemies, but now refined to reduce knockback without sacrificing power-showcasing Kappa engineering.\n
 LOC_SYSTEM_SPL_DESCRIBE_MERMAID_SONG,Wakasagihime's favorite song.\nThe magical melody pulls enemies toward her one tile at a time.\nCannot be blocked by magic resistance but is nullified by confusion resistance.\n
 LOC_SYSTEM_SPL_DESCRIBE_EMERALD_CITY,Creates emerald walls using alchemy.\nDeals heavy physical damage in the surrounding 8 tiles.\n
-LOC_SYSTEM_SPL_DESCRIBE_AUTUMN_BLADE,Attaches steel saw blades to your weapon or fists using alchemy.\nTriples all melee damage while active-simple and deadly.\n
+LOC_SYSTEM_SPL_DESCRIBE_AUTUMN_BLADE,Attaches steel saw blades to your weapon or bare hands through alchemy.\nWhile active, all melee attacks deal greatly increased damage.\nEspecially powerful when used barehanded.\n
 LOC_SYSTEM_SPL_DESCRIBE_PHILOSOPHERS_STONE,The ultimate goal of alchemy-casting the Philosopher's Stone, the pinnacle of alchemical magic.\nWhile active, you can unleash a barrage of spells from various schools at a minimal MP cost.\nDuring the duration, random spells from all five elements are automatically cast at random enemies within your line of sight.\nEach cast consumes 1 MP automatically, and spells cast this way can be used even when you are silenced.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_ANCHOR,Drops a giant anchor near the targeted enemy.\nThe anchor itself does no damage but pins the target in place.\nThe enemy must destroy the anchor or wait for it to disappear to move again.\n
 LOC_SYSTEM_SPL_DESCRIBE_REAPER_MET,Instantly pulls a distant enemy toward you and binds their feet, reducing their movement speed for a short time.\n

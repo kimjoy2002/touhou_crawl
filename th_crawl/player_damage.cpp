@@ -115,11 +115,12 @@ int players::GetAttack(bool max_, equip_type type_)
 	}
 	if(alchemy_buff == ALCT_AUTUMN_BLADE)
 	{
-		max_atk_ *= 3;
+		if(skill_ == SKT_UNWEAPON) {
+			max_atk_ *= 2.5;
+		} else {
+			max_atk_ *= 1.8f;
+		}
 	}
-
-
-
 
 	if(max_atk_<min_atk_)
 		max_atk_ = min_atk_;

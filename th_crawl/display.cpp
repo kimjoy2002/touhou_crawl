@@ -3246,7 +3246,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			if(you.alchemy_buff == ALCT_AUTUMN_BLADE)
 			{
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_AUTUMN_BLADE), CL_alchemy,
-					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTUMN_BLADE), this);
+					LocalzationManager::formatString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTUMN_BLADE, PlaceHolderHelper("1.8"), PlaceHolderHelper("2.5")), this);
 			}
 			if(you.alchemy_buff == ALCT_PHILOSOPHERS_STONE)
 			{

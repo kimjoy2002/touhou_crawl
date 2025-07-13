@@ -765,7 +765,7 @@ LOC_SYSTEM_BUFF_DESCRIBE_STAT_STONEFIST,당신의 다음 맨손 공격은 추가
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIAMOND,잠깐동안 추가 방어력을 얻습니다.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_POISON_BODY,주변 8타일의 적에게 지속적으로 독 데미지를 줍니다.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_ENLIGHTENMENT,근접 공격력이 상승하고 받는 데미지가 66%가 되지만 이동속도가 1.3배 느려집니다.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTUMN_BLADE,근접 공격력이 3배가 됩니다.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTUMN_BLADE,근접 공격력이 {0}배가 됩니다. 맨손이라면 {1}배가 됩니다.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_PHILOSOPHERS,자동으로 마나가 소모되어 주변 적에게 5원소의 마법이 사용됩니다.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_ROYALFLARE,이동 속도가 느려지고 마나를 크게 소모하여 점차 큰 범위에 화염 데미지를 줍니다.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY1,당신은 불행합니다! 이 상태는 경험치를 먹어야 사라집니다.
@@ -2742,7 +2742,7 @@ LOC_SYSTEM_SPL_DESCRIBE_SUMMON_YOSHIKA,강시인 요시카를 불러오는 청�
 LOC_SYSTEM_SPL_DESCRIBE_NESY_CANNON,네시에 탑재되어있는 강력한 물대포.\n너무 강력한 수압으로 인해 적을 날려버려 조준을 방해하는 단점을 개선하면서도\n위력은 낮추지않은 캇파의 기술력이 돋보이는 기술이다.\n
 LOC_SYSTEM_SPL_DESCRIBE_MERMAID_SONG,와카사기히메가 자랑하는 애창곡.\n인어의 노래엔 특수한 효과가 있어서 그 아름다운 노래에 자동으로 발이 끌려가게 된다.\n노래를 들을수록 1칸씩 와카사기히메에게 이끌리듯이 걸어가지만 깊은물에 빠지진않는다.\n마법저항으론 막을 수 없지만 혼란저항이 있다면 인어의 노래의 영향을 받지않게된다.\n
 LOC_SYSTEM_SPL_DESCRIBE_EMERALD_CITY,연금술을 이용한 에메랄드의 벽을 만들어내는 마법.\n주변 8타일에 강한 물리데미지를 입힐 수 있다.\n
-LOC_SYSTEM_SPL_DESCRIBE_AUTUMN_BLADE,연금술로 무기나 맨손에 강철 톱니날을 붙인다.\n사용중엔 모든 근접공격 데미지가 3배가 되는 심플하면서 강력한 마법.\n
+LOC_SYSTEM_SPL_DESCRIBE_AUTUMN_BLADE,연금술로 무기나 맨손에 강철 톱니날을 붙인다.\n사용중엔 모든 근접공격 데미지가 크게 증가하는 강력한 마법.\n특히 맨손으로 사용시 더욱 더 강력한 위력을 얻는다.\n
 LOC_SYSTEM_SPL_DESCRIBE_PHILOSOPHERS_STONE,연금술의 궁극적인 목표로 현자의 돌을 만들어내는 연금술 최종 마법.\n현자의 돌이 시전되고 있는 동안엔 다양한 학파의 마법을 아주 적은 영력만으로 난사하게 된다.\n지속시간동안 각 다섯 속성에 해당하는 랜덤한 마법을 시야내의 무작위 적에게 자동으로 시전한다.\n시전에는 마나가 자동으로 1 소모되며 이 방법으로 사용되는 마법은 소리를 낼 수 없는 상황에서도 사용이 가능하다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_ANCHOR,목표로 한 적의 바로 근처에 거대한 닻을 떨어뜨린다.\n닻 자체에는 데미지나 공격기능이 없지만 닻에 꽂힌 상대는 움직임을 봉인당한다.\n움직이기위해서는 먼저 닻을 파괴하던지 닻이 자연스럽게 사라질때까지 기다려야한다.\n
 LOC_SYSTEM_SPL_DESCRIBE_REAPER_MET,멀리 있는 상대와 자신의 거리를 조절하여 순식간에 눈 앞으로 끌어당긴다.\n끌어당김과 동시에 상대의 발을 묶기 때문에 이동속도 또한 일정시간동안 감소한다.\n

@@ -318,7 +318,7 @@ void wiz_mode()
 				g_menu_select = -1;
 				
 				
-				if (key_ >= 'a' && key_ <= 's')
+				if (key_ >= 'a' && key_ <= 't')
 				{
 					for (int i = 0; i < 10; i++)
 					{

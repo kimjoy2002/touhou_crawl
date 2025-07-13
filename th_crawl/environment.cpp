@@ -2711,7 +2711,7 @@ void SaveFile(bool test_)
 	{
 		env[i].SaveDatas(fp);
 	}
-	SaveData<Iden_collect>(fp,iden_list);
+	iden_list.SaveDatas(fp);
 	SaveData<int>(fp, unique_list.size());
 	for(vector<unique_infor>::iterator it=unique_list.begin();it!=unique_list.end();it++)
 	{
@@ -2761,7 +2761,13 @@ void LoadFile()
 	{
 		env[i].LoadDatas(fp);	
 	}
-	LoadData<Iden_collect>(fp,iden_list);
+	if(isPrevVersion(loading_version_string, "ver1.111")) {
+		Iden_collect_111 temp;
+		LoadData<Iden_collect_111>(fp,temp);
+		Iden_collect_111::migrateIden111toCurrent(temp, iden_list);
+	} else {
+		iden_list.LoadDatas(fp);
+	}
 	
 	unique_list.clear();
 	int size_=0;

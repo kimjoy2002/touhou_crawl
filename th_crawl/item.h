@@ -134,6 +134,8 @@ enum iden_check
 	IDEN_CHECK_END = IDEN_CHECK_ETC_END
 };
 
+
+
 class Iden_collect
 {
 public:
@@ -144,7 +146,25 @@ public:
 	spellcard_iden spellcard_list[SPC_V_MAX];
 	bool fixed_artifact[FIXED_ARTIFACT_MAX];
 	bool books_list[BOOK_LAST];
+	bool autopickup[IDEN_CHECK_END-1];
+
+	void SaveDatas(FILE *fp);
+	void LoadDatas(FILE *fp);
+};
+
+class Iden_collect_111 //111버전을 위한 임시..
+{
+public:
+	potion_iden potion_list[PT_MAX];
+	scroll_iden scroll_list[SCT_MAX-1];
+	ring_iden ring_list[RGT_MAX];
+	amulet_iden amulet_list[AMT_MAX];
+	spellcard_iden spellcard_list[SPC_V_MAX];
+	bool fixed_artifact[FIXED_ARTIFACT_MAX];
+	bool books_list[BOOK_LAST];
 	bool autopickup[IDEN_CHECK_END];
+
+	static void migrateIden111toCurrent(const Iden_collect_111& old_data, Iden_collect& new_data);
 };
 
 

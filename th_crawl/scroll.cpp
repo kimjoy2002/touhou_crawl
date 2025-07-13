@@ -42,7 +42,8 @@ LOCALIZATION_ENUM_KEY scroll_uniden_string[SCT_MAX]=
 	LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN17,
 	LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN18,
 	LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN19,
-	LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN20
+	LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN20,
+	LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN21
 };
 
 LOCALIZATION_ENUM_KEY scroll_iden_string[SCT_MAX]=
@@ -66,7 +67,8 @@ LOCALIZATION_ENUM_KEY scroll_iden_string[SCT_MAX]=
 	LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CHARGING,
 	LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_AMNESIA,
 	LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_SANTUARY,
-	LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_BRAND_WEAPON
+	LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_BRAND_WEAPON,
+	LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_ACQUIRE
 };
 
 
@@ -89,8 +91,7 @@ bool skill_santuary(int pow, bool short_, unit* order, coord_def target);
 bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_);
 bool amnesia_scroll(bool pre_iden_);
 bool brand_weapon_scroll(bool pre_iden_);
-
-
+bool aquire_scroll(bool pre_iden_);
 
 
 scroll_type goodbadscroll(int good_bad)
@@ -114,6 +115,7 @@ scroll_type goodbadscroll(int good_bad)
 		scrolls.push(SCT_SOUL_SHOT,10);
 		scrolls.push(SCT_SANTUARY,10);
 		scrolls.push(SCT_BRAND_WEAPON,10);
+		scrolls.push(SCT_ACQUIREMENT,10);		
 		return scrolls.choice();
 	}
 	else //if(good_bad==1)
@@ -180,6 +182,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 			kind != SCT_ENCHANT_ARMOUR &&
 			kind != SCT_IDENTIFY &&
 			kind != SCT_BRAND_WEAPON &&
+			kind != SCT_ACQUIREMENT &&
 			kind != SCT_REMOVE_CURSE &&
 			kind != SCT_AMNESIA)
 		{
@@ -388,6 +391,12 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 		{
 			iden_list.scroll_list[kind].iden = 3;
 			bool return_ = brand_weapon_scroll(pre_iden_);
+			return return_;
+		}
+	case SCT_ACQUIREMENT:
+		{
+			iden_list.scroll_list[kind].iden = 3;
+			bool return_ = aquire_scroll(pre_iden_);
 			return return_;
 		}
 	default:
@@ -1369,4 +1378,8 @@ bool brand_weapon_scroll(bool pre_iden_)
 			return true;
 		}
 	}
+}
+bool aquire_scroll(bool pre_iden_)
+{
+	return false;
 }

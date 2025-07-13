@@ -447,7 +447,7 @@ void seija_real_gift(int key_)
 		case GT_KEIKI:
 		{
 			item_infor t;
-			item* it = env[current_level].MakeItem(you.position, makeitem(ITM_SCROLL, 0, &t, SCT_SANTUARY)); //획득으로 변경
+			item* it = env[current_level].MakeItem(you.position, makeitem(ITM_SCROLL, 0, &t, SCT_ACQUIREMENT));
 			it->Identify();
 		}
 		case GT_TENKYUU:

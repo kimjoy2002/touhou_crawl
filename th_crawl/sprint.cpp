@@ -507,6 +507,7 @@ void reward_random_init()
 	rand_scroll_option.push(SCT_CHARGING, 5);
 	rand_scroll_option.push(SCT_AMNESIA, 5);
 	rand_scroll_option.push(SCT_BRAND_WEAPON, 2);
+	rand_scroll_option.push(SCT_ACQUIREMENT, 2);
 
 	rand_potion_option.push(PT_HEAL, 10);
 	rand_potion_option.push(PT_HEAL_WOUND, 8);

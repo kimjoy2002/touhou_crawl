@@ -3539,6 +3539,7 @@ LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CHARGING,Scroll of Recharge
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_AMNESIA,Scroll of Amnesia
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_SANTUARY,Scroll of Sanctuary
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_BRAND_WEAPON,Scroll of Brand Weapon
+LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_ACQUIRE,Scroll of Acquirement
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_TELEPORT_SHORT,Teleport
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_IDENTIFY_SHORT,Identify
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_NONE_SHORT,Scribbles
@@ -3559,6 +3560,7 @@ LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CHARGING_SHORT,Recharge
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_AMNESIA_SHORT,Amnesia
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_SANTUARY_SHORT,Sanctuary
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_BRAND_WEAPON_SHORT,Brand Weapon
+LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_ACQUIREMENT_SHORT,Acquire
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN1,Worn Parchment Scroll
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN2,Jagged Bark Scroll
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN3,Faded Ink Cloth Scroll
@@ -3579,6 +3581,7 @@ LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN17,Water-Soaked Paper Scroll
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN18,Cloth Scroll with Muddy Writing
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN19,Thin Translucent Scroll
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN20,Bark Scroll with Ink Writing
+LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN21,Thick Bark Scroll
 LOC_SYSTEM_ITEM_SCROLL_JUST_DOODLE,This scroll appears to be nothing but doodles.
 LOC_SYSTEM_ITEM_SCROLL_CURSE_ITEM,The equipped {0} shone black.
 LOC_SYSTEM_ITEM_SCROLL_CURSE_ITEM_FAIL,You can’t curse this item any further.
@@ -3786,6 +3789,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CHARGING,A scroll that recharges spell cards.
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_AMNESIA,A scroll of amnesia that makes you forget a learned spell.\nYou choose which spell to forget and regain the level used to learn it.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SANTUARY,A scroll that creates a wide sanctuary when read. All damage is nullified inside.\nSaid to be made by a mountain-dwelling yamamba. Very rare.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BRAND_WEAPON,A scroll that enchants your current weapon with magic.\nThe type of enchantment is random and overwrites any existing one.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ACQUIREMENT,A scroll imbued with the power to create items.\nBy reading it and selecting a category, you'll receive a corresponding item.\nThe item is likely to be one you haven't discovered yet and is often related to your current skills.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BUG,A bugged scroll. Report it to the developer immediately!\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_UNKNOWN,A scroll filled with unknown symbols.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD,Spell cards can be used freely until they run out. Once depleted, they cannot be reused.\nExact usage count must be identified. Power scales with Activation skill.\n

@@ -1511,6 +1511,9 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			case SCT_BRAND_WEAPON:
 				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BRAND_WEAPON));
 				break;
+			case SCT_ACQUIREMENT:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ACQUIREMENT));
+				break;
 			default:
 				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BUG));
 				break;

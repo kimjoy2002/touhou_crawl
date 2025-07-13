@@ -1570,7 +1570,8 @@ textures(&texture_item02, 95, 255),
 textures(&texture_item02, 96, 255),
 textures(&texture_item02, 97, 255),
 textures(&texture_item02, 98, 255),
-textures(&texture_item02, 99, 255) };
+textures(&texture_item02, 99, 255),
+textures(&texture_item04, 12, 255) };
 
 
 textures img_item_amulet_kind[] = { textures(&texture_item02, 112, 255),

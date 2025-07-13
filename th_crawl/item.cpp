@@ -289,6 +289,308 @@ void item::LoadDatas(FILE *fp)
 	}
 }
 
+
+void Iden_collect::SaveDatas(FILE *fp) {
+	SaveData<int>(fp, PT_MAX);
+	for(int i = 0; i < PT_MAX; i++) {
+		SaveData<potion_iden>(fp, potion_list[i]);
+	}
+	SaveData<int>(fp, SCT_MAX);
+	for(int i = 0; i < SCT_MAX; i++) {
+		SaveData<scroll_iden>(fp, scroll_list[i]);
+	}
+	SaveData<int>(fp, RGT_MAX);
+	for(int i = 0; i < RGT_MAX; i++) {
+		SaveData<ring_iden>(fp, ring_list[i]);
+	}
+	SaveData<int>(fp, AMT_MAX);
+	for(int i = 0; i < AMT_MAX; i++) {
+		SaveData<amulet_iden>(fp, amulet_list[i]);
+	}
+	SaveData<int>(fp, SPC_V_MAX);
+	for(int i = 0; i < SPC_V_MAX; i++) {
+		SaveData<spellcard_iden>(fp, spellcard_list[i]);
+	}
+	SaveData<int>(fp, FIXED_ARTIFACT_MAX);
+	for(int i = 0; i < FIXED_ARTIFACT_MAX; i++) {
+		SaveData<bool>(fp, fixed_artifact[i]);
+	}
+	SaveData<int>(fp, BOOK_LAST);
+	for(int i = 0; i < BOOK_LAST; i++) {
+		SaveData<bool>(fp, books_list[i]);
+	}
+
+	    // 포션 자동줍기 저장
+    SaveData<int>(fp, PT_MAX);
+    for (int i = IDEN_CHECK_POTION_START; i < IDEN_CHECK_POTION_END; ++i)
+        SaveData<bool>(fp, autopickup[i]);
+
+    // 스크롤 자동줍기 저장
+    SaveData<int>(fp, SCT_MAX);
+    for (int i = IDEN_CHECK_SCROLL_START; i < IDEN_CHECK_SCROLL_END; ++i)
+        SaveData<bool>(fp, autopickup[i]);
+
+    // 반지 자동줍기 저장
+    SaveData<int>(fp, RGT_MAX);
+    for (int i = IDEN_CHECK_RING_START; i < IDEN_CHECK_RING_END; ++i)
+        SaveData<bool>(fp, autopickup[i]);
+
+    // 아뮬렛 자동줍기 저장
+    SaveData<int>(fp, AMT_MAX);
+    for (int i = IDEN_CHECK_AMULET_START; i < IDEN_CHECK_AMULET_END; ++i)
+        SaveData<bool>(fp, autopickup[i]);
+
+    // 스펠카드 자동줍기 저장
+    SaveData<int>(fp, SPC_V_MAX);
+    for (int i = IDEN_CHECK_SPC_START; i < IDEN_CHECK_SPC_END; ++i)
+        SaveData<bool>(fp, autopickup[i]);
+
+    // 책 자동줍기 저장 (미감정 포함)
+    SaveData<int>(fp, 1 + BOOK_LAST);
+    for (int i = IDEN_CHECK_BOOK_START; i < IDEN_CHECK_BOOK_END; ++i)
+        SaveData<bool>(fp, autopickup[i]);
+
+    // 기타 자동줍기 저장 (P아이템 2개 + 음식류)
+    SaveData<int>(fp, 2 + TMT_MAX);
+    for (int i = IDEN_CHECK_ETC_START; i < IDEN_CHECK_ETC_END; ++i)
+        SaveData<bool>(fp, autopickup[i]);
+}
+void Iden_collect::LoadDatas(FILE *fp) {
+	{
+		int size_;
+		LoadData<int>(fp, size_);
+		int i = 0;
+		for(; i < size_; i++) {
+			if(i < PT_MAX) {
+				LoadData<potion_iden>(fp, potion_list[i]);
+			} else {
+				potion_iden temp;
+				LoadData<potion_iden>(fp,temp);
+			}
+		}
+		for(; i < PT_MAX; i++) {
+			potion_list[i] = potion_iden();
+		}
+	}
+
+	{
+		int size_;
+		LoadData<int>(fp, size_);
+		int i = 0;
+		for(; i < size_; i++) {
+			if(i < SCT_MAX) {
+				LoadData<scroll_iden>(fp, scroll_list[i]);
+			} else {
+				scroll_iden temp;
+				LoadData<scroll_iden>(fp,temp);
+			}
+		}
+		for(; i < SCT_MAX; i++) {
+			scroll_list[i] = scroll_iden();
+		}
+	}
+
+	{
+		int size_;
+		LoadData<int>(fp, size_);
+		int i = 0;
+		for(; i < size_; i++) {
+			if(i < RGT_MAX) {
+				LoadData<ring_iden>(fp, ring_list[i]);
+			} else {
+				ring_iden temp;
+				LoadData<ring_iden>(fp,temp);
+			}
+		}
+		for(; i < RGT_MAX; i++) {
+			ring_list[i] = ring_iden();
+		}
+	}
+	
+	{
+		int size_;
+		LoadData<int>(fp, size_);
+		int i = 0;
+		for(; i < size_; i++) {
+			if(i < AMT_MAX) {
+				LoadData<amulet_iden>(fp, amulet_list[i]);
+			} else {
+				amulet_iden temp;
+				LoadData<amulet_iden>(fp,temp);
+			}
+		}
+		for(; i < AMT_MAX; i++) {
+			amulet_list[i] = amulet_iden();
+		}
+	}
+	
+	{
+		int size_;
+		LoadData<int>(fp, size_);
+		int i = 0;
+		for(; i < size_; i++) {
+			if(i < SPC_V_MAX) {
+				LoadData<spellcard_iden>(fp, spellcard_list[i]);
+			} else {
+				spellcard_iden temp;
+				LoadData<spellcard_iden>(fp,temp);
+			}
+		}
+		for(; i < SPC_V_MAX; i++) {
+			spellcard_list[i] = spellcard_iden();
+		}
+	}
+	
+	{
+		int size_;
+		LoadData<int>(fp, size_);
+		int i = 0;
+		for(; i < size_; i++) {
+			if(i < FIXED_ARTIFACT_MAX) {
+				LoadData<bool>(fp,fixed_artifact[i]);
+			} else {
+				bool temp;
+				LoadData<bool>(fp,temp);
+			}
+		}
+		for(; i < FIXED_ARTIFACT_MAX; i++) {
+			fixed_artifact[i] = bool();
+		}
+	}
+	
+	{
+		int size_;
+		LoadData<int>(fp, size_);
+		int i = 0;
+		for(; i < size_; i++) {
+			if(i < BOOK_LAST) {
+				LoadData<bool>(fp,books_list[i]);
+			} else {
+				bool temp;
+				LoadData<bool>(fp,temp);
+			}
+		}
+		for(; i < BOOK_LAST; i++) {
+			books_list[i] = false;
+		}
+	}
+	
+    int size_, i;
+	// 포션 자동줍기 로드
+    LoadData<int>(fp, size_);
+    for (i = 0; i < size_; ++i) {
+        int index = IDEN_CHECK_POTION_START + i;
+        if (index < IDEN_CHECK_POTION_END)
+            LoadData<bool>(fp, autopickup[index]);
+        else {
+            bool temp;
+            LoadData<bool>(fp, temp); // 초과분 무시
+        }
+    }
+    for (; i + IDEN_CHECK_POTION_START < IDEN_CHECK_POTION_END; ++i)
+        autopickup[IDEN_CHECK_POTION_START + i] = false; // 부족분 초기화
+
+    // 스크롤 자동줍기 로드
+    LoadData<int>(fp, size_);
+    for (i = 0; i < size_; ++i) {
+        int index = IDEN_CHECK_SCROLL_START + i;
+        if (index < IDEN_CHECK_SCROLL_END)
+            LoadData<bool>(fp, autopickup[index]);
+        else {
+            bool temp;
+            LoadData<bool>(fp, temp);
+        }
+    }
+    for (; i + IDEN_CHECK_SCROLL_START < IDEN_CHECK_SCROLL_END; ++i)
+        autopickup[IDEN_CHECK_SCROLL_START + i] = false;
+
+    // 반지 자동줍기 로드
+    LoadData<int>(fp, size_);
+    for (i = 0; i < size_; ++i) {
+        int index = IDEN_CHECK_RING_START + i;
+        if (index < IDEN_CHECK_RING_END)
+            LoadData<bool>(fp, autopickup[index]);
+        else {
+            bool temp;
+            LoadData<bool>(fp, temp);
+        }
+    }
+    for (; i + IDEN_CHECK_RING_START < IDEN_CHECK_RING_END; ++i)
+        autopickup[IDEN_CHECK_RING_START + i] = false;
+
+    // 아뮬렛 자동줍기 로드
+    LoadData<int>(fp, size_);
+    for (i = 0; i < size_; ++i) {
+        int index = IDEN_CHECK_AMULET_START + i;
+        if (index < IDEN_CHECK_AMULET_END)
+            LoadData<bool>(fp, autopickup[index]);
+        else {
+            bool temp;
+            LoadData<bool>(fp, temp);
+        }
+    }
+    for (; i + IDEN_CHECK_AMULET_START < IDEN_CHECK_AMULET_END; ++i)
+        autopickup[IDEN_CHECK_AMULET_START + i] = false;
+
+    // 스펠카드 자동줍기 로드
+    LoadData<int>(fp, size_);
+    for (i = 0; i < size_; ++i) {
+        int index = IDEN_CHECK_SPC_START + i;
+        if (index < IDEN_CHECK_SPC_END)
+            LoadData<bool>(fp, autopickup[index]);
+        else {
+            bool temp;
+            LoadData<bool>(fp, temp);
+        }
+    }
+    for (; i + IDEN_CHECK_SPC_START < IDEN_CHECK_SPC_END; ++i)
+        autopickup[IDEN_CHECK_SPC_START + i] = false;
+
+    // 책 자동줍기 로드 (미감정 포함)
+    LoadData<int>(fp, size_);
+    for (i = 0; i < size_; ++i) {
+        int index = IDEN_CHECK_BOOK_START + i;
+        if (index < IDEN_CHECK_BOOK_END)
+            LoadData<bool>(fp, autopickup[index]);
+        else {
+            bool temp;
+            LoadData<bool>(fp, temp);
+        }
+    }
+    for (; i + IDEN_CHECK_BOOK_START < IDEN_CHECK_BOOK_END; ++i)
+        autopickup[IDEN_CHECK_BOOK_START + i] = false;
+
+    // 기타 자동줍기 로드 (P아이템, 음식류 포함)
+    LoadData<int>(fp, size_);
+    for (i = 0; i < size_; ++i) {
+        int index = IDEN_CHECK_ETC_START + i;
+        if (index < IDEN_CHECK_ETC_END)
+            LoadData<bool>(fp, autopickup[index]);
+        else {
+            bool temp;
+            LoadData<bool>(fp, temp);
+        }
+    }
+    for (; i + IDEN_CHECK_ETC_START < IDEN_CHECK_ETC_END; ++i)
+        autopickup[IDEN_CHECK_ETC_START + i] = false;
+}
+
+void Iden_collect_111::migrateIden111toCurrent(const Iden_collect_111& old_data, Iden_collect& new_data)
+{
+	memcpy(new_data.potion_list, old_data.potion_list, sizeof(old_data.potion_list));
+	memcpy(new_data.scroll_list, old_data.scroll_list, sizeof(old_data.scroll_list));
+	memset(&new_data.scroll_list[SCT_MAX - 1], 0, sizeof(scroll_iden)); // 새 항목 초기화
+
+	memcpy(new_data.ring_list, old_data.ring_list, sizeof(old_data.ring_list));
+	memcpy(new_data.amulet_list, old_data.amulet_list, sizeof(old_data.amulet_list));
+	memcpy(new_data.spellcard_list, old_data.spellcard_list, sizeof(old_data.spellcard_list));
+
+	memcpy(new_data.fixed_artifact, old_data.fixed_artifact, sizeof(old_data.fixed_artifact));
+	memcpy(new_data.books_list, old_data.books_list, sizeof(old_data.books_list));
+	memcpy(new_data.autopickup, old_data.autopickup, sizeof(old_data.autopickup));
+}
+
+
 string item::GetName(int num_, bool simple_, string lang)
 {
 	bool overwriteName = false;

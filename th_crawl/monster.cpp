@@ -16,6 +16,7 @@
 #include "save.h"
 #include "god.h"
 #include "skill_use.h"
+#include "steam_api.h"
 #include "keiki.h"
 #include "smoke.h"
 #include "floor.h"
@@ -2940,6 +2941,21 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 	}
 
 
+	if(isNormalGame() && (id == MON_UTSUHO || id == MON_YUMA || id == MON_YUMA2))
+	{
+		steam_mg.achievement(ACHIEVEMENT_ASDD);
+	}
+
+	if(isNormalGame() && (id == MON_TOYOHIME || id == MON_YORIHIME))
+	{
+		if(id == MON_TOYOHIME)
+			you.yori_toyo_kill_count |= 1;
+		if(id == MON_YORIHIME)
+			you.yori_toyo_kill_count |= 2;
+		if(you.yori_toyo_kill_count == 3) {
+			steam_mg.achievement(ACHIEVEMENT_MOON_FALLING);
+		}
+	}
 
 	if((id == MON_STONETOWER || id == MON_CLUMSY_STONE_TOWER) && (reason_ == PRT_PLAYER || reason_ == PRT_ALLY) && !remove_)
 	{

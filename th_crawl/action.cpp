@@ -90,7 +90,7 @@ int Move(const coord_def &c)
 
 
 
-void Long_Move(const coord_def &c, bool speak_)
+bool Long_Move(const coord_def &c, bool speak_)
 {
 	clearKey();
 	while(!you.will_move.empty())
@@ -102,32 +102,32 @@ void Long_Move(const coord_def &c, bool speak_)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LOS_MON),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
-		return;
+		return false;
 	}
 	if(you.s_confuse)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE_WARNING),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
-		return;
+		return false;
 	}
 	if(you.s_dimension)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_DIMENSTION),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
-		return;
+		return false;
 	}
 	if(you.resetLOS() == IT_MAP_DANGER)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_MAP_DANGER),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
-		return;
+		return false;
 	}
 	if(!PathSearch(you.position,c,you.will_move,ST_NORMAL,current_level,you.isFly(),you.isSwim()))
 	{
 		if(speak_)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_UNABLE_MOVE),true,false,false,CL_normal);	
 	}
-	stack_move(false);
+	return stack_move(false);
 }
 
 void repeat_action()
@@ -2135,6 +2135,7 @@ void Stair_move(bool down)
 				you.dead_reason = DR_ESCAPE;
 				if(isNormalGame()) {
 					steam_mg.achievement(ACHIEVEMENT_PERFECT_INK_BLACK_DUNGEON);
+					
 					if(you.haveGoal() == 10) {
 						steam_mg.achievement(ACHIEVEMENT_PURELY_DUNGEON_HELL);
 					}
@@ -2270,9 +2271,6 @@ void Stair_move(bool down)
 				floor_return = map_list.dungeon_enter[ZIGURRAT].floor;
 				//지구랏에서 나오면 지구랏 1층으로 초기화
 				//you.ziggurat_level = 0;
-				if(isNormalGame() && you.ziggurat_level == 27) {
-					steam_mg.achievement(ACHIEVEMENT_NIGHTMARE_OF_DUNGEON);
-				}
 				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[ZIGURRAT].pos;
 				break;
@@ -4642,7 +4640,31 @@ void verylongMove(int level, coord_def pos)
 						}
 					}
 
-					Long_Move(next_, true);
+					if(!Long_Move(next_, true)) {
+						return;
+					}
+
+					switch(you.inter)
+					{
+					case IT_MAP_DANGER:
+						printlog(LocalzationManager::locString(LOC_SYSTEM_MAP_DANGER),true,false,false,CL_small_danger);
+						return;
+					case IT_ITEM_PICKUP:
+					case IT_MAP_FIND:
+					case IT_DECO_MONSTER_FIND:
+					//case IT_HUNGRY:
+					case IT_STAT:
+					case IT_POISON:
+					case IT_TELE:
+					case IT_SMOKE:
+					case IT_EVENT:
+					case IT_DAMAGE:
+					case IT_MAX_ITEM:
+						return;
+					default:
+						break;
+					}
+
 					if (you.position == next_) {
 						switch (env[current_level].getStairKind(you.position.x, you.position.y)) 
 						{

@@ -97,19 +97,33 @@ scroll_type goodbadscroll(int good_bad)
 {
 	if(good_bad==2)
 	{
-		scroll_type list_[7] = {SCT_BLINK, SCT_ENCHANT_WEAPON_1/*SCT_ENCHANT_WEAPON_2*/, SCT_ENCHANT_ARMOUR, SCT_FOG,
-			SCT_CHARGING, SCT_MAPPING,SCT_AMNESIA};
-		return list_[randA(6)];
+		random_extraction<scroll_type> scrolls;
+		scrolls.push(SCT_BLINK,7);
+		scrolls.push(SCT_ENCHANT_WEAPON_1,30);
+		scrolls.push(SCT_ENCHANT_ARMOUR,20);
+		scrolls.push(SCT_FOG,10);
+		scrolls.push(SCT_CHARGING,10);
+		scrolls.push(SCT_MAPPING,15);
+		scrolls.push(SCT_AMNESIA,15);
+		return scrolls.choice();
 	}
 	else if(good_bad==3)
 	{
-		scroll_type list_[4] = {SCT_SILENCE,SCT_SOUL_SHOT,SCT_SANTUARY, SCT_BRAND_WEAPON};
-		return list_[randA(3)];
+		random_extraction<scroll_type> scrolls;
+		scrolls.push(SCT_SILENCE,10);
+		scrolls.push(SCT_SOUL_SHOT,10);
+		scrolls.push(SCT_SANTUARY,10);
+		scrolls.push(SCT_BRAND_WEAPON,10);
+		return scrolls.choice();
 	}
 	else //if(good_bad==1)
 	{
-		scroll_type list_[3] = {SCT_TELEPORT, SCT_IDENTIFY, SCT_REMOVE_CURSE/*SCT_DETECT_CURSE*/};
-		return list_[randA(2)];
+		random_extraction<scroll_type> scrolls;
+		scrolls.push(SCT_TELEPORT,10);
+		scrolls.push(SCT_IDENTIFY,15);
+		scrolls.push(SCT_REMOVE_CURSE,10);
+		scrolls.push(SCT_ENCHANT_WEAPON_1,2);
+		return scrolls.choice();
 	}/*
 	else
 	{

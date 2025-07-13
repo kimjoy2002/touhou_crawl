@@ -88,6 +88,7 @@ bool keiki_gift()
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_GIFT_ON) + " ",false,false,false,CL_keiki);
 		printlog(LocalzationManager::formatString(joypadUtil::isUsingPad()?LOC_SYSTEM_GOD_KEIKI_GIFT_HELP_PAD:LOC_SYSTEM_GOD_KEIKI_GIFT_HELP, PlaceHolderHelper("a")),true,false,false,CL_help);
 		MoreWait();
+		you.SetInter(IT_EVENT);
 
 		you.Ability(SKL_UPGRADE_HANIWA,true,false);
 		you.Ability(SKL_DELAY_HANIWA,true,false);
@@ -342,7 +343,7 @@ void haniwa_abil::upgradeHaniwa(monster* mon) {
 
 	if(has_abil(HANIWA_A_SHIELD1)) {
 		mon->max_hp = mon->max_hp*11/10; //10%증가
-		mon->ac+=5;
+		mon->ac+=3;
 	}
 	if(has_abil(HANIWA_A_SHIELD2)) {
 		mon->flag |= M_FLAG_SAVE_PLAYER;
@@ -464,6 +465,7 @@ void haniwa_abil::upgradeHaniwa(monster* mon) {
 	}
 
 	if(has_abil(HANIWA_A_FLY)) {
+		mon->flag |= M_FLAG_FLY;
 		mon->walk_speed_bonus = 2;
 	}
 
@@ -802,7 +804,7 @@ void haniwa_abil::increaseGift(int haniwa_, int index_) {
 				break;
 			case 4:
 				if(has_abil(HANIWA_A_CREATE_SCROLL)) {
-					scroll_type type_= goodbadscroll(randA(2)>1?1:(randA(20)?2:3));
+					scroll_type type_= goodbadscroll(randA(20)>11?1:(randA(18)?2:3));
 					int num = 1;
 					item_infor t;
 					for(int i=0;i<num;i++)

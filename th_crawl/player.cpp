@@ -128,7 +128,7 @@ s_regen(0), s_selfdestruct(0), s_glutton(0), s_glutton_turn(0), s_shield(), alch
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
-,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0), prevSpell(0), lastSelectMenu(0), lastExplore(0), lastSearch(), currentSkillNum(0),god(GT_NONE), piety(0), gift_count(0), god_turn(0), suwako_meet(0),
+,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0), prevSpell(0), lastSelectMenu(0), lastExplore(0), lastSearch(), yori_toyo_kill_count(0), currentSkillNum(0),god(GT_NONE), piety(0), gift_count(0), god_turn(0), suwako_meet(0),
 sight_reset(false), target(NULL), useMouseTammac(0), throw_weapon(NULL), quickMenu1(SYSCMD_QUICKTHROW), quickMenu2(SYSCMD_MAGIC), dead_order(NULL), dead_reason(DR_NONE)
 {
 	for(int i=0;i<2;i++)
@@ -357,6 +357,7 @@ void players::init() {
 	lastSelectMenu = 0;
 	lastExplore = 0;
 	lastSearch = "";
+	yori_toyo_kill_count = 0;
 	for(int i=0;i<52;i++)
 		MemorizeSkill[i] = 0;
 	for(int i=0;i<52;i++)
@@ -600,6 +601,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, lastSelectMenu);
 	SaveData<char>(fp, lastExplore);
 	SaveData<char>(fp, *lastSearch.c_str(), lastSearch.size() + 1);
+	SaveData<int>(fp, yori_toyo_kill_count);
 	SaveData<int>(fp, *MemorizeSkill,52);
 	SaveData<int>(fp, *MemorizeSkill_num,52);
 	SaveData<int>(fp, currentSkillNum);
@@ -881,6 +883,9 @@ void players::LoadDatas(FILE *fp)
 	if(!isPrevVersion(loading_version_string, "ver1.109")) {
 		lastSearch = loadString(fp);
 	}
+	if(!isPrevVersion(loading_version_string, "ver1.110")) {
+		LoadData<int>(fp, yori_toyo_kill_count);
+	}	
 	LoadData<int>(fp, *MemorizeSkill);
 	LoadData<int>(fp, *MemorizeSkill_num);
 	LoadData<int>(fp, currentSkillNum);
@@ -4856,10 +4861,15 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 				PlaceHolderHelper(rune_string[t->value1])),true,false,false,CL_good);
 			AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GET_ITEM, 
 				PlaceHolderHelper(rune_string[t->value1])),CL_warning);
+			rune[t->value1]++;
 			if(isNormalGame()) {
 				steam_mg.achievement(ACHIEVEMENT_DUNGEON_HARVESTER);
+				if(rune[RUNE_PANDEMONIUM_MAGIC]	>= 1 &&
+					rune[RUNE_PANDEMONIUM_ICE] >= 1 &&
+					rune[RUNE_PANDEMONIUM_SHINKI] >= 1) {
+					steam_mg.achievement(ACHIEVEMENT_END_OF_THE_DUNGEON);
+				}
 			}
-			rune[t->value1]++;
 		} else if(t->value1 >= TPT_STG_START && t->value1 < (TPT_STG_LAST+1)) { //100부터는 슈팅 스프린트용 
 			tribe_proper_type add_abil = (tribe_proper_type)(t->value1);
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_PICKUP_SHOOTING_ABIL, 

@@ -178,7 +178,7 @@ int SpellcardMaxCharge(spellcard_evoke_type skill)
 	case SPC_V_AIR:
 		return 9;
 	case SPC_V_INVISIBLE:
-		return 9;
+		return 6;
 	case SPC_V_METAL:
 		return 15;
 	case SPC_V_SUN:
@@ -400,7 +400,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 	{
 		beam_iterator beam(you.position, target);
 		if (CheckThrowPath(you.position, target, beam)) {
-			beam_infor temp_infor(randC(1, 10 + power / 6), 1 * (10 + power / 6), 14, &you, you.GetParentType(), SpellcardLength(kind), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_V_METAL));
+			beam_infor temp_infor(randC(1, 13 + power / 6), 1 * (13 + power / 6), 14, &you, you.GetParentType(), SpellcardLength(kind), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_V_METAL));
 			if (short_)
 				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 

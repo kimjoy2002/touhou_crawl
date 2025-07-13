@@ -90,7 +90,7 @@ int GetSummonMaxNumber(spell_list skill)
 	case SPL_SUMMON_ZOMBIE_FAIRY:
 		return 8;
 	case SPL_SUMMON_UFO:
-		return 5;
+		return 3;
 	case SPL_FLAN_BUSIN:
 		return 3;		
 	case SPL_SUMMON_LESSOR_DEMON:

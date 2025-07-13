@@ -448,7 +448,17 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_PANDEMONIUM_RUNE),true,false,false,CL_danger);
 		MoreWait();
 	}
+
 	
+	if(isNormalGame() && current_level == ZIGURRAT_LEVEL && you.ziggurat_level == 27) {
+		steam_mg.achievement(ACHIEVEMENT_NIGHTMARE_OF_DUNGEON);
+	}
+	if(isNormalGame() && current_level == DEPTH_LEVEL) {
+		steam_mg.achievement(ACHIEVEMENT_DOOR_TO_THE_HIDDEN_DUNGEON);
+	}
+	if(isNormalGame() && current_level == HAKUREI_LEVEL) {
+		steam_mg.achievement(ACHIEVEMENT_DUNGEON_REINCARNATION);
+	}
 }
 
 bool environment::magicmapping(int x_, int y_)

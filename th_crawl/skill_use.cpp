@@ -4541,6 +4541,7 @@ bool skill_haniwa_recall(int hiniwa_num, unit* order, coord_def target)
 							{
 								it->SetXY(rit->x,rit->y);
 								it->state.SetState(MS_FOLLOW);
+								it->target = &you;
 								it->wait = false;
 								k=1;
 							}
@@ -4548,6 +4549,7 @@ bool skill_haniwa_recall(int hiniwa_num, unit* order, coord_def target)
 							{								
 								if(env[current_level].movingfloor((*rit), you.haniwa_allys[i].floor, &(*it)))
 								{
+									it->target = &you;
 									it->state.SetState(MS_FOLLOW);
 									it->wait = false;
 									k=1;

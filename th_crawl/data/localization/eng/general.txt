@@ -347,18 +347,18 @@ LOC_SYSTEM_DUNGEON_SCARLET_LIBRARY,Scarlet Library
 LOC_SYSTEM_DUNGEON_SCARLET_UNDER,Scarlet Basement
 LOC_SYSTEM_DUNGEON_BAMBOO,Bamboo Forest Maze
 LOC_SYSTEM_DUNGEON_EINENTEI,Eientei
-LOC_SYSTEM_DUNGEON_DEPTH,Beastpath
+LOC_SYSTEM_DUNGEON_DEPTH,Youkai Trail
 LOC_SYSTEM_DUNGEON_DREAM,Dream World
 LOC_SYSTEM_DUNGEON_MOON,Moon Capital
-LOC_SYSTEM_DUNGEON_SUBTERRANEAN,Subterranean
-LOC_SYSTEM_DUNGEON_SUBTERRANEAN_LAST,Blazing Hellgrounds
-LOC_SYSTEM_DUNGEON_PANDEMONIUM,Demon Realm
+LOC_SYSTEM_DUNGEON_SUBTERRANEAN,Underworld
+LOC_SYSTEM_DUNGEON_SUBTERRANEAN_LAST,Hell of Blazing Fires
+LOC_SYSTEM_DUNGEON_PANDEMONIUM,Makai
 LOC_SYSTEM_DUNGEON_PANDEMONIUM_LAST,Pandemonium
 LOC_SYSTEM_DUNGEON_HOKKAI,Hokkai
 LOC_SYSTEM_DUNGEON_FROZEN_FIELD,Frozen Field
 LOC_SYSTEM_DUNGEON_HAKUREI,Hakurei Shrine
 LOC_SYSTEM_DUNGEON_OKINA,The world beyond the door
-LOC_SYSTEM_DUNGEON_ZIGURRAT,World of Delirium
+LOC_SYSTEM_DUNGEON_ZIGURRAT,World of Lunatic Dream
 LOC_SYSTEM_DUNGEON_ARENA,Arena
 LOC_SYSTEM_DUNGEON_SPRINT,Sprint
 LOC_SYSTEM_DUNGEON_UKNOWN_DUNGEON,Unknown Floor
@@ -2304,14 +2304,14 @@ LOC_SYSTEM_TILE_STAIR_LIBRARY,Stairs to the Library
 LOC_SYSTEM_TILE_STAIR_SCARLET_UNDER,Stairs to the Basement
 LOC_SYSTEM_TILE_STAIR_BAMBOO,Path to the Bamboo Labyrinth
 LOC_SYSTEM_TILE_STAIR_EIENTEI,Stairs to Eientei
-LOC_SYSTEM_TILE_STAIR_SUBTERRANEAN,Hole to the Subterranean World
+LOC_SYSTEM_TILE_STAIR_SUBTERRANEAN,Hole to the Underworld
 LOC_SYSTEM_TILE_STAIR_YUKKURI,Stairs to the Yukkuri Nest
-LOC_SYSTEM_TILE_STAIR_DEPTH,Entrance to the Beastpath
+LOC_SYSTEM_TILE_STAIR_DEPTH,Entrance to the Youkai Trail
 LOC_SYSTEM_TILE_STAIR_DREAM,Portal to the Dream World
 LOC_SYSTEM_TILE_STAIR_MOON,Path to the Lunar Capital
 LOC_SYSTEM_TILE_STAIR_PANDEMONIUM,Portal to Pandemonium
 LOC_SYSTEM_TILE_STAIR_HAKUREI,Stairs to the Hakurei Shrine
-LOC_SYSTEM_TILE_STAIR_ZIGURRAT,Portal to the World of Delirium
+LOC_SYSTEM_TILE_STAIR_ZIGURRAT,Portal to the World of Lunatic Dream
 LOC_SYSTEM_TILE_STAIR_RETURN,Stairs Returning to the Entrance
 LOC_SYSTEM_TILE_TEMPLE_JOON_AND_SION,The Dread Altar of Joon & Shion
 LOC_SYSTEM_TILE_TEMPLE_BYAKUREN,Byakuren’s Myouren Altar
@@ -3586,7 +3586,7 @@ LOC_SYSTEM_ITEM_SCROLL_CURSE_ARMOUR_FAIL,You’re not wearing any armor that can
 LOC_SYSTEM_ITEM_SCROLL_REMOVE_CURSE,The curse on your equipment has been lifted.
 LOC_SYSTEM_ITEM_SCROLL_REMOVE_CURSE_FAIL,None of your equipment is cursed.
 LOC_SYSTEM_ITEM_SCROLL_REMOVE_CURSE_HINA_FAIL,Hina interfered with your misfortune cleansing!
-LOC_SYSTEM_ITEM_SCROLL_BLINK_ZIGURRAT,Teleportation cannot be controlled in the world of delusions. Use it anyway?
+LOC_SYSTEM_ITEM_SCROLL_BLINK_ZIGURRAT,Teleportation cannot be controlled in the world of lunatic dream. Use it anyway?
 LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_ASK,Are you sure you want to cancel the teleport?
 LOC_SYSTEM_ITEM_SCROLL_BLINK_CANCLE_WASTE_ASK,Are you sure you want to cancel the teleport? The scroll will be lost!
 LOC_SYSTEM_ITEM_SCROLL_MAPPING_BAMBOO,Terrain detection doesn't work in the Bamboo Forest Labyrinth.

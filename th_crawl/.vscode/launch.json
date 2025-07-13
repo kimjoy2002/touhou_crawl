@@ -9,7 +9,7 @@
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}/build/Debug/th_crawl.exe",
-            "args": [],
+            "args": ["--wizard"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": []

@@ -1969,6 +1969,8 @@ void SetResistMonster(monster* mon)
 		mon->confuse_resist=1;
 		break;
 	case MON_KAGUYA:
+		mon->elec_resist=1;
+		mon->ice_resist=1;
 		mon->poison_resist=1;
 		mon->confuse_resist=1;
 		break;

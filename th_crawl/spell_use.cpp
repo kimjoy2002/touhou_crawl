@@ -1597,16 +1597,16 @@ bool skill_summon_bird(int pow, bool short_, unit* order, coord_def target)
 	{
 		i = 1;
 	}
-	else if(pow_<=30)//까마귀
+	else if(pow_<=30 || randA(2) == 0)//까마귀
 	{
 		//i=(randA_1(20) < pow?3:2);
 	}
-	else if(pow_<=70)//나중에 까마귀에서 바꾸자
+	else if(pow_<=70  || randA(2) == 0)//나중에 까마귀에서 바꾸자
 	{
 		id_ = MON_CRANE;
 		i=1;
 	}
-	else 
+	else
 	{
 		id_ = MON_EAGLE;
 		i=1;
@@ -2155,7 +2155,8 @@ bool skill_summon_ufo(int pow, bool short_, unit* order, coord_def target)
 	int i = 1; 
 	for(; i>0 ; i--)
 	{
-		if(monster *mon_ = BaseSummon(randA(2)?(randA(1)?MON_BLUE_UFO:MON_GREEN_UFO):MON_RED_UFO, rand_int(60+pow/4,120+pow/4), true, false, 2, order, target, SKD_SUMMON_UFO, GetSummonMaxNumber(SPL_SUMMON_UFO)))
+		int time_ = rand_int(30+pow/4,60+pow/4);
+		if(monster *mon_ = BaseSummon(randA(2)?(randA(1)?MON_BLUE_UFO:MON_GREEN_UFO):MON_RED_UFO, time_, true, false, 2, order, target, SKD_SUMMON_UFO, GetSummonMaxNumber(SPL_SUMMON_UFO)))
 		{
 			return_ = true;
 		}
@@ -6415,10 +6416,10 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	case MON_FLAN:
 		list->push_back(spell(SPL_FLAN_BUSIN, 30));
-		list->push_back(spell(SPL_BURST, 12));
+		list->push_back(spell(SPL_BURST, 18));
 		break;
 	case MON_FLAN_BUNSIN:
-		list->push_back(spell(SPL_BURST, 18));
+		list->push_back(spell(SPL_BURST, 23));
 		break;
 	case MON_RABIT_BOMB:
 		list->push_back(spell(SPL_SUICIDE_BOMB, 0));
@@ -6454,7 +6455,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	{
 		list->push_back(spell(SPL_SUMMON_DREAM, 40));
 		list->push_back(spell(SPL_SLEEP_SMITE, 15));
-		list->push_back(spell(SPL_BLINK, 15));
+		list->push_back(spell(SPL_BLINK, 18));
 		item_infor t;
 		makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_DREAM_SOUL);
 		item_list_->push_back(t);
@@ -6577,6 +6578,8 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		break;
 	case MON_KAGUYA:
 		list->push_back(spell(SPL_KAGUYA_SPELL, 70));
+		list->push_back(spell(SPL_SMITE, 25));
+		list->push_back(spell(SPL_THROW_RABBIT, 15));
 		break;
 	case MON_MOKOU:
 		break;

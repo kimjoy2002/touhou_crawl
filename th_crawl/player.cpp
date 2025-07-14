@@ -1214,7 +1214,7 @@ int players::move(short_move x_mov, short_move y_mov)
 	int sight_ = 7;
 	if(!x_mov && !y_mov)
 		return 0;
-	int drunken_ = randA(10);
+	int drunken_ = randA(10) && !you.GetProperty(TPT_DRUNKARD);
 	bool unconscious = false;
 	if(GetArtifactProperty(ART_UNCONSCIOUS) > 0 && randA(20) == 0) {
 		if(env[current_level].insight_mon(MET_ENEMY)) {
@@ -1230,7 +1230,7 @@ int players::move(short_move x_mov, short_move y_mov)
 			}
 		}
 	}
-	if(s_confuse || (s_drunken && drunken_==0))
+	if(s_confuse || (s_drunken && drunken_==0 && !you.GetProperty(TPT_DRUNKARD)))
 	{
 		do
 		{
@@ -1442,7 +1442,7 @@ int players::move(short_move x_mov, short_move y_mov)
 		}
 	}
 	else {
-		if (s_confuse || (s_drunken && drunken_ == 0) || unconscious)
+		if (s_confuse || (s_drunken && drunken_ == 0 && !you.GetProperty(TPT_DRUNKARD)) || unconscious)
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_OUCH), true, false, false, CL_normal);
 			time_delay += GetWalkDelay();
@@ -1932,7 +1932,7 @@ int players::GetSpellSuccess(int spell_)
 		success_+=2;
 	if(magician_bonus)
 		success_+=1+1*magician_bonus;
-	if(s_drunken)
+	if(s_drunken && !you.GetProperty(TPT_DRUNKARD))
 		success_-=2;
 	if(you.god == GT_BYAKUREN && !you.GetPunish(GT_BYAKUREN) && pietyLevel(you.piety)>=4 && SpellFlagCheck((spell_list)spell_ ,S_FLAG_BUF))
 		success_ += 2;

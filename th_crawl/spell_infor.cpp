@@ -919,6 +919,9 @@ string GetSkillInfor(skill_list skill)
 	case SKL_MISSLE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_MISSLE);
 		break;
+	case SKL_SILENCE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SILENCE);
+		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_UKNOWN);
 		break;

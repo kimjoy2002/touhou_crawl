@@ -217,6 +217,34 @@ LOCALIZATION_ENUM_KEY tribe_property::GetNameKey()
 		return LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH1;
 	else
 		return LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH2;
+	case TPT_CAN_INVISIBLE:
+		return LOC_SYSTEM_TRIBE_PROPERTY_CAN_INVISIBLE;
+	case TPT_CAN_SILENCE:
+		return LOC_SYSTEM_TRIBE_PROPERTY_CAN_SILENCE;
+	case TPT_DRUNKARD:
+		return LOC_SYSTEM_TRIBE_PROPERTY_DRUNKARD;
+	case TPT_RELIGIOUS:
+		return LOC_SYSTEM_TRIBE_PROPERTY_RELIGIOUS;
+	case TPT_BIG_WING:
+		return LOC_SYSTEM_TRIBE_PROPERTY_BIG_WING;
+	case TPT_STURDY:
+		return LOC_SYSTEM_TRIBE_PROPERTY_STURDY;
+	case TPT_GOOD_FOR_POTION:
+		return LOC_SYSTEM_TRIBE_PROPERTY_GOOD_FOR_POTION;
+	case TPT_INTELLIGENCE:
+		return LOC_SYSTEM_TRIBE_PROPERTY_INTELLIGENCE;
+	case TPT_POISON_BODY:
+		return LOC_SYSTEM_TRIBE_PROPERTY_POISON_BODY;
+	case TPT_WEAK_ARMOUR:
+		return LOC_SYSTEM_TRIBE_PROPERTY_WEAK_ARMOUR;
+	case TPT_TWISTED_HORN:
+		return LOC_SYSTEM_TRIBE_PROPERTY_TWISTED_HORN;
+	case TPT_POWERLESS:
+		return LOC_SYSTEM_TRIBE_PROPERTY_POWERLESS;
+	case TPT_TICK:
+		return LOC_SYSTEM_TRIBE_PROPERTY_TICK;
+	case TPT_POTION_ADDICTION:
+		return LOC_SYSTEM_TRIBE_PROPERTY_POTION_ADDICTION;
 	case TPT_STG_SPREAD_SHOT:
 		return LOC_SYSTEM_TRIBE_PROPERTY_STG_SPREAD_SHOT;
 	case TPT_STG_TRIPLE_SHOT:
@@ -570,6 +598,34 @@ string tribe_property::GetInfor()
 	else {
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_QUICK_DASH2);
 	}
+	case TPT_CAN_INVISIBLE:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CAN_INVISIBLE);
+	case TPT_CAN_SILENCE:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CAN_SILENCE);
+	case TPT_DRUNKARD:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_DRUNKARD);
+	case TPT_RELIGIOUS:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_RELIGIOUS);
+	case TPT_BIG_WING:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BIG_WING);
+	case TPT_STURDY:
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STURDY, PlaceHolderHelper("+10"));
+	case TPT_GOOD_FOR_POTION:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_GOOD_FOR_POTION);
+	case TPT_INTELLIGENCE:
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_INTELLIGENCE, PlaceHolderHelper("+5"));
+	case TPT_POISON_BODY:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POISON_BODY);
+	case TPT_WEAK_ARMOUR:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_WEAK_ARMOUR);
+	case TPT_TWISTED_HORN:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_TWISTED_HORN);
+	case TPT_POWERLESS:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POWERLESS);
+	case TPT_TICK:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_TICK);
+	case TPT_POTION_ADDICTION:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POTION_ADDICTION);
 	case TPT_STG_SPREAD_SHOT:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SPREAD_SHOT);
 	case TPT_STG_TRIPLE_SHOT:
@@ -847,6 +903,34 @@ string tribe_property::GetDetail()
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_DUAL_WEAPON);
 	case TPT_QUICK_DASH:
 		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_QUICK_DASH, PlaceHolderHelper(to_string(1+value)));
+	case TPT_CAN_INVISIBLE:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CAN_INVISIBLE);
+	case TPT_CAN_SILENCE:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CAN_SILENCE);
+	case TPT_DRUNKARD:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_DRUNKARD);
+	case TPT_RELIGIOUS:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_RELIGIOUS);
+	case TPT_BIG_WING:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BIG_WING);
+	case TPT_STURDY:
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STURDY, PlaceHolderHelper("10"));
+	case TPT_GOOD_FOR_POTION:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_GOOD_FOR_POTION);
+	case TPT_INTELLIGENCE:
+		return LocalzationManager::formatString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_INTELLIGENCE, PlaceHolderHelper("5"));
+	case TPT_POISON_BODY:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POISON_BODY);
+	case TPT_WEAK_ARMOUR:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_WEAK_ARMOUR);
+	case TPT_TWISTED_HORN:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_TWISTED_HORN);
+	case TPT_POWERLESS:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POWERLESS);
+	case TPT_TICK:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_TICK);
+	case TPT_POTION_ADDICTION:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POTION_ADDICTION);
 	case TPT_STG_SPREAD_SHOT:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SPREAD_SHOT);
 	case TPT_STG_TRIPLE_SHOT:
@@ -929,6 +1013,18 @@ D3DCOLOR tribe_property::getColor()
 	case TPT_DUAL_WEAPON:
 	case TPT_QUICK_DASH:
 		return CL_green;
+	case TPT_BIG_WING:
+	case TPT_STURDY:
+	case TPT_GOOD_FOR_POTION:
+	case TPT_INTELLIGENCE:
+	case TPT_POISON_BODY:
+		return CL_white_blue;
+	case TPT_WEAK_ARMOUR:
+	case TPT_TWISTED_HORN:
+	case TPT_POWERLESS:
+	case TPT_TICK:
+	case TPT_POTION_ADDICTION:
+		return CL_small_danger;
 	default:
 		break;
 	}
@@ -1127,6 +1223,48 @@ void tribe_property::gain(bool gain_)
 	case TPT_DUAL_WEAPON:
 		return;
 	case TPT_QUICK_DASH:
+		return;
+	case TPT_CAN_INVISIBLE:
+		{
+			int temp = you.Ability(SKL_INVISIBLE_OFF,false,true);
+			temp += you.Ability(SKL_INVISIBLE,false,true);
+
+			temp+=value;
+			you.Ability(you.s_invisible?SKL_INVISIBLE_OFF:SKL_INVISIBLE,false,temp<=0?true:false,temp);
+			if(temp <= 0 && you.s_invisible)
+			{
+				you.s_invisible=0; 
+			}
+		}
+		return;
+	case TPT_CAN_SILENCE:
+		{
+			you.Ability(SKL_SILENCE,true,!gain_);
+		}
+		return;
+	case TPT_DRUNKARD:
+		return;
+	case TPT_RELIGIOUS:
+		return;
+	case TPT_BIG_WING:
+		return;
+	case TPT_STURDY:
+		return;
+	case TPT_GOOD_FOR_POTION:
+		return;
+	case TPT_INTELLIGENCE:
+		return;
+	case TPT_POISON_BODY:
+		return;
+	case TPT_WEAK_ARMOUR:
+		return;
+	case TPT_TWISTED_HORN:
+		return;
+	case TPT_POWERLESS:
+		return;
+	case TPT_TICK:
+		return;
+	case TPT_POTION_ADDICTION:
 		return;
 	case TPT_STG_SPREAD_SHOT:
 		return;
@@ -1390,6 +1528,7 @@ void SetTribe(tribe_type select_)
 		you.StatUpDown(-1,STAT_DEX);
 		you.SetProperty(TPT_SIZE,1);
 		you.SetProperty(TPT_HORN,1);
+		you.SetProperty(TPT_DRUNKARD,1);
 		break;
 	case TRI_HALFYOKAI:
 		you.half_youkai[0]=randA(3);
@@ -1409,7 +1548,6 @@ void SetTribe(tribe_type select_)
 		you.SetProperty(TPT_GHOST_FOOT,1);
 		break;
 	case TRI_VAMPIRE:
-		you.SetProperty(TPT_HP,1);
 		you.SetProperty(TPT_REGEN,2);
 		you.SetProperty(TPT_MP_REGEN,-1);
 		you.SetProperty(TPT_POWER_SAVE,-1);

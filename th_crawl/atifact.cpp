@@ -581,7 +581,7 @@ bool effectartifact(artifact_type kind, int value)
 			you.Ability(you.s_invisible?SKL_INVISIBLE_OFF:SKL_INVISIBLE,false,temp<=0?true:false,temp);
 			if(temp <= 0 && you.s_invisible)
 			{
-				you.s_levitation=0; 
+				you.s_invisible=0; 
 			}
 			return true;
 		}

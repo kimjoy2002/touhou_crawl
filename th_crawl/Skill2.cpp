@@ -142,6 +142,7 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_ABANDON_GOD:
 	case SKL_SOULSHOT:
 	case SKL_SUPER_GRAZE:
+	case SKL_SILENCE:
 		return ((S_FLAG_IMMEDIATELY) & flag);
 	case SKL_NONE:
 	case SKL_BREATH:
@@ -264,6 +265,7 @@ int SkillLength(skill_list skill)
 	case SKL_DRAW_CARD:
 	case SKL_HARD_SELL:
 	case SKL_CREATE_SHOP:
+	case SKL_SILENCE:
 	default:
 		return 0;
 	}
@@ -471,6 +473,8 @@ string SkillString(skill_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_FIREBALL);
 	case SKL_MISSLE:
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_MISSLE);
+	case SKL_SILENCE:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_SILENCE);
 	case SKL_NONE:
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_UKNOWN);
@@ -556,6 +560,7 @@ int SkillCap(skill_list skill)
 	case SKL_SUPER_GRAZE:
 	case SKL_FIREBALL:
 	case SKL_MISSLE:
+	case SKL_SILENCE:
 		return 200;
 	case SKL_LEVITATION:
 		return 75;
@@ -681,6 +686,7 @@ int SkillNoise(skill_list skill)
 	case SKL_HARD_SELL:
 	case SKL_FIREBALL:
 	case SKL_MISSLE:
+	case SKL_SILENCE:
 		return 8;
 	case SKL_YUUGI_4:
 	case SKL_SWAKO_DIGGING:
@@ -795,6 +801,7 @@ int SkillPow(skill_list skill)
 	case SKL_JOON_AND_SION_4:
 	case SKL_SOULSHOT:
 	case SKL_SUPER_GRAZE:
+	case SKL_SILENCE:
 		return you.level*5;
 		//return you.skill[SKT_SPELLCASTING].level*5;
 	case SKL_SIZUHA_2:
@@ -840,7 +847,7 @@ int SkillDiffer(skill_list skill)
 	case SKL_BYAKUREN_1:
 		return 100;
 		//return SkillDiffer_simple(-3,SKT_SPELLCASTING,SKT_ERROR,SKT_ERROR);
-	case SKL_BYAKUREN_2:		
+	case SKL_BYAKUREN_2:
 		return 100;
 		
 	case SKL_SIZUHA_1: //디버프
@@ -944,6 +951,7 @@ int SkillDiffer(skill_list skill)
 	case SKL_DRAW_CARD:
 	case SKL_HARD_SELL:
 	case SKL_CREATE_SHOP:
+	case SKL_SILENCE:
 		return 100;
 	case SKL_NONE:
 	default:
@@ -1055,6 +1063,7 @@ int SkillMana(skill_list skill)
 	case SKL_LILLY_2:
 	case SKL_OKINA_1:
 	case SKL_OKINA_2:
+	case SKL_SILENCE:
 		return 2;
 	case SKL_KANAKO_2:
 	case SKL_MINORIKO_1:
@@ -1346,7 +1355,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 		return true;
 	case SKL_EIRIN_1:
 		if(!check_)
-			you.PietyUpDown(-5);
+			you.PietyUpDown(-20);
 		return true;
 	case SKL_EIRIN_2:
 		if(check_ && you.GetHp() ==  you.GetMaxHp())
@@ -1466,6 +1475,15 @@ bool SkillPlusCost(skill_list skill,bool check_)
 		}
 		if(!check_)
 			you.PowUpDown(-(20+randA(10)),true);
+		return true;
+	case SKL_SILENCE:
+		if(check_ && you.power<100)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
+			return false;
+		}
+		if(!check_)
+			you.PowUpDown(-100,true);
 		return true;
 	case SKL_JUMPING_ATTACK:
 		if(check_ && you.power<100)
@@ -1794,6 +1812,8 @@ string SkillCostString(skill_list skill)
 		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_LITTLE_AND_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_INVISIBLE:
 		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_SOME_AND_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
+	case SKL_SILENCE:
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_P_BIG_AND_MP_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_SATORI_1:
 		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_MP_AND_PIETY_N, PlaceHolderHelper(to_string(SkillMana(skill))));
 	case SKL_SATORI_2:

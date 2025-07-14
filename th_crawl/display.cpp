@@ -3094,7 +3094,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			}
 			if(you.s_drunken)
 			{
-				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_DRUNKEN), CL_warning,
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_DRUNKEN), you.GetProperty(TPT_DRUNKARD)?((you.god == GT_YUUGI && !you.GetPunish(GT_YUUGI))?CL_white_blue:CL_bad):CL_warning,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_DRUNKEN), this);
 			}
 			if(you.s_lunatic)

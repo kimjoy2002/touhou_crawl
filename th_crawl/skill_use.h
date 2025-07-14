@@ -164,6 +164,7 @@ enum skill_list
 	SKL_CREATE_SHOP,
 	SKL_FIREBALL,
 	SKL_MISSLE,
+	SKL_SILENCE,
 	SKL_MAX
 };
 

@@ -33,11 +33,11 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA3,보너스) +2 빗자루, 영력의 반
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA4,초보자팁) z키로 마법을 쓰고 M키로 마법을 배웁니다. 항상 5키로 마나를 가득 채우고 다닙시다.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE1,고위력 & 광범위 작렬형. 스와코님의 말씀대로!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE2,적성보너스) 전투적성 +2, 회피적성 +1, 발동적성 +3
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,보너스) 대지의 스펠카드(9), 대기의 스펠카드(9), 스와코를 믿고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4,초보자팁) V로 스펠카드가 사용가능합니다. 대지의 스펠카드는 벽에 맞춰서 폭발데미지를 줍시다.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,보너스) 신앙깊음 특성. 대지의 스펠카드(9), 대기의 스펠카드(9), 스와코를 믿고 시작한다.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4,초보자팁) V로 스펠카드가 사용가능합니다. 대지의 스펠카드는 벽에 맞춰서 폭발데미지를 줍시다.\n스와코님은 자비로우시니 원한다면 다른 신을 믿어도 좋습니다!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI1,자동탐색 & 자동공격형. O와 TAB이 당신을 지켜줄지어니
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI2,적성보너스) 장검적성 +1
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,보너스) +2 언월도, +2 철방패, +2 사슬 중갑옷, 상처치료물약 2개, 힘물약 2개, 투명감지 반지
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,보너스) +2 언월도, +2 철방패, +2 사슬 중갑옷, 상처치료물약 2개, 힘물약 2개, 투명감지 특성
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI4,초보자팁) tab은 자동공격, o는 자동탐색으로 편하게 진행 가능합니다. 위기엔 q로 포션을 마시세요.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI1,본포! 당신의 뒤에 있어요. 무의식의 힘으로 모두 암살하라!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI2,적성보너스) 단검적성 +2, 정신마법정석 +2
@@ -70,7 +70,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_KAPPA,높은 창스킬 숙련도를 가지고
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_NECOMATA,빠른 이동속도를 지녔고, 손톱이 자라있어 맨손격투에 강하다.\n체력이 약하고 무기,갑옷,방패는 잘 다루지 못한다.\n속성마법은 잘 다루지못하지만 연금술, 정신마법, 특히 전이마법에 강하다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_OARFISH,느린 이동속도를 지녔지만 높은 체력과 레벨에 따라 단단해지는 비늘 변이가 있다.\n무기적성은 좀 나쁘고 무난한 마법적성을 지녔지만 유독 대기술이 특출나게 높다.\n수영을 할 수 있고 전기저항을 1단계 들고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CHEUKUMOGAMI,몸집이 작고 독저항을 가지고 시작한다.\n전투적인 적성이 좋은 편이고 마법 적성은 그리 좋지 못하다.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_ONI,높은 전투력을 가지고있으나 무기와 마법은 잘 다루지 못한다.\n몸집이 커서 무거운 갑옷을 못입지만 체력이 많고 뿔이 달려서 추가데미지를 준다.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_ONI,높은 전투력을 가지고있으나 무기와 마법은 잘 다루지 못한다.\n몸집이 커서 무거운 갑옷을 못입지만 체력이 많고 뿔이 달려서 추가데미지를 준다.\n술고래 특성이 있어서 술에 취해도 패널티를 거의 받지 않는다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_HALFYOUKAI,성장이 느리고 적성이 골고루 나쁘지만 성장해가면서\n요괴의 특성이 발현되어 점점 강력해진다. 4레벨, 9레벨, 13레벨, 18레벨에 특성을 얻는다.\n4레벨에 어느 요괴의 피를 이어받았는지 밝혀지며 이후 특성은 거기에 맞춰서 진행된다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WRAITH,냉기저항과 독저항을 들고 시작하고 높은 은신치를 가졌다.\n전체적인 적성이 나쁜대신 다른 종족에 비해 체력적성은 괜찮은 편이다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_VAMPIRE,높은 체력재생력과 낮은 영력재생력을 지녔고 체력을 소모하여 마법을 쓸 수 있다.\n좋은 전투,은밀,회피적성을 지녔지만 무기,갑옷적성이 나쁘다. 마법적성은 전체적으로 나쁘지않지만\n연금술은 잘 못다루는 편이고 소환술 적성이 높다. 투명보기가 있고 P의 자연소모가 빠른 편이다.
@@ -100,13 +100,13 @@ LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ENGINEER,도구를 잘 다루는 만능 기술�
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_MISSING,우연히 환상향에 흘러들어가버린 우리들이다?\n음식과 전혀 전투에 도움되지않는 카메라만 들고 시작한다.\n아무런 능력도 힘도 없지만 죽기전에 기념촬영 정도는 할 수 있을 것 같다.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY1,3요정중 빛을 다루는 햇빛의 요정.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY2,적성보너스) 주문시전적성 +1, 파괴마법적성 +2
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY3,보너스) 루나가 침묵마법 대신 소회복을 들고 시작한다.
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY3,보너스) 투명발동 특성, 루나가 침묵마법 대신 을 들고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR1,3요정중 기척을 감지하는 별빛의 요정.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR2,적성보너스) 전투적성 +1, 회피적성 +1, 연금술적성 +1
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR3,보너스) 투명보기 특성을 가지고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA1,3요정중 소리를 지우는 달빛의 요정.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA2,적성보너스) 단검적성+1, 은밀적성 +1, 정신마법적성 +1
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3,보너스) 침묵 두루마리를 5장 들고 시작한다.
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3,보너스) 정적발동 특성
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON1,초보자팁) 삼월정은 혼자서 싸우는 것이 아니라 셋이서 싸웁니다.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON2,위험할때는 자신의 목숨이 제일 중요하다는걸 기억하세요. 동료들은 죽어도 부활합니다.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON3,만약 혼자가 되었을때는 소모품을 아끼지마세요. 동료가 없을때가 제일 취약합니다.
@@ -1313,6 +1313,7 @@ LOC_SYSTEM_NOTE_SATORI_REUNION,사토리와 재회했다.
 LOC_SYSTEM_NOTE_SATORI_WORSHIP,사토리의 애완동물이 되었다.
 LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN,반요 변이발현
 LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GROW,반요 변이강화
+LOC_SYSTEM_NOTE_EIRIN_MUTANT_GAIN,에이린 신체개조
 LOC_SYSTEM_NOTE_YUYUKO_ENSLAVE_GHOST,{0:을|를} 구속했다.
 LOC_SYSTEM_NOTE_SEIJA_GIFT,세이자에게 선물을 받았다. ({0})
 LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_ITEM,순호로부터 아이템순화({0}) 축복.
@@ -1996,6 +1997,20 @@ LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_MP_REGEN,악마의 마지막 특성이 
 LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_TORMENT,악마의 마지막 특성이 발현되었다. 당신은 지옥의 고통을 불러올 수 있게 되었다.
 LOC_SYSTEM_TRIBE_GROW_KOISHI_CONFUSE_ATTACK,당신의 무의식적인 공격은 상대를 혼란하게 만든다.
 LOC_SYSTEM_TRIBE_GROW_YOUMU_QUICK_DASH,당신의 고속 접근 능력이 더욱 빨라졌다.
+LOC_SYSTEM_TRIBE_GROW_CAN_INVISIBLE,당신은 투명해질 수 있다.
+LOC_SYSTEM_TRIBE_GROW_CAN_SILENCE,당신은 주변을 조용하게 만들 수 있다.
+LOC_SYSTEM_TRIBE_GROW_DRUNKARD,당신은 술에 강해졌다.
+LOC_SYSTEM_TRIBE_GROW_RELIGIOUS,당신은 신과 교감한다.
+LOC_SYSTEM_TRIBE_GROW_BIG_WING,당신에게 어마어마한 큰 날개가 자라났다.
+LOC_SYSTEM_TRIBE_GROW_STURDY,당신은 튼튼해졌다.
+LOC_SYSTEM_TRIBE_GROW_GOOD_FOR_POTION,당신은 물약의 효과를 더 잘 받게되었다.
+LOC_SYSTEM_TRIBE_GROW_INTELLIGENCE,당신은 머리가 상쾌해졌다.
+LOC_SYSTEM_TRIBE_GROW_POISON_BODY,당신의 몸은 독을 떨어뜨린다.
+LOC_SYSTEM_TRIBE_GROW_WEAK_ARMOUR,당신의 몸이 작아졌다.
+LOC_SYSTEM_TRIBE_GROW_TWISTED_HORN,당신의 머리에 뒤틀린 뿔이 자라났다.
+LOC_SYSTEM_TRIBE_GROW_POWERLESS,당신의 최대 파워가 낮아졌다.
+LOC_SYSTEM_TRIBE_GROW_TICK,당신은 적을 발견하면 인사를 참을 수 없게 되었다.
+LOC_SYSTEM_TRIBE_GROW_POTION_ADDICTION,당신은 물약에 중독되었다.
 LOC_SYSTEM_TRIBE_PROPERTY_BUG,버그특성
 LOC_SYSTEM_TRIBE_PROPERTY_FIRE_RESIST,화염저항
 LOC_SYSTEM_TRIBE_PROPERTY_COLD_RESIST,냉기저항
@@ -2058,6 +2073,20 @@ LOC_SYSTEM_TRIBE_PROPERTY_FIREUP_COLDDOWN,지옥불
 LOC_SYSTEM_TRIBE_PROPERTY_DUAL_WEAPON,이도류
 LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH1,고속접근1
 LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH2,고속접근2
+LOC_SYSTEM_TRIBE_PROPERTY_CAN_INVISIBLE,투명발동
+LOC_SYSTEM_TRIBE_PROPERTY_CAN_SILENCE,정적발동
+LOC_SYSTEM_TRIBE_PROPERTY_DRUNKARD,술고래
+LOC_SYSTEM_TRIBE_PROPERTY_RELIGIOUS,신앙깊음
+LOC_SYSTEM_TRIBE_PROPERTY_BIG_WING,어마어마하게 큰 날개
+LOC_SYSTEM_TRIBE_PROPERTY_STURDY,튼튼함
+LOC_SYSTEM_TRIBE_PROPERTY_GOOD_FOR_POTION,물약체질
+LOC_SYSTEM_TRIBE_PROPERTY_INTELLIGENCE,명석한 두뇌
+LOC_SYSTEM_TRIBE_PROPERTY_POISON_BODY,맹독의 몸
+LOC_SYSTEM_TRIBE_PROPERTY_WEAK_ARMOUR,작아진 체구
+LOC_SYSTEM_TRIBE_PROPERTY_TWISTED_HORN,뒤틀린 뿔
+LOC_SYSTEM_TRIBE_PROPERTY_POWERLESS,파워감소
+LOC_SYSTEM_TRIBE_PROPERTY_TICK,인사증후군
+LOC_SYSTEM_TRIBE_PROPERTY_POTION_ADDICTION,포션중독
 LOC_SYSTEM_TRIBE_PROPERTY_STG_SPREAD_SHOT,확산사격
 LOC_SYSTEM_TRIBE_PROPERTY_STG_TRIPLE_SHOT,3발사격
 LOC_SYSTEM_TRIBE_PROPERTY_STG_BACK_SHOT,등뒤사격
@@ -2158,6 +2187,20 @@ LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIREUP_COLDDOWN,당신의 몸은 뜨겁게 �
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_DUAL_WEAPON,당신은 무기를 2개 들 수 있다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_QUICK_DASH,당신은 적에게 빠르게 달려든다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_QUICK_DASH2,당신은 적에게 더욱 빠르게 달려든다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CAN_INVISIBLE,당신은 투명을 발동할 수 있다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CAN_SILENCE,당신은 정적을 발동할 수 있다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_DRUNKARD,당신은 술에 강하다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_RELIGIOUS,당신은 신과 더욱 많이 교감한다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BIG_WING,당신에 어마어마하게 큰 날개가 자라났다. (상시비행, 이동속도증가)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STURDY,당신의 몸은 약물 도핑을 받아서 튼튼하다. (체력 {0}%)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_GOOD_FOR_POTION,당신은 물약의 효과를 더욱 효과적으로 받는다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_INTELLIGENCE,당신의 두뇌는 아주 명석하다. (지능{0}, 혼란저항)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POISON_BODY,당신의 몸은 독을 내뿜는다. (독저항, 공격한 적에게 독구름)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_WEAK_ARMOUR,당신의 몸이 작아져서 갑옷으로 얻는 AC가 감소한다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_TWISTED_HORN,당신의 머리에 뿔이 돋아나서 머리 장식이 어울리지 않는다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POWERLESS,당신의 최대 파워가 낮아졌다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_TICK,당신은 처음 보는 적을 만나면 무의식중에 인사를 한다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POTION_ADDICTION,당신은 물약을 오랫동안 마시지 않으면 초조해진다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SPREAD_SHOT,당신의 사격이 확산된다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_TRIPLE_SHOT,당신의 사격이 3발씩 나간다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_BACK_SHOT,당신의 뒤에서도 사격이 나간다.
@@ -2244,6 +2287,20 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIREUP_COLDDOWN,당신의 몸은 불에 익숙�
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_RAD,이 능력은 방사능에 의해 일시적으로 획득한 특성이다.\n일정 경험치를 먹으면 사라진다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_DUAL_WEAPON,당신은 무기를 2개 낄 수 있다.\n무기를 착용시 이미 무기를 끼고있다면 반대편 손에 새로운 무기를 장착한다.\n무기를 2개 들고 있다면 공격시 두 개의 무기로 전부 공격한다.\n공격속도는 두 무기의 평균으로 계산한다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_QUICK_DASH,당신은 시야의 적에 접근할때 이동 속도가 {0}배로 빨라진다.\n자고 있는 적에게 은밀히 다가가는데는 큰 도움이 되지않는다.\n해당 효과를 받는 타일은 바닥에 특수한 표식이 생긴다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CAN_INVISIBLE,당신은 파워와 영력을 약간 소모하여 투명해질 수 있다.\n투명해진 상태에선 투명보기가 없는 적에게 쉽사리 들키지 않는다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CAN_SILENCE,당신은 파워 한칸과 영력을 소모하여 주변의 소리를 지울 수 있다.\n마법사용, 권능사용, 두루마리 읽기등이 금지된다. \n소리가 사라져 부자연스럽기때문에 은밀에 오히려 악영향을 준다. \n사용하면 범위안에 효과를 주지만 시간이 지나면 범위가 줄어든다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_DRUNKARD,당신은 술에 강하기에 술을 마시고 취기가 있어도 패널티를 거의 받지 않는다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_RELIGIOUS,당신은 신과 교감력이 뛰어나서 신앙심이 더욱 빠르게 오른다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BIG_WING,당신은 등 뒤에 부자연스럽게 아주 큰 날개가 자라났다.\n망토를 끼지 못하지만 상시 비행능력과 이동속도가 빨라진다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STURDY,당신은 도핑에 의해 몸에 근육이 붙었다.\n최대 체력이 {0}% 상승한다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_GOOD_FOR_POTION,당신의 몸은 물약과 상성이 좋다.\n마시는 물약의 효과가 100% 상승한다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_INTELLIGENCE,당신의 지능은 약에 의해 비정상적으로 뛰어나다.\n지능이 {0} 오르면서 쉽게 혼란과 광기에 빠지지않는다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POISON_BODY,당신의 몸에서 독이 천천히 흘러나온다.\n독저항이 생기며 공격을 받을때마다 가끔씩 적의 발밑에 독구름을 생성한다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_WEAK_ARMOUR,당신은 약물의 부작용으로 평소보다 몸이 작아졌다.\n평소 입던 갑옷이 안 맞아서 갑옷으로 얻는 AC가 절반이 된다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_TWISTED_HORN,당신은 머리에 보기 흉한 뿔이 생겼다.\n뿔때문에 머리 방어구를 장착할 수 없다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POWERLESS,당신은 최대 파워가 낮아져서 최대 파워가 4가 된다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_TICK,당신은 처음보는 적을 발견할때마다 일정 확률로 인사를 하게된다.\n인사를 하게되면 주변에 큰 소리를 내어 적을 깨우고 관심을 끌게 된다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POTION_ADDICTION,당신은 물약에 중독되어 물약을 오래 마시지못하면 금단 현상이 나타난다.\n물약을 마신지 오랜 턴이 지나면 금단 증상이 생겨서 스탯이 내려간다.\n처음엔 적지만 시간이 흐를 수 록 점점 감소하는 스탯이 커진다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SPREAD_SHOT,당신의 양옆으로 넓게 퍼져나가는 확산사격을 4발 더 발사 할 수 있다.\n추가되는 사격은 기본 사격과 동일한 데미지를 가지나 동일한 적을 때리진 않는다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_TRIPLE_SHOT,당신은 기본 사격 바로 양옆에 동일한 사격을 발사 할 수 있다.\n추가되는 사격은 기본 사격과 동일한 데미지를 가지나 동일한 적을 때리진 않는다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_BACK_SHOT,당신은 자신의 아래로 발사하는 3발의 확산 사격을 추가로 발사한다.\n추가되는 사격은 기본 사격과 동일한 데미지를 가지나 동일한 적을 때리진 않는다.
@@ -2917,6 +2974,7 @@ LOC_SYSTEM_SKL_BREATH_FIRE,화염 브레스
 LOC_SYSTEM_SKL_BREATH_COLDE,냉기 브레스
 LOC_SYSTEM_SKL_BREATH_ELEC,전격 브레스
 LOC_SYSTEM_SKL_TORMENT,지옥의 고통
+LOC_SYSTEM_SKL_SILENCE,정적
 LOC_SYSTEM_SKL_ABANDON_GOD,신을 버리기
 LOC_SYSTEM_SKL_SEIJA_GIFT,보물 받기
 LOC_SYSTEM_SKL_SEIJA_1,위치 뒤집기
@@ -2971,7 +3029,7 @@ LOC_SYSTEM_SKL_DESCRIBE_LEVITATION_OFF,비행 상태를 없앤다.\n
 LOC_SYSTEM_SKL_DESCRIBE_INVISIBLE,일시적 투명화할 수 있는 능력. 투명상태에서는 상대에게 들킬 확률이 현저히 줄어든다.\n이미 밀착해있으면 낌새를 눈치채서 따라올 수 있으며 투명을 보는 상대도 존재한다.\n또 투명상태에서는 P의 소모가 매우 빨라지니 주의해야한다.\n
 LOC_SYSTEM_SKL_DESCRIBE_INVISIBLE_OFF,투명 상태를 없앤다.\n
 LOC_SYSTEM_SKL_DESCRIBE_EIRIN_0,당신은 가지고 있는 물약을 던질 수 있다.\n던진 위치엔 3*3크기로 구름이 생성된다. 구름의 종류는 물약의 종류에따라 정해진다.\n이로운 물약은 던져도 연기구름만 생긴다. 해로운 물약을 던져야 강력한 구름이 나온다.\n
-LOC_SYSTEM_SKL_DESCRIBE_EIRIN_1,에이린에게 몸을 맡겨 원하는대로 몸을 개조한다.\n원하는 스탯을 선택하면 그 외의 스탯이 모두 원하는 스탯으로 반영구적으로 옮겨진다.\n옮겨지는 수치는 신앙심에 따라 2~5로 유동적으로 변하며 언제라도 다시 스탯을 옮길 수 있다.\n중첩은 되지않는다. 한번 스탯을 선택하면 다시 개조하기전엔 계속 효과가 이어진다.\n
+LOC_SYSTEM_SKL_DESCRIBE_EIRIN_1,에이린에게 몸을 맡겨 원하는대로 몸을 개조한다.\n반영구적인 무작위 좋은 특성과 나쁜 특성을 하나씩 부여받는다.\n큰 비용과 일시적인 스탯감소의 패널티가 있지만 다시 사용하여 기존의 특성을 덮어씌울 수 있다.\n대신 원래의 몸으로 돌아올 수 없게되니 신도들의 신중한 선택이 필요할 것이다.
 LOC_SYSTEM_SKL_DESCRIBE_EIRIN_2,높은 신앙심과 파워1칸을 소모하여 순간적으로 체력을 대부분 채워주는 에이린의 궁극 권능.\n효과는 강력하지만 사용후 일정시간이 지나면 회복한 수치만큼 그대로 부작용 데미지를 받게된다.\n
 LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_1,일시적으로 지능을 강화시키는 뱌쿠렌의 신체강화마법.\n지능이 5증가하고 마법성공률, 파워가 증가하며 마나 회복속도도 증가한다.\n
 LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_2,일시적으로 각력을 강화시키는 뱌쿠렌의 신체강화마법. (W)\n이동속도가 매우 매우 빨라진다. 신속과 중첩되지 않으며 지속시간은 짧은 편이다.\n가히 초인이라 부를만 하군!\n
@@ -3059,6 +3117,7 @@ LOC_SYSTEM_SKL_DESCRIBE_HARD_SELL,미구현
 LOC_SYSTEM_SKL_DESCRIBE_CREATE_SHOP,미구현
 LOC_SYSTEM_SKL_DESCRIBE_FIREBALL,제어봉의 화력을 집중하여 구체화된 화염의 탄막을 발사한다.\n사용자의 발동 스킬에 비례해서 성공률과 데미지가 증가한다.\n
 LOC_SYSTEM_SKL_DESCRIBE_MISSLE,마개조된 캇파의 옷에 달린 미사일 포대로부터 미사일을 발사한다.\n높은 유도 성능을 가졌지만 적으로 날라가는데 시간이 걸린다.\n또한 자기 자신도 유폭 피해를 넓은 공간과 충분한 거리가 없으면 위험하다.\n사용자의 발동 스킬에 비례해서 성공률과 데미지가 증가한다.\n
+LOC_SYSTEM_SKL_DESCRIBE_SILENCE,주변의 소리를 지운다.\n루나가 숨박꼭질의 최종병기라고 불릴 정도로 자신있어햐는 능력.\n하지만 오히려 부자연스럽게 소리를 지우기에 은밀함에는 도움이 안된다.\n대신 범위안의 영창이 필요한 마법을 못하게 만드는 효과가 있다.\n
 LOC_SYSTEM_SKL_DESCRIBE_UKNOWN,모르는 능력.\n
 LOC_SYSTEM_ITEM_CATEGORY_WEAPON,무기
 LOC_SYSTEM_ITEM_CATEGORY_TANMAC,탄막
@@ -4369,7 +4428,7 @@ LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_3,*3)혼란물약 : 영력을 회복한다.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_4,*4)감속물약 : 투명해진다.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_5,*5)마비물약 : 마비시간이 줄어들고 영격을 사용한다.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY4,당신의 물약을 던질 수 있다.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5,당신은 신체개조를 통해 능력치를 조절할 수 있다.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5,당신은 신체개조를 통해 무작위 특성을 받을 수 있다.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY6,당신은 부작용을 대가로 몸을 재생할 수 있다.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY7,당신은 가끔씩 에이린으로부터 물약을 선물 받는다.
 LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY1,당신은 유령을 불러들인다.
@@ -4702,7 +4761,7 @@ LOC_SYSTEM_GOD_EIRIN_ACCECPT,에이린은 당신의 강함에 관심을 가졌�
 LOC_SYSTEM_GOD_EIRIN_PRAY_1,{0:은|는} {연기를 내며|고약한 냄새를 풍기며|빛을 내면서} {1:으로|로} 바뀌었다.
 LOC_SYSTEM_GOD_EIRIN_PRAY_2,에이린은 흡족히 여겼다.
 LOC_SYSTEM_GOD_EIRIN_START_SIDEEFFECT,치유로 인한 부작용이 시작되었다!
-LOC_SYSTEM_GOD_EIRIN_STAT_SELECT,당신의 올릴 능력치를 고르세요.
+LOC_SYSTEM_GOD_EIRIN_STAT_SELECT,정말로 몸을 개조하시겠습니까? 다시는 원래대로 돌아올 수 없습니다!
 LOC_SYSTEM_GOD_EIRIN_STAT_SELECT_RETURN,(R)eturn - 복구
 LOC_SYSTEM_GOD_EIRIN_ALREADY_BOOST,당신은 이미 그 능력치로 개조되어있다!
 LOC_SYSTEM_GOD_EIRIN_FAIL_TO_RECOVERY,당신은 개조되어있는 몸이 아니다!

@@ -394,115 +394,66 @@ bool skill_eirin_move_stat(int pow, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
-		bool end_ = false;
-		int stat_ = 0;
-		//어디서부터
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_STAT_SELECT) + " ",false,false,false,CL_help);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_STAT_MESSGE_S),false,false,false,CL_help, 'S');
-		printlog(", ",false,false,false,CL_help);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_STAT_MESSGE_D),false,false,false,CL_help, 'D');
-		printlog(", ",false,false,false,CL_help);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_LEVELUP_STAT_MESSGE_I),false,false,false,CL_help, 'I');
-		printlog(", ",false,false,false,CL_help);
-		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_STAT_SELECT_RETURN),false,false,false,CL_help, 'R');
-		printlog(" ",false,false,false,CL_help);
-		startSelection({'S', 'D', 'I', 'R'});
-		while(!end_)
-		{
-			InputedKey inputedKey;
+		if(ynPrompt(LOC_SYSTEM_GOD_EIRIN_STAT_SELECT, LOC_SYSTEM_BE_PRUDENT, CL_danger, false,true,true,false)) {
+			PlaySE("buff");
+			
+			random_extraction<std::pair<tribe_proper_type,LOCALIZATION_ENUM_KEY>> good_tpts;
+			random_extraction<std::pair<tribe_proper_type,LOCALIZATION_ENUM_KEY>> bad_tpts;
 
-			int key_;
-			g_menu_select = -1;
-			while(true) {
-				key_ = waitkeyinput(inputedKey, true);
+			you.DeleteProperty(TPT_BIG_WING);
+			you.DeleteProperty(TPT_STURDY);
+			you.DeleteProperty(TPT_GOOD_FOR_POTION);
+			you.DeleteProperty(TPT_INTELLIGENCE);
+			you.DeleteProperty(TPT_POISON_BODY);
+			you.DeleteProperty(TPT_WEAK_ARMOUR);
+			you.DeleteProperty(TPT_TWISTED_HORN);
+			you.DeleteProperty(TPT_POWERLESS);
+			you.DeleteProperty(TPT_TICK);
+			you.DeleteProperty(TPT_POTION_ADDICTION);
 
-				if(key_ == VK_RIGHT){
-					if(++g_menu_select>4)
-						g_menu_select = 0;
-					continue;
-				} else if (key_ == VK_LEFT) {
-					if(--g_menu_select<0)
-						g_menu_select = 4;
-					continue;
-				} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
-					switch(g_menu_select) {
-						case 0:
-							key_ = 'S';
-							break;
-						case 1:
-							key_ = 'D';
-							break;
-						case 2:
-							key_ = 'I';
-							break;
-						case 3:
-							key_ = 'R';
-							break;
-						default:
-							break;
-					}
-				}
-				break;
-			}
-			g_menu_select = -1;
+			if(you.tribe != TRI_CROWTENGU && you.tribe != TRI_HALFYOKAI)
+				good_tpts.push({TPT_BIG_WING,LOC_SYSTEM_TRIBE_GROW_BIG_WING});
+			good_tpts.push({TPT_STURDY,LOC_SYSTEM_TRIBE_GROW_STURDY});
+			good_tpts.push({TPT_GOOD_FOR_POTION,LOC_SYSTEM_TRIBE_GROW_GOOD_FOR_POTION});
+			good_tpts.push({TPT_INTELLIGENCE,LOC_SYSTEM_TRIBE_GROW_INTELLIGENCE});
+			good_tpts.push({TPT_POISON_BODY,LOC_SYSTEM_TRIBE_GROW_POISON_BODY});
+
+			bad_tpts.push({TPT_WEAK_ARMOUR,LOC_SYSTEM_TRIBE_GROW_WEAK_ARMOUR});
+			if(you.tribe != TRI_ONI && you.tribe != TRI_HALFYOKAI)
+				bad_tpts.push({TPT_TWISTED_HORN,LOC_SYSTEM_TRIBE_GROW_TWISTED_HORN});
+			bad_tpts.push({TPT_POWERLESS,LOC_SYSTEM_TRIBE_GROW_POWERLESS});
+			bad_tpts.push({TPT_TICK,LOC_SYSTEM_TRIBE_GROW_TICK});
+			bad_tpts.push({TPT_POTION_ADDICTION,LOC_SYSTEM_TRIBE_GROW_POTION_ADDICTION});
 
 
-			switch(key_)
-			{
-			case 'S':
-				stat_ = 1;
-				end_ = true;
-				break;
-			case 'D':
-				stat_ = 2;
-				end_ = true;
-				break;
-			case 'I':
-				stat_ = 3;
-				end_ = true;
-				break;
-			case 'R':
-				stat_ = 0;
-				end_ = true;
-				break;				
-			case -1:
-				if(inputedKey.isRightClick()) {
-					//ESC PASSTHORUGH
-				}
-				else {
-					break;
-				}
-			case VK_ESCAPE:
-			case GVK_BUTTON_B:
-			case GVK_BUTTON_B_LONG:
-				printlog(LocalzationManager::locString(LOC_SYSTEM_BE_PRUDENT),true,false,false,CL_help);
-				endSelection();
-				return false;
-			}
+			auto good_ = good_tpts.choice();
+			auto bad_ = bad_tpts.choice();
+			
+			printlog(LocalzationManager::locString(good_.second),false,false,false,CL_white_blue);
+			printlog(LocalzationManager::locString(bad_.second),true,false,false,CL_small_danger);
+
+			ostringstream oss;
+
+			you.SetProperty(good_.first, 1);
+			you.SetProperty(bad_.first, 1);
+
+
+			AddNote(you.turn, CurrentLevelString(), 
+				LocalzationManager::locString(LOC_SYSTEM_NOTE_EIRIN_MUTANT_GAIN)+": "+getTribeProperty(good_.first, 1)
+			, CL_normal);
+			
+			AddNote(you.turn, CurrentLevelString(), 
+				LocalzationManager::locString(LOC_SYSTEM_NOTE_EIRIN_MUTANT_GAIN)+": "+getTribeProperty(bad_.first, 1)
+			, CL_normal);
+
+			you.StatUpDown(-rand_int(1,3),STAT_STR,true);
+			you.StatUpDown(-rand_int(1,3),STAT_DEX,true);
+			you.StatUpDown(-rand_int(1,3),STAT_INT,true);
+			return true;
 		}
-		endSelection();
-
-		if(you.s_stat_boost == stat_)
-		{
-			if(stat_)
-				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_ALREADY_BOOST),false,false,false,CL_normal);
-			else
-				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_FAIL_TO_RECOVERY),false,false,false,CL_normal);
-
+		else {
 			return false;
 		}
-
-
-		PlaySE("buff");
-		you.SetStatBoost(stat_, max(1,pietyLevel(you.piety)-1));
-		if(stat_)
-			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_BOOST),true,false,false,CL_good);
-		else
-		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_BOOST_RETURN) + " ",false,false,false,CL_help);
-			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_MAYBE),false,false,false,CL_small_danger);
-		}
-		return true;
 	}
 	return false;
 }
@@ -4819,7 +4770,7 @@ bool skill_missle(int power, bool short_, unit* order, coord_def target)
 	}
 	return true;
 }
-
+bool skill_silence(int pow, bool short_, unit* order, coord_def target);
 bool skill_jump_attack(int power, bool short_, unit* order, coord_def target);
 
 
@@ -5178,6 +5129,9 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_MISSLE:
 		return skill_missle(power, short_, &you, target);
+		break;
+	case SKL_SILENCE:
+		return skill_silence(power,short_, &you,target);
 		break;
 	default:
 		break;

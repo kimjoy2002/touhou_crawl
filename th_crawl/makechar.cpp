@@ -1042,8 +1042,7 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			you.additem(it,false);
 			env[current_level].DeleteItem(it);	
 			you.skill[SKT_EVOCATE].onoff = 1;
-
-
+			you.SetProperty(TPT_RELIGIOUS, 1);
 		}
 
 	}
@@ -1180,27 +1179,14 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 
 
 			if (type == UNIQ_START_STAR) {
-
-
-
-
+				you.SetProperty(TPT_CAN_INVISIBLE, 1);
 			}
 			if (type == UNIQ_START_STAR) {
-				
 				you.SetProperty(TPT_SEE_INVI, 1);
-
-
 
 			}
 			if (type == UNIQ_START_LUNA) {
-				for (int i = 0; i < 5; i++)
-				{
-					it = env[current_level].MakeItem(you.position, makeitem(ITM_SCROLL, 0, &t, SCT_SILENCE));
-					it->Identify();
-					you.additem(it, false);
-					env[current_level].DeleteItem(it);
-				}
-
+				you.SetProperty(TPT_CAN_SILENCE, 1);
 			}
 
 

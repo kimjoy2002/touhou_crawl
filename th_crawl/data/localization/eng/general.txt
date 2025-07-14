@@ -33,11 +33,11 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA3,Bonus) +2 Broom, MP Ring, Book of Dest
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA4,Beginner Tip: Use 'z' to cast spells and 'M' to learn new ones. Keep your MP full with the 5 key!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE1,High-power & Wide explosion type. Just as Suwako commands!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE2,Aptitude Bonus) +2 Fight Aptitude, +1 Dodge Aptitude, +3 Evoke Aptitude
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,Bonus) Spell Card of Earth (9), Spell Card of Air (9), Starts with faith in Suwako.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4,Beginner Tip: Press 'V' to use spell cards. Earth spell cards explode on walls for area damage!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,Bonus) Devout trait. Spell Card of Earth (9), Spell Card of Air (9), Starts with faith in Suwako.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4,Beginner Tip: Press 'V' to use spell cards. Earth spell cards explode on walls for area damage!\nSuwako is merciful, so if you wish, you may worship another god.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI1,Auto-explore & Auto-attack Type. Let 'O' and 'TAB' guard you.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI2,Aptitude Bonus) +1 Longblade Aptitude
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,Bonus) +2 Crescent Blade, +2 Iron Shield, +2 Chainmail, 2 Wound Healing Potions, 2 Strength Potions, Ring of Detect Invisibility
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,Bonus) +2 Crescent Blade, +2 Iron Shield, +2 Chainmail, 2 Wound Healing Potions, 2 Might Potions, See Invisibility trait
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI4,Beginner Tip: 'TAB' for auto-attack, 'O' for auto-explore. Press 'Q' to drink a potion in emergencies!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI1,True Horror! Standing Right Behind You. Assassinate them all with the power of the unconscious!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI2,Aptitude Bonus) +2 Shortblade Aptitude, +2 Mental Magic Aptitude
@@ -70,7 +70,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_KAPPA,High spear skill proficiency and can sw
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_NECOMATA,Fleet-footed with natural claws, excels in unarmed combat.\nLow HP and poor with weapons and armor.\nWeak in elemental magic, but strong in alchemy, mental magic, and especially space-time magic.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_OARFISH,Slow mover but tough with scale mutations that harden with level.\nMediocre weapon aptitude, average magic skills, but excels in air techniques.\nCan swim and starts with electricity resistance.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CHEUKUMOGAMI,Small-bodied and starts with poison resistance.\nDecent combat aptitude, poor at magic.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_ONI,High combat power but poor weapon and magic skills.\nLarge body prevents wearing heavy armor. Has high HP and horns for bonus damage.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_ONI,High combat power but poor weapon and magic skills.\nLarge body prevents wearing heavy armor. Has high HP and horns for bonus damage.\nDue to the Heavy Drinker trait, you suffer little to no penalties while drunk.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_HALFYOUKAI,Grows slowly and has poor overall aptitude, but evolves with yokai traits.\nAt Lv4, you discover your yokai bloodline, gaining traits at Lv4, 9, 13, and 18.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WRAITH,Starts with cold and poison resistance and high stealth.\nOverall aptitude is poor, but has decent HP aptitude compared to other races.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_VAMPIRE,High HP regen and low MP regen. Uses HP to cast spells.\nGood at combat, stealth, and evasion, but poor weapon and armor aptitude.\nMagic aptitude is decent overall but weak in alchemy. Strong summoning aptitude.\nCan see invisibility and has fast MP drain.
@@ -82,7 +82,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SHAMAN,A melee fighter who uses Kanako’s powe
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_GLADIATOR,A hybrid evasion fighter skilled in both ranged and melee combat.\nStarts with a chosen weapon, venom shurikens, and a small shield.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_MONK,A martial artist talented in unarmed combat.\nStarts with high unarmed skill.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_CRUSADER,A magic warrior that uses both melee and buffs.\nStarts with a chosen weapon, a Beginner's Spellblade Book, and the Veiling spell.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_BERSERKER,Equipped with extremely aggressive gear based on extreme stats.\nStarts with an axe, a robe, and 2 strength potions.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_BERSERKER,Equipped with extremely aggressive gear based on extreme stats.\nStarts with an axe, a robe, and 2 Might potions.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_FIRE_WIZARD,An elemental mage specializing in fire magic.\nStarts with a Beginner's Pyromancy Book and learns fireball.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_COLD_WIZARD,An elemental mage specializing in cold magic.\nStarts with a Beginner's Cryomancy Book and learns frost.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_EARTH_WIZARD,An elemental mage specializing in earth magic.\nStarts with a Beginner's Geomancy Book and learns stone fist.
@@ -100,13 +100,13 @@ LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ENGINEER,A versatile technician skilled with to
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_MISSING,People like us who accidentally ended up in Gensokyo.\nStarts with food and a useless camera that won’t help in combat.\nHas no powers or strength, but might be able to take a memorial photo before dying.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY1,One of the Three Fairies of Light, controls sunlight.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY2,Aptitude Bonus) Spellcasting +1, Destruction Magic +2
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY3,Bonus) Luna starts with Minor Healing instead of Silence.
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY3,Bonus) Evoke Invisible trait. Luna starts with Minor Healing instead of Silence.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR1,One of the Three Fairies of Light, senses presences via starlight.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR2,Aptitude Bonus) Combat +1, Evasion +1, Alchemy +1
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR3,Bonus) Starts with See Invisibility trait.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA1,One of the Three Fairies of Light, erases sound with moonlight.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA2,Aptitude Bonus) Dagger +1, Stealth +1, Mental Magic +1
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3,Bonus) Starts with 5 Scrolls of Silence.
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3,Bonus) Evoke Silence trait.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON1,Beginner Tip: The Three Fairies always fight as a team, not alone.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON2,Remember: your life comes first when in danger. Allies will revive even if they fall.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON3,If you’re alone, don’t save consumables. You’re most vulnerable without allies.
@@ -2971,7 +2971,7 @@ LOC_SYSTEM_SKL_DESCRIBE_LEVITATION_OFF,Cancels flight state.\n
 LOC_SYSTEM_SKL_DESCRIBE_INVISIBLE,Grants temporary invisibility.\nGreatly reduces the chance of being detected.\nEnemies nearby may still notice you, and some can see through invisibility.\nRapidly drains MP while active.\n
 LOC_SYSTEM_SKL_DESCRIBE_INVISIBLE_OFF,Cancels invisibility.\n
 LOC_SYSTEM_SKL_DESCRIBE_EIRIN_0,Allows you to throw potions in your inventory.\nCreates a 3x3 cloud at the landing spot.\nBeneficial potions create harmless smoke, while harmful ones release powerful clouds.\n
-LOC_SYSTEM_SKL_DESCRIBE_EIRIN_1,Let Eirin modify your body at will.\nTransfers all other stats into one chosen stat based on your faith.\nThe transferred amount ranges from 2-5 and can be changed anytime.\nThe effect is semi-permanent until modified again.\n
+LOC_SYSTEM_SKL_DESCRIBE_EIRIN_1,Entrust your body to Eirin and undergo a modification of your choosing.\nGrants one semi-permanent random positive and negative trait.\nComes at a high cost and causes a temporary stat reduction, but you may overwrite existing traits with future procedures.\nHowever, once modified, you can never return to your original form. choose wisely.\n
 LOC_SYSTEM_SKL_DESCRIBE_EIRIN_2,Eirin’s ultimate divine technique.\nConsumes high faith and 1 MP segment to restore most of your HP instantly.\nAfter a while, you take damage equal to the amount healed.\n
 LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_1,Byakuren’s body enhancement magic that temporarily boosts Intelligence.\nIncreases INT by 5, improves spell success and power recovery rate.\n
 LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_2,Byakuren’s body enhancement magic that temporarily boosts Dexterity (W).\nMovement speed increases dramatically.\nDoes not stack with Haste and lasts briefly.\nSuperhuman speed!\n
@@ -4369,7 +4369,7 @@ LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_3,*3)Confusion Potion: Restores MP.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_4,*4)Slow Potion: Grants invisibility.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_5,*5)Paralysis Potion: Reduces paralysis duration and unleashes a spirit blast.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY4,You can throw your potions.
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5,You can modify your body to adjust your stats.
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5,You can receive random traits through body modification.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY6,You can regenerate at the cost of side effects.
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY7,You sometimes get potions from Eirin.
 LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY1,You attract spirits.
@@ -4702,7 +4702,7 @@ LOC_SYSTEM_GOD_EIRIN_ACCECPT,Eirin has taken interest in your strength.
 LOC_SYSTEM_GOD_EIRIN_PRAY_1,{0} transformed into {1}, {emitting smoke|reeking foully|glowing with light}.
 LOC_SYSTEM_GOD_EIRIN_PRAY_2,Eirin seemed pleased.
 LOC_SYSTEM_GOD_EIRIN_START_SIDEEFFECT,Side effects from healing have begun!
-LOC_SYSTEM_GOD_EIRIN_STAT_SELECT,Choose the stat to increase:
+LOC_SYSTEM_GOD_EIRIN_STAT_SELECT,Are you sure you want to modify your body? There is no going back!
 LOC_SYSTEM_GOD_EIRIN_STAT_SELECT_RETURN,(R)evert
 LOC_SYSTEM_GOD_EIRIN_ALREADY_BOOST,You've already been enhanced for that stat!
 LOC_SYSTEM_GOD_EIRIN_FAIL_TO_RECOVERY,You are not in an enhanced state!

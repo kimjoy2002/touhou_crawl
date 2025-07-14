@@ -45,6 +45,7 @@ bool sionResurrection();
 int getMikoPiety(int kind);
 void godAutoPickUp(god_type god_, bool belive_);
 
+int GetGodMulti();
 bool GodAccpect_KillMonster(monster* mon_, parent_type type_);
 bool GodAccpect_Entering();
 bool GodAccpect_GetPitem();

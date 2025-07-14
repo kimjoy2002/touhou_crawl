@@ -33,11 +33,11 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA3,ボーナス）+2 箒、霊力の指�
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA4,初心者ヒント）zキーで魔法、Mキーで魔法を習得。常に霊力を5キーで満タンに保ちましょう。
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE1,高火力＆広範囲炸裂型。諏訪子様の仰るとおりに
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE2,適性ボーナス）戦闘適性 +2、回避適性 +1、発動適性 +3
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,ボーナス）地のスペルカード(9)、風のスペルカード(9)、諏訪子を信じて始める。
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4,初心者ヒント）Vキーでスペルカード使用可能。地のカードは壁に当てて爆発ダメージを狙おう。
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,ボーナス）	信仰深い特性。地のスペルカード(9)、風のスペルカード(9)、諏訪子を信じて始める。
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4,初心者ヒント）Vキーでスペルカード使用可能。地のカードは壁に当てて爆発ダメージを狙おう。\n諏訪子様は寛大だから、望むなら他の神を信仰してもいいよ。
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI1,自動探索＆自動攻撃型。OキーとTABキーがあなたを守るでしょう。
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI2,適性ボーナス）長剣適性 +1
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,ボーナス）+2 曲刀、+2 鉄の盾、+2 チェインメイル、治癒ポーション×2、力のポーション×2、透明感知の指輪
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,ボーナス）+2 曲刀、+2 鉄の盾、+2 チェインメイル、治癒ポーション×2、力のポーション×2、透明感知の特性持ち
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI4,初心者ヒント）tabで自動攻撃、oで自動探索。危ない時はqでポーションを飲みましょう。
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI1,本怖！貴方の後ろにいるよ。無意識の力で全てを暗殺せよ！
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI2,適性ボーナス）短剣適性 +2、精神魔法適性 +2
@@ -70,7 +70,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_KAPPA,高い槍スキルと水泳能力を持
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_NECOMATA,素早い移動速度と爪による素手戦闘に優れる。\n体力は低く、武器・防具・盾は扱いが苦手。\n属性魔法は不得意だが、錬金・精神魔法、特に転移魔法に長ける。
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_OARFISH,移動速度は遅いが高い体力と、レベルに応じて硬くなる鱗の変異を持つ。\n武器適性は低いが魔法適性は平均的で、大気魔法に特に優れる。\n水泳可能で電気耐性を1段階所持。
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CHEUKUMOGAMI,小柄な体で毒耐性を持ってスタート。\n戦闘適性は良好だが魔法適性は低い。
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_ONI,高い戦闘力を持つが武器と魔法の扱いは苦手。\n体が大きく重装は装備できないが、体力が多く角で追加ダメージを与える。
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_ONI,高い戦闘力を持つが武器と魔法の扱いは苦手。\n体が大きく重装は装備できないが、体力が多く角で追加ダメージを与える。\n酒豪の特性により、酔っていてもほとんどペナルティを受けない。
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_HALFYOUKAI,成長が遅く、全体的に適性は低いが、成長することで\n妖怪の特性が発現し、徐々に強くなる。レベル4、9、13、18で特性を得る。\nレベル4でどの妖怪の血を引いているかが明らかになり、以後の特性はそれに応じて決定される。
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WRAITH,冷気耐性と毒耐性を持って開始し、高い隠密能力を持つ。\n全体的な適性は低いが、体力適性は他の種族に比べて良好。
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_VAMPIRE,高い体力回復力と低い霊力回復力を持ち、体力を消費して魔法を使う。\n戦闘・隠密・回避適性は高いが、武器と防具の適性は低い。魔法適性は全体的に悪くないが、\n錬金術には不向きで召喚術の適性が高い。透明視を持ち、Pの自然消費が早い。
@@ -100,13 +100,13 @@ LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ENGINEER,道具を使いこなす万能技術�
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_MISSING,偶然幻想郷に迷い込んだ我々？\n食料と、戦闘には全く役立たないカメラだけを持ってスタート。\n何の能力も力もないが、死ぬ前に記念写真くらいは撮れそう。
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY1,三妖精の中で光を操る太陽の妖精。
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY2,適性ボーナス）呪文詠唱適性 +1、破壊魔法適性 +2
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY3,ボーナス）ルナが沈黙魔法の代わりに小回復を所持してスタート。
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY3,ボーナス）透明発動特性持ち。ルナが沈黙魔法の代わりに小回復を所持してスタート。
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR1,三妖精の中で気配を探る星の妖精。
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR2,適性ボーナス）戦闘適性 +1、回避適性 +1、錬金術適性 +1
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR3,ボーナス）透明視の特性を持ってスタート。
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA1,三妖精の中で音を消す月の妖精。
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA2,適性ボーナス）短剣適性 +1、隠密適性 +1、精神魔法適性 +1
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3,ボーナス）沈黙の巻物を5枚持ってスタート。
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3,ボーナス）沈黙発動特性持ち。
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON1,初心者ヒント）三月精は一人ではなく三人で戦います。
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON2,危険な時はまず自分の命を最優先にしましょう。仲間は倒れても復活します。
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON3,もし一人になった時は消耗品を惜しまないでください。一人の時が最も脆いです。
@@ -2971,7 +2971,7 @@ LOC_SYSTEM_SKL_DESCRIBE_LEVITATION_OFF,飛行状態を解除する。\n
 LOC_SYSTEM_SKL_DESCRIBE_INVISIBLE,一時的に透明化する。\n透明状態では敵に見つかる確率が大きく低下するが、\n密着していると気配で察知される場合があり、透明を見破る敵も存在する。\nまた、透明中はPの消費が非常に早くなる。\n
 LOC_SYSTEM_SKL_DESCRIBE_INVISIBLE_OFF,透明状態を解除する。\n
 LOC_SYSTEM_SKL_DESCRIBE_EIRIN_0,所持しているポーションを投げることができる。\n着弾地点には3×3の雲が発生し、雲の種類はポーションの種類に依存する。\n有益なポーションではただの煙雲になり、有害なポーションで強力な雲が発生する。\n
-LOC_SYSTEM_SKL_DESCRIBE_EIRIN_1,永琳に身を任せて、身体を改造する。\n選んだ能力値以外のステータスが、選んだステータスに反映される。\n移動量は信仰心に応じて2～5で変化し、何度でも再選択可能。\n効果は重複しないが、選んだステータスは維持される。\n
+LOC_SYSTEM_SKL_DESCRIBE_EIRIN_1,永琳に身体を預け、自らの望む形に改造してもらう。\n半永久的な良い特性と悪い特性を1つずつ無作為に付与される。\n高額な費用と一時的なステータス低下のペナルティがあるが、再度使用することで以前の特性を上書きできる。\nただし、元の身体には二度と戻れない。信徒たちよ、慎重な選択を。\n
 LOC_SYSTEM_SKL_DESCRIBE_EIRIN_2,高い信仰心とパワー1を消費し、体力を大幅に回復する永琳の究極スキル。\n回復効果は高いが、一定時間後に回復した分と同じだけ副作用ダメージを受ける。\n
 LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_1,一時的に知力を強化する白蓮の身体強化魔法。\n知力が5増加し、魔法成功率・パワーが上昇、霊力の回復速度も速くなる。\n
 LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_2,一時的に脚力を強化する白蓮の身体強化魔法（W）。\n移動速度が非常に速くなる。迅速とは重複せず、持続時間は短め。\n
@@ -4369,7 +4369,7 @@ LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_3,*3) 混乱ポーション：霊力が回�
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_4,*4) 減速ポーション：透明になる。
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY3_5,*5) 麻痺ポーション：麻痺時間が短くなり、霊撃を放つ。
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY4,ポーションを投げることができる。
-LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5,身体改造でステータスを調整できる。
+LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY5,身体改造によってランダムな特性を得ることができる。
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY6,副作用と引き換えに体を再生できる。
 LOC_SYSTEM_GOD_SHOW_EIRIN_ABLILITY7,あなたは時々永琳からポーションをもらう。
 LOC_SYSTEM_GOD_SHOW_YUYUKO_ABLILITY1,あなたは幽霊を呼び寄せる。
@@ -4702,7 +4702,7 @@ LOC_SYSTEM_GOD_EIRIN_ACCECPT,永琳はあなたの強さに興味を持った。
 LOC_SYSTEM_GOD_EIRIN_PRAY_1,{0}は{煙を上げながら|悪臭を放ちながら|光を放ちながら}{1}に変化した。
 LOC_SYSTEM_GOD_EIRIN_PRAY_2,永琳は満足そうに微笑んだ。
 LOC_SYSTEM_GOD_EIRIN_START_SIDEEFFECT,治療による副作用が始まった！
-LOC_SYSTEM_GOD_EIRIN_STAT_SELECT,強化する能力値を選択してください。
+LOC_SYSTEM_GOD_EIRIN_STAT_SELECT,本当に身体を改造してもよろしいですか？ 元には戻れなくなります！
 LOC_SYSTEM_GOD_EIRIN_STAT_SELECT_RETURN,(R)eturn - 元に戻す
 LOC_SYSTEM_GOD_EIRIN_ALREADY_BOOST,あなたの身体はすでにその能力に改造されています！
 LOC_SYSTEM_GOD_EIRIN_FAIL_TO_RECOVERY,あなたは改造された身体ではありません！

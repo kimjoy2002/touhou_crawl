@@ -1006,6 +1006,13 @@ bool GetGodAbility(int level, bool plus)
 	return false;
 }
 
+int GetGodMulti() {
+	float prev_ = (isSprint() ? sprintMulti() :1);
+	if(you.GetProperty(TPT_RELIGIOUS))
+		prev_ *= 1.3f;
+	return (int)(prev_+rand_float(0,0.99f));
+}
+
 bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 {
 	switch(you.god)
@@ -1022,7 +1029,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			{ //적일때
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JOON_AND_SION_ACCECPT), true, false, false, CL_joon_and_sion);
 				bool return_ = false;
-				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+				int multi_ = GetGodMulti();
+				for (int i = 0; i < multi_; i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						you.GiftCount(1);
@@ -1043,7 +1051,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			{ //적일때
 				printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_COMMON_ACCECPT, PlaceHolderHelper(LOC_SYSTEM_GOD_KANAKO)), true, false, false, CL_help);
 				bool return_ = false;
-				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+				int multi_ = GetGodMulti();
+				for (int i = 0; i < multi_; i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						you.GiftCount(1);
@@ -1068,7 +1077,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			{ //적일때
 				printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_COMMON_ACCECPT, PlaceHolderHelper(LOC_SYSTEM_GOD_SUWAKO)), true, false, false, CL_swako);
 
-				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+				int multi_ = GetGodMulti();
+				for (int i = 0; i < multi_; i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						you.PietyUpDown(1);
@@ -1114,7 +1124,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				if(!mon_->isUserAlly())
 				{ //적일때
 					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_LETTY_ACCECPT),true,false,false,CL_warning);
-					you.PietyUpDown(5*(isSprint()?sprintMulti():1));
+					you.PietyUpDown(5*GetGodMulti());
 				}
 			}
 		}
@@ -1127,7 +1137,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_COMMON_ACCECPT, PlaceHolderHelper(LOC_SYSTEM_GOD_MIMA)), false, false, false, CL_green);
 
 				bool return_ = false;
-				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+				int multi_ = GetGodMulti();
+				for (int i = 0; i < multi_; i++) {
 					if (getPietyPercent(1, mon_->SetStrong()))
 					{
 						you.PietyUpDown(1);
@@ -1156,7 +1167,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			{ //적일때
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_ACCECPT), true, false, false, CL_yuigi);
 				bool return_ = false;
-				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+				int multi_ = GetGodMulti();
+				for (int i = 0; i < multi_; i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						you.PietyUpDown(1);
@@ -1197,7 +1209,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				else
 					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_ACCECPT),true,false,false,CL_autumn);
 				bool return_ = false;
-				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+				int multi_ = GetGodMulti();
+				for (int i = 0; i < multi_; i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						you.PietyUpDown(1);
@@ -1217,7 +1230,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			{ //적일때
 				printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_COMMON_ACCECPT, PlaceHolderHelper(LOC_SYSTEM_GOD_YUKARI)),true,false,false,CL_yukari);
 				bool return_ = false;
-				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+				int multi_ = GetGodMulti();
+				for (int i = 0; i < multi_; i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						you.PietyUpDown(1);
@@ -1235,7 +1249,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			{ //적일때
 				{
 					bool return_ = false;
-					for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+					int multi_ = GetGodMulti();
+					for (int i = 0; i < multi_; i++) {
 						if (getPietyPercent(2, mon_->SetStrong()))
 						{
 							you.GiftCount(1);
@@ -1298,7 +1313,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			{ //적일때
 				printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_COMMON_ACCECPT, PlaceHolderHelper(LOC_SYSTEM_GOD_YUYUKO)),true,false,false,CL_yuyuko);
 				bool return_ = false;
-				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+				int multi_ = GetGodMulti();
+				for (int i = 0; i < multi_; i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						you.PietyUpDown(1);
@@ -1324,7 +1340,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			if (!mon_->isUserAlly())
 			{ //적일때
 				int base = getPietyPercent(3, mon_->SetStrong());
-				for (int i = 0; i < (isSprint() ? sprintMulti()*base : base); i++) {
+				int multi_ = GetGodMulti()*base;
+				for (int i = 0; i < multi_; i++) {
 					you.PietyUpDown(1);
 				}
 				return true;
@@ -1337,7 +1354,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			{ //적일때
 				printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_COMMON_ACCECPT, PlaceHolderHelper(LOC_SYSTEM_GOD_OKINA)), true, false, false, CL_okina);
 				bool return_ = false;
-				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+				int multi_ = GetGodMulti();
+				for (int i = 0; i < multi_; i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						you.PietyUpDown(1);
@@ -1357,7 +1375,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 				{ //적일때
 					printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_COMMON_ACCECPT, PlaceHolderHelper(LOC_SYSTEM_GOD_JUNKO)), true, false, false, CL_junko);
 					bool return_ = false;
-					for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+					int multi_ = GetGodMulti();
+					for (int i = 0; i < multi_; i++) {
 						if (getPietyPercent(2, mon_->SetStrong()))
 						{
 							you.GiftCount(1);
@@ -1378,7 +1397,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 		{
 			if (!mon_->isUserAlly())
 			{
-				for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+				int multi_ = GetGodMulti();
+				for (int i = 0; i < multi_; i++) {
 					if (getPietyPercent(0, mon_->SetStrong()))
 					{
 						int max_ = haniwa_abil::getMaxHaniwa();
@@ -1448,7 +1468,8 @@ bool GodAccpect_GetPitem()
 	case GT_MINORIKO:
 	{
 		bool return_ = false;
-		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+		int multi_ = GetGodMulti();
+		for (int i = 0; i < multi_; i++) {
 			if (randA(3))
 			{
 				you.GiftCount(1);
@@ -1487,7 +1508,8 @@ bool GodAccpect_GetPitem()
 				you.MpUpDown(randA_1(5));
 			}
 			bool return_ = false;
-			for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+			int multi_ = GetGodMulti();
+			for (int i = 0; i < multi_; i++) {
 				{
 					you.PietyUpDown(1);
 					return_ = true;
@@ -1656,7 +1678,8 @@ bool GodAccpect_Practice(int value, skill_type skill_)
 		if(skill_ >= SKT_SPELLCASTING && skill_ <= SKT_ALCHEMY && value>randA(40))
 		{
 			bool return_ = false;
-			for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+			int multi_ = GetGodMulti();
+			for (int i = 0; i < multi_; i++) {
 				{
 					you.GiftCount(1);
 					you.PietyUpDown(1);
@@ -1780,7 +1803,8 @@ bool GodAccpect_Explore_100()
 	case GT_HINA:
 	{
 		bool return_ = false;
-		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+		int multi_ = GetGodMulti();
+		for (int i = 0; i < multi_; i++) {
 			if (40 > randA(100))
 			{
 				you.PietyUpDown(1);
@@ -1796,7 +1820,8 @@ bool GodAccpect_Explore_100()
 	case GT_SATORI:
 	{
 		bool return_ = false;
-		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+		int multi_ = GetGodMulti();
+		for (int i = 0; i < multi_; i++) {
 			if (40 > randA(100))
 			{
 				you.GiftCount(1);
@@ -1817,7 +1842,8 @@ bool GodAccpect_Explore_100()
 	case GT_LILLY:
 	{
 		bool return_ = false;
-		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+		int multi_ = GetGodMulti();
+		for (int i = 0; i < multi_; i++) {
 			if (30 > randA(100))
 			{
 				you.PietyUpDown(1);
@@ -1909,7 +1935,8 @@ bool GodAccpect_Exp_get()
 	case GT_SEIJA:
 	{
 		bool return_ = false;
-		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) {
+		int multi_ = GetGodMulti();
+		for (int i = 0; i < multi_; i++) {
 			if (randA(2))
 			{
 				you.GiftCount(1);
@@ -1938,8 +1965,8 @@ bool GodAccpect_First_contact()
 	case GT_BYAKUREN:
 	{
 		bool return_ = false;
-		for (int i = 0; i < (isSprint() ? sprintMulti() : 1); i++) 
-		{
+		int multi_ = GetGodMulti();
+		for (int i = 0; i < multi_; i++) {
 			if (randA(7) < 3)
 			{
 				you.GiftCount(1);

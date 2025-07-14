@@ -1313,6 +1313,7 @@ LOC_SYSTEM_NOTE_SATORI_REUNION,Reunited with Satori.
 LOC_SYSTEM_NOTE_SATORI_WORSHIP,Became Satori’s pet.
 LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GAIN,Half-Youkai Mutation Manifested
 LOC_SYSTEM_NOTE_HALFYOUKAI_MUTANT_GROW,Half-Youkai Mutation Strengthened
+LOC_SYSTEM_NOTE_EIRIN_MUTANT_GAIN,Eirin's Body Modification
 LOC_SYSTEM_NOTE_YUYUKO_ENSLAVE_GHOST,Enslave {0}.
 LOC_SYSTEM_NOTE_SEIJA_GIFT,Received a gift from Seija. ({0})
 LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_ITEM,Blessing of purification from Junko: {0}
@@ -1996,6 +1997,20 @@ LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_MP_REGEN,The final trait of your demon 
 LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_TORMENT,The final trait of your demon blood has awakened. You can now unleash the torment of hell.
 LOC_SYSTEM_TRIBE_GROW_KOISHI_CONFUSE_ATTACK,Your subconscious attacks confuse your enemies.
 LOC_SYSTEM_TRIBE_GROW_YOUMU_QUICK_DASH,Your Quick Dash ability has become even faster.
+LOC_SYSTEM_TRIBE_GROW_CAN_INVISIBLE,You can become invisible.
+LOC_SYSTEM_TRIBE_GROW_CAN_SILENCE,You can silence your surroundings.
+LOC_SYSTEM_TRIBE_GROW_DRUNKARD,You’ve become resistant to alcohol.
+LOC_SYSTEM_TRIBE_GROW_RELIGIOUS,You commune with the divine.
+LOC_SYSTEM_TRIBE_GROW_BIG_WING,Massive wings have grown from your back.
+LOC_SYSTEM_TRIBE_GROW_STURDY,You’ve become sturdier.
+LOC_SYSTEM_TRIBE_GROW_GOOD_FOR_POTION,Potions affect you more effectively.
+LOC_SYSTEM_TRIBE_GROW_INTELLIGENCE,Your mind feels refreshed.
+LOC_SYSTEM_TRIBE_GROW_POISON_BODY,Your body emits poison.
+LOC_SYSTEM_TRIBE_GROW_WEAK_ARMOUR,Your body has shrunk.
+LOC_SYSTEM_TRIBE_GROW_TWISTED_HORN,A twisted horn has grown on your head.
+LOC_SYSTEM_TRIBE_GROW_POWERLESS,Your max Power has decreased.
+LOC_SYSTEM_TRIBE_GROW_TICK,You can't stop greeting enemies when you see them.
+LOC_SYSTEM_TRIBE_GROW_POTION_ADDICTION,You’ve become addicted to potions.
 LOC_SYSTEM_TRIBE_PROPERTY_BUG,Bug Trait
 LOC_SYSTEM_TRIBE_PROPERTY_FIRE_RESIST,Fire Resistance
 LOC_SYSTEM_TRIBE_PROPERTY_COLD_RESIST,Cold Resistance
@@ -2058,6 +2073,20 @@ LOC_SYSTEM_TRIBE_PROPERTY_FIREUP_COLDDOWN,Hellfire
 LOC_SYSTEM_TRIBE_PROPERTY_DUAL_WEAPON,Dual Wielding
 LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH1,Quick Dash 1
 LOC_SYSTEM_TRIBE_PROPERTY_QUICK_DASH2,Quick Dash 2
+LOC_SYSTEM_TRIBE_PROPERTY_CAN_INVISIBLE,Invisible Evokable
+LOC_SYSTEM_TRIBE_PROPERTY_CAN_SILENCE,Silence Evokable
+LOC_SYSTEM_TRIBE_PROPERTY_DRUNKARD,Heavy Drinker
+LOC_SYSTEM_TRIBE_PROPERTY_RELIGIOUS,Devout
+LOC_SYSTEM_TRIBE_PROPERTY_BIG_WING,Massive Wings
+LOC_SYSTEM_TRIBE_PROPERTY_STURDY,Sturdy
+LOC_SYSTEM_TRIBE_PROPERTY_GOOD_FOR_POTION,Potion Affinity
+LOC_SYSTEM_TRIBE_PROPERTY_INTELLIGENCE,Sharp Mind
+LOC_SYSTEM_TRIBE_PROPERTY_POISON_BODY,Toxic Body
+LOC_SYSTEM_TRIBE_PROPERTY_WEAK_ARMOUR,Shrunken Frame
+LOC_SYSTEM_TRIBE_PROPERTY_TWISTED_HORN,Twisted Horn
+LOC_SYSTEM_TRIBE_PROPERTY_POWERLESS,Power Loss
+LOC_SYSTEM_TRIBE_PROPERTY_TICK,Greeting Syndrome
+LOC_SYSTEM_TRIBE_PROPERTY_POTION_ADDICTION,Potion Addiction
 LOC_SYSTEM_TRIBE_PROPERTY_STG_SPREAD_SHOT,Spread Shot
 LOC_SYSTEM_TRIBE_PROPERTY_STG_TRIPLE_SHOT,Triple Shot
 LOC_SYSTEM_TRIBE_PROPERTY_STG_BACK_SHOT,Back Shot
@@ -2158,6 +2187,20 @@ LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FIREUP_COLDDOWN,Your body blazes with heat. (
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_DUAL_WEAPON,You can wield two weapons.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_QUICK_DASH,You quickly dash toward enemies.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_QUICK_DASH2,You more quickly dash toward enemies.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CAN_INVISIBLE,You can evoke invisibility.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CAN_SILENCE,You can evoke silence.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_DRUNKARD,You are highly resistant to alcohol.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_RELIGIOUS,You resonate more deeply with the divine.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BIG_WING,Massive wings have grown on your back. (Permanent flight, increased movement speed)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STURDY,Your body is chemically enhanced and sturdy. (HP +{0}%)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_GOOD_FOR_POTION,Potions work more effectively on you.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_INTELLIGENCE,Your mind is exceptionally sharp. (Int +{0}, Conf Resist)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POISON_BODY,Your body emits poison. (Poison Resistance, releases poison cloud when hit)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_WEAK_ARMOUR,Your body has shrunk, reducing AC gained from armor.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_TWISTED_HORN,A horn has sprouted from your head, making headgear incompatible.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POWERLESS,Your maximum Power has decreased.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_TICK,You unconsciously greet new enemies you encounter.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POTION_ADDICTION,You become anxious if you go too long without drinking potions.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_SPREAD_SHOT,Your shots spread out.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_TRIPLE_SHOT,You fire in triple bursts.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_BACK_SHOT,You also fire shots from behind.
@@ -2244,6 +2287,20 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIREUP_COLDDOWN,Your body is now fire-adapted.\
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_RAD,This trait is temporarily acquired from radiation.\nIt disappears after gaining some EXP.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_DUAL_WEAPON,You can equip two weapons.\nWhen equipping a weapon while already holding one, the new weapon is equipped in the opposite hand.\nIf you're dual-wielding, both weapons are used to attack simultaneously.\nAttack speed is calculated as the average of both weapons.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_QUICK_DASH,Your movement speed increases by {0}× when approaching enemies in your line of sight.\nThis has little effect when sneaking up on sleeping enemies.\nTiles affected by this effect are marked with a special symbol on the ground.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CAN_INVISIBLE,You can become invisible by consuming a small amount of Power and MP.\nWhile invisible, enemies without See Invisible cannot detect you easily.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CAN_SILENCE,You can spend 1 Power and some MP to erase sound in the area.\nPrevents spellcasting, ability use, and scroll reading.\nBecause the silence feels unnatural, it actually hurts stealth.\nIt affects an area on use, but the range gradually shrinks over time.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_DRUNKARD,You're highly tolerant of alcohol and suffer little to no penalty even when drunk.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_RELIGIOUS,Your divine attunement lets you build Faith faster.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_BIG_WING,Enormous, unnatural wings have grown from your back.\nYou can't wear cloaks, but you gain permanent flight and increased movement speed.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STURDY,Your muscles have bulked up due to chemical enhancement.\nMax HP is increased by {0}%.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_GOOD_FOR_POTION,Your body is highly compatible with potions.\nPotion effects are increased by 100%.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_INTELLIGENCE,Your intelligence has been chemically boosted to unnatural levels.\nIntelligence increases by {0}, and you are more resistant to confusion and madness.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POISON_BODY,Your body continuously leaks poison.\nGrants poison resistance and sometimes generates a poison cloud under attackers when hit.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_WEAK_ARMOUR,Due to drug side effects, your body has shrunk.\nArmor no longer fits well, and the AC gained from armor is halved.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_TWISTED_HORN,An unsightly horn has grown on your head.\nYou can no longer wear headgear.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POWERLESS,Your maximum Power is capped at 4.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_TICK,You have a chance to greet any enemy you see for the first time.\nThis greeting creates noise that alerts and awakens nearby enemies.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POTION_ADDICTION,You are addicted to potions, and experience withdrawal symptoms if you don’t drink them for a long time.\nThe longer you go without drinking, the more your stats will gradually decrease.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_SPREAD_SHOT,Fire 4 additional spread shots to the sides.\nThey deal the same damage but won’t hit the same target.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_TRIPLE_SHOT,Fire two extra shots alongside your main one.\nThey deal the same damage but target separately.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_BACK_SHOT,Fire three spread shots behind you.\nThey deal the same damage but target separately.
@@ -2917,6 +2974,7 @@ LOC_SYSTEM_SKL_BREATH_FIRE,Fire Breath
 LOC_SYSTEM_SKL_BREATH_COLDE,Cold Breath
 LOC_SYSTEM_SKL_BREATH_ELEC,Electric Breath
 LOC_SYSTEM_SKL_TORMENT,Torment of Hell
+LOC_SYSTEM_SKL_SILENCE,Silence
 LOC_SYSTEM_SKL_ABANDON_GOD,Renounce Belief
 LOC_SYSTEM_SKL_SEIJA_GIFT,Receive Treasure
 LOC_SYSTEM_SKL_SEIJA_1,Reverse Position
@@ -3059,6 +3117,7 @@ LOC_SYSTEM_SKL_DESCRIBE_HARD_SELL,Not implemented.
 LOC_SYSTEM_SKL_DESCRIBE_CREATE_SHOP,Not implemented.
 LOC_SYSTEM_SKL_DESCRIBE_FIREBALL,Concentrates power through the control rod to launch a fireball.\nSuccess rate and damage scale with activation skill.\n
 LOC_SYSTEM_SKL_DESCRIBE_MISSLE,Fires a missile from the modified Kappa suit.\nMissiles have strong tracking but travel slowly.\nCaution: they can cause splash damage if space is limited.\nSuccess rate and damage scale with activation skill.\n
+LOC_SYSTEM_SKL_DESCRIBE_SILENCE,Erases nearby sounds.\nLuna's prized ability, often called her ultimate hide-and-seek technique.\nHowever, the unnatural silence makes stealth worse.\nInstead, it prevents all chanting-based spellcasting within the area.
 LOC_SYSTEM_SKL_DESCRIBE_UKNOWN,An unknown ability.\n
 LOC_SYSTEM_ITEM_CATEGORY_WEAPON,Weapon
 LOC_SYSTEM_ITEM_CATEGORY_TANMAC,Danmaku

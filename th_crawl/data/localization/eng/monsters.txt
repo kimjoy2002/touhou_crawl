@@ -10,9 +10,9 @@ MON_CROW,Crow,A crow that enjoys rotten meat and travels in flocks.
 MON_CRANE,Crane,An entity that existed before the dungeon itself.\nIts presence in the dungeon remains a mystery.
 MON_SPIDER,Spider,A creepy spider with eight legs.
 MON_SNAKE,Snake,A poisonous snake slithering through the dungeon.
-MON_KATPA,Kappa,A yokai living in Genbu's Marsh. Skilled with its hands and commands water.\nBecame violent after losing its river when Gensokyo turned into a dungeon.
+MON_KATPA,Kappa,A yokai living in Genbu Ravine. Skilled with its hands and commands water.\nBecame violent after losing its river when Gensokyo turned into a dungeon.
 MON_TEST_KATPA,Kappa,
-MON_KATPA_GUN,Kappa Sharpshooter,A yokai living in Genbu's Marsh. Skilled with its hands and commands water.\nBecame violent after losing its river when Gensokyo turned into a dungeon.
+MON_KATPA_GUN,Kappa Sharpshooter,A yokai living in Genbu Ravine. Skilled with its hands and commands water.\nBecame violent after losing its river when Gensokyo turned into a dungeon.
 MON_FAIRY_GREEN_WARRIOR,Fairy Warrior,A mischievous fairy often seen in groups.\nCarries a helmet and dagger it found on the road. Not impressive, but better than nothing.
 MON_FAIRY_BLUE_MAGICIAN,Fairy Mage,A mischievous fairy often seen in groups.\nPicked up a small staff to amplify its magic.\nDon't underestimate a tiny fairy’s magic—it could be dangerous.
 MON_FAIRY_RED_COMMANDER,Fairy Commander,A mischievous fairy often seen in groups.\nCarries a sunflower picked from a nearby field.\nThe scent attracts other fairies to gather.
@@ -22,8 +22,8 @@ MON_WRIGGLE,Wriggle,A bug yokai that commands insects. Summons swarms of bugs.
 MON_CIRNO,Cirno,Self-proclaimed strongest ice fairy. Has the ability to control cold.\nStrong for a fairy and shoots powerful cold blasts from afar. But she's a fool.
 MON_MEDICINE,Medicine,A discarded doll turned yokai, a type of tsukumogami. Uses deadly poison.\nThough newly awakened, her poison is extremely dangerous.\nOften uses the poison of lily-of-the-valley, which also slows victims.
 MON_DIEFAIRY,Daiyousei,A fairy stronger than most, hence the title. Her real name is unknown.
-MON_HUMAM_WOMAN,Human Woman,A powerless human female.
-MON_HUMAM_MAN,Human Man,A human male.\nAfter Gensokyo turned into a dungeon, they began moving in groups to defend themselves.
+MON_HUMAM_WOMAN,Human,A powerless human villager.
+MON_HUMAM_MAN,Human,A human villager.\nAfter Gensokyo turned into a dungeon, they began moving in groups to defend themselves.
 MON_HUMAM_YINYANG,Onmyoji,An exorcist from the human village who used to banish yokai.\nNow defends themselves in groups after Gensokyo became a dungeon.
 MON_HUMAM_PRIEST,Priest,A monk trained in Buddhist teachings. Uses sacred texts to exorcise yokai.\nDefends with others after Gensokyo became a dungeon.
 MON_HUMAM_SAMURI,Samurai,A warrior clad in armor and wielding a sword.\nNow travels in groups to defend themselves after the dungeon shift.
@@ -52,8 +52,8 @@ MON_REMILIAYUKKURI,Yukkuri Remilia,A creepy lifeform with only a head. Their num
 MON_ALICEYUKKURI,Yukkuri Alice,A creepy lifeform with only a head. Their numbers have been rapidly increasing.\nA chic, urban-style yukkuri.
 MON_YOUMUYUKKURI,Yukkuri Youmu,A creepy lifeform with only a head. Their numbers have been rapidly increasing.\nMyon!
 MON_YAMABIKO,Yamabiko,A youkai of echoes that replies when voices are heard in the mountains.\nResembles a mix of dog and monkey.
-MON_KATPA_SPEAR,Kappa Spearman,A youkai from Genbu Marsh with skillful hands and the ability to manipulate water.\nOnce peaceful river dwellers, they've grown aggressive since the rivers vanished after the dungeon shift.\nThis kappa skillfully wields a spear, allowing it to attack enemies from 2 tiles away.
-MON_KATPA_WATER_WIZARD,Kappa Water Mage,A youkai from Genbu Marsh with skillful hands and the ability to manipulate water.\nOnce peaceful river dwellers, they've grown aggressive since the rivers vanished after the dungeon shift.\nSeems to have exceptional control over water.
+MON_KATPA_SPEAR,Kappa Spearman,A youkai from Genbu Ravine with skillful hands and the ability to manipulate water.\nOnce peaceful river dwellers, they've grown aggressive since the rivers vanished after the dungeon shift.\nThis kappa skillfully wields a spear, allowing it to attack enemies from 2 tiles away.
+MON_KATPA_WATER_WIZARD,Kappa Water Mage,A youkai from Genbu Ravine with skillful hands and the ability to manipulate water.\nOnce peaceful river dwellers, they've grown aggressive since the rivers vanished after the dungeon shift.\nSeems to have exceptional control over water.
 MON_YAMABUSH_TENGU,Yamabushi Tengu,A crow tengu from Youkai Mountain. Works in printing.
 MON_HANATACA_TENGU,Hanataka Tengu,A crow tengu from Youkai Mountain. Works in clerical tasks.\nKnown for a red face and a long nose.
 MON_BLUE_ONI,Blue Oni,A boisterous oni who hates lies and loves alcohol.\nVery strong and highly aggressive.

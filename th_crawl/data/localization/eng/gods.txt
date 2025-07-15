@@ -1,0 +1,662 @@
+§0
+===============================================
+§_03Suwako Moriya - The Highest of Native Gods§d
+===============================================
+
+Suwako is a native goddess with the power to create earth.
+She grants her followers unpredictable blessings.
+As a result, they receive various powers, though not necessarily the ones they want.
+
+§_03*: Gains 1 low-cost active ability at random.§d
+Frog Jump, Shrine Construction, Water Gun, Frog Tongue
+
+§_03**: Gains 1 passive ability at random.§d
+Heal on Kill, MP Recovery on Kill, Power Recovery on Kill, Swimming, Protection from Death
+
+§_03***: Gains 1 mid-cost active ability at random.§d
+Native God's Calamity, Excavation, Summon Frog, Statue Construction
+
+§_03****: Gains 1 resistance-type passive ability at random.§d
+Cold Resistance, Fire Resistance, Hardened Skin, Confusion Resistance, Poison Resistance
+
+§_03*****: Gains 1 ultimate skill at random.§d
+Rainfall, Hibernation, Summon Mishaguji, Suwako's Hat
+
+
+
+§1
+===============================================
+§_05Mima - Spirit who leaves fate to the dream of eternity§d
+===============================================
+
+Mima is a evil spirit of disaster and destruction.
+Her followers receive powerful destructive magic.
+Her most devoted disciples are granted her ultimate spell: Spark.
+Mima values strength through personal action,
+and grants faith when you defeat enemies yourself.
+
+
+§_05Always: Maximum MP increases proportionally with Faith.§d
+
+§_05*: Gain MP upon killing enemies, based on their strength. (Passive)§d
+
+§_05**: Destruction magic becomes more powerful. (Passive)§d
+
+§_05***: Receive a book of destructive spells.§d
+
+§_05****: Increased success rate for destruction magic. (Passive)§d
+
+§_05*****: Receive Mima’s Sealed Grimoire.§d
+
+
+
+§2
+===============================================
+§_12Yuyuko Saigyouji - Ghost Girl in the Netherworld Tower§d
+===============================================
+
+Yuyuko is the lady of Saigyouji, residing in Hakugyokurou.
+She wields the power of death and grants it to her followers.
+Her devotees gain control over death and receive many spirits.
+ 
+
+§_12*: You passively summon ghosts. (Passive)§d
+
+§_12**: You can send a ghost to a chosen location. (P, MP)§d
+
+§_12***: Temporarily increases the frequency of ghost summoning. (Faith, MP)§d
+
+§_12*****: Captures the soul of a single enemy. (Faith, MP)§d
+
+
+ 
+§3
+===============================================
+§_06Shinki - The God of Makai§d
+===============================================
+
+Shinki is the god and creator of Makai.
+She uses her power of creation to summon strong demons for her followers.
+She protects you from hostile summons and restores HP and MP whenever you gather P.
+However, strong demons may betray you.
+You gain faith by picking up P items.
+
+ 
+§_06*: You can summon a horde of lesser demons. (P, Faith)§d
+
+§_06**: You can summon a mid-tier demon. (P, Faith)§d
+
+§_06***: Occasionally disrupts hostile summons. (Passive)§d
+
+§_06****: You can summon a high-tier demon. (P, Faith)§d
+
+§_06*****: Picking up P restores HP and MP. (Passive)§d
+
+
+
+§4
+===============================================
+§_04Minoriko Aki - Symbol of Abundance and Plenty§d
+===============================================
+
+Minoriko is the god of autumn harvests and blesses her followers with abundance.
+Her followers receive bountiful food that restores fullness and HP.
+You gain faith by picking up P items.
+ 
+
+§_04Always: You can eat food even at full Power, allowing you to maintain max Power longer. (Passive)§d
+
+§_04*: Your HP and MP regeneration speed increases proportionally with your Power. (Passive)§d
+
+§_04**: Cure status effects and debuffs. (P, Faith)§d
+
+§_04***: Minoriko periodically gifts you sweet potatoes.§d
+
+§_04***: You eat food faster and restore some MP when eating. (Passive)§d
+
+§_04****: Consume food in your inventory to greatly restore HP. (P, Food, Faith)§d
+
+§_04*****: Temporarily gain 1 level of Fire and Cold resistance after eating food. (Passive)§d
+
+
+
+§5
+===============================================
+§_08Shizuha Aki - Symbol of Loneliness and Demise§d
+===============================================
+
+Shizuha Aki is the god of autumn.
+She lowers your presence, allowing you to move stealthily.
+Her powers greatly benefit assassins and reduce heavy armor penalties.
+She delights in watching loud enemies fall like leaves.
+
+ 
+§_08Always: Shizuha reduces the chance of enemies shouting when they wake. (Passive)§d
+
+§_08*: You leave behind trails of autumn leaves when you move or kill enemies. (Passive)§d
+
+§_08*: Walking over autumn leaves makes you extremely stealthy. (Passive)
+(You are nearly undetectable while walking over leaves.)§d
+
+§_08**: Inflicts confusion on all enemies standing on leaves. (MP, Faith)§d
+
+§_08***: You can convert your armor into Maple Armor. (Faith)§d
+(Maple Armor sacrifices your current armor to greatly reduce its penalties
+while giving extra defense and stealth bonuses.
+Lighter armors gain a bigger stealth bonus, while heavier armors lose more penalties.
+Also reduces turn cost for equipping/removing armor to 1/5.
+Downside: lowers fire resistance by 1 stage.)
+
+§_08****: You move much faster while walking on leaves. (Passive)§d
+
+§_08*****: Once per game, you can permanently bless your weapon with the Autumn Brand.§d
+(Enables assassination-level attacks even with non-daggers.
+If using a dagger, regular attacks may occasionally trigger ambush effects.)
+
+
+
+§6
+===============================================
+§_11Eirin Yagokoro - Brain of the Moon§d
+===============================================
+
+She is the moon's top sage and a genius pharmacist who can make any medicine.
+Her followers receive potions with additional effects.
+Dramatic treatments such as body modifications are also possible.
+Those who accept becoming test subjects are rewarded.
+You gain faith by praying over beneficial potions or drinking them.
+Occasionally, you may also gain faith by defeating enemies.
+
+
+§_11Always: Eirin enhances the effects of potions. (Passive)§d
+
+§_11Always: Praying while standing over good potions grants faith and bad potions. (Potion)§d
+
+§_11Always: Depending on your faith level, even bad potions can produce bonus effects.
+ └§_11*: Poison Potion: Increases movement speed.§d
+ └§_11**: Stat-Reducing Potion: Restores HP.§d
+ └§_11***: Confusion Potion: Restores MP.§d
+ └§_11****: Slow Potion: Grants invisibility.§d
+ └§_11*****: Paralysis Potion: Reduces paralysis duration and enables ranged attacks.§d
+
+§_11**: You can throw potions. (P, Potion) (same as mass production)§d
+
+§_11***: Undergo human experimentation to gain a random trait. (Faith)§d
+(Gain one positive and one negative trait. Using again replaces the old ones.)
+
+§_11***: You receive a potion as a gift.§d
+
+§_11*****: You can regenerate by accepting side effects. (MP, Faith)§d
+(Instant HP recovery, followed by delayed damage equal to the healed amount.
+The side effect cannot kill you.)
+
+
+§7
+===============================================
+§_02Kanako Yasaka - The Avatar of Mountains and Lakes§d
+===============================================
+
+Kanako is a god with the power to create heavenliness.
+Though originally a god of wind and rain, she is now revered as a mountain god.
+She grants powerful combat abilities in exchange for faith.
+Especially helpful for melee fighters and ranged danmaku users.
+Her followers must continue fighting to offer faith.
+ 
+
+§_02*: Rush forward with Kanako’s power. (MP, Faith)§d
+(Damage scales with melee power, faith, and distance traveled.)
+
+§_02***: Summon Kanako’s Pillar. (MP, Faith)§d
+(A stationary summon that blocks enemies but allows friendly danmaku to pass through.
+While touching a pillar, you gain +3 slay bonus per pillar.)
+
+§_02***: Kanako occasionally gifts you danmaku.§d
+
+§_02****: Wrap yourself in Kanako’s wind. (MP, Faith)§d
+(Grants cleaving and piercing effects for a short time.)
+
+§_02*****: Kanako occasionally gifts you a weapon.§d
+
+
+§8
+===============================================
+§_10Yukari Yakumo - Youkai that lurks in the boundary§d
+===============================================
+
+Yukari Yakumo is a famous boundary youkai in Gensokyo.
+As her shikigami, you gain powers related to boundaries.
+She grants powerful teleportation abilities but bans other teleportation outside her divine powers.
+Her uncontrolled powers can sometimes backfire and endanger followers.
+ 
+ 
+§_10Always: The boundary stares back at you. (Passive)§d
+(Space distortions called “gaps” continuously appear in your vision. Has no effect by itself.)
+
+§_10*: When you take enough damage, you automatically teleport. (Passive)§d
+
+§_10**: You can receive ranged support from a gap. (MP, Faith)§d
+(Choose a gap to summon a stationary allied turret.)
+
+§_10***: You can travel through gaps. (MP, Faith)§d
+(Control Blink targeting a gap.)
+
+§_10****: You can create a barrier. (MP, Faith)§d
+(Increases SH by 15.)
+
+§_10*****: You can lock the dimension. (MP, Faith)§d
+(Fixes the camera view to a chosen area. Enemies outside this view cannot act.
+All gaps become allies, and you can loop the map horizontally and vertically.)
+
+
+
+§9
+===============================================
+§_09Hina Kagiyama - The Hidden God Nagashi-bina§d
+===============================================
+
+Hina is a disaster god who absorbs misfortune to prevent calamity.
+By accepting curses from her, you gain her divine powers.
+Faith is gained through dungeon exploration.
+
+ 
+§_09Always: You can identify whether items in your sight are cursed. (Passive)§d
+
+§_09*: You can convert negative enchantments on cursed gear into positives. (P)§d
+
+§_09**: You can imbue your weapon with cursed power temporarily. (Curse)§d
+(Curses your equipped weapon and grants a curse brand.
+If the weapon already has a brand, it gains a Might-like effect instead.)
+
+§_09***: You can imbue your armor with cursed power to reflect all damage. (Curse)§d
+(Curses one piece of your equipped armor. Reflects all received damage during the effect.
+Body armor has longer duration.)
+
+§_09****: You can imbue your accessory with cursed power to heal yourself. (Curse)§d
+(Curses one accessory and restores HP and MP.)
+
+§_09*****: While wearing cursed items, you emit cursed miasma. (Passive)§d
+(The number of cursed items equipped increases the frequency of cursed gas
+around you. Cursed gas inflicts irresistible poison and slow.)
+
+§_09******: Once per game, you can permanently brand your weapon with a curse.§d
+(Inflicts irresistible poison and occasionally slows enemies.)
+
+
+
+§10
+===============================================
+§_13Satori Komeiji - The Girl Even the Vengeful Spirits Fear§d
+===============================================
+
+Satori is the mistress of the Palace of Earth Spirits and can read minds.
+To believe in her is to become her pet and receive her powers.
+She doesn't provide direct combat abilities but allows you to read maps and detect positions.
+She can read enemy traumas and manipulate their thoughts.
+Enemies exposed become vulnerable to all debuffs, aiding mental magic users.
+Pets earn her favor through dungeon exploration.
+
+ 
+§_13Always: You can see invisible enemies. (Passive)§d
+
+§_13*: You can draw out an enemy’s trauma. (Faith)§d
+(Single-target fear. May cause permanent fear and grants half EXP.)
+
+§_13**: You uncover the map by reading the memories of enemies. (Passive)§d
+(The map is gradually revealed as you encounter enemies.)
+
+§_13***: You can detect enemy presence beyond your sight. (Passive)§d
+(Detects monsters outside your line of sight.)
+
+§_13****: You can fully read the mind of a single enemy. (Turns, Faith)§d
+(If the target is a beast, it becomes your permanent ally but cannot use stairs.
+If not a beast, its accuracy and evasion are greatly reduced and it becomes vulnerable to all debuffs.
+This power never fails, but the time required depends on enemy magic resistance.
+Fails if the enemy leaves sight or becomes confused or paralyzed.)
+
+§_13*****: Satori occasionally gives you treats. The more danger you're in, the more often she helps. (Passive)§d
+(Grants various potion effects.)
+
+
+ 
+§11
+===============================================
+§_07Yuugi Hoshiguma - The Spoken-of Unexplainable Phenomena§d
+===============================================
+
+Yuugi is an oni who lives in the Old Capital underground.
+She bestows overwhelming strength to her followers.
+Her powers enable wrestling-like combat, such as grabbing and slamming enemies.
+She also grants roars that silence enemies and access to her ultimate technique.
+However, she despises relying on magic.\nFaith is earned by winning battles.
+
+ 
+§_07Always: While drunk, you gain minor HP regeneration and increased evasion. (Passive)§d
+
+§_07*: You can convert a potion into alcohol and drink it. (Potion, Faith)§d
+
+§_07**: During combat, you may occasionally grab enemies.
+While grabbed, you can use throw moves without spending Faith. (Passive)§d
+(Grabbing by itself has no effect. It ends if you move.)
+
+§_07**: You can perform a German Suplex on a grabbed enemy. (P, Faith)§d
+(Deals heavy damage and repositions the enemy relative to you.
+No Faith cost if the enemy is already grabbed.)
+
+§_07***: You can throw a grabbed enemy. (P, Faith)§d
+(Causes a small explosion at the target location.
+No Faith cost if the enemy is already grabbed.)
+
+§_07****: You can let out a mighty roar that silences nearby enemies. (P, Faith)§d
+(Inflicts silence on all enemies in sight.
+Grabbed enemies are always silenced.)
+
+§_07*****: You can use the oni’s ultimate technique, “Sambo Final Blow.” (P, Faith)§d
+(Triggers three large area explosions in succession.
+Grabbed enemies take increased damage.)
+
+
+
+§12
+===============================================
+§_14Tenshi Hinanawi - Girl of the Sphere of Neither Perception nor Non-Perception§d
+===============================================
+
+Tenshi is a spoiled celestial from the Celestial Realm.
+Bored with heaven, she toys with followers who worship her during this incident.
+She grants no powers, and all outcomes depend on her whim.
+If you amuse her with constant risky battles, she may help you.
+If you seek safety, you’ll regret your decision.
+
+
+§_14Tenshi’s actions are completely unpredictable!§d
+The more danger you're in, the more often she’ll do helpful and powerful things.
+However, the more boring and safe your play becomes,
+the more often she’ll do mischievous or harmful things.
+
+
+§13
+===============================================
+§_01Byakuren Hijiri - Sealed Great Magician§d
+===============================================
+
+Byakuren is a great sorceress once sealed in Makai, now a Buddhist teacher in Myouren Temple.
+She teaches magic-especially buffs that enhance physical abilities.
+Her powers grant intelligence, speed, and reduction in magic penalties.
+Faith is earned by meeting new people.
+
+
+§_01*: Hijiri increases the maximum spell level you can learn. (Passive)§d
+(Scales with your Faith)
+
+§_01**: You can temporarily enhance your intelligence. (Faith)§d
+(Grants intelligence potion effect and drastically boosts MP regen for a short time)
+
+§_01***: You gain strength, allowing you to ignore spell failure from light armor. (Passive)§d
+
+§_01****: Hijiri supports your enhancement magic, increasing their effectiveness. (Passive)§d
+
+§_01*****: You can temporarily awaken your true potential. (MP, Faith)§d
+(Greatly increases movement speed for a very short time)
+
+§_01*****: Hijiri gives you a spellbook as a gift.§d
+
+
+
+§14
+===============================================
+§_15Seija Kijin - Counterattacking Amanojaku§d
+===============================================
+
+Seija is a wanted amanojaku fleeing with stolen goods.
+Aligning with her grants powerful stolen items.
+She welcomes you now, but only to use you.
+She will use you as a shield and abandon you once you're no longer useful.
+Faith in her draws eternal scorn from other gods.
+She hates the strong and distrusts all; if you reach level 9, she rejects you.
+
+
+§_15*: For every star of faith, Seija increases all your stats by 2. (Passive)§d
+
+§_15**: She helps you when divine punishment summons hostile monsters. (Passive)§d
+(You gain haste when punished enemies appear)
+
+§_15***: You can switch places with any target. (P)§d
+
+§_15*****: You invert all vision on the map. (P)§d
+(Deals percent-based damage and irresistible confusion to all visible enemies and allies)
+
+※ Upon choosing Seija, you start with ****** faith.
+As you gain experience, she grants you stolen treasures—each tied to another god.
+Each time you take a treasure, you lose 1 star of faith and become punished by the original god.
+Even if you don’t claim any treasures, your faith will gradually decrease over time.
+If your faith drops to zero, Seija excommunicates you.
+If you abandon her first, she punishes you in turn.
+※ Once you have ever followed Seija, you will never again be able to follow any other god.
+
+※ If you collect all her treasures and are excommunicated, she gives you a parting gift: the **Malice Mallet**.
+The Malice Mallet consumes 1 Power per use and can:
+- Heal HP
+- Summon friendly allies
+- Apply powerful buffs
+- Generate artifacts
+…but has a 10% chance of the opposite:
+- Halve your HP
+- Summon enemies
+- Apply powerful debuffs
+- Confiscate all gifts and summon hostile guardians
+You can only receive this item from Seija.
+
+
+
+§15
+===============================================
+§_16Lily White - Fairy Herald of Spring§d
+===============================================
+
+Lily White is the fairy of spring, known to bloom flowers just by passing.
+She shares her power to empower other fairies.
+Believing in her lets you recruit wandering fairies as immortal allies.
+Fairies resurrect endlessly while following you.
+You must share some XP with them, allowing them to grow alongside you.
+Though originally a fairy-only deity, she doesn't refuse outsiders.
+Lily enjoys exploring the world.
+
+
+§_16Always: You share experience with all fairies on your floor.
+Dead fairies will revive once they gain enough XP. (Passive)§d
+(Your own experience gain is reduced regardless of whether fairies are present.)
+
+§_16*: You can recruit wandering fairies as allies. (Up to 5)§d
+(Each * adds one recruit slot, up to 5.)
+
+§_16*: You can call your fairy allies to your side. (MP)§d
+
+§_16***: You can heal a selected fairy ally. (P, MP)§d
+
+§_16*****: You can empower all fairy allies in sight. (P, MP)§d
+(Doubles their damage and spell power for a short time,
+but your own damage and spell power are halved.)
+
+
+§16
+===============================================
+§_17Toyosatomimi no Miko - Almighty Taoist who Controls the Cosmos§d
+===============================================
+
+Toyosatomimi no Miko is a sage of the Mausoleum with the power to read desires.
+Her followers use Popularity instead of Piety.
+Popularity increases quickly via reading or defeating enemies.
+However, it drops when floors or subdungeons change, and powers consume large amounts.
+Her Taoist arts last indefinitely but vanish when changing floors.
+
+
+Miko’s blessings are permanent on the current floor but disappear upon changing floors.
+Unlike faith, Popularity is shown as a visible numeric value due to its rapid fluctuation.
+
+*Popularity increases when:
+ - You defeat enemies (stronger enemies give more)
+ - You gather desires from visible enemies
+
+*Popularity decreases when:
+ - You change floors (the higher your Pop, the more you lose)
+ - You enter a new subdungeon (all Pop is lost)
+ - You use Miko’s powers
+
+§_17You can gather desires from all enemies in sight. (Once per floor)§d
+
+§_17You can perform a fast, random teleport. (Popularity 2%)§d
+(Instant blink with only 0.5 turn casting time)
+
+§_17You gain a halo on this floor. (Popularity 5%)§d
+
+§_17You gain a chosen resistance on this floor. (Popularity 15%)§d
+(Fire, Cold, Electric, Poison, or Confusion Resistance +1)
+
+§_17You empower a chosen combat aspect on this floor. (Popularity 50%)§d
+(Red Cloak: +6 Slaying & HP regen / Blue Cloak: x1.5 Spell Power & MP regen)
+
+§_17You receive the ultimate blessing on this floor. (Popularity 100%)§d
+(Choose from: Double HP, Rapid MP Regen, or Haste)
+
+
+§17
+===============================================
+§_18Okina Matara - The Ultimate Hidden God§d
+===============================================
+
+Okina Matara is a hidden, mysterious god whose true identity is unknown.
+She seeks subordinates to do her bidding-you might be one.
+As her follower, you gain door-based powers.
+You can teleport through doors or appear behind enemies.
+You can also call allies to boost HP and MP.
+She enjoys spreading her divine presence through victorious battles.
+
+
+§_18Always: You can freely move and see through doors. §d
+
+§_18*: You can create a door on any wall. (P, MP)§d
+
+§_18**: You can forcibly shut and lock doors. (Faith, MP)§d
+
+§_18***: You can teleport behind an enemy. (Faith, MP)§d
+
+§_18****: You can summon the Crazy Backdancers. (Faith)§d
+(Mai restores HP, Satono restores MP while in your vision.
+You can also summon both at once by spending double the faith.)
+
+§_18*****: You can open a door behind you and escape at any time. (Faith, MP)§d
+(Leads to the “World Behind the Door,” a small safe area.
+There’s no penalty, but nearby enemies can follow you in.
+Satono and Mai will be present in this space.)
+
+
+
+§18
+===============================================
+§_19Junko§d
+===============================================
+
+Junko is a divine spirit purified by hatred, seeking vengeance.
+Her powers are simple but strong.
+They require no piety but cause temporary Purified status.
+Higher Purification limits item usage.
+Normally this fades over time, but her favorite followers may be permanently purified.
+Her blessings are heavy, with great penalties and no betrayal allowed, but immense rewards.
+She enjoys slaying every visible enemy.
+
+
+Purification Level 1: You cannot use spell cards.
+Purification Level 2: You cannot use most scrolls. (Only essential scrolls such as enchantment and uncurse scrolls are allowed.)
+Purification Level 3: You no longer gain effects from potions.
+
+§_19*: You fire a simple but powerful danmaku. (P, MP, +0.5 Purification)§d
+
+§_19**: You gain pure power. (Faith, +1 Purification)§d
+
+§_19***: You gain pure killing intent. (Faith, +2 Purification)§d
+
+§_19******: You can be permanently purified through Junko's blessing. (Once only)§d
+
+Permanent purification grants:
+- +5 to all stats
+- Choose one of the following blessings (from 3 random options). You may spend faith to reroll the selection.
+
+Available Purification Blessings:
+- Skill Purification: The selected skill (with aptitude ≥ 0) always matches your character level.
+- Resistance Purification: Grants immunity to a chosen element.
+- Mana Purification: HP and MP are unified and regenerated together.
+- Power Purification: Always full power; power never decreases.
+- Life Purification: Gain 2 extra lives.
+- Equipment Purification: Selected equipment gains +5 over its maximum enchantment (even artifacts).
+- System Purification: Amulet charge rate triples, and you can use spell cards even while purified.
+
+*If you betray Junko after becoming permanently purified, you will be instantly destroyed—purified by divine wrath.
+
+
+
+§19
+===============================================
+§_00Joon & Shion Yorigami - The Most Despicable and Disastrous Younger Twin Sister§d
+===============================================
+
+Joon and Shion are godes of pestilence and poverty, bringing misfortune to their followers.
+Joon causes wealth to be wasted, while Shion brings poverty.
+Just believing in them causes you to lose items and resources.
+However, devout worshipers are directly possessed and can wield their powers.
+Their powers are strong, but so is the misfortune they bring.
+You gain faith by killing enemies and taking their money.
+
+
+§_00Always: You are cursed by the God of Pestilence and the God of Poverty.§d
+Pestilence Curse: When you use consumables, 2–3 may be used at once.
+(When enhanced, 2–3 are always consumed.)
+Poverty Curse: Uncollected consumables slowly vanish. Dropped consumables may disappear.
+(When enhanced, they vanish quickly and dropped ones always disappear.)
+
+§_00*: You can be possessed by Joon or Shion temporarily.§d
+While possessed by Joon, your power is fully restored, but the Pestilence Curse is strengthened and half your power is lost afterward.
+While possessed by Shion, your HP and MP are restored, the Poverty Curse is strengthened, but you avoid power penalties during possession.
+
+§_00**: While possessed, Joon or Shion utilize your power. (Passive)§d
+Joon: All damage you deal is amplified, but consumes power.
+Shion: Picking up power recovers HP instead of raising power.
+
+§_00****: While possessed, they make use of your consumables. (Passive)§d
+Joon: Wasting consumables grants random buffs.
+Shion: Upon death, you are revived by sacrificing many consumables.
+
+§_00*****: You can use a one-time area ability depending on the possession. (Once per possession)§d
+Joon: Confuses and damages all visible enemies.
+Shion: Slows enemies and creates vision-obscuring fog.
+
+§_00******: You can attach the Poverty Goddess to an enemy as a "Guaranteed Victory Strategy." (Faith)§d
+(Usable only while possessed. Forces a switch to Joon possession.
+The enemy possessed by Shion becomes drastically weakened.
+After use, your faith resets to 5 stars.)
+
+
+§21
+===============================================
+§_21Keiki Haniyasushin - The Sculptor God Crafted by Utter Isolation§d
+===============================================
+
+Keiki is a god of creation born from human spirits.
+She grants life to crafted idols.
+She gives a small Haniwa upon faith and allows you to customize it as you explore.
+Keiki takes a portion of your experience to create idols.
+
+
+§_21항상: 케이키는 당신의 경험치를 조금 가져간다. (패시브)§d
+
+§_21항상: 당신은 자신만의 하니와를 받는다.§d
+* 하니와는 항상 당신의 주변을 지킨다. 멀어지면 곧 자동으로 워프한다.
+* 하니와가 죽으면 일정 시간후 부활한다.
+* 경험치를 일정 얻을때마다 하니와의 개조를 고를 수 있다. 
+* 하니와를 강화할때마다 신앙심을 얻는다. 신앙심이 전부차면 더이상 강화할 수 없다.
+
+
+* 일정 탐험마다 세 가지의 선택지를 주며 선택지의 강함 정도에 따라 신앙심을 다르게 얻는다.
+하니와의 강화는 크게 전사, 마법사, 지원가 세 종류로 나뉘며 선택한 방향에 맞춰서
+특화하는 선택지의 비중이 높아진다.
+선택은 원치않으면 미룰 수 있으며 이 경우 일반적인 시간보다 2배 오래 걸린다.
+신앙심이 6칸이 되면 하니와의 강화가 끝난다.

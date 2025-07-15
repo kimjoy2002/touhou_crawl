@@ -58,11 +58,11 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU1,Fierce Iaido Slash Type. Cut down your 
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU2,Aptitude Bonus) +3 Longblade Aptitude, +2 Evasion Aptitude, -2 Armor Aptitude, -2 Shield Aptitude
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU3,Bonus) Dual Wielding and Quick Dash(Enhances at level 18) traits. Starts with two +0 Katana instead of a Venom Shuriken.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU4,Beginner Tip) A character with top-tier melee damage.\nHer weak defense means you should quickly close in and eliminate enemies.\nPay attention to tile effects to check when your movement speed increases.\nDon't forget: your approach ability is also useful for escaping.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT,Choose your race.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP_APTIT,? to see the racial aptitude chart
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP,See the race descriptions in capital letters.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT,Choose your Species.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP_APTIT,? to see the species aptitude chart
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP,See the species descriptions in capital letters.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_HUMAN,Balanced stats and aptitude. Levels up quickly.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WIZARD,A wizard by race. Weak in melee but excels at magic.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WIZARD,A wizard by species. Weak in melee but excels at magic.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_FAIRY,Masters of elemental magic but frail and small, unable to wear heavy armor.\nStarts with fast HP/MP regen and high stealth. Takes reduced damage from clouds.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CROWTENGU,Can fly. Decent combat abilities and strong air magic aptitude.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WOLFTENGU,10% more HP, excellent melee aptitude, but poor with magic.\nStarts with a strong jaw mutation for bonus melee attacks.
@@ -72,10 +72,10 @@ LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_OARFISH,Slow mover but tough with scale mutat
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CHEUKUMOGAMI,Small-bodied and starts with poison resistance.\nDecent combat aptitude, poor at magic.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_ONI,High combat power but poor weapon and magic skills.\nLarge body prevents wearing heavy armor. Has high HP and horns for bonus damage.\nDue to the Heavy Drinker trait, you suffer little to no penalties while drunk.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_HALFYOUKAI,Grows slowly and has poor overall aptitude, but evolves with yokai traits.\nAt Lv4, you discover your yokai bloodline, gaining traits at Lv4, 9, 13, and 18.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WRAITH,Starts with cold and poison resistance and high stealth.\nOverall aptitude is poor, but has decent HP aptitude compared to other races.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WRAITH,Starts with cold and poison resistance and high stealth.\nOverall aptitude is poor, but has decent HP aptitude compared to other species.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_VAMPIRE,High HP regen and low MP regen. Uses HP to cast spells.\nGood at combat, stealth, and evasion, but poor weapon and armor aptitude.\nMagic aptitude is decent overall but weak in alchemy. Strong summoning aptitude.\nCan see invisibility and has fast MP drain.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT,Choose your job.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT_HELP,View job descriptions in capital letters.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT,Choose your background.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT_HELP,View background descriptions in capital letters.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WARRIOR,A typical heavy-armored melee fighter.\nStarts with a chosen weapon, iron shield, and armor.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WIZARD,Uses a wide variety of spells adaptable to many situations.\nStarts with a beginner’s spellbook and learns magic danmaku.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SHAMAN,A melee fighter who uses Kanako’s power as her shrine maiden.\nWields a gohei and starts with shrine maiden clothes, worshipping Kanako.
@@ -91,7 +91,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_JOB_LIGHT_WIZARD,A wizard who specializes in light 
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SUMMON_WIZARD,A summoner who begins with summoning magic.\nStarts with a Beginner's Summoning Book and learns call Mook.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ALCHEMIST,A close-combat mage who uses alchemy.\nStarts with a Beginner's Alchemy Book and learns rock punch.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_PSYCHOLOGIST,A debuffing mage who uses mind-controlling psychic spells.\nStarts with a Beginner's Psychology Book and learns hypnosis.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_REAPER,Frightening beings who wield a giant scythe as a job symbol.\nStarts with a cursed +3 scythe and a robe.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_REAPER,Frightening beings who wield a giant scythe as a background symbol.\nStarts with a cursed +3 scythe and a robe.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_FANATIC,Fanatics with blind devotion to a specific god.\nStarts with belief in Tenshi or Yukari.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ASSASSIN,Masters of stealth and assassination who ambush enemies.\nStarts with a dagger, poison darts, and high stealth.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_FARMER,The kind souls who farm so we can eat.\nStarts with a chosen weapon, 3 Breads, and belief in Minoriko.
@@ -500,7 +500,7 @@ LOC_SYSTEM_COMMAND,Command
 LOC_SYSTEM_PAD_COMMAND,Commands (gamepad)
 LOC_SYSTEM_COMMAND_LIST,Command List
 LOC_SYSTEM_PAD_COMMAND_LIST,Command List (gamepad)
-LOC_SYSTEM_CHARACTER_HELP,Tribe & Job Help
+LOC_SYSTEM_CHARACTER_HELP,Species & Background Help
 LOC_SYSTEM_GODS_HELP,Gods Help
 LOC_SYSTEM_PROCESS_NOTE,Progress Notes
 LOC_SYSTEM_PROCESS_CREDIT,Credits
@@ -1568,11 +1568,11 @@ LOC_SYSTEM_SEIJA_GOD_KANAKO3,Seija: That god, I mean. What terrible fashion sens
 LOC_SYSTEM_SEIJA_GOD_KANAKO4,Seija: Dodging that pillar was pretty tough... Try to avoid it well!
 LOC_SYSTEM_SEIJA_GOD_SUWAKO1,Seija: That little kid was a god? Didn’t look all that strong.
 LOC_SYSTEM_SEIJA_GOD_SUWAKO2,Seija: There were tons of frogs there. Not really a fan, honestly.
-LOC_SYSTEM_SEIJA_GOD_SUWAKO3,Seija: That goddess of misfortune-she’s more dangerous than she looks.
+LOC_SYSTEM_SEIJA_GOD_SUWAKO3,Seija: That god of misfortune-she’s more dangerous than she looks.
 LOC_SYSTEM_SEIJA_GOD_SUWAKO4,Seija: This item carries a curse with it. You sure you want it?
 LOC_SYSTEM_SEIJA_GOD_MINORIKO1,Seija: Even on the run, you’ve still gotta eat. Here, have some.
 LOC_SYSTEM_SEIJA_GOD_MINORIKO2,Seija: I’ve had enough of sweet potatoes… was thinking of giving them away.
-LOC_SYSTEM_SEIJA_GOD_MINORIKO3,Seija: These sweet potatoes are from that harvest goddess... huh? What was her name again?
+LOC_SYSTEM_SEIJA_GOD_MINORIKO3,Seija: These sweet potatoes are from that harvest god... huh? What was her name again?
 LOC_SYSTEM_SEIJA_GOD_MINORIKO4,Seija: You must’ve been hungry, huh? Go ahead, take some.
 LOC_SYSTEM_SEIJA_GOD_MIMA1,Seija: I heard it contains the ultimate magic. Use it wisely.
 LOC_SYSTEM_SEIJA_GOD_MIMA2,Seija: Is this that “Spark” spellbook or something? That magic’s totally broken.
@@ -2241,8 +2241,8 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POWER_SAVE1,Natural P consumption over turns is
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POWER_SAVE2,Natural P consumption over turns is increased.\nP costs for haste and invisibility are also higher.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_9_LIFE,When you die, you fully recover HP and MP and revive with a large explosion.\nThis ability disappears at level 9.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_18_LIFE,When you die, you fully recover HP and MP and revive with a large explosion.\nThis ability disappears at level 18.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SPEED1,Your movement delay is only 80% compared to other races.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SPEED2,Your movement delay is 120% compared to other races.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SPEED1,Your movement delay is only 80% compared to other species.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SPEED2,Your movement delay is 120% compared to other species.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CLAW,You deal additional unarmed damage.\nYou can't wear gloves.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_JAW,You have a chance to bite with each attack.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FOOT,You can instantly leap toward enemies using Power.\nCannot be used repeatedly.
@@ -2328,7 +2328,7 @@ LOC_SYSTEM_JOB_WARRIOR,Warrior
 LOC_SYSTEM_JOB_WIZARD,Magician
 LOC_SYSTEM_JOB_SHAMAN,Shrine Maiden
 LOC_SYSTEM_JOB_GLADIATOR,Gladiator
-LOC_SYSTEM_JOB_MONK,Martial Artist
+LOC_SYSTEM_JOB_MONK,Monk
 LOC_SYSTEM_JOB_CRUSADER,Spellblade
 LOC_SYSTEM_JOB_BERSERKER,Berserker
 LOC_SYSTEM_JOB_FIRE_WIZARD,Pyromancer
@@ -2345,7 +2345,7 @@ LOC_SYSTEM_JOB_ASSASSIN,Assassin
 LOC_SYSTEM_JOB_FARMER,Farmer
 LOC_SYSTEM_JOB_MADE,Maid
 LOC_SYSTEM_JOB_ENGINEER,Engineer
-LOC_SYSTEM_JOB_MISSING,Missing Person
+LOC_SYSTEM_JOB_MISSING,Wanderer
 LOC_SYSTEM_TILE_UNKNOWN,Unknown
 LOC_SYSTEM_TILE_FLOOR,Floor
 LOC_SYSTEM_TILE_OIL,Oil Pool
@@ -2611,7 +2611,7 @@ LOC_SYSTEM_SPL_SUMMON_NAMAZ,Summon Namaz
 LOC_SYSTEM_SPL_SCHEMA_TANMAC,Gap Danmaku
 LOC_SYSTEM_SPL_CHANGE,Transformation
 LOC_SYSTEM_SPL_UNLUCK,Door to Catastrophe
-LOC_SYSTEM_SPL_THUNDER,Thunder of the Dragon God
+LOC_SYSTEM_SPL_THUNDER,Dragon God's Wrath
 LOC_SYSTEM_SPL_AIR_STRIKE,Gust Fan
 LOC_SYSTEM_SPL_SUMMON_RACOON,Raccoon Danmaku Shift
 LOC_SYSTEM_SPL_SUMMON_YOUKAI,Night Parade
@@ -3240,7 +3240,7 @@ LOC_SYSTEM_ITEM_ARMOUR_T_KAPPA,{0} Kappa Suit
 LOC_SYSTEM_ITEM_ARMOUR_T_FIRE,{0} Fire-Rat Robe
 LOC_SYSTEM_ITEM_ARMOUR_T_MAID,{0} Maid Outfit
 LOC_SYSTEM_ITEM_ARMOUR_T_POISON,{0} Doll Dress
-LOC_SYSTEM_ITEM_ARMOUR_T_AUTUMN,{0} Autumn Garment
+LOC_SYSTEM_ITEM_ARMOUR_T_AUTUMN,{0} Maple Armor
 LOC_SYSTEM_ITEM_ARMOUR_SHIELD_ROUNDSHIELD,Wooden Shield
 LOC_SYSTEM_ITEM_ARMOUR_SHIELD_IRONSHIELD,Iron Shield
 LOC_SYSTEM_ITEM_ARMOUR_SHIELD_KITESHIELD,Kite Shield
@@ -4019,47 +4019,47 @@ LOC_SYSTEM_GOD_JUNKO,Junko
 LOC_SYSTEM_GOD_SHIKIEIKI,Shikieiki
 LOC_SYSTEM_GOD_KEIKI,Keiki
 LOC_SYSTEM_GOD_TENKYUU,Tenkyuu
-LOC_SYSTEM_GOD_SUWAKO_TITLE,Moriya Suwako - Pinnacle of the Native Gods
-LOC_SYSTEM_GOD_SUWAKO_DESCRIPTION,Suwako is a native goddess with the power to create earth.\nShe grants her followers unpredictable blessings.\nAs a result, they receive various powers, though not necessarily the ones they want.
-LOC_SYSTEM_GOD_MIMA_TITLE,Mima - Spirit Who Entrusted Fate to a Distant Dream
-LOC_SYSTEM_GOD_MIMA_DESCRIPTION,Mima is a divine spirit of disaster and destruction.\nHer followers receive powerful destructive magic.\nHer most devoted disciples are granted her ultimate spell: Spark.\nMima values strength through personal action, and grants faith when you defeat enemies yourself.
-LOC_SYSTEM_GOD_YUYUKO_TITLE,Saigyouji Yuyuko - Ghost Girl in the Netherworld Tower
+LOC_SYSTEM_GOD_SUWAKO_TITLE,Suwako Moriya - The Highest of Native Gods
+LOC_SYSTEM_GOD_SUWAKO_DESCRIPTION,Suwako is a native god with the power to create earth.\nShe grants her followers unpredictable blessings.\nAs a result, they receive various powers, though not necessarily the ones they want.
+LOC_SYSTEM_GOD_MIMA_TITLE,Mima - Spirit who leaves fate to the dream of eternity
+LOC_SYSTEM_GOD_MIMA_DESCRIPTION,Mima is a evil spirit of disaster and destruction.\nHer followers receive powerful destructive magic.\nHer most devoted disciples are granted her ultimate spell: Spark.\nMima values strength through personal action,\nand grants faith when you defeat enemies yourself.
+LOC_SYSTEM_GOD_YUYUKO_TITLE,Yuyuko Saigyouji - Ghost Girl in the Netherworld Tower
 LOC_SYSTEM_GOD_YUYUKO_DESCRIPTION,Yuyuko is the lady of Saigyouji, residing in Hakugyokurou.\nShe wields the power of death and grants it to her followers.\nHer devotees gain control over death and receive many spirits.
-LOC_SYSTEM_GOD_JOON_AND_SION_TITLE,Yorigami Joon & Shion - The Most Wicked Sisters
-LOC_SYSTEM_GOD_JOON_AND_SION_DESCRIPTION,Joon and Shion are goddesses of waste and poverty, bringing misfortune to their followers.\nJoon causes wealth to be wasted, while Shion brings poverty.\nJust believing in them causes you to lose items and resources.\nHowever, devout worshipers are directly possessed and can wield their powers.\nTheir powers are strong, but so is the misfortune they bring.\nYou gain faith by killing enemies and taking their money.
-LOC_SYSTEM_GOD_SHINKI_TITLE,Shinki - Goddess of Makai
-LOC_SYSTEM_GOD_SHINKI_DESCRIPTION,Shinki is the goddess and creator of Makai.\nShe uses her power of creation to summon strong demons for her followers.\nShe protects you from hostile summons and restores HP and MP whenever you gather P.\nHowever, strong demons may betray you.\nYou gain faith by picking up P items.
-LOC_SYSTEM_GOD_MINORIKO_TITLE,Aki Minoriko - Symbol of Abundance and Harvest
-LOC_SYSTEM_GOD_MINORIKO_DESCRIPTION,Minoriko is the goddess of autumn harvests and blesses her followers with abundance.\nHer followers receive bountiful food that restores fullness and HP.\nYou gain faith by picking up P items.
-LOC_SYSTEM_GOD_SHIZUHA_TITLE,Aki Shizuha - Symbol of Loneliness and Passing
-LOC_SYSTEM_GOD_SHIZUHA_DESCRIPTION,Aki Shizuha is the goddess of autumn leaves.\nShe lowers your presence, allowing you to move stealthily.\nHer powers greatly benefit assassins and reduce heavy armor penalties.\nShe delights in watching loud enemies fall like leaves.
-LOC_SYSTEM_GOD_EIRIN_TITLE,Yagokoro Eirin - Brain of the Moon
+LOC_SYSTEM_GOD_JOON_AND_SION_TITLE,Joon & Shion Yorigami - The Most Despicable and Disastrous Younger Twin Sister
+LOC_SYSTEM_GOD_JOON_AND_SION_DESCRIPTION,Joon and Shion are godes of pestilence and poverty, bringing misfortune to their followers.\nJoon causes wealth to be wasted, while Shion brings poverty.\nJust believing in them causes you to lose items and resources.\nHowever, devout worshipers are directly possessed and can wield their powers.\nTheir powers are strong, but so is the misfortune they bring.\nYou gain faith by killing enemies and taking their money.
+LOC_SYSTEM_GOD_SHINKI_TITLE,Shinki - The God of Makai
+LOC_SYSTEM_GOD_SHINKI_DESCRIPTION,Shinki is the god and creator of Makai.\nShe uses her power of creation to summon strong demons for her followers.\nShe protects you from hostile summons and restores HP and MP whenever you gather P.\nHowever, strong demons may betray you.\nYou gain faith by picking up P items.
+LOC_SYSTEM_GOD_MINORIKO_TITLE,Minoriko Aki - Symbol of Abundance and Plenty
+LOC_SYSTEM_GOD_MINORIKO_DESCRIPTION,Minoriko is the god of autumn harvests and blesses her followers with abundance.\nHer followers receive bountiful food that restores fullness and HP.\nYou gain faith by picking up P items.
+LOC_SYSTEM_GOD_SHIZUHA_TITLE,Shizuha Aki - Symbol of Loneliness and Demise
+LOC_SYSTEM_GOD_SHIZUHA_DESCRIPTION,Shizuha Aki is the god of autumn leaves.\nShe lowers your presence, allowing you to move stealthily.\nHer powers greatly benefit assassins and reduce heavy armor penalties.\nShe delights in watching loud enemies fall like leaves.
+LOC_SYSTEM_GOD_EIRIN_TITLE,Eirin Yagokoro - Brain of the Moon
 LOC_SYSTEM_GOD_EIRIN_DESCRIPTION,She is the moon's top sage and a genius pharmacist who can make any medicine.\nHer followers receive potions with additional effects.\nDramatic treatments such as body modifications are also possible.\nThose who accept becoming test subjects are rewarded.\nYou gain faith by praying over beneficial potions or drinking them.\nOccasionally, you may also gain faith by defeating enemies.
-LOC_SYSTEM_GOD_KANAKO_TITLE,Yasaka Kanako - Avatar of Mountains and Lakes
-LOC_SYSTEM_GOD_KANAKO_DESCRIPTION,Kanako is a goddess with the power to create Heaven. Though originally a wind deity, she is now revered as a mountain goddess.\nShe grants powerful combat abilities in exchange for faith.\nEspecially helpful for melee fighters and ranged danmaku users.\nHer followers must continue fighting to offer faith.
-LOC_SYSTEM_GOD_YUKARI_TITLE,Yakumo Yukari - Youkai Hidden Within Boundaries
-LOC_SYSTEM_GOD_YUKARI_DESCRIPTION,Yakumo Yukari is a famous boundary youkai in Gensokyo.\nAs her shikigami, you gain powers related to boundaries.\nShe grants powerful teleportation abilities but bans other teleportation outside her divine powers.\nHer uncontrolled powers can sometimes backfire and endanger followers.
-LOC_SYSTEM_GOD_HINA_TITLE,Kagiyama Hina - Hidden Doll Goddess of Misfortune
-LOC_SYSTEM_GOD_HINA_DESCRIPTION,Hina is a disaster goddess who absorbs misfortune to prevent calamity.\nBy accepting curses from her, you gain her divine powers.\nFaith is gained through dungeon exploration.
-LOC_SYSTEM_GOD_SATORI_TITLE,Komeiji Satori - Girl Even Spirits Fear
+LOC_SYSTEM_GOD_KANAKO_TITLE,Kanako Yasaka - The Avatar of Mountains and Lakes
+LOC_SYSTEM_GOD_KANAKO_DESCRIPTION,Kanako is a god with the power to create heavenliness.\nThough originally a god of wind and rain, she is now revered as a mountain god.\nShe grants powerful combat abilities in exchange for faith.\nEspecially helpful for melee fighters and ranged danmaku users.\nHer followers must continue fighting to offer faith.
+LOC_SYSTEM_GOD_YUKARI_TITLE,Yukari Yakumo - Youkai that lurks in the boundary
+LOC_SYSTEM_GOD_YUKARI_DESCRIPTION,Yukari Yakumo is a famous boundary youkai in Gensokyo.\nAs her shikigami, you gain powers related to boundaries.\nShe grants powerful teleportation abilities but bans other teleportation outside her divine powers.\nHer uncontrolled powers can sometimes backfire and endanger followers.
+LOC_SYSTEM_GOD_HINA_TITLE,Hina Kagiyama - The Hidden God Nagashi-bina
+LOC_SYSTEM_GOD_HINA_DESCRIPTION,Hina is a disaster god who absorbs misfortune to prevent calamity.\nBy accepting curses from her, you gain her divine powers.\nFaith is gained through dungeon exploration.
+LOC_SYSTEM_GOD_SATORI_TITLE,Satori Komeiji - The Girl Even the Vengeful Spirits Fear
 LOC_SYSTEM_GOD_SATORI_DESCRIPTION,Satori is the mistress of the Palace of Earth Spirits and can read minds.\nTo believe in her is to become her pet and receive her powers.\nShe doesn't provide direct combat abilities but allows you to read maps and detect positions.\nShe can read enemy traumas and manipulate their thoughts.\nEnemies exposed become vulnerable to all debuffs, aiding mental magic users.\nPets earn her favor through dungeon exploration.
-LOC_SYSTEM_GOD_YUUGI_TITLE,Hoshiguma Yuugi - Notorious Oni of Super Strength
+LOC_SYSTEM_GOD_YUUGI_TITLE,Yuugi Hoshiguma - The Spoken-of Unexplainable Phenomena
 LOC_SYSTEM_GOD_YUUGI_DESCRIPTION,Yuugi is an oni who lives in the Old Capital underground.\nShe bestows overwhelming strength to her followers.\nHer powers enable wrestling-like combat, such as grabbing and slamming enemies.\nShe also grants roars that silence enemies and access to her ultimate technique.\nHowever, she despises relying on magic.\nFaith is earned by winning battles.
-LOC_SYSTEM_GOD_TENSI_TITLE,Hinanawi Tenshi - Girl of Bhavaagra, the Celestial Realm
+LOC_SYSTEM_GOD_TENSI_TITLE,Tenshi Hinanawi - Girl of the Sphere of Neither Perception nor Non-Perception
 LOC_SYSTEM_GOD_TENSI_DESCRIPTION,Tenshi is a spoiled celestial from the Celestial Realm.\nBored with heaven, she toys with followers who worship her during this incident.\nShe grants no powers, and all outcomes depend on her whim.\nIf you amuse her with constant risky battles, she may help you.\nIf you seek safety, you’ll regret your decision.
-LOC_SYSTEM_GOD_BYAKUREN_TITLE,Hijiri Byakuren - Sealed Great Magician
+LOC_SYSTEM_GOD_BYAKUREN_TITLE,Byakuren Hijiri - Sealed Great Magician
 LOC_SYSTEM_GOD_BYAKUREN_DESCRIPTION,Byakuren is a great sorceress once sealed in Makai, now a Buddhist teacher in Myouren Temple.\nShe teaches magic-especially buffs that enhance physical abilities.\nHer powers grant intelligence, speed, and reduction in magic penalties.\nFaith is earned by meeting new people.
-LOC_SYSTEM_GOD_SEIJA_TITLE,Kijin Seija - The Rebellious Amanojaku
+LOC_SYSTEM_GOD_SEIJA_TITLE,Seija Kijin - Counterattacking Amanojaku
 LOC_SYSTEM_GOD_SEIJA_DESCRIPTION,Seija is a wanted amanojaku fleeing with stolen goods.\nAligning with her grants powerful stolen items.\nShe welcomes you now, but only to use you.\nShe will use you as a shield and abandon you once you're no longer useful.\nFaith in her draws eternal scorn from other gods.\nShe hates the strong and distrusts all; if you reach level 9, she rejects you.
 LOC_SYSTEM_GOD_LILLY_TITLE,Lily White - Fairy Herald of Spring
 LOC_SYSTEM_GOD_LILLY_DESCRIPTION,Lily White is the fairy of spring, known to bloom flowers just by passing.\nShe shares her power to empower other fairies.\nBelieving in her lets you recruit wandering fairies as immortal allies.\nFairies resurrect endlessly while following you.\nYou must share some XP with them, allowing them to grow alongside you.\nThough originally a fairy-only deity, she doesn't refuse outsiders.\nLily enjoys exploring the world.
 LOC_SYSTEM_GOD_MIKO_TITLE,Toyosatomimi no Miko - Almighty Taoist who Controls the Cosmos
 LOC_SYSTEM_GOD_MIKO_DESCRIPTION,Toyosatomimi no Miko is a sage of the Mausoleum with the power to read desires.\nHer followers use Popularity instead of Piety.\nPopularity increases quickly via reading or defeating enemies.\nHowever, it drops when floors or subdungeons change, and powers consume large amounts.\nHer Taoist arts last indefinitely but vanish when changing floors.
-LOC_SYSTEM_GOD_OKINA_TITLE,Matara Okina - The Ultimate Hidden God
+LOC_SYSTEM_GOD_OKINA_TITLE,Okina Matara - The Ultimate Hidden God
 LOC_SYSTEM_GOD_OKINA_DESCRIPTION,Okina Matara is a hidden, mysterious god whose true identity is unknown.\nShe seeks subordinates to do her bidding-you might be one.\nAs her follower, you gain door-based powers.\nYou can teleport through doors or appear behind enemies.\nYou can also call allies to boost HP and MP.\nShe enjoys spreading her divine presence through victorious battles.
 LOC_SYSTEM_GOD_JUNKO_TITLE,Junko
 LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,Junko is a divine spirit purified by hatred, seeking vengeance.\nHer powers are simple but strong.\nThey require no piety but cause temporary Purified status.\nHigher Purification limits item usage.\nNormally this fades over time, but her favorite followers may be permanently purified.\nHer blessings are heavy, with great penalties and no betrayal allowed, but immense rewards.\nShe enjoys slaying every visible enemy.
-LOC_SYSTEM_GOD_KEIKI_TITLE,Keiki the God of Haniyasushin - Sculptor Deity Born from Isolation
+LOC_SYSTEM_GOD_KEIKI_TITLE,Keiki Haniyasushin - The Sculptor God Crafted by Utter Isolation
 LOC_SYSTEM_GOD_KEIKI_DESCRIPTION,Keiki is a god of creation born from human spirits.\nShe grants life to crafted idols.\nShe gives a small Haniwa upon faith and allows you to customize it as you explore.\nKeiki takes a portion of your experience to create idols.
 LOC_SYSTEM_GOD_BUG_TITLE,Bug God
 LOC_SYSTEM_GOD_BUG_DESCRIPTION,This god is a bug!\nThe Bug God is the most evil deity in TouhouCrawl.\nIt deeply affects gameplay and causes immense stress.\nIts mere existence might crash the game or delete your character.\nTo appease it, report the bug to the developers.\n
@@ -4335,7 +4335,7 @@ LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5,While possessed, you can use Joon or
 LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5_1,You can inflict confusion and damage to enemies in sight.
 LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY5_2,You can slow enemies in sight and spread vision-obscuring mist.
 LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6,While possessed, you can use the Most Dreadful Strategy.
-LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6_1,You can use the ultimate strategy to possess the enemy with the Poverty Goddess.
+LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6_1,You can use the ultimate strategy to possess the enemy with the Poverty God.
 LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY1,Byakuren increases the maximum spell level you can learn.
 LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY2,You can momentarily boost your intelligence.
 LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY3,Your strength increases, allowing you to ignore magic failure from low-tier armor penalties.
@@ -4604,7 +4604,7 @@ LOC_SYSTEM_GOD_SWAWKO_WELCOME_SANAE,Suwako: Sanae! How’s it going? Getting use
 LOC_SYSTEM_GOD_SUWAKO_TALK1,Suwako: Time to exterminate some youkai, Sanae!
 LOC_SYSTEM_GOD_SUWAKO_TALK2,Suwako: Hm? Did you call me?
 LOC_SYSTEM_GOD_SUWAKO_TALK3,Suwako: Lately, followers want too much.
-LOC_SYSTEM_GOD_SUWAKO_TALK4,Suwako: Don’t forget-I’m a goddess of curses too!
+LOC_SYSTEM_GOD_SUWAKO_TALK4,Suwako: Don’t forget-I have the power of a god of calamity too!
 LOC_SYSTEM_GOD_SUWAKO_TALK5,Suwako: Put in a bit more effort~!
 LOC_SYSTEM_GOD_SUWAKO_TALK6,Suwako: Don’t worry, I’ll give you plenty of power.
 LOC_SYSTEM_GOD_SWAWKO_HAT,Suwako’s Hat

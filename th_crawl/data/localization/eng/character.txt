@@ -1,0 +1,686 @@
+This page provides descriptions and aptitude ratings for the various Species and classes.
+
+
+
+
+§0
+================================================
+             Species Aptitude Chart               
+================================================
+
+
+┌───────────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
+│           │§dHP  §d│§dMP  §d│§dFigh§d│§dUnar§d│§dSb  §d│§dLb  §d│§dMace§d│§dAxe §d│§dSper§d│§dDanm§d│§dEvad§d│§dStel§d│§dArmo§d│§dSh  §d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Human      │  §d0%§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Witch      │§r-20%§d│   §b2§d│  §r-2§d│  §r-2§d│  §p-1§d│  §r-2§d│  §p-1§d│  §R-3§d│  §R-3§d│   §s1§d│   §b2§d│   §b2§d│  §r-2§d│  §r-2§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Fairy      │§R-30%§d│   §s1§d│  §R-3§d│  §r-2§d│   §s1§d│  §r-2§d│  §R-3§d│  §R-3§d│  §p-1§d│   §b2§d│   §B4§d│   §B3§d│  §R-3§d│  §R-3§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Crow Tengu │  §d0%§d│   §d0§d│   §s1§d│  §p-1§d│   §d0§d│   §d0§d│   §b2§d│   §s1§d│   §s1§d│   §s1§d│   §b2§d│   §d0§d│  §r-2§d│  §p-1§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Wolf Tengu │ §s10%§d│  §r-2§d│   §b2§d│   §d0§d│   §d0§d│   §b2§d│   §b2§d│   §b2§d│   §s1§d│   §s1§d│  §p-1§d│  §R-3§d│   §B3§d│   §B3§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Kappa       │§p-10%§d│   §d0§d│   §s1§d│   §b2§d│  §r-2§d│   §d0§d│   §s1§d│  §p-1§d│   §B3§d│   §d0§d│   §b2§d│   §d0§d│   §d0§d│  §R-3§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Nekomata    │§r-20%§d│  §p-1§d│   §s1§d│   §B3§d│  §r-2§d│  §r-2§d│  §r-2§d│  §r-2§d│  §r-2§d│   §d0§d│   §B3§d│   §B4§d│  §R-3§d│  §R-3§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Oarfish    │ §b20%§d│   §d0§d│   §d0§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│   §b2§d│  §p-1§d│   §b2§d│   §d0§d│  §p-1§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Tsukumogami│§p-10%§d│  §p-1§d│   §b2§d│  §p-1§d│   §s1§d│   §s1§d│   §s1§d│   §s1§d│   §s1§d│   §b2§d│   §s1§d│   §s1§d│   §s1§d│   §s1§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Oni        │ §B30%§d│  §R-3§d│   §B3§d│   §d0§d│  §r-2§d│  §p-1§d│   §b2§d│  §p-1§d│  §r-2§d│  §r-2§d│  §p-1§d│  §R-4§d│  §R-4§d│  §R-3§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Half-Youkai│  §d0%§d│   §d0§d│   §d0§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Wraith     │ §s10%§d│   §d0§d│  §r-2§d│  §r-2§d│   §d0§d│  §r-2§d│  §r-2§d│  §r-2§d│  §r-2§d│  §r-2§d│   §d0§d│   §B4§d│  §R-5§d│  §r-2§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Vampire    │ §s10%§d│  §p-1§d│   §s1§d│   §d0§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│   §B3§d│   §B3§d│  §r-2§d│  §r-2§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│           │§dHP  §d│§dMP  §d│§dFigh§d│§dUnar§d│§dSb  §d│§dLb  §d│§dMace§d│§dAxe §d│§dSper§d│§dDanm§d│§dEvad§d│§dStel§d│§dArmo§d│§dSh  §d│
+└───────────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┚
+
+
+┌───────────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
+│           │§dSpct§d│§dFire§d│§dColdd│§dEart§d│§dAir §d│§dDes §d│§dAlch§d│§dMent§d│§dSumm§d│§dSptm§d│§dEvo §d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Human      │   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Witch      │   §B3§d│   §s1§d│   §s1§d│   §s1§d│   §s1§d│   §s1§d│   §s1§d│   §s1§d│   §s1§d│   §s1§d│   §d0§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Fairy      │   §s1§d│   §b2§d│   §b2§d│   §b2§d│   §B3§d│   §b2§d│  §r-2§d│  §r-2§d│  §r-2§d│   §s1§d│  §r-2§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Crow Tengu │  §p-1§d│  §r-2§d│  §r-2§d│  §R-3§d│   §b2§d│   §s1§d│  §r-2§d│  §p-1§d│  §p-1§d│   §d0§d│   §d0§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Wolf Tengu │  §R-3§d│  §r-2§d│  §r-2§d│   §d0§d│  §r-2§d│  §r-2§d│   §d0§d│  §r-2§d│  §r-2§d│  §r-2§d│   §s1§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Kappa      │   §s1§d│  §R-4§d│   §b2§d│  §r-2§d│   §d0§d│  §p-1§d│  §p-1§d│  §p-1§d│   §d0§d│   §d0§d│   §B3§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Nekomata   │   §d0§d│  §p-1§d│  §p-1§d│  §r-2§d│   §d0§d│   §s1§d│   §b2§d│   §b2§d│  §p-1§d│   §B4§d│  §p-1§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Oarfish    │   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §B3§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Tsukumogami│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│   §s1§d│  §r-2§d│   §d0§d│  §p-1§d│   §s1§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Oni        │  §p-1§d│   §b2§d│  §r-2§d│  §p-1§d│  §r-2§d│  §r-2§d│  §r-2§d│  §R-3§d│  §r-2§d│  §R-3§d│  §p-1§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Half-Youkai│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Wraith     │  §p-1§d│  §p-1§d│   §d0§d│  §r-2§d│   §d0§d│   §d0§d│  §R-3§d│   §B3§d│   §s1§d│   §b2§d│  §r-2§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│Vampire    │   §d0§d│   §s1§d│   §d0§d│   §d0§d│   §s1§d│   §s1§d│  §r-2§d│   §d0§d│   §B3§d│   §s1§d│  §r-2§d│
+├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
+│           │§dSpct§d│§dFire§d│§dColdd│§dEart§d│§dAir §d│§dDes §d│§dAlch§d│§dMent§d│§dSumm§d│§dSptm§d│§dEvo §d│
+└───────────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┚
+
+
+
+
+---------------------------------------------------------------------------------------
+
+
+§1
+================================================
+                      Human                      
+================================================
+
+Humans are a plain species with no special abilities.
+Instead of having unique powers, they have balanced aptitudes with all values at 0.
+
+
+* They have standard HP and base stats.
+* Every 5 levels, one random stat increases by 1.
+
+
+§2
+================================================
+                      Witch                      
+================================================
+
+A naturally gifted magic user as a species.
+In Gensokyo, they are considered youkai.
+They have extremely high magical aptitude and can wield any magic with ease, but their physical abilities are weak.
+
+* 10% less HP compared to Humans.
+* Starts with -2 Strength and +2 Intelligence compared to Humans.
+* Gains +1 Intelligence every 4 levels.
+
+
+
+§3
+================================================
+                     Fairy                       
+================================================
+
+A manifestation of natural phenomena in Gensokyo — small beings that dwell in all things.
+They have small bodies and wings, and love playing pranks.
+They are skilled with elemental magic, but are physically fragile and too small to wear heavy armor.
+Though their HP is low, they overcome danger through high regeneration and stealth.
+
+
+* 30% less HP compared to Humans.
+* Starts with -2 Strength, +1 Intelligence, and +1 Dexterity compared to Humans.
+* Gains +1 Intelligence or Dexterity every 5 levels.
+* Cannot wear heavy armor due to small size.
+* Has high HP regeneration.
+* Has high MP regeneration.
+* Moves stealthily.
+* Takes half damage from clouds.
+
+
+
+§4
+================================================
+                   Crow Tengu                  
+================================================
+
+Tengu with crow-like wings who live communally in the Youkai Mountain.
+Many crow tengu work in journalism, gathering information across the land.
+They can fly, possess decent combat ability, and have good aptitude in air magic.
+They fight best by focusing on evasion rather than armor.
+
+
+* Has the same HP as Humans.
+* Starts with -1 Intelligence and +1 Dexterity compared to Humans.
+* Gains +1 Strength or Dexterity every 5 levels.
+* Can fly.
+
+
+
+§5
+================================================
+                   Wolf Tengu                    
+================================================
+
+Tengu with wolf-like traits who live communally in the Youkai Mountain.
+They mainly serve as patrols and guards, driving away intruders.
+They are well-suited for heavy-armored warriors, with high aptitudes in armor and shields.
+
+
+* Has 10% more HP compared to Humans.
+* Starts with +2 Strength, -1 Intelligence, and -1 Dexterity compared to Humans.
+* Gains +1 Strength every 4 levels.
+* Possesses strong jaws capable of biting enemies.
+
+
+
+§6
+================================================
+                     Kappa                      
+================================================
+
+Youkai who dwell together in Genbu Ravine on the mid-slope of the Youkai Mountain.
+They are excellent swimmers and often live near water, spending their time crafting machines thanks to their dexterous hands.
+They have high evasion, are skilled with activated items, and have a knack for ice magic.
+
+
+* Has 10% less HP compared to Humans.
+* Gains +1 random stat every 5 levels.
+* Can swim.
+
+
+
+§7
+================================================
+                    Nekomata                    
+================================================
+
+A cat youkai with feline ears and a tail.
+Like a true cat, it moves quickly and silently.
+Its fast movement makes it good at escaping enemies, and it excels in unarmed combat, though it's not good with weapons.
+It also has good aptitude for alchemy and mental magic, and especially excels in space-time magic.
+
+
+* Has 20% less HP compared to Humans.
+* Starts with -2 Strength and +2 Dexterity compared to Humans.
+* Gains +1 Dexterity every 5 levels.
+* Moves quickly. (Consumes only 80% of a turn to move.)  
+* Has sharp claws.
+* At level 15, it grows thick fur, gaining Cold Resistance 1 and +3 AC.
+
+
+
+§8
+================================================
+                      Oarfish                  
+================================================
+
+A ribbonfish youkai who resides in the Dragon Palace and descends to the surface to predict earthquakes.
+They usually swim leisurely among the clouds.
+They move slowly compared to other species, but possess high HP and innate resistance to electricity.
+They are especially skilled in air (electric) magic.
+
+
+* Has 20% more HP compared to Humans.
+* Gains +1 random stat every 5 levels.
+* Moves slowly. (Consumes 120% of a turn to move.)  
+* Can swim.
+* Starts with Electricity Resistance 1.
+* Has tough scales, granting +3 AC.
+* At level 9, their scales grow stronger, increasing AC to +6.
+* At level 18, their scales toughen further, increasing AC to +9.
+
+
+
+§9
+================================================
+                    Tsukumogami                  
+================================================
+
+A youkai born when a soul inhabits an old, long-used object.
+They carry the tool that serves as their true body.
+Since their body is an object, they start with poison resistance.
+Though small in stature, they are skilled with equipment and well-suited for light-armored combat.
+Their magic aptitude isn't high, but they have decent aptitude for alchemy.
+
+
+* Has 10% less HP compared to Humans.
+* Gains +1 Strength or Dexterity every 5 levels.
+* Too small to wear heavy armor.
+* Starts with Poison Resistance.
+
+
+
+§10
+================================================
+                      Oni                      
+================================================
+
+One of the most powerful youkai in Gensokyo, known for overwhelming strength and magical energy.
+They possess immense HP and large horns, with astonishing combat aptitude.
+Due to their heavy drinking nature, they suffer almost no penalties when drunk.
+They excel at brute-force combat, using raw physical power to crush foes.
+However, their overconfidence in strength makes them reluctant to use tools or magic.
+
+
+* Has 30% more HP compared to Humans.
+* Starts with +3 Strength, -2 Intelligence, and -1 Dexterity compared to Humans.
+* Gains +1 Strength every 3 levels.
+* Too large to wear heavy armor.
+* Starts with large horns.
+* Starts with the “Heavy Drinker” trait.
+
+
+
+§11
+================================================
+                   Half-Youkai                   
+================================================
+
+A half-blood born of both human and unknown youkai lineage.
+Though initially human-like, their youkai blood awakens as they grow.
+Depending on the type of youkai they inherit from, they gain different traits.
+Before this awakening, they are mostly identical to humans — and even have lower aptitudes.
+This is a late-blooming species that gradually becomes a powerful youkai.
+
+
+* Has the same HP as Humans.
+* Gains +1 random stat every 5 levels.
+* Youkai blood awakens at levels 4, 9, 13, and 18.
+* At level 4, the inherited youkai type is revealed.
+* Beast bloods favor melee, Oni blood grants endurance,  
+  Dragon blood leans toward elemental powers, and Demon blood grants magical traits.
+
+
+
+§12
+================================================
+                     Wraith                     
+================================================
+
+A youkai spirit that died but could not pass on, now wandering the living world.
+Though lacking a physical body, it can still touch and speak.
+It has no feet, so it cannot wear shoes, but it moves more stealthily than any other.
+It also has innate resistance to poison.
+While not suited for close combat or heavy equipment,  
+it excels at ambush and assassination, and has high aptitude in mind magic.
+
+
+* Has 10% more HP compared to Humans.
+* Gains +1 random stat every 5 levels.
+* Moves with extreme stealth.
+* Starts with Poison Resistance.
+* Has no feet — floats with ghostly legs.
+
+
+
+§13
+================================================
+                    Vampire                   
+================================================
+
+A Western youkai from outside Gensokyo — the vampire.
+Known for their exceptional strength, magical power, and regeneration, they are among the strongest species.
+However, they are also burdened with many weaknesses, such as sunlight, garlic, and holy symbols.
+Their MP recovers slowly, but they can cast spells using HP as a substitute.
+They are especially skilled in handling familiars, giving them high aptitude in summoning magic.
+They also have strong aptitudes in stealth, unarmed combat, and evasion in addition to magic.
+
+
+* Gains +1 random stat every 7 levels.
+* Recovers HP very quickly.
+* MP regeneration is slow.
+* Power depletes quickly.
+* Has sharp vision and can see invisible.
+* Can use HP (2x cost) instead of MP to cast spells.
+
+
+
+
+---------------------------------------------------------------------------------------
+
+
+§14
+================================================
+                     Warrior                     
+================================================
+
+A classic heavy-armored fighter who favors close combat.
+Starts with no special items, but carries a reliable shield.
+
+
+* Starts with +2 maximum HP.
+* Begins with +3 Strength, -6 Intelligence, and +1 Dexterity.
+* Starts with a weapon of choice, chain armor, and an iron shield.
+* If unable to wear chain armor, starts with leather armor and a cloak instead.
+
+
+
+§15
+================================================
+                     Magician                     
+================================================
+
+A magician adept in various types of magic.
+They are not specialized in any one school,  
+but can flexibly use a variety of low-level spells to handle different situations.
+
+
+* Starts with -2 maximum HP and +5 maximum MP.
+* Begins with -6 Strength and +6 Intelligence.
+* Starts with a robe and a novice magician’s spellbook.
+* Starts knowing Magic Danmaku.
+* Can learn Blink, Diamond Hardness, Summon Option, Mephitic Cloud, and Conjure Flame.
+
+
+
+§16
+================================================
+                  Shrine Maiden             
+================================================
+
+A melee-focused class who serves Kanako and fights using Kanako's divine power.
+
+
+* Starts with +1 maximum HP and MP.
+* Begins with +1 Strength, -2 Intelligence, and +1 Dexterity.
+* Starts with a +1 Gohei and a Celestial Shrine Maiden Robe.
+* Begins with faith in Kanako.
+
+
+§17
+================================================
+                    Gladiator                    
+================================================
+
+A hybrid evasion-type warrior who balances both melee and ranged combat.
+
+
+* Starts with +2 maximum HP.
+* Begins with +2 Strength, -4 Intelligence, and +2 Dexterity.
+* Starts with a weapon of choice, leather armor, wooden shield, and 8 venom shurikens.
+
+
+
+§18
+================================================
+                      Monk                     
+================================================
+
+A fighter with innate talent in unarmed combat.
+Does not start with many items, but begins with high unarmed combat skill.
+
+
+* Starts with +2 maximum HP.
+* Starts wearing only a robe.
+
+
+
+§19
+================================================
+                    Spellblade                   
+================================================
+
+A spellblade who uses both magic and melee, specializing in self-buff spells.
+Begins with magic useful for frontline combat.
+
+
+* Starts with +1 maximum HP and MP.
+* Begins with -6 Strength and +6 Intelligence.
+* Starts with a robe and a novice magician’s spellbook.
+* Starts knowing Veiling.
+* Can learn Diamond Hardness, Poison Body, Silence.
+
+
+
+§20
+================================================
+                    Berserker                     
+================================================
+
+Starts with extreme stats and very aggressive equipment.
+
+
+* Starts with +2 maximum HP.
+* Begins with +5 Strength, -7 Intelligence, and +2 Dexterity.
+* Starts with a hand axe, a robe, and one potion of strength.
+
+
+
+§21
+================================================
+                   Pyromancer                    
+================================================
+
+An elemental magician who starts by learning fire magic.
+Fire spells focus on dealing damage and follow solid fundamentals.
+
+
+* Starts with -1 maximum HP and +3 maximum MP.
+* Begins with -5 Strength, +4 Intelligence, and +1 Dexterity.
+* Starts with a robe and a novice pyromancer’s spellbook.
+* Starts knowing Flame.
+* Can learn Flame Danmaku, Conjure Flame, Fireball, and Fire Bolt.
+
+
+§22
+================================================
+                    Cryomancer                    
+================================================
+
+An elemental magician who starts by learning cold magic.
+Cold spells often inflict slowing effects on enemies,  
+allowing you to deal damage while keeping your distance.
+
+
+* Starts with -1 maximum HP and +3 maximum MP.
+* Begins with -5 Strength, +4 Intelligence, and +1 Dexterity.
+* Starts with a robe and a novice cryomancer’s spellbook.
+* Starts knowing Frost.
+* Can learn Frost Danmaku, Rapid Freeze, Frost Cloud, and Ice Bolt.
+
+
+§23
+================================================
+                    Geomancer                    
+================================================
+
+An elemental magician who starts by learning earth magic.
+Earth spells deal damage that ignores elemental resistances.
+
+
+* Starts with -1 maximum HP and +3 maximum MP.
+* Begins with -5 Strength, +4 Intelligence, and +1 Dexterity.
+* Starts with a robe and a novice geomancer’s spellbook.
+* Starts knowing Stone Fist.
+* Can learn Rock Danmaku, Spiked Rock, Ground Uplift, and Kaname Drill.
+
+
+
+§24
+================================================
+                    Aeromancer                    
+================================================
+
+An elemental magician who starts by learning air and lightning magic.
+Lightning spells are powerful, but often difficult to target precisely.
+
+
+* Starts with +2 maximum MP.
+* Begins with -3 Strength, +2 Intelligence, and +1 Dexterity.
+* Starts with a robe and a novice aeromancer’s spellbook.
+* Starts knowing Shock.
+* Can learn Levitation, Twist, Discharge, and Dragon God's Wrath.
+
+
+
+§35
+================================================
+                  Luminomancer                     
+================================================
+
+A mage who uses light magic to fire concentrated beams at enemies.
+These spells specialize in direct damage and can be used  
+even without deep knowledge of destructive magic schools.
+
+
+* Starts with -1 maximum HP and +3 maximum MP.
+* Begins with -5 Strength, +4 Intelligence, and +1 Dexterity.
+* Starts with a robe and a novice light mage’s spellbook.
+* Starts knowing Magic Danmaku.
+* Can learn Summon Option, Homing Danmaku, Laser, and Omnidirectional Danmaku.
+
+
+
+§25
+================================================
+                    Summoner                    
+================================================
+
+A magician who begins with summoning magic to control summoned creatures.
+Fights from the back, relying entirely on summons to handle combat.
+
+
+* Starts with -1 maximum HP and +3 maximum MP.
+* Begins with -5 Strength, +4 Intelligence, and +1 Dexterity.
+* Starts with a robe and a novice summoner’s spellbook.
+* Starts knowing Summon Mook.
+* Can learn Summon Option, Summon Bird, and Summon Golem.
+
+
+§26
+================================================
+                    Alchemist                    
+================================================
+
+A hybrid magician-alchemist who engages in melee using alchemy.
+Alchemy is a discipline that deals with poison and self-enhancement,  
+specialized in empowering the caster.
+However, only one alchemy buff can be active at a time,  
+so choosing the right effect for the situation is crucial.
+
+
+* Starts with +2 maximum HP and +1 maximum MP.
+* Begins with -1 Strength, +1 Intelligence, and +1 Dexterity.
+* Starts with a robe and a novice alchemist’s spellbook.
+* Starts knowing Stone Fist.
+* Can learn Diamond Hardness, Poison Body, Summon Golem, and Emerald City.
+
+
+
+§27
+================================================
+                   Psychologist                    
+================================================
+
+A debuff-oriented magician who learns mind-manipulating psychic magic.
+Debuff spells may be resisted by enemies,  
+but if successful, their effects are extremely powerful.
+
+
+* Starts with -1 maximum HP and +3 maximum MP.
+* Begins with -5 Strength, +4 Intelligence, and +1 Dexterity.
+* Starts with a dagger, a robe, and a novice psychologist’s spellbook.
+* Starts knowing Hypnosis.
+* Can learn Mind Bending, Mute, Self Injury, and Charm.
+
+
+
+§28
+================================================
+                     Reaper                      
+================================================
+
+A reaper working for the Ministry of Right and Wrong, active in the afterlife.
+Starts with high proficiency in scythes and spears.
+Also begins with faith in Shikieiki. (Not yet implemented)
+
+
+* Starts with +1 maximum HP and MP.
+* Begins with +2 Strength, -4 Intelligence, and +2 Dexterity.
+* Starts with a +3 scythe and a robe.
+
+
+§29
+================================================
+                    Fanatic                     
+================================================
+
+Fanatics devoted to certain characters with extreme faith.
+Their deities are powerful, but such faith can bring harm even to the believer.
+Perfect for thrill-seekers who crave danger.
+
+
+* Starts with +1 maximum HP and MP.
+* Begins with +2 Strength, -4 Intelligence, and +2 Dexterity.
+* Starts with a weapon of choice and leather armor.
+* Begins with faith in Tenshi or Yukari.
+
+
+
+§30
+================================================
+                     Assassin                    
+================================================
+
+Specialized in moving silently and eliminating enemies undetected.
+With high stealth skill, they can approach foes without being noticed.
+Striking sleeping targets with daggers can deal near-lethal damage.
+
+
+* Starts with +2 maximum HP.
+* Begins with -2 Strength, -2 Intelligence, and +4 Dexterity.
+* Starts with a dagger, a robe, and 8 venom shurikens.
+
+
+
+§31
+================================================
+                      Farmer                  
+================================================
+
+Farmers devoted to Minoriko.
+They possess strong physical abilities honed through farming  
+and begin with harvested food in their inventory.
+
+
+* Starts with +2 maximum HP.
+* Begins with +3 Strength, -4 Intelligence, and +1 Dexterity.
+* Starts with a weapon of choice, a robe, and 3 sweet potatoes.
+* Begins with faith in Minoriko.
+
+
+
+§32
+================================================
+                      Maid                     
+================================================
+
+A professional maid working in the Scarlet Devil Mansion.
+Begins with a spellbook issued by the head maid, and throwing knives for duty.
+Fights uniquely by throwing knives and using space-time magic.
+The head maid claims the book is just for cleaning techniques.
+
+
+* Starts with +2 maximum HP.
+* Starts with a broom, cloth maid uniform, "Maid Basics", and 4 throwing knives.
+* Can learn Blink, Summon Option, Bullet Retrieval, Time Paradox, and Private Square.
+
+
+
+§33
+================================================
+                    Engineer                     
+================================================
+
+A versatile engineer skilled in handling various devices.
+Starts with activation abilities needed to operate tools in Gensokyo.
+Also experienced with spell cards and carries a recharge scroll.
+
+
+* Starts with +2 maximum HP. 
+* Begins with +2 Strength, -3 Intelligence, and +1 Dexterity. 
+* Starts with a weapon of choice, a robe, and a recharge scroll.
+
+
+
+§34
+================================================
+                    Wanderer              
+================================================
+
+An ordinary person who accidentally wandered into Gensokyo.
+The camera they carry is of little help.
+(You can throw it away right at the start!)  
+A challenging bakcground with no special abilities.

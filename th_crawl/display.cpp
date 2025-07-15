@@ -511,7 +511,7 @@ void display_manager::spell_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 {
 	RECT rc={50, 50, option_mg.getWidth(), option_mg.getHeight()};
 	stringstream ss;
-	int array_[] = {50, 100, 300, 550, 700};
+	int array_[] = {50, 100, 300, 600, 700};
 
 	DrawTextUTF8(pfont,pSprite,LocalzationManager::formatString(item_view_message, PlaceHolderHelper(joypadUtil::get("?", GVK_BUTTON_Y))), -1, &rc, DT_NOCLIP,CL_normal);
 	rc.top += fontDesc.Height*2;
@@ -973,7 +973,7 @@ void display_manager::skill2_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shar
 	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.left += 200;
 	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_COST), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-	rc.left += 200;
+	rc.left += 250;
 	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_SUCCESS_RATE), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.top += fontDesc.Height;
 	rc.left = 50;
@@ -1001,7 +1001,7 @@ void display_manager::skill2_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shar
 				ss << SkillCostString(skill_);
 				DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 			}
-			rc.left = 500;
+			rc.left = 550;
 			ss.str("");
 			ss.clear();
 			ss << std::setw(3) << std::right << SkillDiffer(skill_) << "%";
@@ -1332,7 +1332,7 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	//DrawTextUTF8(pfont,pSprite,temp, -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 
 	{
-		int pow_ = min(you.power, 500);
+		int pow_ = min(you.power, you.GetMaxPower());
 		ss.str("");
 		ss.clear();
 		ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER);
@@ -2631,13 +2631,13 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 
 
-		int pow_ = min(you.power,500);
+		int pow_ = min(you.power,you.GetMaxPower());
 		img_item_food_p_item.draw(pSprite,rc.left+16,rc.top+7,255);
 
 		ss.str("");
 		ss.clear();
 		ss << "   " << pow_ / 100 << "." << std::setfill('0') << std::setw(2) << pow_ % 100;
-		DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.power == 1000 ? CL_junko :(pow_<=100?CL_danger:(pow_<=200?CL_warning:(pow_==500?CL_good:CL_normal))));
+		DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.power == 1000 ? CL_junko :(pow_<=100?CL_danger:(pow_<=200?CL_warning:(pow_==you.GetMaxPower()?CL_good:CL_normal))));
 
 		int power_blank_ = PrintCharWidth(ss.str());
 		rc.left += power_blank_*fontDesc.Width;
@@ -2728,9 +2728,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 		ss.str("");
 		ss.clear();
-		ss << std::setfill(' ') << std::setw(4) << you.s_str;
 		if(you.s_str != you.m_str) {
-			ss << " (" << std::setw(2) << you.m_str <<")";
+			ss << std::setfill(' ') << std::setw(2) << you.s_str;
+			ss << "(" << std::setw(2) << you.m_str <<")";
+		} else {
+			ss << std::setfill(' ') << std::setw(4) << you.s_str;
 		}
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_STR);
 		{
@@ -2747,7 +2749,9 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 		ss.str("");
 		ss.clear();
-		ss << "  ";
+		if(you.s_str == you.m_str) {
+			ss << "  ";
+		}
 		ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX);
 		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX)) < 4)
 			ss << std::string(4-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX)), ' ');
@@ -2758,9 +2762,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 		ss.str("");
 		ss.clear();
-		ss << std::setfill(' ') << std::setw(4) << you.s_dex;
 		if(you.s_dex != you.m_dex) {
-			ss << " (" << std::setw(2) << you.m_dex <<")";
+			ss << std::setfill(' ') << std::setw(2) << you.s_dex;
+			ss << "(" << std::setw(2) << you.m_dex <<")";
+		} else {
+			ss << std::setfill(' ') << std::setw(4) << you.s_dex;
 		}
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_DEX);
 		{
@@ -2777,7 +2783,9 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 		ss.str("");
 		ss.clear();
-		ss << "  ";
+		if(you.s_dex == you.m_dex) {
+			ss << "  ";
+		}
 		ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_INT);
 		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_INT)) < 4)
 			ss << std::string(4-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_INT)), ' ');
@@ -2788,9 +2796,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 		ss.str("");
 		ss.clear();
-		ss << std::setfill(' ') << std::setw(4) << you.s_int;
 		if(you.s_int != you.m_int) {
-			ss << " (" << std::setw(2) << you.m_int <<")";
+			ss << std::setfill(' ') << std::setw(2) << you.s_int;
+			ss << "(" << std::setw(2) << you.m_int <<")";
+		} else {
+			ss << std::setfill(' ') << std::setw(4) << you.s_int;
 		}
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_INT);
 		{
@@ -3163,6 +3173,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				stateDraw.addState(LocalzationManager::formatString(LOC_SYSTEM_BUFF_STAT_GLUTTON, PlaceHolderHelper(to_string(you.s_glutton))),CL_white_blue,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_GLUTTON), this);
 			}
+			if(you.GetPotionAddictLevel() > 0) {
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_POTIONADDICT),
+				   (you.GetPotionAddictLevel()==3?CL_danger:(you.GetPotionAddictLevel()==2?CL_small_danger:CL_warning)),
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_POTIONADDICT), this);
+			}
 			if(you.s_stasis)
 			{				
 				D3DCOLOR color_ = CL_danger;
@@ -3347,9 +3362,9 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_PARALYSE), CL_danger,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_PARALYSE), this);
 			}
-			if(you.s_levitation)
+			if(you.NowLevitation())
 			{
-				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_LEVITATION), you.s_levitation>10 ? CL_white_blue : CL_blue,
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_LEVITATION), you.GetProperty(TPT_BIG_WING)?CL_normal:(you.s_levitation>10 ? CL_white_blue : CL_blue),
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_LEVITATION), this);
 			}
 			else if(you.s_glow)

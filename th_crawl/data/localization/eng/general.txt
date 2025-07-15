@@ -185,6 +185,7 @@ LOC_SYSTEM_CANT_EQUIP_LIKEIT,You can’t equip it like that.
 LOC_SYSTEM_CANT_EQUIP_HORN,Your horns prevent you from using this equipment.
 LOC_SYSTEM_CANT_EQUIP_GHOSTFOOT,You have no legs!
 LOC_SYSTEM_CANT_EQUIP_CLAW,You can’t wear gloves because of your claws!
+LOC_SYSTEM_CANT_EQUIP_WING,Your wings are far too large to wear a cloak!
 LOC_SYSTEM_CANT_UNEQUIP_EXIST,You have nothing to unequip.
 LOC_SYSTEM_CANT_BRAND,You can't brand anything here.
 LOC_SYSTEM_NOT_EQUIP_ITEM,You’re not wearing that!
@@ -306,6 +307,7 @@ LOC_SYSTEM_SHOUT_STOP,Stop!
 LOC_SYSTEM_SHOUT_WAIT,Wait!
 LOC_SYSTEM_SHOUT_COME,Follow me!
 LOC_SYSTEM_SHOUT_FINISH,You shouted and drew attention.
+LOC_SYSTEM_SHOUT_TICK,You couldn’t help but shout a loud greeting upon seeing your opponent.
 LOC_SYSTEM_SHOUT_WHO,Who do you want to order an attack on?
 LOC_SYSTEM_SHOUT_CANCLE,You didn't shout anything.
 LOC_SYSTEM_ALREADY_FULL_POWER,You are already at full power!
@@ -391,7 +393,7 @@ LOC_SYSTEM_EXPERIENCE_SHOW_MAX,You have reached the maximum level.
 LOC_SYSTEM_DROP_ITEM,You drop {0}.
 LOC_SYSTEM_DROP_ITEM_SION_ALL,But it vanished due to the curse of the Poverty God.
 LOC_SYSTEM_DROP_ITEM_SION_SOME,{0} disappeared due to the curse of the Poverty God.
-LOC_SYSTEM_HOTKEY,Hotkey
+LOC_SYSTEM_HOTKEY,Key
 LOC_SYSTEM_HOTKEYCHANGE,Change Hotkey
 LOC_SYSTEM_NAME,Name
 LOC_SYSTEM_SKILL_NAME,Skill Name
@@ -689,6 +691,7 @@ LOC_SYSTEM_BUFF_STAT_TRACKING,Tracking
 LOC_SYSTEM_BUFF_STAT_SHIELD,Shield ({0})
 LOC_SYSTEM_BUFF_STAT_OVERHEAT,Overheat ({0})
 LOC_SYSTEM_BUFF_STAT_GLUTTON,Gluttony ({0})
+LOC_SYSTEM_BUFF_STAT_POTIONADDICT,Withdrawal
 LOC_SYSTEM_BUFF_DESCRIBE_RISK,Risk indicates how dangerous your current situation is.
 LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY1,Your armor and shield are too heavy! Your evasion, stealth, magic, accuracy, and movement speed are reduced by the penalty.
 LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY2,This is the total penalty from your armor and shield. Your evasion, stealth, magic success rate, accuracy, and movement speed are reduced accordingly.
@@ -765,7 +768,7 @@ LOC_SYSTEM_BUFF_DESCRIBE_STAT_STONEFIST,Your next unarmed attack deals extra dam
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIAMOND,You gain extra defense for a short time.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_POISON_BODY,Continuously deals poison damage to enemies in the surrounding 8 tiles.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_ENLIGHTENMENT,Melee damage increases, damage taken is reduced to 66%, but your movement speed decreases to 0.77x.
-LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTUMN_BLADE,Melee attack damage is increased by {0}×. If unarmed, it increases by {1}×.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_AUTUMN_BLADE,Melee attack damage is increased by {0}x. If unarmed, it increases by {1}x.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_PHILOSOPHERS,MP is consumed automatically to cast elemental spells at nearby enemies.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_ROYALFLARE,Your movement speed is reduced, and MP is heavily consumed to deal growing area fire damage.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_UNLUCKY1,You are unlucky! This state can only be removed by gaining experience.
@@ -795,6 +798,7 @@ LOC_SYSTEM_BUFF_DESCRIBE_STAT_TRACKING,You are being tracked. All enemies on the
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_SHIELD,The shield absorbs all incoming damage. It regenerates if you avoid damage for a while.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_OVERHEAT,You are experiencing magical backlash. You take damage equal to your overheat level when it increases.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_GLUTTON,Your attack power and accuracy increase with your gluttony level. It disappears when not in combat.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_POTIONADDICT,You are suffering withdrawal due to potion addiction. Your stats will gradually decrease unless you drink a potion.
 LOC_SYSTEM_SMOKE_NORMAL,Thin Smoke
 LOC_SYSTEM_SMOKE_FOG,Fog Cloud
 LOC_SYSTEM_SMOKE_FIRE,Flame Cloud
@@ -2192,9 +2196,9 @@ LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CAN_SILENCE,You can evoke silence.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_DRUNKARD,You are highly resistant to alcohol.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_RELIGIOUS,You resonate more deeply with the divine.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BIG_WING,Massive wings have grown on your back. (Permanent flight, increased movement speed)
-LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STURDY,Your body is chemically enhanced and sturdy. (HP +{0}%)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STURDY,Your body is chemically enhanced and sturdy. (HP{0}%)
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_GOOD_FOR_POTION,Potions work more effectively on you.
-LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_INTELLIGENCE,Your mind is exceptionally sharp. (Int +{0}, Conf Resist)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_INTELLIGENCE,Your mind is exceptionally sharp. (Int{0}, Conf Resist)
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POISON_BODY,Your body emits poison. (Poison Resistance, releases poison cloud when hit)
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_WEAK_ARMOUR,Your body has shrunk, reducing AC gained from armor.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_TWISTED_HORN,A horn has sprouted from your head, making headgear incompatible.
@@ -2286,7 +2290,7 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_AC_AND_SLAY,You’ve become attack-focused.\nGa
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FIREUP_COLDDOWN,Your body is now fire-adapted.\nGain {0} Fire Res, but lose {1} Cold Res.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_RAD,This trait is temporarily acquired from radiation.\nIt disappears after gaining some EXP.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_DUAL_WEAPON,You can equip two weapons.\nWhen equipping a weapon while already holding one, the new weapon is equipped in the opposite hand.\nIf you're dual-wielding, both weapons are used to attack simultaneously.\nAttack speed is calculated as the average of both weapons.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_QUICK_DASH,Your movement speed increases by {0}× when approaching enemies in your line of sight.\nThis has little effect when sneaking up on sleeping enemies.\nTiles affected by this effect are marked with a special symbol on the ground.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_QUICK_DASH,Your movement speed increases by {0}x when approaching enemies in your line of sight.\nThis has little effect when sneaking up on sleeping enemies.\nTiles affected by this effect are marked with a special symbol on the ground.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CAN_INVISIBLE,You can become invisible by consuming a small amount of Power and MP.\nWhile invisible, enemies without See Invisible cannot detect you easily.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CAN_SILENCE,You can spend 1 Power and some MP to erase sound in the area.\nPrevents spellcasting, ability use, and scroll reading.\nBecause the silence feels unnatural, it actually hurts stealth.\nIt affects an area on use, but the range gradually shrinks over time.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_DRUNKARD,You're highly tolerant of alcohol and suffer little to no penalty even when drunk.
@@ -2322,6 +2326,7 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_DEFAULT_ABIL,Special shooting mode rules:\n
 LOC_SYSTEM_TRIBE_PROPERTY_HEAD_UNEQUIP,Your headgear has been unequipped!
 LOC_SYSTEM_TRIBE_PROPERTY_FOOT_UNEQUIP,Your leg armor has been unequipped!
 LOC_SYSTEM_TRIBE_PROPERTY_HAND_UNEQUIP,Your gloves have been unequipped!
+LOC_SYSTEM_TRIBE_PROPERTY_CLOAK_UNEQUIP,Your cloak has been unequipped!
 LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE,You've grown strong enough to lose one resurrection.
 LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE_ALL,You've grown strong enough to lose all resurrections.
 LOC_SYSTEM_JOB_WARRIOR,Warrior
@@ -2745,7 +2750,7 @@ LOC_SYSTEM_SPL_DESCRIBE_HEAL_OTHER,Heals nearby allies.\nRestores health to thos
 LOC_SYSTEM_SPL_DESCRIBE_MIND_BENDING,Fires danmaku imbued with wave distortion.\nDeals damage and may slow enemies if they fail to resist.\nHowever, its damage scaling is low, it can be resisted, and it can be dodged.\n
 LOC_SYSTEM_SPL_DESCRIBE_STONE_PUNCH,An alchemy spell that empowers your bare hands with the strength of stone.\nBoosts damage of your next unarmed attack.\nCannot be used while wielding a weapon.\n
 LOC_SYSTEM_SPL_DESCRIBE_STONE_ARROW,A danmaku made of stone.\nIt hurts if it hits, but it doesn't travel far and moves in a straight line, making it easy to dodge.\n
-LOC_SYSTEM_SPL_DESCRIBE_STONE_TRAP,Places sharp, painful rocks in a 3×3 area for a short time.\nHurts anyone who walks over it, friend or foe.\nFlying enemies ignore it.\nMore Power means more tiles.\n
+LOC_SYSTEM_SPL_DESCRIBE_STONE_TRAP,Places sharp, painful rocks in a 3x3 area for a short time.\nHurts anyone who walks over it, friend or foe.\nFlying enemies ignore it.\nMore Power means more tiles.\n
 LOC_SYSTEM_SPL_DESCRIBE_STONE_UPLIFT,Raises the ground rapidly beneath a chosen area, creating sharp rocks.\nDeals high damage in a small AoE.\nLow Power may result in no explosion.\n
 LOC_SYSTEM_SPL_DESCRIBE_KANAME_DRILL,Launches a solid stone shard in a straight line.\nDeals more damage as it spins on hit.\nCannot pierce enemies.\n
 LOC_SYSTEM_SPL_DESCRIBE_DIAMOND_HARDNESS,Uses alchemy to coat the body with the toughness of the earth.\nProvides minor defense for a short time.\n
@@ -3238,7 +3243,7 @@ LOC_SYSTEM_ITEM_ARMOUR_T_MIKO,{0} Shrine Maiden Robe
 LOC_SYSTEM_ITEM_ARMOUR_T_WING,{0} Winged Garment
 LOC_SYSTEM_ITEM_ARMOUR_T_KAPPA,{0} Kappa Suit
 LOC_SYSTEM_ITEM_ARMOUR_T_FIRE,{0} Fire-Rat Robe
-LOC_SYSTEM_ITEM_ARMOUR_T_MAID,{0} Maid Outfit
+LOC_SYSTEM_ITEM_ARMOUR_T_MAID,{0} Maid Uniform
 LOC_SYSTEM_ITEM_ARMOUR_T_POISON,{0} Doll Dress
 LOC_SYSTEM_ITEM_ARMOUR_T_AUTUMN,{0} Maple Armor
 LOC_SYSTEM_ITEM_ARMOUR_SHIELD_ROUNDSHIELD,Wooden Shield

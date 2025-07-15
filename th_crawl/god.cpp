@@ -345,7 +345,7 @@ bool GetGodAbility(int level, bool plus)
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_GAIN_ABLILITY4_REMOVE),true,false,false,CL_warning);
 			break;
 		case 5:
-			//if(you.power>=500)
+			//if(you.power>=you.GetMaxPower())
 			//{			
 			//	you.ResistUpDown(plus,RST_FIRE);
 			//	you.ResistUpDown(plus,RST_ICE);
@@ -3770,7 +3770,7 @@ bool god_punish(god_type god)
 			switch(rand_.pop())
 			{
 			case 0:				
-				you.PowUpDown(-min(you.power,500)/2,true);
+				you.PowUpDown(-min(you.power,you.GetMaxPower())/2,true);
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MINORIKO_PUNISH_HUNGER), true,false,false,CL_warning);
 				break;
 			case 1:

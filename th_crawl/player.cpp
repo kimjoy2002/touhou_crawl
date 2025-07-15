@@ -124,7 +124,7 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
 force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
 s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_oil(0), s_fire(0), s_tracking(0), s_shooting_turn(0), s_overheat(0), s_overheat_turn(0),
-s_regen(0), s_selfdestruct(0), s_glutton(0), s_glutton_turn(0), s_shield(), alchemy_buff(ALCT_NONE), alchemy_time(0),
+s_regen(0), s_selfdestruct(0), s_glutton(0), s_glutton_turn(0), s_potion_addict(0), s_shield(), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -318,6 +318,7 @@ void players::init() {
 	s_selfdestruct = 0;
 	s_glutton = 0;
 	s_glutton_turn = 0;
+	s_potion_addict = 0;
 	s_shield.percent = 0;
 	s_shield.value = 0;
 	s_shield.turn = 0;
@@ -566,6 +567,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_selfdestruct);
 	SaveData<int>(fp, s_glutton);
 	SaveData<int>(fp, s_glutton_turn);
+	SaveData<int>(fp, s_potion_addict);
 	SaveData<shield_struct>(fp, s_shield);
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
@@ -841,6 +843,9 @@ void players::LoadDatas(FILE *fp)
 		LoadData<int>(fp, s_selfdestruct);
 		LoadData<int>(fp, s_glutton);
 		LoadData<int>(fp, s_glutton_turn);
+	}
+	if(!isPrevVersion(loading_version_string, "ver1.112")) {
+		LoadData<int>(fp, s_potion_addict);
 	}
 	if(!isPrevVersion(loading_version_string, "ver1.11")) {
 		LoadData<shield_struct>(fp, s_shield);
@@ -1739,11 +1744,68 @@ int players::OpenDoor(const coord_def &c, bool no_turn)
 		return 0;
 	}
 }
+int players::addPotionAddict(bool reset){
+	int prev_level = GetPotionAddictLevel();
+
+	if(reset == false) {
+		s_potion_addict++;
+	} else {
+		s_potion_addict = 0;
+	}
+	int next_level = GetPotionAddictLevel();
+
+	if(next_level != prev_level) {
+		if(prev_level ==0 && next_level >= 1) {
+			StatUpDown(-1, STAT_STR);
+			StatUpDown(-1, STAT_DEX);
+			StatUpDown(-1, STAT_INT);
+		}
+		if(prev_level <= 1 && next_level >= 2) {
+			StatUpDown(-2, STAT_STR);
+			StatUpDown(-2, STAT_DEX);
+			StatUpDown(-2, STAT_INT);
+		}
+		if(prev_level <= 2 && next_level >= 3) {
+			StatUpDown(-3, STAT_STR);
+			StatUpDown(-3, STAT_DEX);
+			StatUpDown(-3, STAT_INT);
+		}
+
+		if(prev_level >= 3 && next_level <= 2) {
+			StatUpDown(3, STAT_STR);
+			StatUpDown(3, STAT_DEX);
+			StatUpDown(3, STAT_INT);
+		}
+		if(prev_level >= 2 && next_level <= 1) {
+			StatUpDown(2, STAT_STR);
+			StatUpDown(2, STAT_DEX);
+			StatUpDown(2, STAT_INT);
+		}
+		if(prev_level <= 1 && next_level == 0) {
+			StatUpDown(1, STAT_STR);
+			StatUpDown(1, STAT_DEX);
+			StatUpDown(1, STAT_INT);
+		}
+	}
+	return next_level;
+}
+int players::GetPotionAddictLevel(){ 
+	if(s_potion_addict < 800) {
+		return 0;
+	}
+	else if(s_potion_addict < 1300) {
+		return 1;
+	} 
+	else if(s_potion_addict < 1900) {
+		return 2;
+	} 
+	return 3;
+}
 void players::CalcuHP()
 {
 	int fight_= GetSkillLevel(SKT_FIGHT, true);
 	int level_=level;
-	int aptit_=10+GetProperty(TPT_HP)-GetProperty(TPT_HP_LOSS);
+	int aptit_=10+GetProperty(TPT_HP)-GetProperty(TPT_HP_LOSS)+GetProperty(TPT_STURDY);
 	int next_hp_ = floor((8 + floor((1+3*fight_)/2.0f)+floor(9*level_/2.0f)+floor(fight_*level_/14.0f))*(aptit_/10.0f));
 	hp = hp*next_hp_/max_hp;
 	max_hp = next_hp_;
@@ -1828,6 +1890,9 @@ int players::GetWalkDelay(float multi_)
 		speed_ = speed_*8/10;
 	else if(GetProperty(TPT_SPEED)==-1)
 		speed_ = speed_*12/10;
+	if(GetProperty(TPT_BIG_WING) > 0) {
+		speed_ = speed_*8/10;
+	}
 	speed_ = speed_*multi_;
 	if(speed_<3)
 		speed_ = 3;
@@ -2387,6 +2452,9 @@ int players::MpUpDown(int value_)
 		return mp;
 	}
 }
+int players::GetMaxPower() {
+	return GetProperty(TPT_POWERLESS)?400:500;
+}
 int players::AcUpDown(int value_, int bonus_)
 {
 	real_ac += value_;
@@ -2553,28 +2621,13 @@ int players::PowUpDown(int value_, bool big_)
 	if (GetProperty(TPT_PURE_POWER))
 		return power; //풀파워 모드면 떨어지지않음
 
-	if(big_ && value_<0 && power>500)
-		power = 500;
+	if(big_ && value_<0 && power>GetMaxPower())
+		power = GetMaxPower();
 	power+=value_;
-	if(power>530+(you.god == GT_MINORIKO?20:0))
-		power = 530+(you.god == GT_MINORIKO?20:0);
+	if(power>GetMaxPower()+30+(you.god == GT_MINORIKO?20:0))
+		power = GetMaxPower()+30+(you.god == GT_MINORIKO?20:0);
 	else if(power<0)
 		power = 0;
-
-	//if(you.god == GT_MINORIKO && !you.GetPunish(GT_MINORIKO) && pietyLevel(you.piety)>=5)
-	//{
-	//	if(full_power_ && !(power>=500))
-	//	{			
-	//		you.ResistUpDown(-1,RST_FIRE);
-	//		you.ResistUpDown(-1,RST_ICE);
-	//	}
-	//	else if(!full_power_ && power>=500)
-	//	{
-	//		
-	//		you.ResistUpDown(1,RST_FIRE);
-	//		you.ResistUpDown(1,RST_ICE);
-	//	}
-	//}
 
 	return power;
 }
@@ -3407,7 +3460,7 @@ bool players::SetLevitation(int levitation_)
 {
 	if(!levitation_)
 		return false;
-	if(!s_levitation)
+	if(!NowLevitation())
 		printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY) + " ",false,false,false,CL_white_blue);
 	else
 	{
@@ -3417,6 +3470,9 @@ bool players::SetLevitation(int levitation_)
 	if(s_levitation>100)
 		s_levitation = 100;
 	return true;
+}
+bool players::NowLevitation() {
+	return ((GetProperty(TPT_BIG_WING) > 0) || s_levitation);
 }
 bool players::SetGlow(int glow_, bool no_speak, bool setting)
 {
@@ -6583,7 +6639,7 @@ int players::haveOrb()
 }
 bool players::isImpossibeEquip(equip_type type_, bool massage_)
 {
-	if(type_ == ET_HELMET && GetProperty(TPT_HORN) )
+	if(type_ == ET_HELMET && (GetProperty(TPT_HORN) || GetProperty(TPT_TWISTED_HORN) ))
 	{
 		if(massage_)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_CANT_EQUIP_HORN),true,false,false,CL_normal);
@@ -6599,6 +6655,12 @@ bool players::isImpossibeEquip(equip_type type_, bool massage_)
 	{
 		if(massage_)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_CANT_EQUIP_CLAW),true,false,false,CL_normal);
+		return false;
+	}
+	if(type_ == ET_CLOAK && GetProperty(TPT_BIG_WING)) {
+
+		if(massage_)
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CANT_EQUIP_WING),true,false,false,CL_normal);
 		return false;
 	}
 	return true;
@@ -6814,7 +6876,11 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 		}
 		else
 		{
-			AcUpDown((*it).value1 * plus_, (*it).value4 * plus_);
+			int ac_ = (*it).value1;
+			if(GetProperty(TPT_WEAK_ARMOUR)) {
+				ac_/=2;
+			}
+			AcUpDown(ac_ * plus_, (*it).value4 * plus_);
 			//EvUpDown((*it).value2 * 1.5f * plus_);
 			if(where_ == ET_ARMOR)
 				equipArmour((armour_kind)(*it).value5, plus_);

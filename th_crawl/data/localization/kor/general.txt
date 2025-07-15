@@ -185,6 +185,7 @@ LOC_SYSTEM_CANT_EQUIP_LIKEIT,그렇게 장착할 수 없다.
 LOC_SYSTEM_CANT_EQUIP_HORN,당신의 뿔이 이 장비를 쓰는걸 방해한다.
 LOC_SYSTEM_CANT_EQUIP_GHOSTFOOT,당신은 다리가 없다!
 LOC_SYSTEM_CANT_EQUIP_CLAW,당신의 손톱때문에 장갑을 낄 수 없다!
+LOC_SYSTEM_CANT_EQUIP_WING,당신의 너무나도 큰 날개때문에 망토를 낄 수 없다!
 LOC_SYSTEM_CANT_UNEQUIP_EXIST,벗을 아이템이 없다.
 LOC_SYSTEM_CANT_BRAND,여기엔 부여할 수 없다.
 LOC_SYSTEM_NOT_EQUIP_ITEM,그것을 입고 있지 않다!
@@ -306,6 +307,7 @@ LOC_SYSTEM_SHOUT_STOP,멈춰!
 LOC_SYSTEM_SHOUT_WAIT,기다려!
 LOC_SYSTEM_SHOUT_COME,따라와!
 LOC_SYSTEM_SHOUT_FINISH,당신은 소리를 쳐서 주의를 끌었다.
+LOC_SYSTEM_SHOUT_TICK,당신은 상대방을 보고 못참고 크게 인사를 했다.
 LOC_SYSTEM_SHOUT_WHO,누구를 공격하게 명령하시겠습니까?
 LOC_SYSTEM_SHOUT_CANCLE,아무것도 외치지 않았다.
 LOC_SYSTEM_ALREADY_FULL_POWER,당신은 이미 풀파워다!
@@ -689,6 +691,7 @@ LOC_SYSTEM_BUFF_STAT_TRACKING,추적
 LOC_SYSTEM_BUFF_STAT_SHIELD,실드({0})
 LOC_SYSTEM_BUFF_STAT_OVERHEAT,과열({0})
 LOC_SYSTEM_BUFF_STAT_GLUTTON,폭식({0})
+LOC_SYSTEM_BUFF_STAT_POTIONADDICT,금단현상
 LOC_SYSTEM_BUFF_DESCRIBE_RISK,위험도는 얼마나 현재 상황이 위험한지에 대한 수치입니다.
 LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY1,갑옷과 방패가 너무 무겁습니다! 패널티만큼 회피, 은밀, 마법, 명중, 이동속도가 감소되고, 행동속도가 2배로 느려집니다.
 LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY2,갑옷과 방패의 패널티의 합계입니다. 패널티만큼 회피, 은밀, 마법성공율, 명중, 이동속도가 감소합니다.
@@ -795,6 +798,7 @@ LOC_SYSTEM_BUFF_DESCRIBE_STAT_TRACKING,당신은 추적당하고 있습니다. �
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_SHIELD,모든 데미지를 실드가 대신 막아줍니다. 일정 시간 데미지를 받지않으면 재생합니다.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_OVERHEAT,마법의 강한 반동을 받고 있습니다. 과열 수치가 추가로 올라갈때마다 과열 수치만큼 데미지를 받습니다.
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_GLUTTON,당신은 폭식 수치만큼 공격력과 명중률이 상승합니다. 전투를 하지않으면 사라집니다.
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_POTIONADDICT,당신은 물약 중독에 의해 금단 증상이 나타나고 있습니다. 물약을 먹지않으면 점차 스탯이 낮아집니다.
 LOC_SYSTEM_SMOKE_NORMAL,옅은 연기
 LOC_SYSTEM_SMOKE_FOG,안개 구름
 LOC_SYSTEM_SMOKE_FIRE,화염 구름
@@ -2322,6 +2326,7 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_DEFAULT_ABIL,여기서는 일반 게임과 
 LOC_SYSTEM_TRIBE_PROPERTY_HEAD_UNEQUIP,당신이 쓰고있던 머리방어구가 벗겨졌다!
 LOC_SYSTEM_TRIBE_PROPERTY_FOOT_UNEQUIP,당신이 쓰고있던 다리방어구가 벗겨졌다!
 LOC_SYSTEM_TRIBE_PROPERTY_HAND_UNEQUIP,당신이 쓰고있던 손방어구가 벗겨졌다!
+LOC_SYSTEM_TRIBE_PROPERTY_CLOAK_UNEQUIP,당신이 착용하던 망토가 벗겨졌다!
 LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE,당신은 충분히 성장하여 부활능력을 하나 잃었다.
 LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE_ALL,당신은 충분히 성장하여 부활능력을 모두 잃었다.
 LOC_SYSTEM_JOB_WARRIOR,전사

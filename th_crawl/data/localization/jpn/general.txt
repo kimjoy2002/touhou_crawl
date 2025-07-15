@@ -37,7 +37,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,ボーナス）	信仰深い特性。�
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4,初心者ヒント）Vキーでスペルカード使用可能。地のカードは壁に当てて爆発ダメージを狙おう。\n諏訪子様は寛大だから、望むなら他の神を信仰してもいいよ。
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI1,自動探索＆自動攻撃型。OキーとTABキーがあなたを守るでしょう。
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI2,適性ボーナス）長剣適性 +1
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,ボーナス）+2 曲刀、+2 鉄の盾、+2 チェインメイル、治癒ポーション×2、力のポーション×2、透明感知の特性持ち
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,ボーナス）+2 曲刀、+2 鉄の盾、+2 チェインの服、治癒のポーションx2、力のポーションx2、透明感知の特性持ち
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI4,初心者ヒント）tabで自動攻撃、oで自動探索。危ない時はqでポーションを飲みましょう。
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI1,本怖！貴方の後ろにいるよ。無意識の力で全てを暗殺せよ！
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI2,適性ボーナス）短剣適性 +2、精神魔法適性 +2
@@ -78,17 +78,17 @@ LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT,職業を選択します。
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT_HELP,それぞれ大文字で職業の説明を見てください。
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WARRIOR,典型的な近接戦闘を得意とする重装戦士。\n選択した武器と重い盾、鎧を装備してスタート。
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WIZARD,さまざまな状況に対応できる魔法を幅広く使う。\n初心者用の魔法書を持ち、魔法弾幕を習得してスタート。
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SHAMAN,神奈子の巫女として、その力を借りて戦う近接職。\n武器は御幣（鈍器）を装備し、巫女装束と共に神奈子を信じてスタート。
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SHAMAN,神奈子の巫女として、その力を借りて戦う近接職。\n武器は御幣を装備し、巫女装束と共に神奈子を信じてスタート。
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_GLADIATOR,遠距離と近距離をバランスよく使う回避型の戦士。\n選択した武器といくつかの弾幕、小型の盾を持ってスタート。
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_MONK,素手格闘に才能を持つ格闘家。\n高い素手格闘スキルを習得してスタート。
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_CRUSADER,魔法と近接戦を両立するバフ系魔法戦士。\n選んだ武器と初心者用の魔戦士の書、「ヴェイリング」を習得してスタート。
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_CRUSADER,魔法と近接戦を両立するバフ系魔法戦士。\n選んだ武器と初心者用の魔戦士の書、ヴェイリングを習得してスタート。
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_BERSERKER,極端なステータスと非常に攻撃的な装備でスタートする職。\n斧とローブを装備し、力のポーションを2個所持。
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_FIRE_WIZARD,炎を操る火炎魔法を習得してスタートする元素魔法使い。\n初心者用火炎術士の書を持ち、火の魔法を習得。
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_COLD_WIZARD,冷気を操る冷気魔法を習得してスタートする元素魔法使い。\n初心者用冷気術士の書を持ち、冷気魔法を習得。
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_EARTH_WIZARD,大地を操る地魔法を習得してスタートする元素魔法使い。\n初心者用地術士の書を持ち、岩拳を習得。
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_AIR_WIZARD,風と雷を操る魔法を習得してスタートする元素魔法使い。\n初心者用風術士の書を持ち、電撃魔法を習得。
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_LIGHT_WIZARD,光の魔法を主に使う魔法使い。\n初心者向けの光術士の書を持ち、魔法の弾幕を学びながら冒険を始める。
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SUMMON_WIZARD,召喚獣を操る召喚魔法を習得してスタートする魔法使い。\n初心者用召喚術士の書を持ち、「モオク召喚」を習得。
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SUMMON_WIZARD,召喚獣を操る召喚魔法を習得してスタートする魔法使い。\n初心者用召喚術士の書を持ち、毛玉召喚を習得。
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ALCHEMIST,錬金術を用いて近接戦闘を行う魔法使い兼錬金術士。\n初心者用錬金術士の書を持ち、岩拳を習得してスタート。
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_PSYCHOLOGIST,相手を操る精神魔法を学ぶデバフ系魔法使い。\n初心者用心理学者の書を持ち、催眠術を習得してスタート。
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_REAPER,職業の象徴である大鎌を持って登場する恐ろしい存在。\n呪われた+3の大鎌とローブを装備してスタート。
@@ -185,6 +185,7 @@ LOC_SYSTEM_CANT_EQUIP_LIKEIT,そのようには装備できない。
 LOC_SYSTEM_CANT_EQUIP_HORN,あなたの角がこの装備の着用を妨げている。
 LOC_SYSTEM_CANT_EQUIP_GHOSTFOOT,あなたには足がない！
 LOC_SYSTEM_CANT_EQUIP_CLAW,爪のせいで手袋が装備できない！
+LOC_SYSTEM_CANT_EQUIP_WING,あなたの羽が大きすぎてマントを装備できない！
 LOC_SYSTEM_CANT_UNEQUIP_EXIST,脱ぐ装備がありません。
 LOC_SYSTEM_CANT_BRAND,ここには付与できません。
 LOC_SYSTEM_NOT_EQUIP_ITEM,それは装備していない！
@@ -306,6 +307,7 @@ LOC_SYSTEM_SHOUT_STOP,止まれ！
 LOC_SYSTEM_SHOUT_WAIT,待って！
 LOC_SYSTEM_SHOUT_COME,こっち来て！
 LOC_SYSTEM_SHOUT_FINISH,あなたは声を上げて注意を引いた。
+LOC_SYSTEM_SHOUT_TICK,あなたは相手を見て思わず大声で挨拶してしまった。
 LOC_SYSTEM_SHOUT_WHO,誰を攻撃するよう命じますか？
 LOC_SYSTEM_SHOUT_CANCLE,何も叫ばなかった。
 LOC_SYSTEM_ALREADY_FULL_POWER,あなたはすでにフルパワーだ！
@@ -391,7 +393,7 @@ LOC_SYSTEM_EXPERIENCE_SHOW_MAX,現在、最高レベルに達しています。
 LOC_SYSTEM_DROP_ITEM,{0}を置いた。
 LOC_SYSTEM_DROP_ITEM_SION_ALL,しかし貧乏神の呪いで消えてしまった。
 LOC_SYSTEM_DROP_ITEM_SION_SOME,貧乏神の呪いで{0}個が消えた。
-LOC_SYSTEM_HOTKEY,ホットキー
+LOC_SYSTEM_HOTKEY,キー
 LOC_SYSTEM_HOTKEYCHANGE,ホットキー変更
 LOC_SYSTEM_NAME,名前
 LOC_SYSTEM_SKILL_NAME,スキル名
@@ -689,6 +691,7 @@ LOC_SYSTEM_BUFF_STAT_TRACKING,追跡
 LOC_SYSTEM_BUFF_STAT_SHIELD,シールド（{0}）
 LOC_SYSTEM_BUFF_STAT_OVERHEAT,オーバーヒート（{0}）
 LOC_SYSTEM_BUFF_STAT_GLUTTON,暴食（{0}）
+LOC_SYSTEM_BUFF_STAT_POTIONADDICT,禁断症状
 LOC_SYSTEM_BUFF_DESCRIBE_RISK,危険度は現在の状況がどれほど危険かを示す数値です。
 LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY1,鎧と盾が重すぎます！回避、隠密、魔法、命中、移動速度がペナルティ分減少し、行動速度が2倍遅くなります。
 LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY2,鎧と盾によるペナルティの合計です。ペナルティ分、回避・隠密・魔法成功率・命中・移動速度が低下します。
@@ -795,6 +798,7 @@ LOC_SYSTEM_BUFF_DESCRIBE_STAT_TRACKING,追跡されています。マップ上�
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_SHIELD,すべてのダメージをシールドが代わりに防ぎます。一定時間ダメージを受けなければ回復します。
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_OVERHEAT,魔法の強い反動を受けています。オーバーヒート値が上がるたびに、その分のダメージを受けます。
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_GLUTTON,暴食値に応じて攻撃力と命中率が上昇します。戦闘をしないと効果は消えます。
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_POTIONADDICT,あなたはポーション中毒により禁断症状が現れている。ポーションを飲まないと、徐々にステータスが下がっていく。
 LOC_SYSTEM_SMOKE_NORMAL,薄い煙
 LOC_SYSTEM_SMOKE_FOG,霧の雲
 LOC_SYSTEM_SMOKE_FIRE,火炎の雲
@@ -2192,9 +2196,9 @@ LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CAN_SILENCE,あなたは静寂を発動でき
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_DRUNKARD,あなたは酒に強い。
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_RELIGIOUS,あなたは神と深く交感している。
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_BIG_WING,あなたに巨大な翼が生えた。（常時飛行、移動速度上昇）
-LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STURDY,あなたの体はドーピングにより頑丈になっている。（HP +{0}%）
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STURDY,あなたの体はドーピングにより頑丈になっている。（HP{0}%）
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_GOOD_FOR_POTION,あなたはポーションの効果をより強く受ける。
-LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_INTELLIGENCE,あなたの頭脳は非常に明晰だ。（知力 +{0}、混乱耐性）
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_INTELLIGENCE,あなたの頭脳は非常に明晰だ。（知力{0}、混乱耐性）
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POISON_BODY,あなたの体は毒を放っている。（毒耐性、攻撃者の足元に毒の雲）
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_WEAK_ARMOUR,あなたの体が小さくなり、鎧によるACが減少する。
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_TWISTED_HORN,あなたの頭に角が生え、頭装備が似合わなくなった。
@@ -2322,6 +2326,7 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_DEFAULT_ABIL,通常のゲームとはいく
 LOC_SYSTEM_TRIBE_PROPERTY_HEAD_UNEQUIP,装備していた頭防具が脱げた！
 LOC_SYSTEM_TRIBE_PROPERTY_FOOT_UNEQUIP,装備していた足防具が脱げた！
 LOC_SYSTEM_TRIBE_PROPERTY_HAND_UNEQUIP,装備していた手防具が脱げた！
+LOC_SYSTEM_TRIBE_PROPERTY_CLOAK_UNEQUIP,装備していたマントが外れた！
 LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE,十分に成長したため、蘇生能力を1つ失った。
 LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE_ALL,十分に成長したため、蘇生能力をすべて失った。
 LOC_SYSTEM_JOB_WARRIOR,戦士
@@ -2745,7 +2750,7 @@ LOC_SYSTEM_SPL_DESCRIBE_HEAL_OTHER,味方を回復させる魔法。\n近くの�
 LOC_SYSTEM_SPL_DESCRIBE_MIND_BENDING,波長を込めた弾幕で敵の波長を歪ませる魔法。\nダメージに加え、抵抗に失敗した場合は速度低下を引き起こすが、\nパワーが上がってもダメージ増加が少なく、抵抗や回避も可能な点が弱点。\n
 LOC_SYSTEM_SPL_DESCRIBE_STONE_PUNCH,素手に岩の力を込める錬金術魔法。\n次の1回だけ素手攻撃が強化される。\n武器を装備していると使用できない。\n
 LOC_SYSTEM_SPL_DESCRIBE_STONE_ARROW,岩で作られた弾幕。\n命中すると痛いが、射程が短く直線的なため回避しやすい。\n
-LOC_SYSTEM_SPL_DESCRIBE_STONE_TRAP,3×3の床にトゲ付き岩を設置する魔法。\n通過した味方や敵に小ダメージを与えるが、飛行中なら無効。\nパワーが高いほど多く設置できる。\n
+LOC_SYSTEM_SPL_DESCRIBE_STONE_TRAP,3x3の床にトゲ付き岩を設置する魔法。\n通過した味方や敵に小ダメージを与えるが、飛行中なら無効。\nパワーが高いほど多く設置できる。\n
 LOC_SYSTEM_SPL_DESCRIBE_STONE_UPLIFT,指定位置の地面を急激に隆起させる魔法。\n鋭い岩がせり上がり、狭い範囲に大ダメージを与える。\nパワーが低いと範囲内でも不発の場合がある。\n
 LOC_SYSTEM_SPL_DESCRIBE_KANAME_DRILL,硬い要石を直線に飛ばす。\n命中すると回転して追加ダメージを与えるが、貫通はしない。\n
 LOC_SYSTEM_SPL_DESCRIBE_DIAMOND_HARDNESS,錬金術により大地の硬さを身体にまとう魔法。\n短時間、防御力が上昇する。\n
@@ -2788,7 +2793,7 @@ LOC_SYSTEM_SPL_DESCRIBE_SUMMON_NAMAZ,指定位置に巨大なナマズを落下�
 LOC_SYSTEM_SPL_DESCRIBE_SCHEMA_TANMAC,境界の彼方から飛来する弾幕。\n高レベルのスキーマはより強力な弾幕を発射する。\n
 LOC_SYSTEM_SPL_DESCRIBE_CHANGE,タヌキの特技である変化術。周囲のものに変身できる。\n近くで見える最も強いモンスターに変身する。ただし他のタヌキには変身しない。\n変身中はそのモンスターのステータスと魔法を一時的に使用可能。ただし召喚魔法は使用できない。\n一定時間後に元の姿に戻り、倒しても元の経験値が得られる。\n
 LOC_SYSTEM_SPL_DESCRIBE_UNLUCK,風水を通じて周囲の運気を操作する魔法。\n対象の運を下げ、凶→大凶→不滅の3段階の不幸を引き起こす。\n攻撃が命中しやすくなり、回避が困難になり、アイテム運も悪化する。\n大凶や不滅になると、UFOが落ちてくるなど洒落にならない事態も。\n…UFOが落ちる？冗談に決まってるでしょ！\n
-LOC_SYSTEM_SPL_DESCRIBE_THUNDER,上空から雷を落とす魔法。\n指定位置に3×3の範囲で強力な電撃ダメージを与える。\n雷は不確定なので、範囲内すべてに命中するとは限らない。\n
+LOC_SYSTEM_SPL_DESCRIBE_THUNDER,上空から雷を落とす魔法。\n指定位置に3x3の範囲で強力な電撃ダメージを与える。\n雷は不確定なので、範囲内すべてに命中するとは限らない。\n
 LOC_SYSTEM_SPL_DESCRIBE_AIR_STRIKE,速い空気の弾を敵に飛ばす魔法。\n貫通や強力な威力はないが、他の魔法よりも2倍の速さで詠唱できる。\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_RACOON,多数のタヌキ部下を一気に召喚するマミゾウの特技。\n召喚されたタヌキは弱いが、変化するので放っておくと厄介になる可能性がある。\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_YOUKAI,さまざまな強力な妖怪を召喚する魔法。\n鬼、提灯妖怪、雪女などが召喚される。一度に1体のみ召喚可能。\n
@@ -3028,8 +3033,8 @@ LOC_SYSTEM_SKL_DESCRIBE_LEVITATION,一時的に飛行状態になり、深い水
 LOC_SYSTEM_SKL_DESCRIBE_LEVITATION_OFF,飛行状態を解除する。\n
 LOC_SYSTEM_SKL_DESCRIBE_INVISIBLE,一時的に透明化する。\n透明状態では敵に見つかる確率が大きく低下するが、\n密着していると気配で察知される場合があり、透明を見破る敵も存在する。\nまた、透明中はPの消費が非常に早くなる。\n
 LOC_SYSTEM_SKL_DESCRIBE_INVISIBLE_OFF,透明状態を解除する。\n
-LOC_SYSTEM_SKL_DESCRIBE_EIRIN_0,所持しているポーションを投げることができる。\n着弾地点には3×3の雲が発生し、雲の種類はポーションの種類に依存する。\n有益なポーションではただの煙雲になり、有害なポーションで強力な雲が発生する。\n
-LOC_SYSTEM_SKL_DESCRIBE_EIRIN_1,永琳に身体を預け、自らの望む形に改造してもらう。\n半永久的な良い特性と悪い特性を1つずつ無作為に付与される。\n高額な費用と一時的なステータス低下のペナルティがあるが、再度使用することで以前の特性を上書きできる。\nただし、元の身体には二度と戻れない。信徒たちよ、慎重な選択を。\n
+LOC_SYSTEM_SKL_DESCRIBE_EIRIN_0,所持しているポーションを投げることができる。\n着弾地点には3x3の雲が発生し、雲の種類はポーションの種類に依存する。\n有益なポーションではただの煙雲になり、有害なポーションで強力な雲が発生する。\n
+LOC_SYSTEM_SKL_DESCRIBE_EIRIN_1,永琳に身体を預け、自らの望む形に改造してもらう。\n半永久的な良い特性と悪い特性を1つずつ無作為に付与される。\n高額な費用と一時的なステータス低下のペナルティがあるが、\n再度使用することで以前の特性を上書きできる。\nただし、元の身体には二度と戻れない。信徒たちよ、慎重な選択を。\n
 LOC_SYSTEM_SKL_DESCRIBE_EIRIN_2,高い信仰心とパワー1を消費し、体力を大幅に回復する永琳の究極スキル。\n回復効果は高いが、一定時間後に回復した分と同じだけ副作用ダメージを受ける。\n
 LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_1,一時的に知力を強化する白蓮の身体強化魔法。\n知力が5増加し、魔法成功率・パワーが上昇、霊力の回復速度も速くなる。\n
 LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_2,一時的に脚力を強化する白蓮の身体強化魔法（W）。\n移動速度が非常に速くなる。迅速とは重複せず、持続時間は短め。\n
@@ -3095,7 +3100,7 @@ LOC_SYSTEM_SKL_DESCRIBE_JUNKO_4,純狐から一度きりの永続的な浄化の
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_1,疫病神女苑または貧乏神紫苑を自分に憑依させる。\n強化された呪いを受ける代わりに神の権能を使用可能。\n憑依終了後、信仰心を獲得し、再憑依が可能。\n\n女苑：パワー全回復、アイテム2〜3個を常に浪費。\n憑依解除時にパワーが3.00を超えていれば強制的に3.00へ。\n紫苑：体力/霊力回復、パワーが低くてもペナルティなし、地面のアイテムが急速に消滅。\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_2,女苑に憑依中のみ使用可能なスペルカード「クイーン・オブ・バブル」。\n視界内のすべての敵に抵抗不能な短時間の混乱と、使用者のレベルに比例したダメージを与える。\n一度使用すると次の憑依まで再使用できない。\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_3,紫苑に憑依中のみ使用可能なスペルカード「ミスチャンス・スキャッター」。\n視界内のすべての敵に抵抗不能な鈍足を付与し、使用者の周囲に霧を発生させる。\n一度使用すると次の憑依まで再使用できない。\n
-LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_4,敵に強制的に貧乏神紫苑を憑依させることで戦闘力を奪う最凶の戦術。\n命中した敵はレベルと能力を大幅に喪失し、再憑依まで女苑に切り替わる。\n強力だが信仰が★5まで下がり、再使用には多大な信仰が必要。非生物には無効。\n
+LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_4,敵に強制的に貧乏神紫苑を憑依させることで戦闘力を奪う最凶の戦術。\n命中した敵はレベルと能力を大幅に喪失し、再憑依まで女苑に切り替わる。\n強力だが信仰が*5まで下がり、再使用には多大な信仰が必要。非生物には無効。\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_OFF,現在の憑依を手動で解除する。\n自然解除と同じ扱いで、再憑依には再度信仰を得る必要がある。\n
 LOC_SYSTEM_SKL_DESCRIBE_MIKO_1,視界内の敵の欲望を読み取り、人気度を上昇させる。\n敵の数と強さに応じて人気度が大きく上がる。\nペナルティなしで使用できるが、各フロア1回限定。\n
 LOC_SYSTEM_SKL_DESCRIBE_MIKO_2,一瞬で姿を消し、ランダムな位置に現れる。\n人気度を少し消費するシンプルな緊急脱出用の瞬間移動術。\n一度きりの使用。\n
@@ -3233,14 +3238,14 @@ LOC_SYSTEM_ITEM_ARMOUR_M_ROBE,ローブ
 LOC_SYSTEM_ITEM_ARMOUR_M_LEATHER,レザー
 LOC_SYSTEM_ITEM_ARMOUR_M_CHAIN,チェイン
 LOC_SYSTEM_ITEM_ARMOUR_M_PLATE,プレート
-LOC_SYSTEM_ITEM_ARMOUR_T_NORMAL,{0} 普通の服
-LOC_SYSTEM_ITEM_ARMOUR_T_MIKO,{0} 巫女服
-LOC_SYSTEM_ITEM_ARMOUR_T_WING,{0} 翼の服
-LOC_SYSTEM_ITEM_ARMOUR_T_KAPPA,{0} 河童の服
-LOC_SYSTEM_ITEM_ARMOUR_T_FIRE,{0} 火鼠の服
-LOC_SYSTEM_ITEM_ARMOUR_T_MAID,{0} メイド服
-LOC_SYSTEM_ITEM_ARMOUR_T_POISON,{0} 毒の人形服
-LOC_SYSTEM_ITEM_ARMOUR_T_AUTUMN,{0} 紅葉の服
+LOC_SYSTEM_ITEM_ARMOUR_T_NORMAL,{0}の服
+LOC_SYSTEM_ITEM_ARMOUR_T_MIKO,{0}の巫女服
+LOC_SYSTEM_ITEM_ARMOUR_T_WING,{0}の翼服
+LOC_SYSTEM_ITEM_ARMOUR_T_KAPPA,{0}の河童服
+LOC_SYSTEM_ITEM_ARMOUR_T_FIRE,{0}の火鼠服
+LOC_SYSTEM_ITEM_ARMOUR_T_MAID,{0}のメイド服
+LOC_SYSTEM_ITEM_ARMOUR_T_POISON,{0}の人形服
+LOC_SYSTEM_ITEM_ARMOUR_T_AUTUMN,{0}の紅葉服
 LOC_SYSTEM_ITEM_ARMOUR_SHIELD_ROUNDSHIELD,木の盾
 LOC_SYSTEM_ITEM_ARMOUR_SHIELD_IRONSHIELD,鉄の盾
 LOC_SYSTEM_ITEM_ARMOUR_SHIELD_KITESHIELD,カイトシールド

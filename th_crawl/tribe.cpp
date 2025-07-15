@@ -1247,18 +1247,52 @@ void tribe_property::gain(bool gain_)
 	case TPT_RELIGIOUS:
 		return;
 	case TPT_BIG_WING:
+		if(you.equipment[ET_CLOAK])
+		{
+			if(you.unequip(ET_CLOAK,true))
+			{
+				printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_CLOAK_UNEQUIP),true,false,false,CL_danger);
+			}
+		}
 		return;
 	case TPT_STURDY:
 		return;
 	case TPT_GOOD_FOR_POTION:
 		return;
 	case TPT_INTELLIGENCE:
+		you.ResistUpDown(value_,RST_CONFUSE);
+		you.StatUpDown(value_>0?5:-5, STAT_INT);
 		return;
 	case TPT_POISON_BODY:
+		you.ResistUpDown(value_,RST_POISON);
 		return;
 	case TPT_WEAK_ARMOUR:
+	{
+		for(int i = 0; i < ET_LAST; i++) {
+			if(you.equipment[i]) {
+				item* it = you.equipment[i];
+				if((*it).type>=ITM_ARMOR_FIRST && (*it).type<ITM_ARMOR_LAST && i >= ET_ARMOR && i < ET_ARMOR_END)
+				{
+					if((*it).type != ITM_ARMOR_SHIELD)
+					{
+						int ac_ = (*it).value1;
+						ac_/=2;
+						you.AcUpDown(ac_ * -value_, 0);
+					}
+
+				}
+			}
+		}
+	}
 		return;
 	case TPT_TWISTED_HORN:
+		if(you.equipment[ET_HELMET])
+		{
+			if(you.unequip(ET_HELMET, true))
+			{
+				printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_HEAD_UNEQUIP),true,false,false,CL_danger);
+			}
+		}
 		return;
 	case TPT_POWERLESS:
 		return;

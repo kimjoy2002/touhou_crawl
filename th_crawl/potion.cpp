@@ -9,6 +9,7 @@
 
 #include "potion.h"
 #include "god.h"
+#include "tribe.h"
 #include "soundmanager.h"
 extern HANDLE mutx;
 
@@ -124,6 +125,8 @@ bool cantGeneratePotion(potion_type kind) {
 void drinkpotion(potion_type kind, bool waste_)
 {
 	int bonus = (you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN))?1:0;
+	int multiple_ = you.GetProperty(TPT_GOOD_FOR_POTION)>1?2.0f:1.0f;
+	you.addPotionAddict(true);
 	switch(kind)
 	{
 	case PT_WATER:
@@ -133,7 +136,7 @@ void drinkpotion(potion_type kind, bool waste_)
 	case PT_HEAL:
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_HEAL) + " ",false,false,false,CL_normal);
-			you.HpUpDown(6+randA_1(9+bonus*10),DR_POTION);
+			you.HpUpDown((6+randA_1(9+bonus*10))*multiple_,DR_POTION);
 			//you.HungerApply(50);
 			you.s_confuse = 0;
 			you.s_poison = 0;
@@ -188,11 +191,11 @@ void drinkpotion(potion_type kind, bool waste_)
 		//you.HungerApply(50);
 		return;
 	case PT_MIGHT:
-		you.SetMight(rand_int(50,80)+bonus*30);
+		you.SetMight((rand_int(50,80)+bonus*30)*multiple_);
 		//you.HungerApply(50);
 		return;
 	case PT_HASTE:
-		you.SetHaste(rand_int(50,80)+bonus*30);
+		you.SetHaste((rand_int(50,80)+bonus*30)*multiple_);
 		//you.HungerApply(50);
 		return;
 	case PT_CONFUSE:
@@ -209,7 +212,7 @@ void drinkpotion(potion_type kind, bool waste_)
 				enterlog();
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_POTION_POWER) + " ",false,false,false,CL_small_danger);  
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_MAGIC),true,false,false,CL_white_blue);
-				you.MpUpDown(15+randA_1(15));
+				you.MpUpDown((15+randA_1(15))*multiple_);
 			}
 			//you.HungerApply(50);
 			return;
@@ -282,7 +285,7 @@ void drinkpotion(potion_type kind, bool waste_)
 				enterlog();
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_EIRIN_POTION_POWER) + " ",false,false,false,CL_small_danger); 
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_POTION_HEAL_WOUND),true,false,false,CL_normal);
-				you.HpUpDown(15+randA_1(35),DR_POTION);
+				you.HpUpDown((15+randA_1(35))*multiple_,DR_POTION);
 			}
 			//you.HungerApply(50);
 			return;
@@ -317,7 +320,7 @@ void drinkpotion(potion_type kind, bool waste_)
 			if(you.god == GT_YUUGI && !you.GetPunish(GT_YUUGI))
 				you.SetBuff(BUFFSTAT_EV, BUFF_DUPLE, 10, turn_);
 			you.SetDrunken(turn_);
-			int power_ = rand_int(20,40)+bonus*30;
+			int power_ = (rand_int(20,40)+bonus*30)*multiple_;
 			you.PowUpDown(power_);
 		}
 		return;

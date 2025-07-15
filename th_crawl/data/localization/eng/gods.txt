@@ -646,17 +646,17 @@ She gives a small Haniwa upon faith and allows you to customize it as you explor
 Keiki takes a portion of your experience to create idols.
 
 
-§_21항상: 케이키는 당신의 경험치를 조금 가져간다. (패시브)§d
+§_21Always: Keiki takes a portion of your experience. (Passive)§d
 
-§_21항상: 당신은 자신만의 하니와를 받는다.§d
-* 하니와는 항상 당신의 주변을 지킨다. 멀어지면 곧 자동으로 워프한다.
-* 하니와가 죽으면 일정 시간후 부활한다.
-* 경험치를 일정 얻을때마다 하니와의 개조를 고를 수 있다. 
-* 하니와를 강화할때마다 신앙심을 얻는다. 신앙심이 전부차면 더이상 강화할 수 없다.
+§_21Always: You receive your own personal Haniwa.§d
+* The Haniwa always guards your surroundings. If too far, it will warp to you.
+* If the Haniwa dies, it revives after a short time.
+* Each time you gain enough experience, you can choose an upgrade.
+* Every upgrade grants you faith. Once your faith reaches the maximum, you cannot upgrade it further.
 
-
-* 일정 탐험마다 세 가지의 선택지를 주며 선택지의 강함 정도에 따라 신앙심을 다르게 얻는다.
-하니와의 강화는 크게 전사, 마법사, 지원가 세 종류로 나뉘며 선택한 방향에 맞춰서
-특화하는 선택지의 비중이 높아진다.
-선택은 원치않으면 미룰 수 있으며 이 경우 일반적인 시간보다 2배 오래 걸린다.
-신앙심이 6칸이 되면 하니와의 강화가 끝난다.
+* Every few floors, you’ll be offered three upgrade options.
+  The stronger the chosen upgrade, the more faith you gain.
+  Haniwa upgrades fall into three roles: warrior, mage, and supporter.
+  You'll get more options in the role you’ve chosen.
+  You can skip an upgrade to delay the decision, but this will double the waiting time.
+  When your faith reaches 6 stars, your Haniwa is fully upgraded.

@@ -167,7 +167,7 @@ bool skill_turn_levitation(int pow, bool short_, unit* order, coord_def target)
 		you.Ability(SKL_LEVITATION_OFF,false,false,temp);
 		return true;
 	}
-	else if(order->isplayer() && you.s_levitation)
+	else if(order->isplayer() && you.NowLevitation())
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_ALREADY_LEVITATION),true,false,false,CL_normal);	
 
 	return false;
@@ -294,7 +294,7 @@ bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def tar
 								smoke_ = SMT_POISON;
 								break;
 							case PT_CONFUSE:
-								t_ = img_fog_poison;
+								t_ = img_fog_confusion;
 								smoke_ = SMT_CONFUSE;
 								break;
 							case PT_SLOW:
@@ -400,31 +400,38 @@ bool skill_eirin_move_stat(int pow, bool short_, unit* order, coord_def target)
 			random_extraction<std::pair<tribe_proper_type,LOCALIZATION_ENUM_KEY>> good_tpts;
 			random_extraction<std::pair<tribe_proper_type,LOCALIZATION_ENUM_KEY>> bad_tpts;
 
-			you.DeleteProperty(TPT_BIG_WING);
-			you.DeleteProperty(TPT_STURDY);
-			you.DeleteProperty(TPT_GOOD_FOR_POTION);
-			you.DeleteProperty(TPT_INTELLIGENCE);
-			you.DeleteProperty(TPT_POISON_BODY);
-			you.DeleteProperty(TPT_WEAK_ARMOUR);
-			you.DeleteProperty(TPT_TWISTED_HORN);
-			you.DeleteProperty(TPT_POWERLESS);
-			you.DeleteProperty(TPT_TICK);
-			you.DeleteProperty(TPT_POTION_ADDICTION);
-
-			if(you.tribe != TRI_CROWTENGU && you.tribe != TRI_HALFYOKAI)
-				good_tpts.push({TPT_BIG_WING,LOC_SYSTEM_TRIBE_GROW_BIG_WING});
-			good_tpts.push({TPT_STURDY,LOC_SYSTEM_TRIBE_GROW_STURDY});
-			good_tpts.push({TPT_GOOD_FOR_POTION,LOC_SYSTEM_TRIBE_GROW_GOOD_FOR_POTION});
-			good_tpts.push({TPT_INTELLIGENCE,LOC_SYSTEM_TRIBE_GROW_INTELLIGENCE});
-			good_tpts.push({TPT_POISON_BODY,LOC_SYSTEM_TRIBE_GROW_POISON_BODY});
-
-			bad_tpts.push({TPT_WEAK_ARMOUR,LOC_SYSTEM_TRIBE_GROW_WEAK_ARMOUR});
-			if(you.tribe != TRI_ONI && you.tribe != TRI_HALFYOKAI)
-				bad_tpts.push({TPT_TWISTED_HORN,LOC_SYSTEM_TRIBE_GROW_TWISTED_HORN});
-			bad_tpts.push({TPT_POWERLESS,LOC_SYSTEM_TRIBE_GROW_POWERLESS});
-			bad_tpts.push({TPT_TICK,LOC_SYSTEM_TRIBE_GROW_TICK});
-			bad_tpts.push({TPT_POTION_ADDICTION,LOC_SYSTEM_TRIBE_GROW_POTION_ADDICTION});
-
+			if(you.DeleteProperty(TPT_BIG_WING) == 0) {
+				if(you.tribe != TRI_CROWTENGU && you.tribe != TRI_HALFYOKAI)
+					good_tpts.push({TPT_BIG_WING,LOC_SYSTEM_TRIBE_GROW_BIG_WING});
+			}
+			if(you.DeleteProperty(TPT_STURDY) == 0) {
+				good_tpts.push({TPT_STURDY,LOC_SYSTEM_TRIBE_GROW_STURDY});
+			}
+			if(you.DeleteProperty(TPT_GOOD_FOR_POTION) == 0) {
+				good_tpts.push({TPT_GOOD_FOR_POTION,LOC_SYSTEM_TRIBE_GROW_GOOD_FOR_POTION});
+			}
+			if(you.DeleteProperty(TPT_INTELLIGENCE) == 0) {
+				good_tpts.push({TPT_INTELLIGENCE,LOC_SYSTEM_TRIBE_GROW_INTELLIGENCE});
+			}
+			if(you.DeleteProperty(TPT_POISON_BODY) == 0) {
+				good_tpts.push({TPT_POISON_BODY,LOC_SYSTEM_TRIBE_GROW_POISON_BODY});
+			}
+			if(you.DeleteProperty(TPT_WEAK_ARMOUR) == 0) {
+				bad_tpts.push({TPT_WEAK_ARMOUR,LOC_SYSTEM_TRIBE_GROW_WEAK_ARMOUR});
+			}
+			if(you.DeleteProperty(TPT_TWISTED_HORN) == 0) {
+				if(you.tribe != TRI_ONI && you.tribe != TRI_HALFYOKAI)
+					bad_tpts.push({TPT_TWISTED_HORN,LOC_SYSTEM_TRIBE_GROW_TWISTED_HORN});
+			}
+			if(you.DeleteProperty(TPT_POWERLESS) == 0) {
+				bad_tpts.push({TPT_POWERLESS,LOC_SYSTEM_TRIBE_GROW_POWERLESS});
+			}
+			if(you.DeleteProperty(TPT_TICK) == 0) {
+				bad_tpts.push({TPT_TICK,LOC_SYSTEM_TRIBE_GROW_TICK});
+			}
+			if(you.DeleteProperty(TPT_POTION_ADDICTION) == 0) {
+				bad_tpts.push({TPT_POTION_ADDICTION,LOC_SYSTEM_TRIBE_GROW_POTION_ADDICTION});
+			}
 
 			auto good_ = good_tpts.choice();
 			auto bad_ = bad_tpts.choice();
@@ -436,6 +443,8 @@ bool skill_eirin_move_stat(int pow, bool short_, unit* order, coord_def target)
 
 			you.SetProperty(good_.first, 1);
 			you.SetProperty(bad_.first, 1);
+
+			you.CalcuHP();
 
 
 			AddNote(you.turn, CurrentLevelString(), 

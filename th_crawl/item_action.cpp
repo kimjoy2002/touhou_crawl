@@ -523,7 +523,7 @@ bool eat_prev_fail() {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_DROWNED_PENALTY_EAT), true, false, false, CL_danger);
 		return true;
 	}
-	if(you.power >= 500 && !(you.god == GT_MINORIKO))
+	if(you.power >= you.GetMaxPower() && !(you.god == GT_MINORIKO))
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ALREADY_FULL_POWER),true,false,false,CL_normal);
 		return true;

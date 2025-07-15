@@ -576,6 +576,10 @@ void monster::FirstContact()
 			
 		}
 	}
+	if(!(flag & M_FLAG_UNHARM) && isEnemyUnit(&you) && you.GetProperty(TPT_TICK) && randA(4)==0) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOUT_TICK),true,false,false,CL_normal);
+		Noise(you.position, 12);
+	}
 	if(wiz_list.wizard_mode == 1)
 	{
 		float percent_=1.0f, detect_ = you.GetStealth()==-1?1.0f:((float)GetDetect()+1)/(you.GetStealth()+1);
@@ -1807,9 +1811,8 @@ bool monster::damage(attack_infor &a, bool perfect_)
 					if (distan_coord(position, a.order->position) <= 2)
 					{
 						smoke_type could_ = randA(1) ? SMT_POISON : SMT_CONFUSE;
-						env[current_level].MakeSmoke(a.order->position, could_==SMT_POISON?img_fog_poison: img_fog_poison, could_, rand_int(5, 7), 0, this);
+						env[current_level].MakeSmoke(a.order->position, could_==SMT_POISON?img_fog_poison: img_fog_confusion, could_, rand_int(5, 7), 0, this);
 					}
-
 				}
 			}
 			if(id == MON_MUSHROOM && (randA(1) || hp<=0) )

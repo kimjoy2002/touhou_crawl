@@ -338,6 +338,7 @@ public:
 	int s_selfdestruct;
 	int s_glutton;
 	int s_glutton_turn;
+	int s_potion_addict;
 	shield_struct s_shield;
 
 
@@ -416,7 +417,7 @@ public:
 	void LoadDatas(FILE *fp);
 	bool Draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x_, float y_, float scale_);
 	bool isLive();
-	bool isFly(){return s_levitation!=0;}
+	bool isFly(){return NowLevitation();}
 	bool isSwim();
 	coord_def GetPrevPos(){return prev_position;};
 	void SetX(int x_);
@@ -438,6 +439,8 @@ public:
 	void afterThrow(int delay);
 	int OpenDoor(const coord_def &c, bool no_turn);
 	bool GetStatPanalty(){return s_str<=0 ||s_dex<=0 || s_int<=0;};
+	int addPotionAddict(bool reset);
+	int GetPotionAddictLevel();
 	void CalcuHP();
 	int GetHp();
 	int GetMaxHp();
@@ -475,6 +478,7 @@ public:
 	int MpRecoverDelay(int delay_ = 0,bool set_ = false);
 	interupt_type MpRecover(int delay_);
 	int MpUpDown(int value_);
+	int GetMaxPower();
 	int AcUpDown(int value_, int bonus_);
 	int EvUpDown(int value_, int bonus_);
 	int ShUpDown(int value_, int bonus_);
@@ -524,6 +528,7 @@ public:
 	bool SetElec(int elec_);
 	bool SetParalyse(int paralyse_);
 	bool SetLevitation(int levitation_);
+	bool NowLevitation();
 	bool SetGlow(int glow_, bool no_speak = false, bool setting = false);
 	bool SetGraze(int graze_);
 	bool SetSilence(int silence_, int silence_range_);

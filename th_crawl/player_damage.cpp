@@ -1299,6 +1299,18 @@ bool players::damage(attack_infor &a, bool perfect_)
 					}
 				}
 			}
+
+			
+			if(GetProperty(TPT_POISON_BODY) && GetHp()>0 && randA(1) )
+			{
+				if (a.order) {
+					if (distan_coord(position, a.order->position) <= 2)
+					{
+						smoke_type could_ = SMT_POISON;
+						env[current_level].MakeSmoke(a.order->position, img_fog_poison, could_, rand_int(5, 7), 0, this);
+					}
+				}
+			}
 				
 		}
 		else

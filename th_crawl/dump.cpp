@@ -604,7 +604,7 @@ bool Dump(int type, wstring *filename_)
 	}
 												
 	{
-		int pow_ = min(you.power, 500);
+		int pow_ = min(you.power, you.GetMaxPower());
 		ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER) << ": " << pow_ / 100 << '.' << std::setfill('0') << std::setw(2) << pow_ % 100;
 
 		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_POWER)) < 20)

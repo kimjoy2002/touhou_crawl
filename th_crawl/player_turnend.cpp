@@ -610,25 +610,27 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		s_levitation--;
 		if(!s_levitation)
 		{
-			if (env[current_level].dgtile[you.position.x][you.position.y].tile == DG_SEA)
-			{
-				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY_WATER) + " ", false, false, false, you.isSwim()? CL_blue :CL_danger);
-			}
-			else if(env[current_level].dgtile[you.position.x][you.position.y].tile == DG_LAVA){
-				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY_LAVA) + " ", false, false, false, CL_danger);
-			}
-			else if(env[current_level].dgtile[you.position.x][you.position.y].tile == DG_OIL){
-				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY_OIL) + " ", false, false, false, CL_blue);
-			}
-			else {
-				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY_END) + " ", false, false, false, CL_blue);
+			if(!you.NowLevitation()) {
+				if (env[current_level].dgtile[you.position.x][you.position.y].tile == DG_SEA)
+				{
+					printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY_WATER) + " ", false, false, false, you.isSwim()? CL_blue :CL_danger);
+				}
+				else if(env[current_level].dgtile[you.position.x][you.position.y].tile == DG_LAVA){
+					printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY_LAVA) + " ", false, false, false, CL_danger);
+				}
+				else if(env[current_level].dgtile[you.position.x][you.position.y].tile == DG_OIL){
+					printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY_OIL) + " ", false, false, false, CL_blue);
+				}
+				else {
+					printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY_END) + " ", false, false, false, CL_blue);
+				}
 			}
 			int temp = you.Ability(SKL_LEVITATION_OFF,false,true,1);
 			if(temp)
 				you.Ability(SKL_LEVITATION,false,false,temp);
 			SetInter(IT_STAT);
 		}
-		if(s_levitation == 10)
+		if(s_levitation == 10 && !you.GetProperty(TPT_BIG_WING))
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_FLY_END_ALMOST) + " ",false,false,false,CL_small_danger);
 			SetInter(IT_STAT);
@@ -1121,6 +1123,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			s_glutton = 0;
 		}
 	}
+	if(GetProperty(TPT_POTION_ADDICTION)) {
+		addPotionAddict(false);
+	} else {
+		addPotionAddict(true);
+	}
+
 	if(s_shield.turn < s_shield.max_turn) {
 		s_shield.turn++;
 		if(s_shield.max_turn == s_shield.turn && s_shield.value < GetMaxHp()*s_shield.percent/100) {

@@ -1889,6 +1889,11 @@ textures img_fog_slow[] = {textures(&texture_item01, 84, 255),
 							    textures(&texture_item01, 86, 255),
 							    textures(&texture_item01, 87, 255)
 };
+textures img_fog_confusion[] = {textures(&texture_item04, 13, 255),
+							    textures(&texture_item04, 14, 255),
+							    textures(&texture_item04, 15, 255),
+							    textures(&texture_item04, 16, 255)
+};
 textures img_fog_heavenly_storm[] = {textures(&texture_item03, 209, 255),
 	textures(&texture_item03, 210, 255),
 	textures(&texture_item03, 211, 255),
@@ -3784,6 +3789,8 @@ int texturetoint(textures* input)
 		return 599;
 	else if(input == &img_mons_haniwa_human_horse)
 		return 600;
+	else if(input == &img_fog_confusion[0])
+		return 601;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -5012,6 +5019,8 @@ textures* inttotexture(int input)
 		return &img_mons_haniwa_human;
 	case 600:
 		return &img_mons_haniwa_human_horse;
+	case 601:
+		return &img_fog_confusion[0];
 	default:
 		return &img_mons_default;
 	}

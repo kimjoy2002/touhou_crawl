@@ -1,0 +1,22 @@
+﻿Wizard Mode can be activated with & when the game is launched using the --wizard option.
+(It is designed for development convenience rather than actual gameplay.
+   It may contain many bugs and be difficult to use.)
+
+§yA§d      - Generate Item (Beta)
+§yC§d      - Clear Current Floor & Merge Items
+§yD§d      - Magic Mapping
+§yE§d      - Auto Explore
+§yG§d      - Move to Another Floor
+§yH§d      - Restore HP/MP/P
+§yI§d      - Identify All Items
+§yb§d      - Blink
+§ym§d      - Spawn Monster
+§yp§d      - Create Altar
+§yq§d      - Print Required EXP
+§yR§d      - Rebuild Current Floor
+§yw§d      - Trigger Weather
+§yW§d      - Stop Time
+§yX§d      - Level Up Once
+§y>§d      - Go Down a Floor
+§y<§d      - Go Up a Floor
+§y^§d      - Increase Faith by 10

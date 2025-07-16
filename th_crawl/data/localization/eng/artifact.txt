@@ -1,14 +1,85 @@
 --BASE
 {0} of Gensokyo
 {0} of the Shrine
-{0} of the Youkai
+{0} of Youkai
 {0} of Humans
 Cool {0}
-Hot {0}
-Approaching {0}
+Fiery {0}
+Looming {0}
+Crimson {0}
+{0} of the Moon
+{0} of the Underworld
+Phantasmal {0}
+Eternal {0}
+Squirming {0}
+{0} from Beyond
+{0} of Oblivion
+Enchanting {0}
+{0} Veiled in Spirit Power
+Dusky {0}
+Ruined {0}
+{0} of the East
+Soaring {0}
+{0} of Hakurei
+{0} of the Forest of Magic
+{0} of the Scarlet Devil Mansion
+{0} of the Palace of the Earth Spirits
+{0} of the Suzunaan
+{0} of the Myouren Temple
+{0} of the Lunar Rabbit
+{0} of the Youkai Mountain
+{0} of the Genbu Ravine
+{0} of the Hermit
+{0} of the Netherworld
+{0} of the White Jade Tower
+{0} of the Crimson Moon
+{0} of the Night Sparrow
+{0} of the Fairies
+{0} of the Fortuneteller
+{0} of the Blood Pool
+{0} of Makai
+{0} of Hokkai
+{0} of the Beast Path
+{0} of the Hieda Family
 --WORD
-Destruction
+Ruin
 Flight
 Danmaku
-Flame
+Flames
 Frost
+Meteor
+Madness
+Corrosion
+Storm
+Abyss
+Moonshadow
+Smoke
+Death
+Seal
+Ice
+Lightning
+Black Flame
+Delusion
+Silence
+Wind
+Malice
+Explosion
+Mirror
+Chaos
+Moonlight
+Scream
+Silence
+Ash
+Light
+Petal
+Requiem
+Nightmare
+Curse
+Whisper
+Atonement
+Melancholy
+Barrier
+Desire
+Oil
+Mist
+Fumo

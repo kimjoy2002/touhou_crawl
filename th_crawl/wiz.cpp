@@ -82,7 +82,7 @@ void wiz_mode()
 	while(1)
 	{
 		vector<int> wizard_listkey = {
-			'A', 'C', 'D', 'E', 'f', 'G', 'H', 'I', 'm', 'p', 
+			'A', 'C', 'D', 'E', 'G', 'H', 'I', 'b', 'm', 'p', 
 			'q', 'R', 'w', 'W', 'X', '>', '<', '^', '?', VK_ESCAPE
 		};
 		startSelection(wizard_listkey);
@@ -981,7 +981,8 @@ void wiz_mode()
 				make_pair('I',LOC_SYSTEM_GOD_MIKO),
 				make_pair('O',LOC_SYSTEM_GOD_OKINA),
 				make_pair('J',LOC_SYSTEM_GOD_JUNKO),
-				make_pair('X',LOC_SYSTEM_GOD_JOON_AND_SION)
+				make_pair('X',LOC_SYSTEM_GOD_JOON_AND_SION),
+				make_pair('N',LOC_SYSTEM_GOD_KEIKI)
 			};
 			enterlog();
 			std::vector<int> listkey;
@@ -1106,6 +1107,10 @@ void wiz_mode()
 			case 'j':
 			case 'J':
 				next_ = DG_TEMPLE_JUNKO;
+				break;
+			case 'N':
+			case 'n':
+				next_ = DG_TEMPLE_KEIKI;
 				break;
 			default:
 				printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);

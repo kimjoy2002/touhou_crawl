@@ -232,6 +232,10 @@ void tensi_weather(int type_, int good_)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_TENSI_WEATHER3), true, false, false, CL_normal);
 		you.SetWeather(3, 100);
 		break;
+	case 4:
+		printlog(LocalzationManager::locString(LOC_SYSTEM_TENSI_WEATHER4), true, false, false, CL_normal);
+		you.SetWeather(4, 100);
+		break;
 	default:
 		break;
 	}
@@ -670,7 +674,7 @@ void tensi_action()
 		else if(randA(500)<randA(you.CheckTension()) && randA(5)>0)
 		{ //그럭저럭 좋은일
 			type = "[" + LocalzationManager::locString(LOC_SYSTEM_DEBUG_TENSI_CRISIS) + "2]";
-			switch(randA(7)){
+			switch(randA(8)){
 			case 0:doing_ = 1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = 1; action_ =  TENSI_SUMMON; break;
 			case 2:doing_ = 1; action_ =  TENSI_BURST; break;
@@ -679,16 +683,18 @@ void tensi_action()
 			case 5:doing_ = 1; action_ = TENSI_BUFF_DEBUFF; break;
 			case 6:doing_ = 1; action_ = TENSI_WEATHER_THUNDER; break;
 			case 7:doing_ = 1; action_ = TENSI_WEATHER_FOG; break;
+			case 8:doing_ = 1; action_ = TENSI_WEATHER_RAINNY; break;
 			}
 		}
 		else if(randA(100)<randA(you.CheckTension()) && randA(5)>0)
 		{ //괜찮네
 			type = "[" + LocalzationManager::locString(LOC_SYSTEM_DEBUG_TENSI_CRISIS) + "1]";
-			switch(randA(3)){
+			switch(randA(4)){
 			case 0:doing_ = 1; action_ =  TENSI_POTION; break;
 			case 1:doing_ = 1; action_ =  TENSI_BURST; break;
 			case 2:doing_ = 1; action_ =  TENSI_WEAPON; break;
 			case 3:doing_ = 1; action_ = TENSI_WEATHER_SUN; break;
+			case 4:doing_ = 1; action_ = TENSI_WEATHER_RAINNY; break;
 			}
 		}
 		else
@@ -865,6 +871,15 @@ void tensi_action()
 		}
 		AddNote(you.turn, CurrentLevelString(), oss.str(), CL_tensi);
 		tensi_weather(3, doing_);
+		break;
+	case TENSI_WEATHER_RAINNY:
+		oss << LocalzationManager::locString(LOC_SYSTEM_NOTE_TENSI_WEATHER_RANNY);
+		if (wiz_list.wizard_mode == 1)
+		{
+			oss << LocalzationManager::formatString(LOC_SYSTEM_NOTE_TENSI_DEBUG2, PlaceHolderHelper(to_string(you.CheckTension())), PlaceHolderHelper(to_string(doing_)));
+		}
+		AddNote(you.turn, CurrentLevelString(), oss.str(), CL_tensi);
+		tensi_weather(4, doing_);
 		break;
 	}
 }
@@ -1380,6 +1395,24 @@ string tensi_talk(bool good_, tensi_do_list list_)
 				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUN6);
 			case 6:
 				return LocalzationManager::locString(LOC_SYSTEM_TENSI_SUN7);
+			}	
+		case TENSI_WEATHER_RAINNY:
+			switch (randA(6))
+			{
+			case 0:
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_RAINNY1);
+			case 1:
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_RAINNY2);
+			case 2:
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_RAINNY3);
+			case 3:
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_RAINNY4);
+			case 4:
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_RAINNY5);
+			case 5:
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_RAINNY6);
+			case 6:
+				return LocalzationManager::locString(LOC_SYSTEM_TENSI_RAINNY7);
 			}	
 		}
 

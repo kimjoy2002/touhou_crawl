@@ -889,16 +889,17 @@ void wiz_mode()
 			break;
 		case 'w': //날씨발현
 		{
-			LOCALIZATION_ENUM_KEY keylist[3] = {
+			LOCALIZATION_ENUM_KEY keylist[4] = {
 				LOC_SYSTEM_BUFF_FOG,
 				LOC_SYSTEM_BUFF_THUNDER,
-				LOC_SYSTEM_BUFF_SUNNY
+				LOC_SYSTEM_BUFF_SUNNY,
+				LOC_SYSTEM_BUFF_RAINY
 			};
 			std::vector<int> listkey;
-			for(int i = 0; i < 3; i++) {
+			for(int i = 0; i < 4; i++) {
 				ostringstream ss;
 				ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
-				printlog(ss.str(), (i==2?true:false), false, false, CL_help, (char)('a'+i));
+				printlog(ss.str(), (i==3?true:false), false, false, CL_help, (char)('a'+i));
 				listkey.push_back('a'+i);
 			}
 			listkey.push_back(VK_ESCAPE);
@@ -951,6 +952,10 @@ void wiz_mode()
 			case 'C':
 				you.SetWeather(3, 100);
 				break;
+			case 'd':
+			case 'D':
+				you.SetWeather(4, 100);
+				break;
 			default:
 				break;
 			}
@@ -961,7 +966,7 @@ void wiz_mode()
 		{
 			dungeon_tile_type next_ = DG_TEMPLE_FIRST;
 
-			pair<char,LOCALIZATION_ENUM_KEY> keylist[20] = {
+			pair<char,LOCALIZATION_ENUM_KEY> keylist[21] = {
 				make_pair('B',LOC_SYSTEM_GOD_BYAKUREN),
 				make_pair('K',LOC_SYSTEM_GOD_KANAKO),
 				make_pair('W',LOC_SYSTEM_GOD_SUWAKO),
@@ -986,7 +991,7 @@ void wiz_mode()
 			};
 			enterlog();
 			std::vector<int> listkey;
-			for(int i = 0; i < 20; i++) {
+			for(int i = 0; i < 21; i++) {
 				ostringstream ss;
 				ss << string(1,keylist[i].first) << "-" << LocalzationManager::locString(keylist[i].second) << " ";
 				printlog(ss.str(), (i==19?true:false), false, false, CL_help, keylist[i].first);

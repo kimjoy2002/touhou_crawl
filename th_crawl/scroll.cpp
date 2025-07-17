@@ -8,7 +8,13 @@
 
 
 #include "key.h"
+#include "armour.h"
+#include "ring.h"
+#include "book.h"
+#include "amulet.h"
 #include "smoke.h"
+#include "god.h"
+#include "tribe.h"
 #include "monster_texture.h"
 #include "throw.h"
 #include "spellcard.h"
@@ -18,6 +24,7 @@
 #include "option_manager.h"
 #include "soundmanager.h"
 #include "weapon.h"
+extern int g_menu_select;
 #include <algorithm>
 extern HANDLE mutx;
 
@@ -139,6 +146,8 @@ int isGoodScroll(scroll_type kind)
 {	
 	switch(kind)
 	{
+	case SCT_ACQUIREMENT:
+		return 4;
 	case SCT_SOUL_SHOT:
 	case SCT_SANTUARY:
 		return 3;
@@ -395,8 +404,11 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 		}
 	case SCT_ACQUIREMENT:
 		{
+			ReleaseMutex(mutx);
+			changedisplay(DT_GAME);
 			iden_list.scroll_list[kind].iden = 3;
 			bool return_ = aquire_scroll(pre_iden_);
+			WaitForSingleObject(mutx, INFINITE);
 			return return_;
 		}
 	default:
@@ -1381,5 +1393,275 @@ bool brand_weapon_scroll(bool pre_iden_)
 }
 bool aquire_scroll(bool pre_iden_)
 {
-	return false;
+	if(!pre_iden_) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_ACQUIRE) + " ", true, false, false, CL_help);
+		MoreWait();
+	}
+
+
+	ostringstream ss;
+	printlog("a-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_WEAPON) + " ", false, false, false, CL_help, 'a');
+	printlog("b-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_ARMOUR) + " ", false, false, false, CL_help, 'b');
+	printlog("c-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING) + " ", false, false, false, CL_help, 'c');
+	printlog("d-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET) + " ", false, false, false, CL_help, 'd');
+	printlog("e-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_BOOK) + " ", false, false, false, CL_help, 'e');
+	printlog("f-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_EVOCABLE) + " ", false, false, false, CL_help, 'f');
+	printlog("g-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_FOOD), true, false, false, CL_help, 'g');
+	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_ACQUIRE_WHAT), false, false, false, CL_help);
+	
+	
+	vector<int> create_listkey = {
+		'a','b','c','d','e','f','g'
+	};
+
+	
+	startSelection(create_listkey);
+	
+	int key_ = 1;
+	g_menu_select = -1;
+	while(true) {
+		key_ = waitkeyinput(true);
+		if(key_ == VK_RIGHT){
+			if(++g_menu_select>create_listkey.size()-1)
+				g_menu_select = 0;
+			continue;
+		} else if (key_ == VK_LEFT) {
+			if(--g_menu_select<0)
+				g_menu_select = create_listkey.size()-1;
+			continue;
+		} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+			if(create_listkey.size() > g_menu_select) {
+				key_ = create_listkey[g_menu_select];
+			} else {
+				break;
+			}
+		}
+		if(key_ >= 'a' && key_ < ('a' + create_listkey.size())) {
+			break;
+		}
+	}
+	endSelection();
+	g_menu_select = -1;
+			
+			
+	switch (key_)
+	{
+	case 'a':
+	{
+		int max_ = 0;
+		random_extraction<int> rand_;
+
+		for(int i=SKT_SHORTBLADE;i<=SKT_SPEAR;i++)
+		{
+			int skill_level_ = you.GetSkillLevel(i, false);
+			if(max_ < skill_level_) {
+				max_ = skill_level_;
+				rand_.clear();
+			}
+			if(max_ == skill_level_) {
+				rand_.push(i-SKT_SHORTBLADE);
+			}
+		}
+
+		item_infor t;
+		item* it = env[current_level].MakeItem(you.position,makeitem((item_type)(rand_.pop()), 1, &t));
+		it->value4 += rand_int(0,5);
+		if(randA(3)) //75% 아티팩트
+			MakeArtifact(it,1);
+		else {
+			it->value4 += rand_int(2,3); //아니면 강화를 더 해줌
+			if(it->value4 > 9)
+				it->value4 = 9;
+		}
+		break;
+	}
+	break;
+	case 'b':
+	{
+		random_extraction<int> rand_;
+		rand_.push(0,5); //아머
+		rand_.push(1, you.GetSkillLevel(SKT_SHIELD, true)>=5?3:1); //방패
+		if(you.isPossibeEquip(ET_HELMET, false))
+			rand_.push(2,you.equipment[ET_HELMET]==NULL?5:1); //머리
+		if(you.isPossibeEquip(ET_CLOAK, false))
+			rand_.push(3,you.equipment[ET_CLOAK]==NULL?5:1); //망토
+		if(you.isPossibeEquip(ET_GLOVE, false))
+			rand_.push(4,you.equipment[ET_GLOVE]==NULL?5:1); //손
+		if(you.isPossibeEquip(ET_BOOTS, false))
+			rand_.push(5,you.equipment[ET_BOOTS]==NULL?5:1); //발
+		item* it = NULL;
+
+		int armour_ = rand_.pop();
+		switch(armour_)
+		{
+		case 0:
+			{
+				//회피스킬이 갑옷스킬의 2배이상이거나 갑옷이 5레벨미만
+				bool dodge_ = (you.GetSkillLevel(SKT_DODGE, true)>you.GetSkillLevel(SKT_ARMOUR, true)*2 || you.GetSkillLevel(SKT_ARMOUR, true) < 5);
+				//갑옷스킬이 회피스킬의 2배이상이거나 갑옷이 15레벨이상
+				bool heavy_ = (you.GetSkillLevel(SKT_ARMOUR, true)>you.GetSkillLevel(SKT_DODGE, true) *2 || you.GetSkillLevel(SKT_ARMOUR, true) >= 15);
+				random_extraction<int> rand2_;
+
+				rand2_.push(ITM_ARMOR_BODY_ARMOUR_0,dodge_?10:1); //로브
+				if(!you.GetProperty(TPT_SIZE)) {
+					rand2_.push(ITM_ARMOR_BODY_ARMOUR_1,dodge_?8:4); //가죽
+					rand2_.push(ITM_ARMOR_BODY_ARMOUR_2,heavy_?8:4); //체인
+					rand2_.push(ITM_ARMOR_BODY_ARMOUR_3,heavy_?10:1); //판금
+				}
+		
+				int select_ = rand2_.pop();
+				item_infor t;
+				it = env[current_level].MakeItem(you.position,makeitem((item_type)select_, 1, &t,randA(AMK_POISON)));
+
+				if(randA(5))
+					MakeArtifact(it,1);
+				else {
+					it->value4 += rand_int(2,3); //아니면 강화를 더 해줌
+					if(it->value4 > it->value1)
+						it->value4 = it->value1;
+				}
+			}
+			break;
+		case 1:
+			{
+				random_extraction<int> rand2_;
+
+				rand2_.push(0, you.GetSkillLevel(SKT_SHIELD, true) <=5?5:1); //버클러
+				rand2_.push(28, you.GetSkillLevel(SKT_SHIELD, true) >=10?5:1); //실드
+				rand2_.push(30, you.GetSkillLevel(SKT_SHIELD, true) >=20?10:1); //카이트
+				
+				int select_ = rand2_.pop();
+				
+				item_infor t;
+				it = env[current_level].MakeItem(you.position,makeitem(ITM_ARMOR_SHIELD, 1, &t,select_));
+							
+				MakeArtifact(it,1);
+			}
+			break;
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+			{
+				random_extraction<int> rand2_;		
+				
+				item_infor t;
+				it = env[current_level].MakeItem(you.position,makeitem((item_type)(ITM_ARMOR_HEAD+armour_-2), 1, &t));
+
+				MakeArtifact(it,1);
+			}
+			break;
+		}
+	}
+	break;
+	case 'c':
+	{
+		random_extraction<int> rand_;
+
+		for(int i = 0; i < RGT_MAX; i++)
+		{
+			if(isAbleRing((ring_type)i) && isGoodRing((ring_type)i,1) > 0)
+			{
+				rand_.push(i,iden_list.ring_list[i].iden == 2?1:20);
+			}
+		}
+		
+		item_infor t;
+		item* it = env[current_level].MakeItem(you.position,makeitem(ITM_RING, 1, &t,rand_.pop()));
+
+		MakeArtifact(it,1); //반지 항상 아티팩트
+	}
+	break;
+	case 'd':
+	{
+		random_extraction<int> rand_;
+
+		for(int i = 0; i < AMT_MAX; i++)
+		{
+			if(isGenerateAmulet((amulet_type)i))
+			{
+				rand_.push(i,iden_list.amulet_list[i].iden == 2?1:20);
+			}
+		}
+		
+		item_infor t;
+		int amulet_ = rand_.pop();
+		item* it = env[current_level].MakeItem(you.position,makeitem(ITM_AMULET, 1, &t,amulet_));
+
+		if(iden_list.amulet_list[amulet_].iden || randA(4)) {
+			MakeArtifact(it,1); //아뮬렛 식별된거는 항상 아티팩트, 식별안된건 80% 아티팩트
+		}
+	}
+	break;
+	case 'e':
+	{
+		int gift_book = -1;
+		for(int i = 0; i < 40 && gift_book == -1; i++)
+		{
+			vector<bookgift_class> q;
+			for(int j=SKT_SPELLCASTING+1; j<SKT_EVOCATE;j++)
+			{
+				q.push_back(bookgift_class(you.GetSkillLevel(j, false),you.skill[j].exper,j));
+			}
+			sort(q.begin(),q.end(),bookgift_compare());
+			for(int j=SKT_SPELLCASTING+1; j<SKT_EVOCATE;j++)
+			{
+				if(q.back().level == 0 )
+					break;
+				int skill_ = q.back().skills;
+				for(int i = 0; i < 10; i++) { //10번 시도
+					int book_ = SchoolToBook((skill_type)skill_);
+					if(randA(6)>0 && !iden_list.books_list[book_])
+					{
+						gift_book = book_;
+						break;
+					}
+				}
+				if(gift_book != -1) {
+					break;
+				}
+				q.pop_back();
+			}
+		}
+		item_infor t;
+		env[current_level].MakeItem(you.position,makeitem(ITM_BOOK, 0, &t, gift_book));
+	}
+	break;
+	case 'f':
+	{
+		random_extraction<int> rand_;
+
+		for(int i = 0; i < EVK_MAX; i++)
+		{
+			if(isCanGenerate((evoke_kind)i) && !iden_list.evoke_list[i])
+			{
+				rand_.push(i,1);
+			}
+		}
+		if(rand_.GetSize() == 0) {
+			for(int i = 0; i < EVK_MAX; i++) {
+				if(isCanGenerate((evoke_kind)i))
+					rand_.push(i,1);
+			}
+		}
+		
+		item_infor t;
+		int evoke_ = rand_.pop();
+		env[current_level].MakeItem(you.position,makeitem(ITM_MISCELLANEOUS, 1, &t,evoke_));
+
+	}
+	break;
+	case 'g':
+	{
+		item_infor t;
+		int food_ = randA(3);
+		int num_ = (food_==0)?rand_int(5,10):rand_int(8,12);
+		item* it = env[current_level].MakeItem(you.position,makeitem(ITM_FOOD, 1, &t,food_));
+		it->num = num_;
+		it->weight = ((food_==0)?2.0f:1.0f)*num_;
+	}
+	break;
+	}
+
+	return true;
 }

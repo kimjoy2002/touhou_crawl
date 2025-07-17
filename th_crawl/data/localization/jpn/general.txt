@@ -617,7 +617,8 @@ LOC_SYSTEM_BUFF_SLEEPING,眠気
 LOC_SYSTEM_BUFF_JUNKA,浄化
 LOC_SYSTEM_BUFF_FOG,霧
 LOC_SYSTEM_BUFF_THUNDER,雷鳴
-LOC_SYSTEM_BUFF_SUNNY,晴天
+LOC_SYSTEM_BUFF_SUNNY,快晴
+LOC_SYSTEM_BUFF_RAINY,風雨
 LOC_SYSTEM_BUFF_MIKO_NEWPLACE,新たな場所
 LOC_SYSTEM_BUFF_MIKO_REDCLOAK,赤マント
 LOC_SYSTEM_BUFF_MIKO_BLUECLOAK,青マント
@@ -719,6 +720,7 @@ LOC_SYSTEM_BUFF_DESCRIBE_JUNKA4,スペルカードが使用できません。
 LOC_SYSTEM_BUFF_DESCRIBE_FOG,濃霧により視界が大幅に減少します。
 LOC_SYSTEM_BUFF_DESCRIBE_THUNDER,周囲にランダムで雷が落ちます。
 LOC_SYSTEM_BUFF_DESCRIBE_SUNNY,周囲が光り、回避が低下し透明が無効になります。
+LOC_SYSTEM_BUFF_DESCRIBE_RAINNY,周囲の全員の移動速度が上昇する。
 LOC_SYSTEM_BUFF_DESCRIBE_MIKO_NEWPLACE,このフロアでは「欲望召喚」をまだ使用していません。
 LOC_SYSTEM_BUFF_DESCRIBE_MIKO_REDCLOAK,フロア移動まで戦闘力+{0}と体力再生効果があります。
 LOC_SYSTEM_BUFF_DESCRIBE_MIKO_BLUECLOAK,フロア移動までスペルパワー{0}倍と霊力再生効果があります。
@@ -1349,8 +1351,9 @@ LOC_SYSTEM_NOTE_TENSI_GOOD_AOE,天子：範囲減速。
 LOC_SYSTEM_NOTE_TENSI_BAD_AOE,天子：範囲加速。
 LOC_SYSTEM_NOTE_TENSI_SUCIDE,天子：自爆ウサギを召喚。
 LOC_SYSTEM_NOTE_TENSI_WEATHER_FOG,天子：霧。
-LOC_SYSTEM_NOTE_TENSI_WEATHER_THUNDER,天子：雷。
-LOC_SYSTEM_NOTE_TENSI_WEATHER_SUN,天子：晴れ。
+LOC_SYSTEM_NOTE_TENSI_WEATHER_THUNDER,天子：雷鳴。
+LOC_SYSTEM_NOTE_TENSI_WEATHER_SUN,天子：快晴。
+LOC_SYSTEM_NOTE_TENSI_WEATHER_RANNY,天子：風雨.
 LOC_SYSTEM_NOTE_TENSI_DEBUG1,テンション {0}
 LOC_SYSTEM_NOTE_TENSI_DEBUG2,テンション {0} 行動 {1}
 LOC_SYSTEM_NOTE_ARENA,========== レベル {0} ==========
@@ -1542,10 +1545,18 @@ LOC_SYSTEM_TENSI_SUN4,天子は言った。「ちょっと洗濯物干したい�
 LOC_SYSTEM_TENSI_SUN5,天子は言った。「太陽よ、輝け！」
 LOC_SYSTEM_TENSI_SUN6,天子は言った。「飛翔剣ならこんなこともできるの！」
 LOC_SYSTEM_TENSI_SUN7,天子は言った。「今日はピクニック日和ね！」
+LOC_SYSTEM_TENSI_RAINNY1,天子は言った。「今日の天気は風を伴う雨になります！」
+LOC_SYSTEM_TENSI_RAINNY2,天子は言った。「傘は持ってきた？しっかり握ってね！」
+LOC_SYSTEM_TENSI_RAINNY3,天子は言った。「こんな天気、走りたくならない？」
+LOC_SYSTEM_TENSI_RAINNY4,天子は言った。「もっと近づけるようにしてあげる！」
+LOC_SYSTEM_TENSI_RAINNY5,天子は言った。「ロマンのある天気だよね！」
+LOC_SYSTEM_TENSI_RAINNY6,天子は言った。「風に乗って駆け抜けろ！」
+LOC_SYSTEM_TENSI_RAINNY7,天子は言った。「血を洗い流す時間だよ！」
 LOC_SYSTEM_TENSI_WHISPERING,天子は聞こえない声で囁いた。
 LOC_SYSTEM_TENSI_WEATHER1,視界を遮る濃い霧が立ち込め始めた。
 LOC_SYSTEM_TENSI_WEATHER2,ダンジョンに大雨と雷が鳴り響く。
 LOC_SYSTEM_TENSI_WEATHER3,ダンジョンに強い日差しが差し込み始めた。
+LOC_SYSTEM_TENSI_WEATHER4,ダンジョンに雨と風が吹き始めた。
 LOC_SYSTEM_TENSI_BRAND_WEAPON,{0}から飛翔の気配があふれ出している。
 LOC_SYSTEM_TENSI_MORE_BRAND_WEAPON,{0}はさらに飛翔の力が強まった。
 LOC_SYSTEM_SEIJA_SUMMON_BUFF1,正邪は言った。「逃げて！」
@@ -3507,6 +3518,7 @@ LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END,あなたの根性回避は終わ
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SMOKE,視界を奪う濃霧が辺りに立ち込めた。
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_RAIN,ダンジョンに大雨と雷が吹き荒れる。
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SUNNY,ダンジョンに強い日差しが差し込む。
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_RAINWIND,ダンジョンに激しい雨が降り、強風が吹き荒れる。
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_END,天候が元に戻った。
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON,オカルトの力で都市伝説{0}が出現した！
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON_MANY,オカルトの力で都市伝説{0}たちが出現した！
@@ -3678,6 +3690,9 @@ LOC_SYSTEM_ITEM_SCROLL_BRAND_FAST_CAST,{0}が神秘的な力を放っている�
 LOC_SYSTEM_ITEM_SCROLL_BRAND_PROTECT,{0}が保護のオーラを放っている！
 LOC_SYSTEM_ITEM_SCROLL_BRAND_WEAPON,あなたの武器に魔法が宿った！
 LOC_SYSTEM_ITEM_SCROLL_BRAND_WEAPON_FAIL,この武器には魔法を付与できない。
+LOC_SYSTEM_ITEM_SCROLL_ACQUIRE,これは取得の巻物だ！
+LOC_SYSTEM_ITEM_SCROLL_ACQUIRE_WHAT,どの種類のアイテムを取得しますか？
+LOC_SYSTEM_ITEM_SCROLL_ACQUIRE_CREATE,アイテムが足元に出現した！
 LOC_SYSTEM_ITEM_BOOK_MAGICBOOK,魔法書
 LOC_SYSTEM_ITEM_BOOK_UNIDEN_MAGICBOOK,未確認の魔法書
 LOC_SYSTEM_ITEM_BOOK_DROP,落ちていた魔法書
@@ -3873,7 +3888,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH,守矢神社で開発された信仰を
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE,地底のような場所でも遠距離通信が可能なよう改造された護符。\n装備中は電波受信感度が上がり、充電が満タンになると霊力が回復する。\n満タンの状態では霊力の回復速度が上昇し、vキーを押すと瞬間的に霊力を回復できる。\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,夢殿大祀廟で太子を復活させる際に使われたという神霊を宿せる護符。\n装備中は周囲の神霊を吸収し、満タンになるとスペルカードに神霊を吹き込む。\nvキーを押すと所持中のスペルカード1枚を回復できる。\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE,あらゆる異変で重要なグレイズの力が込められた護符。\n装備中に徐々に充電され、100％になると弾幕モンスターと化す。\n常にグレイズが発動し遠距離弾幕を回避でき、vキーを押すとしばらくの間攻撃を100％回避する。\nグレイズ音が心地よい。グレイズが意味なかった作品も…？\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,ある問題児の天人が剣の力を注いだ護符。彼女の気まぐれが表れている。\n装備中に周囲の気質玉を吸収し、満タンになると隠された天候の力が発動する。\nvキーでランダムな天候が発現し、体力回復速度が大きく上昇する。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,ある問題児の天人が剣の力を注いだ護符。彼女の気まぐれが表れている。\n装備中に周囲の気質玉を吸収し、満タンになると隠された天候の力が発動する。\nvキーで保存された天候が発現し、体力回復速度が大きく上昇する。\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT,都市伝説を具現化するオカルトボールの力を秘めた護符。\n装備中にオカルトの気を吸収し、満タンになるとその力を解放する。\nvキーで視界内の敵対召喚体を追放し、護符内に潜むオカルトの力を妖怪として具現化する。\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PURIFTY,月の都の力が宿る護符。\n装備して満タン状態で「v」を押すと、悪い状態異常を瞬時に浄化する。\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG,このバグ護符には見た目も効果もない。\n
@@ -4352,6 +4367,8 @@ LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY2,あなたは神奈子の柱を顕現させ�
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3,あなたは神奈子の風の力をまとえる。
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY4,あなたは時々加奈子から武器をもらう。
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY5,時々神奈子から弾幕の贈り物を受け取る。
+LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY0,入信時に袿姫から埴輪を一つ授かる。
+LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY0_1,袿姫はあなたの経験値を少し持っていく。
 LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY1,袿姫からもらった埴輪を強化できる。
 LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY1_1,埴輪をすべて強化し終えた。
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_JUMP,あなたは短距離をジャンプできる。

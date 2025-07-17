@@ -293,8 +293,11 @@ interupt_type players::TurnEnd(bool *item_delete_)
 				(*mon_it).damage(attack_infor_, true);
 			}
 		}
-		
-		int mp_ = rand_int(3,4)*damage_delay_;
+		random_extraction<int> mana_;
+		mana_.push(3,3);
+		mana_.push(4,1);
+
+		int mp_ = mana_.pop()*damage_delay_;
 		if(you.pure_mp && you.GetMp() <= mp_) {
 			mp_ = you.GetMp()-1;
 		} 

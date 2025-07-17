@@ -618,6 +618,7 @@ LOC_SYSTEM_BUFF_JUNKA,순화
 LOC_SYSTEM_BUFF_FOG,안개
 LOC_SYSTEM_BUFF_THUNDER,천둥번개
 LOC_SYSTEM_BUFF_SUNNY,쾌청
+LOC_SYSTEM_BUFF_RAINY,비바람
 LOC_SYSTEM_BUFF_MIKO_NEWPLACE,새로운장소
 LOC_SYSTEM_BUFF_MIKO_REDCLOAK,빨강망토
 LOC_SYSTEM_BUFF_MIKO_BLUECLOAK,파랑망토
@@ -719,6 +720,7 @@ LOC_SYSTEM_BUFF_DESCRIBE_JUNKA4,스펠카드를 사용할 수 없습니다.
 LOC_SYSTEM_BUFF_DESCRIBE_FOG,짙은 안개로 인하여 모두의 시야가 급격히 줄어듭니다.
 LOC_SYSTEM_BUFF_DESCRIBE_THUNDER,주변에 무작위로 천둥번개가 떨어집니다.
 LOC_SYSTEM_BUFF_DESCRIBE_SUNNY,주변의 모두가 빛나게되어 회피가 낮아지고 투명이 효과를 잃습니다.
+LOC_SYSTEM_BUFF_DESCRIBE_RAINNY,주변 모두의 이동속도가 빨라집니다.
 LOC_SYSTEM_BUFF_DESCRIBE_MIKO_NEWPLACE,이 층에선 욕망부르기를 아직 사용하지않았습니다.
 LOC_SYSTEM_BUFF_DESCRIBE_MIKO_REDCLOAK,층을 옮기기 전까지 전투력보너스 {0}과 체력재생력을 얻고 있습니다.
 LOC_SYSTEM_BUFF_DESCRIBE_MIKO_BLUECLOAK,층을 옮기기 전까지는 스펠 파워 {0}배와 영력재생력을 얻고 있습니다.
@@ -1351,6 +1353,7 @@ LOC_SYSTEM_NOTE_TENSI_SUCIDE,텐시: 자폭토끼 소환.
 LOC_SYSTEM_NOTE_TENSI_WEATHER_FOG,텐시: 안개.
 LOC_SYSTEM_NOTE_TENSI_WEATHER_THUNDER,텐시: 천둥번개.
 LOC_SYSTEM_NOTE_TENSI_WEATHER_SUN,텐시: 쾌청.
+LOC_SYSTEM_NOTE_TENSI_WEATHER_RANNY,텐시: 비바람.
 LOC_SYSTEM_NOTE_TENSI_DEBUG1,텐션 {0}
 LOC_SYSTEM_NOTE_TENSI_DEBUG2,텐션 {0} 행동 {1}
 LOC_SYSTEM_NOTE_ARENA,========== 레벨 {0} ==========
@@ -1542,10 +1545,18 @@ LOC_SYSTEM_TENSI_SUN4,텐시: 잠시 빨래를 말려야하니까!
 LOC_SYSTEM_TENSI_SUN5,텐시: 햇빛이여!
 LOC_SYSTEM_TENSI_SUN6,텐시: 비상의 검으론 이런 것도 할 수 있지!
 LOC_SYSTEM_TENSI_SUN7,텐시: 오늘은 소풍가는 날이야!
+LOC_SYSTEM_TENSI_RAINNY1,텐시: 오늘의 날씨는 바람을 동반한 비가 내리겠습니다!
+LOC_SYSTEM_TENSI_RAINNY2,텐시: 우산 가져왔어? 잘 붙잡고 있어!
+LOC_SYSTEM_TENSI_RAINNY3,텐시: 이런 날씨엔 달리고 싶지않아?
+LOC_SYSTEM_TENSI_RAINNY4,텐시: 좀 더 가까이갈 수 있게 해줄게!
+LOC_SYSTEM_TENSI_RAINNY5,텐시: 낭만 있는 날씨야!
+LOC_SYSTEM_TENSI_RAINNY6,텐시: 바람을 타고 달려가!
+LOC_SYSTEM_TENSI_RAINNY7,텐시: 피를 씻겨낼 시간이야!
 LOC_SYSTEM_TENSI_WHISPERING,텐시는 안들리는 목소리로 소근거렸다.
 LOC_SYSTEM_TENSI_WEATHER1,한치 앞이 안보이는 짙은 안개가 깔리기 시작했다.
 LOC_SYSTEM_TENSI_WEATHER2,던전에 많은 비와 천둥번개가 휘몰아치기 시작한다.
 LOC_SYSTEM_TENSI_WEATHER3,던전에 강한 햇빛이 들기 시작했다.
+LOC_SYSTEM_TENSI_WEATHER4,던전에 비와 바람이 불기 시작했다.
 LOC_SYSTEM_TENSI_BRAND_WEAPON,{0}에서 비상의 기운이 뿜어져나온다.
 LOC_SYSTEM_TENSI_MORE_BRAND_WEAPON,{0:은|는} 더욱 비상의 힘이 길어졌다.
 LOC_SYSTEM_SEIJA_SUMMON_BUFF1,세이자: 도망쳐!
@@ -3507,6 +3518,7 @@ LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END,당신의 근성 회피는 끝났
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SMOKE,한치 앞이 안보이는 짙은 안개가 깔리기 시작했다.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_RAIN,던전에 많은 비와 천둥번개가 휘몰아치기 시작한다.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SUNNY,던전에 강한 햇빛이 들기 시작했다.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_RAINWIND,던전에 비가 쏟아지고 바람이 거세졌다.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_END,날씨가 원래대로 돌아왔다.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON,오컬트의 힘으로 도시전설 {0:이|가} 출현했다!
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON_MANY,오컬트의 힘으로 도시전설 {0}들이 출현했다!
@@ -3678,6 +3690,9 @@ LOC_SYSTEM_ITEM_SCROLL_BRAND_FAST_CAST,{0:이|가} 신비로운 힘을 뿜어내
 LOC_SYSTEM_ITEM_SCROLL_BRAND_PROTECT,{0:이|가} 보호의 오오라를 내뿜고있다!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_WEAPON,당신의 무기에 마법이 부여되었다!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_WEAPON_FAIL,이 무기엔 마법을 부여할 수 없다.
+LOC_SYSTEM_ITEM_SCROLL_ACQUIRE,이것은 획득의 두루마리다!
+LOC_SYSTEM_ITEM_SCROLL_ACQUIRE_WHAT,어떤 종류의 아이템을 획득할까?
+LOC_SYSTEM_ITEM_SCROLL_ACQUIRE_CREATE,아이템이 당신의 발밑에 생성되었다!
 LOC_SYSTEM_ITEM_BOOK_MAGICBOOK,마법책
 LOC_SYSTEM_ITEM_BOOK_UNIDEN_MAGICBOOK,미확인 마법책
 LOC_SYSTEM_ITEM_BOOK_DROP,떨어진 마법책
@@ -3873,7 +3888,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH,모리야신사에서 개발한 신앙�
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE,지저같은 지하에서도 멀리 있는 상대와 통신이 가능하도록 개조된 부적.\n착용하고 있으면 전파수신감도가 점점 좋아지고 충전이 되면 수신된 전파가 영력으로 환원된다.\n100%가 된 부적을 착용한 채로도 영력의 회복력이 조금 올라가며\n100%가 된 부적을 착용한 채로 v를 누르면 영력을 순간적으로 회복할 수 있다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,몽전대사묘의 태자를 부활시킬때도 사용되었다던 신령을 담을 수 있는 부적.\n착용하고 있으면 주변의 신령이 모이고 충전이 되면 가진 스펠카드에 신령을 불어넣을 수 있다.\n100%가 된 부적을 착용한 채로 v를 누르면 가지고 있는 스펠카드 1장을 충전할 수 있다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE,어느 이변에서나 중요한 그레이즈의 힘이 담긴 부적.\n착용하고 있으면 점차 충전이 되고 충전이 끝나면 당신은 탄막괴물이 된다.\n100%가 된 부적을 착용한 채로도 상시 그레이즈가 발동되어 원거리 탄막을 일정확률로 피할 수 있고\n100%상태에서 v를 누르면 근성회피가 발동되어 회피가능한 공격을 일정턴 100% 회피한다.\n그레이즈할때 나는 소리가 기분이 좋다. 그레이즈가 의미없던 시리즈도 있었다고...?\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,어느 불량 천인이 자신의 검의 힘을 부여한 부적. 그녀의 변덕스러운 성격이 부적에도 담겨있다.\n착용하고 있으면 주변의 기질 구슬을 흡수하고 충전이 끝나면 부적에 숨겨있던 기질이 발동된다.\n100%상태에서 v를 누르면 무작위 날씨가 발현되며 체력재생력을 높게 올린다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,어느 불량 천인이 자신의 검의 힘을 부여한 부적. 그녀의 변덕스러운 성격이 부적에도 담겨있다.\n착용하고 있으면 주변의 기질 구슬을 흡수하고 충전이 끝나면 부적에 숨겨있던 기질이 발동된다.\n100%상태에서 v를 누르면 저장된 날씨가 발현되며 체력재생력을 높게 올린다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT,도시전설을 실체화하는 힘을 가진 오컬트볼의 힘이 담긴 부적.\n착용하고 있으면 오컬트의 기운을 흡수하고 충전이 끝나면 오컬트의 힘을 방출한다.\n100%상태에서 v를 누르면 시야내의 모든 적대적인 소환물을 추방하며\n부적안에 숨겨있는 오컬트의 힘을 요괴로서 구현화한다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PURIFTY,달의 도시의 힘이 깃들어있는 부적.\n착100%상태에서 v를 누르면 사용자의 나쁜 상태이상들을 순식간에 정화시킨다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG,이 버그 부적은 멋도 없고 효과도 없다.\n
@@ -4352,6 +4367,8 @@ LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY2,당신은 카나코님의 기둥을 구현�
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3,당신은 카나코님의 바람의 힘을 휘감을 수 있다.
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY4,당신은 가끔씩 카나코로부터 무기를 선물 받는다.
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY5,당신은 가끔씩 카나코로부터 탄막을 선물 받는다.
+LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY0,당신은 입교시 케이키로부터 하니와를 하나 선물 받는다.
+LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY0_1,케이키는 당신의 경험치를 조금 가져간다.
 LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY1,당신은 케이키로부터 선물받은 하니와를 강화할 수 있다.
 LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY1_1,당신은 하니와를 전부 강화했다.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_JUMP,당신은 짧은 거리를 점프할 수 있다.

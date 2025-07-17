@@ -274,7 +274,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 	{
 		int amulet_kind_ = select_ != -1 ? select_ : (int)goodbadamulet(good_bad);
 		t->value1 = amulet_kind_;
-		t->value2 = amulet_kind_==AMT_OCCULT?randA(OCT_MAX-1):0;
+		t->value2 = amulet_kind_==AMT_OCCULT?randA(OCT_MAX-1):(amulet_kind_==AMT_WEATHER?randA(3):0);
 		t->value3 = 0;
 		t->value4 = 0;
 		t->value5 = 0;
@@ -1206,14 +1206,34 @@ void init_identify() //미식별아이템을 구별못하게 섞음
 			iden_list.amulet_list[i].type = dq[i];
 		}
 	}//끝
+	{//스펠카드
+		deque<int> dq;
+		for(int i=0;i<SPC_V_MAX;i++)
+			dq.push_back(i);
+		rand_shuffle(dq.begin(),dq.end());
+		for(int i=0;i<SPC_V_MAX;i++)
+		{
+			iden_list.spellcard_list[i].type = dq[i];
+		}
+	}//끝
 	{//고정아티팩트
 		for(int i=0;i<FIXED_ARTIFACT_MAX;i++)
 		{
 			iden_list.fixed_artifact[i] = false;
 		}
 	}
-
-
+	{//책
+		for(int i=0;i<BOOK_LAST;i++)
+		{
+			iden_list.books_list[i] = false;
+		}
+	}
+	{//발동템
+		for(int i=0;i<EVK_MAX;i++)
+		{
+			iden_list.evoke_list[i] = false;
+		}
+	}
 
 	
 
@@ -1244,7 +1264,7 @@ void init_identify() //미식별아이템을 구별못하게 섞음
 		}
 		else if (i >= IDEN_CHECK_AMULET_START && i < IDEN_CHECK_AMULET_END) {
 			int cur = i - IDEN_CHECK_AMULET_START;
-			if (cur == AMT_OCCULT || cur == AMT_PERFECT)
+			if (cur == AMT_OCCULT || cur == AMT_WEATHER || cur == AMT_PERFECT)
 				iden_list.autopickup[i] = true;
 			else
 				iden_list.autopickup[i] = false;

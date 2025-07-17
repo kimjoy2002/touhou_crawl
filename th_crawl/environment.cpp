@@ -996,9 +996,9 @@ void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x,
 	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_HALO && !(you.s_weather == 3 && you.s_weather_turn > 0))
 		img_effect_sun.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(20, 255, 255, 255));
 	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_ROYAL)
-		img_effect_sun.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(80, 255, 100, 100));
+		img_effect_white.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(80, 255, 127, 40));
 	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_QUICK_DASH)
-		img_effect_sun.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(80, 100, 255, 100));
+		img_effect_white.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(20, 100, 255, 100));
 
 
 		

@@ -319,6 +319,10 @@ void Iden_collect::SaveDatas(FILE *fp) {
 	for(int i = 0; i < BOOK_LAST; i++) {
 		SaveData<bool>(fp, books_list[i]);
 	}
+	SaveData<int>(fp, EVK_MAX);
+	for(int i = 0; i < EVK_MAX; i++) {
+		SaveData<bool>(fp, evoke_list[i]);
+	}
 
 	    // 포션 자동줍기 저장
     SaveData<int>(fp, PT_MAX);
@@ -472,6 +476,24 @@ void Iden_collect::LoadDatas(FILE *fp) {
 		}
 		for(; i < BOOK_LAST; i++) {
 			books_list[i] = false;
+		}
+	}
+
+	if(!isPrevVersion(loading_version_string, "ver1.113"))
+	{
+		int size_;
+		LoadData<int>(fp, size_);
+		int i = 0;
+		for(; i < size_; i++) {
+			if(i < EVK_MAX) {
+				LoadData<bool>(fp,evoke_list[i]);
+			} else {
+				bool temp;
+				LoadData<bool>(fp,temp);
+			}
+		}
+		for(; i < EVK_MAX; i++) {
+			evoke_list[i] = false;
 		}
 	}
 	
@@ -764,6 +786,11 @@ string item::GetName(int num_, bool simple_, string lang)
 			temp += LocalzationManager::locString(lang, getOccultName((occult_type)value2));
 			temp += "}";
 		}
+		if (iden_list.amulet_list[value1].iden == 2 && value1 == AMT_WEATHER && value3 > 0) {
+			temp += " {";
+			temp += LocalzationManager::locString(lang, getWeatherName(value2));
+			temp += "}";
+		}
 	}
 	if(!isArtifact() && ((type==ITM_SCROLL && iden_list.scroll_list[value1].iden == 1) || (type==ITM_RING && iden_list.ring_list[value1].iden == 1)))
 		temp += "("+LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_USED)+")";
@@ -938,7 +965,7 @@ const D3DCOLOR item::item_color()
 		if(iden_list.scroll_list[value1].iden == 3)
 		{
 			int color_ = isGoodScroll((scroll_type)value1);
-			return_ = (color_ == 3)?CL_magic:((color_ == 2)?CL_warning:((color_ == 1)?CL_help:((color_ == 0)?CL_bad:((color_ == -1)?CL_small_danger:(CL_STAT)))));
+			return_ =  (color_ == 4)?CL_cyan:((color_ == 3)?CL_magic:((color_ == 2)?CL_warning:((color_ == 1)?CL_help:((color_ == 0)?CL_bad:((color_ == -1)?CL_small_danger:(CL_STAT))))));
 
 			if (you.s_pure_turn && you.s_pure >= 20)
 			{
@@ -1003,7 +1030,7 @@ const D3DCOLOR item::item_color()
 		if(return_ != CL_danger)
 			return_ = CL_normal;
 	}
-	if((type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST) && !you.isImpossibeEquip(GetArmorType(),false))
+	if((type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST) && !you.isPossibeEquip(GetArmorType(),false))
 	{
 		return_ = CL_bad;
 	}
@@ -1279,6 +1306,9 @@ bool item::isiden()
 		if (value1 == AMT_OCCULT && value3 == 0) {
 			return false;
 		}
+		if (value1 == AMT_WEATHER && value3 == 0) {
+			return false;
+		}
 		return identify && identify_curse;
 
 	}
@@ -1456,7 +1486,7 @@ void item::Identify()
 		if(!prev_iden && you.isequip(this))
 			unidenequipamulet((amulet_type)value1, value2*(-1));
 		you.auto_equip_iden();
-		if(value1 == AMT_OCCULT) 
+		if(value1 == AMT_OCCULT || value1 == AMT_WEATHER) 
 		{
 			value3++;
 		}
@@ -1510,6 +1540,11 @@ void item::equipIdentify()
 }
 void item::income_view()
 {
+	if(type == ITM_MISCELLANEOUS) {
+		if (value1 >= 0 && value1 < EVK_MAX) {
+			iden_list.evoke_list[value1] = true;
+		}
+	}
 	if(you.god == GT_HINA && !you.GetPunish(GT_HINA))
 	{
 		identify_curse = true;

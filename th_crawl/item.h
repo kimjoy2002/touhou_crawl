@@ -15,6 +15,7 @@
 #include "atifact.h"
 #include "scroll.h"
 #include "amulet.h"
+#include "evoke.h"
 
 class item;
 
@@ -146,6 +147,7 @@ public:
 	spellcard_iden spellcard_list[SPC_V_MAX];
 	bool fixed_artifact[FIXED_ARTIFACT_MAX];
 	bool books_list[BOOK_LAST];
+	bool evoke_list[EVK_MAX];
 	bool autopickup[IDEN_CHECK_END-1];
 
 	void SaveDatas(FILE *fp);

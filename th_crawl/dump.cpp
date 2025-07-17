@@ -687,7 +687,7 @@ bool Dump(int type, wstring *filename_)
 		ss << you.equipment[ET_SHIELD]->id << ") " << you.equipment[ET_SHIELD]->GetName() << "\n";
 	}
 	else {
-		ss << (you.isImpossibeEquip(ET_SHIELD, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
+		ss << (you.isPossibeEquip(ET_SHIELD, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
 	}
 
 
@@ -739,7 +739,7 @@ bool Dump(int type, wstring *filename_)
 		ss << you.equipment[ET_ARMOR]->id << ") " << you.equipment[ET_ARMOR]->GetName() << "\n";
 	}
 	else {
-		ss << (you.isImpossibeEquip(ET_ARMOR, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
+		ss << (you.isPossibeEquip(ET_ARMOR, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
 	}
 
 
@@ -770,7 +770,7 @@ bool Dump(int type, wstring *filename_)
 		ss << you.equipment[ET_HELMET]->id << ") " << you.equipment[ET_HELMET]->GetName() << "\n";
 	}
 	else {
-		ss << (you.isImpossibeEquip(ET_HELMET, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
+		ss << (you.isPossibeEquip(ET_HELMET, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
 	}
 
 	offset1_ = PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_CLOAK));
@@ -781,7 +781,7 @@ bool Dump(int type, wstring *filename_)
 		ss << you.equipment[ET_CLOAK]->id << ") " << you.equipment[ET_CLOAK]->GetName() << "\n";
 	}
 	else {
-		ss << (you.isImpossibeEquip(ET_CLOAK, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
+		ss << (you.isPossibeEquip(ET_CLOAK, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
 	}
 
 
@@ -793,7 +793,7 @@ bool Dump(int type, wstring *filename_)
 		ss << you.equipment[ET_GLOVE]->id << ") " << you.equipment[ET_GLOVE]->GetName() << "\n";
 	}
 	else {
-		ss << (you.isImpossibeEquip(ET_GLOVE, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
+		ss << (you.isPossibeEquip(ET_GLOVE, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
 	}
 
 	offset1_ = PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_UI_FOOT));
@@ -804,7 +804,7 @@ bool Dump(int type, wstring *filename_)
 		ss << you.equipment[ET_BOOTS]->id << ") " << you.equipment[ET_BOOTS]->GetName() << "\n";
 	}
 	else {
-		ss << (you.isImpossibeEquip(ET_BOOTS, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
+		ss << (you.isPossibeEquip(ET_BOOTS, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP)) << "\n";
 	}
 
 

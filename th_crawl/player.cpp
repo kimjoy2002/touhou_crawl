@@ -1893,6 +1893,10 @@ int players::GetWalkDelay(float multi_)
 	if(GetProperty(TPT_BIG_WING) > 0) {
 		speed_ = speed_*8/10;
 	}
+	if (s_weather == 4 && s_weather_turn > 0) {
+		speed_ = speed_*7/10;
+	}
+
 	speed_ = speed_*multi_;
 	if(speed_<3)
 		speed_ = 3;
@@ -5988,7 +5992,7 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 			return 0;
 		}
 	}
-	if(!isImpossibeEquip(type_, true))
+	if(!isPossibeEquip(type_, true))
 		return 0;
 
 
@@ -6637,7 +6641,7 @@ int players::haveOrb()
 	return goal_;
 	
 }
-bool players::isImpossibeEquip(equip_type type_, bool massage_)
+bool players::isPossibeEquip(equip_type type_, bool massage_)
 {
 	if(type_ == ET_HELMET && (GetProperty(TPT_HORN) || GetProperty(TPT_TWISTED_HORN) ))
 	{

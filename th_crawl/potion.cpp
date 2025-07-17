@@ -83,6 +83,8 @@ int isGoodPotion(potion_type kind)
 {
 	switch(kind)
 	{
+	case PT_ALCOHOL:
+		return 3;
 	case PT_HEAL:
 	case PT_HEAL_WOUND:
 	case PT_HASTE:
@@ -94,7 +96,6 @@ int isGoodPotion(potion_type kind)
 	case PT_LEVETATION:
 	case PT_MAGIC:
 	case PT_RECOVER_STAT:
-	case PT_ALCOHOL:
 		return 1;
 	case PT_WATER:
 		return 0;

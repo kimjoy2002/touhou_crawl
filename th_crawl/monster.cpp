@@ -2518,7 +2518,8 @@ int monster::longmove()
 {
 	if(direction < 0 || direction > 7)
 		direction = rand_int(0,7);
-	if(move(inttodirec(direction,position.x,position.y), false))
+	int return_ = move(inttodirec(direction,position.x,position.y), false);
+	if(return_)
 	{
 		if(randA(15)==1)
 			direction = rand_int(0,7);
@@ -2540,27 +2541,7 @@ int monster::longmove()
 			}
 		}
 	}
-
-
-	//if(will_move.empty())
-	//{
-	//	//PathSearch(position,you.position,will_move,ST_MONSTER_NORMAL);
-	//}
-
-	//if(will_move.empty())
-	//{
-	//	state.StateTransition(MSI_REST);
-	//	return 0;
-	//}
-	//else
-	//{
-	//	int re = 0;
-	//	coord_def temp = will_move.top();
-	//	re = move(temp);
-	//	will_move.pop();
-	//	return re;
-	//}
-	return true;
+	return return_;
 }
 
 bool monster::tryMagic() {
@@ -3569,6 +3550,7 @@ int monster::action(int delay_)
 			s_none_move--;
 		}
 
+		bool move_ = false;
 		if(s_communication)
 		{
 			s_communication--;
@@ -3761,14 +3743,14 @@ int monster::action(int delay_)
 			if(id == MON_SEIGA) {
 				search_type_ = ST_MONSTER_NORMAL_CANPASSWALL;
 			}
-
-			if(!special_state(is_sight_for_monster)) {
+			int speicial_move_ = special_state(is_sight_for_monster);
+			if(!speicial_move_) {
 				switch (state.GetState())
 				{
 				case MS_NORMAL:
 				default:
 					wait = false;
-					longmove();
+					move_ = (longmove()==2);
 					if (flag & M_FLAG_SHIELD) {
 						if (distan_coord(position, first_position) > 3 * 3)
 						{
@@ -3925,6 +3907,8 @@ int monster::action(int delay_)
 						if (success_ != 2) //이동실패
 						{
 							will_move.push_back(c_);
+						} else {
+							move_ = true;
 						}
 						if (!is_sight_for_monster && env[current_level].isInSight(position, true))
 						{ //플레이어를 발견하게된다.
@@ -3934,7 +3918,7 @@ int monster::action(int delay_)
 					}
 					else if (state.GetState() != MS_FIND)
 					{
-						atkmove(is_sight_for_monster);
+						move_ = (atkmove(is_sight_for_monster) == 2);
 						if (!is_sight_for_monster && env[current_level].isInSight(position, true))
 						{ //플레이어를 발견하게된다.
 							if (target == &you)
@@ -3982,7 +3966,7 @@ int monster::action(int delay_)
 								state.StateTransition(MSI_LOST); //길을 찾지못한다면... 헤메일예정
 							}
 						} else {
-							MoveToPos(you.position, false);	
+							move_ = (MoveToPos(you.position, false) == 2); 	
 						}
 					}
 					sightcheck(is_sight_for_monster);
@@ -4021,6 +4005,8 @@ int monster::action(int delay_)
 									will_move.push_back(c_);
 								else
 									will_move.clear();//가끔씩은 포기(자연스러운 움직임을 위해
+							} else {
+								move_ = true;
 							}
 							if(isUserAlly()) {
 								sightcheck(is_sight_for_monster);
@@ -4052,10 +4038,12 @@ int monster::action(int delay_)
 						if (success_ != 2) //이동실패
 						{
 							will_move.clear();
+						} else {
+							move_ = true;
 						}
 					}
 					else {
-						longmove();
+						move_ = (longmove() == 2);
 						if (distan_coord(position, first_position) > 4 * 4)
 						{
 							//이 몹은 자리를 지키기 위해 원래 자리로 돌아간다.
@@ -4094,7 +4082,9 @@ int monster::action(int delay_)
 								will_move.clear();
 								state.SetState(MS_ATACK);
 								break;
-							} 
+							}  else {
+								move_ = true;
+							}
 						}						
 					}
 					else {
@@ -4106,10 +4096,13 @@ int monster::action(int delay_)
 					break;
 				}
 				}
+			} else {
+				//speicial_move_됨
+				move_ = (speicial_move_==2);
 			}
 		}
 		special_action(is_sight_for_monster, false);
-		time_delay-=GetSpeed();
+		time_delay-= move_ ? GetWalkDelay() :GetSpeed(); //이동으로 바꿔야해!
 		if (!is_sight_for_monster && s_fear == -1) {
 			//전의상실한 몬스터는 시야밖에 나가면 사라짐
 			dead(PRT_NEUTRAL, false, true);
@@ -5767,7 +5760,7 @@ bool monster::special_move(bool is_sight_for_monster, bool can_bounce, float ang
 	return false;
 }
 
-bool monster::special_state(bool is_sight_for_monster) {
+int monster::special_state(bool is_sight_for_monster) {
 	switch(id) {
 	case MON_ENSLAVE_GHOST:
 	{
@@ -5776,9 +5769,11 @@ bool monster::special_state(bool is_sight_for_monster) {
 	} //break passthorough
 	case MON_SONBITEN_SPINTOWIN:
 	{
-		special_move(is_sight_for_monster, true, 30);
+		if(!special_move(is_sight_for_monster, true, 30)) {	
+			return 1;
+		}
 	}
-		return true;
+	return 2;
 	case MON_MISSLE:
 	{
 		if(special_move(is_sight_for_monster, false, 45)) {
@@ -5801,7 +5796,7 @@ bool monster::special_state(bool is_sight_for_monster) {
 			dead(PRT_NEUTRAL, false);
 		}
 	}
-	return true;
+	return 2;
 	case MON_HOMING:
 	{
 		if(special_move(is_sight_for_monster, false, 45)) {
@@ -5809,7 +5804,7 @@ bool monster::special_state(bool is_sight_for_monster) {
 			dead(PRT_NEUTRAL, false);
 		}
 	}
-	return true;
+	return 2;
 	case MON_COGWHEEL:
 	{
 		if(isMultipleAttack(false)) {
@@ -5839,11 +5834,11 @@ bool monster::special_state(bool is_sight_for_monster) {
 			dead(PRT_NEUTRAL, false);
 		}
 	}
-	return true;
+	return 2;
 	default:
 		break;
 	}
-	return false;
+	return 0;
 }
 parent_type monster::GetParentType()
 {
@@ -5947,6 +5942,9 @@ bool monster::isSaveSummoner(unit* order)
 int monster::GetWalkDelay(float multi_) {
 	int speed_ = GetSpeed() - walk_speed_bonus;
 	speed_ *= multi_;
+	if (you.s_weather == 4 && you.s_weather_turn > 0) {
+		speed_ = speed_*7/10;
+	}
 	if(speed_ <= 0)
 		speed_ = 1; 
 	return speed_;

@@ -1448,7 +1448,7 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	}
 	else
 	{
-		DrawTextUTF8(pfont,pSprite, you.isImpossibeEquip(ET_SHIELD, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		DrawTextUTF8(pfont,pSprite, you.isPossibeEquip(ET_SHIELD, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -1532,7 +1532,7 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	}
 	else
 	{
-		DrawTextUTF8(pfont,pSprite,you.isImpossibeEquip(ET_ARMOR, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		DrawTextUTF8(pfont,pSprite,you.isPossibeEquip(ET_ARMOR, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -1580,7 +1580,7 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	}
 	else
 	{
-		DrawTextUTF8(pfont,pSprite,you.isImpossibeEquip(ET_HELMET, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		DrawTextUTF8(pfont,pSprite,you.isPossibeEquip(ET_HELMET, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -1606,7 +1606,7 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	}
 	else
 	{
-		DrawTextUTF8(pfont,pSprite,you.isImpossibeEquip(ET_CLOAK, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		DrawTextUTF8(pfont,pSprite,you.isPossibeEquip(ET_CLOAK, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -1631,7 +1631,7 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,you.equipment[ET_GLOVE]->item_color());
 	}
 	else {
-		DrawTextUTF8(pfont,pSprite,you.isImpossibeEquip(ET_GLOVE, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		DrawTextUTF8(pfont,pSprite,you.isPossibeEquip(ET_GLOVE, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -1657,7 +1657,7 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	}
 	else
 	{
-		DrawTextUTF8(pfont,pSprite,you.isImpossibeEquip(ET_BOOTS, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
+		DrawTextUTF8(pfont,pSprite,you.isPossibeEquip(ET_BOOTS, false)?LocalzationManager::locString(LOC_SYSTEM_UI_NONE):LocalzationManager::locString(LOC_SYSTEM_UI_CANT_EQUIP), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_bad);
 	}
 	rc.left = 30;
 	rc.top += fontDesc.Height;
@@ -2403,6 +2403,9 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						case 3:
 							img_effect_sun.draw(pSprite, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, D3DCOLOR_ARGB(20, 255, 255, 255));
 							break;
+						case 4:
+							img_effect_rain.draw(pSprite, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, D3DCOLOR_ARGB(50, 255, 255, 255));
+							break;
 						}
 
 					}
@@ -2981,6 +2984,9 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					break;
 				case 3:
 					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_SUNNY), color_, LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_SUNNY), this);
+					break;
+				case 4:
+					stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_RAINY), color_, LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_RAINNY), this);
 					break;
 				}
 				stateDraw.enter(this);

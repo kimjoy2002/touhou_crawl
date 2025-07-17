@@ -3443,7 +3443,11 @@ void God_AblilityShow(god_type god) {
 			printsub("",true,CL_normal);
 			printsub("",true,CL_normal);
 			printsub("",true,CL_normal);
+		} else {
+			printGodAbility(GT_KEIKI, level_, 0, true, LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY0, vector<subability>(), LOC_EMPTYSTRING);
 		}
+		printGodAbility(GT_KEIKI, level_, 0, true, LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY0_1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+
 		if (you.piety >= haniwa_abil::max_piety) {
 			printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY1_1),true,CL_keiki);
 		} else {

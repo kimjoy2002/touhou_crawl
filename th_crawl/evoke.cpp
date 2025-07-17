@@ -81,6 +81,17 @@ int EvokeSuccece(evoke_kind skill);
 bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target);
 
 
+bool isCanGenerate(evoke_kind evk) {
+	switch(evk) {
+		case EVK_SKY_TORPEDO:
+		case EVK_MAGIC_HAMMER:
+		case EVK_CAMERA:
+			return false;
+		default:
+			break;
+	}
+	return true;
+}
 
 bool evoke_evokable(bool auto_, int auto_direc_, evoke_kind kind)
 {

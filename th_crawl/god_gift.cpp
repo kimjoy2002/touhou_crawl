@@ -11,6 +11,7 @@
 #include "god.h"
 #include "key.h"
 #include "keiki.h"
+#include "tribe.h"
 #include "skill_use.h"
 #include "mon_infor.h"
 #include "potion.h"
@@ -227,22 +228,7 @@ bool GodGift(god_type god, int piety)
 }
 
 
-class temp_class 
-{
-public:
-	int level;
-	int exp;
-	int skills;
-	temp_class():level(0),exp(0),skills(0){};
-	temp_class(int a,int b,int c):level(a),exp(b),skills(c){};
-};
 
-
-
-struct compare { 
-	bool operator()(const temp_class &a,const temp_class &b) const
-	{return (a.level != b.level)?a.level < b.level:a.exp<b.exp;}
-};
 
 void swako_gift(bool speak_) {
 	item_infor t;
@@ -304,12 +290,12 @@ void byakuren_gift(bool speak_)
 	int gift_book = -1;
 	for(int i = 0; i < 40 && gift_book == -1; i++)
 	{
-		vector<temp_class> q;
+		vector<bookgift_class> q;
 		for(int j=SKT_SPELLCASTING+1; j<SKT_EVOCATE;j++)
 		{
-			q.push_back(temp_class(you.GetSkillLevel(j, false),you.skill[j].exper,j));
+			q.push_back(bookgift_class(you.GetSkillLevel(j, false),you.skill[j].exper,j));
 		}
-		sort(q.begin(),q.end(),compare());
+		sort(q.begin(),q.end(),bookgift_compare());
 		for(int j=SKT_SPELLCASTING+1; j<SKT_EVOCATE;j++)
 		{
 			if(q.back().level == 0 )
@@ -456,10 +442,14 @@ item* armour_gift(bool speak_, bool artifact_)
 	random_extraction<int> rand_;
 	rand_.push(0,5); //아머
 	rand_.push(1, you.GetSkillLevel(SKT_SHIELD, true)>=1?3:1); //방패
-	rand_.push(2,you.equipment[ET_HELMET]==NULL?5:1); //머리
-	rand_.push(3,you.equipment[ET_CLOAK]==NULL?5:1); //망토
-	rand_.push(4,you.equipment[ET_GLOVE]==NULL?5:1); //손
-	rand_.push(5,you.equipment[ET_BOOTS]==NULL?5:1); //발
+	if(you.isPossibeEquip(ET_HELMET, false))
+		rand_.push(2,you.equipment[ET_HELMET]==NULL?5:1); //머리
+	if(you.isPossibeEquip(ET_CLOAK, false))
+		rand_.push(3,you.equipment[ET_CLOAK]==NULL?5:1); //망토
+	if(you.isPossibeEquip(ET_GLOVE, false))
+		rand_.push(4,you.equipment[ET_GLOVE]==NULL?5:1); //손
+	if(you.isPossibeEquip(ET_BOOTS, false))
+		rand_.push(5,you.equipment[ET_BOOTS]==NULL?5:1); //발
 	item* it = NULL;
 
 	int armour_ = rand_.pop();
@@ -474,9 +464,11 @@ item* armour_gift(bool speak_, bool artifact_)
 			random_extraction<int> rand2_;
 
 			rand2_.push(ITM_ARMOR_BODY_ARMOUR_0,dodge_?10:1); //로브
-			rand2_.push(ITM_ARMOR_BODY_ARMOUR_1,dodge_?8:4); //가죽
-			rand2_.push(ITM_ARMOR_BODY_ARMOUR_2,heavy_?8:4); //체인
-			rand2_.push(ITM_ARMOR_BODY_ARMOUR_3,heavy_?10:1); //판금
+			if(!you.GetProperty(TPT_SIZE)) {
+				rand2_.push(ITM_ARMOR_BODY_ARMOUR_1,dodge_?8:4); //가죽
+				rand2_.push(ITM_ARMOR_BODY_ARMOUR_2,heavy_?8:4); //체인
+				rand2_.push(ITM_ARMOR_BODY_ARMOUR_3,heavy_?10:1); //판금
+			}
 	
 			int select_ = rand2_.pop();
 			item_infor t;
@@ -539,7 +531,7 @@ item* jewelry_gift(bool speak_, bool curse_, bool artifact_)
 
 	for(int i = 0; i < RGT_MAX; i++)
 	{
-		if(isGoodRing((ring_type)i,1))
+		if(isAbleRing((ring_type)i) && isGoodRing((ring_type)i,1))
 		{			
 			rand_.push(i,iden_list.ring_list[i].iden == 2?1:20); //식별된것은 확률이 확 줄어듬
 		}

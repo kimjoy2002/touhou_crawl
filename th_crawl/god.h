@@ -25,6 +25,21 @@ enum GOD_CHECK_TYPE
 };
 
 
+class bookgift_class 
+{
+public:
+	int level;
+	int exp;
+	int skills;
+	bookgift_class():level(0),exp(0),skills(0){};
+	bookgift_class(int a,int b,int c):level(a),exp(b),skills(c){};
+};
+struct bookgift_compare { 
+	bool operator()(const bookgift_class &a,const bookgift_class &b) const
+	{return (a.level != b.level)?a.level < b.level:a.exp<b.exp;}
+};
+
+
 
 string GetGodString(god_type god);
 int GetGodAbandonValue(god_type god);

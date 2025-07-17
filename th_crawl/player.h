@@ -648,7 +648,7 @@ public:
 	int getThrowLength();
 	int haveGoal();
 	int haveOrb();
-	bool isImpossibeEquip(equip_type type_, bool massage_);
+	bool isPossibeEquip(equip_type type_, bool massage_);
 	bool unequip(equip_type type_, bool force_=false);
 	bool unequiparmor(char id_);
 	bool unequipjewerly(char id_);

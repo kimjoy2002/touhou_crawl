@@ -61,5 +61,6 @@ bool isCanEvoke(amulet_type kind);
 bool chargingFinish(amulet_type kind, int value);
 bool evokeAmulet(amulet_type kind, int value_);
 LOCALIZATION_ENUM_KEY getOccultName(occult_type kind);
+LOCALIZATION_ENUM_KEY getWeatherName(int kind);
 
 #endif // __AMULET_H__

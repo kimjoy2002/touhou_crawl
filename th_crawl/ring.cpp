@@ -92,6 +92,21 @@ ring_type goodbadring(int good_bad)
 		return list_[randA(3)];
 	}
 }
+
+bool isAbleRing(ring_type kind) {
+
+	switch(kind)
+	{
+		case RGT_FULL:
+		case RGT_LEVITATION:
+		case RGT_HUNGRY:
+			return false;
+		default:
+			break;
+	}
+	return true;
+}
+
 int isGoodRing(ring_type kind, int value)
 {
 	switch(kind)

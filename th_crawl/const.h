@@ -32,6 +32,7 @@ extern const D3DCOLOR CL_bad;
 extern const D3DCOLOR CL_punish_bad;
 extern const D3DCOLOR CL_verybad;
 extern const D3DCOLOR CL_none;
+extern const D3DCOLOR CL_cyan;
 extern const D3DCOLOR CL_help; 
 extern const D3DCOLOR CL_good;
 extern const D3DCOLOR CL_dark_good; 

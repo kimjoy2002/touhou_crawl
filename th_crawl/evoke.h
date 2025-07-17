@@ -6,6 +6,9 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+#ifndef  __EVOKE_H__
+#define  __EVOKE_H__
+
 #include "enumMapBuilder.h"
 
 enum evoke_kind
@@ -23,8 +26,10 @@ enum evoke_kind
 
 struct item_infor;
 
+bool isCanGenerate(evoke_kind evk);
 
 bool evoke_evokable(bool auto_, int auto_direc_, evoke_kind kind);
 int Evokeusepower(evoke_kind skill, bool max_);
 
 void MakeEvokeItem(item_infor* t, int kind_ = -1);
+#endif // __EVENT_H__

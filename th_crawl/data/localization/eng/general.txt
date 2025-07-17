@@ -618,6 +618,7 @@ LOC_SYSTEM_BUFF_JUNKA,Purity
 LOC_SYSTEM_BUFF_FOG,Fog
 LOC_SYSTEM_BUFF_THUNDER,Thndr
 LOC_SYSTEM_BUFF_SUNNY,Sun
+LOC_SYSTEM_BUFF_RAINY,Tempest
 LOC_SYSTEM_BUFF_MIKO_NEWPLACE,NewPlace
 LOC_SYSTEM_BUFF_MIKO_REDCLOAK,RCloak
 LOC_SYSTEM_BUFF_MIKO_BLUECLOAK,BCloak
@@ -719,6 +720,7 @@ LOC_SYSTEM_BUFF_DESCRIBE_JUNKA4,You can't use spell cards.
 LOC_SYSTEM_BUFF_DESCRIBE_FOG,A thick fog greatly reduces everyone's vision.
 LOC_SYSTEM_BUFF_DESCRIBE_THUNDER,Lightning strikes randomly around the area.
 LOC_SYSTEM_BUFF_DESCRIBE_SUNNY,Everyone around you glows, lowering evasion and nullifying invisibility.
+LOC_SYSTEM_BUFF_DESCRIBE_RAINNY,Movement speed of all nearby units increases.
 LOC_SYSTEM_BUFF_DESCRIBE_MIKO_NEWPLACE,Desire Summon has not been used on this floor.
 LOC_SYSTEM_BUFF_DESCRIBE_MIKO_REDCLOAK,Until changing floors, you gain {0} bonus power and HP regeneration.
 LOC_SYSTEM_BUFF_DESCRIBE_MIKO_BLUECLOAK,Until changing floors, you gain {0}x spell power and MP regeneration.
@@ -1350,7 +1352,8 @@ LOC_SYSTEM_NOTE_TENSI_BAD_AOE,Tenshi: Area-wide haste.
 LOC_SYSTEM_NOTE_TENSI_SUCIDE,Tenshi: Summon self-destructing rabbit.
 LOC_SYSTEM_NOTE_TENSI_WEATHER_FOG,Tenshi: Fog.
 LOC_SYSTEM_NOTE_TENSI_WEATHER_THUNDER,Tenshi: Thunderstorm.
-LOC_SYSTEM_NOTE_TENSI_WEATHER_SUN,Tenshi: Clear skies.
+LOC_SYSTEM_NOTE_TENSI_WEATHER_SUN,Tenshi: Sunny.
+LOC_SYSTEM_NOTE_TENSI_WEATHER_RANNY,Tenshi: Tempest.
 LOC_SYSTEM_NOTE_TENSI_DEBUG1,Tension {0}
 LOC_SYSTEM_NOTE_TENSI_DEBUG2,Tension {0} Action {1}
 LOC_SYSTEM_NOTE_ARENA,========== Level {0} ==========
@@ -1542,10 +1545,18 @@ LOC_SYSTEM_TENSI_SUN4,Tenshi: Gotta dry some laundry real quick!
 LOC_SYSTEM_TENSI_SUN5,Tenshi: Sunlight-shine!
 LOC_SYSTEM_TENSI_SUN6,Tenshi: The Sword of Hisou can do this too!
 LOC_SYSTEM_TENSI_SUN7,Tenshi: Today’s perfect for a picnic!
+LOC_SYSTEM_TENSI_RAINNY1,Tenshi: Today’s forecast calls for rain with strong winds!
+LOC_SYSTEM_TENSI_RAINNY2,Tenshi: Did you bring an umbrella? Hold on tight!
+LOC_SYSTEM_TENSI_RAINNY3,Tenshi: Don’t you feel like running in weather like this?
+LOC_SYSTEM_TENSI_RAINNY4,Tenshi: I’ll help you get a little closer!
+LOC_SYSTEM_TENSI_RAINNY5,Tenshi: What a romantic weather, isn’t it?
+LOC_SYSTEM_TENSI_RAINNY6,Tenshi: Ride the wind and go!
+LOC_SYSTEM_TENSI_RAINNY7,Tenshi: Time to wash away the blood!
 LOC_SYSTEM_TENSI_WHISPERING,Tenshi whispered in an inaudible voice.
 LOC_SYSTEM_TENSI_WEATHER1,A thick fog began to spread, making it hard to see even an inch ahead.
 LOC_SYSTEM_TENSI_WEATHER2,Heavy rain and thunderstorm began to rage through the dungeon.
 LOC_SYSTEM_TENSI_WEATHER3,Bright sunlight began to shine into the dungeon.
+LOC_SYSTEM_TENSI_WEATHER4,Rain and wind begin to sweep through the dungeon.
 LOC_SYSTEM_TENSI_BRAND_WEAPON,The aura of Hisou surges from {0}.
 LOC_SYSTEM_TENSI_MORE_BRAND_WEAPON,{0} is further empowered by the force of Hisou.
 LOC_SYSTEM_SEIJA_SUMMON_BUFF1,Seija: Run!
@@ -3507,6 +3518,7 @@ LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END,Your grit-based grazing has ended
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SMOKE,A thick fog rolls in, obscuring everything.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_RAIN,Heavy rain and thunder sweep through the dungeon.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SUNNY,Bright sunlight begins to shine into the dungeon.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_RAINWIND,Heavy rain pours and strong winds howl through the dungeon.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_END,The weather has returned to normal.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON,Through occult power, urban legend {0} has appeared!
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON_MANY,Through occult power, multiple {0} urban legends have appeared!
@@ -3678,6 +3690,9 @@ LOC_SYSTEM_ITEM_SCROLL_BRAND_FAST_CAST,{0} radiated mysterious energy!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_PROTECT,{0} glowed with a protective aura!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_WEAPON,Your weapon has been enchanted with magic!
 LOC_SYSTEM_ITEM_SCROLL_BRAND_WEAPON_FAIL,This weapon cannot be branded with magic.
+LOC_SYSTEM_ITEM_SCROLL_ACQUIRE,This is a Scroll of Acquirement!
+LOC_SYSTEM_ITEM_SCROLL_ACQUIRE_WHAT,What type of item would you like to acquire?
+LOC_SYSTEM_ITEM_SCROLL_ACQUIRE_CREATE,An item has been created beneath your feet!
 LOC_SYSTEM_ITEM_BOOK_MAGICBOOK,Spellbook
 LOC_SYSTEM_ITEM_BOOK_UNIDEN_MAGICBOOK,Unidentified Spellbook
 LOC_SYSTEM_ITEM_BOOK_DROP,Dropped Spellbook
@@ -3873,7 +3888,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH,A charm developed by the Moriya Shrine 
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE,A charm modified to send long-distance signals underground.\nIncreases MP regen when equipped at full charge.\nPress 'v' while fully charged to instantly restore MP.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,A charm said to have revived the Crown Prince in the Dream Mausoleum.\nCharges with spirits and recharges one spell card when full.\nPress 'v' to activate.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE,A charm filled with the essence of Graze.\nWhile equipped, gradually charges and provides Graze ability at full charge.\nPress 'v' to dodge all avoidable attacks for a few turns.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,A charm infused with a delinquent celestial's sword energy.\nCharges with ambient weather energy and randomly triggers a weather effect.\nRestores HP regen greatly upon activation.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,A charm infused with a delinquent celestial's sword energy.\nTriggers the stored weather effect when at 100% charge, greatly increasing health regeneration.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT,A charm powered by the Occult Ball that manifests urban legends.\nCharges with occult energy and can banish all summoned enemies in sight.\nAlso grants a random yokai effect.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PURIFTY,An amulet imbued with the power of the lunar capital.\nWhen fully charged (100%), press V to instantly purify harmful effects.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG,This bugged charm is neither stylish nor useful.\n
@@ -4352,6 +4367,8 @@ LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY2,You can manifest Kanako’s onbashira.
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY3,You can be enveloped in Kanako’s wind power.
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY4,You sometimes get a gift of weapons from Kanako.
 LOC_SYSTEM_GOD_SHOW_KANAKO_ABLILITY5,You occasionally receive danmaku as a gift from Kanako.
+LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY0,You receive a Haniwa from Keiki when you first join her faith.
+LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY0_1,Keiki takes a small portion of your experience points.
 LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY1,You can enhance your gifted Haniwa with powers from Keiki.
 LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY1_1,You have enhanced all available Haniwa abilities.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY1_JUMP,You can perform short jumps.

@@ -269,10 +269,9 @@ bool evokeAmulet(amulet_type kind, int value_)
 	case AMT_WEATHER:
 		{
 			PlaySE("buff");
-			int weather_ = rand_int(1, 3);
 			int time_ = rand_int(50, 80);
 			you.SetBuff(BUFFSTAT_REGEN, BUFF_DUPLE, 3, time_);
-			switch (weather_)
+			switch (value_+1)
 			{
 			case 1:
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SMOKE), true, false, false, CL_normal);
@@ -285,6 +284,10 @@ bool evokeAmulet(amulet_type kind, int value_)
 			case 3:
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SUNNY), true, false, false, CL_normal);
 				you.SetWeather(3, time_);
+				break;
+			case 4:
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_RAINWIND), true, false, false, CL_normal);
+				you.SetWeather(4, time_);
 				break;
 			default:
 				break;
@@ -438,6 +441,23 @@ LOCALIZATION_ENUM_KEY getOccultName(occult_type kind)
 		break;
 	}
 	return LOC_SYSTEM_ITEM_OCCULT_UNKNOWN;
+}
+LOCALIZATION_ENUM_KEY getWeatherName(int kind) {
+
+	switch (kind)
+	{
+	case OCT_NESI:
+		return LOC_SYSTEM_BUFF_FOG;
+	case OCT_LONG:
+		return LOC_SYSTEM_BUFF_THUNDER;
+	case OCT_SHORT:
+		return LOC_SYSTEM_BUFF_SUNNY;
+	case OCT_DISH:
+		return LOC_SYSTEM_BUFF_RAINY;
+	default:
+		break;
+	}
+	return LOC_SYSTEM_NONE_STRING;
 }
 
 bool skill_summon_occult_nesi(int power, bool short_, unit* order, coord_def target) {

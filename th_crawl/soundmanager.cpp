@@ -115,7 +115,7 @@ void FMODSoundManager::Update() {
                 bgmFadeVolume = std::max(bgmFadeVolume - fadeSpeed, bgmTargetVolume);
             }
 
-            currentBgmChannel->setVolume(bgmFadeVolume * (bgmVolume / 100.0f));
+            currentBgmChannel->setVolume(bgmFadeVolume * (bgmVolume / 100.0f)*0.8f);
 
             if (bgmFadingOut && bgmFadeVolume <= 0.0f) {
                 currentBgmChannel->stop();
@@ -233,7 +233,7 @@ void FMODSoundManager::playSound(const std::string& name) {
 }
 
 bool FMODSoundManager::playBgm(const std::string& name) {
-    if (name == currentBgmName) return false;
+    if (name == currentBgmName && !bgmFadingOut) return false;
 
 
     // 현재 페이드아웃 중이면 예약만 함
@@ -274,7 +274,7 @@ void FMODSoundManager::stopCurrentBGM(const std::string& except) {
 void FMODSoundManager::setBgmVolume(int vol) {
     bgmVolume = vol;
     if (currentBgmChannel) {
-        currentBgmChannel->setVolume(bgmVolume / 100.0f);
+        currentBgmChannel->setVolume(bgmVolume / 100.0f*0.8f);
     }
 }
 

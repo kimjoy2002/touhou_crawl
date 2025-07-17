@@ -22,9 +22,9 @@ This page provides descriptions and aptitude ratings for the various Species and
 ├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
 │Wolf Tengu │ §s10%§d│  §r-2§d│   §b2§d│   §d0§d│   §d0§d│   §b2§d│   §b2§d│   §b2§d│   §s1§d│   §s1§d│  §p-1§d│  §R-3§d│   §B3§d│   §B3§d│
 ├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
-│Kappa       │§p-10%§d│   §d0§d│   §s1§d│   §b2§d│  §r-2§d│   §d0§d│   §s1§d│  §p-1§d│   §B3§d│   §d0§d│   §b2§d│   §d0§d│   §d0§d│  §R-3§d│
+│Kappa      │§p-10%§d│   §d0§d│   §s1§d│   §b2§d│  §r-2§d│   §d0§d│   §s1§d│  §p-1§d│   §B3§d│   §d0§d│   §b2§d│   §d0§d│   §d0§d│  §R-3§d│
 ├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
-│Nekomata    │§r-20%§d│  §p-1§d│   §s1§d│   §B3§d│  §r-2§d│  §r-2§d│  §r-2§d│  §r-2§d│  §r-2§d│   §d0§d│   §B3§d│   §B4§d│  §R-3§d│  §R-3§d│
+│Nekomata   │§r-20%§d│  §p-1§d│   §s1§d│   §B3§d│  §r-2§d│  §r-2§d│  §r-2§d│  §r-2§d│  §r-2§d│   §d0§d│   §B3§d│   §B4§d│  §R-3§d│  §R-3§d│
 ├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
 │Oarfish    │ §b20%§d│   §d0§d│   §d0§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│  §p-1§d│   §b2§d│  §p-1§d│   §b2§d│   §d0§d│  §p-1§d│
 ├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
@@ -43,7 +43,7 @@ This page provides descriptions and aptitude ratings for the various Species and
 
 
 ┌───────────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┬────┐
-│           │§dSpct§d│§dFire§d│§dColdd│§dEart§d│§dAir §d│§dDes §d│§dAlch§d│§dMent§d│§dSumm§d│§dSptm§d│§dEvo §d│
+│           │§dSpct§d│§dFire§d│§dCold│§dEart§d│§dAir §d│§dDes §d│§dAlch§d│§dMent§d│§dSumm§d│§dSptm§d│§dEvo §d│
 ├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
 │Human      │   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│   §d0§d│
 ├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
@@ -71,7 +71,7 @@ This page provides descriptions and aptitude ratings for the various Species and
 ├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
 │Vampire    │   §d0§d│   §s1§d│   §d0§d│   §d0§d│   §s1§d│   §s1§d│  §r-2§d│   §d0§d│   §B3§d│   §s1§d│  §r-2§d│
 ├───────────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┼────┤
-│           │§dSpct§d│§dFire§d│§dColdd│§dEart§d│§dAir §d│§dDes §d│§dAlch§d│§dMent§d│§dSumm§d│§dSptm§d│§dEvo §d│
+│           │§dSpct§d│§dFire§d│§dCold│§dEart§d│§dAir §d│§dDes §d│§dAlch§d│§dMent§d│§dSumm§d│§dSptm§d│§dEvo §d│
 └───────────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┴────┚
 
 

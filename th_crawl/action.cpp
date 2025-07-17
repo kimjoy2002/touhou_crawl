@@ -1946,7 +1946,7 @@ void Stair_move(bool down)
 					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_DOWN),true,false,false,CL_normal);
 					GodAccpect_Stair(true, false);
 					PlaySE("stair");
-					//you.resetLOS(false);
+					you.ReleaseDimention();
 					you.TurnEnd();
 					break;
 				}
@@ -2071,6 +2071,7 @@ void Stair_move(bool down)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_DOWN),true,false,false,CL_normal);
 			GodAccpect_Stair(true, true);
 			PlaySE("stair");
+			you.ReleaseDimention();
 			//you.resetLOS(false);
 			you.TurnEnd();
 			break;
@@ -2120,6 +2121,7 @@ void Stair_move(bool down)
 					printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_UP),true,false,false,CL_normal);
 					GodAccpect_Stair(false, false);
 					PlaySE("stair");
+					you.ReleaseDimention();
 					//you.resetLOS(false);
 					you.TurnEnd();
 					break;
@@ -2307,6 +2309,7 @@ void Stair_move(bool down)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_RETURN),true,false,false,CL_normal);
 			GodAccpect_Stair(false, true);
 			PlaySE("stair");
+			you.ReleaseDimention();
 			//you.resetLOS(false);
 			you.TurnEnd();
 			break;
@@ -2755,8 +2758,8 @@ void Iden_Show()
 	{
 		InputedKey inputedKey;
 		int key_ = waitkeyinput(inputedKey, true);
-		int offseta_ = max(((DisplayManager.move + 1000) / 2000),0)*52;
-		int offsetb_ = max((DisplayManager.move / 2000), 0) * 52;
+		int offseta_ = max((DisplayManager.move / 2000),0)*52;
+		int offsetb_ = max(((DisplayManager.move - 1000) / 2000), 0) * 52;
 		if ((key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z'))
 		{
 			int num = ((key_ >= 'a' && key_ <= 'z') ? (key_ - 'a') + offseta_ : (key_ - 'A' + 26) + offsetb_);

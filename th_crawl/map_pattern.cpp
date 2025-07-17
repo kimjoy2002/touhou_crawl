@@ -5603,32 +5603,56 @@ const char* subterranean_last_vault_pattern(map_dummy* map)
 
 
 
-const char* hakurei_last_vault_pattern(map_dummy* map)
+const char* hakurei_last_vault_pattern(map_dummy* map, bool fake)
 {
 	switch(randA(0))
 	{
 	default:
 	case 0:
 		{
+			int hw_ = randA(1)?1:-1;
 			map->size_x = 9;
 			map->size_y = 9;
-			map->m_entrance.x = -map->size_x;
+			map->m_entrance.x = hw_>0?-map->size_x:map->size_x;
 			map->m_entrance.y = -2;
-			map->m_exit.x = -map->size_x;
+			map->m_exit.x = hw_>0?-map->size_x:map->size_x;
 			map->m_exit.y = -2;
 
-			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+			map->flag = FLAG_NO_ITEM | FLAG_NO_STAIR;
+			if(!fake)
 			{
 				item_infor t;
 				makeitem(ITM_ORB, 0, &t, 0);
-				map->item_list.push_back(mapdummy_item(t,coord_def(-4,-2)));		
+				map->item_list.push_back(mapdummy_item(t,coord_def(-4*hw_,-2)));		
+			} else {
+				item_infor t;
+				random_extraction<int> type_;
+				type_.push(ITM_WEAPON_SHORTBLADE);
+				type_.push(ITM_WEAPON_LONGBLADE);
+				type_.push(ITM_WEAPON_MACE);
+				type_.push(ITM_WEAPON_SPEAR);
+				type_.push(ITM_WEAPON_AXE);
+				type_.push(ITM_ARMOR_BODY_ARMOUR_0);
+				type_.push(ITM_ARMOR_BODY_ARMOUR_1);
+				type_.push(ITM_ARMOR_BODY_ARMOUR_2);
+				type_.push(ITM_ARMOR_BODY_ARMOUR_3);
+				type_.push(ITM_ARMOR_HEAD);
+				type_.push(ITM_ARMOR_CLOAK);
+				type_.push(ITM_ARMOR_GLOVE);
+				type_.push(ITM_ARMOR_BOOT);
+				type_.push(ITM_ARMOR_LAST);
+				type_.push(ITM_RING);
+				type_.push(ITM_AMULET);
+				makeitem((item_type)type_.pop(), 0, &t, 0);
+				t.artifact = true;
+				map->item_list.push_back(mapdummy_item(t,coord_def(-4*hw_,-2)));
 			}
 
 			
 			int mon_num_ = 2;
 			while(mon_num_)
 			{
-				coord_def c_(rand_int(-1,-7),rand_int(0,5));
+				coord_def c_(rand_int(-1*hw_,-7*hw_),rand_int(0,5));
 				auto it = find_if(map->monster_list.begin(),map->monster_list.end(),
 					[c_](mapdummy_mon &v)->bool{
 						return v.pos == c_;
@@ -5636,7 +5660,7 @@ const char* hakurei_last_vault_pattern(map_dummy* map)
 				);
 				if(it == map->monster_list.end())
 				{
-					map->monster_list.push_back(mapdummy_mon(MON_EVIL_EYE_TANK,0,c_));
+					map->monster_list.push_back(mapdummy_mon(randA(2)?MON_EVIL_EYE_TANK:MON_FLOWER_TANK,0,c_));
 					mon_num_--;
 				}
 			}
@@ -5644,7 +5668,7 @@ const char* hakurei_last_vault_pattern(map_dummy* map)
 			mon_num_ = 2;
 			while(mon_num_)
 			{
-				coord_def c_(rand_int(1,7),rand_int(0,-5));
+				coord_def c_(rand_int(1*hw_,7*hw_),rand_int(0,-5));
 				auto it = find_if(map->monster_list.begin(),map->monster_list.end(),
 					[c_](mapdummy_mon &v)->bool{
 						return v.pos == c_;
@@ -5652,11 +5676,12 @@ const char* hakurei_last_vault_pattern(map_dummy* map)
 				);
 				if(it == map->monster_list.end())
 				{
-					map->monster_list.push_back(mapdummy_mon(MON_EVIL_EYE_TANK,0,c_));
+					map->monster_list.push_back(mapdummy_mon(randA(3)?MON_FLOWER_TANK:MON_EVIL_EYE_TANK,0,c_));
 					mon_num_--;
 				}
 			}
-			map->name = "HAKUREI_BASE_YINYANG_ORB";
+			map->name = fake?"HAKUREI_BASE_YINYANG_FAKE":"HAKUREI_BASE_YINYANG_ORB";
+			if(hw_>0) {
 			return  "\
 #####$$$$$$$$$#####\
 ###$$$.......$$$###\
@@ -5677,6 +5702,28 @@ $$...............$$\
 ##$$...........$$##\
 ###$$$.......$$$###\
 #####$$$$$$$$$#####";	
+			} else {
+return  "\
+#####$$$$$$$$$#####\
+###$$$.......$$$###\
+##$$...........$$##\
+#$$.............$$#\
+#$...............$#\
+$$...............$$\
+$..........$$$$$..$\
+$.........$$...$$..\
+$$.......$$.....$$$\
+$$.......$.......$$\
+$.$.....$$.......$$\
+$.$$...$$.........$\
+$..$$$$$..........$\
+$$...............$$\
+#$...............$#\
+#$$.............$$#\
+##$$...........$$##\
+###$$$.......$$$###\
+#####$$$$$$$$$#####";
+			}
 		break;
 		}
 	}

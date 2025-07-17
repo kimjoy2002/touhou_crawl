@@ -673,6 +673,13 @@ bool effectartifact(artifact_type kind, int value)
 	return false;
 }
 
+bool CantBothArtifact(artifact_type left, artifact_type right) {
+	if((left == ART_HUNGRY && right == ART_FULL)|| (left == ART_FULL  && right == ART_HUNGRY))
+		return true;
+	return false;
+}
+
+
 
 
 int ArmourExceptopn(armour_kind type)
@@ -726,6 +733,7 @@ void MakeArtifact(item* item_, int good_bad_)
 
 	int num_ = 1+randA(good_bad_ +randA(3));
 	random_extraction<artifact_type> temp;
+	vector<artifact_type> check;
 	for(int i=0; i<ART_MAX_ATIFACT; i++)
 	{
 		if(item_->type >= ITM_ARMOR_BODY_FIRST && item_->type < ITM_ARMOR_BODY_LAST)
@@ -740,7 +748,16 @@ void MakeArtifact(item* item_, int good_bad_)
 		if(isGenerateRandart((artifact_type)i, item_->type ) <= 0) {
 			continue;
 		}
-
+		bool cantgene = false;
+		for(auto already_ : check) {
+			if(CantBothArtifact(already_, (artifact_type)i)) {
+				cantgene = true;
+			}
+		}
+		if(cantgene) {
+			continue;
+		}
+		check.push_back((artifact_type)i);
 		temp.push((artifact_type)i, isGenerateRandart((artifact_type)i, item_->type ));
 	}
 	
@@ -925,7 +942,6 @@ bool IsTypeOfFixedArtifact(fixed_artifact_type fixed_artifact, item_type itemTyp
 		return false;
 	}
 }
-
 
 
 void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz) {

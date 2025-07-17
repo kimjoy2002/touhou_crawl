@@ -136,7 +136,7 @@ void initMap()
 	map_list.dungeon_enter[ZIGURRAT].set(false, 0, 0, DEPTH_LEVEL + rand_int(2, MAX_DEPTH_LEVEL));
 	map_list.dungeon_enter[HAKUREI_D].set(false,0,0,DEPTH_LAST_LEVEL);
 
-	map_list.god_num = rand_int(5,8);
+	map_list.god_num = rand_int(6,9);
 	map_list.bamboo_count = 0;
 	map_list.bamboo_rate = 0;
 	//map_list.tutorial = 0;
@@ -152,7 +152,7 @@ void initMap()
 	for(int i=0;i<GT_LAST;i++)
 		map_list.temple[i].set(false,0,0,-1);
 
-	for(int i=0;i<GT_LAST-map_list.god_num;i++)
+	for(int i=0;i<map_list.god_num;i++)
 	{
 		map_list.temple[dq[i]].set(false,0,0,rand_int(1,5));
 	}
@@ -377,7 +377,11 @@ bool CommonValutMap(map_dummy* map, int pattern)
 		temp = subterranean_last_vault_pattern(map);
 		break;
 	case VP_HAKUREI_LAST:
-		temp = hakurei_last_vault_pattern(map);
+		temp = hakurei_last_vault_pattern(map, false);
+		break;
+	case VP_HAKUREI_LAST_FAKE:
+		temp = hakurei_last_vault_pattern(map,true);
+		break;
 	default:
 		return false;
 	}
@@ -844,7 +848,10 @@ void map_dummy::patternSet()
 			PixedMap(this, subterranean_last_vault_pattern(this));
 			break;
 		case VP_HAKUREI_LAST:
-			PixedMap(this, hakurei_last_vault_pattern(this));
+			PixedMap(this, hakurei_last_vault_pattern(this, false));
+			break;
+		case VP_HAKUREI_LAST_FAKE:
+			PixedMap(this, hakurei_last_vault_pattern(this, true));
 			break;
 		default:
 			baseMap(this);

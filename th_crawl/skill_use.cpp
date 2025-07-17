@@ -81,7 +81,7 @@ bool skill_kanako_might(int pow, bool short_, unit* order, coord_def target)
 					you.SetXY(beam->x,beam->y);
 
 					float multy_ = 1.0f;
-					multy_*=(9.0f+temp.GetCurLength()*2)/9; //거리가 6기준으로 2.3배 데미지를 준다.
+					multy_*=(9.0f+temp.GetCurLength()*2)/9.0f; //거리가 6기준으로 2.3배 데미지를 준다.
 
 					PlaySE("wind");
 					attack_infor temp_att(you.GetAttack(false)*multy_,you.GetAttack(true),you.GetHit()+10,&you,you.GetParentType(),ATT_RUSH,name_infor(LOC_SYSTEM_ATT_RUSH));

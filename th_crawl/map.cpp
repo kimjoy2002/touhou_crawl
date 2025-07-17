@@ -446,7 +446,9 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 	if(floor == HAKUREI_LAST_LEVEL)
 	{
 		vector_.push_back(VP_HAKUREI_LAST);
-
+		vector_.push_back(VP_HAKUREI_LAST_FAKE);
+		vector_.push_back(VP_HAKUREI_LAST_FAKE);
+		vector_.push_back(VP_HAKUREI_LAST_FAKE);
 	}
 	if(0)
 	{

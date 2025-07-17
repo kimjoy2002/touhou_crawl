@@ -61,6 +61,15 @@ bool CheckMonsterPassive(int turn)
 	return true;
 }
 bool orbRun();
+void players::ReleaseDimention() {
+	if(s_dimension)
+	{
+		s_dimension = 0;
+		resetLOS(false);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DIMENSION_END) + " ",false,false,false,CL_blue);
+		SetInter(IT_STAT);
+	}
+}
 interupt_type players::TurnEnd(bool *item_delete_)
 {
 	you.maybeAction();

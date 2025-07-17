@@ -190,7 +190,7 @@ void bamboo_count(int num)
 
 	}
 
-	if(randA(500)<1)
+	if(randA(350)<1)
 	{
 		
 		if(!is_exist_named(MON_TEWI)){

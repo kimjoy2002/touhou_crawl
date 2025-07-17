@@ -177,13 +177,13 @@ int Evokeusepower(evoke_kind skill, bool max_)
 	switch(skill)
 	{
 	case EVK_PAGODA:
-		return 8;
+		return 6;
 	case EVK_AIR_SCROLL:
-		return 50;
+		return 40;
 	case EVK_DREAM_SOUL:
-		return 100;
+		return 60;
 	case EVK_BOMB:
-		return 30;
+		return 20;
 	case EVK_GHOST_BALL:
 		return you.s_evoke_ghost?0:50;
 	case EVK_SKY_TORPEDO:
@@ -288,7 +288,7 @@ bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target)
 		{
 			beam_iterator beam(you.position,target);
 			if(CheckThrowPath(you.position,target,beam)){
-				beam_infor temp_infor(randC(3,3+level_*2/3),3*(3+level_*2/3),16 + level_ / 8,&you,you.GetParentType(),EvokeLength(kind),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_LASER));
+				beam_infor temp_infor(randC(3,5+level_*2/3),3*(5+level_*2/3),16 + level_ / 8,&you,you.GetParentType(),EvokeLength(kind),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_LASER));
 				if(short_)
 					temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 

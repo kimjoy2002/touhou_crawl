@@ -971,9 +971,9 @@ void display_manager::skill2_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shar
 	rc.left += 50;
 	ss << "- " << LocalzationManager::locString(LOC_SYSTEM_NAME);
 	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-	rc.left += 200;
-	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_COST), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.left += 250;
+	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_COST), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
+	rc.left += 300;
 	DrawTextUTF8(pfont,pSprite,LocalzationManager::locString(LOC_SYSTEM_SUCCESS_RATE), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 	rc.top += fontDesc.Height;
 	rc.left = 50;
@@ -994,14 +994,14 @@ void display_manager::skill2_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shar
 			ss.clear();
 			ss << "- " << SkillString(skill_);
 			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
-			rc.left += 200;
+			rc.left += 250;
 			{
 				ss.str("");
 				ss.clear();
 				ss << SkillCostString(skill_);
 				DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 			}
-			rc.left = 550;
+			rc.left = 600;
 			ss.str("");
 			ss.clear();
 			ss << std::setw(3) << std::right << SkillDiffer(skill_) << "%";

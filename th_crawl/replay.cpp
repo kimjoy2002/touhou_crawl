@@ -848,7 +848,7 @@ bool score_menu(int value_)
 						ss << WithBlankString(to_string(entry.level),5) << "|" 
 						<< WithBlankString(to_string(entry.turn),10) << "|" 
 						<< WithBlankString(GetGodString((god_type)entry.god),12) << "|" 
-						<< WithBlankString(to_string(entry.rune),4) << "|";
+						<< WithBlankString(to_string(entry.rune% 100),4) << "|";
 						printsub("     ", false, CL_normal);
 						printsub(ss.str(), true, CL_normal);
 					}

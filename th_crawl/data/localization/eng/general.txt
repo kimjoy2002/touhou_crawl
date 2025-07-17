@@ -3413,7 +3413,7 @@ LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_LEVITATION,Ring of Levitation
 LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_INVISIBLE,Ring of Invisibility
 LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_MANA,Ring of Mana
 LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_MAGACIAN,Ring of the Magician
-LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_AC,Ring of Defense {0}
+LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_AC,Ring of Protection {0}
 LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_EV,Ring of Evasion {0}
 LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_CONFUSE_RESIS,Ring of Confusion Resistance
 LOC_SYSTEM_ITEM_JEWELRY_RING_IDEN_ELEC_RESIS,Ring of Electricity Resistance
@@ -3531,7 +3531,7 @@ LOC_SYSTEM_ITEM_OCCULT_DISH,Banchō-Sarayashiki
 LOC_SYSTEM_ITEM_OCCULT_KUNEKUNE,Kunekune
 LOC_SYSTEM_ITEM_OCCULT_UNKNOWN,Unknown Entity
 LOC_SYSTEM_ITEM_FOOD_BREAD,Bread
-LOC_SYSTEM_ITEM_FOOD_SWEETPOTATO,Roasted Sweet Potato
+LOC_SYSTEM_ITEM_FOOD_SWEETPOTATO,Sweet Potato
 LOC_SYSTEM_ITEM_FOOD_CHOCOLET,Chocolate
 LOC_SYSTEM_ITEM_FOOD_CUCUMBER,Cucumber
 LOC_SYSTEM_ITEM_FOOD_P_ITEM,P-Item
@@ -4003,7 +4003,7 @@ LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED5,Slow.
 LOC_SYSTEM_MONSTER_DESCRIPTION_SPEED6,Very slow.
 LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_FLY,Can fly.
 LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_SWIM,Can swim.
-LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_SEE_INVISIBLE,Can see invisible entities.
+LOC_SYSTEM_MONSTER_DESCRIPTION_CAN_SEE_INVISIBLE,Can see invisible.
 LOC_SYSTEM_MONSTER_DESCRIPTION_SPEAR_ATTACK,Can attack from one tile away.
 LOC_SYSTEM_MONSTER_DESCRIPTION_INANIMATE,An inanimate object.
 LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BLIZARD,Immune to blizzards-thanks to the power of the moon sisters.
@@ -4397,8 +4397,8 @@ LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_MISYAGUZI,You can summon Mishaguji.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY5_SWAKO_HAT,You have received Suwako's adorable hat.
 LOC_SYSTEM_GOD_SHOW_SWAKO_ABLILITY_UNKNOWN,This ability is not yet known.
 LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY1,You can eat even at full power and maintain max power longer.
-LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY2,The fuller your power, the faster your HP and MP recover.
-LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY3,Minoriko cures your status ailments and stat reductions.
+LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY2,The more power you have, the faster your HP and MP recover.
+LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY3,Minoriko cures your debuffs and stat reductions.
 LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY4,You eat faster and recover a bit of MP when doing so.
 LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY5,Minoriko consumes your food to greatly restore HP.
 LOC_SYSTEM_GOD_SHOW_MINORIKO_ABLILITY6,After eating, Minoriko briefly grants 1 level of fire and cold resistance.
@@ -4518,7 +4518,7 @@ LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_7,Equipment Purity: Your gear has been purif
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8,System Purity: You can now use spell cards, and amulet charge rate is tripled.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_BUG,Unknown Bug Purity
 LOC_SYSTEM_GOD_ABLILITES,Divine Abilities
-LOC_SYSTEM_GOD_COMMON_ACCECPT,{0} rejoiced at your kill.
+LOC_SYSTEM_GOD_COMMON_ACCECPT,{0} accepted at your kill.
 LOC_SYSTEM_GOD_COMMON_PROTECT,You were protected!
 LOC_SYSTEM_GOD_COMMON_RAGE,{0} is enraged by your actions. Repent!
 LOC_SYSTEM_GOD_COMMON_NOT_EXIST_GOD,This god doesn’t exist.
@@ -4541,7 +4541,7 @@ LOC_SYSTEM_GOD_JOON_AND_SION_TALK10,Shion: Lately, I’ve been happy even while 
 LOC_SYSTEM_GOD_JOON_AND_SION_TALK11,Joon: With us, we can rob everyone blind!
 LOC_SYSTEM_GOD_JOON_AND_SION_TALK12,Shion: Do you think I can be helpful too...?
 LOC_SYSTEM_GOD_JOON_AND_SION_TALK13,Joon & Shion: Time to show you the power of the most fearsome sisters!
-LOC_SYSTEM_GOD_JOON_AND_SION_ACCECPT,Joon and Shion rejoiced in robbing enemies’ wallets.
+LOC_SYSTEM_GOD_JOON_AND_SION_ACCECPT,Joon and Shion accepted in robbing enemies’ wallets.
 LOC_SYSTEM_GOD_JOON_AND_SION_WASTE_CONSUMABLE,Due to the Curse of Pestilence, you wasted {0} {1}.
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_READY,You can be possessed again.
 LOC_SYSTEM_GOD_JOON_AND_SION_POSSESSION_ASK,Which god will you channel?
@@ -4684,7 +4684,7 @@ LOC_SYSTEM_GOD_YUUGI_TALK4,Yuugi: Can you hold your liquor?
 LOC_SYSTEM_GOD_YUUGI_TALK5,Yuugi: Watching you fight somehow makes me happy!
 LOC_SYSTEM_GOD_YUUGI_TALK6,Yuugi: Want to spar with me sometime?
 LOC_SYSTEM_GOD_YUUGI_TALK7,Yuugi: I’ll invite you for drinks next time-just make sure you survive!
-LOC_SYSTEM_GOD_YUUGI_ACCECPT,Yuugi rejoiced in your victory.
+LOC_SYSTEM_GOD_YUUGI_ACCECPT,Yuugi accepted in your victory.
 LOC_SYSTEM_GOD_YUUGI_CATCH,You caught {0}.
 LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX_NOT_ENOUGH_TILE,There's not enough ground to perform a German Suplex.
 LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX_SOMEONE,Someone is in the way of your German Suplex.
@@ -5226,66 +5226,66 @@ LOC_SYSTEM_DUMP_ACTION_TYPE_EVOKE,Evoke
 LOC_SYSTEM_DUMP_ACTION_TYPE_USE,Use
 LOC_SYSTEM_DUMP_ACTION_TYPE_ETC,Etc
 LOC_SYSTEM_DUMP_DEATHREASON_UNKNOWN,Died for an unknown reason({1}) at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_NORMAL,Was beaten to death at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_NORMAL_BY,Was beaten to death by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_NORMAL,Died at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_NORMAL_BY,Slain by {1} at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_SMITE,Died at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SMITE_BY,Was killed by {1} at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SMASH,Was slammed into the ground at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SMASH_BY,Was slammed into the ground by {1} at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_BLOOD,Coughed up blood and died at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_BLOOD_BY,Coughed up blood and died by {1} at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_NOISE,Eardrums burst to death at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_NOISE_BY,Eardrums burst to death by {1} at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SPEAR,Was stabbed to death at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SPEAR_BY,Was stabbed to death by {1} at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_VAMP,Was drained to death at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_VAMP_BY,Was drained to death by {1} at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_VEILING,Was sliced by a wind armor at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_VEILING_BY,Was sliced by {1}'s wind armor at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_RUSH,Died in a traffic accident at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_RUSH_BY,Was run over by {1} at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_WALL,Smashed into a wall and died at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_WALL_BY,Smashed into {1} and died at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO,Was thrown by psychokinesis and died at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO_BY,Was thrown by {1}'s psychokinesis and died at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_TRAP,Stubbed pinky toe on a rock and died at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_TANMAC,Was hit by danmaku at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_TANMAC_BY,Was hit by danmaku from {1} at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_BLAST,Exploded to death at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_BLAST_BY,Exploded by {1} at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SUN,Burned to death in the sunlight at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SUN_BY,Burned by {1}'s sunlight at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_FIRE,Burned to death at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SMITE_BY,Killed by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SMASH,Slammed into the ground at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SMASH_BY,Slammed into the ground by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_BLOOD,Coughed up blood and collapsed at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_BLOOD_BY,Coughed up blood and collapsed by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_NOISE,Eardrums burst and died at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_NOISE_BY,Eardrums burst and died by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SPEAR,Skewered at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SPEAR_BY,Skewered  by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_VAMP,Drained of life at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_VAMP_BY,Drained of life by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_VEILING,Cut down by wind armor at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_VEILING_BY,Sliced by {1}'s wind armor at  {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_RUSH,Hit by a sudden rush and died at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_RUSH_BY,Run over by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_WALL,Smashed into a wall at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_WALL_BY,Smashed into {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO,Thrown by psychokinesis at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO_BY,Thrown by {1}'s psychokinesis {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_TRAP,Stubbed their pinky toe on a rock at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_TANMAC,Hit by danmaku at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_TANMAC_BY,Shot down by {1}'s danmaku at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_BLAST,Exploded into pieces at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_BLAST_BY,Blown up by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SUN,Burned to ash in sunlight at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SUN_BY,Set ablaze by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_FIRE,Burned alive at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_FIRE_BY,Burned to death by {1} at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_COLD,Froze to death at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_COLD_BY,Frozen to death by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_COLD,Froze solid at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_COLD_BY,Frozen by {1} at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_ELEC,Electrocuted at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_ELEC_BY,Electrocuted by {1} at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_POISON,Poisoned to death at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_POISON,Succumbed to poison at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_POISON_BY,Poisoned by {1} at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_WIND,Swept away by wind at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_WIND_BY,Swept away by {1}'s wind at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_WIND,Swept away by fierce wind at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_WIND_BY,Blown away by {1}'s wind at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_CURSE,Cursed to death at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_CURSE_BY,Cursed to death by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_CURSE_BY,Cursed by {1} at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_BURST,Burst apart at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_BURST_BY,Burst by {1} at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_DROWNING,Drowned at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_UKNOWNDAMAGE,Died from unknown damage at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_ADDICTION,Died from poison at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_UKNOWNDAMAGE,Killed by unknown forces at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_ADDICTION,Collapsed from poison at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_POTION,Died due to a potion at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_QUIT,Gave up on the game at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_HUNGRY,Died of starvation at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_QUIT,Gave up and quit the game at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_HUNGRY,Starved to death at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_MIRROR,Died from reflected damage at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_MIRROR_BY,Died from {1}'s reflected damage at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_MP,Died as all purified MP was depleted at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_INSTANT,Died as their deathly impurity was purified by Junko at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SLEEP,Died while having a happy dream at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SLEEP_BY,Died while having a happy dream caused by {1} at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_HOOF,Died by being trampled at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_HOOF_BY,Died by being trampled by {1} at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_GHOST,Died as life force was drained by Okurichochin at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_MIRROR_BY,Killed by {1}'s reflected damage at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_MP,Ran out of purified MP and died at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_INSTANT,Had impurity purified by Junko and died at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SLEEP,Died while dreaming happily at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SLEEP_BY,Sent into eternal dreams by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_HOOF,Trampled at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_HOOF_BY,Trampled by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_GHOST,Life drained by Okurichochin at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_SIDEEFFECT,Died from side effects at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_WIN,Escaped successfully with the Yin-Yang Orb and {0} runes.
+LOC_SYSTEM_DUMP_DEATHREASON_WIN,Escaped with the Yin-Yang Orb and {0} runes.
 LOC_SYSTEM_DUMP_DEATHREASON_COWARD,Fled with only {0} runes.
 LOC_SYSTEM_DUMP_DEATHREASON_FAIL,Escaped with nothing to show.
 LOC_SYSTEM_REPLAY_LIST,Replay List!

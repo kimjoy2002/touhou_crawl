@@ -611,6 +611,7 @@ public:
 	vector<monster>::iterator GetTargetIter();
 	interupt_type resetLOS(bool speak_ = true);
 	void MakeLOSPattern();
+	void ReleaseDimention(); 
 	interupt_type TurnEnd(bool *item_delete_ = NULL); //0은 딱히일없고, 1이상부터 인터럽트
 	bool TraningStealth();
 	int additem(item *t, bool speak_ = true);

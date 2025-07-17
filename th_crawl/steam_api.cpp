@@ -84,6 +84,16 @@ const char* steam_manager::getAchievementId(achievement_enum enum_) {
             return "ACHIEVEMENT_DUNGEONS_GAME_OF_LIFE";
 	    case ACHIEVEMENT_BOUNDARY_OF_SHOOTING_AND_ROGUELIKE:
             return "ACHIEVEMENT_BOUNDARY_OF_SHOOTING_AND_ROGUELIKE";
+	    case ACHIEVEMENT_DOOR_TO_THE_HIDDEN_DUNGEON:
+            return "ACHIEVEMENT_DOOR_TO_THE_HIDDEN_DUNGEON";
+	    case ACHIEVEMENT_MOON_FALLING:
+            return "ACHIEVEMENT_MOON_FALLING";
+	    case ACHIEVEMENT_DUNGEON_REINCARNATION:
+            return "ACHIEVEMENT_DUNGEON_REINCARNATION";
+	    case ACHIEVEMENT_ASDD:
+            return "ACHIEVEMENT_ASDD";
+	    case ACHIEVEMENT_END_OF_THE_DUNGEON:
+            return "ACHIEVEMENT_END_OF_THE_DUNGEON";
         default:
             return "";
     }

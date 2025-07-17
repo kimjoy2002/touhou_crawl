@@ -239,10 +239,10 @@ bool save_menu(int value_)
 					ss << LocalzationManager::locString(LOC_SYSTEM_SAVE_MENU_BROKEN);
 				}
 				else if(!temp_player.GetCharNameString().empty()) {
-					ss << ' ' << LocalzationManager::formatString(LOC_SYSTEM_LEVEL_WITH_NUMBER, PlaceHolderHelper(to_string(temp_player.level))) << ' ' << LocalzationManager::locString(tribe_type_string[temp_player.tribe]) << ' ' << LocalzationManager::locString(job_type_string[temp_player.job]) << ' ' << temp_player.GetCharNameString();
+					ss << ' ' << LocalzationManager::formatString(LOC_SYSTEM_LEVEL_WITH_NUMBER, PlaceHolderHelper(to_string(temp_player.level))) << ' ' << LocalzationManager::locString(temp_player.getTribeString()) << ' ' << LocalzationManager::locString(job_type_string[temp_player.job]) << ' ' << temp_player.GetCharNameString();
 				} 
 				else {
-					ss << ' ' << LocalzationManager::formatString(LOC_SYSTEM_LEVEL_WITH_NUMBER, PlaceHolderHelper(to_string(temp_player.level))) << ' ' << LocalzationManager::locString(tribe_type_string[temp_player.tribe]) << ' ' << LocalzationManager::locString(job_type_string[temp_player.job]);
+					ss << ' ' << LocalzationManager::formatString(LOC_SYSTEM_LEVEL_WITH_NUMBER, PlaceHolderHelper(to_string(temp_player.level))) << ' ' << LocalzationManager::locString(temp_player.getTribeString()) << ' ' << LocalzationManager::locString(job_type_string[temp_player.job]);
 				}
 				char_info[i] = ss.str();
 			}

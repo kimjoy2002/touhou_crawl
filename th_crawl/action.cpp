@@ -2971,7 +2971,7 @@ void Experience_Show()
 {
 	printlog(LocalzationManager::formatString(LOC_SYSTEM_EXPERIENCE_SHOW_LEVEL,
 		PlaceHolderHelper(to_string(you.level)),
-		PlaceHolderHelper(tribe_type_string[you.tribe]),
+		PlaceHolderHelper(you.getTribeString()),
 		PlaceHolderHelper(job_type_string[you.job])),true,false,false,CL_normal);
 	if(you.GetNeedExp(you.level-1) > 0)
 	{

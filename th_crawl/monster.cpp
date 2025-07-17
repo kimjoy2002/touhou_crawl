@@ -2632,7 +2632,7 @@ int monster::atkmove(int is_sight, bool only_move)
 			}
 		}
 	}
-	if (flag & M_FLAG_LEADER_SUMMON && flag & M_FLAG_SUMMON)
+	if (flag & M_FLAG_LEADER_SUMMON && (flag & M_FLAG_SUMMON || flag & M_FLAG_NO_ATK))
 	{
 		if(sm_info.parent_map_id >= 0)
 		{

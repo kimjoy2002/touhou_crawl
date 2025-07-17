@@ -975,6 +975,8 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			you.skill[SKT_TANMAC].onoff = 1;
 
 			
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 
 		}
 	}
@@ -1016,6 +1018,8 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 
 			you.mp = you.max_mp;
 
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 
 			
 			//you.Memorize(SPL_CONTROLED_BLINK,true);		
@@ -1043,6 +1047,8 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			env[current_level].DeleteItem(it);	
 			you.skill[SKT_EVOCATE].onoff = 1;
 			you.SetProperty(TPT_RELIGIOUS, 1);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 		}
 
 	}
@@ -1083,6 +1089,8 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			}
 			set_exist_named(MON_MOMIZI);	
 
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 
 			
 		}
@@ -1102,7 +1110,10 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			you.SetProperty(TPT_POWER_SAVE,1);
 
 			you.skill[SKT_TANMAC].onoff = 1;
-			set_exist_named(MON_KOISHI);	
+			set_exist_named(MON_KOISHI);
+
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 			
 		}
 
@@ -1117,10 +1128,10 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 		else
 		{					
 			you.SetProperty(TPT_HP,2);
-			you.SetProperty(TPT_9_LIFE,1);
-			you.SetProperty(TPT_18_LIFE,1);
 			set_exist_named(MON_MOKOU);	
 
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 		}
 
 	}
@@ -1145,6 +1156,8 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			set_exist_named(MON_NITORI);
 
 			you.equip('a' + 4, ET_NECK, false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 		}
 	}
 	else if (type == UNIQ_START_SUNNY || type == UNIQ_START_STAR || type == UNIQ_START_LUNA)
@@ -1174,6 +1187,8 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			set_exist_named(MON_LUNAR);
 
 
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 			you.Belief(GT_LILLY, 55, false);
 
 
@@ -1229,6 +1244,8 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			you.SetProperty(TPT_QUICK_DASH,1);
 			set_exist_named(MON_YOUMU);
 			you.equip('b',ET_SHIELD,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 		}
 
 	}

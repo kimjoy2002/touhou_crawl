@@ -11,6 +11,8 @@
 #include "skill_use.h"
 #include "mon_infor.h"
 #include "book.h"
+#include "rect.h"
+#include "god.h"
 #include "rand_shuffle.h"
 #include "tribe.h"
 #include "event.h"
@@ -811,17 +813,14 @@ int getBossForSprint(SHOOTING_STAGE_LEVEL base_level)
 	case SHT_STAGE_MOON:
 		boss.push(MON_YORIHIME);
 		boss.push(MON_TOYOHIME);
-		boss.push(MON_DOREMI);
 		break;
 	case SHT_STAGE_HELL:
 		boss.push(MON_SAKI);
 		boss.push(MON_YUMA);
-		boss.push(MON_ORIN);
+		boss.push(MON_UTSUHO);
 		break;
 	case SHT_STAGE_HAKUREI:
-		boss.push(MON_FLAN);
 		boss.push(MON_REIMU);
-		boss.push(MON_UTSUHO);
 		break;
 	default:
 		break;
@@ -1218,11 +1217,16 @@ void map_algorithms_shooting_sprint(int num)
 	sprint_map.make_map(env[num],true, true);
 
 	
+
 	env[num].stair_up[0].x = DG_MAX_X/2;
 	env[num].stair_up[0].y = DG_MAX_Y/2+6;
 	map_list.god_num=0;
 	env[num].MakeEvent(EVL_SHOOTING_SPRINT,coord_def(0,0),EVT_ALWAYS);
 	scrollup(false, 7, true);
+
+
+
+	
 }
 
 bool pickup_move();
@@ -1253,8 +1257,12 @@ bool shooting_event(int num)
 				getWallTileOfBaselevel(current_base_level, map_list.bamboo_count)
 				:getTileOfBaselevel(current_base_level, map_list.bamboo_count));
 			}
+			for(int i = 0; i < 2; i++) {
+				if(you.explore_map++ % 100 == 0)
+					GodAccpect_Explore_100();
+			}
 		}
-
+		
 	}
 
 	if(!line_delay && map_list.bamboo_count < maximum_turn)
@@ -1343,10 +1351,14 @@ bool shooting_event(int num)
 					t.name = name_infor(getTribePropertyKey((tribe_proper_type)(value1), 1));
 					env[num].MakeItem(coord_def(DG_MAX_X/2-4+i*4, DG_MAX_Y/2-7), t);
 				}
-
+				
 				current_base_level = next_base_level;
 				map_list.bamboo_count = 0;
 				line_delay = 30;
+				if(you.god == GT_MIKO) {
+					you.PietyUpDown(-200);
+					you.PietyUpDown(60, true);
+				}
 				initBaselevel(current_base_level);
 			}
 		}

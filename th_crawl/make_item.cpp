@@ -333,7 +333,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->value2 = 0;
 			t->value3 = 0;
 			t->value4 = 0;
-			t->value5 = 10;
+			t->value5 = 30;
 			t->value6 = 0;
 			t->value7 = 0;
 			t->value8 = 0;
@@ -350,7 +350,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->value2 = 0;
 			t->value3 = 0;
 			t->value4 = 0;
-			t->value5 = 10;
+			t->value5 = 30;
 			t->value6 = 0;
 			t->value7 = 0;
 			t->value8 = 0;

@@ -123,7 +123,7 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
 force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
-s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_oil(0), s_fire(0), s_tracking(0), s_shooting_turn(0), s_overheat(0), s_overheat_turn(0),
+s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_evoke_ghost_level(0), s_oil(0), s_fire(0), s_tracking(0), s_shooting_turn(0), s_overheat(0), s_overheat_turn(0),
 s_regen(0), s_selfdestruct(0), s_glutton(0), s_glutton_turn(0), s_potion_addict(0), s_shield(), alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
@@ -308,6 +308,7 @@ void players::init() {
 	s_weather = 0;
 	s_weather_turn = 0;
 	s_evoke_ghost = 0;
+	s_evoke_ghost_level = 0;
 	s_oil = 0;
 	s_fire = 0;
 	s_tracking = 0;
@@ -557,6 +558,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_weather);
 	SaveData<int>(fp, s_weather_turn);
 	SaveData<int>(fp, s_evoke_ghost);
+	SaveData<int>(fp, s_evoke_ghost_level);
 	SaveData<int>(fp, s_oil);
 	SaveData<int>(fp, s_fire);
 	SaveData<int>(fp, s_tracking);
@@ -826,6 +828,9 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_weather);
 	LoadData<int>(fp, s_weather_turn);
 	LoadData<int>(fp, s_evoke_ghost);
+	if(!isPrevVersion(loading_version_string, "ver1.113")) {
+		SaveData<int>(fp, s_evoke_ghost_level);
+	}
 	LoadData<int>(fp, s_oil);
 	LoadData<int>(fp, s_fire);
 	if(!isPrevVersion(loading_version_string, "ver1.1")) {
@@ -1605,6 +1610,15 @@ bool players::shooing_fire(float bonus_)
 			beam_infor temp_infor_sub(GetAttack(false)*multi_option_,GetAttack(true)*multi_option_,hit_,&you,you.GetParentType(),20,pentan_?20:1,pentan_?BMT_PENETRATE:BMT_NORMAL,brand_,name_infor(LOC_SYSTEM_ATT_NORMAL));
 			beam_iterator beam_sub(it->position,coord_def(it->position.x, it->position.y-1));
 			tanmac_list.push_back(make_shared<ThrowTamacInstance>(texture_, graphic_, beam_sub, temp_infor_sub, nullptr, false));
+		}
+		if(it->isLive() && it->id == MON_GHOST && it->isUserAlly() && it->s_invincibility != 0)
+		{
+			if(GetProperty(TPT_DUAL_WEAPON) && you.equipment[ET_SHIELD] && you.equipment[ET_SHIELD]->isweapon()) {
+				float multi_option_ = 0.5f * multi_;
+				beam_infor temp_infor_sub(GetAttack(false, ET_SHIELD)*multi_option_,GetAttack(true, ET_SHIELD)*multi_option_,hit_,&you,you.GetParentType(),20,pentan_?20:1,pentan_?BMT_PENETRATE:BMT_NORMAL,brand_,name_infor(LOC_SYSTEM_ATT_NORMAL));
+				beam_iterator beam_sub(it->position,coord_def(it->position.x, it->position.y-1));
+				tanmac_list.push_back(make_shared<ThrowTamacInstance>(texture_, graphic_, beam_sub, temp_infor_sub, nullptr, false));
+			}
 		}
 	}
 
@@ -2457,7 +2471,12 @@ int players::MpUpDown(int value_)
 	}
 }
 int players::GetMaxPower() {
-	return GetProperty(TPT_POWERLESS)?400:500;
+	int power_ = 500;
+	if(GetProperty(TPT_PURE_POWER))
+		power_ *= 2;
+	if(GetProperty(TPT_POWERLESS))
+		power_ -= 100;
+	return power_;
 }
 int players::AcUpDown(int value_, int bonus_)
 {
@@ -2622,8 +2641,8 @@ interupt_type players::PowDecrease(int delay_)
 }
 int players::PowUpDown(int value_, bool big_)
 {
-	if (GetProperty(TPT_PURE_POWER))
-		return power; //풀파워 모드면 떨어지지않음
+	if (GetProperty(TPT_PURE_POWER) && value_ > 0)
+		value_ *= 2;
 
 	if(big_ && value_<0 && power>GetMaxPower())
 		power = GetMaxPower();
@@ -4094,9 +4113,10 @@ bool players::SetWeather(int value_, int turn_)
 	env[current_level].ShadowMonster();
 	return true;
 }
-bool players::SetEvokeGhost(int turn_)
+bool players::SetEvokeGhost(int turn_, int level_)
 {
 	s_evoke_ghost = turn_;
+	s_evoke_ghost_level = level_;
 	return true;
 }
 
@@ -4445,19 +4465,6 @@ void players::LevelUp(bool speak_)
 			else
 				you.StatUpDown(1,STAT_INT);
 		}
-	}
-
-	if(level == 9 && GetProperty(TPT_9_LIFE))
-	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE),true,false,false,CL_small_danger);
-		image = &img_play_mokou[1];
-		DeleteProperty(TPT_9_LIFE);
-	}
-	if(level == 18 && GetProperty(TPT_18_LIFE))
-	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE_ALL),true,false,false,CL_small_danger);
-		image = &img_play_mokou[2];
-		DeleteProperty(TPT_18_LIFE);
 	}
 
 	max_mp += 1;
@@ -5374,8 +5381,9 @@ bool players::Evoke(char id_, bool auto_)
 			{
 				ReleaseMutex(mutx);
 
-				if(evoke_evokable(auto_, 0, (evoke_kind)(*it).value1))
+				if(evoke_evokable(&(*it), auto_, 0, (evoke_kind)(*it).value1))
 				{
+					it->identify = true;
 					you.doingActionDump(DACT_EVOKE, (*it).name.getName());
 					return true;
 				}
@@ -6530,10 +6538,11 @@ bool players::unequipdualweapon() {
 			type_ = ET_WEAPON;
 
 	}
-	else if(equipment[ET_WEAPON] && has_righthand_weapon)
+	else if(equipment[ET_SHIELD] && has_righthand_weapon)
 		type_ = ET_SHIELD;
 	else
 		type_ = ET_WEAPON;
+
 	return unequip(type_);
 }
 

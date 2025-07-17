@@ -3361,7 +3361,6 @@ void God_AblilityShow(god_type god) {
 						abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2, 0, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad));
 					else
 						abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3, 0, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad));
-					abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY4, 0, (you.god == GT_JUNKO?CL_junko:CL_bad)));
 					printGodAbility(GT_JUNKO, level_, 0, true, LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1, abillist, LOC_SYSTEM_GOD_SHOW_PASSIVE);
 				}
 				else

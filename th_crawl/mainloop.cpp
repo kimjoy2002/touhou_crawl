@@ -9,6 +9,7 @@
 #include "d3dUtility.h"
 #include "environment.h"
 #include "display.h"
+#include "rect.h"
 #include "key.h"
 #include "save.h"
 #include "joypad.h"
@@ -446,7 +447,7 @@ void charter_selete(bool first)
 	{
 		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_START,
 			PlaceHolderHelper(you.user_name),
-			PlaceHolderHelper(LocalzationManager::locString(tribe_type_string[you.tribe])),
+			PlaceHolderHelper(LocalzationManager::locString(you.getTribeString())),
 			PlaceHolderHelper(LocalzationManager::locString(job_type_string[you.job])),
 			PlaceHolderHelper(you.GetCharNameString())),CL_normal);
 
@@ -507,7 +508,7 @@ void charter_selete(bool first)
 	{
 		AddNote(you.turn, CurrentLevelString(), LocalzationManager::formatString(LOC_SYSTEM_NOTE_START,
 			PlaceHolderHelper(you.user_name),
-			PlaceHolderHelper(LocalzationManager::locString(tribe_type_string[you.tribe])),
+			PlaceHolderHelper(LocalzationManager::locString(you.getTribeString())),
 			PlaceHolderHelper(LocalzationManager::locString(job_type_string[you.job])),
 			PlaceHolderHelper(you.GetCharNameString())), CL_normal);
 
@@ -533,7 +534,7 @@ void charter_selete(bool first)
 	{
 		AddNote(you.turn, CurrentLevelString(), LocalzationManager::formatString(LOC_SYSTEM_NOTE_START,
 			PlaceHolderHelper(you.user_name),
-			PlaceHolderHelper(LocalzationManager::locString(tribe_type_string[you.tribe])),
+			PlaceHolderHelper(LocalzationManager::locString(you.getTribeString())),
 			PlaceHolderHelper(LocalzationManager::locString(job_type_string[you.job])),
 			PlaceHolderHelper(you.GetCharNameString())), CL_normal);
 
@@ -548,6 +549,25 @@ void charter_selete(bool first)
 		steam_mg.setCurrentInfo();
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SHOOTING_SPRINT_START1),true,false,false,CL_help);
 		printlog(LocalzationManager::formatString(LOC_SYSTEM_SHOOTING_SPRINT_START2, joypadUtil::get(".", GVK_BUTTON_A)),true,false,false,CL_help);
+		
+		if(you.GetProperty(TPT_DUAL_WEAPON)) {
+
+			dif_rect_iterator rit(you.position, 3);
+			for (; !rit.end(); rit++)
+			{
+				if (env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && you.position != (*rit))
+				{
+					monster* mon_ = env[current_level].AddMonster(MON_GHOST, M_FLAG_ALLY, *rit);
+					mon_->SetInvincibility(-1, false);
+					mon_->sm_info.parent_map_id = -2;
+					mon_->flag |= M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY;
+					mon_->spell_lists.clear();
+					break;
+				}
+			}
+		}
+
+		
 		env[current_level].enterBgm(0);
 	}
 

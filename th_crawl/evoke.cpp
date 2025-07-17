@@ -11,6 +11,7 @@
 #include "projectile.h"
 #include "environment.h"
 #include "throw.h"
+#include "tribe.h"
 #include "key.h"
 #include "soundmanager.h"
 #include "weapon.h"
@@ -78,7 +79,7 @@ bool EvokeFlagCheck(evoke_kind skill, skill_flag flag);
 int EvokeLength(evoke_kind skill);
 float EvokeSector(evoke_kind skill);
 int EvokeSuccece(evoke_kind skill);
-bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target);
+bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target);
 
 
 bool isCanGenerate(evoke_kind evk) {
@@ -93,7 +94,7 @@ bool isCanGenerate(evoke_kind evk) {
 	return true;
 }
 
-bool evoke_evokable(bool auto_, int auto_direc_, evoke_kind kind)
+bool evoke_evokable(item* item_, bool auto_, int auto_direc_, evoke_kind kind)
 {
 	if(you.s_confuse)
 	{
@@ -119,7 +120,7 @@ bool evoke_evokable(bool auto_, int auto_direc_, evoke_kind kind)
 		coord_def target_;
 		if(Direc_Throw(auto_direc_, &target_))
 		{
-			if(EvokeEvokable(kind, false, target_))
+			if(EvokeEvokable(item_, kind, false, target_))
 			{
 				you.PowUpDown(-1* Evokeusepower(kind,false),true);
 				return true;
@@ -143,7 +144,7 @@ bool evoke_evokable(bool auto_, int auto_direc_, evoke_kind kind)
 			you.SetBattleCount(30);
 			if(unit_)
 				you.youAttack(unit_);
-			if(EvokeEvokable(kind, short_ == 2, you.search_pos))
+			if(EvokeEvokable(item_, kind, short_ == 2, you.search_pos))
 			{
 				you.PowUpDown(-1* Evokeusepower(kind,false),true);
 				SetSpellSight(0,0);
@@ -162,7 +163,7 @@ bool evoke_evokable(bool auto_, int auto_direc_, evoke_kind kind)
 	}			
 	else if(EvokeFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
-		if(EvokeEvokable(kind, false, you.position))
+		if(EvokeEvokable(item_, kind, false, you.position))
 		{
 			you.PowUpDown(-1* Evokeusepower(kind,false),true);
 			return true;
@@ -265,7 +266,7 @@ string DreamSoulMonster(vector<int>& list_, int level_);
 
 extern int g_menu_select;
 
-bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
+bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target)
 {
 	if(target == you.position && !EvokeFlagCheck(kind,S_FLAG_SEIF) && !EvokeFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
@@ -279,7 +280,6 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 	}
 	int level_ = you.GetSkillLevel(SKT_EVOCATE, true);
 	level_ = max(level_,you.level/3 + you.GetSkillLevel(SKT_EVOCATE, true)*2/3);
-	
 	switch(kind)
 	{
 	default:
@@ -555,16 +555,20 @@ bool EvokeEvokable(evoke_kind kind, bool short_, coord_def &target)
 		PlaySE("ufo");
 		if (you.s_evoke_ghost) {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_GHOST_BALL_CANCLE), true, false, false, CL_magic);
-			you.PowUpDown(50, true);
-			you.SetEvokeGhost(0);
+			you.PowUpDown(you.GetProperty(TPT_PURE_POWER)?25:50, true);
+			you.SetEvokeGhost(0, 0);
 		}
 		else {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_GHOST_BALL), true, false, false, CL_magic);
-			float bonus_ = 1.0f - (1.0f * level_ / 27);
+			float bonus_ = 1.0f - (1.0f * level_ / 27)+0.1f;
+			if(item_!=nullptr)
+				bonus_ += 0.02f;
 			int hp_ = min<int>(you.GetHp() -1, you.GetHp() * (0.3f + 0.5f * bonus_));
 			you.HpUpDown(-hp_, DR_EFFECT);
 			you.PowUpDown(-50, true);
-			you.SetEvokeGhost(-1);
+			you.SetEvokeGhost(-1, item_->value4);
+			if(item_!=nullptr && item_->value4 < 9)
+				item_->value4++;
 		}
 		return true;
 	}

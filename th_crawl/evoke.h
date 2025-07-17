@@ -25,10 +25,11 @@ enum evoke_kind
 };
 
 struct item_infor;
+class item;
 
 bool isCanGenerate(evoke_kind evk);
 
-bool evoke_evokable(bool auto_, int auto_direc_, evoke_kind kind);
+bool evoke_evokable(item* item_, bool auto_, int auto_direc_, evoke_kind kind);
 int Evokeusepower(evoke_kind skill, bool max_);
 
 void MakeEvokeItem(item_infor* t, int kind_ = -1);

@@ -80,9 +80,8 @@ bool skill_kanako_might(int pow, bool short_, unit* order, coord_def target)
 					}
 					you.SetXY(beam->x,beam->y);
 
-					float multy_ = 1.0f; //기도술, 거리 비례해서 데미지를 주자.
-					multy_*=(9.0f+temp.GetCurLength())/9; //거리가 6기준으로 1.66배 데미지를 준다.
-					//multy_*=(13.0f+pow/5)/13;
+					float multy_ = 1.0f;
+					multy_*=(9.0f+temp.GetCurLength()*2)/9; //거리가 6기준으로 2.3배 데미지를 준다.
 
 					PlaySE("wind");
 					attack_infor temp_att(you.GetAttack(false)*multy_,you.GetAttack(true),you.GetHit()+10,&you,you.GetParentType(),ATT_RUSH,name_infor(LOC_SYSTEM_ATT_RUSH));
@@ -3592,7 +3591,6 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 		break;
 	case 4:
 		you.SetProperty(TPT_PURE_POWER, 1);
-		iden_list.autopickup[IDEN_CHECK_ETC_START] = false;
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_POWER_SUCCESS), true, false, false, CL_junko);
 		AddNote(you.turn, CurrentLevelString(), LocalzationManager::locString(LOC_SYSTEM_NOTE_JUNKO_PURIFICATION_POWER), CL_junko);
 		break;
@@ -3720,13 +3718,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 	PlaySE("levelup");
 	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_TALK), true, false, false, CL_junko);
 	you.god_value[GT_JUNKO][3] = kind_;
-	you.Ability(SKL_JUNKO_1, true, true);
-	you.Ability(SKL_JUNKO_2, true, true);
-	you.Ability(SKL_JUNKO_3, true, true);
 	you.Ability(SKL_JUNKO_4, true, true);
-	you.StatUpDown(5, STAT_STR);
-	you.StatUpDown(5, STAT_DEX);
-	you.StatUpDown(5, STAT_INT);
 	you.SetPureTurn(30, -1);
 
 

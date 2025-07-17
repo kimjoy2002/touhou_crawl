@@ -637,6 +637,16 @@ string item::GetName(int num_, bool simple_, string lang)
 		}
 	}
 	
+	if(type==ITM_MISCELLANEOUS && value1 == EVK_GHOST_BALL)
+	{	
+		if(identify && value4)
+		{
+			std::ostringstream ss;
+			ss << '-' << abs(value4) << " ";
+			temp += ss.str();
+		}
+	}
+
 	if(fixed_artifact != FIXED_ARTIFACT_NONE) {
 		temp += "★";
 	}
@@ -974,6 +984,7 @@ const D3DCOLOR item::item_color()
 					value1 != SCT_ENCHANT_ARMOUR &&
 					value1 != SCT_IDENTIFY &&
 					value1 != SCT_BRAND_WEAPON &&
+					value1 != SCT_ACQUIREMENT &&
 					value1 != SCT_REMOVE_CURSE &&
 					value1 != SCT_AMNESIA)
 					return_ = CL_bad;

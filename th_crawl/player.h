@@ -328,6 +328,7 @@ public:
 	int s_weather;
 	int s_weather_turn;
 	int s_evoke_ghost;
+	int s_evoke_ghost_level;
 	int s_oil;
 	int s_fire;
 	int s_tracking;
@@ -575,7 +576,7 @@ public:
 	bool SetSleep(int value_);
 	bool SetPureTurn(int value_, int turn_);
 	bool SetWeather(int value_, int turn_);
-	bool SetEvokeGhost(int turn_);
+	bool SetEvokeGhost(int turn_, int level_);
 	bool SetOil(int value_, int max_);
 	bool SetFire(int value_, bool from_oil);
 	bool SetTracking(int value_);
@@ -677,11 +678,14 @@ public:
 	bool isSightnonblocked(coord_def c, coord_def* return_firstpos = nullptr);//보이는 이 위치가 실제로 공격가능한지?(유리벽)
 	parent_type GetParentType();
 	interupt_type SetInter(interupt_type inter_);
+	LOCALIZATION_ENUM_KEY getTribeString();
 
 };
 void GameOver();
 string GetUniqueCharString(int char_type);
 extern players you;
+
+
 
 int action_Move(int key, const coord_def &c); //메인루프에서의 이동
 int Move(const coord_def &c); //이동한다.

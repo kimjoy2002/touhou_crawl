@@ -5,7 +5,7 @@ LOC_SYSTEM_TITLE_START,시작한다!
 LOC_SYSTEM_MAINMENU_MAINGAME,메인 게임
 LOC_SYSTEM_MAINMENU_GAMESTART,게임시작
 LOC_SYSTEM_MAINMENU_TUTORIAL,튜토리얼
-LOC_SYSTEM_MAINMENU_MINIGAME,미니 게임
+LOC_SYSTEM_MAINMENU_MINIGAME,미니 게임 (저장불가)
 LOC_SYSTEM_MAINMENU_ARENA,아레나
 LOC_SYSTEM_MAINMENU_SPRINT,스프린트1: 미니 동방크롤
 LOC_SYSTEM_MAINMENU_SPRINT2,스프린트2: 슈팅&로그라이크
@@ -45,8 +45,8 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI3,보너스) 영구투명특성, 파워�
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI4,초보자팁) 전투중이 아닐땐 항상 투명이 된 상태입니다. 조심하세요! 전투중에는 투명이 풀립니다.\n 자고있는 상대를 찌르면 암습과 단검스킬에 비례해서 치명적인 큰 데미지가 들어갑니다.\n x를 누른 상태에서 몬스터위에 커서를 두고 v를 누르면 정보가 뜹니다. 투명보기가 있는지 확인하세요!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU1,격열! 인간 인페르노. 죽어도 살아나서 돌파하라!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU2,적성보너스) 체력 +20%, 전투적성 +2, 화염마법적성 +2
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,보너스) 2번까지 부활가능(9레벨, 18레벨에 다다르면 삭제)
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4,초보자팁) 죽어도 2번에 한해서 부활이 가능합니다. 부활할때 체력과 영력이 회복되고 폭발합니다.\n 죽지않고 9레벨, 18레벨에 다다르면 부활능력이 1개씩 사라집니다. 그러니 죽는 것에 두려워하지마세요!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,보너스) 9레벨, 18레벨에 다다르면 부활가능
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4,초보자팁) 9레벨, 18레벨에 다다르면 부활이 가능합니다. 부활할때 체력과 영력이 회복되고 폭발합니다.\n좀 더 안전하게 플레이하세요!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI1,태고! 트라이아스기의 캇파. 아이템의 힘으로 돌파하라!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2,적성보너스) 둔기적성 +2, 발동적성 +1
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI3,보너스) 천 캇파옷과 공중어뢰, 네시의 오컬트 부적을 들고 시작한다.
@@ -100,13 +100,13 @@ LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ENGINEER,도구를 잘 다루는 만능 기술�
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_MISSING,우연히 환상향에 흘러들어가버린 우리들이다?\n음식과 전혀 전투에 도움되지않는 카메라만 들고 시작한다.\n아무런 능력도 힘도 없지만 죽기전에 기념촬영 정도는 할 수 있을 것 같다.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY1,3요정중 빛을 다루는 햇빛의 요정.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY2,적성보너스) 주문시전적성 +1, 파괴마법적성 +2
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY3,보너스) 투명발동 특성, 루나가 침묵마법 대신 을 들고 시작한다.
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY3,보너스) 투명발동 특성을 가지고 시작한다. 루나가 정적 대신 소회복으로 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR1,3요정중 기척을 감지하는 별빛의 요정.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR2,적성보너스) 전투적성 +1, 회피적성 +1, 연금술적성 +1
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR3,보너스) 투명보기 특성을 가지고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA1,3요정중 소리를 지우는 달빛의 요정.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA2,적성보너스) 단검적성+1, 은밀적성 +1, 정신마법적성 +1
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3,보너스) 정적발동 특성
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3,보너스) 정적발동 특성을 가지고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON1,초보자팁) 삼월정은 혼자서 싸우는 것이 아니라 셋이서 싸웁니다.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON2,위험할때는 자신의 목숨이 제일 중요하다는걸 기억하세요. 동료들은 죽어도 부활합니다.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON3,만약 혼자가 되었을때는 소모품을 아끼지마세요. 동료가 없을때가 제일 취약합니다.
@@ -1967,6 +1967,7 @@ LOC_SYSTEM_TRIBE_HALFYOUKAI,반요
 LOC_SYSTEM_TRIBE_WRAITH,망령
 LOC_SYSTEM_TRIBE_VAMPIRE,흡혈귀
 LOC_SYSTEM_TRIBE_YOUKAI,요괴
+LOC_SYSTEM_TRIBE_HALFHUMANGHOST,반인반령
 LOC_SYSTEM_TRIBE_GROW_NECOMATA_FUR,당신에게 푹신푹신한 털이 자라났다.
 LOC_SYSTEM_TRIBE_GROW_OARFIGH_SCALE1,당신의 비늘이 단단해졌다.
 LOC_SYSTEM_TRIBE_GROW_OARFIGH_SCALE2,당신의 비늘이 더욱 단단해졌다
@@ -2012,6 +2013,7 @@ LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_MP_REGEN,악마의 마지막 특성이 
 LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_TORMENT,악마의 마지막 특성이 발현되었다. 당신은 지옥의 고통을 불러올 수 있게 되었다.
 LOC_SYSTEM_TRIBE_GROW_KOISHI_CONFUSE_ATTACK,당신의 무의식적인 공격은 상대를 혼란하게 만든다.
 LOC_SYSTEM_TRIBE_GROW_YOUMU_QUICK_DASH,당신의 고속 접근 능력이 더욱 빨라졌다.
+LOC_SYSTEM_TRIBE_GROW_MOKOU,당신의 이제 죽어도 한번 부활 가능하다.
 LOC_SYSTEM_TRIBE_GROW_CAN_INVISIBLE,당신은 투명해질 수 있다.
 LOC_SYSTEM_TRIBE_GROW_CAN_SILENCE,당신은 주변을 조용하게 만들 수 있다.
 LOC_SYSTEM_TRIBE_GROW_DRUNKARD,당신은 술에 강해졌다.
@@ -2151,8 +2153,8 @@ LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP6,당신은 매우 연약하다. (체력 {0
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_INVISIBLE,무의식인 당신은 항상 투명해져있다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POWER_SAVE1,당신은 P의 자연소모가 느리다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POWER_SAVE2,당신은 P에 굶주려 있다.
-LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_9_LIFE,당신은 9레벨이전에 한번 부활할 수 있다.
-LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_18_LIFE,당신은 18레벨이전에 한번 부활할 수 있다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_9_LIFE,당신은 한번 부활할 수 있다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_18_LIFE,당신은 한번 부활할 수 있다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SPEED1,당신은 이동속도가 빠르다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SPEED2,당신은 이동속도는 느리다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CLAW1,당신은 손톱이 아주 길다.
@@ -2254,8 +2256,8 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_HP,당신은 유전적으로 체력이 결정�
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_INVISIBLE,비전투중일때는 당신은 상시 투명을 유지한다.\n만약 당신이 공격을 시도하면 투명이 풀린다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POWER_SAVE1,턴이 지남에 따라 소모되는 P의 자연 감소율이 줄어든다.\n또한 가속과 투명에 의한 P 소모폭도 감소한다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POWER_SAVE2,턴이 지남에 따라 소모되는 P의 자연 감소율이 증가한다.\n또한 가속과 투명에 의한 P 소모폭도 증가한다.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_9_LIFE,죽었을때 모든 체력과 영력을 회복하고 큰 폭발과 함께 부활한다.\n이 능력은 레벨 9가 되면 사라진다.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_18_LIFE,죽었을때 모든 체력과 영력을 회복하고 큰 폭발과 함께 부활한다.\n이 능력은 레벨 18이 되면 사라진다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_9_LIFE,죽었을때 모든 체력과 영력을 회복하고 큰 폭발과 함께 부활한다.\n
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_18_LIFE,죽었을때 모든 체력과 영력을 회복하고 큰 폭발과 함께 부활한다.\n
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SPEED1,이동시 다른 종족보다 80%의 딜레이만을 가진다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SPEED2,이동시 다른 종족보다 120%의 딜레이를 가진다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CLAW,맨손격투시 추가 데미지를 준다.\n장갑을 낄 수 없게 된다.
@@ -3950,7 +3952,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA,누군가가 잃어버린 보탑. 강�
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL,어딘가의 주지승이 쓰고 있던 경전. 마법의 힘이 담겨 있다.\n발동하게되면 파워를 대가로 사용자의 영력을 순식간에 회복시켜준다.\n발동 스킬이 높아지면 회복되는 영력이 많아진다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL,꿈의 세계에서 해메고있던 영혼이다.\n사용하면 꿈의 세계로부터 환상의 실체화가 잠시동안 가능하다.\n어딘가의 지역에 있던 몬스터 무리들이 아군이 되어 소환된다.\n발동 스킬이 높아지면 더욱 강한 아군이 소환된다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BOMB,아주 거대한 폭탄. 마법의 힘으로 점화가 가능하다.\n발동하게되면 폭탄이 점화되어 목표지점으로 던질 수 있다.\n던진 폭탄은 바로 터지진않지만 몇 턴이 지나면 큰 폭발이 일어난다.\n폭탄은 한 칸을 차지하며 적에 의해 파괴되면 폭파하지않고 파괴되어버린다.\n발동템이므로 사용해도 소모되진않는다. 신비한 마법의 힘이 작용하는 것 같다.\n발동 스킬이 높아지면 데미지와 폭탄의 체력이 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL,사람없이 등불만 떠다닌다는 괴담의 하나로 유령이 들고다닌다는 등불이다.\n발동하여 손에 들면 아무에게도 보이지않고 공격당하지않는 유령화상태가 된다.\n발동시 자신의 현재 남은 체력이 30%~70%까지 감소되고 발동된다.\n발동중엔 누구에게도 공격을 받지않는 무적상태지만 체력은 회복되지않고 파워가 빠르게 떨어진다.\n한번 더 발동해서 종료하거나 파워가 0이되면 자동으로 종료된다.\n유령화상태에선 이동만 가능하여 아이템, 마법, 공격등의 모든 행동이 불가능하다.\n만약 당신이 어떤 이유로 파워가 낮아지지 않는다면 오쿠리쵸친은 다른 무언가를 대신 가져갈 것이다.\n발동 스킬이 높아지면 발동시 감소되는 체력과 발동중 떨어지는 파워소모가 낮아진다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL,사람없이 등불만 떠다닌다는 괴담의 하나로 유령이 들고다닌다는 등불이다.\n발동하여 손에 들면 아무에게도 보이지않고 공격당하지않는 유령화상태가 된다.\n발동시 자신의 현재 남은 체력이 30%~70%까지 감소되고 발동된다.\n발동중엔 누구에게도 공격을 받지않는 무적상태지만 체력은 회복되지않고 파워가 빠르게 떨어진다.\n한번 더 발동해서 종료하거나 파워가 0이되면 자동으로 종료된다.\n유령화상태에선 이동만 가능하여 아이템, 마법, 공격등의 모든 행동이 불가능하다.\n사용할수록 점차 열화되면서 효율이 나빠진다.\n발동 스킬이 높아지면 발동시 감소되는 체력과 발동중 떨어지는 파워소모가 낮아진다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_SKY_TORPEDO,캇파가 물밖에서도 쏠 수 있도록 개량한 어뢰.\n잘 생각해보면 미사일과 별반 다를게 없다.\n발동 스킬이 높아지면 데미지가 높아진다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_MAGIC_HAMMER,소인족이 다룬다고 하는 요술망치. 본래 주인은 오니라고 한다.\n사용하면 실로 엄청난 효과들을 원하는대로 파워 1칸만으로 사용할 수 있게 된다.\n단, 요술망치를 사용하는것은 큰 위험부담이 따르게되며 사용자를 자멸시킨다고 한다.\n요술망치를 사용시 10%의 확률로 정반대의 효과가 발휘될 가능성이 있다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_CAMERA,환상향에 떨어지기전에 우연히 들고오게된 카메라.\n기묘한 힘을 사용하여 왠지 필름없이도 찍을 수 있어보인다.\n당신의 생존엔 전혀 도움이 안되지만 미소녀들을 찍어서 기념사진을 보관할수도 있다.\n그렇게 고성능은 아닌지라 너무 멀리있는 상대엔 찍기 힘들어 보인다.\n
@@ -4510,7 +4512,7 @@ LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1,당신은 순호의 축복으로 영구적
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2,스킬순화: 당신의 {0} 스킬레벨은 캐릭터 레벨과 항상 같다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3,저항순화: 당신의 {0:은|는} 무한대다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4,마력순화: 당신의 체력과 영력은 동일시된다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5,파워순화: 당신은 항상 풀파워다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5,파워순화: 당신의 최대 파워와 파워 회복량이 2배가 된다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_6,생명순화: 당신은 추가 목숨을 받았다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_7,장비순화: 당신은 가지고 있던 장비를 순화했다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8,시스템순화: 당신은 스펠카드 사용이 허가되고 부적의 충전속도가 3배가 되었다.
@@ -5049,7 +5051,7 @@ LOC_SYSTEM_GOD_OKINA_PUNISH_DRAIN,오키나의 분노로 당신의 체력과 영
 LOC_SYSTEM_GOD_JUNKO_WELCOME,순호: 상아여, 보고 있는가?
 LOC_SYSTEM_GOD_JUNKO_TALK,순호: 상아여 보고있는가!
 LOC_SYSTEM_GOD_JUNKO_ABIL_HASTE_FAIL,시야에 살의를 표출할 적이 있어야 한다.
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,순화의 축복은 권능을 사용할 수 없게되며 영구적인 순화 패널티를 얻게된다.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,순화의 축복은 영구적인 순화 패널티를 얻게된다.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN,또한 한번 고른 순화는 되돌릴 수 없다!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ASK,어떤 능력을 순화하겠습니까?
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_OTHER,신앙심을 내리고 새로운 순화를 위해 이번 선택을 미룬다.
@@ -5058,7 +5060,7 @@ LOC_SYSTEM_GOD_JUNKO_PURIFICATION_DELAY,순화 선택을 미뤘다. 다음 순�
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL,스킬순화: 선택한 적성0 이상의 스킬의 레벨이 캐릭터 레벨과 항상 같아진다.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST,저항순화: 선택한 속성에 대해 면역이 된다.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_MP,마력순화: 체력과 영력이 동일시 되며 회복력이 합쳐진다.
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_POWER,파워순화: 항상 풀파워가 되며 떨어지지 않는다.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_POWER,파워순화: 당신의 최대 파워와 파워 회복량이 2배가 된다.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_LIFE,생명순화: 추가 목숨을 2개 얻는다.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM,장비순화: 선택한 장비의 강화치가 최대 강화치+5가 된다. 아티팩트도 가능.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SYSTEM,시스템순화: 부적의 충전속도가 3배가 되고 순화시에도 스펠카드 사용이 가능.

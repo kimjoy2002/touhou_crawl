@@ -593,8 +593,8 @@ interupt_type players::TurnEnd(bool *item_delete_)
 
 	if(you.GetProperty(TPT_STG_STATIC_ELECTRONIC) == 1)
 	{
-		int power_=you.level*10;
-		if(randA(5)<2)
+		int power_=you.level*5;
+		if(randA(6)<2)
 			skill_elec_passive(power_,&you);
 	}
 
@@ -853,13 +853,15 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		level_ = max(level_, you.level / 3 + you.GetSkillLevel(SKT_EVOCATE, true) * 2 / 3);
 
 		int power_decre_ = 12 - level_ / 3;
+		power_decre_ += you.s_evoke_ghost_level; //많이 쓸떄마다 점차 소모값이 커짐
+		if(you.s_evoke_ghost_level >= 5) { //-5부터 끔찍하게 나빠짐!
+			power_decre_ += 2*you.s_evoke_ghost_level;
+		}
+		if(you.s_evoke_ghost_level >= 8) { //-8부터는 아예 못쓸정도!
+			power_decre_ += 5*you.s_evoke_ghost_level;
+		}
 		you.PowUpDown(-power_decre_);
 
-		if (GetProperty(TPT_PURE_POWER)) {
-			if (randA(2) == 0) {
-				you.HpUpDown(-1, DR_GHOST);
-			}
-		}
 		if (you.power <= 0) {
 			PlaySE("ufo");
 			you.s_evoke_ghost = 0;
@@ -1480,7 +1482,12 @@ interupt_type players::SetInter(interupt_type inter_)
 		inter = inter_;
 	return inter;
 }
-
+LOCALIZATION_ENUM_KEY players::getTribeString(){
+	if(char_type == UNIQ_START_YOUMU) {
+		return LOC_SYSTEM_TRIBE_HALFHUMANGHOST;
+	}
+	return tribe_type_string[tribe];
+}
 
 
 void deadlog()
@@ -1532,7 +1539,7 @@ void GameOver()
 		ReplayClass.StopReplay(LocalzationManager::formatString(LOC_SYSTEM_REPLAY_TITLE, 
 			PlaceHolderHelper(to_string(caculScore())),
 			PlaceHolderHelper(to_string(you.level)),
-			PlaceHolderHelper(LocalzationManager::locString(tribe_type_string[you.tribe])),
+			PlaceHolderHelper(LocalzationManager::locString(you.getTribeString())),
 			PlaceHolderHelper(LocalzationManager::locString(job_type_string[you.job])),
 			PlaceHolderHelper(you.GetCharNameString()),
 			PlaceHolderHelper(you.user_name)));
@@ -1550,7 +1557,7 @@ void GameOver()
 		ReplayClass.StopReplay(LocalzationManager::formatString(LOC_SYSTEM_REPLAY_TITLE, 
 			PlaceHolderHelper(to_string(caculScore())),
 			PlaceHolderHelper(to_string(you.level)),
-			PlaceHolderHelper(LocalzationManager::locString(tribe_type_string[you.tribe])),
+			PlaceHolderHelper(LocalzationManager::locString(you.getTribeString())),
 			PlaceHolderHelper(LocalzationManager::locString(job_type_string[you.job])),
 			PlaceHolderHelper(you.GetCharNameString()),
 			PlaceHolderHelper(you.user_name)));

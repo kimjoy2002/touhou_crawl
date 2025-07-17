@@ -1254,7 +1254,7 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	ss.str("");
 	ss.clear();
 	ss << you.user_name << " (" << LocalzationManager::formatString(LOC_SYSTEM_LEVEL_WITH_NUMBER, PlaceHolderHelper(to_string(you.level))) << ' '
-	   << LocalzationManager::locString(tribe_type_string[you.tribe]) << ' ' << LocalzationManager::locString(job_type_string[you.job]) << ' ' <<you.GetCharNameString() << ')';
+	   << LocalzationManager::locString(you.getTribeString()) << ' ' << LocalzationManager::locString(job_type_string[you.job]) << ' ' <<you.GetCharNameString() << ')';
 
 	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_warning);
 	rc.left += 350;
@@ -2544,7 +2544,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		rc.top += fontDesc.Height;
 		rc.left = info_minX;
 		if(you.char_type == UNIQ_START_NONE) {
-			string tribe_string = LocalzationManager::locString(tribe_type_string[you.tribe]);
+			string tribe_string = LocalzationManager::locString(you.getTribeString());
 			DrawTextUTF8(pfont,pSprite,tribe_string.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 			rc.left += fontDesc.Width*(PrintCharWidth(tribe_string)+1);
 			string job_string = LocalzationManager::locString(job_type_string[you.job]);

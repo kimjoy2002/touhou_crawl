@@ -5,7 +5,7 @@ LOC_SYSTEM_TITLE_START,Begin!
 LOC_SYSTEM_MAINMENU_MAINGAME,Main Game
 LOC_SYSTEM_MAINMENU_GAMESTART,Start Game
 LOC_SYSTEM_MAINMENU_TUTORIAL,Tutorial
-LOC_SYSTEM_MAINMENU_MINIGAME,Mini Game
+LOC_SYSTEM_MAINMENU_MINIGAME,Mini Game (can't save)
 LOC_SYSTEM_MAINMENU_ARENA,Arena
 LOC_SYSTEM_MAINMENU_SPRINT,Sprint 1: Mini Touhou Crawl
 LOC_SYSTEM_MAINMENU_SPRINT2,Sprint 2: Shooting & Roguelike
@@ -45,12 +45,12 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI3,Bonus) Permanent Invisibility Trait, M
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI4,Beginner Tip: You're always invisible outside combat. Be careful-it disappears during combat.\nStabbing sleeping enemies deals massive damage based on sneak and dagger skill.\nHold 'x' and hover over a monster, then press 'v' to check info. Make sure they can't see invisibility!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU1,Blaze! Human Inferno. Revive and break through even after death!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU2,Aptitude Bonus) HP +20%, +2 Fight Aptitude, +2 Fire Magic Aptitude
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,Bonus) Can revive twice (removed at Lv9 and Lv18)
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4,Beginner Tip: You can revive twice after dying. When revived, you explode and restore HP and MP.\nIf you reach Lv9 and Lv18 without dying, the revive abilities disappear one by one. Don’t be afraid to die!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,Bonus) You can revive upon reaching levels 9 and 18.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4,Beginner Tip) You can revive when you reach levels 9 and 18. You’ll recover HP and MP and explode upon revival.\nPlay a bit more safely!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI1,Ancient! The triassic Kappa. Break through with the power of items!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2,Aptitude Bonus) +2 Mace Aptitude, +1 Evoke Aptitude
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI3,Bonus) Starts with Cloth Kappa Suit, Aerial Torpedo, and Neshii’s Occult Amulet
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4,Beginner Tip: Use 'V' to activate items. The aerial torpedo fires long-range danmaku.\nOccult amulets charge with XP. When fully charged, press 'V' to launch Neshii!\nActivatable items are permanent but consume lots of MP. Use them wisely in tough battles.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4,Beginner Tip: Use 'V' to evoke items. The aerial torpedo fires long-range danmaku.\nOccult amulets charge with XP. When fully charged, press 'V' to launch Neshii!\nEvokable items are permanent but consume lots of MP. Use them wisely in tough battles.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES1,Fairy Wars! The Three Fairies of Light. It's better to fight together!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES2,Bonus) Trust Lily and start with two fairy companions.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3,Beginner Tip: You’ll always fight with companions. They revive after gaining XP, even if they die.\nUse the 'a' key to invoke divine powers. Recruit or summon fairy allies!\nYou still get the same XP even if allies land the kill. Prioritize your survival!
@@ -66,7 +66,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WIZARD,A wizard by species. Weak in melee but
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_FAIRY,Masters of elemental magic but frail and small, unable to wear heavy armor.\nStarts with fast HP/MP regen and high stealth. Takes reduced damage from clouds.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CROWTENGU,Can fly. Decent combat abilities and strong air magic aptitude.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WOLFTENGU,10% more HP, excellent melee aptitude, but poor with magic.\nStarts with a strong jaw mutation for bonus melee attacks.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_KAPPA,High spear skill proficiency and can swim.\nHas decent magic aptitude (except fire and earth) and excellent activation aptitude.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_KAPPA,High spear skill proficiency and can swim.\nHas decent magic aptitude (except fire and earth) and excellent evoke aptitude.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_NECOMATA,Fleet-footed with natural claws, excels in unarmed combat.\nLow HP and poor with weapons and armor.\nWeak in elemental magic, but strong in alchemy, mental magic, and especially space-time magic.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_OARFISH,Slow mover but tough with scale mutations that harden with level.\nMediocre weapon aptitude, average magic skills, but excels in air techniques.\nCan swim and starts with electricity resistance.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CHEUKUMOGAMI,Small-bodied and starts with poison resistance.\nDecent combat aptitude, poor at magic.
@@ -106,7 +106,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR2,Aptitude Bonus) Combat +1, Evasion +1
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR3,Bonus) Starts with See Invisibility trait.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA1,One of the Three Fairies of Light, erases sound with moonlight.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA2,Aptitude Bonus) Dagger +1, Stealth +1, Mental Magic +1
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3,Bonus) Evoke Silence trait.
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3,Bonus) Starts with Evoke Silence trait.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON1,Beginner Tip: The Three Fairies always fight as a team, not alone.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON2,Remember: your life comes first when in danger. Allies will revive even if they fall.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON3,If you’re alone, don’t save consumables. You’re most vulnerable without allies.
@@ -148,7 +148,7 @@ LOC_SYSTEM_AUTOBATTLE_DANGERHP,Your HP is too low for auto-battle.
 LOC_SYSTEM_AUTOBATTLE_NOMON,No monsters to attack.
 LOC_SYSTEM_BLOOD_MAGIC,You chanted a spell at the cost of your blood!
 LOC_SYSTEM_TOO_LOW_MP,You don't have enough MP.
-LOC_SYSTEM_TOO_LOW_P_EVOKE,You don't have enough P to activate it.
+LOC_SYSTEM_TOO_LOW_P_EVOKE,You don't have enough P to evoke it.
 LOC_SYSTEM_DISAPPEAR_P_ITEM,The P item in your inventory has disappeared.
 LOC_SYSTEM_SHOULD_P_OVER_ONE,Must be used at Power level 1 or higher.
 LOC_SYSTEM_MEMORIZE_SPELL_NOT_ENOUGH_LEVEL,Your level is too low to learn this spell.
@@ -875,7 +875,7 @@ LOC_SYSTEM_DISPLAY_MANAGER_PICK,Which item would you like to pick up?
 LOC_SYSTEM_DISPLAY_MANAGER_DISCARD,Which item would you like to discard?
 LOC_SYSTEM_DISPLAY_MANAGER_FOOD,What would you like to eat?
 LOC_SYSTEM_DISPLAY_MANAGER_DRINK,What would you like to drink?
-LOC_SYSTEM_DISPLAY_MANAGER_EVOKE,What would you like to activate?
+LOC_SYSTEM_DISPLAY_MANAGER_EVOKE,What would you like to evoke?
 LOC_SYSTEM_DISPLAY_MANAGER_READ,What would you like to read?
 LOC_SYSTEM_DISPLAY_MANAGER_ITEMINFOR,Which item would you like to inspect?
 LOC_SYSTEM_DISPLAY_MANAGER_GAMEOVER,Your items
@@ -1619,7 +1619,7 @@ LOC_SYSTEM_SEIJA_GOD_EIRIN3,Seija: That room was full of weird tools I’d never
 LOC_SYSTEM_SEIJA_GOD_EIRIN4,Seija: When you’re in a bind, there’s nothing like a good potion. Stay safe out there!
 LOC_SYSTEM_SEIJA_GOD_YUYUKO1,Seija: I really don’t wanna climb that long staircase again.
 LOC_SYSTEM_SEIJA_GOD_YUYUKO2,Seija: Ever since I stole this, ghosts won’t stop showing up.
-LOC_SYSTEM_SEIJA_GOD_YUYUKO3,Seija: A wraith that deals in death? That’s ominous.
+LOC_SYSTEM_SEIJA_GOD_YUYUKO3,Seija: A ghost that deals in death? That’s ominous.
 LOC_SYSTEM_SEIJA_GOD_YUYUKO4,Seija: Ghosts are easy to shake off, right? I believe in you, partner.
 LOC_SYSTEM_SEIJA_GOD_SATORI1,Seija: A mind-reading youkai, huh... Creepy.
 LOC_SYSTEM_SEIJA_GOD_SATORI2,Seija: I can't tell if they're pets or just being left to roam free.
@@ -1938,7 +1938,7 @@ LOC_SYSTEM_EVOKE_MAGIC_HAMMER_PRESENT_BACKFIRE,The magic hammer backfired! All t
 LOC_SYSTEM_EVOKE_FOUR_FOOR_MAGIC_BOMB_DROWN,The Four-Shaku Magic Bomb fell into the water.
 LOC_SYSTEM_EVOKE_GHOST_BALL,You turned into a ghost at the cost of life! Use the skill again to cancel.
 LOC_SYSTEM_EVOKE_GHOST_BALL_CANCLE,You let go of the Okurichōchin.
-LOC_SYSTEM_EVOKE_GHOST_BALL_WARN,You can't activate items except Okurichochin while in ghost state!
+LOC_SYSTEM_EVOKE_GHOST_BALL_WARN,You can't evoke items except Okurichochin while in ghost state!
 LOC_SYSTEM_EVOKE_GHOST_BALL_END,Your power has run out and ghost mode has ended.
 LOC_SYSTEM_EVOKE_CAMERA_NOT_EXIST,No time to take photos of thin air.
 LOC_SYSTEM_EVOKE_CAMERA_NOT_UNIQUE,I'd rather photograph a prettier girl.
@@ -1949,10 +1949,10 @@ LOC_SYSTEM_EVOKE_CAMERA_SAKUYA,The subject suddenly vanished!
 LOC_SYSTEM_EVOKE_CAMERA_THE_WORLD,I have stopped time...
 LOC_SYSTEM_EVOKE_CAMERA_SELF,Are you taking a selfie?
 LOC_SYSTEM_EVOKE_EMPTY,No uses left.
-LOC_SYSTEM_EVOKE_ONLY_EQUIP_AMULET,You can only activate equipped amulets.
-LOC_SYSTEM_EVOKE_PASSIVE_AMULET,This amulet cannot be activated.
-LOC_SYSTEM_EVOKE_NOT_CHARGING_AMULET,You need 100% charge to activate the amulet.
-LOC_SYSTEM_EVOKE_CANT,This cannot be activated.
+LOC_SYSTEM_EVOKE_ONLY_EQUIP_AMULET,You can only evoke equipped amulets.
+LOC_SYSTEM_EVOKE_PASSIVE_AMULET,This amulet cannot be evoke.
+LOC_SYSTEM_EVOKE_NOT_CHARGING_AMULET,You need 100% charge to evoke the amulet.
+LOC_SYSTEM_EVOKE_CANT,This cannot be evoke.
 LOC_SYSTEM_TRIBE_HUMAN,Human
 LOC_SYSTEM_TRIBE_WIZARD,Witch
 LOC_SYSTEM_TRIBE_FAIRY,Fairy
@@ -1964,9 +1964,10 @@ LOC_SYSTEM_TRIBE_OARFISH,Oarfish
 LOC_SYSTEM_TRIBE_CHEUKUMOGAMI,Tsukumogami
 LOC_SYSTEM_TRIBE_ONI,Oni
 LOC_SYSTEM_TRIBE_HALFYOUKAI,Half-Youkai
-LOC_SYSTEM_TRIBE_WRAITH,Wraith
+LOC_SYSTEM_TRIBE_WRAITH,Ghost
 LOC_SYSTEM_TRIBE_VAMPIRE,Vampire
 LOC_SYSTEM_TRIBE_YOUKAI,Youkai
+LOC_SYSTEM_TRIBE_HALFHUMANGHOST,Half-Ghost
 LOC_SYSTEM_TRIBE_GROW_NECOMATA_FUR,Soft, fluffy fur has grown on your body.
 LOC_SYSTEM_TRIBE_GROW_OARFIGH_SCALE1,Your scales have hardened.
 LOC_SYSTEM_TRIBE_GROW_OARFIGH_SCALE2,Your scales have become even tougher.
@@ -2012,6 +2013,7 @@ LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_MP_REGEN,The final trait of your demon 
 LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_TORMENT,The final trait of your demon blood has awakened. You can now unleash the torment of hell.
 LOC_SYSTEM_TRIBE_GROW_KOISHI_CONFUSE_ATTACK,Your subconscious attacks confuse your enemies.
 LOC_SYSTEM_TRIBE_GROW_YOUMU_QUICK_DASH,Your Quick Dash ability has become even faster.
+LOC_SYSTEM_TRIBE_GROW_MOKOU,You can now revive once upon death.
 LOC_SYSTEM_TRIBE_GROW_CAN_INVISIBLE,You can become invisible.
 LOC_SYSTEM_TRIBE_GROW_CAN_SILENCE,You can silence your surroundings.
 LOC_SYSTEM_TRIBE_GROW_DRUNKARD,You’ve become resistant to alcohol.
@@ -2151,8 +2153,8 @@ LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP6,You are very fragile. (HP{0}%)
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_INVISIBLE,As a subconscious being, you are always invisible.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POWER_SAVE1,Your natural P consumption is slow.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POWER_SAVE2,You are starved for P.
-LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_9_LIFE,You can resurrect once before level 9.
-LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_18_LIFE,You can resurrect once before level 18.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_9_LIFE,You can resurrect once.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_18_LIFE,You can resurrect once.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SPEED1,You move quickly.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SPEED2,You move slowly.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CLAW1,Your claws are very long.
@@ -2254,8 +2256,8 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_HP,Your HP is genetically determined.\nFinal HP
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_INVISIBLE,You remain invisible while out of combat.\nAttacking cancels the effect.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POWER_SAVE1,Natural P consumption over turns is reduced.\nP costs for haste and invisibility are also lowered.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POWER_SAVE2,Natural P consumption over turns is increased.\nP costs for haste and invisibility are also higher.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_9_LIFE,When you die, you fully recover HP and MP and revive with a large explosion.\nThis ability disappears at level 9.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_18_LIFE,When you die, you fully recover HP and MP and revive with a large explosion.\nThis ability disappears at level 18.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_9_LIFE,When you die, you fully recover HP and MP and revive with a large explosion.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_18_LIFE,When you die, you fully recover HP and MP and revive with a large explosion.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SPEED1,Your movement delay is only 80% compared to other species.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SPEED2,Your movement delay is 120% compared to other species.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CLAW,You deal additional unarmed damage.\nYou can't wear gloves.
@@ -3131,8 +3133,8 @@ LOC_SYSTEM_SKL_DESCRIBE_DELAY_HANIWA,Postpones the Haniwa upgrade.\nUse this if 
 LOC_SYSTEM_SKL_DESCRIBE_DRAW_CARD,Not implemented.
 LOC_SYSTEM_SKL_DESCRIBE_HARD_SELL,Not implemented.
 LOC_SYSTEM_SKL_DESCRIBE_CREATE_SHOP,Not implemented.
-LOC_SYSTEM_SKL_DESCRIBE_FIREBALL,Concentrates power through the control rod to launch a fireball.\nSuccess rate and damage scale with activation skill.\n
-LOC_SYSTEM_SKL_DESCRIBE_MISSLE,Fires a missile from the modified Kappa suit.\nMissiles have strong tracking but travel slowly.\nCaution: they can cause splash damage if space is limited.\nSuccess rate and damage scale with activation skill.\n
+LOC_SYSTEM_SKL_DESCRIBE_FIREBALL,Concentrates power through the control rod to launch a fireball.\nSuccess rate and damage scale with Evoke skill.\n
+LOC_SYSTEM_SKL_DESCRIBE_MISSLE,Fires a missile from the modified Kappa suit.\nMissiles have strong tracking but travel slowly.\nCaution: they can cause splash damage if space is limited.\nSuccess rate and damage scale with Evoke skill.\n
 LOC_SYSTEM_SKL_DESCRIBE_SILENCE,Erases nearby sounds.\nLuna's prized ability, often called her ultimate hide-and-seek technique.\nHowever, the unnatural silence makes stealth worse.\nInstead, it prevents all chanting-based spellcasting within the area.
 LOC_SYSTEM_SKL_DESCRIBE_UKNOWN,An unknown ability.\n
 LOC_SYSTEM_ITEM_CATEGORY_WEAPON,Weapon
@@ -3352,7 +3354,7 @@ LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_RAD_INFO,Taking damage has a small chance t
 LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_NAME,Control Rod
 LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_DESCRIBE,A giant rod worn on the arm, also called a third leg.\nCan be swung or used to launch fire using Power.\nSecretly protects against radiation from nuclear fusion.
 LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_FIREBALL,Fireball
-LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_FIREBALL_INFO,Consumes Power to launch a fireball from the arm. Power scales with Activation.
+LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_FIREBALL_INFO,Consumes Power to launch a fireball from the arm. Power scales with evoke skill.
 LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_NAME,Centipede’s Shovel & Pickaxe
 LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_DESCRIBE,A golden toolset used by a centipede from Hongryudong.\nSaid to be strong enough to cleave mountains.\nAs a pair, they require both hands.\nPoisoned due to the toxic nature of their owner.
 LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_GLUTTON,Gluttony
@@ -3503,8 +3505,8 @@ LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN7,Amulet with a Horse
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN8,Amulet with a Sheep
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN9,Amulet with a Monkey
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN10,Amulet with a Cat Drawing
-LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH,The amulet is fully charged! You can now activate it with 'v'.
-LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PAD,The amulet is fully charged! Click it to activate.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH,The amulet is fully charged! You can now evoke it with 'v'.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PAD,The amulet is fully charged! Click it to evoke.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_CHARGING_FINISH_PASSIVE,The amulet is fully charged!
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_PERFECT_REVIVE,The perfect amulet shattered, but you felt your power return!
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_HEAL,You have recovered MP.
@@ -3871,14 +3873,14 @@ LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BRAND_WEAPON,A scroll that enchants your curr
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ACQUIREMENT,A scroll imbued with the power to create items.\nBy reading it and selecting a category, you'll receive a corresponding item.\nThe item is likely to be one you haven't discovered yet and is often related to your current skills.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BUG,A bugged scroll. Report it to the developer immediately!\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_UNKNOWN,A scroll filled with unknown symbols.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD,Spell cards can be used freely until they run out. Once depleted, they cannot be reused.\nExact usage count must be identified. Power scales with Activation skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_FIRE,A spell card imbued with fire energy.\nCreates a wide fire cloud in the chosen direction.\nDuration increases with higher Activation skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_ICE,A spell card imbued with cold energy.\nDeals strong cold damage to the enemy.\nDamage increases with higher Activation skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_EARTH,A spell card imbued with earth energy.\nDeals low base damage, but explodes upon hitting a wall for high AoE damage.\nDamage increases with higher Activation skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_AIR,A spell card imbued with air energy.\nFires danmaku in a wide fan that pushes back enemies.\nStrength and knockback increase with higher Activation skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_INVISIBLE,A spell card imbued with moonlight.\nTemporarily turns the user invisible.\nDuration increases with higher Activation skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_METAL,A spell card imbued with metal energy.\nFires three spiked projectiles forward.\nDamage increases with higher Activation skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_SUN,A spell card imbued with solar energy.\nEmits a bright light that confuses nearby enemies.\nStronger confusion effects can be resisted and don’t affect non-living beings.\nVampires take extra damage. Duration and confusion chance increase with Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD,Spell cards can be used freely until they run out. Once depleted, they cannot be reused.\nExact usage count must be identified. Power scales with Evoke skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_FIRE,A spell card imbued with fire energy.\nCreates a wide fire cloud in the chosen direction.\nDuration increases with higher Evoke skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_ICE,A spell card imbued with cold energy.\nDeals strong cold damage to the enemy.\nDamage increases with higher Evoke skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_EARTH,A spell card imbued with earth energy.\nDeals low base damage, but explodes upon hitting a wall for high AoE damage.\nDamage increases with higher Evoke skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_AIR,A spell card imbued with air energy.\nFires danmaku in a wide fan that pushes back enemies.\nStrength and knockback increase with higher Evoke skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_INVISIBLE,A spell card imbued with moonlight.\nTemporarily turns the user invisible.\nDuration increases with higher Evoke skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_METAL,A spell card imbued with metal energy.\nFires three spiked projectiles forward.\nDamage increases with higher Evoke skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_SUN,A spell card imbued with solar energy.\nEmits a bright light that confuses nearby enemies.\nStronger confusion effects can be resisted and don’t affect non-living beings.\nVampires take extra damage. Duration and confusion chance increase with Evoke skill.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_BUG,A bugged spell card.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET,A charm containing mysterious power. It’s just a normal charm until charged with EXP.\nOnce fully charged, it activates. Removing it resets charge to 0%, so be careful.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PERFECT,A charm infused with Eirin’s elixir said to let you experience the future.\nCharges very slowly but revives you when fully charged and you die.\nThe amulet burns away upon revival.\n
@@ -3903,8 +3905,8 @@ LOC_SYSTEM_ITEM_DESCRIPTION_RING_POISON_RESIS,A ring that grants strong poison r
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_FIRE_RESIS,A ring that grants fire resistance. Stacks up to 3 levels.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_ICE_RESIS,A ring that grants ice resistance. Stacks up to 3 levels.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_SEE_INVISIBLE,Wearing this allows you to see invisible enemies.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_LEVITATION,A ring that allows flight. Grants a fly ability when equipped.\nWhile flying, you can cross deep water.\nRequires Activation skill and consumes a small amount of MP.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_INVISIBLE,A ring that grants invisibility. Adds an invisibility ability when equipped.\nGreatly reduces detection chance by enemies.\nInvisibility consumes MP quickly. Requires Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_LEVITATION,A ring that allows flight. Grants a fly ability when equipped.\nWhile flying, you can cross deep water.\nRequires Evoke skill and consumes a small amount of MP.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_INVISIBLE,A ring that grants invisibility. Adds an invisibility ability when equipped.\nGreatly reduces detection chance by enemies.\nInvisibility consumes MP quickly. Requires Evoke skill.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_MANA,A ring that increases max MP.\nMP returns to normal when unequipped.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGACIAN,A ring that boosts magic success rate and power.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_AC,A ring that modifies defense.\nAmount is based on the number shown on the ring.\n
@@ -3946,19 +3948,19 @@ LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_ULTI,A thrilling adventure manga featuring 
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMY_ULTI,A tome containing all of alchemy, found in a massive library inside a mansion.\nThe vague and messy handwriting makes it hard to understand unless you’re a true alchemy master.\nJudging from the scribbles, even the original owner probably didn’t understand it well.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_LIGHT_BASE,A basic tome for danmaku combat using light projectiles.\nUsed by everyone from stray fairies to skilled magicians.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_FIRE_EXTEND,A popular magazine published in the Blazing Hellscape.\nPacked with fire-against-fire themed spells suited for the extreme heat of the inferno.\nIt also serves as a discussion forum for Gensokyo residents confident in their fire magic.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA,A lost pagoda infused with great power.\nWhen activated, releases stored energy as a laser.\nDamage increases with higher Activation skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL,A scripture once used by a wandering monk.\nConsumes Power to rapidly restore MP.\nMP restored increases with higher Activation skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL,A soul that wandered from the dream world.\nSummons allies from the dream world for a short time.\nStronger allies with higher Activation skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BOMB,A massive bomb ignitable with magic.\nCan be thrown after activation. Explodes after a few turns.\nTakes up a tile. Destroyed if hit by enemies.\nNot consumed on use-powered by mysterious magic.\nDamage and bomb HP scale with Activation skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL,A lantern said to be carried by ghosts.\nActivating turns you into a ghost state-untouchable, invisible.\nConsumes 30-70% of your HP. MP drains quickly while active.\nCannot act during ghost state. Ends when MP reaches 0 or you cancel it.\nStronger Activation reduces HP loss and MP drain.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_SKY_TORPEDO,A torpedo modified by kappas to fire out of water.\nBasically a missile. Damage increases with higher Activation skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA,A lost pagoda infused with great power.\nWhen evoke, releases stored energy as a laser.\nDamage increases with higher Evoke skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL,A scripture once used by a wandering monk.\nConsumes Power to rapidly restore MP.\nMP restored increases with higher Evoke skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL,A soul that wandered from the dream world.\nSummons allies from the dream world for a short time.\nStronger allies with higher Evoke skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BOMB,A massive bomb ignitable with magic.\nCan be thrown after evoke. Explodes after a few turns.\nTakes up a tile. Destroyed if hit by enemies.\nNot consumed on use-powered by mysterious magic.\nDamage and bomb HP scale with Evoke skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL,A lantern said to be carried by ghosts.\nActivating turns you into a ghost state-untouchable, invisible.\nConsumes 30-70% of your HP. MP drains quickly while active.\nCannot act during ghost state. Ends when MP reaches 0 or you cancel it.\nIts efficiency gradually deteriorates with use.\nHigh Evoke skill reduces HP loss and MP drain.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_SKY_TORPEDO,A torpedo modified by kappas to fire out of water.\nBasically a missile. Damage increases with higher Evoke skill.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_MAGIC_HAMMER,A magic hammer wielded by the small people, once owned by an oni.\nAllows powerful effects with only 1 P.\nHowever, has a 10% chance to cause the opposite of the intended effect.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_CAMERA,A camera brought by accident to Gensokyo.\nUses mysterious energy to take pictures without film.\nWon’t help in battle but can photograph beautiful girls.\nToo weak to shoot distant subjects.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG,A bug-infused activatable item.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1,This item can be activated without usage limits.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2,This item can be activated without usage limits. Its power scales with your Activation skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3,Press 'V' to activate using Power.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,Each time this activatable item is used, it requires
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG,A bug-infused evokable item.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1,This item can be evoked without usage limits.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2,This item can be evoked without usage limits. Its power scales with your Evoke skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3,Press 'V' to evoke using Power.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,Each time this evokable item is used, it requires
 LOC_SYSTEM_ITEM_DESCRIPTION_RUNE,This is a rune proving you’ve conquered dungeons.\nCollect 3 to open the final door of the Hakurei Shrine.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_YINYANG_ORB,This is the powerful Yin-Yang Orb. It’s enshrined within the shrine.\nTake it to escape or harness its power-but beware!\nThe red-white shrine maiden will chase you relentlessly.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE1,A flyer reading “Missing Pet - Komeiji Satori.”\nIt has your photo on it...\n
@@ -4510,7 +4512,7 @@ LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1,You have been permanently purified by Junk
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2,Skill Purity: Your {0} skill level always matches your character level.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3,Resistance Purity: Your {0} is infinite.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4,Magic Purity: Your HP and MP are treated as the same.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5,Power Purity: You are always at full power.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5,Power Purity: Your maximum power and power regeneration are doubled.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_6,Life Purity: You received an extra life.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_7,Equipment Purity: Your gear has been purified.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8,System Purity: You can now use spell cards, and amulet charge rate is tripled.
@@ -4897,7 +4899,7 @@ LOC_SYSTEM_GOD_SEIJA_GIFT_YUKARI3,summoning enemies around you or calling forth 
 LOC_SYSTEM_GOD_SEIJA_GIFT_EIRIN1,Eirin: Receive a batch of random potions.
 LOC_SYSTEM_GOD_SEIJA_GIFT_EIRIN2,Eirin may force you to drink bad potions or conduct suspicious experiments
 LOC_SYSTEM_GOD_SEIJA_GIFT_EIRIN3,that leave side effects. During her punishment, potion effects may randomly fail.
-LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO1,Yuyuko: Receive several random activatable items.
+LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO1,Yuyuko: Receive several random evokable items.
 LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO2,Yuyuko may punish you by summoning many hostile ghosts around you.
 LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO3,The summoned ghosts become stronger as you grow stronger.
 LOC_SYSTEM_GOD_SEIJA_GIFT_SATORI1,Satori: Receive several identification scrolls.
@@ -5049,7 +5051,7 @@ LOC_SYSTEM_GOD_OKINA_PUNISH_DRAIN,Okina’s rage has drained your HP and MP!
 LOC_SYSTEM_GOD_JUNKO_WELCOME,Junko: Chang’e, are you watching?
 LOC_SYSTEM_GOD_JUNKO_TALK,Junko: Chang’e, are you watching!?
 LOC_SYSTEM_GOD_JUNKO_ABIL_HASTE_FAIL,There must be an enemy in sight showing intent to kill.
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,The Blessing of Purification disables divine powers and applies a permanent purification penalty.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,The Blessing of Purification applies a permanent purification penalty.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN,Also, once you choose a purification, it cannot be undone!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ASK,Which ability would you like to purify?
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_OTHER,Decrease faith and postpone this choice for a new purification.
@@ -5058,7 +5060,7 @@ LOC_SYSTEM_GOD_JUNKO_PURIFICATION_DELAY,You postponed your purification. You'll 
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL,Skill Purification: The chosen skill (with aptitude ≥ 0) will always match your character level.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST,Resistance Purification: Gain immunity to the selected element.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_MP,MP Purification: HP and MP are unified and recover together.
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_POWER,Power Purification: You're always at full power and it never drops.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_POWER,Power Purification: Your maximum power and power regeneration are doubled.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_LIFE,Life Purification: Gain 2 extra lives.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM,Equipment Purification: The chosen equipment gets +5 above its max upgrade. Artifacts included.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SYSTEM,Purification System: Amulet recharge speed is tripled, and spell cards can still be used during purification.
@@ -5223,66 +5225,66 @@ LOC_SYSTEM_DUMP_ACTION_TYPE_INVOKE,Invoke
 LOC_SYSTEM_DUMP_ACTION_TYPE_EVOKE,Evoke
 LOC_SYSTEM_DUMP_ACTION_TYPE_USE,Use
 LOC_SYSTEM_DUMP_ACTION_TYPE_ETC,Etc
-LOC_SYSTEM_DUMP_DEATHREASON_UNKNOWN,Died for an unknown reason({1}) from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_NORMAL,Was beaten to death from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_NORMAL_BY,Was beaten to death by {1} from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SMITE,Died from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SMITE_BY,Was killed by {1} from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SMASH,Was slammed into the ground from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SMASH_BY,Was slammed into the ground by {1} from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_BLOOD,Coughed up blood and died from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_BLOOD_BY,Coughed up blood and died by {1} from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_NOISE,Eardrums burst to death from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_NOISE_BY,Eardrums burst to death by {1} from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SPEAR,Was stabbed to death from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SPEAR_BY,Was stabbed to death by {1} from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_VAMP,Was drained to death from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_VAMP_BY,Was drained to death by {1} from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_VEILING,Was sliced by a wind armor from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_VEILING_BY,Was sliced by {1}'s wind armor from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_RUSH,Died in a traffic accident from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_RUSH_BY,Was run over by {1} from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_WALL,Smashed into a wall and died from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_WALL_BY,Smashed into {1} and died from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO,Was thrown by psychokinesis and died from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO_BY,Was thrown by {1}'s psychokinesis and died from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_TRAP,Stubbed pinky toe on a rock and died from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_TANMAC,Was hit by danmaku from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_TANMAC_BY,Was hit by danmaku from {1} from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_BLAST,Exploded to death from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_BLAST_BY,Exploded by {1} from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SUN,Burned to death in the sunlight from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SUN_BY,Burned by {1}'s sunlight from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_FIRE,Burned to death from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_FIRE_BY,Burned to death by {1} from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_COLD,Froze to death from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_COLD_BY,Frozen to death by {1} from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_ELEC,Electrocuted from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_ELEC_BY,Electrocuted by {1} from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_POISON,Poisoned to death from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_POISON_BY,Poisoned by {1} from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_WIND,Swept away by wind from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_WIND_BY,Swept away by {1}'s wind from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_CURSE,Cursed to death from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_CURSE_BY,Cursed to death by {1} from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_BURST,Burst apart from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_BURST_BY,Burst by {1} from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_DROWNING,Drowned from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_UKNOWNDAMAGE,Died from unknown damage from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_ADDICTION,Died from poison from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_POTION,Died due to a potion from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_QUIT,Gave up on the game from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_HUNGRY,Died of starvation from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_MIRROR,Died from reflected damage from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_MIRROR_BY,Died from {1}'s reflected damage from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_MP,Died as all purified MP was depleted from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_INSTANT,Died as their karma was purified by Junko from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SLEEP,Died while having a happy dream from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SLEEP_BY,Died while having a happy dream caused by {1} from {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_UNKNOWN,Died for an unknown reason({1}) at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_NORMAL,Was beaten to death at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_NORMAL_BY,Was beaten to death by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SMITE,Died at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SMITE_BY,Was killed by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SMASH,Was slammed into the ground at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SMASH_BY,Was slammed into the ground by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_BLOOD,Coughed up blood and died at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_BLOOD_BY,Coughed up blood and died by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_NOISE,Eardrums burst to death at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_NOISE_BY,Eardrums burst to death by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SPEAR,Was stabbed to death at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SPEAR_BY,Was stabbed to death by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_VAMP,Was drained to death at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_VAMP_BY,Was drained to death by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_VEILING,Was sliced by a wind armor at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_VEILING_BY,Was sliced by {1}'s wind armor at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_RUSH,Died in a traffic accident at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_RUSH_BY,Was run over by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_WALL,Smashed into a wall and died at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_WALL_BY,Smashed into {1} and died at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO,Was thrown by psychokinesis and died at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO_BY,Was thrown by {1}'s psychokinesis and died at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_TRAP,Stubbed pinky toe on a rock and died at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_TANMAC,Was hit by danmaku at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_TANMAC_BY,Was hit by danmaku from {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_BLAST,Exploded to death at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_BLAST_BY,Exploded by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SUN,Burned to death in the sunlight at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SUN_BY,Burned by {1}'s sunlight at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_FIRE,Burned to death at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_FIRE_BY,Burned to death by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_COLD,Froze to death at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_COLD_BY,Frozen to death by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_ELEC,Electrocuted at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_ELEC_BY,Electrocuted by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_POISON,Poisoned to death at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_POISON_BY,Poisoned by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_WIND,Swept away by wind at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_WIND_BY,Swept away by {1}'s wind at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_CURSE,Cursed to death at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_CURSE_BY,Cursed to death by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_BURST,Burst apart at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_BURST_BY,Burst by {1} at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_DROWNING,Drowned at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_UKNOWNDAMAGE,Died from unknown damage at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_ADDICTION,Died from poison at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_POTION,Died due to a potion at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_QUIT,Gave up on the game at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_HUNGRY,Died of starvation at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_MIRROR,Died from reflected damage at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_MIRROR_BY,Died from {1}'s reflected damage at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_MP,Died as all purified MP was depleted at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_INSTANT,Died as their deathly impurity was purified by Junko at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SLEEP,Died while having a happy dream at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SLEEP_BY,Died while having a happy dream caused by {1} at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_HOOF,Died by being trampled at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_HOOF_BY,Died by being trampled by {1} at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_GHOST,Died as life force was drained by Okurichochin from {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_SIDEEFFECT,Died from side effects from {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_GHOST,Died as life force was drained by Okurichochin at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SIDEEFFECT,Died from side effects at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_WIN,Escaped successfully with the Yin-Yang Orb and {0} runes.
 LOC_SYSTEM_DUMP_DEATHREASON_COWARD,Fled with only {0} runes.
 LOC_SYSTEM_DUMP_DEATHREASON_FAIL,Escaped with nothing to show.

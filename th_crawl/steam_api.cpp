@@ -21,7 +21,7 @@ steam_manager steam_mg;
 
 
 bool steam_manager::steamInit() {
-	if(1)
+	if(0)
 		return false;
 	bool result_ = SteamAPI_Init();
 	if(result_ == true) {
@@ -39,7 +39,7 @@ string steam_manager::getSteamUserName() {
 }
 
 void steam_manager::setCurrentInfo() {
-	setCurrentInfo(LocalzationManager::locString(tribe_type_string[you.tribe]), LocalzationManager::locString(job_type_string[you.job]), you.GetCharNameString(), you.level, CurrentLevelString());
+	setCurrentInfo(LocalzationManager::locString(you.getTribeString()), LocalzationManager::locString(job_type_string[you.job]), you.GetCharNameString(), you.level, CurrentLevelString());
 
 }
 void steam_manager::setCurrentMainMenuInfo() {

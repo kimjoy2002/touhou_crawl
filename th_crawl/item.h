@@ -213,7 +213,7 @@ public:
 
 	int value3;	//value3 - 방어구-최소 EV패널티 탄막-인챈트 음식-신선도 스펠카드-사용예측횟수 아뮬렛-오컬트발동여부
 	
-	int value4; //value4 - 무기-인챈트 방어구-AC+ 방패-SH+ 탄막-종류 음식(p템)-몬스터id 
+	int value4; //value4 - 무기-인챈트 방어구-AC+ 방패-SH+ 탄막-종류 음식(p템)-몬스터id 발동템-(일부) 사용횟수
 
 	int value5;	//value5 - 무기-속성 방어구-저항 음식-pow상승치
 	

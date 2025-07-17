@@ -1198,7 +1198,7 @@ void tribe_property::gain(bool gain_)
 			you.pure_mp = false;
 		return;
 	case TPT_PURE_POWER:
-		you.power = 1000;
+		//you.power = 1000;
 		return;
 	case TPT_PURE_LIFE:
 		return;
@@ -1322,6 +1322,7 @@ void tribe_property::gain(bool gain_)
 			{
 				monster* mon_ = env[current_level].AddMonster(MON_MAGICAL_STAR, M_FLAG_ALLY, *rit);
 				mon_->SetInvincibility(-1, false);
+				mon_->sm_info.parent_map_id = -2;
 				mon_->spell_lists.clear();
 				count--;
 				if(count == 0)
@@ -1604,6 +1605,29 @@ void LevelUpTribe(int level_)
 		if(level_%5 == 0)
 		{
 			randA(2)?(randA(1)?you.StatUpDown(1,STAT_STR):you.StatUpDown(1,STAT_DEX)):you.StatUpDown(1,STAT_INT);
+		}
+		if(level_ == 9 && you.char_type == UNIQ_START_MOKOU)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_MOKOU),true,false,false,CL_small_danger);
+			you.image = &img_play_mokou[1];
+			you.SetProperty(TPT_9_LIFE,1);
+		}
+		if(level_ == 18 && you.char_type == UNIQ_START_MOKOU)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_MOKOU),true,false,false,CL_small_danger);
+			you.image = &img_play_mokou[2];
+			you.SetProperty(TPT_18_LIFE,1);
+		}
+		if(level_ == 15 && you.char_type == UNIQ_START_KOISHI)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_KOISHI_CONFUSE_ATTACK),true,false,false,CL_small_danger);
+			you.SetProperty(TPT_CONFUSE_ATTACK,1);
+		} 
+		if(level_ == 18 && you.char_type == UNIQ_START_YOUMU)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_YOUMU_QUICK_DASH),true,false,false,CL_white_blue);
+			you.DeleteProperty(TPT_QUICK_DASH);
+			you.SetProperty(TPT_QUICK_DASH,2);
 		}
 		break;
 	case TRI_WIZARD:
@@ -2072,17 +2096,6 @@ void LevelUpTribe(int level_)
 		if(level_%5 == 0)
 		{
 			randA(2)?(randA(1)?you.StatUpDown(1,STAT_STR):you.StatUpDown(1,STAT_DEX)):you.StatUpDown(1,STAT_INT);
-		}
-		if(level_ == 15 && you.char_type == UNIQ_START_KOISHI)
-		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_KOISHI_CONFUSE_ATTACK),true,false,false,CL_small_danger);
-			you.SetProperty(TPT_CONFUSE_ATTACK,1);
-		}
-		if(level_ == 18 && you.char_type == UNIQ_START_YOUMU)
-		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_TRIBE_GROW_YOUMU_QUICK_DASH),true,false,false,CL_white_blue);
-			you.DeleteProperty(TPT_QUICK_DASH);
-			you.SetProperty(TPT_QUICK_DASH,2);
 		}
 		break;
 	default:

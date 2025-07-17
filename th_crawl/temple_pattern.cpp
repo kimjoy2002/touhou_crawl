@@ -20,7 +20,7 @@ dungeon_tile_type randomTemple()
 	
 	for(int i=0;i<GT_LAST;i++)
 	{
-		if(i != GT_SEIJA)
+		if(i != GT_SEIJA && i != GT_SHIKIEIKI && i != GT_TENKYUU)
 			rand_.push((dungeon_tile_type)(i+DG_TEMPLE_JOON_AND_SION));
 	}
 	

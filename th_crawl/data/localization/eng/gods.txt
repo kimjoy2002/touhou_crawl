@@ -578,14 +578,17 @@ Purification Level 3: You no longer gain effects from potions.
 §_19******: You can be permanently purified through Junko's blessing. (Once only)§d
 
 Permanent purification grants:
-- +5 to all stats
-- Choose one of the following blessings (from 3 random options). You may spend faith to reroll the selection.
+- Choose one of the following blessings (from 3 random options).
+  You may spend faith to reroll the selection.
+
+Normally, betraying Junko after purification causes one's deathly impurity to be purified, 
+  resulting in instant death.
 
 Available Purification Blessings:
 - Skill Purification: The selected skill (with aptitude ≥ 0) always matches your character level.
 - Resistance Purification: Grants immunity to a chosen element.
 - Mana Purification: HP and MP are unified and regenerated together.
-- Power Purification: Always full power; power never decreases.
+- Power Purification: Maximum power and power regeneration are doubled.
 - Life Purification: Gain 2 extra lives.
 - Equipment Purification: Selected equipment gains +5 over its maximum enchantment (even artifacts).
 - System Purification: Amulet charge rate triples, and you can use spell cards even while purified.

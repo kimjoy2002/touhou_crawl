@@ -5,9 +5,9 @@ LOC_SYSTEM_TITLE_START,始める！
 LOC_SYSTEM_MAINMENU_MAINGAME,メインゲーム
 LOC_SYSTEM_MAINMENU_GAMESTART,ゲーム開始
 LOC_SYSTEM_MAINMENU_TUTORIAL,チュートリアル
-LOC_SYSTEM_MAINMENU_MINIGAME,ミニゲーム
+LOC_SYSTEM_MAINMENU_MINIGAME,ミニゲーム (保存できない)
 LOC_SYSTEM_MAINMENU_ARENA,アリーナ
-LOC_SYSTEM_MAINMENU_SPRINT,スプリント
+LOC_SYSTEM_MAINMENU_SPRINT,スプリント1：ミニ Touhou Crawl
 LOC_SYSTEM_MAINMENU_SPRINT2,スプリント2：シューティング＆ローグライク
 LOC_SYSTEM_MAINMENU_ETC,その他
 LOC_SYSTEM_MAINMENU_OPTION,オプション
@@ -45,8 +45,8 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI3,ボーナス）永久透明特性、P�
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_KOISHI4,初心者ヒント）非戦闘時は常に透明状態。戦闘に入ると解除されます。\n眠っている敵を刺すと、奇襲と短剣スキルに応じて大ダメージ！\nxを押しながらモンスターにカーソルを合わせ、vを押すと情報表示。透明視持ちか確認しましょう！
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU1,激熱！人間インフェルノ。死んでも蘇って突破せよ！
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU2,適性ボーナス）体力 +20%、戦闘適性 +2、火炎魔法適性 +2
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,ボーナス）2回まで復活可能（レベル9と18に到達すると削除される）
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4,初心者ヒント）2回までなら死亡しても復活できます。復活時に体力と霊力が回復し爆発が発生します。\n死なずにレベル9と18に到達すると復活能力が1つずつ消えます。だから死を恐れないで！
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,ボーナス）レベル9と18に到達すると復活可能。
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4,初心者向けヒント）レベル9と18に到達すると復活できます。復活時に体力とMPが回復し、爆発します。\nより安全に立ち回りましょう！
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI1,太古！三畳紀の河童。アイテムの力で切り開け！
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2,適性ボーナス）鈍器適性 +2、発動適性 +1
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI3,ボーナス）布の河童服、空中魚雷、ネシのオカルト札を持ってスタート。
@@ -106,7 +106,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR2,適性ボーナス）戦闘適性 +1�
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_STAR3,ボーナス）透明視の特性を持ってスタート。
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA1,三妖精の中で音を消す月の妖精。
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA2,適性ボーナス）短剣適性 +1、隠密適性 +1、精神魔法適性 +1
-LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3,ボーナス）沈黙発動特性持ち。
+LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_LUNA3,ボーナス）沈黙発動特性持ってスタート。
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON1,初心者ヒント）三月精は一人ではなく三人で戦います。
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON2,危険な時はまず自分の命を最優先にしましょう。仲間は倒れても復活します。
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_COMMON3,もし一人になった時は消耗品を惜しまないでください。一人の時が最も脆いです。
@@ -1967,6 +1967,7 @@ LOC_SYSTEM_TRIBE_HALFYOUKAI,半妖
 LOC_SYSTEM_TRIBE_WRAITH,亡霊
 LOC_SYSTEM_TRIBE_VAMPIRE,吸血鬼
 LOC_SYSTEM_TRIBE_YOUKAI,妖怪
+LOC_SYSTEM_TRIBE_HALFHUMANGHOST,半人半霊
 LOC_SYSTEM_TRIBE_GROW_NECOMATA_FUR,あなたにふわふわの毛が生えた。
 LOC_SYSTEM_TRIBE_GROW_OARFIGH_SCALE1,あなたの鱗が硬くなった。
 LOC_SYSTEM_TRIBE_GROW_OARFIGH_SCALE2,あなたの鱗がさらに硬くなった。
@@ -2012,6 +2013,7 @@ LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_MP_REGEN,悪魔の最後の特性が発
 LOC_SYSTEM_TRIBE_GROW_HALFYOUKAI_DEMON_4_TORMENT,悪魔の最後の特性が発現した。地獄の苦痛を呼び出せるようになった。
 LOC_SYSTEM_TRIBE_GROW_KOISHI_CONFUSE_ATTACK,無意識的な攻撃が敵を混乱させる。
 LOC_SYSTEM_TRIBE_GROW_YOUMU_QUICK_DASH,クイックダッシュの能力がさらに速くなった。
+LOC_SYSTEM_TRIBE_GROW_MOKOU,あなたは死んでも一度だけ復活できる。
 LOC_SYSTEM_TRIBE_GROW_CAN_INVISIBLE,あなたは透明になることができる。
 LOC_SYSTEM_TRIBE_GROW_CAN_SILENCE,あなたは周囲を静かにすることができる。
 LOC_SYSTEM_TRIBE_GROW_DRUNKARD,あなたは酒に強くなった。
@@ -2151,8 +2153,8 @@ LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP6,あなたは非常に脆弱だ。(体力 
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_INVISIBLE,無意識のあなたは常に透明状態である。
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POWER_SAVE1,あなたはPの自然消費が遅い。
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POWER_SAVE2,あなたはPに飢えている。
-LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_9_LIFE,あなたはレベル9以前に1度だけ復活できる。
-LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_18_LIFE,あなたはレベル18以前に1度だけ復活できる。
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_9_LIFE,あなたは復活できる。
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_18_LIFE,あなたは復活できる。
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SPEED1,あなたは移動速度が速い。
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SPEED2,あなたは移動速度が遅い。
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CLAW1,あなたは非常に長い爪を持っている。
@@ -2254,8 +2256,8 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_HP,あなたの体力は遺伝的に決まっ�
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_INVISIBLE,非戦闘時には常に透明状態になる。\n攻撃を試みると透明は解除される。
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POWER_SAVE1,ターン経過によるPの自然消費量が減少する。\nまた、加速や透明によるP消費も減少する。
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POWER_SAVE2,ターン経過によるPの自然消費量が増加する。\nまた、加速や透明によるP消費も増加する。
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_9_LIFE,死亡時に体力と霊力が完全に回復し、大爆発と共に蘇る。\nこの能力はレベル9に達すると失われる。
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_18_LIFE,死亡時に体力と霊力が完全に回復し、大爆発と共に蘇る。\nこの能力はレベル18に達すると失われる。
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_9_LIFE,死亡時に体力と霊力が完全に回復し、大爆発と共に蘇る。
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_18_LIFE,死亡時に体力と霊力が完全に回復し、大爆発と共に蘇る。
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SPEED1,移動時のディレイが他の種族の80%になる。
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SPEED2,移動時のディレイが他の種族の120%になる。
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CLAW,素手戦闘時に追加ダメージを与える。\n手袋を装備できなくなる。
@@ -3950,7 +3952,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA,誰かが失くした宝塔。強力な
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL,どこかの住職が使っていた経典。魔法の力が込められている。\n発動するとパワーを代償に霊力を瞬時に回復する。\n発動スキルが高いと回復量が増加する。\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL,夢の世界を彷徨っていた魂。\n使用すると幻の具現化がしばらく可能になる。\nある場所にいたモンスターたちが味方として召喚される。\n発動スキルが高いとより強い味方が現れる。\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BOMB,非常に巨大な爆弾。魔法の力で点火可能。\n発動すると目標地点に向けて投げられる。\n投げられた爆弾は数ターン後に大爆発を起こす。\n爆弾はマスを占有し、敵に壊されると爆発せず破壊される。\n発動アイテムのため使用しても消費されない。何か不思議な力が働いているようだ。\n発動スキルが高いとダメージと耐久力が上昇する。\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL,人のいない場所を漂うという怪談に登場する幽霊の提灯。\n発動して手に持つと誰にも見えず攻撃されない幽霊化状態になる。\n発動時、現在体力の30％～70％が減少する。\n発動中は完全無敵だが体力は回復せず、パワーが急速に減る。\n再度発動か、パワーが0になると自動的に解除される。\n幽霊化中は移動しかできず、アイテム・魔法・攻撃は全て使用不可。\nもし何らかの理由でパワーが減らなければ、送り提灯は代わりに別の何かを奪っていく。\n発動スキルが高いと体力減少量やパワー消費が軽減される。\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL,人のいない場所を漂うという怪談に登場する幽霊の提灯。\n発動して手に持つと誰にも見えず攻撃されない幽霊化状態になる。\n発動時、現在体力の30％～70％が減少する。\n発動中は完全無敵だが体力は回復せず、パワーが急速に減る。\n再度発動か、パワーが0になると自動的に解除される。\n幽霊化中は移動しかできず、アイテム・魔法・攻撃は全て使用不可。\n使うたびに徐々に劣化し、効率が悪くなる。\n発動スキルが高いと体力減少量やパワー消費が軽減される。\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_SKY_TORPEDO,河童が陸上でも撃てるように改造した魚雷。\nよく考えたらミサイルと大差ない。\n発動スキルが高いとダメージが上昇する。\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_MAGIC_HAMMER,小人族が使うという妖術のハンマー。本来の持ち主は鬼らしい。\n使うと様々な効果をパワー1だけで発揮できる。\nただし使用にはリスクがあり、使用者が自滅することもある。\n10％の確率で正反対の効果が発動する可能性がある。\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_CAMERA,幻想郷に来る前に偶然持ってきたカメラ。\n不思議な力によりフィルムがなくても撮影できそうだ。\n生存には全く役立たないが、美少女たちを記念に撮影して保管できる。\n高性能ではないため遠くの対象は撮影が難しい。\n
@@ -4510,7 +4512,7 @@ LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1,あなたは純狐の祝福により永久
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2,スキル純化: あなたの{0}スキルレベルは常にキャラクターレベルと等しい。
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3,抵抗純化: あなたの{0}は無限大である。
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4,魔力純化: あなたの体力と霊力は同一化される。
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5,パワー純化: あなたは常にフルパワー状態である。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5,パワー純化: 最大パワーとパワー回復量が2倍になる。
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_6,生命純化: あなたは追加の命を授かった。
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_7,装備純化: あなたは所持していた装備を純化した。
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8,システム純化: スペルカードの使用が許可され、お札のチャージ速度が3倍になる。
@@ -5049,7 +5051,7 @@ LOC_SYSTEM_GOD_OKINA_PUNISH_DRAIN,隠岐奈の怒りにより、あなたの体�
 LOC_SYSTEM_GOD_JUNKO_WELCOME,純狐は言った。「象牙よ、見ているか？」
 LOC_SYSTEM_GOD_JUNKO_TALK,純狐は言った。「象牙よ、見ているか！」
 LOC_SYSTEM_GOD_JUNKO_ABIL_HASTE_FAIL,視界内に殺意を示す敵が必要です。
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,「浄化の祝福」を選ぶと特技が使用できなくなり、永久的な浄化ペナルティを得ます。
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,「浄化の祝福」を選ぶと永久的な浄化ペナルティを得ます。
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN,さらに、一度選んだ浄化は取り消すことができません！
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ASK,どの能力を浄化しますか？
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_OTHER,信仰心を下げて今回の選択を見送り、次回に回します。
@@ -5058,7 +5060,7 @@ LOC_SYSTEM_GOD_JUNKO_PURIFICATION_DELAY,浄化の選択を見送りました。�
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL,スキル浄化：選択した適性0以上のスキルはキャラクターレベルと常に同じになります。
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_RESIST,耐性浄化：選んだ属性に対して完全な免疫を得ます。
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_MP,霊力浄化：体力と霊力が同一化され、回復力が合算されます。
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_POWER,パワー浄化：常にフルパワー状態となり、減少しません。
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_POWER,パワー浄化：最大パワーとパワー回復量が2倍になる。
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_LIFE,生命浄化：追加ライフを2つ得ます。
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM,装備浄化：選んだ装備の強化値が最大+5まで強化されます（アーティファクトも可）。
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SYSTEM,システム浄化：お札のチャージ速度が3倍になり、浄化中でもスペルカードが使用可能になります。
@@ -5276,7 +5278,7 @@ LOC_SYSTEM_DUMP_DEATHREASON_HUNGRY,{0}で飢えて死亡した。
 LOC_SYSTEM_DUMP_DEATHREASON_MIRROR,{0}で反射ダメージを受けて死亡した。
 LOC_SYSTEM_DUMP_DEATHREASON_MIRROR_BY,{0}で{1}の反射ダメージを受けて死亡した。
 LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_MP,{0}で純化されたMPが尽きて死亡した。
-LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_INSTANT,{0}で純狐により即死で純化されて死亡した。
+LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_INSTANT,{0}で純狐により死穢が純化されて死亡した。
 LOC_SYSTEM_DUMP_DEATHREASON_SLEEP,{0}で幸せな夢を見ながら死亡した。
 LOC_SYSTEM_DUMP_DEATHREASON_SLEEP_BY,{0}で{1}に幸せな夢を見させられて死亡した。
 LOC_SYSTEM_DUMP_DEATHREASON_HOOF,{0}で踏みつけられて死んだ。

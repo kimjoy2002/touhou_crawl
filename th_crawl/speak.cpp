@@ -34,7 +34,7 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			case 0:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_RUMIA_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 1:
-				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_RUMIA_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()),PlaceHolderHelper(job_type_string[you.job]),PlaceHolderHelper(tribe_type_string[you.tribe]));
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_RUMIA_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()),PlaceHolderHelper(job_type_string[you.job]),PlaceHolderHelper(you.getTribeString()));
 			case 2:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_RUMIA_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 3:
@@ -290,7 +290,7 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			case 5:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MEDICINE_NORMAL8), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 6:
-				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MEDICINE_NORMAL9), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(tribe_type_string[you.tribe]));
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MEDICINE_NORMAL9), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(you.getTribeString()));
 			case 7:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MEDICINE_NORMAL10), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 8:
@@ -697,7 +697,7 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			case 2:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_KYOUKO_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 3:
-				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_KYOUKO_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(tribe_type_string[you.tribe]));
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_KYOUKO_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(you.getTribeString()));
 			case 4:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_KYOUKO_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 5:
@@ -1137,7 +1137,7 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			case 4:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_NAZRIN_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 5:
-				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_NAZRIN_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(tribe_type_string[you.tribe]));
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_NAZRIN_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(you.getTribeString()));
 			case 6:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_NAZRIN_NORMAL8), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 7:
@@ -2570,7 +2570,7 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			switch(randA(10))
 			{
 			case 0:
-				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PACHU_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(tribe_type_string[you.tribe]));
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PACHU_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(you.getTribeString()));
 			case 1:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PACHU_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 2:
@@ -2582,7 +2582,7 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			case 5:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PACHU_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 6:
-				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PACHU_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(tribe_type_string[you.tribe]));
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PACHU_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(you.getTribeString()));
 			case 7:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PACHU_NORMAL8), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 8:
@@ -4606,7 +4606,7 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			case 1:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_NARUMI_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 2:
-				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_NARUMI_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(tribe_type_string[you.tribe]));
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_NARUMI_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(you.getTribeString()));
 			case 3:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_NARUMI_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 4:
@@ -4894,7 +4894,7 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 				}
 				else
 				{
-					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SUMIREKO_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(tribe_type_string[you.tribe]));
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SUMIREKO_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(you.getTribeString()));
 				}
 			case 2:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SUMIREKO_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
@@ -4962,7 +4962,7 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 				case 2:
 					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HATATE_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
 				case 3:
-					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HATATE_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(tribe_type_string[you.tribe]));
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HATATE_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()), PlaceHolderHelper(you.getTribeString()));
 				case 4:
 					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_HATATE_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
 				case 5:

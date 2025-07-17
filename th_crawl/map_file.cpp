@@ -136,7 +136,7 @@ void initMap()
 	map_list.dungeon_enter[ZIGURRAT].set(false, 0, 0, DEPTH_LEVEL + rand_int(2, MAX_DEPTH_LEVEL));
 	map_list.dungeon_enter[HAKUREI_D].set(false,0,0,DEPTH_LAST_LEVEL);
 
-	map_list.god_num = 8;
+	map_list.god_num = rand_int(5,8);
 	map_list.bamboo_count = 0;
 	map_list.bamboo_rate = 0;
 	//map_list.tutorial = 0;
@@ -144,16 +144,19 @@ void initMap()
 	deque<int> dq;
 	for(int i=0;i<GT_LAST;i++)
 	{
-		if(i != GT_SEIJA) //세이자는 무조건 나온다.
+		if(i != GT_SEIJA && i != GT_TENKYUU && i != GT_SHIKIEIKI)
 			dq.push_back(i);
 	}
 	rand_shuffle(dq.begin(),dq.end());
+
+	for(int i=0;i<GT_LAST;i++)
+		map_list.temple[i].set(false,0,0,-1);
+
 	for(int i=0;i<GT_LAST-map_list.god_num;i++)
 	{
 		map_list.temple[dq[i]].set(false,0,0,rand_int(1,5));
 	}
-	map_list.temple[GT_SEIJA].set(false,0,0,rand_int(1,5));
-	//map_list.temple[GT_SUWAKO].set(false,0,0,0);
+	map_list.temple[GT_SEIJA].set(false,0,0,rand_int(1,5));  //세이자는 무조건 나온다.
 }
 
 

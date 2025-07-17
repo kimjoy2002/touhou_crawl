@@ -526,6 +526,7 @@ bool Dump(int type, wstring *filename_)
 				entry.version = version_string_to_int();
 				entry.dungeon_level = current_level;
 
+				steam_mg.addStats(you.haveOrb(), you.char_type, you.tribe, you.job);
 				send_score = steam_mg.sendScore(entry);
 			}
 		}

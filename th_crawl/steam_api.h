@@ -15,6 +15,7 @@
 #include <mutex>
 #include <steam/steam_api.h>
 #include "joypad.h"
+#include "enum.h"
 
 using namespace std;
 
@@ -75,6 +76,8 @@ private:
 public:
 	bool steamInit();
 	bool isInit(){return init;};
+	bool IncrementStat(const char* statName, int32 delta);
+	void addStats(bool win, unique_starting_type char_type, tribe_type tribe, job_type job);
 	string getSteamUserName();
 	void setCurrentInfo();
 	void setCurrentMainMenuInfo();

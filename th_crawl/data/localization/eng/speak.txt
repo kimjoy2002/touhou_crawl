@@ -134,11 +134,11 @@ SPEAK_DIEFAIRY_REVIVE,{0} greeted you warmly.
 SPEAK_KISUME_NORMAL1,{0} shook their head.
 SPEAK_KISUME_NORMAL2,{0} is watching this way.
 SPEAK_KISUME_NORMAL3,{0} made a clattering sound.
-SPEAK_KISUME_NORMAL4,{0} hid their face in the bucket.
+SPEAK_KISUME_NORMAL4,{0} hide their face in the bucket.
 SPEAK_KISUME_NORMAL5,{0} peeked their face out.
 SPEAK_KISUME_NORMAL6,{0} is swaying with the bucket.
 SPEAK_KISUME_NORMAL7,{0} briefly made a scary face.
-SPEAK_KISUME_CAMERA,{0} hid inside the bucket.
+SPEAK_KISUME_CAMERA,{0} hide inside the bucket.
 SPEAK_CHEN_NORMAL1,{0} shouted. "If you get lost here, it's the end!"
 SPEAK_CHEN_NORMAL2,{0} shouted. "This is our home now, would you kindly leave?"
 SPEAK_CHEN_NORMAL3,{0} shouted. "It took too many catnip trees to gather this many cats!"

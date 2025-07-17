@@ -686,6 +686,11 @@ string GetUniqueCharString(int char_type);
 extern players you;
 
 
+//스팀통계용
+const char* GetTribeStatString(tribe_type tribe);
+const char* GetJobStatString(job_type job);
+const char* GetUniqueStartStatString(unique_starting_type start);
+
 
 int action_Move(int key, const coord_def &c); //메인루프에서의 이동
 int Move(const coord_def &c); //이동한다.

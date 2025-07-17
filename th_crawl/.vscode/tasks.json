@@ -19,7 +19,7 @@
         {
             "label": "cmake build Release",
             "type": "shell",
-            "command": "cmake .. -G 'Visual Studio 16 2019' -T ClangCL -A x64 -DCMAKE_BUILD_TYPE=Release; cmake --build ./ --config Release",
+            "command": "cmake .. -G 'Visual Studio 16 2019' -T ClangCL -A x64 -DCMAKE_BUILD_TYPE=Release; cmake --build ./ --config Release;python.exe ../data/temp/encriptionPng.py C:/Users/admin/Documents/git/touhou_crawl/th_crawl/build/Release/data/;python.exe ../data/temp/encriptionPng.py C:/Users/admin/Documents/git/touhou_crawl/th_crawl/build/Release/data/god/;python.exe ../data/temp/encriptionPng.py C:/Users/admin/Documents/git/touhou_crawl/th_crawl/build/Release/data/dot",
             "options": {
                 "cwd": "${workspaceFolder}/build"
             },

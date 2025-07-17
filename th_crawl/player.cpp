@@ -4541,6 +4541,72 @@ string GetUniqueCharString(int char_type){
 	}
 }
 
+const char* GetTribeStatString(tribe_type tribe) {
+    switch (tribe) {
+    case TRI_HUMAN:         return "Human";
+    case TRI_WIZARD:        return "Wizard";
+    case TRI_FAIRY:         return "Fairy";
+    case TRI_CROWTENGU:     return "CrowTengu";
+    case TRI_WOLFTENGU:     return "WolfTengu";
+    case TRI_KAPPA:         return "Kappa";
+    case TRI_NECOMATA:      return "Necomata";
+    case TRI_OARFISH:       return "Oarfish";
+    case TRI_CHEUKUMOGAMI:  return "Cheukumogami";
+    case TRI_ONI:           return "Oni";
+    case TRI_HALFYOKAI:     return "HalfYoukai";
+    case TRI_WRAITH:        return "Wraith";
+    case TRI_VAMPIRE:       return "Vampire";
+    default:                return "Unknown";
+    }
+}
+
+
+const char* GetJobStatString(job_type job) {
+    switch (job) {
+    case JOB_WARRIOR:        return "Warrior";
+    case JOB_WIZARD:         return "Wizard";
+    case JOB_SHAMAN:         return "Shaman";
+    case JOB_GLADIATOR:      return "Gladiator";
+    case JOB_MONK:           return "Monk";
+    case JOB_CRUSADER:       return "Crusader";
+    case JOB_BERSERKER:      return "Berserker";
+    case JOB_FIRE_WIZARD:    return "FireWizard";
+    case JOB_COLD_WIZARD:    return "ColdWizard";
+    case JOB_EARTH_WIZARD:   return "EarthWizard";
+    case JOB_AIR_WIZARD:     return "AirWizard";
+    case JOB_SUMMON_WIZARD:  return "SummonWizard";
+    case JOB_ALCHEMIST:      return "Alchemist";
+    case JOB_PSYCHOLOGIST:   return "Psychologist";
+    case JOB_REAPER:         return "Reaper";
+    case JOB_FANATIC:        return "Fanatic";
+    case JOB_ASSASSIN:       return "Assassin";
+    case JOB_FARMER:         return "Farmer";
+    case JOB_MADE:           return "Maid";
+    case JOB_ENGINEER:       return "Engineer";
+    case JOB_MISSING:        return "Missing";
+    case JOB_LIGHT_WIZARD:   return "LightWizard";
+    default:                 return "Unknow";
+    }
+}
+
+
+const char* GetUniqueStartStatString(unique_starting_type start) {
+    switch (start) {
+    case UNIQ_START_REIMU:  return "Reimu";
+    case UNIQ_START_MARISA: return "Marisa";
+    case UNIQ_START_SANAE:  return "Sanae";
+    case UNIQ_START_MOMIZI: return "Momizi";
+    case UNIQ_START_KOISHI: return "Koishi";
+    case UNIQ_START_MOKOU:  return "Mokou";
+    case UNIQ_START_NITORI: return "Nitori";
+    case UNIQ_START_SUNNY:  return "Sunny";
+    case UNIQ_START_STAR:   return "Star";
+    case UNIQ_START_LUNA:   return "Luna";
+    case UNIQ_START_YOUMU:  return "Youmu";
+    default: return "Unknown";
+    }
+}
+
 string players::GetCharNameString(){
 	return GetUniqueCharString(char_type);
 };

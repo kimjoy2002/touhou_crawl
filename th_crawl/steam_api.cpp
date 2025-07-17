@@ -179,6 +179,52 @@ void steam_manager::achievement(achievement_enum achievement) {
 	}
 }
 
+bool steam_manager::IncrementStat(const char* statName, int32 delta) {
+    int32 current = 0;
+    if (!SteamUserStats()->GetStat(statName, &current))
+        return false;
+
+    current += delta;
+    return SteamUserStats()->SetStat(statName, current);
+}
+
+void steam_manager::addStats(bool win, unique_starting_type char_type, tribe_type tribe, job_type job)
+{
+    if (!SteamUserStats()) return;
+
+    // 시작 캐릭터가 없는 일반 플레이
+    if (char_type == UNIQ_START_NONE)
+    {
+        std::string tribe_play = "Stat_Play_Tribe_" + std::string(GetTribeStatString(tribe));
+        std::string job_play   = "Stat_Play_Job_"   + std::string(GetJobStatString(job));
+
+        IncrementStat(tribe_play.c_str(), 1);
+        IncrementStat(job_play.c_str(), 1);
+
+        if (win) {
+            std::string tribe_win = "Stat_Win_Tribe_" + std::string(GetTribeStatString(tribe));
+            std::string job_win   = "Stat_Win_Job_"   + std::string(GetJobStatString(job));
+
+            IncrementStat(tribe_win.c_str(), 1);
+            IncrementStat(job_win.c_str(), 1);
+        }
+    }
+    // 시작 캐릭터가 지정된 특수 플레이
+    else
+    {
+        std::string start_play = "Stat_Play_Start_" + std::string(GetUniqueStartStatString(char_type));
+        IncrementStat(start_play.c_str(), 1);
+
+        if (win) {
+            std::string start_win = "Stat_Win_Start_" + std::string(GetUniqueStartStatString(char_type));
+            IncrementStat(start_win.c_str(), 1);
+        }
+    }
+
+    SteamUserStats()->StoreStats(); // 실제 저장 반영
+}
+
+
 void steam_manager::debugText() {
 	if(!init) {
 		printlog("스팀에 연결되어있지않습니다.",true,false,false,CL_help);

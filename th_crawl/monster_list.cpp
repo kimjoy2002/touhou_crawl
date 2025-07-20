@@ -127,7 +127,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10,'h'},
 
 	{MON_HUMAM_SAMURI,8,210,name_infor(MON_HUMAM_SAMURI),&img_mons_human_samuri,50,6,8,
-	{17,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,1,10,'h'},
 
 	{MON_FIREFLY,2,5,name_infor(MON_FIREFLY),&img_mons_firefly,18,1,10,
@@ -163,15 +163,15 @@ const mon_infor mondata[] = {
 	M_FLAG_SWIM | M_FLAG_ANIMAL,0,0,9,'f' },
 	
 	{MON_BLACK_CAT,8,237,name_infor(MON_BLACK_CAT),&img_mons_black_cat,50,0,15,
-	{11,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(),name_infor()},
+	{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(),name_infor()},
 	M_FLAG_ANIMAL,0,1,7,'c'},
 	
 	{MON_ORANGE_CAT,8,237,name_infor(MON_ORANGE_CAT),&img_mons_orange_cat,50,0,15,
-	{11,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(),name_infor()},
+	{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(),name_infor()},
 	M_FLAG_ANIMAL,0,1,7,'c' },
 
 	{MON_WHITE_CAT,8,237,name_infor(MON_WHITE_CAT),&img_mons_white_cat,50,0,15,
-	{11,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(),name_infor()},
+	{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_CLAW),name_infor(),name_infor()},
 	M_FLAG_ANIMAL,0,1,7,'c' },
 
 	{MON_CROW_TENGU,10,532,name_infor(MON_CROW_TENGU),&img_mons_crow_tengu,75,3,15,

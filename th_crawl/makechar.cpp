@@ -1193,12 +1193,11 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 
 
 
-			if (type == UNIQ_START_STAR) {
+			if (type == UNIQ_START_SUNNY) {
 				you.SetProperty(TPT_CAN_INVISIBLE, 1);
 			}
 			if (type == UNIQ_START_STAR) {
 				you.SetProperty(TPT_SEE_INVI, 1);
-
 			}
 			if (type == UNIQ_START_LUNA) {
 				you.SetProperty(TPT_CAN_SILENCE, 1);

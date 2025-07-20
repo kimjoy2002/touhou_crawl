@@ -1140,6 +1140,34 @@ monster* environment::AddMonsterWithMoving(monster *mon_, int prev_floor, coord_
 	ReleaseMutex(mutx);
 	return nullptr;
 }
+void environment::clearLimitSummonMonster(int parent_map_id,SUMMON_KIND summon_id, int max_num) {
+	vector<monster*> temp_list_;
+
+	for(int i = 0; i < MAXLEVEL;i ++) {
+		for( auto it = env[i].mon_vector.begin();it != env[i].mon_vector.end();it++)
+		{
+			if(it->isLive() && it->sm_info.summon_id == summon_id && 
+			it->sm_info.parent_map_id == parent_map_id &&
+			it->summon_time>0)
+			{
+				temp_list_.push_back(&(*it));
+			}
+		}
+	}
+	if(temp_list_.size() > max_num)
+	{
+		sort(temp_list_.begin(), temp_list_.end(), 
+			[](monster* lt,monster* rt){
+			return lt->GetMapId() > rt->GetMapId();
+		});
+		int remain_ = temp_list_.size() - max_num;
+		for(int i = temp_list_.size() - 1; remain_ > 0 ; remain_--)
+		{
+			temp_list_[i]->summon_time = 0;
+		}
+	}
+}
+
 monster* environment::AddMonster_Summon(int id_, uint64_t flag_, coord_def position_, summon_info &info_, int time_ = 0)
 {
 	monster* mon_ = AddMonster(id_, flag_, position_, time_);
@@ -1149,26 +1177,7 @@ monster* environment::AddMonster_Summon(int id_, uint64_t flag_, coord_def posit
 
 		if(mon_->sm_info.summon_id != SKD_OTHER && mon_->sm_info.max_num > 0) //최대 소환수가 정해져있는경우
 		{
-			vector<monster*> temp_list_;
-			for( auto it = mon_vector.begin();it != mon_vector.end();it++)
-			{
-				if(it->isLive() && it->sm_info.summon_id == mon_->sm_info.summon_id && it->sm_info.parent_map_id == mon_->sm_info.parent_map_id && it->summon_time>0)
-				{
-					temp_list_.push_back(&(*it));
-				}
-			}
-			if(temp_list_.size() > mon_->sm_info.max_num)
-			{
-				sort(temp_list_.begin(), temp_list_.end(), 
-					[](monster* lt,monster* rt){
-					return lt->GetMapId() > rt->GetMapId();
-				});
-				int remain_ = temp_list_.size() - mon_->sm_info.max_num;
-				for(int i = temp_list_.size() - 1; remain_ > 0 ; remain_--)
-				{
-					temp_list_[i]->summon_time = 0;
-				}
-			}
+			clearLimitSummonMonster(mon_->sm_info.parent_map_id, mon_->sm_info.summon_id, mon_->sm_info.max_num);
 		}
 	}
 	return mon_;

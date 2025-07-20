@@ -558,7 +558,7 @@ void start_mainmenu()
 
 		
 		temp = make_unique<vector<menu_string>>();
-		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_MODE_NORMAL), true, CL_help));
+		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_MODE_EASY), true, CL_help));
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("", true, CL_normal));
 

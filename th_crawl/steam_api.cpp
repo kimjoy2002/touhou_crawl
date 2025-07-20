@@ -342,7 +342,7 @@ void steam_manager::OnFindLeaderboard(LeaderboardFindResult_t* pResult, bool bIO
     }
 }
 
-bool steam_manager::getScoreBoard(std::vector<ScoreEntry>& out_entries)
+bool steam_manager::getScoreBoard(std::vector<ScoreEntry>& out_entries, int range_start, int range_end)
 {
     if (!init) return false;
 
@@ -384,7 +384,7 @@ bool steam_manager::getScoreBoard(std::vector<ScoreEntry>& out_entries)
     SteamAPICall_t hAPICall = SteamUserStats()->DownloadLeaderboardEntries(
         m_CurrentLeaderboard,
         k_ELeaderboardDataRequestGlobal,
-        1, 10
+        range_start, range_end
     );
 
     m_callDownloadLeaderboard.Set(hAPICall, this, &steam_manager::OnDownloadLeaderboard);

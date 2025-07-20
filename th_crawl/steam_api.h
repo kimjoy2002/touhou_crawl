@@ -87,7 +87,7 @@ public:
 	void achievement(achievement_enum achievement);
 	
 	bool sendScore(const ScoreEntry& entry);
-	bool getScoreBoard(std::vector<ScoreEntry>& out_entries);
+	bool getScoreBoard(std::vector<ScoreEntry>& out_entries, int range_start, int range_end);
 	void OnFindLeaderboard(LeaderboardFindResult_t* pResult, bool bIOFailure);
 	void OnFindLeaderboardForQuery(LeaderboardFindResult_t* pResult, bool bIOFailure);
 	void OnDownloadLeaderboard(LeaderboardScoresDownloaded_t* pResult, bool bIOFailure);

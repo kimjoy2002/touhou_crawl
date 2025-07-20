@@ -44,7 +44,7 @@ extern bool ableWiz;
 
 extern HANDLE mutx;
 
-const char *version_string = "ver1.114";
+const char *version_string = "ver1.115";
 extern int g_tile_size;
 
 int version_string_to_int() {
@@ -1381,6 +1381,7 @@ void MainLoop()
 			SkillUse(0);
 			break;
 		case GVK_BUTTON_Y://패드 X
+		case 'c':
 			rightmenu_control();
 			break;
 		case GVK_BUTTON_Y_LONG: //패드 X 길게

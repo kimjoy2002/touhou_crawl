@@ -3828,7 +3828,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL3,강철로 된 판금을 덧댄 갑�
 LOC_SYSTEM_ITEM_DESCRIPTION_SHIELD,상대의 공격을 막기 위한 방패. 양손무기를 들고 있으면 장착이 불가능하다.\n상대의 탄막을 막는 반칙적인 활용도 가능하다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_HEAD,머리에 달 수 있는 장신구. 패션의 기본\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_CLOAK,몸에 두르는 폼나는 망토.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE,손에 낄 수 있는 장갑이다. 장갑에 저주가 걸려있으면 반지를 빼고 낄 수 없다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE,손에 낄 수 있는 장갑이다. 한때는 장갑에 저주가 걸리면 반지를 벗지 못했다고 한다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_BOOT,발을 보호하는 신발. 던전의 바닥을 맨발로 다니고 싶지않으면 꼭 착용하자.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_WATER,단순한 물이 들어간 병이다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL,치료 물약이다. 마시면 혼란, 독, 병으로부터 회복되고 체력도 소량 회복된다.\n효과도 마신 즉시 발휘되는 신비의 물약\n

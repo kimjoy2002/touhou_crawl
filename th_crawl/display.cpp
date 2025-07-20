@@ -3513,9 +3513,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				if(tile_count < 20) {
 					if(selection_vector.size() > 0) {
 						textures* pixel_ = &img_command_empty;
+						int command_kind = 0;
 						
 						if(selection_vector.size() > tile_count) {
-							pixel_ = getSelectTexure(selection_vector[tile_count]);
+							command_kind = selection_vector[tile_count];
+							pixel_ = getSelectTexure(command_kind);
 						}
 						int x_ = start_x+i*32, y_ = start_y+j*32;
 
@@ -3523,7 +3525,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 						if(g_menu_select == tile_count) {
 							if(mouseInfo.empty()) {
-								mouseInfo = getCilnkableString(selection_vector[tile_count]);
+								mouseInfo = getCilnkableString(command_kind);
 								mouseColor = CL_help;
 								infoDrawPoint.x = x_;
 								infoDrawPoint.y = y_;
@@ -3536,13 +3538,13 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 								MousePoint.y > y_ - 16 && MousePoint.y <= y_ + 16){
 								img_effect_select.draw(pSprite, x_, y_, D3DCOLOR_ARGB(255, 255, 255, 255));
 								
-								mouseInfo = getCilnkableString(selection_vector[tile_count]);
+								mouseInfo = getCilnkableString(command_kind);
 								mouseColor = CL_help;
 								infoDrawPoint = MousePoint;
 								if(isClicked(LEFT_CLICK)) {
 									MSG msg;
 									msg.message = WM_CHAR;
-									msg.wParam = convertClickable(selection_vector[tile_count]);
+									msg.wParam = convertClickable(command_kind);
 									g_keyQueue->push(InputedKey(msg));
 								}
 							}

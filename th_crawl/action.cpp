@@ -126,6 +126,7 @@ bool Long_Move(const coord_def &c, bool speak_)
 	{
 		if(speak_)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_UNABLE_MOVE),true,false,false,CL_normal);	
+		return false;
 	}
 	return stack_move(false);
 }
@@ -1752,14 +1753,28 @@ bool CheckDimension()
 	}
 }
 bool warning(dungeon_tile_type type, bool down)
-{//경고메시지를 주는 곳
-	
+{//경고메시지를 주는 곳		
 	switch(type)
 	{
 	case DG_YUKKURI_STAIR:
+		if(down)
+		{
+			if(env[YUKKURI_LEVEL].make)
+				return true;
+			if(ynPrompt(LOC_SYSTEM_STAIR_SUBDUNGEON_WARN, LOC_SYSTEM_WISDOM, CL_danger, false,false,false,false)) {
+				enterlog();
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		break;
 	case DG_SCARLET_U_STAIR:
 		if(down)
 		{
+			if(env[SCARLET_UNDER_LEVEL].make)
+				return true;
 			if(ynPrompt(LOC_SYSTEM_STAIR_SUBDUNGEON_WARN, LOC_SYSTEM_WISDOM, CL_danger, false,false,false,false)) {
 				enterlog();
 				return true;
@@ -1834,6 +1849,8 @@ bool warning(dungeon_tile_type type, bool down)
 	case DG_HAKUREI_STAIR:
 		if(down)
 		{
+			if(env[HAKUREI_LEVEL].make)
+				return true;
 			if(you.haveGoal()<3)
 			{
 				printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_THREE_RUNE),true,false,false,CL_normal);

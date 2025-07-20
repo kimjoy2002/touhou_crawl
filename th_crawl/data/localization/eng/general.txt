@@ -351,7 +351,7 @@ LOC_SYSTEM_DUNGEON_BAMBOO,Bamboo Forest of the Lost
 LOC_SYSTEM_DUNGEON_EINENTEI,Eientei
 LOC_SYSTEM_DUNGEON_DEPTH,Youkai Trail
 LOC_SYSTEM_DUNGEON_DREAM,Dream World
-LOC_SYSTEM_DUNGEON_MOON,Lunnar Capital
+LOC_SYSTEM_DUNGEON_MOON,Lunar Capital
 LOC_SYSTEM_DUNGEON_SUBTERRANEAN,Underworld
 LOC_SYSTEM_DUNGEON_SUBTERRANEAN_LAST,Hell of Blazing Fires
 LOC_SYSTEM_DUNGEON_PANDEMONIUM,Makai
@@ -3828,7 +3828,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL3,Armor reinforced with steel plates.
 LOC_SYSTEM_ITEM_DESCRIPTION_SHIELD,A shield used to block enemy attacks. Cannot be equipped with two-handed weapons.\nAlso works (unfairly) to block danmaku.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_HEAD,An accessory worn on the head. The foundation of fashion.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_CLOAK,A stylish cloak worn over the body.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE,Gloves for your hands. Cursed gloves must be worn before rings.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE,Gloves that can be worn on your hands.\nIt is said that in the past, cursed gloves prevented people from removing rings.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_BOOT,Shoes that protect your feet. Don’t walk barefoot in the dungeon-wear these!\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_WATER,A bottle filled with plain water.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_POTION_HEAL,A healing potion that cures confusion, poison, sickness, and drunkenness, while also restoring a small amount of HP.\nAlso partially restores temporarily lost stats.\nA mysterious potion whose effects take place immediately upon drinking.\n

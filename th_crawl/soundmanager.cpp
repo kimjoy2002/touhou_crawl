@@ -115,7 +115,7 @@ void FMODSoundManager::Update() {
                 bgmFadeVolume = std::max(bgmFadeVolume - fadeSpeed, bgmTargetVolume);
             }
 
-            currentBgmChannel->setVolume(bgmFadeVolume * (bgmVolume / 100.0f)*0.8f);
+            currentBgmChannel->setVolume(bgmFadeVolume * (bgmVolume / 100.0f)*0.7f);
 
             if (bgmFadingOut && bgmFadeVolume <= 0.0f) {
                 currentBgmChannel->stop();
@@ -274,7 +274,7 @@ void FMODSoundManager::stopCurrentBGM(const std::string& except) {
 void FMODSoundManager::setBgmVolume(int vol) {
     bgmVolume = vol;
     if (currentBgmChannel) {
-        currentBgmChannel->setVolume(bgmVolume / 100.0f*0.8f);
+        currentBgmChannel->setVolume(bgmVolume / 100.0f*0.7f);
     }
 }
 

@@ -1337,7 +1337,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			break;
 		case ITM_ARMOR_BOOT:
 			if(!fixed_artifact_)
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE));
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_BOOT));
 			if (can_use_)
 			{
 				if (you.equipment[ET_BOOTS] != it)

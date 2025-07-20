@@ -297,7 +297,9 @@ public:
 	wstring path;	
 	string infor;	
 	FILETIME localtime;
-	replay_sort(wstring path_,string infor_,FILETIME localtime_):path(path_),infor(infor_),localtime(localtime_){};
+	string version;
+	replay_sort(wstring path_,string infor_,FILETIME localtime_,string version):
+	    path(path_),infor(infor_),localtime(localtime_),version(version){};
 
 
 	bool operator<(const replay_sort &t) const {
@@ -337,16 +339,13 @@ bool replay_menu(int value_)
 				if(_wfopen_s(&fp, wfilename.c_str(), L"rb") == 0 && fp)
 				{
 					fread(&temp_infor,sizeof(base_infor),1,fp);
-					fclose(fp);					
-					if (strcmp(temp_infor.version, version_string) == 0 &&
-						wfilename != ReplayClass.replay_string && 
+					fclose(fp);	
+					if (wfilename != ReplayClass.replay_string && 
 						temp_infor.infor[0] != 0)
 					{
 						FILETIME localtime_;
 						FileTimeToLocalFileTime(&findFileData.ftCreationTime,&localtime_);
-
-
-						file_vector.push_back(replay_sort(findFileData.cFileName,temp_infor.infor,localtime_));
+						file_vector.push_back(replay_sort(findFileData.cFileName,temp_infor.infor,localtime_, temp_infor.version));
 
 
 
@@ -396,13 +395,19 @@ bool replay_menu(int value_)
 					SYSTEMTIME stC;
 					memset(&stC, 0, sizeof(stC));
 					FileTimeToSystemTime(&file_vector[cur].localtime, &stC);
-					printsub(ss.str(),false,CL_normal,char_);
+					bool bad_ = false;
+
+					if(strcmp(file_vector[cur].version.c_str(), version_string)!=0) {
+						bad_ = true;
+					}
+
+					printsub(ss.str(),false,!bad_?CL_normal:CL_bad,char_);
 
 				
 					if(60 - PrintCharWidth(ss.str()) > 0) {
-						printsub(string(60 - PrintCharWidth(ss.str()), ' '), false, CL_normal);
+						printsub(string(60 - PrintCharWidth(ss.str()), ' '), false, !bad_?CL_normal:CL_bad);
 					} else {
-						printsub(" ", false, CL_normal);
+						printsub(" ", false, !bad_?CL_normal:CL_bad);
 					}
 
 					{
@@ -413,13 +418,16 @@ bool replay_menu(int value_)
 							PlaceHolderHelper(to_string(stC.wDay)),
 							PlaceHolderHelper(to_string(stC.wHour)),
 							PlaceHolderHelper(to_string(stC.wMinute)));
-						printsub(ss.str(),true,CL_help);
+						if(bad_) {
+							ss << "("<< file_vector[cur].version << ")";
+						}
+						printsub(ss.str(),true,!bad_?CL_help:CL_bad);
 					}
 
 
 					
 					printsub(blank,false,CL_warning);		
-					printsub(file_vector[cur].infor,true,CL_green);
+					printsub(file_vector[cur].infor,true,!bad_?CL_green:CL_bad);
 
 					printsub("",true,CL_normal);
 					char_++;
@@ -470,15 +478,17 @@ bool replay_menu(int value_)
 
 				if(select_<file_num)
 				{
-					std::wstring wpath = replay_path_w + L"/" + file_vector[select_].path;
-					std::string utf8path = ConvertUTF16ToUTF8(wpath);
-					char temp[512];
-					sprintf_s(temp,utf8path.c_str(), sizeof(temp) - 1);
-					temp[sizeof(temp) - 1] = '\0';
-					ReplayClass.init_replay(temp);
-					ReplayClass.LoadReplayStart();
-					game_over = true;
-					return true;
+					if(strcmp(file_vector[select_].version.c_str(), version_string)==0) {
+						std::wstring wpath = replay_path_w + L"/" + file_vector[select_].path;
+						std::string utf8path = ConvertUTF16ToUTF8(wpath);
+						char temp[512];
+						sprintf_s(temp,utf8path.c_str(), sizeof(temp) - 1);
+						temp[sizeof(temp) - 1] = '\0';
+						ReplayClass.init_replay(temp);
+						ReplayClass.LoadReplayStart();
+						game_over = true;
+						return true;
+					}
 				}
 			}
 			else if(input_ == VK_LEFT)
@@ -639,7 +649,7 @@ bool morgue_menu(int value_)
                 {
                     FILETIME localtime_;
                     FileTimeToLocalFileTime(&findFileData.ftCreationTime, &localtime_);
-                    file_vector.emplace_back(findFileData.cFileName, summary, localtime_);
+                    file_vector.emplace_back(findFileData.cFileName, summary, localtime_, "");
                 }
             }
         } while (FindNextFileW(hFind, &findFileData) != 0);
@@ -785,7 +795,11 @@ string versionToString(int version);
 bool score_menu(int value_)
 {
     constexpr int ENTRIES_PER_PAGE = 10;
-    constexpr int MAX_ENTRIES = 999;
+    constexpr int MAX_ENTRIES = 9999;
+    constexpr int MAX_LOADING = 100;
+
+	int current_loading = 1;
+
     int page = 0;
     deletesub();
 
@@ -797,9 +811,10 @@ bool score_menu(int value_)
     printsub("", true, CL_normal);
 
     std::vector<ScoreEntry> scores;
-    if(steam_mg.getScoreBoard(scores)) {
+    if(steam_mg.getScoreBoard(scores, current_loading, MAX_LOADING)) {
 		if (scores.size() > MAX_ENTRIES)
 			scores.resize(MAX_ENTRIES);
+		current_loading+=scores.size();
     	int total_pages = (scores.size() + ENTRIES_PER_PAGE - 1) / ENTRIES_PER_PAGE;
 
 		while (true)
@@ -868,7 +883,7 @@ bool score_menu(int value_)
 							entry.rune % 100);
 
 						printsub("     ", false, CL_normal);
-						printsub(WithBlankString(death_reason.str(), 61), false,entry.rune >= 100?CL_green: CL_warning);
+						printsub(WithBlankString(death_reason.str(), 61), false,(entry.rune >= 100 && entry.damage_reason == DR_ESCAPE)?CL_green: CL_warning);
 						std::ostringstream ss;
 						ss << "|"
 							<< WithBlankString(time_str, 10) << "|"
@@ -877,11 +892,12 @@ bool score_menu(int value_)
 					}
 				}
 				printsub("     ", false, CL_normal);
-				std::ostringstream ss;
-				ss << "←";
-				ss << "  " << LocalzationManager::formatString(LOC_SYSTEM_REPLAY_PAGE, PlaceHolderHelper(std::to_string(page + 1))) << "  ";
-				ss << "→";
-				printsub(ss.str(), true, CL_help);
+				printsub("←", false, CL_help, VK_LEFT);
+				printsub("  ", false, CL_help);
+				printsub(LocalzationManager::formatString(LOC_SYSTEM_REPLAY_PAGE, PlaceHolderHelper(to_string(page + 1))), false, CL_help);
+				printsub("  ", false, CL_help);
+				printsub("→", true, CL_help, VK_RIGHT);
+				printsub("", true, CL_normal);
 			}
 			else
 			{
@@ -894,7 +910,24 @@ bool score_menu(int value_)
 			changedisplay(DT_SUB_TEXT);
 
 			InputedKey inputedKey;
-			int input_ = waitkeyinput(inputedKey, true);
+			int input_ =0;
+			
+			while (1)
+			{
+				input_ = waitkeyinput(inputedKey, true);
+				if (input_ == VK_UP)
+					DisplayManager.addPosition(-1);
+				else if (input_ == VK_DOWN)
+					DisplayManager.addPosition(1);
+				else if (input_ == VK_RETURN || input_ == GVK_BUTTON_A || input_ == GVK_BUTTON_A_LONG)
+				{
+					input_ = DisplayManager.positionToChar();
+					break;
+				}
+				else
+					break;
+			}
+
 
 			if (input_ == VK_ESCAPE  || input_ == VK_RETURN || input_ == GVK_BUTTON_A|| input_ == GVK_BUTTON_A_LONG || input_ == GVK_BUTTON_B || input_ == GVK_BUTTON_B_LONG || inputedKey.isRightClick())
 				break;
@@ -904,7 +937,24 @@ bool score_menu(int value_)
 			}
 			else if (input_ == VK_RIGHT || inputedKey.mouse == MKIND_SCROLL_DOWN)
 			{
-				if (page + 1 < total_pages) page++;
+				if(page + 1 >= total_pages) {
+					printsub("", true, CL_normal);
+					printsub(LocalzationManager::locString(LOC_SYSTEM_SCORE_LOADING), true, CL_danger);
+					std::vector<ScoreEntry> more_scores;
+					if(steam_mg.getScoreBoard(more_scores, current_loading, current_loading+MAX_LOADING-1)) {
+						if(more_scores.size() > 0) {
+							if (scores.size() + more_scores.size() > MAX_ENTRIES)
+								more_scores.resize(MAX_ENTRIES-scores.size());
+							current_loading+=more_scores.size();
+							scores.insert( scores.end(), more_scores.begin(), more_scores.end() );
+							total_pages = (scores.size() + ENTRIES_PER_PAGE - 1) / ENTRIES_PER_PAGE;
+						}
+					}
+					deletesub();
+				}
+				if (page + 1 < total_pages) { 
+					page++; 
+				}
 			}
 		}
 	} else {
@@ -916,9 +966,13 @@ bool score_menu(int value_)
 		changedisplay(DT_SUB_TEXT);
 
 		InputedKey inputedKey;
+
+
+		
 		while (1)
 		{
 			int input_ = waitkeyinput(inputedKey, true);
+			
 			if (input_ == VK_ESCAPE || input_ == VK_RETURN || input_ == GVK_BUTTON_A || input_ == GVK_BUTTON_A_LONG || input_ == GVK_BUTTON_B || input_ == GVK_BUTTON_B_LONG || inputedKey.isRightClick())
 				break;
 		}

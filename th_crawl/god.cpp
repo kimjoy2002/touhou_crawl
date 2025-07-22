@@ -3137,7 +3137,7 @@ void God_AblilityShow(god_type god) {
 		printGodAbility(GT_MIMA, level_, 2, false, LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
 		printGodAbility(GT_MIMA, level_, 3, false, you.god_value[GT_MIMA][0] ? LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY5_1:LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY5, vector<subability>(), LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
 		printGodAbility(GT_MIMA, level_, 4, false, LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
-		printGodAbility(GT_MIMA, level_, 6, false, you.god_value[GT_MIMA][0] ? LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY6_1:LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
+		printGodAbility(GT_MIMA, level_, 6, false, you.god_value[GT_MIMA][1] ? LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY6_1:LOC_SYSTEM_GOD_SHOW_MIMA_ABLILITY6, vector<subability>(), LOC_SYSTEM_GOD_SHOW_ONCE_UPON);
 		break;
 	case GT_SHINKI:
 		printGodAbility(GT_SHINKI, level_, 1, false, LOC_SYSTEM_GOD_SHOW_SHINKI_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_PIETY);

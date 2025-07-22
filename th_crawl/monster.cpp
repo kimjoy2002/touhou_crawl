@@ -2671,22 +2671,27 @@ int monster::atkmove(int is_sight, bool only_move)
 
 		if(!s_fear && !range_attack) {
 			bool attack_ = false;
-			if(target && !only_move && flag & M_FLAG_SPEAR_ATTACK && target->position == target_pos &&
-				(std::abs(c.x) > 1 || std::abs(c.y) > 1) &&  std::abs(c.x) <= 2 && std::abs(c.y) <= 2 && isMonsterSight(target_pos) ) {
-				if(target->isplayer())
-				{
-					if(!you.s_timestep && isEnemyUnit(target) && !(flag & M_FLAG_NO_ATK)) {
-						int num_=0;
-						for(int i=0;i<3;i++,num_++)
-							if(atk_type[i] == ATT_NONE)
-								break;
-						if(num_)
-						{
-							num_ = randA(num_-1);
-							attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
-							target->damage(temp_att, false);
-							attack_ = true;
+			if(target && !only_move && flag & M_FLAG_SPEAR_ATTACK && target->position == target_pos) {
+				if((std::abs(c.x) > 1 || std::abs(c.y) > 1) && std::abs(c.x) <= 2 && std::abs(c.y) <= 2 && isMonsterSight(target_pos)) {
+					if(target->isplayer())
+					{
+						if(!you.s_timestep && isEnemyUnit(target) && !(flag & M_FLAG_NO_ATK)) {
+							int num_=0;
+							for(int i=0;i<3;i++,num_++)
+								if(atk_type[i] == ATT_NONE)
+									break;
+							if(num_)
+							{
+								num_ = randA(num_-1);
+								attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
+								target->damage(temp_att, false);
+								attack_ = true;
+							}
 						}
+					}
+					else if(isEnemyUnit(target) && !s_confuse)
+					{
+						return AttackToMon((monster*)target, false);
 					}
 				}
 			} 

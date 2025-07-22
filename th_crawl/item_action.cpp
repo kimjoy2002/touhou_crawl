@@ -866,7 +866,8 @@ void Memorize_book(int key_) {
 		changedisplay(DT_SUB_TEXT);
 		int key_;
 		while(1) {
-			key_ = waitkeyinput(true);
+			InputedKey inputedKey;
+			key_ = waitkeyinput(inputedKey,true);
 			if(key_ == VK_UP)
 				DisplayManager.addPosition(-1);
 			else if(key_ == VK_DOWN)
@@ -874,9 +875,20 @@ void Memorize_book(int key_) {
 			else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
 				key_ = DisplayManager.positionToChar();
 				break;
-			} else {
-				break;
+			} else if(key_ == -1) {
+				if(inputedKey.mouse == MKIND_SCROLL_UP) {
+					changemove(1);  //위
+				} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+					changemove(-1); //아래
+				} else if(inputedKey.isRightClick())
+					break;
 			}
+			else if( (key_ >= 'a' && key_ <= 'f'))
+				break;
+			else if(key_ == VK_ESCAPE||
+					key_ == GVK_BUTTON_B ||
+					key_ == GVK_BUTTON_B_LONG)
+				break;
 		}
 		if( (key_ >= 'a' && key_ <= 'f'))
 		{

@@ -5236,7 +5236,6 @@ bool players::Eat(char id_)
 	{
 		if((*it).id == id_)
 		{
-			WaitForSingleObject(mutx, INFINITE);
 			if((*it).type == ITM_FOOD)
 			{
 				if(!you.isequip(it))
@@ -5269,26 +5268,22 @@ bool players::Eat(char id_)
 					PowUpDown((*it).value5);
 					DeleteItem(it,1);
 					enterlog();
-					ReleaseMutex(mutx);
 					return true;		
 				}
 				else
 				{
 					printlog(LocalzationManager::locString(LOC_SYSTEM_IS_EQUIP_ITEM),true,false,false,CL_normal);
-					ReleaseMutex(mutx);
 					return false;		
 				}		
 			}
 			else
 			{
 				printlog(LocalzationManager::locString(LOC_SYSTEM_EAT_NOT_FOOD),true,false,false,CL_normal);
-				ReleaseMutex(mutx);
 				return false;				
 			}
 		}
 	}
 	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_NOT_EXIST),true,false,false,CL_normal);
-	ReleaseMutex(mutx);
 	return false;
 }
 bool players::Drink(char id_)

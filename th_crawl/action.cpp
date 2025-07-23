@@ -1906,7 +1906,7 @@ void Stair_move_all() {
 
 
 
-void Stair_move(bool down)
+bool Stair_move(bool down)
 {
 	dungeon_tile_type type = env[current_level].dgtile[you.position.x][you.position.y].tile;
 	switch(env[current_level].getStairKind(you.position.x, you.position.y))
@@ -1925,12 +1925,12 @@ void Stair_move(bool down)
 		{
 			if(!warning(type, down))
 			{
-				return;
+				return false;
 			}
 			if(you.s_dimension)
 			{
 				if(!CheckDimension())					
-					return;
+					return false;
 			}
 
 
@@ -1983,13 +1983,13 @@ void Stair_move(bool down)
 		{
 			if(!warning(type, down))
 			{
-				return;
+				return false;
 			}
 
 			if(you.s_dimension)
 			{
 				if(!CheckDimension())					
-					return;
+					return false;
 			}
 
 			if(you.s_catch)
@@ -2104,12 +2104,12 @@ void Stair_move(bool down)
 		{			
 			if(!warning(type, down))
 			{
-				return;
+				return false;
 			}
 			if(you.s_dimension)
 			{
 				if(!CheckDimension())					
-					return;
+					return false;
 			}
 
 			if(you.s_catch)
@@ -2187,12 +2187,12 @@ void Stair_move(bool down)
 		{
 			if(!warning(type, down))
 			{
-				return;
+				return false;
 			}
 			if(you.s_dimension)
 			{
 				if(!CheckDimension())					
-					return;
+					return false;
 			}
 
 			if(you.s_catch)
@@ -2334,8 +2334,9 @@ void Stair_move(bool down)
 		break;
 	default:
 		printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_EMPTY),true,false,false,CL_normal);
-		break;
+		return false;
 	}
+	return true;
 }
 
 
@@ -4692,11 +4693,15 @@ void verylongMove(int level, coord_def pos)
 							return;
 						case STAIR_KIND_UP_BASE:
 						case STAIR_KIND_UP_SPECIAL:
-							Stair_move(false);
+							if(!Stair_move(false)) {
+								return;
+							}
 							break;
 						case STAIR_KIND_DOWN_BASE:
 						case STAIR_KIND_DOWN_SPECIAL:
-							Stair_move(true);
+							if(!Stair_move(true)) {
+								return;
+							}
 							break;
 						}
 					}

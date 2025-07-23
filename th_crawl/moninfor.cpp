@@ -18,6 +18,61 @@ extern HANDLE mutx;
 
 void _infor_(string str);
 
+bool maybeUpgrade(int mon_id) {
+	switch(mon_id) {
+		case MON_GHOST:
+		case MON_ONBASIRA:
+		case MON_MAGICAL_STAR:
+		case MON_GOLEM:
+		case MON_SCHEMA_EYE:
+		case MON_CLOSE_DOOR:
+		case MON_KUNEKUNE:
+		case MON_KANAME:
+		case MON_HANIWA:
+		case MON_SECURIRY_DOOR:
+		case MON_COGWHEEL:
+			return true;
+	}
+	return false;
+}
+
+
+LOCALIZATION_ENUM_KEY getKeyOfAttack(attack_type type) {
+	switch(type) {
+	case ATT_FIRE:
+	case ATT_FIREPLUS:
+		return LOC_SYSTEM_ATT_INFO_FIRE;
+	case ATT_COLD:
+		return LOC_SYSTEM_ATT_INFO_COLD;
+	case ATT_ELEC:
+		return LOC_SYSTEM_ATT_INFO_ELEC;
+	case ATT_FIRE_WEAK:
+	case ATT_COLD_WEAK:
+	case ATT_ELEC_WEAK:
+		return LOC_SYSTEM_ATT_INFO_DOWN_RESIST;
+	case ATT_S_POISON:
+	case ATT_M_POISON:
+		return LOC_SYSTEM_ATT_INFO_POISON;
+	case ATT_SLOW_POISON:
+		return LOC_SYSTEM_ATT_INFO_POISON_SLOW;
+	case ATT_SICK:
+		return LOC_SYSTEM_ATT_INFO_POISON_SICK;
+	case ATT_VAMP:
+		return LOC_SYSTEM_ATT_INFO_VAMP;
+	case ATT_LUNATIC:
+		return LOC_SYSTEM_ATT_INFO_LUNATIC;
+	case ATT_SLEEP:
+		return LOC_SYSTEM_ATT_INFO_SLEEP;
+	case ATT_BEARTRAP:
+		return LOC_SYSTEM_ATT_INFO_BEARTRAP;
+	default:
+		break;
+	}
+	return LOC_NONE;
+}
+
+
+
 void GetMonsterInfor(monster *it)
 {
 	string blank(12,' ');
@@ -32,13 +87,63 @@ void GetMonsterInfor(monster *it)
 	_infor_(it->GetNameString());
 	_infor_("\n\n");
 
+	
 	if (it->dream) {
 		_infor_(LocalzationManager::locString(LOC_SYSTEM_MONSTER_DESCRIPTION_DREAM));
 	}
 	else {
 		_infor_(LocalzationManager::monDecsriptionString((monster_index)it->id));
 	}
-	_infor_("\n\n\n");
+	_infor_("\n\n");
+
+	set<LOCALIZATION_ENUM_KEY> all_key;
+	if(maybeUpgrade(it->id)) {
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_ABOUT_SPEC_MAYBE));
+		_infor_("\n");
+	} else if(it->id >= 0 && it->id < MON_MAX) {
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_ABOUT_SPEC));
+		_infor_("\n");
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_ABOUT_MAX_HP));
+		_infor_(": ");
+		_infor_(std::to_string(mondata[it->id].max_hp));
+		_infor_("\n");
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_ABOUT_AC));
+		_infor_(": ");
+		_infor_(std::to_string(mondata[it->id].ac));
+		_infor_("\n");
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_ABOUT_EV));
+		_infor_(": ");
+		_infor_(std::to_string(mondata[it->id].ev));
+		_infor_("\n");
+		if(!(mondata[it->id].flag & M_FLAG_NO_ATK)) {
+			int aver_damage = 0;
+			int max_damage = 0;
+			int att_ = 0;
+			for(int i = 0; i < 3;i++) {
+				if(mondata[it->id].atk_type[i] != ATT_NONE) {
+					aver_damage+=mondata[it->id].atk[i];
+					if(mondata[it->id].atk[i] > max_damage)
+						max_damage = mondata[it->id].atk[i];
+					all_key.insert(getKeyOfAttack(mondata[it->id].atk_type[i]));
+					att_ ++;
+				}
+			}
+			if(aver_damage > 0 && att_ > 0 ) {
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ABOUT_DAMAGE));
+				_infor_(": ");
+				float value = (int)(aver_damage / att_) / 2.0f;
+				std::ostringstream oss;
+				oss << std::fixed << std::setprecision((value == (int)value) ? 0 : 1) << value;
+				_infor_(oss.str());
+				_infor_(" (1~");
+				_infor_(std::to_string((int)(max_damage)));
+				_infor_(")");
+				_infor_("\n");
+			}
+		}
+	}
+
+	_infor_("\n");
 
 	if(it->id == MON_REIMU)
 	{
@@ -63,6 +168,12 @@ void GetMonsterInfor(monster *it)
 		_infor_("\n");
 	}
 
+	for( auto key : all_key) {
+		if(key != LOC_NONE) {
+			_infor_(LocalzationManager::locString(key));
+			_infor_("\n");
+		}
+	}
 
 
 	if(it->poison_resist)
@@ -167,29 +278,10 @@ void GetMonsterInfor(monster *it)
 		_infor_("\n");
 	}
 	
-	if(it->resist >= 99) {
-		_infor_(LocalzationManager::locString(LOC_SYSTEM_MONSTER_DESCRIPTION_DEBUFF_IMMUN));
-		_infor_("\n");
-	}
-	else
-	{
-		_infor_(LocalzationManager::locString(LOC_SYSTEM_MAGICRESIST));
-		_infor_(": ");
-		for (int i = 0; i < 10; i++ ) {
-			if (it->GetResist() > 110 + i * 20) {
-				_infor_("#");
-			}
-			else {
-				_infor_(".");
-			}
-		}
-		_infor_("\n");
-	}
 	if (it->flag & M_FLAG_SILENCE) {
 		_infor_(LocalzationManager::locString(LOC_SYSTEM_MONSTER_DESCRIPTION_SILENCE));
 		_infor_("\n");
 	}
-
 
 	bool enter_ = false;
 	if(it->flag & M_FLAG_SUMMON)
@@ -223,9 +315,29 @@ void GetMonsterInfor(monster *it)
 		_infor_("\n");
 	}
 
+	_infor_("\n");
+	if(it->resist >= 99) {
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_MONSTER_DESCRIPTION_DEBUFF_IMMUN));
+		_infor_("\n");
+	}
+	else
+	{
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_MAGICRESIST));
+		_infor_(": ");
+		for (int i = 0; i < 10; i++ ) {
+			if (it->GetResist() > 110 + i * 20) {
+				_infor_("#");
+			}
+			else {
+				_infor_(".");
+			}
+		}
+		_infor_("\n");
+	}
+
 	if(!it->spell_lists.empty())
 	{
-		_infor_("\n\n\n");
+		_infor_("\n\n");
 		_infor_(LocalzationManager::locString(LOC_SYSTEM_MONSTER_DESCRIPTION_USE_MAGIC));
 		_infor_("\n\n");
 

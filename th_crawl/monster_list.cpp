@@ -673,8 +673,8 @@ const mon_infor mondata[] = {
 	{65,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_UNIQUE | M_FLAG_SPEAK,3,1,10,'&' },
 	
-	{MON_REIMU,20,0,name_infor(MON_REIMU),&img_named_reimu,190,5,30,
-	{40,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_REIMU,20,0,name_infor(MON_REIMU),&img_named_reimu,130,5,30,
+	{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_UNIQUE | M_FLAG_SPEAK,99,4,8,'&' },
 	
 	{MON_ALICE,18,8467,name_infor(MON_ALICE),&img_named_alice,180,10,15,

@@ -18,12 +18,10 @@ void forbid::SaveDatas(FILE *fp)
 	SaveData<bool>(fp, big);
 	SaveData<bool>(fp, change);
 	SaveData<int>(fp, stack.size());
-
-	for (int i = stack.size(); i > 0; i--) {
-		coord_def pop_ = stack.front();
-		SaveData<int>(fp, pop_.x);
-		SaveData<int>(fp, pop_.y);
-		stack.pop_front();
+	
+	for (const coord_def& pos : stack) {
+		SaveData<int>(fp, pos.x);
+		SaveData<int>(fp, pos.y);
 	}
 }
 void forbid::LoadDatas(FILE *fp)

@@ -1347,9 +1347,9 @@ bool orbRun() {
 				//두번째 등장할때부터 봉마진을 들고 옴
 				mon_->spell_lists.push_back(spell(SPL_REIMU_BARRIER, 15));
 			}
-			if (you.reimu_level >= 4) {
-				//네번째부턴 음양탄을 착용하고온다.
-				mon_->spell_lists.push_back(spell(SPL_CANNON, 8 + min(42, 2 *(you.reimu_level-4))));
+			if (you.reimu_level >= 5) {
+				//다섯번째부턴 음양탄을 착용하고온다.
+				mon_->spell_lists.push_back(spell(SPL_CANNON, 8 + min(42, 2 *(you.reimu_level-5))));
 			}
 			mon_->LevelUpdown(you.reimu_level++, 15.0f);
 

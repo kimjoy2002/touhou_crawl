@@ -1140,8 +1140,9 @@ monster* environment::AddMonsterWithMoving(monster *mon_, int prev_floor, coord_
 	ReleaseMutex(mutx);
 	return nullptr;
 }
-void environment::clearLimitSummonMonster(int parent_map_id,SUMMON_KIND summon_id, int max_num) {
+void environment::clearLimitSummonMonster(int parent_map_id,SUMMON_KIND summon_id, int max_num, monster* except_) {
 	vector<monster*> temp_list_;
+	vector<monster*> otherfloor_list_;
 
 	for(int i = 0; i < MAXLEVEL;i ++) {
 		for( auto it = env[i].mon_vector.begin();it != env[i].mon_vector.end();it++)
@@ -1150,22 +1151,33 @@ void environment::clearLimitSummonMonster(int parent_map_id,SUMMON_KIND summon_i
 			it->sm_info.parent_map_id == parent_map_id &&
 			it->summon_time>0)
 			{
-				temp_list_.push_back(&(*it));
+				if(i == current_level) {
+					temp_list_.push_back(&(*it));
+				}else {
+					otherfloor_list_.push_back(&(*it));
+				}
 			}
 		}
 	}
-	if(temp_list_.size() > max_num)
-	{
-		sort(temp_list_.begin(), temp_list_.end(), 
-			[](monster* lt,monster* rt){
-			return lt->GetMapId() > rt->GetMapId();
-		});
-		int remain_ = temp_list_.size() - max_num;
-		for(int i = temp_list_.size() - 1; remain_ > 0 ; remain_--)
-		{
-			temp_list_[i]->summon_time = 0;
-		}
-	}
+	
+	size_t total = temp_list_.size() + otherfloor_list_.size();
+    if(total > max_num) {
+        vector<monster*> all_list = otherfloor_list_;
+        all_list.insert(all_list.end(), temp_list_.begin(), temp_list_.end());
+
+        sort(all_list.begin() + otherfloor_list_.size(), all_list.end(),
+            [](monster* a, monster* b) {
+                return a->GetMapId() < b->GetMapId();
+            });
+
+        int remain = static_cast<int>(total - max_num);
+        for(int i = 0; i < all_list.size() && remain > 0; i++) {
+            if(all_list[i] != except_) {
+                all_list[i]->summon_time = 0;
+                remain--;
+            }
+        }
+    }
 }
 
 monster* environment::AddMonster_Summon(int id_, uint64_t flag_, coord_def position_, summon_info &info_, int time_ = 0)
@@ -1177,7 +1189,7 @@ monster* environment::AddMonster_Summon(int id_, uint64_t flag_, coord_def posit
 
 		if(mon_->sm_info.summon_id != SKD_OTHER && mon_->sm_info.max_num > 0) //최대 소환수가 정해져있는경우
 		{
-			clearLimitSummonMonster(mon_->sm_info.parent_map_id, mon_->sm_info.summon_id, mon_->sm_info.max_num);
+			clearLimitSummonMonster(mon_->sm_info.parent_map_id, mon_->sm_info.summon_id, mon_->sm_info.max_num, mon_);
 		}
 	}
 	return mon_;

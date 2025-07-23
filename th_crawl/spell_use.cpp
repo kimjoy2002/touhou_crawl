@@ -4778,7 +4778,7 @@ bool skill_reimu_barrier(int pow, bool short_, unit* order, coord_def target)
 		you.search_pos = target;
 		you.god_value[GT_YUKARI][0] = target.x;
 		you.god_value[GT_YUKARI][1] = target.y;
-		you.SetDimension(rand_int(15, 25));
+		you.SetDimension(rand_int(12, 20));
 		PlaySE("timestop");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_REIMU_BARRIER) + " ", false, false, false, CL_danger);
 		//((monster*)order)

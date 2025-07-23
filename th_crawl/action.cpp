@@ -4567,6 +4567,7 @@ void shout(char auto_)
 				it->first_position = it->position;
 				//it->target_pos = you.position;
 				it->state.SetState(MS_WAIT);
+				it->wait = true;
 				it->will_move.clear();
 			}
 		}

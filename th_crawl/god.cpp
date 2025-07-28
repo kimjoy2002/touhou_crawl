@@ -1299,6 +1299,9 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 						mon2_->ice_resist++;
 					//독저항이 생긴다.
 					mon2_->poison_resist=1;
+
+					mon2_->flag &= ~M_FLAG_NONE_STAIR;
+					mon2_->flag &= ~M_FLAG_SHIELD;
 						
 					//그러나 레벨은 내려간다.
 					mon2_->LevelUpdown(-2);

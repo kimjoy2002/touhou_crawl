@@ -237,7 +237,7 @@ void swako_gift(bool speak_) {
 	t.equip_image = &img_play_item_hat[6];
 	t.name = name_infor(LOC_SYSTEM_GOD_SWAWKO_HAT);
 	item* item_ = env[current_level].MakeItem(you.position, t);
-	MakeArtifact(item_, 2);
+	MakeArtifact(item_, 2, true);
 
 	bool see_invi_ = false;
 	for (auto it = item_->atifact_vector.begin(); it != item_->atifact_vector.end(); it++) {

@@ -107,7 +107,7 @@ std::string GetAtifactInfor(artifact_type ring_, int value_);
 bool CantBothArtifact(artifact_type left, artifact_type right);
 int isGenerateRandart(artifact_type ring_, item_type type);
 bool effectartifact(artifact_type kind, int value);
-void MakeArtifact(item* item_, int good_bad_);
+void MakeArtifact(item* item_, int good_bad_, bool cant_fixed = false);
 
 std::string GetFixedArtifact(fixed_artifact_type fixed_artifact);
 bool IsTypeOfFixedArtifact(fixed_artifact_type fixed_artifact, item_type itemType);

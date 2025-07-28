@@ -710,9 +710,9 @@ int ArmourExceptopn(armour_kind type)
 
 
 
-void MakeArtifact(item* item_, int good_bad_)
+void MakeArtifact(item* item_, int good_bad_, bool cant_fixed)
 {
-	if(good_bad_ > 0) {
+	if(good_bad_ > 0 && !cant_fixed) {
 		random_extraction<fixed_artifact_type> able_fixed_arti;
 		for(int i = 1; i < FIXED_ARTIFACT_MAX; i++) {
 			if(!iden_list.fixed_artifact[i] && IsTypeOfFixedArtifact((fixed_artifact_type)i, item_->type)) {

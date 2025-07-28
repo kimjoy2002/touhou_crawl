@@ -128,7 +128,7 @@ s_regen(0), s_selfdestruct(0), s_glutton(0), s_glutton_turn(0), s_potion_addict(
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
-,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0), prevSpell(0), lastSelectMenu(0), lastExplore(0), lastSearch(), yori_toyo_kill_count(0), currentSkillNum(0),god(GT_NONE), piety(0), gift_count(0), god_turn(0), suwako_meet(0),
+,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0), prevSpell(0), lastSelectMenu(0), lastExplore(0), lastSearch(), yori_toyo_kill_count(0), max_power(500), currentSkillNum(0),god(GT_NONE), piety(0), gift_count(0), god_turn(0), suwako_meet(0),
 sight_reset(false), target(NULL), useMouseTammac(0), throw_weapon(NULL), quickMenu1(SYSCMD_QUICKTHROW), quickMenu2(SYSCMD_MAGIC), dead_order(NULL), dead_reason(DR_NONE)
 {
 	for(int i=0;i<2;i++)
@@ -360,6 +360,7 @@ void players::init() {
 	lastExplore = 0;
 	lastSearch = "";
 	yori_toyo_kill_count = 0;
+	max_power = 500;
 	for(int i=0;i<52;i++)
 		MemorizeSkill[i] = 0;
 	for(int i=0;i<52;i++)
@@ -606,6 +607,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<char>(fp, lastExplore);
 	SaveData<char>(fp, *lastSearch.c_str(), lastSearch.size() + 1);
 	SaveData<int>(fp, yori_toyo_kill_count);
+	SaveData<int>(fp, max_power);
 	SaveData<int>(fp, *MemorizeSkill,52);
 	SaveData<int>(fp, *MemorizeSkill_num,52);
 	SaveData<int>(fp, currentSkillNum);
@@ -895,7 +897,10 @@ void players::LoadDatas(FILE *fp)
 	}
 	if(!isPrevVersion(loading_version_string, "ver1.110")) {
 		LoadData<int>(fp, yori_toyo_kill_count);
-	}	
+	}
+	if(!isPrevVersion(loading_version_string, "ver1.116")) {
+		LoadData<int>(fp, max_power);
+	}
 	LoadData<int>(fp, *MemorizeSkill);
 	LoadData<int>(fp, *MemorizeSkill_num);
 	LoadData<int>(fp, currentSkillNum);
@@ -1910,6 +1915,10 @@ int players::GetWalkDelay(float multi_)
 	if (s_weather == 4 && s_weather_turn > 0) {
 		speed_ = speed_*7/10;
 	}
+	int heavy_ = GetArtifactProperty(ART_HEAVY);
+	if(heavy_ > 0) {
+		speed_ += heavy_;
+	}
 
 	speed_ = speed_*multi_;
 	if(speed_<3)
@@ -2471,11 +2480,14 @@ int players::MpUpDown(int value_)
 	}
 }
 int players::GetMaxPower() {
-	int power_ = 500;
+	int power_ = max_power;
 	if(GetProperty(TPT_PURE_POWER))
 		power_ *= 2;
 	if(GetProperty(TPT_POWERLESS))
 		power_ -= 100;
+	if(power_ < 200) {
+		power_ = 200;
+	}
 	return power_;
 }
 int players::AcUpDown(int value_, int bonus_)

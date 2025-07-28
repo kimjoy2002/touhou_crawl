@@ -1165,6 +1165,21 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 	}
 
+	if(GetArtifactProperty(ART_CURSE) > 0) {
+		if(randA(1000) == 0) {
+			for(int i = 0; i < ET_LAST; i++) {
+				if(equipment[i] && !equipment[i]->curse) {
+					for(auto& infor : equipment[i]->atifact_vector) {
+						if(infor.kind == ART_CURSE) {
+							equipment[i]->Curse(true, (equip_type )i);
+							i = ET_LAST;
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
 
 	if(battle_count)
 	{

@@ -58,6 +58,9 @@ enum artifact_type
 	ART_DRUNK,
 	ART_SLAY,
 	ART_HP_REGEN,
+	ART_LESS_POWER,
+	ART_CURSE,
+	ART_HEAVY,
 	ART_MAX_ATIFACT,
 };
 

@@ -5371,3 +5371,9 @@ LOC_SYSTEM_ATT_INFO_COLD,Attacks deal cold damage.
 LOC_SYSTEM_ATT_INFO_ELEC,Attacks deal electric damage.
 LOC_SYSTEM_TUTORIAL_START4,Kanako said: (Using a keyboard but seeing gamepad prompts—or vice versa? Change it in the options.)
 LOC_SYSTEM_SCORE_CAUTION,[Scores are recorded as the highest per user.]
+LOC_SYSTEM_ITEM_ARTIFACT_LESS_POWER,Pow-
+LOC_SYSTEM_ITEM_ARTIFACT_CURSE,*Curse
+LOC_SYSTEM_ITEM_ARTIFACT_HEAVY,Heavy
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_LESS_POWER,Maximum Power is reduced by 1.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_CURSE,Automatically cursed while equipped.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_HEAVY,Movement speed is reduced by {0}.

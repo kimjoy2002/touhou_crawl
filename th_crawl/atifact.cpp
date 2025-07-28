@@ -85,6 +85,9 @@ int GetAtifactValue(artifact_type ring_, int good_bad_)
 	case ART_SUMMONRESIST:
 	case ART_DRUNK:
 	case ART_HP_REGEN:
+	case ART_LESS_POWER:
+	case ART_CURSE:
+	case ART_HEAVY:
 			return 1;
 	case ART_FIRE_RESIS:
 	case ART_ICE_RESIS:
@@ -248,6 +251,15 @@ string GetAtifactString(std::string lang, artifact_type ring_, int value_)
 			(value_==-3?"---":"?"
 			))))))));
 		break;
+	case ART_LESS_POWER:
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_LESS_POWER);
+		break;
+	case ART_CURSE:
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_CURSE);
+		break;
+	case ART_HEAVY:
+		oss << LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_ARTIFACT_HEAVY);
+		break;
 	case ART_SKILL_UP:
 		oss << skill_string((skill_type)(value_ %100)) << "+" << value_/100;
 		break;
@@ -406,6 +418,15 @@ std::string GetAtifactInfor(artifact_type ring_, int value_)
 			(value_==-3?"---":"?"
 			))))))));
 		break;
+	case ART_LESS_POWER:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_LESS_POWER);
+		break;
+	case ART_CURSE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_CURSE);
+		break;
+	case ART_HEAVY:
+		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_HEAVY, PlaceHolderHelper("0.1"));
+		break;
 	case ART_SKILL_UP:
 		oss << LocalzationManager::formatString(LOC_SYSTEM_ITEM_ARTIFACT_INFO_SKILL_UP,
 			PlaceHolderHelper(skill_string((skill_type)(value_ % 100)) + to_string(value_ / 100)));
@@ -476,7 +497,6 @@ int isGenerateRandart(artifact_type type_, item_type type) {
 		case ART_INT:
 		case ART_HUNGRY:
 		case ART_FULL:
-		case ART_TELEPORT:
 		case ART_POISON_RESIS:
 		case ART_FIRE_RESIS:
 		case ART_ICE_RESIS:
@@ -495,6 +515,11 @@ int isGenerateRandart(artifact_type type_, item_type type) {
 		case ART_SKILL_UP:
 		case ART_SLAY:
 			return 3;
+		case ART_LESS_POWER:
+		case ART_CURSE:
+		case ART_HEAVY:
+		case ART_TELEPORT:
+			return 2;
 		case ART_HP_REGEN:
 		{
 			if(type == ITM_RING) {
@@ -660,6 +685,20 @@ bool effectartifact(artifact_type kind, int value)
 	case ART_HP_REGEN:
 		you.s_regen += value;
 		return false;
+	case ART_LESS_POWER:
+		if(value>0) {
+			you.max_power -= 100;
+			if(you.GetMaxPower()+30 < you.power) {
+				 you.power = you.GetMaxPower()+30;
+			}
+		} else {
+			you.max_power += 100;
+		}
+		return false;
+	case ART_CURSE:
+		break;
+	case ART_HEAVY:
+		break;
 	case ART_SKILL_UP:
 	{
 		int value_ = abs(value);

@@ -150,11 +150,9 @@ void monster::SaveDatas(FILE *fp)
 
 	SaveData<int>(fp, will_move.size());
 
-	for (int i = will_move.size(); i > 0; i--) {
-		coord_def pop_ = will_move.front();
-		SaveData<int>(fp, pop_.x);
-		SaveData<int>(fp, pop_.y);
-		will_move.pop_front();
+	for (const auto& pos : will_move) {
+		SaveData<int>(fp, pos.x);
+		SaveData<int>(fp, pos.y);
 	}
 	//SaveData<int>(fp, target);  //마찬가지이유
 	//temp_target_map_id 이 변수는 저장할 필요가 없다.

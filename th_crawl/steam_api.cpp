@@ -66,6 +66,16 @@ void steam_manager::setCurrentInfo(string tribe, string job, string charname, in
 	current_ = SteamFriends()->SetRichPresence("floor", which.c_str());
 }
 
+bool steam_manager::isSteamDeck()
+{
+    if (!init || !SteamUtils())
+        return false;
+        
+    if (SteamUtils()->IsSteamRunningOnSteamDeck()) return true;
+
+    return false;
+}
+
 const char* steam_manager::getAchievementId(achievement_enum enum_) {
     switch (enum_) {
         case ACHIEVEMENT_DUNGEON_OF_FAITH:
@@ -451,4 +461,13 @@ void steam_manager::OnDownloadLeaderboard(LeaderboardScoresDownloaded_t* pResult
     }
 
     m_scoreReceived = true;
+}
+
+
+bool steam_manager::showSteamKeyboard() {
+    if (!init || !SteamUtils()) return false;
+    return SteamUtils()->ShowFloatingGamepadTextInput(
+        k_EFloatingGamepadTextInputModeModeSingleLine,
+        0, 0, option_mg.getWidth(), DisplayManager.fontDesc.Height*DisplayManager.text_log.short_len
+    );
 }

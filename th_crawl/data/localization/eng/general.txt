@@ -5369,3 +5369,4 @@ LOC_SYSTEM_ATT_INFO_DOWN_RESIST,Attacks reduce the target's elemental resistance
 LOC_SYSTEM_ATT_INFO_FIRE,Attacks deal fire damage.
 LOC_SYSTEM_ATT_INFO_COLD,Attacks deal cold damage.
 LOC_SYSTEM_ATT_INFO_ELEC,Attacks deal electric damage.
+LOC_SYSTEM_TUTORIAL_START4,Kanako said: (Using a keyboard but seeing gamepad prompts—or vice versa? Change it in the options.)

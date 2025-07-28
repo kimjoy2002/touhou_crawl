@@ -75,6 +75,7 @@ private:
 
 public:
 	bool steamInit();
+	bool isSteamDeck();
 	bool isInit(){return init;};
 	bool IncrementStat(const char* statName, int32 delta);
 	void addStats(bool win, unique_starting_type char_type, tribe_type tribe, job_type job);
@@ -91,6 +92,7 @@ public:
 	void OnFindLeaderboard(LeaderboardFindResult_t* pResult, bool bIOFailure);
 	void OnFindLeaderboardForQuery(LeaderboardFindResult_t* pResult, bool bIOFailure);
 	void OnDownloadLeaderboard(LeaderboardScoresDownloaded_t* pResult, bool bIOFailure);
+	bool showSteamKeyboard();
 	void debugText();
 };
 

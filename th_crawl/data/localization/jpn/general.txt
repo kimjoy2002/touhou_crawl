@@ -5369,3 +5369,4 @@ LOC_SYSTEM_ATT_INFO_DOWN_RESIST,攻撃で属性耐性を1段階下げる。
 LOC_SYSTEM_ATT_INFO_FIRE,攻撃に炎属性がある。
 LOC_SYSTEM_ATT_INFO_COLD,攻撃に冷気属性がある。
 LOC_SYSTEM_ATT_INFO_ELEC,攻撃に電撃属性がある。
+LOC_SYSTEM_TUTORIAL_START4,神奈子は言った。「キーボードなのにパッド表示、またはその逆なら、オプションで直せるぞ」

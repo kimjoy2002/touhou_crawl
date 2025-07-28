@@ -5369,3 +5369,4 @@ LOC_SYSTEM_ATT_INFO_DOWN_RESIST,공격이 속성저항을 1단계 낮춘다.
 LOC_SYSTEM_ATT_INFO_FIRE,공격이 화염속성을 지닌다.
 LOC_SYSTEM_ATT_INFO_COLD,공격이 냉기속성을 지닌다.
 LOC_SYSTEM_ATT_INFO_ELEC,공격이 전격속성을 지닌다.
+LOC_SYSTEM_TUTORIAL_START4,카나코는 말했다 : (키보드인데 패드 표시가 뜨거나 반대라면, 옵션에서 바꿔)

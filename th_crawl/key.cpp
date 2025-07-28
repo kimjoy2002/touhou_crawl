@@ -11,6 +11,7 @@
 #include "d3dUtility.h"
 #include "key.h"
 #include "replay.h"
+#include "steam_api.h"
 #include <conio.h>
 #include <windows.h>
 #include <string>
@@ -480,9 +481,13 @@ string GetClipboardTextUTF8() {
 string getKeyboardInputString(bool& cancle) {
     string temp;
 
+	if (steam_mg.isSteamDeck()) {
+		steam_mg.showSteamKeyboard();
+	}
+
     while (true) {
         InputedKey inputed;
-        int input_ = waitkeyinput(inputed);
+        int input_ = waitkeyinput(inputed, true);
 
 
 		if(input_ == -1) {
@@ -493,12 +498,12 @@ string getKeyboardInputString(bool& cancle) {
 				return "";
 			}
 		}
-        else if (input_ == VK_ESCAPE) {
+        else if (input_ == VK_ESCAPE || input_ == GVK_BUTTON_B || input_ == GVK_BUTTON_B_LONG) {
 			deletelog();
 			cancle = true;
             return "";
         }
-        else if (input_ == VK_RETURN) {
+        else if (input_ == VK_RETURN || input_ == GVK_BUTTON_A || input_ == GVK_BUTTON_A_LONG) {
 			deletelog();
             return temp;
         }

@@ -214,7 +214,6 @@ bool SpellAiCondition(spell_list skill, monster *mon); //인공지능이 마법�
 
 
 
-
 bool SkillFlagCheck(skill_list skill, skill_flag flag);
 int SkillLength(skill_list skill);
 string SkillString(skill_list skill); //스킬 이름
@@ -246,7 +245,8 @@ bool skill_elec_ball_bomb(int power, unit* order);
 
 void SetSpell(monster_index id, monster *mon_, vector<item_infor> *item_list_, bool* random_spell);
 
-
+int getMonsterSpellPower(spell_list skill, monster* order, int pow_);
+void GetSpellDamageString(spell_list skill, monster* order, int pow_);
 bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &target, int pow_ = -1);
 bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target);
 bool CheckDangerSpell(int danger_);

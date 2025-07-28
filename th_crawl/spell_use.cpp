@@ -34,6 +34,11 @@
 #include <algorithm>
 #include <math.h>
 
+//편의상 (나중에 파일로 빼기)
+#define SPL_MON_TANMAC_SMALL_DAM(pow_) (2 + (pow_) / 3)
+
+
+
 extern HANDLE mutx;
 extern int map_effect;
 
@@ -448,12 +453,14 @@ monster* BaseSummon(int id_, int time_, bool targeting_, bool random_, int range
 
 
 
-bool skill_tanmac_small(int pow, bool short_, unit* order, coord_def target)
+
+
+bool skill_tanmac_small(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		beam_infor temp_infor(randA_1(2 + pow / 3), 2 + pow / 3, 17, order, order->GetParentType(), SpellLength(SPL_MON_TANMAC_SMALL, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_TANMAC));
+		beam_infor temp_infor(randA_1(SPL_MON_TANMAC_SMALL_DAM(pow_)), SPL_MON_TANMAC_SMALL_DAM(pow_), 17, order, order->GetParentType(), SpellLength(SPL_MON_TANMAC_SMALL, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -6851,31 +6858,32 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	}
 }
 
-bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &target, int pow_)
-{
-	int power=(order->level-3)*8;
+int getMonsterSpellPower(spell_list skill, monster* order, int pow_) {
+
+	int power_=(order->level-3)*8;
 	if(pow_ != -1)
-		power = pow_;
+		power_ = pow_;
 	if(order->force_turn)
 	{
 		if(order->force_strong)
-			power *= 2;
+			power_ *= 2;
 		else
-			power /= 2;
+			power_ /= 2;
 	}
 	if (order->s_clever) {
-		power *= 1.5f;
-		if(wiz_list.wizard_mode == 1) {
-			LocalzationManager::printLogWithKey(LOC_SYSTEM_DEBUG_CLEVER,false,false,false,CL_danger,
-				PlaceHolderHelper(order->GetName()->getName()));
-		}
-
+		power_ *= 1.5f;
 	}
 
 	if(order->flag & M_FLAG_MAGICIAN) {
-		power *= 1.5f;
+		power_ *= 1.5f;
 	}
-	power=max(0,min(SpellCap(skill),power));
+	power_=std::max(0,std::min(SpellCap(skill),power_));
+	return power_;
+}
+
+bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &target, int pow_)
+{
+	int power=getMonsterSpellPower(skill, order, pow_);
 	switch(skill)
 	{
 	case SPL_MON_TANMAC_SMALL:
@@ -7728,3 +7736,356 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 	}
 }
 
+
+
+void GetSpellDamageString(spell_list skill, monster* order, int pow_)
+{
+	switch(skill)
+	{
+	case SPL_MON_TANMAC_SMALL:
+	{
+		ostringstream ss;
+		ss << "(" << 1 << "d" << SPL_MON_TANMAC_SMALL_DAM(pow_) << ")";
+		printsub(ss.str(), false, CL_normal);
+		return;
+	}
+	case SPL_MON_TANMAC_MIDDLE:
+		return;
+	case SPL_MON_WATER_GUN:
+		return;
+	case SPL_FLAME:
+		return;
+	case SPL_FROST:
+		return;
+	case SPL_MEDICINE_CLOUD:
+		return;
+	case SPL_COLD_BEAM:
+		return;
+	case SPL_SUMMON_BUG:
+		return;
+	case SPL_CONFUSE:
+		return;
+	case SPL_SLOW:
+		return;
+	case SPL_SELF_HEAL:
+		return;
+	case SPL_BLINK:
+		return;
+	case SPL_SMITE:
+		return;
+	case SPL_BURN:
+		return;
+	case SPL_FIRE_WALL:
+		return;
+	case SPL_FROZEN:
+		return;
+	case SPL_FREEZE:
+		return;
+	case SPL_STING:
+		return;
+	case SPL_CURE_POISON:
+		return;
+	case SPL_TWIST:
+		return;
+	case SPL_SUMMON_MOOK:
+		return;
+	case SPL_SHOCK:
+		return;
+	case SPL_CHAIN_LIGHTNING:
+		return;
+	case SPL_DISCHARGE:
+		return;
+	case SPL_GLOW:
+		return;
+	case SPL_GRAZE:
+		return;
+	case SPL_VEILING:
+		return;
+	case SPL_INVISIBLE:
+		return;
+	case SPL_HASTE:
+		return;
+	case SPL_SILENCE:
+		return;
+	case SPL_MAGIC_TANMAC:
+		return;
+	case SPL_FIRE_BALL:
+		return;
+	case SPL_FIRE_BOLT:
+		return;
+	case SPL_ICE_BOLT:
+		return;
+	case SPL_VENOM_BOLT:
+		return;
+	case SPL_CONFUSE_CLOUD:
+		return;
+	case SPL_ICE_CLOUD:
+		return;
+	case SPL_SUMMON_BIRD:
+		return;
+	case SPL_RECALL:
+		return;
+	case SPL_TELEPORT_OTHER:
+		return;
+	case SPL_TELEPORT_SELF:
+		return;
+	case SPL_WHIRLWIND:
+		return;
+	case SPL_SUMMON_PENDULUM:
+		return;
+	case SPL_SUMMON_SEKIBANKI:
+		return;
+	case SPL_WATER_CANNON:
+		return;
+	case SPL_KYOKO_SMITE:
+		return;
+	case SPL_SUMMON_OPTION:
+		return;
+	case SPL_SUMMON_GOLEM:
+		return;
+	case SPL_HYPNOSIS:
+		return;
+	case SPL_MUTE:
+		return;
+	case SPL_SELF_INJURY:
+		return;
+	case SPL_CHARM:
+		return;
+	case SPL_LASER:
+		return;
+	case SPL_SPARK:
+		return;		
+	case SPL_SUMMON_UNZAN:
+		return;
+	case SPL_SUMMON_UNZAN_PUNCH:
+		return;
+	case SPL_SUMMON_ZOMBIE_FAIRY:
+		return;
+	case SPL_SUMMON_UFO:
+		return;
+	case SPL_HASTE_OTHER:
+		return;
+	case SPL_HEAL_OTHER:
+		return;
+	case SPL_MIND_BENDING:
+		return;
+	case SPL_STONE_PUNCH:
+		return;
+	case SPL_STONE_ARROW:
+		return; 
+	case SPL_STONE_TRAP:
+		return;
+	case SPL_STONE_UPLIFT:
+		return;
+	case SPL_KANAME_DRILL:
+		return;
+	case SPL_DIAMOND_HARDNESS:
+		return;
+	case SPL_POISON_SKIN:
+		return;
+	case SPL_STONE_FORM:
+		return;
+	case SPL_KNIFE_COLLECT:
+		return;
+	case SPL_FLAN_BUSIN:
+		return;
+	case SPL_BURST:
+		return;
+	case SPL_SUICIDE_BOMB:
+		return;
+	case SPL_RABBIT_HORN:
+		return;
+	case SPL_SUMMON_LESSOR_DEMON:
+		return;	
+	case SPL_LUMINUS_STRIKE:
+		return;
+	case SPL_FIRE_STORM:
+		return;
+	case SPL_BLIZZARD: 
+		return;
+	case SPL_PERFERT_FREEZE: 
+		return;
+	case SPL_DRAW_POWER:
+		return;
+	case SPL_ANIMAL_CHANGE:
+		return;
+	case SPL_FIELD_VIOLET:
+		return;
+	case SPL_TIME_PARADOX: 
+		return;
+	case SPL_PRIVATE_SQ: 
+		return;
+	case SPL_CONTROLED_BLINK: 
+		return;
+	case SPL_THE_WORLD:	
+		return;	
+	case SPL_HASTE_ALL:
+		return;
+	case SPL_HEAL_ALL:	
+		return;	
+	case SPL_MOON_COMMUNICATION:
+		return;	
+	case SPL_MOON_GUN:
+		return;	
+	case SPL_SUMMON_DREAM:
+		return;	
+	case SPL_MANA_DRAIN:
+		return;	
+	case SPL_INSANE:
+		return;	
+	case SPL_BLOOD_SMITE:
+		return;	
+	case SPL_CALL_HOUND:
+		return;	
+	case SPL_CANNON:
+		return;	
+	case SPL_DOLLS_WAR:
+		return;	
+	case SPL_FAKE_DOLLS_WAR:
+		return;	
+	case SPL_FIRE_SPREAD:
+		return;			
+	case SPL_STASIS:
+		return;	
+	case SPL_JUMP_ATTACK:
+		return;
+	case SPL_ALERT_NOISE: 
+		return;
+	case SPL_SUMMON_NAMAZ:
+		return;
+	case SPL_SCHEMA_TANMAC:
+		return;
+	case SPL_CHANGE:
+		return;
+	case SPL_UNLUCK:
+		return;	
+	case SPL_THUNDER:
+		return;	
+	case SPL_AIR_STRIKE:
+		return;	
+	case SPL_SUMMON_RACOON:
+		return;	
+	case SPL_SUMMON_YOUKAI:
+		return;	
+	case SPL_MAMIZO_EVADE:
+		return;	
+	case SPL_MACRO_BURST:
+		return;	
+	case SPL_SHATTER:
+		return;	
+	case SPL_SUMMON_YOSHIKA:
+		return;	
+	case SPL_NESY_CANNON:
+		return;	
+	case SPL_MERMAID_SONG:
+		return;	
+	case SPL_EMERALD_CITY:
+		return;	
+	case SPL_AUTUMN_BLADE:
+		return;	
+	case SPL_PHILOSOPHERS_STONE:
+		return;	
+	case SPL_SUMMON_ANCHOR:
+		return;
+	case SPL_REAPER_MET:
+		return;
+	case SPL_AFTERLITE:
+		return;
+	case SPL_PRISM_CALL:
+		return;
+	case SPL_PSYCHOKINESIS:
+		return;
+	case SPL_SUMMON_TRASH:
+		return;
+	case SPL_TRASH_RUSH:
+		return;
+	case SPL_KOKORO_CHANGE:
+		return;
+	case SPL_THUNDER_BOLT:
+		return;
+	case SPL_SANTUARY:
+		return;
+	case SPL_MISTIA_SONG:
+		return;
+	case SPL_THROW_DISH:
+		return;
+	case SPL_MESS_CONFUSION:
+		return;
+	case SPL_SLEEP_SMITE:
+		return;
+	case SPL_TARGET_ELEC:
+		return;
+	case SPL_SUMMON_ELEC_BALL:
+		return;
+	case SPL_DREAM_CALL:
+		return;
+	case SPL_HYPER_BEAM:
+		return;
+	case SPL_KAGUYA_SPELL:
+		return;
+	case SPL_THROW_SWORD:
+		return;
+	case SPL_THROW_KNIFE:
+		return;
+	case SPL_THROW_PLAYER:
+		return;
+	case SPL_THROW_AMULET:
+		return;
+	case SPL_WARP_KICK:
+		return;
+	case SPL_REIMU_BARRIER:
+		return;
+	case SPL_TOUGUE:
+		return;
+	case SPL_WINDFLAW:
+		return;
+	case SPL_SUMMON_GHOST:
+		return;
+	case SPL_MEGATON_KICK:
+		return;
+	case SPL_THROW_OIL:
+		return;
+	case SPL_HEAVENLY_STORM:
+		return;
+	case SPL_TRACKING:
+		return;
+	case SPL_DISCORD:
+		return;
+	case SPL_SMOKING:
+		return;
+	case SPL_CREATE_FOG:
+		return;
+	case SPL_GROW_VINE:
+		return;
+	case SPL_CLOSE_DOOR:
+		return;
+	case SPL_SPEAKER_PHONE:
+		return;
+	case SPL_HOMING_TANMAC:
+		return;
+	case SPL_ALLROUND_TANMAC:
+		return;
+	case SPL_THROW_POTION:
+		return;
+	case SPL_THROW_RABBIT:
+		return;
+	case SPL_ARROW:
+		return;
+	case SPL_HANIWA_MAGIC_TANMAC:
+		return;
+	case SPL_HANIWA_MAGIC_TANMAC2:
+		return;
+	case SPL_HANIWA_MAGIC_TANMAC3:
+		return;
+	case SPL_BLINK_AWAY:
+		return;
+	case SPL_ELEMENTAL_HARVESTER:
+		return;
+	case SPL_NIGHTMARE_MANIFEST:
+		return;
+	case SPL_ROYALFLARE:
+		return;
+	default:
+		return;
+	}
+}

@@ -365,6 +365,12 @@ void GetMonsterInfor(monster *it)
 					ss << " (" << std::fixed << std::setprecision(0) << percent_ << "%)";
 				}
 				printsub(ss.str(), false, CL_normal, sp_char);
+				
+				{
+					int power = getMonsterSpellPower(spell_, it, -1);
+					GetSpellDamageString(spell_, it, power);
+				}
+				
 
 				_infor_("\n");
 				i++;

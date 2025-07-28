@@ -1038,7 +1038,7 @@ const mon_infor mondata[] = {
 
 	{MON_SECURITY_MAID_FIARY,8,160,name_infor(MON_SECURITY_MAID_FIARY),&img_mons_security_fairy_maid,30,1,20,
 		{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK,0,2,10,'f'},
+		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_CANT_NETURAL,0,2,10,'f'},
 
 	{MON_GIANT_SLIME,12,1343,name_infor(MON_GIANT_SLIME),&img_mons_big_slime,230,15,3,
 		{30,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},

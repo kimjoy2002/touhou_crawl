@@ -157,7 +157,7 @@ void SeleteArenaMonster(int num, int level)
 
 
 
-void arena_event(int num)
+bool arena_event(int num)
 {
 	if(map_list.bamboo_count == 10)
 	{
@@ -166,6 +166,10 @@ void arena_event(int num)
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ARENA_CLEAR),true,false,false,CL_help);
 			AddNote(you.turn,CurrentLevelString(),LocalzationManager::locString(LOC_SYSTEM_NOTE_ARENA_WIN),CL_help);
+			item_infor t;
+			makeitem(ITM_ORB, -1, &t);
+			env[num].MakeItem(you.position, t);
+			return 1;
 		}
 		else
 		{
@@ -344,6 +348,7 @@ void arena_event(int num)
 	map_list.bamboo_count++;
 
 
+	return 0;
 }
 
 

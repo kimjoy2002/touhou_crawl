@@ -697,7 +697,7 @@ bool skill_cold_beam(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,5+pow/9),3*(5+pow/9),18,order,order->GetParentType(),SpellLength(SPL_COLD_BEAM, order->isplayer()),8,BMT_PENETRATE,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLDBEAM));
+		beam_infor temp_infor(randC(3,5+pow/9),3*(5+pow/9),18,order,order->GetParentType(),SpellLength(SPL_COLD_BEAM, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLDBEAM));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1462,7 +1462,7 @@ bool skill_fire_bolt(int pow, bool short_, unit* order, coord_def target)
 	{
 		int mon_panlty_ = order->isplayer()?0:2;//몬스터가 쓸때 패널티
 		int damage_ = 9+pow/6-mon_panlty_;
-		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),SpellLength(SPL_FIRE_BOLT, order->isplayer()),8,BMT_PENETRATE,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_FIRE));
+		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),SpellLength(SPL_FIRE_BOLT, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_FIRE));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1484,7 +1484,7 @@ bool skill_ice_bolt(int pow, bool short_, unit* order, coord_def target)
 	{
 		int mon_panlty_ = order->isplayer()?0:2;//몬스터가 쓸때 패널티
 		int damage_ = 9+pow/6-mon_panlty_;
-		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),SpellLength(SPL_ICE_BOLT, order->isplayer()),8,BMT_PENETRATE,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
+		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),SpellLength(SPL_ICE_BOLT, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1504,7 +1504,7 @@ bool skill_venom_bolt(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,6+pow/6),3*(6+pow/6),19,order,order->GetParentType(),SpellLength(SPL_VENOM_BOLT, order->isplayer()),8,BMT_PENETRATE,ATT_THROW_MIDDLE_POISON,name_infor(LOC_SYSTEM_ATT_VENOM));
+		beam_infor temp_infor(randC(3,6+pow/6),3*(6+pow/6),19,order,order->GetParentType(),SpellLength(SPL_VENOM_BOLT, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_MIDDLE_POISON,name_infor(LOC_SYSTEM_ATT_VENOM));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -2051,7 +2051,7 @@ bool skill_laser(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(2,9+pow/8),2*(9+pow/8),18,order,order->GetParentType(),SpellLength(SPL_LASER, order->isplayer()),8,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_LASER));
+		beam_infor temp_infor(randC(2,9+pow/8),2*(9+pow/8),18,order,order->GetParentType(),SpellLength(SPL_LASER, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_LASER));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -2081,7 +2081,7 @@ bool skill_spark(int pow, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("spark");
 		}
-		beam_infor temp_infor(randC(5,9+pow/18),5*(9+pow/18),99,order,order->GetParentType(),SpellLength(SPL_SPARK, order->isplayer()),8,BMT_PENETRATE,ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_SPARK));
+		beam_infor temp_infor(randC(5,9+pow/18),5*(9+pow/18),99,order,order->GetParentType(),SpellLength(SPL_SPARK, order->isplayer()),7,BMT_PENETRATE,ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_SPARK));
 		ThrowSector(46,beam,temp_infor,GetSpellSector(SPL_SPARK),[&](coord_def c_){
 		},false);
 		return true;
@@ -3391,7 +3391,7 @@ bool skill_fire_spread(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("fire");
 		}
-		beam_infor temp_infor(0,0,99,order,order->GetParentType(),SpellLength(SPL_FIRE_SPREAD, order->isplayer()),8,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor(LOC_SYSTEM_ATT_SEAOFFIRE));
+		beam_infor temp_infor(0,0,99,order,order->GetParentType(),SpellLength(SPL_FIRE_SPREAD, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_NONE_MASSAGE,name_infor(LOC_SYSTEM_ATT_SEAOFFIRE));
 		ThrowSector(0,beam,temp_infor,GetSpellSector(SPL_FIRE_SPREAD),[&](coord_def c_){
 			if(order->isSightnonblocked(c_))
 			{

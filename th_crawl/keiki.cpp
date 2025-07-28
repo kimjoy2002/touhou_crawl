@@ -67,7 +67,7 @@ haniwa_abil haniwa_abil_list[HANIWA_A_MAX] = {
 	{LOC_SYSTEM_HANIWA_A_CREATE_SCROLL_NAME,LOC_SYSTEM_HANIWA_A_CREATE_SCROLL_INFO,HANIWA_T_SUPPORT,60,5,false,{},{},{HANIWA_A_ARMY1}},
 	{LOC_SYSTEM_HANIWA_A_WARN_NAMED_NAME,LOC_SYSTEM_HANIWA_A_WARN_NAMED_INFO,HANIWA_T_SUPPORT,10,0,false,{},{},{}},
 	{LOC_SYSTEM_HANIWA_A_IDEN_NAME,LOC_SYSTEM_HANIWA_A_IDEN_INFO,HANIWA_T_SUPPORT,10,5,false,{},{},{}},
-	{LOC_SYSTEM_HANIWA_A_HEAL_NAME,LOC_SYSTEM_HANIWA_A_HEAL_INFO,HANIWA_T_SUPPORT,50,10,false,{},{},{}},
+	{LOC_SYSTEM_HANIWA_A_HEAL_NAME,LOC_SYSTEM_HANIWA_A_HEAL_INFO,HANIWA_T_SUPPORT,30,10,false,{},{},{}},
 	{LOC_SYSTEM_HANIWA_A_HARDEN1_NAME,LOC_SYSTEM_HANIWA_A_HARDEN1_INFO,HANIWA_T_COMMON,20,20,false,{},{},{}},
 	{LOC_SYSTEM_HANIWA_A_HARDEN2_NAME,LOC_SYSTEM_HANIWA_A_HARDEN2_INFO,HANIWA_T_COMMON,20,20,false,{HANIWA_A_HARDEN1},{},{}},
 	{LOC_SYSTEM_HANIWA_A_HARDEN3_NAME,LOC_SYSTEM_HANIWA_A_HARDEN3_INFO,HANIWA_T_COMMON,20,20,false,{HANIWA_A_HARDEN3},{},{}},
@@ -474,7 +474,7 @@ void haniwa_abil::upgradeHaniwa(monster* mon) {
 		mon->flag |= M_FLAG_RANGE_ATTACK;
 	}
 
-	if(!has_abil(HANIWA_A_SPEAR)) {
+	if(has_abil(HANIWA_A_SPEAR)) {
 		mon->flag |= M_FLAG_SPEAR_ATTACK;
 	}
 }
@@ -696,6 +696,7 @@ string haniwa_speak(monster* monster_info, HANIWA_SPEAK type)
 void haniwa_abil::increaseGift(int haniwa_, int index_) {
 	you.haniwa_allys[haniwa_].item_count[index_]++;
 	int require_count_ = getGiftCount(index_);
+	bool create_gift_with_more = false;
 	if(require_count_ != 0 && require_count_ < you.haniwa_allys[haniwa_].item_count[index_] && you.haniwa_allys[haniwa_].floor == current_level) {
 		monster* haniwa_mon_ = getHaniwa(haniwa_);
 		if(haniwa_mon_ != nullptr && env[current_level].isInSight(haniwa_mon_->position)) {
@@ -728,6 +729,7 @@ void haniwa_abil::increaseGift(int haniwa_, int index_) {
 					}
 
 					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_WEAPON) + " ", false, false, false, CL_normal);
+					create_gift_with_more = true;
 				}
 				break;
 			case 2:
@@ -789,6 +791,7 @@ void haniwa_abil::increaseGift(int haniwa_, int index_) {
 						MakeArtifact(it,1);
 					}
 					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_ARMOUR) + " ", false, false, false, CL_normal);
+					create_gift_with_more = true;
 				}
 				break;
 			case 3:
@@ -799,7 +802,7 @@ void haniwa_abil::increaseGift(int haniwa_, int index_) {
 					for(int i=0;i<num;i++)
 						env[current_level].MakeItem(haniwa_mon_->position,makeitem(ITM_POTION, 0, &t,(int)type_));
 					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_POTION) + " ", false, false, false, CL_normal);
-
+					create_gift_with_more = true;
 				}
 				break;
 			case 4:
@@ -810,9 +813,14 @@ void haniwa_abil::increaseGift(int haniwa_, int index_) {
 					for(int i=0;i<num;i++)
 						env[current_level].MakeItem(haniwa_mon_->position,makeitem(ITM_SCROLL, 0, &t,(int)type_));
 					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_SCROLL) + " ", false, false, false, CL_normal);
+					create_gift_with_more = true;
 				}
 				break;
 			}
 		}
+	}
+	if(create_gift_with_more) {
+		enterlog();
+		MoreWait();
 	}
 }

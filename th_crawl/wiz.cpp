@@ -994,7 +994,7 @@ void wiz_mode()
 			for(int i = 0; i < 21; i++) {
 				ostringstream ss;
 				ss << string(1,keylist[i].first) << "-" << LocalzationManager::locString(keylist[i].second) << " ";
-				printlog(ss.str(), (i==19?true:false), false, false, CL_help, keylist[i].first);
+				printlog(ss.str(), (i==20?true:false), false, false, CL_help, keylist[i].first);
 				listkey.push_back(keylist[i].first);
 			}
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_ALTAR),false,false,false,CL_help);

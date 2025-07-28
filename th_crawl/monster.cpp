@@ -2670,7 +2670,8 @@ int monster::atkmove(int is_sight, bool only_move)
 		if(!s_fear && !range_attack) {
 			bool attack_ = false;
 			if(target && !only_move && flag & M_FLAG_SPEAR_ATTACK && target->position == target_pos) {
-				if((std::abs(c.x) > 1 || std::abs(c.y) > 1) && std::abs(c.x) <= 2 && std::abs(c.y) <= 2 && isMonsterSight(target_pos)) {
+				if((std::abs(c.x) > 1 || std::abs(c.y) > 1) && std::abs(c.x) <= 2 && std::abs(c.y) <= 2 && isMonsterSight(target_pos) 
+				&& isSightnonblocked(target_pos)) {
 					if(target->isplayer())
 					{
 						if(!you.s_timestep && isEnemyUnit(target) && !(flag & M_FLAG_NO_ATK)) {

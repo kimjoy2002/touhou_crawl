@@ -9,6 +9,9 @@
 
 #include "environment.h"
 
+bool dungeon_tile::isEffectibleEarthSpellcard() {
+	return isBreakable() || tile == DG_IZAKAYA || tile == DG_GRAVE || tile == DG_STATUE || tile == DG_STATUE2;
+}
 
 dot_tile_type dungeon_tile::GetDot()
 {

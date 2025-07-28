@@ -80,6 +80,7 @@ public:
 	bool isBreakable(){return (tile>=DG_WALL && tile<=DG_WALL_END) || (tile >= DG_CLOSE_DOOR && tile <= DG_GLASS);};
 	bool isStair(){ return (tile >= DG_DOWN_STAIR && tile <= DG_RETURN_STAIR); };
 	bool isTemple(){ return (tile >= DG_TEMPLE_FIRST && tile <= DG_TEMPLE_LAST); };
+	bool isEffectibleEarthSpellcard();
 	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x, float y, float scale, D3DCOLOR color, int count_)
 	{
 		bool temp;

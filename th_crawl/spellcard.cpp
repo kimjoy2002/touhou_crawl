@@ -296,7 +296,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 			{
 				PlaySE("shoot");
 				coord_def pos = throwtanmac(26, beam, temp_infor, NULL);
-				if (env[current_level].dgtile[pos.x][pos.y].isBreakable())
+				if (env[current_level].dgtile[pos.x][pos.y].isEffectibleEarthSpellcard())
 				{
 					PlaySE("stone");
 					for (int i = -1; i <= 1; i++)
@@ -319,7 +319,10 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 							}
 							else
 							{
-								if (env[current_level].dgtile[pos.x + i][pos.y + j].isBreakable())
+								if(i == 0 && j == 0 && env[current_level].dgtile[pos.x + i][pos.y + j].isEffectibleEarthSpellcard()) {
+									env[current_level].changeTile(coord_def(pos.x + i, pos.y + j), env[current_level].base_floor);
+								}
+								else if (env[current_level].dgtile[pos.x + i][pos.y + j].isBreakable())
 									env[current_level].changeTile(coord_def(pos.x + i, pos.y + j), env[current_level].base_floor);
 							}
 						}

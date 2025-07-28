@@ -1070,11 +1070,7 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			if(you.equipment[ET_SHIELD]){
 				you.equipment[ET_SHIELD]->Enchant(ET_SHIELD, 2);
 			}
-			it = env[current_level].MakeItem(you.position,makeitem(ITM_RING,1,&t,RGT_SEE_INVISIBLE));	
-			it->Identify();
-			you.additem(it,false);
-			you.equip('a'+3,ET_LEFT,false);
-			env[current_level].DeleteItem(it);
+			you.SetProperty(TPT_SEE_INVI, 1);
 
 			for(int i = 0; i < 2; i++)
 			{				
@@ -1087,7 +1083,7 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 				you.additem(it,false);
 				env[current_level].DeleteItem(it);				
 			}
-			set_exist_named(MON_MOMIZI);	
+			set_exist_named(MON_MOMIZI);
 
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);

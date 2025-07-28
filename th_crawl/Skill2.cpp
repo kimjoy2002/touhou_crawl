@@ -839,7 +839,11 @@ int SkillDiffer(skill_list skill)
 	case SKL_LEVITATION:
 		return SkillDiffer_simple(-4,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
 	case SKL_INVISIBLE:
-		return SkillDiffer_simple(0,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
+		if(you.char_type == UNIQ_START_SUNNY) {
+			return 100;
+		} else {
+			return SkillDiffer_simple(0,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
+		}
 	case SKL_FIREBALL:
 		return SkillDiffer_simple(-3,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
 	case SKL_MISSLE:

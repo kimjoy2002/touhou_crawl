@@ -415,7 +415,7 @@ bool GetGodAbility(int level, bool plus)
 				if(plus)
 					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY1_ADD),true,false,false,CL_white_puple);
 				else
-					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_MIMA_GAIN_ABLILITY4_REMOVE),true,false,false,CL_white_puple);
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHINKI_GAIN_ABLILITY1_REMOVE),true,false,false,CL_white_puple);
 				break;
 			case 2:
 				you.Ability(SKL_SHINKI_2,true,!plus);

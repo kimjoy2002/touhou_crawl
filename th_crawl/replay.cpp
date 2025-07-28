@@ -824,6 +824,8 @@ bool score_menu(int value_)
 			printsub("", true, CL_normal);
 			printsub("     ", false, CL_warning);
 			printsub(LocalzationManager::locString(LOC_SYSTEM_SCORE_LIST), true, CL_help);
+			printsub("     ", false, CL_warning);
+			printsub(LocalzationManager::locString(LOC_SYSTEM_SCORE_CAUTION), true, CL_help);
 			printsub("", true, CL_normal);
 
 			if (!scores.empty())

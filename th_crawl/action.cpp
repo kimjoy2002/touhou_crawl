@@ -2395,10 +2395,23 @@ void skill_view()
 
 			if( (key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z') )
 			{
-				int num = (key_ >= 'a' && key_ <= 'z')?key_-'a':key_-'A'+26;
+				bool isUpperCase = false;
+				if(key_ >= 'A' && key_ <= 'Z')
+					isUpperCase = true;
+				int num = (key_ >= 'a' && key_ <= 'z')?key_-'a':key_-'A';
 				if (num < SKT_MAX && you.GetSkillLevel(num,false) < 27 && !you.cannotSkillup(num))
 				{
-					you.skill[num].onoff = (you.skill[num].onoff+1)%3;
+					if(!isUpperCase) {
+						you.skill[num].onoff = (you.skill[num].onoff+1)%3;
+					} else {
+						for(int i = 0; i < SKT_MAX; i++) {
+							you.skill[i].onoff = 0;
+							if(i == num) {
+								you.skill[i].onoff = 1;
+							}
+						}
+
+					}
 				}
 			}
 			else if(key_ == '!')

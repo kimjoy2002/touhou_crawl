@@ -183,7 +183,11 @@ void map_algorithms_sprint(int num)
 
 	//시작
 	addMonster_sprint(num, randA(1) ? MON_KATPA: MON_HUMAM_MAN, &sprint_map);
-	addMonster_sprint(num, randA(2)? (randA(1) ? MON_SUNNY : MON_STAR):MON_LUNAR, &sprint_map);
+	if(you.char_type == UNIQ_START_LUNA || you.char_type == UNIQ_START_STAR || you.char_type == UNIQ_START_SUNNY) {
+		addMonster_sprint(num, randA(1) ? MON_FAIRY_GREEN_WARRIOR : MON_FAIRY_BLUE_MAGICIAN, &sprint_map);
+	} else {
+		addMonster_sprint(num, randA(2)? (randA(1) ? MON_SUNNY : MON_STAR):MON_LUNAR, &sprint_map);
+	}
 	//시작끝
 	addMonster_sprint(num, getMonsterFromFloor(8, GMFF_FLAG_ONLY_MIDDLE), &sprint_map);
 	reward_item(num, REWARD_BONUS_FOR_EARLY, &sprint_map);

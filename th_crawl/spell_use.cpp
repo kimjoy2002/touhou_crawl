@@ -35,7 +35,222 @@
 #include <math.h>
 
 //편의상 (나중에 파일로 빼기)
+#define SPL_MON_TANMAC_SMALL_DICE 1
 #define SPL_MON_TANMAC_SMALL_DAM(pow_) (2 + (pow_) / 3)
+
+#define SPL_MON_TANMAC_MIDDLE_DICE 2
+#define SPL_MON_TANMAC_MIDDLE_DAM(pow_) (12 + (pow_) / 8)
+
+#define SPL_MON_WATER_GUN_DICE 1
+#define SPL_MON_WATER_GUN_DAM(pow_) (15 + (pow_) / 4)
+
+#define SPL_BURN_DICE 1
+#define SPL_BURN_DAM(pow_) (14 + (pow_) / 6)
+
+#define SPL_FLAME_DICE 1
+#define SPL_FLAME_PLAYER_DAM(pow_) (15 + (pow_) / 6)
+#define SPL_FLAME_DAM(pow_) (11 + (pow_) / 6)
+
+#define SPL_FROZEN_DICE 1
+#define SPL_FROZEN_DAM(pow_) (10 + (pow_) / 6)
+
+#define SPL_FROST_DICE 1
+#define SPL_FROST_PLAYER_DAM(pow_) (14 + (pow_) / 5)
+#define SPL_FROST_DAM(pow_) (10 + (pow_) / 5)
+
+#define SPL_FREEZE_DICE 2
+#define SPL_FREEZE_DAM(pow_) (13 + (pow_) / 6)
+
+#define SPL_STING_DICE 1
+#define SPL_STING_DAM(pow_) (6 + (pow_) / 6)
+
+#define SPL_COLD_BEAM_DICE 3
+#define SPL_COLD_BEAM_DAM(pow_) (5 + (pow_) / 9)
+
+#define SPL_SMITE_DICE 1
+#define SPL_SMITE_DAM(pow_) (11 + (pow_) / 7)
+
+#define SPL_SHOCK_DICE 1
+#define SPL_SHOCK_DAM(pow_) (10 + (pow_) / 6)
+
+#define SPL_DISCHARGE_DICE 1
+#define SPL_DISCHARGE_DAM(pow_) (9 + (pow_) / 3)
+
+#define SPL_SUMMON_ELEC_BALL_DICE 3
+#define SPL_SUMMON_ELEC_BALL_DAM(pow_) (8 + (pow_) / 6)
+
+#define SPL_CHAIN_LIGHTNING_DICE 2
+#define SPL_CHAIN_LIGHTNING_DAM(pow_) (8 + (pow_) / 4)
+
+#define SPL_VEILING_DAM(pow_) (12 + (pow_) / 4)
+
+#define SPL_MAGIC_TANMAC_DICE 1
+#define SPL_MAGIC_TANMAC_PLAYER_DAM(pow_) (6 + (pow_) / 3)
+#define SPL_MAGIC_TANMAC_DAM(pow_) (5 + (pow_) / 3)
+
+#define SPL_FIRE_BALL_DICE 3
+#define SPL_FIRE_BALL_DAM(pow_) (7 + (pow_) / 12)
+
+#define SPL_FIRE_BOLT_DICE 3
+#define SPL_FIRE_BOLT_PLAYER_DAM(pow_) (9 + (pow_) / 6)
+#define SPL_FIRE_BOLT_DAM(pow_) (7 + (pow_) / 6)
+
+#define SPL_ICE_BOLT_DICE 3
+#define SPL_ICE_BOLT_PLAYER_DAM(pow_) (9 + (pow_) / 6)
+#define SPL_ICE_BOLT_DAM(pow_) (7 + (pow_) / 6)
+
+#define SPL_VENOM_BOLT_DICE 3
+#define SPL_VENOM_BOLT_DAM(pow_) (6 + (pow_) / 6)
+
+#define SPL_WATER_CANNON_DICE 3
+#define SPL_WATER_CANNON_DAM(pow_) (5 + (pow_) / 6)
+
+#define SPL_KYOKO_SMITE_DICE 1
+#define SPL_KYOKO_SMITE_DAM(pow_) (10 + (pow_) / 4)
+
+#define SPL_HYPNOSIS_DICE 1
+#define SPL_HYPNOSIS_DAM(pow_) (13 + (pow_) / 6)
+#define SPL_HYPNOSIS_OTHERMON_DAM(pow_) (6 + (pow_) / 8)
+
+#define SPL_LASER_DICE 2
+#define SPL_LASER_DAM(pow_) (9 + (pow_) / 8)
+
+#define SPL_SPARK_DICE 5
+#define SPL_SPARK_DAM(pow_) (9 + (pow_) / 18)
+
+#define SPL_SELF_HEAL_MIN(pow_) (2 + (pow_) / 10)
+#define SPL_SELF_HEAL_MAX(pow_) (10 + (pow_) / 5)
+
+#define SPL_HEAL_OTHER_MIN(pow_) (2 + (pow_) / 10)
+#define SPL_HEAL_OTHER_MAX(pow_) (10 + (pow_) / 5)
+
+#define SPL_MIND_BENDING_DICE 1
+#define SPL_MIND_BENDING_DAM(pow_) (13 + (pow_) / 25)
+
+#define SPL_STONE_ARROW_DICE 1
+#define SPL_STONE_ARROW_PLAYER_DAM(pow_) (19 + (pow_) / 5.5)
+#define SPL_STONE_ARROW_DAM(pow_) (15 + (pow_) / 5.5)
+
+#define SPL_STONE_UPLIFT_DICE 3
+#define SPL_STONE_UPLIFT_DAM(pow_) (8 + (pow_) / 14)
+
+#define SPL_KANAME_DRILL_DICE 3
+#define SPL_KANAME_DRILL_PLAYER_DAM(pow_) (18 + (pow_) / 5)
+#define SPL_KANAME_DRILL_DAM(pow_) (18 + (pow_)*0.7f / 5)
+
+#define SPL_BURST_DICE 3
+#define SPL_BURST_DAM(pow_) (6 + (pow_) /18)
+
+#define SPL_SUICIDE_BOMB_DICE 4
+#define SPL_SUICIDE_BOMB_DAM(base_damage_, pow_) ((base_damage_) + (pow_) /20)
+#define SPL_SUICIDE_BOMB_BASE_DAMAGE 13
+
+#define SPL_LUMINUS_STRIKE_DICE 3
+#define SPL_LUMINUS_STRIKE_PLAYER_DAM(pow_) (11 + (pow_) / 8)
+#define SPL_LUMINUS_STRIKE_DAM(pow_) (11 + (pow_)*0.8f / 8)
+
+#define SPL_FIRE_STORM_DICE 9
+#define SPL_FIRE_STORM_DAM(pow_) (10 + (pow_) /20)
+
+#define SPL_PERFERT_FREEZE_DICE 5
+#define SPL_PERFERT_FREEZE_DAM(pow_) (10 + (pow_) /7)
+
+#define SPL_HEAL_ALL_MIN(pow_) (2 + (pow_) / 10)
+#define SPL_HEAL_ALL_MAX(pow_) (10 + (pow_) / 5)
+
+#define SPL_MOON_GUN_DICE 3
+#define SPL_MOON_GUN_DAM(pow_) (6 + (pow_) /8)
+
+#define SPL_BLOOD_SMITE_MIN 10
+#define SPL_BLOOD_SMITE_MAX 20
+
+#define SPL_CANNON_DICE 3
+#define SPL_CANNON_DAM(pow_) (6 + (pow_) /12)
+
+#define SPL_SUMMON_NAMAZ_DICE 8
+#define SPL_SUMMON_NAMAZ_DAM(pow_) (6 + (pow_) /30)
+
+#define SPL_SCHEMA_TANMAC_DICE 2
+#define SPL_SCHEMA_TANMAC_NOORDER_DAM 3
+#define SPL_SCHEMA_TANMAC_DAM(level_) ((3+(level_) *1.5f)/2)
+
+#define SPL_THUNDER_DICE 3
+#define SPL_THUNDER_DAM(pow_) (12 + (pow_) /12)
+
+#define SPL_AIR_STRIKE_DICE 1
+#define SPL_AIR_STRIKE_DAM(pow_) (16 + (pow_) /4)
+
+#define SPL_MACRO_BURST_DICE 4
+#define SPL_MACRO_BURST_DAM(pow_) (14 + (pow_) /12)
+
+#define SPL_SHATTER_DICE 5
+#define SPL_SHATTER_DAM(pow_) (3 + (pow_) /5)
+
+#define SPL_NESY_CANNON_DICE 3
+#define SPL_NESY_CANNON_DAM(pow_) (5 + (pow_) /6)
+
+#define SPL_EMERALD_CITY_DICE 3
+#define SPL_EMERALD_CITY_DAM(pow_) (10 + (pow_) /6)
+
+#define SPL_PSYCHOKINESIS_DICE 1
+#define SPL_PSYCHOKINESIS_DAM(pow_) (11 + (pow_) /7)
+
+#define SPL_TRASH_RUSH_DICE 1
+#define SPL_TRASH_RUSH_DAM(pow_) (13 + (pow_) /16)
+
+#define SPL_THUNDER_BOLT_DICE 3
+#define SPL_THUNDER_BOLT_PLAYER_DAM(pow_) (11 + (pow_) / 6)
+#define SPL_THUNDER_BOLT_DAM(pow_) (9 + (pow_) / 6)
+
+#define SPL_THROW_DISH_DICE 1
+#define SPL_THROW_DISH_DAM(pow_) (11 + (pow_) /6)
+
+#define SPL_HYPER_BEAM_DICE 4
+#define SPL_HYPER_BEAM_DAM(pow_) (12 + (pow_) /8)
+
+#define SPL_THROW_SWORD_DICE 4
+#define SPL_THROW_SWORD_DAM(pow_) (8 + (pow_) /15)
+
+#define SPL_THROW_KNIFE_DICE 3
+#define SPL_THROW_KNIFE_DAM(pow_) (6 + (pow_) /11)
+
+#define SPL_THROW_PLAYER_DICE 1
+#define SPL_THROW_PLAYER_DAM(pow_) 70
+
+#define SPL_THROW_AMULET_DICE 3
+#define SPL_THROW_AMULET_DAM(pow_) (5 + (pow_) /12)
+
+#define SPL_WARP_KICK_MULTI 1.3f
+
+#define SPL_WINDFLAW_DICE 2
+#define SPL_WINDFLAW_DAM(pow_) (7 + (pow_) /6)
+
+#define SPL_MEGATON_KICK_DICE 4
+#define SPL_MEGATON_KICK_DAM(pow_) (22 + (pow_) /14)
+
+#define SPL_THROW_OIL_DICE 3
+#define SPL_THROW_OIL_DAM(pow_) (10 + (pow_) /15)
+
+#define SPL_ALLROUND_TANMAC_DICE 3
+#define SPL_ALLROUND_TANMAC_PLAYER_DAM(pow_) (6 + (pow_) / 9)
+#define SPL_ALLROUND_TANMAC_DAM(pow_) (4 + (pow_) / 9)
+
+#define SPL_THROW_POTION_DICE 3
+#define SPL_THROW_POTION_DAM(pow_) (1 + (pow_) /25)
+
+#define SPL_THROW_RABBIT_DICE 3
+#define SPL_THROW_RABBIT_DAM(pow_) (6 + (pow_) /15)
+
+#define SPL_HANIWA_MAGIC_TANMAC_DICE 1
+#define SPL_HANIWA_MAGIC_TANMAC_DAM(pow_) (7 + (pow_) /10)
+#define SPL_HANIWA_MAGIC_TANMAC2_DICE 2
+#define SPL_HANIWA_MAGIC_TANMAC2_DAM(pow_) (7 + (pow_) /15)
+#define SPL_HANIWA_MAGIC_TANMAC3_DICE 3
+#define SPL_HANIWA_MAGIC_TANMAC3_DAM(pow_) (9 + (pow_) /12)
+
+#define SPL_EARTH_BOLT_DICE 3
+#define SPL_EARTH_BOLT_PLAYER_DAM(pow_) (9 + (pow_) / 6)
+#define SPL_EARTH_BOLT_DAM(pow_) (7 + (pow_) / 6)
 
 
 
@@ -460,7 +675,7 @@ bool skill_tanmac_small(int pow_, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		beam_infor temp_infor(randA_1(SPL_MON_TANMAC_SMALL_DAM(pow_)), SPL_MON_TANMAC_SMALL_DAM(pow_), 17, order, order->GetParentType(), SpellLength(SPL_MON_TANMAC_SMALL, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_TANMAC));
+		beam_infor temp_infor(randC(SPL_MON_TANMAC_SMALL_DICE,SPL_MON_TANMAC_SMALL_DAM(pow_)), SPL_MON_TANMAC_SMALL_DICE*SPL_MON_TANMAC_SMALL_DAM(pow_), 17, order, order->GetParentType(), SpellLength(SPL_MON_TANMAC_SMALL, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -476,12 +691,12 @@ bool skill_tanmac_small(int pow_, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_tanmac_middle(int pow, bool short_, unit* order, coord_def target)
+bool skill_tanmac_middle(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(2,12+pow/8),2*(12+pow/8),14,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_MIDDLE, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
+		beam_infor temp_infor(randC(SPL_MON_TANMAC_MIDDLE_DICE,SPL_MON_TANMAC_MIDDLE_DAM(pow_)),SPL_MON_TANMAC_MIDDLE_DICE*SPL_MON_TANMAC_MIDDLE_DAM(pow_),14,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_MIDDLE, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -497,12 +712,12 @@ bool skill_tanmac_middle(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_water_gun(int pow, bool short_, unit* order, coord_def target)
+bool skill_water_gun(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,15+pow/4),15+pow/4,12,order,order->GetParentType(),SpellLength(SPL_MON_WATER_GUN, order->isplayer()),1,BMT_NORMAL,ATT_THROW_WATER,name_infor(LOC_SYSTEM_ATT_WATERGUN));
+		beam_infor temp_infor(randC(SPL_MON_WATER_GUN_DICE,SPL_MON_WATER_GUN_DAM(pow_)),SPL_MON_WATER_GUN_DICE*SPL_MON_WATER_GUN_DAM(pow_),12,order,order->GetParentType(),SpellLength(SPL_MON_WATER_GUN, order->isplayer()),1,BMT_NORMAL,ATT_THROW_WATER,name_infor(LOC_SYSTEM_ATT_WATERGUN));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -517,12 +732,12 @@ bool skill_water_gun(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_burn(int pow, bool short_, unit* order, coord_def target)
+bool skill_burn(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,14+pow/6),14+pow/6,13,order,order->GetParentType(),SpellLength(SPL_BURN, order->isplayer()),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_BURN));
+		beam_infor temp_infor(randC(SPL_BURN_DICE,SPL_BURN_DAM(pow_)),SPL_BURN_DICE*SPL_BURN_DAM(pow_),13,order,order->GetParentType(),SpellLength(SPL_BURN, order->isplayer()),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_BURN));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -537,14 +752,16 @@ bool skill_burn(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_flame(int pow, bool short_, unit* order, coord_def target)
+bool skill_flame(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int mon_panlty_ = order->isplayer()?0:4;//몬스터가 쓸때 패널티
-		int damage_ = 15+pow/6-mon_panlty_;
-		beam_infor temp_infor(randC(1,damage_),damage_,15+pow/15,order,order->GetParentType(),SpellLength(SPL_FLAME, order->isplayer()),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_BURN));
+		int damage_ = SPL_FLAME_DAM(pow_); //몬스터가 쓸때 패널티
+		if(order->isplayer()) {
+			damage_ = SPL_FLAME_PLAYER_DAM(pow_);
+		}
+		beam_infor temp_infor(randC(SPL_FLAME_DICE,damage_),SPL_FLAME_DICE*damage_,15+pow/15,order,order->GetParentType(),SpellLength(SPL_FLAME, order->isplayer()),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_BURN));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -559,12 +776,12 @@ bool skill_flame(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_frozen(int pow, bool short_, unit* order, coord_def target)
+bool skill_frozen(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,10+pow/6),10+pow/6,99,order,order->GetParentType(),SpellLength(SPL_FROZEN, order->isplayer()),1,BMT_NORMAL,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
+		beam_infor temp_infor(randC(SPL_FROZEN_DICE,SPL_FROZEN_DAM(pow_)),SPL_FROZEN_DICE*SPL_FROZEN_DAM(pow_),99,order,order->GetParentType(),SpellLength(SPL_FROZEN, order->isplayer()),1,BMT_NORMAL,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -579,14 +796,16 @@ bool skill_frozen(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_frost(int pow, bool short_, unit* order, coord_def target)
+bool skill_frost(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int mon_panlty_ = order->isplayer()?0:4;//몬스터가 쓸때 패널티
-		int damage_ = 14+pow/5-mon_panlty_;
-		beam_infor temp_infor(randC(1,damage_),damage_,14+pow/15,order,order->GetParentType(),SpellLength(SPL_FROST, order->isplayer()),1,BMT_NORMAL,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
+		int damage_ = SPL_FROST_DAM(pow_); //몬스터가 쓸때 패널티
+		if(order->isplayer()) {
+			damage_ = SPL_FROST_PLAYER_DAM(pow_);
+		}
+		beam_infor temp_infor(randC(SPL_FROST_DICE,damage_),SPL_FROST_DICE*damage_,14+pow_/15,order,order->GetParentType(),SpellLength(SPL_FROST, order->isplayer()),1,BMT_NORMAL,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -601,7 +820,7 @@ bool skill_frost(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_freeze(int pow, bool short_, unit* order, coord_def target)
+bool skill_freeze(int pow_, bool short_, unit* order, coord_def target)
 {
 	//beam_iterator beam(order->position,order->position);
 	//if(CheckThrowPath(order->position,target,beam))
@@ -609,25 +828,21 @@ bool skill_freeze(int pow, bool short_, unit* order, coord_def target)
 	
 	if(target_unit)
 	{	
-		attack_infor temp_att(randC(2,13+pow/6),2*(13+pow/6),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor(LOC_SYSTEM_ATT_COLD));
+		attack_infor temp_att(randC(SPL_FREEZE_DICE,SPL_FREEZE_DAM(pow_)),SPL_FREEZE_DICE*SPL_FREEZE_DAM(pow_),99,order,order->GetParentType(),ATT_THROW_FREEZING,name_infor(LOC_SYSTEM_ATT_COLD));
 		target_unit->damage(temp_att, true);
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("cold");
 		}
-		//beam_infor temp_infor(randC(2,8+pow/6),2*(8+pow/6),99,order,order->GetParentType(),SpellLength(SPL_FREEZE, order->isplayer()),1,BMT_NORMAL,ATT_THROW_FREEZING,name_infor(LOC_SYSTEM_ATT_COLD));
-		//if(short_)
-		//	temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
-		//throwtanmac(19,beam,temp_infor,NULL);
 		return true;
 	}
 	return false;
 }
-bool skill_sting(int pow, bool short_, unit* order, coord_def target)
+bool skill_sting(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(1,6+pow/6),6+pow/6,14+pow/15,order,order->GetParentType(),SpellLength(SPL_STING, order->isplayer()),1,BMT_NORMAL,ATT_THROW_WEAK_POISON,name_infor(LOC_SYSTEM_ATT_POISONTANMAC));
+		beam_infor temp_infor(randC(SPL_STING_DICE,SPL_STING_DAM(pow_)),SPL_STING_DICE*SPL_STING_DAM(pow_),14+pow/15,order,order->GetParentType(),SpellLength(SPL_STING, order->isplayer()),1,BMT_NORMAL,ATT_THROW_WEAK_POISON,name_infor(LOC_SYSTEM_ATT_POISONTANMAC));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -642,11 +857,11 @@ bool skill_sting(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_medicine_cloud(int pow, bool short_, unit* order, coord_def target)
+bool skill_medicine_cloud(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
-		MakeCloud(target, img_fog_slow, SMT_SLOW, rand_int(8,10), 4+pow/10,0,5, order);
+		MakeCloud(target, img_fog_slow, SMT_SLOW, rand_int(8,10), 4+pow_/10,0,5, order);
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("wind");
 		}
@@ -654,7 +869,7 @@ bool skill_medicine_cloud(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_fire_wall(int pow, bool short_, unit* order, coord_def target)
+bool skill_fire_wall(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
@@ -670,7 +885,7 @@ bool skill_fire_wall(int pow, bool short_, unit* order, coord_def target)
 				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_EXIST_SMOKE),true,false,false,CL_small_danger);
 			return false;
 		}
-		env[current_level].MakeSmoke(target, img_fog_fire, SMT_FIRE, rand_int(7,13)+pow/4,  0, order);
+		env[current_level].MakeSmoke(target, img_fog_fire, SMT_FIRE, rand_int(7,13)+pow_/4,  0, order);
 
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("fire");
@@ -680,7 +895,7 @@ bool skill_fire_wall(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_twist(int pow, bool short_, unit* order, coord_def target)
+bool skill_twist(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
@@ -690,7 +905,7 @@ bool skill_twist(int pow, bool short_, unit* order, coord_def target)
 				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_EXIST_SMOKE),true,false,false,CL_small_danger);
 			return false;
 		}
-		env[current_level].MakeSmoke(target, img_fog_tonado, SMT_TWIST, rand_int(3,8)+pow/5,  0, order);
+		env[current_level].MakeSmoke(target, img_fog_tonado, SMT_TWIST, rand_int(3,8)+pow_/5,  0, order);
 
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("wind");
@@ -699,12 +914,12 @@ bool skill_twist(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_cold_beam(int pow, bool short_, unit* order, coord_def target)
+bool skill_cold_beam(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,5+pow/9),3*(5+pow/9),18,order,order->GetParentType(),SpellLength(SPL_COLD_BEAM, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLDBEAM));
+		beam_infor temp_infor(randC(SPL_COLD_BEAM_DICE,SPL_COLD_BEAM_DAM(pow_)),SPL_COLD_BEAM_DICE*SPL_COLD_BEAM_DAM(pow_),18,order,order->GetParentType(),SpellLength(SPL_COLD_BEAM, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLDBEAM));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -731,7 +946,7 @@ bool skill_cold_beam(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_summon_bug(int pow, bool short_, unit* order, coord_def target)
+bool skill_summon_bug(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 
@@ -748,13 +963,13 @@ bool skill_summon_bug(int pow, bool short_, unit* order, coord_def target)
 	return return_;
 }
 
-bool skill_confuse(int pow, bool short_, unit* order, coord_def target)
+bool skill_confuse(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(unit* hit_mon = DebufBeam(SPL_CONFUSE, order, target))
 	{
-		if(hit_mon->CalcuateMR(GetDebufPower(SPL_CONFUSE,pow)))
+		if(hit_mon->CalcuateMR(GetDebufPower(SPL_CONFUSE,pow_)))
 		{
-			hit_mon->SetConfuse(rand_int(10,20)+randA(pow/10));
+			hit_mon->SetConfuse(rand_int(10,20)+randA(pow_/10));
 		}
 		else if(hit_mon->isYourShight())
 		{
@@ -767,13 +982,13 @@ bool skill_confuse(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_slow(int pow, bool short_, unit* order, coord_def target)
+bool skill_slow(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(unit* hit_mon = DebufBeam(SPL_SLOW, order, target))
 	{
-		if(hit_mon->CalcuateMR(GetDebufPower(SPL_SLOW,pow)))
+		if(hit_mon->CalcuateMR(GetDebufPower(SPL_SLOW,pow_)))
 		{
-			hit_mon->SetSlow(rand_int(15,30)+randA(pow/8));
+			hit_mon->SetSlow(rand_int(15,30)+randA(pow_/8));
 		}
 		else if(hit_mon->isYourShight())
 		{
@@ -787,13 +1002,13 @@ bool skill_slow(int pow, bool short_, unit* order, coord_def target)
 }
 
 
-bool skill_self_heal(int pow, bool short_, unit* order, coord_def target)
+bool skill_self_heal(int pow_, bool short_, unit* order, coord_def target)
 {
-	order->HpUpDown(rand_int(2+pow/10,10+pow/5),DR_NONE);
+	order->HpUpDown(rand_int(SPL_SELF_HEAL_MIN(pow_),SPL_SELF_HEAL_MAX(pow_)),DR_NONE);
 	return true;
 }
 
-bool skill_blink(int pow, bool short_, unit* order, coord_def target)
+bool skill_blink(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(!order->Tele_check(true, false))
 		return false; 
@@ -804,7 +1019,7 @@ bool skill_blink(int pow, bool short_, unit* order, coord_def target)
 
 	return true;
 }
-bool skill_cure_poison(int pow, bool short_, unit* order, coord_def target)
+bool skill_cure_poison(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
@@ -823,13 +1038,13 @@ bool skill_cure_poison(int pow, bool short_, unit* order, coord_def target)
 	return true;
 }
 
-bool skill_smite(int pow, bool short_, unit* order, coord_def target)
+bool skill_smite(int pow_, bool short_, unit* order, coord_def target)
 {	
 	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
 	
 	if(target_unit)
 	{
-		attack_infor temp_att(randA_1(11+pow/7),11+pow/7,99,order,order->GetParentType(),ATT_SMITE,name_infor(LOC_SYSTEM_ATT_SMITE));
+		attack_infor temp_att(randC(SPL_SMITE_DICE,SPL_SMITE_DAM(pow_)),SPL_SMITE_DICE*SPL_SMITE_DAM(pow_),99,order,order->GetParentType(),ATT_SMITE,name_infor(LOC_SYSTEM_ATT_SMITE));
 		
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("smite");
@@ -839,7 +1054,7 @@ bool skill_smite(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_summon_mook(int pow, bool short_, unit* order, coord_def target)
+bool skill_summon_mook(int pow_, bool short_, unit* order, coord_def target)
 {	
 	bool return_=false;
 
@@ -856,7 +1071,7 @@ bool skill_summon_mook(int pow, bool short_, unit* order, coord_def target)
 	return return_;
 
 }
-bool skill_fire_bread(int pow, bool short_, unit* order, coord_def target)
+bool skill_fire_bread(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
@@ -865,7 +1080,7 @@ bool skill_fire_bread(int pow, bool short_, unit* order, coord_def target)
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_FIRE_BRAND,true,false,false,CL_white_blue,
 				 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 			you.equipment[ET_WEAPON]->value5 = WB_FIRE;
-			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+pow/3; 
+			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+pow_/3; 
 			if (env[current_level].isInSight(order->position)) {
 				PlaySE("fire");
 			}
@@ -874,7 +1089,7 @@ bool skill_fire_bread(int pow, bool short_, unit* order, coord_def target)
 		{
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_FIRE_BRAND_MORE,true,false,false,CL_white_blue,
 				 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
-			you.equipment[ET_WEAPON]->value6 += rand_int(8,12)+pow/5;
+			you.equipment[ET_WEAPON]->value6 += rand_int(8,12)+pow_/5;
 			if(you.equipment[ET_WEAPON]->value6>50)
 				you.equipment[ET_WEAPON]->value6 = 50; 
 			if (env[current_level].isInSight(order->position)) {
@@ -888,7 +1103,7 @@ bool skill_fire_bread(int pow, bool short_, unit* order, coord_def target)
 	}
 	return true;
 }
-bool skill_cold_bread(int pow, bool short_, unit* order, coord_def target)
+bool skill_cold_bread(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
@@ -897,7 +1112,7 @@ bool skill_cold_bread(int pow, bool short_, unit* order, coord_def target)
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_COLD_BRAND,true,false,false,CL_white_blue,
 				 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 			you.equipment[ET_WEAPON]->value5 = WB_COLD;
-			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+pow/3; 
+			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+pow_/3; 
 			if (env[current_level].isInSight(order->position)) {
 				PlaySE("cold");
 			}
@@ -906,7 +1121,7 @@ bool skill_cold_bread(int pow, bool short_, unit* order, coord_def target)
 		{
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_COLD_BRAND_MORE,true,false,false,CL_white_blue,
 				 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
-			you.equipment[ET_WEAPON]->value6 += rand_int(8,12)+pow/5;
+			you.equipment[ET_WEAPON]->value6 += rand_int(8,12)+pow_/5;
 			if(you.equipment[ET_WEAPON]->value6>50)
 				you.equipment[ET_WEAPON]->value6 = 50; 
 			if (env[current_level].isInSight(order->position)) {
@@ -921,7 +1136,7 @@ bool skill_cold_bread(int pow, bool short_, unit* order, coord_def target)
 	return true;
 }
 
-bool skill_poison_bread(int pow, bool short_, unit* order, coord_def target)
+bool skill_poison_bread(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
@@ -930,7 +1145,7 @@ bool skill_poison_bread(int pow, bool short_, unit* order, coord_def target)
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_POISON_BRAND,true,false,false,CL_white_blue,
 				 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
 			you.equipment[ET_WEAPON]->value5 = WB_POISON;
-			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+pow/3; 
+			you.equipment[ET_WEAPON]->value6 = rand_int(10,20)+pow_/3; 
 			if (env[current_level].isInSight(order->position)) {
 				PlaySE("fire");
 			}
@@ -939,7 +1154,7 @@ bool skill_poison_bread(int pow, bool short_, unit* order, coord_def target)
 		{
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_POISON_BRAND_MORE,true,false,false,CL_white_blue,
 				 PlaceHolderHelper(you.equipment[ET_WEAPON]->GetName()));
-			you.equipment[ET_WEAPON]->value6 += rand_int(8,12)+pow/5;
+			you.equipment[ET_WEAPON]->value6 += rand_int(8,12)+pow_/5;
 			if(you.equipment[ET_WEAPON]->value6>50)
 				you.equipment[ET_WEAPON]->value6 = 50; 
 			if (env[current_level].isInSight(order->position)) {
@@ -954,7 +1169,7 @@ bool skill_poison_bread(int pow, bool short_, unit* order, coord_def target)
 	return true;
 }
 
-bool skill_elec(int power, bool short_, unit* order, coord_def target)
+bool skill_elec(int pow_, bool short_, unit* order, coord_def target)
 {
 	unit *hit_mon=NULL;
 	int conduct=9999;
@@ -1009,7 +1224,7 @@ bool skill_elec(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("elec");
 		}
-		beam_infor temp_infor(randA_1(10+power/6),10+power/6,99,order,order->GetParentType(),SpellLength(SPL_SHOCK, order->isplayer()),1,BMT_NORMAL,ATT_THROW_ELEC,name_infor(LOC_SYSTEM_ATT_ELECTRIC));
+		beam_infor temp_infor(randC(SPL_SHOCK_DICE,SPL_SHOCK_DAM(pow_)),SPL_SHOCK_DICE*SPL_SHOCK_DAM(pow_),99,order,order->GetParentType(),SpellLength(SPL_SHOCK, order->isplayer()),1,BMT_NORMAL,ATT_THROW_ELEC,name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		ThrowShock(21,order->position,hit_mon->position,temp_infor); 
 		if(env[current_level].isInSight(order->position) || env[current_level].isInSight(hit_mon->position)) {
 			Sleep(120);
@@ -1027,7 +1242,7 @@ bool skill_elec(int power, bool short_, unit* order, coord_def target)
 }
 
 
-bool skill_elec_passive(int power, unit* order)
+bool skill_elec_passive(int pow_, unit* order)
 {
 	unit *hit_mon=NULL;
 	int conduct=9999;
@@ -1074,7 +1289,7 @@ bool skill_elec_passive(int power, unit* order)
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("elec");
 		}
-		beam_infor temp_infor(randA_1(9+power/3),9+power/3,99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor(LOC_SYSTEM_ATT_ELECTRIC));
+		beam_infor temp_infor(randC(SPL_DISCHARGE_DICE, SPL_DISCHARGE_DAM(pow_)),SPL_DISCHARGE_DICE*SPL_DISCHARGE_DAM(pow_),99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		ThrowShock(21,order->position,hit_mon->position,temp_infor); 
 		if(env[current_level].isInSight(order->position) || env[current_level].isInSight(hit_mon->position)) {
 			Sleep(120);
@@ -1086,7 +1301,7 @@ bool skill_elec_passive(int power, unit* order)
 }
 
 
-bool skill_elec_ball_bomb(int power, unit* order)
+bool skill_elec_ball_bomb(int pow_, unit* order)
 {
 	unit *hit_mon = NULL;
 	int conduct = 9999;
@@ -1134,7 +1349,7 @@ bool skill_elec_ball_bomb(int power, unit* order)
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("elec");
 		}
-		beam_infor temp_infor(randC(3, 8 + power * 1 / 6), 3 * (8 + power * 1 / 6), 99, order, order->GetParentType(), spell_length_, 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor(LOC_SYSTEM_ATT_ELECTRIC));
+		beam_infor temp_infor(randC(SPL_SUMMON_ELEC_BALL_DICE, SPL_SUMMON_ELEC_BALL_DAM(pow_)), SPL_SUMMON_ELEC_BALL_DICE * SPL_SUMMON_ELEC_BALL_DAM(pow_), 99, order, order->GetParentType(), spell_length_, 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		ThrowShock(42, order->position, hit_mon->position, temp_infor);
 		if(env[current_level].isInSight(order->position) || env[current_level].isInSight(hit_mon->position)) {
 			Sleep(120);
@@ -1147,7 +1362,7 @@ bool skill_elec_ball_bomb(int power, unit* order)
 
 
 
-bool skill_lightning(int power, unit* order, coord_def *start, int& direc, int count)
+bool skill_lightning(int pow_, unit* order, coord_def *start, int& direc, int count)
 {
 	unit *hit_mon=NULL;
 	int conduct=9999, next_direc= direc;
@@ -1203,7 +1418,7 @@ bool skill_lightning(int power, unit* order, coord_def *start, int& direc, int c
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("elec");
 		}
-		beam_infor temp_infor(randC(2,8+power*1/4),2*(8+power*1/4),99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor(LOC_SYSTEM_ATT_ELECTRIC));
+		beam_infor temp_infor(randC(SPL_CHAIN_LIGHTNING_DICE,SPL_CHAIN_LIGHTNING_DAM(pow_)),SPL_CHAIN_LIGHTNING_DICE*SPL_CHAIN_LIGHTNING_DAM(pow_),99,order,order->GetParentType(),spell_length_,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		if(ThrowShock(42,(*start),hit_mon->position,temp_infor))
 		{
 			(*start) = hit_mon->position;
@@ -1216,7 +1431,7 @@ bool skill_lightning(int power, unit* order, coord_def *start, int& direc, int c
 	}
 	return true;
 }
-bool skill_chain_lightning(int power, bool short_, unit* order, coord_def target)
+bool skill_chain_lightning(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool hit_ = false;
 	int chain = rand_int(3,6);
@@ -1225,11 +1440,11 @@ bool skill_chain_lightning(int power, bool short_, unit* order, coord_def target
 	coord_def cur = order->position;
 	while(chain)
 	{
-		if(!skill_lightning(power, order, &cur, direc,count++))
+		if(!skill_lightning(pow_, order, &cur, direc,count++))
 		{
 			break;
 		}
-		power =  power*9/10;
+		pow_ =  pow_*9/10;
 		hit_ = true;
 		if(chain--<1)
 			break;
@@ -1320,30 +1535,30 @@ bool base_bomb(int damage, int max_damage, int size, attack_type type, unit* ord
 	return false;
 }
 
-bool skill_discharge(int pow, bool short_, unit* order, coord_def target)
+bool skill_discharge(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (env[current_level].isInSight(order->position)) {
 		PlaySE("elec");
 	}
-	order->SetElec(15+pow/5);
+	order->SetElec(15+pow_/5);
 	return true;
 }
 
-bool skill_levitation(int pow, bool short_, unit* order, coord_def target)
+bool skill_levitation(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (env[current_level].isInSight(order->position)) {
 		PlaySE("wind");
 	}
-	order->SetLevitation(rand_int(30,50)+pow/2);
+	order->SetLevitation(rand_int(30,50)+pow_/2);
 	return true;
 }
-bool skill_glow(int pow, bool short_, unit* order, coord_def target)
+bool skill_glow(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(unit* hit_mon = DebufBeam(SPL_GLOW, order, target))
 	{
-		if(hit_mon->CalcuateMR(GetDebufPower(SPL_GLOW,pow)))
+		if(hit_mon->CalcuateMR(GetDebufPower(SPL_GLOW,pow_)))
 		{
-			hit_mon->SetGlow(rand_int(15,30)+randA(pow/8));
+			hit_mon->SetGlow(rand_int(15,30)+randA(pow_/8));
 		}
 		else if(hit_mon->isYourShight())
 		{
@@ -1356,22 +1571,22 @@ bool skill_glow(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_graze(int pow, bool short_, unit* order, coord_def target)
+bool skill_graze(int pow_, bool short_, unit* order, coord_def target)
 {
-	order->SetGraze(rand_int(30,50)+pow/2);
+	order->SetGraze(rand_int(30,50)+pow_/2);
 	return true;
 }
 
-bool skill_veiling(int pow, bool short_, unit* order, coord_def target)
+bool skill_veiling(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (env[current_level].isInSight(order->position)) {
 		PlaySE("wind");
 	}
-	order->SetVeiling(10+pow/7,12+pow/4);
+	order->SetVeiling(10+pow_/7,SPL_VEILING_DAM(pow_));
 	return true;
 }
 
-bool skill_invisible(int pow, bool short_, unit* order, coord_def target)
+bool skill_invisible(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (env[current_level].isInSight(order->position)) {
 		PlaySE("spellcard");
@@ -1380,22 +1595,22 @@ bool skill_invisible(int pow, bool short_, unit* order, coord_def target)
 	return true;
 }
 
-bool skill_haste(int pow, bool short_, unit* order, coord_def target)
+bool skill_haste(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order == &you)
 	{
-		you.SetAlchemyBuff(ALCT_HASTE,rand_int(30,50)+pow/4);
+		you.SetAlchemyBuff(ALCT_HASTE,rand_int(30,50)+pow_/4);
 	}
 	else
 		order->SetHaste(rand_int(30,80));
 	return true;
 }
-bool skill_silence(int pow, bool short_, unit* order, coord_def target)
+bool skill_silence(int pow_, bool short_, unit* order, coord_def target)
 {
-	order->SetSilence(rand_int(20,30)+pow/10,(4+pow/50)*2);
+	order->SetSilence(rand_int(20,30)+pow_/10,(4+pow_/50)*2);
 	return true;
 }
-bool skill_santuary(int pow, bool short_, unit* order, coord_def target)
+bool skill_santuary(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (order && order->GetExhausted())
 		return false;
@@ -1411,19 +1626,21 @@ bool skill_santuary(int pow, bool short_, unit* order, coord_def target)
 	}
 	return true;
 }
-bool skill_swift(int pow, bool short_, unit* order, coord_def target)
+bool skill_swift(int pow_, bool short_, unit* order, coord_def target)
 {
-	order->SetSwift(rand_int(30,50)+pow/2);
+	order->SetSwift(rand_int(30,50)+pow_/2);
 	return true;
 }
-bool skill_magic_tanmac(int pow, bool short_, unit* order, coord_def target)
+bool skill_magic_tanmac(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int mon_panlty_ = order->isplayer()?0:1;//몬스터가 쓸때 패널티
-		int damage_ = 6+pow/3-mon_panlty_;
-		beam_infor temp_infor(randA_1(damage_),damage_,99,order,order->GetParentType(),SpellLength(SPL_MAGIC_TANMAC, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
+		int damage_ = SPL_MAGIC_TANMAC_DAM(pow_); //몬스터가 쓸때 패널티
+		if(order->isplayer()) {
+			damage_ = SPL_MAGIC_TANMAC_PLAYER_DAM(pow_);
+		}
+		beam_infor temp_infor(randC(SPL_MAGIC_TANMAC_DICE, damage_),SPL_MAGIC_TANMAC_DICE*damage_,99,order,order->GetParentType(),SpellLength(SPL_MAGIC_TANMAC, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));		
 		
@@ -1438,7 +1655,7 @@ bool skill_magic_tanmac(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_fire_ball(int power, bool short_, unit* order, coord_def target)
+bool skill_fire_ball(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	int length_ = GetLengthFromCenter(order->position.x, order->position.y, target.x, target.y);
@@ -1450,7 +1667,7 @@ bool skill_fire_ball(int power, bool short_, unit* order, coord_def target)
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 		{
 			coord_def pos = throwtanmac(16,beam,temp_infor,NULL);
-			attack_infor temp_att(randC(3,7+power/12),3*(7+power/12),99,order,order->GetParentType(),ATT_FIRE_BLAST,name_infor(LOC_SYSTEM_ATT_FIREBALL));
+			attack_infor temp_att(randC(SPL_FIRE_BALL_DICE,SPL_FIRE_BALL_DAM(pow_)),3*SPL_FIRE_BALL_DAM(pow_),99,order,order->GetParentType(),ATT_FIRE_BLAST,name_infor(LOC_SYSTEM_ATT_FIREBALL));
 			
 			if (env[current_level].isInSight(order->position)) {
 				PlaySE("bomb");
@@ -1462,14 +1679,16 @@ bool skill_fire_ball(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_fire_bolt(int pow, bool short_, unit* order, coord_def target)
+bool skill_fire_bolt(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int mon_panlty_ = order->isplayer()?0:2;//몬스터가 쓸때 패널티
-		int damage_ = 9+pow/6-mon_panlty_;
-		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),SpellLength(SPL_FIRE_BOLT, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_FIRE));
+		int damage_ = SPL_FIRE_BOLT_DAM(pow_); //몬스터가 쓸때 패널티
+		if(order->isplayer()) {
+			damage_ = SPL_FIRE_BOLT_PLAYER_DAM(pow_);
+		}
+		beam_infor temp_infor(randC(SPL_FIRE_BOLT_DICE,damage_),SPL_FIRE_BOLT_DICE*(damage_),18+pow_/25,order,order->GetParentType(),SpellLength(SPL_FIRE_BOLT, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_FIRE));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1484,14 +1703,16 @@ bool skill_fire_bolt(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_ice_bolt(int pow, bool short_, unit* order, coord_def target)
+bool skill_ice_bolt(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int mon_panlty_ = order->isplayer()?0:2;//몬스터가 쓸때 패널티
-		int damage_ = 9+pow/6-mon_panlty_;
-		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),SpellLength(SPL_ICE_BOLT, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
+		int damage_ = SPL_ICE_BOLT_DAM(pow_); //몬스터가 쓸때 패널티
+		if(order->isplayer()) {
+			damage_ = SPL_ICE_BOLT_PLAYER_DAM(pow_);
+		}
+		beam_infor temp_infor(randC(SPL_ICE_BOLT_DICE,damage_),SPL_ICE_BOLT_DICE*(damage_),18+pow_/25,order,order->GetParentType(),SpellLength(SPL_ICE_BOLT, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1506,12 +1727,12 @@ bool skill_ice_bolt(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_venom_bolt(int pow, bool short_, unit* order, coord_def target)
+bool skill_venom_bolt(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,6+pow/6),3*(6+pow/6),19,order,order->GetParentType(),SpellLength(SPL_VENOM_BOLT, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_MIDDLE_POISON,name_infor(LOC_SYSTEM_ATT_VENOM));
+		beam_infor temp_infor(randC(SPL_VENOM_BOLT_DICE,SPL_VENOM_BOLT_DAM(pow_)),SPL_VENOM_BOLT_DICE*SPL_VENOM_BOLT_DAM(pow_),19,order,order->GetParentType(),SpellLength(SPL_VENOM_BOLT, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_MIDDLE_POISON,name_infor(LOC_SYSTEM_ATT_VENOM));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1526,7 +1747,7 @@ bool skill_venom_bolt(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_confuse_cloud(int power, bool short_, unit* order, coord_def target)
+bool skill_confuse_cloud(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	int length_ =  GetLengthFromCenter(order->position.x, order->position.y, target.x, target.y);
@@ -1550,7 +1771,7 @@ bool skill_confuse_cloud(int power, bool short_, unit* order, coord_def target)
 							env[current_level].MakeEffect(coord_def(pos.x+k,pos.y+j),&img_fog_confusion[0],false);
 				for(int k=-1;k<=1;k++)
 					for(int j=-1;j<=1;j++)
-							env[current_level].MakeSmoke(coord_def(pos.x+k,pos.y+j),img_fog_confusion,SMT_CONFUSE,rand_int(6,12)+randA(power/15),0,order);
+							env[current_level].MakeSmoke(coord_def(pos.x+k,pos.y+j),img_fog_confusion,SMT_CONFUSE,rand_int(6,12)+randA(pow_/15),0,order);
 
 				if(env[current_level].isInSight(pos)) {
 					Sleep(300);
@@ -1566,38 +1787,38 @@ bool skill_confuse_cloud(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_poison_cloud(int pow, bool short_, unit* order, coord_def target)
+bool skill_poison_cloud(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("wind");
 		}
-		MakeCloud(target, img_fog_poison, SMT_POISON, rand_int(8,10), rand_int(7,10)+randA(pow/10),0,5, order);
+		MakeCloud(target, img_fog_poison, SMT_POISON, rand_int(8,10), rand_int(7,10)+randA(pow_/10),0,5, order);
 		return true;
 	}
 	return false;
 }
-bool skill_ice_cloud(int pow, bool short_, unit* order, coord_def target)
+bool skill_ice_cloud(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("cold");
 		}
-		MakeCloud(target, img_fog_cold, SMT_COLD, rand_int(8,10), rand_int(7,10)+randA(pow/10),0,5, order);
+		MakeCloud(target, img_fog_cold, SMT_COLD, rand_int(8,10), rand_int(7,10)+randA(pow_/10),0,5, order);
 		return true;
 	}
 	return false;
 }
-bool skill_summon_bird(int pow, bool short_, unit* order, coord_def target)
+bool skill_summon_bird(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 	dif_rect_iterator rit(order->position,2);
 	int id_ = MON_CROW;
-	int time_ = rand_int(20,30)+randA(pow);
+	int time_ = rand_int(20,30)+randA(pow_);
 
-	int pow_ = pow/3+randA(pow*2/3);
+	int pow_ = pow_/3+randA(pow_*2/3);
 	int i = 2;
 
 	if(pow_<=10)//까마귀
@@ -1606,7 +1827,7 @@ bool skill_summon_bird(int pow, bool short_, unit* order, coord_def target)
 	}
 	else if(pow_<=30 || randA(2) == 0)//까마귀
 	{
-		//i=(randA_1(20) < pow?3:2);
+		//i=(randA_1(20) < pow_?3:2);
 	}
 	else if(pow_<=70  || randA(2) == 0)//나중에 까마귀에서 바꾸자
 	{
@@ -1632,7 +1853,7 @@ bool skill_summon_bird(int pow, bool short_, unit* order, coord_def target)
 	return return_;
 }
 
-bool skill_recall(int pow, bool short_, unit* order, coord_def target)
+bool skill_recall(int pow_, bool short_, unit* order, coord_def target)
 {
 	deque<monster*> dq;
 	for(vector<monster>::iterator it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end();it++)
@@ -1664,13 +1885,13 @@ bool skill_recall(int pow, bool short_, unit* order, coord_def target)
 	return true;
 }
 
-bool skill_teleport_other(int pow, bool short_, unit* order, coord_def target)
+bool skill_teleport_other(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(isArena())
 		return false;
 	if(unit* hit_mon = DebufBeam(SPL_TELEPORT_OTHER, order, target))
 	{
-		if(hit_mon->CalcuateMR(GetDebufPower(SPL_TELEPORT_OTHER,pow)))
+		if(hit_mon->CalcuateMR(GetDebufPower(SPL_TELEPORT_OTHER,pow_)))
 		{
 			hit_mon->SetTele(rand_int(3,6));
 		}
@@ -1685,7 +1906,7 @@ bool skill_teleport_other(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_teleport_self(int pow, bool short_, unit* order, coord_def target)
+bool skill_teleport_self(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(isArena())
 		return false;
@@ -1696,7 +1917,7 @@ bool skill_teleport_self(int pow, bool short_, unit* order, coord_def target)
 }
 
 
-bool skill_whirlwind(int pow, bool short_, unit* order, coord_def target)
+bool skill_whirlwind(int pow_, bool short_, unit* order, coord_def target)
 {
 
 	if(env[current_level].isMove(target.x, target.y, true))
@@ -1739,7 +1960,7 @@ bool skill_whirlwind(int pow, bool short_, unit* order, coord_def target)
 						//		hit_->damage(temp_att, true);
 						//	}
 						//}
-						env[current_level].MakeSmoke((*rit), img_fog_tonado, SMT_WHIRLWIND, 3+pow/20,  0, order);
+						env[current_level].MakeSmoke((*rit), img_fog_tonado, SMT_WHIRLWIND, 3+pow_/20,  0, order);
 					}
 				}
 			}
@@ -1751,7 +1972,7 @@ bool skill_whirlwind(int pow, bool short_, unit* order, coord_def target)
 }
 
 
-bool skill_summon_pendulum(int pow, bool short_, unit* order, coord_def target)
+bool skill_summon_pendulum(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 
@@ -1770,11 +1991,11 @@ bool skill_summon_pendulum(int pow, bool short_, unit* order, coord_def target)
 	}
 	return return_;
 }
-bool skill_summon_sekibanki(int pow, bool short_, unit* order, coord_def target)
+bool skill_summon_sekibanki(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 	
-	int i = pow==200?4:1; 
+	int i = pow_==200?4:1; 
 	for(; i>0 ; i--)
 	{
 		if(BaseSummon(MON_SEKIBANKI_HEAD, rand_int(90,120), true, true, 2, order, target, SKD_SUMMON_SEKIBANKI, GetSummonMaxNumber(SPL_SUMMON_SEKIBANKI)))
@@ -1790,12 +2011,12 @@ bool skill_summon_sekibanki(int pow, bool short_, unit* order, coord_def target)
 	return return_;
 
 }
-bool skill_water_cannon(int pow, bool short_, unit* order, coord_def target)
+bool skill_water_cannon(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,5+pow/6),3*(5+pow/6),18,order,order->GetParentType(),SpellLength(SPL_WATER_CANNON, order->isplayer()),1,BMT_NORMAL,ATT_THROW_WATER,name_infor(LOC_SYSTEM_ATT_WATERPRESSURE));
+		beam_infor temp_infor(randC(SPL_WATER_CANNON_DICE,SPL_WATER_CANNON_DAM(pow_)),SPL_WATER_CANNON_DICE*SPL_WATER_CANNON_DAM(pow_),18,order,order->GetParentType(),SpellLength(SPL_WATER_CANNON, order->isplayer()),1,BMT_NORMAL,ATT_THROW_WATER,name_infor(LOC_SYSTEM_ATT_WATERPRESSURE));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1839,7 +2060,7 @@ bool skill_water_cannon(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_kyoko_smite(int pow, bool short_, unit* order, coord_def target)
+bool skill_kyoko_smite(int pow_, bool short_, unit* order, coord_def target)
 {	
 	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
 	
@@ -1848,7 +2069,7 @@ bool skill_kyoko_smite(int pow, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("smite");
 		}
-		attack_infor temp_att(randA_1(10+pow/4),10+pow/4,99,order,order->GetParentType(),ATT_NOISE,name_infor(LOC_SYSTEM_ATT_NOISE));
+		attack_infor temp_att(randC(SPL_KYOKO_SMITE_DICE,SPL_KYOKO_SMITE_DAM(pow_)),SPL_KYOKO_SMITE_DICE*SPL_KYOKO_SMITE_DAM(pow_),99,order,order->GetParentType(),ATT_NOISE,name_infor(LOC_SYSTEM_ATT_NOISE));
 		target_unit->damage(temp_att, true);
 		if(randA(10)==0)
 			target_unit->SetConfuse(rand_int(3,6));
@@ -1856,7 +2077,7 @@ bool skill_kyoko_smite(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_summon_option(int pow, bool short_, unit* order, coord_def target)
+bool skill_summon_option(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 	
@@ -1865,7 +2086,7 @@ bool skill_summon_option(int pow, bool short_, unit* order, coord_def target)
 	{
 		if(monster *mon_ = BaseSummon(MON_MAGICAL_STAR, rand_int(30,60), true, false, 2, order, target, SKD_SUMMON_OPTION, GetSummonMaxNumber(SPL_SUMMON_OPTION)))
 		{
-			mon_->LevelUpdown(pow/20,5.0f);
+			mon_->LevelUpdown(pow_/20,5.0f);
 			return_ = true;
 		}
 	} 
@@ -1876,7 +2097,7 @@ bool skill_summon_option(int pow, bool short_, unit* order, coord_def target)
 	}
 	return return_;
 }
-bool skill_summon_golem(int pow, bool short_, unit* order, coord_def target)
+bool skill_summon_golem(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 	
@@ -1886,7 +2107,7 @@ bool skill_summon_golem(int pow, bool short_, unit* order, coord_def target)
 		if(monster *mon_ = BaseSummon(MON_GOLEM, rand_int(60,120), true, false, 2, order, target, SKD_SUMMON_GOLEM, GetSummonMaxNumber(SPL_SUMMON_GOLEM)))
 		{
 			order->SetSaved(true);
-			mon_->LevelUpdown(pow/20);
+			mon_->LevelUpdown(pow_/20);
 			return_ = true;
 		}
 	} 
@@ -1897,11 +2118,11 @@ bool skill_summon_golem(int pow, bool short_, unit* order, coord_def target)
 	}
 	return return_;
 }
-bool skill_hypnosis(int pow, bool short_, unit* order, coord_def target)
+bool skill_hypnosis(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(unit* hit_mon = DebufBeam(SPL_HYPNOSIS, order, target))
 	{
-		if(hit_mon->CalcuateMR(GetDebufPower(SPL_HYPNOSIS,pow)))
+		if(hit_mon->CalcuateMR(GetDebufPower(SPL_HYPNOSIS,pow_)))
 		{
 			rand_rect_iterator rit(hit_mon->position,1,1,true);
 			unit* unit_ = NULL; //부딪힌 적
@@ -1915,7 +2136,7 @@ bool skill_hypnosis(int pow, bool short_, unit* order, coord_def target)
 				if (env[current_level].isInSight(order->position)) {
 					PlaySE("stone");
 				}
-				attack_infor temp_att(randC(1,13+pow/6),(13+pow/6),99,NULL,order->GetParentType(),ATT_WALL,name_infor(LOC_SYSTEM_ATT_CRASH));
+				attack_infor temp_att(randC(SPL_HYPNOSIS_DICE,SPL_HYPNOSIS_DAM(pow_)),SPL_HYPNOSIS_DICE*SPL_HYPNOSIS_DAM(pow_),99,NULL,order->GetParentType(),ATT_WALL,name_infor(LOC_SYSTEM_ATT_CRASH));
 				hit_mon->damage(temp_att, true);
 			}
 			else if(unit_)
@@ -1924,11 +2145,11 @@ bool skill_hypnosis(int pow, bool short_, unit* order, coord_def target)
 					PlaySE("stone");
 				}
 				{
-					attack_infor temp_att(randC(1,13+pow/6),(13+pow/6),99,unit_,order->GetParentType(),ATT_WALL,name_infor(LOC_SYSTEM_ATT_CRASH));
+					attack_infor temp_att(randC(SPL_HYPNOSIS_DICE,SPL_HYPNOSIS_DAM(pow_)),SPL_HYPNOSIS_DICE*SPL_HYPNOSIS_DAM(pow_),99,unit_,order->GetParentType(),ATT_WALL,name_infor(LOC_SYSTEM_ATT_CRASH));
 					hit_mon->damage(temp_att, true);
 				}				
 				{
-					attack_infor temp_att(randC(1,6+pow/8),(6+pow/8),99,hit_mon,order->GetParentType(),ATT_WALL,name_infor(LOC_SYSTEM_ATT_CRASH));
+					attack_infor temp_att(randC(SPL_HYPNOSIS_DICE,SPL_HYPNOSIS_OTHERMON_DAM(pow_)),SPL_HYPNOSIS_DICE*SPL_HYPNOSIS_OTHERMON_DAM(pow_),99,hit_mon,order->GetParentType(),ATT_WALL,name_infor(LOC_SYSTEM_ATT_CRASH));
 					unit_->damage(temp_att, true);
 				}
 			}
@@ -1954,14 +2175,14 @@ bool skill_hypnosis(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_mute(int pow, bool short_, unit* order, coord_def target)
+bool skill_mute(int pow_, bool short_, unit* order, coord_def target)
 { 
 
 	if(unit* hit_mon = DebufBeam(SPL_MUTE, order, target))
 	{
-		if(hit_mon->CalcuateMR(GetDebufPower(SPL_MUTE,pow)))
+		if(hit_mon->CalcuateMR(GetDebufPower(SPL_MUTE,pow_)))
 		{
-			hit_mon->SetMute(rand_int(20+pow/2,40+pow/2));
+			hit_mon->SetMute(rand_int(20+pow_/2,40+pow_/2));
 		}
 		else if(hit_mon->isYourShight())
 		{
@@ -1973,11 +2194,11 @@ bool skill_mute(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_self_injury(int pow, bool short_, unit* order, coord_def target)
+bool skill_self_injury(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(unit* hit_mon = DebufBeam(SPL_SELF_INJURY, order, target))
 	{
-		if(hit_mon->CalcuateMR(GetDebufPower(SPL_SELF_INJURY,pow)))
+		if(hit_mon->CalcuateMR(GetDebufPower(SPL_SELF_INJURY,pow_)))
 		{ //나중에 추가할것-> 마법을 쓰는 캐릭터는 마법으로 자해할 가능성?
 			if(!hit_mon->isplayer())
 			{
@@ -2033,13 +2254,13 @@ bool skill_self_injury(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_charm(int pow, bool short_, unit* order, coord_def target)
+bool skill_charm(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(unit* hit_mon = DebufBeam(SPL_CHARM, order, target))
 	{
-		if(hit_mon->CalcuateMR(GetDebufPower(SPL_CHARM,pow)))
+		if(hit_mon->CalcuateMR(GetDebufPower(SPL_CHARM,pow_)))
 		{
-			hit_mon->SetCharm(rand_int(20+pow/2,40+pow/2));
+			hit_mon->SetCharm(rand_int(20+pow_/2,40+pow_/2));
 			hit_mon->CheckSightNewTarget();
 		}
 		else if(hit_mon->isYourShight())
@@ -2053,12 +2274,12 @@ bool skill_charm(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_laser(int pow, bool short_, unit* order, coord_def target)
+bool skill_laser(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(2,9+pow/8),2*(9+pow/8),18,order,order->GetParentType(),SpellLength(SPL_LASER, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_LASER));
+		beam_infor temp_infor(randC(SPL_LASER_DICE,SPL_LASER_DAM(pow_)),SPL_LASER_DICE*SPL_LASER_DAM(pow_),18,order,order->GetParentType(),SpellLength(SPL_LASER, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_LASER));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -2074,7 +2295,7 @@ bool skill_laser(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_spark(int pow, bool short_, unit* order, coord_def target)
+bool skill_spark(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
@@ -2088,14 +2309,14 @@ bool skill_spark(int pow, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("spark");
 		}
-		beam_infor temp_infor(randC(5,9+pow/18),5*(9+pow/18),99,order,order->GetParentType(),SpellLength(SPL_SPARK, order->isplayer()),7,BMT_PENETRATE,ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_SPARK));
+		beam_infor temp_infor(randC(SPL_SPARK_DICE,SPL_SPARK_DAM(pow_)),SPL_SPARK_DICE*SPL_SPARK_DAM(pow_),99,order,order->GetParentType(),SpellLength(SPL_SPARK, order->isplayer()),7,BMT_PENETRATE,ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_SPARK));
 		ThrowSector(46,beam,temp_infor,GetSpellSector(SPL_SPARK),[&](coord_def c_){
 		},false);
 		return true;
 	}
 	return false;
 }
-bool skill_summon_unzan(int pow, bool short_, unit* order, coord_def target)
+bool skill_summon_unzan(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 	
@@ -2115,7 +2336,7 @@ bool skill_summon_unzan(int pow, bool short_, unit* order, coord_def target)
 	return return_;
 
 }
-bool skill_summon_unzan_punch(int pow, bool short_, unit* order, coord_def target)
+bool skill_summon_unzan_punch(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 	
@@ -2135,7 +2356,7 @@ bool skill_summon_unzan_punch(int pow, bool short_, unit* order, coord_def targe
 	}
 	return return_;
 }
-bool skill_summon_zombie_fairy(int pow, bool short_, unit* order, coord_def target)
+bool skill_summon_zombie_fairy(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 	
@@ -2155,14 +2376,14 @@ bool skill_summon_zombie_fairy(int pow, bool short_, unit* order, coord_def targ
 	return return_;
 }
 
-bool skill_summon_ufo(int pow, bool short_, unit* order, coord_def target)
+bool skill_summon_ufo(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 	
 	int i = 1; 
 	for(; i>0 ; i--)
 	{
-		int time_ = rand_int(30+pow/4,60+pow/4);
+		int time_ = rand_int(30+pow_/4,60+pow_/4);
 		if(monster *mon_ = BaseSummon(randA(2)?(randA(1)?MON_BLUE_UFO:MON_GREEN_UFO):MON_RED_UFO, time_, true, false, 2, order, target, SKD_SUMMON_UFO, GetSummonMaxNumber(SPL_SUMMON_UFO)))
 		{
 			return_ = true;
@@ -2175,7 +2396,7 @@ bool skill_summon_ufo(int pow, bool short_, unit* order, coord_def target)
 	}
 	return return_;
 }
-bool skill_haste_other(int pow, bool short_, unit* order, coord_def target)
+bool skill_haste_other(int pow_, bool short_, unit* order, coord_def target)
 {	
 	if(order->isplayer())
 		return false;
@@ -2224,11 +2445,11 @@ bool skill_haste_other(int pow, bool short_, unit* order, coord_def target)
 
 	monster* final_target = target_mon_list.back();
 
-	final_target->SetHaste(rand_int(20+pow/3,40+pow/3));
+	final_target->SetHaste(rand_int(20+pow_/3,40+pow_/3));
 
 	return true;
 }
-bool skill_heal_other(int pow, bool short_, unit* order, coord_def target)
+bool skill_heal_other(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 		return false;
@@ -2277,7 +2498,7 @@ bool skill_heal_other(int pow, bool short_, unit* order, coord_def target)
 
 	monster* final_target = target_mon_list.back();
 	
-	final_target->HpUpDown(rand_int(2+pow/10,10+pow/5),DR_NONE);
+	final_target->HpUpDown(rand_int(SPL_HEAL_OTHER_MIN(pow_),SPL_HEAL_OTHER_MAX(pow_)),DR_NONE);
 	if(env[current_level].isInSight(final_target->position)) {
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_HEALED,true,false,false,CL_normal,
 			PlaceHolderHelper(final_target->GetName()->getName()));
@@ -2286,12 +2507,12 @@ bool skill_heal_other(int pow, bool short_, unit* order, coord_def target)
 	return true;
 
 }
-bool skill_mind_bending(int pow, bool short_, unit* order, coord_def target)
+bool skill_mind_bending(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randA_1(13+pow/25),13+pow/25,17+pow/15,order,order->GetParentType(),SpellLength(SPL_MIND_BENDING, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
+		beam_infor temp_infor(randC(SPL_MIND_BENDING_DICE, SPL_MIND_BENDING_DAM(pow_)),SPL_MIND_BENDING_DICE*SPL_MIND_BENDING_DAM(pow_),17+pow/15,order,order->GetParentType(),SpellLength(SPL_MIND_BENDING, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
 		
 		
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
@@ -2303,9 +2524,9 @@ bool skill_mind_bending(int pow, bool short_, unit* order, coord_def target)
 			unit* hit_mon = env[current_level].isMonsterPos(c_.x,c_.y,order);
 			if(hit_mon)
 			{		
-				if(hit_mon->CalcuateMR(GetDebufPower(SPL_MIND_BENDING,pow)))
+				if(hit_mon->CalcuateMR(GetDebufPower(SPL_MIND_BENDING,pow_)))
 				{
-					hit_mon->SetSlow(rand_int(10,20)+randA(pow/12));
+					hit_mon->SetSlow(rand_int(10,20)+randA(pow_/12));
 				}
 				else if(hit_mon->isYourShight())
 				{
@@ -2320,7 +2541,7 @@ bool skill_mind_bending(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_stone_punch(int pow, bool short_, unit* order, coord_def target)
+bool skill_stone_punch(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order == &you)
 	{
@@ -2329,19 +2550,21 @@ bool skill_stone_punch(int pow, bool short_, unit* order, coord_def target)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_SHOULD_UNARMED),true,false,false,CL_normal);
 			return false;
 		}
-		you.SetAlchemyBuff(ALCT_STONE_FIST,rand_int(8,15)+pow/5);
+		you.SetAlchemyBuff(ALCT_STONE_FIST,rand_int(8,15)+pow_/5);
 		return true;
 	}
 	return false;
 }
-bool skill_stone_arrow(int pow, bool short_, unit* order, coord_def target)
+bool skill_stone_arrow(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int mon_panlty_ = order->isplayer()?0:4;//몬스터가 쓸때 패널티
-		int damage_ = 19+pow/5.5-mon_panlty_;
-		beam_infor temp_infor(randC(1,damage_),damage_,13+pow/15,order,order->GetParentType(),SpellLength(SPL_STONE_ARROW, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_STONE));
+		int damage_ = SPL_STONE_ARROW_DAM(pow_); //몬스터가 쓸때 패널티
+		if(order->isplayer()) {
+			damage_ = SPL_STONE_ARROW_PLAYER_DAM(pow_);
+		}
+		beam_infor temp_infor(randC(SPL_STONE_ARROW_DICE,damage_),SPL_STONE_ARROW_DICE*damage_,13+pow/15,order,order->GetParentType(),SpellLength(SPL_STONE_ARROW, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_STONE));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -2356,7 +2579,7 @@ bool skill_stone_arrow(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_stone_trap(int pow, bool short_, unit* order, coord_def target)
+bool skill_stone_trap(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
@@ -2369,11 +2592,11 @@ bool skill_stone_trap(int pow, bool short_, unit* order, coord_def target)
 
 		if(order == &you)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_STONE_TRAP),true,false,false,CL_normal);
-		env[current_level].MakeFloorEffect(target,&img_effect_rock_trap,&img_effect_rock_trap,FLOORT_STONE,20+pow/4,&you);
+		env[current_level].MakeFloorEffect(target,&img_effect_rock_trap,&img_effect_rock_trap,FLOORT_STONE,20+pow_/4,&you);
 		rand_rect_iterator rit(target,1,1);
 		for(;!rit.end();rit++)
 		{
-			if(randA(75)<pow)
+			if(randA(75)<pow_)
 			{
 				env[current_level].MakeFloorEffect((*rit),&img_effect_rock_trap,&img_effect_rock_trap,FLOORT_STONE,20+pow/4,&you);
 			}
@@ -2383,7 +2606,7 @@ bool skill_stone_trap(int pow, bool short_, unit* order, coord_def target)
 		
 	return false;
 }
-bool skill_stone_uplift(int pow, bool short_, unit* order, coord_def target)
+bool skill_stone_uplift(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isMove(target.x, target.y))
 	{
@@ -2395,7 +2618,7 @@ bool skill_stone_uplift(int pow, bool short_, unit* order, coord_def target)
 			rect_iterator rit(target,1,1);
 			for(;!rit.end();rit++)
 			{
-				if(randA(randA(90))<pow || (*rit) == target)
+				if(randA(randA(90))<pow_ || (*rit) == target)
 				{
 					textures* t_ = &img_effect_rock_uplift[rand_int(1,4)];
 					if((*rit) == target)
@@ -2415,7 +2638,7 @@ bool skill_stone_uplift(int pow, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
-					attack_infor attack_infor_(randC(3,8+pow/14),3*(8+pow/14),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_ROCK));
+					attack_infor attack_infor_(randC(SPL_STONE_UPLIFT_DICE,SPL_STONE_UPLIFT_DAM(pow_)),SPL_STONE_UPLIFT_DICE*SPL_STONE_UPLIFT_DAM(pow_),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_ROCK));
 					hit_->damage(attack_infor_, true);
 		
 					//hit_->damage(att_, true);
@@ -2431,14 +2654,18 @@ bool skill_stone_uplift(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_kaname_drill(int pow, bool short_, unit* order, coord_def target)
+bool skill_kaname_drill(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		if (!order->isplayer()) //카나메드릴은 너무 쎄서 몬스터 보정이 좀 더 필요
-			pow *= 0.7f;
-		beam_infor temp_infor(randC(3,18+pow/5),3*(18+pow/5),13+pow/15,order,order->GetParentType(),SpellLength(SPL_KANAME_DRILL, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_KANAMEDRILL));
+		int damage_ = SPL_KANAME_DRILL_PLAYER_DAM(pow_);
+		int hit_ = 13+pow_/15;
+		if(!order->isplayer()) { //몬스터가 쓸때 패널티
+			damage_ = SPL_STONE_ARROW_DAM(pow_);
+			hit_ = 13+pow_*0.7f/15;
+		}
+		beam_infor temp_infor(randC(SPL_KANAME_DRILL_DICE,damage_),SPL_KANAME_DRILL_DICE*damage_,hit_,order,order->GetParentType(),SpellLength(SPL_KANAME_DRILL, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_KANAMEDRILL));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -2453,50 +2680,50 @@ bool skill_kaname_drill(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_diamond_hardness(int pow, bool short_, unit* order, coord_def target)
+bool skill_diamond_hardness(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order == &you)
 	{
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("stone");
 		}
-		you.SetAlchemyBuff(ALCT_DIAMOND_HARDNESS,rand_int(30,50)+pow/3);
+		you.SetAlchemyBuff(ALCT_DIAMOND_HARDNESS,rand_int(30,50)+pow_/3);
 		return true;
 	}
 	return false;
 }
-bool skill_poison_skin(int pow, bool short_, unit* order, coord_def target)
+bool skill_poison_skin(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order == &you)
 	{
-		you.SetAlchemyBuff(ALCT_POISON_BODY,rand_int(20,30)+pow/5);
+		you.SetAlchemyBuff(ALCT_POISON_BODY,rand_int(20,30)+pow_/5);
 		return true;
 	}
 	return false;
 }
-bool skill_stone_form(int pow, bool short_, unit* order, coord_def target)
+bool skill_stone_form(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order == &you)
 	{
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("spellcard");
 		}
-		you.SetAlchemyBuff(ALCT_STONE_FORM,rand_int(30,50)+pow/3);
+		you.SetAlchemyBuff(ALCT_STONE_FORM,rand_int(30,50)+pow_/3);
 		return true;
 	}
 	return false;
 }
-bool skill_knife_collect(int pow, bool short_, unit* order, coord_def target)
+bool skill_knife_collect(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order == &you)
 	{
-		you.SetKnifeCollect(rand_int(30,50)+pow/3);
+		you.SetKnifeCollect(rand_int(30,50)+pow_/3);
 		return true;
 	}
 	return false;
 }
 
-bool skill_burst(int pow, bool short_, unit* order, coord_def target)
+bool skill_burst(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isMove(target.x, target.y))
 	{
@@ -2508,7 +2735,7 @@ bool skill_burst(int pow, bool short_, unit* order, coord_def target)
 			rect_iterator rit(target,1,1);
 			for(;!rit.end();rit++)
 			{
-				if(randA(randA(90))<pow || (*rit) == target)
+				if(randA(randA(90))<pow_ || (*rit) == target)
 				{
 					if(env[current_level].isMove(rit->x,rit->y))
 					{
@@ -2525,7 +2752,7 @@ bool skill_burst(int pow, bool short_, unit* order, coord_def target)
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
 					if(hit_->GetId() != MON_FLAN && hit_->GetId() != MON_FLAN_BUNSIN) { //플랑은 면역(나중에 폭팔면역추가?)
-						attack_infor attack_infor_(randC(3,6+pow/18),3*(6+pow/18),99,order,order->GetParentType(),ATT_BURST,name_infor(LOC_SYSTEM_ATT_BURST));
+						attack_infor attack_infor_(randC(SPL_BURST_DICE,SPL_BURST_DAM(pow_)),SPL_BURST_DICE*SPL_BURST_DAM(pow_),99,order,order->GetParentType(),ATT_BURST,name_infor(LOC_SYSTEM_ATT_BURST));
 						hit_->damage(attack_infor_, true);				
 					}
 				}
@@ -2540,7 +2767,7 @@ bool skill_burst(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_summon_flandre(int pow, bool short_, unit* order, coord_def target)
+bool skill_summon_flandre(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 	
@@ -2558,9 +2785,9 @@ bool skill_summon_flandre(int pow, bool short_, unit* order, coord_def target)
 		}
 	}
 	return return_;
-
 }
-bool skill_suicide_bomb(int base_damage, int power, bool short_, unit* order, coord_def target, bool hurt_ally, bool self_hurt)
+
+bool skill_suicide_bomb(int base_damage_, int pow_, bool short_, unit* order, coord_def target, bool hurt_ally, bool self_hurt)
 {
 	if(1)
 	{
@@ -2594,8 +2821,8 @@ bool skill_suicide_bomb(int base_damage, int power, bool short_, unit* order, co
 						{	
 							if((self_hurt || hit_ != order) && (hurt_ally || hit_->isEnemyUnit(order)))
 							{
-								int att_ = randC(4,base_damage+power/20);
-								int m_att_ = 4*(base_damage+power/20);
+								int att_ = randC(SPL_SUICIDE_BOMB_DICE,SPL_SUICIDE_BOMB_DAM(base_damage_, pow_));
+								int m_att_ = SPL_SUICIDE_BOMB_DICE*SPL_SUICIDE_BOMB_DAM(base_damage_, pow_);
 
 								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor(LOC_SYSTEM_ATT_SUICIDE));
 								hit_->damage(temp_att, true);
@@ -2626,9 +2853,9 @@ bool skill_suicide_bomb(int base_damage, int power, bool short_, unit* order, co
 	return false;
 }
 bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target) {
-	return skill_suicide_bomb(13, power, short_, order, target, true, false);
+	return skill_suicide_bomb(SPL_SUICIDE_BOMB_BASE_DAMAGE, power, short_, order, target, true, false);
 }
-bool skill_rabbit_horn(int pow, bool short_, unit* order, coord_def target)
+bool skill_rabbit_horn(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isBamboo() && order && !order->isUserAlly())
 	{
@@ -2646,7 +2873,7 @@ bool skill_rabbit_horn(int pow, bool short_, unit* order, coord_def target)
 	return false;
 
 }
-bool skill_summon_lessor_demon(int pow, bool short_, unit* order, coord_def target)
+bool skill_summon_lessor_demon(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 	
@@ -2665,16 +2892,19 @@ bool skill_summon_lessor_demon(int pow, bool short_, unit* order, coord_def targ
 	}
 	return return_;
 }
-bool skill_luminus_strike(int power, bool short_, unit* order, coord_def target)
+bool skill_luminus_strike(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	int length_ = GetLengthFromCenter(order->position.x, order->position.y, target.x, target.y);
 	length_ = min(length_,SpellLength(SPL_FIRE_BALL, order->isplayer()));
 	if(CheckThrowPath(order->position,target,beam))
-	{		
-		float mon_panlty_ = order->isplayer()?1.0f:0.8f;//몬스터가 쓸때 패널티
-		int damage_ = (11+power/8)*mon_panlty_;
-		beam_infor temp_infor(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),SpellLength(SPL_LUMINUS_STRIKE, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_LIGHTTANMAC));
+	{
+		int damage_ = SPL_LUMINUS_STRIKE_PLAYER_DAM(pow_);
+		if(!order->isplayer()) { //몬스터가 쓸때 패널티
+			damage_ = SPL_LUMINUS_STRIKE_DAM(pow_);
+		}
+		
+		beam_infor temp_infor(randC(SPL_LUMINUS_STRIKE_DICE,damage_),SPL_LUMINUS_STRIKE_DICE*(damage_),99,order,order->GetParentType(),SpellLength(SPL_LUMINUS_STRIKE, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_LIGHTTANMAC));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -2710,7 +2940,7 @@ bool skill_luminus_strike(int power, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_fire_storm(int power, bool short_, unit* order, coord_def target)
+bool skill_fire_storm(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
@@ -2746,8 +2976,8 @@ bool skill_fire_storm(int power, bool short_, unit* order, coord_def target)
 						{	
 							if(1/*hit_ != order*/)
 							{
-								int att_ = randC(9,10+power/20);
-								int m_att_ = 9*(10+power/20);
+								int att_ = randC(SPL_FIRE_STORM_DICE,SPL_FIRE_STORM_DAM(pow_));
+								int m_att_ = SPL_FIRE_STORM_DICE*SPL_FIRE_STORM_DAM(pow_);
 
 								attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor(LOC_SYSTEM_ATT_FIRESTORM));
 								hit_->damage(temp_att, true);
@@ -2767,7 +2997,7 @@ bool skill_fire_storm(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_blizzard(int power, bool short_, unit* order, coord_def target)
+bool skill_blizzard(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
@@ -2797,18 +3027,7 @@ bool skill_blizzard(int power, bool short_, unit* order, coord_def target)
 								break;
 							}
 						}
-						//if(unit* hit_ = env[current_level].isMonsterPos(rit->x,rit->y))
-						//{	
-						//	if(hit_ != order)
-						//	{
-						//		int att_ = randC(9,10+power/20);
-						//		int m_att_ = 9*(10+power/20);
-
-						//		attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_FIRE_PYSICAL_BLAST,name_infor(LOC_SYSTEM_ATT_FIRESTORM));
-						//		hit_->damage(temp_att, true);
-						//	}
-						//}
-						env[current_level].MakeSmoke((*rit), img_blizzard, SMT_BLIZZARD, rand_int(5,10)+power/15,  0, order);
+						env[current_level].MakeSmoke((*rit), img_blizzard, SMT_BLIZZARD, rand_int(5,10)+pow_/15,  0, order);
 					}
 				}
 			}
@@ -2819,7 +3038,7 @@ bool skill_blizzard(int power, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_perfect_freeze(int pow, bool short_, unit* order, coord_def target)
+bool skill_perfect_freeze(int pow_, bool short_, unit* order, coord_def target)
 {
 	map_effect = 1;
 	if(env[current_level].isInSight(order->position)) {
@@ -2833,17 +3052,17 @@ bool skill_perfect_freeze(int pow, bool short_, unit* order, coord_def target)
 			if (env[current_level].isInSight(order->position)) {
 				PlaySE("timestop");
 			}
-			int att_ = 10+pow/7;				
-			attack_infor temp_att(randC(5,att_),5*(att_),99,order,order->GetParentType(),ATT_COLD_BLAST,name_infor(LOC_SYSTEM_ATT_COLD));
+			int att_ = SPL_PERFERT_FREEZE_DAM(pow_);				
+			attack_infor temp_att(randC(SPL_PERFERT_FREEZE_DICE,att_),SPL_PERFERT_FREEZE_DICE*(att_),99,order,order->GetParentType(),ATT_COLD_BLAST,name_infor(LOC_SYSTEM_ATT_COLD));
 			it->damage(temp_att, true);
-			it->SetFrozen(randA(30));			
+			it->SetFrozen(randA(30));
 		}
 	}
 	map_effect = 0;
 	return true;
 }
 
-bool skill_draw_power(int pow, bool short_, unit* order, coord_def target)
+bool skill_draw_power(int pow_, bool short_, unit* order, coord_def target)
 {	
 	int p_tem = 0;
 	{
@@ -2875,7 +3094,7 @@ bool skill_draw_power(int pow, bool short_, unit* order, coord_def target)
 	return true;
 }
 
-bool skill_animal_change(int pow, bool short_, unit* order, coord_def target)
+bool skill_animal_change(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(unit* hit_mon = DebufBeam(SPL_ANIMAL_CHANGE, order, target))
 	{
@@ -2887,7 +3106,7 @@ bool skill_animal_change(int pow, bool short_, unit* order, coord_def target)
 			return false;
 		}
 
-		if(hit_mon->CalcuateMR(GetDebufPower(SPL_ANIMAL_CHANGE,pow)))
+		if(hit_mon->CalcuateMR(GetDebufPower(SPL_ANIMAL_CHANGE,pow_)))
 		{
 			if(!hit_mon->isplayer())
 			{
@@ -2926,7 +3145,7 @@ bool skill_animal_change(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_field_violet(int power, bool short_, unit* order, coord_def target)
+bool skill_field_violet(int pow_, bool short_, unit* order, coord_def target)
 {
 	for(list<events>::iterator it = env[current_level].event_list.begin(); it != env[current_level].event_list.end(); it++)
 	{
@@ -2942,20 +3161,20 @@ bool skill_field_violet(int power, bool short_, unit* order, coord_def target)
 	}
 	if(env[current_level].isInSight(target))
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_FILED_VIOLET) + " ",false,false,false,CL_normal);
-	env[current_level].MakeEvent(EVL_VIOLET,coord_def(target.x,target.y),EVT_ALWAYS,rand_int(10,20)+power/10);
+	env[current_level].MakeEvent(EVL_VIOLET,coord_def(target.x,target.y),EVT_ALWAYS,rand_int(10,20)+pow_/10);
 	return true;
 }
-bool skill_time_paradox(int power, bool short_, unit* order, coord_def target)
+bool skill_time_paradox(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
 		if(!randA(5))
 			you.SetTransPanalty(1);
-		you.SetParadox(rand_int(20,30)+power/4);
+		you.SetParadox(rand_int(20,30)+pow_/4);
 	}
 	return true;
 }
-bool skill_private_sq(int power, bool short_, unit* order, coord_def target)
+bool skill_private_sq(int pow_, bool short_, unit* order, coord_def target)
 {	
 	if(!order->isplayer())
 		return false;
@@ -2963,9 +3182,9 @@ bool skill_private_sq(int power, bool short_, unit* order, coord_def target)
 	{	
 		if(it->isLive() && &(*it) != order && env[current_level].isInSight(it->position) && order->isSightnonblocked(it->position))
 		{			
-			if(it->CalcuateMR(GetDebufPower(SPL_PRIVATE_SQ,power)))
+			if(it->CalcuateMR(GetDebufPower(SPL_PRIVATE_SQ,pow_)))
 			{
-				it->SetSlow(rand_int(15,30)+randA(power/8));
+				it->SetSlow(rand_int(15,30)+randA(pow_/8));
 			}
 			else if(it->isYourShight())
 			{
@@ -2980,7 +3199,7 @@ bool skill_private_sq(int power, bool short_, unit* order, coord_def target)
 	return true;
 }
 
-bool skill_controled_blink(int pow, bool short_, unit* order, coord_def target)
+bool skill_controled_blink(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(!order->isplayer())
 		return false;
@@ -3005,7 +3224,7 @@ bool skill_controled_blink(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_the_world(int power, bool short_, unit* order, coord_def target)
+bool skill_the_world(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 	{
@@ -3013,12 +3232,12 @@ bool skill_the_world(int power, bool short_, unit* order, coord_def target)
 			PlaySE("timestop");
 		}
 		you.SetTransPanalty(rand_int(3,4));
-		you.SetTheWorld(rand_int(5+power/50,max(10,6+power/30)));
+		you.SetTheWorld(rand_int(5+pow_/50,max(10,6+pow_/30)));
 	}
 	return true;
 }
 
-bool skill_haste_all(int power, bool short_, unit* order, coord_def target)
+bool skill_haste_all(int pow_, bool short_, unit* order, coord_def target)
 {	
 	if(order->isplayer())
 		return false;
@@ -3047,12 +3266,12 @@ bool skill_haste_all(int power, bool short_, unit* order, coord_def target)
 	for(vector<monster*>::iterator it = target_mon_list.begin(); it != target_mon_list.end(); it++)
 	{
 		monster* final_target = (*it);
-		final_target->SetHaste(rand_int(20+power/3,40+power/3));
+		final_target->SetHaste(rand_int(20+pow_/3,40+pow_/3));
 	}
 
 	return true;
 }
-bool skill_heal_all(int power, bool short_, unit* order, coord_def target)
+bool skill_heal_all(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 		return false;
@@ -3081,7 +3300,7 @@ bool skill_heal_all(int power, bool short_, unit* order, coord_def target)
 	for(vector<monster*>::iterator it = target_mon_list.begin(); it != target_mon_list.end(); it++)
 	{
 		monster* final_target = (*it);	
-		final_target->HpUpDown(rand_int(2+power/10,10+power/5),DR_NONE);		
+		final_target->HpUpDown(rand_int(SPL_HEAL_ALL_MIN(pow_),SPL_HEAL_ALL_MAX(pow_)),DR_NONE);		
 		if(env[current_level].isInSight(final_target->position)) {
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_HEALED,false,false,false,CL_normal,
 				PlaceHolderHelper(final_target->GetName()->getName()));
@@ -3090,7 +3309,7 @@ bool skill_heal_all(int power, bool short_, unit* order, coord_def target)
 
 	return true;
 }
-bool skill_moon_communication(int power, bool short_, unit* order, coord_def target)
+bool skill_moon_communication(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(!order)
 		return false;
@@ -3110,13 +3329,13 @@ bool skill_moon_communication(int power, bool short_, unit* order, coord_def tar
 	order->SetCommunication(rand_int(3,5));
 	return true;
 }
-bool skill_moon_gun(int power, bool short_, unit* order, coord_def target)
+bool skill_moon_gun(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int damage_ = 6+power/8;
-		beam_infor temp_infor(randC(3,damage_),3*damage_,18,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_SMALL, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_BULLET));
+		int damage_ = SPL_MOON_GUN_DAM(pow_);
+		beam_infor temp_infor(randC(SPL_MOON_GUN_DICE,damage_),SPL_MOON_GUN_DICE*damage_,18,order,order->GetParentType(),SpellLength(SPL_MOON_GUN, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_BULLET));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -3132,7 +3351,7 @@ bool skill_moon_gun(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
+bool skill_summon_dream(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order->GetExhausted())
 		return false;
@@ -3228,7 +3447,7 @@ bool skill_summon_dream(int power, bool short_, unit* order, coord_def target)
 
 	return return_;
 }
-bool skill_mana_drain(int power, bool short_, unit* order, coord_def target)
+bool skill_mana_drain(int pow_, bool short_, unit* order, coord_def target)
 {
 	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
 	
@@ -3256,13 +3475,13 @@ bool skill_mana_drain(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_insane(int power, bool short_, unit* order, coord_def target)
+bool skill_insane(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(unit* hit_mon = DebufBeam(SPL_INSANE, order, target))
 	{
-		if(hit_mon->CalcuateMR(GetDebufPower(SPL_INSANE,power)))
+		if(hit_mon->CalcuateMR(GetDebufPower(SPL_INSANE,pow_)))
 		{
-			int time_ = rand_int(5,10)+power/5;
+			int time_ = rand_int(5,10)+pow_/5;
 			if(hit_mon->isplayer())
 				time_ = time_/2;
 			hit_mon->SetLunatic(time_);
@@ -3277,7 +3496,7 @@ bool skill_insane(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_blood_smite(int power, bool short_, unit* order, coord_def target)
+bool skill_blood_smite(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (order->GetExhausted())
 		return false;
@@ -3295,7 +3514,7 @@ bool skill_blood_smite(int power, bool short_, unit* order, coord_def target)
 			PlaySE("smite");
 		}
 
-		int damage_ = target_unit->GetMaxHp()*rand_int(10,20)/100;
+		int damage_ = target_unit->GetMaxHp()*rand_int(SPL_BLOOD_SMITE_MIN,SPL_BLOOD_SMITE_MAX)/100;
 		attack_infor temp_att(damage_,damage_,99,order,order->GetParentType(),ATT_BLOOD,name_infor(LOC_SYSTEM_ATT_BLOOD_STARE));
 		target_unit->damage(temp_att, true);
 		order->SetExhausted(rand_int(3, 5));
@@ -3303,7 +3522,7 @@ bool skill_blood_smite(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_call_hound(int power, bool short_, unit* order, coord_def target)
+bool skill_call_hound(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(!order)
 		return false;
@@ -3326,7 +3545,7 @@ bool skill_call_hound(int power, bool short_, unit* order, coord_def target)
 	order->SetCommunication(rand_int(2,4));
 	return true;
 }
-bool skill_canon(int power, bool short_, unit* order, coord_def target)
+bool skill_canon(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	int length_ = GetLengthFromCenter(order->position.x, order->position.y, target.x, target.y);
@@ -3338,7 +3557,7 @@ bool skill_canon(int power, bool short_, unit* order, coord_def target)
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 		{
 			coord_def pos = throwtanmac(12,beam,temp_infor,NULL);
-			attack_infor temp_att(randC(3,6+power/12),3*(6+power/12),99,order,order->GetParentType(),ATT_AC_REDUCE_BLAST,name_infor(LOC_SYSTEM_ATT_YINYANG_TANMAC));
+			attack_infor temp_att(randC(SPL_CANNON_DICE,SPL_CANNON_DAM(pow_)),SPL_CANNON_DICE*SPL_CANNON_DAM(pow_),99,order,order->GetParentType(),ATT_AC_REDUCE_BLAST,name_infor(LOC_SYSTEM_ATT_YINYANG_TANMAC));
 			
 			if (env[current_level].isInSight(order->position)) {
 				PlaySE("bomb");
@@ -3350,17 +3569,17 @@ bool skill_canon(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_dolls_war(int power, bool short_, unit* order, coord_def target)
+bool skill_dolls_war(int pow_, bool short_, unit* order, coord_def target)
 {	
 	bool return_=false;	
 	int i = 1; 
 	for(; i>0 ; i--)
 	{
-		if(monster *mon_ = BaseSummon(MON_SANGHAI, rand_int(30,60)+power/2, true, false, 2, order, target, SKD_SUMMON_DOLLS_WAR, GetSummonMaxNumber(SPL_DOLLS_WAR)))
+		if(monster *mon_ = BaseSummon(MON_SANGHAI, rand_int(30,60)+pow_/2, true, false, 2, order, target, SKD_SUMMON_DOLLS_WAR, GetSummonMaxNumber(SPL_DOLLS_WAR)))
 		{
 			return_ = true;
 		}	
-		if(monster *mon_ = BaseSummon(MON_HOURAI, rand_int(30,60)+power/2, true, false, 2, order, target, SKD_SUMMON_DOLLS_WAR, GetSummonMaxNumber(SPL_DOLLS_WAR)))
+		if(monster *mon_ = BaseSummon(MON_HOURAI, rand_int(30,60)+pow_/2, true, false, 2, order, target, SKD_SUMMON_DOLLS_WAR, GetSummonMaxNumber(SPL_DOLLS_WAR)))
 		{
 			order->SetSaved(true);
 			return_ = true;
@@ -3373,14 +3592,14 @@ bool skill_dolls_war(int power, bool short_, unit* order, coord_def target)
 	}
 	return return_;
 }
-bool skill_fake_dolls_war(int power, bool short_, unit* order, coord_def target)
+bool skill_fake_dolls_war(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;	
 	int i = 1; 
 	for(; i>0 ; i--)
 	{
 		int id_ = randA(1)?MON_FAKE_SANGHAI:MON_FAKE_HOURAI;
-		if(monster *mon_ = BaseSummon(id_, rand_int(30,60)+power/2, true, false, 2, order, target, SKD_SUMMON_FAKE_DOLLS_WAR, GetSummonMaxNumber(SPL_FAKE_DOLLS_WAR)))
+		if(monster *mon_ = BaseSummon(id_, rand_int(30,60)+pow_/2, true, false, 2, order, target, SKD_SUMMON_FAKE_DOLLS_WAR, GetSummonMaxNumber(SPL_FAKE_DOLLS_WAR)))
 		{
 			if(id_ == MON_FAKE_HOURAI)
 				order->SetSaved(true);
@@ -3390,7 +3609,7 @@ bool skill_fake_dolls_war(int power, bool short_, unit* order, coord_def target)
 	return return_;
 }
 
-bool skill_fire_spread(int power, bool short_, unit* order, coord_def target)
+bool skill_fire_spread(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
@@ -3402,7 +3621,7 @@ bool skill_fire_spread(int power, bool short_, unit* order, coord_def target)
 		ThrowSector(0,beam,temp_infor,GetSpellSector(SPL_FIRE_SPREAD),[&](coord_def c_){
 			if(order->isSightnonblocked(c_))
 			{
-				env[current_level].MakeSmoke(c_, img_fog_fire, SMT_FIRE, rand_int(3,10)+power/10,  0, order);
+				env[current_level].MakeSmoke(c_, img_fog_fire, SMT_FIRE, rand_int(3,10)+pow_/10,  0, order);
 			}
 		},false);
 
@@ -3416,11 +3635,11 @@ bool skill_fire_spread(int power, bool short_, unit* order, coord_def target)
 }
 
 
-bool skill_stasis(int power, bool short_, unit* order, coord_def target)
+bool skill_stasis(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(unit* hit_mon = DebufBeam(SPL_STASIS, order, target))
 	{
-		if(hit_mon->CalcuateMR(GetDebufPower(SPL_STASIS,power)))
+		if(hit_mon->CalcuateMR(GetDebufPower(SPL_STASIS,pow_)))
 		{
 			hit_mon->SetStasis(rand_int(10,40));
 		}
@@ -3434,7 +3653,7 @@ bool skill_stasis(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_jump_attack(int power, bool short_, unit* order, coord_def target)
+bool skill_jump_attack(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(!order)
 		return false;
@@ -3482,7 +3701,7 @@ bool skill_jump_attack(int power, bool short_, unit* order, coord_def target)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_CANT_LEAP),true,false,false,CL_normal);	
 	return false; //해당 위치에 몬스터가 없다.
 }
-bool skill_alert_noise(int power, bool short_, unit* order, coord_def target)
+bool skill_alert_noise(int pow_, bool short_, unit* order, coord_def target)
 {
 	{
 		PlaySE("warning");
@@ -3493,7 +3712,7 @@ bool skill_alert_noise(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_summon_namaz(int power, bool short_, unit* order, coord_def target)
+bool skill_summon_namaz(int pow_, bool short_, unit* order, coord_def target)
 {
 	for(list<events>::iterator it = env[current_level].event_list.begin(); it != env[current_level].event_list.end(); it++)
 	{
@@ -3512,7 +3731,7 @@ bool skill_summon_namaz(int power, bool short_, unit* order, coord_def target)
 	}
 	return true;
 }
-bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target)
+bool skill_summon_namaz2(int pow_, bool short_, unit* order, coord_def target)
 {
 	int length_ = 2;
 	if(env[current_level].isMove(target.x, target.y, true))
@@ -3544,8 +3763,8 @@ bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target)
 					{	
 						if(1/*hit_ != order*/)
 						{
-							int att_ = randC(8,6+power/30);
-							int m_att_ = 8*(6+power/30);
+							int att_ = randC(SPL_SUMMON_NAMAZ_DICE,SPL_SUMMON_NAMAZ_DAM(pow_));
+							int m_att_ = SPL_SUMMON_NAMAZ_DICE*SPL_SUMMON_NAMAZ_DAM(pow_);
 
 							attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_SHOCKWAVE));
 							hit_->damage(temp_att, true);
@@ -3559,7 +3778,7 @@ bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target)
 		}
 		env[current_level].ClearEffect();	
 		env[current_level].MakeNoise(target,12,NULL);		
-		BaseSummon(MON_NAMAZ, rand_int(20,40)+power/5, false, false, 2, order, target, SKD_SUMMON_NAMAZ, GetSummonMaxNumber(SPL_SUMMON_NAMAZ));
+		BaseSummon(MON_NAMAZ, rand_int(20,40)+pow_/5, false, false, 2, order, target, SKD_SUMMON_NAMAZ, GetSummonMaxNumber(SPL_SUMMON_NAMAZ));
 		return true;
 	}
 	return false;
@@ -3567,13 +3786,13 @@ bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target)
 
 
 
-bool skill_schema_tanmac(int pow, bool short_, unit* order, coord_def target)
+bool skill_schema_tanmac(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int damage_ = order?3+order->GetLevel()*1.5f:6;
-		beam_infor temp_infor(randC(2,damage_/2),damage_,99,order,order->GetParentType(),SpellLength(SPL_MAGIC_TANMAC, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
+		int damage_ = order?SPL_SCHEMA_TANMAC_DAM(order->GetLevel()):SPL_SCHEMA_TANMAC_NOORDER_DAM;
+		beam_infor temp_infor(randC(SPL_SCHEMA_TANMAC_DICE,damage_),SPL_SCHEMA_TANMAC_DICE*damage_,99,order,order->GetParentType(),SpellLength(SPL_SCHEMA_TANMAC, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));		
 		
@@ -3590,7 +3809,7 @@ bool skill_schema_tanmac(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_change(int power, bool short_, unit* order, coord_def target)
+bool skill_change(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 		return false;
@@ -3632,7 +3851,7 @@ bool skill_change(int power, bool short_, unit* order, coord_def target)
 	return true;
 }
 
-bool skill_unluck(int power, bool short_, unit* order, coord_def target)
+bool skill_unluck(int pow_, bool short_, unit* order, coord_def target)
 {
 	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
 	
@@ -3668,7 +3887,7 @@ bool skill_unluck(int power, bool short_, unit* order, coord_def target)
 }
 
 
-bool skill_thunder(int power, bool short_, unit* order, coord_def target)
+bool skill_thunder(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
@@ -3680,7 +3899,7 @@ bool skill_thunder(int power, bool short_, unit* order, coord_def target)
 			rect_iterator rit(target,1,1);
 			for(;!rit.end();rit++)
 			{
-				if(randA(randA(600))<power+100 || (*rit) == target)
+				if(randA(randA(600))<pow_+100 || (*rit) == target)
 				{
 					if(env[current_level].isMove(rit->x,rit->y,true))
 					{
@@ -3696,7 +3915,7 @@ bool skill_thunder(int power, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
-					attack_infor attack_infor_(randC(3,12+power/12),3*(12+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor(LOC_SYSTEM_ATT_THUNDER));
+					attack_infor attack_infor_(randC(SPL_THUNDER_DICE,SPL_THUNDER_DAM(pow_)),SPL_THUNDER_DICE*SPL_THUNDER_DAM(pow_),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor(LOC_SYSTEM_ATT_THUNDER));
 					hit_->damage(attack_infor_, true);
 				}
 			}
@@ -3709,7 +3928,7 @@ bool skill_thunder(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_air_strike(int power, bool short_, unit* order, coord_def target)
+bool skill_air_strike(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
@@ -3717,8 +3936,7 @@ bool skill_air_strike(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("wind");
 		}
-		int damage_ = 2*(8+power/8);
-		beam_infor temp_infor(randC(1,damage_),damage_,15+power/15,order,order->GetParentType(),SpellLength(SPL_AIR_STRIKE, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_AIRSTRIKE));
+		beam_infor temp_infor(randC(SPL_AIR_STRIKE_DICE,SPL_AIR_STRIKE_DAM(pow_)),SPL_AIR_STRIKE_DICE*SPL_AIR_STRIKE_DAM(pow_),15+pow_/15,order,order->GetParentType(),SpellLength(SPL_AIR_STRIKE, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_AIRSTRIKE));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -3737,12 +3955,12 @@ bool skill_air_strike(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_summon_racoon(int power, bool short_, unit* order, coord_def target)
+bool skill_summon_racoon(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 	dif_rect_iterator rit(order->position,2);
 	int id_ = MON_RACCON;
-	int time_ = rand_int(20,30)+randA(power);
+	int time_ = rand_int(20,30)+randA(pow_);
 
 	int i = 3;
 
@@ -3758,11 +3976,11 @@ bool skill_summon_racoon(int power, bool short_, unit* order, coord_def target)
 	}
 	return return_;
 }
-bool skill_summon_youkai(int power, bool short_, unit* order, coord_def target)
+bool skill_summon_youkai(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 	dif_rect_iterator rit(order->position,2);
-	int time_ = rand_int(10,30)+randA(power)/2;
+	int time_ = rand_int(10,30)+randA(pow_)/2;
 	random_extraction<int> rand_;
 	rand_.push(MON_ONI,2);
 	rand_.push(MON_BLUE_ONI,2);
@@ -3782,11 +4000,11 @@ bool skill_summon_youkai(int power, bool short_, unit* order, coord_def target)
 	}
 	return return_;
 }
-bool skill_mamizo_evade(int power, bool short_, unit* order, coord_def target)
+bool skill_mamizo_evade(int pow_, bool short_, unit* order, coord_def target)
 {
 	return false;
 }
-bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
+bool skill_macro_burst(int pow_, bool short_, unit* order, coord_def target)
 {
 	int direc = (GetPosToDirec(order->position, target) + 4)%8;
 	int max_length=6;
@@ -3835,7 +4053,7 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 			rect_iterator rit(target,1,1);
 			for(;!rit.end();rit++)
 			{
-				if(/*randA(randA(600))<power+100*/1 || (*rit) == target)
+				if(/*randA(randA(600))<pow_+100*/1 || (*rit) == target)
 				{
 					if(env[current_level].isMove(rit->x,rit->y))
 					{
@@ -3857,11 +4075,11 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y,&you))
 				{
-					attack_infor attack_infor_(randC(4,14+power/12),4*(14+power/12),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor(LOC_SYSTEM_ATT_MACROBURST));
+					attack_infor attack_infor_(randC(SPL_MACRO_BURST_DICE,SPL_MACRO_BURST_DAM(pow_)),SPL_MACRO_BURST_DICE*SPL_MACRO_BURST_DAM(pow_),99,order,order->GetParentType(),ATT_ELEC_BLAST,name_infor(LOC_SYSTEM_ATT_MACROBURST));
 					hit_->damage(attack_infor_, true);
 					
 				}
-				env[current_level].MakeSmoke((*it),img_fog_tonado,SMT_WHIRLWIND,rand_int(6,12)+randA(power/15),0,order);
+				env[current_level].MakeSmoke((*it),img_fog_tonado,SMT_WHIRLWIND,rand_int(6,12)+randA(pow_/15),0,order);
 			}
 		}
 		if(effect_) {
@@ -3879,7 +4097,7 @@ bool skill_macro_burst(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_shatter(int power, bool short_, unit* order, coord_def target)
+bool skill_shatter(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (env[current_level].isInSight(order->position)) {
 		PlaySE("earthquake");
@@ -3894,10 +4112,10 @@ bool skill_shatter(int power, bool short_, unit* order, coord_def target)
 	{	
 		if(it->isLive() && env[current_level].isInSight(it->position) && order->isSightnonblocked(it->position))
 		{
-			int damage_ = 5*(3+power/5);
+			int damage_ = SPL_SHATTER_DAM(pow_);
 			if(it->isFly())
 				damage_ /= 3;
-			attack_infor temp_att(randA(damage_),damage_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_EARTHQUAKE));
+			attack_infor temp_att(randC(SPL_SHATTER_DICE,damage_),SPL_SHATTER_DICE*damage_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_EARTHQUAKE));
 			it->damage(temp_att, true);			
 		}
 	}
@@ -3919,7 +4137,7 @@ bool skill_shatter(int power, bool short_, unit* order, coord_def target)
 	you.resetLOS();
 	return true;
 }
-bool skill_summon_yoshika(int power, bool short_, unit* order, coord_def target)
+bool skill_summon_yoshika(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(!order || order->isplayer())
 		return false;
@@ -3974,12 +4192,12 @@ bool skill_summon_yoshika(int power, bool short_, unit* order, coord_def target)
 
 	return true;
 }
-bool skill_nesy_cannon(int power, bool short_, unit* order, coord_def target)
+bool skill_nesy_cannon(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(3,5+power/6),3*(5+power/6),18,order,order->GetParentType(),SpellLength(SPL_WATER_CANNON, order->isplayer()),1,BMT_NORMAL,ATT_THROW_WATER,name_infor(LOC_SYSTEM_ATT_WATERPRESSURE));
+		beam_infor temp_infor(randC(SPL_NESY_CANNON_DICE,SPL_NESY_CANNON_DAM(pow_)),SPL_NESY_CANNON_DICE*SPL_NESY_CANNON_DAM(pow_),18,order,order->GetParentType(),SpellLength(SPL_NESY_CANNON, order->isplayer()),1,BMT_NORMAL,ATT_THROW_WATER,name_infor(LOC_SYSTEM_ATT_WATERPRESSURE));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -3997,7 +4215,7 @@ bool skill_nesy_cannon(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_mermaid_song(int power, bool short_, unit* order, coord_def target)
+bool skill_mermaid_song(int pow_, bool short_, unit* order, coord_def target)
 {
 	unit* hit_mon = env[current_level].isMonsterPos(target.x, target.y);
 	
@@ -4033,7 +4251,7 @@ bool skill_mermaid_song(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_emerald_city(int power, bool short_, unit* order, coord_def target)
+bool skill_emerald_city(int pow_, bool short_, unit* order, coord_def target)
 {
 	vector<coord_def> vt_;
 	{
@@ -4063,8 +4281,8 @@ bool skill_emerald_city(int power, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y, order))
 				{
-					int damage_ = 10+power/6;
-					attack_infor attack_infor_(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_EMERALD));
+					int damage_ = SPL_EMERALD_CITY_DAM(pow_);
+					attack_infor attack_infor_(randC(SPL_EMERALD_CITY_DICE,damage_),SPL_EMERALD_CITY_DICE*(damage_),99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_EMERALD));
 					hit_->damage(attack_infor_, true);
 				}
 
@@ -4078,25 +4296,25 @@ bool skill_emerald_city(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_autumn_blade(int power, bool short_, unit* order, coord_def target)
+bool skill_autumn_blade(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order == &you)
 	{
-		you.SetAlchemyBuff(ALCT_AUTUMN_BLADE,rand_int(30,50)+power/3);
+		you.SetAlchemyBuff(ALCT_AUTUMN_BLADE,rand_int(30,50)+pow_/3);
 		return true;
 	}
 	return false;
 }
-bool skill_philosophers_stone(int power, bool short_, unit* order, coord_def target)
+bool skill_philosophers_stone(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order == &you)
 	{
-		you.SetAlchemyBuff(ALCT_PHILOSOPHERS_STONE,rand_int(30,50)+power/3);
+		you.SetAlchemyBuff(ALCT_PHILOSOPHERS_STONE,rand_int(30,50)+pow_/3);
 		return true;
 	}
 	return false;
 }
-bool skill_summon_anchor(int power, bool short_, unit* order, coord_def target)
+bool skill_summon_anchor(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_ = false;
 
@@ -4115,7 +4333,7 @@ bool skill_summon_anchor(int power, bool short_, unit* order, coord_def target)
 	}
 	return return_;
 }
-bool skill_reaper_met(int power, bool short_, unit* order, coord_def target)
+bool skill_reaper_met(int pow_, bool short_, unit* order, coord_def target)
 {
 	unit* hit_mon = env[current_level].isMonsterPos(target.x, target.y);
 
@@ -4146,7 +4364,7 @@ bool skill_reaper_met(int power, bool short_, unit* order, coord_def target)
 
 }
 
-bool skill_afterlife(int power, bool short_, unit* order, coord_def target)
+bool skill_afterlife(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (order->GetExhausted())
 		return false;
@@ -4169,7 +4387,7 @@ bool skill_afterlife(int power, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_prism_call(int power, bool short_, unit* order, coord_def target)
+bool skill_prism_call(int pow_, bool short_, unit* order, coord_def target)
 {
 
 	if (order->isplayer())
@@ -4209,7 +4427,7 @@ bool skill_prism_call(int power, bool short_, unit* order, coord_def target)
 	}
 	return true;
 }
-bool skill_psychokinesis(int power, bool short_, unit* order, coord_def target)
+bool skill_psychokinesis(int pow_, bool short_, unit* order, coord_def target)
 {
 	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
 
@@ -4229,13 +4447,13 @@ bool skill_psychokinesis(int power, bool short_, unit* order, coord_def target)
 		target_unit->Blink(25);
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_PSYCHOKINESIS,true,false,false,CL_normal,
 			 PlaceHolderHelper(target_unit->GetName()->getName()));
-		attack_infor temp_att(randA_1(11 + power / 7), 11 + power / 7, 99, order, order->GetParentType(), ATT_PSYCHO, name_infor(LOC_SYSTEM_ATT_PSYCHOKINESIS));
+		attack_infor temp_att(randC(SPL_PSYCHOKINESIS_DICE, SPL_PSYCHOKINESIS_DAM(pow_)), SPL_PSYCHOKINESIS_DICE* SPL_PSYCHOKINESIS_DAM(pow_), 99, order, order->GetParentType(), ATT_PSYCHO, name_infor(LOC_SYSTEM_ATT_PSYCHOKINESIS));
 		target_unit->damage(temp_att, true);
 		return true;
 	}
 	return false;
 }
-bool skill_summon_trash(int power, bool short_, unit* order, coord_def target)
+bool skill_summon_trash(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_ = false;
 	int id_ = MON_TRASH;
@@ -4258,7 +4476,7 @@ bool skill_summon_trash(int power, bool short_, unit* order, coord_def target)
 	}
 	return return_;
 }
-bool skill_trash_rush(int power, bool short_, unit* order, coord_def target)
+bool skill_trash_rush(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (order->isplayer())
 		return false;
@@ -4306,9 +4524,9 @@ bool skill_trash_rush(int power, bool short_, unit* order, coord_def target)
 
 
 		monster *trash = monster_list.pop();
-		int damage_ = (13 + power / 16);
+		int damage_ = SPL_TRASH_RUSH_DAM(pow_);
 		beam_iterator beam(trash->position, target);
-		beam_infor temp_infor(randC(1, damage_), damage_, 99, order, order->GetParentType(), 8, 1, BMT_PENETRATE, ATT_THROW_NORMAL, trash->name);
+		beam_infor temp_infor(randC(SPL_TRASH_RUSH_DICE, damage_), SPL_TRASH_RUSH_DICE*damage_, 99, order, order->GetParentType(), 8, 1, BMT_PENETRATE, ATT_THROW_NORMAL, trash->name);
 		throwtanmac(trash->image, beam, temp_infor, NULL);
 		max_++;
 
@@ -4330,7 +4548,7 @@ bool skill_trash_rush(int power, bool short_, unit* order, coord_def target)
 	else	
 		return false;
 }
-bool skill_kokoro_roulette(int power, bool short_, unit* order, coord_def target)
+bool skill_kokoro_roulette(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (order->GetExhausted())
 		return false;
@@ -4379,14 +4597,16 @@ bool skill_kokoro_roulette(int power, bool short_, unit* order, coord_def target
 	return true;
 }
 
-bool skill_thunder_bolt(int pow, bool short_, unit* order, coord_def target)
+bool skill_thunder_bolt(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position, order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		int mon_panlty_ = order->isplayer() ? 0 : 2;//몬스터가 쓸때 패널티
-		int damage_ = 11 + pow / 6 - mon_panlty_;
-		beam_infor temp_infor(randC(3, damage_), 3 * (damage_), 18 + pow / 25, order, order->GetParentType(), SpellLength(SPL_THUNDER_BOLT, order->isplayer()), 8, BMT_PENETRATE, ATT_THROW_ELEC, name_infor(LOC_SYSTEM_ATT_THUNDER));
+		int damage_ = SPL_THUNDER_BOLT_PLAYER_DAM(pow_);
+		if(!order->isplayer()) { //몬스터가 쓸때 패널티
+			damage_ = SPL_THUNDER_BOLT_DAM(pow_);
+		}
+		beam_infor temp_infor(randC(SPL_THUNDER_BOLT_DICE, damage_), SPL_THUNDER_BOLT_DICE * (damage_), 18 + pow_ / 25, order, order->GetParentType(), SpellLength(SPL_THUNDER_BOLT, order->isplayer()), 8, BMT_PENETRATE, ATT_THROW_ELEC, name_infor(LOC_SYSTEM_ATT_THUNDER));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4403,7 +4623,7 @@ bool skill_thunder_bolt(int pow, bool short_, unit* order, coord_def target)
 }
 
 
-bool skill_mistia_song(int pow, bool short_, unit* order, coord_def target)
+bool skill_mistia_song(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (order->GetExhausted())
 		return false;
@@ -4426,14 +4646,14 @@ bool skill_mistia_song(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_throw_dish(int pow, bool short_, unit* order, coord_def target)
+bool skill_throw_dish(int pow_, bool short_, unit* order, coord_def target)
 {
-	int damage_ = 11 + pow / 6;
-	int hit_ = 12 + pow / 20;
+	int damage_ = SPL_THROW_DISH_DAM(pow_);
+	int hit_ = 12 + pow_ / 20;
 	beam_iterator beam(order->position, order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		beam_infor temp_infor(randC(1, damage_), damage_, hit_, order, order->GetParentType(), SpellLength(SPL_THROW_DISH, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_DISH));
+		beam_infor temp_infor(randC(SPL_THROW_DISH_DICE, damage_), SPL_THROW_DISH_DICE*damage_, hit_, order, order->GetParentType(), SpellLength(SPL_THROW_DISH, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_DISH));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4448,16 +4668,16 @@ bool skill_throw_dish(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_mess_confusion(int power, bool short_, unit* order, coord_def target)
+bool skill_mess_confusion(int pow_, bool short_, unit* order, coord_def target)
 {
 	int i = 0;
 	for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 	{
 		if (it->isLive() && it->isEnemyUnit(order) && &(*it) != order && order->isSightnonblocked(it->position))
 		{
-			if (it->CalcuateMR(GetDebufPower(SPL_MESS_CONFUSION, power)))
+			if (it->CalcuateMR(GetDebufPower(SPL_MESS_CONFUSION, pow_)))
 			{
-				it->SetConfuse(rand_int(10, 20) + randA(power / 10));
+				it->SetConfuse(rand_int(10, 20) + randA(pow_ / 10));
 			}
 			else if (it->isYourShight())
 			{
@@ -4472,7 +4692,7 @@ bool skill_mess_confusion(int power, bool short_, unit* order, coord_def target)
 	}
 	return true;
 }
-bool skill_abusion(int power, bool short_, unit* order, coord_def target)
+bool skill_abusion(int pow_, bool short_, unit* order, coord_def target)
 {
 	for (vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 	{
@@ -4487,7 +4707,7 @@ bool skill_abusion(int power, bool short_, unit* order, coord_def target)
 	return true;
 }
 
-bool skill_sleep_smite(int power, bool short_, unit* order, coord_def target)
+bool skill_sleep_smite(int pow_, bool short_, unit* order, coord_def target)
 {
 	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
 
@@ -4509,7 +4729,7 @@ bool skill_sleep_smite(int power, bool short_, unit* order, coord_def target)
 
 
 
-bool skill_target_elec(int power, bool short_, unit* order, coord_def target)
+bool skill_target_elec(int pow_, bool short_, unit* order, coord_def target)
 {
 	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
 
@@ -4518,7 +4738,7 @@ bool skill_target_elec(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("elec");
 		}
-		beam_infor temp_infor(randA_1(10 + power / 6), 10 + power / 6, 99, order, order->GetParentType(), SpellLength(SPL_SHOCK, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor(LOC_SYSTEM_ATT_ELECTRIC));
+		beam_infor temp_infor(randC(SPL_SHOCK_DICE, SPL_SHOCK_DAM(pow_)), SPL_SHOCK_DICE*SPL_SHOCK_DAM(pow_), 99, order, order->GetParentType(), SpellLength(SPL_SHOCK, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_ELEC, name_infor(LOC_SYSTEM_ATT_ELECTRIC));
 		ThrowShock(21, order->position, target_unit->position, temp_infor);
 		if(env[current_level].isInSight(order->position)) {
 			Sleep(120);
@@ -4529,22 +4749,22 @@ bool skill_target_elec(int power, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_summon_elec_ball(int pow, bool short_, unit* order, coord_def target)
+bool skill_summon_elec_ball(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_ = false;
 
 	int i = 2;
-	if(pow> 110 && randA(2)==0) {
+	if(pow_> 110 && randA(2)==0) {
 		i++;
 	}
-	if(pow> 160 && randA(4)==0) {
+	if(pow_> 160 && randA(4)==0) {
 		i++;
 	}
 	for (; i>0; i--)
 	{
 		if (monster *mon_ = BaseSummon(MON_ELEC_BALL, rand_int(30, 60), true, true, 2, order, target, SKD_OTHER, GetSummonMaxNumber(SPL_SUMMON_ELEC_BALL)))
 		{
-			mon_->LevelUpdown((pow) / 8, 1.0f);
+			mon_->LevelUpdown((pow_) / 8, 1.0f);
 			return_ = true;
 		}
 	}
@@ -4556,7 +4776,7 @@ bool skill_summon_elec_ball(int pow, bool short_, unit* order, coord_def target)
 	return return_;
 }
 
-bool skill_dream_call(int pow, bool short_, unit* order, coord_def target)
+bool skill_dream_call(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (order->isplayer())
 		return false;
@@ -4601,12 +4821,12 @@ bool skill_dream_call(int pow, bool short_, unit* order, coord_def target)
 	}
 	return true;
 }
-bool skill_hyper_beam(int pow, bool short_, unit* order, coord_def target)
+bool skill_hyper_beam(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position, order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		beam_infor temp_infor(randC(4, 12 + pow / 8), 4 * (12 + pow / 8), 20, order, order->GetParentType(), SpellLength(SPL_LASER, order->isplayer()), 8, BMT_PENETRATE, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_HYPERBEAM));
+		beam_infor temp_infor(randC(SPL_HYPER_BEAM_DICE, SPL_HYPER_BEAM_DAM(pow_)), SPL_HYPER_BEAM_DICE * SPL_HYPER_BEAM_DAM(pow_), 20, order, order->GetParentType(), SpellLength(SPL_HYPER_BEAM, order->isplayer()), 8, BMT_PENETRATE, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_HYPERBEAM));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4621,7 +4841,7 @@ bool skill_hyper_beam(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_kaguya_spell(int pow, bool short_, unit* order, coord_def target)
+bool skill_kaguya_spell(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_ = false;
 	int time_ = rand_int(10, 20);
@@ -4642,13 +4862,13 @@ bool skill_kaguya_spell(int pow, bool short_, unit* order, coord_def target)
 	}
 	return return_;
 }
-bool skill_throw_sword(int pow, bool short_, unit* order, coord_def target)
+bool skill_throw_sword(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position, order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		int damage_ = (8 + pow / 15);
-		beam_infor temp_infor(randC(4, damage_), 4*damage_, 16, order, order->GetParentType(), SpellLength(SPL_THROW_SWORD, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_SWORD));
+		int damage_ = SPL_THROW_SWORD_DAM(pow_);
+		beam_infor temp_infor(randC(SPL_THROW_SWORD_DICE, damage_), SPL_THROW_SWORD_DICE*damage_, 16, order, order->GetParentType(), SpellLength(SPL_THROW_SWORD, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_SWORD));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4664,13 +4884,13 @@ bool skill_throw_sword(int pow, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
-bool skill_throw_knife(int pow, bool short_, unit* order, coord_def target)
+bool skill_throw_knife(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position, order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		int damage_ = (6 + pow / 11);
-		beam_infor temp_infor(randC(3, damage_), 3 * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_KNIFE, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_KNIFE));
+		int damage_ = SPL_THROW_KNIFE_DAM(pow_);
+		beam_infor temp_infor(randC(SPL_THROW_KNIFE_DICE, damage_), SPL_THROW_KNIFE_DICE * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_KNIFE, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_KNIFE));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4687,7 +4907,7 @@ bool skill_throw_knife(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_throw_player(int pow, bool short_, unit* order, coord_def target)
+bool skill_throw_player(int pow_, bool short_, unit* order, coord_def target)
 {
 	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
 
@@ -4697,21 +4917,21 @@ bool skill_throw_player(int pow, bool short_, unit* order, coord_def target)
 			PlaySE("earthquake");
 		}
 		target_unit->Blink(40);
-		int damage_ = 70;
-		attack_infor temp_att(randA_1(damage_), damage_, 99, order, order->GetParentType(), ATT_SMASH, name_infor(LOC_SYSTEM_ATT_THROWING_ATLAS));
+		int damage_ = SPL_THROW_PLAYER_DAM(pow_);
+		attack_infor temp_att(randC(SPL_THROW_PLAYER_DICE, damage_), SPL_THROW_PLAYER_DICE*damage_, 99, order, order->GetParentType(), ATT_SMASH, name_infor(LOC_SYSTEM_ATT_THROWING_ATLAS));
 		target_unit->damage(temp_att, true);
 		return true;
 	}
 	return false;
 }
 
-bool skill_throw_amulet(int pow, bool short_, unit* order, coord_def target)
+bool skill_throw_amulet(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position, order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
-		int damage_ = (5 + pow / 12);
-		beam_infor temp_infor(randC(3, damage_), 3 * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_AMULET, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_BILL));
+		int damage_ = SPL_THROW_AMULET_DAM(pow_);
+		beam_infor temp_infor(randC(SPL_THROW_AMULET_DICE, damage_), SPL_THROW_AMULET_DICE * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_AMULET, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_BILL));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 
@@ -4728,7 +4948,7 @@ bool skill_throw_amulet(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_warp_kick(int power, bool short_, unit* order, coord_def target)
+bool skill_warp_kick(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (!order)
 		return false;
@@ -4762,7 +4982,7 @@ bool skill_warp_kick(int power, bool short_, unit* order, coord_def target)
 					 PlaceHolderHelper(order->GetName()->getName()),
 					 PlaceHolderHelper(unit_->GetName()->getName()));
 			}
-			attack_infor temp_att(order->GetAttack(false)*1.3f, order->GetAttack(true)*1.3f, order->GetHit(), order, order->GetParentType(), ATT_RUSH, name_infor(LOC_SYSTEM_ATT_DIMENSIONAL_RIFT));
+			attack_infor temp_att(order->GetAttack(false)*SPL_WARP_KICK_MULTI, order->GetAttack(true)*SPL_WARP_KICK_MULTI, order->GetHit(), order, order->GetParentType(), ATT_RUSH, name_infor(LOC_SYSTEM_ATT_DIMENSIONAL_RIFT));
 			unit_->damage(temp_att, false);
 			return true;
 		}
@@ -4774,7 +4994,7 @@ bool skill_warp_kick(int power, bool short_, unit* order, coord_def target)
 }
 
 
-bool skill_reimu_barrier(int pow, bool short_, unit* order, coord_def target)
+bool skill_reimu_barrier(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (order->isplayer())
 		return false;
@@ -4799,7 +5019,7 @@ bool skill_reimu_barrier(int pow, bool short_, unit* order, coord_def target)
 }
 
 
-bool skill_tougue(int pow, bool short_, unit* order, coord_def target)
+bool skill_tougue(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (order->isplayer())
 		return false;
@@ -4837,7 +5057,7 @@ bool skill_tougue(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_windflaw(int pow, bool short_, unit* order, coord_def target)
+bool skill_windflaw(int pow_, bool short_, unit* order, coord_def target)
 {
 	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
 
@@ -4854,8 +5074,8 @@ bool skill_windflaw(int pow, bool short_, unit* order, coord_def target)
 		target_unit->Blink(10);
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_WINDFLAW,true,false,false,CL_normal,
 			 PlaceHolderHelper(target_unit->GetName()->getName()));
-		int damage_ = 7+pow/6;
-		attack_infor temp_att(randC(2,damage_), 2*damage_, 99, order, order->GetParentType(), ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_WIND));
+		int damage_ = SPL_WINDFLAW_DAM(pow_);
+		attack_infor temp_att(randC(SPL_WINDFLAW_DICE,damage_), SPL_WINDFLAW_DICE*damage_, 99, order, order->GetParentType(), ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_WIND));
 		target_unit->damage(temp_att, true);
 		order->SetExhausted(rand_int(10,15));
 		return true;
@@ -4863,16 +5083,16 @@ bool skill_windflaw(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_summon_ghost(int pow, bool short_, unit* order, coord_def target)
+bool skill_summon_ghost(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 	
 	int i = rand_int(3,4); 
 	for(; i>0 ; i--)
 	{
-		if(monster *mon_ = BaseSummon(MON_GHOST, rand_int(8,15)+pow/20, true, false, 3, order, target, SKD_SUMMON_GHOST, GetSummonMaxNumber(SPL_SUMMON_GHOST)))
+		if(monster *mon_ = BaseSummon(MON_GHOST, rand_int(8,15)+pow_/20, true, false, 3, order, target, SKD_SUMMON_GHOST, GetSummonMaxNumber(SPL_SUMMON_GHOST)))
 		{
-			mon_->LevelUpdown(pow/12,3.0f,1.5f);
+			mon_->LevelUpdown(pow_/12,3.0f,1.5f);
 			mon_->image = &img_mons_ghost[randA(2)];
 			return_ = true;
 		}
@@ -4885,14 +5105,14 @@ bool skill_summon_ghost(int pow, bool short_, unit* order, coord_def target)
 	return return_;
 }
 
-bool skill_megaton_kick(int pow, bool short_, unit* order, coord_def target)
+bool skill_megaton_kick(int pow_, bool short_, unit* order, coord_def target)
 {
 	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
 	
 	if(target_unit)
 	{
-		int damage_ = 22+pow/14;
-		attack_infor temp_att(randC(4,damage_),4*(damage_),20+pow/10,order,order->GetParentType(),ATT_HOOF,name_infor(LOC_SYSTEM_ATT_HOOF));
+		int damage_ = SPL_MEGATON_KICK_DAM(pow_);
+		attack_infor temp_att(randC(SPL_MEGATON_KICK_DICE,damage_),SPL_MEGATON_KICK_DICE*(damage_),20+pow_/10,order,order->GetParentType(),ATT_HOOF,name_infor(LOC_SYSTEM_ATT_HOOF));
 		bool hit_ = target_unit->damage(temp_att, true);
 		if(hit_) {
 			if (env[current_level].isInSight(order->position) || env[current_level].isInSight(target)) {
@@ -4932,7 +5152,7 @@ bool skill_megaton_kick(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_throw_oil(int power, bool short_, unit* order, coord_def target)
+bool skill_throw_oil(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	int length_ =  GetLengthFromCenter(order->position.x, order->position.y, target.x, target.y);
@@ -4944,8 +5164,8 @@ bool skill_throw_oil(int power, bool short_, unit* order, coord_def target)
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 		{
 			coord_def pos = throwtanmac(49,beam,temp_infor,NULL);
-			int damage = 10+power/15;
-			attack_infor temp_att(randC(3,damage),3*(damage),99,order,order->GetParentType(),ATT_OIL_BLAST,name_infor(LOC_SYSTEM_ATT_OIL_BALL));
+			int damage = SPL_THROW_OIL_DAM(pow_);
+			attack_infor temp_att(randC(SPL_THROW_OIL_DICE,damage),SPL_THROW_OIL_DICE*(damage),99,order,order->GetParentType(),ATT_OIL_BLAST,name_infor(LOC_SYSTEM_ATT_OIL_BALL));
 			
 			if (env[current_level].isInSight(order->position)) {
 				PlaySE("bomb");
@@ -4958,7 +5178,7 @@ bool skill_throw_oil(int power, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_heavenly_storm(int pow, bool short_, unit* order, coord_def target)
+bool skill_heavenly_storm(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (order->isplayer() || (order->GetId() != MON_SONBITEN && order->GetId() != MON_ENSLAVE_GHOST))
 		return false;
@@ -4978,14 +5198,14 @@ bool skill_heavenly_storm(int pow, bool short_, unit* order, coord_def target)
 	return true;
 }
 
-bool skill_tracking(int pow, bool short_, unit* order, coord_def target)
+bool skill_tracking(int pow_, bool short_, unit* order, coord_def target)
 {
 	int turn_ = rand_int(50, 70);
 	if(unit* hit_mon = DebufBeam(SPL_TRACKING, order, target))
 	{
 		if(!hit_mon->isplayer())
 			return false;
-		if(hit_mon->CalcuateMR(GetDebufPower(SPL_TRACKING,pow)))
+		if(hit_mon->CalcuateMR(GetDebufPower(SPL_TRACKING,pow_)))
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_TRACKING) + " ", false, false, false, CL_normal); 
 			if (env[current_level].isInSight(order->position)) {
@@ -4998,12 +5218,12 @@ bool skill_tracking(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_discord(int pow, bool short_, unit* order, coord_def target)
+bool skill_discord(int pow_, bool short_, unit* order, coord_def target)
 {
 	return false;
 }
 
-bool skill_smoking(int pow, bool short_, unit* order, coord_def target)
+bool skill_smoking(int pow_, bool short_, unit* order, coord_def target)
 {
 	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
 	
@@ -5058,7 +5278,7 @@ bool skill_smoking(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_create_fog(int pow, bool short_, unit* order, coord_def target)
+bool skill_create_fog(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(target == you.position) {
 		PlaySE("spellcard");
@@ -5069,14 +5289,14 @@ bool skill_create_fog(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_grow_vine(int pow, bool short_, unit* order, coord_def target)
+bool skill_grow_vine(int pow_, bool short_, unit* order, coord_def target)
 {
 	bool return_=false;
 	
 	int i = rand_int(3,4); 
 	for(; i>0 ; i--)
 	{
-		if(monster *mon_ = BaseSummon(MON_VINE, rand_int(20,30)+pow/20, true, false, 1, order, target, SKD_SUMMON_VINE, GetSummonMaxNumber(SPL_GROW_VINE)))
+		if(monster *mon_ = BaseSummon(MON_VINE, rand_int(20,30)+pow_/20, true, false, 1, order, target, SKD_SUMMON_VINE, GetSummonMaxNumber(SPL_GROW_VINE)))
 		{
 			return_ = true;
 		}
@@ -5091,7 +5311,7 @@ bool skill_grow_vine(int pow, bool short_, unit* order, coord_def target)
 
 
 
-bool skill_close_door(int pow, bool short_, unit* order, coord_def target_)
+bool skill_close_door(int pow_, bool short_, unit* order, coord_def target_)
 {
 	if(!order)
 		return false;
@@ -5129,7 +5349,7 @@ bool skill_close_door(int pow, bool short_, unit* order, coord_def target_)
 				}
 				//적이 서있으면 강제로 비키도록 한다.
 				
-				if (monster *mon_ = BaseSummon(MON_SECURIRY_DOOR, 30 + randA_1(pow / 10), true, false, 0, NULL, target, SKD_OTHER, -1))
+				if (monster *mon_ = BaseSummon(MON_SECURIRY_DOOR, 30 + randA_1(pow_ / 10), true, false, 0, NULL, target, SKD_OTHER, -1))
 				{
 					((monster*)order)->special_value = 50;
 					if(!create_door && order->isYourShight()) {
@@ -5137,7 +5357,7 @@ bool skill_close_door(int pow, bool short_, unit* order, coord_def target_)
 					}
 					create_door = true;
 					PlaySE("block");
-					mon_->LevelUpdown(pow/20, 10);
+					mon_->LevelUpdown(pow_/20, 10);
 				}
 			}
 		}
@@ -5145,7 +5365,7 @@ bool skill_close_door(int pow, bool short_, unit* order, coord_def target_)
 	return create_door;
 }
 
-bool skill_speaker_phone(int pow, bool short_, unit* order, coord_def target)
+bool skill_speaker_phone(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(!order)
 		return false;
@@ -5161,7 +5381,7 @@ bool skill_speaker_phone(int pow, bool short_, unit* order, coord_def target)
 }
 
 
-bool skill_homing_tanmac(int pow, bool short_, int base_damage, int type, unit* order, coord_def target)
+bool skill_homing_tanmac(int pow_, bool short_, int base_damage, int type, unit* order, coord_def target)
 {
 	if(target == order->position) {
 		return false;
@@ -5207,7 +5427,7 @@ bool skill_homing_tanmac(int pow, bool short_, int base_damage, int type, unit* 
 					}
 					mon_->atk[0] = base_damage;
 					mon_->special_value = type;
-					mon_->LevelUpdown(pow/15,0.0f,2.0f);
+					mon_->LevelUpdown(pow_/15,0.0f,2.0f);
 				}
 				mon_->direction = GetPositionToAngle(order->position.x, order->position.y, mon_->position.x, mon_->position.y);
 				mon_->image = type==1?&img_tanmac_homing_cyan[GetAngleToDirec(mon_->direction)]:&img_tanmac_homing[GetAngleToDirec(mon_->direction)];
@@ -5225,7 +5445,7 @@ bool skill_homing_tanmac(int pow, bool short_, int base_damage, int type, unit* 
 	return return_;
 }
 
-bool skill_allround_tanmac(int pow, bool short_, unit* order, coord_def target)
+bool skill_allround_tanmac(int pow_, bool short_, unit* order, coord_def target)
 {
 	vector<unit*> able_unit_vector;
 
@@ -5297,9 +5517,11 @@ bool skill_allround_tanmac(int pow, bool short_, unit* order, coord_def target)
 			int graphic_ = rand_int(10, 15);
 			for(unit* target_unit : able_unit_vector) {
 				if(target_unit->isLive()) {
-					int mon_panlty_ = order->isplayer()?0:2;//몬스터가 쓸때 패널티
-					int damage_ = 6+pow/9-mon_panlty_;
-					beam_infor temp_infor_sub(randC(3,damage_),3*(damage_),15+pow/25,order,order->GetParentType(),SpellLength(SPL_ALLROUND_TANMAC, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
+					int damage_ = SPL_ALLROUND_TANMAC_PLAYER_DAM(pow_);
+					if(!order->isplayer()) {
+						damage_ = SPL_ALLROUND_TANMAC_DAM(pow_);
+					}
+					beam_infor temp_infor_sub(randC(SPL_ALLROUND_TANMAC_DICE,damage_),SPL_ALLROUND_TANMAC_DICE*(damage_),15+pow/25,order,order->GetParentType(),SpellLength(SPL_ALLROUND_TANMAC, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
 					temp_infor_sub.length = ceil(GetPositionGap(order->position.x, order->position.y, target_unit->position.x, target_unit->position.y));
 					beam_iterator beam_sub(order->position,target_unit->position);
 					tanmac_list.push_back(make_shared<ThrowTamacInstance>(nullptr, graphic_, beam_sub, temp_infor_sub, nullptr, false));
@@ -5342,7 +5564,7 @@ bool skill_allround_tanmac(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_throw_potion(int power, bool short_, unit* order, coord_def target)
+bool skill_throw_potion(int pow_, bool short_, unit* order, coord_def target)
 {
 	textures *t_ = img_fog_normal;
 	smoke_type smoke_ = SMT_FOG;
@@ -5399,8 +5621,8 @@ bool skill_throw_potion(int power, bool short_, unit* order, coord_def target)
 				PlaySE("throw");
 			}
 			coord_def pos = throwtanmac(27,beam,temp_infor,NULL, false);
-			int damage_ = 1+power/25;
-			attack_infor temp_att(randC(3,damage_),3*(damage_),99,order,order->GetParentType(),bomb_type,name_infor(LOC_SYSTEM_ITEM_POTION_POTION));
+			int damage_ = SPL_THROW_POTION_DAM(pow_);
+			attack_infor temp_att(randC(SPL_THROW_POTION_DICE,damage_),SPL_THROW_POTION_DICE*(damage_),99,order,order->GetParentType(),bomb_type,name_infor(LOC_SYSTEM_ITEM_POTION_POTION));
 			
 			if (env[current_level].isInSight(order->position)) {
 				PlaySE("bomb");
@@ -5408,7 +5630,7 @@ bool skill_throw_potion(int power, bool short_, unit* order, coord_def target)
 			BaseBomb(pos, t_,temp_att, nullptr);
 			for(int i=-1;i<=1;i++) {
 				for(int j=-1;j<=1;j++) {
-					env[current_level].MakeSmoke(coord_def(pos.x+i,pos.y+j),t_,smoke_,rand_int(3+power/16,10+power/16),0,&you, true);		
+					env[current_level].MakeSmoke(coord_def(pos.x+i,pos.y+j),t_,smoke_,rand_int(3+pow_/16,10+pow_/16),0,&you, true);		
 				}
 			}
 		}
@@ -5418,7 +5640,7 @@ bool skill_throw_potion(int power, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_throw_rabbit(int pow, bool short_, unit* order, coord_def target)
+bool skill_throw_rabbit(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order->isplayer())
 		return false;
@@ -5438,8 +5660,8 @@ bool skill_throw_rabbit(int pow, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,target);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int damage_ = 6 + pow/15;
-		beam_infor temp_infor(randC(3,damage_),3*damage_,18,order,order->GetParentType(),SpellLength(SPL_THROW_RABBIT, order->isplayer()),1,BMT_PENETRATE,ATT_THROW_NORMAL,*throwing_->GetName());
+		int damage_ = SPL_THROW_RABBIT_DAM(pow_);
+		beam_infor temp_infor(randC(SPL_THROW_RABBIT_DICE,damage_),SPL_THROW_RABBIT_DICE*damage_,18,order,order->GetParentType(),SpellLength(SPL_THROW_RABBIT, order->isplayer()),1,BMT_PENETRATE,ATT_THROW_NORMAL,*throwing_->GetName());
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -5470,7 +5692,7 @@ bool skill_throw_rabbit(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_arrow(int pow, bool short_, unit* order, coord_def target) {
+bool skill_arrow(int pow_, bool short_, unit* order, coord_def target) {
 	beam_iterator beam(order->position,order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
@@ -5510,7 +5732,7 @@ bool skill_arrow(int pow, bool short_, unit* order, coord_def target) {
 	}
 	return false;
 }
-bool skill_haniwa_magic_tanmac(int pow, bool short_, unit* order, coord_def target, int size_) {
+bool skill_haniwa_magic_tanmac(int pow_, bool short_, unit* order, coord_def target, int size_) {
 	beam_iterator beam(order->position,order->position);
 	if (CheckThrowPath(order->position, target, beam))
 	{
@@ -5521,20 +5743,20 @@ bool skill_haniwa_magic_tanmac(int pow, bool short_, unit* order, coord_def targ
 		spell_list spell__ = SPL_HANIWA_MAGIC_TANMAC;
 		switch(size_) {
 		case 0:
-			damage_ =  7 + pow / 10;
-			dam_multi_ = 1;
+			damage_ =  SPL_HANIWA_MAGIC_TANMAC_DAM(pow_);
+			dam_multi_ = SPL_HANIWA_MAGIC_TANMAC_DICE;
 			color_offset = 30;
 			spell__  = SPL_HANIWA_MAGIC_TANMAC;
 			break;
 		case 1:
-			damage_ =  7 + pow / 15;
-			dam_multi_ = 2;
+			damage_ = SPL_HANIWA_MAGIC_TANMAC2_DAM(pow_);
+			dam_multi_ = SPL_HANIWA_MAGIC_TANMAC2_DICE;
 			color_offset = 10;
 			spell__  = SPL_HANIWA_MAGIC_TANMAC2;
 			break;
 		case 2:
-			damage_ =  9 + pow / 12;
-			dam_multi_ = 3;
+			damage_ =  SPL_HANIWA_MAGIC_TANMAC3_DAM(pow_);
+			dam_multi_ = SPL_HANIWA_MAGIC_TANMAC3_DICE;
 			color_offset = 10;
 			spell__  = SPL_HANIWA_MAGIC_TANMAC3;
 			break;
@@ -5590,7 +5812,7 @@ bool skill_haniwa_magic_tanmac(int pow, bool short_, unit* order, coord_def targ
 	return false;
 }
 
-bool skill_blink_away(int pow, bool short_, unit* order, coord_def target)
+bool skill_blink_away(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(!order->Tele_check(true, false))
 		return false; 
@@ -5602,7 +5824,7 @@ bool skill_blink_away(int pow, bool short_, unit* order, coord_def target)
 	return true;
 }
 
-bool skill_elemental_harvester(int pow, bool short_, unit* order, coord_def target)
+bool skill_elemental_harvester(int pow_, bool short_, unit* order, coord_def target)
 {
 
 	beam_iterator beam(order->position,order->position);
@@ -5639,8 +5861,8 @@ bool skill_elemental_harvester(int pow, bool short_, unit* order, coord_def targ
 					mon_->memory_time = mon_->FoundTime();
 					mon_->target_pos = target;
 				}
-				mon_->atk[0] = 25+pow/10;
-				mon_->LevelUpdown(pow/10,6.0f,1.0f);
+				mon_->atk[0] = 25+pow_/10;
+				mon_->LevelUpdown(pow_/10,6.0f,1.0f);
 			}
 			
 			int len_ = SpellLength(SPL_ELEMENTAL_HARVESTER, order->isplayer());
@@ -5669,7 +5891,7 @@ bool skill_elemental_harvester(int pow, bool short_, unit* order, coord_def targ
 	return false;
 }
 
-bool skill_nightmare_manifest(int pow, bool short_, unit* order, coord_def target)
+bool skill_nightmare_manifest(int pow_, bool short_, unit* order, coord_def target)
 {
 	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
 	
@@ -5694,7 +5916,7 @@ bool skill_nightmare_manifest(int pow, bool short_, unit* order, coord_def targe
 				PlaceHolderHelper(order->GetName()->getName()),
 				PlaceHolderHelper(target_unit->GetName()->getName()));
 		}
-		if(target_unit->CalcuateMR(GetDebufPower(SPL_NIGHTMARE_MANIFEST,pow)))
+		if(target_unit->CalcuateMR(GetDebufPower(SPL_NIGHTMARE_MANIFEST,pow_)))
 		{
 			switch(randA(5)) {
 			case 0:
@@ -5729,16 +5951,16 @@ bool skill_nightmare_manifest(int pow, bool short_, unit* order, coord_def targe
 		rand_mon_.push(MON_SHEEP);
 		rand_mon_.push(MON_SHEEP);
 
-		if(pow > 80) {
-			rand_mon_.push(MON_LUNATIC, pow>=120?3:2);
+		if(pow_ > 80) {
+			rand_mon_.push(MON_LUNATIC, pow_>=120?3:2);
 		}
-		if(pow > 100) {
-			rand_mon_.push(MON_NIGHTMARE, pow>=150?3:2);
+		if(pow_ > 100) {
+			rand_mon_.push(MON_NIGHTMARE, pow_>=150?3:2);
 		}
-		if(pow > 130) {
+		if(pow_ > 130) {
 			rand_mon_.push(MON_LUNATIC, 1);
 		}
-		if(pow > 150) {
+		if(pow_ > 150) {
 			rand_mon_.push(MON_NIGHTMARE, 1);
 		}
 		
@@ -5746,7 +5968,7 @@ bool skill_nightmare_manifest(int pow, bool short_, unit* order, coord_def targe
 		int i = rand_int(2,4); 
 		for(; i>0 ; i--)
 		{
-			if(monster *mon_ = BaseSummon(rand_mon_.pop(), rand_int(15,20)+pow/15, true, false, 3, order, target, SKD_OTHER, GetSummonMaxNumber(SPL_NIGHTMARE_MANIFEST)))
+			if(monster *mon_ = BaseSummon(rand_mon_.pop(), rand_int(15,20)+pow_/15, true, false, 3, order, target, SKD_OTHER, GetSummonMaxNumber(SPL_NIGHTMARE_MANIFEST)))
 			{
 				mon_->sm_info.parent_map_id = target_unit->GetMapId();
 				mon_->FoundTarget(target_unit, mon_->FoundTime());
@@ -5763,14 +5985,16 @@ bool skill_nightmare_manifest(int pow, bool short_, unit* order, coord_def targe
 }
 
 
-bool skill_earth_bolt(int pow, bool short_, unit* order, coord_def target)
+bool skill_earth_bolt(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		int mon_panlty_ = order->isplayer()?0:2;
-		int damage_ = 9+pow/6-mon_panlty_;
-		beam_infor temp_infor(randC(3,damage_),3*(damage_),18+pow/25,order,order->GetParentType(),5,5,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_ROCK));
+		int damage_ = SPL_EARTH_BOLT_PLAYER_DAM(pow_);
+		if(!order->isplayer()) {
+			damage_ = SPL_EARTH_BOLT_DAM(pow_);
+		}
+		beam_infor temp_infor(randC(SPL_EARTH_BOLT_DICE,damage_),SPL_EARTH_BOLT_DICE*(damage_),18+pow_/25,order,order->GetParentType(),5,5,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_ROCK));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -5786,7 +6010,7 @@ bool skill_earth_bolt(int pow, bool short_, unit* order, coord_def target)
 	return false;
 }
 
-bool skill_philosopher_passive(int power, unit* order)
+bool skill_philosopher_passive(int pow_, unit* order)
 {
 	int rand_ = randA(4); //5개
 
@@ -5900,19 +6124,19 @@ bool skill_philosopher_passive(int power, unit* order)
 	if(able_unit_vector.GetSize() > 0) {
 		switch (rand_) {
 			case 0:
-				return skill_fire_ball(power,true,order,able_unit_vector.pop()->position);
+				return skill_fire_ball(pow_,true,order,able_unit_vector.pop()->position);
 				break;
 			case 1:
-				return skill_water_cannon(power,true,order,able_unit_vector.pop()->position);
+				return skill_water_cannon(pow_,true,order,able_unit_vector.pop()->position);
 				break;
 			case 2:
-				return skill_homing_tanmac(power,true, 23, 1,order,able_unit_vector.pop()->position);	
+				return skill_homing_tanmac(pow_,true, 23, 1,order,able_unit_vector.pop()->position);	
 				break;
 			case 3:
-				return skill_emerald_city(power,true,order,able_unit_vector.pop()->position);
+				return skill_emerald_city(pow_,true,order,able_unit_vector.pop()->position);
 				break;
 			case 4:
-				return skill_earth_bolt(power,false,order,able_unit_vector.pop()->position);
+				return skill_earth_bolt(pow_,false,order,able_unit_vector.pop()->position);
 				break;
 		}
 		return false;
@@ -5920,7 +6144,7 @@ bool skill_philosopher_passive(int power, unit* order)
 	return false;
 }
 
-bool skill_royalflare(int power, bool short_, unit* order, coord_def target)
+bool skill_royalflare(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(order == &you)
 	{
@@ -7738,29 +7962,65 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 
 
 
-void GetSpellDamageString(spell_list skill, monster* order, int pow_)
+void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 {
+	D3DCOLOR normal_dam = CL_normal;
+	D3DCOLOR smite_dam = CL_magic;
+	D3DCOLOR fire_dam = CL_autumn;
+	D3DCOLOR oil_dam = CL_bad;
+	D3DCOLOR cold_dam = CL_cyan;
+	D3DCOLOR elec_dam = CL_warning;
+	D3DCOLOR poision_dam = CL_green;
+	D3DCOLOR special_dam = CL_magic;
+	D3DCOLOR heal = CL_white_blue;
+	bool isPlayer = order!=nullptr?order->isPlayer():false;
+	
 	switch(skill)
 	{
 	case SPL_MON_TANMAC_SMALL:
 	{
 		ostringstream ss;
-		ss << "(" << 1 << "d" << SPL_MON_TANMAC_SMALL_DAM(pow_) << ")";
-		printsub(ss.str(), false, CL_normal);
+		ss << "(" << SPL_MON_TANMAC_SMALL_DICE << "d" << SPL_MON_TANMAC_SMALL_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
 	}
 	case SPL_MON_TANMAC_MIDDLE:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_MON_TANMAC_MIDDLE_DICE << "d" << SPL_MON_TANMAC_MIDDLE_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_MON_WATER_GUN:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_MON_WATER_GUN_DICE << "d" << SPL_MON_WATER_GUN_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_FLAME:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_FLAME_DICE << "d" << (isPlayer?SPL_FLAME_PLAYER_DAM(pow_):SPL_FLAME_DAM(pow_)) << ")";
+		printsub(ss.str(), false, fire_dam);
 		return;
+	}
 	case SPL_FROST:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_FROST_DICE << "d" << (isPlayer?SPL_FROST_PLAYER_DAM(pow_):SPL_FROST_DAM(pow_)) << ")";
+		printsub(ss.str(), false, cold_dam);
 		return;
+	}
 	case SPL_MEDICINE_CLOUD:
 		return;
 	case SPL_COLD_BEAM:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_COLD_BEAM_DICE << "d" << SPL_COLD_BEAM_DAM(pow_) << ")";
+		printsub(ss.str(), false, cold_dam);
 		return;
+	}
 	case SPL_SUMMON_BUG:
 		return;
 	case SPL_CONFUSE:
@@ -7768,21 +8028,51 @@ void GetSpellDamageString(spell_list skill, monster* order, int pow_)
 	case SPL_SLOW:
 		return;
 	case SPL_SELF_HEAL:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_SELF_HEAL_MIN(pow_) << "~" << SPL_SELF_HEAL_MAX(pow_) << ")";
+		printsub(ss.str(), false, heal);
 		return;
+	}
 	case SPL_BLINK:
 		return;
 	case SPL_SMITE:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_SMITE_DICE << "d" << SPL_SMITE_DAM(pow_) << ")";
+		printsub(ss.str(), false, smite_dam);
 		return;
+	}
 	case SPL_BURN:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_BURN_DICE << "d" << SPL_BURN_DAM(pow_) << ")";
+		printsub(ss.str(), false, fire_dam);
 		return;
+	}
 	case SPL_FIRE_WALL:
 		return;
 	case SPL_FROZEN:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_FROZEN_DICE << "d" << SPL_FROZEN_DAM(pow_) << ")";
+		printsub(ss.str(), false, cold_dam);
 		return;
+	}
 	case SPL_FREEZE:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_FREEZE_DICE << "d" << SPL_FREEZE_DAM(pow_) << ")";
+		printsub(ss.str(), false, cold_dam);
 		return;
+	}
 	case SPL_STING:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_STING_DICE << "d" << SPL_STING_DAM(pow_) << ")";
+		printsub(ss.str(), false, poison_dam);
 		return;
+	}
 	case SPL_CURE_POISON:
 		return;
 	case SPL_TWIST:
@@ -7790,9 +8080,19 @@ void GetSpellDamageString(spell_list skill, monster* order, int pow_)
 	case SPL_SUMMON_MOOK:
 		return;
 	case SPL_SHOCK:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_SHOCK_DICE << "d" << SPL_SHOCK_DAM(pow_) << ")";
+		printsub(ss.str(), false, elec_dam);
 		return;
+	}
 	case SPL_CHAIN_LIGHTNING:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_CHAIN_LIGHTNING_DICE << "d" << SPL_CHAIN_LIGHTNING_DAM(pow_) << ")";
+		printsub(ss.str(), false, elec_dam);
 		return;
+	}
 	case SPL_DISCHARGE:
 		return;
 	case SPL_GLOW:
@@ -7800,7 +8100,12 @@ void GetSpellDamageString(spell_list skill, monster* order, int pow_)
 	case SPL_GRAZE:
 		return;
 	case SPL_VEILING:
+	{
+		ostringstream ss;
+		ss << "(" << 1 << "d" << SPL_VEILING_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_INVISIBLE:
 		return;
 	case SPL_HASTE:
@@ -7808,15 +8113,40 @@ void GetSpellDamageString(spell_list skill, monster* order, int pow_)
 	case SPL_SILENCE:
 		return;
 	case SPL_MAGIC_TANMAC:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_MAGIC_TANMAC_DICE << "d" << (isPlayer?SPL_MAGIC_TANMAC_PLAYER_DAM(pow_):SPL_MAGIC_TANMAC_DAM(pow_)) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_FIRE_BALL:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_FIRE_BALL_DICE << "d" << SPL_FIRE_BALL_DAM(pow_) << ")";
+		printsub(ss.str(), false, fire_dam);
 		return;
+	}
 	case SPL_FIRE_BOLT:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_FIRE_BOLT_DICE << "d" << (isPlayer?SPL_FIRE_BOLT_PLAYER_DAM(pow_):SPL_FIRE_BOLT_DAM(pow_)) << ")";
+		printsub(ss.str(), false, fire_dam);
 		return;
+	}
 	case SPL_ICE_BOLT:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_ICE_BOLT_DICE << "d" << (isPlayer?SPL_ICE_BOLT_PLAYER_DAM(pow_):SPL_ICE_BOLT_DAM(pow_)) << ")";
+		printsub(ss.str(), false, cold_dam);
 		return;
+	}
 	case SPL_VENOM_BOLT:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_VENOM_BOLT_DICE << "d" << SPL_VENOM_BOLT_DAM(pow_) << ")";
+		printsub(ss.str(), false, poison_dam);
 		return;
+	}
 	case SPL_CONFUSE_CLOUD:
 		return;
 	case SPL_ICE_CLOUD:
@@ -7836,15 +8166,30 @@ void GetSpellDamageString(spell_list skill, monster* order, int pow_)
 	case SPL_SUMMON_SEKIBANKI:
 		return;
 	case SPL_WATER_CANNON:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_WATER_CANNON_DICE << "d" << SPL_WATER_CANNON_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_KYOKO_SMITE:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_KYOKO_SMITE_DICE << "d" << SPL_KYOKO_SMITE_DAM(pow_) << ")";
+		printsub(ss.str(), false, smite_dam);
 		return;
+	}
 	case SPL_SUMMON_OPTION:
 		return;
 	case SPL_SUMMON_GOLEM:
 		return;
 	case SPL_HYPNOSIS:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_HYPNOSIS_DICE << "d" << SPL_HYPNOSIS_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_MUTE:
 		return;
 	case SPL_SELF_INJURY:
@@ -7852,9 +8197,19 @@ void GetSpellDamageString(spell_list skill, monster* order, int pow_)
 	case SPL_CHARM:
 		return;
 	case SPL_LASER:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_LASER_DICE << "d" << SPL_LASER_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_SPARK:
-		return;		
+	{
+		ostringstream ss;
+		ss << "(" << SPL_SPARK_DICE << "d" << SPL_SPARK_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
+		return;
+	}
 	case SPL_SUMMON_UNZAN:
 		return;
 	case SPL_SUMMON_UNZAN_PUNCH:
@@ -7866,19 +8221,44 @@ void GetSpellDamageString(spell_list skill, monster* order, int pow_)
 	case SPL_HASTE_OTHER:
 		return;
 	case SPL_HEAL_OTHER:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_HEAL_OTHER_MIN(pow_) << "~" << SPL_HEAL_OTHER_MAX(pow_) << ")";
+		printsub(ss.str(), false, heal);
 		return;
+	}
 	case SPL_MIND_BENDING:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_MIND_BENDING_DICE << "d" << SPL_MIND_BENDING_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_STONE_PUNCH:
 		return;
 	case SPL_STONE_ARROW:
-		return; 
+	{
+		ostringstream ss;
+		ss << "(" << SPL_STONE_ARROW_DICE << "d" << (isPlayer?SPL_STONE_ARROW_PLAYER_DAM(pow_):SPL_STONE_ARROW_DAM(pow_)) << ")";
+		printsub(ss.str(), false, normal_dam);
+		return;
+	}
 	case SPL_STONE_TRAP:
 		return;
 	case SPL_STONE_UPLIFT:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_STONE_UPLIFT_DICE << "d" << SPL_STONE_UPLIFT_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_KANAME_DRILL:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_KANAME_DRILL_DICE << "d" << (isPlayer?SPL_KANAME_DRILL_PLAYER_DAM(pow_):SPL_KANAME_DRILL_DAM(pow_)) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_DIAMOND_HARDNESS:
 		return;
 	case SPL_POISON_SKIN:
@@ -7890,21 +8270,46 @@ void GetSpellDamageString(spell_list skill, monster* order, int pow_)
 	case SPL_FLAN_BUSIN:
 		return;
 	case SPL_BURST:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_BURST_DICE << "d" << SPL_BURST_DAM(pow_) << ")";
+		printsub(ss.str(), false, smite_dam);
 		return;
+	}
 	case SPL_SUICIDE_BOMB:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_SUICIDE_BOMB_DICE << "d" << SPL_SUICIDE_BOMB_DAM(SPL_SUICIDE_BOMB_BASE_DAMAGE, pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_RABBIT_HORN:
 		return;
 	case SPL_SUMMON_LESSOR_DEMON:
 		return;	
 	case SPL_LUMINUS_STRIKE:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_LUMINUS_STRIKE_DICE << "d" << (isPlayer?SPL_LUMINUS_STRIKE_PLAYER_DAM(pow_):SPL_LUMINUS_STRIKE_DAM(pow_)) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_FIRE_STORM:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_FIRE_STORM_DICE << "d" << SPL_FIRE_STORM_DAM(pow_) << ")";
+		printsub(ss.str(), false, fire_dam);
 		return;
+	}
 	case SPL_BLIZZARD: 
 		return;
 	case SPL_PERFERT_FREEZE: 
+	{
+		ostringstream ss;
+		ss << "(" << SPL_PERFERT_FREEZE_DICE << "d" << SPL_PERFERT_FREEZE_DAM(pow_) << ")";
+		printsub(ss.str(), false, cold_dam);
 		return;
+	}
 	case SPL_DRAW_POWER:
 		return;
 	case SPL_ANIMAL_CHANGE:
@@ -7922,11 +8327,21 @@ void GetSpellDamageString(spell_list skill, monster* order, int pow_)
 	case SPL_HASTE_ALL:
 		return;
 	case SPL_HEAL_ALL:	
-		return;	
+	{
+		ostringstream ss;
+		ss << "(" << SPL_HEAL_ALL_MIN(pow_) << "~" << SPL_HEAL_ALL_MAX(pow_) << ")";
+		printsub(ss.str(), false, heal);
+		return;
+	}
 	case SPL_MOON_COMMUNICATION:
 		return;	
 	case SPL_MOON_GUN:
-		return;	
+	{
+		ostringstream ss;
+		ss << "(" << SPL_MOON_GUN_DICE << "d" << SPL_MOON_GUN_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
+		return;
+	}
 	case SPL_SUMMON_DREAM:
 		return;	
 	case SPL_MANA_DRAIN:
@@ -7934,11 +8349,21 @@ void GetSpellDamageString(spell_list skill, monster* order, int pow_)
 	case SPL_INSANE:
 		return;	
 	case SPL_BLOOD_SMITE:
-		return;	
+	{
+		ostringstream ss;
+		ss << "(" << LocalzationManager::locString(LOC_SYSTEM_ABOUT_MAX_HP) << SPL_BLOOD_SMITE_MIN << "% ~ " << SPL_BLOOD_SMITE_MAX << "%)";
+		printsub(ss.str(), false, smite_dam);
+		return;
+	}
 	case SPL_CALL_HOUND:
 		return;	
 	case SPL_CANNON:
-		return;	
+	{
+		ostringstream ss;
+		ss << "(" << SPL_CANNON_DICE << "d" << SPL_CANNON_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
+		return;
+	}
 	case SPL_DOLLS_WAR:
 		return;	
 	case SPL_FAKE_DOLLS_WAR:
@@ -7952,17 +8377,41 @@ void GetSpellDamageString(spell_list skill, monster* order, int pow_)
 	case SPL_ALERT_NOISE: 
 		return;
 	case SPL_SUMMON_NAMAZ:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_SUMMON_NAMAZ_DICE << "d" << SPL_SUMMON_NAMAZ_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_SCHEMA_TANMAC:
+	{
+		ostringstream ss;
+		if(order != nullptr) {
+			ss << "(" << SPL_SCHEMA_TANMAC_DICE << "d" << SPL_SCHEMA_TANMAC_DAM(order->GetLevel()) << ")";
+		} else {
+			ss << "(" << SPL_SCHEMA_TANMAC_DICE << "d" << SPL_SCHEMA_TANMAC_NOORDER_DAM << ")";
+		}
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_CHANGE:
 		return;
 	case SPL_UNLUCK:
 		return;	
 	case SPL_THUNDER:
-		return;	
+	{
+		ostringstream ss;
+		ss << "(" << SPL_THUNDER_DICE << "d" << SPL_THUNDER_DAM(pow_) << ")";
+		printsub(ss.str(), false, elec_dam);
+		return;
+	}
 	case SPL_AIR_STRIKE:
-		return;	
+	{
+		ostringstream ss;
+		ss << "(" << SPL_AIR_STRIKE_DICE << "d" << SPL_AIR_STRIKE_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
+		return;
+	}
 	case SPL_SUMMON_RACOON:
 		return;	
 	case SPL_SUMMON_YOUKAI:
@@ -7970,17 +8419,37 @@ void GetSpellDamageString(spell_list skill, monster* order, int pow_)
 	case SPL_MAMIZO_EVADE:
 		return;	
 	case SPL_MACRO_BURST:
-		return;	
+	{
+		ostringstream ss;
+		ss << "(" << SPL_MACRO_BURST_DICE << "d" << SPL_MACRO_BURST_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
+		return;
+	}
 	case SPL_SHATTER:
-		return;	
+	{
+		ostringstream ss;
+		ss << "(" << SPL_SHATTER_DICE << "d" << SPL_SHATTER_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
+		return;
+	}
 	case SPL_SUMMON_YOSHIKA:
 		return;	
 	case SPL_NESY_CANNON:
-		return;	
+	{
+		ostringstream ss;
+		ss << "(" << SPL_NESY_CANNON_DICE << "d" << SPL_NESY_CANNON_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
+		return;
+	}
 	case SPL_MERMAID_SONG:
 		return;	
 	case SPL_EMERALD_CITY:
-		return;	
+	{
+		ostringstream ss;
+		ss << "(" << SPL_EMERALD_CITY_DICE << "d" << SPL_EMERALD_CITY_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
+		return;
+	}
 	case SPL_AUTUMN_BLADE:
 		return;	
 	case SPL_PHILOSOPHERS_STONE:
@@ -7994,21 +8463,41 @@ void GetSpellDamageString(spell_list skill, monster* order, int pow_)
 	case SPL_PRISM_CALL:
 		return;
 	case SPL_PSYCHOKINESIS:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_PSYCHOKINESIS_DICE << "d" << SPL_PSYCHOKINESIS_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_SUMMON_TRASH:
 		return;
 	case SPL_TRASH_RUSH:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_TRASH_RUSH_DICE << "d" << SPL_TRASH_RUSH_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_KOKORO_CHANGE:
 		return;
 	case SPL_THUNDER_BOLT:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_THUNDER_BOLT_DICE << "d" << (isPlayer?SPL_THUNDER_BOLT_PLAYER_DAM(pow_):SPL_THUNDER_BOLT_DAM(pow_)) << ")";
+		printsub(ss.str(), false, elec_dam);
 		return;
+	}
 	case SPL_SANTUARY:
 		return;
 	case SPL_MISTIA_SONG:
 		return;
 	case SPL_THROW_DISH:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_THROW_DISH_DICE << "d" << SPL_THROW_DISH_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_MESS_CONFUSION:
 		return;
 	case SPL_SLEEP_SMITE:
@@ -8020,31 +8509,77 @@ void GetSpellDamageString(spell_list skill, monster* order, int pow_)
 	case SPL_DREAM_CALL:
 		return;
 	case SPL_HYPER_BEAM:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_HYPER_BEAM_DICE << "d" << SPL_HYPER_BEAM_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_KAGUYA_SPELL:
 		return;
 	case SPL_THROW_SWORD:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_THROW_SWORD_DICE << "d" << SPL_THROW_SWORD_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_THROW_KNIFE:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_THROW_KNIFE_DICE << "d" << SPL_THROW_KNIFE_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_THROW_PLAYER:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_THROW_PLAYER_DICE << "d" << SPL_THROW_PLAYER_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_THROW_AMULET:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_THROW_AMULET_DICE << "d" << SPL_THROW_AMULET_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_WARP_KICK:
+	if(order != nullptr) {
+	{
+		ostringstream ss;
+		ss << "(" << 1 << "d" << (order->GetAttack(true) * SPL_WARP_KICK_MULTI(pow_)) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_REIMU_BARRIER:
 		return;
 	case SPL_TOUGUE:
 		return;
 	case SPL_WINDFLAW:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_WINDFLAW_DICE << "d" << SPL_WINDFLAW_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_SUMMON_GHOST:
 		return;
 	case SPL_MEGATON_KICK:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_MEGATON_KICK_DICE << "d" << SPL_MEGATON_KICK_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_THROW_OIL:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_THROW_OIL_DICE << "d" << SPL_THROW_OIL_DAM(pow_) << ")";
+		printsub(ss.str(), false, oil_dam);
 		return;
+	}
 	case SPL_HEAVENLY_STORM:
 		return;
 	case SPL_TRACKING:
@@ -8064,19 +8599,100 @@ void GetSpellDamageString(spell_list skill, monster* order, int pow_)
 	case SPL_HOMING_TANMAC:
 		return;
 	case SPL_ALLROUND_TANMAC:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_ALLROUND_TANMAC_DICE << "d" << (isPlayer?SPL_ALLROUND_TANMAC_PLAYER_DAM(pow_):SPL_ALLROUND_TANMAC_DAM(pow_)) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_THROW_POTION:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_THROW_POTION_DICE << "d" << SPL_THROW_POTION_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_THROW_RABBIT:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_THROW_RABBIT_DICE << "d" << SPL_THROW_RABBIT_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_ARROW:
+	if(order != nullptr) {
+	{
+		ostringstream ss;
+		ss << "(" << 1 << "d" << order->GetAttack(true) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_HANIWA_MAGIC_TANMAC:
+	{
+		int damege_ = SPL_HANIWA_MAGIC_TANMAC_DAM(pow_);
+		D3DCOLOR color_ = normal_dam;
+		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC)) {
+			damage_ = damage_ * 1.3f;
+			color_ = fire_dam;
+		}
+		if(haniwa_abil::has_abil(HANIWA_A_COLD_TANMAC)) {
+			damage_ = damage_ * 1.3f;
+			color_ = cold_dam;
+		}
+		if(haniwa_abil::has_abil(HANIWA_A_ELEC_TANMAC)) {
+			damage_ = damage_ * 1.3f;
+			color_ = elec_dam;
+		}
+		
+		ostringstream ss;
+		ss << "(" << SPL_HANIWA_MAGIC_TANMAC_DICE << "d" << damege_ << ")";
+		printsub(ss.str(), false, color_);
 		return;
+	}
 	case SPL_HANIWA_MAGIC_TANMAC2:
+	{
+		int damege_ = SPL_HANIWA_MAGIC_TANMAC2_DAM(pow_);
+		D3DCOLOR color_ = normal_dam;
+		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC)) {
+			damage_ = damage_ * 1.3f;
+			color_ = fire_dam;
+		}
+		if(haniwa_abil::has_abil(HANIWA_A_COLD_TANMAC)) {
+			damage_ = damage_ * 1.3f;
+			color_ = cold_dam;
+		}
+		if(haniwa_abil::has_abil(HANIWA_A_ELEC_TANMAC)) {
+			damage_ = damage_ * 1.3f;
+			color_ = elec_dam;
+		}
+		
+		ostringstream ss;
+		ss << "(" << SPL_HANIWA_MAGIC_TANMAC2_DICE << "d" << damege_ << ")";
+		printsub(ss.str(), false, color_);
 		return;
+	}
 	case SPL_HANIWA_MAGIC_TANMAC3:
+	{
+		int damege_ = SPL_HANIWA_MAGIC_TANMAC3_DAM(pow_);
+		D3DCOLOR color_ = normal_dam;
+		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC)) {
+			damage_ = damage_ * 1.3f;
+			color_ = fire_dam;
+		}
+		if(haniwa_abil::has_abil(HANIWA_A_COLD_TANMAC)) {
+			damage_ = damage_ * 1.3f;
+			color_ = cold_dam;
+		}
+		if(haniwa_abil::has_abil(HANIWA_A_ELEC_TANMAC)) {
+			damage_ = damage_ * 1.3f;
+			color_ = elec_dam;
+		}
+		
+		ostringstream ss;
+		ss << "(" << SPL_HANIWA_MAGIC_TANMAC3_DICE << "d" << damege_ << ")";
+		printsub(ss.str(), false, color_);
 		return;
+	}
 	case SPL_BLINK_AWAY:
 		return;
 	case SPL_ELEMENTAL_HARVESTER:

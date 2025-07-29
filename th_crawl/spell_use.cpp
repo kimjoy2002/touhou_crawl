@@ -761,7 +761,7 @@ bool skill_flame(int pow_, bool short_, unit* order, coord_def target)
 		if(order->isplayer()) {
 			damage_ = SPL_FLAME_PLAYER_DAM(pow_);
 		}
-		beam_infor temp_infor(randC(SPL_FLAME_DICE,damage_),SPL_FLAME_DICE*damage_,15+pow/15,order,order->GetParentType(),SpellLength(SPL_FLAME, order->isplayer()),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_BURN));
+		beam_infor temp_infor(randC(SPL_FLAME_DICE,damage_),SPL_FLAME_DICE*damage_,15+pow_/15,order,order->GetParentType(),SpellLength(SPL_FLAME, order->isplayer()),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_BURN));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -842,7 +842,7 @@ bool skill_sting(int pow_, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(SPL_STING_DICE,SPL_STING_DAM(pow_)),SPL_STING_DICE*SPL_STING_DAM(pow_),14+pow/15,order,order->GetParentType(),SpellLength(SPL_STING, order->isplayer()),1,BMT_NORMAL,ATT_THROW_WEAK_POISON,name_infor(LOC_SYSTEM_ATT_POISONTANMAC));
+		beam_infor temp_infor(randC(SPL_STING_DICE,SPL_STING_DAM(pow_)),SPL_STING_DICE*SPL_STING_DAM(pow_),14+pow_/15,order,order->GetParentType(),SpellLength(SPL_STING, order->isplayer()),1,BMT_NORMAL,ATT_THROW_WEAK_POISON,name_infor(LOC_SYSTEM_ATT_POISONTANMAC));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -1818,18 +1818,18 @@ bool skill_summon_bird(int pow_, bool short_, unit* order, coord_def target)
 	int id_ = MON_CROW;
 	int time_ = rand_int(20,30)+randA(pow_);
 
-	int pow_ = pow_/3+randA(pow_*2/3);
+	int rand_ = pow_/3+randA(pow_*2/3);
 	int i = 2;
 
-	if(pow_<=10)//까마귀
+	if(rand_<=10)//까마귀
 	{
 		i = 1;
 	}
-	else if(pow_<=30 || randA(2) == 0)//까마귀
+	else if(rand_<=30 || randA(2) == 0)//까마귀
 	{
 		//i=(randA_1(20) < pow_?3:2);
 	}
-	else if(pow_<=70  || randA(2) == 0)//나중에 까마귀에서 바꾸자
+	else if(rand_<=70  || randA(2) == 0)//나중에 까마귀에서 바꾸자
 	{
 		id_ = MON_CRANE;
 		i=1;
@@ -2512,7 +2512,7 @@ bool skill_mind_bending(int pow_, bool short_, unit* order, coord_def target)
 	beam_iterator beam(order->position,order->position);
 	if(CheckThrowPath(order->position,target,beam))
 	{
-		beam_infor temp_infor(randC(SPL_MIND_BENDING_DICE, SPL_MIND_BENDING_DAM(pow_)),SPL_MIND_BENDING_DICE*SPL_MIND_BENDING_DAM(pow_),17+pow/15,order,order->GetParentType(),SpellLength(SPL_MIND_BENDING, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
+		beam_infor temp_infor(randC(SPL_MIND_BENDING_DICE, SPL_MIND_BENDING_DAM(pow_)),SPL_MIND_BENDING_DICE*SPL_MIND_BENDING_DAM(pow_),17+pow_/15,order,order->GetParentType(),SpellLength(SPL_MIND_BENDING, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
 		
 		
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
@@ -2564,7 +2564,7 @@ bool skill_stone_arrow(int pow_, bool short_, unit* order, coord_def target)
 		if(order->isplayer()) {
 			damage_ = SPL_STONE_ARROW_PLAYER_DAM(pow_);
 		}
-		beam_infor temp_infor(randC(SPL_STONE_ARROW_DICE,damage_),SPL_STONE_ARROW_DICE*damage_,13+pow/15,order,order->GetParentType(),SpellLength(SPL_STONE_ARROW, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_STONE));
+		beam_infor temp_infor(randC(SPL_STONE_ARROW_DICE,damage_),SPL_STONE_ARROW_DICE*damage_,13+pow_/15,order,order->GetParentType(),SpellLength(SPL_STONE_ARROW, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_STONE));
 		if(short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -2598,7 +2598,7 @@ bool skill_stone_trap(int pow_, bool short_, unit* order, coord_def target)
 		{
 			if(randA(75)<pow_)
 			{
-				env[current_level].MakeFloorEffect((*rit),&img_effect_rock_trap,&img_effect_rock_trap,FLOORT_STONE,20+pow/4,&you);
+				env[current_level].MakeFloorEffect((*rit),&img_effect_rock_trap,&img_effect_rock_trap,FLOORT_STONE,20+pow_/4,&you);
 			}
 		}
 		return true;
@@ -5521,7 +5521,7 @@ bool skill_allround_tanmac(int pow_, bool short_, unit* order, coord_def target)
 					if(!order->isplayer()) {
 						damage_ = SPL_ALLROUND_TANMAC_DAM(pow_);
 					}
-					beam_infor temp_infor_sub(randC(SPL_ALLROUND_TANMAC_DICE,damage_),SPL_ALLROUND_TANMAC_DICE*(damage_),15+pow/25,order,order->GetParentType(),SpellLength(SPL_ALLROUND_TANMAC, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
+					beam_infor temp_infor_sub(randC(SPL_ALLROUND_TANMAC_DICE,damage_),SPL_ALLROUND_TANMAC_DICE*(damage_),15+pow_/25,order,order->GetParentType(),SpellLength(SPL_ALLROUND_TANMAC, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
 					temp_infor_sub.length = ceil(GetPositionGap(order->position.x, order->position.y, target_unit->position.x, target_unit->position.y));
 					beam_iterator beam_sub(order->position,target_unit->position);
 					tanmac_list.push_back(make_shared<ThrowTamacInstance>(nullptr, graphic_, beam_sub, temp_infor_sub, nullptr, false));
@@ -7970,10 +7970,9 @@ void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 	D3DCOLOR oil_dam = CL_bad;
 	D3DCOLOR cold_dam = CL_cyan;
 	D3DCOLOR elec_dam = CL_warning;
-	D3DCOLOR poision_dam = CL_green;
-	D3DCOLOR special_dam = CL_magic;
+	D3DCOLOR poison_dam = CL_green;
 	D3DCOLOR heal = CL_white_blue;
-	bool isPlayer = order!=nullptr?order->isPlayer():false;
+	bool isPlayer = order!=nullptr?order->isplayer():false;
 	
 	switch(skill)
 	{
@@ -8546,10 +8545,10 @@ void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 		return;
 	}
 	case SPL_WARP_KICK:
-	if(order != nullptr) {
+	if(order != nullptr)
 	{
 		ostringstream ss;
-		ss << "(" << 1 << "d" << (order->GetAttack(true) * SPL_WARP_KICK_MULTI(pow_)) << ")";
+		ss << "(" << 1 << "d" << (order->GetAttack(true) * SPL_WARP_KICK_MULTI) << ")";
 		printsub(ss.str(), false, normal_dam);
 		return;
 	}
@@ -8620,7 +8619,7 @@ void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 		return;
 	}
 	case SPL_ARROW:
-	if(order != nullptr) {
+	if(order != nullptr)
 	{
 		ostringstream ss;
 		ss << "(" << 1 << "d" << order->GetAttack(true) << ")";
@@ -8629,7 +8628,7 @@ void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 	}
 	case SPL_HANIWA_MAGIC_TANMAC:
 	{
-		int damege_ = SPL_HANIWA_MAGIC_TANMAC_DAM(pow_);
+		int damage_ = SPL_HANIWA_MAGIC_TANMAC_DAM(pow_);
 		D3DCOLOR color_ = normal_dam;
 		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC)) {
 			damage_ = damage_ * 1.3f;
@@ -8645,13 +8644,13 @@ void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 		}
 		
 		ostringstream ss;
-		ss << "(" << SPL_HANIWA_MAGIC_TANMAC_DICE << "d" << damege_ << ")";
+		ss << "(" << SPL_HANIWA_MAGIC_TANMAC_DICE << "d" << damage_ << ")";
 		printsub(ss.str(), false, color_);
 		return;
 	}
 	case SPL_HANIWA_MAGIC_TANMAC2:
 	{
-		int damege_ = SPL_HANIWA_MAGIC_TANMAC2_DAM(pow_);
+		int damage_ = SPL_HANIWA_MAGIC_TANMAC2_DAM(pow_);
 		D3DCOLOR color_ = normal_dam;
 		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC)) {
 			damage_ = damage_ * 1.3f;
@@ -8667,13 +8666,13 @@ void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 		}
 		
 		ostringstream ss;
-		ss << "(" << SPL_HANIWA_MAGIC_TANMAC2_DICE << "d" << damege_ << ")";
+		ss << "(" << SPL_HANIWA_MAGIC_TANMAC2_DICE << "d" << damage_ << ")";
 		printsub(ss.str(), false, color_);
 		return;
 	}
 	case SPL_HANIWA_MAGIC_TANMAC3:
 	{
-		int damege_ = SPL_HANIWA_MAGIC_TANMAC3_DAM(pow_);
+		int damage_ = SPL_HANIWA_MAGIC_TANMAC3_DAM(pow_);
 		D3DCOLOR color_ = normal_dam;
 		if(haniwa_abil::has_abil(HANIWA_A_FIRE_TANMAC)) {
 			damage_ = damage_ * 1.3f;
@@ -8689,7 +8688,7 @@ void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 		}
 		
 		ostringstream ss;
-		ss << "(" << SPL_HANIWA_MAGIC_TANMAC3_DICE << "d" << damege_ << ")";
+		ss << "(" << SPL_HANIWA_MAGIC_TANMAC3_DICE << "d" << damage_ << ")";
 		printsub(ss.str(), false, color_);
 		return;
 	}

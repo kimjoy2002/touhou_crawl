@@ -287,7 +287,7 @@ bool save_menu(int value_)
 		}
 		printsub("",true,CL_normal);
 		printsub(blank,false,CL_warning);
-		printsub("c - " + LocalzationManager::formatString(LOC_SYSTEM_SAVE_MENU_SLOT, PlaceHolderHelper(to_string(3))),false,(delete_mode==2&&last_pick_delete==3)?CL_danger:char_info[2].empty()?CL_bad:CL_normal,'b');
+		printsub("c - " + LocalzationManager::formatString(LOC_SYSTEM_SAVE_MENU_SLOT, PlaceHolderHelper(to_string(3))),false,(delete_mode==2&&last_pick_delete==3)?CL_danger:char_info[2].empty()?CL_bad:CL_normal,'c');
 		
 		if(!char_info[2].empty()) {
 			printsub(char_info[2],false,(delete_mode==2&&last_pick_delete==3)?CL_danger:CL_warning);

@@ -5640,7 +5640,6 @@ const char* hakurei_last_vault_pattern(map_dummy* map, bool fake)
 				type_.push(ITM_ARMOR_CLOAK);
 				type_.push(ITM_ARMOR_GLOVE);
 				type_.push(ITM_ARMOR_BOOT);
-				type_.push(ITM_ARMOR_LAST);
 				type_.push(ITM_RING);
 				type_.push(ITM_AMULET);
 				makeitem((item_type)type_.pop(), 0, &t, 0);

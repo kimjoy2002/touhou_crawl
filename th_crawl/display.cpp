@@ -2344,7 +2344,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		{
 			if(abs((*it).position.x -x_-sight_x)<=sight_x && abs((*it).position.y -y_-sight_y)<=sight_y)
 			{
-				if(!env[current_level].isInSight((*it).position)) 
+				if(!env[current_level].isInSight((*it).position) && (*it).image) 
 				{
 					(*it).image->draw(pSprite,((*it).position.x-x_)*calc_tile_size+tile_x_offset,((*it).position.y-y_)*calc_tile_size+tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale,D3DCOLOR_XRGB(128,128,128));
 				}

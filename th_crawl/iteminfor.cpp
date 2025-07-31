@@ -37,7 +37,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key);
 bool compareAlphabet(char l_, char r_)
 {
 	bool l_small = l_ >= 'a' && l_ <= 'z';
-	bool r_small = l_ >= 'a' && l_ <= 'z';
+	bool r_small = r_ >= 'a' && r_ <= 'z';
 	if (l_small && !r_small)
 		return false;
 	else if(!l_small && r_small)
@@ -128,7 +128,7 @@ bool changeItemHotkey(int prev_item, int new_id, int change) {
 				//하지만 앞으로 밀 필요가 있음
 				if(old_ != you.item_list.rbegin()) {
 					old_--;
-					changeItemHotkey(prev_item, old_->id, change*-1);
+					changeItemHotkey(prev_item, old_->id, -change);
 				}
 				return false;
 			}
@@ -183,6 +183,8 @@ bool changeItemHotkey(int prev_item, int new_id, int change) {
 			if(change == 0) {
 				old_->id = prev_item;
 				new_->id = new_id;
+				final_ << new_->id << " - " << new_->GetName() << " ";
+				final_color_ = new_->item_color();
 				swap_list_items(you.item_list, old_, new_);
 
 				ostringstream ss;
@@ -219,7 +221,7 @@ bool changeItemHotkey(int prev_item, int new_id, int change) {
 					//하지만 앞으로 밀 필요가 있음
 					if(old_ != you.item_list.begin()) {
 						old_--;
-						changeItemHotkey(prev_item, old_->id, change*-1);
+						changeItemHotkey(prev_item, old_->id, -change);
 					}
 					return false;
 				}

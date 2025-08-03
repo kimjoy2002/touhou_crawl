@@ -4568,7 +4568,7 @@ bool display_manager::checkVaildItemView(item_type_simple i) {
 	if (item_vt == IVT_SPELLCARD && i != ITMS_SPELL) {
 		return false;
 	}
-	if(item_vt == IVT_EVOKE && i != ITMS_SPELL && i != ITMS_MISCELLANEOUS && i != ITMS_JEWELRY)
+	if(item_vt == IVT_EVOKE && i != ITMS_SPELL && i != ITMS_MISCELLANEOUS && i != ITMS_JEWELRY && i != ITMS_WEAPON)
 		return false;
 	if(item_vt == IVT_CURSE_ENCHANT && (i != ITMS_WEAPON && i != ITMS_ARMOR))
 		return false;

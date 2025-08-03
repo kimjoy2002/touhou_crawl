@@ -291,8 +291,37 @@ void auto_battle()
 		printlog(LocalzationManager::locString(LOC_SYSTEM_AUTOBATTLE_DANGERHP),true,false,false,CL_small_danger);
 		return;
 	}
-
+	bool can_reach = false; 
+	bool can_reach_right = false; 
+	
+	if(you.equipment[ET_WEAPON] && you.equipment[ET_WEAPON]->canReachAttack()) {
+		can_reach = true;
+	} else if((you.GetProperty(TPT_DUAL_WEAPON) && you.equipment[ET_SHIELD] && you.equipment[ET_SHIELD]->canReachAttack())) {
+		can_reach_right = true;
+	}
 	monster* mon_ = env[current_level].close_mon(you.position.x,you.position.y, MET_ENEMY);
+
+
+	if(can_reach || can_reach_right) {
+		int abs_ = std::max(abs(mon_->position.x - you.position.x), abs(mon_->position.y - you.position.y));
+		if(abs_ == 2 && you.isSightnonblocked(mon_->position)) {
+			if(can_reach) {
+				you.attack(mon_, ET_WEAPON, false);
+				you.doingActionDump(DACT_MELEE, you.equipment[ET_WEAPON]->GetName());
+			}
+			if(mon_->isLive() && can_reach_right) {
+				you.attack(mon_, ET_SHIELD, false);
+				you.doingActionDump(DACT_MELEE, you.equipment[ET_SHIELD]->GetName());
+			}
+			you.time_delay += you.GetAtkDelay();
+			you.TurnEnd();
+			you.SetPrevAction(VK_TAB);
+			return;
+		}
+	}
+
+
+
 	if(mon_)
 	{
 		if(useAutoTanmac(mon_)) {
@@ -3944,7 +3973,7 @@ void More_Item_Action()
 			deletelog();
 			if(you.GetProperty(TPT_DUAL_WEAPON)) {
 				if(!you.unequipdualweapon())
-				{				
+				{
 					printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY),true,false,false,CL_normal);
 				}
 			}

@@ -606,7 +606,6 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 					}
 					if (you.Evoke(item_->id, false))
 					{
-						you.time_delay += you.GetNormalDelay();
 						you.TurnEnd();
 					}
 					return true;

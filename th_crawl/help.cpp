@@ -84,9 +84,11 @@ void Help_Show()
 					changemove(-1); //아래
 					break;
 				case VK_PRIOR:
+				case GVK_LEFT_BUMPER:
 					changemove(DisplayManager.log_length);
 					break;
 				case VK_NEXT:
+				case GVK_RIGHT_BUMPER:
 					changemove(-DisplayManager.log_length);
 					break;
 				case -1:
@@ -135,9 +137,11 @@ void Help_Show()
 					changemove(-1); //아래
 					break;
 				case VK_PRIOR:
+				case GVK_LEFT_BUMPER:
 					changemove(DisplayManager.log_length);
 					break;
 				case VK_NEXT:
+				case GVK_RIGHT_BUMPER:
 					changemove(-DisplayManager.log_length);
 					break;
 				case -1:
@@ -185,9 +189,11 @@ void Help_Show()
 					changemove(-1); //아래
 					break;
 				case VK_PRIOR:
+				case GVK_LEFT_BUMPER:
 					changemove(DisplayManager.log_length);
 					break;
 				case VK_NEXT:
+				case GVK_RIGHT_BUMPER:
 					changemove(-DisplayManager.log_length);
 					break;
 				case -1:
@@ -257,9 +263,11 @@ void Help_Show()
 						changemove(-1); //아래
 						break;
 					case VK_PRIOR:
+					case GVK_LEFT_BUMPER:
 						changemove(DisplayManager.log_length);
 						break;
 					case VK_NEXT:
+					case GVK_RIGHT_BUMPER:
 						changemove(-DisplayManager.log_length);
 						break;						
 					case -1:
@@ -308,9 +316,11 @@ void Help_Show()
 					changemove(-1); //아래
 					break;
 				case VK_PRIOR:
+				case GVK_LEFT_BUMPER:
 					changemove(DisplayManager.log_length);
 					break;
 				case VK_NEXT:
+				case GVK_RIGHT_BUMPER:
 					changemove(-DisplayManager.log_length);
 					break;
 				case -1:

@@ -1449,14 +1449,28 @@ bool item::isChargable()
 	return false;
 
 }
+bool item::canReachAttack() {
+	if(type == ITM_WEAPON_SPEAR) {
+		//창은 사거리 공격가능
+		return true;
+	}	
+	return false;
+}	
 bool item::isEvokable()
-{
+	{
 	if (type == ITM_SPELL || type == ITM_MISCELLANEOUS)
 		return true;
 	if (type == ITM_AMULET) {
 		if (isCanEvoke((amulet_type)value1) && you.equipment[ET_NECK] == this && you.getAmuletPercent() >= 100) {
 			return true;
 		}
+	}
+	if(you.isequip(this)) {
+		if(canReachAttack()) {
+			//창은 사거리 공격가능
+			return true;
+		}
+
 	}
 	return false;
 

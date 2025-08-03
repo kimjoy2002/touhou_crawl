@@ -5405,6 +5405,7 @@ bool players::Drink(char id_)
 	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_NOT_EXIST),true,false,false,CL_normal);
 	return false;
 }
+bool evoke_prev_fail();
 bool players::Evoke(char id_, bool auto_)
 {
 	for(auto it = item_list.begin(); it != item_list.end(); it++)
@@ -5420,6 +5421,10 @@ bool players::Evoke(char id_, bool auto_)
 			WaitForSingleObject(mutx, INFINITE);
 			if((*it).type == ITM_SPELL)
 			{
+				if(evoke_prev_fail()) {
+					ReleaseMutex(mutx);
+					return false;
+				}
 				if(((*it).identify || (*it).value3 == -1) && (*it).value1 <= 0)
 				{
 					printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_EMPTY),true,false,false,CL_normal);
@@ -5436,6 +5441,7 @@ bool players::Evoke(char id_, bool auto_)
 						printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_EMPTY),true,false,false,CL_normal);
 						(*it).value3 = -1; //-1이면 비어있는것이 확정
 						ReleaseMutex(mutx);
+						you.time_delay += you.GetNormalDelay();
 						return true;
 					}
 					iden_list.spellcard_list[(*it).value2].iden = 2;
@@ -5446,18 +5452,37 @@ bool players::Evoke(char id_, bool auto_)
 					ReleaseMutex(mutx);
 					
 					you.doingActionDump(DACT_EVOKE, (*it).name.getName());
+					you.time_delay += you.GetNormalDelay();
 					return true;
 				}
 				return false;
 			}
+			if((*it).type == ITM_WEAPON_SPEAR)
+			{
+				ReleaseMutex(mutx);
+
+				if(evoke_evokable(&(*it), auto_, 0, EVK_SPEAR))
+				{
+					you.time_delay += you.GetAtkDelay();
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
 			if((*it).type == ITM_MISCELLANEOUS)
 			{
+				if(evoke_prev_fail()) {
+					ReleaseMutex(mutx);
+					return false;
+				}
 				ReleaseMutex(mutx);
 
 				if(evoke_evokable(&(*it), auto_, 0, (evoke_kind)(*it).value1))
 				{
 					it->identify = true;
 					you.doingActionDump(DACT_EVOKE, (*it).name.getName());
+					you.time_delay += you.GetNormalDelay();
 					return true;
 				}
 				else {
@@ -5466,6 +5491,10 @@ bool players::Evoke(char id_, bool auto_)
 			}
 			if ((*it).type == ITM_AMULET)
 			{
+				if(evoke_prev_fail()) {
+					ReleaseMutex(mutx);
+					return false;
+				}
 				if (equipment[ET_NECK] != &(*it))
 				{
 					printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_ONLY_EQUIP_AMULET), true, false, false, CL_normal);
@@ -5489,6 +5518,7 @@ bool players::Evoke(char id_, bool auto_)
 					(*it).value3++;
 					you.doingActionDump(DACT_EVOKE, (*it).name.getName());
 					resetAmuletPercent((amulet_type)(*it).value1, true);
+					you.time_delay += you.GetNormalDelay();
 					return true;
 				}
 				else

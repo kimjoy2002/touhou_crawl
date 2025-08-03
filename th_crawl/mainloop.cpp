@@ -1298,6 +1298,8 @@ void MainLoop()
 		//	//Eat_Power();
 		//	break;
 		case 'v':
+			Speed_Evoke();
+			break;
 		case 'V':
 			Spelllcard_Evoke(0);
 			break;

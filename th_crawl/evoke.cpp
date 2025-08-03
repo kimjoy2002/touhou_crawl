@@ -6,6 +6,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include "dump.h"
 #include "evoke.h"
 #include "skill_use.h"
 #include "projectile.h"
@@ -87,6 +88,7 @@ bool isCanGenerate(evoke_kind evk) {
 		case EVK_SKY_TORPEDO:
 		case EVK_MAGIC_HAMMER:
 		case EVK_CAMERA:
+		case EVK_SPEAR:
 			return false;
 		default:
 			break;
@@ -94,6 +96,16 @@ bool isCanGenerate(evoke_kind evk) {
 	return true;
 }
 
+bool isFakeEvoke(evoke_kind evk) {
+	//이건 Evoke용 아이템은 아니지만 발동으로 사용하게 하기위한 가짜 발동템
+	switch(evk) {
+		case EVK_SPEAR:
+			return true;
+		default:
+			break;
+	}
+	return false;
+}
 bool evoke_evokable(item* item_, bool auto_, int auto_direc_, evoke_kind kind)
 {
 	if(you.s_confuse)
@@ -102,16 +114,18 @@ bool evoke_evokable(item* item_, bool auto_, int auto_direc_, evoke_kind kind)
 		return false;
 	}
 
-	if(you.power < Evokeusepower(kind,true))
-	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TOO_LOW_P_EVOKE),true,false,false,CL_small_danger);	
-		return false;
-	}
+	if(!isFakeEvoke(kind)) {
+		if(you.power < Evokeusepower(kind,true))
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TOO_LOW_P_EVOKE),true,false,false,CL_small_danger);	
+			return false;
+		}
 
-	if(randA(99) >= EvokeSuccece(kind))
-	{		
-		printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);	
-		return true;
+		if(randA(99) >= EvokeSuccece(kind))
+		{		
+			printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);	
+			return true;
+		}
 	}
 
 	if(EvokeFlagCheck(kind, S_FLAG_DIREC))
@@ -192,8 +206,10 @@ int Evokeusepower(evoke_kind skill, bool max_)
 		return 100;
 	case EVK_CAMERA:
 		return 100;
+	case EVK_SPEAR:
+		return 0;
 	default:
-		return false;
+		return 0;
 	}
 }
 
@@ -213,6 +229,8 @@ bool EvokeFlagCheck(evoke_kind skill, skill_flag flag)
 	case EVK_GHOST_BALL:
 	case EVK_MAGIC_HAMMER:
 		return (S_FLAG_IMMEDIATELY) & flag;
+	case EVK_SPEAR:
+		return (S_FLAG_SMITE) & flag;
 	default:
 		return false;
 	}
@@ -234,6 +252,8 @@ int EvokeLength(evoke_kind skill)
 	case EVK_GHOST_BALL:
 	case EVK_MAGIC_HAMMER:
 		return 0;
+	case EVK_SPEAR:
+		return 2;
 	default:
 		return false;
 	}
@@ -284,6 +304,34 @@ bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target)
 	{
 	default:
 		break;
+	case EVK_SPEAR:
+	{
+		unit* target_unit = env[current_level].isMonsterPos(target.x, target.y, &you,NULL);
+		if(target_unit && !target_unit->isplayer()) {
+			monster* target_mon = (monster*)target_unit;
+			equip_type type_ = you.getequipslot(item_);
+			if(type_ != ET_LAST) {
+				you.attack(target_mon, type_, false);
+				you.doingActionDump(DACT_MELEE, item_->GetName());
+			}
+			if(target_mon->isLive() && you.GetProperty(TPT_DUAL_WEAPON)) {
+				if(type_ == ET_WEAPON) {
+					if(you.equipment[ET_SHIELD] && you.equipment[ET_SHIELD]->isweapon() &&  you.equipment[ET_SHIELD]->canReachAttack()) {
+						you.attack(target_mon, type_, false);
+						you.doingActionDump(DACT_MELEE, you.equipment[ET_SHIELD]->GetName());
+					}
+				} else if(type_ == ET_WEAPON){
+					if(you.equipment[ET_WEAPON] && you.equipment[ET_WEAPON]->isweapon() &&  you.equipment[ET_WEAPON]->canReachAttack()) {
+						you.attack(target_mon, type_, false);
+						you.doingActionDump(DACT_MELEE, you.equipment[ET_WEAPON]->GetName());
+					}
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+	break;
 	case EVK_PAGODA:
 		{
 			beam_iterator beam(you.position,target);
@@ -299,7 +347,7 @@ bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target)
 				you.SetParadox(0); 
 				return true;
 			}
-			return false;	
+			return false;
 		}	
 	case EVK_AIR_SCROLL:
 		{

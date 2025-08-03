@@ -720,6 +720,7 @@ void fast_discard(int delete_id, int delete_num);
 void Eatting(char auto_);
 void Drinking(char auto_);
 //void Spelllcard_Declare();
+void Speed_Evoke();
 void Spelllcard_Evoke(char auto_);
 void Reading(char auto_);
 void Equip_Weapon(); //무기장착

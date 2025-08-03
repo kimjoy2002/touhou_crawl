@@ -11,6 +11,7 @@
 #include "key.h"
 #include "player.h"
 #include "beam.h"
+#include "tribe.h"
 #include "skill_use.h"
 #include "monster_texture.h"
 #include "spellcard.h"
@@ -733,17 +734,27 @@ void evoke_logic(int key_, char auto_) {
 	changedisplay(DT_GAME);
 	if(you.Evoke(key_, auto_>0))
 	{
-		you.time_delay += you.GetNormalDelay();
 		you.TurnEnd();
-		you.SetPrevAction('v', key_);
+		you.SetPrevAction('V', key_);
 	}
 }
 
+void Speed_Evoke()
+{
+	if(you.equipment[ET_WEAPON] && you.equipment[ET_WEAPON]->isEvokable()) {
+		evoke_logic(you.equipment[ET_WEAPON]->id,0);
+		you.SetPrevAction('v', you.equipment[ET_WEAPON]->id);
+	} else if((you.GetProperty(TPT_DUAL_WEAPON) && you.equipment[ET_SHIELD] && you.equipment[ET_SHIELD]->isEvokable())) {
+		evoke_logic(you.equipment[ET_SHIELD]->id,0);
+		you.SetPrevAction('v', you.equipment[ET_SHIELD]->id);
+	} else {
+		Spelllcard_Evoke(0);
+	}
+}
+
+
 void Spelllcard_Evoke(char auto_)
 {
-	if(evoke_prev_fail()) {
-		return;
-	}
 	view_item(IVT_EVOKE,LOC_SYSTEM_DISPLAY_MANAGER_EVOKE);
 	while(1)
 	{

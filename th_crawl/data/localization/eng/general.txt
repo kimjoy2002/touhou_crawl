@@ -457,7 +457,7 @@ LOC_SYSTEM_INFORMATION_COMMAND,Additional Information Window
 LOC_SYSTEM_INFORMATION_CHARACTER,Character Information
 LOC_SYSTEM_INFORMATION_FAITH,Faith Information
 LOC_SYSTEM_INFORMATION_INDENTIFY,Identified Items
-LOC_SYSTEM_INFORMATION_PROPERTY,Property Information
+LOC_SYSTEM_INFORMATION_PROPERTY,Traits Information
 LOC_SYSTEM_INFORMATION_SPELL,Learned Spells
 LOC_SYSTEM_INFORMATION_LEARN_SPELL,Learn New Spell
 LOC_SYSTEM_INFORMATION_SKILL,Skill Window
@@ -897,7 +897,7 @@ LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL,Select a spell to view details. (Press {0}
 LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL_SIMPLE,Select a spell to view details.
 LOC_SYSTEM_DISPLAY_MANAGER_IDEN_VIEW,Identified items & Auto-pickup settings
 LOC_SYSTEM_DISPLAY_MANAGER_NO_IDEN,No identified items.
-LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW,Your properties (Press a letter for detailed info.)
+LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW,Your traits (Press a letter for detailed info.)
 LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW_PAD,Your traits (Press {0} for more details.)
 LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY,Traits
 LOC_SYSTEM_DISPLAY_MANAGER_EFFECT,Effects
@@ -2860,7 +2860,7 @@ LOC_SYSTEM_SPL_DESCRIBE_CLOSE_DOOR,Activates Scarlet Devil Mansion’s emergency
 LOC_SYSTEM_SPL_DESCRIBE_SPEAKER_PHONE,Sounds an alert to allies using a loudspeaker.\nLinked to the Scarlet Devil Mansion’s internal security system, some distant groups may hear it and come.\nHowever, since they’re walking, you may have time to escape.\nRumor has it the head maid on the same floor arrives as if by teleportation.\n
 LOC_SYSTEM_SPL_DESCRIBE_HOMING_TANMAC,Summons two small energy-based homing danmaku.\nThey are slower than normal shots and need time to reach targets.\nHigh accuracy on hit, but may miss if terrain is tight or enemies are too close.
 LOC_SYSTEM_SPL_DESCRIBE_ALLROUND_TANMAC,Casts danmaku in all directions.\nAutomatically targets threatening enemies within range.\nFires mid-sized danmaku but doesn’t pierce enemies.
-LOC_SYSTEM_SPL_DESCRIBE_THROW_POTION,Throws a random potion.\nCreates an explosion with random properties and a 3x3 cloud effect at impact.
+LOC_SYSTEM_SPL_DESCRIBE_THROW_POTION,Throws a random potion.\nCreates an explosion with random element and a 3x3 cloud effect at impact.
 LOC_SYSTEM_SPL_DESCRIBE_THROW_RABBIT,Throws a nearby rabbit at an enemy.\nA combo move trained at Eientei.
 LOC_SYSTEM_SPL_DESCRIBE_ARROW,The Haniwa uses a bow to attack distant enemies.
 LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC,A small magical danmaku that flies toward distant enemies.

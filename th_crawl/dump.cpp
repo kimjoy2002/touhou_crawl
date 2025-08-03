@@ -585,7 +585,7 @@ bool Dump(int type, wstring *filename_)
 	
 	if (!you.pure_mp)
 	{
-		ss << "MP: " << std::setw(4) << you.GetMp() << "/" << std::setw(4) << you.GetMaxHp() << "             EV:" << std::setw(4) << you.ev << "             ";
+		ss << "MP: " << std::setw(4) << you.GetMp() << "/" << std::setw(4) << you.GetMaxMp() << "             EV:" << std::setw(4) << you.ev << "             ";
 		ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX);
 		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX)) < 4)
 			ss << std::string(4-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_DEX)), ' ');

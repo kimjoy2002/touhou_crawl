@@ -1332,10 +1332,10 @@ bool environment::MakeEvent(int id_, coord_def position_, event_type type_, int 
 	return true;
 }
 
-void environment::MakeEffect(const coord_def &c, textures *t, bool over_sight_)
+void environment::MakeEffect(const coord_def &c, textures *t, bool over_sight_, float alpha_)
 {
 	WaitForSingleObject(mutx, INFINITE);
-	effect_list.push_back(effect(c,t,over_sight_));
+	effect_list.push_back(effect(c,t,over_sight_, alpha_));
 	ReleaseMutex(mutx);
 }
 void environment::ClearEffect()
@@ -2529,9 +2529,9 @@ int environment::insight_mon(monster_enemy_type type_) //타입은 동맹,적등
 	}
 	return num_;
 }
-monster* environment::close_mon(int x_,int y_, monster_enemy_type type_)
+monster* environment::close_mon(int x_,int y_, monster_enemy_type type_, int max_len_)
 {
-	int dis_=999;
+	int dis_=max_len_;
 	monster* return_=NULL;
 	vector<monster>::iterator it;
 	it = mon_vector.begin();

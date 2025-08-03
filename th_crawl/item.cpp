@@ -1449,6 +1449,13 @@ bool item::isChargable()
 	return false;
 
 }
+bool item::canSlashTanmac() {
+	if(type == ITM_WEAPON_LONGBLADE) {
+		//장검은 탄막을 자를 수 있음
+		return true;
+	}	
+	return false;
+}	
 bool item::canReachAttack() {
 	if(type == ITM_WEAPON_SPEAR) {
 		//창은 사거리 공격가능

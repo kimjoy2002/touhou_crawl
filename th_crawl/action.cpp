@@ -299,7 +299,7 @@ void auto_battle()
 	} else if((you.GetProperty(TPT_DUAL_WEAPON) && you.equipment[ET_SHIELD] && you.equipment[ET_SHIELD]->canReachAttack())) {
 		can_reach_right = true;
 	}
-	monster* mon_ = env[current_level].close_mon(you.position.x,you.position.y, MET_ENEMY);
+	monster* mon_ = env[current_level].close_mon(you.position.x,you.position.y, MET_ENEMY, 999);
 
 
 	if(can_reach || can_reach_right) {

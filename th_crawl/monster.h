@@ -350,8 +350,10 @@ public:
 	textures *image;
 	coord_def position;
 	bool over_sight;
-	effect():image(NULL),position(),over_sight(false){}
-	effect(const coord_def &c, textures *t, bool over_sight_):image(t),position(c),over_sight(over_sight_){};
+	float alpha;
+	effect():image(NULL),position(),over_sight(false), alpha(1.0f){}
+	effect(const coord_def &c, textures *t, bool over_sight_):image(t),position(c),over_sight(over_sight_), alpha(1.0f){};
+	effect(const coord_def &c, textures *t, bool over_sight_, float alpha):image(t),position(c),over_sight(over_sight_), alpha(alpha){};
 };
 
 #endif // __MONSTER_H__

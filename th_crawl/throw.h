@@ -55,6 +55,8 @@ public:
 	unit* last_hit;
 	bool effect_delete;
 	bool mimic_;
+	int slashed;
+	std::vector<beam_iterator> slashed_beams;
 	void (*attack_prefix)(attack_infor& attack, ThrowTamacInstance* instance_);
 	//람다 추가(int반환 ThrowTamacInstance입력
 

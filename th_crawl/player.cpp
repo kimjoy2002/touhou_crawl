@@ -7152,6 +7152,34 @@ bool players::GetCloudResist()
 	return GetProperty(TPT_CLOUD_RESIST);
 }
 
+int players::CanSlash(attack_type att_type) {
+	int percent_ = 0;
+	for(int i = 0; i < 2; i++) {
+		equip_type et = (i == 0?ET_WEAPON:ET_SHIELD);
+		bool check_mon_ = false;
+		monster* mon_ = nullptr;
+		if(you.equipment[et] && you.equipment[et]->isweapon() && you.equipment[et]->canSlashTanmac()) {
+			if(!check_mon_) {
+				mon_ = env[current_level].close_mon(you.position.x,you.position.y, MET_ENEMY, 2);
+				check_mon_ = true;
+			}
+			if(mon_ == nullptr) {
+				//근처에 적이 없고
+				if(!s_confuse && !s_paralyse) {
+					//혼란이나 마비상태가 아니며, (광기는 가능!)
+					if(att_type >= ATT_THROW_NORMAL && att_type <= ATT_THROW_LAST) {
+						//기본적으로 그레이즈가 되는 기술들
+						int long_blade = GetSkillLevel(SKT_LONGBLADE, true);
+						if(long_blade >= 8) {//최소 롱 블레이드 스킬이 8이상
+							percent_ += 20 + (long_blade-7)*1.5f;//최대확률 50% (요우무면 2배!)
+						}
+					}
+				}
+			}
+		}
+	}
+	return percent_;
+}
 
 void players::burstCloud(int kind_, int rate_)
 {	

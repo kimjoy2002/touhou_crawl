@@ -48,6 +48,31 @@ void beam_iterator::SetCurrent(round_type type)
 	current.y = (type==RT_FLOOR?floor(y):(type==RT_ROUND_DOWN?round_down(y):(type==RT_ROUND?round(y):(type==RT_ROUND_UP?round_up(y):ceil_up(y)))));
 }
 
+std::pair<beam_iterator, beam_iterator> split_beam(beam_iterator& original, float split_angle)
+{
+    float base_angle = original.GetAngle();
+    float left_angle = base_angle + GetDegToRad(split_angle);
+    float right_angle = base_angle - GetDegToRad(split_angle);
+
+    int length = 7;
+    coord_def origin = original.current;
+
+    coord_def left_target(
+        origin.x + static_cast<int>(round(cos(left_angle) * length)),
+        origin.y + static_cast<int>(round(sin(left_angle) * length))
+    );
+
+    coord_def right_target(
+        origin.x + static_cast<int>(round(cos(right_angle) * length)),
+        origin.y + static_cast<int>(round(sin(right_angle) * length))
+    );
+
+    beam_iterator left_beam(origin, left_target, original.type);
+    beam_iterator right_beam(origin, right_target, original.type);
+
+    return {left_beam, right_beam};
+}
+
 
 coord_def beam_iterator::operator *() const
 {

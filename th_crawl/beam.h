@@ -66,7 +66,7 @@ public:
 };
 
 
-
+std::pair<beam_iterator, beam_iterator> split_beam(beam_iterator& original, float split_angle = 30.0f);
 
 
 #endif // __BEAM_H__

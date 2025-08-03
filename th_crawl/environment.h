@@ -293,7 +293,7 @@ public:
 	bool MakeSmoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, unit* parent_ = NULL, bool override_ = false);
 	bool MakeFloorEffect(const coord_def &c, textures *t,textures *t2, floor_type type_, int time_, unit* parent_ = NULL);
 	bool MakeEvent(int id_, coord_def position_, event_type type_, int count_ = -1, int value = 0);
-	void MakeEffect(const coord_def &c, textures *t, bool over_sight_); //over_sight_ : 시야 밖에서의 이펙트도 볼것인가?
+	void MakeEffect(const coord_def &c, textures *t, bool over_sight_, float alpha_ = 1.0f); //over_sight_ : 시야 밖에서의 이펙트도 볼것인가?
 	void ClearEffect();
 	void ClearWithoutLaserEffect();
 	void ClearAllShadow();
@@ -353,7 +353,7 @@ public:
 	smoke* isSmokePos2(int x_,int y_, const smoke* excep_ = NULL);//해당 위치에 구름이 있냐 없냐(포인터 리턴)
 	monster* getRandomMonster(bool except_melee); //시야내 랜덤 몬스터 리턴
 	int insight_mon(monster_enemy_type type_);//시야내 몬스터갯수
-	monster* close_mon(int x_,int y_, monster_enemy_type type_);//가장 가까이 있는 몬스터리턴
+	monster* close_mon(int x_,int y_, monster_enemy_type type_, int max_len_);//가장 가까이 있는 몬스터리턴
 	void item_view_set();
 	int new_item_interupt();//시야에 새로운 아이템있으면 메세지보내고 갯수리턴
 	item* close_item(vector<item*> &item_vector_);//가장 가까운 아이템의 정보를 리턴

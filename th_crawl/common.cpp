@@ -225,6 +225,9 @@ int rand_int_with_nonlogic(int min, int max)
 	return min;
 }
 
+float GetDegToRad(float angle_degrees) {
+	return ((angle_degrees) *  DirectX::XM_PI / 180.0f);
+}
 
 float GetPositionToAngle(float start_x, float start_y, float target_x, float target_y)
 {

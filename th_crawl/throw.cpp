@@ -8,6 +8,7 @@
 
 #include "monster.h"
 #include "mon_infor.h"
+#include "soundmanager.h"
 #include "monster_texture.h"
 #include "item.h"
 #include "environment.h"
@@ -432,6 +433,8 @@ void ThrowTamacInstance::init() {
 	count = 0;
 	last_hit = nullptr;
 	path = 8;
+	slashed = 0;
+	slashed_beams.clear();
 	switch(infor_.type1)
 	{
 	case BMT_NORMAL:
@@ -462,47 +465,84 @@ bool ThrowTamacInstance::oneturn(coord_def& hit_pos_) {
 	case BMT_WALL:
 	case BMT_PENETRATE:
 	default:
-		for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
-		{
-			if((*it).isLive() && (*it).position.x == (*beam).x && (*it).position.y == (*beam).y &&
-				!(*it).isPassedBullet(infor_.order, true)
-				)
+		if(slashed == 0) {
+			for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
+			{
+				if((*it).isLive() && (*it).position.x == (*beam).x && (*it).position.y == (*beam).y &&
+					!(*it).isPassedBullet(infor_.order, true)
+					)
+				{
+					attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+					if(attack_prefix != nullptr) {
+						attack_prefix(temp_att, this);
+					}
+					if((*it).damage(temp_att)) {
+						hit_pos_ = (*beam);
+						last_hit = &(*it);
+						penetrate--;
+					}
+				}
+			}
+			if(!infor_.order->isplayer() && you.position.x == (*beam).x && you.position.y == (*beam).y &&				
+				!you.isPassedBullet(infor_.order, true)
+				) //플레이어는 자기자신에게 맞지않는 조건은 나중에 지울까?
 			{
 				attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
 				if(attack_prefix != nullptr) {
 					attack_prefix(temp_att, this);
 				}
-				if((*it).damage(temp_att)) {
+				int slash_ = you.CanSlash(infor_.type2);
+				if(!item_ && slash_ && randA(99) < slash_) {
+					slashed = 1;
+					if(env[current_level].isInSight(*beam)) {
+						PlaySE("slash");
+						name_infor name_;
+						if(infor_.order)	
+							name_ = (*infor_.order->GetName());
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_SLASH,true,false,false,CL_bad,
+							PlaceHolderHelper(you.name.getName()),
+							PlaceHolderHelper(name_.getName()),
+							PlaceHolderHelper(infor_.name.getName()));
+					}
+					
+					std::pair<beam_iterator, beam_iterator> beams_ =  split_beam(beam, 45.0f);
+					slashed_beams.push_back(beams_.first);
+					slashed_beams.push_back(beams_.second);
+				}
+				else if(you.damage(temp_att)) {
 					hit_pos_ = (*beam);
-					last_hit = &(*it);
+					last_hit = &you;
 					penetrate--;
 				}
 			}
-		}
-		if(!infor_.order->isplayer() && you.position.x == (*beam).x && you.position.y == (*beam).y &&				
-			!you.isPassedBullet(infor_.order, true)
-			) //플레이어는 자기자신에게 맞지않는 조건은 나중에 지울까?
-		{
-			attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
-			if(attack_prefix != nullptr) {
-				attack_prefix(temp_att, this);
+			path = 10*GetPosToDirec((*beam),prev);
+			coord_def postion_ = (*beam);
+			prev = *(beam++);
+			path += (penetrate>0 && length>0)?GetPosToDirec(prev,(*beam)):9;
+			if(t_)
+				env[current_level].MakeEffect(postion_,t_,false);
+			else if(graphic_type || !item_)
+				env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path),false);
+			else if(item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
+				env[current_level].MakeEffect(postion_,item_->image,false);
+		} else {
+			for(auto& beam_ : slashed_beams) {
+				int path_ = 10*GetPosToDirec((*beam_),prev);
+				coord_def postion_ = (*beam_);
+				prev = *(beam_++);
+				path_ += (penetrate>0 && length>0)?GetPosToDirec(prev,(*beam_)):9;
+				if(env[current_level].isMove(postion_,true)) {
+					if(t_)
+						env[current_level].MakeEffect(postion_,t_,false, 0.4f);
+					else if(graphic_type || !item_)
+						env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path_),false, 0.4f);
+					else if(item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
+						env[current_level].MakeEffect(postion_,item_->image,false, 0.4f);
+				}
 			}
-			if(you.damage(temp_att)) {
-				hit_pos_ = (*beam);
-				last_hit = &you;
-				penetrate--;
-			}
+			slashed++;
+
 		}
-		path = 10*GetPosToDirec((*beam),prev);
-		coord_def postion_ = (*beam);
-		prev = *(beam++);
-		path += (penetrate>0 && length>0)?GetPosToDirec(prev,(*beam)):9;
-		if(t_)
-			env[current_level].MakeEffect(postion_,t_,false);
-		else if(graphic_type || !item_)
-			env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path),false);
-		else if(item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
-			env[current_level].MakeEffect(postion_,item_->image,false);
 	}
 	
 	return false;
@@ -526,6 +566,9 @@ bool ThrowTamacInstance::oneturn_after(bool without_laser) {
 				env[current_level].ClearEffect();
 			}
 		}
+	}
+	if(slashed == 2) {
+		return true;
 	}
 	
 	return !(env[current_level].isMove(*(beam),true) && penetrate>0 && length>0);

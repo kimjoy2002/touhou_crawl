@@ -63,7 +63,7 @@ int rand_int_impl(const char* file, int line, int min, int max);
 int rand_int_with_nonlogic(int min, int max); //이 무작위는 게임에 영향을 주지않아야함
 
 
-
+float GetDegToRad(float angle_degrees);
 float GetPositionToAngle(float start_x, float start_y, float target_x, float target_y);
 
 float GetPositionToAngle2(float start_x, float start_y, float target_x, float target_y);

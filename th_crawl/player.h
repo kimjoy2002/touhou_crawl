@@ -674,6 +674,7 @@ public:
 	bool isPassedBullet(unit* order, bool really = false);
 	bool isMemorizeSpell(int spell_);
 	bool CanMemorizeSpell(int spell_);
+	int CanSlash(attack_type att_type);
 	bool isView(){return true;};
 	bool isView(const monster* monster_info);
 	bool isYourShight(){return true;};	

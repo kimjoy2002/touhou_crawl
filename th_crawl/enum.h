@@ -535,6 +535,15 @@ enum skill_type //고치면 skill.cpp의 스킬스트링부분추가. player.cpp
 	SKT_MAX
 };
 
+enum attack_with_weapon {
+	ATT_WEAPON_NONE=0,
+	ATT_WEAPON_SHORTBLADE,
+	ATT_WEAPON_LONGBLADE,
+	ATT_WEAPON_MACE,
+	ATT_WEAPON_AXE,
+	ATT_WEAPON_SPEAR
+};
+
 enum item_type //추가시 env의 isSimpleType 살필것+item_type_simple도 추가하기+ const 스트링도 추가하고+GetItemTypeSting도 추가해야함
 { //GetItemInfor도 추가하자 
 	ITM_WEAPON_FIRST = 0,
@@ -930,6 +939,7 @@ enum monster_state_simple //표시용 상태
 	MSS_OIL,
 	MSS_FIRE,
 	MSS_NONE_MOVE,
+	MSS_DAZED,
 	MSS_MAX
 };
 

@@ -1462,7 +1462,14 @@ bool item::canReachAttack() {
 		return true;
 	}	
 	return false;
-}	
+}
+bool item::canBashAttack() {
+	if(type == ITM_WEAPON_MACE) {
+		//창은 사거리 공격가능
+		return true;
+	}	
+	return false;
+}
 bool item::isEvokable()
 	{
 	if (type == ITM_SPELL || type == ITM_MISCELLANEOUS)

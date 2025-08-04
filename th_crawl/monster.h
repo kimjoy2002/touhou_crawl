@@ -92,6 +92,8 @@ public:
 	int s_fire;
 	parent_type fire_reason;
 	int s_none_move;
+	int s_dazed;
+	bool bashed;
 	int debuf_boost;
 	int summon_time;
 	parent_type summon_parent;
@@ -240,6 +242,7 @@ public:
 	bool SetOil(int oil_, int max_);
 	bool SetFire(int fire_, parent_type type_, bool from_oil);
 	bool SetNoneMove(int s_none_move);
+	bool SetDazed(int s_dazed_, bool bashed_);
 	bool canSwap(monster* target_mon, bool able_enemy = false);
 	int PlusTimeDelay(int delay_)
 	{

@@ -54,7 +54,8 @@ struct attack_infor
 	parent_type p_type;
 	attack_type type;
 	name_infor name;
-	attack_infor(int damage_,int max_damage_, int accuracy_, unit *order_, parent_type p_type_, attack_type type_,name_infor name_){damage=damage_;max_damage=max_damage_;accuracy=accuracy_;order=order_;p_type=p_type_;type=type_;name = name_;}
+	attack_with_weapon weapon_type;
+	attack_infor(int damage_,int max_damage_, int accuracy_, unit *order_, parent_type p_type_, attack_type type_,name_infor name_){damage=damage_;max_damage=max_damage_;accuracy=accuracy_;order=order_;p_type=p_type_;type=type_;name = name_;weapon_type = ATT_WEAPON_NONE;}
 };
 
 struct beam_infor

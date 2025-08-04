@@ -1132,6 +1132,8 @@ bool players::attack(monster* mon_, equip_type type_, bool counter_)
 		att_name = LOC_SYSTEM_ATT_STONE_PUNCH;
 	}
 	attack_infor temp_att(GetAttack(false, type_),GetAttack(true, type_),GetHit(type_),this,GetParentType(),brand_,name_infor(att_name));
+	
+	
 	if(equipment[type_] && equipment[type_]->type >= ITM_WEAPON_FIRST && equipment[type_]->type <= ITM_WEAPON_CLOSE)
 	{
 		doingActionDump(DACT_MELEE, equipment[type_]->name.getName());
@@ -1146,6 +1148,28 @@ bool players::attack(monster* mon_, equip_type type_, bool counter_)
 	else
 	{
 		doingActionDump(DACT_MELEE, LocalzationManager::locString(LOC_SYSTEM_UI_INEFFICIENT));
+	}
+
+	if(equipment[type_]) {
+		switch(equipment[type_]->type) {
+			case ITM_WEAPON_SHORTBLADE:
+				temp_att.weapon_type = ATT_WEAPON_SHORTBLADE;
+				break;
+			case ITM_WEAPON_LONGBLADE:
+				temp_att.weapon_type = ATT_WEAPON_LONGBLADE;
+				break;
+			case ITM_WEAPON_MACE:
+				temp_att.weapon_type = ATT_WEAPON_MACE;
+				break;
+			case ITM_WEAPON_AXE:
+				temp_att.weapon_type = ATT_WEAPON_AXE;
+				break;
+			case ITM_WEAPON_SPEAR:
+				temp_att.weapon_type = ATT_WEAPON_SPEAR;
+				break;
+			default:
+				break;
+		}
 	}
 
 

@@ -5378,3 +5378,6 @@ LOC_SYSTEM_ITEM_ARTIFACT_INFO_LESS_POWER,Maximum Power is reduced by 1.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_CURSE,Automatically cursed while equipped.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_HEAVY,Movement speed is reduced by {0}.
 LOC_SYSTEM_FIGHT_SLASH,{0} slash{0!=you?s:} {1}{1==you?r:'s} {2} with a long blade.
+LOC_SYSTEM_FLOOR_EFFECT_SCORE,Score Items
+LOC_SYSTEM_DAZED,Dazed
+LOC_SYSTEM_HIT_BASH,{0} bash{0==you?:es} {1!=you?the :}{1} with a blunt weapon.

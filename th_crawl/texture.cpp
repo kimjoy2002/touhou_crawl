@@ -2096,6 +2096,24 @@ textures(&texture_laser, 155, 255),
 textures(&texture_laser, 156, 255)
 };
 
+textures img_axe_wind[] = { textures(&texture_laser, 157, 255),
+textures(&texture_laser, 157, 255),
+textures(&texture_laser, 158, 255),
+textures(&texture_laser, 159, 255),
+textures(&texture_laser, 160, 255),
+textures(&texture_laser, 161, 255),
+textures(&texture_laser, 162, 255),
+textures(&texture_laser, 163, 255)
+};
+
+
+textures img_score_item[] = { textures(&texture_item04, 17, 255),
+textures(&texture_item04, 18, 255),
+textures(&texture_item04, 19, 255),
+textures(&texture_item04, 20, 255),
+textures(&texture_item04, 21, 255),
+textures(&texture_item04, 22, 255)
+};
 
 textures img_tanmac_small[6][4] =
 {
@@ -3791,6 +3809,18 @@ int texturetoint(textures* input)
 		return 600;
 	else if(input == &img_fog_confusion[0])
 		return 601;
+	else if(input == &img_score_item[0])
+		return 602;
+	else if(input == &img_score_item[1])
+		return 603;
+	else if(input == &img_score_item[2])
+		return 604;
+	else if(input == &img_score_item[3])
+		return 605;
+	else if(input == &img_score_item[4])
+		return 606;
+	else if(input == &img_score_item[5])
+		return 607;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -5021,6 +5051,18 @@ textures* inttotexture(int input)
 		return &img_mons_haniwa_human_horse;
 	case 601:
 		return &img_fog_confusion[0];
+	case 602:
+		return &img_score_item[0];
+	case 603:
+		return &img_score_item[1];
+	case 604:
+		return &img_score_item[2];
+	case 605:
+		return &img_score_item[3];
+	case 606:
+		return &img_score_item[4];
+	case 607:
+		return &img_score_item[5];
 	default:
 		return &img_mons_default;
 	}

@@ -490,6 +490,8 @@ extern textures img_tanmac_knife[];
 extern textures img_tanmac_missle[];
 extern textures img_tanmac_homing[];
 extern textures img_tanmac_homing_cyan[];
+extern textures img_axe_wind[];
+extern textures img_score_item[];
 extern textures img_tanmac_small[6][4];
 extern textures img_joypad_arrow[];
 

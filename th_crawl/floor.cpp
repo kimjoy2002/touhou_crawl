@@ -148,6 +148,10 @@ void floor_effect::onWalk(unit* unit_)
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SHIZUHA_MAKE_NOISE), true,false,false,CL_autumn);
 		}
 		break;	
+	case FLOORT_SCORE_ITEM:
+		if(unit_->isplayer()) {
+			time = 0;
+		}
 	case FLOORT_NORMAL:
 	default:
 		break;
@@ -156,7 +160,7 @@ void floor_effect::onWalk(unit* unit_)
 bool floor_effect::Update(textures *t, textures *t2, floor_type type_, int time_, parent_type parent_)
 {
 	time_*=10;
-	if(type_>= type)
+	if(getPriorityFloorEffect(type_)>= getPriorityFloorEffect(type))
 	{//덮어 씌운다.
 		if(type_== type && parent == parent_ &&time_<time)
 		{//시간이 짧아지는 경우는 덮어씌우지않음
@@ -216,8 +220,32 @@ string floor_effect::GetName()
 		return LocalzationManager::locString(LOC_SYSTEM_FLOOR_EFFECT_SCHEMA);
 	case FLOORT_GOLD:
 		return LocalzationManager::locString(LOC_SYSTEM_FLOOR_EFFECT_GOLD);
+	case FLOORT_SCORE_ITEM:
+		return LocalzationManager::locString(LOC_SYSTEM_FLOOR_EFFECT_SCORE);
 	case FLOORT_NORMAL:
 	default:
 		return "";
 	}
+}
+
+int getPriorityFloorEffect(floor_type type) {
+
+	switch(type)
+	{
+	case FLOORT_NORMAL:
+		return 1;
+	case FLOORT_SCORE_ITEM:
+		return 2;
+	case FLOORT_GOLD:
+		return 3;
+	case FLOORT_AUTUMN:
+		return 4;
+	case FLOORT_STONE:
+		return 5;
+	case FLOORT_SCHEMA:
+		return 6;
+	default:
+		return 0;
+	}
+
 }

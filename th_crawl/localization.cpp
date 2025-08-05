@@ -256,6 +256,108 @@ void LocalzationManager::initFileArtifact(const string& path, const string& file
 	}
 }
 
+void LocalzationManager::parseWikiFile(const string& path, const string& filename,
+	unordered_map<string, string>& wiki_redirect,
+	unordered_map<string, WikiHelper>& wiki_map)
+{
+	ifstream file(path + filename);
+	if (!file) return;
+
+	string line;
+	bool first_line = true;
+
+	string current_key;
+	string current_content;
+	vector<string> current_redirects;
+
+	auto processCurrent = [&]() {
+		if (!current_key.empty()) {
+			WikiHelper helper;
+			istringstream ss(current_content);
+			string inner_line;
+			while (getline(ss, inner_line)) {
+				vector<TextHelper> parts;
+				size_t pos = 0;
+				while (pos < inner_line.size()) {
+					if (inner_line[pos] == '{') {
+						size_t end = inner_line.find('}', pos);
+						if (end != string::npos) {
+							string keyword = inner_line.substr(pos + 1, end - pos - 1);
+							parts.push_back({ keyword, cl_help, false });
+							pos = end + 1;
+						} else {
+							// 잘못된 형식, 무시
+							break;
+						}
+					} else {
+						size_t next = inner_line.find('{', pos);
+						string normal_text = inner_line.substr(pos, next - pos);
+						parts.push_back({ normal_text, cl_normal, false });
+						if (next == string::npos)
+							break;
+						pos = next;
+					}
+				}
+				// 줄바꿈 구분
+				if (!parts.empty())
+					parts.back().enter = true;
+				helper.content.insert(helper.content.end(), parts.begin(), parts.end());
+			}
+			wiki_map[current_key] = helper;
+
+			for (const string& alt : current_redirects) {
+				wiki_redirect[alt] = current_key;
+			}
+		}
+		current_key.clear();
+		current_content.clear();
+		current_redirects.clear();
+	};
+
+	while (getline(file, line)) {
+		if (first_line) {
+			first_line = false;
+			if (!line.empty() && static_cast<unsigned char>(line[0]) == 0xEF &&
+				line.size() >= 3 &&
+				static_cast<unsigned char>(line[1]) == 0xBB &&
+				static_cast<unsigned char>(line[2]) == 0xBF) {
+				line = line.substr(3); //BOM제거
+			}
+		}
+
+		if (line.find("=====") != string::npos) {
+			processCurrent();
+			continue;
+		}
+
+		if (line.find("//") == string::npos && line.find('(') != string::npos && line.find(')') != string::npos) {
+			size_t lparen = line.find('(');
+			size_t rparen = line.find(')');
+			if (lparen != string::npos && rparen != string::npos && rparen > lparen) {
+				string key = line.substr(0, lparen);
+				key = trim(key);
+				current_key = key;
+
+				string redirect_list = line.substr(lparen + 1, rparen - lparen - 1);
+				istringstream rs(redirect_list);
+				string redirect;
+				while (getline(rs, redirect, ',')) {
+					current_redirects.push_back(trim(redirect));
+				}
+			}
+		}
+		else if (current_key.empty() && !line.empty()) {
+			current_key = trim(line);
+		}
+		else {
+			current_content += line + "\n";
+		}
+	}
+
+	processCurrent();
+}
+
+
 
 void LocalzationManager::initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector, vector<int>* helpline) {
 	ifstream file(path + filename);

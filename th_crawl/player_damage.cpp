@@ -358,11 +358,11 @@ int players::GetThrowAttack(const item* it, bool max_)
 
 int players::GetThrowHit(const item* it)
 {
-	int hit_ = 3+s_dex/2;	
+	int hit_ = 8+s_dex/3;
 
 	if (!(it->type >= ITM_THROW_FIRST && it->type<ITM_THROW_LAST))
 	{//이것은 장착무기이다..
-		hit_ = 2 + it->value1 + it->value4 + GetSkillLevel(SKT_TANMAC, true) / 2;
+		hit_ = 3 + it->value1 + it->value4 + GetSkillLevel(SKT_TANMAC, true) / 2;
 	}
 	else
 	{

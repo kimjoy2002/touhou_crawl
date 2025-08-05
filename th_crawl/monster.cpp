@@ -1682,13 +1682,17 @@ bool monster::damage(attack_infor &a, bool perfect_)
 	int BashPower = 0;
 	if(canBash && !bashed) {
 		int skill_ = 10;
+		float multi_ = 1.0f;
 		if(a.order && a.order->isplayer()) {
 			skill_ = you.GetSkillLevel(SKT_MACE, true);
+			multi_ += you.s_str*0.03f;
+		} else {
+			multi_ += 0.2f;
 		}
 		if(skill_+25 > randA(99)) {
 			BashPower = skill_ + 2;
-			a.damage *= 1.2f; //배쉬 데미지 1.2배 (더 높아질수도)
-			a.max_damage *= 1.2f;
+			a.damage *= multi_; //배쉬 데미지 1 + str*0.03 (10에서 1.3, 20에서 1.6)
+			a.max_damage *= multi_;
 		}
 		else {
 			canBash = false;

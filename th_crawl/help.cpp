@@ -30,6 +30,7 @@ void Help_Show()
 	printsub("p. " + LocalzationManager::locString(LOC_SYSTEM_PAD_COMMAND_LIST),true,CL_normal, 'p');
 	printsub("c. " + LocalzationManager::locString(LOC_SYSTEM_CHARACTER_HELP),true,CL_normal, 'c');
 	printsub("g. " + LocalzationManager::locString(LOC_SYSTEM_GODS_HELP),true,CL_normal, 'g');	
+	printsub("h. " + LocalzationManager::locString(LOC_SYSTEM_WIKI_HELP),true,CL_normal, 'h');
 	printsub(":. " + LocalzationManager::locString(LOC_SYSTEM_PROCESS_NOTE),true,CL_normal, ':');
 	printsub("0. " + LocalzationManager::locString(LOC_SYSTEM_PROCESS_CREDIT),true,CL_normal, '0');
 	changedisplay(DT_SUB_TEXT);
@@ -187,6 +188,78 @@ void Help_Show()
 					break;
 				case VK_DOWN:
 					changemove(-1); //아래
+					break;
+				case VK_PRIOR:
+				case GVK_LEFT_BUMPER:
+					changemove(DisplayManager.log_length);
+					break;
+				case VK_NEXT:
+				case GVK_RIGHT_BUMPER:
+					changemove(-DisplayManager.log_length);
+					break;
+				case -1:
+					if(inputedKey.mouse == MKIND_SCROLL_UP) {
+						changemove(1);  //아래
+						break;
+					} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+						changemove(-1);  //위
+						break;
+					} else if(inputedKey.isRightClick()) {
+						//ESC PASSTHORUGH
+					}
+					else {
+						break;
+					}
+				case VK_ESCAPE:
+				case GVK_BUTTON_B:
+				case GVK_BUTTON_B_LONG:
+					loop_ = false;
+					break;
+				default:
+					break;
+				}
+			}
+			break;
+		case 'H':
+		case 'h':
+			WaitForSingleObject(mutx, INFINITE);
+			deletesub();
+			DisplayManager.setPosition(-1);
+			LocalzationManager::printWiki();
+			changedisplay(DT_SUB_TEXT);
+			setDisplayMove(DisplayManager.max_y);
+			ReleaseMutex(mutx);
+			while(loop_)
+			{
+				InputedKey inputedKey;
+				int key_ = waitkeyinput(inputedKey,true);
+				if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
+					key_ = DisplayManager.positionToChar();
+				}
+				if(key_ >= 1000) {
+					int line = LocalzationManager::getWikiLine(key_-1000);
+					if(line != -1) {
+						setDisplayMove(DisplayManager.max_y-line);
+					}
+					continue;
+				}
+
+
+				switch(key_)
+				{
+				case VK_UP:
+					changemove(1);  //위
+					DisplayManager.addPosition(0);
+					break;
+				case VK_DOWN:
+					changemove(-1); //아래
+					DisplayManager.addPosition(0);
+					break;
+				case VK_RIGHT:
+					DisplayManager.addPosition(1);
+					break;
+				case VK_LEFT:
+					DisplayManager.addPosition(-1);
 					break;
 				case VK_PRIOR:
 				case GVK_LEFT_BUMPER:

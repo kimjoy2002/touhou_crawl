@@ -207,9 +207,6 @@ int rand_int_impl(const char* file, int line, int min, int max)
 	return min;
 }
 
-
-
-
 int rand_int_with_nonlogic(int min, int max)
 {
 	if(min == max)
@@ -223,6 +220,12 @@ int rand_int_with_nonlogic(int min, int max)
 	}	
 	min = (rand_engine_nonlogic() % (max - min+1)) + min;
 	return min;
+}
+
+
+bool startsWith(const std::string& str, const std::string& prefix) {
+    return str.size() >= prefix.size() &&
+           str.compare(0, prefix.size(), prefix) == 0;
 }
 
 float GetDegToRad(float angle_degrees) {

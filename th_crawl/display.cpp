@@ -4344,7 +4344,8 @@ void display_manager::sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 	{
 		list<text_dummy*>::iterator it;
 		it = text_sub.text_list.end();
-		it--;
+		if(it != text_sub.text_list.begin())
+			it--;
 		int view_length = log_length;
 		int i = view_length+(move>0?move:0);
 		while(i)
@@ -4639,7 +4640,28 @@ void display_manager::setPosition(int value_, int char_) {
 		} 
 	}
 	else if(state == DT_SUB_TEXT) {
-		for(list<text_dummy*>::iterator it = text_sub.text_list.begin(); it != text_sub.text_list.end();it++)
+		list<text_dummy*>::iterator it;
+		it = text_sub.text_list.end();
+		if(it != text_sub.text_list.begin())
+			it--;
+		int view_length = log_length;
+		int i = view_length+(move>0?move:0);
+		while(i)
+		{
+			if(it == text_sub.text_list.begin())
+				break;
+			it--;
+			if((*it)->enter)
+			{
+				i--;
+				if(i<=0)
+				{
+					it++;
+					break;
+				}
+			}
+		}
+		for(i = 0;i < view_length && it != text_sub.text_list.end();it++)
 		{
 			if((*it)->clickable > 0) {
 				max_position++;
@@ -4647,6 +4669,9 @@ void display_manager::setPosition(int value_, int char_) {
 					current_position = max_position;
 					return;
 				}
+			}
+			if((*it)->enter) {
+				i++;
 			}
 		}
 		if(char_ == -1) {
@@ -4742,7 +4767,28 @@ int display_manager::positionToChar() {
 		}
 	}  
 	else if(state == DT_SUB_TEXT) {
-		for(list<text_dummy*>::iterator it = text_sub.text_list.begin(); it != text_sub.text_list.end();it++)
+		list<text_dummy*>::iterator it;
+		it = text_sub.text_list.end();
+		if(it != text_sub.text_list.begin())
+			it--;
+		int view_length = log_length;
+		int i = view_length+(move>0?move:0);
+		while(i)
+		{
+			if(it == text_sub.text_list.begin())
+				break;
+			it--;
+			if((*it)->enter)
+			{
+				i--;
+				if(i<=0)
+				{
+					it++;
+					break;
+				}
+			}
+		}
+		for(i = 0;i < view_length && it != text_sub.text_list.end();it++)
 		{
 			if((*it)->clickable > 0) {
 				if(max_position == current_position) {

@@ -69,7 +69,7 @@ struct localizationInfo {
 class LocalzationManager {
 public:
     static OrderedMap<string, localizationInfo> localization_type;
-private:
+	static const int wiki_enter = 4;
 // 전역 변수로 사용
 	static unordered_map<string, LOCALIZATION_ENUM_KEY> localization_enum_map;
 	static unordered_map<LOCALIZATION_ENUM_KEY, string> localization_enum_reverse_map;
@@ -95,7 +95,9 @@ private:
 	    vector<TextHelper> help_wizard;
 	    vector<TextHelper> help_character;
 	    unordered_map<string, string> wiki_redirect;
-	    unordered_map<string, WikiHelper> wiki_map;
+	    unordered_map<string, shared_ptr<vector<WikiHelper>>> wiki_map;
+	    BiMap wiki_id_matching;
+	    unordered_map<string, int> wikiline;
 	    vector<int> helpline_character;
 	    vector<TextHelper> help_gods;
 	    vector<int> helpline_gods;
@@ -108,7 +110,8 @@ private:
     static D3DCOLOR parseMultiColorLine(const string& line, vector<TextHelper>& outVector, D3DCOLOR currentColor, int current_line, vector<int>* helpline);
     static pair<string, D3DCOLOR> parseColorTag(const string& line);
     static void initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector, vector<int>* helpline);
-    static void parseWikiFile(const string& path, const string& filename,	unordered_map<string, string>& wiki_redirect,unordered_map<string, WikiHelper>& wiki_map);
+    static void parsingWikiInfo(string key, string content, unordered_map<string, shared_ptr<vector<WikiHelper>>>& wiki_map, unordered_map<string, int>& wikiline, int& current_line, BiMap& wiki_id_matching);
+    static void parseWikiFile(const string& path, const string& filename,	unordered_map<string, string>& wiki_redirect, unordered_map<string, shared_ptr<vector<WikiHelper>>>& wiki_map, unordered_map<string, int>& wikiline, BiMap& wiki_id_matching);
 	static void initFileArtifact(const string& path, const string& filename, vector<string>& baseVector, vector<string>& wordVector);
     template<typename EnumType>
     static void initFile(const string& path, const string& filename, unordered_map<string, EnumType>& enum_map, int argument_num, function<void(EnumType, vector<string>, vector<string>)> func) {
@@ -215,6 +218,8 @@ public:
 	static const vector<TextHelper>& getHelpCredit(){return localizationVector.find(current_lang)->help_credit;};
 	static const vector<TextHelper>& getHelpWizard(){return localizationVector.find(current_lang)->help_wizard;};
 	static const vector<TextHelper>& getHelpCharacter(){return localizationVector.find(current_lang)->help_character;};
+	static void printWiki();
+    static int getWikiLine(int id);
 	static int getHelpCharacterLine(int index);
 	static const vector<TextHelper>& getHelpGods(){return localizationVector.find(current_lang)->help_gods;};
 	static int getHelpGodsLine(int index);

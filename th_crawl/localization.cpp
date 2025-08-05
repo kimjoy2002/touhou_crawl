@@ -75,6 +75,7 @@ void LocalzationManager::init(string type, bool init_) {
 	initFileSimple(filePath, "character.txt", localizationVector.find(type)->help_character, &localizationVector.find(type)->helpline_character);
 	initFileSimple(filePath, "gods.txt", localizationVector.find(type)->help_gods, &localizationVector.find(type)->helpline_gods);
 	initFileArtifact(filePath, "artifact.txt", localizationVector.find(type)->randart_name_base, localizationVector.find(type)->randart_name_word);
+	parseWikiFile(filePath, "wiki.txt",	localizationVector.find(type)->wiki_redirect, localizationVector.find(type)->wiki_map, localizationVector.find(type)->wikiline, localizationVector.find(type)->wiki_id_matching);
 
 	initFile<LOCALIZATION_ENUM_KEY>(filePath, "general.txt", localization_enum_map, 1, [type](LOCALIZATION_ENUM_KEY key, vector<string> values, vector<string> prev_values) {
 		localizationVector.find(type)->localization_map[key] = values[0];
@@ -256,9 +257,55 @@ void LocalzationManager::initFileArtifact(const string& path, const string& file
 	}
 }
 
+
+void LocalzationManager::parsingWikiInfo(string key, string content, unordered_map<string, shared_ptr<vector<WikiHelper>>>& wiki_map, unordered_map<string, int>& wikiline, int& current_line, BiMap& wiki_id_matching) {
+	if (!key.empty()) {
+		wikiline[key] = current_line;
+		current_line+=3; //이름앞뒤
+		istringstream ss(content);
+		string inner_line;
+		shared_ptr<vector<WikiHelper>> parts = make_shared<vector<WikiHelper>>();
+		while (getline(ss, inner_line)) {
+			size_t pos = 0;
+			while (pos < inner_line.size()) {
+				if (inner_line[pos] == '{') {
+					size_t end = inner_line.find('}', pos);
+					if (end != string::npos) {
+						string keyword = inner_line.substr(pos + 1, end - pos - 1);
+						parts->push_back({ keyword, false, CL_green});
+						pos = end + 1;
+					} else {
+						// 잘못된 형식, 무시
+						break;
+					}
+				} else {
+					size_t next = inner_line.find('{', pos);
+					string normal_text = inner_line.substr(pos, next - pos);
+					parts->push_back({ normal_text, false, CL_normal});
+					if (next == string::npos)
+						break;
+					pos = next;
+				}
+			}
+			// 줄바꿈 구분
+			if (!parts->empty()) {
+				parts->back().enter = true;
+				current_line++;
+			}
+		}
+		int id_ = wiki_id_matching.size();
+		wiki_id_matching.insert(id_, key);
+		wiki_map[key] = parts;
+		current_line+=wiki_enter;
+	}
+}
+
+
 void LocalzationManager::parseWikiFile(const string& path, const string& filename,
 	unordered_map<string, string>& wiki_redirect,
-	unordered_map<string, WikiHelper>& wiki_map)
+	unordered_map<string, shared_ptr<vector<WikiHelper>>>& wiki_map,
+	unordered_map<string, int>& wikiline,
+	BiMap& wiki_id_matching)
 {
 	ifstream file(path + filename);
 	if (!file) return;
@@ -270,50 +317,8 @@ void LocalzationManager::parseWikiFile(const string& path, const string& filenam
 	string current_content;
 	vector<string> current_redirects;
 
-	auto processCurrent = [&]() {
-		if (!current_key.empty()) {
-			WikiHelper helper;
-			istringstream ss(current_content);
-			string inner_line;
-			while (getline(ss, inner_line)) {
-				vector<TextHelper> parts;
-				size_t pos = 0;
-				while (pos < inner_line.size()) {
-					if (inner_line[pos] == '{') {
-						size_t end = inner_line.find('}', pos);
-						if (end != string::npos) {
-							string keyword = inner_line.substr(pos + 1, end - pos - 1);
-							parts.push_back({ keyword, cl_help, false });
-							pos = end + 1;
-						} else {
-							// 잘못된 형식, 무시
-							break;
-						}
-					} else {
-						size_t next = inner_line.find('{', pos);
-						string normal_text = inner_line.substr(pos, next - pos);
-						parts.push_back({ normal_text, cl_normal, false });
-						if (next == string::npos)
-							break;
-						pos = next;
-					}
-				}
-				// 줄바꿈 구분
-				if (!parts.empty())
-					parts.back().enter = true;
-				helper.content.insert(helper.content.end(), parts.begin(), parts.end());
-			}
-			wiki_map[current_key] = helper;
-
-			for (const string& alt : current_redirects) {
-				wiki_redirect[alt] = current_key;
-			}
-		}
-		current_key.clear();
-		current_content.clear();
-		current_redirects.clear();
-	};
-
+	int type_ = 0; //1=키, 2=컨텐츠
+	int current_line = 0;
 	while (getline(file, line)) {
 		if (first_line) {
 			first_line = false;
@@ -325,36 +330,53 @@ void LocalzationManager::parseWikiFile(const string& path, const string& filenam
 			}
 		}
 
-		if (line.find("=====") != string::npos) {
-			processCurrent();
+		if (startsWith(line, "==")) {
+			if(type_==0) {
+				type_ = 1;
+			}
+			else if(type_ == 1)
+			{
+				type_ = 2;
+
+			}
+			else  if(type_ == 2) {
+				type_ = 1;
+				parsingWikiInfo(current_key, current_content, wiki_map, wikiline, current_line, wiki_id_matching);
+				for(auto redirect_ : current_redirects) {
+					wiki_redirect[redirect_] = current_key;
+				}
+				current_key.clear();
+				current_content.clear();
+				current_redirects.clear();
+			}
 			continue;
-		}
+		} else if(type_ == 1) {
 
-		if (line.find("//") == string::npos && line.find('(') != string::npos && line.find(')') != string::npos) {
-			size_t lparen = line.find('(');
-			size_t rparen = line.find(')');
-			if (lparen != string::npos && rparen != string::npos && rparen > lparen) {
-				string key = line.substr(0, lparen);
-				key = trim(key);
-				current_key = key;
+			if (line.find("//") == string::npos && line.find('(') != string::npos && line.find(')') != string::npos) {
+				size_t lparen = line.find('(');
+				size_t rparen = line.find(')');
+				if (lparen != string::npos && rparen != string::npos && rparen > lparen) {
+					string key = line.substr(0, lparen);
+					key = trim(key);
+					current_key = key;
 
-				string redirect_list = line.substr(lparen + 1, rparen - lparen - 1);
-				istringstream rs(redirect_list);
-				string redirect;
-				while (getline(rs, redirect, ',')) {
-					current_redirects.push_back(trim(redirect));
+					string redirect_list = line.substr(lparen + 1, rparen - lparen - 1);
+					istringstream rs(redirect_list);
+					string redirect;
+					while (getline(rs, redirect, ',')) {
+						current_redirects.push_back(trim(redirect));
+					}
 				}
 			}
+			else {
+				current_key = trim(line);
+			}
 		}
-		else if (current_key.empty() && !line.empty()) {
-			current_key = trim(line);
-		}
-		else {
+		else if(type_ == 2) {
 			current_content += line + "\n";
 		}
 	}
-
-	processCurrent();
+	parsingWikiInfo(current_key, current_content, wiki_map, wikiline, current_line, wiki_id_matching);
 }
 
 
@@ -640,7 +662,66 @@ const string& LocalzationManager::monDecsriptionString(monster_index key) {
 	}
 	return localizationVector.find(current_lang)->monster_description_map[MON_REIMUYUKKURI];
 }
+void LocalzationManager::printWiki() {
+	shared_ptr<LocalzationManager::LocalzationData> langData = nullptr;
+	if(localizationVector.has(current_lang)) {
+		langData = localizationVector.find(current_lang);
+	}
+	if(langData == nullptr && localizationVector.has(baseLang())) {
+		langData = localizationVector.find(baseLang());
+	}
+	if(langData != nullptr) {
+		int id_ = 1;
+		langData->wiki_id_matching.clear();
+		langData->wikiline.clear();
+		for(auto& wiki_entry : langData->wiki_map) {
+			langData->wiki_id_matching.insert(id_++, wiki_entry.first);
+		}
 
+		int current_line = 0;
+		for(auto& wiki_entry : langData->wiki_map) {
+			langData->wikiline[wiki_entry.first] = current_line;
+			printsub("===============================",true,CL_help);
+			printsub(wiki_entry.first,true,CL_normal);
+			printsub("===============================",true,CL_help);
+			current_line+=3;
+			if(wiki_entry.second != nullptr) {
+				for(auto& wiki_value : *wiki_entry.second) {
+					if(wiki_value.color == CL_normal) {
+						printsub(wiki_value.text,wiki_value.enter,wiki_value.color);
+					} else {
+						int redirect_ = langData->wiki_id_matching.getId(wiki_value.text);
+						if(redirect_ > 0) {
+							redirect_ += 1000;
+						}
+						printsub(wiki_value.text,wiki_value.enter,wiki_value.color, redirect_);
+					}
+					if(wiki_value.enter)
+						current_line++;
+				}
+			}
+			for(int i = 0; i < wiki_enter; i++)
+				printsub("",true,CL_normal);
+			current_line+=wiki_enter;
+		}
+	}
+}
+int LocalzationManager::getWikiLine(int id) {
+	shared_ptr<LocalzationManager::LocalzationData> langData = nullptr;
+	if(localizationVector.has(current_lang)) {
+		langData = localizationVector.find(current_lang);
+	}
+	if(langData == nullptr && localizationVector.has(baseLang())) {
+		langData = localizationVector.find(baseLang());
+	}
+	if(langData != nullptr) {
+		string redirect_ = langData->wiki_id_matching.getStr(id);
+		if(!redirect_.empty() && langData->wikiline.find(redirect_) != langData->wikiline.end()) {
+			return langData->wikiline[redirect_];
+		}
+	}
+	return -1;
+}
 int LocalzationManager::getHelpCharacterLine(int index) {
 	if(localizationVector.find(current_lang)->helpline_character.size() > index) {
 		return localizationVector.find(current_lang)->helpline_character[index];

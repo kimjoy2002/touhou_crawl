@@ -174,7 +174,7 @@ int players::GetAttack(bool max_, equip_type type_)
 
 int players::GetHit(equip_type type_)
 {
-	int hit_ = 5+s_dex/3+ GetSkillLevel(SKT_FIGHT, true)/4;
+	int hit_ = 2+s_dex/3+ GetSkillLevel(SKT_FIGHT, true)/4;
 	if(equipment[type_] && equipment[type_]->type >= ITM_WEAPON_FIRST && equipment[type_]->type <= ITM_WEAPON_CLOSE)
 	{
 		skill_type skill_ = itemtoskill(equipment[type_]->type);
@@ -362,7 +362,7 @@ int players::GetThrowHit(const item* it)
 
 	if (!(it->type >= ITM_THROW_FIRST && it->type<ITM_THROW_LAST))
 	{//이것은 장착무기이다..
-		hit_ = 2 + it->value1 + it->value4 + GetSkillLevel(SKT_TANMAC, true) / 2;
+		hit_ = 1 + it->value1 + it->value4 + GetSkillLevel(SKT_TANMAC, true) / 2;
 	}
 	else
 	{

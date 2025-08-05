@@ -50,16 +50,6 @@ public:
     TextHelper(string text, bool enter, D3DCOLOR color) : text(std::move(text)), enter(enter), color(color){};
 };
 
-class WikiHelper {
-public:
-    string text;
-    bool enter;
-    D3DCOLOR color;
-    WikiHelper(string text, bool enter, D3DCOLOR color) : text(std::move(text)), enter(enter), color(color){};
-};
-
-
-
 struct localizationInfo {
     std::string name;
     std::string font;
@@ -94,8 +84,6 @@ private:
 	    vector<TextHelper> help_credit;
 	    vector<TextHelper> help_wizard;
 	    vector<TextHelper> help_character;
-	    unordered_map<string, string> wiki_redirect;
-	    unordered_map<string, WikiHelper> wiki_map;
 	    vector<int> helpline_character;
 	    vector<TextHelper> help_gods;
 	    vector<int> helpline_gods;
@@ -108,8 +96,7 @@ private:
     static D3DCOLOR parseMultiColorLine(const string& line, vector<TextHelper>& outVector, D3DCOLOR currentColor, int current_line, vector<int>* helpline);
     static pair<string, D3DCOLOR> parseColorTag(const string& line);
     static void initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector, vector<int>* helpline);
-    static void parseWikiFile(const string& path, const string& filename,	unordered_map<string, string>& wiki_redirect,unordered_map<string, WikiHelper>& wiki_map);
-	static void initFileArtifact(const string& path, const string& filename, vector<string>& baseVector, vector<string>& wordVector);
+    static void initFileArtifact(const string& path, const string& filename, vector<string>& baseVector, vector<string>& wordVector);
     template<typename EnumType>
     static void initFile(const string& path, const string& filename, unordered_map<string, EnumType>& enum_map, int argument_num, function<void(EnumType, vector<string>, vector<string>)> func) {
         ifstream file(path + filename);

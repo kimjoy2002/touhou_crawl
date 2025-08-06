@@ -224,7 +224,7 @@ void Help_Show()
 		case 'h':
 			WaitForSingleObject(mutx, INFINITE);
 			deletesub();
-			DisplayManager.setPosition(-1);
+			DisplayManager.setPosition(0);
 			LocalzationManager::printWiki();
 			changedisplay(DT_SUB_TEXT);
 			setDisplayMove(DisplayManager.max_y);
@@ -240,6 +240,7 @@ void Help_Show()
 					int line = LocalzationManager::getWikiLine(key_-1000);
 					if(line != -1) {
 						setDisplayMove(DisplayManager.max_y-line);
+						DisplayManager.setPosition(0);
 					}
 					continue;
 				}

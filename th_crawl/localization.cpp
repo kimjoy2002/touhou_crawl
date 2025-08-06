@@ -698,7 +698,7 @@ void LocalzationManager::printWiki() {
 							printsub(wiki_value.text,wiki_value.enter,wiki_value.color, redirect_);
 						}
 						else {
-							printsub(wiki_value.text,wiki_value.enter, CL_darkgreen);
+							printsub(wiki_value.text,wiki_value.enter, CL_small_danger);
 						}
 					}
 					if(wiki_value.enter)

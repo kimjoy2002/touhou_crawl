@@ -373,7 +373,8 @@ void LocalzationManager::parseWikiFile(const string& path, const string& filenam
 			}
 		}
 		else if(type_ == 2) {
-			current_content += line + "\n";
+			if(!line.empty())
+				current_content += line + "\n";
 		}
 	}
 	parsingWikiInfo(current_key, current_content, wiki_map, wikiline, current_line, wiki_id_matching);
@@ -684,7 +685,8 @@ void LocalzationManager::printWiki() {
 			printsub("===============================",true,CL_help);
 			printsub(wiki_entry.first,true,CL_normal);
 			printsub("===============================",true,CL_help);
-			current_line+=3;
+			printsub("",true,CL_normal);
+			current_line+=4;
 			if(wiki_entry.second != nullptr) {
 				for(auto& wiki_value : *wiki_entry.second) {
 					if(wiki_value.color == CL_normal) {
@@ -693,8 +695,11 @@ void LocalzationManager::printWiki() {
 						int redirect_ = langData->wiki_id_matching.getId(wiki_value.text);
 						if(redirect_ > 0) {
 							redirect_ += 1000;
+							printsub(wiki_value.text,wiki_value.enter,wiki_value.color, redirect_);
 						}
-						printsub(wiki_value.text,wiki_value.enter,wiki_value.color, redirect_);
+						else {
+							printsub(wiki_value.text,wiki_value.enter, CL_darkgreen);
+						}
 					}
 					if(wiki_value.enter)
 						current_line++;

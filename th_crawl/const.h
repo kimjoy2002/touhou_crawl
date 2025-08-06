@@ -41,6 +41,7 @@ extern const D3DCOLOR CL_blue;
 extern const D3DCOLOR CL_white_blue;
 extern const D3DCOLOR CL_tensi;
 extern const D3DCOLOR CL_alchemy;
+extern const D3DCOLOR CL_darkgreen;
 extern const D3DCOLOR CL_green;
 extern const D3DCOLOR CL_yuigi;
 extern const D3DCOLOR CL_hina;

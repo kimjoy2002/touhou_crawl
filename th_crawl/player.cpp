@@ -7195,7 +7195,13 @@ int players::CanSlash(attack_type att_type) {
 						//기본적으로 그레이즈가 되는 기술들
 						int long_blade = GetSkillLevel(SKT_LONGBLADE, true);
 						if(long_blade >= 8) {//최소 롱 블레이드 스킬이 8이상
-							percent_ += 20 + (long_blade-7)*1.5f;//최대확률 50% (요우무면 2배!)
+							if(percent_ == 0) {
+								percent_ = 15 + (long_blade-7)*1.5f;//최대확률 45%
+							} else {
+								float temp = 120 + (long_blade-7)*1.5f;
+								percent_ = (int)(percent_*temp/100);
+								
+							}
 						}
 					}
 				}

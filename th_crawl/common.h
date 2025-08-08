@@ -8,6 +8,8 @@
 #include <process.h>
 #include <string>
 #include <d3d11.h>
+#include <algorithm>
+#include <cctype>
 #include <time.h>
 #include <vector>
 #include <unordered_map>
@@ -38,9 +40,32 @@ inline DirectX::XMVECTOR D3DCOLOR_to_XMVECTOR(D3DCOLOR c) {
 
 struct coord_def;
 
+struct ci_hash {
+    size_t operator()(const std::string& s) const noexcept {
+        std::string lower = s;
+        std::transform(lower.begin(), lower.end(), lower.begin(),
+                    [](unsigned char c){ return std::tolower(c); });
+        return std::hash<std::string>{}(lower);
+    }
+};
+struct ci_equal {
+    bool operator()(const std::string& a, const std::string& b) const noexcept {
+        if (a.size() != b.size()) return false;
+        for (size_t i = 0; i < a.size(); ++i) {
+            if (std::tolower(static_cast<unsigned char>(a[i])) !=
+                std::tolower(static_cast<unsigned char>(b[i]))) {
+                return false;
+            }
+        }
+        return true;
+    }
+};
+
+
+
 class BiMap {
     unordered_map<int, string> id_to_str;
-    unordered_map<string, int> str_to_id;
+    unordered_map<string, int, ci_hash, ci_equal> str_to_id;
 
 public:
     bool insert(int id, const string& str) {
@@ -457,6 +482,7 @@ int distan_coord(const coord_def& a, const coord_def& b);
 wstring ConvertUTF8ToUTF16(const string& utf8Str);
 string ConvertUTF16ToUTF8(const wstring& utf16Str);
 string WithBlankString(const string& str, int size, bool left = true);
+bool UnicodeCodepointLess(const std::string& a, const std::string& b);
 
 int PrintCharWidth(const wstring& text);
 int PrintCharWidth(const string& text);

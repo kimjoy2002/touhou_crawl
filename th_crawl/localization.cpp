@@ -67,15 +67,24 @@ void LocalzationManager::init(string type, bool init_) {
 		[](unsigned char c) { return std::tolower(c); });
 	
 	filePath = "./data/localization/" +  type_ + "/";
+	string defaultFilePath = "./data/localization/" +  baseLang() + "/";
 
-	initFileSimple(filePath, "help.txt", localizationVector.find(type)->help_command, nullptr);
-	initFileSimple(filePath, "help_pad.txt", localizationVector.find(type)->help_pad_command, nullptr);
-	initFileSimple(filePath, "credit.txt", localizationVector.find(type)->help_credit, nullptr);
-	initFileSimple(filePath, "wizardhelp.txt", localizationVector.find(type)->help_wizard, nullptr);
-	initFileSimple(filePath, "character.txt", localizationVector.find(type)->help_character, &localizationVector.find(type)->helpline_character);
-	initFileSimple(filePath, "gods.txt", localizationVector.find(type)->help_gods, &localizationVector.find(type)->helpline_gods);
-	initFileArtifact(filePath, "artifact.txt", localizationVector.find(type)->randart_name_base, localizationVector.find(type)->randart_name_word);
-	parseWikiFile(filePath, "wiki.txt",	localizationVector.find(type)->wiki_redirect, localizationVector.find(type)->wiki_map, localizationVector.find(type)->wikiline, localizationVector.find(type)->wiki_id_matching);
+	if(!initFileSimple(filePath, "help.txt", localizationVector.find(type)->help_command, nullptr))
+		initFileSimple(defaultFilePath, "help.txt", localizationVector.find(type)->help_command, nullptr);
+	if(!initFileSimple(filePath, "help_pad.txt", localizationVector.find(type)->help_pad_command, nullptr))
+		initFileSimple(defaultFilePath, "help_pad.txt", localizationVector.find(type)->help_pad_command, nullptr);
+	if(!initFileSimple(filePath, "credit.txt", localizationVector.find(type)->help_credit, nullptr))
+		initFileSimple(defaultFilePath, "credit.txt", localizationVector.find(type)->help_credit, nullptr);
+	if(!initFileSimple(filePath, "wizardhelp.txt", localizationVector.find(type)->help_wizard, nullptr))
+		initFileSimple(defaultFilePath, "wizardhelp.txt", localizationVector.find(type)->help_wizard, nullptr);
+	if(!initFileSimple(filePath, "character.txt", localizationVector.find(type)->help_character, &localizationVector.find(type)->helpline_character))
+		initFileSimple(defaultFilePath, "character.txt", localizationVector.find(type)->help_character, &localizationVector.find(type)->helpline_character);
+	if(!initFileSimple(filePath, "gods.txt", localizationVector.find(type)->help_gods, &localizationVector.find(type)->helpline_gods))
+		initFileSimple(defaultFilePath, "gods.txt", localizationVector.find(type)->help_gods, &localizationVector.find(type)->helpline_gods);
+	if(!initFileArtifact(filePath, "artifact.txt", localizationVector.find(type)->randart_name_base, localizationVector.find(type)->randart_name_word))
+		initFileArtifact(defaultFilePath, "artifact.txt", localizationVector.find(type)->randart_name_base, localizationVector.find(type)->randart_name_word);
+	if(!parseWikiFile(filePath, "wiki.txt",	localizationVector.find(type)->wiki_redirect, localizationVector.find(type)->wiki_map, localizationVector.find(type)->wikiline, localizationVector.find(type)->wiki_id_matching))
+		parseWikiFile(defaultFilePath, "wiki.txt",	localizationVector.find(type)->wiki_redirect, localizationVector.find(type)->wiki_map, localizationVector.find(type)->wikiline, localizationVector.find(type)->wiki_id_matching);
 
 	initFile<LOCALIZATION_ENUM_KEY>(filePath, "general.txt", localization_enum_map, 1, [type](LOCALIZATION_ENUM_KEY key, vector<string> values, vector<string> prev_values) {
 		localizationVector.find(type)->localization_map[key] = values[0];
@@ -220,10 +229,10 @@ void LocalzationManager::initLocalization() {
 
 
 
-void LocalzationManager::initFileArtifact(const string& path, const string& filename, vector<string>& baseVector, vector<string>& wordVector) {
+bool LocalzationManager::initFileArtifact(const string& path, const string& filename, vector<string>& baseVector, vector<string>& wordVector) {
 	ifstream file(path + filename);
 	if (!file) {
-		return;
+		return false;
 	}
 
 	baseVector.clear();
@@ -255,10 +264,14 @@ void LocalzationManager::initFileArtifact(const string& path, const string& file
 
 		current_line++;
 	}
+	return true;
 }
 
 
-void LocalzationManager::parsingWikiInfo(string key, string content, unordered_map<string, shared_ptr<vector<WikiHelper>>>& wiki_map, unordered_map<string, int>& wikiline, int& current_line, BiMap& wiki_id_matching) {
+void LocalzationManager::parsingWikiInfo(string key, string content, 
+	unordered_map<string, shared_ptr<vector<WikiHelper>>, ci_hash, ci_equal>& wiki_map, 
+	unordered_map<string, int, ci_hash, ci_equal>& wikiline, 
+	int& current_line, BiMap& wiki_id_matching) {
 	if (!key.empty()) {
 		wikiline[key] = current_line;
 		current_line+=3; //이름앞뒤
@@ -301,14 +314,14 @@ void LocalzationManager::parsingWikiInfo(string key, string content, unordered_m
 }
 
 
-void LocalzationManager::parseWikiFile(const string& path, const string& filename,
-	unordered_map<string, string>& wiki_redirect,
-	unordered_map<string, shared_ptr<vector<WikiHelper>>>& wiki_map,
-	unordered_map<string, int>& wikiline,
+bool LocalzationManager::parseWikiFile(const string& path, const string& filename,
+	unordered_map<string, string, ci_hash, ci_equal>& wiki_redirect,
+	unordered_map<string, shared_ptr<vector<WikiHelper>>, ci_hash, ci_equal>& wiki_map,
+	unordered_map<string, int, ci_hash, ci_equal>& wikiline,
 	BiMap& wiki_id_matching)
 {
 	ifstream file(path + filename);
-	if (!file) return;
+	if (!file) return false;
 
 	string line;
 	bool first_line = true;
@@ -378,14 +391,15 @@ void LocalzationManager::parseWikiFile(const string& path, const string& filenam
 		}
 	}
 	parsingWikiInfo(current_key, current_content, wiki_map, wikiline, current_line, wiki_id_matching);
+	return true;
 }
 
 
 
-void LocalzationManager::initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector, vector<int>* helpline) {
+bool LocalzationManager::initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector, vector<int>* helpline) {
 	ifstream file(path + filename);
 	if (!file) {
-		return;
+		return false;
 	}
 
 	saveVector.clear();
@@ -408,6 +422,7 @@ void LocalzationManager::initFileSimple(const string& path, const string& filena
 		color_ = parseMultiColorLine(line, saveVector, color_, current_line, helpline);
 		current_line++;
 	}
+	return true;
 }
 
 string LocalzationManager::langString(string key) {
@@ -675,24 +690,37 @@ void LocalzationManager::printWiki() {
 		int id_ = 1;
 		langData->wiki_id_matching.clear();
 		langData->wikiline.clear();
-		for(auto& wiki_entry : langData->wiki_map) {
-			langData->wiki_id_matching.insert(id_++, wiki_entry.first);
+
+		std::vector<std::string> keys;
+		keys.reserve(langData->wiki_map.size());
+		for (auto& kv : langData->wiki_map) keys.push_back(kv.first);
+
+		std::sort(keys.begin(), keys.end(), UnicodeCodepointLess);
+
+		for (auto& key : keys) {
+			langData->wiki_id_matching.insert(id_++, key);
 		}
 
-		int current_line = 0;
-		for(auto& wiki_entry : langData->wiki_map) {
-			langData->wikiline[wiki_entry.first] = current_line;
+
+		int current_line = 0; 
+		 // 정렬된 키 순서로 출력
+        for (auto& key : keys) {
+            langData->wikiline[key] = current_line;
 			printsub("===============================",true,CL_help);
-			printsub(wiki_entry.first,true,CL_normal);
+			printsub(key,true,CL_normal);
 			printsub("===============================",true,CL_help);
 			printsub("",true,CL_normal);
 			current_line+=4;
-			if(wiki_entry.second != nullptr) {
-				for(auto& wiki_value : *wiki_entry.second) {
+            auto it = langData->wiki_map.find(key);
+            if (it != langData->wiki_map.end() && it->second != nullptr) {
+				for(auto& wiki_value : *it->second) {
 					if(wiki_value.color == CL_normal) {
 						printsub(wiki_value.text,wiki_value.enter,wiki_value.color);
 					} else {
-						int redirect_ = langData->wiki_id_matching.getId(wiki_value.text);
+						string key_ = wiki_value.text;
+						if(langData->wiki_redirect.find(key_) != langData->wiki_redirect.end())
+							key_ = langData->wiki_redirect[key_];
+						int redirect_ = langData->wiki_id_matching.getId(key_);
 						if(redirect_ > 0) {
 							redirect_ += 1000;
 							printsub(wiki_value.text,wiki_value.enter,wiki_value.color, redirect_);

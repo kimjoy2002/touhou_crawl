@@ -604,6 +604,25 @@ string WithBlankString(const string& str, int size, bool left) {
 
 	return result;
 }
+wchar_t fold_ascii_w(wchar_t ch) {
+    if (ch >= L'A' && ch <= L'Z') return static_cast<wchar_t>(ch - L'A' + L'a');
+    return ch;
+}
+
+bool UnicodeCodepointLess(const std::string& a, const std::string& b) {
+    const std::wstring wa = ConvertUTF8ToUTF16(a);
+    const std::wstring wb = ConvertUTF8ToUTF16(b);
+
+    size_t i = 0, j = 0;
+    while (i < wa.size() && j < wb.size()) {
+        const wchar_t ca = fold_ascii_w(wa[i]);
+        const wchar_t cb = fold_ascii_w(wb[j]);
+        if (ca < cb) return true;
+        if (ca > cb) return false;
+        ++i; ++j;
+    }
+    return wa.size() < wb.size();
+}
 
 bool IsCJKWideChar(wchar_t ch)
 {

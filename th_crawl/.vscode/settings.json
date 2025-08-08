@@ -67,7 +67,8 @@
         "optional": "cpp",
         "string_view": "cpp",
         "valarray": "cpp",
-        "xhash": "cpp"
+        "xhash": "cpp",
+        "xstddef": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabled"
 }

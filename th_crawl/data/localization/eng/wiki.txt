@@ -1,0 +1,327 @@
+﻿This page stores various in-game formulas and information that are otherwise hard to discover.
+
+This page is intended to be searchable in a wiki format in the future.
+
+// (Important) Reserved Words
+// All key entries must be enclosed with =====.
+// A word in parentheses next to a key indicates an alternative name (redirect).
+// Words enclosed in {} can be clicked to navigate to the related entry.
+
+================================================
+Touhou Crawl
+================================================
+Touhou Crawl is a fan game based on both {Dungeon Crawl Stone Soup} and the {Touhou Project}.
+
+================================================
+Touhou Project
+================================================
+A wonderful game. If you haven't tried it, definitely give it a shot.
+
+================================================
+Dungeon Crawl Stone Soup
+================================================
+A wonderful game. If you haven't tried it, definitely give it a shot.
+
+================================================
+Stats (Stat)
+================================================
+In {Touhou Crawl}, there are three stats: {Strength}, {Dexterity}, and {Intelligence}.
+Every 3 levels, you can choose one stat to increase.
+Additionally, each race may have different starting stats and growth per level.
+
+================================================
+Strength (Str)
+================================================
+Strength is one of the three {Stats} in {Touhou Crawl}.
+It increases base {damage} by Strength / 3. -> {Melee Damage Formula}, {Ranged Damage Formula}
+It increases the multiplier of {Smash} attacks with {Mace} weapons.
+It also affects the {Equipment Penalty}.
+
+================================================
+Dexterity (Dex)
+================================================
+Dexterity is one of the three {Stats} in {Touhou Crawl}.
+It increases base {damage} by Dexterity / 6. -> {Melee Damage Formula}, {Ranged Damage Formula}
+{Accuracy} is also increased by Dexterity. -> {Melee Accuracy Formula}, {Ranged Accuracy Formula}
+Additionally, Dexterity affects {Stealth}, {Evasion}, and {Shields} formulas.
+
+================================================
+Intelligence (Int)
+================================================
+Intelligence is one of the three {Stats} in {Touhou Crawl}.
+Intelligence increases {Spell Power} and {Spell Success Rate}.
+
+================================================
+Equipment Penalty
+================================================
+A debuff that applies when wearing heavy {Armour} and {Shield}.
+Each piece of {Armour} or {Shield} has its own penalty value, and the penalties from both are added together.
+This penalty is reduced by 1/3 of your {Armour} or {Shield} skill, but it cannot go below a certain minimum.
+If the penalty exceeds 2 + {Strength}/6, it counts as Level 2;
+if it exceeds 3 + {Strength}/4, it counts as Level 3;
+if it exceeds 4 + {Strength}/3, it counts as Level 4.
+At penalty Level 1, text appears gray, and {Evasion}, {Stealth}, and {Spell Success Rate} are reduced by the penalty value.
+At Level 2, text appears yellow, and {Evasion}, {Stealth}, {Spell Success Rate}, and {Accuracy} are reduced.
+At Level 3, text appears orange, and {Evasion}, {Stealth}, {Spell Success Rate}, {Accuracy}, and {Movement Speed} are reduced.
+At Level 4, text appears red, and in addition to the above, all {Action Speed} is halved.
+
+================================================
+Damage (Attack)
+================================================
+Damage is the value that reduces an enemy's HP.
+By default, damage is calculated as a random value from 0 to your full damage potential.
+For player damage, refer to {Melee Damage} and {Ranged Damage}.
+Monster damage varies per monster and is a fixed value.
+For actual applied damage, refer to {Player Defense Formula} and {Monster Defense Formula}.
+
+================================================
+Melee Damage Formula (Melee Damage)
+================================================
+Base {Damage}: {Strength}/3 + {Dexterity}/6
+{Weapon} Max Damage: Weapon Power * (Weapon Enchant/18 + Weapon Skill/20 + Base Damage/6)
+{Unarmed} Max Damage: Base Damage + {Unarmed} Skill * 15/20
+Afterward, various buffs are applied, and then 0~Damage is calculated against the monster's {Defense}. 
+-> {Monster Defense Formula}
+
+================================================
+Accuracy
+================================================
+For player accuracy, refer to {Melee Accuracy Formula} and {Ranged Accuracy Formula}.
+Monster accuracy is calculated as Level * 1.5 + 8 -> {Player Evasion Formula}
+
+================================================
+Melee Accuracy Formula (Melee Accuracy)
+================================================
+Base {Accuracy}: 5 + {Dexterity}/3 + {Fighting} Skill/4
+{Weapon} Accuracy: Base Accuracy + 1 + (Weapon Accuracy + Weapon Enchant + Weapon Skill/3) * 3 / 4
+{Unarmed} Accuracy: Base Accuracy + {Dexterity}/4
+Afterward, various buffs are applied and {Evasion} and {Accuracy} are calculated. -> {Monster Evasion Formula}
+
+================================================
+Ranged Damage Formula (Danmaku Damage Formula, Ranged Damage, Danmaku Damage)
+================================================
+Base {Damage}: 1 + {Strength}/3 + {Dexterity}/6
+Danmaku Max Damage: 1 + {Danmaku} Damage * (1 + Base Damage/10 + Danmaku Skill/20 + Danmaku Enchant/10)
+Afterward, various buffs are applied, and then 0~Damage is calculated against the monster's {Defense}. 
+-> {Monster Defense Formula}
+
+================================================
+Ranged Accuracy Formula (Ranged Accuracy Formula, Ranged Accuracy, Danmaku Accuracy)
+================================================
+Base {Accuracy}: 8 + {Dexterity}/3
+Ranged Accuracy: {Danmaku} Accuracy + Danmaku Enchant + Danmaku Skill/2
+If it is an equippable {Weapon}, accuracy increases by an additional 3.
+Afterward, various buffs are applied and {Evasion} and {Accuracy} are calculated. -> {Monster Evasion Formula}
+
+
+================================================
+Weapons (Weapon, Attack Delay)
+================================================
+Weapons are equippable items used to attack enemies.
+All weapons have a minimum delay and a maximum delay.
+When attacking, the delay decreases from the maximum delay by 0.1 turns for every 2 levels in the weapon skill, 
+until it reaches the minimum delay.
+Some weapons have 3 stages of {Two-Hand Penalty} when wielded together with a {Shield}.
+Depending on the penalty stage, attack delay is increased by 0.1 to 0.3 turns.
+Weapon types include {Short Blades}, {Long Blades}, {Polearms}, {Maces}, and {Axes}.
+
+================================================
+Short Blades (Short Blade)
+================================================
+Deal less damage than other {Weapons} but have higher accuracy and faster attack speed.
+Includes daggers, throwing knives, and short swords.
+Deal higher {Stabbing} damage compared to other {Weapons}.
+
+================================================
+Stabbing
+================================================
+A special attack that guarantees a hit and deals high damage against an unprepared enemy.
+Stabbing attacks are divided into 3 stages:
+Stage 3 occurs when attacking an enemy that is {Asleep}.
+Stage 2 occurs when attacking an enemy that cannot see {Invisible}, or is under {Confusion}, {Fear}, or {Paralysis}.
+Stage 1 occurs when using a {Short Blades} with the {Autumn} brand, or when attacking an enemy under {Madness}.
+Stage 3 always triggers; Stage 2 triggers with a 25% chance; Stage 1 triggers with a 10% chance.
+Stage 3 always guarantees maximum damage, while Stages 1 and 2 use the higher of 0~Max Damage or the original damage.
+When attempting a Stabbing with a non-dagger weapon, maximum damage increases by 1 + {Stealth} level * 0.1 times.
+When using a {Short Blades} for a stabbing, base damage increases by (1 + {Short Blades} level + {Stealth} level),
+and Stabbing damage further increases by 1 + {Short Blades} level * 0.1 + {Stealth} level * 0.1 times.
+
+================================================
+Long Blades (Long Blade)
+================================================
+{Weapons} with long blades.
+When there are no enemies in the surrounding 8 tiles,
+can use {Slash} Away to cut through eligible ranged attacks that can be {Grazed}.
+Includes swords, crescent blades, greatswords, and tetsurin.
+
+================================================
+Slash (Slash Away)
+================================================
+The ability to automatically cut through and nullify eligible ranged attacks
+that can be {Grazed} while wielding a {Long Blade}.
+Requires at least {Long Blade} skill level 8 and no enemies in the surrounding 8 tiles.
+You must also not be under {Confusion} or {Paralysis}.
+Slash Away chance = 15 + ({Long Blade} skill - 7) * 1.5.
+When using {Dual Wield}, the chance is multiplied.
+
+================================================
+Axes (Axe)
+================================================
+{Weapons} with a single blade on one side, specialized for chopping.
+When attacking an enemy, a gust effect occurs, 
+allowing the attack to hit up to 2 tiles in a straight line, including the tile behind the target.
+Includes hand axes, battle axes, and anchors.
+
+================================================
+Maces (Mace)
+================================================
+{Weapons} without blades, with blunt ends specialized for striking enemies.
+Can use {Smash}, which causes {Dazed} on each enemy once.
+Includes gohei, broomstick, parasol, dowsing rod, and onbashira.
+
+================================================
+Smash
+================================================
+When attacking with a {Mace}, there is a chance to deal heavy damage and inflict {Dazed}.
+Smash triggers if the damage is at least 1, with a chance of {Mace} skill level + 25%.
+Damage is increased by 100 + {Strength} * 3%.
+Also inflicts {Dazed} for ({Mace} level + 2)/2 turns.
+When Smash occurs, decorative point items are scattered around.
+In addition, a {P Item} is generated, 
+but in this case, the {P Item} that would drop on kill will not appear.
+
+================================================
+Polearms (Polearm)
+================================================
+{Weapons} with long reach, consisting of a blade fixed to the end of a long shaft.
+Have a reach of 2 tiles and can be used via auto-attack or the v key.
+Includes spears, javelin, scythe, and trident.
+
+================================================
+Unarmed (Unarmed Combat)
+================================================
+When attacking an enemy without a {Weapon} equipped, you attack unarmed.
+When using unarmed, attack delay is fixed at 0.6 turns, and
+the {Melee Damage Formula} and {Melee Accuracy Formula} are applied differently.
+
+================================================
+Stealth
+================================================
+Base stealth is determined by {Dexterity} * 3 + Stealth skill level * 15.
+Additionally, {Potion of Gliding} increases it by 50, each stealth trait increases it by 50, 
+and each {Equipment Penalty} reduces it by 10.
+{Maple Armour} increases it by 150, but this bonus is halved if in bright light.
+Each turn, if a random value between 0~Stealth is less than or equal to a monster's {Detection} value,
+the monsters notice the player and wake up.
+
+================================================
+Detection
+================================================
+A monster's detection value is calculated as 10 + Level * (1.5 + Detection Level).
+Detection Level is unique to each monster, typically ranging from 0 to 3.
+This value is reduced by 70 if the player is {Invisible}, reduced by 20 just before invisibility wears off,
+and reduced by 40 when walking over {Maple Leaves}.
+Detection is checked every turn the monster can see the player,
+and is based on the player's turns, so it is unaffected by the player's movement or action speed.
+
+================================================
+Armour (Body Armour)
+================================================
+Armour refers to body {Armour} and provides high defense along with penalties.
+Armour has four materials - {Cloth}, {Leather}, {Chain}, and {Plate} - which determine AC and penalties,
+and eight types - {Outfit}, {Shrine Maiden Robe}, {Winged Garment}, {Kappa Suit}, {Fire-Rat Robe}, 
+{Maid Uniform}, {Doll Dress}, {Maple Armour} - which determine resistances.
+Armour has {Equipment Penalty} values based on material, 
+and the penalty can be reduced by 1 for every 3 levels in Armour skill.
+When worn, the armour's {Defense} value is applied to {Defense} calculations.
+
+================================================
+Defense (AC)
+================================================
+Player's displayed AC is calculated as follows:
+Base AC comes from the {Armour} and other equipped {Armour} pieces.
+Bonus AC comes from armour enchantments and various abilities.
+Actual defense is calculated as Base AC * (1 + {Armour} skill level / 22) + Bonus AC.
+Monster defense uses each monster's unique defense value.
+For actual damage reduction, refer to {Player Defense Formula} and {Monster Defense Formula}.
+
+================================================
+Evasion (EV)
+================================================
+Player's displayed EV is calculated as follows:
+Base evasion is 10 by default and increases by 1 for every level in Evasion skill.
+Bonus evasion comes from various items.
+Size value is 0 for medium races, 2 for large races, and -2 for small races.
+Actual evasion is calculated as 3 * Size + Base Evasion * (12 + {Dexterity}) / (32 - Size) + Bonus Evasion.
+Monster evasion uses each monster's unique evasion value.
+For actual evasion rate, refer to {Player Evasion Formula} and {Monster Evasion Formula}.
+
+
+================================================
+Shield (SH, Guard, Shields)
+================================================
+There are three types of Shield: {Wooden Shield}, {Iron Shield}, and {Kite Shield}.
+Shields have their own {Equipment Penalty} values, 
+which can be reduced by 1 for every 3 levels in the Shield skill.
+When equipped, the SH value from the shield is applied to SH calculations.
+Base SH comes from the shield's inherent value.
+Bonus SH comes from the shield's enchantments and various abilities.
+Actual SH is calculated as Base SH * (1 + ({Dexterity}/5 + Shield skill level) / 15) + Bonus SH.
+{Battle Sense} manifested by {Half-Youkai} multiplies Base SH by 1.2.
+For the detailed formula for guard chance, see {Shield Formula}.
+
+================================================
+Shield Formula
+================================================
+Using the actual SH calculated from the {Shield}, the following formula applies:
+Final Guard Rate = SH / (Penetration + SH) * 100%
+Penetration is 75, and 60 if the attack can be {Grazed}.
+Guarding is not possible while {Asleep} or {Paralyzed}.
+Some attacks, such as explosions, cannot be guarded.
+
+================================================
+Player Defense Formula (Defense Formula, Player Defense)
+================================================
+Player {Defense} is applied using the following formula:
+Damage Reduction: AC 1~15 increases by 0.008 per point, AC 15~30 increases by 0.01 per point, 
+and AC 30+ increases by 0.005 per point.
+Modified AC: ({Defense} + 1) / 3
+Final {Damage}: ((1 - Damage Reduction) * {Damage}) - 0~Modified AC
+Some attacks that pierce defense may calculate AC at half value.
+-> {Monster Defense Formula}
+
+================================================
+Monster Defense Formula (Monster Defense)
+================================================
+Monster {Defense} is applied using the following formula:
+Final {Damage}: {Damage} - 0~AC
+Some attacks that pierce defense may calculate AC at half value.
+-> {Player Defense Formula}
+
+================================================
+Player Evasion Formula (Evasion Formula)
+================================================
+Player evasion rate is calculated using the following formula:
+Modified {Evasion}: EV 1~15 increases by 0.8 per point, EV 15~30 increases by 1 per point,
+and EV 30+ increases by 1.5 per point.
+Evasion Rate = Modified Evasion / (Modified Evasion + {Accuracy}) * 100%
+If Accuracy is higher than Modified Evasion, 
+the evasion rate is multiplied by max(0.5, (Modified Evasion) / (Accuracy)).
+Maximum evasion rate is 95%.
+For monsters, see {Monster Evasion Formula}.
+
+================================================
+Monster Evasion Formula
+================================================
+Monster evasion rate is calculated using the following formula:
+Base evasion rate is 45%. If {Accuracy} is higher than {Evasion},
+ the rate decreases by 3.5% for each point of difference.
+If {Evasion} is higher than {Accuracy}, the rate increases by 3% for each point of difference.
+Maximum evasion rate is 90%.
+For players, see {Player Evasion Formula}.
+
+================================================
+Dazed
+================================================
+Dazed is a status effect that reduces a monster’s {Accuracy} by 3 and lowers the cast frequency of {Spells} to 90%.
+It is mainly caused by the {Smash} ability of {Maces}.

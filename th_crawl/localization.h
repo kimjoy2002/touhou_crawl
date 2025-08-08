@@ -82,6 +82,7 @@ public:
 	static unordered_set<string> english_article;
 
     class LocalzationData {
+
     public:
 	    unordered_map<LOCALIZATION_ENUM_KEY, string> localization_map;
 	    unordered_map<SPEAK_ENUM_KEY, string> speak_map;
@@ -94,10 +95,10 @@ public:
 	    vector<TextHelper> help_credit;
 	    vector<TextHelper> help_wizard;
 	    vector<TextHelper> help_character;
-	    unordered_map<string, string> wiki_redirect;
-	    unordered_map<string, shared_ptr<vector<WikiHelper>>> wiki_map;
+	    unordered_map<string, string, ci_hash, ci_equal> wiki_redirect;
+	    unordered_map<string, shared_ptr<vector<WikiHelper>>, ci_hash, ci_equal> wiki_map;
 	    BiMap wiki_id_matching;
-	    unordered_map<string, int> wikiline;
+	    unordered_map<string, int, ci_hash, ci_equal> wikiline;
 	    vector<int> helpline_character;
 	    vector<TextHelper> help_gods;
 	    vector<int> helpline_gods;
@@ -109,16 +110,16 @@ private:
     static D3DCOLOR getColorFromCode(const string& code);
     static D3DCOLOR parseMultiColorLine(const string& line, vector<TextHelper>& outVector, D3DCOLOR currentColor, int current_line, vector<int>* helpline);
     static pair<string, D3DCOLOR> parseColorTag(const string& line);
-    static void initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector, vector<int>* helpline);
-    static void parsingWikiInfo(string key, string content, unordered_map<string, shared_ptr<vector<WikiHelper>>>& wiki_map, unordered_map<string, int>& wikiline, int& current_line, BiMap& wiki_id_matching);
-    static void parseWikiFile(const string& path, const string& filename,	unordered_map<string, string>& wiki_redirect, unordered_map<string, shared_ptr<vector<WikiHelper>>>& wiki_map, unordered_map<string, int>& wikiline, BiMap& wiki_id_matching);
-	static void initFileArtifact(const string& path, const string& filename, vector<string>& baseVector, vector<string>& wordVector);
+    static bool initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector, vector<int>* helpline);
+    static void parsingWikiInfo(string key, string content, unordered_map<string, shared_ptr<vector<WikiHelper>>, ci_hash, ci_equal>& wiki_map, unordered_map<string, int, ci_hash, ci_equal>& wikiline, int& current_line, BiMap& wiki_id_matching);
+    static bool parseWikiFile(const string& path, const string& filename, unordered_map<string, string, ci_hash, ci_equal>& wiki_redirect, unordered_map<string, shared_ptr<vector<WikiHelper>>, ci_hash, ci_equal>& wiki_map, unordered_map<string, int, ci_hash, ci_equal>& wikiline, BiMap& wiki_id_matching);
+	static bool initFileArtifact(const string& path, const string& filename, vector<string>& baseVector, vector<string>& wordVector);
     template<typename EnumType>
-    static void initFile(const string& path, const string& filename, unordered_map<string, EnumType>& enum_map, int argument_num, function<void(EnumType, vector<string>, vector<string>)> func) {
+    static bool initFile(const string& path, const string& filename, unordered_map<string, EnumType>& enum_map, int argument_num, function<void(EnumType, vector<string>, vector<string>)> func) {
         ifstream file(path + filename);
         if (!file) {
             string error_msg = "Error: Cannot open localization file: " + path + filename;
-            return;
+            return false;
         }
 
         string line;
@@ -188,6 +189,7 @@ private:
         }
 
         file.close();
+        return true;
     }
 
 

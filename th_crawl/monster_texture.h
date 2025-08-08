@@ -471,6 +471,7 @@ extern textures img_item_rune;
 
 extern textures img_tanmac_bill[]; //아이템 이미지론 1만 씁니다. 
 extern textures img_tanmac_amulet[]; //0씀
+extern textures img_tanmac_shockwave[];
 extern textures img_tanmac_oil_big[]; //아이템 이미지론 1만 씁니다. 
 extern textures img_tanmac_fire_big[]; //아이템 이미지론 1만 씁니다. 
 extern textures img_tanmac_fire_small[];//아이템 이미지론 1만 씁니다. 
@@ -623,6 +624,12 @@ extern textures img_state_scary;
 extern textures img_state_ally;
 extern textures img_state_summon;
 extern textures img_state_haste;
+extern textures img_state_dazed;
+extern textures img_state_lunatic;
+extern textures img_state_slow;
+extern textures img_state_neutral;
+extern textures img_state_calling;
+extern textures img_state_dazed;
 
 
 int texturetoint(textures* input);

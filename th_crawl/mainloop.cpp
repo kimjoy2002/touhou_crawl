@@ -1242,6 +1242,7 @@ void MainLoop()
 			findItem();
 			break;
 		case 0x07: //전체층 이동
+		case 'G':
 			if (isNormalGame())
 				floorMove();
 			break;

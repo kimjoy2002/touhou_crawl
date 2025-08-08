@@ -5382,3 +5382,8 @@ LOC_SYSTEM_FLOOR_EFFECT_SCORE,点アイテム
 LOC_SYSTEM_DAZED,朦朧
 LOC_SYSTEM_HIT_BASH,{0}は{1}を鈍器で叩きつけた。
 LOC_SYSTEM_WIKI_HELP,ダンジョン鈴奈庵
+LOC_SYSTEM_HELP_SHORTBLADE,短剣は不意打ちのダメージが高いです。
+LOC_SYSTEM_HELP_LONGBLADE,長剣は飛来する弾幕を斬り払うことができます。
+LOC_SYSTEM_HELP_AXE,斧は攻撃時に後方に衝撃波を発生させます。
+LOC_SYSTEM_HELP_MACE,鈍器は敵を打ち砕き、朦朧にすることができます。
+LOC_SYSTEM_HELP_SPEAR,槍は2マス離れた敵を攻撃できます。

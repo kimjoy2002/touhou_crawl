@@ -1939,7 +1939,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 				}
 
 
-				SetDazed(BashPower/2, true);
+				SetDazed(BashPower/2+1, true);
 			}
 
 			if (player_joon_punch_)
@@ -6143,6 +6143,8 @@ bool monster::isSimpleState(monster_state_simple state_)
 			return (s_communication > 0);
 		case MSS_ALLY:
 			return (isUserAlly());
+		case MSS_DAZED:
+			return (s_dazed > 0);
 		default:
 			break;
 	}

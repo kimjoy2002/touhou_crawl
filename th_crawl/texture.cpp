@@ -1857,6 +1857,17 @@ textures img_tanmac_amulet[] = {textures(&texture_item01, 25, 255),
 							    textures(&texture_item01, 26, 255)
 };
 
+textures img_tanmac_shockwave[] = { textures(&texture_laser, 157, 255),
+textures(&texture_laser, 158, 255),
+textures(&texture_laser, 159, 255),
+textures(&texture_laser, 160, 255),
+textures(&texture_laser, 161, 255),
+textures(&texture_laser, 162, 255),
+textures(&texture_laser, 163, 255),
+textures(&texture_laser, 164, 255)
+};
+
+
 
 
 textures img_fog_normal[] = {textures(&texture_item01, 64, 255),
@@ -2337,6 +2348,7 @@ textures img_state_lunatic(&texture_item01, 219, 255);
 textures img_state_slow(&texture_item01, 239, 255);
 textures img_state_neutral(&texture_item03, 194, 255);
 textures img_state_calling(&texture_item03, 213, 255);
+textures img_state_dazed(&texture_item04, 23, 255);
 
 textures dot_floor(&texture_dot_floor, 0, 0, 1, 1, 255);
 textures dot_wall(&texture_dot_wall, 0, 0, 1, 1, 255);
@@ -3821,6 +3833,12 @@ int texturetoint(textures* input)
 		return 606;
 	else if(input == &img_score_item[5])
 		return 607;
+	else if(input == &img_tanmac_shockwave[0] ||
+		input == &img_tanmac_shockwave[1]||input == &img_tanmac_shockwave[2] ||
+		input == &img_tanmac_shockwave[3]||input == &img_tanmac_shockwave[4] ||
+		input == &img_tanmac_shockwave[5]||input == &img_tanmac_shockwave[6] ||
+		input == &img_tanmac_shockwave[7])
+		return 608;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -5063,6 +5081,8 @@ textures* inttotexture(int input)
 		return &img_score_item[4];
 	case 607:
 		return &img_score_item[5];
+	case 608:
+		return &img_tanmac_shockwave[0];
 	default:
 		return &img_mons_default;
 	}
@@ -5101,6 +5121,8 @@ textures* statetotexture(monster_state_simple state_)
 		return &img_state_neutral;
 	case MSS_COMMUNICATION:
 		return &img_state_calling;
+	case MSS_DAZED:
+		return &img_state_dazed;
 	default:
 		return nullptr;
 	}

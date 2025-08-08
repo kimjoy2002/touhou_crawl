@@ -1111,6 +1111,29 @@ coord_def players::GetDisplayPos()
 	}
 }
 
+bool players::shockwave(monster* mon_, attack_infor temp_att) {
+	if(!mon_)
+		return false;
+
+	temp_att.name = name_infor(LOC_SYSTEM_ATT_SHOCKWAVE);
+
+	beam_iterator beam(you.position,mon_->position);
+	coord_def prev = *(beam++);
+	if(env[current_level].isMove(*beam, true)) {
+		int path_ = 10*GetPosToDirec((*beam),prev);
+		env[current_level].MakeEffect((*beam),GetTanmacGraphic(51, beam.GetDirec(), 0,path_),false, 0.4f);
+		if(monster *unit_ = (monster*)env[current_level].isMonsterPos(beam->x,beam->y, &you))
+		{
+			if(you.isEnemyMonster(unit_) && !unit_->isPassedBullet(&you)) {
+				if(unit_->damage(temp_att)) {
+					//딱히 하는거 없음
+				}
+			}
+		}
+		return true;
+	}
+	return false;
+}
 bool players::attack(monster* mon_, equip_type type_, bool counter_)
 {
 	if (s_evoke_ghost) {
@@ -1171,7 +1194,11 @@ bool players::attack(monster* mon_, equip_type type_, bool counter_)
 				break;
 		}
 	}
+	bool canShockwave = false, doShockwave = false;
 
+	if(equipment[type_] && equipment[type_]->canShockwave()) {
+		canShockwave = true;
+	}
 
 	if(mon_->damage(temp_att))
 	{
@@ -1187,6 +1214,13 @@ bool players::attack(monster* mon_, equip_type type_, bool counter_)
 			alchemy_time = 0;
 		}
 	}
+
+	if(canShockwave) {
+		if(shockwave(mon_, temp_att)) {
+			doShockwave = true;
+		}
+	}
+
 	you.SetBattleCount(30);
 	youAttack(mon_);
 	if(mon_->isLive() && you.GetProperty(TPT_HORN))
@@ -1217,6 +1251,12 @@ bool players::attack(monster* mon_, equip_type type_, bool counter_)
 			if(unit_ && unit_ != mon_ && !unit_->isUserAlly())
 			{
 				unit_->damage(temp_att, false);
+				
+				if(canShockwave && !unit_->isplayer()) {
+					if(shockwave((monster*)unit_, temp_att)) {
+						doShockwave = true;
+					}
+				}
 
 			}
 		}
@@ -1238,6 +1278,10 @@ bool players::attack(monster* mon_, equip_type type_, bool counter_)
 			}
 					
 		}
+	}
+	if(doShockwave) {
+		Sleep(16);
+		env[current_level].ClearEffect();
 	}
     return true;
 }

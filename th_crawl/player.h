@@ -431,6 +431,7 @@ public:
 	void SetPrevAction(int key, char item = 0, int num = 0);
 	void maybeAction();
 	coord_def GetDisplayPos();
+	bool shockwave(monster* mons_, attack_infor temp_att);
 	bool attack(monster* mons_, equip_type type_, bool counter_);
 	int move(short_move x_mov, short_move y_mov);
 	int move(const coord_def &c);

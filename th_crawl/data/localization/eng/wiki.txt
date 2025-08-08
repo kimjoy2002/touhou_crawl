@@ -185,7 +185,7 @@ Smash
 When attacking with a {Mace}, there is a chance to deal heavy damage and inflict {Dazed}.
 Smash triggers if the damage is at least 1, with a chance of {Mace} skill level + 25%.
 Damage is increased by 100 + {Strength} * 3%.
-Also inflicts {Dazed} for ({Mace} level + 2)/2 turns.
+Also inflicts {Dazed} for ({Mace} level + 2)/2+1 turns.
 When Smash occurs, decorative point items are scattered around.
 In addition, a {P Item} is generated, 
 but in this case, the {P Item} that would drop on kill will not appear.

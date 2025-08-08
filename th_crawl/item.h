@@ -265,6 +265,7 @@ public:
 	bool canSlashTanmac();
 	bool canReachAttack();
 	bool canBashAttack();
+	bool canShockwave();
 	bool isEvokable();
 	bool isBreakable();
 	bool isNameAccent();

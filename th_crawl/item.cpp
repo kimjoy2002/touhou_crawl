@@ -1470,6 +1470,13 @@ bool item::canBashAttack() {
 	}	
 	return false;
 }
+bool item::canShockwave() {
+	if(type == ITM_WEAPON_AXE) {
+		//창은 사거리 공격가능
+		return true;
+	}	
+	return false;
+}
 bool item::isEvokable()
 	{
 	if (type == ITM_SPELL || type == ITM_MISCELLANEOUS)

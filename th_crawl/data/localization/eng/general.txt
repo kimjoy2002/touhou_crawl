@@ -5380,5 +5380,10 @@ LOC_SYSTEM_ITEM_ARTIFACT_INFO_HEAVY,Movement speed is reduced by {0}.
 LOC_SYSTEM_FIGHT_SLASH,{0} slash{0!=you?s:} {1}{1==you?r:'s} {2} with a long blade.
 LOC_SYSTEM_FLOOR_EFFECT_SCORE,Score Items
 LOC_SYSTEM_DAZED,Dazed
-LOC_SYSTEM_HIT_BASH,{0} bash{0==you?:es} {1!=you?the :}{1} with a blunt weapon.
+LOC_SYSTEM_HIT_BASH,{0} bash{0==you?:es} {1!=you?the :}{1} with a mace.
 LOC_SYSTEM_WIKI_HELP,Dungeon Suzunaan
+LOC_SYSTEM_HELP_SHORTBLADE,Short blades deal high backstab damage.
+LOC_SYSTEM_HELP_LONGBLADE,Long blades can slash away incoming projectiles.
+LOC_SYSTEM_HELP_AXE,Axes generate shockwaves to the rear when attacking.
+LOC_SYSTEM_HELP_MACE,Maces can smash enemies, causing Dazed.
+LOC_SYSTEM_HELP_SPEAR,Spears can attack enemies two tiles away.

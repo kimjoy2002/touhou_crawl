@@ -79,19 +79,19 @@ skill_type WeaponSelect(int num)
 	printsub("", true, CL_normal);
 	printsub(blank, false, CL_normal);
 	printsub("a - ", false, CL_normal);
-	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_SHORTBLADE), true, CL_normal, 'a');
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_SHORTBLADE) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_SHORTBLADE), true, CL_normal, 'a');
 	printsub(blank, false, CL_normal);
 	printsub("b - ", false, CL_normal);
-	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_AXE), true, CL_normal, 'b');
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_AXE) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_AXE), true, CL_normal, 'b');
 	printsub(blank, false, CL_normal);
 	printsub("c - ", false, CL_normal);
-	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_MACE), true, CL_normal, 'c');
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_MACE) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_MACE), true, CL_normal, 'c');
 	printsub(blank, false, CL_normal);
 	printsub("d - ", false, CL_normal);
-	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_SPEAR), true, CL_normal, 'd');
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_SPEAR) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_SPEAR), true, CL_normal, 'd');
 	printsub(blank, false, CL_normal);
 	printsub("e - ", false, CL_normal);
-	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_LONGBLADE), true, CL_normal, 'e');
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_LONGBLADE) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_LONGBLADE), true, CL_normal, 'e');
 	ReleaseMutex(mutx);
 
 	while(1)

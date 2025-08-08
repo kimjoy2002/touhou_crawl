@@ -5382,3 +5382,8 @@ LOC_SYSTEM_FLOOR_EFFECT_SCORE,점수아이템
 LOC_SYSTEM_DAZED,멍함
 LOC_SYSTEM_HIT_BASH,{0:은|는} {1:을|를} 둔기로 내리쳤다.
 LOC_SYSTEM_WIKI_HELP,던전 스즈나안
+LOC_SYSTEM_HELP_SHORTBLADE,단검은 암습 데미지가 높습니다.
+LOC_SYSTEM_HELP_LONGBLADE,장검은 멀리서오는 탄막의 상쇄가 가능합니다.
+LOC_SYSTEM_HELP_AXE,도끼는 공격시 적 후방에 충격파를 발생시킵니다.
+LOC_SYSTEM_HELP_MACE,둔기는 적에게 강타를 날려 멍함을 유발합니다.
+LOC_SYSTEM_HELP_SPEAR,창은 2칸 떨어진 적을 공격가능합니다.

@@ -2540,7 +2540,7 @@ monster* environment::close_mon(int x_,int y_, monster_enemy_type type_, int max
 		if((*it).isLive() && (*it).isYourShight())
 		{
 			int dis2_=max(abs((*it).position.x-x_),abs((*it).position.y-y_));
-			if(type_ == MET_ENEMY && ((*it).flag & M_FLAG_UNHARM || (*it).isUserAlly()))
+			if(type_ == MET_ENEMY && ((*it).flag & M_FLAG_UNHARM || (*it).flag & M_FLAG_DECORATE || (*it).isCompleteNeutral()  || (*it).isUserAlly()))
 				continue;
 			if(dis_>dis2_){
 				dis_= dis2_;

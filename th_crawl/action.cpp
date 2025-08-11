@@ -513,6 +513,13 @@ bool stack_move(bool auto_)
 		}
 		env[current_level].item_view_set();
 
+		if(monster* unit_ = (monster*)env[current_level].isMonsterPos(temp.x, temp.y, &you)) {
+			if(unit_->isCompleteNeutral()) {
+				//이동 실패
+				return false;
+			}
+		}
+
 		right_move = Move(temp);
 
 		switch(you.inter)

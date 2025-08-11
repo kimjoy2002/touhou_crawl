@@ -306,28 +306,31 @@ bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target)
 		break;
 	case EVK_SPEAR:
 	{
-		unit* target_unit = env[current_level].isMonsterPos(target.x, target.y, &you,NULL);
-		if(target_unit && !target_unit->isplayer()) {
-			monster* target_mon = (monster*)target_unit;
-			equip_type type_ = you.getequipslot(item_);
-			if(type_ != ET_LAST) {
-				you.attack(target_mon, type_, false);
-				you.doingActionDump(DACT_MELEE, item_->GetName());
-			}
-			if(target_mon->isLive() && you.GetProperty(TPT_DUAL_WEAPON)) {
-				if(type_ == ET_WEAPON) {
-					if(you.equipment[ET_SHIELD] && you.equipment[ET_SHIELD]->isweapon() &&  you.equipment[ET_SHIELD]->canReachAttack()) {
-						you.attack(target_mon, type_, false);
-						you.doingActionDump(DACT_MELEE, you.equipment[ET_SHIELD]->GetName());
-					}
-				} else if(type_ == ET_WEAPON){
-					if(you.equipment[ET_WEAPON] && you.equipment[ET_WEAPON]->isweapon() &&  you.equipment[ET_WEAPON]->canReachAttack()) {
-						you.attack(target_mon, type_, false);
-						you.doingActionDump(DACT_MELEE, you.equipment[ET_WEAPON]->GetName());
+		beam_iterator beam(you.position,target);
+		if(CheckThrowPath(you.position,target,beam)){
+			unit* target_unit = env[current_level].isMonsterPos(target.x, target.y, &you,NULL);
+			if(target_unit && !target_unit->isplayer()) {
+				monster* target_mon = (monster*)target_unit;
+				equip_type type_ = you.getequipslot(item_);
+				if(type_ != ET_LAST) {
+					you.attack(target_mon, type_, false);
+					you.doingActionDump(DACT_MELEE, item_->GetName());
+				}
+				if(target_mon->isLive() && you.GetProperty(TPT_DUAL_WEAPON)) {
+					if(type_ == ET_WEAPON) {
+						if(you.equipment[ET_SHIELD] && you.equipment[ET_SHIELD]->isweapon() &&  you.equipment[ET_SHIELD]->canReachAttack()) {
+							you.attack(target_mon, type_, false);
+							you.doingActionDump(DACT_MELEE, you.equipment[ET_SHIELD]->GetName());
+						}
+					} else if(type_ == ET_WEAPON){
+						if(you.equipment[ET_WEAPON] && you.equipment[ET_WEAPON]->isweapon() &&  you.equipment[ET_WEAPON]->canReachAttack()) {
+							you.attack(target_mon, type_, false);
+							you.doingActionDump(DACT_MELEE, you.equipment[ET_WEAPON]->GetName());
+						}
 					}
 				}
+				return true;
 			}
-			return true;
 		}
 		return false;
 	}

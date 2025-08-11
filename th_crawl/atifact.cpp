@@ -1290,7 +1290,7 @@ void MakeFixedArtifact(item* item_, fixed_artifact_type fixed_artifact, bool wiz
 		item_->num = 1;
 		item_->value0 = 1;
 		item_->value1 = 5;
-		item_->value2 = 6;
+		item_->value2 = 7;
 		item_->value3 = 0;
 		item_->value4 = 9;
 		item_->value5 = WB_SILVER;

@@ -1358,7 +1358,7 @@ bool item::isautopick()
 	switch(type)
 	{
 	case ITM_POTION:
-		if(iden_list.potion_list[value1].iden)
+		if(value1 >= 0 && value1 < PT_MAX && iden_list.potion_list[value1].iden)
 		{	
 			return iden_list.autopickup[value1 + IDEN_CHECK_POTION_START];
 			/*if(isGoodPotion((potion_type)value1)>0 || you.god == GT_EIRIN || (you.god == GT_YUUGI && value1 == PT_ALCOHOL))
@@ -1373,7 +1373,7 @@ bool item::isautopick()
 	case ITM_FOOD:
 		return iden_list.autopickup[(value1==0?0:1) + IDEN_CHECK_ETC_START];
 	case ITM_SCROLL:
-		if(iden_list.scroll_list[value1].iden == 3)
+		if(value1 >= 0 && value1 < SCT_MAX-1 && iden_list.scroll_list[value1].iden == 3)
 		{
 			return iden_list.autopickup[value1 + IDEN_CHECK_SCROLL_START];
 			/*if(you.god == GT_YUKARI && (value1 == SCT_TELEPORT || value1 == SCT_BLINK))
@@ -1390,20 +1390,26 @@ bool item::isautopick()
 		else
 			return true;
 	case ITM_SPELL:
-		if (iden_list.spellcard_list[value1].iden == 2)
+		if (value1 >= 0 && value1 < SPC_V_MAX && iden_list.spellcard_list[value1].iden == 2)
 		{
 			return iden_list.autopickup[value1 + IDEN_CHECK_SPC_START];
 		}
 		return true;
 	case ITM_AMULET:
-		if (iden_list.amulet_list[value1].iden == 2)
+		if(isArtifact()) {
+			return true;
+		}
+		if (value1 >= 0 && value1 < AMT_MAX && iden_list.amulet_list[value1].iden == 2)
 		{
 			return iden_list.autopickup[value1 + IDEN_CHECK_AMULET_START];
 		}
 		else
 			return true;
 	case ITM_RING:
-		if(iden_list.ring_list[value1].iden == 2)
+		if(isArtifact()) {
+			return true;
+		}
+		if(value1 >= 0 && value1 < RGT_MAX && iden_list.ring_list[value1].iden == 2)
 		{
 			return iden_list.autopickup[value1 + IDEN_CHECK_RING_START];
 			/*if(isGoodRing((ring_type)value1,identify?value2:1)>0)
@@ -1420,7 +1426,7 @@ bool item::isautopick()
 			return true;
 	case ITM_BOOK:
 	{
-		if (iden_list.books_list[value0]) {
+		if (value0 >= 0 && value0 < BOOK_LAST && iden_list.books_list[value0]) {
 			return iden_list.autopickup[value0 + 1 + IDEN_CHECK_BOOK_START];
 		}
 		return iden_list.autopickup[IDEN_CHECK_BOOK_START];
@@ -1428,7 +1434,12 @@ bool item::isautopick()
 	case ITM_MENUAL:
 		return true;
 	case ITM_THROW_TANMAC:
-		return iden_list.autopickup[value4 + 2 +IDEN_CHECK_ETC_START];
+	{
+		if(value4 >= 0 && value4 < TMT_MAX) {
+			return iden_list.autopickup[value4 + 2 +IDEN_CHECK_ETC_START];
+		}
+		return false;
+	}
 	default:
 		break;
 	}

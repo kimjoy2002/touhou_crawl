@@ -1932,10 +1932,13 @@ bool monster::damage(attack_infor &a, bool perfect_)
 				{
 					if (env[current_level].isMove(rit->x, rit->y, false))
 					{
+						if (a.order && !a.order->isSightnonblocked(*rit)) {
+							continue;
+						}
 						int rand_ = randA(5);
 						env[current_level].MakeFloorEffect(coord_def(rit->x, rit->y), &img_score_item[rand_], &img_score_item[rand_],  FLOORT_SCORE_ITEM, rand_int(20, 30), &you);
+						i--;
 					}
-					i--;
 				}
 
 

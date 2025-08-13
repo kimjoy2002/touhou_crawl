@@ -271,3 +271,26 @@ MON_HOMING,호밍탄,적을 추적하는 호밍탄.\n타겟이 된 적을 향해
 MON_RABIT_GIANT,토끼 거인,거대한 근육질의 몸을 지닌 토끼 거인.\n건강을 챙기면서 영양 섭취와 운동을 꾸준히 하다보니 멋진 몸을 지니게 되었다.\n소문으로는 에이린의 수상한 단백질 음료를 많이 먹은 결과라고도...
 MON_RABIT_ALCHEMIST,토끼 연금술사,방독면과 물약을 주렁주렁 차고 있는 토끼.\n에이린의 밑에서 약품 제조에 대한 지식을 배우고 자신의 재능에 눈을 떴다.\n스승의 영향으로 성격이 매드 사이언티스트에 가깝게 되었다.
 MON_COGWHEEL,톱니바퀴,연금술에 의해 만들어진 톱니바퀴.\n움직이면서 주변 8방향의 적에게 데미지를 준다.
+MON_YAMAINU,들개,테스트
+MON_CONFUSE_MUSHROOM,환각버섯요괴,테스트
+MON_WEAKENING_MUSHROOM,마비버섯요괴,테스트
+MON_MUSHROOM_GIANT,버섯거인,테스트
+MON_GIANT_STAG_BEETLE,거대 사슴벌레,테스트
+MON_GIANT_SLUG,거대 민달팽이,테스트
+MON_GIANT_CENTIPEDE,거대 지네,테스트
+MON_GIANT_CENTIPEDE_BODY,거대 지네,테스트
+MON_SPORE,버섯 포자,테스트
+MON_MAN_EATING_FLOWER,식인 나팔꽃,테스트
+MON_OVERGROWTH_MAGIC_FLOWER,과정상 마법 꽃,테스트
+MON_OVERGROWTH_STEM,과성장 줄기,테스트
+MON_OVERGROWTH_WATERMELON,거대 수박,테스트
+MON_WIZARD,은둔 마법사,테스트
+MON_TREE_GAINT,나무 거인,테스트
+MON_SANGHAI_DOLL,상해 인형,바카쟈네노?
+MON_HOURAI_DOLL,봉래 인형,앨리스의 인형중 하나인 봉래인형\n원거리 레이저를 쏜다.
+MON_FRANCE_DOLL,프랑스 인형,테스트
+MON_LONDON_DOLL,런던 인형,테스트
+MON_NETHERLANDS_DOLL,네덜란드 인형,테스트
+MON_GOLIATH_DOLL,골리아테 인형,테스트
+MON_MARISA,마리사,테스트
+MON_ORRERY_ORB,오렐리즈 구슬,테스트

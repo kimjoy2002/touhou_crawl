@@ -202,6 +202,28 @@ extern textures img_mons_stonetower[];
 extern textures img_mons_security_door;
 
 
+extern textures img_mons_yamainu;
+extern textures img_confuse_mushroom;
+extern textures img_mons_weakening_mushroom;
+extern textures img_mons_mushroom_giant;
+extern textures img_mons_stag_beetle;
+extern textures img_mons_giant_slug;
+extern textures img_mons_giant_centipede;
+extern textures img_mons_giant_centipede_body[];
+extern textures img_mons_spore;
+extern textures img_mons_eating_flower;
+extern textures img_mons_magic_flower;
+extern textures img_mons_magic_flower_stem[];
+extern textures img_mons_watermelon;
+extern textures img_mons_wizard;
+extern textures img_mons_tree_giant;
+extern textures img_mons_france_doll;
+extern textures img_mons_london_doll;
+extern textures img_mons_netherlands_doll;
+extern textures img_mons_goliath_doll;
+extern textures img_mons_orrery_orb[];
+
+
 
 extern textures img_named_rumia;
 extern textures img_named_mistia;
@@ -304,6 +326,7 @@ extern textures img_mons_nareko;
 extern textures img_mons_mike;
 extern textures img_mons_takane;
 extern textures img_mons_sannyo;
+extern textures img_named_marisa;
 
 
 

@@ -5387,3 +5387,9 @@ LOC_SYSTEM_HELP_LONGBLADE,Long blades can slash away incoming projectiles.
 LOC_SYSTEM_HELP_AXE,Axes generate shockwaves to the rear when attacking.
 LOC_SYSTEM_HELP_MACE,Maces can smash enemies, causing Dazed.
 LOC_SYSTEM_HELP_SPEAR,Spears can attack enemies two tiles away.
+LOC_SYSTEM_DUNGEON_FORESTOFMAGIC,Forest of Magic
+LOC_SYSTEM_DUNGEON_DOLLSHOUSE,Doll's House
+LOC_SYSTEM_TILE_STAIR_FORESTOFMAGIC,Stairs to the Forest of Magic
+LOC_SYSTEM_TILE_STAIR_DOLLSHOUSE,Stairs to the Doll's House
+LOC_SYSTEM_ITEM_RUNE_FORESTOFMAGIC,Rune of Magic
+LOC_SYSTEM_ITEM_RUNE_DOLLSHOUSE,Rune of Dolls

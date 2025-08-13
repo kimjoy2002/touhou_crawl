@@ -2099,6 +2099,44 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 					}				
 					break;
 				}
+				else if(current_level>=FORESTOFMAGIC_LEVEL && current_level<=FORESTOFMAGIC_LEVEL+MAX_FORESTOFMAGIC_LEVEL) {
+					switch(randA(6))
+					{
+					case 0:
+						return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_DUNGEON_FORESTOFMAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+					case 1:
+						return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_DUNGEON_FORESTOFMAGIC2), PlaceHolderHelper(monster_info->GetName()->getName()));
+					case 2:
+						return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_DUNGEON_FORESTOFMAGIC3), PlaceHolderHelper(monster_info->GetName()->getName()));
+					case 3:
+						return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_DUNGEON_FORESTOFMAGIC4), PlaceHolderHelper(monster_info->GetName()->getName()));
+					case 4:
+						return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_DUNGEON_FORESTOFMAGIC5), PlaceHolderHelper(monster_info->GetName()->getName()));
+					case 5:
+						return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_DUNGEON_FORESTOFMAGIC6), PlaceHolderHelper(monster_info->GetName()->getName()));
+					case 6:
+						return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_DUNGEON_FORESTOFMAGIC7), PlaceHolderHelper(monster_info->GetName()->getName()));
+					}				
+					break;
+				}
+				else if(current_level>=DOLLSHOUSE_LEVEL && current_level<=DOLLSHOUSE_LEVEL+MAX_DOLLSHOUSE_LEVEL) {
+					switch(randA(5))
+					{
+					case 0:
+						return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_DUNGEON_DOLLSHOUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+					case 1:
+						return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_DUNGEON_DOLLSHOUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+					case 2:
+						return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_DUNGEON_DOLLSHOUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+					case 3:
+						return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_DUNGEON_DOLLSHOUSE4), PlaceHolderHelper(monster_info->GetName()->getName()));
+					case 4:
+						return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_DUNGEON_DOLLSHOUSE5), PlaceHolderHelper(monster_info->GetName()->getName()));
+					case 5:
+						return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PARSI_DUNGEON_DOLLSHOUSE6), PlaceHolderHelper(monster_info->GetName()->getName()));
+					}				
+					break;
+				}
 				else if(current_level>=BAMBOO_LEVEL && current_level<=BAMBOO_LEVEL+MAX_BAMBOO_LEVEL) {					
 					switch(randA(7))
 					{

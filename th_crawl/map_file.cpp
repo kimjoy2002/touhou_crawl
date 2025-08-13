@@ -24,6 +24,8 @@ bool environment::isFirstFloor(int level_)
 		level_ == SCARLET_LEVEL ||
 		level_ == SCARLET_LIBRARY_LEVEL ||
 		level_ == SCARLET_UNDER_LEVEL ||
+		level_ == FORESTOFMAGIC_LEVEL ||
+		level_ == DOLLSHOUSE_LEVEL ||
 		level_ == BAMBOO_LEVEL ||
 		level_ == EIENTEI_LEVEL ||
 		level_ == SUBTERRANEAN_LEVEL ||		
@@ -54,6 +56,8 @@ bool environment::isLastFloor(int level_)
 		level_ == SCARLET_LEVEL_LAST_LEVEL ||
 		level_ == SCARLET_LIBRARY_LEVEL_LAST_LEVEL ||
 		level_ == SCARLET_UNDER_LEVEL_LAST_LEVEL ||
+		level_ == FORESTOFMAGIC_LAST_LEVEL ||
+		level_ == DOLLSHOUSE_LAST_LEVEL ||
 		level_ == BAMBOO_LEVEL_LAST_LEVEL ||
 		level_ == EIENTEI_LEVEL_LAST_LEVEL ||
 		level_ == SUBTERRANEAN_LEVEL_LAST_LEVEL ||
@@ -120,9 +124,16 @@ void initMap()
 	map_list.dungeon_enter[TEMPLE].set(false,0,0,rand_int(2,5));
 	map_list.dungeon_enter[MISTY_LAKE].set(false,0,0,rand_int(7,9));
 	map_list.dungeon_enter[YOUKAI_MOUNTAIN].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(1,2));
-	map_list.dungeon_enter[SCARLET_M].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(3,4));	
+	if(randA(1)) {
+		map_list.dungeon_enter[SCARLET_M].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(3,4));
+		map_list.dungeon_enter[FORESTOFMAGIC].set(false,0,0,-1);
+	} else {
+		map_list.dungeon_enter[FORESTOFMAGIC].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(3,4));
+		map_list.dungeon_enter[SCARLET_M].set(false,0,0,-1);
+	}
 	map_list.dungeon_enter[SCARLET_L].set(false,0,0,SCARLET_LEVEL+rand_int(1,2));	
 	map_list.dungeon_enter[SCARLET_U].set(false,0,0,SCARLET_LEVEL_LAST_LEVEL);
+	map_list.dungeon_enter[DOLLSHOUSE].set(false,0,0,FORESTOFMAGIC_LAST_LEVEL);	
 	map_list.dungeon_enter[BAMBOO].set(false,0,0,rand_int(10,13));
 	map_list.dungeon_enter[SUBTERRANEAN].set(false,0,0,DEPTH_LEVEL+rand_int(1,3));
 
@@ -799,6 +810,11 @@ void map_dummy::patternSet()
 	else if(pattern == 100+HAKUREI_D) //하쿠레이
 	{
 		PixedMap(this, hakurei_pattern(this));
+	}
+	else if(pattern == 100+FORESTOFMAGIC) //마법의 숲
+	{
+		//YoukaiEnterMap(this);		
+		PixedMap(this, forestofmagic_pattern(this));
 	}
 	else if (pattern == 100 + ZIGURRAT) //하쿠레이
 	{

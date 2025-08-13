@@ -170,6 +170,22 @@ void environment::LoadDatas(FILE *fp)
 	LoadData<dungeon_tile_type>(fp, base_floor);
 	LoadData<dungeon_tile_type>(fp, base_wall);
 	LoadData<dungeon_tile>(fp, **dgtile);
+	if(isPrevVersion(loading_version_string, "ver1.202")) {
+		//신규 서브던전을 위한 enum 값 증가
+		for (int x = 0; x < DG_MAX_X; x++)
+		{
+			for (int y = 0; y < DG_MAX_Y; y++)
+			{
+				if(dgtile[x][y].tile >= 70) { //DG_NONE_MOVE
+					dgtile[x][y].tile=(dungeon_tile_type)(30+dgtile[x][y].tile); //100
+				}
+				else if(dgtile[x][y].tile >= 44) { //DG_RETURN_STAIR
+					dgtile[x][y].tile=(dungeon_tile_type)(21+dgtile[x][y].tile); //65
+				}
+			}
+		}
+
+	}
 	LoadData<coord_def>(fp, *stair_up);
 	LoadData<coord_def>(fp, *stair_down);
 	int size_;
@@ -307,6 +323,10 @@ bool environment::MakeMap(bool return_)
 		case SCARLET_LEVEL+MAX_SCARLET_LEVEL:
 		case SCARLET_LIBRARY_LEVEL:
 		case SCARLET_UNDER_LEVEL:
+		case FORESTOFMAGIC_LEVEL:
+		case FORESTOFMAGIC_LEVEL + MAX_FORESTOFMAGIC_LEVEL:
+		case DOLLSHOUSE_LEVEL:
+		case DOLLSHOUSE_LEVEL + MAX_DOLLSHOUSE_LEVEL:
 		case BAMBOO_LEVEL:
 		case EIENTEI_LEVEL:
 		case SUBTERRANEAN_LEVEL:
@@ -489,7 +509,13 @@ bool environment::magicmapping(int x_, int y_)
 		break;				
 	case DG_SCARLET_U_STAIR:
 		map_list.dungeon_enter[SCARLET_U].detected = true;		
-		break;				
+		break;	
+	case DG_FORESTOFMAGIC_STAIR:
+		map_list.dungeon_enter[FORESTOFMAGIC].detected = true;		
+		break;
+	case DG_DOLLSHOUSE_STAIR:
+		map_list.dungeon_enter[DOLLSHOUSE].detected = true;		
+		break;			
 	case DG_BAMBOO_STAIR:
 		map_list.dungeon_enter[BAMBOO].detected = true;		
 		break;				
@@ -1514,6 +1540,14 @@ void environment::enterBgm(boolean first_)
 		StopCurrentBGM("scarlet");
 		PlayBGM("scarlet");
 		break;
+	case FORESTOFMAGIC_LEVEL:
+		StopCurrentBGM("forestofmagic");
+		PlayBGM("forestofmagic");
+		break;
+	case DOLLSHOUSE_LEVEL:
+		StopCurrentBGM("forestofmagic");
+		PlayBGM("forestofmagic");
+		break;
 	case BAMBOO_LEVEL:
 		StopCurrentBGM("bamboo");
 		PlayBGM("bamboo");
@@ -1570,6 +1604,10 @@ void environment::playBgm() {
 		PlayBGM("scarlet");
 	else if (floor >= SCARLET_UNDER_LEVEL && floor <= SCARLET_UNDER_LEVEL + MAX_SCARLET_UNDER_LEVEL)
 		PlayBGM("scarlet");
+	else if (floor >= FORESTOFMAGIC_LEVEL && floor <= FORESTOFMAGIC_LEVEL + MAX_FORESTOFMAGIC_LEVEL)
+		PlayBGM("forestofmagic");
+	else if (floor >= DOLLSHOUSE_LEVEL && floor <= DOLLSHOUSE_LEVEL + MAX_DOLLSHOUSE_LEVEL)
+		PlayBGM("forestofmagic");
 	else if (floor >= BAMBOO_LEVEL && floor <= BAMBOO_LEVEL + MAX_BAMBOO_LEVEL)
 		PlayBGM("bamboo");
 	else if (floor >= EIENTEI_LEVEL && floor <= EIENTEI_LEVEL + MAX_EIENTEI_LEVEL)
@@ -2728,6 +2766,7 @@ void SaveFile(bool test_)
 
 	you.SaveDatas(fp);
 
+	SaveData<int>(fp, MAXLEVEL);
 	for(int i = 0; i < MAXLEVEL; i++)
 	{
 		env[i].SaveDatas(fp);
@@ -2738,7 +2777,7 @@ void SaveFile(bool test_)
 	{
 		SaveData<unique_infor>(fp, (*it));
 	}
-	SaveData<map_infor>(fp,map_list);
+	map_list.SaveDatas(fp);
 	SaveData<wiz_infor>(fp,wiz_list);
 	save_note.SaveDatas(fp);
 
@@ -2778,9 +2817,29 @@ void LoadFile()
 	}
 
 	you.LoadDatas(fp);
-	for(int i = 0; i < MAXLEVEL; i++)
-	{
-		env[i].LoadDatas(fp);	
+
+	if(!isPrevVersion(loading_version_string, "ver1.202")) {
+		int size_=0;
+		LoadData<int>(fp, size_);
+		int i = 0;
+		for(; i < size_ && i < MAXLEVEL; i++)
+		{
+			env[i].LoadDatas(fp);	
+		}
+		for(; i < MAXLEVEL; i++)
+		{
+			env[i].init();
+		}
+	} else {
+		int i = 0;
+		for(; i < 63 && i < MAXLEVEL; i++)
+		{
+			env[i].LoadDatas(fp);	
+		}
+		for(; i < MAXLEVEL; i++)
+		{
+			env[i].init();
+		}
 	}
 	if(isPrevVersion(loading_version_string, "ver1.111")) {
 		Iden_collect_111 temp;
@@ -2799,7 +2858,14 @@ void LoadFile()
 		LoadData<unique_infor>(fp,temp);
 		unique_list.push_back(temp);
 	}
-	LoadData<map_infor>(fp,map_list);
+	if(isPrevVersion(loading_version_string, "ver1.202")) {
+		map_infor_202 temp;
+		LoadData<map_infor_202>(fp,temp);
+		map_infor_202::migrateInfor202toCurrent(temp, map_list);
+	} else {
+		map_list.LoadDatas(fp);
+	}
+
 	LoadData<wiz_infor>(fp,wiz_list);
 	save_note.LoadDatas(fp);
 	
@@ -2846,6 +2912,10 @@ string CurrentLevelString(int level)
 		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET_LIBRARY);
 	else if(level_ >= SCARLET_UNDER_LEVEL && level_ <= SCARLET_UNDER_LEVEL+MAX_SCARLET_UNDER_LEVEL)
 		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET_UNDER);
+	else if(level_ >= FORESTOFMAGIC_LEVEL && level_ <= FORESTOFMAGIC_LEVEL+MAX_FORESTOFMAGIC_LEVEL)
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_FORESTOFMAGIC) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(level_+1-FORESTOFMAGIC_LEVEL)));
+	else if(level_ >= DOLLSHOUSE_LEVEL && level_ <= DOLLSHOUSE_LEVEL+MAX_DOLLSHOUSE_LEVEL)
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DOLLSHOUSE) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(level_+1-DOLLSHOUSE_LEVEL)));
 	else if(level_ >= BAMBOO_LEVEL && level_ <= BAMBOO_LEVEL+MAX_BAMBOO_LEVEL)
 		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_BAMBOO);
 	else if(level_ >= EIENTEI_LEVEL && level_ <= EIENTEI_LEVEL+MAX_EIENTEI_LEVEL)

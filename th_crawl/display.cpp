@@ -1757,8 +1757,11 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	ss.str("");
 	ss.clear();
 	ss << LocalzationManager::locString(LOC_SYSTEM_ITEM_RUNE_RUNE) << ": ";
-	for(int i=0;i<RUNE_HAKUREI_ORB;i++)
-	{		
+	for(int i = 0; i<RUNE_MAX;i++)
+	{
+		if(i == RUNE_HAKUREI_ORB) {
+			continue;
+		}
 		if(you.rune[i])
 		{
 			if(i!=0)

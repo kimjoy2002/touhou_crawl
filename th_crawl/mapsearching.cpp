@@ -20,7 +20,9 @@ int seqence = 0;
 /*
 ㅏ일반던전
 ㅣㅏ안개의호수
-ㅣㅣㅏ홍마관
+ㅣㅣㅏ마법의숲(혹은 홍마관)
+ㅣㅣㅣㄴ인형의집
+ㅣㅣㅏ홍마관(혹은 마법의 숲)
 ㅣㅣㅣㅏ도서관
 ㅣㅣㅣㄴ지하실
 ㅣㅣㄴ요괴의산
@@ -42,6 +44,8 @@ MapNode mapNode_library(LOC_SYSTEM_DUNGEON_SCARLET_LIBRARY, SCARLET_LIBRARY_LEVE
 MapNode mapNode_flan(LOC_SYSTEM_DUNGEON_SCARLET_UNDER, SCARLET_UNDER_LEVEL, MAX_SCARLET_UNDER_LEVEL);
 MapNode mapNode_moun(LOC_SYSTEM_DUNGEON_YOUKAI_MOUNTAIN, YOUKAI_MOUNTAIN_LEVEL, MAX_YOUKAI_MOUNTAIN_LEVEL);
 MapNode mapNode_yukku(LOC_SYSTEM_DUNGEON_YUKKURI, YUKKURI_LEVEL, MAX_YUKKURI_LEVEL);
+MapNode mapNode_forestofmagic(LOC_SYSTEM_DUNGEON_FORESTOFMAGIC, FORESTOFMAGIC_LEVEL, MAX_FORESTOFMAGIC_LEVEL); 
+MapNode mapNode_dollshouse(LOC_SYSTEM_DUNGEON_DOLLSHOUSE, DOLLSHOUSE_LEVEL, MAX_DOLLSHOUSE_LEVEL);
 MapNode mapNode_bamboo(LOC_SYSTEM_DUNGEON_BAMBOO, BAMBOO_LEVEL, MAX_BAMBOO_LEVEL);
 MapNode mapNode_eien(LOC_SYSTEM_DUNGEON_EINENTEI, EIENTEI_LEVEL, MAX_EIENTEI_LEVEL);
 MapNode mapNode_depth(LOC_SYSTEM_DUNGEON_DEPTH, DEPTH_LEVEL, MAX_DEPTH_LEVEL);
@@ -84,6 +88,8 @@ void MapNode::initMapNode()
 	mapNode_flan = MapNode(LOC_SYSTEM_DUNGEON_SCARLET_UNDER, SCARLET_UNDER_LEVEL, MAX_SCARLET_UNDER_LEVEL);
 	mapNode_moun = MapNode(LOC_SYSTEM_DUNGEON_YOUKAI_MOUNTAIN, YOUKAI_MOUNTAIN_LEVEL, MAX_YOUKAI_MOUNTAIN_LEVEL);
 	mapNode_yukku = MapNode(LOC_SYSTEM_DUNGEON_YUKKURI, YUKKURI_LEVEL, MAX_YUKKURI_LEVEL);
+	mapNode_forestofmagic = MapNode(LOC_SYSTEM_DUNGEON_FORESTOFMAGIC, FORESTOFMAGIC_LEVEL, MAX_FORESTOFMAGIC_LEVEL);
+	mapNode_dollshouse = MapNode(LOC_SYSTEM_DUNGEON_DOLLSHOUSE, DOLLSHOUSE_LEVEL, MAX_DOLLSHOUSE_LEVEL);
 	mapNode_bamboo = MapNode(LOC_SYSTEM_DUNGEON_BAMBOO, BAMBOO_LEVEL, MAX_BAMBOO_LEVEL);
 	mapNode_eien = MapNode(LOC_SYSTEM_DUNGEON_EINENTEI, EIENTEI_LEVEL, MAX_EIENTEI_LEVEL);
 	mapNode_depth = MapNode(LOC_SYSTEM_DUNGEON_DEPTH, DEPTH_LEVEL, MAX_DEPTH_LEVEL);
@@ -105,6 +111,7 @@ void MapNode::initMapNode()
 	mapNode_misty.addNode(&mapNode_normal, -1); //돌아옴
 	mapNode_misty.addNode(&mapNode_scarlet, SCARLET_M);
 	mapNode_misty.addNode(&mapNode_moun, YOUKAI_MOUNTAIN);
+	mapNode_misty.addNode(&mapNode_forestofmagic, FORESTOFMAGIC);
 
 	mapNode_scarlet.addNode(&mapNode_misty, -1); //돌아옴
 	mapNode_scarlet.addNode(&mapNode_library, SCARLET_L);
@@ -118,6 +125,11 @@ void MapNode::initMapNode()
 	mapNode_moun.addNode(&mapNode_yukku, YUKKURI_D);
 
 	mapNode_yukku.addNode(&mapNode_moun, -1); //돌아옴
+
+	mapNode_forestofmagic.addNode(&mapNode_misty, -1); //돌아옴
+	mapNode_forestofmagic.addNode(&mapNode_library, DOLLSHOUSE);
+
+	mapNode_dollshouse.addNode(&mapNode_forestofmagic, -1); //돌아옴
 
 	//mapNode_bamboo.addNode(&mapNode_normal);
 	mapNode_bamboo.addStair(&mapNode_normal, -1);//일방동행
@@ -172,6 +184,10 @@ MapNode* MapNode::getNode(int level_)
 		return &mapNode_library;
 	else if (level_ >= SCARLET_UNDER_LEVEL && level_ <= SCARLET_UNDER_LEVEL + MAX_SCARLET_UNDER_LEVEL)
 		return &mapNode_flan;
+	else if (level_ >= FORESTOFMAGIC_LEVEL && level_ <= FORESTOFMAGIC_LEVEL + MAX_FORESTOFMAGIC_LEVEL)
+		return &mapNode_forestofmagic;
+	else if (level_ >= DOLLSHOUSE_LEVEL && level_ <= DOLLSHOUSE_LEVEL + MAX_DOLLSHOUSE_LEVEL)
+		return &mapNode_dollshouse;
 	else if (level_ >= BAMBOO_LEVEL && level_ <= BAMBOO_LEVEL + MAX_BAMBOO_LEVEL)
 		return &mapNode_bamboo;
 	else if (level_ >= EIENTEI_LEVEL && level_ <= EIENTEI_LEVEL + MAX_EIENTEI_LEVEL)

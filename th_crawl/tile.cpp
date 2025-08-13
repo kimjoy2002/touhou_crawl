@@ -69,6 +69,8 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_SCARLET_STAIR:					
 	case DG_SCARLET_L_STAIR:
 	case DG_SCARLET_U_STAIR:
+	case DG_FORESTOFMAGIC_STAIR:
+	case DG_DOLLSHOUSE_STAIR:
 	case DG_BAMBOO_STAIR:
 	case DG_EIENTEI_STAIR:
 	case DG_SUBTERRANEAN_STAIR:

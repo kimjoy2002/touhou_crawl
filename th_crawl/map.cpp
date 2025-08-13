@@ -8,6 +8,7 @@
 
 #include "map.h"
 #include "throw.h"
+#include "save.h"
 #include "enum.h"
 #include "mon_infor.h"
 #include "event.h"
@@ -15,6 +16,93 @@
 #include "evoke.h"
 #include "zigurrat.h"
 
+
+
+void map_infor::SaveDatas(FILE *fp) {
+	SaveData<int>(fp, MAX_SUB_DUNGEON);
+	for(int i = 0; i < MAX_SUB_DUNGEON; i++) {
+		SaveData<pos_infor>(fp, dungeon_enter[i]);
+	}
+	SaveData<int>(fp, GT_LAST);
+	for(int i = 0; i < GT_LAST; i++) {
+		SaveData<pos_infor>(fp, temple[i]);
+	}
+	SaveData<int>(fp, tutorial);
+	SaveData<int>(fp, god_num);
+	SaveData<int>(fp, bamboo_count);
+	SaveData<int>(fp, bamboo_rate);
+	SaveData<bool>(fp, bamboo_tewi);
+	SaveData<unsigned int>(fp, random_number);
+}
+
+
+void map_infor::LoadDatas(FILE *fp) {
+	
+	{
+		int size_;
+		LoadData<int>(fp, size_);
+		int i = 0;
+		for(; i < size_; i++) {
+			if(i < MAX_SUB_DUNGEON) {
+				LoadData<pos_infor>(fp, dungeon_enter[i]);
+			} else {
+				pos_infor temp;
+				LoadData<pos_infor>(fp,temp);
+			}
+		}
+		for(; i < MAX_SUB_DUNGEON; i++) {
+			dungeon_enter[i] = pos_infor();
+		}
+	}
+	{
+		int size_;
+		LoadData<int>(fp, size_);
+		int i = 0;
+		for(; i < size_; i++) {
+			if(i < GT_LAST) {
+				LoadData<pos_infor>(fp, temple[i]);
+			} else {
+				pos_infor temp;
+				LoadData<pos_infor>(fp,temp);
+			}
+		}
+		for(; i < GT_LAST; i++) {
+			temple[i] = pos_infor();
+		}
+	}
+	LoadData<int>(fp, tutorial);
+	LoadData<int>(fp, god_num);
+	LoadData<int>(fp, bamboo_count);
+	LoadData<int>(fp, bamboo_rate);
+	LoadData<bool>(fp, bamboo_tewi);
+	LoadData<unsigned int>(fp, random_number);
+}
+
+void map_infor_202::migrateInfor202toCurrent(const map_infor_202& old_data, map_infor& new_data)
+{
+	for(int i = 0; i < MAX_SUB_DUNGEON; i++) {
+		if(i < 14) {
+			new_data.dungeon_enter[i] = old_data.dungeon_enter[i];
+		} else {
+			new_data.dungeon_enter[i] = pos_infor();
+		}
+	}
+	
+	for(int i = 0; i < GT_LAST; i++) {
+		if(i < 23) {
+			new_data.temple[i] = old_data.temple[i];
+		} else {
+			new_data.temple[i] = pos_infor();
+		}
+	}
+
+	new_data.tutorial = old_data.tutorial;
+	new_data.god_num = old_data.god_num;
+	new_data.bamboo_count = old_data.bamboo_count;
+	new_data.bamboo_rate = old_data.bamboo_rate;
+	new_data.bamboo_tewi = old_data.bamboo_tewi;
+	new_data.random_number = old_data.random_number;
+}
 
 
 

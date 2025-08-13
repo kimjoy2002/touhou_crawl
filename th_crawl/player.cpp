@@ -4850,6 +4850,8 @@ interupt_type players::resetLOS(bool speak_)
 						case DG_SCARLET_STAIR:							
 						case DG_SCARLET_L_STAIR:
 						case DG_SCARLET_U_STAIR:
+						case DG_FORESTOFMAGIC_STAIR:
+						case DG_DOLLSHOUSE_STAIR:
 						case DG_BAMBOO_STAIR:
 						case DG_EIENTEI_STAIR:
 						case DG_SUBTERRANEAN_STAIR:
@@ -4857,7 +4859,7 @@ interupt_type players::resetLOS(bool speak_)
 						case DG_DEPTH_STAIR:
 						case DG_DREAM_STAIR:
 						case DG_MOON_STAIR:		
-						case DG_PANDEMONIUM_STAIR:	
+						case DG_PANDEMONIUM_STAIR:
 						case DG_HAKUREI_STAIR:
 						case DG_TEMPLE_JOON_AND_SION:
 						case DG_TEMPLE_BYAKUREN:
@@ -4902,10 +4904,16 @@ interupt_type players::resetLOS(bool speak_)
 								break;				
 							case DG_SCARLET_U_STAIR:
 								map_list.dungeon_enter[SCARLET_U].detected = true;		
-								break;				
+								break;
+							case DG_FORESTOFMAGIC_STAIR:
+								map_list.dungeon_enter[FORESTOFMAGIC].detected = true;		
+								break;
+							case DG_DOLLSHOUSE_STAIR:
+								map_list.dungeon_enter[DOLLSHOUSE].detected = true;		
+								break;
 							case DG_BAMBOO_STAIR:
 								map_list.dungeon_enter[BAMBOO].detected = true;		
-								break;				
+								break;
 							case DG_EIENTEI_STAIR:	
 								break;				
 							case DG_SUBTERRANEAN_STAIR:
@@ -6803,8 +6811,11 @@ int players::getThrowLength() {
 int players::haveGoal()
 {
 	int goal_ = 0;
-	for(int i=0;i<RUNE_HAKUREI_ORB;i++)
+	for(int i = 0; i<RUNE_MAX;i++)
 	{
+		if(i == RUNE_HAKUREI_ORB) {
+			continue;
+		}
 
 		if(rune[i]>0)
 			goal_++;

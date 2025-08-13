@@ -24,6 +24,12 @@
     "loop_end": 298695
   },
   {
+    "name": "forestofmagic",
+    "path": "sound\\bgm\\forestofmagic.mp3",
+    "loop_start": 7488,
+    "loop_end": 188059
+  },
+  {
     "name": "bamboo",
     "path": "sound\\bgm\\bamboo.mp3",
     "loop_start": 502,

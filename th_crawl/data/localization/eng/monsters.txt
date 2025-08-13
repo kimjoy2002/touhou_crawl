@@ -271,3 +271,26 @@ MON_HOMING,Homing Shot,A homing projectile that chases a target.\nFlies toward i
 MON_RABIT_GIANT,Giant Rabbit,A giant rabbit with a muscular physique.\nThrough consistent nutrition and training, it developed an impressive body.\nRumor has it that Eirin's suspicious protein drinks may have helped...
 MON_RABIT_ALCHEMIST,Rabbit Alchemist,A rabbit wearing a gas mask and loaded with potions.\nStudied pharmaceutical alchemy under Eirin and discovered its own talent.\nDue to its master’s influence, it now acts more like a mad scientist.
 MON_COGWHEEL,Cogwheel,A gear created through alchemy.\nMoves around and deals damage to enemies in all 8 surrounding directions.
+MON_YAMAINU,Wild Dog,TODO
+MON_CONFUSE_MUSHROOM,Hallucinogenic Mushroom Youkai,TODO
+MON_WEAKENING_MUSHROOM,Paralytic Mushroom Youkai,TODO
+MON_MUSHROOM_GIANT,Mushroom Giant,TODO
+MON_GIANT_STAG_BEETLE,Giant Stag Beetle,TODO
+MON_GIANT_SLUG,Giant Slug,TODO
+MON_GIANT_CENTIPEDE,Giant Centipede,TODO
+MON_GIANT_CENTIPEDE_BODY,Giant Centipede,TODO
+MON_SPORE,Mushroom Spore,TODO
+MON_MAN_EATING_FLOWER,Maneating Morning Glory,TODO
+MON_OVERGROWTH_MAGIC_FLOWER,Overgrown Magic Flower,TODO
+MON_OVERGROWTH_STEM,Overgrown Stem,TODO
+MON_OVERGROWTH_WATERMELON,Giant Watermelon,TODO
+MON_WIZARD,Reclusive Wizard,TODO
+MON_TREE_GAINT,Tree Giant,TODO
+MON_SANGHAI_DOLL,Shanghai Doll,Bakaja-né no?
+MON_HOURAI_DOLL,Hourai Doll,One of Alice’s dolls, the Hourai type.\nCan firing long-range lasers.
+MON_FRANCE_DOLL,France Doll,TODO
+MON_LONDON_DOLL,London Doll,TODO
+MON_NETHERLANDS_DOLL,Netherlands Doll,TODO
+MON_GOLIATH_DOLL,Goliath Doll,TODO
+MON_MARISA,Marisa,TODO
+MON_ORRERY_ORB,Orrery Orb,TODO

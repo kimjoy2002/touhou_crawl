@@ -847,8 +847,11 @@ bool Dump(int type, wstring *filename_)
 	
 	ss << "\n" << LocalzationManager::locString(LOC_SYSTEM_ITEM_RUNE_RUNE) << ":";
 	int first_rune_ = 0;
-	for(int i=0;i<RUNE_HAKUREI_ORB;i++)
-	{		
+	for(int i = 0; i<RUNE_MAX;i++)
+	{
+		if(i == RUNE_HAKUREI_ORB) {
+			continue;
+		}
 		if(you.rune[i])
 		{
 			if(first_rune_ !=0)

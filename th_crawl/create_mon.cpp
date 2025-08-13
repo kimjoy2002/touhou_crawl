@@ -87,7 +87,7 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 36,  9,  14,  3, 3}, //키메이마루
 
 	{ 37,  10,  14,  5, 3}, //레밀리아 윳쿠
-	{ 53,  10,  14,  5, 3}, //매	
+	{ 53,  10,  14,  5, 3}, //매
 	{ 54,  10,  14,  5, 3}, //호랑이
 
 	
@@ -196,12 +196,35 @@ mon_group normal_group[] = //일반몹 그룹
 	
 	{ 47,  SCARLET_LIBRARY_LEVEL,  SCARLET_LIBRARY_LEVEL, 5,  3}, //도서관용 마법책
 	
+	//FORESTOFMAGIC_LEVEL
+	{ 111,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+2, 15,  1}, //야마이누
+	{ 94,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+1, 15,  1}, //버섯요괴
+	{ 112,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+1, 10,  1}, //혼란버섯요괴
+	{ 113,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+2, 5,  3}, //마비버섯요괴
+	{ 103,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+3, 1,  4}, //츠치노코
+	{ 114,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+3, 7,  1}, //버섯들
+	{ 116,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+3, 5,  3}, //사슴벌레
+	{ 120,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+3, 2,  3}, //식인꽃
+	
+	{ 117, FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 3,  3}, //민달팽이
+	{ 54, FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 3,  3}, //호랑이
+	{ 119,  FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 5,  3}, //포자
+	{ 120,  FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 5,  3}, //식인꽃
+	
+	{ 121,  FORESTOFMAGIC_LEVEL+2,  FORESTOFMAGIC_LEVEL+3, 5,  1}, //은둔 마법사
+
+	{ 122,  FORESTOFMAGIC_LEVEL+3,  FORESTOFMAGIC_LEVEL+3, 5,  5}, //나무 거인
+	
+	//인형의집
+	{ 123, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 10,  1}, //상해인형
+	{ 124, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 10, 1}, //봉래인형
+	{ 125, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 5, 3}, //프랑스인형
+	{ 126, DOLLSHOUSE_LEVEL+1,  DOLLSHOUSE_LAST_LEVEL, 5, 3}, //런던인형
+	{ 127, DOLLSHOUSE_LEVEL+1,  DOLLSHOUSE_LAST_LEVEL, 3, 4}, //네덜란드인형
 
 	//영원정
 	{ 95,  EIENTEI_LEVEL,  EIENTEI_LEVEL, 10,  3}, //토끼들
 	{ 106, EIENTEI_LEVEL,  EIENTEI_LEVEL, 2,  3}, //토끼 거인
-
-
 
 	//윳쿠리굴
 	{ 2,  YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL-1, 2,  1}, //레이무윳쿠리
@@ -1050,6 +1073,66 @@ void create_id_to_mon(int id, int level, int strong)
 	case 110:
 		for (int rand_ = rand_int(3, 5), i = 0; i<rand_; i++)
 			index.push_back(pair<monster_index, int>(MON_OTTER_SPIRIT, strong));
+		break;
+
+	case 111:
+		for (int rand_ = rand_int(2, 3), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_YAMAINU, strong));
+		break;
+	case 112:
+		index.push_back(pair<monster_index, int>(MON_CONFUSE_MUSHROOM, strong));
+		break;
+	case 113:
+		index.push_back(pair<monster_index, int>(MON_WEAKENING_MUSHROOM, strong));
+		break;
+	case 114:
+		for (int rand_ = rand_int(1, 2), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_MUSHROOM, strong));
+		index.push_back(pair<monster_index, int>(MON_CONFUSE_MUSHROOM, strong));
+		for (int rand_ = rand_int(0, 1), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_WEAKENING_MUSHROOM, strong));
+		break;
+	case 115:
+		index.push_back(pair<monster_index, int>(MON_MUSHROOM_GIANT, strong));
+		break;
+	case 116:
+		index.push_back(pair<monster_index, int>(MON_GIANT_STAG_BEETLE, strong));
+		break;
+	case 117:
+		index.push_back(pair<monster_index, int>(MON_GIANT_SLUG, strong));
+		break;
+	case 118:
+		index.push_back(pair<monster_index, int>(MON_GIANT_CENTIPEDE, strong));
+		break;
+	case 119:
+		index.push_back(pair<monster_index, int>(MON_SPORE, strong));
+		break;
+	case 120:
+		index.push_back(pair<monster_index, int>(MON_MAN_EATING_FLOWER, strong));
+		break;
+	case 121:
+		index.push_back(pair<monster_index, int>(MON_WIZARD, strong));
+		break;
+	case 122:
+		index.push_back(pair<monster_index, int>(MON_TREE_GIANT, strong));
+		break;
+	case 123:
+		index.push_back(pair<monster_index, int>(MON_SANGHAI_DOLL, strong));
+		break;
+	case 124:
+		index.push_back(pair<monster_index, int>(MON_HOURAI_DOLL, strong));
+		break;
+	case 125:
+		index.push_back(pair<monster_index, int>(MON_FRANCE_DOLL, strong));
+		break;
+	case 126:
+		index.push_back(pair<monster_index, int>(MON_LONDON_DOLL, strong));
+		break;
+	case 127:
+		index.push_back(pair<monster_index, int>(MON_NETHERLANDS_DOLL, strong));
+		break;
+	case 128:
+		index.push_back(pair<monster_index, int>(MON_GOLIATH_DOLL, strong));
 		break;
 	}
 

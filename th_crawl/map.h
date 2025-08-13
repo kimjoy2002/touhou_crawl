@@ -28,6 +28,8 @@ enum sub_dungeon
 	PANDEMONIUM,
 	HAKUREI_D,
 	ZIGURRAT,
+	FORESTOFMAGIC,
+	DOLLSHOUSE,
 	MAX_SUB_DUNGEON
 };
 enum valut_pattern
@@ -67,6 +69,26 @@ public:
 	int bamboo_rate;
 	bool bamboo_tewi;
 	unsigned int random_number;
+
+	void SaveDatas(FILE *fp);
+	void LoadDatas(FILE *fp);
+};
+
+
+
+class map_infor_202 //202버전을 위한 임시..
+{
+public:
+	pos_infor dungeon_enter[14];
+	pos_infor temple[23];
+	int tutorial;
+	int god_num;
+	int bamboo_count;
+	int bamboo_rate;
+	bool bamboo_tewi;
+	unsigned int random_number;
+
+	static void migrateInfor202toCurrent(const map_infor_202& old_data, map_infor& new_data);
 };
 
 
@@ -153,6 +175,7 @@ const char* temple_pattern(map_dummy* map);
 const char* misty_lake_pattern(map_dummy* map);
 const char* youkai_mountain_pattern(map_dummy* map);
 const char* scarlet_pattern(map_dummy* map);
+const char* forestofmagic_pattern(map_dummy* map);
 
 const char* scarlet_library_pattern(map_dummy* map);
 const char* scarlet_under_pattern(map_dummy* map);

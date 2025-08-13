@@ -715,7 +715,7 @@ void wiz_mode()
 			deque<monster*> dq;
 			dungeon_level next_ = TEMPLE_LEVEL;
 
-			pair<char,LOCALIZATION_ENUM_KEY> keylist[17] = {
+			pair<char,LOCALIZATION_ENUM_KEY> keylist[19] = {
 				make_pair('d',LOC_SYSTEM_DUNGEON),
 				make_pair('t',LOC_SYSTEM_DUNGEON_TEMPLE),
 				make_pair('l',LOC_SYSTEM_DUNGEON_MISTYLAKE),
@@ -723,6 +723,8 @@ void wiz_mode()
 				make_pair('s',LOC_SYSTEM_DUNGEON_SCARLET),
 				make_pair('b',LOC_SYSTEM_DUNGEON_SCARLET_LIBRARY),
 				make_pair('u',LOC_SYSTEM_DUNGEON_SCARLET_UNDER),
+				make_pair('f',LOC_SYSTEM_DUNGEON_FORESTOFMAGIC),
+				make_pair('O',LOC_SYSTEM_DUNGEON_DOLLSHOUSE),
 				make_pair('a',LOC_SYSTEM_DUNGEON_BAMBOO),
 				make_pair('e',LOC_SYSTEM_DUNGEON_EINENTEI),
 				make_pair('y',LOC_SYSTEM_DUNGEON_YUKKURI),
@@ -736,10 +738,10 @@ void wiz_mode()
 			};
 			enterlog();
 			std::vector<int> listkey;
-			for(int i = 0; i < 17; i++) {
+			for(int i = 0; i < 19; i++) {
 				ostringstream ss;
 				ss << string(1,keylist[i].first) << "-" << LocalzationManager::locString(keylist[i].second) << " ";
-				printlog(ss.str(), (i==16?true:false), false, false, CL_help, keylist[i].first);
+				printlog(ss.str(), (i==18?true:false), false, false, CL_help, keylist[i].first);
 				listkey.push_back(keylist[i].first);
 			}
 			listkey.push_back(VK_ESCAPE);
@@ -815,6 +817,13 @@ void wiz_mode()
 			case 'U':
 				next_ = SCARLET_UNDER_LEVEL;
 				break;
+			case 'f':
+			case 'F':
+				next_ = FORESTOFMAGIC_LEVEL;
+				break;
+			case 'O':
+				next_ = DOLLSHOUSE_LEVEL;
+				break;
 			case 'a':
 			case 'A':
 				next_ = BAMBOO_LEVEL;
@@ -846,7 +855,6 @@ void wiz_mode()
 				next_ = DREAM_LEVEL;
 				break;
 			case 'o':
-			case 'O':
 				next_ = MOON_LEVEL;
 				break;
 			case 'k':

@@ -4650,6 +4650,12 @@ const char* scarlet_under_pattern(map_dummy* map)
 	map->sp_tile_list.push_back(DG_SCARLET_U_STAIR);
 	return under_enter_pattern(map);
 }
+const char* forestofmagic_pattern(map_dummy* map)
+{
+	map->sp_tile_list.clear();
+	map->sp_tile_list.push_back(DG_FORESTOFMAGIC_STAIR);
+	return common_enter_pattern(map);
+}
 const char* bamboo_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();

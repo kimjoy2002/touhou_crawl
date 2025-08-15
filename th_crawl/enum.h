@@ -790,7 +790,8 @@ enum damage_reason
 	DR_JUNKO,
 	DR_SLEEP,
 	DR_GHOST,
-	DR_FIRE
+	DR_FIRE,
+	DR_SPREAD
 };
 
 

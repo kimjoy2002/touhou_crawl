@@ -139,8 +139,8 @@ void initMap()
 
 
 
-	map_list.dungeon_enter[YUKKURI_D].set(false,0,0,YOUKAI_MOUNTAIN_LAST_LEVEL);	
-	map_list.dungeon_enter[DEPTH].set(false,0,0,MAX_DUNGEUN_LEVEL);	
+	map_list.dungeon_enter[YUKKURI_D].set(false,0,0,YOUKAI_MOUNTAIN_LAST_LEVEL);
+	map_list.dungeon_enter[DEPTH].set(false,0,0,MAX_DUNGEUN_LEVEL);
 	map_list.dungeon_enter[DREAM_D].set(false,0,0,DEPTH_LEVEL+rand_int(1,3));
 	//map_list.dungeon_enter[MOON_D].set(false,0,0,rand_int(10,13));
 	map_list.dungeon_enter[PANDEMONIUM].set(false,0,0,DEPTH_LEVEL+rand_int(1,3));

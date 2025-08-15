@@ -354,6 +354,10 @@ void map_algorithms(int num)
 		{
 			map_algorithms_under(num,DG_FLOOR,DG_RED_WALL);
 		}
+		else if(num == FORESTOFMAGIC_LEVEL)
+		{
+			map_algorithms03(70,3,4,12, num,DG_GRASS,DG_STONE_WALL);
+		}
 		else if(num == BAMBOO_LEVEL)
 		{
 			map_algorithms_bamboo(num,DG_GRASS,DG_BAMBOO_WALL);

@@ -1128,13 +1128,13 @@ const mon_infor mondata[] = {
 		{30,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,0,20,'S'},
 		
-	{MON_GIANT_CENTIPEDE,13,1700,name_infor(MON_GIANT_CENTIPEDE),&img_mons_giant_centipede,160,5,10,
-		{35,0,0},{ATT_M_POISON,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		 M_FLAG_ANIMAL | M_FLAG_WAKE | M_FLAG_CAN_SEE_INVI | M_FLAG_NONE_STAIR,2,1,8,'C'},
+	{MON_GIANT_CENTIPEDE,13,1700,name_infor(MON_GIANT_CENTIPEDE),&img_mons_giant_centipede,190,5,10,
+		{30,0,0},{ATT_M_POISON,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		 M_FLAG_ANIMAL | M_FLAG_IMMOBILE | M_FLAG_WAKE | M_FLAG_CAN_SEE_INVI | M_FLAG_NONE_STAIR,2,1,8,'C'},
 		
-	{MON_GIANT_CENTIPEDE_BODY,13,0,name_infor(MON_GIANT_CENTIPEDE_BODY),&img_mons_giant_centipede_body[0],160,5,10,
+	{MON_GIANT_CENTIPEDE_BODY,13,0,name_infor(MON_GIANT_CENTIPEDE_BODY),&img_mons_giant_centipede_body[0],190,20,0,
 		{0,0,0},{ATT_NONE,ATT_NONE,ATT_NONE},{name_infor(),name_infor(),name_infor()},
-		M_FLAG_NO_ATK | M_FLAG_CAN_SEE_INVI | M_FLAG_NONE_STAIR | M_FLAG_ANIMAL | M_FLAG_CANT_NETURAL,2,1,8,'%'},
+		M_FLAG_NO_ATK  | M_FLAG_IMMOBILE | M_FLAG_WAKE | M_FLAG_CAN_SEE_INVI | M_FLAG_NONE_MOVE | M_FLAG_NONE_STAIR | M_FLAG_ANIMAL | M_FLAG_CANT_NETURAL,99,1,8,'%'},
 		
 	{MON_SPORE,6,100,name_infor(MON_SPORE),&img_mons_spore,30,0,15,
 		{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},

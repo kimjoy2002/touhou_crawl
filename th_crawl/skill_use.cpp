@@ -870,10 +870,14 @@ bool skill_yuugi_german(int pow, bool short_, unit* order, coord_def target)
 		if(you.isEnemyMonster(mon_))
 		{
 			coord_def offset_ = you.position+you.position - mon_->position;
+			if(mon_->isImmobile()) {
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX_IMMOBILE),true,false,false,CL_normal);
+				return false;
+			}
 			if(!env[current_level].isMove(offset_))
 			{
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX_NOT_ENOUGH_TILE),true,false,false,CL_normal);
-				return false;	
+				return false;
 			}
 			if(env[current_level].isMonsterPos(offset_.x,offset_.y,order))
 			{
@@ -905,6 +909,10 @@ bool skill_yuugi_throw(int power, bool short_, unit* order, coord_def target)
 		bool no_cost_ = (you.s_catch && mon_->s_catch);
 		if(you.isEnemyMonster(mon_))
 		{
+			if(mon_->isImmobile()) {
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_THROW_IMMOBILE),true,false,false,CL_normal);
+				return false;
+			}
 			int throw_length_ = 7;
 			SetSpellSight(throw_length_, 1);
 			beam_iterator beam(you.position,you.position);
@@ -1553,9 +1561,14 @@ bool skill_swako_water_gun(int power, bool short_, unit* order, coord_def target
 bool skill_swako_tongue(int power, bool short_, unit* order, coord_def target)
 {
 	if(!order->isplayer())
-		return false;	
+		return false;
 	if(unit* hit_mon = DebufBeam(SKL_SWAKO_TOUGUE, order, target))
 	{
+		if(hit_mon->isImmobile()) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_TOUGUE_IMMOBILE),true,false,false,CL_normal);
+			return false;
+		}
+
 		beam_iterator beam(order->position,target);
 		if(CheckThrowPath(order->position,target,beam))
 		{
@@ -2555,7 +2568,12 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 bool skill_seija_1(int power, bool short_, unit* order, coord_def target)
 {
 	if(unit* hit_mon = env[current_level].isMonsterPos(target.x,target.y,order))
-	{	
+	{
+		if(hit_mon->isImmobile()) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP_IMMOBILE),true,false,false,CL_normal);
+			return false;
+		}
+
 		hit_mon->SetXY(you.position.x,you.position.y);
 		you.SetXY(target.x,target.y);
 
@@ -2989,6 +3007,10 @@ bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].dgtile[target.x][target.y].isOpenDoor() || env[current_level].dgtile[target.x][target.y].isCloseDoor()) {
 
 			if (unit_) {
+				if(unit_->isImmobile()) {
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_LOCKED_DOOR_IMMOBILE),true,false,false,CL_normal);
+					return false;
+				}
 
 				rand_rect_iterator rit(unit_->position, 1, 1, true);
 				while (!rit.end()) {

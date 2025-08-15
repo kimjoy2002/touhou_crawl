@@ -477,7 +477,7 @@ public:
 	//hunger_type GetHunger();
 	int HpRecoverDelay(int delay_ = 0);
 	interupt_type HpRecover(int delay_);
-	int HpUpDown(int value_,damage_reason reason, unit *order_ = nullptr);
+	int HpUpDown(int value_,damage_reason reason, unit *order_ = nullptr, bool non_dead = false);
 	int MpRecoverDelay(int delay_ = 0,bool set_ = false);
 	interupt_type MpRecover(int delay_);
 	int MpUpDown(int value_);

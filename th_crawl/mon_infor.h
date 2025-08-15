@@ -72,7 +72,8 @@ enum monster_flag : uint64_t
 	M_FLAG_SPEAR_ATTACK = 1ull << 33, //한칸 멀리서 공격
 	M_FLAG_SAVE_PLAYER = 1ull << 34, //주인을 지킨다.
 	M_FLAG_MISSLE = 1ull << 35, //미사일이라 공격할 수 없고, 밀착하면 사라져버림
-	M_FLAG_AUTO_TARGETING = 1ull << 36 // 자동으로 주변 적을 타겟팅한다.
+	M_FLAG_AUTO_TARGETING = 1ull << 36, // 자동으로 주변 적을 타겟팅한다.
+	M_FLAG_IMMOBILE = 1ull << 37 //강제로 이동시킬 수 없음
 };
 
 

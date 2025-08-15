@@ -41,7 +41,7 @@ coord_def inttodirec(int direc, int x_=0, int y_=0);
 bool evoke_bomb(int power, bool short_, unit* order, coord_def target);
 
 monster::monster() 
-: map_id(-1), id(0), id2(0), level(1), exper(0), name(LOC_SYSTEM_NONE_STRING), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), first_position(0,0), prev_sight(false),
+: map_id(-1), id(0), id2(0), parent_part_id(-1), level(1), exper(0), name(LOC_SYSTEM_NONE_STRING), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), prev_position_for_monster(0,0), first_position(0,0), prev_sight(false),
 ac(0), ev(0), flag(0), resist(0), sense(0), dream(false), s_poison(0), poison_reason(PRT_NEUTRAL), s_tele(0), s_might(0), s_clever(0), s_haste(0), s_confuse(0), s_slow(0), s_frozen(0), s_ally(0),
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
@@ -67,7 +67,8 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, position.y);
 	SaveData<int>(fp, map_id);
 	SaveData<int>(fp, id);
-	SaveData<int>(fp, id2);	
+	SaveData<int>(fp, id2);
+	SaveData<int>(fp, parent_part_id);
 	SaveData<int>(fp, level);
 	SaveData<int>(fp, exper);
 	name.SaveDatas(fp);
@@ -77,6 +78,8 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, max_hp);
 	SaveData<int>(fp, prev_position.x);
 	SaveData<int>(fp, prev_position.y);
+	SaveData<int>(fp, prev_position_for_monster.x);
+	SaveData<int>(fp, prev_position_for_monster.y);
 	SaveData<int>(fp, first_position.x);
 	SaveData<int>(fp, first_position.y);
 	SaveData<bool>(fp, prev_sight);
@@ -190,6 +193,9 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, map_id);
 	LoadData<int>(fp, id);
 	LoadData<int>(fp, id2);
+	if(!isPrevVersion(loading_version_string, "ver1.202")) {
+		LoadData<int>(fp, parent_part_id);
+	}
 	LoadData<int>(fp, level);
 	LoadData<int>(fp, exper);
 	name.LoadDatas(fp);
@@ -201,6 +207,10 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, max_hp);
 	LoadData<int>(fp, prev_position.x);
 	LoadData<int>(fp, prev_position.y);
+	if(!isPrevVersion(loading_version_string, "ver1.202")) {
+		LoadData<int>(fp, prev_position_for_monster.x);
+		LoadData<int>(fp, prev_position_for_monster.y);
+	}
 	LoadData<int>(fp, first_position.x);
 	LoadData<int>(fp, first_position.y);
 	LoadData<bool>(fp, prev_sight);
@@ -333,6 +343,7 @@ void monster::init()
 	map_id=-1;
 	id=0;
 	id2=0;
+	parent_part_id=-1;
 	level=1;
 	exper=0;
 	name = name_infor(LOC_SYSTEM_NONE_STRING);
@@ -342,6 +353,8 @@ void monster::init()
 	max_hp=0;
 	prev_position.x = 0;
 	prev_position.y = 0;
+	prev_position_for_monster.x = 0;
+	prev_position_for_monster.y = 0;
 	first_position.x = 0;
 	first_position.y = 0;
 	prev_sight = false;
@@ -489,6 +502,7 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int
 				state.SetState(MS_ATACK);
 		}
 		SetXY(map_num_, position_.x, position_.y, true);
+		prev_position_for_monster = position_;
 		first_position = position_;
 		if(flag & M_FLAG_ALLY)
 		{
@@ -788,7 +802,7 @@ void monster::TurnLoad()
 	if(flag & M_FLAG_CONFUSE)
 		s_confuse = 10;
 
-	if(!s_sick)
+	if(!s_sick && parent_part_id == -1)//파트는 힐을 안해
 		HpRecover(temp_turn);
 	if(flag & M_FLAG_SUMMON && summon_time>=0)
 	{
@@ -837,7 +851,7 @@ void monster::SetXYPassFloor(int prev_floor, int new_floor, int x_, int y_) {
 		}
 		AfterMove(prev_floor, x_, y_);
 	}
-
+	prev_position_for_monster = position;
 	position.set(x_,y_);
 	for(auto it = env[new_floor].floor_list.begin(); it != env[new_floor].floor_list.end();it++)
 	{
@@ -1837,8 +1851,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			}
 
 			enterlog();
-			
-			hp-=damage_;
+			HpUpDown(-damage_, DR_HITTING, nullptr, true);
 			if(damage_/3 > 0 && a.type == ATT_VAMP && randA(2) == 0)
 			{
 				if(a.order)
@@ -2369,6 +2382,26 @@ int monster::AttackToYou(bool force_) {
 		you.damage(temp_att);
 		multipleAttack(&you, temp_att);
 		enterlog();
+
+		if(id == MON_GIANT_CENTIPEDE) {
+			coord_def next_ =  position;
+			int max_distance = 999;
+			rand_rect_iterator rand_(you.position, 1, 1);
+			while(!rand_.end()) {
+				if(position.distance_from(*rand_) == 1 &&
+				(position-*rand_).abs() < max_distance &&
+				!env[current_level].isMonsterPos(rand_->x, rand_->y)&&
+				 env[current_level].isMove(rand_->x, rand_->y)) {
+					next_ = *rand_;
+					max_distance = (position-*rand_).abs();
+				}
+				rand_++;
+			}
+			if(next_ != position) {
+				SetXY(next_.x, next_.y);
+			}
+			return 1;
+		}
 		return 1;
 	}
 	return 0;
@@ -2439,7 +2472,12 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 		{
 			bool isExistMon_ = (*it).isLive() && (*it).position.x == position.x+x_mov && (*it).position.y == position.y+y_mov;
 
-			if(isExistMon_ && (*it).flag & M_FLAG_MISSLE && !isMoveNotInturrpt(&(*it))) {
+			if(isExistMon_ && id == MON_GIANT_CENTIPEDE && it->id == MON_GIANT_CENTIPEDE_BODY
+				 && it->parent_part_id == map_id && it->special_value != 1) {
+				//전갈은 자신의 몸을 뚫는다. 하지만 바로 뒤론 못감(머리 바로 뒤는 special_value가 1이다)
+				it->dead(PRT_NEUTRAL, false);
+			}
+			else if(isExistMon_ && (*it).flag & M_FLAG_MISSLE && !isMoveNotInturrpt(&(*it))) {
 				//이건 미사일류 몬스터라 사라져야함
 				AttackToMon(&(*it), true);
 				it->dead(PRT_NEUTRAL, false);
@@ -2850,9 +2888,14 @@ int monster::atkmove(int is_sight, bool only_move)
 }
 
 
+bool monster::isImmobile() {
+	return flag & M_FLAG_IMMOBILE;
+}
 bool monster::isCanMove()
 {
 	if(state.GetState() == MS_SLEEP)
+		return false;
+	if (isImmobile())
 		return false;
 	if (s_paralyse)
 		return false;
@@ -2920,10 +2963,11 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 	{
 		ChangeMonster(MON_RACCON,0);
 	}
+	bool isPart = (parent_part_id != -1);
 
 
 
-	if (message_ && !remove_)
+	if (message_ && !remove_ && !isPart)
 	{
 		if (sight_){
 			if (flag & M_FLAG_UNIQUE && id != MON_ENSLAVE_GHOST) {
@@ -3167,7 +3211,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		//	}
 		//}
 	}
-	if(flag & M_FLAG_UNIQUE && id != MON_ENSLAVE_GHOST && !remove_)
+	if(flag & M_FLAG_UNIQUE && id != MON_ENSLAVE_GHOST && !remove_ && !isPart)
 	{
 		if(reason_ == PRT_PLAYER || reason_ == PRT_ALLY)
 		{
@@ -3179,7 +3223,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 
 		}
 	}
-	if (!(flag & M_FLAG_SUMMON) && !remove_ && !(flag & M_FLAG_UNHARM))
+	if (!(flag & M_FLAG_SUMMON) && !remove_ && !isPart && !(flag & M_FLAG_UNHARM))
 		GodAccpect_KillMonster(this,reason_);
 	return true;
 }
@@ -3284,7 +3328,7 @@ int monster::action(int delay_)
 		{
 			if (poison_percent(s_poison) && !s_invincibility)
 			{
-				hp -= randA_1(3)*poison_damage(s_poison);
+				HpUpDown(-randA_1(3)*poison_damage(s_poison), DR_POISON, nullptr, true);
 				if(hp<=0)
 				{
 					dead(poison_reason, true); //아직 플레이어의 독은 없다.
@@ -3635,7 +3679,7 @@ int monster::action(int delay_)
 				int damage_add =  (int)(damage_ + rand_float(0,0.99f));
 				if (damage_add > 0 && !s_invincibility)
 				{
-					hp -= damage_add;
+					HpUpDown(-damage_add, DR_FIRE, nullptr, true);
 					if(hp<=0)
 					{
 						dead(fire_reason, true);
@@ -3785,7 +3829,7 @@ int monster::action(int delay_)
 				//	target = NULL;
 				//}
 			}
-			if(!s_sick)
+			if(!s_sick && parent_part_id)
 				HpRecover();
 			if(target && !target->isLive())
 			{
@@ -4626,6 +4670,64 @@ void monster::special_action(int delay_, bool smoke_)
 			}
 		}
 		break;
+	case MON_GIANT_CENTIPEDE:
+		if (!smoke_) {
+			if(position != prev_position_for_monster && position.distance_from(prev_position_for_monster) == 1 &&
+				!env[current_level].isMonsterPos(prev_position_for_monster.x, prev_position_for_monster.y)) {
+				vector<monster*> body_vector;
+				for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+				{
+					if (it->isLive() && it->parent_part_id != -1 && it->parent_part_id == map_id && it->id == MON_GIANT_CENTIPEDE_BODY){
+						it->special_value++;
+						body_vector.push_back(&(*it));
+					}
+				}
+				std::sort(body_vector.begin(), body_vector.end(),
+						[](monster* a, monster* b) {
+							return a->special_value < b->special_value;
+						});
+				monster *mon_ = env[current_level].AddMonster(MON_GIANT_CENTIPEDE_BODY, 0, prev_position_for_monster);
+				mon_->parent_part_id = map_id;
+				mon_->special_value = 1;
+				mon_->max_hp = max_hp;
+				mon_->hp = hp;
+				mon_->target = target;
+
+				{ //머리 이미지 조정
+					int path_ = 80+GetPosToDirec(position,mon_->position);
+					int index_ = PathToNum_forstem(path_);
+					if(index_ < 8) {
+						image = &img_mons_giant_centipede_body[index_];
+					}
+				}
+
+				if(body_vector.size() != 0) { //중간
+					monster* tail_ = body_vector[0];
+					int path_ = 10*GetPosToDirec(mon_->position,position);
+					path_ += GetPosToDirec(mon_->position,tail_->position);
+					int index_ = PathToNum_forstem(path_);
+					if(index_ < 36) {
+						mon_->image = &img_mons_giant_centipede_body[index_];
+					}
+				} else { //맨 끝
+					coord_def dir = prev_position_for_monster - position;
+					coord_def temp = prev_position_for_monster + dir;
+					int path_ = 10*GetPosToDirec(mon_->position,position);
+					path_ += GetPosToDirec(mon_->position,temp);
+					int index_ = PathToNum_forstem(path_);
+					if(index_ < 36) {
+						mon_->image = &img_mons_giant_centipede_body[index_];
+					}
+				}
+				//몸통은 최대 8칸임
+				for(int i = 0; i < body_vector.size(); i++) {
+					if(body_vector[i]->special_value > 7) {
+						body_vector[i]->dead(PRT_NEUTRAL, false, true);
+					}
+				}
+			}
+		}
+		break;
 	default:
 		break;
 	}
@@ -4748,7 +4850,7 @@ bool monster::HpRecover(int turn_)
 		hp_recov -= speed*turn_;
 		while((hp_recov)<=0)
 		{
-			hp++;
+			HpUpDown(1, DR_EFFECT);
 			HpRecoverDelay();
 			if(hp == max_hp)
 			{
@@ -4760,7 +4862,13 @@ bool monster::HpRecover(int turn_)
 	}
 	return false;
 }
-int monster::HpUpDown(int value_,damage_reason reason, unit *order_)
+bool monster::HasMultiTile() {
+	if(id == MON_GIANT_CENTIPEDE) {
+		return true;
+	}
+	return false;
+}
+int monster::HpUpDown(int value_,damage_reason reason, unit *order_, bool non_dead)
 {
 	if (s_invincibility) {
 		return 0;
@@ -4769,8 +4877,29 @@ int monster::HpUpDown(int value_,damage_reason reason, unit *order_)
 	if(hp >= max_hp)
 	{
 		hp = max_hp;		
-	}	
-	if(hp<=0)
+	}
+	if(reason != DR_SPREAD) {
+		if(HasMultiTile()){
+			//전파
+			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+			{
+				if (&(*it) != this && it->isLive() && it->parent_part_id != -1 && it->parent_part_id == map_id){
+					it->HpUpDown(value_, DR_SPREAD, order_, false);
+				}
+			}
+		}
+		if(parent_part_id != -1) {
+			//내가 전파해야함
+			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+			{
+				if (&(*it) != this && it->isLive() && (parent_part_id == it->map_id || 
+					it->parent_part_id == parent_part_id)){
+					it->HpUpDown(value_, DR_SPREAD, order_, false);
+				}
+			}
+		}
+	}
+	if(hp<=0 && !non_dead)
 	{
 		dead(order_?order_->GetParentType():PRT_NEUTRAL,order_?true:false);
 	}

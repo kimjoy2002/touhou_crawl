@@ -357,7 +357,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				ThrowSector(25, beam, temp_infor, SpellcardSector(SPC_V_AIR), [&](coord_def c_) {
 					if (unit* unit_ = env[current_level].isMonsterPos(c_.x, c_.y))
 					{
-						if (you.isSightnonblocked(c_))
+						if (!unit_->isImmobile() && you.isSightnonblocked(c_))
 						{
 							coord_def push_(c_ - you.position + c_);
 							beam_iterator beam(c_, push_);

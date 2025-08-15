@@ -34,6 +34,7 @@ public:
 	int map_id;
 	int id;
 	int id2; //ENSLAVE_GHOST용도
+	int parent_part_id; //만약 이 모형에 부모가 있다면
 	int level;
 	int exper;
 	name_infor name;
@@ -41,7 +42,8 @@ public:
 	int hp;
 	int hp_recov;
 	int max_hp;
-	coord_def prev_position;
+	coord_def prev_position; //몬스터의 이전 위치(플레이어 턴 기준)
+	coord_def prev_position_for_monster;//몬스터의 이전 경로(움직일때마다 초기화)
 	coord_def first_position;
 	bool prev_sight;
 	int ac;
@@ -184,6 +186,7 @@ public:
 	int longmove();
 	bool tryMagic();
 	int atkmove(int is_sight, bool only_move=false);
+	bool isImmobile();
 	bool isCanMove();
 	bool isHaveSpell(spell_list sp);
 	int MoveToPos(coord_def pos_, bool only_move);
@@ -205,7 +208,9 @@ public:
 	bool SetPoison(int poison_, int max_, bool strong_);
 	int HpRecoverDelay();
 	bool HpRecover(int trun_ = 1);
-	int HpUpDown(int value_,damage_reason reason, unit *order_ = nullptr);
+	bool HasMultiTile();
+	bool SpreadDamage(int value_, unit *order_);
+	int HpUpDown(int value_,damage_reason reason, unit *order_ = nullptr, bool non_dead = false);
 	void SetStrong(int strong_) {strong = strong_;};
 	bool SetTele(int tele_);
 	bool SetMight(int might_);

@@ -215,6 +215,65 @@ void MakeTanmac(item_infor* t, int select_)
 
 
 }
+
+int PathToNum_forstem(int path)
+{
+	//줄기형 몬스터(지네, 줄기) 사용타일을 정하기위한 switch문
+	//7 0 1
+	//6 * 2
+	//5 4 3
+	//위와 같은 타일대로한다.
+	//여기서 십의자리에서 들어가서 일의 자리로 나간다고 가정(들어가는것과 나가는것이 바뀌어도 같음)
+	//여기서 특수케이스로 8은 시작점일때로 취급한다. (도착점은 없다.)
+	//해당 경로에 맞는 이미지배열의 인덱스를 리턴한다.
+
+	//레이저와 다른점 = 20부터 90도, 45도 각도를 위한 부분임
+	switch(path)
+	{
+	case 80:case 8:return 0;
+	case 81:case 18:return 1;
+	case 82:case 28:return 2;
+	case 83:case 38:return 3;
+	case 84:case 48:return 4;
+	case 85:case 58:return 5;
+	case 86:case 68:return 6;
+	case 87:case 78:return 7;
+	case 30:case 3:return 8;
+	case 40:case 4:return 9;
+	case 41:case 14:return 10;
+	case 50:case 5:return 11;
+	case 51:case 15:return 12;
+	case 52:case 25:return 13;
+	case 61:case 16:return 14;
+	case 62:case 26:return 15;
+	case 63:case 36:return 16;
+	case 72:case 27:return 17;
+	case 73:case 37:return 18;
+	case 74:case 47:return 19;
+
+	case 20:case 2:return 20; //90도
+	case 24:case 42:return 21;
+	case 46:case 64:return 22;
+	case 60:case 6:return 23;
+	case 31:case 13:return 24;
+	case 53:case 35:return 25;
+	case 75:case 57:return 26;
+	case 71:case 17:return 27;
+
+	case 10:case 1:return 28; //45도
+	case 21:case 12:return 29;
+	case 32:case 23:return 30;
+	case 43:case 34:return 31;
+	case 54:case 45:return 32;
+	case 65:case 56:return 33;
+	case 76:case 67:return 34;
+	case 70:case 7:return 35;
+
+	default:return 0;
+	}
+}
+
+
 int PathToNum(int path)
 {
 	//레이져(주로 전기계열)의 사용타일을 정하기위한 switch문

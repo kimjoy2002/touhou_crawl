@@ -87,6 +87,9 @@ unit* throwtanmac_check_hit(int graphic_type,beam_iterator& beam, const beam_inf
 
 bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &target, const beam_infor &infor_);
 bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_, float sector_ , function<void(coord_def)> func_, bool reverse_, bool effect_delete = true);
+int PathToNum_forstem(int path);
+int PathToNum(int path);
+
 
 void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2, bool auto_);
 void Select_Throw();

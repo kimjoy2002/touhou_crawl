@@ -2294,7 +2294,7 @@ interupt_type players::HpRecover(int delay_)
 bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target);
 void deadlog();
 void resurectionlog(string reason);
-int players::HpUpDown(int value_,damage_reason reason, unit *order_)
+int players::HpUpDown(int value_,damage_reason reason, unit *order_, bool non_dead)
 {
 	int prev_value_ = value_;
 	if (value_ > 0 && s_evoke_ghost) {

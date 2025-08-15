@@ -5393,3 +5393,9 @@ LOC_SYSTEM_TILE_STAIR_FORESTOFMAGIC,Stairs to the Forest of Magic
 LOC_SYSTEM_TILE_STAIR_DOLLSHOUSE,Stairs to the Doll's House
 LOC_SYSTEM_ITEM_RUNE_FORESTOFMAGIC,Rune of Magic
 LOC_SYSTEM_ITEM_RUNE_DOLLSHOUSE,Rune of Dolls
+LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX_IMMOBILE,This enemy is firmly fixed to the ground and cannot be German suplexed!
+LOC_SYSTEM_GOD_YUUGI_THROW_IMMOBILE,This enemy is firmly fixed to the ground and cannot be thrown!
+LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP_IMMOBILE,This enemy cannot be position-swapped.
+LOC_SYSTEM_GOD_OKINA_ABIL_LOCKED_DOOR_IMMOBILE,This enemy cannot move away from the door!
+LOC_SYSTEM_GOD_SWAWKO_TOUGUE_IMMOBILE,This enemy cannot be pulled.
+LOC_SYSTEM_IMMOBILE_FAIL,This enemy is firmly rooted to the ground.

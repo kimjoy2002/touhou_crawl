@@ -139,6 +139,7 @@ void GetDeathReason(stringstream& death_reason, damage_reason dead_reason, int a
 	switch (dead_reason)
 	{
 	case DR_NONE:
+	case DR_SPREAD:
 	{
 		stringstream temp_reason;
 		if (hasorder)

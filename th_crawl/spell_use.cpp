@@ -2028,7 +2028,7 @@ bool skill_water_cannon(int pow_, bool short_, unit* order, coord_def target)
 			}
 			coord_def temp = throwtanmac(22,beam,temp_infor,NULL);
 			unit* unit_ = env[current_level].isMonsterPos(temp.x,temp.y,order);		
-			if(unit_)
+			if(unit_ && !unit_->isImmobile())
 			{
 				int knockback = randA(2);
 				int real_knock_ = 0;
@@ -2122,6 +2122,12 @@ bool skill_hypnosis(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(unit* hit_mon = DebufBeam(SPL_HYPNOSIS, order, target))
 	{
+		if(hit_mon->isImmobile()) {
+			if(order == &you) {
+				printlog(LocalzationManager::locString(LOC_SYSTEM_IMMOBILE_FAIL),true,false,false,CL_normal);
+			}
+			return false;
+		}
 		if(hit_mon->CalcuateMR(GetDebufPower(SPL_HYPNOSIS,pow_)))
 		{
 			rand_rect_iterator rit(hit_mon->position,1,1,true);
@@ -4339,6 +4345,9 @@ bool skill_reaper_met(int pow_, bool short_, unit* order, coord_def target)
 
 	if (order && hit_mon)
 	{
+		if(hit_mon->isImmobile()) {
+			return false;
+		}
 		beam_iterator beam(order->position, hit_mon->position);
 		if (CheckThrowPath(order->position, hit_mon->position, beam))
 		{
@@ -4791,7 +4800,7 @@ bool skill_dream_call(int pow_, bool short_, unit* order, coord_def target)
 	{
 		if (&(*it) != mon_ && it->isLive() && it->isCanMove() && it->isAllyMonster(mon_))
 		{
-			if (mon_->isMonsterSight(it->position)) {
+			if (mon_->isMonsterSight(it->position) && !mon_->isImmobile()) {
 				monster_list.push(&(*it), it->level);
 			}
 		}
@@ -5027,6 +5036,9 @@ bool skill_tougue(int pow_, bool short_, unit* order, coord_def target)
 
 	if(unit* hit_ = DebufBeam(SPL_TOUGUE, order, target))
 	{
+		if(hit_->isImmobile()) {
+			return false;
+		}
 		beam_iterator beam(order->position,target);
 		if(CheckThrowPath(order->position,target,beam))
 		{
@@ -5114,7 +5126,7 @@ bool skill_megaton_kick(int pow_, bool short_, unit* order, coord_def target)
 		int damage_ = SPL_MEGATON_KICK_DAM(pow_);
 		attack_infor temp_att(randC(SPL_MEGATON_KICK_DICE,damage_),SPL_MEGATON_KICK_DICE*(damage_),20+pow_/10,order,order->GetParentType(),ATT_HOOF,name_infor(LOC_SYSTEM_ATT_HOOF));
 		bool hit_ = target_unit->damage(temp_att, true);
-		if(hit_) {
+		if(hit_ && !target_unit->isImmobile()) {
 			if (env[current_level].isInSight(order->position) || env[current_level].isInSight(target)) {
 				PlaySE("shoot_heavy");
 			}
@@ -5332,6 +5344,9 @@ bool skill_close_door(int pow_, bool short_, unit* order, coord_def target_)
 					continue;
 
 				if (unit_) {
+					if(unit_->isImmobile()) {
+						return false;
+					}
 					rand_rect_iterator rit(unit_->position, 1, 1, true);
 					while (!rit.end()) {
 						unit* unit_hit_ = env[current_level].isMonsterPos(rit->x, rit->y);

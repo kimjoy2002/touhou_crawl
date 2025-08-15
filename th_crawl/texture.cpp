@@ -1143,25 +1143,53 @@ textures img_mons_stonetower[] =
 textures img_mons_security_door(&texture_item03, 214, 255);
 
 
-textures img_mons_yamainu(&texture_monster01, 47, 255);
-textures img_confuse_mushroom(&texture_monster01, 47, 255);
-textures img_mons_weakening_mushroom(&texture_monster01, 47, 255);
-textures img_mons_mushroom_giant(&texture_monster01, 47, 255);
-textures img_mons_stag_beetle(&texture_monster01, 47, 255);
-textures img_mons_giant_slug(&texture_monster01, 47, 255);
-textures img_mons_giant_centipede(&texture_monster01, 47, 255);
+textures img_mons_yamainu(&texture_monster02, 67, 255);
+textures img_confuse_mushroom(&texture_monster02, 68, 255);
+textures img_mons_weakening_mushroom(&texture_monster02, 69, 255);
+textures img_mons_mushroom_giant(&texture_monster02, 70, 255);
+textures img_mons_stag_beetle(&texture_monster02, 71, 255);
+textures img_mons_giant_slug(&texture_monster02, 72, 255);
+textures img_mons_giant_centipede(&texture_monster02, 74, 255);
 textures img_mons_giant_centipede_body[] =
 {
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255)
+	textures(&texture_monster02, 74, 255),
+	textures(&texture_monster02, 75, 255),
+	textures(&texture_monster02, 76, 255),
+	textures(&texture_monster02, 77, 255),
+	textures(&texture_monster02, 78, 255),
+	textures(&texture_monster02, 79, 255),
+	textures(&texture_monster02, 80, 255),
+	textures(&texture_monster02, 81, 255),
+	textures(&texture_monster02, 82, 255),
+	textures(&texture_monster02, 83, 255),
+	textures(&texture_monster02, 84, 255),
+	textures(&texture_monster02, 85, 255),
+	textures(&texture_monster02, 86, 255),
+	textures(&texture_monster02, 87, 255),
+	textures(&texture_monster02, 88, 255),
+	textures(&texture_monster02, 89, 255),
+	textures(&texture_monster02, 90, 255),
+	textures(&texture_monster02, 91, 255),
+	textures(&texture_monster02, 92, 255),
+	textures(&texture_monster02, 93, 255),
+	textures(&texture_monster02, 94, 255),
+	textures(&texture_monster02, 95, 255),
+	textures(&texture_monster02, 96, 255),
+	textures(&texture_monster02, 97, 255),
+	textures(&texture_monster02, 98, 255),
+	textures(&texture_monster02, 99, 255),
+	textures(&texture_monster02, 100, 255),
+	textures(&texture_monster02, 101, 255),
+	textures(&texture_monster02, 102, 255),
+	textures(&texture_monster02, 103, 255),
+	textures(&texture_monster02, 104, 255),
+	textures(&texture_monster02, 105, 255),
+	textures(&texture_monster02, 106, 255),
+	textures(&texture_monster02, 107, 255),
+	textures(&texture_monster02, 108, 255),
+	textures(&texture_monster02, 109, 255)
 };
-textures img_mons_spore(&texture_monster01, 47, 255);
+textures img_mons_spore(&texture_monster02, 73, 255);
 textures img_mons_eating_flower(&texture_monster01, 47, 255);
 textures img_mons_magic_flower(&texture_monster01, 47, 255);
 textures img_mons_magic_flower_stem[] =
@@ -1189,6 +1217,23 @@ textures img_mons_orrery_orb[] =
 	textures(&texture_monster01, 47, 255),
 	textures(&texture_monster01, 47, 255)
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 textures img_named_rumia(&texture_monster01, 13, 255);
@@ -4031,6 +4076,62 @@ int texturetoint(textures* input)
 		return 645;
 	else if(input == &img_named_marisa)
 		return 646;
+	else if(input == &img_mons_giant_centipede_body[8])
+		return 647;
+	else if(input == &img_mons_giant_centipede_body[9])
+		return 648;
+	else if(input == &img_mons_giant_centipede_body[10])
+		return 649;
+	else if(input == &img_mons_giant_centipede_body[11])
+		return 650;
+	else if(input == &img_mons_giant_centipede_body[12])
+		return 651;
+	else if(input == &img_mons_giant_centipede_body[13])
+		return 652;
+	else if(input == &img_mons_giant_centipede_body[14])
+		return 653;
+	else if(input == &img_mons_giant_centipede_body[15])
+		return 654;
+	else if(input == &img_mons_giant_centipede_body[16])
+		return 655;
+	else if(input == &img_mons_giant_centipede_body[17])
+		return 656;
+	else if(input == &img_mons_giant_centipede_body[18])
+		return 657;
+	else if(input == &img_mons_giant_centipede_body[19])
+		return 658;
+	else if(input == &img_mons_giant_centipede_body[20])
+		return 659;
+	else if(input == &img_mons_giant_centipede_body[21])
+		return 660;
+	else if(input == &img_mons_giant_centipede_body[22])
+		return 661;
+	else if(input == &img_mons_giant_centipede_body[23])
+		return 662;
+	else if(input == &img_mons_giant_centipede_body[24])
+		return 663;
+	else if(input == &img_mons_giant_centipede_body[25])
+		return 664;
+	else if(input == &img_mons_giant_centipede_body[26])
+		return 665;
+	else if(input == &img_mons_giant_centipede_body[27])
+		return 666;
+	else if(input == &img_mons_giant_centipede_body[28])
+		return 667;
+	else if(input == &img_mons_giant_centipede_body[29])
+		return 668;
+	else if(input == &img_mons_giant_centipede_body[30])
+		return 669;
+	else if(input == &img_mons_giant_centipede_body[31])
+		return 670;
+	else if(input == &img_mons_giant_centipede_body[32])
+		return 671;
+	else if(input == &img_mons_giant_centipede_body[33])
+		return 672;
+	else if(input == &img_mons_giant_centipede_body[34])
+		return 673;
+	else if(input == &img_mons_giant_centipede_body[35])
+		return 674;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -5351,6 +5452,62 @@ textures* inttotexture(int input)
 		return &img_mons_orrery_orb[3];
 	case 646:
 		return &img_named_marisa;
+	case 647:
+		return &img_mons_giant_centipede_body[8];
+	case 648:
+		return &img_mons_giant_centipede_body[9];
+	case 649:
+		return &img_mons_giant_centipede_body[10];
+	case 650:
+		return &img_mons_giant_centipede_body[11];
+	case 651:
+		return &img_mons_giant_centipede_body[12];
+	case 652:
+		return &img_mons_giant_centipede_body[13];
+	case 653:
+		return &img_mons_giant_centipede_body[14];
+	case 654:
+		return &img_mons_giant_centipede_body[15];
+	case 655:
+		return &img_mons_giant_centipede_body[16];
+	case 656:
+		return &img_mons_giant_centipede_body[17];
+	case 657:
+		return &img_mons_giant_centipede_body[18];
+	case 658:
+		return &img_mons_giant_centipede_body[19];
+	case 659:
+		return &img_mons_giant_centipede_body[20];
+	case 660:
+		return &img_mons_giant_centipede_body[21];
+	case 661:
+		return &img_mons_giant_centipede_body[22];
+	case 662:
+		return &img_mons_giant_centipede_body[23];
+	case 663:
+		return &img_mons_giant_centipede_body[24];
+	case 664:
+		return &img_mons_giant_centipede_body[25];
+	case 665:
+		return &img_mons_giant_centipede_body[26];
+	case 666:
+		return &img_mons_giant_centipede_body[27];
+	case 667:
+		return &img_mons_giant_centipede_body[28];
+	case 668:
+		return &img_mons_giant_centipede_body[29];
+	case 669:
+		return &img_mons_giant_centipede_body[30];
+	case 670:
+		return &img_mons_giant_centipede_body[31];
+	case 671:
+		return &img_mons_giant_centipede_body[32];
+	case 672:
+		return &img_mons_giant_centipede_body[33];
+	case 673:
+		return &img_mons_giant_centipede_body[34];
+	case 674:
+		return &img_mons_giant_centipede_body[35];
 	default:
 		return &img_mons_default;
 	}

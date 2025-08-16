@@ -285,7 +285,7 @@ MON_OVERGROWTH_MAGIC_FLOWER,暴走魔法花,テスト
 MON_OVERGROWTH_STEM,暴走した茎,テスト
 MON_OVERGROWTH_WATERMELON,巨大スイカ,テスト
 MON_WIZARD,隠遁魔法使い,テスト
-MON_TREE_GAINT,木の巨人,テスト
+MON_TREE_GIANT,木の巨人,テスト
 MON_SANGHAI_DOLL,上海人形,バカジャネーノ？
 MON_HOURAI_DOLL,蓬莱人形,アリスの人形中の一つである蓬莱人形\n遠距離レーザーを放つ。
 MON_FRANCE_DOLL,蘭西人形,テスト

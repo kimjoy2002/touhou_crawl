@@ -333,6 +333,8 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 
 	DG_GLASS,
 	DG_STATUE,
 	DG_STATUE2,
+	DG_MUSHROOM1,
+	DG_MUSHROOM2,
 	DG_SEA, //여기부터 바다
 	DG_LAVA,
 	DG_OBJECT_END = DG_LAVA,

@@ -285,7 +285,7 @@ MON_OVERGROWTH_MAGIC_FLOWER,Overgrown Magic Flower,TODO
 MON_OVERGROWTH_STEM,Overgrown Stem,TODO
 MON_OVERGROWTH_WATERMELON,Giant Watermelon,TODO
 MON_WIZARD,Reclusive Wizard,TODO
-MON_TREE_GAINT,Tree Giant,TODO
+MON_TREE_GIANT,Tree Giant,TODO
 MON_SANGHAI_DOLL,Shanghai Doll,Bakaja-né no?
 MON_HOURAI_DOLL,Hourai Doll,One of Alice’s dolls, the Hourai type.\nCan firing long-range lasers.
 MON_FRANCE_DOLL,France Doll,TODO

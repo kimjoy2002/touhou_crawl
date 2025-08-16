@@ -755,6 +755,8 @@ textures img_dungeon01[] = {
 					textures(&texture_dungeon01),//유리
 					textures(&texture_dungeon01),//석상
 					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//석상2
+					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//버섯땅
+					textures(&texture_dungeon01, 256, 0, 288, 32, 255),//버섯2땅
 					textures(&texture_dungeon01, 96, 0, 128, 32, 255),//바다
 					textures(&texture_dungeon01, 96, 0, 128, 32, 255)//용암
 };
@@ -870,6 +872,8 @@ textures img_dungeon_object[][3] = {
 				{textures(&texture_item01, 222, 255),textures(&texture_item01, 222, 255),textures(&texture_item01, 222, 255)},
 
 				{textures(&texture_item02, 161, 255),textures(&texture_item02, 161, 255),textures(&texture_item02, 161, 255)}, //125
+				{textures(&texture_monster02, 144, 255),textures(&texture_monster02, 144, 255),textures(&texture_monster02, 144, 255)},
+				{textures(&texture_monster02, 145, 255),textures(&texture_monster02, 145, 255),textures(&texture_monster02, 145, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 			{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}
 };
@@ -1224,8 +1228,8 @@ textures img_mons_magic_flower_stem[] =
 	textures(&texture_monster02, 141, 255)
 };
 textures img_mons_watermelon(&texture_monster02, 112, 255);
-textures img_mons_wizard(&texture_monster01, 47, 255);
-textures img_mons_tree_giant(&texture_monster01, 47, 255);
+textures img_mons_wizard(&texture_monster02, 146, 255);
+textures img_mons_tree_giant(&texture_monster02, 142, 255);
 textures img_mons_france_doll(&texture_monster01, 47, 255);
 textures img_mons_london_doll(&texture_monster01, 47, 255);
 textures img_mons_netherlands_doll(&texture_monster01, 47, 255);
@@ -1669,6 +1673,7 @@ textures img_item_fixed_artifact_ibukisake(&texture_item04, 7, 255);
 
 textures img_item_food_bread(&texture_item01, 0, 255);
 textures img_item_food_p_item(&texture_item01, 63, 255);
+textures img_mons_food_watermelon(&texture_monster02, 143, 255);
 
 textures img_item_potion[] = {textures(&texture_item02, 0, 255),
 	textures(&texture_item02, 1, 255),
@@ -4192,6 +4197,8 @@ int texturetoint(textures* input)
 		return 693;
 	else if(input == &img_mons_magic_flower_stem[27])
 		return 694;
+	else if(input == &img_mons_food_watermelon)
+		return 695;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -5608,6 +5615,8 @@ textures* inttotexture(int input)
 		return &img_mons_magic_flower_stem[26];
 	case 694:
 		return &img_mons_magic_flower_stem[27];
+	case 695:
+		return &img_mons_food_watermelon;
 	default:
 		return &img_mons_default;
 	}

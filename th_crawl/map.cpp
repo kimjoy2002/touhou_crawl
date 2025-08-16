@@ -298,6 +298,7 @@ coord_def map_dummy::getNextPos()
 	return c;
 }
 
+void make_mushroom(int num, int freq);
 void make_lake(int num, int repeat, boolean lava);
 
 void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
@@ -357,6 +358,7 @@ void map_algorithms(int num)
 		else if(num >= FORESTOFMAGIC_LEVEL && num <= FORESTOFMAGIC_LEVEL+MAX_FORESTOFMAGIC_LEVEL)
 		{
 			map_algorithms03(70,3,4,12, num,DG_GRASS,DG_TREE);
+			make_mushroom(num, rand_int(20,30));
 		}
 		else if(num == BAMBOO_LEVEL)
 		{
@@ -553,6 +555,60 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 
 	return;
 }
+
+
+
+void make_mushroom(int num, int freq)
+{
+
+    const auto in_bounds = [](int x, int y) {
+        return (0 <= x && x < DG_MAX_X) && (0 <= y && y < DG_MAX_Y);
+    };
+
+    auto cross_all_move = [&](int x, int y) {
+        static const int dx[4] = { 1, -1, 0, 0 };
+        static const int dy[4] = { 0, 0, 1, -1 };
+        for (int k = 0; k < 4; ++k) {
+            int nx = x + dx[k], ny = y + dy[k];
+            if (!in_bounds(nx, ny)) return false;
+            if (!env[num].isMove(coord_def(x,y), false)) return false;
+        }
+        return true;
+    };
+
+    auto diag_all_move = [&](int x, int y) {
+        static const int dx[4] = { 1,  1, -1, -1 };
+        static const int dy[4] = { 1, -1,  1, -1 };
+        for (int k = 0; k < 4; ++k) {
+            int nx = x + dx[k], ny = y + dy[k];
+            if (!in_bounds(nx, ny)) return false;
+            if (!env[num].isMove(coord_def(x,y), false)) return false;
+        }
+        return true;
+    };
+
+    random_extraction<coord_def> candidates;
+
+    for (int y = 0; y < DG_MAX_Y; ++y) {
+        for (int x = 0; x < DG_MAX_X; ++x) {
+            const auto& t = env[num].dgtile[x][y];
+
+            if (!env[num].isMove(coord_def(x,y), false)) continue;
+            if (t.flag & FLAG_NO_MONSTER) continue;
+            if (!(cross_all_move(x, y) || diag_all_move(x, y))) continue;
+
+            candidates.push(coord_def(x, y));
+        }
+    }
+
+	for(int i = 0; i < freq; i++) {
+   		if(candidates.GetSize() > 0) {
+			coord_def c = candidates.pop();
+			env[num].dgtile[c.x][c.y].tile = randA(1)?DG_MUSHROOM1:DG_MUSHROOM2;
+		}
+	}
+}
+
 
 void make_lake(int num, int repeat, boolean lava)
 {

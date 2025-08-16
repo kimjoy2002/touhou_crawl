@@ -307,6 +307,7 @@ public:
 	monster* movingfloor(const coord_def &c, int prev_floor_, monster* mon_);
 	item* MakeItem(const coord_def &c, const item_infor &t, int num_ = 0);
 	item* AddItem(const coord_def &c, item *t, int num_ = 0);
+	item* MoveItem(const coord_def& from, const coord_def& to);
 	void AddSpecialMapInfo(string string_);
 	void DeleteItem(const list<item>::iterator it);
 	bool DeleteItem(const item *item_);

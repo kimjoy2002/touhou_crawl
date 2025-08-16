@@ -374,7 +374,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->is_pile = true;
 			t->can_throw = false;
 			t->num = 1;
-			t->image = &img_mons_default;
+			t->image = &img_mons_food_watermelon;
 			t->name = name_infor(LOC_SYSTEM_ITEM_FOOD_WATERMELEN);
 			t->weight = 5.0f*t->num;
 			t->value = 30;

@@ -176,7 +176,10 @@ void environment::LoadDatas(FILE *fp)
 		{
 			for (int y = 0; y < DG_MAX_Y; y++)
 			{
-				if(dgtile[x][y].tile >= 70) { //DG_NONE_MOVE
+				if(dgtile[x][y].tile >= 95) { //DG_SEA
+					dgtile[x][y].tile=(dungeon_tile_type)(32+dgtile[x][y].tile);
+				}
+				else if(dgtile[x][y].tile >= 70) { //DG_NONE_MOVE
 					dgtile[x][y].tile=(dungeon_tile_type)(30+dgtile[x][y].tile); //100
 				}
 				else if(dgtile[x][y].tile >= 44) { //DG_RETURN_STAIR
@@ -700,6 +703,9 @@ char environment::getAsciiDot(int x_, int y_)
 	case DG_STATUE:
 	case DG_STATUE2:
 		return '&';
+	case DG_MUSHROOM1:
+	case DG_MUSHROOM2:
+		return 'P';
 	case DG_SEA:
 	case DG_LAVA:
 		return '~';
@@ -1723,6 +1729,45 @@ item* environment::AddItem(const coord_def &c, item *t, int num_)
 	}
 	ReleaseMutex(mutx);
 	return NULL;
+}
+
+item* environment::MoveItem(const coord_def& from, const coord_def& to)
+{
+    // 같은 칸이면 굳이 이동할 필요 없음. 해당 칸의 첫 아이템 포인터만 반환
+    if (from == to) {
+        WaitForSingleObject(mutx, INFINITE);
+        for (auto it = item_list.begin(); it != item_list.end(); ++it) {
+            const auto& p = it->position;
+            if (p.y > from.y || (p.y == from.y && p.x > from.x)) break;
+            if (p.y == from.y && p.x == from.x) {
+                item* ret = &(*it);
+                ReleaseMutex(mutx);
+                return ret;
+            }
+        }
+        ReleaseMutex(mutx);
+        return nullptr;
+    }
+
+    WaitForSingleObject(mutx, INFINITE);
+
+    auto it = item_list.begin();
+    for (; it != item_list.end(); ++it) {
+        const auto& p = it->position;
+        if (p.y > from.y || (p.y == from.y && p.x > from.x)) break; 
+        if (p.y == from.y && p.x == from.x) break;
+    }
+    if (it == item_list.end() || it->position != from) {
+        ReleaseMutex(mutx);
+        return nullptr;
+    }
+
+    item moving = *it;
+    moving.position = to;
+    item_list.erase(it);
+
+    ReleaseMutex(mutx);
+    return AddItem(to, &moving, 0);
 }
 
 void environment::AddSpecialMapInfo(string string_)

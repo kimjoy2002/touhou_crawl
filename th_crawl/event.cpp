@@ -1207,6 +1207,39 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		}
 	}
 	return 1;
+	case EVL_TREE:// 나무거인이 죽어서 나무를 남기면서 임시로 꽃을 피운다.
+	{
+		if (env[current_level].isMove(event_->position))
+		{
+			event_->value = env[current_level].dgtile[event_->position.x][event_->position.y].tile;
+			env[current_level].changeTile(event_->position, DG_TREE);
+			you.resetLOS(false);
+
+			rand_rect_iterator rand_pos(event_->position,1,1);
+			while(!rand_pos.end()) {
+				if(env[current_level].isMove(*rand_pos, false)) {
+					env[current_level].MoveItem(event_->position, *rand_pos);
+					break;
+				}
+				rand_pos++;
+			}
+
+			int time_ = event_->count;
+			if(monster *mon_ = BaseSummon(MON_OVERGROWTH_STEM, time_, true, true, 1, NULL, event_->position, SKD_OTHER, -1))
+			{
+				printlog(LocalzationManager::locString(LOC_SYSTEM_MON_TREE_GIANT_GROWING),true,false,false,CL_small_danger);
+			}
+		}
+		else if (event_->count <= 0 && event_->value > 0 &&  event_->value < MAX_NUM_DG)
+		{
+			env[current_level].changeTile(event_->position, (dungeon_tile_type)event_->value);
+			if(env[current_level].isInSight(event_->position)) {
+				printlog(LocalzationManager::locString(LOC_SYSTEM_MON_TREE_GIANT_WITHERING) + " ",false,false,false,CL_bad);
+			}
+			return 1;
+		}
+		return 0;
+	}
 	default:
 		break;
 	}

@@ -35,6 +35,7 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_WALL:
 	case DG_GLASS:
 	case DG_STATUE:
+	case DG_STATUE2:
 	case DG_STONE_WALL:
 	case DG_RED_WALL:
 	case DG_BOOK_WALL:
@@ -55,6 +56,8 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_SNOWMAN:
 	case DG_GRAVE:
 	case DG_IZAKAYA:
+	case DG_MUSHROOM1:
+	case DG_MUSHROOM2:
 		return DOT_WALL;
 	case DG_CLOSE_DOOR:
 	case DG_OPEN_DOOR:

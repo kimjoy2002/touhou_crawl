@@ -459,6 +459,7 @@ extern textures img_item_fixed_artifact_ibukisake;
 
 extern textures img_item_food_bread;
 extern textures img_item_food_p_item;
+extern textures img_mons_food_watermelon;
 
 extern textures img_item_potion[];
 

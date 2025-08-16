@@ -1158,10 +1158,10 @@ const mon_infor mondata[] = {
 		
 	{MON_WIZARD,13,1500,name_infor(MON_WIZARD),&img_mons_wizard,70,0,8,
 		{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,1,2,10,'&'},
+		M_FLAG_OPEN_DOOR | M_FLAG_FLY | M_FLAG_MAGICIAN | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,1,2,10,'&'},
 		
 	{MON_TREE_GIANT,12,1200,name_infor(MON_TREE_GIANT),&img_mons_tree_giant,180,10,5,
-		{30,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI,1,0,10,'T'},
 		
 	{MON_SANGHAI_DOLL,15,1,name_infor(MON_SANGHAI_DOLL),&img_mons_sanghai[0],80,5,22,

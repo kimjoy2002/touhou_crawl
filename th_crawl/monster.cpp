@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+#include "event.h"
 #include "monster.h"
 #include "keiki.h"
 #include "mon_infor.h"
@@ -3137,6 +3138,16 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		}		
 	}
 
+	
+	if (id == MON_TREE_GIANT) {
+		env[current_level].MakeEvent(EVL_TREE, position, EVT_ALWAYS, rand_int(20,30));
+		if(isYourShight()) {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_MON_TREE_GIANT_DEAD,
+				PlaceHolderHelper(GetName()->getName())) + " ",false,false,false,CL_bad);
+		} else if(env[current_level].isInSight(position)) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_MON_TREE_GIANT_SUDDENLY) + " ",false,false,false,CL_normal);
+		}
+	}
 
 	for(int i = 0; i < 5; i++)
 	{
@@ -3282,6 +3293,33 @@ int monster::action(int delay_)
 					PlaySE("kill_banashed");
 				}
 			}
+
+			
+			if(HasMultiTile() && parent_part_id == -1){
+				//전파
+				for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+				{
+					if (&(*it) != this && it->isLive() && it->parent_part_id != -1 && it->parent_part_id == map_id && 
+					it->flag & M_FLAG_SUMMON && it->summon_time>=0){
+						it->hp = 0;
+						env[current_level].MakeSmoke(it->position, img_fog_normal, SMT_NORMAL, 4, 0, this);
+					}
+				}
+			}
+			if(parent_part_id != -1) {
+				//내가 전파해야함
+				for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+				{
+					if (&(*it) != this && it->isLive() && (parent_part_id == it->map_id || 
+						it->parent_part_id == parent_part_id) && 
+					it->flag & M_FLAG_SUMMON && it->summon_time>=0){
+						it->hp = 0;
+						env[current_level].MakeSmoke(it->position, img_fog_normal, SMT_NORMAL, 4, 0, this);
+					}
+				}
+			}
+
+
 			env[current_level].SummonClear(map_id);
 			return 0;
 		}
@@ -4682,6 +4720,12 @@ void monster::special_action(int delay_, bool smoke_)
 				mon_->hp = hp;
 				mon_->target = target;
 
+				if(flag & M_FLAG_SUMMON) {
+					mon_->flag |= M_FLAG_SUMMON;
+					mon_->summon_time = summon_time;
+					mon_->summon_parent = summon_parent;
+					mon_->sm_info = sm_info;
+				}
 				{ //머리 이미지 조정
 					int path_ = 80+GetPosToDirec(position,mon_->position);
 					int index_ = PathToNum_forstem(path_);
@@ -4784,6 +4828,12 @@ void monster::special_action(int delay_, bool smoke_)
 				mon_->max_hp = max_hp;
 				mon_->hp = hp;
 				mon_->target = target;
+				if(flag & M_FLAG_SUMMON) {
+					mon_->flag |= M_FLAG_SUMMON;
+					mon_->summon_time = summon_time;
+					mon_->summon_parent = summon_parent;
+					mon_->sm_info = sm_info;
+				}
 
 				{ //머리 이미지 조정
 					int path_ = GetPosToDirec(position,mon_->position);
@@ -4825,12 +4875,18 @@ void monster::special_action(int delay_, bool smoke_)
 							more_branch_->hp = hp;
 							more_branch_->target = target;
 							more_branch_->direction = GetBaseAngle(direction + 180);
+							if(flag & M_FLAG_SUMMON) {
+								more_branch_->flag |= M_FLAG_SUMMON;
+								more_branch_->summon_time = summon_time;
+								more_branch_->summon_parent = summon_parent;
+								more_branch_->sm_info = sm_info;
+							}
 							break;
 						}
 					}
 				}
 
-				if(randA(4) == 0){
+				if(randA(4) ==  0 && !(flag & M_FLAG_SUMMON)){
 					int temp_ = body_vector.size();
 					if(temp_ == 1 || temp_ == 2 || temp_ == 4 || temp_ == 6) {
 						dif_rect_iterator drit(prev_position_for_monster, 1, true);

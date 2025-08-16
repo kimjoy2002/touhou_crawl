@@ -244,6 +244,12 @@ float GetPositionToAngle2(float start_x, float start_y, float target_x, float ta
 
 }
 
+int loopInt(int min, int max, int cur) {
+	int size = max-min+1;
+	while(min>cur)cur+=size;
+	while(max<cur)cur-=size;
+	return cur;
+}
 float GetBaseAngle(float angle)
 {
 	while(angle <= 0 || angle > 360)

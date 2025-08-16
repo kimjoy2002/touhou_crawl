@@ -111,6 +111,7 @@ public:
 
 
 	int time_delay; //누적되어있는시간
+	int all_time_delay; //살아있는 모든 시간
 	int speed; //행동시간 (누적되어있는시간/행동시간=행동턴)
 	int memory_time; //기억력
 	bool first_contact; //이 몬스터를 처음 보았다.

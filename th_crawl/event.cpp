@@ -1187,6 +1187,26 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			return 0;
 		}
 	}
+	case EVL_OVERGROWING:
+	{
+		if(!env[current_level].isInSight(event_->position)) {
+			return 0;
+		}
+		rand_rect_iterator rand_pos(event_->position,1,1);
+		while(!rand_pos.end()) {
+			if(env[current_level].isMove(event_->position, true) && env[current_level].isInSight(*rand_pos)) {
+				monster *stem_ = env[current_level].AddMonster(MON_OVERGROWTH_STEM, 0, event_->position);
+				int target_angle = GetBaseAngle(GetPositionToAngle(event_->position.x,event_->position.y,rand_pos->x, rand_pos->y));
+				stem_->direction = target_angle;
+				stem_->PlusTimeDelay(-you.GetWalkDelay());
+				printlog(LocalzationManager::locString(LOC_SYSTEM_STEM_GROWING), true, false, false, CL_small_danger);
+				you.SetInter(IT_EVENT);
+				break;
+			}
+			rand_pos++;
+		}
+	}
+	return 1;
 	default:
 		break;
 	}

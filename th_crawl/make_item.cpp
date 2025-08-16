@@ -362,6 +362,23 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->weight = 1.0f*t->num;
 			t->value = 30;
 			break;
+		case 4:
+			t->value1 = 5;
+			t->value2 = 0;
+			t->value3 = 0;
+			t->value4 = 0;
+			t->value5 = 50;
+			t->value6 = 0;
+			t->value7 = 0;
+			t->value8 = 0;
+			t->is_pile = true;
+			t->can_throw = false;
+			t->num = 1;
+			t->image = &img_mons_default;
+			t->name = name_infor(LOC_SYSTEM_ITEM_FOOD_WATERMELEN);
+			t->weight = 5.0f*t->num;
+			t->value = 30;
+			break;
 		}
 		break;
 	case ITM_POTION:

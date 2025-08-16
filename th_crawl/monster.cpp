@@ -47,7 +47,7 @@ s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0
 s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
 force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), s_oil(0), s_fire(0), fire_reason(PRT_NEUTRAL), s_none_move(0), s_dazed(0), bashed(false), debuf_boost(0),
-	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0),walk_speed_bonus(0), time_delay(0), 
+	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0),walk_speed_bonus(0), time_delay(0), all_time_delay(0), 
 	speed(10), memory_time(0), first_contact(true), strong(1), special_value(0), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(),
 	direction(-1), sm_info(), state(MS_NORMAL), random_spell(false), wait(false)
 {
@@ -146,6 +146,7 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, wind_resist);
 	SaveData<int>(fp, walk_speed_bonus);
 	SaveData<int>(fp, time_delay);
+	SaveData<int>(fp, all_time_delay);
 	SaveData<int>(fp, speed);
 	SaveData<int>(fp, memory_time);
 	SaveData<bool>(fp, first_contact);
@@ -281,6 +282,9 @@ void monster::LoadDatas(FILE *fp)
 		LoadData<int>(fp, walk_speed_bonus);
 	}
 	LoadData<int>(fp, time_delay);
+	if(!isPrevVersion(loading_version_string, "ver1.202")) {
+		LoadData<int>(fp, all_time_delay);
+	}
 	LoadData<int>(fp, speed);
 	LoadData<int>(fp, memory_time);
 	LoadData<bool>(fp, first_contact);
@@ -420,6 +424,7 @@ void monster::init()
 	wind_resist = 0;
 	walk_speed_bonus = 0;
 	time_delay = 0;
+	all_time_delay = 0;
 	speed = 10; 
 	memory_time = 0; 
 	first_contact = true;
@@ -3159,7 +3164,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		}
 	}
 
-	if(!(flag & M_FLAG_SUMMON) && !remove_ && !(flag & M_FLAG_UNHARM))
+	if(!(flag & M_FLAG_SUMMON) && !remove_ && !isPart && !(flag & M_FLAG_UNHARM))
 	{
 		if (reason_ == PRT_PLAYER && s_fear != -1 && !(flag & M_FLAG_COMPLETE_NETURALY)) //플레이어가 죽였다.
 		{
@@ -3177,6 +3182,8 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			item_infor temp;
 			env[current_level].MakeItem(position,makePitem((monster_index)id, 1, &temp));
 		}
+	}
+	if(!(flag & M_FLAG_SUMMON) && !remove_ && !isPart) {
 		if (s_ally != -1 && !isArena())
 		{
 			if (!item_lists.empty())
@@ -3191,25 +3198,6 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 				}
 			}
 		}
-		//if(id == MON_MAGIC_BOOK)
-		//{
-		//	item_infor t;
-		//	item *it2;
-		//	it2 = env[current_level].MakeItem(position,makeCustomBook(&t));
-		//	list<spell>::iterator it = spell_lists.begin();
-		//	if(it != spell_lists.end()){
-		//		it2->value1 = it->num;
-		//		it++;
-		//	}
-		//	if(it != spell_lists.end()){
-		//		it2->value2 = it->num;
-		//		it++;
-		//	}
-		//	if(it != spell_lists.end()){
-		//		it2->value3 = it->num;
-		//		it++;
-		//	}
-		//}
 	}
 	if(flag & M_FLAG_UNIQUE && id != MON_ENSLAVE_GHOST && !remove_ && !isPart)
 	{
@@ -3268,8 +3256,9 @@ int monster::action(int delay_)
 		is_sight_for_monster = true;
 	}
 
-
-	time_delay+=delay_ * rand_int(9,11) / 10; //움직임 randomizing
+	int delay_temp = delay_ * rand_int(9,11) / 10;  //움직임 randomizing
+	time_delay+=delay_temp; //움직임 randomizing
+	all_time_delay+=delay_temp;
 	if(flag & M_FLAG_CONFUSE)
 		s_confuse = 10;
 	if(flag & M_FLAG_SUMMON && summon_time>=0)
@@ -3829,7 +3818,7 @@ int monster::action(int delay_)
 				//	target = NULL;
 				//}
 			}
-			if(!s_sick && parent_part_id)
+			if(!s_sick && parent_part_id == -1)
 				HpRecover();
 			if(target && !target->isLive())
 			{
@@ -4726,6 +4715,155 @@ void monster::special_action(int delay_, bool smoke_)
 					}
 				}
 			}
+		} 
+		break;
+	case MON_OVERGROWTH_WATERMELON:
+		if (!smoke_) {
+			bool close_stem = false;
+			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+			{
+				if (it->isLive() && it->id == MON_OVERGROWTH_STEM && position.distance_from(it->position) <= 1){
+					close_stem = true;
+				}
+			}
+			if(!close_stem)
+				dead(PRT_NEUTRAL, false, false);
+		}
+		break;
+	case MON_OVERGROWTH_MAGIC_FLOWER:
+		if (!smoke_) {
+			if(parent_part_id == -1 && all_time_delay > 500) { //대충 100턴지남
+				bool inSight_ = env[current_level].isInSight(position);
+				for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+				{
+					if (it->isLive() && it->parent_part_id == map_id){
+						it->dead(PRT_NEUTRAL, false, true);
+						if(env[current_level].isInSight(it->position)) {
+							inSight_ = true;
+						}
+					}
+					if (it->isLive() && it->special_value == map_id){
+						it->dead(PRT_NEUTRAL, false, true);
+						if(env[current_level].isInSight(it->position)) {
+							inSight_ = true;
+						}
+					}
+				}
+				dead(PRT_NEUTRAL, false, true);
+				if (env[current_level].isInSight(position)) {
+					printlog(LocalzationManager::locString(LOC_SYSTEM_STEM_WITHERING) + " ", false, false, false, CL_bad);
+				}
+			}
+		}
+		break;
+	case MON_OVERGROWTH_STEM:
+		if (!smoke_) {
+			if(special_value == 0 && position != prev_position_for_monster && position.distance_from(prev_position_for_monster) == 1 &&
+				!env[current_level].isMonsterPos(prev_position_for_monster.x, prev_position_for_monster.y)) {
+				vector<monster*> body_vector;
+				for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+				{
+					if (it->isLive() && &(*it) != this && it->special_value != 0 
+					 && it->parent_part_id != -1
+					 && it->special_value/100 == map_id 
+					 && it->id == MON_OVERGROWTH_STEM){
+						it->special_value++;
+						body_vector.push_back(&(*it));
+					}
+				}
+				std::sort(body_vector.begin(), body_vector.end(),
+						[](monster* a, monster* b) {
+							return (a->special_value%100) < (b->special_value%100);
+						});
+				monster *mon_ = env[current_level].AddMonster(MON_OVERGROWTH_STEM, M_FLAG_NONE_MOVE, prev_position_for_monster);
+				mon_->parent_part_id = map_id;
+				if(parent_part_id != -1) {
+					mon_->parent_part_id = parent_part_id;
+				}
+				mon_->special_value = map_id*100 + 1;
+				mon_->max_hp = max_hp;
+				mon_->hp = hp;
+				mon_->target = target;
+
+				{ //머리 이미지 조정
+					int path_ = GetPosToDirec(position,mon_->position);
+					path_+= 10*loopInt(0, 7, path_+4);
+					int index_ = PathToNum_forstem(path_);
+					if(index_ > 8 && index_ < 36) {
+						image = &img_mons_magic_flower_stem[index_-8];
+					}
+				}
+
+				if(body_vector.size() != 0) { //중간
+					monster* tail_ = body_vector[0];
+					int path_ = 10*GetPosToDirec(mon_->position,position);
+					path_ += GetPosToDirec(mon_->position,tail_->position);
+					int index_ = PathToNum_forstem(path_);
+					if(index_ > 8 && index_ < 36) {
+						mon_->image = &img_mons_magic_flower_stem[index_-8];
+					}
+				} else { //맨 끝
+					coord_def dir = prev_position_for_monster - position;
+					coord_def temp = prev_position_for_monster + dir;
+					int path_ = 10*GetPosToDirec(mon_->position,position);
+					path_ += GetPosToDirec(mon_->position,temp);
+					int index_ = PathToNum_forstem(path_);
+					if(index_ > 8 && index_ < 36) {
+						mon_->image = &img_mons_magic_flower_stem[index_-8];
+					}
+				}
+				if(((body_vector.size() == 5 && randA(1)) || body_vector.size() == 3) && parent_part_id == -1) {
+					dif_rect_iterator drit(prev_position_for_monster, 1, true);
+					for (; !drit.end(); drit++)
+					{
+						if (summon_check(coord_def(drit->x, drit->y), position, true, false))
+						{
+							monster *more_branch_ = env[current_level].AddMonster(MON_OVERGROWTH_STEM, 0, *drit);
+							more_branch_->parent_part_id = map_id;
+							more_branch_->special_value = 0;
+							more_branch_->max_hp = max_hp;
+							more_branch_->hp = hp;
+							more_branch_->target = target;
+							more_branch_->direction = GetBaseAngle(direction + 180);
+							break;
+						}
+					}
+				}
+
+				if(randA(4) == 0){
+					int temp_ = body_vector.size();
+					if(temp_ == 1 || temp_ == 2 || temp_ == 4 || temp_ == 6) {
+						dif_rect_iterator drit(prev_position_for_monster, 1, true);
+						for (; !drit.end(); drit++)
+						{
+							if (summon_check(coord_def(drit->x, drit->y), position, true, false))
+							{
+								monster *watermelon_ = env[current_level].AddMonster(MON_OVERGROWTH_WATERMELON, 0, *drit);
+								watermelon_->target = target;
+								watermelon_->special_value = map_id;
+								item_infor t;
+								makeitem(ITM_FOOD, 0, &t, 4);
+								watermelon_->item_lists.push_back(t);
+								break;
+							}
+						}
+					}
+				}
+
+
+				if(special_value == 0) {
+					if(parent_part_id == -1) {
+						if(body_vector.size() > 6) {
+							ChangeMonster(MON_OVERGROWTH_MAGIC_FLOWER,0);
+						}
+					}
+					else {
+						if((body_vector.size() == 3 && randA(1)) || body_vector.size() > 3) {
+							ChangeMonster(MON_OVERGROWTH_MAGIC_FLOWER,0);
+						}
+					}
+				}
+			}
 		}
 		break;
 	default:
@@ -4863,7 +5001,7 @@ bool monster::HpRecover(int turn_)
 	return false;
 }
 bool monster::HasMultiTile() {
-	if(id == MON_GIANT_CENTIPEDE) {
+	if(id == MON_GIANT_CENTIPEDE || id == MON_OVERGROWTH_MAGIC_FLOWER) {
 		return true;
 	}
 	return false;
@@ -4879,7 +5017,7 @@ int monster::HpUpDown(int value_,damage_reason reason, unit *order_, bool non_de
 		hp = max_hp;		
 	}
 	if(reason != DR_SPREAD) {
-		if(HasMultiTile()){
+		if(HasMultiTile() && parent_part_id == -1){
 			//전파
 			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
 			{
@@ -6074,6 +6212,13 @@ int monster::special_state(bool is_sight_for_monster) {
 		} else {
 			env[current_level].MakeAfterimage(coord_def(position.x, position.y), image, 50, 4);
 			dead(PRT_NEUTRAL, false);
+		}
+	}
+	return 2;
+	case MON_OVERGROWTH_STEM:
+	{
+		if(!special_move(is_sight_for_monster, true, 30)) {	
+			return 1;
 		}
 	}
 	return 2;

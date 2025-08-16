@@ -1146,15 +1146,15 @@ const mon_infor mondata[] = {
 		
 	{MON_OVERGROWTH_MAGIC_FLOWER,11,1100,name_infor(MON_OVERGROWTH_MAGIC_FLOWER),&img_mons_magic_flower,120,5,3,
 		{0,0,0},{ATT_NONE,ATT_NONE,ATT_NONE},{name_infor(),name_infor(),name_infor()},
-		M_FLAG_NONE_MOVE | M_FLAG_WAKE | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL,1,2,10,'F'},
+		M_FLAG_NONE_MOVE | M_FLAG_IMMOBILE | M_FLAG_WAKE | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL,1,2,10,'F'},
 		
-	{MON_OVERGROWTH_STEM,11,0,name_infor(MON_OVERGROWTH_STEM),&img_mons_magic_flower_stem[0],50,0,0,
+	{MON_OVERGROWTH_STEM,11,0,name_infor(MON_OVERGROWTH_STEM),&img_mons_magic_flower_stem[0],120,10,3,
 		{0,0,0},{ATT_NONE,ATT_NONE,ATT_NONE},{name_infor(),name_infor(),name_infor()},
-		M_FLAG_NONE_MOVE | M_FLAG_WAKE | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL,0,0,10,'*'},
+		M_FLAG_IMMOBILE | M_FLAG_WAKE | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_UNHARM | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL,0,0,3,'*'},
 		
 	{MON_OVERGROWTH_WATERMELON,11,0,name_infor(MON_OVERGROWTH_WATERMELON),&img_mons_watermelon,80,0,0,
 		{0,0,0},{ATT_NONE,ATT_NONE,ATT_NONE},{name_infor(),name_infor(),name_infor()},
-		M_FLAG_NONE_MOVE | M_FLAG_WAKE | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL,0,0,10,'O'},
+		M_FLAG_NONE_MOVE | M_FLAG_WAKE | M_FLAG_NO_ATK | M_FLAG_UNHARM | M_FLAG_CANT_NETURAL,0,0,10,'O'},
 		
 	{MON_WIZARD,13,1500,name_infor(MON_WIZARD),&img_mons_wizard,70,0,8,
 		{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},

@@ -1190,20 +1190,40 @@ textures img_mons_giant_centipede_body[] =
 	textures(&texture_monster02, 109, 255)
 };
 textures img_mons_spore(&texture_monster02, 73, 255);
-textures img_mons_eating_flower(&texture_monster01, 47, 255);
-textures img_mons_magic_flower(&texture_monster01, 47, 255);
+textures img_mons_eating_flower(&texture_monster02, 110, 255);
+textures img_mons_magic_flower(&texture_monster02, 111, 255);
 textures img_mons_magic_flower_stem[] =
 {
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255)
+	textures(&texture_monster02, 114, 255),
+	textures(&texture_monster02, 115, 255),
+	textures(&texture_monster02, 116, 255),
+	textures(&texture_monster02, 117, 255),
+	textures(&texture_monster02, 118, 255),
+	textures(&texture_monster02, 119, 255),
+	textures(&texture_monster02, 120, 255),
+	textures(&texture_monster02, 121, 255),
+	textures(&texture_monster02, 122, 255),
+	textures(&texture_monster02, 123, 255),
+	textures(&texture_monster02, 124, 255),
+	textures(&texture_monster02, 125, 255),
+	textures(&texture_monster02, 126, 255),
+	textures(&texture_monster02, 127, 255),
+	textures(&texture_monster02, 128, 255),
+	textures(&texture_monster02, 129, 255),
+	textures(&texture_monster02, 130, 255),
+	textures(&texture_monster02, 131, 255),
+	textures(&texture_monster02, 132, 255),
+	textures(&texture_monster02, 133, 255),
+	textures(&texture_monster02, 134, 255),
+	textures(&texture_monster02, 135, 255),
+	textures(&texture_monster02, 136, 255),
+	textures(&texture_monster02, 137, 255),
+	textures(&texture_monster02, 138, 255),
+	textures(&texture_monster02, 139, 255),
+	textures(&texture_monster02, 140, 255),
+	textures(&texture_monster02, 141, 255)
 };
-textures img_mons_watermelon(&texture_monster01, 47, 255);
+textures img_mons_watermelon(&texture_monster02, 112, 255);
 textures img_mons_wizard(&texture_monster01, 47, 255);
 textures img_mons_tree_giant(&texture_monster01, 47, 255);
 textures img_mons_france_doll(&texture_monster01, 47, 255);
@@ -4132,6 +4152,46 @@ int texturetoint(textures* input)
 		return 673;
 	else if(input == &img_mons_giant_centipede_body[35])
 		return 674;
+	else if(input == &img_mons_magic_flower_stem[8])
+		return 675;
+	else if(input == &img_mons_magic_flower_stem[9])
+		return 676;
+	else if(input == &img_mons_magic_flower_stem[10])
+		return 677;
+	else if(input == &img_mons_magic_flower_stem[11])
+		return 678;
+	else if(input == &img_mons_magic_flower_stem[12])
+		return 679;
+	else if(input == &img_mons_magic_flower_stem[13])
+		return 680;
+	else if(input == &img_mons_magic_flower_stem[14])
+		return 681;
+	else if(input == &img_mons_magic_flower_stem[15])
+		return 682;
+	else if(input == &img_mons_magic_flower_stem[16])
+		return 683;
+	else if(input == &img_mons_magic_flower_stem[17])
+		return 684;
+	else if(input == &img_mons_magic_flower_stem[18])
+		return 685;
+	else if(input == &img_mons_magic_flower_stem[19])
+		return 686;
+	else if(input == &img_mons_magic_flower_stem[20])
+		return 687;
+	else if(input == &img_mons_magic_flower_stem[21])
+		return 688;
+	else if(input == &img_mons_magic_flower_stem[22])
+		return 689;
+	else if(input == &img_mons_magic_flower_stem[23])
+		return 690;
+	else if(input == &img_mons_magic_flower_stem[24])
+		return 691;
+	else if(input == &img_mons_magic_flower_stem[25])
+		return 692;
+	else if(input == &img_mons_magic_flower_stem[26])
+		return 693;
+	else if(input == &img_mons_magic_flower_stem[27])
+		return 694;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -5508,6 +5568,46 @@ textures* inttotexture(int input)
 		return &img_mons_giant_centipede_body[34];
 	case 674:
 		return &img_mons_giant_centipede_body[35];
+	case 675:
+		return &img_mons_magic_flower_stem[8];
+	case 676:
+		return &img_mons_magic_flower_stem[9];
+	case 677:
+		return &img_mons_magic_flower_stem[10];
+	case 678:
+		return &img_mons_magic_flower_stem[11];
+	case 679:
+		return &img_mons_magic_flower_stem[12];
+	case 680:
+		return &img_mons_magic_flower_stem[13];
+	case 681:
+		return &img_mons_magic_flower_stem[14];
+	case 682:
+		return &img_mons_magic_flower_stem[15];
+	case 683:
+		return &img_mons_magic_flower_stem[16];
+	case 684:
+		return &img_mons_magic_flower_stem[17];
+	case 685:
+		return &img_mons_magic_flower_stem[18];
+	case 686:
+		return &img_mons_magic_flower_stem[19];
+	case 687:
+		return &img_mons_magic_flower_stem[20];
+	case 688:
+		return &img_mons_magic_flower_stem[21];
+	case 689:
+		return &img_mons_magic_flower_stem[22];
+	case 690:
+		return &img_mons_magic_flower_stem[23];
+	case 691:
+		return &img_mons_magic_flower_stem[24];
+	case 692:
+		return &img_mons_magic_flower_stem[25];
+	case 693:
+		return &img_mons_magic_flower_stem[26];
+	case 694:
+		return &img_mons_magic_flower_stem[27];
 	default:
 		return &img_mons_default;
 	}

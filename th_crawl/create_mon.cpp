@@ -206,12 +206,14 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 116,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+3, 5,  3}, //사슴벌레
 	{ 120,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+3, 2,  3}, //식인꽃
 	
-	{ 117, FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 3,  3}, //민달팽이
+	{ 117, FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 1,  3}, //민달팽이
 	{ 54, FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 3,  3}, //호랑이
 	{ 119,  FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 5,  3}, //포자
 	{ 120,  FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 5,  3}, //식인꽃
+	{ 129,  FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 2,  2}, //과성장 줄기
 	
-	{ 121,  FORESTOFMAGIC_LEVEL+2,  FORESTOFMAGIC_LEVEL+3, 5,  1}, //은둔 마법사
+	{ 121,  FORESTOFMAGIC_LEVEL+2,  FORESTOFMAGIC_LEVEL+3, 5,  3}, //은둔 마법사
+	{ 129,  FORESTOFMAGIC_LEVEL+2,  FORESTOFMAGIC_LEVEL+3, 8,  2}, //과성장 줄기
 
 	{ 122,  FORESTOFMAGIC_LEVEL+3,  FORESTOFMAGIC_LEVEL+3, 5,  5}, //나무 거인
 	
@@ -1133,6 +1135,61 @@ void create_id_to_mon(int id, int level, int strong)
 		break;
 	case 128:
 		index.push_back(pair<monster_index, int>(MON_GOLIATH_DOLL, strong));
+		break;
+	case 129://줄기(이벤트로 추가필요)
+		{
+			const auto in_bounds = [](int x, int y) {
+				return (0 <= x && x < DG_MAX_X) && (0 <= y && y < DG_MAX_Y);
+			};
+
+			auto has_adjacent_tree_4 = [&](int x, int y) {
+				static const int dx[4] = {1,-1,0,0};
+				static const int dy[4] = {0,0,1,-1};
+				for (int k = 0; k < 4; ++k) {
+					int nx = x + dx[k], ny = y + dy[k];
+					if (!in_bounds(nx, ny)) continue;
+					if (env[level].dgtile[nx][ny].tile == DG_TREE) return true;
+				}
+				return false;
+			};
+
+			auto has_adjacent_move_4 = [&](int x, int y) {
+				static const int dx[4] = {1,-1,0,0};
+				static const int dy[4] = {0,0,1,-1};
+				for (int k = 0; k < 4; ++k) {
+					int nx = x + dx[k], ny = y + dy[k];
+					if (!in_bounds(nx, ny)) continue;
+					if (env[level].dgtile[nx][ny].isMove(true, false, false)) return true;
+				}
+				return false;
+			};
+
+			std::vector<coord_def> candidates;
+			candidates.reserve((DG_MAX_X * DG_MAX_Y) / 8);
+
+			for (int y = 0; y < DG_MAX_Y; ++y) {
+				for (int x = 0; x < DG_MAX_X; ++x) {
+					// 1) 자기 칸 이동 가능
+					if (!env[level].isMove(x, y, true)) continue;
+
+					// 2) 몬스터 금지 플래그가 없어야 함
+					if (env[level].dgtile[x][y].flag & FLAG_NO_MONSTER) continue;
+
+					// 3) 나무 인접(4방)
+					if (!has_adjacent_tree_4(x, y)) continue;
+
+					// 4) 인접칸 중 최소 1칸 이동 가능(4방)
+					if (!has_adjacent_move_4(x, y)) continue;
+
+					candidates.emplace_back(x, y);
+				}
+			}
+
+			if (!candidates.empty()) {
+				const int idx = randA((int)candidates.size()-1);
+				env[level].MakeEvent(EVL_OVERGROWING, candidates[idx], EVT_APPROACH_BIG);
+			}
+		}
 		break;
 	}
 

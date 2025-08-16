@@ -1357,6 +1357,11 @@ bool skill_yuyuko_enslave(int power, bool short_, unit* order, coord_def target)
 		return false;	
 	if(unit* hit_mon = DebufBeam(SKL_YUYUKO_3, order, target))
 	{
+		
+		if(hit_mon->isImmobile()) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_IMMOBILE_FAIL),true,false,false,CL_normal);
+			return false;
+		}
 		/*
 	if(unit* hit_mon = env[current_level].isMonsterPos(target.x,target.y,order))
 	{*/

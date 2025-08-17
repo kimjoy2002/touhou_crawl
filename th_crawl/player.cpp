@@ -7246,7 +7246,7 @@ int players::CanSlash(attack_type att_type) {
 				//근처에 적이 없고
 				if(!s_confuse && !s_paralyse) {
 					//혼란이나 마비상태가 아니며, (광기는 가능!)
-					if(att_type >= ATT_THROW_NORMAL && att_type <= ATT_THROW_LAST) {
+					if(isGrazableAtt(att_type)) {
 						//기본적으로 그레이즈가 되는 기술들
 						int long_blade = GetSkillLevel(SKT_LONGBLADE, true);
 						if(long_blade >= 8) {//최소 롱 블레이드 스킬이 8이상

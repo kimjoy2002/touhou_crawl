@@ -2351,7 +2351,8 @@ textures img_blast[] = {textures(&texture_laser, 100, 255),
 								textures(&texture_laser, 103, 255),
 								textures(&texture_laser, 104, 255),
 								textures(&texture_laser, 105, 255),
-								textures(&texture_laser, 132, 255)};
+								textures(&texture_laser, 132, 255),
+								textures(&texture_laser, 165, 255)};
 textures img_autumn_edge[] = { textures(&texture_laser, 106, 255),
 			textures(&texture_laser, 107, 255),
 			textures(&texture_laser, 108, 255),

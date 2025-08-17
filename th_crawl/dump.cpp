@@ -223,6 +223,14 @@ void GetDeathReason(stringstream& death_reason, damage_reason dead_reason, int a
 					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NORMAL, PlaceHolderHelper(CurrentLevelString(level)));
 				}
 				break;
+			case ATT_CONFUSE_SPORE:
+			case ATT_WEAK_SPORE:
+				if (hasmonster) {
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SPORE_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+				} else {
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SPORE, PlaceHolderHelper(CurrentLevelString(level)));
+				}
+				break;
 			case ATT_HOOF:
 				if (hasmonster) {
 					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_HOOF_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));

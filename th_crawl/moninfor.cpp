@@ -65,6 +65,10 @@ LOCALIZATION_ENUM_KEY getKeyOfAttack(attack_type type) {
 		return LOC_SYSTEM_ATT_INFO_SLEEP;
 	case ATT_BEARTRAP:
 		return LOC_SYSTEM_ATT_INFO_BEARTRAP;
+	case ATT_CONFUSE_SPORE:
+		return LOC_SYSTEM_ATT_INFO_CONFUSE_SPORE;
+	case ATT_WEAK_SPORE:
+		return LOC_SYSTEM_ATT_INFO_WEAK_SPORE;
 	default:
 		break;
 	}

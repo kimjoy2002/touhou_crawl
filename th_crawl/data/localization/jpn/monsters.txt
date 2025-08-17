@@ -273,7 +273,7 @@ MON_RABIT_ALCHEMIST,ウサギ錬金術師,ガスマスクをつけ、薬品を�
 MON_COGWHEEL,歯車,錬金術によって作られた歯車。\n移動しながら周囲8方向の敵にダメージを与える。
 MON_YAMAINU,野犬,テスト
 MON_CONFUSE_MUSHROOM,幻覚キノコ妖怪,テスト
-MON_WEAKENING_MUSHROOM,麻痺キノコ妖怪,テスト
+MON_WEAKENING_MUSHROOM,弱体キノコ妖怪,テスト
 MON_MUSHROOM_GIANT,キノコの巨人,テスト
 MON_GIANT_STAG_BEETLE,巨大クワガタ,テスト
 MON_GIANT_SLUG,巨大ナメクジ,テスト

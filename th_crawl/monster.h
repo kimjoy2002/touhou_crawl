@@ -365,4 +365,9 @@ public:
 	effect(const coord_def &c, textures *t, bool over_sight_, float alpha):image(t),position(c),over_sight(over_sight_), alpha(alpha){};
 };
 
+bool isNormalAtt(attack_type type);
+bool isGrazableAtt(attack_type type);
+bool CantGaurdAtt(attack_type type);
+
+
 #endif // __MONSTER_H__

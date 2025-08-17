@@ -1109,11 +1109,11 @@ const mon_infor mondata[] = {
 		M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,1,10,'D'},
 		
 	{MON_CONFUSE_MUSHROOM,9,690,name_infor(MON_CONFUSE_MUSHROOM),&img_confuse_mushroom,70,6,0,
-		{14,0,0},{ATT_S_POISON,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		{14,0,0},{ATT_CONFUSE_SPORE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_SPORE),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,0,12,'m'},
 		
 	{MON_WEAKENING_MUSHROOM,8,350,name_infor(MON_WEAKENING_MUSHROOM),&img_mons_weakening_mushroom,55,6,0,
-		{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		{12,0,0},{ATT_WEAK_SPORE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_SPORE),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR  | M_FLAG_SPEAK,0,0,12,'m'},
 		
 	{MON_MUSHROOM_GIANT,12,1200,name_infor(MON_MUSHROOM_GIANT),&img_mons_mushroom_giant,210,12,0,

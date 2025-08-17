@@ -6172,6 +6172,80 @@ bool skill_royalflare(int pow_, bool short_, unit* order, coord_def target)
 	return false;
 }
 
+
+bool skill_spore_bomb(monster* order)
+{
+	if(!order)
+	return false;
+	if (env[current_level].isInSight(order->position)) {
+		PlaySE("bomb");
+	}
+	bool isSight = false;
+	textures* t_ = &img_blast[7];
+	{
+		dif_rect_iterator rit(order->position,3);
+	
+		for(;!rit.end();rit++)
+			if(env[current_level].isMove(rit->x,rit->y,true))
+			{
+				if(order->isSightnonblocked(*rit))
+				{
+					env[current_level].MakeEffect(*rit,t_,false);
+					if (env[current_level].isInSight(*rit)) {
+						isSight = true;
+					}
+				}
+			}
+	}
+	
+	random_extraction<coord_def> can_pos;
+	{
+		dif_rect_iterator rit(order->position,2);
+	
+		for(;!rit.end();rit++)
+		{
+			if(env[current_level].isMove(rit->x,rit->y,true))
+			{
+				if(order->isSightnonblocked(*rit))
+				{
+					if(unit* hit_ = env[current_level].isMonsterPos(rit->x,rit->y, order))
+					{	
+						if((hit_ != order))
+						{
+							int att_ = order->GetAttack(false);
+							int m_att_ = order->GetAttack(true);
+
+							attack_infor temp_att(att_,m_att_,99,order,order->GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_SPORE));
+							hit_->damage(temp_att, true);
+						}
+					} else {
+						can_pos.push(*rit);
+					}
+				}
+			}
+		}
+	}
+	if (isSight) {
+		Sleep(300);
+	}
+	env[current_level].ClearEffect();
+	random_extraction<int> mushrooms;
+	mushrooms.push(MON_MUSHROOM, 4);
+	mushrooms.push(MON_CONFUSE_MUSHROOM, 2);
+	mushrooms.push(MON_WEAKENING_MUSHROOM, 1);
+
+	for(int i = rand_int(2,4); i> 0 && can_pos.GetSize() > 0;) {
+		coord_def pos_ = can_pos.pop();
+		if(env[current_level].isMove(pos_)) {
+			monster *stem_ = env[current_level].AddMonster(mushrooms.choice(), 0, pos_);
+			stem_->PlusTimeDelay(-you.GetWalkDelay());
+			i--;
+		}
+	}
+	return true;
+}
+
+
 void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, bool* random_spell)
 {
 	list<spell> *list =  &(mon_->spell_lists);

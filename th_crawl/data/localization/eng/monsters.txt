@@ -272,8 +272,8 @@ MON_RABIT_GIANT,Giant Rabbit,A giant rabbit with a muscular physique.\nThrough c
 MON_RABIT_ALCHEMIST,Rabbit Alchemist,A rabbit wearing a gas mask and loaded with potions.\nStudied pharmaceutical alchemy under Eirin and discovered its own talent.\nDue to its master’s influence, it now acts more like a mad scientist.
 MON_COGWHEEL,Cogwheel,A gear created through alchemy.\nMoves around and deals damage to enemies in all 8 surrounding directions.
 MON_YAMAINU,Wild Dog,TODO
-MON_CONFUSE_MUSHROOM,Hallucinogenic Mushroom Youkai,TODO
-MON_WEAKENING_MUSHROOM,Paralytic Mushroom Youkai,TODO
+MON_CONFUSE_MUSHROOM,Confusing Mushroom Youkai,TODO
+MON_WEAKENING_MUSHROOM,Weakened Mushroom Youkai,TODO
 MON_MUSHROOM_GIANT,Mushroom Giant,TODO
 MON_GIANT_STAG_BEETLE,Giant Stag Beetle,TODO
 MON_GIANT_SLUG,Giant Slug,TODO

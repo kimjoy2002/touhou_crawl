@@ -37,9 +37,9 @@
 
 
 
-
 coord_def inttodirec(int direc, int x_=0, int y_=0);
 bool evoke_bomb(int power, bool short_, unit* order, coord_def target);
+bool skill_spore_bomb(monster* order);
 
 monster::monster() 
 : map_id(-1), id(0), id2(0), parent_part_id(-1), level(1), exper(0), name(LOC_SYSTEM_NONE_STRING), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), prev_position_for_monster(0,0), first_position(0,0), prev_sight(false),
@@ -1157,6 +1157,9 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_COLD_ENCHANT_BLAST:
 	case ATT_ELEC_ENCHANT_BLAST:
 	case ATT_POISON_ENCHANT_BLAST:
+	case ATT_CONFUSE_SPORE:
+	case ATT_WEAK_SPORE:
+	case ATT_ACID_BYTE:
 	default:
 		damage_ -= randA(ac);
 		if(damage_<0)
@@ -1314,6 +1317,9 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_THROW_POISON_PYSICAL:
 		case ATT_THROW_SLOW_POISON:
 		case ATT_BEARTRAP:
+		case ATT_CONFUSE_SPORE:
+		case ATT_WEAK_SPORE:
+		case ATT_ACID_BYTE:
 			if(a.order) {
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,CL_normal,
 					PlaceHolderHelper(name_.getName()),
@@ -1644,7 +1650,7 @@ void monster::print_no_damage_message(attack_infor &a)
 bool monster::damage(attack_infor &a, bool perfect_)
 {
 	int back_stab = 0;
-	if(a.type < ATT_THROW_NORMAL)
+	if(isNormalAtt(a.type))
 	{ //백스탭레벨  3-맥스데미지 2-간간히 크리데미지 1-아주 드문 크리데미지
 		if(state.GetState() == MS_SLEEP || state.GetState() == MS_REST)
 			back_stab = 3;
@@ -1683,7 +1689,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 
 	bool player_joon_punch_ = false;
 
-	if (/*a.type < ATT_THROW_NORMAL &&*/ a.order && a.order->isplayer() && you.god == GT_JOON_AND_SION && !you.GetPunish(GT_JOON_AND_SION)
+	if (a.order && a.order->isplayer() && you.god == GT_JOON_AND_SION && !you.GetPunish(GT_JOON_AND_SION)
 		&& you.god_value[GT_JOON_AND_SION][0] == 1 && pietyLevel(you.piety) >= 2 &&
 		you.power >= 10 )
 	{
@@ -1734,7 +1740,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 
 	if(s_graze && randA(5) == 0)
 	{
-		if(a.type >= ATT_THROW_NORMAL && a.type < ATT_THROW_LAST)
+		if(isGrazableAtt(a.type))
 			graze_ = true;
 	}
 
@@ -1852,7 +1858,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			if(canBash) {
 				PlaySE("bash");
 			}
-			else if ((sight_ || only_invisible_) && a.type < ATT_THROW_NORMAL) {
+			else if ((sight_ || only_invisible_) && isNormalAtt(a.type)) {
 				PlaySE("hit");
 			}
 
@@ -1920,7 +1926,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			}
 			if(s_veiling)
 			{
-				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
+				if(a.order && a.type >=ATT_NORMAL && isNormalAtt(a.type))
 				{
 					attack_infor attack_infor_(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor(LOC_SYSTEM_VEILING));
 					a.order->damage(attack_infor_, true);
@@ -2109,7 +2115,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		}
 		if(damage_ && a.order == &you)
 		{
-			if(a.type >= ATT_NORMAL && a.type < ATT_THROW_NORMAL && you.GetProperty(TPT_CONFUSE_ATTACK) && randA(4) == 0)
+			if(a.type >= ATT_NORMAL && isNormalAtt(a.type) && you.GetProperty(TPT_CONFUSE_ATTACK) && randA(4) == 0)
 			{
 				if(!confuse_resist)
 				{
@@ -2123,6 +2129,17 @@ bool monster::damage(attack_infor &a, bool perfect_)
 
 		if(a.type == ATT_OIL_BLAST) { 
 			SetOil(10, 50);
+		}
+
+		if(a.type == ATT_CONFUSE_SPORE) { 
+			if(((poison_resist < 0)|| (poison_resist<=0 && randA(2) == 0)) && s_confuse < 12) {
+				SetConfuse(rand_int(5,8));
+			}
+		}
+		if(a.type == ATT_WEAK_SPORE) { 
+			if(((poison_resist < 0)|| (poison_resist<=0 && randA(1) == 0))) {
+				SetForceStrong(false, rand_int(10,20), true);
+			}
 		}
 
 		if(s_oil > 0 && (a.type == ATT_FIRE ||
@@ -2376,6 +2393,10 @@ int monster::AttackToYou(bool force_) {
 	for(int i=0;i<3;i++,num_++)
 		if(atk_type[i] == ATT_NONE)
 			break;
+	if(id == MON_SPORE) {
+		dead(PRT_NEUTRAL,true);
+		return 1;
+	}
 	if(isHaveSpell(SPL_SUICIDE_BOMB))
 	{
 		MonsterUseSpell(SPL_SUICIDE_BOMB, false, this, you.position);
@@ -3139,6 +3160,9 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 	}
 
 	
+	if (id == MON_SPORE) {
+		skill_spore_bomb(this);
+	}
 	if (id == MON_TREE_GIANT) {
 		env[current_level].MakeEvent(EVL_TREE, position, EVT_ALWAYS, rand_int(20,30));
 		if(isYourShight()) {
@@ -6990,4 +7014,51 @@ coord_def inttodirec(int direc, int x_, int y_)
 	else if(direc>=3 && direc < 6)
 		y += 1;
 	return coord_def(x,y);
+}
+
+bool isNormalAtt(attack_type type) {
+	if(type>ATT_DROWNING) {
+		//enum 세이브 호환성을 위해 별도로 뺌
+		switch(type) {
+			case ATT_CONFUSE_SPORE:
+			case ATT_WEAK_SPORE:
+			case ATT_ACID_BYTE:
+				return true;
+			default:
+				break;
+		}
+
+	}
+	return type < ATT_THROW_NORMAL;
+}
+bool isGrazableAtt(attack_type type) {
+	if(type>ATT_DROWNING) {
+		//enum 세이브 호환성을 위해 별도로 뺌
+		switch(type) {
+			case ATT_CONFUSE_SPORE:
+			case ATT_WEAK_SPORE:
+			case ATT_ACID_BYTE:
+				return false;
+			default:
+				break;
+		}
+
+
+	}
+	return type >= ATT_THROW_NORMAL && type < ATT_THROW_LAST;
+}
+bool CantGaurdAtt(attack_type type) {
+	if(type>ATT_DROWNING) {
+		//enum 세이브 호환성을 위해 별도로 뺌
+		switch(type) {
+			case ATT_CONFUSE_SPORE:
+			case ATT_WEAK_SPORE:
+			case ATT_ACID_BYTE:
+				return false;
+			default:
+				break;
+		}
+
+	}
+	return type >= ATT_NO_GUARD;
 }

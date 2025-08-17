@@ -503,6 +503,9 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_THROW_SLOW_POISON:
 	case ATT_BEARTRAP:
 	case ATT_POISON_ENCHANT_BLAST:
+	case ATT_CONFUSE_SPORE:
+	case ATT_WEAK_SPORE:
+	case ATT_ACID_BYTE:
 	default:
 		{//데미지 계산공식
 			//최종데미지  :  1d(percent_*damage_) - 0d(ac_dec)
@@ -841,6 +844,9 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_COLD_ENCHANT_BLAST:
 	case ATT_ELEC_ENCHANT_BLAST:
 	case ATT_POISON_ENCHANT_BLAST:
+	case ATT_CONFUSE_SPORE:
+	case ATT_WEAK_SPORE:
+	case ATT_ACID_BYTE:
 		if(a.order)
 		{
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BLAST,false,false,false,CL_normal,
@@ -958,7 +964,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 	if (accuracy_ >= 99)
 		perfect_ = true;
 
-	if(a.type < ATT_THROW_NORMAL)
+	if(isNormalAtt(a.type))
 	{
 		if(s_paralyse)
 			damage_ *= 1.2f;
@@ -981,7 +987,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 	
 	if(s_graze && randA(GetProperty(TPT_GRAZE_CONTROL)?2:5) == 0)
 	{
-		if(a.type >= ATT_THROW_NORMAL && a.type < ATT_THROW_LAST)
+		if(isGrazableAtt(a.type))
 			graze_ = true;
 	}
 
@@ -1032,10 +1038,10 @@ bool players::damage(attack_infor &a, bool perfect_)
      // (SH / breaking+SH)의 확률로 가드!
 	 //단 실드가 통하지 않는 공격일경우 최종확률이 0이됨(나중에 넣기)
 		float breaking = 75;
-		if(a.type >= ATT_THROW_NORMAL && a.type < ATT_THROW_LAST)
+		if(isGrazableAtt(a.type))
 			breaking -= 15;
 		shield_ = (float)sh/(sh+breaking);
-		if(a.type >= ATT_NO_GUARD)
+		if(CantGaurdAtt(a.type))
 			shield_ = 0;
 		if(you.s_sleep<0 || you.s_paralyse)
 			shield_ = 0;
@@ -1172,6 +1178,16 @@ bool players::damage(attack_infor &a, bool perfect_)
 			if(a.type == ATT_OIL_BLAST) {
 				you.SetOil(10, 50);
 			}
+			if(a.type == ATT_CONFUSE_SPORE) { 
+				if(((poison_resist < 0)|| (poison_resist<=0 && randA(2) == 0)) && s_confuse < 12) {
+					SetConfuse(rand_int(5,8));
+				}
+			}
+			if(a.type == ATT_WEAK_SPORE) { 
+				if(((poison_resist < 0)|| (poison_resist<=0)) && randA(1) == 0) {
+					SetForceStrong(false, rand_int(10,20), true);
+				}
+			}
 			if(s_oil > 0 && (a.type == ATT_FIRE ||
 				a.type == ATT_FIREPLUS ||
 				a.type == ATT_FIRE_WEAK ||
@@ -1206,7 +1222,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 
 			if(s_veiling && GetHp()>0)
 			{
-				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
+				if(a.order && a.type >=ATT_NORMAL && isNormalAtt(a.type))
 				{
 					attack_infor attack_infor_(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor(LOC_SYSTEM_VEILING));
 					a.order->damage(attack_infor_, true);
@@ -1265,7 +1281,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 
 			if(GetProperty(TPT_FORCE_OF_NATURE) && GetHp()>0 && randA(1))
 			{
-				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
+				if(a.order && a.type >=ATT_NORMAL && isNormalAtt(a.type))
 				{
 					switch(half_youkai[1])
 					{

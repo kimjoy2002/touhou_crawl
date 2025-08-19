@@ -6173,6 +6173,67 @@ bool skill_royalflare(int pow_, bool short_, unit* order, coord_def target)
 }
 
 
+bool skill_confuse_spore(int pow_, bool short_, unit* order, coord_def target)
+{
+	beam_iterator beam(order->position,order->position);
+	if(CheckThrowPath(order->position,target,beam))
+	{
+		beam_infor temp_infor(0,0,99,order,order->GetParentType(),SpellLength(SPL_CONFUSE_SPORE, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_SPORE));
+		if(short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+		
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			if (env[current_level].isInSight(order->position)) {
+				PlaySE("shoot_heavy");
+			}
+			throwtanmac(39, beam, temp_infor, NULL);
+		}
+		order->SetParadox(0); 
+		beam.init();
+		int length = 7;
+		while(env[current_level].isMove(*(beam),true) && length>0)
+		{
+			env[current_level].MakeSmoke((*beam),img_fog_confusion,SMT_CONFUSE,rand_int(6,10),0,order);
+			length--;
+			beam++;
+		}
+		return true;
+	}
+	return false;
+}
+
+bool skill_weakended_spore(int pow_, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_acid_bolt(int pow_, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
+bool skill_orrerires_sun(int pow_, bool short_, unit* order, coord_def target)
+{
+	bool return_=false;
+	
+	int i = 4; 
+	for(; i>0 ; i--)
+	{
+		if(monster *mon_ = BaseSummon(MON_ORRERY_ORB, rand_int(30,60), true, false, 2, order, target, SKD_ORRERIRES_SUN, GetSummonMaxNumber(SPL_ORRERIRES_SUN)))
+		{
+			mon_->LevelUpdown(pow_/20,5.0f);
+			return_ = true;
+		}
+	} 
+	if (return_) {
+		if (env[current_level].isInSight(order->position)) {
+			PlaySE("summon");
+		}
+	}
+	return return_;
+}
+bool skill_throw_star(int pow_, bool short_, unit* order, coord_def target)
+{
+	return false;
+}
 bool skill_spore_bomb(monster* order)
 {
 	if(!order)
@@ -7166,6 +7227,29 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_INVISIBLE, 35));
 		list->push_back(spell(SPL_JUMP_ATTACK, 15));
 		break;
+	case MON_CONFUSE_MUSHROOM:
+		list->push_back(spell(SPL_CONFUSE_SPORE, 35));
+		break;
+	case MON_WEAKENING_MUSHROOM:
+		list->push_back(spell(SPL_WEAKENDED_SPORE, 50));
+		break;
+	case MON_MAN_EATING_FLOWER:
+		list->push_back(spell(SPL_ACID_BOLT, 20));
+		break;
+	case MON_OVERGROWTH_MAGIC_FLOWER:
+		list->push_back(spell(SPL_ALLROUND_TANMAC, 40));
+		break;
+	case MON_WIZARD:
+		list->push_back(spell(SPL_LASER, 40));
+		list->push_back(spell(SPL_SUMMON_OPTION, 30));
+		list->push_back(spell(SPL_ICE_BOLT, 20));
+		break;
+	case MON_MARISA:
+		list->push_back(spell(SPL_ORRERIRES_SUN, 50));
+		list->push_back(spell(SPL_LUMINUS_STRIKE, 10));
+		list->push_back(spell(SPL_LASER, 20));
+		list->push_back(spell(SPL_BLINK_AWAY, 12));
+		break;
 	default:
 		break;
 	}
@@ -7537,6 +7621,16 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_nightmare_manifest(power,short_,order,target);
 	case SPL_ROYALFLARE:
 		return skill_royalflare(power,short_,order,target);
+	case SPL_CONFUSE_SPORE:
+		return skill_confuse_spore(power,short_,order,target);
+	case SPL_WEAKENDED_SPORE:
+		return skill_weakended_spore(power,short_,order,target);
+	case SPL_ACID_BOLT:
+		return skill_acid_bolt(power,short_,order,target);
+	case SPL_ORRERIRES_SUN:
+		return skill_orrerires_sun(power,short_,order,target);
+	case SPL_THROW_STAR:
+		return skill_throw_star(power,short_,order,target);
 	default:
 		return false;
 	}
@@ -8044,6 +8138,16 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_nightmare_manifest(power,short_,&you,target);
 	case SPL_ROYALFLARE:
 		return skill_royalflare(power,short_,&you,target);
+	case SPL_CONFUSE_SPORE:
+		return skill_confuse_spore(power,short_,&you,target);
+	case SPL_WEAKENDED_SPORE:
+		return skill_weakended_spore(power,short_,&you,target);
+	case SPL_ACID_BOLT:
+		return skill_acid_bolt(power,short_,&you,target);
+	case SPL_ORRERIRES_SUN:
+		return skill_orrerires_sun(power,short_,&you,target);
+	case SPL_THROW_STAR:
+		return skill_throw_star(power,short_,&you,target);
 	default:
 		return false;
 	}
@@ -8788,6 +8892,16 @@ void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 	case SPL_NIGHTMARE_MANIFEST:
 		return;
 	case SPL_ROYALFLARE:
+		return;
+	case SPL_CONFUSE_SPORE:
+		return;
+	case SPL_WEAKENDED_SPORE:
+		return;
+	case SPL_ACID_BOLT:
+		return;
+	case SPL_ORRERIRES_SUN:
+		return;
+	case SPL_THROW_STAR:
 		return;
 	default:
 		return;

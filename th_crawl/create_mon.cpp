@@ -1949,7 +1949,7 @@ void SetResistMonster(monster* mon)
 		mon->ice_resist=3;
 		mon->fire_resist=3;
 		mon->poison_resist=1;
-		break;		
+		break;
 	case MON_GOLEM:
 		mon->elec_resist=3;
 		mon->ice_resist=2;
@@ -2418,6 +2418,91 @@ void SetResistMonster(monster* mon)
 		mon->ice_resist = 3;
 		mon->poison_resist = 1;
 		mon->confuse_resist = 1;
+		break;
+	case MON_YAMAINU:
+		break;
+	case MON_CONFUSE_MUSHROOM:
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
+	case MON_WEAKENING_MUSHROOM:
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
+	case MON_MUSHROOM_GIANT:
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
+	case MON_GIANT_STAG_BEETLE:
+		mon->elec_resist = 1;
+		break;
+	case MON_GIANT_SLUG:
+		mon->fire_resist = 1;
+		mon->ice_resist = 1;
+		mon->elec_resist = 1;
+		break;
+	case MON_GIANT_CENTIPEDE:
+		mon->confuse_resist = 1;
+		break;
+	case MON_GIANT_CENTIPEDE_BODY:
+		mon->fire_resist = 2;
+		mon->ice_resist = 2;
+		mon->elec_resist = 2;
+		mon->confuse_resist = 1;
+		break;
+	case MON_SPORE:
+		mon->elec_resist = 2;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
+	case MON_MAN_EATING_FLOWER:
+		mon->fire_resist = -1;
+		mon->poison_resist = 1;
+		break;
+	case MON_OVERGROWTH_MAGIC_FLOWER:
+		mon->fire_resist = -1;
+		mon->ice_resist = 2;
+		mon->elec_resist = 2;
+		mon->poison_resist = 1;
+		break;
+	case MON_OVERGROWTH_STEM:
+		mon->fire_resist = -1;
+		mon->ice_resist = 2;
+		mon->elec_resist = 2;
+		mon->poison_resist = 1;
+		break;
+	case MON_OVERGROWTH_WATERMELON:
+		break;
+	case MON_WIZARD:
+		mon->fire_resist = 1;
+		mon->ice_resist = 1;
+		break;
+	case MON_TREE_GIANT:
+		mon->fire_resist = -1;
+		mon->ice_resist = 2;
+		mon->elec_resist = 2;
+		mon->poison_resist = 1;
+		break;
+	case MON_SANGHAI_DOLL:
+		break;
+	case MON_HOURAI_DOLL:
+		break;
+	case MON_FRANCE_DOLL:
+		break;
+	case MON_LONDON_DOLL:
+		break;
+	case MON_NETHERLANDS_DOLL:
+		break;
+	case MON_GOLIATH_DOLL:
+		break;
+	case MON_MARISA :
+		mon->ice_resist = 1;
+		break;
+	case MON_ORRERY_ORB:
+		mon->elec_resist=3;
+		mon->ice_resist=3;
+		mon->fire_resist=3;
+		mon->poison_resist=1;
 		break;
 	}
 }

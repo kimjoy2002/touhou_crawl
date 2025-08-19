@@ -5413,3 +5413,13 @@ LOC_SYSTEM_DUMP_DEATHREASON_SPORE,{0}에서 포자에 질식해죽었다.
 LOC_SYSTEM_DUMP_DEATHREASON_SPORE_BY,{0}에서 {1}의 포자에 질식해죽었다.
 LOC_SYSTEM_ATT_INFO_CONFUSE_SPORE,공격에 혼란을 유발하는 독이 포함되어있다.
 LOC_SYSTEM_ATT_INFO_WEAK_SPORE,공격에 약화를 유발하는 독이 포함되어있다.
+LOC_SYSTEM_SPL_DESCRIBE_CONFUSE_SPORE,커다란 머리를 흔들어 혼란 포자를 멀리 있는 상대에게 날리는 기술.\n자체적으로 데미지는 없지만 발사 경로에 혼란 구름이 생긴다.\n가까이 있을땐 쓰지 않는다.\n
+LOC_SYSTEM_SPL_DESCRIBE_WEAKENDED_SPORE,면역력을 약화시키는 포자를 주변에 뿌린다. 이 포자에 당하면 독저항이 일시적으로 사라진다.\n먼 거리까지 닿진않지만 면역을 약화시키는 포자가 주변에 퍼저있기때문에\n일정거리 안에 있다면 저항이나 위치 무관하게 당할 수 있다.\n
+LOC_SYSTEM_SPL_DESCRIBE_ACID_BOLT,산성 미사일을 발사하는 기술.\n이 공격에 당하면 일시적으로 방어력이 감소된다.\n또한 산성에 당한 동안에는 마이너스 방어력만큼 추가 피해를 받게 된다.
+LOC_SYSTEM_SPL_DESCRIBE_ORRERIRES_SUN,주변에 별 탄막을 적에게 주기적으로 발사하는 구슬을 4체 소환한다.\n마치 작은 우주를 형상화시킨듯한 마리사의 대표 마법.
+LOC_SYSTEM_SPL_DESCRIBE_THROW_STAR,별 모양의 탄막을 뿌린다.\n별 모양인걸 제외하면 일반적인 탄막과 크게 다르진않다.
+LOC_SYSTEM_SPL_CONFUSE_SPORE,혼란 포자 방출
+LOC_SYSTEM_SPL_WEAKENDED_SPORE,면역 약화 포자
+LOC_SYSTEM_SPL_ACID_BOLT,산성 볼트
+LOC_SYSTEM_SPL_ORRERIRES_SUN,오렐리즈 썬
+LOC_SYSTEM_SPL_THROW_STAR,별모양 탄막

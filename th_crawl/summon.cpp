@@ -119,6 +119,8 @@ int GetSummonMaxNumber(spell_list skill)
 		return 8;
 	case SPL_GROW_VINE:
 		return 5;
+	case SPL_ORRERIRES_SUN:
+		return 4;
 	default:
 		return -1;
 	}
@@ -179,6 +181,8 @@ SUMMON_KIND GetSummonKind(spell_list skill)
 		return SKD_SUMMON_GHOST;
 	case SPL_GROW_VINE:
 		return SKD_SUMMON_VINE;
+	case SPL_ORRERIRES_SUN:
+		return SKD_ORRERIRES_SUN;
 	default:
 		return SKD_OTHER;
 	}

@@ -551,6 +551,21 @@ string GetSpellInfor(spell_list spell, bool isPlayer)
 	case SPL_ROYALFLARE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ROYALFLARE);
 		break;
+	case SPL_CONFUSE_SPORE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_CONFUSE_SPORE);
+		break;
+	case SPL_WEAKENDED_SPORE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_WEAKENDED_SPORE);
+		break;
+	case SPL_ACID_BOLT:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ACID_BOLT);
+		break;
+	case SPL_ORRERIRES_SUN:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ORRERIRES_SUN);
+		break;
+	case SPL_THROW_STAR:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_STAR);
+		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_UKNOWN);
 		break;

@@ -1190,7 +1190,7 @@ const mon_infor mondata[] = {
 		
 	{MON_MARISA,15,3200,name_infor(MON_MARISA),&img_named_marisa,130,3,15,
 		{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_SHIELD | M_FLAG_MAGICIAN | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY,1,1,10,'&'},
+		M_FLAG_OPEN_DOOR | M_FLAG_SHIELD | M_FLAG_UNIQUE | M_FLAG_SPEAK | M_FLAG_FLY,1,1,10,'&'},
 		
 	{MON_ORRERY_ORB,7,0,name_infor(MON_ORRERY_ORB),&img_mons_orrery_orb[0],50,0,10,
 		{0,0,0},{ATT_NONE,ATT_NONE,ATT_NONE},{name_infor(),name_infor(),name_infor()},

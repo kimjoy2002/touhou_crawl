@@ -127,13 +127,14 @@ void initMap()
 	if(randA(1)) {
 		map_list.dungeon_enter[SCARLET_M].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(3,4));
 		map_list.dungeon_enter[FORESTOFMAGIC].set(false,0,0,-1);
+		map_list.dungeon_enter[SCARLET_U].set(false,0,0,SCARLET_LEVEL_LAST_LEVEL);
 	} else {
 		map_list.dungeon_enter[FORESTOFMAGIC].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(3,4));
 		map_list.dungeon_enter[SCARLET_M].set(false,0,0,-1);
+		map_list.dungeon_enter[SCARLET_U].set(false,0,0,FORESTOFMAGIC_LAST_LEVEL); //나중에 제거
+		//map_list.dungeon_enter[DOLLSHOUSE].set(false,0,0,FORESTOFMAGIC_LAST_LEVEL); 나중에 돌즈하우스 입구 추가 필요함
 	}
-	map_list.dungeon_enter[SCARLET_L].set(false,0,0,SCARLET_LEVEL+rand_int(1,2));	
-	map_list.dungeon_enter[SCARLET_U].set(false,0,0,SCARLET_LEVEL_LAST_LEVEL);
-	map_list.dungeon_enter[DOLLSHOUSE].set(false,0,0,FORESTOFMAGIC_LAST_LEVEL);	
+	map_list.dungeon_enter[SCARLET_L].set(false,0,0,SCARLET_LEVEL+rand_int(1,2));
 	map_list.dungeon_enter[BAMBOO].set(false,0,0,rand_int(10,13));
 	map_list.dungeon_enter[SUBTERRANEAN].set(false,0,0,DEPTH_LEVEL+rand_int(1,3));
 
@@ -392,6 +393,12 @@ bool CommonValutMap(map_dummy* map, int pattern)
 		break;
 	case VP_HAKUREI_LAST_FAKE:
 		temp = hakurei_last_vault_pattern(map,true);
+		break;
+	case VP_FORESTOFMAGIC_LAST:
+		temp = forestofmagic_last_vault_pattern(map);
+		break;
+	case VP_DOLLSHOUSE_LAST:
+		temp = dollshouse_last_vault_pattern(map);
 		break;
 	default:
 		return false;
@@ -839,11 +846,9 @@ void map_dummy::patternSet()
 			break;
 		case VP_SCARLET_LAST:
 			PixedMap(this, scarlet_last_vault_pattern(this));
-			//temp = youkai_last_vault_pattern(map);
 			break;
 		case VP_EIENTEI_LAST:
 			PixedMap(this, eientei_vault_pattern(this));
-			//temp = youkai_last_vault_pattern(map);
 			break;
 		case VP_PANDEMONIUM_1_LAST:
 			PixedMap(this, pandemonium_baykuren_last_vault_pattern(this));
@@ -868,6 +873,12 @@ void map_dummy::patternSet()
 			break;
 		case VP_HAKUREI_LAST_FAKE:
 			PixedMap(this, hakurei_last_vault_pattern(this, true));
+			break;
+		case VP_FORESTOFMAGIC_LAST:
+			PixedMap(this, forestofmagic_last_vault_pattern(this));
+			break;
+		case VP_DOLLSHOUSE_LAST:
+			PixedMap(this, dollshouse_last_vault_pattern(this));
 			break;
 		default:
 			baseMap(this);

@@ -1328,6 +1328,7 @@ int get_unique_to_id(int m_id)
 	case MON_MIKE: return 82;
 	case MON_TAKANE: return 83;
 	case MON_SANNYO: return 84;
+	case MON_MARISA: return 85;
 	}
 }
 

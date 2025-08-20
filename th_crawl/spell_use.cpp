@@ -136,7 +136,7 @@
 
 #define SPL_KANAME_DRILL_DICE 3
 #define SPL_KANAME_DRILL_PLAYER_DAM(pow_) (18 + (pow_) / 5)
-#define SPL_KANAME_DRILL_DAM(pow_) (18 + (pow_)*0.7f / 5)
+#define SPL_KANAME_DRILL_DAM(pow_) (18 + (int)((pow_)*0.7f / 5))
 
 #define SPL_BURST_DICE 3
 #define SPL_BURST_DAM(pow_) (6 + (pow_) /18)
@@ -147,7 +147,7 @@
 
 #define SPL_LUMINUS_STRIKE_DICE 3
 #define SPL_LUMINUS_STRIKE_PLAYER_DAM(pow_) (11 + (pow_) / 8)
-#define SPL_LUMINUS_STRIKE_DAM(pow_) (11 + (pow_)*0.8f / 8)
+#define SPL_LUMINUS_STRIKE_DAM(pow_) (11 + (int)((pow_)*0.8f / 8))
 
 #define SPL_FIRE_STORM_DICE 9
 #define SPL_FIRE_STORM_DAM(pow_) (10 + (pow_) /20)

@@ -46,6 +46,8 @@ enum valut_pattern
 	VP_SUBTERRANEAN_LAST,
 	VP_HAKUREI_LAST,
 	VP_HAKUREI_LAST_FAKE,
+	VP_FORESTOFMAGIC_LAST,
+	VP_DOLLSHOUSE_LAST,
 	VP_LAST
 };
 
@@ -194,6 +196,8 @@ const char* zigurrat_pattern(map_dummy* map);
 
 const char* youkai_last_vault_pattern(map_dummy* map);
 const char* scarlet_last_vault_pattern(map_dummy* map);
+const char* forestofmagic_last_vault_pattern(map_dummy* map);
+const char* dollshouse_last_vault_pattern(map_dummy* map);
 const char* eientei_vault_pattern(map_dummy* map);
 const char* pandemonium_baykuren_last_vault_pattern(map_dummy* map);
 const char* pandemonium_ice_last_vault_pattern(map_dummy* map);

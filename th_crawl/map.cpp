@@ -509,6 +509,14 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 	{
 		vector_.push_back(VP_SCARLET_LAST);		
 	}
+	if(floor == FORESTOFMAGIC_LAST_LEVEL)
+	{
+		vector_.push_back(VP_FORESTOFMAGIC_LAST);			
+	}
+	if(floor == DOLLSHOUSE_LAST_LEVEL)
+	{
+		vector_.push_back(VP_DOLLSHOUSE_LAST);		
+	}
 	if(floor == EIENTEI_LEVEL_LAST_LEVEL)
 	{
 		vector_.push_back(VP_EIENTEI_LAST);		

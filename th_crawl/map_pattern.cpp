@@ -5069,6 +5069,211 @@ const char* scarlet_last_vault_pattern(map_dummy* map)
 	}
 }
 
+
+const char* forestofmagic_last_vault_pattern(map_dummy* map) {
+
+	switch(randA(0))
+	{
+	default:
+	case 0:
+		{
+		bool hw_ = randA(1);
+		map->size_x = 8;
+		map->size_y = 8;	
+		map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+		map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+		map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		item_infor t;
+		makeitem(ITM_GOAL, 0, &t, RUNE_FORESTOFMAGIC);
+		map->item_list.push_back(mapdummy_item(t,coord_def(randA(1)?6:-6,-5)));
+		if(!is_exist_named(MON_MARISA)){
+			map->monster_list.push_back(mapdummy_mon(MON_MARISA,0,coord_def(0,0)));
+			set_exist_named(MON_MARISA);
+		}
+
+		for(int i =0;i<4;i++)
+		{
+			for(int j =0;j<3;j++)
+			{
+				if(!( (i==0 || i ==3) && (j==0 || j ==2))) {
+					item_infor t;
+					makeitem(ITM_BOOK, 0, &t, -1);
+					map->item_list.push_back(mapdummy_item(t,coord_def(3+i,-5+j)));	
+				}
+			}
+		}
+
+		
+		for(int i = -6;i<=6;i+=2)
+		{
+			if(i != 0) {
+				map->monster_list.push_back(mapdummy_mon(MON_MAGIC_BOOK,0,coord_def(i,-1)));
+			}
+		}
+
+		int mon_num_ = 5;
+		while(mon_num_)
+		{
+			coord_def c_(rand_int(-6,6), rand_int(1,6));
+			auto it = find_if(map->monster_list.begin(),map->monster_list.end(),
+				[c_](mapdummy_mon &v)->bool{
+					return v.pos == c_;
+				}
+			);
+			if(it == map->monster_list.end())
+			{
+				random_extraction<int> mon_;
+				mon_.push(MON_DANCING_WEAPON);
+				mon_.push(MON_DANCING_ARMOUR);
+				mon_.push(MON_CURSE_DOLL);
+				mon_.push(MON_WEAKENING_MUSHROOM);
+				mon_.push(MON_CONFUSE_MUSHROOM);
+				map->monster_list.push_back(mapdummy_mon(mon_num_==1?MON_TSUCHINOKO:mon_.choice(),0,c_));
+				mon_num_--;
+			}
+		}
+		map->name = "FOREST_OF_MAGIC_MARISA_HOUSE_RUNE";
+		return  "\
+.................\
+.................\
+.$$$$$$$$$$$$$$$.\
+.$.ii.+...+....$.\
+.$iiii$...$....$.\
+.$.ii.$...$....$.\
+.$$$$$$...$$$$$$.\
+.$.............$.\
+.$......0......$.\
+.$.............$.\
+.$.............$.\
+.$.............$.\
+.$.............$.\
+.$.............$.\
+.$.............$.\
+.$$$$$$+++$$$$$$.\
+.................";
+		break;
+		}
+	case 1:
+		{
+		bool hw_ = randA(1);
+		map->size_x = 8;
+		map->size_y = 8;	
+		map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+		map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+		map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		
+		item_infor t;
+		makeitem(ITM_GOAL, 0, &t, RUNE_YOUKAI_MOUNTAIN);
+		map->item_list.push_back(mapdummy_item(t,coord_def(5*(randA(1)*2-1),5*(randA(1)*2-1))));
+
+		if(!is_exist_named(MON_NITORI)){
+			map->monster_list.push_back(mapdummy_mon(MON_NITORI,0,coord_def(0,0)));
+			set_exist_named(MON_NITORI);
+		}
+		
+		map->monster_list.push_back(mapdummy_mon(MON_SANPEI_FIGHTER,0,coord_def(4,-3)));	
+		map->monster_list.push_back(mapdummy_mon(MON_NESI,0,coord_def(3,4)));		
+		map->monster_list.push_back(mapdummy_mon(MON_SANPEI_FIGHTER,0,coord_def(-4,3)));		
+		map->monster_list.push_back(mapdummy_mon(MON_NESI,0,coord_def(-3,-4)));	
+
+
+		int mon_num_ = 6;
+		while(mon_num_)
+		{
+			coord_def c_(rand_int(-4,4),rand_int(-4,4));
+			auto it = find_if(map->monster_list.begin(),map->monster_list.end(),
+				[c_](mapdummy_mon &v)->bool{
+					return v.pos == c_;
+				}
+			);
+			if(it == map->monster_list.end())
+			{
+				map->monster_list.push_back(mapdummy_mon(randA(2)?MON_KATPA_SPEAR:MON_KATPA_WATER_WIZARD,0,c_));
+				mon_num_--;
+			}
+		}
+		map->name = "FOREST_OF_MAGIC_MARISA2_RUNE";
+		return  "\
+.................\
+.................\
+..$$$$.....$$$$..\
+..$.i$$$+$$$i.$..\
+..$i.~~~.~~~.i$..\
+..$$~.~~.~~.~$$..\
+...$~~.~.~.~~$...\
+...$~~~.~.~~~$...\
+...+...~~~...+...\
+...$~~~.~.~~~$...\
+...$~~.~.~.~~$...\
+..$$~.~~.~~.~$$..\
+..$i.~~~.~~~.i$..\
+..$.i$$$+$$$i.$..\
+..$$$$.....$$$$..\
+.................\
+.................";
+		break;
+		}
+	}
+}
+
+
+
+const char* dollshouse_last_vault_pattern(map_dummy* map)
+{
+	switch(randA(0))
+	{
+	default:
+	case 0:
+		{
+		
+		bool hw_ = randA(1);
+		map->size_x = 35;
+		map->size_y = 9;	
+		map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+		map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
+		map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
+
+		map->flag = FLAG_NO_STAIR | FLAG_NO_MONSTER | FLAG_NO_ITEM;
+		item_infor t;
+		makeitem(ITM_GOAL, 0, &t, RUNE_DOLLSHOUSE);
+		map->item_list.push_back(mapdummy_item(t,coord_def(23,2)));		
+		
+		map->name = "DOLLSHOUSE_RUNE";
+
+		return  "\
+.......................................................................\
+.......................................................................\
+.....$$$$$$$$$$$$$$$$$$$$==$$$$$$$$$==$$$$$$$$$$$$$$$$$$$$$$$$$$$......\
+.....$,,,,,,$i$i$i$i$i$,,,,,,,,,,,,,,,,,$,,,,,,,,,,,,,,,,,,,,,,,$......\
+.....$,,,,,,$+$+$+$+$+$,,,,,,,,,,,,,,,,,$,,,,,,,,,,,,,,,,,,,,,,,$......\
+.....$,,,,,,+,,,,,,,,,+,,,,,,,,,,,,,,,,,+,,,,,,,,,,,,$$$$$$$$$++$......\
+.....$,,,,,,$+$+$+$+$+$,,,,,,,,,,,,,,,,,$,,,,,,,,,,,,$,,,,,,,,,,$......\
+.....$,,,,,,$i$i$i$i$i$,,,,,,,,,,,,,,,,,$,,,,,,,,,,,,$,,,,,,,,,,$......\
+.....$$+$$$$$$$$$$$$$$$$$==$$$$$$$$$==$$$$$$$$$$$$$$$$,,,,,,,,,,$......\
+.....$,,,,,,,,,,$....................................$,,,,,,,,,,$......\
+.....$,,,,,,,,,,$........................[...........$,,,,,,,,,,$......\
+.....$,,,,,,,,,,$.....[[........~~~~~~~.......[......$,,,,,,,,,,$......\
+.....$$$$$++$$$$$..............~~~~~~~~~.............$$$$$$$$$$$$......\
+...........................[..~~~~~~~~~~~..............................\
+...................[.....[.....~~~~~~~~~.............[[................\
+...................[............~~~~~~~......[.........................\
+.................................................[.....................\
+.................................[.....................................\
+.......................................................................";
+		break;
+		}
+	}
+}
+
+
 const char* eientei_vault_pattern(map_dummy* map)
 {
 	switch(randA(0))

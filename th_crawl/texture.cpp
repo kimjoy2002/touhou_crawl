@@ -1236,10 +1236,10 @@ textures img_mons_netherlands_doll(&texture_monster01, 47, 255);
 textures img_mons_goliath_doll(&texture_monster01, 47, 255);
 textures img_mons_orrery_orb[] =
 {
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255),
-	textures(&texture_monster01, 47, 255)
+	textures(&texture_monster02, 148, 255),
+	textures(&texture_monster02, 149, 255),
+	textures(&texture_monster02, 150, 255),
+	textures(&texture_monster02, 151, 255)
 };
 
 
@@ -1359,7 +1359,7 @@ textures img_mons_nareko(&texture_monster02, 14, 255);
 textures img_mons_mike(&texture_monster02, 15, 255);
 textures img_mons_takane(&texture_monster02, 16, 255);
 textures img_mons_sannyo(&texture_monster02, 17, 255);
-textures img_named_marisa(&texture_monster01, 47, 255);
+textures img_named_marisa(&texture_monster02, 147, 255);
 
 
 
@@ -2293,15 +2293,12 @@ textures(&texture_laser, 155, 255),
 textures(&texture_laser, 156, 255)
 };
 
-textures img_axe_wind[] = { textures(&texture_laser, 157, 255),
-textures(&texture_laser, 157, 255),
-textures(&texture_laser, 158, 255),
-textures(&texture_laser, 159, 255),
-textures(&texture_laser, 160, 255),
-textures(&texture_laser, 161, 255),
-textures(&texture_laser, 162, 255),
-textures(&texture_laser, 163, 255)
+textures img_star_tanmac[] = { textures(&texture_laser, 166, 255),
+textures(&texture_laser, 167, 255),
+textures(&texture_laser, 168, 255),
+textures(&texture_laser, 169, 255)
 };
+
 
 
 textures img_score_item[] = { textures(&texture_item04, 17, 255),
@@ -4200,6 +4197,14 @@ int texturetoint(textures* input)
 		return 694;
 	else if(input == &img_mons_food_watermelon)
 		return 695;
+	else if(input == &img_star_tanmac[0])
+		return 696;
+	else if(input == &img_star_tanmac[1])
+		return 697;
+	else if(input == &img_star_tanmac[2])
+		return 698;
+	else if(input == &img_star_tanmac[3])
+		return 699;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -5618,6 +5623,14 @@ textures* inttotexture(int input)
 		return &img_mons_magic_flower_stem[27];
 	case 695:
 		return &img_mons_food_watermelon;
+	case 696:
+		return &img_star_tanmac[0];
+	case 697:
+		return &img_star_tanmac[1];
+	case 698:
+		return &img_star_tanmac[2];
+	case 699:
+		return &img_star_tanmac[3];
 	default:
 		return &img_mons_default;
 	}

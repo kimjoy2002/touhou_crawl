@@ -405,6 +405,11 @@ textures* GetTanmacGraphic(int type, int direc, int count, int path)
 		return &img_effect_rock_uplift[count%3+1];
 	case 51:
 		return &img_tanmac_shockwave[direc];
+	case 52:
+	case 53:
+	case 54:
+	case 55:
+		return &img_star_tanmac[type-52];	
 	}
 }
 

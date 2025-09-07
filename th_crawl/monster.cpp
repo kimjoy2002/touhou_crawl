@@ -1895,11 +1895,31 @@ bool monster::damage(attack_infor &a, bool perfect_)
 					}
 				}
 			}
-			if(id == MON_MUSHROOM && (randA(1) || hp<=0) )
+			if((id == MON_MUSHROOM || id == MON_MUSHROOM_GIANT) && (randA(1) || hp<=0) )
 			{
+				textures *fog_t = img_fog_poison;
+				smoke_type smoke_type = SMT_POISON;
+				if(id == MON_MUSHROOM_GIANT) {
+					switch(randA(4)) {
+						case 0:
+						case 1:
+						default:
+							//poison
+							break;
+						case 2:
+						case 3:
+							fog_t = img_fog_confusion;
+							smoke_type = SMT_CONFUSE;
+							break;
+						case 4:
+							fog_t = img_fog_slow;
+							smoke_type = SMT_SLOW;
+							break;
+					}
+				}
 				for(int i=-1;i<=1;i++){
 					for(int j=-1;j<=1;j++){
-							env[current_level].MakeSmoke(coord_def(position.x+i,position.y+j),img_fog_poison,SMT_POISON,rand_int(3,6),0,this);
+							env[current_level].MakeSmoke(coord_def(position.x+i,position.y+j),fog_t,smoke_type,rand_int(3,6),0,this);
 					}
 				}
 			}

@@ -252,6 +252,10 @@
 #define SPL_EARTH_BOLT_PLAYER_DAM(pow_) (9 + (pow_) / 6)
 #define SPL_EARTH_BOLT_DAM(pow_) (7 + (pow_) / 6)
 
+#define SPL_THROW_STAR_DICE 1
+#define SPL_THROW_STAR_DAM(pow_) (10 + (pow_) /7)
+
+
 
 
 extern HANDLE mutx;
@@ -6220,6 +6224,7 @@ bool skill_orrerires_sun(int pow_, bool short_, unit* order, coord_def target)
 		if(monster *mon_ = BaseSummon(MON_ORRERY_ORB, rand_int(30,60), true, false, 2, order, target, SKD_ORRERIRES_SUN, GetSummonMaxNumber(SPL_ORRERIRES_SUN)))
 		{
 			mon_->LevelUpdown(pow_/20,5.0f);
+			mon_->image = &img_mons_orrery_orb[i-1];
 			return_ = true;
 		}
 	} 
@@ -6232,6 +6237,24 @@ bool skill_orrerires_sun(int pow_, bool short_, unit* order, coord_def target)
 }
 bool skill_throw_star(int pow_, bool short_, unit* order, coord_def target)
 {
+	int damage_ = SPL_THROW_DISH_DAM(pow_);
+	int hit_ = 12 + pow_ / 20;
+	beam_iterator beam(order->position, order->position);
+	if (CheckThrowPath(order->position, target, beam))
+	{
+		beam_infor temp_infor(randC(SPL_THROW_STAR_DICE, damage_), SPL_THROW_STAR_DICE*damage_, hit_, order, order->GetParentType(), SpellLength(SPL_THROW_STAR, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_STAR));
+		if (short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			if (env[current_level].isInSight(order->position)) {
+				PlaySE("shoot");
+			}
+			throwtanmac(rand_int(52, 55), beam, temp_infor, NULL);
+		}
+		order->SetParadox(0);
+		return true;
+	}
 	return false;
 }
 bool skill_spore_bomb(monster* order)
@@ -7249,6 +7272,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_LUMINUS_STRIKE, 10));
 		list->push_back(spell(SPL_LASER, 20));
 		list->push_back(spell(SPL_BLINK_AWAY, 12));
+		break;
+	case MON_ORRERY_ORB:
+		list->push_back(spell(SPL_THROW_STAR, 12));
 		break;
 	default:
 		break;

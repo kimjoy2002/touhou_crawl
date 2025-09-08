@@ -6208,6 +6208,22 @@ bool skill_confuse_spore(int pow_, bool short_, unit* order, coord_def target)
 
 bool skill_weakended_spore(int pow_, bool short_, unit* order, coord_def target)
 {
+	unit* target_unit = env[current_level].isMonsterPos(target.x, target.y);
+	
+	if(target_unit)
+	{
+		if (env[current_level].isInSight(order->position)) {
+			PlaySE("debuf");
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_WEAKENING_SPORE,false,false,false,CL_normal,
+				 PlaceHolderHelper(target_unit->GetName()->getName()));
+		}
+		if(target_unit->isplayer()) {
+			you.SetBuff(BUFFSTAT_RP, BUFF_WEAK_RP, -1, rand_int(30,50));
+		} else {
+			((monster*)target_unit)->SetVulunPoison(rand_int(30,50));
+		}
+		return true;
+	}
 	return false;
 }
 bool skill_acid_bolt(int pow_, bool short_, unit* order, coord_def target)
@@ -7251,7 +7267,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_JUMP_ATTACK, 15));
 		break;
 	case MON_CONFUSE_MUSHROOM:
-		list->push_back(spell(SPL_CONFUSE_SPORE, 35));
+		list->push_back(spell(SPL_CONFUSE_SPORE, 25));
 		break;
 	case MON_WEAKENING_MUSHROOM:
 		list->push_back(spell(SPL_WEAKENDED_SPORE, 50));

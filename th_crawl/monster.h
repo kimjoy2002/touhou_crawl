@@ -99,6 +99,7 @@ public:
 	int debuf_boost;
 	int summon_time;
 	parent_type summon_parent;
+	int s_vulun_poison;
 
 	
 	int poison_resist;
@@ -247,6 +248,7 @@ public:
 	bool SetSleep(int s_sleep_);
 	bool SetOil(int oil_, int max_);
 	bool SetFire(int fire_, parent_type type_, bool from_oil);
+	bool SetVulunPoison(int time_);
 	bool SetNoneMove(int s_none_move);
 	bool SetDazed(int s_dazed_, bool bashed_);
 	bool canSwap(monster* target_mon, bool able_enemy = false);

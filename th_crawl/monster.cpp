@@ -48,7 +48,7 @@ s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0
 s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
 force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), s_oil(0), s_fire(0), fire_reason(PRT_NEUTRAL), s_none_move(0), s_dazed(0), bashed(false), debuf_boost(0),
-	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0),walk_speed_bonus(0), time_delay(0), all_time_delay(0), 
+	summon_time(0), summon_parent(PRT_NEUTRAL), s_vulun_poison(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0),walk_speed_bonus(0), time_delay(0), all_time_delay(0), 
 	speed(10), memory_time(0), first_contact(true), strong(1), special_value(0), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(),
 	direction(-1), sm_info(), state(MS_NORMAL), random_spell(false), wait(false)
 {
@@ -139,6 +139,7 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, debuf_boost);
 	SaveData<int>(fp, summon_time);
 	SaveData<parent_type>(fp, summon_parent);
+	SaveData<int>(fp, s_vulun_poison);
 	SaveData<int>(fp, poison_resist);
 	SaveData<int>(fp, fire_resist);
 	SaveData<int>(fp, ice_resist);
@@ -273,6 +274,9 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, debuf_boost);
 	LoadData<int>(fp, summon_time);
 	LoadData<parent_type>(fp, summon_parent);
+	if(!isPrevVersion(loading_version_string, "ver1.202")) {
+		LoadData<int>(fp, s_vulun_poison);
+	}
 	LoadData<int>(fp, poison_resist);
 	LoadData<int>(fp, fire_resist);
 	LoadData<int>(fp, ice_resist);
@@ -417,6 +421,7 @@ void monster::init()
 	debuf_boost = 0;
 	summon_time = 0;
 	summon_parent = PRT_NEUTRAL;
+	s_vulun_poison = 0;
 	poison_resist = 0;
 	fire_resist = 0;
 	ice_resist = 0;
@@ -803,7 +808,7 @@ void monster::TurnLoad()
 	if(s_fire-temp_turn>0)
 		s_fire-=temp_turn;
 	else
-		force_turn =0;
+		s_fire =0;
 
 	if(flag & M_FLAG_CONFUSE)
 		s_confuse = 10;
@@ -818,6 +823,10 @@ void monster::TurnLoad()
 		if(summon_time<=0)
 			hp = 0;
 	}
+	if(s_vulun_poison-temp_turn>0)
+		s_vulun_poison-=temp_turn;
+	else
+		s_vulun_poison =0;
 }
 void monster::SetX(int x_)
 {
@@ -2152,12 +2161,14 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		}
 
 		if(a.type == ATT_CONFUSE_SPORE) { 
-			if(((poison_resist < 0)|| (poison_resist<=0 && randA(2) == 0)) && s_confuse < 12) {
+			int temp_posion_resi = poison_resist - (s_vulun_poison?1:0);
+			if(((temp_posion_resi < 0)|| (temp_posion_resi<=0 && randA(2) == 0)) && s_confuse < 12) {
 				SetConfuse(rand_int(5,8));
 			}
 		}
 		if(a.type == ATT_WEAK_SPORE) { 
-			if(((poison_resist < 0)|| (poison_resist<=0 && randA(1) == 0))) {
+			int temp_posion_resi = poison_resist - (s_vulun_poison?1:0);
+			if(((temp_posion_resi < 0)|| (temp_posion_resi<=0 && randA(1) == 0))) {
 				SetForceStrong(false, rand_int(10,20), true);
 			}
 		}
@@ -3760,6 +3771,20 @@ int monster::action(int delay_)
 			}
 		}
 
+
+		if(s_vulun_poison)
+		{
+			s_vulun_poison--;
+			if (!s_vulun_poison)
+			{
+				if (is_sight && isView())
+				{
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_VULUN_POISON,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
+			}
+		}
+
 		if (s_none_move > 0)
 		{
 			s_none_move--;
@@ -5048,14 +5073,16 @@ bool monster::SetPoison(int poison_, int max_, bool strong_)
 {
 	if(!poison_)
 		return false;
-	if(poison_resist>0 && !strong_)
+	if(poison_resist>0 && s_vulun_poison == 0 && !strong_)
 		return false;
 	if(s_poison >= max_)
 		return false;
 	else if(poison_resist<0)
 		poison_*=2;
-	else if(poison_resist>0 && strong_)
+	else if(poison_resist>0 && strong_ && s_vulun_poison == 0)
 		poison_/=3;
+	else if(poison_resist == 0 && s_vulun_poison > 0)
+		poison_*=2;
 
 	if(isYourShight())
 	{
@@ -5786,6 +5813,23 @@ bool monster::SetFire(int fire_, parent_type type_, bool from_oil) {
 		s_fire = 30;
 	return true;
 }
+
+bool monster::SetVulunPoison(int time_) {
+	if(!time_)
+		return false;
+	if(isYourShight())
+	{
+		if(!s_vulun_poison) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_VULUN_POISON,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+	}
+	s_vulun_poison += time_;
+	if(s_vulun_poison>100)
+		s_vulun_poison = 100;
+	return true;
+}
+
 bool monster::SetNoneMove(int s_none_move_) {
 	if(s_none_move < s_none_move_)
 		s_none_move = s_none_move_;
@@ -6522,6 +6566,8 @@ bool monster::isSimpleState(monster_state_simple state_)
 			return (isUserAlly());
 		case MSS_DAZED:
 			return (s_dazed > 0);
+		case MSS_VULUN_POISON:
+			return s_vulun_poison>0;
 		default:
 			break;
 	}
@@ -6569,6 +6615,8 @@ monster_state_simple monster::GetSimpleState()
 		temp = MSS_NEUTRAL;
 	if(isUserAlly())
 		temp = MSS_ALLY;
+	if(s_vulun_poison)
+		temp = MSS_VULUN_POISON;
 	return temp;
 }
 bool monster::isRabbit() {
@@ -6868,6 +6916,13 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, ostringstream& ss)
 		if (s_dazed)
 		{
 			ss << LocalzationManager::locString(LOC_SYSTEM_DAZED);
+			return CL_normal;
+		}
+		return CL_none;
+	case MSS_VULUN_POISON:
+		if (s_vulun_poison)
+		{
+			ss << LocalzationManager::locString(LOC_SYSTEM_VULUN_POISON);
 			return CL_normal;
 		}
 		return CL_none;

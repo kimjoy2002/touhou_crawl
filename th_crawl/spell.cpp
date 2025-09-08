@@ -2151,6 +2151,14 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 				return false;
 		}
 		return true;
+	case SPL_WEAKENDED_SPORE:
+		if (mon->target) {
+			if (mon->target->isplayer() && you.GetBuffOk(BUFFSTAT_RP) != 0)
+				return false;
+			if (!(mon->target->isplayer()) && ((monster*)(mon->target))->s_vulun_poison != 0)
+				return false;
+		}
+		return true;
 	default:
 		return true;
 	}

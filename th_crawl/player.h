@@ -80,6 +80,7 @@ enum buff_type //겹쳐져선 안되는 버프들
 	BUFF_WEAK_RF,
 	BUFF_WEAK_RC,
 	BUFF_WEAK_RE,
+	BUFF_WEAK_RP,
 	BUFF_MAX
 };
 enum action_type

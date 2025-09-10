@@ -1169,6 +1169,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_CONFUSE_SPORE:
 	case ATT_WEAK_SPORE:
 	case ATT_ACID_BYTE:
+	case ATT_THROW_ACID:
 	default:
 		damage_ -= randA(ac);
 		if(damage_<0)
@@ -1328,7 +1329,6 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_BEARTRAP:
 		case ATT_CONFUSE_SPORE:
 		case ATT_WEAK_SPORE:
-		case ATT_ACID_BYTE:
 			if(a.order) {
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,CL_normal,
 					PlaceHolderHelper(name_.getName()),
@@ -1396,6 +1396,15 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_THROW_COLD_PYSICAL:
 			if(a.order) {
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_COLD,false,false,false,CL_normal,
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(a.name.getName()),
+					PlaceHolderHelper(GetName()->getName()));
+			}
+			break;
+		case ATT_ACID_BYTE:
+		case ATT_THROW_ACID:
+			if(a.order) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_ACID,false,false,false,CL_normal,
 					PlaceHolderHelper(name_.getName()),
 					PlaceHolderHelper(a.name.getName()),
 					PlaceHolderHelper(GetName()->getName()));
@@ -7099,6 +7108,8 @@ bool isNormalAtt(attack_type type) {
 			case ATT_WEAK_SPORE:
 			case ATT_ACID_BYTE:
 				return true;
+			case ATT_THROW_ACID:
+				return false;
 			default:
 				break;
 		}
@@ -7114,6 +7125,8 @@ bool isGrazableAtt(attack_type type) {
 			case ATT_WEAK_SPORE:
 			case ATT_ACID_BYTE:
 				return false;
+			case ATT_THROW_ACID:
+				return true;
 			default:
 				break;
 		}
@@ -7129,6 +7142,7 @@ bool CantGaurdAtt(attack_type type) {
 			case ATT_CONFUSE_SPORE:
 			case ATT_WEAK_SPORE:
 			case ATT_ACID_BYTE:
+			case ATT_THROW_ACID:
 				return false;
 			default:
 				break;

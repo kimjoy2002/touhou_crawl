@@ -888,6 +888,7 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_d
 	ATT_CONFUSE_SPORE, //혼란포자
 	ATT_WEAK_SPORE, //약체포자
 	ATT_ACID_BYTE, //산성 깨물기
+	ATT_THROW_ACID,
 	ATT_MAX
 };
 

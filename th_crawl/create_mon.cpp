@@ -212,10 +212,11 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 120,  FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 5,  3}, //식인꽃
 	{ 129,  FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 2,  2}, //과성장 줄기
 	
+	{ 118,  FORESTOFMAGIC_LEVEL+2,  FORESTOFMAGIC_LEVEL+3, 5,  3}, //지네
 	{ 121,  FORESTOFMAGIC_LEVEL+2,  FORESTOFMAGIC_LEVEL+3, 5,  3}, //은둔 마법사
 	{ 129,  FORESTOFMAGIC_LEVEL+2,  FORESTOFMAGIC_LEVEL+3, 8,  2}, //과성장 줄기
 
-	{ 122,  FORESTOFMAGIC_LEVEL+3,  FORESTOFMAGIC_LEVEL+3, 5,  5}, //나무 거인
+	{ 122,  FORESTOFMAGIC_LEVEL+3,  FORESTOFMAGIC_LEVEL+3, 6,  5}, //나무 거인
 	
 	//인형의집
 	{ 123, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 10,  1}, //상해인형
@@ -1641,6 +1642,9 @@ void create_id_to_unique(int id, int level)
 		break;
 	case 84:
 		index.push_back(MON_SANNYO);
+		break;
+	case 85:
+		index.push_back(MON_MARISA);
 		break;
 	}
 

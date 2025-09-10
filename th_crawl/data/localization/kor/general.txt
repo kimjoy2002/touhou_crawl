@@ -5428,3 +5428,5 @@ LOC_SYSTEM_MAGIC_WEAKENING_SPORE,{0:은|는} 공기중 퍼진 포자에 의해 �
 LOC_SYSTEM_MON_NO_LONGER_VULUN_POISON,{0:은|는} 더 이상 독에 약하지않다.
 LOC_SYSTEM_VULUN_POISON,독취약
 LOC_SYSTEM_MON_VULUN_POISON,{0:은|는} 포자를 뒤집어쓰고 면역력이 약화되었다.
+LOC_SYSTEM_ATT_ACID,산성
+LOC_SYSTEM_HIT_ACID,{0}의 {1:은|는} {2}에게 명중하고 산성으로 타들어간다.

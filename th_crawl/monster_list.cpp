@@ -1146,7 +1146,7 @@ const mon_infor mondata[] = {
 		
 	{MON_OVERGROWTH_MAGIC_FLOWER,11,1100,name_infor(MON_OVERGROWTH_MAGIC_FLOWER),&img_mons_magic_flower,120,5,3,
 		{0,0,0},{ATT_NONE,ATT_NONE,ATT_NONE},{name_infor(),name_infor(),name_infor()},
-		M_FLAG_NONE_MOVE | M_FLAG_IMMOBILE | M_FLAG_WAKE | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL,1,2,10,'F'},
+		M_FLAG_NONE_MOVE | M_FLAG_IMMOBILE | M_FLAG_WAKE | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL | M_FLAG_MAGICIAN,1,2,10,'F'},
 		
 	{MON_OVERGROWTH_STEM,11,0,name_infor(MON_OVERGROWTH_STEM),&img_mons_magic_flower_stem[0],120,10,3,
 		{0,0,0},{ATT_NONE,ATT_NONE,ATT_NONE},{name_infor(),name_infor(),name_infor()},

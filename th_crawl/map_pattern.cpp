@@ -5107,7 +5107,7 @@ const char* forestofmagic_last_vault_pattern(map_dummy* map) {
 		}
 
 		
-		for(int i = -6;i<=6;i+=2)
+		for(int i = -6;i<=6;i+=4)
 		{
 			if(i != 0) {
 				map->monster_list.push_back(mapdummy_mon(MON_MAGIC_BOOK,0,coord_def(i,-1)));

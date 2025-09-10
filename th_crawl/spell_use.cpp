@@ -256,6 +256,11 @@
 #define SPL_THROW_STAR_DAM(pow_) (10 + (pow_) /7)
 
 
+#define SPL_ACID_BOLT_DICE 3
+#define SPL_ACID_BOLT_DAM(pow_) (7 + (pow_) / 6)
+
+
+
 
 
 extern HANDLE mutx;
@@ -5512,7 +5517,7 @@ bool skill_allround_tanmac(int pow_, bool short_, unit* order, coord_def target)
 				while (!beam.end())
 				{
 					unit *unit_ = env[current_level].isMonsterPos(beam->x, beam->y, order->isplayer()?&you:nullptr);
-					if (unit_)
+					if (unit_ && !unit_->isPassedBullet(order))
 					{
 						break;
 					}
@@ -5543,7 +5548,11 @@ bool skill_allround_tanmac(int pow_, bool short_, unit* order, coord_def target)
 					beam_infor temp_infor_sub(randC(SPL_ALLROUND_TANMAC_DICE,damage_),SPL_ALLROUND_TANMAC_DICE*(damage_),15+pow_/25,order,order->GetParentType(),SpellLength(SPL_ALLROUND_TANMAC, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
 					temp_infor_sub.length = ceil(GetPositionGap(order->position.x, order->position.y, target_unit->position.x, target_unit->position.y));
 					beam_iterator beam_sub(order->position,target_unit->position);
-					tanmac_list.push_back(make_shared<ThrowTamacInstance>(nullptr, graphic_, beam_sub, temp_infor_sub, nullptr, false));
+					
+					if(CheckThrowPath(order->position,target_unit->position,beam_sub))
+					{
+						tanmac_list.push_back(make_shared<ThrowTamacInstance>(nullptr, graphic_, beam_sub, temp_infor_sub, nullptr, false));
+					}
 				}
 			}
 
@@ -6228,6 +6237,23 @@ bool skill_weakended_spore(int pow_, bool short_, unit* order, coord_def target)
 }
 bool skill_acid_bolt(int pow_, bool short_, unit* order, coord_def target)
 {
+	beam_iterator beam(order->position,order->position);
+	if(CheckThrowPath(order->position,target,beam))
+	{
+		int damage_ = SPL_ACID_BOLT_DAM(pow_); //몬스터가 쓸때 패널티
+		beam_infor temp_infor(randC(SPL_ACID_BOLT_DICE,damage_),SPL_ACID_BOLT_DICE*(damage_),18+pow_/25,order,order->GetParentType(),SpellLength(SPL_ACID_BOLT, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_ACID,name_infor(LOC_SYSTEM_ATT_ACID));
+		if(short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+		
+		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
+			if (env[current_level].isInSight(order->position)) {
+				PlaySE("fire");
+			}
+			throwtanmac(38, beam, temp_infor, NULL);
+		}
+		order->SetParadox(0); 
+		return true;
+	}
 	return false;
 }
 bool skill_orrerires_sun(int pow_, bool short_, unit* order, coord_def target)
@@ -7276,7 +7302,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_ACID_BOLT, 20));
 		break;
 	case MON_OVERGROWTH_MAGIC_FLOWER:
-		list->push_back(spell(SPL_ALLROUND_TANMAC, 40));
+		list->push_back(spell(SPL_ALLROUND_TANMAC, 60));
 		break;
 	case MON_WIZARD:
 		list->push_back(spell(SPL_LASER, 40));
@@ -8940,11 +8966,21 @@ void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 	case SPL_WEAKENDED_SPORE:
 		return;
 	case SPL_ACID_BOLT:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_ACID_BOLT_DICE << "d" << SPL_ACID_BOLT_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	case SPL_ORRERIRES_SUN:
 		return;
 	case SPL_THROW_STAR:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_THROW_STAR_DICE << "d" << SPL_THROW_STAR_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
 		return;
+	}
 	default:
 		return;
 	}

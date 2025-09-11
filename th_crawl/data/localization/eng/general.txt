@@ -5399,3 +5399,34 @@ LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP_IMMOBILE,This enemy cannot be position-swapped.
 LOC_SYSTEM_GOD_OKINA_ABIL_LOCKED_DOOR_IMMOBILE,This enemy cannot move away from the door!
 LOC_SYSTEM_GOD_SWAWKO_TOUGUE_IMMOBILE,This enemy cannot be pulled.
 LOC_SYSTEM_IMMOBILE_FAIL,This enemy is firmly rooted to the ground.
+LOC_SYSTEM_STEM_GROWING,Nearby stems suddenly grow at an incredible speed!
+LOC_SYSTEM_STEM_WITHERING,The overgrown stem has withered.
+LOC_SYSTEM_ITEM_FOOD_WATERMELEN,Watermelon
+LOC_SYSTEM_TILE_MUSHROOM1,Large Mushroom
+LOC_SYSTEM_TILE_MUSHROOM2,Large Mushroom
+LOC_SYSTEM_MON_TREE_GIANT_DEAD,{0} has lost its strength and returned to an ordinary tree.
+LOC_SYSTEM_MON_TREE_GIANT_SUDDENLY,A tree suddenly grows out of thin air.
+LOC_SYSTEM_MON_TREE_GIANT_GROWING,And plants sprout from the tree!
+LOC_SYSTEM_MON_TREE_GIANT_WITHERING,The tree has withered.
+LOC_SYSTEM_ATT_SPORE,Spore
+LOC_SYSTEM_DUMP_DEATHREASON_SPORE,Suffocated by spores at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SPORE_BY,Suffocated by {1}'s spores at {0}.
+LOC_SYSTEM_ATT_INFO_CONFUSE_SPORE,This attack contains a poison that causes confusion.
+LOC_SYSTEM_ATT_INFO_WEAK_SPORE,This attack contains a poison that causes weakness.
+LOC_SYSTEM_SPL_DESCRIBE_CONFUSE_SPORE,A technique that shakes a giant cap to launch confusion spores at a distant target.\nDeals no damage but leaves behind a cloud of confusion along the path.\nNot used at close range.\n
+LOC_SYSTEM_SPL_DESCRIBE_WEAKENDED_SPORE,Scatters spores that weaken immunity around the user. Victims temporarily lose poison resistance.\nWhile not far-reaching, these spores spread in the area,\nand anyone within range may be affected regardless of resistance or position.\n
+LOC_SYSTEM_SPL_DESCRIBE_ACID_BOLT,Fires an acidic missile.\nHit enemies temporarily lose defense,\nand while affected by acid, they take extra damage equal to the negative defense.\n
+LOC_SYSTEM_SPL_DESCRIBE_ORRERIRES_SUN,Summons four orbs that periodically shoot star danmaku at nearby enemies.\nOne of Marisa's signature spells, forming a miniature universe.\n
+LOC_SYSTEM_SPL_DESCRIBE_THROW_STAR,Fires star-shaped danmaku.\nAside from the shape, it behaves like a standard bullet pattern.\n
+LOC_SYSTEM_SPL_CONFUSE_SPORE,Confusion Spores
+LOC_SYSTEM_SPL_WEAKENDED_SPORE,Immunity-Weakening Spores
+LOC_SYSTEM_SPL_ACID_BOLT,Acid Bolt
+LOC_SYSTEM_SPL_ORRERIRES_SUN,Orreries Sun
+LOC_SYSTEM_SPL_THROW_STAR,Star Danmaku
+LOC_SYSTEM_ATT_STAR,Star Danmaku
+LOC_SYSTEM_MAGIC_WEAKENING_SPORE,{0} has reduced poison resistance due to airborne spores.
+LOC_SYSTEM_MON_NO_LONGER_VULUN_POISON,{0} is no longer vulnerable to poison.
+LOC_SYSTEM_VULUN_POISON,Pois-
+LOC_SYSTEM_MON_VULUN_POISON,{0} is weakened after being covered in spores.
+LOC_SYSTEM_ATT_ACID,Acid
+LOC_SYSTEM_HIT_ACID,{0}{0==you?r:'s} {1} hits {2} and burns with acid.

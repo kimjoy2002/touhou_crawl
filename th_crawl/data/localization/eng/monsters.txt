@@ -271,26 +271,26 @@ MON_HOMING,Homing Shot,A homing projectile that chases a target.\nFlies toward i
 MON_RABIT_GIANT,Giant Rabbit,A giant rabbit with a muscular physique.\nThrough consistent nutrition and training, it developed an impressive body.\nRumor has it that Eirin's suspicious protein drinks may have helped...
 MON_RABIT_ALCHEMIST,Rabbit Alchemist,A rabbit wearing a gas mask and loaded with potions.\nStudied pharmaceutical alchemy under Eirin and discovered its own talent.\nDue to its master’s influence, it now acts more like a mad scientist.
 MON_COGWHEEL,Cogwheel,A gear created through alchemy.\nMoves around and deals damage to enemies in all 8 surrounding directions.
-MON_YAMAINU,Wild Dog,TODO
-MON_CONFUSE_MUSHROOM,Confusing Mushroom Youkai,TODO
-MON_WEAKENING_MUSHROOM,Weakened Mushroom Youkai,TODO
-MON_MUSHROOM_GIANT,Mushroom Giant,TODO
-MON_GIANT_STAG_BEETLE,Giant Stag Beetle,TODO
-MON_GIANT_SLUG,Giant Slug,TODO
-MON_GIANT_CENTIPEDE,Giant Centipede,TODO
-MON_GIANT_CENTIPEDE_BODY,Giant Centipede,TODO
-MON_SPORE,Mushroom Spore,TODO
-MON_MAN_EATING_FLOWER,Maneating Morning Glory,TODO
-MON_OVERGROWTH_MAGIC_FLOWER,Overgrown Magic Flower,TODO
-MON_OVERGROWTH_STEM,Overgrown Stem,TODO
-MON_OVERGROWTH_WATERMELON,Giant Watermelon,TODO
-MON_WIZARD,Reclusive Wizard,TODO
-MON_TREE_GIANT,Tree Giant,TODO
+MON_YAMAINU,Wild Dog,A wolf beast living in the Forest of Magic.\nThey travel in packs looking for prey.\nIt's said that some powerful wolves can even take human form.
+MON_CONFUSE_MUSHROOM,Confusing Mushroom Youkai,A mushroom youkai brought to life by the strange energy of the Forest of Magic.\nIt throws confusion spores that cause dizziness just by breathing them in.\nThese long-range spores can be resisted with poison resistance.
+MON_WEAKENING_MUSHROOM,Weakened Mushroom Youkai,A mushroom youkai animated by the Forest of Magic's strange energy.\nIt releases weakening spores upon close contact, which at first seem resistible,\nbut proximity causes temporary suppression of poison resistance.
+MON_MUSHROOM_GIANT,Mushroom Giant,A mushroom youkai that grew enormous under the forest's strange energy.\nVarious fungi grow on its body, allowing it to scatter many kinds of spores.\nBut its most terrifying trait is its overwhelming physical strength.
+MON_GIANT_STAG_BEETLE,Giant Stag Beetle,A stag beetle that grew massive from the Forest of Magic's influence.\nAside from its size, it's mostly the same—but its pincers are dangerously sharp.\nIts damage fluctuates wildly, catching the careless off guard.
+MON_GIANT_SLUG,Giant Slug,A massive slug that loves the dampness of the Forest of Magic.\nMany adventurers report hearing the slug’s haunting cries as hallucinations.\nSome smart ones are said to wear hats and cast wind magic...
+MON_GIANT_CENTIPEDE,Giant Centipede,A centipede whose elongated body has been enlarged by magic.\nIt uses venomous fangs and coils its body around prey to immobilize them.\nIts torso is tougher than its head, making it inefficient to attack.
+MON_GIANT_CENTIPEDE_BODY,Giant Centipede
+MON_SPORE,Mushroom Spore,A mass of spores found commonly in the Forest of Magic.\nWhen charged with magical energy and burst, it deals area damage and rapidly evolves nearby mushrooms into youkai.
+MON_MAN_EATING_FLOWER,Maneating Morning Glory,A carnivorous trumpet flower mutated by magic.\nIt lifts its roots to walk and emits powerful acid.
+MON_OVERGROWTH_MAGIC_FLOWER,Overgrown Magic Flower,A flower grown huge by strange energy.\nPerhaps due to overgrowth, it withers after a short time.\nFleeing is an option, but many adventurers fight it for the sweet watermelon reward.
+MON_OVERGROWTH_STEM,Overgrown Stem,A plant stem swollen by strange energy.\nIt too withers after some time.\nSome avoid it, others fight to obtain the delicious watermelon it guards.
+MON_OVERGROWTH_WATERMELON,Giant Watermelon,A watermelon enlarged by mysterious energy.\nIf the flower and stem monsters wither, the watermelon becomes inedible.
+MON_WIZARD,Reclusive Wizard,A wizard hiding deep within the Forest of Magic.\nVery on edge, as they detest having their territory invaded.
+MON_TREE_GIANT,Tree Giant,A huge tree youkai that can lift its roots to walk.\nOnce slain, it becomes an ordinary tree, but the remaining magical power often grows dangerous flowers—be wary.
 MON_SANGHAI_DOLL,Shanghai Doll,Bakaja-né no?
 MON_HOURAI_DOLL,Hourai Doll,One of Alice’s dolls, the Hourai type.\nCan firing long-range lasers.
 MON_FRANCE_DOLL,France Doll,TODO
 MON_LONDON_DOLL,London Doll,TODO
 MON_NETHERLANDS_DOLL,Netherlands Doll,TODO
 MON_GOLIATH_DOLL,Goliath Doll,TODO
-MON_MARISA,Marisa,TODO
-MON_ORRERY_ORB,Orrery Orb,TODO
+MON_MARISA,Marisa,A seemingly ordinary magician living in the Forest of Magic.\nShe stores all sorts of magical tools and (stolen) books in her house.\nCurrently researching a strange, powerful rune she found.\nIf you intend to interfere, you’ll have to get through her danmaku.
+MON_ORRERY_ORB,Orreries Orb,A magical orb created by Marisa.\nIt represents the starry sky and unleashes relentless star-shaped danmaku at enemies.

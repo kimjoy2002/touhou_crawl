@@ -342,6 +342,8 @@ public:
 	int s_glutton_turn;
 	int s_potion_addict;
 	shield_struct s_shield;
+	int s_acid;
+	int s_acid_turn;
 
 
 	ALCHEMY_LIST alchemy_buff;

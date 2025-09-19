@@ -654,8 +654,9 @@ coord_def ThrowTamacInstance::endShoot(bool sleep_, bool without_laser) {
 			prev = *(beam++);
 			//벽에 부딪히는?
 		}
+		bool returned = infor_.order == &you && you.s_knife_collect  && (item_?item_->fixed_artifact != FIXED_ARTIFACT_GUNGNIR:true);
 
-		if(item_ && !mimic_ && (infor_.order != &you || !you.s_knife_collect))
+		if(item_ && !mimic_ && !returned)
 		{
 			if(!(item_->type>=ITM_THROW_FIRST && item_->type<ITM_THROW_LAST) || !TanmacDeleteRand((tanmac_type)item_->value4, false))
 			{
@@ -826,7 +827,9 @@ coord_def throwtanmac_temp(int graphic_type, textures* t_, beam_iterator& beam, 
 			//벽에 부딪히는?
 		}
 
-		if(item_ && !mimic_ && (infor_.order != &you || !you.s_knife_collect))
+		bool returned = infor_.order == &you && you.s_knife_collect  && (item_?item_->fixed_artifact != FIXED_ARTIFACT_GUNGNIR:true);
+
+		if(item_ && !mimic_ && !returned)
 		{
 			if(!(item_->type>=ITM_THROW_FIRST && item_->type<ITM_THROW_LAST) || !TanmacDeleteRand((tanmac_type)item_->value4, false))
 			{

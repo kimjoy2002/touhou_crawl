@@ -6100,7 +6100,11 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 
 
 		time_delay += GetThrowDelay((*it).type);
-		if((!s_knife_collect || TanmacDeleteRand(tanmac_type_, false)) && DeleteItem(it,1))
+
+
+		bool returned = you.s_knife_collect && (*it).fixed_artifact != FIXED_ARTIFACT_GUNGNIR;
+
+		if((!returned || TanmacDeleteRand(tanmac_type_, false)) && DeleteItem(it,1))
 		{
 			if (throw_weapon == NULL)
 			{

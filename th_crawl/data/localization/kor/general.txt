@@ -5429,4 +5429,8 @@ LOC_SYSTEM_MON_NO_LONGER_VULUN_POISON,{0:은|는} 더 이상 독에 약하지않
 LOC_SYSTEM_VULUN_POISON,독취약
 LOC_SYSTEM_MON_VULUN_POISON,{0:은|는} 포자를 뒤집어쓰고 면역력이 약화되었다.
 LOC_SYSTEM_ATT_ACID,산성
-LOC_SYSTEM_HIT_ACID,{0}의 {1:은|는} {2}에게 명중하고 산성으로 타들어간다.
+LOC_SYSTEM_HIT_ACID,{0}의 {1:은|는} {2}에게 명중하고 산성액을 뒤집어썼다.
+LOC_SYSTEM_BUFF_ACID,산성({0})
+LOC_SYSTEM_BUFF_DESCRIBE_ACID,산성은 수치만큼 방어력을 감소시킵니다. 산성으로 인해 방어력이 음수가 되면 더 큰 데미지를 받습니다.
+LOC_SYSTEM_ACID,산성
+LOC_SYSTEM_ATT_INFO_ACID,공격이 산성을 걸 수 있다.

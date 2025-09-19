@@ -256,8 +256,8 @@
 #define SPL_THROW_STAR_DAM(pow_) (10 + (pow_) /7)
 
 
-#define SPL_ACID_BOLT_DICE 3
-#define SPL_ACID_BOLT_DAM(pow_) (7 + (pow_) / 6)
+#define SPL_ACID_BOLT_DICE 2
+#define SPL_ACID_BOLT_DAM(pow_) (8 + (pow_) / 6)
 
 
 

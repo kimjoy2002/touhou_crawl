@@ -1141,7 +1141,7 @@ const mon_infor mondata[] = {
 		M_FLAG_CANT_NETURAL,0,0,5,'*'},
 		
 	{MON_MAN_EATING_FLOWER,10,800,name_infor(MON_MAN_EATING_FLOWER),&img_mons_eating_flower,95,3,10,
-		{32,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		{32,0,0},{ATT_ACID_BYTE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR,0,1,10,'P'},
 		
 	{MON_OVERGROWTH_MAGIC_FLOWER,11,1100,name_infor(MON_OVERGROWTH_MAGIC_FLOWER),&img_mons_magic_flower,120,5,3,

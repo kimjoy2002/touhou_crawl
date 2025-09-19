@@ -2685,7 +2685,9 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		ss.clear();
 		ss << std::setfill(' ') << std::setw(4) << you.GetDisplayAc();
 		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_AC)+ ((you.alchemy_buff == ALCT_DIAMOND_HARDNESS)?5:0);
-		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (temp_buff_value_>0?CL_white_blue:(temp_buff_value_<0?CL_small_danger:CL_STAT)));
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, 
+		you.s_acid?CL_danger:
+		((temp_buff_value_>0?CL_white_blue:(temp_buff_value_<0?CL_small_danger:CL_STAT))));
 		rc.left += fontDesc.Width*PrintCharWidth(ss.str());
 
 
@@ -3181,6 +3183,10 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			if(you.s_glutton_turn > 0) {
 				stateDraw.addState(LocalzationManager::formatString(LOC_SYSTEM_BUFF_STAT_GLUTTON, PlaceHolderHelper(to_string(you.s_glutton))),CL_white_blue,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_GLUTTON), this);
+			}
+			if(you.s_acid_turn > 0) {
+				stateDraw.addState(LocalzationManager::formatString(LOC_SYSTEM_BUFF_ACID, PlaceHolderHelper(to_string(you.s_acid))),CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_ACID), this);
 			}
 			if(you.GetPotionAddictLevel() > 0) {
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_POTIONADDICT),

@@ -1137,6 +1137,13 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			s_glutton = 0;
 		}
 	}
+	if(s_acid) 
+	{
+		s_acid_turn--;
+		if(s_acid_turn == 0) {
+			UnSetAcid();
+		}
+	}
 	if(GetProperty(TPT_POTION_ADDICTION)) {
 		addPotionAddict(false);
 	} else {

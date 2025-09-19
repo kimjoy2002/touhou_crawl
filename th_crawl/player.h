@@ -588,6 +588,8 @@ public:
 	bool SetShield(int percent_, int turn_);
 	bool SetOverheat(int overheat_, int turn_);
 	bool SetGlutton(int glutton_, int turn_);
+	bool UnSetAcid();
+	bool SetAcid(int acid_, int turn_);
 	int AbsorbShield(int damage_);
 	
 	int GetInvisible();

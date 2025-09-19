@@ -515,13 +515,17 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 			//최종데미지가 0보다 작으면 0이된다.
 			float percent_ = 1.0f;
 			int ac_dec=0;
-			for(int i = ac; i>0; i--)
-				percent_ -= (i<=15?0.008f:(i<=30?0.01f:0.005f));/*
-			for(int i = 4, j=3 ; j <= ac ; j+=i++)
-				ac_dec++;*/
-			ac_dec = (ac+1)/3;
+			if(ac >= 0) {
+				for(int i = ac; i>0; i--)
+					percent_ -= (i<=15?0.008f:(i<=30?0.01f:0.005f));
+			} else if(s_acid > 0) { //산성이 붙어야 마이너스 AC를 적용
+				for(int i = ac; i<0; i++)
+					percent_ += (i>=-5?0.01f:(i>=-10?0.015f:0.02f));
+			}
+			if(ac >= 0) {
+				ac_dec = (ac+1)/3;
+			}
 			damage_ = (int)round(damage_*percent_) - randA(ac_dec);
-			//damage_ = randA_1((int)round(damage_*percent_)) - randA(ac_dec);
 			if(damage_<0)
 				damage_ = 0;
 		}
@@ -531,9 +535,16 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 		{
 			float percent_ = 1.0f;
 			int ac_dec=0;
-			for(int i = ac/2; i>0; i--)
-				percent_ -= (i<=15?0.008f:(i<=30?0.01f:0.005f));
-			ac_dec = (ac/2+1)/3;
+			if(ac >= 0) {
+				for(int i = ac/2; i>0; i--)
+					percent_ -= (i<=15?0.008f:(i<=30?0.01f:0.005f));
+			} else if(s_acid > 0) { //산성이 붙어야 마이너스 AC를 적용
+				for(int i = ac; i<0; i++)
+					percent_ += (i>=-5?0.01f:(i>=-10?0.015f:0.02f));
+			}
+			if(ac >= 0) {
+				ac_dec = (ac/2+1)/3;
+			}
 			damage_ = (int)round(damage_*percent_) - randA(ac_dec);
 			//damage_ = randA_1((int)round(damage_*percent_)) - randA(ac_dec);
 			if(damage_<0)
@@ -846,12 +857,21 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_POISON_ENCHANT_BLAST:
 	case ATT_CONFUSE_SPORE:
 	case ATT_WEAK_SPORE:
-	case ATT_ACID_BYTE:
 		if(a.order)
 		{
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BLAST,false,false,false,CL_normal,
 				 PlaceHolderHelper(GetName()->getName()),
 				 PlaceHolderHelper(a.name.getName()));
+		}
+		break;
+	case ATT_ACID_BYTE:
+	case ATT_THROW_ACID:
+		if(a.order)
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_ACID,false,false,false,CL_normal,
+				PlaceHolderHelper(name_.getName()),
+				PlaceHolderHelper(a.name.getName()),
+				PlaceHolderHelper(GetName()->getName()));
 		}
 		break;
 	case ATT_SUN_BLAST:
@@ -1177,6 +1197,9 @@ bool players::damage(attack_infor &a, bool perfect_)
 			}
 			if(a.type == ATT_OIL_BLAST) {
 				you.SetOil(10, 50);
+			}
+			if(a.type == ATT_ACID_BYTE || a.type == ATT_THROW_ACID) {
+				you.SetAcid(3, 50);
 			}
 			if(a.type == ATT_CONFUSE_SPORE) { 
 				if(((poison_resist < 0)|| (poison_resist<=0 && randA(2) == 0)) && s_confuse < 12) {

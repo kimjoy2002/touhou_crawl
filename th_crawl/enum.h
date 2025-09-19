@@ -958,6 +958,7 @@ enum monster_state_simple //표시용 상태
 	MSS_NONE_MOVE,
 	MSS_DAZED,
 	MSS_VULUN_POISON,
+	MSS_ACID,
 	MSS_MAX
 };
 

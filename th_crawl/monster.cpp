@@ -48,7 +48,8 @@ s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0
 s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
 force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), s_oil(0), s_fire(0), fire_reason(PRT_NEUTRAL), s_none_move(0), s_dazed(0), bashed(false), debuf_boost(0),
-	summon_time(0), summon_parent(PRT_NEUTRAL), s_vulun_poison(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0),walk_speed_bonus(0), time_delay(0), all_time_delay(0), 
+	summon_time(0), summon_parent(PRT_NEUTRAL), s_vulun_poison(0), 
+	s_acid(0), s_acid_turn(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0),walk_speed_bonus(0), time_delay(0), all_time_delay(0), 
 	speed(10), memory_time(0), first_contact(true), strong(1), special_value(0), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(),
 	direction(-1), sm_info(), state(MS_NORMAL), random_spell(false), wait(false)
 {
@@ -140,6 +141,8 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, summon_time);
 	SaveData<parent_type>(fp, summon_parent);
 	SaveData<int>(fp, s_vulun_poison);
+	SaveData<int>(fp, s_acid);
+	SaveData<int>(fp, s_acid_turn);
 	SaveData<int>(fp, poison_resist);
 	SaveData<int>(fp, fire_resist);
 	SaveData<int>(fp, ice_resist);
@@ -276,6 +279,8 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<parent_type>(fp, summon_parent);
 	if(!isPrevVersion(loading_version_string, "ver1.202")) {
 		LoadData<int>(fp, s_vulun_poison);
+		LoadData<int>(fp, s_acid);
+		LoadData<int>(fp, s_acid_turn);
 	}
 	LoadData<int>(fp, poison_resist);
 	LoadData<int>(fp, fire_resist);
@@ -422,6 +427,8 @@ void monster::init()
 	summon_time = 0;
 	summon_parent = PRT_NEUTRAL;
 	s_vulun_poison = 0;
+	s_acid = 0;
+	s_acid_turn = 0;
 	poison_resist = 0;
 	fire_resist = 0;
 	ice_resist = 0;
@@ -827,6 +834,11 @@ void monster::TurnLoad()
 		s_vulun_poison-=temp_turn;
 	else
 		s_vulun_poison =0;
+	if(s_acid_turn-temp_turn>0) {
+		s_acid_turn-=temp_turn;
+	} else {
+		UnSetAcid();
+	}
 }
 void monster::SetX(int x_)
 {
@@ -1171,13 +1183,21 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_ACID_BYTE:
 	case ATT_THROW_ACID:
 	default:
-		damage_ -= randA(ac);
+		if(ac >= 0) {
+			damage_ -= randA(ac);
+		} else if (s_acid > 0) {
+			damage_ += randA(-ac);
+		}
 		if(damage_<0)
 			damage_ = 0;
 		break;
 	case ATT_AC_REDUCE_BLAST:
 	case ATT_HOOF:
-		damage_ -= randA(ac/2);
+		if(ac >= 0) {
+			damage_ -= randA(ac/2);
+		} else if (s_acid > 0) {
+			damage_ += randA(-ac/2);
+		}
 		if(damage_<0)
 			damage_ = 0;
 		break;
@@ -2168,7 +2188,9 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		if(a.type == ATT_OIL_BLAST) { 
 			SetOil(10, 50);
 		}
-
+		if(a.type == ATT_ACID_BYTE || a.type == ATT_THROW_ACID) {
+			you.SetAcid(3, 50);
+		}
 		if(a.type == ATT_CONFUSE_SPORE) { 
 			int temp_posion_resi = poison_resist - (s_vulun_poison?1:0);
 			if(((temp_posion_resi < 0)|| (temp_posion_resi<=0 && randA(2) == 0)) && s_confuse < 12) {
@@ -3802,6 +3824,13 @@ int monster::action(int delay_)
 		if (s_dazed > 0)
 		{
 			s_dazed--;
+		}
+		if (s_acid_turn > 0)
+		{
+			s_acid_turn--;
+			if(s_acid_turn == 0) {
+				UnSetAcid();
+			}
 		}
 
 		bool move_ = false;
@@ -5851,7 +5880,27 @@ bool monster::SetDazed(int s_dazed_, bool bashed_) {
 	bashed = bashed_;
 	return true;
 }
-
+bool monster::UnSetAcid() {
+	s_acid_turn = 0;
+	ac+=s_acid;
+	s_acid = 0;
+	return true;
+}
+bool monster::SetAcid(int acid_, int turn_) {
+	s_acid_turn = turn_;
+	if(randA(s_acid + 15) > 10) {//산성확률 기본66%, 올라갈수록 감소하여 33%까지 
+		//저항 추가?
+		return true;
+	}
+	if(s_acid+acid_ > 15) {
+		acid_ = 15-s_acid;
+	}
+	if(acid_ > 0) {
+		s_acid += acid_;
+		ac -= acid_;
+	}
+	return true;
+}
 bool monster::canSwap(monster* target_mon, bool able_enemy) {
 	if(!isCantInterupt() && target_mon->isCantInterupt()) {
 		return true;
@@ -6577,6 +6626,8 @@ bool monster::isSimpleState(monster_state_simple state_)
 			return (s_dazed > 0);
 		case MSS_VULUN_POISON:
 			return s_vulun_poison>0;
+		case MSS_ACID:
+			return s_acid>0;
 		default:
 			break;
 	}
@@ -6626,6 +6677,8 @@ monster_state_simple monster::GetSimpleState()
 		temp = MSS_ALLY;
 	if(s_vulun_poison)
 		temp = MSS_VULUN_POISON;
+	if(s_acid)
+		temp = MSS_ACID;
 	return temp;
 }
 bool monster::isRabbit() {
@@ -6932,6 +6985,13 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, ostringstream& ss)
 		if (s_vulun_poison)
 		{
 			ss << LocalzationManager::locString(LOC_SYSTEM_VULUN_POISON);
+			return CL_normal;
+		}
+		return CL_none;
+	case MSS_ACID:
+		if (s_acid)
+		{
+			ss << LocalzationManager::locString(LOC_SYSTEM_ACID);
 			return CL_normal;
 		}
 		return CL_none;

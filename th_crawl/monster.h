@@ -100,6 +100,8 @@ public:
 	int summon_time;
 	parent_type summon_parent;
 	int s_vulun_poison;
+	int s_acid;
+	int s_acid_turn;
 
 	
 	int poison_resist;
@@ -251,6 +253,8 @@ public:
 	bool SetVulunPoison(int time_);
 	bool SetNoneMove(int s_none_move);
 	bool SetDazed(int s_dazed_, bool bashed_);
+	bool UnSetAcid();
+	bool SetAcid(int acid_, int turn_);
 	bool canSwap(monster* target_mon, bool able_enemy = false);
 	int PlusTimeDelay(int delay_)
 	{

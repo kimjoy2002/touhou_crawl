@@ -4283,15 +4283,24 @@ bool players::SetGlutton(int glutton_, int turn_) {
 	s_glutton_turn = turn_;
 	return true;
 }
+bool players::UnSetAcid() {
+	s_acid_turn = 0;
+	AcUpDown(0, s_acid);
+	s_acid = 0;
+	return true;
+}
 bool players::SetAcid(int acid_, int turn_) {
 	s_acid_turn = turn_;
 	if(randA(s_acid + 15) > 10) {//산성확률 기본66%, 올라갈수록 감소하여 33%까지 
 		//저항 추가?
 		return true;
 	}
-	s_acid += acid_;
-	if(s_acid > 15) {
-		s_acid = 15;
+	if(s_acid+acid_ > 15) {
+		acid_ = 15-s_acid;
+	}
+	if(acid_ > 0) {
+		s_acid += acid_;
+		AcUpDown(0, -acid_);
 	}
 	return true;
 }

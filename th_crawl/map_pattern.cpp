@@ -1963,6 +1963,7 @@ B....B.\
 				}
 			}
 			map->name = "RUMIA_DANCER";
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 			return  "\
 .0.0.\
 0.0.0\

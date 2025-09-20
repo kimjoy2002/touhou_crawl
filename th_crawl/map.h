@@ -152,6 +152,7 @@ public:
 	map_dummy(int floor_, coord_def pos_,bool wall_,int size_x_,int size_y_,int pattern_, dungeon_tile_type floor_tex_, dungeon_tile_type wall_tex_);
 	~map_dummy();
 	void patternSet(); 
+	bool isVaild(int offset);
 	bool collution(const coord_def& point,int size_x_ = 0,int size_y_ = 0);
 	bool plus_collution(const coord_def& point,int size_x_,int size_y_);
 	void make_map(environment& env_pointer, bool wall_ = true, bool stair_input_ = false);

@@ -156,7 +156,13 @@ map_dummy::~map_dummy()
 		delete[] tiles[i];
 	delete[] tiles;
 }
-
+bool map_dummy::isVaild(int offset) {
+	if(pos.x-size_x < offset || pos.x+size_x>=DG_MAX_X-offset || pos.y-size_y<offset || pos.y+size_y>=DG_MAX_Y-offset)
+	{
+		return false;
+	}
+	return true;
+}
 bool map_dummy::collution(const coord_def& point,int size_x_,int size_y_)
 {
 	return ( abs(point.x-pos.x) <= size_x_ + size_x + 1 && abs(point.y-pos.y) <= size_y_ + size_y + 1 );
@@ -173,7 +179,7 @@ void map_dummy::make_map(environment& env_pointer, bool wall_, bool stair_input_
 	{
 		for(int j = -size_y;j<=size_y;j++)
 		{			
-			if(i+pos.x<0 || i+pos.x>DG_MAX_X||j+pos.y<0 || j+pos.y>DG_MAX_X)
+			if(i+pos.x<0 || i+pos.x>=DG_MAX_X||j+pos.y<0 || j+pos.y>=DG_MAX_X)
 			{
 				break;
 			}
@@ -1249,6 +1255,11 @@ void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 			
 			map_dummy* temp = new map_dummy(num, temp_coord, true,r_size_x,r_size_y, pattern_,floor_tex,wall_tex); //랜덤한 맵더미
 
+			if(!temp->isVaild(2)) {
+				delete temp;
+				continue;
+			}
+
 			vector<map_dummy*>::iterator it;
 			for (it=vec_special_map.begin();it!=vec_special_map.end();it++) 
 			{
@@ -1351,6 +1362,10 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 			map_dummy* temp = new map_dummy(num,temp_coord, false,r_size_x,r_size_y,pattern_,floor_tex,wall_tex); //랜덤한 맵더미
 			
 			
+			if(!temp->isVaild(2)) {
+				delete temp;
+				continue;
+			}
 
 
 			vector<map_dummy*>::iterator it;
@@ -1407,6 +1422,12 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 
 			coord_def temp_coord(next_x,next_y);		
 			map_dummy* temp = new map_dummy(num,temp_coord, false,r_size_x,r_size_y,0,floor_tex,wall_tex); //랜덤한 맵더미
+
+
+			if(!temp->isVaild(2)) {
+				delete temp;
+				continue;
+			}
 
 			if(step)
 			{
@@ -1536,6 +1557,12 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 			coord_def temp_coord(next_x,next_y);		
 			map_dummy* temp = new map_dummy(num,temp_coord, false,r_size_x,r_size_y,1,floor_tex,wall_tex); //랜덤한 맵더미
 
+
+			if(!temp->isVaild(2)) {
+				delete temp;
+				continue;
+			}
+
 			if(step)
 			{
 				if(step == 1)
@@ -1619,6 +1646,12 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 
 			map_dummy* temp = new map_dummy(num,temp_coord, false,r_size_x,r_size_y,pattern_,floor_tex,wall_tex); //랜덤한 맵더미
 			
+
+			if(!temp->isVaild(5)) {
+				delete temp;
+				continue;
+			}
+
 			vector<map_dummy*>::iterator it;
 			for (it=vec_map.begin();it!=vec_map.end();it++) 
 			{
@@ -1706,6 +1739,12 @@ void map_algorithms04(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 			coord_def temp_coord(randA(DG_MAX_X-(r_size_x+2)*2-1-m_size*2)+r_size_x+2+m_size,randA(DG_MAX_Y-(r_size_y+2)*2-1-m_size*2)+r_size_y+2+m_size);		
 			
 			map_dummy* temp = new map_dummy(num, temp_coord, true,r_size_x,r_size_y, pattern_,floor_tex,wall_tex); //랜덤한 맵더미
+
+
+			if(!temp->isVaild(2)) {
+				delete temp;
+				continue;
+			}
 
 			vector<map_dummy*>::iterator it;
 			for (it=vec_special_map.begin();it!=vec_special_map.end();it++) 

@@ -56,7 +56,8 @@ enum start_item_type
 	SIT_CAMERA,
 	SIT_TEST_POTION,
 	SIT_TEST_RING,
-	SIT_TEST_SCROLL
+	SIT_TEST_SCROLL,
+	SIT_MOMIZI_SHIELD
 };
 
 
@@ -341,6 +342,14 @@ void MakeStartItem(start_item_type select_, int num)
 		you.equiparmor('a'+num,false);
 		env[current_level].DeleteItem(it);	
 		break;
+	case SIT_MOMIZI_SHIELD:
+		it = env[current_level].MakeItem(you.position, makeitem(ITM_ARMOR_SHIELD, 0, &t, 25));
+		(*it).identify = true;
+		(*it).identify_curse = true;
+		you.additem(it,false);
+		you.equiparmor('a'+num,false);
+		env[current_level].DeleteItem(it);	
+		break;
 	case SIT_FOOD:	
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_FOOD, 0, &t, 0));
 		(*it).identify = true;
@@ -499,7 +508,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 			MakeStartItem(SIT_LONGBLADE,0);
 			you.GiveSkillExp(SKT_LONGBLADE,60,false);
 			MakeStartItem(SIT_ARMOUR_1,1);
-			MakeStartItem(SIT_SMALL_SHIELD,2);
+			MakeStartItem(SIT_MOMIZI_SHIELD,2);
 
 		}
 		you.GiveSkillExp(SKT_FIGHT,30,false);

@@ -2370,6 +2370,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_, bool non_de
 			{
 				if (&(*it) == equipment[ET_NECK]) {
 					you.resetAmuletPercent((amulet_type)equipment[ET_NECK]->value1, true);
+					you.unequip(ET_NECK, true);
 					DeleteItem(it);
 					break;
 				}

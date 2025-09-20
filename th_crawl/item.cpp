@@ -880,7 +880,15 @@ string item::GetName(int num_, bool simple_, string lang)
 		}
 		else
 		{
-			temp+=" {"+ LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_ARTIFACT) +"}";
+			temp+=" {";
+			if(type==ITM_AMULET)
+			{
+				if(iden_list.amulet_list[value1].iden == 2)  {
+					temp += GetShortAmuletString(lang,(amulet_type)value1);
+					temp+=", ";
+				}
+			}
+			temp+= LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_ARTIFACT) +"}";
 		}
 	}
 

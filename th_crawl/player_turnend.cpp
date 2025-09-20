@@ -1621,7 +1621,7 @@ void GameOver()
 		WaitForSingleObject(mutx, INFINITE);
 		if(!replay_mode_)
 			dump_ok = Dump(1,&dump_);
-		if((wiz_list.wizard_mode != 2 || you.dead_reason == DR_ESCAPE || you.dead_reason == DR_QUIT) && !replay_mode_)
+		if(isNormalGame() && (wiz_list.wizard_mode != 2 || you.dead_reason == DR_ESCAPE || you.dead_reason == DR_QUIT) && !replay_mode_)
 			delete_file();
 		ReleaseMutex(mutx);
 

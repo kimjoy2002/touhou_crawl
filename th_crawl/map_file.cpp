@@ -124,7 +124,7 @@ void initMap()
 	map_list.dungeon_enter[TEMPLE].set(false,0,0,rand_int(2,5));
 	map_list.dungeon_enter[MISTY_LAKE].set(false,0,0,rand_int(7,9));
 	map_list.dungeon_enter[YOUKAI_MOUNTAIN].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(1,2));
-	if(randA(1)) {
+	if(0) {//임시 0퍼센트
 		map_list.dungeon_enter[SCARLET_M].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(3,4));
 		map_list.dungeon_enter[FORESTOFMAGIC].set(false,0,0,-1);
 		map_list.dungeon_enter[SCARLET_U].set(false,0,0,SCARLET_LEVEL_LAST_LEVEL);

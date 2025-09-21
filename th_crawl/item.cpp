@@ -12,6 +12,7 @@
 #include "potion.h"
 #include "player.h"
 #include "scroll.h"
+#include "skill_use.h"
 #include "ring.h"
 #include "save.h"
 #include "weapon.h"
@@ -915,6 +916,17 @@ bool item::matches(const string& term_raw) {
         string name = tolower_ascii(GetName(-1, false, it.first));
         if (name.find(term) != string::npos)
             return true;
+		if(type == ITM_BOOK && (identify || iden_list.books_list[value0])) {
+			for (int i = 0; i < 8; i++)
+			{
+				spell_list spell_;
+				if ((spell_ = (spell_list)GetValue(i + 1)) != SPL_NONE)
+				{
+					if (SpellString(spell_).find(term) != string::npos)
+						return true;
+				}
+			}
+		}
 
         for (LOCALIZATION_ENUM_KEY tag : item_tag) {
             string tag_string = tolower_ascii(LocalzationManager::locString(it.first, tag));

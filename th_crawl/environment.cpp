@@ -2932,7 +2932,7 @@ float GetDotY(int offset_, int y, int magnification)
 	return offset_+y*magnification;
 }
 
-string CurrentLevelString(int level)
+string CurrentLevelString(int level, int ziggurat_level)
 {
 	ostringstream ss;
 
@@ -2990,7 +2990,7 @@ string CurrentLevelString(int level)
 	else if (level_ == OKINA_LEVEL)
 		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_OKINA);
 	else if (level_ == ZIGURRAT_LEVEL)
-		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_ZIGURRAT) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(you.ziggurat_level)));
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_ZIGURRAT) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(ziggurat_level)));
 	else
 		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_UKNOWN_DUNGEON);
 

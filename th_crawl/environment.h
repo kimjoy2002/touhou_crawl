@@ -381,7 +381,7 @@ int sprintMulti();
 
 float GetDotX(int offset_, int x, int magnification);
 float GetDotY(int offset_, int y, int magnification);
-string CurrentLevelString(int level = -1);
+string CurrentLevelString(int level = -1, int ziggurat_level = you.ziggurat_level);
 int GetLevelMonsterNum(int level, bool item_);
 void Noise(coord_def center_, int length_, const unit* excep_=NULL);
 bool Auto_Pick_Up(list<item>::iterator it);

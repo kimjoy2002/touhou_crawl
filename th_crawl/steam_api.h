@@ -55,6 +55,7 @@ struct ScoreEntry {
     int timestamp;
     int dungeon_level;
     int att_type;
+    int ziggurat_level;
 };
 
 

@@ -45,7 +45,7 @@ public:
 string GetDumpActionString(dump_action_type type_);
 
 
-void GetDeathReason(stringstream& death_reason, damage_reason dead_reason, int att_type, attack_infor* dead_order, int mon_id, int damage, int level, bool orb, int rune);
+void GetDeathReason(stringstream& death_reason, damage_reason dead_reason, int att_type, attack_infor* dead_order, int mon_id, int damage, int level, bool orb, int rune, int ziggurat_level);
 
 bool Dump(int type, wstring *filename_);
 

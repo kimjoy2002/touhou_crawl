@@ -882,7 +882,8 @@ bool score_menu(int value_)
 							entry.last_damage, 
 							entry.dungeon_level,
 							entry.rune >= 100,
-							entry.rune % 100);
+							entry.rune % 100,
+							entry.ziggurat_level);
 
 						printsub("     ", false, CL_normal);
 						printsub(WithBlankString(death_reason.str(), 61), false,(entry.rune >= 100 && entry.damage_reason == DR_ESCAPE)?CL_green: CL_warning);

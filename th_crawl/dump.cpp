@@ -111,7 +111,7 @@ int caculScore()
 }
 
 
-void GetDeathReason(stringstream& death_reason, damage_reason dead_reason, int att_type, attack_infor* dead_order, int mon_id, int damage, int level, bool orb, int rune) {
+void GetDeathReason(stringstream& death_reason, damage_reason dead_reason, int att_type, attack_infor* dead_order, int mon_id, int damage, int level, bool orb, int rune, int ziggurat_level) {
 	
 	string mon_name;
 	bool hasorder = false;
@@ -152,7 +152,7 @@ void GetDeathReason(stringstream& death_reason, damage_reason dead_reason, int a
 			}
 			temp_reason << ")";
 		}
-		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_UNKNOWN, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_UNKNOWN, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 		break;
 	}
 	case DR_HITTING:
@@ -169,37 +169,37 @@ void GetDeathReason(stringstream& death_reason, damage_reason dead_reason, int a
 			case ATT_SMITE:
 			default:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMITE, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_SMASH:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMASH_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMASH_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMASH, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SMASH, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_BLOOD:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BLOOD_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BLOOD_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BLOOD, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BLOOD, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_NOISE:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NOISE_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NOISE_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NOISE, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NOISE, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_SPEAR:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SPEAR_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SPEAR_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SPEAR, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SPEAR, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_NORMAL:
@@ -218,86 +218,86 @@ void GetDeathReason(stringstream& death_reason, damage_reason dead_reason, int a
 			case ATT_THROW_SLOW_POISON:
 			case ATT_SILVER:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NORMAL_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NORMAL_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NORMAL, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_NORMAL, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_CONFUSE_SPORE:
 			case ATT_WEAK_SPORE:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SPORE_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SPORE_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SPORE, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SPORE, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_HOOF:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_HOOF_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_HOOF_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_HOOF, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_HOOF, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_VAMP:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_VAMP_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_VAMP_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_VAMP, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_VAMP, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_VEILING:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_VEILING_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_VEILING_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_VEILING, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_VEILING, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_RUSH:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_RUSH_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_RUSH_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_RUSH, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_RUSH, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_WALL:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WALL_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WALL_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WALL, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WALL, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_PSYCHO:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_PSYCHO, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_STONE_TRAP:
-				death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_TRAP, PlaceHolderHelper(CurrentLevelString(level)));
+				death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_TRAP, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				break;
 			case ATT_THROW_NORMAL:
 			case ATT_THROW_WATER:
 			case ATT_THROW_SILVER:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_TANMAC_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_TANMAC_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_TANMAC, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_TANMAC, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_NORMAL_BLAST:
 			case ATT_AC_REDUCE_BLAST:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BLAST_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BLAST_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BLAST, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BLAST, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_SUN_BLAST:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SUN_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SUN_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SUN, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SUN, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_FIRE:
@@ -310,9 +310,9 @@ void GetDeathReason(stringstream& death_reason, damage_reason dead_reason, int a
 			case ATT_THROW_FIRE_PYSICAL:
 			case ATT_FIRE_ENCHANT_BLAST:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_FIRE_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_FIRE_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_FIRE, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_FIRE, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_COLD:
@@ -324,9 +324,9 @@ void GetDeathReason(stringstream& death_reason, damage_reason dead_reason, int a
 			case ATT_THROW_COLD_PYSICAL:
 			case ATT_COLD_ENCHANT_BLAST:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_COLD_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_COLD_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_COLD, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_COLD, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_ELEC:
@@ -336,73 +336,73 @@ void GetDeathReason(stringstream& death_reason, damage_reason dead_reason, int a
 			case ATT_THROW_ELEC_PYSICAL:
 			case ATT_ELEC_ENCHANT_BLAST:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_ELEC_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_ELEC_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_ELEC, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_ELEC, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_POISON_BLAST:
 			case ATT_POISON_ENCHANT_BLAST:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_POISON_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_POISON_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_POISON, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_POISON, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_CLOUD_NORMAL:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WIND_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WIND_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WIND, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_WIND, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_CLOUD_CURSE:
 				if (hasmonster) {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_CURSE_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(temp_reason.str()));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_CURSE_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_CURSE, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_CURSE, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_BURST:
 				if (hasmonster) {
 					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BURST_BY, PlaceHolderHelper(temp_reason.str()));
 				} else {
-					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BURST, PlaceHolderHelper(CurrentLevelString(level)));
+					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_BURST, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 				}
 				break;
 			case ATT_DROWNING:
-				death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_DROWNING), PlaceHolderHelper(CurrentLevelString(level));
+				death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_DROWNING), PlaceHolderHelper(CurrentLevelString(level, ziggurat_level));
 				break;
 			}
 			death_reason << "(" << to_string(damage) << " " << LocalzationManager::locString(LOC_SYSTEM_DAMAGE) << ")";
 		}
 		else {
-			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_UKNOWNDAMAGE, PlaceHolderHelper(CurrentLevelString(level)));
+			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_UKNOWNDAMAGE, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 		}
 		break;
 	case DR_POISON:
-		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_ADDICTION, PlaceHolderHelper(CurrentLevelString(level)));
+		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_ADDICTION, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 		break;
 	case DR_FIRE:
-		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_FIRE, PlaceHolderHelper(CurrentLevelString(level)));
+		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_FIRE, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 		break;
 	case DR_POTION:
-		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_POTION, PlaceHolderHelper(CurrentLevelString(level)));
+		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_POTION, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 		if (hasorder) {
 			death_reason << "(" << to_string(damage) << " " << LocalzationManager::locString(LOC_SYSTEM_DAMAGE) << ")";
 		}
 		break;
 	case DR_QUIT:
-		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_QUIT, PlaceHolderHelper(CurrentLevelString(level)));
+		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_QUIT, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 		break;
 	case DR_HUNGRY:
-		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_HUNGRY, PlaceHolderHelper(CurrentLevelString(level)));
+		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_HUNGRY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 		break;
 	case DR_MIRROR:
 		if (hasorder && hasmonster) {
-			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_MIRROR_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(mon_name));
+			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_MIRROR_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(mon_name));
 		} else {
-			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_MIRROR, PlaceHolderHelper(CurrentLevelString(level)));
+			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_MIRROR, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 		}
 		if (hasorder)
 		{
@@ -410,23 +410,23 @@ void GetDeathReason(stringstream& death_reason, damage_reason dead_reason, int a
 		}
 		break;
 	case DR_MP:
-		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_MP, PlaceHolderHelper(CurrentLevelString(level)));
+		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_MP, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 		break;
 	case DR_JUNKO:
-		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_INSTANT, PlaceHolderHelper(CurrentLevelString(level)));
+		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_JUNKO_INSTANT, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 		break;
 	case DR_SLEEP:
 		if (hasorder && hasmonster) {
-			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SLEEP_BY, PlaceHolderHelper(CurrentLevelString(level)), PlaceHolderHelper(mon_name));
+			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SLEEP_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(mon_name));
 		} else {
-			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SLEEP, PlaceHolderHelper(CurrentLevelString(level)));
+			death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SLEEP, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 		}
 		break;
 	case DR_GHOST:
-		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_GHOST, PlaceHolderHelper(CurrentLevelString(level)));
+		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_GHOST, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 		break;
 	case DR_EFFECT:
-		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SIDEEFFECT, PlaceHolderHelper(CurrentLevelString(level)));
+		death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_SIDEEFFECT, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)));
 		break;
 	case DR_ESCAPE:
 		if (orb) {
@@ -490,7 +490,7 @@ bool Dump(int type, wstring *filename_)
 		
 		ss << "             ";
 		stringstream death_reason;
-		GetDeathReason(death_reason, you.dead_reason, ATT_NORMAL, you.dead_order, -1, -1, current_level,you.haveOrb(),you.haveGoal());
+		GetDeathReason(death_reason, you.dead_reason, ATT_NORMAL, you.dead_order, -1, -1, current_level,you.haveOrb(),you.haveGoal(), you.ziggurat_level);
 		ss << death_reason.str() << "\n             ";
 		ss << LocalzationManager::locString(LOC_SYSTEM_FINAL_TURN) <<  ' ' << you.turn << "\n";
 		if (wiz_list.wizard_mode == 1)
@@ -534,6 +534,7 @@ bool Dump(int type, wstring *filename_)
 				entry.god = you.god;
 				entry.version = version_string_to_int();
 				entry.dungeon_level = current_level;
+				entry.ziggurat_level = you.ziggurat_level;
 
 				steam_mg.addStats(you.haveOrb(), you.char_type, you.tribe, you.job);
 				send_score = steam_mg.sendScore(entry);

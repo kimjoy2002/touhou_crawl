@@ -5430,3 +5430,7 @@ LOC_SYSTEM_VULUN_POISON,毒耐性-
 LOC_SYSTEM_MON_VULUN_POISON,{0}は胞子を浴びて免疫力が弱くなった。
 LOC_SYSTEM_ATT_ACID,酸
 LOC_SYSTEM_HIT_ACID,{0}の{1}が{2}に命中し、酸で焼き尽くした。
+LOC_SYSTEM_BUFF_ACID,酸性（{0}）
+LOC_SYSTEM_BUFF_DESCRIBE_ACID,酸性は防御力を{0}だけ下げます。防御力がマイナスになると、受けるダメージが増加します。
+LOC_SYSTEM_ACID,酸性
+LOC_SYSTEM_ATT_INFO_ACID,この攻撃は酸性を付与する可能性があります。

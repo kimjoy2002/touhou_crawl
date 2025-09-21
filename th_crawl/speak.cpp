@@ -5890,6 +5890,97 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SANNYO_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
 		}
 		break;
+	case MON_MARISA:
+		if (type == MST_NORMAL)
+		{
+			switch (randA(5))
+			{
+			case 0:
+			if (you.char_type == UNIQ_START_REIMU)
+			{
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_NORMAL1_REIMU), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+			else if (you.char_type == UNIQ_START_NITORI)
+			{
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_NORMAL1_NITORI), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+			else {
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+			case 1:
+			if (you.char_type == UNIQ_START_REIMU)
+			{
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_NORMAL2_REIMU), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+			else if (you.char_type == UNIQ_START_NITORI)
+			{
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_NORMAL2_NITORI), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+			else {
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+			case 2:
+			if (you.char_type == UNIQ_START_REIMU)
+			{
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_NORMAL3_REIMU), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+			else if (you.char_type == UNIQ_START_NITORI)
+			{
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_NORMAL3_NITORI), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+			else {
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+			case 3:
+			if (you.god == GT_MIMA)
+			{
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_NORMAL1_MIMA), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+			else {
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+			case 4:
+			if (you.god == GT_MIMA)
+			{
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_NORMAL2_MIMA), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+			else {
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+			case 5:
+			if (you.god == GT_MIMA)
+			{
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_NORMAL3_MIMA), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+			else {
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+			}
+		}
+		else if (type == MST_CONFUSE)
+		{
+			switch (randA(2))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_CONFUSE1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 1:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_CONFUSE2), PlaceHolderHelper(monster_info->GetName()->getName()));
+			case 2:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_CONFUSE3), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_MAGIC)
+		{
+			switch (randA(0))
+			{
+			case 0:
+				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_MAGIC1), PlaceHolderHelper(monster_info->GetName()->getName()));
+			}
+		}
+		else if (type == MST_CAMERA)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MARISA_CAMERA), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
 	default:
 		break;
 	}

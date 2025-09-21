@@ -2874,6 +2874,7 @@ void LoadFile()
 		for(; i < MAXLEVEL; i++)
 		{
 			env[i].init();
+			env[i].floor = i;
 		}
 	} else {
 		int i = 0;
@@ -2884,6 +2885,7 @@ void LoadFile()
 		for(; i < MAXLEVEL; i++)
 		{
 			env[i].init();
+			env[i].floor = i;
 		}
 	}
 	if(isPrevVersion(loading_version_string, "ver1.111")) {

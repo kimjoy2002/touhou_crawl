@@ -1108,11 +1108,11 @@ const mon_infor mondata[] = {
 		{17,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_BITE),name_infor(),name_infor()},
 		M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,1,10,'D'},
 		
-	{MON_CONFUSE_MUSHROOM,9,690,name_infor(MON_CONFUSE_MUSHROOM),&img_confuse_mushroom,70,6,0,
+	{MON_CONFUSE_MUSHROOM,9,690,name_infor(MON_CONFUSE_MUSHROOM),&img_confuse_mushroom,55,6,0,
 		{14,0,0},{ATT_CONFUSE_SPORE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_SPORE),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,0,12,'m'},
 		
-	{MON_WEAKENING_MUSHROOM,8,350,name_infor(MON_WEAKENING_MUSHROOM),&img_mons_weakening_mushroom,55,6,0,
+	{MON_WEAKENING_MUSHROOM,8,350,name_infor(MON_WEAKENING_MUSHROOM),&img_mons_weakening_mushroom,40,6,0,
 		{12,0,0},{ATT_WEAK_SPORE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_SPORE),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR  | M_FLAG_SPEAK,0,0,12,'m'},
 		
@@ -1120,8 +1120,8 @@ const mon_infor mondata[] = {
 		{35,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK,0,0,9,'M'},
 
-	{MON_GIANT_STAG_BEETLE,10,800,name_infor(MON_GIANT_STAG_BEETLE),&img_mons_stag_beetle,70,20,0,
-		{12,12,60},{ATT_NORMAL,ATT_NORMAL,ATT_NORMAL},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL)},
+	{MON_GIANT_STAG_BEETLE,10,800,name_infor(MON_GIANT_STAG_BEETLE),&img_mons_stag_beetle,70,12,0,
+		{10,10,60},{ATT_NORMAL,ATT_NORMAL,ATT_NORMAL},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL)},
 		M_FLAG_ANIMAL,0,1,10,'B'},
 		
 	{MON_GIANT_SLUG,9,670,name_infor(MON_GIANT_SLUG),&img_mons_giant_slug,150,15,0,
@@ -1141,7 +1141,7 @@ const mon_infor mondata[] = {
 		M_FLAG_CANT_NETURAL,0,0,5,'*'},
 		
 	{MON_MAN_EATING_FLOWER,10,800,name_infor(MON_MAN_EATING_FLOWER),&img_mons_eating_flower,95,3,10,
-		{32,0,0},{ATT_ACID_BYTE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		{22,0,0},{ATT_ACID_BYTE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR,0,1,10,'P'},
 		
 	{MON_OVERGROWTH_MAGIC_FLOWER,11,1100,name_infor(MON_OVERGROWTH_MAGIC_FLOWER),&img_mons_magic_flower,120,5,3,

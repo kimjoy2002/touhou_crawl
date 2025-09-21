@@ -5887,11 +5887,11 @@ bool monster::UnSetAcid() {
 	return true;
 }
 bool monster::SetAcid(int acid_, int turn_) {
-	s_acid_turn = turn_;
-	if(randA(s_acid + 15) > 10) {//산성확률 기본66%, 올라갈수록 감소하여 33%까지 
+	if(randA(s_acid + 15) > 7) {//산성확률 기본50%, 올라갈수록 감소하여 23%까지 
 		//저항 추가?
 		return true;
 	}
+	s_acid_turn = turn_;
 	if(s_acid+acid_ > 15) {
 		acid_ = 15-s_acid;
 	}

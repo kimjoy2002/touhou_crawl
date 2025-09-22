@@ -5090,7 +5090,7 @@ const char* forestofmagic_last_vault_pattern(map_dummy* map) {
 		item_infor t;
 		makeitem(ITM_GOAL, 0, &t, RUNE_FORESTOFMAGIC);
 		map->item_list.push_back(mapdummy_item(t,coord_def(randA(1)?6:-6,-5)));
-		if(!is_exist_named(MON_MARISA)){
+		if(true){//!is_exist_named(MON_MARISA)){ //항상만듬
 			map->monster_list.push_back(mapdummy_mon(MON_MARISA,0,coord_def(0,0)));
 			set_exist_named(MON_MARISA);
 		}

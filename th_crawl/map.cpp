@@ -1628,7 +1628,7 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 		if(!special_enter.empty())
 		{
 			special_ = true;
-			repeat = 9999;//특수패턴은 (거의)무한반복시킴
+			repeat = 999;//특수패턴은 (거의)무한반복시킴
 			pattern_ = special_enter.back();
 			special_enter.pop_back();
 		}

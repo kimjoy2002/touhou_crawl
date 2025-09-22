@@ -589,6 +589,8 @@ stair_kind environment::getStairKind(int x_, int y_)
 	case DG_BAMBOO_STAIR:
 	case DG_EIENTEI_STAIR:
 	case DG_SUBTERRANEAN_STAIR:
+	case DG_FORESTOFMAGIC_STAIR:
+	case DG_DOLLSHOUSE_STAIR:
 	case DG_YUKKURI_STAIR:
 	case DG_DEPTH_STAIR:
 	case DG_DREAM_STAIR:

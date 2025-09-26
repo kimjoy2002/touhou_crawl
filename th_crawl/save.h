@@ -39,8 +39,11 @@ void SaveData(FILE *fp, const T &input, int size = 1)
 template <typename T>
 void LoadData(FILE *fp, T &output)
 {
+    if (feof(fp)) {
+        return;
+    }
 	char *temp = (char*)(&output);
-	int size;
+	int size = 0;
 	fscanf_s(fp, "%d",&size);
 	fgetc(fp);
 	//temp = new char[sizeof(T)];

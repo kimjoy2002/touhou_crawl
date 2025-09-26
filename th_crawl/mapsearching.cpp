@@ -78,7 +78,7 @@ void MapNode::addStair(MapNode* node, int floor)
 
 
 
-void MapNode::initMapNode()
+void MapNode::initMapNode(bool temp)
 {
 	mapNode_normal = MapNode(LOC_SYSTEM_DUNGEON, 0, MAX_DUNGEUN_LEVEL);
 	mapNode_temple = MapNode(LOC_SYSTEM_DUNGEON_TEMPLE, TEMPLE_LEVEL, 1);
@@ -115,11 +115,17 @@ void MapNode::initMapNode()
 
 	mapNode_scarlet.addNode(&mapNode_misty, -1); //돌아옴
 	mapNode_scarlet.addNode(&mapNode_library, SCARLET_L);
-	mapNode_scarlet.addNode(&mapNode_flan, SCARLET_U);
+	if(!temp) {
+		mapNode_scarlet.addNode(&mapNode_flan, SCARLET_U);
+	}
 
 	mapNode_library.addNode(&mapNode_scarlet, -1); //돌아옴
 
-	mapNode_flan.addNode(&mapNode_scarlet, -1); //돌아옴
+	if(temp) {
+		mapNode_flan.addNode(&mapNode_forestofmagic, -1); //돌아옴
+	} else {
+		mapNode_flan.addNode(&mapNode_scarlet, -1); //돌아옴
+	}
 
 	mapNode_moun.addNode(&mapNode_misty, -1); //돌아옴
 	mapNode_moun.addNode(&mapNode_yukku, YUKKURI_D);
@@ -127,7 +133,10 @@ void MapNode::initMapNode()
 	mapNode_yukku.addNode(&mapNode_moun, -1); //돌아옴
 
 	mapNode_forestofmagic.addNode(&mapNode_misty, -1); //돌아옴
-	mapNode_forestofmagic.addNode(&mapNode_library, DOLLSHOUSE);
+	if(temp) {
+		mapNode_forestofmagic.addNode(&mapNode_flan, SCARLET_U);
+	}
+	mapNode_forestofmagic.addNode(&mapNode_dollshouse, DOLLSHOUSE);
 
 	mapNode_dollshouse.addNode(&mapNode_forestofmagic, -1); //돌아옴
 

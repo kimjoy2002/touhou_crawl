@@ -16,6 +16,7 @@
 #include "rect.h"
 #include "event.h"
 #include "mon_infor.h"
+#include "mapsearching.h"
 #include "key.h"
 #include "smoke.h"
 #include "floor.h"
@@ -191,7 +192,7 @@ void environment::LoadDatas(FILE *fp)
 	}
 	LoadData<coord_def>(fp, *stair_up);
 	LoadData<coord_def>(fp, *stair_down);
-	int size_;
+	int size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i=0;i<size_;i++)
 	{	
@@ -199,6 +200,7 @@ void environment::LoadDatas(FILE *fp)
 		temp.LoadDatas(fp);
 		stair_vector.push_back(temp);
 	}
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i=0;i<size_;i++)
 	{	
@@ -206,6 +208,7 @@ void environment::LoadDatas(FILE *fp)
 		temp.LoadDatas(fp);
 		mon_vector.push_back(temp);
 	}
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i=0;i<size_;i++)
 	{	
@@ -214,6 +217,7 @@ void environment::LoadDatas(FILE *fp)
 		shadow_list.push_back(temp);
 	}
 	if(!isPrevVersion(loading_version_string, "ver1.102")) {
+		size_ = 0;
 		LoadData<int>(fp, size_);
 		for(int i=0;i<size_;i++)
 		{	
@@ -222,6 +226,7 @@ void environment::LoadDatas(FILE *fp)
 			afterimage_list.push_back(temp);
 		}
 	}
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i=0;i<size_;i++)
 	{	
@@ -229,6 +234,7 @@ void environment::LoadDatas(FILE *fp)
 		temp.LoadDatas(fp);
 		item_list.push_back(temp);
 	}
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i=0;i<size_;i++)
 	{	
@@ -236,6 +242,7 @@ void environment::LoadDatas(FILE *fp)
 		temp.LoadDatas(fp);
 		smoke_list.push_back(temp);
 	}
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i=0;i<size_;i++)
 	{	
@@ -243,6 +250,7 @@ void environment::LoadDatas(FILE *fp)
 		temp.LoadDatas(fp);
 		floor_list.push_back(temp);
 	}
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i=0;i<size_;i++)
 	{	
@@ -250,6 +258,7 @@ void environment::LoadDatas(FILE *fp)
 		temp.LoadDatas(fp);
 		event_list.push_back(temp);
 	}
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for (int i = 0; i<size_; i++)
 	{
@@ -258,6 +267,7 @@ void environment::LoadDatas(FILE *fp)
 		string name = temp;
 		speciel_map_name.push_back(temp);
 	}
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for (int i = 0; i<size_; i++)
 	{
@@ -2871,7 +2881,8 @@ void LoadFile()
 		int i = 0;
 		for(; i < size_ && i < MAXLEVEL; i++)
 		{
-			env[i].LoadDatas(fp);	
+			env[i].LoadDatas(fp);
+			env[i].floor = i;
 		}
 		for(; i < MAXLEVEL; i++)
 		{
@@ -2882,7 +2893,8 @@ void LoadFile()
 		int i = 0;
 		for(; i < 63 && i < MAXLEVEL; i++)
 		{
-			env[i].LoadDatas(fp);	
+			env[i].LoadDatas(fp);
+			env[i].floor = i;
 		}
 		for(; i < MAXLEVEL; i++)
 		{
@@ -2913,6 +2925,18 @@ void LoadFile()
 		map_infor_202::migrateInfor202toCurrent(temp, map_list);
 	} else {
 		map_list.LoadDatas(fp);
+	}
+
+
+	//깨진 파일 개선
+	if(map_list.dungeon_enter[TEMPLE].floor == -1) {
+		//파일이 깨졌음
+		recoverMap(); //복구 시도
+	}
+
+	//임시로 맵에 따라 강제 재조정
+	if(map_list.dungeon_enter[SCARLET_M].floor == -1) {
+		MapNode::initMapNode(true);//임시 재정렬
 	}
 
 	LoadData<wiz_infor>(fp,wiz_list);

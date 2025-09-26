@@ -118,6 +118,124 @@ int sprintMulti()
 	}
 	return 7;
 }
+void recoverMap() {
+	initMap();
+	for(int i = 0; i < MAXLEVEL; i++)
+	{
+		if(env[i].make) {
+			for(int x_ = 0; x_ < DG_MAX_X; x_++) {
+				for(int y_ = 0; y_ < DG_MAX_Y; y_++) {
+					dungeon_tile dgtile_ = env[i].dgtile[x_][y_];
+					switch(dgtile_.tile) {
+						default:
+							break;
+						case DG_TEMPLE_STAIR:
+							map_list.dungeon_enter[TEMPLE].floor = i;
+							map_list.dungeon_enter[TEMPLE].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[TEMPLE].detected = true;
+							break;
+						case DG_MISTY_LAKE_STAIR:	
+							map_list.dungeon_enter[MISTY_LAKE].floor = i;
+							map_list.dungeon_enter[MISTY_LAKE].pos = coord_def(x_,y_);				
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[MISTY_LAKE].detected = true;
+							break;
+						case DG_YOUKAI_MOUNTAIN_STAIR:
+							map_list.dungeon_enter[YOUKAI_MOUNTAIN].floor = i;
+							map_list.dungeon_enter[YOUKAI_MOUNTAIN].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[YOUKAI_MOUNTAIN].detected = true;
+							break;
+						case DG_SCARLET_STAIR:
+							map_list.dungeon_enter[SCARLET_M].floor = i;
+							map_list.dungeon_enter[SCARLET_M].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[SCARLET_M].detected = true;
+							break;				
+						case DG_SCARLET_L_STAIR:
+							map_list.dungeon_enter[SCARLET_L].floor = i;
+							map_list.dungeon_enter[SCARLET_L].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[SCARLET_L].detected = true;		
+							break;				
+						case DG_SCARLET_U_STAIR:
+							map_list.dungeon_enter[SCARLET_U].floor = i;
+							map_list.dungeon_enter[SCARLET_U].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[SCARLET_U].detected = true;		
+							break;	
+						case DG_FORESTOFMAGIC_STAIR:
+							map_list.dungeon_enter[FORESTOFMAGIC].floor = i;
+							map_list.dungeon_enter[FORESTOFMAGIC].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[FORESTOFMAGIC].detected = true;		
+							break;
+						case DG_DOLLSHOUSE_STAIR:
+							map_list.dungeon_enter[DOLLSHOUSE].floor = i;
+							map_list.dungeon_enter[DOLLSHOUSE].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[DOLLSHOUSE].detected = true;		
+							break;			
+						case DG_BAMBOO_STAIR:
+							map_list.dungeon_enter[BAMBOO].floor = i;
+							map_list.dungeon_enter[BAMBOO].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[BAMBOO].detected = true;		
+							break;				
+						case DG_EIENTEI_STAIR:	
+							break;				
+						case DG_SUBTERRANEAN_STAIR:
+							map_list.dungeon_enter[SUBTERRANEAN].floor = i;
+							map_list.dungeon_enter[SUBTERRANEAN].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[SUBTERRANEAN].detected = true;		
+							break;
+						case DG_YUKKURI_STAIR:
+							map_list.dungeon_enter[YUKKURI_D].floor = i;
+							map_list.dungeon_enter[YUKKURI_D].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[YUKKURI_D].detected = true;		
+							break;
+						case DG_DEPTH_STAIR:
+							map_list.dungeon_enter[DEPTH].floor = i;
+							map_list.dungeon_enter[DEPTH].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[DEPTH].detected = true;		
+							break;
+						case DG_DREAM_STAIR:
+							map_list.dungeon_enter[DREAM_D].floor = i;
+							map_list.dungeon_enter[DREAM_D].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[DREAM_D].detected = true;		
+							break;
+						case DG_MOON_STAIR:	
+							break;
+						case DG_PANDEMONIUM_STAIR:
+							map_list.dungeon_enter[PANDEMONIUM].floor = i;
+							map_list.dungeon_enter[PANDEMONIUM].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[PANDEMONIUM].detected = true;		
+							break;
+						case DG_HAKUREI_STAIR:
+							map_list.dungeon_enter[HAKUREI_D].floor = i;
+							map_list.dungeon_enter[HAKUREI_D].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[HAKUREI_D].detected = true;		
+							break;
+						case DG_ZIGURRAT_STAIR:
+							map_list.dungeon_enter[ZIGURRAT].floor = i;
+							map_list.dungeon_enter[ZIGURRAT].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[ZIGURRAT].detected = true;
+							break;
+
+					}
+				}
+			}
+		}
+	}
+}
 
 void initMap()
 {

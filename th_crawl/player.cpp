@@ -713,7 +713,7 @@ void players::LoadDatas(FILE *fp)
 		LoadData<buff_class>(fp, temp);
 		buff_list.push_back(temp);
 	}
-
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i = 0; i < size_; i++)
 	{
@@ -722,6 +722,7 @@ void players::LoadDatas(FILE *fp)
 		item_list.push_back(temp);
 	}
 	
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i = 0; i < size_; i++)
 	{
@@ -731,6 +732,7 @@ void players::LoadDatas(FILE *fp)
 	}
 
 	
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i = 0; i < size_; i++)
 	{

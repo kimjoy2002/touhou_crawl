@@ -155,7 +155,7 @@ void item_infor::LoadDatas(FILE *fp)
 	LoadData<bool>(fp, artifact);
 	if(!isPrevVersion(loading_version_string, "ver1.109")) {
 
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		for(int i = 0; i < size_; i++)
 		{
@@ -268,7 +268,7 @@ void item::LoadDatas(FILE *fp)
 	}
 
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		for(int i = 0; i < size_; i++)
 		{
@@ -279,7 +279,7 @@ void item::LoadDatas(FILE *fp)
 	}
 	if(!isPrevVersion(loading_version_string, "ver1.109")) {
 
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		for(int i = 0; i < size_; i++)
 		{
@@ -362,7 +362,7 @@ void Iden_collect::SaveDatas(FILE *fp) {
 }
 void Iden_collect::LoadDatas(FILE *fp) {
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -379,7 +379,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 	}
 
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -396,7 +396,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 	}
 
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -413,7 +413,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 	}
 	
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -430,7 +430,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 	}
 	
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -447,7 +447,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 	}
 	
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -464,7 +464,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 	}
 	
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -482,7 +482,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 
 	if(!isPrevVersion(loading_version_string, "ver1.113"))
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -498,7 +498,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 		}
 	}
 	
-    int size_, i;
+    int size_ = 0, i;
 	// 포션 자동줍기 로드
     LoadData<int>(fp, size_);
     for (i = 0; i < size_; ++i) {
@@ -510,9 +510,10 @@ void Iden_collect::LoadDatas(FILE *fp) {
             LoadData<bool>(fp, temp); // 초과분 무시
         }
     }
-    for (; i + IDEN_CHECK_POTION_START < IDEN_CHECK_POTION_END; ++i)
+    for (; i + IDEN_CHECK_POTION_START < IDEN_CHECK_POTION_END; ++i) {
         autopickup[IDEN_CHECK_POTION_START + i] = false; // 부족분 초기화
-
+	}
+	size_ = 0;
     // 스크롤 자동줍기 로드
     LoadData<int>(fp, size_);
     for (i = 0; i < size_; ++i) {
@@ -524,9 +525,10 @@ void Iden_collect::LoadDatas(FILE *fp) {
             LoadData<bool>(fp, temp);
         }
     }
-    for (; i + IDEN_CHECK_SCROLL_START < IDEN_CHECK_SCROLL_END; ++i)
+    for (; i + IDEN_CHECK_SCROLL_START < IDEN_CHECK_SCROLL_END; ++i) {
         autopickup[IDEN_CHECK_SCROLL_START + i] = false;
-
+	}
+	size_ = 0;
     // 반지 자동줍기 로드
     LoadData<int>(fp, size_);
     for (i = 0; i < size_; ++i) {
@@ -538,9 +540,10 @@ void Iden_collect::LoadDatas(FILE *fp) {
             LoadData<bool>(fp, temp);
         }
     }
-    for (; i + IDEN_CHECK_RING_START < IDEN_CHECK_RING_END; ++i)
+    for (; i + IDEN_CHECK_RING_START < IDEN_CHECK_RING_END; ++i){
         autopickup[IDEN_CHECK_RING_START + i] = false;
-
+	}
+	size_ = 0;
     // 아뮬렛 자동줍기 로드
     LoadData<int>(fp, size_);
     for (i = 0; i < size_; ++i) {
@@ -552,9 +555,10 @@ void Iden_collect::LoadDatas(FILE *fp) {
             LoadData<bool>(fp, temp);
         }
     }
-    for (; i + IDEN_CHECK_AMULET_START < IDEN_CHECK_AMULET_END; ++i)
+    for (; i + IDEN_CHECK_AMULET_START < IDEN_CHECK_AMULET_END; ++i){
         autopickup[IDEN_CHECK_AMULET_START + i] = false;
-
+	}
+	size_ = 0;
     // 스펠카드 자동줍기 로드
     LoadData<int>(fp, size_);
     for (i = 0; i < size_; ++i) {
@@ -566,9 +570,10 @@ void Iden_collect::LoadDatas(FILE *fp) {
             LoadData<bool>(fp, temp);
         }
     }
-    for (; i + IDEN_CHECK_SPC_START < IDEN_CHECK_SPC_END; ++i)
+    for (; i + IDEN_CHECK_SPC_START < IDEN_CHECK_SPC_END; ++i){
         autopickup[IDEN_CHECK_SPC_START + i] = false;
-
+	}
+	size_ = 0;
     // 책 자동줍기 로드 (미감정 포함)
     LoadData<int>(fp, size_);
     for (i = 0; i < size_; ++i) {
@@ -580,9 +585,10 @@ void Iden_collect::LoadDatas(FILE *fp) {
             LoadData<bool>(fp, temp);
         }
     }
-    for (; i + IDEN_CHECK_BOOK_START < IDEN_CHECK_BOOK_END; ++i)
+    for (; i + IDEN_CHECK_BOOK_START < IDEN_CHECK_BOOK_END; ++i){
         autopickup[IDEN_CHECK_BOOK_START + i] = false;
-
+	}
+	size_ = 0;
     // 기타 자동줍기 로드 (P아이템, 음식류 포함)
     LoadData<int>(fp, size_);
     for (i = 0; i < size_; ++i) {
@@ -594,8 +600,9 @@ void Iden_collect::LoadDatas(FILE *fp) {
             LoadData<bool>(fp, temp);
         }
     }
-    for (; i + IDEN_CHECK_ETC_START < IDEN_CHECK_ETC_END; ++i)
+    for (; i + IDEN_CHECK_ETC_START < IDEN_CHECK_ETC_END; ++i){
         autopickup[IDEN_CHECK_ETC_START + i] = false;
+	}
 }
 
 void Iden_collect_111::migrateIden111toCurrent(const Iden_collect_111& old_data, Iden_collect& new_data)

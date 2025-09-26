@@ -44,7 +44,7 @@ extern bool ableWiz;
 
 extern HANDLE mutx;
 
-const char *version_string = "ver1.204";
+const char *version_string = "ver1.205";
 extern int g_tile_size;
 
 int version_string_to_int() {
@@ -358,7 +358,7 @@ void charter_selete(bool first)
 
 	
 	init_state();
-	MapNode::initMapNode();
+	MapNode::initMapNode(false);
 	map_list.tutorial = GM_TITLE;
 
 	if(!ReplayClass.play)

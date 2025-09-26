@@ -171,6 +171,7 @@ public:
 
 extern map_infor map_list;
 
+void recoverMap();
 void initMap();
 void map_algorithms(int num);
 const char* common_base_pattern(int floor_, map_dummy* map);

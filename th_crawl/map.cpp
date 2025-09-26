@@ -39,7 +39,7 @@ void map_infor::SaveDatas(FILE *fp) {
 void map_infor::LoadDatas(FILE *fp) {
 	
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -55,7 +55,7 @@ void map_infor::LoadDatas(FILE *fp) {
 		}
 	}
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {

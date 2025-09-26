@@ -4863,6 +4863,8 @@ void verylongMove(int level, coord_def pos)
 					}
 					stairMap.pop();
 				}
+			} else {
+				return;
 			}
 			if(onemore && current_level == level) {
 				onemore = false;

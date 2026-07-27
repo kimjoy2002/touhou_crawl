@@ -369,7 +369,7 @@ bool environment::MakeMap(bool return_)
 	}
 	return false;
 }
-void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
+void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_, bool preserve_instance_map)
 {
 	if (floor == current_level) {
 	//같은 층끼리 움직이는거라면 몬스터를 끌어오면 안된다.
@@ -389,7 +389,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 
 	int dq_n=0;
 	
-	bool first_ = MakeMap(false);
+	bool first_ = MakeMap(preserve_instance_map);
 	enterBgm(first_);
 	WaitForSingleObject(mutx, INFINITE);
 	int prev_level = current_level;

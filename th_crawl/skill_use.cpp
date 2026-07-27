@@ -3283,6 +3283,7 @@ bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 	you.god_value[GT_OKINA][0] = current_level;
 	you.god_value[GT_OKINA][1] = you.position.x;
 	you.god_value[GT_OKINA][2] = you.position.y;
+	you.god_value[GT_OKINA][3] = current_level == ZIGURRAT_LEVEL ? you.ziggurat_level : -1;
 	env[OKINA_LEVEL].EnterMap(0, dq);
 	printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_WELCOME), true, false, false, CL_normal);
 

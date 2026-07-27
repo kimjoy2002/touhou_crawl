@@ -2262,6 +2262,7 @@ bool Stair_move(bool down)
 			}
 			int floor_return=0;
 			coord_def pos_return(0,0);
+			bool preserve_return_map = false;
 
 			
 			switch(current_level)
@@ -2370,8 +2371,11 @@ bool Stair_move(bool down)
 			}
 			if (current_level == OKINA_LEVEL) {
 				floor_return = you.god_value[GT_OKINA][0];// map_list.dungeon_enter[SUBTERRANEAN].floor;
-				env[floor_return].MakeMap(true);
+				if (floor_return == ZIGURRAT_LEVEL && you.god_value[GT_OKINA][3] > 0) {
+					you.ziggurat_level = you.god_value[GT_OKINA][3];
+				}
 				pos_return = coord_def(you.god_value[GT_OKINA][1], you.god_value[GT_OKINA][2]);//map_list.dungeon_enter[SUBTERRANEAN].pos;
+				preserve_return_map = true;
 				//floor_return = map_list.dungeon_enter[SUBTERRANEAN].floor;
 				//env[floor_return].MakeMap(true);
 				//pos_return = map_list.dungeon_enter[SUBTERRANEAN].pos;
@@ -2389,7 +2393,7 @@ bool Stair_move(bool down)
 			rand_shuffle(dq.begin(),dq.end());
 			you.time_delay += you.GetNormalDelay();
 			you.TurnEnd();
-			env[floor_return].EnterMap(-1,dq,pos_return);
+			env[floor_return].EnterMap(-1,dq,pos_return,preserve_return_map);
 			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_RETURN),true,false,false,CL_normal);
 			GodAccpect_Stair(false, true);
 			PlaySE("stair");

@@ -144,17 +144,23 @@ bool d3d::InitD3D11(HINSTANCE hInstance, int width, int height, bool windowed){
 
 void OnResize(int width, int height)
 {
+    if (!g_pSwapChain || !g_pd3dDevice || !g_pImmediateContext || width <= 0 || height <= 0) return;
+
     if (g_pImmediateContext) g_pImmediateContext->OMSetRenderTargets(0, 0, 0);
-    if (g_pRenderTargetView) g_pRenderTargetView->Release();
+    if (g_pRenderTargetView) {
+        g_pRenderTargetView->Release();
+        g_pRenderTargetView = nullptr;
+    }
 
 
 	if (option_mg.getFullscreen()) {
 		DXGI_OUTPUT_DESC outputDesc;
 		Microsoft::WRL::ComPtr<IDXGIOutput> output;
-		g_pSwapChain->GetContainingOutput(&output);
-		output->GetDesc(&outputDesc);
-		width = outputDesc.DesktopCoordinates.right - outputDesc.DesktopCoordinates.left;
-		height = outputDesc.DesktopCoordinates.bottom - outputDesc.DesktopCoordinates.top;
+		if (SUCCEEDED(g_pSwapChain->GetContainingOutput(&output)) &&
+            SUCCEEDED(output->GetDesc(&outputDesc))) {
+            width = outputDesc.DesktopCoordinates.right - outputDesc.DesktopCoordinates.left;
+            height = outputDesc.DesktopCoordinates.bottom - outputDesc.DesktopCoordinates.top;
+        }
 	}
 
     HRESULT hr = g_pSwapChain->ResizeBuffers(
@@ -165,8 +171,9 @@ void OnResize(int width, int height)
     hr = g_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&pBackBuffer);
     if (FAILED(hr)) return;
 
-    g_pd3dDevice->CreateRenderTargetView(pBackBuffer, nullptr, &g_pRenderTargetView);
+    hr = g_pd3dDevice->CreateRenderTargetView(pBackBuffer, nullptr, &g_pRenderTargetView);
     pBackBuffer->Release();
+    if (FAILED(hr)) return;
 
     g_pImmediateContext->OMSetRenderTargets(1, &g_pRenderTargetView, nullptr);
 
@@ -194,10 +201,11 @@ void OnResize(int width, int height)
 
 void ToggleFullscreen(bool fullscreen)
 {
-    if (!g_pSwapChain || !g_pd3dDevice) return;
+    if (!g_pSwapChain || !g_pd3dDevice || !g_pImmediateContext) return;
 
     UINT width = option_mg.getWidth();
     UINT height = option_mg.getHeight();
+    HRESULT hr = S_OK;
 
     // 디스플레이 해상도 전환
     if (fullscreen)
@@ -215,14 +223,22 @@ void ToggleFullscreen(bool fullscreen)
             DXGI_MODE_DESC closestMode = {};
             if (SUCCEEDED(output->FindClosestMatchingMode(&targetMode, &closestMode, g_pd3dDevice)))
             {
-                g_pSwapChain->ResizeTarget(&closestMode);
+                hr = g_pSwapChain->ResizeTarget(&closestMode);
+                if (SUCCEEDED(hr)) {
+                    width = closestMode.Width;
+                    height = closestMode.Height;
+                }
             }
         }
 
-        g_pSwapChain->SetFullscreenState(TRUE, nullptr);
+        hr = g_pSwapChain->SetFullscreenState(TRUE, nullptr);
+        if (FAILED(hr)) return;
     }
     else
     {
+        hr = g_pSwapChain->SetFullscreenState(FALSE, nullptr);
+        if (FAILED(hr)) return;
+
         DXGI_MODE_DESC windowedMode = {};
         windowedMode.Width = width;
         windowedMode.Height = height;
@@ -231,42 +247,41 @@ void ToggleFullscreen(bool fullscreen)
         windowedMode.RefreshRate.Denominator = 1;
 
         g_pSwapChain->ResizeTarget(&windowedMode);
-        g_pSwapChain->SetFullscreenState(FALSE, nullptr);
     }
 
-    Sleep(50); // 전환 대기 (안 하면 버퍼 접근 실패할 수 있음)
-
+    g_pImmediateContext->OMSetRenderTargets(0, nullptr, nullptr);
     if (g_pRenderTargetView) {
         g_pRenderTargetView->Release();
         g_pRenderTargetView = nullptr;
     }
+    g_pImmediateContext->Flush();
 
     // 스왑체인 버퍼 리사이즈
-    HRESULT hr = g_pSwapChain->ResizeBuffers(
+    hr = g_pSwapChain->ResizeBuffers(
         0, width, height, DXGI_FORMAT_UNKNOWN, DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH);
-    if (FAILED(hr)) return;
-
-
-    // 렌더타겟 및 뷰포트 재설정
-    if (g_pImmediateContext) g_pImmediateContext->OMSetRenderTargets(0, 0, 0);
-    if (g_pRenderTargetView) { g_pRenderTargetView->Release(); g_pRenderTargetView = nullptr; }
 
     Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
-    hr = g_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBuffer);
-    if (FAILED(hr)) return;
+    HRESULT bufferHr = g_pSwapChain->GetBuffer(
+        0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(backBuffer.GetAddressOf()));
+    if (FAILED(bufferHr)) return;
 
-    g_pd3dDevice->CreateRenderTargetView(backBuffer.Get(), nullptr, &g_pRenderTargetView);
+    bufferHr = g_pd3dDevice->CreateRenderTargetView(backBuffer.Get(), nullptr, &g_pRenderTargetView);
+    if (FAILED(bufferHr)) return;
     g_pImmediateContext->OMSetRenderTargets(1, &g_pRenderTargetView, nullptr);
+
+    D3D11_TEXTURE2D_DESC backBufferDesc = {};
+    backBuffer->GetDesc(&backBufferDesc);
 
     D3D11_VIEWPORT vp = {};
     vp.TopLeftX = 0;
     vp.TopLeftY = 0;
-    vp.Width = (FLOAT)width;
-    vp.Height = (FLOAT)height;
+    vp.Width = static_cast<FLOAT>(backBufferDesc.Width);
+    vp.Height = static_cast<FLOAT>(backBufferDesc.Height);
     vp.MinDepth = 0.0f;
     vp.MaxDepth = 1.0f;
     g_pImmediateContext->RSSetViewports(1, &vp);
 
+    if (FAILED(hr)) return;
 
 	if (!option_mg.getFullscreen()) {
 		// 창 모드 전환 시 윈도우 스타일 복원
@@ -280,7 +295,7 @@ void ToggleFullscreen(bool fullscreen)
 }
 
 
-extern bool g_changefullscreen;
+extern std::atomic<bool> g_changefullscreen;
 int d3d::EnterMsgLoop()
 {
 	MSG msg;
@@ -303,7 +318,7 @@ int d3d::EnterMsgLoop()
 			if(msg.message == WM_SYSKEYDOWN && (msg.wParam == VK_RETURN && (msg.lParam & (1 << 29))) ) {
 				// Alt + Enter 감지
 				option_mg.setFullscreen(!option_mg.getFullscreen());
-				g_changefullscreen = true;
+				g_changefullscreen.store(true);
 			} else {
 				if (msg.message == WM_QUIT)
 					break;

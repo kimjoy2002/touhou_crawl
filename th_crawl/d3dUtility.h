@@ -18,6 +18,7 @@
 #include "common.h"
 #include <dinput.h>
 #include <mutex>
+#include <atomic>
 #include <queue>
 #include <condition_variable>
 #include <imm.h>

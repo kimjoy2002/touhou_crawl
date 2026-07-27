@@ -121,7 +121,7 @@ extern Microsoft::WRL::ComPtr<ID3D11SamplerState> g_pPointSampler;
 
 
 
-extern bool g_changefullscreen;
+extern std::atomic<bool> g_changefullscreen;
 void OnResize(int width, int height);
 void ToggleFullscreen(bool fullscreen);
 
@@ -130,8 +130,7 @@ bool Display(float timeDelta)
 	WaitForSingleObject(mutx, INFINITE);
 
 	
-	if(g_changefullscreen) {
-		g_changefullscreen = false;
+	if(g_changefullscreen.exchange(false)) {
 		ToggleFullscreen(option_mg.getFullscreen());
 	}
 

@@ -1409,7 +1409,7 @@ void MainLoop()
 	}
 }
 
-bool g_changefullscreen = false;
+std::atomic<bool> g_changefullscreen = false;
 extern display_manager DisplayManager;
 
 bool loading_font(string font_name);
@@ -1593,11 +1593,11 @@ bool option_menu(int value_)
 			if(should_reload) {
 				if(display == LOC_SYSTEM_OPTION_MENU_FULLSCREEN) {
 					option_mg.setFullscreen(true);
-					g_changefullscreen = true;
+					g_changefullscreen.store(true);
 	
 				}else if(display == LOC_SYSTEM_OPTION_MENU_WINDOWED) {
 					option_mg.setFullscreen(false);
-					g_changefullscreen = true;
+					g_changefullscreen.store(true);
 				}
 			}
 			StopCurrentBGM(nullptr);

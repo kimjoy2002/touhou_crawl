@@ -6064,6 +6064,8 @@ bool monster::isYourShight()
 }
 bool monster::isEnemyUnit(unit* unit_info)
 {
+	if(!unit_info)
+		return false;
 	if(unit_info->isplayer())
 	{
 		return !isUserAlly() && !isCompleteNeutral();

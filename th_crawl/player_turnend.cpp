@@ -1403,6 +1403,8 @@ bool players::TraningStealth()
 }
 
 bool players::isEnemyUnit(unit* unit_info) {
+	if(!unit_info)
+		return false;
 	if(unit_info->isplayer())
 		return false;
 	return !unit_info->isUserAlly() && !unit_info->isCompleteNeutral();

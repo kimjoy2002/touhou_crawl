@@ -3672,8 +3672,8 @@ bool skill_jump_attack(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(!order)
 		return false;
-	unit* unit_ = (monster*)env[current_level].isMonsterPos(target.x,target.y);
-	if(!unit_ && order->isEnemyUnit(unit_)) 
+	unit* unit_ = env[current_level].isMonsterPos(target.x,target.y);
+	if(!unit_ || !order->isEnemyUnit(unit_))
 	{
 		if(order->isplayer())
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_SHOULD_TARGET_ENEMY),true,false,false,CL_normal);	
@@ -4970,8 +4970,8 @@ bool skill_warp_kick(int pow_, bool short_, unit* order, coord_def target)
 {
 	if (!order)
 		return false;
-	unit* unit_ = (monster*)env[current_level].isMonsterPos(target.x, target.y);
-	if (!unit_ && order->isEnemyUnit(unit_))
+	unit* unit_ = env[current_level].isMonsterPos(target.x, target.y);
+	if (!unit_ || !order->isEnemyUnit(unit_))
 	{
 		if (order->isplayer())
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_SHOULD_TARGET_ENEMY), true, false, false, CL_normal);

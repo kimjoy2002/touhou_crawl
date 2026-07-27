@@ -1521,6 +1521,147 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 
 
 
+static bool is_connectivity_floor(dungeon_tile& tile)
+{
+	return tile.isMove(false, false, false) || tile.isDoor();
+}
+
+static void repair_disconnected_map(int num)
+{
+	environment& map = env[num];
+	coord_def anchor(-1, -1);
+	for(int i = 0; i < 3 && anchor.x < 0; i++)
+	{
+		coord_def stairs[2] = { map.stair_up[i], map.stair_down[i] };
+		for(const coord_def& stair : stairs)
+		{
+			if(stair.x >= 0 && stair.x < DG_MAX_X && stair.y >= 0 && stair.y < DG_MAX_Y &&
+				map.dgtile[stair.x][stair.y].isStair())
+			{
+				anchor = stair;
+				break;
+			}
+		}
+	}
+	if(anchor.x < 0)
+		return;
+
+	vector<coord_def> required_targets;
+	for(int x = 0; x < DG_MAX_X; x++)
+		for(int y = 0; y < DG_MAX_Y; y++)
+			if(map.dgtile[x][y].isStair())
+				required_targets.push_back(coord_def(x, y));
+	for(const item& item_info : map.item_list)
+		if(item_info.type == ITM_ORB &&
+			item_info.position.x >= 0 && item_info.position.x < DG_MAX_X &&
+			item_info.position.y >= 0 && item_info.position.y < DG_MAX_Y)
+			required_targets.push_back(item_info.position);
+
+	const int dx[8] = { 1, -1, 0, 0, 1, 1, -1, -1 };
+	const int dy[8] = { 0, 0, 1, -1, 1, -1, 1, -1 };
+	const int infinity = DG_MAX_X * DG_MAX_Y + 1;
+
+	for(int repair_count = 0; repair_count < DG_MAX_X * DG_MAX_Y; repair_count++)
+	{
+		bool reachable[DG_MAX_X][DG_MAX_Y] = {};
+		vector<coord_def> pending(1, anchor);
+		reachable[anchor.x][anchor.y] = true;
+		while(!pending.empty())
+		{
+			coord_def current = pending.back();
+			pending.pop_back();
+			for(int direction = 0; direction < 8; direction++)
+			{
+				int x = current.x + dx[direction];
+				int y = current.y + dy[direction];
+				if(x < 0 || x >= DG_MAX_X || y < 0 || y >= DG_MAX_Y ||
+					reachable[x][y] || !is_connectivity_floor(map.dgtile[x][y]))
+					continue;
+				reachable[x][y] = true;
+				pending.push_back(coord_def(x, y));
+			}
+		}
+
+		coord_def required_target(-1, -1);
+		for(const coord_def& target : required_targets)
+			if(!reachable[target.x][target.y])
+			{
+				required_target = target;
+				break;
+			}
+		if(required_target.x < 0)
+			return;
+
+		int distance[DG_MAX_X][DG_MAX_Y];
+		coord_def previous[DG_MAX_X][DG_MAX_Y];
+		deque<coord_def> search;
+		for(int x = 0; x < DG_MAX_X; x++)
+		{
+			for(int y = 0; y < DG_MAX_Y; y++)
+			{
+				distance[x][y] = infinity;
+				previous[x][y] = coord_def(-1, -1);
+				if(reachable[x][y])
+				{
+					distance[x][y] = 0;
+					search.push_back(coord_def(x, y));
+				}
+			}
+		}
+
+		coord_def target(-1, -1);
+		while(!search.empty())
+		{
+			coord_def current = search.front();
+			search.pop_front();
+			if(current == required_target)
+			{
+				target = current;
+				break;
+			}
+			for(int direction = 0; direction < 8; direction++)
+			{
+				int x = current.x + dx[direction];
+				int y = current.y + dy[direction];
+				if(x < 0 || x >= DG_MAX_X || y < 0 || y >= DG_MAX_Y)
+					continue;
+				dungeon_tile& tile = map.dgtile[x][y];
+				bool floor = is_connectivity_floor(tile);
+				if(!floor && !tile.isBreakable())
+					continue;
+				int next_distance = distance[current.x][current.y] + (floor ? 0 : 1);
+				if(next_distance >= distance[x][y])
+					continue;
+				distance[x][y] = next_distance;
+				previous[x][y] = current;
+				if(floor)
+					search.push_front(coord_def(x, y));
+				else
+					search.push_back(coord_def(x, y));
+			}
+		}
+		if(target.x < 0)
+		{
+			return;
+		}
+
+		vector<coord_def> carved;
+		coord_def current = target;
+		while(!reachable[current.x][current.y])
+		{
+			if(!is_connectivity_floor(map.dgtile[current.x][current.y]))
+			{
+				map.dgtile[current.x][current.y].tile = map.base_floor;
+				carved.push_back(current);
+			}
+			coord_def next = previous[current.x][current.y];
+			if(next.x < 0)
+				return;
+			current = next;
+		}
+	}
+}
+
 void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
 	vector<map_dummy*> vec_map;
@@ -1698,10 +1839,11 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 	setBaseFloorWall(num, floor_tex, wall_tex);
 	
 	common_map_make_last(num, 	
-	floor_tex,wall_tex,
-	vec_map,
-	vec_special_map, 
-	false, false, false, false, 11, 0);
+		floor_tex,wall_tex,
+		vec_map,
+		vec_special_map,
+		false, false, false, false, 11, 0);
+	repair_disconnected_map(num);
 
 
 }

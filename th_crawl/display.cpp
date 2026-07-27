@@ -2459,6 +2459,28 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		img_effect_select.draw(pSprite,(you.search_pos.x-x_)*calc_tile_size+tile_x_offset,(you.search_pos.y-y_)*calc_tile_size+tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale,D3DCOLOR_XRGB(255,255,255));
 	}
 
+	if(widesearch && wiz_list.wizard_mode == 1)
+	{
+		ostringstream coord_text;
+		coord_text << "(" << you.search_pos.x << ", " << you.search_pos.y << ")";
+		int cursor_x = (you.search_pos.x - x_) * calc_tile_size + tile_x_offset;
+		int cursor_y = (you.search_pos.y - y_) * calc_tile_size + tile_x_offset;
+		int coord_width = PrintCharWidth(coord_text.str()) * fontDesc.Width;
+		int coord_left = cursor_x + calc_tile_size / 2 + 4;
+		if(coord_left + coord_width >= info_minX)
+			coord_left = cursor_x - calc_tile_size / 2 - coord_width - 4;
+		int coord_top = max(0, min((int)(cursor_y - fontDesc.Height / 2),
+			(int)(option_mg.getHeight() - fontDesc.Height)));
+		RECT rc = {
+			coord_left,
+			coord_top,
+			coord_left + coord_width,
+			(LONG)(coord_top + fontDesc.Height)
+		};
+		DrawTextUTF8_OutLine(pfont, pSprite, coord_text.str().c_str(), -1, &rc,
+			DT_SINGLELINE | DT_NOCLIP, CL_help);
+	}
+
 	if(g_gamepad_on[0]) {
 		float lx = (float)g_gamepad_xlx[0];
 		float ly = (float)g_gamepad_xly[0];

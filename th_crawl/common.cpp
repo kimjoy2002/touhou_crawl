@@ -76,6 +76,12 @@ void init_nonlogic_seed(unsigned int seed_)
 
 }
 
+static unsigned int next_logic_random()
+{
+	map_list.random_number = map_list.random_number * 1664525u + 1013904223u;
+	return map_list.random_number;
+}
+
 int LoopSelect(int min, int max, int cur)
 {
 	if(min	> max)
@@ -166,10 +172,8 @@ float rand_float_impl(const char* file, int line, float min, float max)
 	}
 	//min = (float)(random_number % (int)((max - min)*100 + 1)) /100 + min;
 	//random_number = (((random_number*214013L + 2531011L)>>16)&0x7fff);
-	rand_seed(map_list.random_number);
-	int rand_ = abs((int)rand_engine());
+	unsigned int rand_ = next_logic_random();
 	min = (float)(rand_ % (int)((max - min)*100 + 1)) /100 + min;
-	map_list.random_number = rand_;
 	
 	//min = (float)(map_list.random_number % (int)((max - min)*100 + 1)) /100 + min;
 
@@ -198,10 +202,9 @@ int rand_int_impl(const char* file, int line, int min, int max)
 	}
 	//min = (random_number % (max - min+1)) + min;
 	
-	rand_seed(map_list.random_number);
-	int rand_ = rand_engine();
-	min = (rand_engine() % (max - min+1)) + min;
-	map_list.random_number = rand_;
+	unsigned int rand_ = next_logic_random();
+	unsigned int range = (unsigned int)((long long)max - min + 1);
+	min = (int)(rand_ % range) + min;
 	//map_list.random_number = (((map_list.random_number*214013L + 2531011L)>>16)&0x7fff);
 
 	return min;

@@ -1255,7 +1255,7 @@ void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 			
 			map_dummy* temp = new map_dummy(num, temp_coord, true,r_size_x,r_size_y, pattern_,floor_tex,wall_tex); //랜덤한 맵더미
 
-			if(!temp->isVaild(2)) {
+			if(!temp->isVaild(m_size + 2)) {
 				delete temp;
 				continue;
 			}

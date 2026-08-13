@@ -180,6 +180,7 @@ const char* misty_lake_pattern(map_dummy* map);
 const char* youkai_mountain_pattern(map_dummy* map);
 const char* scarlet_pattern(map_dummy* map);
 const char* forestofmagic_pattern(map_dummy* map);
+const char* dollshouse_pattern(map_dummy* map);
 
 const char* scarlet_library_pattern(map_dummy* map);
 const char* scarlet_under_pattern(map_dummy* map);

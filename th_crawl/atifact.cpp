@@ -608,6 +608,10 @@ bool effectartifact(artifact_type kind, int value)
 			{
 				you.s_invisible=0; 
 			}
+			if(you.GetArtifactProperty(ART_PERMAINVI) > 0)
+			{
+				you.s_invisible = -1;
+			}
 			return true;
 		}
 	case ART_MANA:

@@ -242,15 +242,14 @@ void initMap()
 	map_list.dungeon_enter[TEMPLE].set(false,0,0,rand_int(2,5));
 	map_list.dungeon_enter[MISTY_LAKE].set(false,0,0,rand_int(7,9));
 	map_list.dungeon_enter[YOUKAI_MOUNTAIN].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(1,2));
-	if(0) {//임시 0퍼센트
+	if(randA(1)) {
 		map_list.dungeon_enter[SCARLET_M].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(3,4));
 		map_list.dungeon_enter[FORESTOFMAGIC].set(false,0,0,-1);
 		map_list.dungeon_enter[SCARLET_U].set(false,0,0,SCARLET_LEVEL_LAST_LEVEL);
 	} else {
 		map_list.dungeon_enter[FORESTOFMAGIC].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(3,4));
 		map_list.dungeon_enter[SCARLET_M].set(false,0,0,-1);
-		map_list.dungeon_enter[SCARLET_U].set(false,0,0,FORESTOFMAGIC_LAST_LEVEL); //나중에 제거
-		//map_list.dungeon_enter[DOLLSHOUSE].set(false,0,0,FORESTOFMAGIC_LAST_LEVEL); 나중에 돌즈하우스 입구 추가 필요함
+		map_list.dungeon_enter[DOLLSHOUSE].set(false,0,0,FORESTOFMAGIC_LAST_LEVEL);
 	}
 	map_list.dungeon_enter[SCARLET_L].set(false,0,0,SCARLET_LEVEL+rand_int(1,2));
 	map_list.dungeon_enter[BAMBOO].set(false,0,0,rand_int(10,13));
@@ -907,6 +906,10 @@ void map_dummy::patternSet()
 	else if(pattern == 100+SCARLET_U) //지하실
 	{
 		PixedMap(this, scarlet_under_pattern(this));
+	}
+	else if(pattern == 100+DOLLSHOUSE) //인형방
+	{
+		PixedMap(this, dollshouse_pattern(this));
 	}
 	else if(pattern == 100+BAMBOO) //미궁의죽림
 	{

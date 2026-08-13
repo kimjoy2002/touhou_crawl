@@ -865,6 +865,15 @@ void monster::SetXYPassFloor(int prev_floor, int new_floor, int x_, int y_) {
 	if(position.x == x_ && position.y == y_ && prev_floor == new_floor)
 		return;
 
+	if(id == MON_GOLIATH_DOLL && parent_part_id == -1 && prev_floor == new_floor && prev_floor >= 0)
+	{
+		coord_def offset(x_ - position.x, y_ - position.y);
+		for(monster& part : env[prev_floor].mon_vector)
+			if(part.isLive() && part.parent_part_id == map_id)
+				part.SetXYPassFloor(prev_floor, new_floor,
+					part.position.x + offset.x, part.position.y + offset.y);
+	}
+
 
 	if(prev_floor != -1) {
 		if(s_silence)
@@ -1687,6 +1696,13 @@ void monster::print_no_damage_message(attack_infor &a)
 
 bool monster::damage(attack_infor &a, bool perfect_)
 {
+	if(id == MON_GOLIATH_DOLL && parent_part_id != -1)
+	{
+		for(monster& root : env[current_level].mon_vector)
+			if(root.isLive() && root.map_id == parent_part_id)
+				return root.damage(a, perfect_);
+	}
+
 	int back_stab = 0;
 	if(isNormalAtt(a.type))
 	{ //백스탭레벨  3-맥스데미지 2-간간히 크리데미지 1-아주 드문 크리데미지
@@ -2301,7 +2317,9 @@ bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX:
 			}
 		}
 	}
-	if(return_)
+	bool draw_hp = id != MON_GOLIATH_DOLL ||
+		(parent_part_id != -1 && (special_value == 2 || special_value == 3));
+	if(return_ && draw_hp)
 	{
 		int hp_ = hp*5/max_hp;
 		if(hp_>=0 && hp_<5)
@@ -2535,6 +2553,12 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 			y_mov = (short_move)rand_int(MV_BACK,MV_FRONT);
 		}while(x_mov == MV_NONE && y_mov == MV_NONE);
 	}
+	if(id == MON_GOLIATH_DOLL)
+	{
+		if(parent_part_id != -1)
+			return 0;
+		return moveGoliath(x_mov, y_mov, only_move);
+	}
 
 	if(!(flag & M_FLAG_NONE_MOVE) &&
 		env[current_level].isMove(position.x+x_mov,position.y+y_mov,isFly() || s_confuse, isSwim(), false/*flag & M_FLAG_CANT_GROUND*/, id == MON_SEIGA))
@@ -2683,6 +2707,126 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 		return 0;
 	}
 }
+
+int monster::moveGoliath(short_move x_mov, short_move y_mov, bool only_move)
+{
+	static const coord_def offsets[4] = {
+		coord_def(0, 0), coord_def(1, 0), coord_def(0, 1), coord_def(1, 1)
+	};
+	coord_def destination = position + coord_def(x_mov, y_mov);
+	monster* attack_target = NULL;
+
+	for(const coord_def& offset : offsets)
+	{
+		coord_def pos = destination + offset;
+		if(pos.x < 0 || pos.x >= DG_MAX_X || pos.y < 0 || pos.y >= DG_MAX_Y ||
+			!env[current_level].isMove(pos, isFly(), isSwim(), flag & M_FLAG_CANT_GROUND))
+			return 0;
+
+		unit* occupied = env[current_level].isMonsterPos(pos.x, pos.y, this);
+		if(!occupied)
+			continue;
+		if(occupied->isplayer())
+		{
+			if(only_move || !isEnemyUnit(occupied) || flag & M_FLAG_NO_ATK)
+				return 0;
+			return AttackToYou(false);
+		}
+
+		monster* mon = (monster*)occupied;
+		if(mon->map_id == map_id || mon->parent_part_id == map_id)
+			continue;
+		if(isEnemyMonster(mon) || s_confuse || mon->id == MON_BUSH)
+			attack_target = mon;
+		else
+			return 0;
+	}
+
+	if(attack_target)
+	{
+		if(only_move)
+			return 0;
+		return AttackToMon(attack_target, false);
+	}
+	SetXY(destination);
+	return 2;
+}
+
+bool monster::canPlaceGoliath(const coord_def& anchor)
+{
+	static const coord_def offsets[4] = {
+		coord_def(0, 0), coord_def(1, 0), coord_def(0, 1), coord_def(1, 1)
+	};
+	for(const coord_def& offset : offsets)
+	{
+		coord_def pos = anchor + offset;
+		if(pos.x < 0 || pos.x >= DG_MAX_X || pos.y < 0 || pos.y >= DG_MAX_Y ||
+			!env[current_level].isMove(pos, isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) ||
+			you.position == pos)
+			return false;
+		unit* occupied = env[current_level].isMonsterPos(pos.x, pos.y, this);
+		if(occupied && (occupied->isplayer() ||
+			(((monster*)occupied)->map_id != map_id && ((monster*)occupied)->parent_part_id != map_id)))
+			return false;
+	}
+	return true;
+}
+
+int monster::moveGoliathToPos(const coord_def& target_, bool only_move)
+{
+	short_move direct_x = target_.x > position.x ? MV_FRONT :
+		(target_.x < position.x ? MV_BACK : MV_NONE);
+	short_move direct_y = target_.y > position.y ? MV_FRONT :
+		(target_.y < position.y ? MV_BACK : MV_NONE);
+	int direct_result = moveGoliath(direct_x, direct_y, only_move);
+	if(direct_result || (direct_x == MV_NONE && direct_y == MV_NONE))
+		return direct_result;
+
+	bool visited[DG_MAX_X][DG_MAX_Y] = {};
+	coord_def previous[DG_MAX_X][DG_MAX_Y];
+	deque<coord_def> open;
+	open.push_back(position);
+	visited[position.x][position.y] = true;
+	previous[position.x][position.y] = position;
+	coord_def goal(-1, -1);
+
+	while(!open.empty() && goal.x < 0)
+	{
+		coord_def current = open.front();
+		open.pop_front();
+		for(int y = -1; y <= 1 && goal.x < 0; y++)
+			for(int x = -1; x <= 1; x++)
+			{
+				if(x == 0 && y == 0)
+					continue;
+				coord_def next = current + coord_def(x, y);
+				if(next.x < 0 || next.x >= DG_MAX_X || next.y < 0 || next.y >= DG_MAX_Y ||
+					visited[next.x][next.y] || !canPlaceGoliath(next))
+					continue;
+				visited[next.x][next.y] = true;
+				previous[next.x][next.y] = current;
+				open.push_back(next);
+
+				int gap_x = target_.x < next.x ? next.x - target_.x :
+					(target_.x > next.x + 1 ? target_.x - (next.x + 1) : 0);
+				int gap_y = target_.y < next.y ? next.y - target_.y :
+					(target_.y > next.y + 1 ? target_.y - (next.y + 1) : 0);
+				if(gap_x <= 1 && gap_y <= 1)
+				{
+					goal = next;
+					break;
+				}
+			}
+	}
+
+	if(goal.x < 0)
+		return 0;
+	while(previous[goal.x][goal.y] != position)
+		goal = previous[goal.x][goal.y];
+	return moveGoliath((short_move)(goal.x - position.x),
+		(short_move)(goal.y - position.y), only_move);
+}
+
 int monster::move(const coord_def &c, bool only_move)
 {
 	return move((c.x>position.x?MV_FRONT:(c.x==position.x?MV_NONE:MV_BACK)),(c.y>position.y?MV_FRONT:(c.y==position.y?MV_NONE:MV_BACK)), only_move);
@@ -2734,6 +2878,35 @@ bool monster::OpenDoor(const coord_def &c)
 
 int monster::longmove()
 {
+	if(id == MON_GOLIATH_DOLL)
+	{
+		if(direction < 0 || direction > 7)
+			direction = rand_int(0,7);
+		int result = move(inttodirec(direction,position.x,position.y), false);
+		if(result)
+		{
+			if(randA(15)==1)
+				direction = rand_int(0,7);
+			return result;
+		}
+
+		deque<int> directions;
+		for(int i=0;i<8;i++)
+			if(i != direction)
+				directions.push_back(i);
+		rand_shuffle(directions.begin(), directions.end());
+		for(int next_direction : directions)
+		{
+			coord_def next = inttodirec(next_direction, position.x, position.y);
+			if(canPlaceGoliath(next))
+			{
+				direction = next_direction;
+				return move(next, false);
+			}
+		}
+		return 0;
+	}
+
 	if(direction < 0 || direction > 7)
 		direction = rand_int(0,7);
 	int return_ = move(inttodirec(direction,position.x,position.y), false);
@@ -3005,6 +3178,9 @@ bool monster::isHaveSpell(spell_list sp)
 }
 int monster::MoveToPos(coord_def pos_, bool only_move)
 {
+	if(id == MON_GOLIATH_DOLL && parent_part_id == -1)
+		return moveGoliathToPos(pos_, only_move);
+
 	int move_ = 0;
 	close_beam_iterator it(position,pos_);
 	for(;!it.end() && !move_;it++)
@@ -3037,6 +3213,16 @@ bool monster::CanSpeak()
 bool skill_suicide_bomb(int base_damage, int power, bool short_, unit* order, coord_def target, bool hurt_ally, bool self_hurt);
 bool monster::dead(parent_type reason_, bool message_, bool remove_)
 {
+	if(id == MON_GOLIATH_DOLL && parent_part_id != -1)
+	{
+		for(monster& root : env[current_level].mon_vector)
+			if(root.map_id == parent_part_id && root.isLive())
+			{
+				hp = 0;
+				return root.dead(reason_, message_, remove_);
+			}
+	}
+
 	bool sight_ = false;
 	if(isYourShight())
 		sight_ = true;
@@ -3053,6 +3239,12 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		ChangeMonster(MON_RACCON,0);
 	}
 	bool isPart = (parent_part_id != -1);
+	if(id == MON_GOLIATH_DOLL && !isPart)
+	{
+		for(monster& part : env[current_level].mon_vector)
+			if(part.parent_part_id == map_id)
+				part.hp = 0;
+	}
 
 
 
@@ -3326,12 +3518,32 @@ void monster::resetShadow() {
 	}
 
 	prev_position = position;
+	if(id == MON_GOLIATH_DOLL && parent_part_id == -1)
+	{
+		for(monster& part : env[current_level].mon_vector)
+			if(part.isLive() && part.parent_part_id == map_id)
+				part.resetShadow();
+	}
 
 }
 
 
 int monster::action(int delay_)
 {
+	if(id == MON_GOLIATH_DOLL && parent_part_id != -1)
+		return 0;
+	if(id == MON_GOLIATH_DOLL && target && !target->isplayer())
+	{
+		monster* target_monster = (monster*)target;
+		if(target_monster->map_id == map_id || target_monster->parent_part_id == map_id)
+		{
+			target = NULL;
+			memory_time = 0;
+			will_move.clear();
+			state.StateTransition(MSI_LOST);
+		}
+	}
+
 	bool is_sight = false, is_sight_for_monster = false;
 	if(env[current_level].isInSight(position, true))
 	{
@@ -5166,7 +5378,7 @@ bool monster::HpRecover(int turn_)
 	return false;
 }
 bool monster::HasMultiTile() {
-	if(id == MON_GIANT_CENTIPEDE || id == MON_OVERGROWTH_MAGIC_FLOWER) {
+	if(id == MON_GIANT_CENTIPEDE || id == MON_OVERGROWTH_MAGIC_FLOWER || id == MON_GOLIATH_DOLL) {
 		return true;
 	}
 	return false;
@@ -5987,7 +6199,10 @@ bool monster::Blink(int time_)
 		{
 			x_ = temp_x_;
 			y_ = temp_y_;
-			if((i>=time_ || i%5 == 0) && env[current_level].isMove(x_,y_,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) && !env[current_level].isMonsterPos(x_,y_) && !(you.position.x == x_ && you.position.y == y_) && !env[current_level].isSmokePos(x_,y_))
+			if((i>=time_ || i%5 == 0) &&
+				(id == MON_GOLIATH_DOLL ? canPlaceGoliath(coord_def(x_, y_)) :
+				(env[current_level].isMove(x_,y_,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) && !env[current_level].isMonsterPos(x_,y_) && !(you.position.x == x_ && you.position.y == y_))) &&
+				!env[current_level].isSmokePos(x_,y_))
 			{
 				prev_x = x_;
 				prev_y = y_;
@@ -6012,7 +6227,8 @@ bool monster::Teleport()
 	while(1)
 	{
 		int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
-		if(env[current_level].isMove(x_,y_,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) && !env[current_level].isMonsterPos(x_,y_))
+		if(id == MON_GOLIATH_DOLL ? canPlaceGoliath(coord_def(x_, y_)) :
+			(env[current_level].isMove(x_,y_,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) && !env[current_level].isMonsterPos(x_,y_)))
 		{
 			env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
 			SetXY(x_, y_);
@@ -6077,6 +6293,12 @@ bool monster::isEnemyUnit(unit* unit_info)
 }
 bool monster::isEnemyMonster(const monster* monster_info)
 {
+	if(monster_info && id == MON_GOLIATH_DOLL &&
+		(monster_info->map_id == map_id || monster_info->parent_part_id == map_id ||
+		(parent_part_id != -1 &&
+			(monster_info->map_id == parent_part_id || monster_info->parent_part_id == parent_part_id))))
+		return false;
+
 	if(isUserAlly() && monster_info->isUserAlly())
 	{
 		if(s_lunatic)

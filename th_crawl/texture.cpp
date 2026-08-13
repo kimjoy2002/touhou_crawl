@@ -1233,7 +1233,13 @@ textures img_mons_tree_giant(&texture_monster02, 142, 255);
 textures img_mons_france_doll(&texture_monster01, 47, 255);
 textures img_mons_london_doll(&texture_monster01, 47, 255);
 textures img_mons_netherlands_doll(&texture_monster01, 47, 255);
-textures img_mons_goliath_doll(&texture_monster01, 47, 255);
+textures img_mons_goliath_doll[] =
+{
+	textures(&texture_monster02, 152, 255),
+	textures(&texture_monster02, 153, 255),
+	textures(&texture_monster02, 168, 255),
+	textures(&texture_monster02, 169, 255)
+};
 textures img_mons_orrery_orb[] =
 {
 	textures(&texture_monster02, 148, 255),
@@ -4087,7 +4093,7 @@ int texturetoint(textures* input)
 		return 639;
 	else if(input == &img_mons_netherlands_doll)
 		return 640;
-	else if(input == &img_mons_goliath_doll)
+	else if(input == &img_mons_goliath_doll[0])
 		return 641;
 	else if(input == &img_mons_orrery_orb[0])
 		return 642;
@@ -4205,6 +4211,12 @@ int texturetoint(textures* input)
 		return 698;
 	else if(input == &img_star_tanmac[3])
 		return 699;
+	else if(input == &img_mons_goliath_doll[1])
+		return 700;
+	else if(input == &img_mons_goliath_doll[2])
+		return 701;
+	else if(input == &img_mons_goliath_doll[3])
+		return 702;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -5514,7 +5526,7 @@ textures* inttotexture(int input)
 	case 640:
 		return &img_mons_netherlands_doll;
 	case 641:
-		return &img_mons_goliath_doll;
+		return &img_mons_goliath_doll[0];
 	case 642:
 		return &img_mons_orrery_orb[0];
 	case 643:
@@ -5631,6 +5643,12 @@ textures* inttotexture(int input)
 		return &img_star_tanmac[2];
 	case 699:
 		return &img_star_tanmac[3];
+	case 700:
+		return &img_mons_goliath_doll[1];
+	case 701:
+		return &img_mons_goliath_doll[2];
+	case 702:
+		return &img_mons_goliath_doll[3];
 	default:
 		return &img_mons_default;
 	}

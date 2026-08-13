@@ -220,7 +220,7 @@ extern textures img_mons_tree_giant;
 extern textures img_mons_france_doll;
 extern textures img_mons_london_doll;
 extern textures img_mons_netherlands_doll;
-extern textures img_mons_goliath_doll;
+extern textures img_mons_goliath_doll[4];
 extern textures img_mons_orrery_orb[];
 
 

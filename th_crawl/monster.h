@@ -184,6 +184,9 @@ public:
 	int AttackToYou(bool force_);
 	int AttackToMon(monster* mon_, bool force_);
 	int move(short_move x_mov, short_move y_mov, bool only_move);
+	int moveGoliath(short_move x_mov, short_move y_mov, bool only_move);
+	int moveGoliathToPos(const coord_def& target_, bool only_move);
+	bool canPlaceGoliath(const coord_def& anchor);
 	int move(const coord_def &c, bool only_move);
 	bool offsetmove(const coord_def &c);
 	bool OpenDoor(const coord_def &c);

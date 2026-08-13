@@ -38,6 +38,8 @@ extern HANDLE mutx;
 extern optionManager option_mg;
 extern POINT MousePoint;
 
+static void repair_goliath_groups(environment& map);
+
 
 
 void stair_info::SaveDatas(FILE *fp)
@@ -284,6 +286,7 @@ void environment::LoadDatas(FILE *fp)
 			(*it).target = GetMapIDtoUnit((*it).temp_target_map_id);
 		}
 	}
+	repair_goliath_groups(*this);
 
 
 }
@@ -1125,33 +1128,155 @@ int environment::CloseDoor(int x_,int y_)
 	else
 		return 0;
 }
-monster* environment::AddMonster(int id_, uint64_t flag_, coord_def position_, int time_)
+static monster* add_single_monster(environment& map, int id_, uint64_t flag_, coord_def position_, int time_)
 {
 	WaitForSingleObject(mutx, INFINITE);
 	vector<monster>::iterator it;
-	it = mon_vector.begin();
+	it = map.mon_vector.begin();
 	for(int i=0;i<MON_MAX_IN_FLOOR;i++,it++)
 	{
-		if(it == mon_vector.end())
+		if(it == map.mon_vector.end())
 		{
-			mon_vector.push_back(monster());
-			if(all_monster_id<1)
-				all_monster_id = 1;
+			map.mon_vector.push_back(monster());
+			if(map.all_monster_id<1)
+				map.all_monster_id = 1;
 			ReleaseMutex(mutx);
-			mon_vector.back().SetMonster(floor, all_monster_id++, id_, flag_, time_, position_);
-			return &(mon_vector.back());
+			map.mon_vector.back().SetMonster(map.floor, map.all_monster_id++, id_, flag_, time_, position_);
+			return &(map.mon_vector.back());
 		}
 		else if(!(*it).isLive())
 		{
-			if(all_monster_id<1)
-				all_monster_id = 1;
+			if(map.all_monster_id<1)
+				map.all_monster_id = 1;
 			ReleaseMutex(mutx);
-			(*it).SetMonster(floor, all_monster_id++, id_, flag_, time_, position_);
+			(*it).SetMonster(map.floor, map.all_monster_id++, id_, flag_, time_, position_);
 			return &(*it);
 		}
 	}
 	ReleaseMutex(mutx);
 	return NULL;
+}
+
+static bool can_place_goliath(environment& map, const coord_def& anchor)
+{
+	static const coord_def offsets[4] = {
+		coord_def(0, 0), coord_def(1, 0), coord_def(0, 1), coord_def(1, 1)
+	};
+	for(const coord_def& offset : offsets)
+	{
+		coord_def pos = anchor + offset;
+		if(pos.x < 0 || pos.x >= DG_MAX_X || pos.y < 0 || pos.y >= DG_MAX_Y ||
+			!map.dgtile[pos.x][pos.y].isMove(false, false, false) ||
+			map.isMonsterPos(pos.x, pos.y) ||
+			(map.floor == current_level && you.position == pos))
+			return false;
+	}
+	return true;
+}
+
+monster* environment::AddMonster(int id_, uint64_t flag_, coord_def position_, int time_)
+{
+	if(id_ != MON_GOLIATH_DOLL)
+		return add_single_monster(*this, id_, flag_, position_, time_);
+
+	coord_def anchor(-1, -1);
+	for(int radius = 0; radius <= 4 && anchor.x < 0; radius++)
+	{
+		for(int y = position_.y - radius; y <= position_.y + radius && anchor.x < 0; y++)
+			for(int x = position_.x - radius; x <= position_.x + radius; x++)
+				if((radius == 0 || abs(x - position_.x) == radius || abs(y - position_.y) == radius) &&
+					can_place_goliath(*this, coord_def(x, y)))
+				{
+					anchor = coord_def(x, y);
+					break;
+				}
+	}
+	if(anchor.x < 0)
+		return NULL;
+
+	monster* root = add_single_monster(*this, id_, flag_, anchor, time_);
+	if(!root)
+		return NULL;
+	int root_id = root->map_id;
+	static const coord_def offsets[4] = {
+		coord_def(0, 0), coord_def(1, 0), coord_def(0, 1), coord_def(1, 1)
+	};
+	vector<int> created_ids(1, root_id);
+	for(int part = 1; part < 4; part++)
+	{
+		monster* body = add_single_monster(*this, id_,
+			flag_ | M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_NO_STATE | M_FLAG_DECORATE,
+			anchor + offsets[part], time_);
+		if(!body)
+		{
+			for(monster& made : mon_vector)
+				if(find(created_ids.begin(), created_ids.end(), made.map_id) != created_ids.end())
+					made.hp = 0;
+			return NULL;
+		}
+		body->parent_part_id = root_id;
+		body->special_value = part;
+		body->image = &img_mons_goliath_doll[part];
+		body->exper = 0;
+		body->item_lists.clear();
+		created_ids.push_back(body->map_id);
+	}
+	return (monster*)GetMapIDtoUnit(root_id);
+}
+
+static void repair_goliath_groups(environment& map)
+{
+	vector<int> root_ids;
+	for(monster& mon : map.mon_vector)
+		if(mon.isLive() && mon.id == MON_GOLIATH_DOLL && mon.parent_part_id == -1)
+			root_ids.push_back(mon.map_id);
+
+	static const coord_def offsets[4] = {
+		coord_def(0, 0), coord_def(1, 0), coord_def(0, 1), coord_def(1, 1)
+	};
+	for(int root_id : root_ids)
+	{
+		monster* root = (monster*)map.GetMapIDtoUnit(root_id);
+		if(!root)
+			continue;
+		root->image = &img_mons_goliath_doll[0];
+		bool exists[4] = { true, false, false, false };
+		for(monster& part : map.mon_vector)
+			if(part.isLive() && part.parent_part_id == root_id &&
+				part.special_value >= 1 && part.special_value < 4)
+				exists[part.special_value] = true;
+
+		coord_def anchor = root->position;
+		for(int part_index = 1; part_index < 4; part_index++)
+		{
+			if(exists[part_index])
+				continue;
+			coord_def pos = anchor + offsets[part_index];
+			if(pos.x < 0 || pos.x >= DG_MAX_X || pos.y < 0 || pos.y >= DG_MAX_Y ||
+				!map.dgtile[pos.x][pos.y].isMove(root->isFly(), root->isSwim(), root->flag & M_FLAG_CANT_GROUND))
+				continue;
+			unit* occupied = map.isMonsterPos(pos.x, pos.y);
+			if(occupied && (occupied->isplayer() || ((monster*)occupied)->map_id != root_id))
+				continue;
+
+			monster* body = add_single_monster(map, MON_GOLIATH_DOLL,
+				root->flag | M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_NO_STATE | M_FLAG_DECORATE,
+				pos, root->summon_time);
+			root = (monster*)map.GetMapIDtoUnit(root_id);
+			if(!body || !root)
+				break;
+			body->parent_part_id = root_id;
+			body->special_value = part_index;
+			body->image = &img_mons_goliath_doll[part_index];
+			body->hp = root->hp;
+			body->max_hp = root->max_hp;
+			body->exper = 0;
+			body->item_lists.clear();
+			body->state = root->state;
+			body->target = root->target;
+			body->temp_target_map_id = root->temp_target_map_id;
+		}
+	}
 }
 monster* environment::AddMonsterWithMoving(monster *mon_, int prev_floor, coord_def position_, int time_)
 {
@@ -2516,8 +2641,20 @@ unit* environment::isMonsterPos(int x_,int y_, const unit* excep_, int* map_id_)
 	{
 		if((*it).isLive() && (*it).position.x == x_ && (*it).position.y == y_ && &(*it) != excep_)
 		{
+			if(it->id == MON_GOLIATH_DOLL && it->parent_part_id != -1)
+			{
+				for(monster& root : mon_vector)
+					if(root.isLive() && root.map_id == it->parent_part_id)
+					{
+						if(&root == excep_)
+							return NULL;
+						if(map_id_)
+							*map_id_ = root.map_id;
+						return &root;
+					}
+			}
 			if(map_id_)
-				(*map_id_) = (*it).map_id;
+				*map_id_ = it->map_id;
 			return &(*it);
 		}
 	}

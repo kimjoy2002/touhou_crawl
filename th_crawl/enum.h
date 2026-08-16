@@ -927,6 +927,7 @@ enum monster_state_simple //표시용 상태
 	MSS_MIGHT,
 	MSS_CLEVER,
 	MSS_HASTE,
+	MSS_SWIFT,
 	MSS_SLOW,
 	MSS_SMOKE_ABOVE,
 	MSS_SUMMON,

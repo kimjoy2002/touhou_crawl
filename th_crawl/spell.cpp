@@ -78,6 +78,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 		return ((S_FLAG_SMITE | S_FLAG_SPEAK) & flag);
 	case SPL_HEAVENLY_STORM:
 		return ((S_FLAG_SMITE | S_FLAG_DELAYED) & flag);
+	case SPL_SACRIFICE:
+		return ((S_FLAG_DELAYED) & flag);
 	case SPL_WEAKENDED_SPORE:
 		return ((S_FLAG_SMITE) & flag);
 	case SPL_FIRE_WALL:
@@ -479,6 +481,7 @@ int SpellLength(spell_list skill, bool isPlayer)
 	case SPL_SPEAKER_PHONE:
 	case SPL_ROYALFLARE:
 	case SPL_ORRERIRES_SUN:
+	case SPL_SACRIFICE:
 	default:
 		length_ = 0;
 		break;		
@@ -802,6 +805,8 @@ string SpellString(spell_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_THROW_OIL);
 	case SPL_HEAVENLY_STORM:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_HEAVENLY_STORM);
+	case SPL_SACRIFICE:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_SACRIFICE);
 	case SPL_TRACKING:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_TRACKING);
 	case SPL_DISCORD:
@@ -1000,6 +1005,7 @@ int SpellLevel(spell_list skill)
 	case SPL_HANIWA_MAGIC_TANMAC3:
 	case SPL_ELEMENTAL_HARVESTER:
 	case SPL_ACID_BOLT:
+	case SPL_SACRIFICE:
 		return 6;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_STONE_FORM:
@@ -1131,6 +1137,7 @@ int SpellNoise(spell_list skill)
 	case SPL_THROW_RABBIT:
 	case SPL_ARROW:
 	case SPL_HANIWA_MAGIC_TANMAC:
+	case SPL_SACRIFICE:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -1641,6 +1648,8 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_SUMMON) : num == 1 ? (SKT_CONJURE) : (SKT_ERROR);
 	case SPL_THROW_STAR:
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_SACRIFICE:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1830,6 +1839,7 @@ int SpellCap(spell_list skill)
 	case SPL_ACID_BOLT:
 	case SPL_ORRERIRES_SUN:
 	case SPL_THROW_STAR:
+	case SPL_SACRIFICE:
 		return 200;
 	default:
 	case SPL_BLINK:
@@ -2096,6 +2106,14 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 		return (you.s_weather>0 || !(current_level >= MISTY_LAKE_LEVEL && current_level <=MISTY_LAKE_LAST_LEVEL)?false:true);
 	case SPL_HEAVENLY_STORM:
 		return (mon->id == MON_SONBITEN || (mon->id == MON_ENSLAVE_GHOST && mon->id2 == MON_SONBITEN))?true:false;
+	case SPL_SACRIFICE:
+		if(mon->special_value > 0 || mon->s_exhausted)
+			return false;
+		if(mon->id == MON_SANGHAI_DOLL)
+			return env[current_level].isInSight(mon->position, true);
+		if(mon->id == MON_HOURAI_DOLL)
+			return mon->hp <= mon->max_hp / 2;
+		return false;
 	case SPL_CLOSE_DOOR:
 		if(mon->special_value == 0)
 		{

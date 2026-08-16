@@ -490,10 +490,10 @@ string GetSpellInfor(spell_list spell, bool isPlayer)
 		break;	
 	case SPL_THROW_OIL:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_OIL);
-		break;	
+		break;
 	case SPL_HEAVENLY_STORM:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_HEAVENLY_STORM);
-		break;	
+		break;
 	case SPL_TRACKING:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_TRACKING);
 		break;	
@@ -565,6 +565,9 @@ string GetSpellInfor(spell_list spell, bool isPlayer)
 		break;
 	case SPL_THROW_STAR:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_STAR);
+		break;
+	case SPL_SACRIFICE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SACRIFICE);
 		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_UKNOWN);

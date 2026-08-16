@@ -59,6 +59,7 @@ enum spell_list
 	SPL_BLINK_AWAY, SPL_ELEMENTAL_HARVESTER, SPL_NIGHTMARE_MANIFEST,
 	SPL_ROYALFLARE,
 	SPL_CONFUSE_SPORE, SPL_WEAKENDED_SPORE, SPL_ACID_BOLT, SPL_ORRERIRES_SUN, SPL_THROW_STAR,
+	SPL_SACRIFICE,
 	SPL_MAX
 };
 
@@ -240,7 +241,7 @@ int GetSpellBombRange(spell_list spell);
 bool skill_philosopher_passive(int power, unit* order);
 bool skill_elec_passive(int power, unit* order);
 bool skill_elec_ball_bomb(int power, unit* order);
-
+attack_infor get_sacrifice_dam(int pow_, unit* doll);
 
 
 

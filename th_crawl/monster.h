@@ -62,6 +62,7 @@ public:
 	int s_might;
 	int s_clever;
 	int s_haste;
+	int s_swift;
 	int s_confuse;
 	int s_slow;
 	int s_frozen;
@@ -187,6 +188,7 @@ public:
 	int moveGoliath(short_move x_mov, short_move y_mov, bool only_move);
 	int moveGoliathToPos(const coord_def& target_, bool only_move);
 	bool canPlaceGoliath(const coord_def& anchor);
+	bool sacrificeMove();
 	int move(const coord_def &c, bool only_move);
 	bool offsetmove(const coord_def &c);
 	bool OpenDoor(const coord_def &c);

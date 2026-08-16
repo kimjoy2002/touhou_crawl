@@ -221,6 +221,7 @@ extern textures img_mons_france_doll;
 extern textures img_mons_london_doll;
 extern textures img_mons_netherlands_doll;
 extern textures img_mons_goliath_doll[4];
+extern textures img_mons_sacrifice_doll[2];
 extern textures img_mons_orrery_orb[];
 
 
@@ -522,6 +523,7 @@ extern textures img_joypad_arrow[];
 
 
 extern textures img_laser_small[];
+extern textures img_sacrifice_countdown[5];
 
 extern textures img_fog_normal[];
 extern textures img_fog_fire[];

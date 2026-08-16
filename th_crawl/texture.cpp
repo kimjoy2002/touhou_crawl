@@ -1240,6 +1240,11 @@ textures img_mons_goliath_doll[] =
 	textures(&texture_monster02, 168, 255),
 	textures(&texture_monster02, 169, 255)
 };
+textures img_mons_sacrifice_doll[] =
+{
+	textures(&texture_monster02, 154, 255),
+	textures(&texture_monster02, 155, 255)
+};
 textures img_mons_orrery_orb[] =
 {
 	textures(&texture_monster02, 148, 255),
@@ -2303,6 +2308,13 @@ textures img_star_tanmac[] = { textures(&texture_laser, 166, 255),
 textures(&texture_laser, 167, 255),
 textures(&texture_laser, 168, 255),
 textures(&texture_laser, 169, 255)
+};
+textures img_sacrifice_countdown[] = {
+	textures(&texture_laser, 170, 255),
+	textures(&texture_laser, 171, 255),
+	textures(&texture_laser, 172, 255),
+	textures(&texture_laser, 173, 255),
+	textures(&texture_laser, 174, 255)
 };
 
 
@@ -4217,6 +4229,10 @@ int texturetoint(textures* input)
 		return 701;
 	else if(input == &img_mons_goliath_doll[3])
 		return 702;
+	else if(input == &img_mons_sacrifice_doll[0])
+		return 703;
+	else if(input == &img_mons_sacrifice_doll[1])
+		return 704;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -5649,6 +5665,10 @@ textures* inttotexture(int input)
 		return &img_mons_goliath_doll[2];
 	case 702:
 		return &img_mons_goliath_doll[3];
+	case 703:
+		return &img_mons_sacrifice_doll[0];
+	case 704:
+		return &img_mons_sacrifice_doll[1];
 	default:
 		return &img_mons_default;
 	}
@@ -5678,6 +5698,8 @@ textures* statetotexture(monster_state_simple state_)
 	case MSS_SUMMON:
 		return &img_state_summon;
 	case MSS_HASTE:
+		return &img_state_haste;
+	case MSS_SWIFT:
 		return &img_state_haste;
 	case MSS_FEAR:
 		return &img_state_scary;

@@ -40,10 +40,11 @@
 coord_def inttodirec(int direc, int x_=0, int y_=0);
 bool evoke_bomb(int power, bool short_, unit* order, coord_def target);
 bool skill_spore_bomb(monster* order);
+static void sacrificeExplosion(monster* doll);
 
 monster::monster() 
 : map_id(-1), id(0), id2(0), parent_part_id(-1), level(1), exper(0), name(LOC_SYSTEM_NONE_STRING), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), prev_position_for_monster(0,0), first_position(0,0), prev_sight(false),
-ac(0), ev(0), flag(0), resist(0), sense(0), dream(false), s_poison(0), poison_reason(PRT_NEUTRAL), s_tele(0), s_might(0), s_clever(0), s_haste(0), s_confuse(0), s_slow(0), s_frozen(0), s_ally(0),
+ac(0), ev(0), flag(0), resist(0), sense(0), dream(false), s_poison(0), poison_reason(PRT_NEUTRAL), s_tele(0), s_might(0), s_clever(0), s_haste(0), s_swift(0), s_confuse(0), s_slow(0), s_frozen(0), s_ally(0),
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
@@ -103,6 +104,7 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_might);
 	SaveData<int>(fp, s_clever);
 	SaveData<int>(fp, s_haste);
+	SaveData<int>(fp, s_swift);
 	SaveData<int>(fp, s_confuse);
 	SaveData<int>(fp, s_slow);
 	SaveData<int>(fp, s_frozen);
@@ -238,6 +240,9 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_might);
 	LoadData<int>(fp, s_clever);
 	LoadData<int>(fp, s_haste);
+	if(!isPrevVersion(loading_version_string, "ver1.206")) {
+		LoadData<int>(fp, s_swift);
+	}
 	LoadData<int>(fp, s_confuse);
 	LoadData<int>(fp, s_slow);
 	LoadData<int>(fp, s_frozen);
@@ -389,6 +394,7 @@ void monster::init()
 	s_might = 0;
 	s_clever = 0;
 	s_haste = 0;
+	s_swift = 0;
 	s_confuse = 0;
 	s_slow = 0;
 	s_frozen = 0;
@@ -674,6 +680,11 @@ void monster::TurnLoad()
 	else
 		s_haste = 0;
 
+	if(s_swift-temp_turn>0)
+		s_swift-=temp_turn;
+	else
+		s_swift = 0;
+
 	if(s_confuse-temp_turn>0)
 		s_confuse-=temp_turn;
 	else
@@ -912,6 +923,11 @@ void monster::AfterMove(int map_num_, int x_, int y_) {
 		break;
 	case MON_MISSLE:
 		env[map_num_].MakeSmoke(coord_def(position.x, position.y), img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, this);
+		break;
+	case MON_SANGHAI_DOLL:
+	case MON_HOURAI_DOLL:
+		if(special_value > 0)
+			env[map_num_].MakeSmoke(coord_def(position.x, position.y), img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, this);
 		break;
 	default:
 		break;
@@ -2325,6 +2341,13 @@ bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX:
 		if(hp_>=0 && hp_<5)
 			return_ = img_hp_graphic[hp_].draw(pSprite,x_,y_+12*scale_,0.0f,scale_,scale_,255);
 	}
+	if(return_ && (id == MON_SANGHAI_DOLL || id == MON_HOURAI_DOLL) &&
+		special_value > 0 && env[current_level].isInSight(position))
+	{
+		int countdown_index = min(4, max(0, (10 - special_value) / 2));
+		img_sacrifice_countdown[countdown_index].draw(pSprite, x_, y_ - 16 * scale_,
+			0.0f, scale_, scale_, 255);
+	}
 	return return_;
 }
 
@@ -3707,6 +3730,14 @@ int monster::action(int delay_)
 				}
 			}
 		}
+		if(s_swift)
+		{
+			s_swift--;
+			if(is_sight && isView() && !s_swift) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_SWIFT,true,false,false,CL_normal,
+					PlaceHolderHelper(GetName()->getName()));
+			}
+		}
 
 		
 		if(s_confuse)
@@ -4938,6 +4969,11 @@ void monster::special_action(int delay_, bool smoke_)
 			}
 		}
 		break;
+	case MON_SANGHAI_DOLL:
+	case MON_HOURAI_DOLL:
+		if(!smoke_ && special_value > 0 && --special_value == 0)
+			sacrificeExplosion(this);
+		break;
 	case MON_SONBITEN_SPINTOWIN:
 		if (smoke_){
 			for (int i = -1; i < 2; i++)
@@ -5841,7 +5877,17 @@ bool monster::SetSaved(int saved_)
 
 bool monster::SetSwift(int swift_)
 {
-	return false;
+	if(swift_ <= 0)
+		return false;
+	if(isYourShight())
+	{
+		LocalzationManager::printLogWithKey(s_swift ? LOC_SYSTEM_MON_MORE_SWIFT : LOC_SYSTEM_MON_SWIFT,
+			false,false,false,CL_normal, PlaceHolderHelper(GetName()->getName()));
+	}
+	s_swift += swift_;
+	if(s_swift > 100)
+		s_swift = 100;
+	return true;
 }
 bool monster::SetFear(int fear_)
 {
@@ -6566,8 +6612,91 @@ bool monster::special_move(bool is_sight_for_monster, bool can_bounce, float ang
 	return false;
 }
 
+static void sacrificeExplosion(monster* doll)
+{
+	if(!doll || !doll->isLive())
+		return;
+	bool visible = false;
+	for(int y = -2; y <= 2; y++) {
+		for(int x = -2; x <= 2; x++)
+		{
+			if(abs(x) == 2 && abs(y) == 2)
+				continue;
+			coord_def pos = doll->position + coord_def(x, y);
+			if(pos.x < 0 || pos.x >= DG_MAX_X || pos.y < 0 || pos.y >= DG_MAX_Y)
+				continue;
+			if(env[current_level].dgtile[pos.x][pos.y].isBreakable())
+				env[current_level].changeTile(pos, env[current_level].base_floor);
+			env[current_level].MakeEffect(pos, &img_blast[0], false);
+			visible |= env[current_level].isInSight(pos);
+		}
+	}
+	attack_infor explosion = get_sacrifice_dam(getMonsterSpellPower(SPL_SACRIFICE, doll, -1), doll);
+	for(int y = -2; y <= 2; y++)
+		for(int x = -2; x <= 2; x++)
+		{
+			if(abs(x) == 2 && abs(y) == 2)
+				continue;
+			coord_def pos = doll->position + coord_def(x, y);
+			if(pos.x < 0 || pos.x >= DG_MAX_X || pos.y < 0 || pos.y >= DG_MAX_Y)
+				continue;
+			if(unit* hit = env[current_level].isMonsterPos(pos.x, pos.y, doll))
+				hit->damage(explosion, true);
+		}
+	Noise(doll->position, 20, doll);
+	if(visible)
+	{
+		PlaySE("bomb");
+		Sleep(300);
+	}
+	env[current_level].ClearEffect();
+	you.resetLOS();
+	doll->dead(PRT_NEUTRAL, false);
+}
+
+bool monster::sacrificeMove()
+{
+	if(target)
+	{
+		int target_angle = GetBaseAngle(GetPositionToAngle(position.x, position.y,
+			target->position.x, target->position.y));
+		direction = MoveAngleTowards(direction, target_angle, 30);
+	}
+	coord_def next = inttodirec(GetAngleToDirec(direction), position.x, position.y);
+	unit* occupied = env[current_level].isMonsterPos(next.x, next.y, this);
+	if(env[current_level].isMove(next, isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) && !occupied)
+	{
+		SetXY(next);
+	}
+	else
+	{
+		for(int i = 0; i < 10; i++)
+		{
+			direction = GetBaseAngle(direction + rand_int(120, 240));
+			next = inttodirec(GetAngleToDirec(direction), position.x, position.y);
+			if(env[current_level].isMove(next, isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) &&
+				!env[current_level].isMonsterPos(next.x, next.y, this))
+				break;
+		}
+	}
+	int move_direction = GetAngleToDirec(direction);
+	if(move_direction >= 5 && move_direction < 8)
+		image = &img_mons_sacrifice_doll[0];
+	else if(move_direction >= 1 && move_direction < 4)
+		image = &img_mons_sacrifice_doll[1];
+	return true;
+}
+
 int monster::special_state(bool is_sight_for_monster) {
 	switch(id) {
+	case MON_SANGHAI_DOLL:
+	case MON_HOURAI_DOLL:
+		if(special_value > 0)
+		{
+			sacrificeMove();
+			return 2;
+		}
+		break;
 	case MON_ENSLAVE_GHOST:
 	{
 		if(id2 != MON_SONBITEN_SPINTOWIN)
@@ -6761,6 +6890,8 @@ int monster::GetWalkDelay(float multi_) {
 	if (you.s_weather == 4 && you.s_weather_turn > 0) {
 		speed_ = speed_*7/10;
 	}
+	if(s_swift)
+		speed_ = speed_*7/10;
 	if(speed_ <= 0)
 		speed_ = 1; 
 	return speed_;
@@ -6822,6 +6953,8 @@ bool monster::isSimpleState(monster_state_simple state_)
 			return (s_slow != 0) && s_haste == 0;
 		case MSS_HASTE:
 			return (s_haste != 0) && s_slow == 0;
+		case MSS_SWIFT:
+			return s_swift > 0;
 		case MSS_POISON:
 			return (s_poison != 0);
 		case MSS_FEAR:
@@ -6873,6 +7006,8 @@ monster_state_simple monster::GetSimpleState()
 		temp = MSS_SLOW;
 	if((s_haste != 0) && s_slow == 0)
 		temp = MSS_HASTE;
+	if(s_swift)
+		temp = MSS_SWIFT;
 	if(s_oil)
 		temp = MSS_OIL;
 	if(s_poison)
@@ -6996,6 +7131,14 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, ostringstream& ss)
 		if(s_haste && !s_slow)
 		{
 			ss << LocalzationManager::locString(LOC_SYSTEM_HASTE);
+			return CL_normal;
+		}
+		else
+			return CL_none;
+	case MSS_SWIFT:
+		if(s_swift)
+		{
+			ss << LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SWIFT);
 			return CL_normal;
 		}
 		else

@@ -259,7 +259,8 @@
 #define SPL_ACID_BOLT_DICE 2
 #define SPL_ACID_BOLT_DAM(pow_) (8 + (pow_) / 6)
 
-
+#define SPL_SACRIFICE_DICE 3
+#define SPL_SACRIFICE_DAM(pow_) (4 + (pow_) /10)
 
 
 
@@ -5219,6 +5220,31 @@ bool skill_heavenly_storm(int pow_, bool short_, unit* order, coord_def target)
 	return true;
 }
 
+attack_infor get_sacrifice_dam(int pow_, unit* doll)
+{
+	int damage =  SPL_SACRIFICE_DAM(pow_);
+	attack_infor explosion(randC(SPL_SACRIFICE_DICE, damage), SPL_SACRIFICE_DICE * damage, 99, doll,
+		doll->GetParentType(), ATT_NORMAL_BLAST, name_infor(LOC_SYSTEM_ATT_BURST));
+	return explosion;
+}
+
+bool skill_sacrifice(int pow_, bool short_, unit* order, coord_def target)
+{
+	if(!order || order->isplayer() ||
+		(order->GetId() != MON_SANGHAI_DOLL && order->GetId() != MON_HOURAI_DOLL))
+		return false;
+	monster* doll = (monster*)order;
+	if(doll->special_value > 0)
+		return false;
+	doll->special_value = 11;
+	doll->SetSwift(11);
+	coord_def aim = doll->target ? doll->target->position : you.position;
+	doll->direction = GetPositionToAngle(doll->position.x, doll->position.y, aim.x, aim.y);
+	int move_direction = GetAngleToDirec(doll->direction);
+	doll->image = &img_mons_sacrifice_doll[move_direction >= 5 && move_direction < 8 ? 0 : 1];
+	return true;
+}
+
 bool skill_tracking(int pow_, bool short_, unit* order, coord_def target)
 {
 	int turn_ = rand_int(50, 70);
@@ -7263,6 +7289,10 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_SONBITEN_SPINTOWIN:
 		list->push_back(spell(SPL_HEAVENLY_STORM, 15));
 		break;
+	case MON_SANGHAI_DOLL:
+	case MON_HOURAI_DOLL:
+		list->push_back(spell(SPL_SACRIFICE, 30));
+		break;
 	case MON_SECURITY_MAID_FIARY:
 		list->push_back(spell(SPL_CLOSE_DOOR, 80));
 		list->push_back(spell(SPL_SPEAKER_PHONE, 30));
@@ -7651,6 +7681,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_throw_oil(power, short_, order, target);
 	case SPL_HEAVENLY_STORM:
 		return skill_heavenly_storm(power, short_, order, target);
+	case SPL_SACRIFICE:
+		return skill_sacrifice(power, short_, order, target);
 	case SPL_TRACKING:
 		return skill_tracking(power, short_, order, target);
 	case SPL_DISCORD:
@@ -8978,6 +9010,13 @@ void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 	{
 		ostringstream ss;
 		ss << "(" << SPL_THROW_STAR_DICE << "d" << SPL_THROW_STAR_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
+		return;
+	}
+	case SPL_SACRIFICE:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_SACRIFICE_DICE << "d" << SPL_SACRIFICE_DAM(pow_) << ")";
 		printsub(ss.str(), false, normal_dam);
 		return;
 	}

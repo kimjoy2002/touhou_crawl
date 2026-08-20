@@ -20,6 +20,7 @@
 #include "option_manager.h"
 #include "soundmanager.h"
 #include "steam_api.h"
+#include "crash_dump.h"
 #include <wrl/client.h>  
 
 
@@ -264,6 +265,7 @@ int WINAPI WinMain(HINSTANCE hinstance,
 	g_keyQueue = std::make_unique<KeyInputQueue>();
 	steam_mg.steamInit();
 	init_save_paths();
+	InitCrashDump();
 	init_localization();
 	joypadUtil::initJoypad();
 	//random_number = (unsigned int)time(NULL);

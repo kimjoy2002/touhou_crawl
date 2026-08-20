@@ -12,6 +12,7 @@
 #include "key.h"
 #include "replay.h"
 #include "steam_api.h"
+#include "crash_dump.h"
 #include <conio.h>
 #include <windows.h>
 #include <string>
@@ -354,7 +355,9 @@ int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecurs
 		DWORD time2_ = timeGetTime();
 
 		ReplayClass.SaveReplayInput(immedity_?0:(time2_-time_) , return_, key);
-		LOG_KEY_INPUT(inputedkey_to_string(return_,key));
+		std::string input_log = inputedkey_to_string(return_,key);
+		LOG_KEY_INPUT(input_log);
+		AddCrashInput(input_log);
 
 		return return_;
 	}
@@ -443,7 +446,9 @@ int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecurs
 				for(int i = 0; i <(replay_speed==1?min(1000,(int)delay_):0); i++)
 					Sleep(1);
 			}
-			LOG_KEY_INPUT(inputedkey_to_string(return_,key));
+			std::string input_log = inputedkey_to_string(return_,key);
+			LOG_KEY_INPUT(input_log);
+			AddCrashInput(input_log);
 
 			return return_;
 		}

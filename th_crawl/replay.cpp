@@ -687,7 +687,8 @@ bool morgue_menu(int value_)
                 SYSTEMTIME stC;
                 FileTimeToSystemTime(&file_vector[cur].localtime, &stC);
 
-                printsub(ss.str(), false, CL_normal, char_);
+                bool crash_file = file_vector[cur].path.rfind(L"crash-", 0) == 0;
+                printsub(ss.str(), false, crash_file ? CL_danger : CL_normal, char_);
                 if (60 - PrintCharWidth(ss.str()) > 0)
                     printsub(string(60 - PrintCharWidth(ss.str()), ' '), false, CL_normal);
                 else

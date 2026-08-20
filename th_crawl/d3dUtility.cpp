@@ -14,6 +14,7 @@
 #include "key.h"
 #include "soundmanager.h"
 #include "joypad.h"
+#include "crash_dump.h"
 #include <wrl/client.h>
 #include <imm.h>
 #include <XInput.h>
@@ -394,7 +395,7 @@ unsigned int WINAPI DrawLoop(void *arg)
 			}
 			return 1;
 		}
-		__except (1)
+		__except (CrashDumpExceptionFilter(GetExceptionInformation()))
 		{
 		}
 	}
@@ -439,7 +440,7 @@ unsigned int WINAPI SoundLoop(void *arg)
 			}
 			return 1;
 		}
-		__except (1)
+		__except (CrashDumpExceptionFilter(GetExceptionInformation()))
 		{
 		}
 	}
@@ -456,6 +457,7 @@ unsigned int ExceptionGameLoop() {
 		return GameInnerLoop();
 	}
 	catch(std::exception& e) {
+		CrashDumpMessage(e.what());
 		std::string msg = "exception occurs! : ";
 		msg += e.what();
 		::MessageBoxA(0, msg.c_str(), "Error", MB_OK | MB_ICONERROR);
@@ -494,7 +496,7 @@ unsigned int WINAPI GameLoop(void *arg)
 		{
 			return ExceptionGameLoop();
 		}
-		__except(1)
+		__except(CrashDumpExceptionFilter(GetExceptionInformation()))
 		{
 		}
 	}

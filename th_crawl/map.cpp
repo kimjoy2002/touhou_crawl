@@ -366,6 +366,14 @@ void map_algorithms(int num)
 			map_algorithms03(70,3,4,12, num,DG_GRASS,DG_TREE);
 			make_mushroom(num, rand_int(20,30));
 		}
+		else if(num >= DOLLSHOUSE_LEVEL && num < DOLLSHOUSE_LAST_LEVEL)
+		{
+			map_algorithms04(num,DG_DOLLSHOUSE_FLOOR,DG_DOLLSHOUSE_WALL);
+		}
+		else if(num == DOLLSHOUSE_LAST_LEVEL)
+		{
+			map_algorithms03(70,3,4,12, num,DG_DOLLSHOUSE_FLOOR,DG_DOLLSHOUSE_WALL);
+		}
 		else if(num == BAMBOO_LEVEL)
 		{
 			map_algorithms_bamboo(num,DG_GRASS,DG_BAMBOO_WALL);

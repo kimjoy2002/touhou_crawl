@@ -4453,7 +4453,7 @@ bool skill_psychokinesis(int pow_, bool short_, unit* order, coord_def target)
 	if (target_unit)
 	{
 		if (!target_unit->isplayer()) {
-			if (((monster*)target_unit)->flag & M_FLAG_NONE_MOVE) {
+			if (target_unit->isImmobile() || ((monster*)target_unit)->flag & M_FLAG_NONE_MOVE) {
 				if (order->isplayer()) {
 					printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_PSYCHOKINESIS_FAIL), true, false, false, CL_normal);
 				}
@@ -4932,6 +4932,8 @@ bool skill_throw_player(int pow_, bool short_, unit* order, coord_def target)
 
 	if (target_unit)
 	{
+		if(target_unit->isImmobile())
+			return false;
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("earthquake");
 		}
@@ -5086,7 +5088,7 @@ bool skill_windflaw(int pow_, bool short_, unit* order, coord_def target)
 	if (target_unit)
 	{
 		if (!target_unit->isplayer()) {
-			if (((monster*)target_unit)->flag & M_FLAG_NONE_MOVE) {
+			if (target_unit->isImmobile() || ((monster*)target_unit)->flag & M_FLAG_NONE_MOVE) {
 				return false; //이동불가인 적엔 사용 불가
 			}
 		} 
@@ -5242,6 +5244,100 @@ bool skill_sacrifice(int pow_, bool short_, unit* order, coord_def target)
 	doll->direction = GetPositionToAngle(doll->position.x, doll->position.y, aim.x, aim.y);
 	int move_direction = GetAngleToDirec(doll->direction);
 	doll->image = &img_mons_sacrifice_doll[move_direction >= 5 && move_direction < 8 ? 0 : 1];
+	return true;
+}
+
+bool skill_doll_lunge(int pow_, bool short_, unit* order, coord_def target)
+{
+	if(!order || order->isplayer() || order->GetId() != MON_SPEAR_DOLL)
+		return false;
+	unit* victim = env[current_level].isMonsterPos(target.x, target.y);
+	int distance = order->position.distance_from(target);
+	if(!victim || !order->isEnemyUnit(victim) || distance < 3 || distance > 5)
+		return false;
+	beam_iterator beam(order->position, order->position);
+	if(!CheckThrowPath(order->position, target, beam))
+		return false;
+	beam.init();
+	coord_def landing = order->position;
+	for(; !beam.end() && *beam != target; beam++)
+	{
+		if(*beam != order->position)
+		{
+			if(!env[current_level].isMove(beam->x, beam->y, false, false) ||
+				env[current_level].isMonsterPos(beam->x, beam->y))
+				return false;
+			landing = *beam;
+			env[current_level].MakeSmoke(*beam, img_fog_normal, SMT_NORMAL, rand_int(2,3), 0, order);
+		}
+	}
+	if (env[current_level].isInSight(order->position)) {
+		PlaySE("shoot_heavy");
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_DOLL_LUNGE,true,false,false,CL_normal,
+			 PlaceHolderHelper(order->GetName()->getName()),
+			 PlaceHolderHelper(victim->GetName()->getName()));
+	}
+
+	order->SetXY(landing);
+	attack_infor attack(order->GetAttack(false) * 3 / 2, order->GetAttack(true) * 3 / 2,
+		order->GetHit(), order, order->GetParentType(), ATT_RUSH, name_infor(LOC_SYSTEM_ATT_DOLL_LUNGE));
+	victim->damage(attack, false);
+	order->SetExhausted(rand_int(5,10));
+	return true;
+}
+
+bool skill_curse(int pow_, bool short_, unit* order, coord_def target)
+{
+	if(!order || order->isplayer() || order->GetId() != MON_HOURAI_DOLL)
+		return false;
+	unit* victim = env[current_level].isMonsterPos(target.x, target.y);
+	int cost = max(1, order->GetMaxHp() / 8);
+	if(!victim || !order->isEnemyUnit(victim) || order->GetHp() <= cost)
+		return false;
+	attack_infor self_cost(cost, cost, 99, order, order->GetParentType(), ATT_NORMAL,
+		name_infor(LOC_SYSTEM_SPL_CURSE));
+	order->damage(self_cost, true);
+	attack_infor curse(randC(2, 7 + pow_ / 12), 2 * (7 + pow_ / 12), 99, order,
+		order->GetParentType(), ATT_SMITE, name_infor(LOC_SYSTEM_ATT_CURSE));
+	victim->damage(curse, true);
+	if(env[current_level].isInSight(order->position))
+		PlaySE("smite");
+	return true;
+}
+
+bool skill_throw_bucket(int pow_, bool short_, unit* order, coord_def target)
+{
+	if(!order || order->isplayer() || order->GetId() != MON_NETHERLANDS_DOLL)
+		return false;
+	beam_iterator beam(order->position, order->position);
+	if(!CheckThrowPath(order->position, target, beam))
+		return false;
+	beam_infor projectile(0, 0, 99, order, order->GetParentType(),
+		SpellLength(SPL_THROW_BUCKET, false), 1, BMT_NORMAL, ATT_THROW_NONE_MASSAGE,
+		name_infor(LOC_SYSTEM_ATT_BUCKET));
+	coord_def impact = throwtanmac(175, beam, projectile, NULL);
+	attack_infor splash(randC(2, 5 + pow_ / 15), 2 * (5 + pow_ / 15), 99, order,
+		order->GetParentType(), ATT_NORMAL_BLAST, name_infor(LOC_SYSTEM_ATT_BUCKET));
+	BaseBomb(impact, &img_blast[6], splash, order);
+	dif_rect_iterator rit(impact, 1);
+	for(; !rit.end(); rit++)
+	{
+		unit* hit = env[current_level].isMonsterPos(rit->x, rit->y);
+		if(!hit || !order->isEnemyUnit(hit))
+			continue;
+		if(hit->isplayer())
+		{
+			if(!you.s_slippery)
+				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLIPPERY) + " ", false, false, false, CL_danger);
+			you.s_slippery = max(you.s_slippery, rand_int(8,12));
+		}
+		switch(randA(2)) {
+		case 0: hit->SetSlow(rand_int(4,7)); break;
+		case 1: hit->SetConfuse(rand_int(4,7)); break;
+		default: hit->SetSick(rand_int(4,7)); break;
+		}
+	}
+	order->SetExhausted(rand_int(40,50));
 	return true;
 }
 
@@ -7290,8 +7386,23 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_HEAVENLY_STORM, 15));
 		break;
 	case MON_SANGHAI_DOLL:
-	case MON_HOURAI_DOLL:
 		list->push_back(spell(SPL_SACRIFICE, 30));
+		break;
+	case MON_HOURAI_DOLL:
+		list->push_back(spell(SPL_CURSE, 35));
+		break;
+	case MON_LONDON_DOLL:
+		list->push_back(spell(SPL_ARROW, 50));
+		break;
+	case MON_SPEAR_DOLL:
+		list->push_back(spell(SPL_DOLL_LUNGE, 60));
+		break;
+	case MON_FRANCE_DOLL:
+		list->push_back(spell(SPL_ICE_BOLT, 35));
+		list->push_back(spell(SPL_ICE_CLOUD, 25));
+		break;
+	case MON_NETHERLANDS_DOLL:
+		list->push_back(spell(SPL_THROW_BUCKET, 50));
 		break;
 	case MON_SECURITY_MAID_FIARY:
 		list->push_back(spell(SPL_CLOSE_DOOR, 80));
@@ -7683,6 +7794,12 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_heavenly_storm(power, short_, order, target);
 	case SPL_SACRIFICE:
 		return skill_sacrifice(power, short_, order, target);
+	case SPL_DOLL_LUNGE:
+		return skill_doll_lunge(power, short_, order, target);
+	case SPL_CURSE:
+		return skill_curse(power, short_, order, target);
+	case SPL_THROW_BUCKET:
+		return skill_throw_bucket(power, short_, order, target);
 	case SPL_TRACKING:
 		return skill_tracking(power, short_, order, target);
 	case SPL_DISCORD:

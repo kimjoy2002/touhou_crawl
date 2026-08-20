@@ -31,6 +31,7 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_DREAM_FLOOR2:
 	case DG_HELL_FLOOR:
 	case DG_SNOW:
+	case DG_DOLLSHOUSE_FLOOR:
 		return DOT_FLOOR;
 	case DG_WALL:
 	case DG_GLASS:
@@ -58,6 +59,7 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_IZAKAYA:
 	case DG_MUSHROOM1:
 	case DG_MUSHROOM2:
+	case DG_DOLLSHOUSE_WALL:
 		return DOT_WALL;
 	case DG_CLOSE_DOOR:
 	case DG_OPEN_DOOR:

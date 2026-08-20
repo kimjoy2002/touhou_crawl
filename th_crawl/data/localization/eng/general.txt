@@ -5439,3 +5439,19 @@ LOC_SYSTEM_SPL_DESCRIBE_SACRIFICE,The doll throws itself at the enemy with a mas
 LOC_SYSTEM_MON_SWIFT,{0} becomes swift.
 LOC_SYSTEM_MON_MORE_SWIFT,{0} can move swiftly for longer.
 LOC_SYSTEM_MON_NO_LONGER_SWIFT,{0} is no longer swift.
+LOC_SYSTEM_SPL_DOLL_LUNGE,Doll Charge
+LOC_SYSTEM_SPL_CURSE,Curse
+LOC_SYSTEM_SPL_THROW_BUCKET,Throw Bucket
+LOC_SYSTEM_ATT_DOLL_LUNGE,Spear charge
+LOC_SYSTEM_ATT_BUCKET,Bucket
+LOC_SYSTEM_BUFF_STAT_SLIPPERY,Slippery
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLIPPERY,You cannot use stairs while covered in slippery liquid.
+LOC_SYSTEM_STAIR_SLIPPERY,You are too slippery to use the stairs!
+LOC_SYSTEM_YOU_SLIPPERY,You are covered in slippery liquid.
+LOC_SYSTEM_YOU_SLIPPERY_END,The slippery liquid wears off.
+LOC_SYSTEM_SPL_DESCRIBE_DOLL_LUNGE,Readies its spear and lunges at a distant enemy in an instant, closing the distance and dealing damage.\nCannot lunge at enemies that are too close, within 2 tiles, and cannot be used consecutively.
+LOC_SYSTEM_SPL_DESCRIBE_CURSE,Drives nails into its own body, sacrificing HP to deal damage to the target that ignores AC.\nThis attack can be used on any target within sight and cannot be evaded.
+LOC_SYSTEM_SPL_DESCRIBE_THROW_BUCKET,Throws a bucket of slippery liquid that it was carrying for cleaning.\nTargets hit by the liquid temporarily become Slippery, preventing them from using stairs, and the dirty water randomly inflicts Slow, Confusion, or Sick.\nIt appears to have only one bucket, so it cannot throw one consecutively.
+LOC_SYSTEM_ATT_PIERCING,Piercing
+LOC_SYSTEM_TILE_DOLLSHOUSE_WALL,Wall
+LOC_SYSTEM_MAGIC_DOLL_LUNGE,{0} lunged at {1}.

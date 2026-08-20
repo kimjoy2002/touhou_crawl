@@ -287,10 +287,11 @@ MON_OVERGROWTH_WATERMELON,Giant Watermelon,A watermelon enlarged by mysterious e
 MON_WIZARD,Reclusive Wizard,A wizard hiding deep within the Forest of Magic.\nVery on edge, as they detest having their territory invaded.
 MON_TREE_GIANT,Tree Giant,A huge tree youkai that can lift its roots to walk.\nOnce slain, it becomes an ordinary tree, but the remaining magical power often grows dangerous flowers—be wary.
 MON_SANGHAI_DOLL,Shanghai Doll,Bakaja-né no?
-MON_HOURAI_DOLL,Hourai Doll,One of Alice’s dolls, the Hourai type.\nCan firing long-range lasers.
-MON_FRANCE_DOLL,France Doll,TODO
-MON_LONDON_DOLL,London Doll,TODO
-MON_NETHERLANDS_DOLL,Netherlands Doll,TODO
-MON_GOLIATH_DOLL,Goliath Doll,TODO
+MON_HOURAI_DOLL,Cursed Hourai Doll,A doll that sacrifices its own body to inflict curses.
+MON_FRANCE_DOLL,France Doll,A doll that uses cold magic.
+MON_LONDON_DOLL,Doll Archer,A doll that fires arrows with a bow.
+MON_NETHERLANDS_DOLL,Netherlands Doll,A doll that throws buckets filled with suspicious liquid.
+MON_GOLIATH_DOLL,Goliath Doll,A gigantic combat doll created by Alice.
 MON_MARISA,Marisa,A seemingly ordinary magician living in the Forest of Magic.\nShe stores all sorts of magical tools and (stolen) books in her house.\nCurrently researching a strange, powerful rune she found.\nIf you intend to interfere, you’ll have to get through her danmaku.
 MON_ORRERY_ORB,Orreries Orb,A magical orb created by Marisa.\nIt represents the starry sky and unleashes relentless star-shaped danmaku at enemies.
+MON_SPEAR_DOLL,Spear Doll,A combat doll that rapidly charges enemies with a spear.

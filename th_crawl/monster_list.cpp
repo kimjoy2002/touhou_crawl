@@ -1164,29 +1164,29 @@ const mon_infor mondata[] = {
 		{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI,1,0,10,'T'},
 		
-	{MON_SANGHAI_DOLL,15,1,name_infor(MON_SANGHAI_DOLL),&img_mons_sanghai[0],80,5,22,
-		{36,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,1,7,'d' },
+	{MON_SANGHAI_DOLL,9,500,name_infor(MON_SANGHAI_DOLL),&img_mons_sanghai[0],70,0,16,
+		{15,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE,99,1,7,'d' },
 	
-	{MON_HOURAI_DOLL,15,1,name_infor(MON_HOURAI_DOLL),&img_mons_hourai[0],120,20,2,
-		{2,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_HOURAI_DOLL,12,600,name_infor(MON_HOURAI_DOLL),&img_mons_curse_doll,65,1,15,
+		{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,1,10,'d' },
 
-	{MON_FRANCE_DOLL,2,4,name_infor(MON_FRANCE_DOLL),&img_mons_france_doll,80,5,22,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_FRANCE_DOLL,14,1100,name_infor(MON_FRANCE_DOLL),&img_mons_france_doll,80,2,10,
+		{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,1,10,'d' },
 		
-	{MON_LONDON_DOLL,2,4,name_infor(MON_LONDON_DOLL),&img_mons_london_doll,80,5,22,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,1,10,'d' },
+	{MON_LONDON_DOLL,10,700,name_infor(MON_LONDON_DOLL),&img_mons_london_doll,50,5,5,
+		{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE,99,1,10,'d' },
 		
-	{MON_NETHERLANDS_DOLL,2,4,name_infor(MON_NETHERLANDS_DOLL),&img_mons_netherlands_doll,80,5,22,
-		{7,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,1,10,'d' },
+	{MON_NETHERLANDS_DOLL,13,850,name_infor(MON_NETHERLANDS_DOLL),&img_mons_netherlands_doll,90,2,20,
+		{24,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE,99,1,10,'d' },
 		
 	{MON_GOLIATH_DOLL,16,1500,name_infor(MON_GOLIATH_DOLL),&img_mons_goliath_doll[0],240,22,5,
 		{40,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE | M_FLAG_NONE_STAIR,99,1,8,'d' },
+		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE | M_FLAG_NONE_STAIR | M_FLAG_IMMOBILE,99,1,8,'d' },
 		
 	{MON_MARISA,15,3200,name_infor(MON_MARISA),&img_named_marisa,130,3,15,
 		{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
@@ -1194,5 +1194,9 @@ const mon_infor mondata[] = {
 		
 	{MON_ORRERY_ORB,7,0,name_infor(MON_ORRERY_ORB),&img_mons_orrery_orb[0],50,0,10,
 		{0,0,0},{ATT_NONE,ATT_NONE,ATT_NONE},{name_infor(),name_infor(),name_infor()},
-		M_FLAG_NO_ATK | M_FLAG_AUTO_TARGETING | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,5,'*' }
+		M_FLAG_NO_ATK | M_FLAG_AUTO_TARGETING | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,5,'*' },
+
+	{MON_SPEAR_DOLL,10,500,name_infor(MON_SPEAR_DOLL),&img_mons_spear_doll,110,10,5,
+		{20,36,0},{ATT_NORMAL,ATT_NORMAL,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_PIERCING),name_infor()},
+		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,1,10,'d' }
 };

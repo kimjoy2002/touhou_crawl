@@ -237,6 +237,8 @@ enum round_type
 };
 
 //던전타일종류
+//추가시 const.cpp의 LOC_SYSTEM_TILE_XXX도 추가해야함
+//
 enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 player.cpp의 resetLOS()에 추가하자
 {
 	DG_NONE = 0,
@@ -253,7 +255,8 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 
 	DG_PANDE_FLOOR7,
     DG_DREAM_FLOOR2,
 	DG_HELL_FLOOR,
-	DG_FLOOR_END = DG_HELL_FLOOR,
+	DG_DOLLSHOUSE_FLOOR,
+	DG_FLOOR_END = DG_DOLLSHOUSE_FLOOR,
 	DG_OIL,
 	DG_SNOW,
 	DG_FLOOR_OBJECT = 25,
@@ -322,7 +325,8 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 
 	DG_TREE,
 	DG_SUN_FLOWER,
 	DG_HELL_WALL,
-	DG_WALL_END = DG_HELL_WALL,
+	DG_DOLLSHOUSE_WALL,
+	DG_WALL_END = DG_DOLLSHOUSE_WALL,
 	DG_METAL_WALL,
 	DG_WALL2,
 	DG_WALL3,

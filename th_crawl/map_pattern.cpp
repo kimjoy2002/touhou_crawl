@@ -4341,6 +4341,70 @@ const char* under_enter_pattern(map_dummy* map)
 }
 
 
+
+const char* dollshouse_enter_pattern(map_dummy* map)
+{
+	switch (randA(1))
+	{
+	default:
+	case 0:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 8;
+		map->size_y = 5;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->name = "DOLLHOUSE_NORMAL_ENTER";
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->sp_tile_list.push_back(DG_DOLLSHOUSE_WALL);
+		map->sp_tile_list.push_back(DG_DOLLSHOUSE_FLOOR);
+		map->monster_list.push_back(mapdummy_mon(MON_LONDON_DOLL, 0, coord_def(-6,3)));
+		map->monster_list.push_back(mapdummy_mon(MON_LONDON_DOLL, 0, coord_def(-1,3)));
+		return "\
+.................\
+.111111111111111.\
+.122222122222221.\
+.122222+22222221.\
+.122222122222221.\
+.1222221111+1111.\
+.1222221.........\
+.1222221..T...T..\
+.1220221.........\
+.1111111.........\
+.................";
+	}
+	case 1:
+	{
+		bool hw_ = randA(1);
+		map->size_x = 7;
+		map->size_y = 3;
+		map->m_entrance.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_entrance.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		hw_ = randA(1);
+		map->m_exit.x = hw_ ? (randA(1) ? -map->size_x : map->size_x) : rand_int(-map->size_x, map->size_x);
+		map->m_exit.y = hw_ ? rand_int(-map->size_y, map->size_y) : (randA(1) ? -map->size_y : map->size_y);
+		map->name = "DOLLHOUSE_WITH_DOLL_ENTER";
+		map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
+		map->sp_tile_list.push_back(DG_DOLLSHOUSE_WALL);
+		map->monster_list.push_back(mapdummy_mon(MON_SANGHAI_DOLL, 0, coord_def(-1,0)));
+		map->monster_list.push_back(mapdummy_mon(MON_SANGHAI_DOLL, 0, coord_def(1,0)));
+		return "\
+...............\
+.1111111111111.\
+.1111110111111.\
+.11111...11111.\
+.11111...11111.\
+.11111...11111.\
+...............";
+	}
+	}
+}
+
+
+
 const char* bamboo_enter_pattern(map_dummy* map)
 {
 	map->size_x = rand_int(3,8);
@@ -4661,7 +4725,7 @@ const char* dollshouse_pattern(map_dummy* map)
 {
 	map->sp_tile_list.clear();
 	map->sp_tile_list.push_back(DG_DOLLSHOUSE_STAIR);
-	return common_enter_pattern(map);
+	return dollshouse_enter_pattern(map);
 }
 const char* bamboo_pattern(map_dummy* map)
 {
@@ -5238,43 +5302,58 @@ const char* dollshouse_last_vault_pattern(map_dummy* map)
 	default:
 	case 0:
 		{
-		
 		bool hw_ = randA(1);
-		map->size_x = 35;
-		map->size_y = 9;	
+		map->size_x = 8;
+		map->size_y = 8;	
 		map->m_entrance.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 		map->m_entrance.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
 		hw_ = randA(1);
 		map->m_exit.x = hw_?(randA(1)?-map->size_x:map->size_x):rand_int(-map->size_x,map->size_x);
 		map->m_exit.y = hw_?rand_int(-map->size_y,map->size_y):(randA(1)?-map->size_y:map->size_y);
-
 		map->flag = FLAG_NO_STAIR | FLAG_NO_MONSTER | FLAG_NO_ITEM;
-		item_infor t;
-		makeitem(ITM_GOAL, 0, &t, RUNE_DOLLSHOUSE);
-		map->item_list.push_back(mapdummy_item(t,coord_def(23,2)));		
+
+		if(true){//!is_exist_named(MON_ALICE)){ //항상만듬
+			map->monster_list.push_back(mapdummy_mon(MON_ALICE, M_FLAG_SHIELD, coord_def(0, 0)));
+			set_exist_named(MON_ALICE);
+		}
+		map->monster_list.push_back(mapdummy_mon(MON_GOLIATH_DOLL, M_FLAG_SHIELD, coord_def(-5, 0)));
+		map->monster_list.push_back(mapdummy_mon(MON_GOLIATH_DOLL, M_FLAG_SHIELD, coord_def(5, 0)));
+		
+
+		bool rune_ = randA(3);
+		for(int i = 0; i < 4; i++)
+		{
+			if(rune_ == i) {
+				item_infor t;
+				makeitem(ITM_GOAL, 0, &t, RUNE_DOLLSHOUSE);
+				map->item_list.push_back(mapdummy_item(t,coord_def(5*(i/2)*2-5,5*(i%2)*2-5)));
+			} else {
+				item_infor t;
+				makeitem(ITM_BOOK, 0, &t, -1);
+				map->item_list.push_back(mapdummy_item(t,coord_def(5*(i/2)*2-5,5*(i%2)*2-5)));
+			}
+			
+		}
 		
 		map->name = "DOLLSHOUSE_RUNE";
-
 		return  "\
-.......................................................................\
-.......................................................................\
-.....$$$$$$$$$$$$$$$$$$$$==$$$$$$$$$==$$$$$$$$$$$$$$$$$$$$$$$$$$$......\
-.....$,,,,,,$i$i$i$i$i$,,,,,,,,,,,,,,,,,$,,,,,,,,,,,,,,,,,,,,,,,$......\
-.....$,,,,,,$+$+$+$+$+$,,,,,,,,,,,,,,,,,$,,,,,,,,,,,,,,,,,,,,,,,$......\
-.....$,,,,,,+,,,,,,,,,+,,,,,,,,,,,,,,,,,+,,,,,,,,,,,,$$$$$$$$$++$......\
-.....$,,,,,,$+$+$+$+$+$,,,,,,,,,,,,,,,,,$,,,,,,,,,,,,$,,,,,,,,,,$......\
-.....$,,,,,,$i$i$i$i$i$,,,,,,,,,,,,,,,,,$,,,,,,,,,,,,$,,,,,,,,,,$......\
-.....$$+$$$$$$$$$$$$$$$$$==$$$$$$$$$==$$$$$$$$$$$$$$$$,,,,,,,,,,$......\
-.....$,,,,,,,,,,$....................................$,,,,,,,,,,$......\
-.....$,,,,,,,,,,$........................[...........$,,,,,,,,,,$......\
-.....$,,,,,,,,,,$.....[[........~~~~~~~.......[......$,,,,,,,,,,$......\
-.....$$$$$++$$$$$..............~~~~~~~~~.............$$$$$$$$$$$$......\
-...........................[..~~~~~~~~~~~..............................\
-...................[.....[.....~~~~~~~~~.............[[................\
-...................[............~~~~~~~......[.........................\
-.................................................[.....................\
-.................................[.....................................\
-.......................................................................";
+.................\
+.................\
+..####.....####..\
+..#.ii.....ii.#..\
+..#i.........i#..\
+..#i.........i#..\
+.................\
+.................\
+.................\
+.................\
+.................\
+..#i.........i#..\
+..#i.........i#..\
+..#.ii.....ii.#..\
+..####.....####..\
+.................\
+.................";
 		break;
 		}
 	}

@@ -80,6 +80,11 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 		return ((S_FLAG_SMITE | S_FLAG_DELAYED) & flag);
 	case SPL_SACRIFICE:
 		return ((S_FLAG_DELAYED) & flag);
+	case SPL_DOLL_LUNGE:
+		return ((S_FLAG_SMITE | S_FLAG_RANGE_ATTACK | S_FLAG_DELAYED) & flag);
+	case SPL_CURSE:
+	case SPL_THROW_BUCKET:
+		return ((S_FLAG_SMITE | S_FLAG_RANGE_ATTACK) & flag);
 	case SPL_WEAKENDED_SPORE:
 		return ((S_FLAG_SMITE) & flag);
 	case SPL_FIRE_WALL:
@@ -343,6 +348,8 @@ int SpellLength(spell_list skill, bool isPlayer)
 	case SPL_ELEMENTAL_HARVESTER:
 	case SPL_CONFUSE_SPORE:
 	case SPL_THROW_STAR:
+	case SPL_CURSE:
+	case SPL_THROW_BUCKET:
 		length_ = 7;
 		break;
 	case SPL_FLAME:	
@@ -395,6 +402,7 @@ int SpellLength(spell_list skill, bool isPlayer)
 	case SPL_GROW_VINE:
 	case SPL_SUMMON_GHOST:
 	case SPL_ALLROUND_TANMAC:
+	case SPL_DOLL_LUNGE:
 		length_ = 5;
 		break;
 	case SPL_SMOKING:
@@ -807,6 +815,12 @@ string SpellString(spell_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_HEAVENLY_STORM);
 	case SPL_SACRIFICE:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_SACRIFICE);
+	case SPL_DOLL_LUNGE:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_DOLL_LUNGE);
+	case SPL_CURSE:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_CURSE);
+	case SPL_THROW_BUCKET:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_THROW_BUCKET);
 	case SPL_TRACKING:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_TRACKING);
 	case SPL_DISCORD:
@@ -1006,6 +1020,9 @@ int SpellLevel(spell_list skill)
 	case SPL_ELEMENTAL_HARVESTER:
 	case SPL_ACID_BOLT:
 	case SPL_SACRIFICE:
+	case SPL_DOLL_LUNGE:
+	case SPL_CURSE:
+	case SPL_THROW_BUCKET:
 		return 6;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_STONE_FORM:
@@ -1138,6 +1155,9 @@ int SpellNoise(spell_list skill)
 	case SPL_ARROW:
 	case SPL_HANIWA_MAGIC_TANMAC:
 	case SPL_SACRIFICE:
+	case SPL_DOLL_LUNGE:
+	case SPL_CURSE:
+	case SPL_THROW_BUCKET:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -2114,6 +2134,14 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 		if(mon->id == MON_HOURAI_DOLL)
 			return mon->hp <= mon->max_hp / 2;
 		return false;
+	case SPL_DOLL_LUNGE:
+		return mon->id == MON_SPEAR_DOLL && !mon->s_exhausted && mon->target &&
+			mon->position.distance_from(mon->target->position) >= 3 &&
+			mon->position.distance_from(mon->target->position) <= 5;
+	case SPL_CURSE:
+		return mon->id == MON_HOURAI_DOLL && mon->hp > mon->max_hp / 8 && !mon->s_exhausted;
+	case SPL_THROW_BUCKET:
+		return mon->id == MON_NETHERLANDS_DOLL && !mon->s_exhausted;
 	case SPL_CLOSE_DOOR:
 		if(mon->special_value == 0)
 		{

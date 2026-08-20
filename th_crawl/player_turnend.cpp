@@ -959,6 +959,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	{
 		s_none_move--;
 	}
+	if(s_slippery > 0)
+	{
+		s_slippery--;
+		if(!s_slippery)
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLIPPERY_END) + " ", false, false, false, CL_blue);
+	}
 	if(s_spellcard)
 	{
 		s_spellcard--;

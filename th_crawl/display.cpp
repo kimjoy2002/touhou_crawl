@@ -3446,6 +3446,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				stateDraw.addState(you.s_swift>0 ? LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SWIFT) : LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SLUGGISH), you.s_swift>10 ? CL_white_blue : (you.s_swift>0 ? CL_blue : CL_danger),
 					you.s_swift > 0 ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SWIFT) : LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLUGGISH), this);
 			}
+			if(you.s_slippery)
+			{
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SLIPPERY), CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLIPPERY), this);
+			}
 			if(you.s_superman)
 			{
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SUPERMAN), you.s_superman>5 ? CL_white_puple : CL_magic,

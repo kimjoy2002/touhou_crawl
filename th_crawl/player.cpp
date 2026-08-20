@@ -122,7 +122,7 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0),
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
-force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
+force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_slippery(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
 s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_evoke_ghost_level(0), s_oil(0), s_fire(0), s_tracking(0), s_shooting_turn(0), s_overheat(0), s_overheat_turn(0),
 s_regen(0), s_selfdestruct(0), s_glutton(0), s_glutton_turn(0), s_potion_addict(0), s_shield(), s_acid(0), s_acid_turn(0),
 alchemy_buff(ALCT_NONE), alchemy_time(0),
@@ -300,6 +300,7 @@ void players::init() {
 	s_unluck = 0;
 	s_super_graze = 0;
 	s_none_move = 0;
+	s_slippery = 0;
 	s_night_sight = 0;
 	s_night_sight_turn = 0;
 	s_sleep = 0;
@@ -553,6 +554,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_unluck);
 	SaveData<int>(fp, s_super_graze);
 	SaveData<int>(fp, s_none_move);
+	SaveData<int>(fp, s_slippery);
 	SaveData<int>(fp, s_night_sight);
 	SaveData<int>(fp, s_night_sight_turn);
 	SaveData<int>(fp, s_sleep);
@@ -828,6 +830,9 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_unluck); 
 	LoadData<int>(fp, s_super_graze);
 	LoadData<int>(fp, s_none_move);
+	if(!isPrevVersion(loading_version_string, "ver1.205")) {
+		LoadData<int>(fp, s_slippery);
+	}
 	LoadData<int>(fp, s_night_sight); 
 	LoadData<int>(fp, s_night_sight_turn);
 	LoadData<int>(fp, s_sleep);
@@ -1360,7 +1365,7 @@ int players::move(short_move x_mov, short_move y_mov)
 		}
 		else if(mon_)
 		{
-			if(mon_->isUserAlly() && !(mon_->flag & M_FLAG_NONE_MOVE))
+			if(mon_->isUserAlly() && !(mon_->flag & M_FLAG_NONE_MOVE) && !mon_->isImmobile())
 			{
 				if(env[current_level].isMove(position.x, position.y, mon_->isFly(), mon_->isSwim(), mon_->flag & M_FLAG_CANT_GROUND) && env[current_level].isMove(move_x_,move_y_,isFly(),isSwim() || drowned))
 				{
@@ -1373,7 +1378,7 @@ int players::move(short_move x_mov, short_move y_mov)
 				else
 					return 0;
 			}
-			else if(mon_->isUserAlly() && (mon_->flag & M_FLAG_NONE_MOVE))
+			else if(mon_->isUserAlly() && ((mon_->flag & M_FLAG_NONE_MOVE) || mon_->isImmobile()))
 			{
 				printlog(LocalzationManager::locString(LOC_SYSTEM_CANT_SWAP_ALLY),true,false,false,CL_normal);
 				you.SetInter(IT_MAP_FIND);

@@ -345,8 +345,8 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 123, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 10,  1}, //상해인형
 	{ 124, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 10, 1}, //봉래인형
 	{ 125, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 5, 3}, //프랑스인형
-	{ 126, DOLLSHOUSE_LEVEL+1,  DOLLSHOUSE_LAST_LEVEL, 5, 3}, //런던인형
 	{ 127, DOLLSHOUSE_LEVEL+1,  DOLLSHOUSE_LAST_LEVEL, 3, 4}, //네덜란드인형
+	{ 130, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 7, 3}, //인형 창병
 
 	{ -1,  0,  0,  0,  0} //배열의 끝
 };
@@ -434,7 +434,6 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{ 21,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  10,  3}, //파르시
 	{ 24,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //이치린
 	{ 37,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  15,  3}, //레티
-	{ 43,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //앨리스
 	{ 50,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //토지코
 	{ 51,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //후토
 	{ 53,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //세이가
@@ -553,6 +552,11 @@ void create_mon(int floor, int num_)
 {
 	if(num_ == 0)
 		return;
+	if(floor >= DOLLSHOUSE_LEVEL && floor <= DOLLSHOUSE_LEVEL + 1)
+	{
+		for(int london_count = rand_int(3,4); london_count > 0; london_count--)
+			create_id_to_mon(126, floor, 3);
+	}
 
 	int i = 0, total=0, num = num_?num_:10;
 	vector<mon_group*> group;
@@ -1199,6 +1203,9 @@ void create_id_to_mon(int id, int level, int strong)
 				env[level].MakeEvent(EVL_OVERGROWING, candidates[idx], EVT_APPROACH_BIG);
 			}
 		}
+		break;
+	case 130:
+		index.push_back(pair<monster_index, int>(MON_SPEAR_DOLL, strong));
 		break;
 	}
 
@@ -2507,6 +2514,8 @@ void SetResistMonster(monster* mon)
 	case MON_NETHERLANDS_DOLL:
 		break;
 	case MON_GOLIATH_DOLL:
+		break;
+	case MON_SPEAR_DOLL:
 		break;
 	case MON_MARISA :
 		mon->ice_resist = 1;

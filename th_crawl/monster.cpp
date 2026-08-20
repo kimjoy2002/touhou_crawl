@@ -240,7 +240,7 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_might);
 	LoadData<int>(fp, s_clever);
 	LoadData<int>(fp, s_haste);
-	if(!isPrevVersion(loading_version_string, "ver1.206")) {
+	if(!isPrevVersion(loading_version_string, "ver1.205")) {
 		LoadData<int>(fp, s_swift);
 	}
 	LoadData<int>(fp, s_confuse);
@@ -2405,7 +2405,7 @@ bool monster::isMoveNotInturrpt(monster* mon) {
 	}
 	if(flag & M_FLAG_MISSLE && mon->flag & M_FLAG_MISSLE)
 		return true;
-	if(mon->flag & M_FLAG_NONE_MOVE && !canSwap(mon, false) && mon->position != target_pos)
+	if((mon->isImmobile() || mon->flag & M_FLAG_NONE_MOVE) && !canSwap(mon, false) && mon->position != target_pos)
 		return true;
 	return false;
 }
@@ -5306,7 +5306,7 @@ void monster::DrainAll(bool item_, bool unit_) {
 	{
 		if((*it).isLive() && !(it->position == position))
 		{
-			if(!(it->flag & M_FLAG_NONE_MOVE)) {
+			if(!it->isImmobile() && !(it->flag & M_FLAG_NONE_MOVE)) {
 				beam_iterator beam(it->position,position);
 				if(CheckThrowPath(it->position,position,beam))
 				{
@@ -6160,6 +6160,9 @@ bool monster::SetAcid(int acid_, int turn_) {
 	return true;
 }
 bool monster::canSwap(monster* target_mon, bool able_enemy) {
+	if(target_mon->isImmobile()) {
+		return false;
+	}
 	if(!isCantInterupt() && target_mon->isCantInterupt()) {
 		return true;
 	}

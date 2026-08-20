@@ -65,7 +65,7 @@ public:
 	}
 	bool isMove(bool fly_, bool swim_, bool no_ground_, bool seiga_ = false)
 	{
-		return ((!no_ground_ && tile<DG_NONE_MOVE )|| 
+		return ((!no_ground_ && tile<DG_NONE_MOVE)||
 			((fly_ || swim_) && tile == DG_SEA) ||
 			((fly_) && tile == DG_LAVA)) || 
 			(seiga_ && tile == DG_NONE_MOVE);
@@ -103,6 +103,8 @@ public:
 	}
 	bool isNormal()
 	{
+		if(tile == DG_DOLLSHOUSE_FLOOR || tile == DG_DOLLSHOUSE_WALL)
+			return false;
 		return img_dungeon01[tile].isNormal();
 	}
 	bool isAutoTile(int i)
@@ -110,7 +112,7 @@ public:
 		switch (i)
 		{
 		case AUTOTILE_WALL:
-			if ((tile >= DG_WALL && tile <= DG_GLASS) || (tile == DG_OPEN_DOOR))
+			if ((tile >= DG_WALL && tile <= DG_GLASS) || tile == DG_OPEN_DOOR)
 				return true;
 			break;
 		case AUTOTILE_WATER:

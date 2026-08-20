@@ -569,6 +569,15 @@ string GetSpellInfor(spell_list spell, bool isPlayer)
 	case SPL_SACRIFICE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SACRIFICE);
 		break;
+	case SPL_DOLL_LUNGE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_DOLL_LUNGE);
+		break;
+	case SPL_CURSE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_CURSE);
+		break;
+	case SPL_THROW_BUCKET:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_BUCKET);
+		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_UKNOWN);
 		break;

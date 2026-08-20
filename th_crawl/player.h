@@ -320,6 +320,7 @@ public:
 	int s_unluck;
 	int s_super_graze;
 	int s_none_move;
+	int s_slippery;
 	int s_night_sight;
 	int s_night_sight_turn;
 	int s_sleep;

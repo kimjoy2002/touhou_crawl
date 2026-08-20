@@ -173,24 +173,43 @@ void environment::LoadDatas(FILE *fp)
 	LoadData<dungeon_tile_type>(fp, base_floor);
 	LoadData<dungeon_tile_type>(fp, base_wall);
 	LoadData<dungeon_tile>(fp, **dgtile);
-	if(isPrevVersion(loading_version_string, "ver1.202")) {
-		//신규 서브던전을 위한 enum 값 증가
-		for (int x = 0; x < DG_MAX_X; x++)
-		{
-			for (int y = 0; y < DG_MAX_Y; y++)
-			{
-				if(dgtile[x][y].tile >= 95) { //DG_SEA
-					dgtile[x][y].tile=(dungeon_tile_type)(32+dgtile[x][y].tile);
-				}
-				else if(dgtile[x][y].tile >= 70) { //DG_NONE_MOVE
-					dgtile[x][y].tile=(dungeon_tile_type)(30+dgtile[x][y].tile); //100
-				}
-				else if(dgtile[x][y].tile >= 44) { //DG_RETURN_STAIR
-					dgtile[x][y].tile=(dungeon_tile_type)(21+dgtile[x][y].tile); //65
-				}
+	const bool load_ver_1202_or_older = isPrevVersion(loading_version_string, "ver1.202");
+	const bool load_ver_1205_or_older = isPrevVersion(loading_version_string, "ver1.205");
+	auto remapDungeonTile = [load_ver_1202_or_older, load_ver_1205_or_older](dungeon_tile_type& tile)
+	{
+		int value = static_cast<int>(tile);
+		if(load_ver_1202_or_older) {
+			//신규 서브던전 및 버섯 타일 추가 이전의 enum 값을 현재 위치로 이동
+			if(value >= 95) { //당시 DG_SEA
+				value += 32;
+			}
+			else if(value >= 70) { //당시 DG_NONE_MOVE
+				value += 30;
+			}
+			else if(value >= 44) { //당시 DG_RETURN_STAIR
+				value += 21;
 			}
 		}
+		if(load_ver_1205_or_older) {
+			//ver1.206에서 바닥 범위 끝과 벽 범위 끝에 인형의 집 타일이 추가됨
+			if(value >= 14 && value < 25) { //당시 DG_OIL ~ DG_FLOOR_OBJECT 이전
+				value += 1;
+			}
+			else if(value >= 115) { //당시 DG_METAL_WALL 이후
+				value += 1;
+			}
+		}
+		tile = static_cast<dungeon_tile_type>(value);
+	};
 
+	remapDungeonTile(base_floor);
+	remapDungeonTile(base_wall);
+	for (int x = 0; x < DG_MAX_X; x++)
+	{
+		for (int y = 0; y < DG_MAX_Y; y++)
+		{
+			remapDungeonTile(dgtile[x][y].tile);
+		}
 	}
 	LoadData<coord_def>(fp, *stair_up);
 	LoadData<coord_def>(fp, *stair_down);
@@ -639,6 +658,7 @@ char environment::getAsciiDot(int x_, int y_)
 	case DG_PANDE_FLOOR7:
 	case DG_DREAM_FLOOR2:
 	case DG_HELL_FLOOR:
+	case DG_DOLLSHOUSE_FLOOR:
 		return '.';
 	case DG_OPEN_DOOR:
 		return '/';
@@ -702,6 +722,7 @@ char environment::getAsciiDot(int x_, int y_)
 	case DG_PANDE_WALL6:
 	case DG_PANDE_WALL7:
 	case DG_HELL_WALL:
+	case DG_DOLLSHOUSE_WALL:
 		return '#';
 	case DG_TREE:
 	case DG_SUN_FLOWER:
@@ -998,6 +1019,13 @@ void environment::innerDrawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int ti
 		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y,0.0f,scale,scale, color_);
 		//img_auto_wall[0].draw(pSprite, x, y, color_);
 		img_auto_snow[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_SNOW])].draw(pSprite, x, y,0.0f,scale,scale, color_);
+	}
+	else if (dgtile[tile_x][tile_y].tile == DG_DOLLSHOUSE_FLOOR) {
+		img_dollshouse_floor.draw(pSprite, x, y,0.0f,scale,scale, color_);
+	}
+	else if (dgtile[tile_x][tile_y].tile == DG_DOLLSHOUSE_WALL) {
+		img_dollshouse_floor.draw(pSprite, x, y,0.0f,scale,scale, color_);
+		img_auto_dollshouse_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y,0.0f,scale,scale, color_);
 	}
 	else if (!dgtile[tile_x][tile_y].isNormal()) {
 		dgtile[tile_x][tile_y].draw(pSprite, x, y, scale, color_, count_);

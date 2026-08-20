@@ -5439,3 +5439,19 @@ LOC_SYSTEM_SPL_DESCRIBE_SACRIFICE,인형이 거대한 폭탄과 함께 자신의
 LOC_SYSTEM_MON_SWIFT,{0:은|는} 신속해졌다.
 LOC_SYSTEM_MON_MORE_SWIFT,{0:은|는} 더욱 오래 신속하게 움직일 수 있다.
 LOC_SYSTEM_MON_NO_LONGER_SWIFT,{0:은|는} 더 이상 신속하지 않다.
+LOC_SYSTEM_SPL_DOLL_LUNGE,인형 돌진
+LOC_SYSTEM_SPL_CURSE,저주
+LOC_SYSTEM_SPL_THROW_BUCKET,양동이 던지기
+LOC_SYSTEM_ATT_DOLL_LUNGE,창 돌진
+LOC_SYSTEM_ATT_BUCKET,양동이
+LOC_SYSTEM_BUFF_STAT_SLIPPERY,미끄러움
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLIPPERY,발밑이 미끄러워 계단을 이용할 수 없다.
+LOC_SYSTEM_STAIR_SLIPPERY,발밑이 미끄러워 계단을 이용할 수 없다!
+LOC_SYSTEM_YOU_SLIPPERY,당신은 미끄러운 액체를 뒤집어썼다.
+LOC_SYSTEM_YOU_SLIPPERY_END,몸에 묻은 미끄러운 액체가 사라졌다.
+LOC_SYSTEM_SPL_DESCRIBE_DOLL_LUNGE,창을 세우고 떨어진 적에게 순식간에 돌진하여 거리를 좁히고 데미지를 준다.\n2칸 이하의 너무 가까이 있는 적에겐 돌진 할 수 없고 연속으로 사용하지 못한다.
+LOC_SYSTEM_SPL_DESCRIBE_CURSE,자신의 몸에 못을 박아 체력을 깎아 대상에게 방어를 무시하는 데미지를 입힌다.\n이 공격은 시야에만 있으면 사용이 가능하며 회피할 수 없다.
+LOC_SYSTEM_SPL_DESCRIBE_THROW_BUCKET,청소를 위해 들고 있던 미끄러운 액체가 든 양동이를 던진다.\n이 액체를 맞으면 일시적으로 계단을 이용할 수 없는 미끄러움 상태가 되며, 더러운 물에 의해 감속, 혼란, 병의 무작위 상태이상에 걸린다.\n양동이는 하나이기때문에 연속으로 던지지는 못하는걸로 보인다.
+LOC_SYSTEM_ATT_PIERCING,찌르기 
+LOC_SYSTEM_TILE_DOLLSHOUSE_WALL,벽
+LOC_SYSTEM_MAGIC_DOLL_LUNGE,{0:은|는} {1}에게 돌격했다.

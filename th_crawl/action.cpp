@@ -1790,6 +1790,11 @@ bool CheckDimension()
 }
 bool warning(dungeon_tile_type type, bool down)
 {//경고메시지를 주는 곳		
+	if(you.s_slippery > 0)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SLIPPERY), true, false, false, CL_danger);
+		return false;
+	}
 	switch(type)
 	{
 	case DG_YUKKURI_STAIR:

@@ -25,6 +25,8 @@ extern textures img_auto_hell_wall[48];
 extern textures img_auto_lava[48];
 extern textures img_auto_oil[48];
 extern textures img_auto_snow[48];
+extern textures img_dollshouse_floor;
+extern textures img_auto_dollshouse_wall[48];
 extern textures img_mons_default;
 //여기추가하면 texturetoint도 추가해야함
 extern textures img_mons_reimu_yukkuri;
@@ -220,6 +222,8 @@ extern textures img_mons_tree_giant;
 extern textures img_mons_france_doll;
 extern textures img_mons_london_doll;
 extern textures img_mons_netherlands_doll;
+extern textures img_mons_spear_doll;
+extern textures img_mons_curse_doll;
 extern textures img_mons_goliath_doll[4];
 extern textures img_mons_sacrifice_doll[2];
 extern textures img_mons_orrery_orb[];

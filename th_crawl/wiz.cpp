@@ -26,7 +26,7 @@ extern int g_menu_select;
 extern HANDLE mutx;
 wiz_infor wiz_list;
 extern int create_bamboo_mon();
-bool ableWiz = false;
+bool ableWiz = true;
 
 void checkWizardModeFromCmdLine(const char* cmdLine) {
     std::string cmd(cmdLine);
@@ -1248,6 +1248,15 @@ void wiz_mode()
 			}
 			enterlog();
 		}
+			break;
+		case 'c':
+			{
+				//make crash
+				string* str_ = NULL;
+				printlog(*str_, false, false, false, CL_normal);
+
+				break;
+			}
 			break;
 		case 'C':
 			{

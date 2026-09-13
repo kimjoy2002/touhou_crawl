@@ -342,11 +342,14 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 122,  FORESTOFMAGIC_LEVEL+3,  FORESTOFMAGIC_LEVEL+3, 6,  5}, //나무 거인
 	
 	//인형의집
-	{ 123, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 10,  1}, //상해인형
-	{ 124, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 10, 1}, //봉래인형
-	{ 125, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 5, 3}, //프랑스인형
-	{ 127, DOLLSHOUSE_LEVEL+1,  DOLLSHOUSE_LAST_LEVEL, 3, 4}, //네덜란드인형
-	{ 130, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 7, 3}, //인형 창병
+	{ 123, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 8,  1}, //상해인형
+	{ 124, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 8, 1}, //봉래인형
+	{ 125, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 3, 3}, //프랑스인형
+	{ 126, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 10, 1}, //인형 궁수
+	{ 130, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 5, 3}, //인형 창병
+	{ 130, DOLLSHOUSE_LEVEL+1,    DOLLSHOUSE_LAST_LEVEL, 7, 3}, //인형 창병
+	{ 125, DOLLSHOUSE_LEVEL+1,    DOLLSHOUSE_LAST_LEVEL, 4, 3}, //프랑스인형
+	{ 127, DOLLSHOUSE_LEVEL+1,  DOLLSHOUSE_LAST_LEVEL, 5, 4}, //네덜란드인형
 
 	{ -1,  0,  0,  0,  0} //배열의 끝
 };
@@ -552,12 +555,6 @@ void create_mon(int floor, int num_)
 {
 	if(num_ == 0)
 		return;
-	if(floor >= DOLLSHOUSE_LEVEL && floor <= DOLLSHOUSE_LEVEL + 1)
-	{
-		for(int london_count = rand_int(3,4); london_count > 0; london_count--)
-			create_id_to_mon(126, floor, 3);
-	}
-
 	int i = 0, total=0, num = num_?num_:10;
 	vector<mon_group*> group;
 	group.reserve(128);
@@ -1132,7 +1129,8 @@ void create_id_to_mon(int id, int level, int strong)
 		index.push_back(pair<monster_index, int>(MON_TREE_GIANT, strong));
 		break;
 	case 123:
-		index.push_back(pair<monster_index, int>(MON_SANGHAI_DOLL, strong));
+		for (int rand_ = rand_int(1, 2), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_SANGHAI_DOLL, strong));
 		break;
 	case 124:
 		index.push_back(pair<monster_index, int>(MON_HOURAI_DOLL, strong));
@@ -1141,7 +1139,8 @@ void create_id_to_mon(int id, int level, int strong)
 		index.push_back(pair<monster_index, int>(MON_FRANCE_DOLL, strong));
 		break;
 	case 126:
-		index.push_back(pair<monster_index, int>(MON_LONDON_DOLL, strong));
+		for (int rand_ = rand_int(2, 4), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_LONDON_DOLL, strong));
 		break;
 	case 127:
 		index.push_back(pair<monster_index, int>(MON_NETHERLANDS_DOLL, strong));
@@ -2504,18 +2503,32 @@ void SetResistMonster(monster* mon)
 		mon->poison_resist = 1;
 		break;
 	case MON_SANGHAI_DOLL:
+		mon->fire_resist=2;
+		mon->poison_resist=1;
 		break;
 	case MON_HOURAI_DOLL:
+		mon->poison_resist=1;
 		break;
 	case MON_FRANCE_DOLL:
+		mon->ice_resist=3;
+		mon->poison_resist=1;
 		break;
 	case MON_LONDON_DOLL:
+		mon->ice_resist=2;
+		mon->poison_resist=1;
 		break;
 	case MON_NETHERLANDS_DOLL:
+		mon->poison_resist=1;
 		break;
 	case MON_GOLIATH_DOLL:
+		mon->fire_resist = 1;
+		mon->ice_resist = 1;
+		mon->elec_resist = 2;
+		mon->poison_resist=1;
 		break;
 	case MON_SPEAR_DOLL:
+		mon->fire_resist = 1;
+		mon->poison_resist=1;
 		break;
 	case MON_MARISA :
 		mon->ice_resist = 1;

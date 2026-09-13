@@ -3218,6 +3218,10 @@ int GetLevelMonsterNum(int level, bool item_)
 			return 18;
 		else if(level_ >= DEPTH_LEVEL && level_ <= DEPTH_LAST_LEVEL)
 			return 15;
+		else if(level_ >= DOLLSHOUSE_LEVEL && level_ < DOLLSHOUSE_LAST_LEVEL)
+			return 25;
+		else if(level_ == DOLLSHOUSE_LAST_LEVEL)
+			return 12;
 		else if (level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)
 			return 12 * multi_;
 		else if(level_ == MOON_LEVEL)

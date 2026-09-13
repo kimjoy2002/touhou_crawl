@@ -262,7 +262,11 @@
 #define SPL_SACRIFICE_DICE 3
 #define SPL_SACRIFICE_DAM(pow_) (4 + (pow_) /10)
 
+#define SPL_CURSE_DICE 1
+#define SPL_CURSE_DAM(pow_) (15 + (pow_) / 6)
 
+#define SPL_BUCKET_DICE 2
+#define SPL_BUCKET_DAM(pow_) (8 + (pow_) /12)
 
 extern HANDLE mutx;
 extern int map_effect;
@@ -5297,7 +5301,7 @@ bool skill_curse(int pow_, bool short_, unit* order, coord_def target)
 	attack_infor self_cost(cost, cost, 99, order, order->GetParentType(), ATT_NORMAL,
 		name_infor(LOC_SYSTEM_SPL_CURSE));
 	order->damage(self_cost, true);
-	attack_infor curse(randC(2, 7 + pow_ / 12), 2 * (7 + pow_ / 12), 99, order,
+	attack_infor curse(randC(SPL_CURSE_DICE,SPL_CURSE_DAM(pow_)),SPL_CURSE_DICE*SPL_CURSE_DAM(pow_),99,order,
 		order->GetParentType(), ATT_SMITE, name_infor(LOC_SYSTEM_ATT_CURSE));
 	victim->damage(curse, true);
 	if(env[current_level].isInSight(order->position))
@@ -5307,38 +5311,53 @@ bool skill_curse(int pow_, bool short_, unit* order, coord_def target)
 
 bool skill_throw_bucket(int pow_, bool short_, unit* order, coord_def target)
 {
-	if(!order || order->isplayer() || order->GetId() != MON_NETHERLANDS_DOLL)
-		return false;
-	beam_iterator beam(order->position, order->position);
-	if(!CheckThrowPath(order->position, target, beam))
-		return false;
-	beam_infor projectile(0, 0, 99, order, order->GetParentType(),
-		SpellLength(SPL_THROW_BUCKET, false), 1, BMT_NORMAL, ATT_THROW_NONE_MASSAGE,
-		name_infor(LOC_SYSTEM_ATT_BUCKET));
-	coord_def impact = throwtanmac(175, beam, projectile, NULL);
-	attack_infor splash(randC(2, 5 + pow_ / 15), 2 * (5 + pow_ / 15), 99, order,
-		order->GetParentType(), ATT_NORMAL_BLAST, name_infor(LOC_SYSTEM_ATT_BUCKET));
-	BaseBomb(impact, &img_blast[6], splash, order);
-	dif_rect_iterator rit(impact, 1);
-	for(; !rit.end(); rit++)
+	beam_iterator beam(order->position,order->position);
+	int length_ =  GetLengthFromCenter(order->position.x, order->position.y, target.x, target.y);
+	length_ = min(length_,SpellLength(SPL_THROW_OIL, order->isplayer()));
+	if(CheckThrowPath(order->position,target,beam))
 	{
-		unit* hit = env[current_level].isMonsterPos(rit->x, rit->y);
-		if(!hit || !order->isEnemyUnit(hit))
-			continue;
-		if(hit->isplayer())
+		beam_infor temp_infor(0, 0, 15, order, order->GetParentType(),
+			SpellLength(SPL_THROW_BUCKET, false), 1, BMT_NORMAL, ATT_THROW_NONE_MASSAGE,
+			name_infor(LOC_SYSTEM_ATT_BUCKET));
+
+		for(int i=0;i<(order->GetParadox()?2:1);i++)
 		{
-			if(!you.s_slippery)
-				printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLIPPERY) + " ", false, false, false, CL_danger);
-			you.s_slippery = max(you.s_slippery, rand_int(8,12));
+			coord_def pos = throwtanmac(175,beam,temp_infor,NULL);
+
+			attack_infor splash(randC(SPL_BUCKET_DICE,SPL_BUCKET_DAM(pow_)),SPL_BUCKET_DICE*SPL_BUCKET_DAM(pow_),99,order,
+				order->GetParentType(), ATT_NORMAL_BLAST, name_infor(LOC_SYSTEM_ATT_BUCKET));
+				
+			if (env[current_level].isInSight(order->position)) {
+				PlaySE("splash");
+			}
+			BaseBomb_forAlly(pos, &img_blast[6], splash, order, 100, false);
+			env[current_level].ClearEffect();
+			env[current_level].MakeNoise(pos,20,NULL);
+
+			dif_rect_iterator rit(pos, 1);
+			for(; !rit.end(); rit++)
+			{
+				unit* hit = env[current_level].isMonsterPos(rit->x, rit->y);
+				if(!hit || !order->isEnemyUnit(hit))
+					continue;
+				if(hit->isplayer())
+				{
+					if(!you.s_slippery)
+						printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLIPPERY) + " ", false, false, false, CL_danger);
+					you.s_slippery = max(you.s_slippery, rand_int(8,12));
+				}
+				switch(randA(2)) {
+				case 0: hit->SetSlow(rand_int(4,7)); break;
+				case 1: hit->SetConfuse(rand_int(4,7)); break;
+				default: hit->SetSick(rand_int(4,7)); break;
+				}
+			}
 		}
-		switch(randA(2)) {
-		case 0: hit->SetSlow(rand_int(4,7)); break;
-		case 1: hit->SetConfuse(rand_int(4,7)); break;
-		default: hit->SetSick(rand_int(4,7)); break;
-		}
+		order->SetParadox(0); 
+		order->SetExhausted(rand_int(40,50));
+		return true;
 	}
-	order->SetExhausted(rand_int(40,50));
-	return true;
+	return false;
 }
 
 bool skill_tracking(int pow_, bool short_, unit* order, coord_def target)
@@ -9127,6 +9146,20 @@ void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 	{
 		ostringstream ss;
 		ss << "(" << SPL_THROW_STAR_DICE << "d" << SPL_THROW_STAR_DAM(pow_) << ")";
+		printsub(ss.str(), false, normal_dam);
+		return;
+	}
+	case SPL_CURSE:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_CURSE_DICE << "d" << SPL_CURSE_DAM(pow_) << ")";
+		printsub(ss.str(), false, smite_dam);
+		return;
+	}
+	case SPL_THROW_BUCKET:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_BUCKET_DICE << "d" << SPL_BUCKET_DAM(pow_) << ")";
 		printsub(ss.str(), false, normal_dam);
 		return;
 	}

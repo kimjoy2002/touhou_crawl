@@ -1253,4 +1253,38 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 		}
 
 	}
+	else if(type == UNIQ_START_SAKUYA)
+	{
+		if(aptit_)
+		{
+			you.skill[SKT_SHORTBLADE].aptit +=3;
+			you.skill[SKT_TANMAC].aptit +=3;
+			you.skill[SKT_TRANS].aptit +=4;
+		}
+		else
+		{
+			you.SetProperty(TPT_SAKUYA_PASSIVE,1);
+			set_exist_named(MON_SAKUYA);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+		}
+	}
+	else if(type == UNIQ_START_CIRNO)
+	{
+		if(aptit_)
+		{
+			you.skill[SKT_FIGHT].aptit +=3;
+			you.skill[SKT_LONGBLADE].aptit +=2;
+			you.skill[SKT_MACE].aptit +=2;
+			you.skill[SKT_COLD].aptit +=3;
+			you.skill[SKT_FIRE].aptit -=3;
+		}
+		else
+		{
+			you.SetProperty(TPT_CIRNO_PASSIVE,2);
+			set_exist_named(MON_CIRNO);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+		}
+	}
 }

@@ -5885,7 +5885,7 @@ bool skill_arrow(int pow_, bool short_, unit* order, coord_def target) {
 			}
 		}
 
-		beam_infor temp_infor(order->GetAttack(false), order->GetAttack(true), order->GetHit(), order, order->GetParentType(), SpellLength(SPL_ARROW, order->isplayer()), 1, BMT_NORMAL, type_, name_infor(LOC_SYSTEM_ATT_ARROW));
+		beam_infor temp_infor(randC(2,order->GetAttack(false)/2), order->GetAttack(true), order->GetHit(), order, order->GetParentType(), SpellLength(SPL_ARROW, order->isplayer()), 1, BMT_NORMAL, type_, name_infor(LOC_SYSTEM_ATT_ARROW));
 		if (short_)
 			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
 		
@@ -7405,7 +7405,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_HEAVENLY_STORM, 15));
 		break;
 	case MON_SANGHAI_DOLL:
-		list->push_back(spell(SPL_SACRIFICE, 30));
+		list->push_back(spell(SPL_SACRIFICE, 50));
 		break;
 	case MON_HOURAI_DOLL:
 		list->push_back(spell(SPL_CURSE, 35));
@@ -9051,7 +9051,7 @@ void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 	if(order != nullptr)
 	{
 		ostringstream ss;
-		ss << "(" << 1 << "d" << order->GetAttack(true) << ")";
+		ss << "(" << 2 << "d" << order->GetAttack(true)/2 << ")";
 		printsub(ss.str(), false, normal_dam);
 		return;
 	}

@@ -398,6 +398,18 @@ bool select_named(int value_)
 		you.char_type = UNIQ_START_YOUMU;
 		you.image = &img_named_youmu;
 		break;
+	case 9:
+		you.tribe = TRI_HUMAN;
+		you.job = JOB_MADE;
+		you.char_type = UNIQ_START_SAKUYA;
+		you.image = &img_named_sakuya;
+		break;
+	case 10:
+		you.tribe = TRI_FAIRY;
+		you.job = JOB_COLD_WIZARD;
+		you.char_type = UNIQ_START_CIRNO;
+		you.image = &img_named_cirno;
+		break;
 	}						
 	WaitForSingleObject(mutx, INFINITE);
 	printsub("", true, CL_normal);
@@ -562,7 +574,7 @@ void start_mainmenu()
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("", true, CL_normal));
 
-		LOCALIZATION_ENUM_KEY charlist[9][3] = {
+		LOCALIZATION_ENUM_KEY charlist[][3] = {
 			{LOC_SYSTEM_TRIBE_HUMAN,LOC_SYSTEM_JOB_SHAMAN,LOC_SYSTEM_PLAYER_REIMU},
 			{LOC_SYSTEM_TRIBE_HUMAN,LOC_SYSTEM_JOB_WIZARD,LOC_SYSTEM_PLAYER_MARISA},
 			{LOC_SYSTEM_TRIBE_HUMAN,LOC_SYSTEM_JOB_SHAMAN,LOC_SYSTEM_PLAYER_SANAE},
@@ -571,10 +583,12 @@ void start_mainmenu()
 			{LOC_SYSTEM_TRIBE_HUMAN,LOC_SYSTEM_JOB_MONK,LOC_SYSTEM_PLAYER_MOKOU},
 			{LOC_SYSTEM_TRIBE_KAPPA,LOC_SYSTEM_JOB_ENGINEER,LOC_SYSTEM_PLAYER_NITORI},
 			{LOC_SYSTEM_TRIBE_FAIRY,LOC_NONE,LOC_SYSTEM_PLAYER_THREE_FAIRIES},
-			{LOC_SYSTEM_TRIBE_HUMAN,LOC_SYSTEM_JOB_GLADIATOR,LOC_SYSTEM_PLAYER_YOUMU}
+			{LOC_SYSTEM_TRIBE_HUMAN,LOC_SYSTEM_JOB_GLADIATOR,LOC_SYSTEM_PLAYER_YOUMU},
+			{LOC_SYSTEM_TRIBE_HUMAN,LOC_SYSTEM_JOB_MADE,LOC_SYSTEM_PLAYER_SAKUYA},
+			{LOC_SYSTEM_TRIBE_FAIRY,LOC_SYSTEM_JOB_COLD_WIZARD,LOC_SYSTEM_PLAYER_CIRNO}
 		};
 
-		for(int i = 0; i < 9; i++) {
+		for(int i = 0; i < sizeof(charlist)/sizeof(charlist[0]); i++) {
 			char hotkey_ = 'a' + i;
 			ostringstream ss;
 			ss << hotkey_ << " - " << LocalzationManager::locString(charlist[i][0]);
@@ -714,6 +728,20 @@ void start_mainmenu()
 		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
 		tempstr += "\n";
 		m_mgr.menu_input_puls(2,'i',2,tempstr,true,select_named,8);
+		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_SAKUYA);
+		tempstr += " : ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SAKUYA);
+		tempstr += "\n\n\n";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
+		tempstr += "\n";
+		m_mgr.menu_input_puls(2,'j',2,tempstr,true,select_named,9);
+		tempstr = LocalzationManager::locString(LOC_SYSTEM_PLAYER_CIRNO);
+		tempstr += " : ";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_CIRNO);
+		tempstr += "\n\n\n";
+		tempstr += LocalzationManager::locString(LOC_SYSTEM_MAINMENU_CONTINUE_SAMEKEY);
+		tempstr += "\n";
+		m_mgr.menu_input_puls(2,'k',2,tempstr,true,select_named,10);
 		m_mgr.menu_input_puls(2,VK_ESCAPE,1,"",false,NULL,0);
 
 		

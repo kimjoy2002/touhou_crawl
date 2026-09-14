@@ -109,6 +109,9 @@ enum tribe_proper_type
 	TPT_STG_COMSUMABLE,
 	TPT_STG_DEFAULT_ABIL,
 	TPT_STG_LAST = TPT_STG_DEFAULT_ABIL,
+	TPT_SAKUYA_PASSIVE,
+	TPT_CIRNO_PASSIVE,
+	TPT_CIRNO_ICE_CREATE,
 	TPT_MAX
 };
 
@@ -141,6 +144,8 @@ int getRadValue();
 void SetTribe(tribe_type select_);
 void PropertyView();
 void LevelUpTribe(int level_);
+int GetCirnoIceCreateCount();
+int GetCirnoIceCreateLevel();
 
 
 

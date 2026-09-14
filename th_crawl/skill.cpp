@@ -271,5 +271,8 @@ D3DCOLOR GetSkillColor(int aptit_)
 	case 4:
 		return D3DCOLOR_XRGB(50,50,255);
 		break;
+	case 5:
+		return D3DCOLOR_XRGB(25,25,255);
+		break;
 	}
 }

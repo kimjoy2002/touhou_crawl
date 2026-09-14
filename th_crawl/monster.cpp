@@ -1712,11 +1712,19 @@ void monster::print_no_damage_message(attack_infor &a)
 
 bool monster::damage(attack_infor &a, bool perfect_)
 {
+	return damage(a, perfect_, nullptr);
+}
+
+bool monster::damage(attack_infor &a, bool perfect_, const coord_def* hit_pos)
+{
 	if(id == MON_GOLIATH_DOLL && parent_part_id != -1)
 	{
 		for(monster& root : env[current_level].mon_vector)
 			if(root.isLive() && root.map_id == parent_part_id)
-				return root.damage(a, perfect_);
+			{
+				coord_def part_pos = position;
+				return root.damage(a, perfect_, &part_pos);
+			}
 	}
 
 	int back_stab = 0;
@@ -2249,9 +2257,10 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			s_oil = 0;
 		}
 		if(a.type == ATT_FIREPLUS&& randA(2) == 0) {
-			if(a.order != nullptr && env[current_level].isMove(position.x, position.y, true))
+			coord_def fire_pos = hit_pos?*hit_pos:position;
+			if(a.order != nullptr && env[current_level].isMove(fire_pos.x, fire_pos.y, true))
 			{
-				env[current_level].MakeSmoke(position,img_fog_fire,SMT_FIRE,rand_int(3,4),0,a.order);
+				env[current_level].MakeSmoke(fire_pos,img_fog_fire,SMT_FIRE,rand_int(3,4),0,a.order);
 			}
 		}
 
@@ -6646,7 +6655,7 @@ static void sacrificeExplosion(monster* doll)
 			if(unit* hit = env[current_level].isMonsterPos(pos.x, pos.y, doll))
 				hit->damage(explosion, true);
 		}
-	Noise(doll->position, 20, doll);
+	Noise(doll->position, 32, doll);
 	if(visible)
 	{
 		PlaySE("bomb");

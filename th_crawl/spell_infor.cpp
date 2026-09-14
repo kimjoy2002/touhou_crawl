@@ -949,6 +949,9 @@ string GetSkillInfor(skill_list skill)
 	case SKL_SILENCE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SILENCE);
 		break;
+	case SKL_CIRNO_ICE_CREATE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_CIRNO_ICE_CREATE);
+		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_UKNOWN);
 		break;

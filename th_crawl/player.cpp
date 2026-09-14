@@ -4654,6 +4654,10 @@ string GetUniqueCharString(int char_type){
 		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_LUNA);
 	case UNIQ_START_YOUMU:
 		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_YOUMU);
+	case UNIQ_START_SAKUYA:
+		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_SAKUYA);
+	case UNIQ_START_CIRNO:
+		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_CIRNO);
 	default:
 		return "";
 	}
@@ -4721,6 +4725,8 @@ const char* GetUniqueStartStatString(unique_starting_type start) {
     case UNIQ_START_STAR:   return "Star";
     case UNIQ_START_LUNA:   return "Luna";
     case UNIQ_START_YOUMU:  return "Youmu";
+    case UNIQ_START_SAKUYA: return "Sakuya";
+    case UNIQ_START_CIRNO:  return "Cirno";
     default: return "Unknown";
     }
 }

@@ -37,6 +37,7 @@
 #include "soundmanager.h"
 #include "tribe.h"
 #include "evoke.h"
+#include "scroll.h"
 
 
 extern HANDLE mutx;
@@ -4810,6 +4811,16 @@ bool skill_emerald_city(int power, bool short_, unit* order, coord_def target);
 bool skill_stone_uplift(int power, bool short_, unit* order, coord_def target);
 
 
+bool skill_cirno_ice_create(int level_)
+{
+	// 임시
+	if(level_ <= 0 || !aquire_scroll(true, true))
+		return false;
+	you.Ability(SKL_CIRNO_ICE_CREATE,false,true);
+	printlog(LocalzationManager::formatString(LOC_SYSTEM_CIRNO_ICE_CREATE_USED),true,false,false,CL_normal);
+	return true;
+}
+
 int UseSkill(skill_list skill, bool short_, coord_def &target)
 {
 	int power=min(SkillCap(skill),SkillPow(skill));
@@ -5161,6 +5172,9 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_SILENCE:
 		return skill_silence(power,short_, &you,target);
+		break;
+	case SKL_CIRNO_ICE_CREATE:
+		return skill_cirno_ice_create(power);
 		break;
 	default:
 		break;

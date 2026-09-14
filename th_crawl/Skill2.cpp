@@ -15,6 +15,7 @@
 #include "projectile.h"
 #include "god.h"
 #include "dump.h"
+#include "tribe.h"
 #include <algorithm>
 using namespace std;
 extern HANDLE mutx;
@@ -149,6 +150,8 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 		return ((S_FLAG_DELAYED) & flag);
 	case SKL_JUMPING_ATTACK:
 		return ((S_FLAG_SMITE | S_FLAG_DELAYED) & flag);
+	case SKL_CIRNO_ICE_CREATE:
+		return (S_FLAG_IMMEDIATELY & flag);
 	default:
 		return false;
 	}
@@ -475,6 +478,8 @@ string SkillString(skill_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_MISSLE);
 	case SKL_SILENCE:
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_SILENCE);
+	case SKL_CIRNO_ICE_CREATE:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_CIRNO_ICE_CREATE);
 	case SKL_NONE:
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_UKNOWN);
@@ -561,6 +566,7 @@ int SkillCap(skill_list skill)
 	case SKL_FIREBALL:
 	case SKL_MISSLE:
 	case SKL_SILENCE:
+	case SKL_CIRNO_ICE_CREATE:
 		return 200;
 	case SKL_LEVITATION:
 		return 75;
@@ -811,6 +817,8 @@ int SkillPow(skill_list skill)
 	case SKL_FIREBALL:
 	case SKL_MISSLE:
 		return you.GetSkillLevel(SKT_EVOCATE, true) *5;
+	case SKL_CIRNO_ICE_CREATE:
+		return GetCirnoIceCreateLevel();
 	case SKL_GRAZE:
 	case SKL_GRAZE_OFF:
 	case SKL_LEVITATION_OFF:
@@ -956,6 +964,7 @@ int SkillDiffer(skill_list skill)
 	case SKL_HARD_SELL:
 	case SKL_CREATE_SHOP:
 	case SKL_SILENCE:
+	case SKL_CIRNO_ICE_CREATE:
 		return 100;
 	case SKL_NONE:
 	default:
@@ -1740,6 +1749,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_DRAW_CARD:
 	case SKL_HARD_SELL:
 	case SKL_CREATE_SHOP:
+	case SKL_CIRNO_ICE_CREATE:
 	default:
 		return true;
 	}
@@ -1954,6 +1964,9 @@ string SkillCostString(skill_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_SOME);
 	case SKL_MISSLE:
 		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_LITTLE);
+	case SKL_CIRNO_ICE_CREATE:
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_N_REMAIN,
+			PlaceHolderHelper(to_string(GetCirnoIceCreateCount())));
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:

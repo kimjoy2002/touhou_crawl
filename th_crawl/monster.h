@@ -206,6 +206,7 @@ public:
 	void print_damage_message(attack_infor &a, bool back_stab);
 	void print_no_damage_message(attack_infor &a);
 	bool damage(attack_infor &a, bool perfect_ = false);
+	bool damage(attack_infor &a, bool perfect_, const coord_def* hit_pos);
 	bool dead(parent_type reason_, bool message_, bool remove_ = false); //remove는 증발시키기(아예 경험치나 관련도 없이)
 	void resetShadow();
 	int action(int delay_);

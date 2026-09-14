@@ -286,7 +286,7 @@ MON_OVERGROWTH_STEM,Overgrown Stem,A plant stem swollen by strange energy.\nIt t
 MON_OVERGROWTH_WATERMELON,Giant Watermelon,A watermelon enlarged by mysterious energy.\nIf the flower and stem monsters wither, the watermelon becomes inedible.
 MON_WIZARD,Reclusive Wizard,A wizard hiding deep within the Forest of Magic.\nVery on edge, as they detest having their territory invaded.
 MON_TREE_GIANT,Tree Giant,A huge tree youkai that can lift its roots to walk.\nOnce slain, it becomes an ordinary tree, but the remaining magical power often grows dangerous flowers—be wary.
-MON_SANGHAI_DOLL,Shanghai Doll,Bakaja-né no?
+MON_SANGHAI_DOLL,Self-Destruct Doll,A doll ready to blow itself up at any moment.\nIt seems the main purpose of these dolls is not the explosion damage itself, but to serve as an alarm for intruders.
 MON_HOURAI_DOLL,Cursed Hourai Doll,A doll that sacrifices its own body to inflict curses.
 MON_FRANCE_DOLL,France Doll,A doll that uses cold magic.
 MON_LONDON_DOLL,Doll Archer,A doll that fires arrows with a bow.

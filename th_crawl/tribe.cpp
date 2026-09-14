@@ -281,6 +281,12 @@ LOCALIZATION_ENUM_KEY tribe_property::GetNameKey()
 		return LOC_SYSTEM_TRIBE_PROPERTY_STG_COMSUMABLE;
 	case TPT_STG_DEFAULT_ABIL:
 		return LOC_SYSTEM_TRIBE_PROPERTY_STG_DEFAULT_ABIL;
+	case TPT_SAKUYA_PASSIVE:
+		return LOC_SYSTEM_TRIBE_PROPERTY_SAKUYA_PASSIVE;
+	case TPT_CIRNO_PASSIVE:
+		return LOC_SYSTEM_TRIBE_PROPERTY_CIRNO_PASSIVE;
+	case TPT_CIRNO_ICE_CREATE:
+		return LOC_SYSTEM_SKL_CIRNO_ICE_CREATE;
 	default:
 		break;
 	}
@@ -662,6 +668,12 @@ string tribe_property::GetInfor()
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_COMSUMABLE);
 	case TPT_STG_DEFAULT_ABIL:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STG_DEFAULT_ABIL);
+	case TPT_SAKUYA_PASSIVE:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SAKUYA_PASSIVE);
+	case TPT_CIRNO_PASSIVE:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CIRNO_PASSIVE);
+	case TPT_CIRNO_ICE_CREATE:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CIRNO_ICE_CREATE);
 	default:
 		break;
 	}
@@ -967,6 +979,12 @@ string tribe_property::GetDetail()
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_COMSUMABLE);
 	case TPT_STG_DEFAULT_ABIL:
 		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_DEFAULT_ABIL);
+	case TPT_SAKUYA_PASSIVE:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SAKUYA_PASSIVE);
+	case TPT_CIRNO_PASSIVE:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CIRNO_PASSIVE);
+	case TPT_CIRNO_ICE_CREATE:
+		return LocalzationManager::locString(LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CIRNO_ICE_CREATE);
 	default:
 		break;
 	}
@@ -1025,6 +1043,10 @@ D3DCOLOR tribe_property::getColor()
 	case TPT_TICK:
 	case TPT_POTION_ADDICTION:
 		return CL_small_danger;
+	case TPT_SAKUYA_PASSIVE:
+	case TPT_CIRNO_PASSIVE:
+	case TPT_CIRNO_ICE_CREATE:
+		return CL_green;
 	default:
 		break;
 	}
@@ -1369,6 +1391,13 @@ void tribe_property::gain(bool gain_)
 		return;
 	case TPT_STG_DEFAULT_ABIL:
 		return;
+	case TPT_CIRNO_PASSIVE:
+		if(value >= 2)
+		{
+			you.ResistUpDown(gain_?2:-2,RST_ICE);
+			you.ResistUpDown(gain_?-1:1,RST_FIRE);
+		}
+		return;
 	default:
 		break;
 	}
@@ -1597,8 +1626,44 @@ void SetTribe(tribe_type select_)
 	you.exper_aptit = exp_aptitude[select_];
 }
 
+int GetCirnoIceCreateCount()
+{
+	for(int i=0;i<52;i++)
+	{
+		if(you.MemorizeSkill[i] == SKL_CIRNO_ICE_CREATE)
+			return you.MemorizeSkill_num[i];
+	}
+	return 0;
+}
+
+int GetCirnoIceCreateLevel()
+{
+	int count_ = GetCirnoIceCreateCount();
+	if(count_ == 0)
+		return 0;
+	int used_ = you.GetProperty(TPT_CIRNO_ICE_CREATE) - count_;
+	return min(200,50 + used_*40);
+}
+
 void LevelUpTribe(int level_)
 {
+	if(you.char_type == UNIQ_START_CIRNO)
+	{
+		int earned_ = you.GetProperty(TPT_CIRNO_ICE_CREATE);
+		int prev_ = earned_;
+		while(earned_ < level_/3)
+		{
+			if(!you.Ability(SKL_CIRNO_ICE_CREATE,false,false))
+				break;
+			earned_++;
+		}
+		if(earned_ > prev_)
+		{
+			you.DeleteProperty(TPT_CIRNO_ICE_CREATE);
+			you.SetProperty(TPT_CIRNO_ICE_CREATE,earned_);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CIRNO_ICE_CREATE_READY),true,false,false,CL_green);
+		}
+	}
 	switch(you.tribe)
 	{
 	case TRI_HUMAN:

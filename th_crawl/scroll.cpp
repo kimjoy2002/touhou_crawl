@@ -98,7 +98,6 @@ bool skill_santuary(int pow, bool short_, unit* order, coord_def target);
 bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_);
 bool amnesia_scroll(bool pre_iden_);
 bool brand_weapon_scroll(bool pre_iden_);
-bool aquire_scroll(bool pre_iden_);
 
 
 scroll_type goodbadscroll(int good_bad)
@@ -1391,7 +1390,7 @@ bool brand_weapon_scroll(bool pre_iden_)
 		}
 	}
 }
-bool aquire_scroll(bool pre_iden_)
+bool aquire_scroll(bool pre_iden_, bool cancel_)
 {
 	if(!pre_iden_) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_ACQUIRE) + " ", true, false, false, CL_help);
@@ -1421,6 +1420,11 @@ bool aquire_scroll(bool pre_iden_)
 	g_menu_select = -1;
 	while(true) {
 		key_ = waitkeyinput(true);
+		if(cancel_ && (key_ == VK_ESCAPE || key_ == GVK_BUTTON_B || key_ == GVK_BUTTON_B_LONG)) {
+			endSelection();
+			g_menu_select = -1;
+			return false;
+		}
 		if(key_ == VK_RIGHT){
 			if(++g_menu_select>create_listkey.size()-1)
 				g_menu_select = 0;
@@ -1432,6 +1436,8 @@ bool aquire_scroll(bool pre_iden_)
 		} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
 			if(create_listkey.size() > g_menu_select) {
 				key_ = create_listkey[g_menu_select];
+			} else if(cancel_) {
+				continue;
 			} else {
 				break;
 			}

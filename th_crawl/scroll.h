@@ -49,5 +49,6 @@ extern LOCALIZATION_ENUM_KEY scroll_iden_string[SCT_MAX];
 
 int isGoodScroll(scroll_type kind);
 bool readscroll(scroll_type kind, bool pre_iden_, bool waste_);
+bool aquire_scroll(bool pre_iden_, bool cancel_ = false);
 
 #endif // __SCROLL_H__

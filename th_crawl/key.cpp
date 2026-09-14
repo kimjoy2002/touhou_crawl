@@ -29,11 +29,32 @@ extern std::atomic<bool> g_shutdownRequested;
 void saveReplay_cpp();
 std::unique_ptr<KeyInputQueue> g_keyQueue;
 
+// 버리는 입력도 보조키 상태는 반영한다.
+static void updateModifierKey(const InputedKey& inputedKey)
+{
+	if(inputedKey.mouse != MKIND_NONE)
+		return;
+	const MSG& msg = inputedKey.key;
+	if(msg.message == WM_KEYDOWN || msg.message == WM_KEYUP)
+	{
+		if(msg.wParam == VK_SHIFT)
+			shift_check = (msg.message == WM_KEYDOWN);
+		if(msg.wParam == VK_CONTROL)
+			ctrl_check = (msg.message == WM_KEYDOWN);
+	}
+	else if(msg.message == WM_KILLFOCUS)
+	{
+		shift_check = false;
+		ctrl_check = false;
+	}
+}
+
 bool isKeyinput(bool ablecursor)
 {
 	while(1) {
 		InputedKey inputedKey;
 		if(g_keyQueue->try_pop(inputedKey)) {
+			updateModifierKey(inputedKey);
 			if(!ablecursor && inputedKey.mouse == MKIND_MAP_CURSOR) {
 			}
 			else {
@@ -558,6 +579,7 @@ InputedKey KeyInputQueue::pop(int timeout_ms) {
 				return tk.key;
 			}
 			else {
+				updateModifierKey(tk.key);
 				queue_.pop();
 			}
 		}

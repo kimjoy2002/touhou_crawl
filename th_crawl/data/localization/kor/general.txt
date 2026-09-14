@@ -5455,3 +5455,21 @@ LOC_SYSTEM_SPL_DESCRIBE_THROW_BUCKET,청소를 위해 들고 있던 미끄러운
 LOC_SYSTEM_ATT_PIERCING,찌르기 
 LOC_SYSTEM_TILE_DOLLSHOUSE_WALL,벽
 LOC_SYSTEM_MAGIC_DOLL_LUNGE,{0:은|는} {1}에게 돌격했다.
+LOC_SYSTEM_PLAYER_SAKUYA,사쿠야
+LOC_SYSTEM_PLAYER_CIRNO,치르노
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SAKUYA,시공마법과 투척을 사용하는 타입.\n 적성보너스) 단검적성 +3, 투척적성 +3, 시공간마법적성 +4\n 보너스) 고유 패시브 (미정)
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_CIRNO,얼음으로 아이템을 만드는 요정 타입.\n 적성보너스) 전투적성 +3, 장검적성 +2, 둔기적성 +2, 냉기마법적성 +3, 화염마법적성 -3\n 보너스) 냉기저항 ++, 화염저항 -, 3레벨마다 얼음 만들기 1회\n\n 사용 횟수를 모아둘 수 있지만 먼저 얻은 횟수부터 소모합니다.\n 현재 얼음 만들기는 임시로 획득 두루마리와 같은 효과를 냅니다.
+LOC_SYSTEM_TRIBE_PROPERTY_SAKUYA_PASSIVE,소쇄한 메이드
+LOC_SYSTEM_TRIBE_PROPERTY_CIRNO_PASSIVE,얼음의 요정
+LOC_SYSTEM_TRIBE_PROPERTY_CIRNO_ICE_CREATE,얼음 아이템 생성
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SAKUYA_PASSIVE,당신은 소쇄한 메이드다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CIRNO_PASSIVE,당신은 냉기 그 자체다. (냉기저항 2단계, 화염취약 1단계)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CIRNO_ICE_CREATE,당신은 3레벨마다 얼음으로 된 아이템을 만들어낼 수 있다.
+LOC_SYSTEM_SKL_CIRNO_ICE_CREATE,얼음 아이템 생성
+LOC_SYSTEM_SKL_DESCRIBE_CIRNO_ICE_CREATE,얼음 속성이 부여된 아이템을 3개 만들어내고 그 중 하나를 선택해서 얻을 수 있다.\n아이템의 품질은 사용 횟수에 따라 점차 좋아진다.
+LOC_SYSTEM_GOD_SHOW_N_REMAIN,({0}번 남음)
+LOC_SYSTEM_CIRNO_ICE_CREATE_READY,당신의 이제 얼음으로 만들어진 아이템을 만들어낼 수 있다.
+LOC_SYSTEM_CIRNO_ICE_CREATE_USED,당신은 얼음으로 된 아이템을 만들어냈다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SAKUYA_PASSIVE,효과 미정.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CIRNO_PASSIVE,냉기 저항이 2단계 증가하고 화염 저항이 1단계 감소한다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CIRNO_ICE_CREATE,3레벨마다 얼음으로 만든 아이템 생성 능력을 1회 얻는다.\n얼음으로 만들어진 아이템은 냉기 속성이 부여되어 있으며 3개의 선택지가 보여진다.\n능력 사용마다 품질이 점점 좋아지고 생성은 능력 사용을 통해 언제든지 할 수 있으며 모아둘 수 있다.

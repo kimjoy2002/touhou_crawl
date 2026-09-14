@@ -102,4 +102,6 @@ extern textures sight_rect;
 extern textures explore_forbid_small;
 extern textures explore_forbid_big;
 
+extern textures img_item_ice[15];
+
 #endif // __TEXTRUE_H__

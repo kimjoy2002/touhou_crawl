@@ -9,6 +9,7 @@
 
 #include "unit.h"
 #include "skill_use.h"
+#include "ice_item.h"
 #include "throw.h"
 #include "beam.h"
 #include "keiki.h"
@@ -4813,8 +4814,7 @@ bool skill_stone_uplift(int power, bool short_, unit* order, coord_def target);
 
 bool skill_cirno_ice_create(int level_)
 {
-	// 임시
-	if(level_ <= 0 || !aquire_scroll(true, true))
+	if(level_ <= 0 || !CreateIceItem(level_))
 		return false;
 	you.Ability(SKL_CIRNO_ICE_CREATE,false,true);
 	printlog(LocalzationManager::formatString(LOC_SYSTEM_CIRNO_ICE_CREATE_USED),true,false,false,CL_normal);

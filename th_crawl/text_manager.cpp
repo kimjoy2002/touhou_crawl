@@ -224,14 +224,16 @@ void entersub()
 	ReleaseMutex(mutx);
 }
 
-void startSelection(vector<int> select_list) {
+void startSelection(vector<int> select_list, bool description_) {
 	WaitForSingleObject(mutx, INFINITE);
 	DisplayManager.selection_vector.clear();
 	DisplayManager.selection_vector = select_list;
+	DisplayManager.selection_description = description_;
 	ReleaseMutex(mutx);
 }
 void endSelection() {
 	WaitForSingleObject(mutx, INFINITE);
+	DisplayManager.selection_description = false;
 	DisplayManager.text_log.removeClickable();
 	DisplayManager.selection_vector.clear();
 	DisplayManager.list_draw.clear();

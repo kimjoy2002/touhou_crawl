@@ -1700,6 +1700,24 @@ textures img_item_fixed_artifact_kappafullarmor(&texture_item04, 5, 255);
 textures img_item_fixed_artifact_maiduniform(&texture_item04, 6, 255);
 textures img_item_fixed_artifact_ibukisake(&texture_item04, 7, 255);
 
+textures img_item_ice[15] = {
+	textures(&texture_item04, 24, 255),
+	textures(&texture_item04, 25, 255),
+	textures(&texture_item04, 26, 255),
+	textures(&texture_item04, 27, 255),
+	textures(&texture_item04, 28, 255),
+	textures(&texture_item04, 29, 255),
+	textures(&texture_item04, 30, 255),
+	textures(&texture_item04, 31, 255),
+	textures(&texture_item04, 32, 255),
+	textures(&texture_item04, 33, 255),
+	textures(&texture_item04, 34, 255),
+	textures(&texture_item04, 35, 255),
+	textures(&texture_item04, 36, 255),
+	textures(&texture_item04, 37, 255),
+	textures(&texture_item04, 38, 255)
+};
+
 
 
 textures img_item_food_bread(&texture_item01, 0, 255);
@@ -4257,6 +4275,36 @@ int texturetoint(textures* input)
 		return 705;
 	else if(input == &img_mons_curse_doll)
 		return 706;
+	else if(input == &img_item_ice[0])
+		return 707;
+	else if(input == &img_item_ice[1])
+		return 708;
+	else if(input == &img_item_ice[2])
+		return 709;
+	else if(input == &img_item_ice[3])
+		return 710;
+	else if(input == &img_item_ice[4])
+		return 711;
+	else if(input == &img_item_ice[5])
+		return 712;
+	else if(input == &img_item_ice[6])
+		return 713;
+	else if(input == &img_item_ice[7])
+		return 714;
+	else if(input == &img_item_ice[8])
+		return 715;
+	else if(input == &img_item_ice[9])
+		return 716;
+	else if(input == &img_item_ice[10])
+		return 717;
+	else if(input == &img_item_ice[11])
+		return 718;
+	else if(input == &img_item_ice[12])
+		return 719;
+	else if(input == &img_item_ice[13])
+		return 720;
+	else if(input == &img_item_ice[14])
+		return 721;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -5697,6 +5745,36 @@ textures* inttotexture(int input)
 		return &img_mons_spear_doll;
 	case 706:
 		return &img_mons_curse_doll;
+	case 707:
+		return &img_item_ice[0];
+	case 708:
+		return &img_item_ice[1];
+	case 709:
+		return &img_item_ice[2];
+	case 710:
+		return &img_item_ice[3];
+	case 711:
+		return &img_item_ice[4];
+	case 712:
+		return &img_item_ice[5];
+	case 713:
+		return &img_item_ice[6];
+	case 714:
+		return &img_item_ice[7];
+	case 715:
+		return &img_item_ice[8];
+	case 716:
+		return &img_item_ice[9];
+	case 717:
+		return &img_item_ice[10];
+	case 718:
+		return &img_item_ice[11];
+	case 719:
+		return &img_item_ice[12];
+	case 720:
+		return &img_item_ice[13];
+	case 721:
+		return &img_item_ice[14];
 	default:
 		return &img_mons_default;
 	}

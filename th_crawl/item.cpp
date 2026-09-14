@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "item.h"
+#include "ice_item.h"
 #include "monster_texture.h"
 #include "const.h"
 #include "potion.h"
@@ -758,7 +759,7 @@ string item::GetName(int num_, bool simple_, string lang)
 	}
 
 
-	if(fixed_artifact == FIXED_ARTIFACT_NONE && isArtifact() && identify) {
+	if(fixed_artifact == FIXED_ARTIFACT_NONE && isArtifact() && identify && GetIceItemDescription(this) == LOC_NONE) {
 		string randart_name = LocalzationManager::artifactString(lang, artifact_guid);
 		if(!randart_name.empty()) {
 			temp += randart_name;
@@ -901,7 +902,8 @@ string item::GetName(int num_, bool simple_, string lang)
 	}
 
 
-	if (type == ITM_BOOK && !iden_list.books_list[value0]) {
+	if (type == ITM_BOOK && !identify &&
+		(value0 < 0 || value0 >= BOOK_LAST || !iden_list.books_list[value0])) {
 		temp = second_name.getName(lang) + " ";
 	}
 

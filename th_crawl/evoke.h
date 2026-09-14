@@ -22,6 +22,7 @@ enum evoke_kind
 	EVK_MAGIC_HAMMER,
 	EVK_CAMERA,
 	EVK_SPEAR,
+	EVK_FROZEN_FROG,
 	EVK_MAX
 };
 

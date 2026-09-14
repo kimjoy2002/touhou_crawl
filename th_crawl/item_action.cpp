@@ -526,6 +526,12 @@ bool eat_prev_fail() {
 	}
 	if(you.power >= you.GetMaxPower() && !(you.god == GT_MINORIKO))
 	{
+		if(you.GetHp() < you.GetMaxHp())
+		{
+			for(auto& item_ : you.item_list)
+				if(item_.type == ITM_FOOD && item_.name.getSystemKey() == LOC_SYSTEM_ITEM_ICE_CREAM)
+					return false;
+		}
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ALREADY_FULL_POWER),true,false,false,CL_normal);
 		return true;
 	}

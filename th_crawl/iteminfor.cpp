@@ -17,6 +17,7 @@
 #include "armour.h"
 #include "evoke.h"
 #include "book.h"
+#include "ice_item.h"
 #include "option_manager.h"
 #include "tribe.h"
 #include "dump.h"
@@ -768,11 +769,14 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	printsub(blank,false,CL_normal);
 
 	bool fixed_artifact_ = false;
+	LOCALIZATION_ENUM_KEY ice_description_ = GetIceItemDescription(it);
 
 	if(it->fixed_artifact != FIXED_ARTIFACT_NONE) {
 		_infor_(GetFixedArtifact(it->fixed_artifact));
 		fixed_artifact_ = true;
 	}
+	if(ice_description_ != LOC_NONE)
+		_infor_(LocalzationManager::locString(ice_description_));
 
 	switch (it->type)
 	{
@@ -787,7 +791,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		//case ITM_WEAPON_BOW:
 	{
 		skill_type ski_ = SKT_MACE;
-		if(!fixed_artifact_) {
+		if(!fixed_artifact_ && ice_description_ == LOC_NONE) {
 			switch (it->type)
 			{
 			case ITM_WEAPON_SHORTBLADE:
@@ -1033,6 +1037,8 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		case TMT_DOGGOJEO:
 			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_DOGGOJEO));
 			break;
+		case TMT_ICICLE:
+			break;
 		}
 
 
@@ -1083,7 +1089,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	case ITM_ARMOR_BODY_ARMOUR_2:
 	case ITM_ARMOR_BODY_ARMOUR_3:
 	{
-		if(!fixed_artifact_) {
+		if(!fixed_artifact_ && ice_description_ == LOC_NONE) {
 			switch (it->value5)
 			{
 			case AMK_NORMAL:
@@ -1286,7 +1292,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->type)
 		{
 		case ITM_ARMOR_HEAD:
-			if(!fixed_artifact_)
+			if(!fixed_artifact_ && ice_description_ == LOC_NONE)
 				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_HEAD));
 			if (can_use_)
 			{
@@ -1303,7 +1309,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			}
 			break;
 		case ITM_ARMOR_CLOAK:
-			if(!fixed_artifact_)
+			if(!fixed_artifact_ && ice_description_ == LOC_NONE)
 				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_CLOAK));
 			if (can_use_)
 			{
@@ -1320,7 +1326,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			}
 			break;
 		case ITM_ARMOR_GLOVE:
-			if(!fixed_artifact_)
+			if(!fixed_artifact_ && ice_description_ == LOC_NONE)
 				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE));
 			if (can_use_)
 			{
@@ -1337,7 +1343,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			}
 			break;
 		case ITM_ARMOR_BOOT:
-			if(!fixed_artifact_)
+			if(!fixed_artifact_ && ice_description_ == LOC_NONE)
 				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_BOOT));
 			if (can_use_)
 			{
@@ -1441,7 +1447,8 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	}
 	break;
 	case ITM_FOOD:
-		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_FOOD));
+		if(ice_description_ == LOC_NONE)
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_FOOD));
 		if (can_use_)
 		{
 			use_text_.push_back({"(e)" + LocalzationManager::locString(LOC_SYSTEM_EAT),'e'});
@@ -1644,7 +1651,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			if(fixed_artifact_){
 				_infor_("\n\n");
 			}
-			//if(!fixed_artifact_){
+			if(ice_description_ == LOC_NONE) {
 				switch (it->value1)
 				{
 				case RGT_STR:
@@ -1708,7 +1715,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_BUG));
 					break;
 				}
-			//}
+			}
 		}
 		else
 		{
@@ -1732,7 +1739,8 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	case ITM_BOOK:
 	{
 
-		_infor_(GetBookInfor((book_list)it->value0));
+		if(ice_description_ == LOC_NONE)
+			_infor_(GetBookInfor((book_list)it->value0));
 		_infor_("\n\n");
 		if (it->identify)
 		{
@@ -1815,6 +1823,9 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		case EVK_CAMERA:
 			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_CAMERA));
 			break;
+		case EVK_FROZEN_FROG:
+			_infor_(LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_ICE_FROG));
+			break;
 		default:
 			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG));
 			break;
@@ -1823,7 +1834,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		if (it->value1 == EVK_CAMERA) {
 			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1));
 		}
-		else {
+		else if(it->value1 != EVK_FROZEN_FROG) {
 			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2));
 		}
 		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3));

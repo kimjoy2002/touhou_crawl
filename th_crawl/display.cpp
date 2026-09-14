@@ -2001,6 +2001,9 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						msg.wParam = draw_dummy.clickable;
 						g_keyQueue->push(InputedKey(msg));
 					}
+					else if(selection_description && isClicked(RIGHT_CLICK)) {
+						g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,draw_dummy.clickable,0));
+					}
 					already_draw = true;
 				}
 			}

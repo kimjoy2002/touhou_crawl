@@ -458,24 +458,25 @@ void wiz_mode()
 			return;
 			case 'e':
 			{
-				int list[EVK_MAX-1] = { EVK_PAGODA,EVK_AIR_SCROLL,EVK_DREAM_SOUL,EVK_BOMB, EVK_GHOST_BALL, EVK_SKY_TORPEDO, EVK_MAGIC_HAMMER };
+				int list[] = { EVK_PAGODA,EVK_AIR_SCROLL,EVK_DREAM_SOUL,EVK_BOMB, EVK_GHOST_BALL, EVK_SKY_TORPEDO, EVK_MAGIC_HAMMER, EVK_FROZEN_FROG };
 				
-				LOCALIZATION_ENUM_KEY keylist[EVK_MAX-1] = {
+				LOCALIZATION_ENUM_KEY keylist[] = {
 					LOC_SYSTEM_ITEM_EVOKE_PAGODA,
 					LOC_SYSTEM_ITEM_EVOKE_AIR_SCROLL,
 					LOC_SYSTEM_ITEM_EVOKE_DREAM_SOUL,
 					LOC_SYSTEM_ITEM_EVOKE_BOMB,
 					LOC_SYSTEM_ITEM_EVOKE_GHOST_BALL,
 					LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO,
-					LOC_SYSTEM_ITEM_EVOKE_MAGIC_HAMMER
+					LOC_SYSTEM_ITEM_EVOKE_MAGIC_HAMMER,
+					LOC_SYSTEM_ITEM_EVOKE_ICE_FROG
 				};
 				enterlog();
 				std::vector<int> listkey;
-				for(int i = 0; i < EVK_MAX-1; i++) {
+				for(int i = 0; i < sizeof(list)/sizeof(list[0]); i++) {
 					ss.str("");
 					ss.clear();
 					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
-					printlog(ss.str(), (i==EVK_MAX-2?true:false), false, false, CL_help, (char)('a'+i));
+					printlog(ss.str(), (i==sizeof(list)/sizeof(list[0])-1?true:false), false, false, CL_help, (char)('a'+i));
 					listkey.push_back('a'+i);
 				}
 				listkey.push_back(VK_ESCAPE);
@@ -503,7 +504,7 @@ void wiz_mode()
 					break;
 				}
 				g_menu_select = -1;
-				if (key_ >= 'a' && key_ <= 'g')
+				if (key_ >= 'a' && key_ < 'a'+sizeof(list)/sizeof(list[0]))
 				{
 					item_infor t;
 					makeitem(ITM_MISCELLANEOUS, 0, &t, list[key_ - 'a']);

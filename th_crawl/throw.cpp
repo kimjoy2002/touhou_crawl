@@ -35,6 +35,8 @@ int GetTanmacGraphicType(tanmac_type type)
 			return 18;
 		case TMT_DOGGOJEO:
 			return 43;
+		case TMT_ICICLE:
+			return 18;
 		/*아이템에서 나오지않는 번호들
 			return 10;
 			return 11;
@@ -69,6 +71,8 @@ attack_type GetTanmacAttackType(tanmac_type type)
 			return ATT_THROW_NORMAL;			
 		case TMT_POISON_NEEDLE:
 			return ATT_THROW_WEAK_POISON;
+		case TMT_ICICLE:
+			return ATT_THROW_FREEZING;
 		default:
 			break;
 	}
@@ -114,6 +118,8 @@ bool TanmacDeleteRand(tanmac_type type, bool isCanDelete_)
 		case TMT_DOGGOJEO:
 			return isCanDelete_?true:(randA(9)==0);
 		case TMT_KIKU_COMPRESSER:
+			return true;
+		case TMT_ICICLE:
 			return true;
 		default:
 			break;
@@ -202,6 +208,23 @@ void MakeTanmac(item_infor* t, int select_)
 		t->value7 = 0;
 		t->value8 = 0;
 		t->num = (select_ != -1) ? 10 : rand_int(2, 8);
+		t->is_pile = true;
+		t->can_throw = true;
+		t->image = GetTanmacBaseGraphic(t->value4);
+		t->name = name_infor(GetTanmacKey(t->value4));
+		t->weight = 0.5f*t->num;
+		t->value = 20;
+		break;
+	case TMT_ICICLE:
+		t->value1 = 6;
+		t->value2 = 9;
+		t->value3 = 0;
+		t->value4 = TMT_ICICLE;
+		t->value5 = 0;
+		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
+		t->num = 10;
 		t->is_pile = true;
 		t->can_throw = true;
 		t->image = GetTanmacBaseGraphic(t->value4);
@@ -462,6 +485,8 @@ textures* GetTanmacBaseGraphic(int type)
 		return &img_item_kikuichi;
 	case TMT_DOGGOJEO:
 		return &img_item_doggojeo;
+	case TMT_ICICLE:
+		return &img_item_ice[5];
 	}
 }
 
@@ -479,6 +504,8 @@ LOCALIZATION_ENUM_KEY GetTanmacKey(int type)
 		return LOC_SYSTEM_ITEM_TANMAC_KIKU_COMPRESSER;
 	case TMT_DOGGOJEO:
 		return LOC_SYSTEM_ITEM_TANMAC_DOGGOJEO;
+	case TMT_ICICLE:
+		return LOC_SYSTEM_ITEM_ICE_ICICLE;
 	}
 }
 

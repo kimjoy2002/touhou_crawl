@@ -3960,7 +3960,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG,A bug-infused evokable item.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1,This item can be evoked without usage limits.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2,This item can be evoked without usage limits. Its power scales with your Evoke skill.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3,Press 'V' to evoke using Power.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,Each time this evokable item is used, it requires
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,Each time this evokable item is used, it requires Power
 LOC_SYSTEM_ITEM_DESCRIPTION_RUNE,This is a rune proving you’ve conquered dungeons.\nCollect 3 to open the final door of the Hakurei Shrine.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_YINYANG_ORB,This is the powerful Yin-Yang Orb. It’s enshrined within the shrine.\nTake it to escape or harness its power-but beware!\nThe red-white shrine maiden will chase you relentlessly.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE1,A flyer reading “Missing Pet - Komeiji Satori.”\nIt has your photo on it...\n

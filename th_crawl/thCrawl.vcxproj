@@ -205,6 +205,7 @@
     <ClCompile Include="skill.cpp" />
     <ClCompile Include="Skill2.cpp" />
     <ClCompile Include="skill_use.cpp" />
+    <ClCompile Include="ice_item.cpp" />
     <ClCompile Include="smoke.cpp" />
     <ClCompile Include="soundmanager.cpp" />
     <ClCompile Include="speak.cpp" />
@@ -281,6 +282,7 @@
     <ClInclude Include="seija.h" />
     <ClInclude Include="skill.h" />
     <ClInclude Include="skill_use.h" />
+    <ClInclude Include="ice_item.h" />
     <ClInclude Include="smoke.h" />
     <ClInclude Include="soundmanager.h" />
     <ClInclude Include="speak.h" />

@@ -3960,7 +3960,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG,버그를 담은 발동템이다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1,이 템은 횟수제한없이 발동이 가능한 템이다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2,이 템은 횟수제한없이 발동이 가능한 템이다. 당신의 발동스킬에 비례해서 강력함이 결정된다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3,V키로 파워를 소모하여 발동할 수 있다.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,이 발동템을 사용할때마다 필요한 
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,이 발동템을 사용할때마다 필요한 파워
 LOC_SYSTEM_ITEM_DESCRIPTION_RUNE,이것은 각종 던전을 정복한 증거인 룬이다.\n3개를 모으면 최심부 하쿠레이 신사의 문을 열 수 있다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_YINYANG_ORB,이것은 강대한 힘을 가진 음양옥이다. 신사 내부에 정중하게 모셔져 있다.\n이 것을 가지고 탈출하면 이 이변을 끝내거나 엄청난 힘을 얻을 수 있을 것 같다.\n어떻게 사용하는지는 당신의 자유이다! 그러나 탈출할때까진 끝이 아니므로 조심하길!\n특히 신사의 홍백의 무녀가 눈에 불을 키고 당신을 쫓아올 것이다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE1,"잃어버린 애완동물을 찾습니다. - 코메이지 사토리"라고 적혀있는 종이다.\n당신의 사진이 붙어있다...\n
@@ -5473,3 +5473,40 @@ LOC_SYSTEM_CIRNO_ICE_CREATE_USED,당신은 얼음으로 된 아이템을 만들�
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SAKUYA_PASSIVE,효과 미정.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CIRNO_PASSIVE,냉기 저항이 2단계 증가하고 화염 저항이 1단계 감소한다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CIRNO_ICE_CREATE,3레벨마다 얼음으로 만든 아이템 생성 능력을 1회 얻는다.\n얼음으로 만들어진 아이템은 냉기 속성이 부여되어 있으며 3개의 선택지가 보여진다.\n능력 사용마다 품질이 점점 좋아지고 생성은 능력 사용을 통해 언제든지 할 수 있으며 모아둘 수 있다.
+LOC_SYSTEM_ITEM_ICE_SWORD,아이시클 소드
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_SWORD,고드름으로 만든 큰 대검이다.\n자신이 생각하기에 가장 거대하고 강하게 만들었지만 그 무게에 이기지못하고 휘둘리기도 한다. 
+LOC_SYSTEM_ITEM_ICE_DAGGER,아이시클 대거
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_DAGGER,얼음으로 만든 작은 단검이다.\n그녀는 단검으로 싸우는걸 좋아하진 않지만, 작은만큼 정교하고 날카롭게 다듬어져있다.
+LOC_SYSTEM_ITEM_ICE_CRASHER,그레이트 크래셔
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_CRASHER,커다란 얼음 덩어리로 만든 둔기다.\n그녀의 작은 머리로 가장 강력한 무기를 생각한 결과, 거대한 망치가 만들어졌다.
+LOC_SYSTEM_ITEM_ICE_SPEAR,아이시클 스피어
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_SPEAR,얼음으로 만든 창이다.\n최대한 길고 커다란 고드름을 생각했더니, 이런 무기가 나왔다.
+LOC_SYSTEM_ITEM_ICE_AXE,아이시클 액스
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_AXE,얼음으로 만든 도끼다.\n치르노가 생각해내기엔 꽤 고급스러운 무기지만, 사용법은 단순하다.
+LOC_SYSTEM_ITEM_ICE_ICICLE,고드름
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_ICICLE,던져서 적을 공격하는 날카로운 고드름 탄막이다.\n냉기 피해를 주고 맞은 적을 빙결시킨다.
+LOC_SYSTEM_ITEM_ICE_RING,얼음 반지
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_RING,얼음으로 가공한 반지다.
+LOC_SYSTEM_ITEM_ICE_CROWN,얼음 왕관
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_CROWN,얼음으로 가공한 왕관이다.
+LOC_SYSTEM_ITEM_ICE_CREAM,아이스크림
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_CREAM,치르노가 좋아하는 차갑고 달콤한 아이스크림이다.\n약간의 파워와 체력 회복 능력이 있다.
+LOC_SYSTEM_ITEM_ICE_ARMOUR,얼음 갑옷
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_ARMOUR,얼음으로 만들어진 갑옷이다.\n엄청나게 차갑기때문에, 입을 수 있는 자는 한정될 것이다.
+LOC_SYSTEM_ITEM_ICE_GLOVES,얼음 장갑
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_GLOVES,얼음으로 만든 장갑이다.\n손에 동상을 견딜 수 있는 자만이 낄 수 있을 것이다.
+LOC_SYSTEM_ITEM_ICE_BOOTS,얼음 신발
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_BOOTS,얼음으로 만든 신발이다.\n그 냉기를 버틸 수 있다면 발을 보호해줄 것이다.
+LOC_SYSTEM_ITEM_ICE_CLOAK,얼음 망토
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_CLOAK,얼음으로 만든 망토다.\n멋지지만 바람에 휘날리진 못한다.
+LOC_SYSTEM_ITEM_ICE_BOOK,얼음 책
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_BOOK,얼음으로 만든 책이다.\n삐뚤빼뚤한 글씨로 자신이 생각한 최강의 마법이 적혀있다.
+LOC_SYSTEM_ITEM_EVOKE_ICE_FROG,냉동 개구리
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_ICE_FROG,얼어붙은 개구리다.\n사용하면 주변에 안개를 만들고 적에게 감속과 빙결을 건다. 가까운 적일수록 효과가 강하다.\n일정 횟수를 사용하면 얼음이 녹아 평범한 개구리로 돌아갈 것이다.
+LOC_SYSTEM_CIRNO_ICE_CREATE_SELECT,얼음 아이템을 고르시오.
+LOC_SYSTEM_CIRNO_ICE_CREATE_EXAMINE,설명을 볼 얼음 아이템을 고르시오.
+LOC_SYSTEM_CIRNO_ICE_CREATE_CONFIRM,정말로 이 아이템을 고르겠습니까?
+LOC_SYSTEM_ITEM_FROZEN_FROG_USE,냉동 개구리에서 차가운 안개가 피어오른다.
+LOC_SYSTEM_ITEM_FROZEN_FROG_EMPTY,냉동 개구리는 더 이상 사용할 수 없다.
+LOC_SYSTEM_CIRNO_ICE_CREATE_SELECT_MODE,선택
+LOC_SYSTEM_CIRNO_ICE_CREATE_EXAMINE_MODE,설명

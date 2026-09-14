@@ -5370,6 +5370,12 @@ bool players::Eat(char id_)
 		{
 			if((*it).type == ITM_FOOD)
 			{
+				if(power >= GetMaxPower() && god != GT_MINORIKO &&
+					(it->name.getSystemKey() != LOC_SYSTEM_ITEM_ICE_CREAM || GetHp() >= GetMaxHp()))
+				{
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ALREADY_FULL_POWER),true,false,false,CL_normal);
+					return false;
+				}
 				if(!you.isequip(it))
 				{
 					if((*it).value1 == 0)
@@ -5398,6 +5404,8 @@ bool players::Eat(char id_)
 					}
 					printlog(LocalzationManager::locString(LOC_SYSTEM_EAT_FINISH),false,false,false,CL_normal);
 					PowUpDown((*it).value5);
+					if((*it).name.getSystemKey() == LOC_SYSTEM_ITEM_ICE_CREAM)
+						HpUpDown(6+randA_1(9),DR_POTION);
 					DeleteItem(it,1);
 					enterlog();
 					return true;		

@@ -162,6 +162,7 @@ public:
 	textures *image;
 	
 	vector<int> selection_vector;
+	bool selection_description = false;
 	vector<int> spell_skill_vector;
 
 	int current_position;
@@ -240,7 +241,7 @@ void add_stringblank(ostringstream& oss, int next_index);
 int printsub_utf8witdh(string text_, bool enter_, D3DCOLOR color_);
 void deletesub(bool reset_position = true);
 void entersub();
-void startSelection(vector<int> select_list);
+void startSelection(vector<int> select_list, bool description_ = false);
 void endSelection();
 void startAbilGrid(vector<int> select_list);
 void endAbilGrid();

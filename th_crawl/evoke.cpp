@@ -19,6 +19,7 @@
 #include "god.h"
 #include "rect.h"
 #include "speak.h"
+#include "smoke.h"
 
 
 LOCALIZATION_ENUM_KEY evoke_string[EVK_MAX]=
@@ -30,7 +31,9 @@ LOCALIZATION_ENUM_KEY evoke_string[EVK_MAX]=
 	LOC_SYSTEM_ITEM_EVOKE_GHOST_BALL,
 	LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO,
 	LOC_SYSTEM_ITEM_EVOKE_MAGIC_HAMMER,
-	LOC_SYSTEM_ITEM_EVOKE_CAMERA
+	LOC_SYSTEM_ITEM_EVOKE_CAMERA,
+	LOC_NONE, //창의 근접 발동
+	LOC_SYSTEM_ITEM_EVOKE_ICE_FROG
 };
 
 int getEvokeItem() {
@@ -69,6 +72,11 @@ void MakeEvokeItem(item_infor* t, int kind_)
 	t->name = name_infor(evoke_string[kind_]);
 	t->weight = 1.0f;
 	t->value = 300;
+	if(kind_ == EVK_FROZEN_FROG)
+	{
+		t->image = &img_item_ice[14];
+		t->value4 = rand_int(3,5);
+	}
 }
 
 
@@ -89,6 +97,7 @@ bool isCanGenerate(evoke_kind evk) {
 		case EVK_MAGIC_HAMMER:
 		case EVK_CAMERA:
 		case EVK_SPEAR:
+		case EVK_FROZEN_FROG:
 			return false;
 		default:
 			break;
@@ -231,6 +240,8 @@ bool EvokeFlagCheck(evoke_kind skill, skill_flag flag)
 		return (S_FLAG_IMMEDIATELY) & flag;
 	case EVK_SPEAR:
 		return (S_FLAG_SMITE) & flag;
+	case EVK_FROZEN_FROG:
+		return (S_FLAG_IMMEDIATELY) & flag;
 	default:
 		return false;
 	}
@@ -731,6 +742,38 @@ bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target)
 			}
 		}
 		return false;
+	}
+	case EVK_FROZEN_FROG:
+	{
+		if(!item_ || item_->value4 <= 0)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_FROZEN_FROG_EMPTY),true,false,false,CL_normal);
+			return false;
+		}
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_FROZEN_FROG_USE),true,false,false,CL_normal);
+		map<unit*,int> targets_;
+		rect_iterator rit(you.position,3,3);
+		for(;!rit.end();rit++)
+		{
+			if(!you.isSightnonblocked(*rit))
+				continue;
+			unit* target_ = env[current_level].isMonsterPos(rit->x,rit->y,&you);
+			if(target_ && you.isEnemyUnit(target_))
+			{
+				int distance_ = max(abs(rit->x-you.position.x),abs(rit->y-you.position.y));
+				auto it = targets_.find(target_);
+				if(it == targets_.end() || distance_ < it->second)
+					targets_[target_] = distance_;
+			}
+		}
+		for(auto target_ : targets_)
+		{
+			target_.first->SetSlow(11-3*target_.second);
+			target_.first->SetFrozen(16-4*target_.second);
+		}
+		MakeCloud(you.position,img_fog_normal,SMT_FOG,rand_int(15,20),rand_int(8,12),0,3,&you);
+		item_->value4--;
+		return true;
 	}
 	}
 	return false;

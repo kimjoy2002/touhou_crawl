@@ -356,7 +356,7 @@ void seija_real_gift(int key_)
 				random_extraction<int> rand_;
 
 				for (int i = 0; i < EVK_MAX; i++) {
-					if (i != EVK_MAGIC_HAMMER && i != EVK_SKY_TORPEDO && i != EVK_CAMERA
+					if (i != EVK_MAGIC_HAMMER && i != EVK_SKY_TORPEDO && i != EVK_CAMERA && i != EVK_FROZEN_FROG
 						) {
 						rand_.push(i);
 					}

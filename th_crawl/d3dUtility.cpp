@@ -15,6 +15,7 @@
 #include "soundmanager.h"
 #include "joypad.h"
 #include "crash_dump.h"
+#include "web_backend.h"
 #include <wrl/client.h>
 #include <imm.h>
 #include <XInput.h>
@@ -82,6 +83,10 @@ unsigned int WINAPI GameLoop(void *arg);
 unsigned int WINAPI DrawLoop(void *arg);
 unsigned int WINAPI GameInnerLoop();
 bool d3d::InitD3D11(HINSTANCE hInstance, int width, int height, bool windowed){
+#ifdef WEB_TILES
+    if (web::enabled() && web::headless())
+        return true;
+#endif
     WNDCLASS wc = {};
     wc.style = CS_HREDRAW | CS_VREDRAW;
     wc.lpfnWndProc = d3d::WndProc;
@@ -403,11 +408,11 @@ unsigned int WINAPI DrawLoop(void *arg)
 	{
 		g_ThreadCnt--;
 	}
-    g_pSwapChain->SetFullscreenState(FALSE, NULL);
-	g_pd3dDevice->Release();
-	g_pImmediateContext->Release();
-	g_pSwapChain->Release();
-	g_pRenderTargetView->Release();
+    if (g_pSwapChain) g_pSwapChain->SetFullscreenState(FALSE, NULL);
+	if (g_pd3dDevice) g_pd3dDevice->Release();
+	if (g_pImmediateContext) g_pImmediateContext->Release();
+	if (g_pSwapChain) g_pSwapChain->Release();
+	if (g_pRenderTargetView) g_pRenderTargetView->Release();
 	return 0;
 }
 
@@ -541,6 +546,9 @@ void InputInitialize(HINSTANCE hinstance)
 bool one_turn_click = true;
 
 bool isInScreen() {
+#ifdef WEB_TILES
+	if (web::enabled()) return false;
+#endif
 	POINT cursorPos;
 	GetCursorPos(&cursorPos);
 	RECT clientRect;
@@ -558,7 +566,11 @@ bool isInScreen() {
 
 
 bool isClicked(MOUSE_BUTTON button) {
-	if(!one_turn_click || GetForegroundWindow() != hwnd) {
+	bool fgOk = (GetForegroundWindow() == hwnd);
+#ifdef WEB_TILES
+	if (web::enabled()) fgOk = true;
+#endif
+	if(!one_turn_click || !fgOk) {
 		return false;
 	}
 
@@ -632,6 +644,24 @@ std::tuple<bool, POINT> isRealese()
 
 void InputUpdate()
 {
+#ifdef WEB_TILES
+    if (web::enabled()) {
+        int mx = 0, my = 0, btn = 0;
+        web::nextMouseFrame(mx, my, btn);
+        PreviousMouseState = CurrentMouseState;
+        ZeroMemory(&CurrentMouseState, sizeof(CurrentMouseState));
+        CurrentMouseState.rgbButtons[0] = (btn & 1) ? (char)0x80 : 0;
+        CurrentMouseState.rgbButtons[1] = (btn & 2) ? (char)0x80 : 0;
+        CurrentMouseState.rgbButtons[2] = (btn & 4) ? (char)0x80 : 0;
+        MousePoint.x = mx; MousePoint.y = my;
+        if ((CurrentMouseState.rgbButtons[0] & 0x80) && !(PreviousMouseState.rgbButtons[0] & 0x80))
+            prev_click_pos = MousePoint;
+        if (!(CurrentMouseState.rgbButtons[0] & 0x80) && (PreviousMouseState.rgbButtons[0] & 0x80))
+            finish_click_pos = MousePoint;
+        one_turn_click = true;
+        return;
+    }
+#endif
     if (!Mouse) return;
 
 	Mouse -> Acquire();

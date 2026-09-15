@@ -21,6 +21,7 @@
 #include "soundmanager.h"
 #include "steam_api.h"
 #include "crash_dump.h"
+#include "web_backend.h"
 #include <wrl/client.h>  
 
 
@@ -46,6 +47,7 @@ Microsoft::WRL::ComPtr<ID3D11SamplerState> g_pPointSampler;
 
 void InitSampler(ID3D11Device* device)
 {
+    if (!device) return;
     D3D11_SAMPLER_DESC sampDesc = {};
     sampDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT; // ✅ 필터 핵심
     sampDesc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
@@ -74,6 +76,7 @@ Microsoft::WRL::ComPtr<ID3D11BlendState> g_pAlphaBlendState;
 
 
 bool loading_font(string font_name) {
+	if (!g_pd3dDevice) return false;
 	std::wstring path = ConvertUTF8ToUTF16("./data/font/" + font_name + "_m.spritefont");
 	shared_ptr<DirectX::SpriteFont> temp_font = std::make_shared<DirectX::SpriteFont>(
 		g_pd3dDevice,
@@ -97,7 +100,7 @@ bool Setup()
 	loading_font(LocalzationManager::getCurrentFont());
 
 	// SpriteBatch 생성
-	g_pSprite = std::make_shared<DirectX::SpriteBatch>(g_pImmediateContext);
+	if (g_pImmediateContext) g_pSprite = std::make_shared<DirectX::SpriteBatch>(g_pImmediateContext);
 
 
 	// bool return_ = true;
@@ -113,7 +116,7 @@ bool Setup()
 	// fontDesc.PitchAndFamily = FF_DONTCARE;
 	// fontDesc.MipLevels = 1;
 	// SpriteBatch 생성
-	g_pSprite = std::make_shared<DirectX::SpriteBatch>(g_pImmediateContext);
+	if (g_pImmediateContext) g_pSprite = std::make_shared<DirectX::SpriteBatch>(g_pImmediateContext);
 
 
 	D3D11_BLEND_DESC desc = {};
@@ -126,7 +129,7 @@ bool Setup()
     desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
     desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
-    g_pd3dDevice->CreateBlendState(&desc, &g_pAlphaBlendState);
+    if (g_pd3dDevice) g_pd3dDevice->CreateBlendState(&desc, &g_pAlphaBlendState);
 	
 	texture_title.name = imgfile_title[randA(MAX_TITLE-1)];
 	if(!texture_title.loading(g_pd3dDevice, g_pImmediateContext))
@@ -258,6 +261,9 @@ int WINAPI WinMain(HINSTANCE hinstance,
 				   int showCmd)
 {
     checkWizardModeFromCmdLine(cmdLine);
+#ifdef WEB_TILES
+    web::init(cmdLine);
+#endif
 	map_list.random_number = (unsigned long)time(NULL);
 	init_nonlogic_seed((unsigned long)time(NULL));
 	srand((unsigned int)map_list.random_number);
@@ -278,8 +284,14 @@ int WINAPI WinMain(HINSTANCE hinstance,
 		
 	if(!Setup())
 	{
+#ifdef WEB_TILES
+		if (!web::headless())
+#endif
 		::MessageBox(0, "Init Image fail", 0, 0);
 	}
+#ifdef WEB_TILES
+	if (!web::headless())
+#endif
 	InitSound(hwnd);
 
 	d3d::EnterMsgLoop();

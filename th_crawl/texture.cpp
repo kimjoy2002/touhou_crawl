@@ -11,6 +11,7 @@
 #include "monster_texture.h"
 #include "texture.h"
 #include "Fliename.h"
+#include "web_backend.h"
 #include <WICTextureLoader.h>
 #include <sys/stat.h>
 
@@ -2622,6 +2623,9 @@ TextureFile::TextureFile(LPCSTR _name)
 //TextureFile 클래스의 소멸자
 TextureFile::~TextureFile()
 {
+#ifdef WEB_TILES
+	if (web::headless()) { pTexture = nullptr; return; }
+#endif
 	if(pTexture) {
 		pTexture->Release();
 		pTexture = nullptr;
@@ -2631,6 +2635,13 @@ TextureFile::~TextureFile()
 //로딩
 bool TextureFile::loading(ID3D11Device* device, ID3D11DeviceContext* context)
 {
+#ifdef WEB_TILES
+    if (web::headless()) {
+        pTexture = reinterpret_cast<ID3D11ShaderResourceView*>(this);
+        web::registerAtlas(pTexture, name);
+        return true;
+    }
+#endif
     std::string pngName = std::string(name) + ".png";
     std::string datName = std::string(name) + ".dat";
 
@@ -2651,6 +2662,9 @@ bool TextureFile::loading(ID3D11Device* device, ID3D11DeviceContext* context)
             nullptr,
             &pTexture
         );
+#ifdef WEB_TILES
+        if (SUCCEEDED(hr)) web::registerAtlas(pTexture, name);
+#endif
         return SUCCEEDED(hr);
     }
     else if (stat(datName.c_str(), &st) == 0) {
@@ -2685,6 +2699,9 @@ bool TextureFile::loading(ID3D11Device* device, ID3D11DeviceContext* context)
 			nullptr,
 			&pTexture
 		);
+#ifdef WEB_TILES
+        if (SUCCEEDED(hr)) web::registerAtlas(pTexture, name);
+#endif
         return SUCCEEDED(hr);
     }
 

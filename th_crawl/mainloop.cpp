@@ -25,6 +25,7 @@
 #include "tribe.h"
 #include "network.h"
 #include "steam_api.h"
+#include "web_backend.h"
 #include "replay.h"
 #include "mon_infor.h"
 #include "mapsearching.h"
@@ -285,6 +286,13 @@ extern void start_mainmenu();
 
 
 string getDefaultLang() {
+#ifdef WEB_TILES
+	if (web::enabled() && !web::lang().empty()) {
+		string wl = web::lang();
+		std::transform(wl.begin(), wl.end(), wl.begin(), ::toupper);
+		return wl;
+	}
+#endif
 	string lang = option_mg.getLang();
     std::transform(lang.begin(), lang.end(), lang.begin(), ::toupper);
 
@@ -335,6 +343,10 @@ void charter_selete(bool first)
 		{
 			you.user_name = user_name;
 		}
+#ifdef WEB_TILES
+		if (web::enabled() && !web::userName().empty())
+			you.user_name = web::userName();
+#endif
 
 		SetText() += LocalzationManager::formatString(LOC_SYSTEM_TITLE_YOUR_NAME, PlaceHolderHelper(you.user_name));
 		SetText() += "\n";

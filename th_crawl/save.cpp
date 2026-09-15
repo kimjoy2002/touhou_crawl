@@ -10,6 +10,7 @@
 #include "key.h"
 #include "replay.h"
 #include "option_manager.h"
+#include "web_backend.h"
 #include <shlobj.h>
 #include <filesystem>
 
@@ -29,6 +30,19 @@ std::wstring morgue_path_w;
 
 
 void init_save_paths() {
+#ifdef WEB_TILES
+    if (web::enabled() && !web::userDir().empty()) {
+        std::filesystem::path base = std::filesystem::u8path(web::userDir());
+        std::filesystem::create_directories(base);
+        option_mg.init((base / L"config.ini").wstring());
+        for (int i = 0; i < 3; i++)
+            save_file_w[i] = (base / saveslot_wstring[i]).wstring();
+        user_name_file_w = (base / L"user_name.txt").wstring();
+        replay_path_w = (base / L"replay").wstring();
+        morgue_path_w = (base / L"morgue").wstring();
+        return;
+    }
+#endif
     wchar_t appDataPath[MAX_PATH];
     if (SUCCEEDED(SHGetFolderPathW(NULL, CSIDL_PROFILE, NULL, 0, appDataPath))) {
         std::filesystem::path base(appDataPath);

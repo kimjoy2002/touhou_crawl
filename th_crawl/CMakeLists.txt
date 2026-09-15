@@ -31,6 +31,12 @@ if (MSVC)
 endif()
 add_definitions(-DNOMINMAX)
 
+# webtiles
+option(WEB_TILES "Build webtiles(browser) backend" ON)
+if (WEB_TILES)
+    add_definitions(-DWEB_TILES)
+endif()
+
 
 
 

@@ -8,6 +8,7 @@
 
 #include "d3dUtility.h"
 #include "textureUtility.h"
+#include "web_backend.h"
 #include "environment.h"
 #include "texture.h"
 #include "display.h"
@@ -71,7 +72,11 @@ int greed_max_y = 8;
 
 
 void text_dummy::calculateWitdh() {
+#ifdef WEB_TILES
+	if (!g_pfont && !web::headless()) return;
+#else
 	if (!g_pfont) return;
+#endif
 
 	//부정확해
 	//DirectX::XMVECTOR sizeVec = g_pfont->MeasureString(PreserveTrailingSpaces(text).c_str());
@@ -135,7 +140,10 @@ bool Display(float timeDelta)
 	}
 
 	CalcFPS(timeDelta);
-	if (g_pImmediateContext && g_pRenderTargetView)
+
+	const bool hasDevice = (g_pImmediateContext && g_pRenderTargetView);
+
+	if (hasDevice)
 	{
 		// Clear background (검정색)
 		const float clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
@@ -146,14 +154,22 @@ bool Display(float timeDelta)
             g_pAlphaBlendState.Get(),
             g_pPointSampler.Get(), // ✅ POINT filtering
             nullptr, nullptr);
+	}
 
-		DisplayManager.draw(g_pSprite, g_pfont);
-		
+#ifdef WEB_TILES
+	if (web::enabled()) web::beginFrame(option_mg.getWidth(), option_mg.getHeight());
+#endif
+	DisplayManager.draw(g_pSprite, g_pfont);   // headless 시 g_pSprite/g_pfont 는 null
+#ifdef WEB_TILES
+	if (web::enabled()) web::endFrame();
+#endif
+
+	if (hasDevice)
+	{
 		g_pSprite->End();
-
 		g_pSwapChain->Present(1, 0);
 	}
-	
+
 	ReleaseMutex(mutx);
 	return true;
 }
@@ -173,7 +189,13 @@ void display_manager::initText() {
 }
 void display_manager::Getfontinfor()
 {
-	if (!g_pfont) return;
+	if (!g_pfont) {
+		fontDesc.Height = 20;
+		fontDesc.Width = 10;
+		fontDesc.Size = 20;
+		log_length = (option_mg.getHeight() - 25) / fontDesc.Height;
+		return;
+	}
 
 	// 예시 텍스트로 평균적인 너비/높이 측정
 	std::wstring sample = L"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -411,7 +433,7 @@ void display_manager::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<
 }
 
 int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::SpriteBatch> pSprite, LPCWSTR text, int count, LPRECT pRect, DWORD format, D3DCOLOR color, bool drawOutline = false, D3DCOLOR outlineColor = 0xFF000000) {
-    if (!pFont || !text || !pRect) {
+    if (!text || !pRect) {
         return 0;
     }
 
@@ -426,10 +448,14 @@ int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::Spri
     DirectX::XMVECTOR colorVec = D3DCOLOR_to_XMVECTOR(color);
     DirectX::XMVECTOR outlineColorVec = D3DCOLOR_to_XMVECTOR(outlineColor);
 
-    // 문자열 크기 측정
-    DirectX::XMVECTOR sizeVec = pFont->MeasureString(wtext.c_str());
+    // 문자열 크기 측정 (fontDesc 로 근사)
     DirectX::XMFLOAT2 size;
-    DirectX::XMStoreFloat2(&size, sizeVec);
+    if (pFont) {
+        DirectX::XMStoreFloat2(&size, pFont->MeasureString(wtext.c_str()));
+    } else {
+        size.x = (float)(PrintCharWidth(wtext) * DisplayManager.fontDesc.Width);
+        size.y = (float)DisplayManager.fontDesc.Height;
+    }
 
     // 정렬 계산
     float x = (float)pRect->left;
@@ -449,7 +475,7 @@ int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::Spri
         y = (float)pRect->bottom - size.y;
 	}
 
-	if (drawOutline) {
+	if (drawOutline && pFont && pSprite) {
 		DirectX::XMFLOAT2 pos = { x, y };
 		static const DirectX::XMFLOAT2 offsets[] = {
 			{ -2,  0 }, { 2,  0 }, { 0, -2 }, { 0,  2 },
@@ -460,15 +486,19 @@ int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::Spri
 			pFont->DrawString(pSprite.get(), wtext.c_str(), outlinePos, outlineColorVec);
 		}
 	}
-    // Draw
-    pFont->DrawString(pSprite.get(), wtext.c_str(), { x, y }, colorVec);
+#ifdef WEB_TILES
+    if (web::enabled())
+        web::recText(wtext.c_str(), x, y, color);
+#endif
+    if (pFont && pSprite)
+        pFont->DrawString(pSprite.get(), wtext.c_str(), { x, y }, colorVec);
 
     return (int)wtext.size();  // 반환값은 출력한 글자 수
 }
 
 
 int DrawTextUTF8_OutLine(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::SpriteBatch> pSprite, const char* text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
-    if (!pFont || !text || !pRect) {
+    if (!text || !pRect) {
         return 0;
     }
 
@@ -479,7 +509,7 @@ int DrawTextUTF8_OutLine(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<Direc
 }
 
 int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::SpriteBatch> pSprite, const char* text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
-    if (!pFont || !text || !pRect) {
+    if (!text || !pRect) {
         return 0;
     }
 

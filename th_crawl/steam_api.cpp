@@ -12,6 +12,7 @@
 #include "environment.h"
 #include "const.h"
 #include "player.h"
+#include "web_backend.h"
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -46,6 +47,19 @@ void steam_manager::setCurrentMainMenuInfo() {
 	setCurrentInfo("","","",0,"");
 }
 void steam_manager::setCurrentInfo(string tribe, string job, string charname, int level, string which) {
+#ifdef WEB_TILES
+	if (web::enabled()) {
+		std::string st;
+		if (!(tribe.empty() && job.empty())) {
+			std::ostringstream ss;
+			if (!charname.empty()) ss << charname << " ";
+			ss << tribe << " " << job << " Lv" << level;
+			if (!which.empty()) ss << " / " << which;
+			st = ss.str();
+		}
+		web::setStatus(st.c_str());
+	}
+#endif
 	if(!init)
 		return;
 

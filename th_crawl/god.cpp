@@ -3357,23 +3357,11 @@ void God_AblilityShow(god_type god) {
 			bool already_pure = you.god_value[GT_JUNKO][3] != 0;
 			if (level_ >= 0)
 			{
-				if (already_pure)
-				{
-					vector<subability> abillist;
-					if (you.god_value[GT_JUNKO][3] == 7)
-						abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2, 0, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad));
-					else
-						abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3, 0, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad));
-					printGodAbility(GT_JUNKO, level_, 0, true, LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1, abillist, LOC_SYSTEM_GOD_SHOW_PASSIVE);
-				}
-				else
-				{
-					vector<subability> abillist;
-					abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_1, 0, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad));
-					abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_2, 0, (you.s_pure_turn && you.s_pure >= 20) ? CL_junko : CL_bad));
-					abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3, 0, (you.s_pure_turn && you.s_pure >= 30) ? CL_junko : CL_bad));
-					printGodAbility(GT_JUNKO, level_, 0, true, LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1, abillist, LOC_SYSTEM_GOD_SHOW_PASSIVE);
-				}
+				vector<subability> abillist;
+				abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_1, 0, (you.s_pure_turn && you.s_pure >= 10) ? CL_junko : CL_bad));
+				abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_2, 0, (you.s_pure_turn && you.s_pure >= 20) ? CL_junko : CL_bad));
+				abillist.push_back(subability(LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3, 0, (you.s_pure_turn && you.s_pure >= 30) ? CL_junko : CL_bad));
+				printGodAbility(GT_JUNKO, level_, 0, true, LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1, abillist, LOC_SYSTEM_GOD_SHOW_PASSIVE);
 			}
 			printGodAbility(GT_JUNKO, level_, 1, false, LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_P_AND_MP);
 			printGodAbility(GT_JUNKO, level_, 2, false, LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PIETY);

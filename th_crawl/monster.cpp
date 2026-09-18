@@ -594,6 +594,15 @@ void monster::FirstContact()
 	{
 		map_list.bamboo_tewi = true;
 	}
+	if(id == MON_DIEFAIRY && you.char_type == UNIQ_START_CIRNO && map_list.tutorial == GM_NORMAL && !(flag & M_FLAG_SUMMON) && !isUserAlly())
+	{
+		SetNeutrality(-1);
+		target = NULL;
+		memory_time = 0;
+		will_move.clear();
+		state.SetState(MS_NORMAL);
+		printlog(LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_DIEFAIRY_FOUND_CIRNO), PlaceHolderHelper(GetName()->getName())),true,false,false,CL_speak);
+	}
 	if(!(flag & M_FLAG_SUMMON))
 	{
 		GodAccpect_First_contact();
@@ -1108,7 +1117,7 @@ bool monster::isMultipleAttack(bool canAttackFreindly) {
 	if(id == MON_YUMA2) {
 		return true;
 	}
-	if(id == MON_SONBITEN_SPINTOWIN || id == MON_COGWHEEL || (id == MON_ENSLAVE_GHOST && id2 == MON_SONBITEN_SPINTOWIN)) {
+	if(id == MON_SONBITEN_SPINTOWIN || id == MON_COGWHEEL || id == MON_SPINNING_DOLL || (id == MON_ENSLAVE_GHOST && id2 == MON_SONBITEN_SPINTOWIN)) {
 		return canAttackFreindly?false:true;
 	}
 
@@ -1132,7 +1141,8 @@ void monster::multipleAttack(unit* except, attack_infor& att_infor) {
 			if(it->isLive() && &(*it) != this && except != &(*it) && (isMultipleAttack(true) || isEnemyMonster(&(*it))) && distan_coord(it->position, position) < 4)
 			{
 				it->damage(att_infor);
-				break;
+				if(id != MON_SPINNING_DOLL)
+					break;
 			}
 		}
 		if(except != &you && (isMultipleAttack(true) || isEnemyUnit(&you)) && distan_coord(you.position, position) < 4) {
@@ -2311,9 +2321,31 @@ bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX:
 	}
 
 	int blue_ = s_frozen==0?255:127 +  std::max(0, 25-s_frozen)*128/25;
-	D3DCOLOR color_ = D3DCOLOR_ARGB(id == MON_ENSLAVE_GHOST?128:255, blue_,blue_,255);
+	bool is_ghost = (id == MON_ENSLAVE_GHOST || id == MON_TIME_PARADOX);
+	D3DCOLOR color_ = D3DCOLOR_ARGB(is_ghost?128:255, blue_,blue_,255);
 
-	return_ = image->draw(pSprite, x_, y_,0.0f,scale_,scale_,color_);
+	if(id == MON_TIME_PARADOX && sm_info.parent_map_id == you.GetMapId() && you.GetCharNameString().empty())
+	{
+		auto draw_equip_ = [&](equip_type type_)
+		{
+			item* item_ = you.equipment[type_];
+			if(item_ && item_->equip_image)
+				item_->equip_image->draw(pSprite,x_,y_,0.0f,scale_,scale_,color_);
+		};
+		draw_equip_(ET_CLOAK);
+		return_ = image->draw(pSprite,x_,y_,0.0f,scale_,scale_,color_);
+		if(you.tribe != TRI_FAIRY)
+		{
+			draw_equip_(ET_GLOVE);
+			draw_equip_(ET_BOOTS);
+			draw_equip_(ET_ARMOR);
+		}
+		draw_equip_(ET_HELMET);
+		draw_equip_(ET_WEAPON);
+		draw_equip_(ET_SHIELD);
+	}
+	else
+		return_ = image->draw(pSprite, x_, y_,0.0f,scale_,scale_,color_);
 	if (id == MON_DANCING_ARMOUR || id == MON_DANCING_WEAPON) {
 		img_mons_dancing_weapon.draw(pSprite, x_, y_,0.0f,scale_,scale_, 255);
 	}
@@ -6701,6 +6733,14 @@ bool monster::sacrificeMove()
 
 int monster::special_state(bool is_sight_for_monster) {
 	switch(id) {
+	case MON_SPINNING_DOLL:
+	{
+		image = &img_mons_spinning_doll[special_value%2];
+		special_value++;
+		attack_infor temp_att(GetAttack(0,false),GetAttack(0,true),GetHit(),this,GetParentType(),atk_type[0],atk_name[0]);
+		multipleAttack(nullptr,temp_att);
+	}
+	return 1;
 	case MON_SANGHAI_DOLL:
 	case MON_HOURAI_DOLL:
 		if(special_value > 0)

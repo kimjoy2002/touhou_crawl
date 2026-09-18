@@ -2532,6 +2532,8 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 	
 	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 
+	
+	PlaySE("gift");
 	AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_SEIJA_GIFT, PlaceHolderHelper(GetGodString(next_))),CL_help);
 	you.god_value[GT_SEIJA][2] = 0;
 	MoreWait();
@@ -3387,7 +3389,6 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 
 	int kind_ = 0;
 	bool loop_ = true;
-	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO), true, false, false, CL_danger);
 	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN) +" ", false, false, false, CL_danger);
 	while (loop_) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ASK), true, false, false, CL_help);
@@ -3749,7 +3750,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_TALK), true, false, false, CL_junko);
 	you.god_value[GT_JUNKO][3] = kind_;
 	you.Ability(SKL_JUNKO_4, true, true);
-	you.SetPureTurn(30, -1);
+	//you.SetPureTurn(30, -1);
 
 
 	return true;
@@ -4699,6 +4700,7 @@ bool skill_upgrade_haniwa(int power, bool short_, unit* order, coord_def target)
 		return false;
 	}
 
+	PlaySE("gift");
 	AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_KEIKI_GIFT, PlaceHolderHelper(haniwa_abil_list[next_].name)),CL_help);
 	you.god_value[GT_KEIKI][3] = 0;
 	you.god_value[GT_KEIKI][4] = 0;

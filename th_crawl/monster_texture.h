@@ -227,6 +227,7 @@ extern textures img_mons_curse_doll;
 extern textures img_mons_goliath_doll[4];
 extern textures img_mons_sacrifice_doll[2];
 extern textures img_mons_orrery_orb[];
+extern textures img_mons_spinning_doll[2];
 
 
 

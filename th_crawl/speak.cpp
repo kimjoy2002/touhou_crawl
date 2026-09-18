@@ -518,8 +518,12 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			switch(randA(6))
 			{
 			case 0:
+				if(you.char_type == UNIQ_START_CIRNO)
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SUNNY_NORMAL1_CIRNO), PlaceHolderHelper(monster_info->GetName()->getName()));
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SUNNY_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 1:
+				if(you.char_type == UNIQ_START_CIRNO)
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SUNNY_NORMAL2_CIRNO), PlaceHolderHelper(monster_info->GetName()->getName()));
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SUNNY_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 2:
 				if (monster_info->GetInvisible() && !you.invisible_view)
@@ -574,8 +578,12 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			switch(randA(5))
 			{
 			case 0:
+				if(you.char_type == UNIQ_START_CIRNO)
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_LUNAR_NORMAL1_CIRNO), PlaceHolderHelper(monster_info->GetName()->getName()));
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_LUNAR_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 1:
+				if(you.char_type == UNIQ_START_CIRNO)
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_LUNAR_NORMAL2_CIRNO), PlaceHolderHelper(monster_info->GetName()->getName()));
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_LUNAR_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 2:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_LUNAR_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
@@ -618,8 +626,12 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			switch(randA(5))
 			{
 			case 0:
+				if(you.char_type == UNIQ_START_CIRNO)
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_STAR_NORMAL1_CIRNO), PlaceHolderHelper(monster_info->GetName()->getName()));
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_STAR_NORMAL1), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 1:
+				if(you.char_type == UNIQ_START_CIRNO)
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_STAR_NORMAL2_CIRNO), PlaceHolderHelper(monster_info->GetName()->getName()));
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_STAR_NORMAL2), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 2:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_STAR_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
@@ -2605,6 +2617,22 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 	case MON_PACHU:
 		if(type == MST_NORMAL)
 		{
+			if(you.char_type == UNIQ_START_SAKUYA)
+			{
+				switch(randA(4))
+				{
+				case 0:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PACHU_NORMAL1_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 1:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PACHU_NORMAL2_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 2:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PACHU_NORMAL3_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 3:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PACHU_NORMAL4_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 4:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_PACHU_NORMAL5_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			}
 			switch(randA(10))
 			{
 			case 0:
@@ -2719,6 +2747,22 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 	case MON_MEIRIN:
 		if(type == MST_NORMAL)
 		{
+			if(you.char_type == UNIQ_START_SAKUYA)
+			{
+				switch(randA(4))
+				{
+				case 0:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MEIRIN_NORMAL1_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 1:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MEIRIN_NORMAL2_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 2:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MEIRIN_NORMAL3_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 3:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MEIRIN_NORMAL4_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 4:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_MEIRIN_NORMAL5_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			}
 			switch(randA(6))
 			{
 			case 0:
@@ -2813,6 +2857,22 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 	case MON_REMILIA:
 		if(type == MST_NORMAL)
 		{
+			if(you.char_type == UNIQ_START_SAKUYA)
+			{
+				switch(randA(4))
+				{
+				case 0:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_REMILIA_NORMAL1_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 1:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_REMILIA_NORMAL2_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 2:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_REMILIA_NORMAL3_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 3:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_REMILIA_NORMAL4_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 4:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_REMILIA_NORMAL5_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			}
 			switch(randA(8))
 			{
 			case 0:
@@ -2966,6 +3026,22 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 	case MON_FLAN:
 		if(type == MST_NORMAL)
 		{
+			if(you.char_type == UNIQ_START_SAKUYA)
+			{
+				switch(randA(4))
+				{
+				case 0:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_FLAN_NORMAL1_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 1:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_FLAN_NORMAL2_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 2:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_FLAN_NORMAL3_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 3:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_FLAN_NORMAL4_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 4:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_FLAN_NORMAL5_SAKUYA), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			}
 			switch(randA(10)) 
 			{
 			case 0:
@@ -3197,6 +3273,16 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 	case MON_LETTY:
 		if(type == MST_NORMAL)
 		{
+			if(you.char_type == UNIQ_START_CIRNO)
+			{
+				switch(randA(1))
+				{
+				case 0:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_LETTY_NORMAL1_CIRNO), PlaceHolderHelper(monster_info->GetName()->getName()));
+				case 1:
+					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_LETTY_NORMAL2_CIRNO), PlaceHolderHelper(monster_info->GetName()->getName()));
+				}
+			}
 			switch(randA(4))
 			{
 			case 0:

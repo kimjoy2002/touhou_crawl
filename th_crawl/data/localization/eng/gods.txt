@@ -560,8 +560,8 @@ Junko is a divine spirit purified by hatred, seeking vengeance.
 Her powers are simple but strong.
 They require no piety but cause temporary Purified status.
 Higher Purification limits item usage.
-Normally this fades over time, but her favorite followers may be permanently purified.
-Her blessings are heavy, with great penalties and no betrayal allowed, but immense rewards.
+Normally this fades over time, while her favorite followers may receive a permanent blessing of Purity.
+Once you receive this blessing, you can no longer escape from Junko, but she grants immense power in return.
 She enjoys slaying every visible enemy.
 
 
@@ -575,13 +575,13 @@ Purification Level 3: You no longer gain effects from potions.
 
 §_19***: You gain pure killing intent. (Faith, +2 Purification)§d
 
-§_19******: You can be permanently purified through Junko's blessing. (Once only)§d
+§_19******: You can receive a permanent blessing of Purity from Junko. (Once only)§d
 
-Permanent purification grants:
+The permanent blessing of Purity grants:
 - Choose one of the following blessings (from 3 random options).
   You may spend faith to reroll the selection.
 
-Normally, betraying Junko after purification causes one's deathly impurity to be purified, 
+Normally, betraying Junko after receiving it causes one's deathly impurity to be purified,
   resulting in instant death.
 
 Available Purification Blessings:
@@ -593,7 +593,7 @@ Available Purification Blessings:
 - Equipment Purification: Selected equipment gains +5 over its maximum enchantment (even artifacts).
 - System Purification: Amulet charge rate triples, and you can use spell cards even while purified.
 
-*If you betray Junko after becoming permanently purified, you will be instantly destroyed—purified by divine wrath.
+*If you betray Junko after receiving the blessing, you will be instantly destroyed—purified by divine wrath.
 
 
 

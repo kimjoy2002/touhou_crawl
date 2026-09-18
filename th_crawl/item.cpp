@@ -723,7 +723,7 @@ string item::GetName(int num_, bool simple_, string lang)
 	}
 	
 
-	if(type==ITM_GOAL && value1 >= 0 && value1 < 10)
+	if(type==ITM_GOAL && value1 >= 0 && value1 < RUNE_MAX)
 	{
 		temp += LocalzationManager::locString(lang, rune_string[value1]);
 		overwriteName = true;
@@ -837,7 +837,10 @@ string item::GetName(int num_, bool simple_, string lang)
 	}
 	if(type==ITM_MISCELLANEOUS)
 	{
-		temp += " {" + LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_EVOKE) + "}";
+		temp += " {" + LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_EVOKE);
+		if(identify && value1 == EVK_FROZEN_FROG)
+			temp += ", " + LocalzationManager::formatString(lang,LOC_SYSTEM_ITEM_FROZEN_FROG_REMAIN,PlaceHolderHelper(to_string(value4)));
+		temp += "}";
 	}
 	if (type == ITM_AMULET && you.equipment[ET_NECK] == this)
 	{

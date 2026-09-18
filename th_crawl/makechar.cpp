@@ -884,7 +884,13 @@ void SetJobs(job_type select_, unique_starting_type type)
 		break;
 	case JOB_MADE:
 		you.max_hp+=2;		
-		MakeStartItem(SIT_BROOM,0);
+		if(type == UNIQ_START_SAKUYA)
+		{
+			MakeStartItem(SIT_THROWING_KNIFE,0);
+			you.equip('a',ET_WEAPON,false);
+		}
+		else
+			MakeStartItem(SIT_BROOM,0);
 		MakeStartItem(SIT_MAID,1);
 		MakeStartItem(SIT_BOOK,2);
 		MakeStartItem(SIT_THROWING_KNIFE,3);
@@ -892,7 +898,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		MakeStartItem(SIT_THROWING_KNIFE,5);
 		MakeStartItem(SIT_THROWING_KNIFE,6);
 		you.GiveSkillExp(SKT_FIGHT,30,false);
-		you.GiveSkillExp(SKT_MACE,30,false);
+		you.GiveSkillExp(type == UNIQ_START_SAKUYA?SKT_SHORTBLADE:SKT_MACE,30,false);
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_TANMAC,60,false);
 		you.GiveSkillExp(SKT_STEALTH,30,false);
@@ -1282,6 +1288,9 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 		else
 		{
 			you.SetProperty(TPT_CIRNO_PASSIVE,2);
+			you.SetProperty(TPT_CIRNO_ICE_CREATE,0);
+			you.StatUpDown(6,STAT_STR);
+			you.StatUpDown(-6,STAT_INT);
 			set_exist_named(MON_CIRNO);
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);

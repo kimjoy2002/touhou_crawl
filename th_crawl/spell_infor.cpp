@@ -578,6 +578,12 @@ string GetSpellInfor(spell_list spell, bool isPlayer)
 	case SPL_THROW_BUCKET:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_BUCKET);
 		break;
+	case SPL_DOLL_SPEAR:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_DOLL_SPEAR);
+		break;
+	case SPL_LITTLE_LEGION:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_LITTLE_LEGION);
+		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_UKNOWN);
 		break;

@@ -16,6 +16,7 @@
 #include "mon_infor.h"
 #include "rect.h"
 #include "tribe.h"
+#include "key.h"
 
 int GetDebufPower(spell_list skill, int power_);//디버프의 파워
 
@@ -44,32 +45,45 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 
 	if(!SpellcardFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
-		SetSpellSight(SpellcardLength(kind),SpellcardFlagCheck(kind, S_FLAG_RECT)?2:1);
-		beam_iterator beam(you.position,you.position);
-		projectile_infor infor(SpellcardLength(kind),false,SpellcardFlagCheck(kind, S_FLAG_SMITE),-2,false);
-		auto it = you.item_list.end();
-		if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor, SpellcardLength(kind), SpellcardSector(kind), auto_))
+		while(true)
 		{
-			if(fail_)
-				return true;
-			unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
-			you.SetBattleCount(30);
-			if(unit_)
-				you.youAttack(unit_);
-			if(EvokeSpellcard(kind, short_ == 2, power, you.search_pos))
+			SetSpellSight(SpellcardLength(kind),SpellcardFlagCheck(kind, S_FLAG_RECT)?2:1);
+			beam_iterator beam(you.position,you.position);
+			projectile_infor infor(SpellcardLength(kind),false,SpellcardFlagCheck(kind, S_FLAG_SMITE),-2,false);
+			auto it = you.item_list.end();
+			if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor, SpellcardLength(kind), SpellcardSector(kind), auto_))
 			{
-				you.PowUpDown(-1* Spellcardusepower(kind,false),true);
+				if(fail_)
+				{
+					SetSpellSight(0,0);
+					return true;
+				}
+				unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
+				you.SetBattleCount(30);
+				if(unit_)
+					you.youAttack(unit_);
+				if(EvokeSpellcard(kind, short_ == 2, power, you.search_pos))
+				{
+					you.PowUpDown(-1* Spellcardusepower(kind,false),true);
+					SetSpellSight(0,0);
+					return true;
+				}
 				SetSpellSight(0,0);
-				return true;
+				if(iden_)
+					return false;
+				MoreWait();
 			}
-		}
-		else
-		{
-			SetSpellSight(0,0);
-			if(iden_)
-				return false;
 			else
-				return true;
+			{
+				SetSpellSight(0,0);
+				if(iden_)
+					return false;
+				bool cancel_ = ynPrompt(LOC_SYSTEM_SPELLCARD_CANCEL_WASTE_ASK, LOC_EMPTYSTRING, CL_help, false,false,true,true);
+				enterlog();
+				if(cancel_)
+					return true;
+			}
+			auto_ = false;
 		}
 	}			
 	else if(SpellcardFlagCheck(kind, S_FLAG_IMMEDIATELY))

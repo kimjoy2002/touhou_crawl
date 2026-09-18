@@ -41,6 +41,10 @@ void MakeTanmac(item_infor* t, int select_);
 
 list<item>::iterator ThrowSelect();
 bool CheckThrowPath(coord_def start,coord_def target, beam_iterator &beam, bool passdoor = false);
+bool IsSakuyaKnife(const item* item_);
+vector<beam_iterator> GetSakuyaKnifeBeams(coord_def target_, int length_);
+vector<beam_iterator> GetSakuyaKnifeBeams(coord_def start_, coord_def target_, int length_);
+void ThrowSakuyaKnives(beam_iterator& beam, const vector<beam_iterator>& side_beams, const beam_infor& infor_, item* item_, bool mimic_, int graphic_type = 0);
 void paintpath(coord_def c_,beam_iterator &beam, list<item>::iterator item_, bool set, projectile_infor* infor_, int m_len, float sector_);
 
 

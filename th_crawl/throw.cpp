@@ -19,6 +19,9 @@
 #include "rect.h"
 #include "weapon.h"
 #include "option_manager.h"
+#include "tribe.h"
+
+extern HANDLE mutx;
 
 
 int GetTanmacGraphicType(tanmac_type type)
@@ -36,7 +39,7 @@ int GetTanmacGraphicType(tanmac_type type)
 		case TMT_DOGGOJEO:
 			return 43;
 		case TMT_ICICLE:
-			return 18;
+			return 19;
 		/*아이템에서 나오지않는 번호들
 			return 10;
 			return 11;
@@ -1145,8 +1148,131 @@ bool CheckThrowPath(coord_def start,coord_def target, beam_iterator &beam, bool 
 	return false;
 }
 
+bool IsSakuyaKnife(const item* item_)
+{
+	return you.GetProperty(TPT_SAKUYA_PASSIVE) && item_ && item_->can_throw &&
+		item_->type == ITM_WEAPON_SHORTBLADE && item_->value0 == 1;
+}
+
+vector<beam_iterator> GetSakuyaKnifeBeams(coord_def target_, int length_)
+{
+	return GetSakuyaKnifeBeams(you.position,target_,length_);
+}
+
+vector<beam_iterator> GetSakuyaKnifeBeams(coord_def start_, coord_def target_, int length_)
+{
+	vector<beam_iterator> beams_;
+	if(target_ == start_ || length_ <= 0)
+		return beams_;
+	float angle_ = atan2((float)(target_.y-start_.y),(float)(target_.x-start_.x));
+	unit* main_ = env[current_level].isMonsterPos(target_.x,target_.y,&you);
+	unit* selected_ = NULL;
+	for(int side_=-1;side_<=1;side_+=2)
+	{
+		float best_angle_ = GetDegToRad(45.0f);
+		int best_distance_ = (length_+1)*(length_+1);
+		monster* best_ = NULL;
+		beam_iterator side_beam(start_,target_);
+		for(monster& mon_ : env[current_level].mon_vector)
+		{
+			if(!mon_.isLive() || !mon_.isYourShight() || !you.isEnemyUnit(&mon_) || (mon_.flag & M_FLAG_UNHARM) || mon_.isPassedBullet(&you,true))
+				continue;
+			unit* root_ = env[current_level].isMonsterPos(mon_.position.x,mon_.position.y,&you);
+			if(root_ == main_ || root_ == selected_)
+				continue;
+			int dx_ = mon_.position.x-start_.x, dy_ = mon_.position.y-start_.y;
+			int distance_ = dx_*dx_+dy_*dy_;
+			if(distance_ == 0 || distance_ >= (length_+1)*(length_+1))
+				continue;
+			float delta_ = atan2((float)dy_,(float)dx_) - angle_;
+			delta_ = atan2(sin(delta_),cos(delta_))*side_;
+			if(delta_ <= 0.000001f || delta_ > GetDegToRad(45.0f)+0.000001f)
+				continue;
+			float diff_ = GetDegToRad(45.0f) - delta_;
+			if(diff_ > best_angle_ || (diff_ == best_angle_ && distance_ >= best_distance_))
+				continue;
+			beam_iterator path_(start_,mon_.position);
+			if(!CheckThrowPath(start_,mon_.position,path_))
+				continue;
+			bool blocked_ = false;
+			for(path_.init();!path_.end();path_++)
+			{
+				unit* hit_ = env[current_level].isMonsterPos(path_->x,path_->y,&you);
+				if(hit_ && hit_ != root_ && !hit_->isPassedBullet(&you,true))
+				{
+					blocked_ = true;
+					break;
+				}
+			}
+			if(blocked_)
+				continue;
+			best_ = &mon_;
+			best_angle_ = diff_;
+			best_distance_ = distance_;
+			side_beam = path_;
+		}
+		if(best_)
+		{
+			selected_ = env[current_level].isMonsterPos(best_->position.x,best_->position.y,&you);
+			side_beam.init();
+			beams_.push_back(side_beam);
+		}
+	}
+	return beams_;
+}
+
+void ThrowSakuyaKnives(beam_iterator& beam, const vector<beam_iterator>& side_beams, const beam_infor& infor_, item* item_, bool mimic_, int graphic_type)
+{
+	list<shared_ptr<ThrowTamacInstance>> tanmac_list;
+	tanmac_list.push_back(make_shared<ThrowTamacInstance>(nullptr,graphic_type,beam,infor_,item_,false,mimic_));
+	beam_infor side_infor = infor_;
+	side_infor.length = you.getThrowLength();
+	for(beam_iterator side_beam : side_beams)
+		tanmac_list.push_back(make_shared<ThrowTamacInstance>(item_->image,0,side_beam,side_infor,nullptr,false,true));
+	while(!tanmac_list.empty())
+	{
+		for(auto it = tanmac_list.begin();it != tanmac_list.end();)
+		{
+			auto temp = it++;
+			coord_def hit_pos_;
+			if((*temp)->oneturn(hit_pos_))
+			{
+				(*temp)->endShoot(false,false);
+				tanmac_list.erase(temp);
+			}
+		}
+		Sleep(16);
+		for(auto it = tanmac_list.begin();it != tanmac_list.end();)
+		{
+			auto temp = it++;
+			if((*temp)->oneturn_after(false))
+			{
+				(*temp)->endShoot(false,false);
+				tanmac_list.erase(temp);
+			}
+		}
+	}
+	env[current_level].ClearEffect();
+}
+
 void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bool set, projectile_infor* infor_, int m_len_, float sector_)
 {
+	vector<coord_def> side_path_;
+	if(set && infor_->isitem && item_ != you.item_list.end() && IsSakuyaKnife(&(*item_)))
+	{
+		for(beam_iterator side_beam : GetSakuyaKnifeBeams(c_,infor_->length))
+		{
+			for(side_beam.init();;side_beam++)
+			{
+				side_path_.push_back(*side_beam);
+				if(side_beam.end())
+					break;
+			}
+		}
+	}
+	WaitForSingleObject(mutx,INFINITE);
+	DisplayManager.sakuya_knife_path = side_path_;
+	ReleaseMutex(mutx);
 	if(m_len_ == -1)
 		m_len_ = beam.GetMaxLength();
 

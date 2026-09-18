@@ -10,6 +10,7 @@
 #include "unit.h"
 #include "skill_use.h"
 #include "throw.h"
+#include "time_paradox.h"
 #include "beam.h"
 #include "monster.h"
 #include "smoke.h"
@@ -2735,12 +2736,38 @@ bool skill_stone_form(int pow_, bool short_, unit* order, coord_def target)
 }
 bool skill_knife_collect(int pow_, bool short_, unit* order, coord_def target)
 {
-	if(order == &you)
+	if(order != &you)
+		return false;
+	vector<item> items_;
+	for(auto it = env[current_level].item_list.begin(); it != env[current_level].item_list.end();)
 	{
-		you.SetKnifeCollect(rand_int(30,50)+pow_/3);
-		return true;
+		auto temp = it++;
+		if(temp->can_throw && (temp->isweapon() || (temp->type >= ITM_THROW_FIRST && temp->type < ITM_THROW_LAST)) &&
+			env[current_level].isInSight(temp->position) && order->isSightnonblocked(temp->position))
+		{
+			items_.push_back(*temp);
+			env[current_level].DeleteItem(temp);
+		}
 	}
-	return false;
+	if(items_.empty())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_KNIFE_COLLECT_EMPTY),true,false,false,CL_normal);
+		return false;
+	}
+	bool floor_ = false;
+	for(item& item_ : items_)
+	{
+		if(!you.additem(&item_,false))
+		{
+			env[current_level].AddItem(you.position,&item_);
+			floor_ = true;
+		}
+	}
+	if (env[current_level].isInSight(order->position)) {
+		PlaySE("return");
+	}
+	printlog(LocalzationManager::locString(LOC_SYSTEM_KNIFE_COLLECT_DONE),true,false,false,CL_normal);
+	return true;
 }
 
 bool skill_burst(int pow_, bool short_, unit* order, coord_def target)
@@ -3184,14 +3211,46 @@ bool skill_field_violet(int pow_, bool short_, unit* order, coord_def target)
 	env[current_level].MakeEvent(EVL_VIOLET,coord_def(target.x,target.y),EVT_ALWAYS,rand_int(10,20)+pow_/10);
 	return true;
 }
-bool skill_time_paradox(int pow_, bool short_, unit* order, coord_def target)
+bool skill_time_paradox(int power_, bool short_, unit* order, coord_def target)
 {
-	if(order->isplayer())
+	vector<coord_def> positions_;
+	for(rect_iterator it(order->position,3,3); !it.end(); it++)
 	{
-		if(!randA(5))
-			you.SetTransPanalty(1);
-		you.SetParadox(rand_int(20,30)+pow_/4);
+		int distance_ = max(abs(it->x-order->position.x),abs(it->y-order->position.y));
+		if(distance_ >= 2 && env[current_level].isInSight(*it) && summon_check(*it,order->position,true,false))
+			positions_.push_back(*it);
 	}
+	if(positions_.empty())
+	{
+		if(order->isplayer()) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TIME_PARADOX_NO_SPACE),true,false,false,CL_normal);
+		}
+		return false;
+	}
+	power_ = min(SpellCap(SPL_TIME_PARADOX),max(0,power_));
+	summon_info info_(order->GetMapId(),SKD_TIME_PARADOX,GetSummonMaxNumber(SPL_TIME_PARADOX));
+	monster* mon_ = env[current_level].AddMonster_Summon(MON_TIME_PARADOX,M_FLAG_SUMMON | M_FLAG_ALLY,
+		positions_[randA((int)positions_.size()-1)],info_,20+power_/5);
+	if(!mon_)
+		return false;
+	mon_->hp = mon_->max_hp = 15+power_/4;
+	mon_->level = 5+power_/20;
+	mon_->special_value = 4+power_*16/SpellCap(SPL_TIME_PARADOX);
+	mon_->image = order->isplayer()? you.image: ((monster*)order)->image;
+	for(int floor_ = 0; floor_ < MAXLEVEL; floor_++)
+	{
+		for(monster& other_ : env[floor_].mon_vector)
+		{
+			if(&other_ != mon_ && other_.isLive() && other_.id == MON_TIME_PARADOX && other_.isUserAlly())
+			{
+				if(floor_ == current_level)
+					other_.dead(PRT_NEUTRAL,false,true);
+				else
+					other_.hp = 0;
+			}
+		}
+	}
+	PlaySE("summon");
 	return true;
 }
 bool skill_private_sq(int pow_, bool short_, unit* order, coord_def target)
@@ -3590,7 +3649,7 @@ bool skill_canon(int pow_, bool short_, unit* order, coord_def target)
 	return false;
 }
 bool skill_dolls_war(int pow_, bool short_, unit* order, coord_def target)
-{	
+{
 	bool return_=false;	
 	int i = 1; 
 	for(; i>0 ; i--)
@@ -3609,6 +3668,59 @@ bool skill_dolls_war(int pow_, bool short_, unit* order, coord_def target)
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("summon");
 		}
+	}
+	return return_;
+}
+bool skill_doll_spear(int pow_, bool short_, unit* order, coord_def target)
+{
+	bool return_ = false;
+	for(int i=0;i<2;i++)
+	{
+		if(monster *mon_ = BaseSummon(MON_SPINNING_DOLL,rand_int(10,20),true,true,1,order,target,
+			SKD_DOLL_SPEAR,GetSummonMaxNumber(SPL_DOLL_SPEAR)))
+		{
+			mon_->LevelUpdown(pow_/40,3.0f,0.3f);
+			return_ = true;
+		}
+	}
+	if(return_)
+	{
+		if(env[current_level].isInSight(order->position))
+			PlaySE("summon");
+	}
+	return return_;
+}
+bool skill_little_legion(int pow_, bool short_, unit* order, coord_def target)
+{
+	bool return_ = false;
+	int id_;
+	switch(randA(2))
+	{
+	case 0:
+		id_ = MON_LONDON_DOLL;
+		break;
+	case 1:
+		id_ = MON_SPEAR_DOLL;
+		break;
+	default:
+		id_ = MON_SANGHAI_DOLL;
+		break;
+	}
+	int count_ = id_ == MON_SPEAR_DOLL ? rand_int(2,3) : rand_int(3,4);
+	int max_count_ = id_ == MON_SPEAR_DOLL ? 3 : GetSummonMaxNumber(SPL_LITTLE_LEGION);
+	for(int i=0;i<count_;i++)
+	{
+		if(monster *mon_ = BaseSummon(id_,rand_int(9,11),true,true,2,order,order->position,
+			SKD_LITTLE_LEGION,max_count_))
+		{
+			return_ = true;
+		}
+	}
+	if(return_)
+	{
+		order->SetExhausted(20);
+		if(env[current_level].isInSight(order->position))
+			PlaySE("summon");
 	}
 	return return_;
 }
@@ -7149,8 +7261,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	}
 	break;
 	case MON_ALICE:
-		list->push_back(spell(SPL_DOLLS_WAR, 40));
-		list->push_back(spell(SPL_TELEPORT_SELF, 30));
+		list->push_back(spell(SPL_DOLL_SPEAR, 40));
+		list->push_back(spell(SPL_LITTLE_LEGION, 35));
+		list->push_back(spell(SPL_BLINK, 25));
 		break;
 	case MON_SEIRAN:
 		break;
@@ -7819,6 +7932,10 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_curse(power, short_, order, target);
 	case SPL_THROW_BUCKET:
 		return skill_throw_bucket(power, short_, order, target);
+	case SPL_DOLL_SPEAR:
+		return skill_doll_spear(power, short_, order, target);
+	case SPL_LITTLE_LEGION:
+		return skill_little_legion(power, short_, order, target);
 	case SPL_TRACKING:
 		return skill_tracking(power, short_, order, target);
 	case SPL_DISCORD:
@@ -7979,7 +8096,7 @@ bool CheckSucide(coord_def pos, coord_def target, bool self, int size, int smite
 
 
 
-bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
+static bool PlayerUseSpellInternal(spell_list skill, bool short_, coord_def &target, int& echo_power_)
 {
 	int power=you.GetSpellPower(SpellSchool(skill,0),SpellSchool(skill,1),SpellSchool(skill,2));
 	
@@ -8022,6 +8139,7 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 	{
 		printlog(LocalzationManager::formatString(LOC_SYSTEM_DEBUG_SPELLPOWER,PlaceHolderHelper(to_string(power)),PlaceHolderHelper(to_string(SpellCap(skill)))),true,false,false,CL_help);
 	}
+	echo_power_ = power;
 	switch(skill)
 	{
 	case SPL_MON_TANMAC_SMALL:
@@ -8384,12 +8502,25 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 		return skill_orrerires_sun(power,short_,&you,target);
 	case SPL_THROW_STAR:
 		return skill_throw_star(power,short_,&you,target);
+	case SPL_DOLL_SPEAR:
+		return skill_doll_spear(power,short_,&you,target);
+	case SPL_LITTLE_LEGION:
+		return skill_little_legion(power,short_,&you,target);
 	default:
 		return false;
 	}
 }
 
 
+
+bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
+{
+	int echo_power_ = -1;
+	bool result_ = PlayerUseSpellInternal(skill,short_,target,echo_power_);
+	if(result_ && echo_power_ >= 0)
+		TimeParadoxSpell(skill,echo_power_,target);
+	return result_;
+}
 
 void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 {
@@ -9170,6 +9301,9 @@ void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 		printsub(ss.str(), false, normal_dam);
 		return;
 	}
+	case SPL_DOLL_SPEAR:
+	case SPL_LITTLE_LEGION:
+		return;
 	default:
 		return;
 	}

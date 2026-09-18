@@ -3109,7 +3109,7 @@ LOC_SYSTEM_SKL_DESCRIBE_OKINA_5,Okina’s followers can escape into the Back Doo
 LOC_SYSTEM_SKL_DESCRIBE_JUNKO_1,Fires a simple but powerful physical danmaku.\nDamage scales with level.\nEach use increases a Purification level, limiting item use.\nTwo uses = +1 Purification.\n
 LOC_SYSTEM_SKL_DESCRIBE_JUNKO_2,Temporarily gains pure power.\nSTR +5, boosts melee and danmaku damage.\nEach use increases Purification level by 1, limiting item use.\n
 LOC_SYSTEM_SKL_DESCRIBE_JUNKO_3,Enhances bloodlust for a burst of speed.\nAll actions are 1.5x faster while enemies are in sight.\nBloodlust fades if no enemies remain.\nEach use increases Purification by 2.\n
-LOC_SYSTEM_SKL_DESCRIBE_JUNKO_4,Grants a one-time permanent blessing of Purity from Junko.\nChoose one of three passive effects and gain permanent stat boosts.\nYou can no longer use Junko’s powers or items.\nIf you betray Junko in this state, you die instantly.\nYou can delay the choice but must regain Faith later to retry.\n
+LOC_SYSTEM_SKL_DESCRIBE_JUNKO_4,Grants a one-time permanent blessing of Purity from Junko.\nChoose one of three passive effects to gain permanently.\nYou can no longer use Junko's powers.\nIf you betray Junko after receiving the blessing, you die instantly.\nYou can delay the choice but must regain Faith later to retry.\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_1,Become possessed by Joon (plague god) or Shion (poverty god).\nWhile possessed, use their powers but suffer stronger curses.\nAfter possession ends, gain Faith before reusing.\nJoon fills your MP but wastes 2-3 items and resets MP to 3.00 if over.\nShion restores HP/MP, removes low MP penalties, but causes all dropped items to vanish faster.\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_2,While possessed by Joon, use Queen of Bubble.\nConfuses all enemies briefly and deals damage based on your level.\nUnavailable until the next possession.\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_3,While possessed by Shion, use Misfortune Scatter.\nSlows all enemies and spreads mist to obscure vision.\nUnavailable until the next possession.\n
@@ -4080,7 +4080,7 @@ LOC_SYSTEM_GOD_MIKO_DESCRIPTION,Toyosatomimi no Miko is a sage of the Mausoleum 
 LOC_SYSTEM_GOD_OKINA_TITLE,Okina Matara - The Ultimate Hidden God
 LOC_SYSTEM_GOD_OKINA_DESCRIPTION,Okina Matara is a hidden, mysterious god whose true identity is unknown.\nShe seeks subordinates to do her bidding-you might be one.\nAs her follower, you gain door-based powers.\nYou can teleport through doors or appear behind enemies.\nYou can also call allies to boost HP and MP.\nShe enjoys spreading her divine presence through victorious battles.
 LOC_SYSTEM_GOD_JUNKO_TITLE,Junko
-LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,Junko is a divine spirit purified by hatred, seeking vengeance.\nHer powers are simple but strong.\nThey require no piety but cause temporary Purified status.\nHigher Purification limits item usage.\nNormally this fades over time, but her favorite followers may be permanently purified.\nHer blessings are heavy, with great penalties and no betrayal allowed, but immense rewards.\nShe enjoys slaying every visible enemy.
+LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,Junko is a divine spirit purified by hatred, seeking vengeance.\nHer powers are simple but strong.\nThey require no piety but cause temporary Purified status.\nHigher Purification limits item usage.\nNormally this fades over time, while her favorite followers may receive a permanent blessing of Purity.\nOnce you receive this blessing, you can no longer escape from Junko, but she grants immense power in return.\nShe enjoys slaying every visible enemy.
 LOC_SYSTEM_GOD_KEIKI_TITLE,Keiki Haniyasushin - The Sculptor God Crafted by Utter Isolation
 LOC_SYSTEM_GOD_KEIKI_DESCRIPTION,Keiki is a god of creation born from human spirits.\nShe grants life to crafted idols.\nShe gives a small Haniwa upon faith and allows you to customize it as you explore.\nKeiki takes a portion of your experience to create idols.
 LOC_SYSTEM_GOD_BUG_TITLE,Bug God
@@ -4496,7 +4496,7 @@ LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY3,You can forcibly shut and lock doors.
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY4,You can teleport behind an enemy.
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY5,You can summon the Crazy Back Dancer.
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY6,You can open a door behind you to escape anytime.
-LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1,You are permanently purified by Junko’s blessing.
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1,You received a permanent blessing of Purity from Junko.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2,You cannot use certain scrolls and potions.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3,You cannot use spell cards, and some scrolls and potions.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY4,All your stats are increased by 5.
@@ -4507,8 +4507,8 @@ LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3,Stage 3: You are unaffected by potions.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY2,You can unleash simple but powerful danmaku.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY3,You can gain pure power.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY4,You can gain pure murderous intent.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5,You can be permanently purified by Junko's blessing.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1,You have been permanently purified by Junko’s blessing.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5,You can receive a permanent blessing of Purity from Junko.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1,You received a permanent blessing of Purity from Junko.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2,Skill Purity: Your {0} skill level always matches your character level.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3,Resistance Purity: Your {0} is infinite.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4,Magic Purity: Your HP and MP are treated as the same.
@@ -5051,8 +5051,8 @@ LOC_SYSTEM_GOD_OKINA_PUNISH_DRAIN,Okina’s rage has drained your HP and MP!
 LOC_SYSTEM_GOD_JUNKO_WELCOME,Junko: Chang’e, are you watching?
 LOC_SYSTEM_GOD_JUNKO_TALK,Junko: Chang’e, are you watching!?
 LOC_SYSTEM_GOD_JUNKO_ABIL_HASTE_FAIL,There must be an enemy in sight showing intent to kill.
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,The Blessing of Purification applies a permanent purification penalty.
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN,Also, once you choose a purification, it cannot be undone!
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,Receiving the Blessing of Purification prevents further use of Junko's powers.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN,Once you choose a purification, it cannot be undone!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ASK,Which ability would you like to purify?
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_OTHER,Decrease faith and postpone this choice for a new purification.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_REALLY,Postponing this choice will delay the next one. Are you sure you want to wait?

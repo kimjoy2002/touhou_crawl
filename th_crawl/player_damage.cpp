@@ -363,6 +363,8 @@ int players::GetThrowHit(const item* it)
 	if (!(it->type >= ITM_THROW_FIRST && it->type<ITM_THROW_LAST))
 	{//이것은 장착무기이다..
 		hit_ = 3 + it->value1 + it->value4 + GetSkillLevel(SKT_TANMAC, true) / 2;
+		if((it->type == ITM_WEAPON_SHORTBLADE || it->type == ITM_WEAPON_SPEAR) && it->value0 == 1)
+			hit_ += 3;
 	}
 	else
 	{

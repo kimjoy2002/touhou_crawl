@@ -9,6 +9,7 @@
 #include "ice_item.h"
 #include "environment.h"
 #include "weapon.h"
+#include "soundmanager.h"
 #include "armour.h"
 #include "ring.h"
 #include "book.h"
@@ -18,6 +19,89 @@
 
 extern HANDLE mutx;
 extern int g_menu_select;
+
+namespace
+{
+	ice_item_kind GetIceWeaponKind()
+	{
+		const skill_type skills_[5] = {
+			SKT_LONGBLADE,
+			SKT_SHORTBLADE,
+			SKT_MACE,
+			SKT_SPEAR,
+			SKT_AXE
+		};
+		const ice_item_kind kinds_[5] = {
+			ICE_ITEM_SWORD,
+			ICE_ITEM_DAGGER,
+			ICE_ITEM_CRASHER,
+			ICE_ITEM_SPEAR,
+			ICE_ITEM_AXE
+		};
+		random_extraction<ice_item_kind> weapons_;
+		for(int i=0;i<5;i++)
+			weapons_.push(kinds_[i],you.GetSkillLevel(skills_[i],true)*2+1);
+		return weapons_.pop();
+	}
+
+	ice_item_kind GetIceArmourKind()
+	{
+		random_extraction<ice_item_kind> armours_;
+		armours_.push(ICE_ITEM_CROWN);
+		armours_.push(ICE_ITEM_ARMOUR);
+		armours_.push(ICE_ITEM_GLOVES);
+		armours_.push(ICE_ITEM_BOOTS);
+		armours_.push(ICE_ITEM_CLOAK);
+		return armours_.pop();
+	}
+
+	void MakeIceItemCandidates(int power)
+	{
+		random_extraction<int> types_;
+		for(int i=0;i<7;i++)
+			types_.push(i);
+		for(int i=0;i<3;i++)
+		{
+			ice_item_kind kind_ = ICE_ITEM_ICICLE;
+			switch(types_.pop())
+			{
+			case 0:
+				kind_ = GetIceWeaponKind();
+				break;
+			case 1:
+				kind_ = ICE_ITEM_ICICLE;
+				break;
+			case 2:
+				kind_ = GetIceArmourKind();
+				break;
+			case 3:
+				kind_ = ICE_ITEM_RING;
+				break;
+			case 4:
+				kind_ = ICE_ITEM_CREAM;
+				break;
+			case 5:
+				kind_ = ICE_ITEM_FROG;
+				break;
+			case 6:
+				kind_ = ICE_ITEM_BOOK;
+				break;
+			}
+			you.ice_item_candidates[i] = make_shared<item>(MakeIceItem(kind_,power));
+			you.ice_item_candidates[i]->id = 'a'+i;
+		}
+		you.ice_item_candidate_power = power;
+		you.ice_item_candidate_ready = true;
+	}
+}
+
+void ClearIceItemCandidates()
+{
+	you.ice_item_candidate_power = 0;
+	you.ice_item_candidate_ready = false;
+	for(int i=0;i<3;i++)
+		you.ice_item_candidates[i].reset();
+}
 
 item MakeIceItem(ice_item_kind kind_, int power)
 {
@@ -245,15 +329,13 @@ bool CreateIceItem(int power)
 {
 	if(power <= 0)
 		return false;
-	random_extraction<ice_item_kind> kinds_;
-	for(int i=0;i<ICE_ITEM_MAX;i++)
-		kinds_.push((ice_item_kind)i);
-	item items_[3];
-	for(int i=0;i<3;i++)
-	{
-		items_[i] = MakeIceItem(kinds_.pop(),power);
-		items_[i].id = 'a'+i;
-	}
+	if(!you.ice_item_candidate_ready || you.ice_item_candidate_power != power)
+		MakeIceItemCandidates(power);
+	item items_[3] = {
+		*you.ice_item_candidates[0],
+		*you.ice_item_candidates[1],
+		*you.ice_item_candidates[2]
+	};
 	bool examine_ = false;
 	bool redraw_ = true;
 	changedisplay(DT_GAME);
@@ -269,7 +351,24 @@ bool CreateIceItem(int power)
 			printlog(" / ",false,false,true,CL_help);
 			printlog("Esc - "+LocalzationManager::locString(LOC_SYSTEM_CANCLE),true,false,true,CL_help,VK_ESCAPE);
 			for(int i=0;i<3;i++)
-				printlog(string(1,'a'+i)+" - "+items_[i].GetName(),true,false,true,items_[i].item_color(),'a'+i);
+			{
+				string name_ = items_[i].GetName();
+				if(items_[i].type == ITM_BOOK)
+				{
+					string spells_;
+					for(int j=1;j<=8;j++)
+					{
+						spell_list spell_ = (spell_list)items_[i].GetValue(j);
+						if(spell_ == SPL_NONE)
+							continue;
+						if(!spells_.empty())
+							spells_ += ", ";
+						spells_ += SpellString(spell_);
+					}
+					name_ += " {" + spells_ + "}";
+				}
+				printlog(string(1,'a'+i)+" - "+name_,true,false,true,items_[i].item_color(),'a'+i);
+			}
 			startSelection({'a','b','c'},true);
 			ReleaseMutex(mutx);
 			redraw_ = false;
@@ -327,6 +426,8 @@ bool CreateIceItem(int power)
 			deletelog();
 			g_menu_select = -1;
 			env[current_level].AddItem(you.position,&items_[select_]);
+			PlaySE("gift");
+			ClearIceItemCandidates();
 			return true;
 		}
 		redraw_ = true;

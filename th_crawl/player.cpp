@@ -25,6 +25,7 @@
 #include "god.h"
 #include "steam_api.h"
 #include "throw.h"
+#include "time_paradox.h"
 #include "note.h"
 #include "spellcard.h"
 #include "rect.h"
@@ -168,6 +169,10 @@ players::~players()
 {
 }
 void players::init() {
+	ice_item_candidate_power = 0;
+	ice_item_candidate_ready = false;
+	for(int i=0;i<3;i++)
+		ice_item_candidates[i].reset();
 
 	prev_position = coord_def(0,0);
 	name = name_infor(LOC_SYSTEM_YOU);
@@ -635,6 +640,17 @@ void players::SaveDatas(FILE *fp)
 	SaveData<char>(fp, throw_weapon?throw_weapon->id:0);
 	SaveData<SYSTEM_COMMAND_KIND>(fp, quickMenu1);
 	SaveData<SYSTEM_COMMAND_KIND>(fp, quickMenu2);
+	bool save_ice_item_candidates_ = ice_item_candidate_ready;
+	for(int i=0;i<3;i++)
+		if(!ice_item_candidates[i])
+			save_ice_item_candidates_ = false;
+	SaveData<bool>(fp, save_ice_item_candidates_);
+	if(save_ice_item_candidates_)
+	{
+		SaveData<int>(fp, ice_item_candidate_power);
+		for(int i=0;i<3;i++)
+			ice_item_candidates[i]->SaveDatas(fp);
+	}
 }
 void players::LoadDatas(FILE *fp)
 {
@@ -960,6 +976,23 @@ void players::LoadDatas(FILE *fp)
 	if(!isPrevVersion(loading_version_string, "ver1.103")) {
 		LoadData<SYSTEM_COMMAND_KIND>(fp, quickMenu1);
 		LoadData<SYSTEM_COMMAND_KIND>(fp, quickMenu2);
+	}
+	ice_item_candidate_ready = false;
+	ice_item_candidate_power = 0;
+	for(int i=0;i<3;i++)
+		ice_item_candidates[i].reset();
+	if(!isPrevVersion(loading_version_string, "ver1.205"))
+	{
+		LoadData<bool>(fp, ice_item_candidate_ready);
+		if(ice_item_candidate_ready)
+		{
+			LoadData<int>(fp, ice_item_candidate_power);
+			for(int i=0;i<3;i++)
+			{
+				ice_item_candidates[i] = make_shared<item>();
+				ice_item_candidates[i]->LoadDatas(fp);
+			}
+		}
 	}
 }
 
@@ -1365,11 +1398,11 @@ int players::move(short_move x_mov, short_move y_mov)
 		}
 		else if(mon_)
 		{
-			if(mon_->isUserAlly() && !(mon_->flag & M_FLAG_NONE_MOVE) && !mon_->isImmobile())
+			if(mon_->isUserAlly() && ((!(mon_->flag & M_FLAG_NONE_MOVE) && !mon_->isImmobile()) ||  mon_->flag & M_FLAG_CAN_SWAP))
 			{
 				if(env[current_level].isMove(position.x, position.y, mon_->isFly(), mon_->isSwim(), mon_->flag & M_FLAG_CANT_GROUND) && env[current_level].isMove(move_x_,move_y_,isFly(),isSwim() || drowned))
 				{
-					PositionSwap(mon_);								
+					PositionSwap(mon_);	
 					//printlog(LocalzationManager::locString(LOC_SYSTEM_SWAP_ALLY) + " ",false,false,false,CL_bad);
 					time_delay += GetWalkDelay();//이동속도만큼 이동
 					prev_action = ACTT_WALK;
@@ -1972,6 +2005,13 @@ int players::GetThrowDelay(item_type type_, bool random_)
 	int delay_ = real_delay_;
 	if(random_)
 		delay_ += rand_float(0.99f, 0.0f);
+	return delay_;
+}
+int players::GetThrowDelay(item* item_, bool random_)
+{
+	int delay_ = GetThrowDelay(item_->type,random_);
+	if(IsSakuyaKnife(item_))
+		delay_ = max(1,(int)(delay_*0.8f));
 	return delay_;
 }
 int players::GetSpellDelay()
@@ -5611,6 +5651,8 @@ bool players::Evoke(char id_, bool auto_)
 					it->identify = true;
 					you.doingActionDump(DACT_EVOKE, (*it).name.getName());
 					you.time_delay += you.GetNormalDelay();
+					if(it->value1 == EVK_FROZEN_FROG && it->value4 <= 0)
+						DeleteItem(it);
 					return true;
 				}
 				else {
@@ -6053,6 +6095,7 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 	{
 		
 		bool kiku_ = ((*it).type >= ITM_THROW_FIRST && (*it).type < ITM_THROW_LAST && (*it).value4 == TMT_KIKU_COMPRESSER);
+		bool sakuya_ = IsSakuyaKnife(&(*it));
 		
 		if(!CheckSucide(you.position, target_pos_, false,kiku_?1:0 , false))
 			return false;
@@ -6110,18 +6153,25 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 		
 			if(short_)
 				temp_infor.length = length_;
+			vector<beam_iterator> side_beams;
+			if(sakuya_)
+				side_beams = GetSakuyaKnifeBeams(beam.target,getThrowLength());
 			for(int i=0;i<(you.GetParadox()?2:1);i++)
 			{
-				PlaySE("shoot");
-				throwtanmac(type_,beam,temp_infor,&(*it), true, (you.GetParadox()&&i==0)?true:false);
+				PlaySE((*it).type == ITM_WEAPON_SHORTBLADE && (*it).value0 == 1?"knife":"shoot");
+				if(sakuya_)
+					ThrowSakuyaKnives(beam,side_beams,temp_infor,&(*it),you.GetParadox()&&i==0,type_);
+				else
+					throwtanmac(type_,beam,temp_infor,&(*it), true, (you.GetParadox()&&i==0)?true:false);
 			}
 		}
 		you.SetParadox(0);
+		TimeParadoxThrow(&(*it),target_pos_,temp_infor,type_);
 
 		doingActionDump(DACT_SHOOT, (*it).name.getName());
 
 
-		time_delay += GetThrowDelay((*it).type);
+		time_delay += GetThrowDelay(&(*it));
 
 
 		bool returned = you.s_knife_collect && (*it).fixed_artifact != FIXED_ARTIFACT_GUNGNIR;
@@ -6209,6 +6259,11 @@ void players::resetAmuletPercent(amulet_type type_, bool use_)
 }
 bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 {
+	if(char_type == UNIQ_START_CIRNO && it->fixed_artifact == FIXED_ARTIFACT_LAEVATEIN)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_CIRNO_LAEVATEIN_TOO_HOT),true,false,false,CL_normal);
+		return false;
+	}
 	for(equip_type i = ET_FIRST;i!=ET_LAST;i=(equip_type)(i+1))
 	{
 		if(equipment[i] == &(*it))
@@ -6293,6 +6348,8 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 			ostringstream ss;
 			ss << (*it).id << " - " << (*it).GetName() << " (" << LocalzationManager::locString(LOC_SYSTEM_EQUIP) << ")";
 			printlog(ss.str(),true,false,false,(*it).item_color());
+			if(char_type == UNIQ_START_CIRNO && it->fixed_artifact == FIXED_ARTIFACT_ICEFAIRYRING)
+				printlog(LocalzationManager::locString(LOC_SYSTEM_CIRNO_ICEFAIRYRING_EQUIP),true,false,false,CL_normal);
 
 			
 			if(type_ == ET_ARMOR)
@@ -7179,6 +7236,8 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 	{
 		for(auto it2 = (*it).atifact_vector.begin(); it2 != (*it).atifact_vector.end(); it2++)
 		{
+			if(char_type == UNIQ_START_CIRNO && it->fixed_artifact == FIXED_ARTIFACT_ICEFAIRYRING && it2->kind == ART_INT && it2->value == -9)
+				continue;
 			effectartifact((artifact_type)it2->kind, it2->value * plus_);
 		}
 		(*it).identify = true;

@@ -1651,7 +1651,7 @@ void LevelUpTribe(int level_)
 	{
 		int earned_ = you.GetProperty(TPT_CIRNO_ICE_CREATE);
 		int prev_ = earned_;
-		while(earned_ < level_/3)
+		while(earned_ < level_/3-1)
 		{
 			if(!you.Ability(SKL_CIRNO_ICE_CREATE,false,false))
 				break;

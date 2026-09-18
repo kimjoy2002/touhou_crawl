@@ -1254,6 +1254,11 @@ textures img_mons_spear_doll(&texture_monster02, 157, 255);
 textures img_mons_curse_doll(&texture_monster02, 158, 255);
 textures img_mons_france_doll(&texture_monster02, 159, 255);
 textures img_mons_netherlands_doll(&texture_monster02, 170, 255);
+textures img_mons_spinning_doll[] =
+{
+	textures(&texture_monster02, 171, 255),
+	textures(&texture_monster02, 172, 255)
+};
 textures img_mons_goliath_doll[] =
 {
 	textures(&texture_monster02, 152, 255),
@@ -4322,6 +4327,10 @@ int texturetoint(textures* input)
 		return 720;
 	else if(input == &img_item_ice[14])
 		return 721;
+	else if(input == &img_mons_spinning_doll[0])
+		return 722;
+	else if(input == &img_mons_spinning_doll[1])
+		return 723;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -5792,6 +5801,10 @@ textures* inttotexture(int input)
 		return &img_item_ice[13];
 	case 721:
 		return &img_item_ice[14];
+	case 722:
+		return &img_mons_spinning_doll[0];
+	case 723:
+		return &img_mons_spinning_doll[1];
 	default:
 		return &img_mons_default;
 	}

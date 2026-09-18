@@ -771,6 +771,8 @@ bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target)
 			target_.first->SetSlow(11-3*target_.second);
 			target_.first->SetFrozen(16-4*target_.second);
 		}
+		
+		PlaySE("cold");
 		MakeCloud(you.position,img_fog_normal,SMT_FOG,rand_int(15,20),rand_int(8,12),0,3,&you);
 		item_->value4--;
 		return true;

@@ -986,7 +986,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO3));
 			_infor_("\n");
 			_infor_(LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO4, 
-					PlaceHolderHelper(float_to_string(you.GetThrowDelay((*it).type, false) / 10.0f)),
+					PlaceHolderHelper(float_to_string(you.GetThrowDelay(it, false) / 10.0f)),
 					PlaceHolderHelper(to_string(you.GetSkillLevel(SKT_TANMAC, true)))));
 		}
 
@@ -1061,7 +1061,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 		temp.str("");
 		temp.clear();
-		temp << LocalzationManager::locString(LOC_SYSTEM_CURRENT_TANMAC_SPEED) << ": " <<  (you.GetThrowDelay((*it).type, false) / 10.0f);
+		temp << LocalzationManager::locString(LOC_SYSTEM_CURRENT_TANMAC_SPEED) << ": " <<  (you.GetThrowDelay(it, false) / 10.0f);
 		ss << temp.str();
 		if(PrintCharWidth(temp.str()) < 20)
 			ss << std::string(20-PrintCharWidth(temp.str()), ' ');

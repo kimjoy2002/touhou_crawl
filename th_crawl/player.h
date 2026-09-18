@@ -17,6 +17,7 @@
 
 
 class monster;
+class item;
 class beam_iterator;
 class tribe_property;
 class action_class;
@@ -412,6 +413,9 @@ public:
 	item *throw_weapon;
 	SYSTEM_COMMAND_KIND quickMenu1;
 	SYSTEM_COMMAND_KIND quickMenu2;
+	shared_ptr<item> ice_item_candidates[3];
+	int ice_item_candidate_power = 0;
+	bool ice_item_candidate_ready = false;
 
 	attack_infor *dead_order;
 	damage_reason dead_reason;
@@ -469,6 +473,7 @@ public:
 	int GetThrowHit(const item* it);
 	attack_weapon_type GetAttackType();
 	int GetThrowDelay(item_type type_, bool random_ = true);
+	int GetThrowDelay(item* item_, bool random_ = true);
 	int GetSpellDelay();
 	int GetNormalDelay();
 	int GetWalkDelay(float multi_ = 1.0f);

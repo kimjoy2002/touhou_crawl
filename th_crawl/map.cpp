@@ -16,6 +16,7 @@
 #include "evoke.h"
 #include "zigurrat.h"
 
+static list<pair<const map_dummy*,monster_index>> reserved_named;
 
 
 void map_infor::SaveDatas(FILE *fp) {
@@ -152,9 +153,27 @@ connect_enter(false),connect_exit(false),floor_tex(floor_tex_),wall_tex(wall_tex
 }
 map_dummy::~map_dummy()
 {
+	reserved_named.remove_if([this](const pair<const map_dummy*,monster_index>& entry_){
+		return entry_.first == this;
+	});
 	for(int i=0;i<size_x;i++)
 		delete[] tiles[i];
 	delete[] tiles;
+}
+bool map_dummy::is_exist_named(monster_index id_) const
+{
+	if(::is_exist_named(id_))
+		return true;
+	for(const auto& entry_ : reserved_named)
+		if(entry_.second == id_)
+			return true;
+	return false;
+}
+void map_dummy::reserve_named(monster_index id_)
+{
+	auto entry_ = make_pair((const map_dummy*)this,id_);
+	if(find(reserved_named.begin(),reserved_named.end(),entry_) == reserved_named.end())
+		reserved_named.push_back(entry_);
 }
 bool map_dummy::isVaild(int offset) {
 	if(pos.x-size_x < offset || pos.x+size_x>=DG_MAX_X-offset || pos.y-size_y<offset || pos.y+size_y>=DG_MAX_Y-offset)
@@ -214,7 +233,18 @@ void map_dummy::make_map(environment& env_pointer, bool wall_, bool stair_input_
 	for(list<mapdummy_mon>::iterator it = monster_list.begin();it!=monster_list.end();it++)
 	{
 		monster* mon_ = env_pointer.AddMonster(it->id,it->flag,it->pos+pos,0);
+		if(!mon_)
+		{
+			reserved_named.remove(make_pair((const map_dummy*)this,(monster_index)it->id));
+			continue;
+		}
 		mon_->SetStrong(mon_->isUnique()?5:1);
+		auto entry_ = find(reserved_named.begin(),reserved_named.end(),make_pair((const map_dummy*)this,(monster_index)it->id));
+		if(entry_ != reserved_named.end())
+		{
+			set_exist_named((monster_index)it->id);
+			reserved_named.erase(entry_);
+		}
 	}
 	for (auto it = pos_list.begin(); it != pos_list.end(); it++) {
 		it->operator+=(pos);
@@ -234,6 +264,17 @@ void map_dummy::make_map(environment& env_pointer, bool wall_, bool stair_input_
 	for(list<mapdummy_event>::iterator it = event_list.begin();it!=event_list.end();it++)
 	{
 		env_pointer.MakeEvent(it->id,it->position+pos,it->type, -1, it->value);
+	}
+	// 나중에 이벤트로 등장하는 네임드도 맵 배치가 끝나면 출현을 확정한다.
+	for(auto it = reserved_named.begin();it != reserved_named.end();)
+	{
+		if(it->first == this)
+		{
+			set_exist_named(it->second);
+			it = reserved_named.erase(it);
+		}
+		else
+			it++;
 	}
 
 
@@ -593,7 +634,7 @@ void make_mushroom(int num, int freq)
         for (int k = 0; k < 4; ++k) {
             int nx = x + dx[k], ny = y + dy[k];
             if (!in_bounds(nx, ny)) return false;
-            if (!env[num].isMove(coord_def(x,y), false)) return false;
+            if (!env[num].isMove(coord_def(nx,ny), false)) return false;
         }
         return true;
     };
@@ -604,7 +645,7 @@ void make_mushroom(int num, int freq)
         for (int k = 0; k < 4; ++k) {
             int nx = x + dx[k], ny = y + dy[k];
             if (!in_bounds(nx, ny)) return false;
-            if (!env[num].isMove(coord_def(x,y), false)) return false;
+            if (!env[num].isMove(coord_def(nx,ny), false)) return false;
         }
         return true;
     };
@@ -613,9 +654,9 @@ void make_mushroom(int num, int freq)
 
     for (int y = 0; y < DG_MAX_Y; ++y) {
         for (int x = 0; x < DG_MAX_X; ++x) {
-            const auto& t = env[num].dgtile[x][y];
+            auto& t = env[num].dgtile[x][y];
 
-            if (!env[num].isMove(coord_def(x,y), false)) continue;
+            if (!t.isFloor()) continue;
             if (t.flag & FLAG_NO_MONSTER) continue;
             if (!(cross_all_move(x, y) || diag_all_move(x, y))) continue;
 
@@ -626,6 +667,7 @@ void make_mushroom(int num, int freq)
 	for(int i = 0; i < freq; i++) {
    		if(candidates.GetSize() > 0) {
 			coord_def c = candidates.pop();
+			if (!(cross_all_move(c.x, c.y) || diag_all_move(c.x, c.y))) continue;
 			env[num].dgtile[c.x][c.y].tile = randA(1)?DG_MUSHROOM1:DG_MUSHROOM2;
 		}
 	}

@@ -34,5 +34,6 @@ enum ice_item_kind
 item MakeIceItem(ice_item_kind kind_, int power);
 LOCALIZATION_ENUM_KEY GetIceItemDescription(item* item_);
 bool CreateIceItem(int power);
+void ClearIceItemCandidates();
 
 #endif // __ICE_ITEM_H__

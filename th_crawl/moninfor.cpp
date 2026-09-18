@@ -30,7 +30,7 @@ bool maybeUpgrade(int mon_id) {
 		case MON_KANAME:
 		case MON_HANIWA:
 		case MON_SECURIRY_DOOR:
-		case MON_COGWHEEL:
+		case MON_TIME_PARADOX:
 			return true;
 	}
 	return false;
@@ -146,6 +146,22 @@ void GetMonsterInfor(monster *it)
 				_infor_(")");
 				_infor_("\n");
 			}
+		}
+	}
+	if(it->id == MON_COGWHEEL || it->id == MON_SPINNING_DOLL)
+	{
+		int max_damage = it->GetAttack(0,true);
+		if(max_damage > 0)
+		{
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ABOUT_DAMAGE));
+			_infor_(": ");
+			float value = max_damage / 2.0f;
+			std::ostringstream oss;
+			oss << std::fixed << std::setprecision((value == (int)value) ? 0 : 1) << value;
+			_infor_(oss.str());
+			_infor_(" (1~");
+			_infor_(std::to_string(max_damage));
+			_infor_(")\n");
 		}
 	}
 

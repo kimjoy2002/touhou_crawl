@@ -124,7 +124,12 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_SUMMON_TRASH:
 	case SPL_SUMMON_ELEC_BALL:
 	case SPL_ORRERIRES_SUN:
+	case SPL_TIME_PARADOX:
 		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;
+	case SPL_LITTLE_LEGION:
+		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY | S_FLAG_DELAYED) & flag;
+	case SPL_DOLL_SPEAR:
+		return (S_FLAG_SUMMON | S_FLAG_SPEAK | S_FLAG_SMITE) & flag;
 	case SPL_SUMMON_ZOMBIE_FAIRY:
 	case SPL_SUMMON_NAMAZ:
 	case SPL_SUMMON_GHOST:
@@ -241,7 +246,6 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_DIAMOND_HARDNESS:
 	case SPL_POISON_SKIN:
 	case SPL_STONE_FORM:
-	case SPL_KNIFE_COLLECT:
 	case SPL_AUTUMN_BLADE:
 	case SPL_PHILOSOPHERS_STONE:
 	case SPL_ROYALFLARE:
@@ -256,7 +260,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_RABBIT_HORN:
 	case SPL_PERFERT_FREEZE: 
 	case SPL_DRAW_POWER:
-	case SPL_TIME_PARADOX: 
+	case SPL_KNIFE_COLLECT:
 	case SPL_PRIVATE_SQ: 
 	case SPL_THE_WORLD:
 	case SPL_CALL_HOUND:
@@ -403,6 +407,7 @@ int SpellLength(spell_list skill, bool isPlayer)
 	case SPL_SUMMON_GHOST:
 	case SPL_ALLROUND_TANMAC:
 	case SPL_DOLL_LUNGE:
+	case SPL_DOLL_SPEAR:
 		length_ = 5;
 		break;
 	case SPL_SMOKING:
@@ -490,6 +495,7 @@ int SpellLength(spell_list skill, bool isPlayer)
 	case SPL_ROYALFLARE:
 	case SPL_ORRERIRES_SUN:
 	case SPL_SACRIFICE:
+	case SPL_LITTLE_LEGION:
 	default:
 		length_ = 0;
 		break;		
@@ -869,6 +875,10 @@ string SpellString(spell_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_ORRERIRES_SUN);
 	case SPL_THROW_STAR:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_THROW_STAR);
+	case SPL_DOLL_SPEAR:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_DOLL_SPEAR);
+	case SPL_LITTLE_LEGION:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_LITTLE_LEGION);
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_UKNOWN);
 	}
@@ -915,6 +925,7 @@ int SpellLevel(spell_list skill)
 	case SPL_ARROW:
 	case SPL_HANIWA_MAGIC_TANMAC:
 	case SPL_BLINK_AWAY:
+	case SPL_KNIFE_COLLECT:
 		return 2;
 	case SPL_CONFUSE:
 	case SPL_FREEZE:
@@ -945,7 +956,6 @@ int SpellLevel(spell_list skill)
 	case SPL_SUMMON_GOLEM:
 	case SPL_CHARM:
 	case SPL_LASER:
-	case SPL_KNIFE_COLLECT:
 	case SPL_RABBIT_HORN:
 	case SPL_TIME_PARADOX: 
 	case SPL_AIR_STRIKE:
@@ -986,6 +996,7 @@ int SpellLevel(spell_list skill)
 	case SPL_TRACKING:
 	case SPL_ALLROUND_TANMAC:
 	case SPL_NIGHTMARE_MANIFEST:
+	case SPL_DOLL_SPEAR:
 		return 5;
 	case SPL_COLD_BEAM:
 	case SPL_CHAIN_LIGHTNING:
@@ -1041,10 +1052,10 @@ int SpellLevel(spell_list skill)
 	case SPL_THROW_PLAYER:
 	case SPL_THROW_OIL:
 	case SPL_ORRERIRES_SUN:
+	case SPL_LITTLE_LEGION:
 		return 7;
 	case SPL_SPARK:
 	case SPL_BLIZZARD: 
-	case SPL_DOLLS_WAR:
 	case SPL_HASTE_ALL:
 	case SPL_HEAL_ALL:
 	case SPL_CANNON:
@@ -1069,6 +1080,7 @@ int SpellLevel(spell_list skill)
 	case SPL_AFTERLITE:
 	case SPL_SANTUARY:
 	case SPL_REIMU_BARRIER:
+	case SPL_DOLLS_WAR:
 		return 9;
 	default:
 		return 0;
@@ -1230,6 +1242,8 @@ int SpellNoise(spell_list skill)
 	case SPL_WEAKENDED_SPORE:
 	case SPL_ACID_BOLT:
 	case SPL_THROW_STAR:
+	case SPL_DOLL_SPEAR:
+	case SPL_LITTLE_LEGION:
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
@@ -1670,6 +1684,9 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_SACRIFICE:
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_DOLL_SPEAR:
+	case SPL_LITTLE_LEGION:
+		return num == 0 ? (SKT_SUMMON) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	default:
 		return SKT_ERROR;
 	}
@@ -1860,6 +1877,8 @@ int SpellCap(spell_list skill)
 	case SPL_ORRERIRES_SUN:
 	case SPL_THROW_STAR:
 	case SPL_SACRIFICE:
+	case SPL_DOLL_SPEAR:
+	case SPL_LITTLE_LEGION:
 		return 200;
 	default:
 	case SPL_BLINK:

@@ -16,6 +16,7 @@
 #include "mon_infor.h"
 #include "potion.h"
 #include "skill.h"
+#include "soundmanager.h"
 #include "player.h"
 #include "book.h"
 #include "weapon.h"
@@ -252,6 +253,7 @@ void swako_gift(bool speak_) {
 
 	if (speak_)
 	{
+		PlaySE("gift");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR), true, false, false, CL_dark_good);
 
 
@@ -278,6 +280,7 @@ void minoriko_gift(bool speak_)
 	
 	if(speak_)
 	{
+		PlaySE("gift");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 
 		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_GIFT, PlaceHolderHelper(LOC_SYSTEM_GOD_MINORIKO)),CL_help);
@@ -315,6 +318,7 @@ void byakuren_gift(bool speak_)
 	
 	if(speak_)
 	{
+		PlaySE("gift");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 
 		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_GIFT, PlaceHolderHelper(LOC_SYSTEM_GOD_BYAKUREN)),CL_help);
@@ -330,6 +334,7 @@ void mima_gift(book_list book_)
 		item_infor t;
 		env[current_level].MakeItem(you.position,makeitem(ITM_BOOK, 0, &t, book_));
 		
+		PlaySE("gift");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 
 		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_GIFT, PlaceHolderHelper(LOC_SYSTEM_GOD_MIMA)),CL_help);
@@ -397,6 +402,8 @@ void kanako_tanmac_gift(bool speak_)
 
 	if(speak_)
 	{
+		
+		PlaySE("gift");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 
 		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_GIFT, PlaceHolderHelper(LOC_SYSTEM_GOD_KANAKO)),CL_help);
@@ -425,6 +432,7 @@ void kanako_gift(bool speak_)
 		MakeArtifact(it,1);
 	if(speak_)
 	{
+		PlaySE("gift");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 
 		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_GIFT, PlaceHolderHelper(LOC_SYSTEM_GOD_KANAKO)),CL_help);
@@ -517,6 +525,7 @@ item* armour_gift(bool speak_, bool artifact_)
 
 	if(speak_)
 	{
+		PlaySE("gift");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 
 		MoreWait();
@@ -551,6 +560,7 @@ item* jewelry_gift(bool speak_, bool curse_, bool artifact_)
 
 	if(speak_)
 	{
+		PlaySE("gift");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 
 		MoreWait();
@@ -577,6 +587,7 @@ void eirin_gift(bool speak_)
 		env[current_level].MakeItem(you.position,makeitem(ITM_POTION, 0, &t,(int)type_));
 	if(speak_)
 	{
+		PlaySE("gift");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 	
 

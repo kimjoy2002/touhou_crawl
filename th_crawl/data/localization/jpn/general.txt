@@ -3109,7 +3109,7 @@ LOC_SYSTEM_SKL_DESCRIBE_OKINA_5,いつでも自分の背後のドアを開けて
 LOC_SYSTEM_SKL_DESCRIBE_JUNKO_1,単純だが強力な物理弾幕を放つ。キャラのレベルで威力が上昇。\n純狐の権能は使用するたびに「浄化」状態となり、アイテム使用に制限がかかる。\n2回使用するごとに浄化レベルが1段階上昇。\n
 LOC_SYSTEM_SKL_DESCRIBE_JUNKO_2,純粋な力を一時的に得る。\n力が5増加し、近接・弾幕ダメージが増える。\n使用するたびに浄化状態が1段階上昇。\n
 LOC_SYSTEM_SKL_DESCRIBE_JUNKO_3,殺意を高めて行動速度を1.5倍に加速。\n視界内に敵がいなくなると効果は終了。\n使用するたびに浄化が2段階上昇。\n
-LOC_SYSTEM_SKL_DESCRIBE_JUNKO_4,純狐から一度きりの永続的な浄化の祝福を受ける。\nステータス上昇と3種の能力から1つを選んで永続付与されるが、\n以降は純狐の能力を使えず、アイテム使用も不可能に。\n選択肢を先延ばしも可能だが、次回の選択には再度信仰が必要。\n裏切ると即死。\n
+LOC_SYSTEM_SKL_DESCRIBE_JUNKO_4,純狐から一度きりの永続的な純化の祝福を受ける。\n3種の能力から1つを選んで永続的に得られるが、\n以降は純狐の能力を使えなくなる。\n選択肢を先延ばしも可能だが、次回の選択には再度信仰が必要。\n祝福を受けた後に裏切ると即死する。\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_1,疫病神女苑または貧乏神紫苑を自分に憑依させる。\n強化された呪いを受ける代わりに神の権能を使用可能。\n憑依終了後、信仰心を獲得し、再憑依が可能。\n\n女苑：パワー全回復、アイテム2〜3個を常に浪費。\n憑依解除時にパワーが3.00を超えていれば強制的に3.00へ。\n紫苑：体力/霊力回復、パワーが低くてもペナルティなし、地面のアイテムが急速に消滅。\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_2,女苑に憑依中のみ使用可能なスペルカード「クイーン・オブ・バブル」。\n視界内のすべての敵に抵抗不能な短時間の混乱と、使用者のレベルに比例したダメージを与える。\n一度使用すると次の憑依まで再使用できない。\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_3,紫苑に憑依中のみ使用可能なスペルカード「ミスチャンス・スキャッター」。\n視界内のすべての敵に抵抗不能な鈍足を付与し、使用者の周囲に霧を発生させる。\n一度使用すると次の憑依まで再使用できない。\n
@@ -4080,7 +4080,7 @@ LOC_SYSTEM_GOD_MIKO_DESCRIPTION,神子は夢殿大祀廟の聖人であり、欲
 LOC_SYSTEM_GOD_OKINA_TITLE,摩多羅 隠岐奈 - 究極の絶対秘神
 LOC_SYSTEM_GOD_OKINA_DESCRIPTION,隠岐奈は背後に潜む秘神で、その正体は明らかにされていない。\n彼女は自分の仕事を任せられる部下を探しており、あなたがその役を担うかもしれない。\n信者になることで、扉を創る力を使った権能を得られる。\n自由に扉を通って移動したり、敵の背後に現れたりすることができる。\n仲間を呼び寄せて生命力と精神力を高めることも可能。\n戦闘で勝利し、神の存在感を広めることが彼女の望みである。
 LOC_SYSTEM_GOD_JUNKO_TITLE,純狐
-LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,純狐は怨念が浄化された神霊で、自らの怨みを晴らすため信者を募っている。\n信者になると、単純ながら強力な「純化」の力を得ることができる。\n彼女の権能は信仰心を消費しないが、使用すると一時的に純化状態になり、\n段階が進むと消耗品の使用が制限されるペナルティが生じる。\n通常は時間経過で戻るが、特別な信者には永久的な純化が与えられる。\nその祝福は重く、ペナルティも大きいが、それに見合う加護を受けられる。\n彼女は怨みを晴らすため、目に見える敵をすべて倒すのを好む。
+LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,純狐は怨念が浄化された神霊で、自らの怨みを晴らすため信者を募っている。\n信者になると、単純ながら強力な「純化」の力を得ることができる。\n彼女の権能は信仰心を消費しないが、使用すると一時的に純化状態になり、\n段階が進むと消耗品の使用が制限されるペナルティが生じる。\n通常は時間経過で戻るが、特別な信者には永続的な純化の祝福が与えられる。\nこの祝福を受けた以上、純狐から逃れることはできないが、それに見合う強大な加護を得られる。\n彼女は怨みを晴らすため、目に見える敵をすべて倒すのを好む。
 LOC_SYSTEM_GOD_KEIKI_TITLE,埴安神 袿姫 - 孤立無援が誂えた造形神
 LOC_SYSTEM_GOD_KEIKI_DESCRIPTION,袿姫は人間霊が生み出した造形の神である。\n偶像を創り、命を吹き込むことができる。\n信者を守るために小さな埴輪を授け、\n探索を通してその埴輪を自由にカスタマイズできる。\nただし偶像を作るには経験値の一部を捧げねばならない。
 LOC_SYSTEM_GOD_BUG_TITLE,バグ神
@@ -4496,7 +4496,7 @@ LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY3,あなたは扉を強制的に閉じて施�
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY4,あなたは敵の背後に移動できる。
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY5,あなたはクレイジー・バックダンサーズを召喚できる。
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY6,あなたはいつでも背後の扉を開けて逃げることができる。
-LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1,あなたは純狐の祝福によって永久に純化された。
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1,あなたは純狐から永続的な純化の祝福を受けた。
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2,あなたは一部の巻物とポーションを使用できない。
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3,あなたはスペルカードおよび一部の巻物・ポーションを使用できない。
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY4,あなたのすべてのステータスが5上昇する。
@@ -4507,8 +4507,8 @@ LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3,段階3: あなたはポーションの効
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY2,あなたは単純だが強力な弾幕を放つことができる。
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY3,あなたは純粋な力を得ることができる。
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY4,あなたは純粋な殺意を得ることができる。
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5,あなたは純狐の祝福により永久に純化できる。
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1,あなたは純狐の祝福により永久に純化された。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5,あなたは純狐から永続的な純化の祝福を受けられる。
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1,あなたは純狐から永続的な純化の祝福を受けた。
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2,スキル純化: あなたの{0}スキルレベルは常にキャラクターレベルと等しい。
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3,抵抗純化: あなたの{0}は無限大である。
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4,魔力純化: あなたの体力と霊力は同一化される。
@@ -5051,8 +5051,8 @@ LOC_SYSTEM_GOD_OKINA_PUNISH_DRAIN,隠岐奈の怒りにより、あなたの体�
 LOC_SYSTEM_GOD_JUNKO_WELCOME,純狐は言った。「象牙よ、見ているか？」
 LOC_SYSTEM_GOD_JUNKO_TALK,純狐は言った。「象牙よ、見ているか！」
 LOC_SYSTEM_GOD_JUNKO_ABIL_HASTE_FAIL,視界内に殺意を示す敵が必要です。
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,「浄化の祝福」を選ぶと永久的な浄化ペナルティを得ます。
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN,さらに、一度選んだ浄化は取り消すことができません！
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,純化の祝福を受けると、以降は純狐の権能を使用できません。
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN,一度選んだ浄化は取り消すことができません！
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ASK,どの能力を浄化しますか？
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_OTHER,信仰心を下げて今回の選択を見送り、次回に回します。
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_REALLY,選択を見送ると次回まで時間がかかります。本当に見送りますか？

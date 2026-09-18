@@ -99,6 +99,8 @@ void FMODSoundManager::Initialize() {
 	addSound("royalflare", "sound\\se\\royalflare.mp3");
 	addSound("slash", "sound\\se\\slash.mp3");
 	addSound("bash", "sound\\se\\bash.mp3");
+	addSound("splash", "sound\\se\\splash.mp3");
+	addSound("gift", "sound\\se\\gift.mp3");
     
     
 	loadBgmFromJson("sound\\bgm\\bgm.json");

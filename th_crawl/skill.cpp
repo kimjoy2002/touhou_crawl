@@ -74,6 +74,8 @@ int AptCal(int aptitu_)
 		return 60;
 	case 4:
 		return 50;
+	case 5:
+		return 42;
 	}
 }
 

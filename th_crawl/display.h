@@ -162,6 +162,7 @@ public:
 	textures *image;
 	
 	vector<int> selection_vector;
+	vector<coord_def> sakuya_knife_path;
 	bool selection_description = false;
 	vector<int> spell_skill_vector;
 

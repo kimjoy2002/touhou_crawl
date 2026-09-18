@@ -678,7 +678,7 @@ const mon_infor mondata[] = {
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_UNIQUE | M_FLAG_SPEAK,99,4,8,'&' },
 	
 	{MON_ALICE,18,8467,name_infor(MON_ALICE),&img_named_alice,180,10,15,
-	{30,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_UNIQUE | M_FLAG_SPEAK,2,2,10,'&' },
 
 	{MON_SEIRAN,8,573,name_infor(MON_SEIRAN),&img_named_seiran,74,2,11,
@@ -1104,8 +1104,8 @@ const mon_infor mondata[] = {
 		{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_ATK | M_FLAG_NO_STATE | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_MISSLE,99,1,7,'X' },
 
-	{MON_YAMAINU,7,250,name_infor(MON_YAMAINU),&img_mons_yamainu,60,2,8,
-		{17,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_BITE),name_infor(),name_infor()},
+	{MON_YAMAINU,7,250,name_infor(MON_YAMAINU),&img_mons_yamainu,55,2,8,
+		{16,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_BITE),name_infor(),name_infor()},
 		M_FLAG_CAN_SEE_INVI | M_FLAG_SPEAK | M_FLAG_ANIMAL,0,1,10,'D'},
 		
 	{MON_CONFUSE_MUSHROOM,9,690,name_infor(MON_CONFUSE_MUSHROOM),&img_confuse_mushroom,55,6,0,
@@ -1140,7 +1140,7 @@ const mon_infor mondata[] = {
 		{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_CANT_NETURAL,0,0,5,'*'},
 		
-	{MON_MAN_EATING_FLOWER,10,800,name_infor(MON_MAN_EATING_FLOWER),&img_mons_eating_flower,95,3,10,
+	{MON_MAN_EATING_FLOWER,10,800,name_infor(MON_MAN_EATING_FLOWER),&img_mons_eating_flower,85,3,10,
 		{22,0,0},{ATT_ACID_BYTE,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR,0,1,10,'P'},
 		
@@ -1198,5 +1198,13 @@ const mon_infor mondata[] = {
 
 	{MON_SPEAR_DOLL,10,500,name_infor(MON_SPEAR_DOLL),&img_mons_spear_doll,110,10,5,
 		{20,36,0},{ATT_NORMAL,ATT_NORMAL,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_PIERCING),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,1,10,'d' }
+		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,1,10,'d' },
+
+	{MON_TIME_PARADOX,4,0,name_infor(MON_TIME_PARADOX),&img_mons_default,15,0,5,
+		{0,0,0},{ATT_NONE,ATT_NONE,ATT_NONE},{name_infor(),name_infor(),name_infor()},
+		M_FLAG_NONE_MOVE | M_FLAG_CAN_SWAP | M_FLAG_NONE_STAIR | M_FLAG_NO_ATK | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,10,'@' },
+
+	{MON_SPINNING_DOLL,5,0,name_infor(MON_SPINNING_DOLL),&img_mons_spinning_doll[0],30,4,0,
+		{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_NONE_MOVE | M_FLAG_IMMOBILE | M_FLAG_NONE_STAIR | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,10,'d' }
 };

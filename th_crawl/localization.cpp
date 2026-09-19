@@ -702,7 +702,9 @@ void LocalzationManager::printWiki() {
 		}
 
 
-		int current_line = 0; 
+		printsub(locString(LOC_SYSTEM_WIKI_SEARCH_HINT),true,CL_warning);
+		printsub("",true,CL_normal);
+		int current_line = 2;
 		 // 정렬된 키 순서로 출력
         for (auto& key : keys) {
             langData->wikiline[key] = current_line;
@@ -754,6 +756,71 @@ int LocalzationManager::getWikiLine(int id) {
 		}
 	}
 	return -1;
+}
+int LocalzationManager::findWikiTitle(const string& query, int current_line, bool backward) {
+	if(query.empty())
+		return -1;
+	shared_ptr<LocalzationManager::LocalzationData> langData = nullptr;
+	if(localizationVector.has(current_lang))
+		langData = localizationVector.find(current_lang);
+	if(langData == nullptr && localizationVector.has(baseLang()))
+		langData = localizationVector.find(baseLang());
+	if(langData == nullptr)
+		return -1;
+
+	auto matches = [&query](const string& title) {
+		return std::search(title.begin(), title.end(), query.begin(), query.end(), [](char a, char b) {
+			if(a >= 'A' && a <= 'Z') a += 'a' - 'A';
+			if(b >= 'A' && b <= 'Z') b += 'a' - 'A';
+			return a == b;
+		}) != title.end();
+	};
+	int next_line = -1;
+	int wrapped_line = -1;
+	auto consider = [&](int line) {
+		if(backward) {
+			if(line < current_line && (next_line == -1 || line > next_line)) next_line = line;
+			if(wrapped_line == -1 || line > wrapped_line) wrapped_line = line;
+		} else {
+			if(line > current_line && (next_line == -1 || line < next_line)) next_line = line;
+			if(wrapped_line == -1 || line < wrapped_line) wrapped_line = line;
+		}
+	};
+	for(const auto& entry : langData->wikiline)
+		if(matches(entry.first)) consider(entry.second);
+	for(const auto& entry : langData->wiki_redirect) {
+		if(!matches(entry.first)) continue;
+		auto line = langData->wikiline.find(entry.second);
+		if(line != langData->wikiline.end()) consider(line->second);
+	}
+	return next_line != -1 ? next_line : wrapped_line;
+}
+vector<string> LocalzationManager::getWikiTitleCompletions(const string& prefix) {
+	vector<string> result;
+	if(prefix.empty()) return result;
+	shared_ptr<LocalzationManager::LocalzationData> langData = nullptr;
+	if(localizationVector.has(current_lang))
+		langData = localizationVector.find(current_lang);
+	if(langData == nullptr && localizationVector.has(baseLang()))
+		langData = localizationVector.find(baseLang());
+	if(langData == nullptr) return result;
+	auto matches = [&prefix](const string& title) {
+		if(title.size() < prefix.size()) return false;
+		for(size_t i=0;i<prefix.size();i++) {
+			char a = title[i], b = prefix[i];
+			if(a >= 'A' && a <= 'Z') a += 'a' - 'A';
+			if(b >= 'A' && b <= 'Z') b += 'a' - 'A';
+			if(a != b) return false;
+		}
+		return true;
+	};
+	for(const auto& entry : langData->wiki_map)
+		if(matches(entry.first)) result.push_back(entry.first);
+	for(const auto& entry : langData->wiki_redirect)
+		if(matches(entry.first)) result.push_back(entry.first);
+	std::sort(result.begin(), result.end(), UnicodeCodepointLess);
+	result.erase(std::unique(result.begin(), result.end()), result.end());
+	return result;
 }
 int LocalzationManager::getHelpCharacterLine(int index) {
 	if(localizationVector.find(current_lang)->helpline_character.size() > index) {

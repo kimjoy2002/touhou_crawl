@@ -231,6 +231,7 @@ void players::init() {
 	buff_list.clear();
 	item_list.clear();
 	search_list.clear();
+	wiki_search_history.clear();
 	property_vector.clear();
 	action_vector.clear();
 	item_weight = 0;
@@ -656,6 +657,7 @@ void players::LoadDatas(FILE *fp)
 {
 	item_list.clear();
 	search_list.clear();
+	wiki_search_history.clear();
 
 	//필수 정보
 	LoadData<int>(fp, level);

@@ -1806,7 +1806,7 @@ SPEAK_SUNNY_NORMAL2_CIRNO,{0:은|는} 말했다. "그때 집을 부순걸 아직
 SPEAK_LUNAR_NORMAL1_CIRNO,{0:은|는} 말했다. "아, 그때의 얼음 요정... 귀찮네 정말"
 SPEAK_LUNAR_NORMAL2_CIRNO,{0:은|는} 말했다. "으 추운건 질색인데, 얼른 끝내야지"
 SPEAK_STAR_NORMAL1_CIRNO,{0:은|는} 말했다. "냉기의 힘을 빌리면 인간들을 놀릴때 편할거같은데..."
-SPEAK_STAR_NORMAL2_CIRNO,{0:은|는} 말했다. "좋아. 스타, 서니!, 가서 저 얼음 녀석을 혼내줘!"
+SPEAK_STAR_NORMAL2_CIRNO,{0:은|는} 말했다. "좋아. 루나, 서니! 가서 저 얼음 녀석을 혼내줘!"
 SPEAK_PACHU_NORMAL1_SAKUYA,{0:은|는} 말했다. "사쿠야, 도서관에선 나이프를 던지지 말아줘"
 SPEAK_PACHU_NORMAL2_SAKUYA,{0:은|는} 말했다. "메이드 일은 다 끝난거야?"
 SPEAK_PACHU_NORMAL3_SAKUYA,{0:은|는} 말했다. "어디 말을 안 듣는 메이드에게 특효인 마법은..."

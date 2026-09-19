@@ -146,6 +146,8 @@ public:
 	int tile_type;
 	text_manager text_log;
 	text_manager text_sub;
+	string sub_text_prompt;
+	D3DCOLOR sub_text_prompt_color = 0;
 	FontInfo fontDesc;
 	string text;
 	display_type state;

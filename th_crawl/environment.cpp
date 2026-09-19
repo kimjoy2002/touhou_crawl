@@ -2949,6 +2949,44 @@ list<item>::iterator environment::GetPositiontoitemend(coord_def position_)
 }
 
 
+static void SaveWikiSearchHistory(FILE *fp)
+{
+	const char marker[4] = {'W', 'I', 'K', '1'};
+	fwrite(marker, 1, sizeof(marker), fp);
+	int start = max(0, (int)you.wiki_search_history.size() - players::WIKI_SEARCH_HISTORY_MAX);
+	int count = (int)you.wiki_search_history.size() - start;
+	fwrite(&count, sizeof(count), 1, fp);
+	for(int i=start;i<(int)you.wiki_search_history.size();i++) {
+		const string& query = you.wiki_search_history[i];
+		int length = min(players::WIKI_SEARCH_QUERY_MAX, (int)query.size());
+		fwrite(&length, sizeof(length), 1, fp);
+		fwrite(query.data(), 1, length, fp);
+	}
+}
+
+static void LoadWikiSearchHistory(FILE *fp)
+{
+	you.wiki_search_history.clear();
+	char marker[4];
+	if(fread(marker, 1, sizeof(marker), fp) != sizeof(marker) ||
+		marker[0] != 'W' || marker[1] != 'I' || marker[2] != 'K' || marker[3] != '1')
+		return;
+	int count = 0;
+	if(fread(&count, sizeof(count), 1, fp) != 1 || count < 0 || count > players::WIKI_SEARCH_HISTORY_MAX)
+		return;
+	vector<string> history;
+	for(int i=0;i<count;i++) {
+		int length = 0;
+		if(fread(&length, sizeof(length), 1, fp) != 1 || length < 0 || length > players::WIKI_SEARCH_QUERY_MAX)
+			return;
+		string query(length, '\0');
+		if(length > 0 && fread(&query[0], 1, length, fp) != (size_t)length)
+			return;
+		history.push_back(query);
+	}
+	you.wiki_search_history = history;
+}
+
 void SaveFile(bool test_)
 { 
 	if(ReplayClass.ReplayMode())
@@ -3008,6 +3046,7 @@ void SaveFile(bool test_)
 	save_note.SaveDatas(fp);
 
 	ReplayClass.SaveDatas(fp);
+	SaveWikiSearchHistory(fp);
 
 
 
@@ -3112,6 +3151,7 @@ void LoadFile()
 	save_note.LoadDatas(fp);
 	
 	ReplayClass.LoadDatas(fp);
+	LoadWikiSearchHistory(fp);
 
 	
 

@@ -573,7 +573,7 @@ Purification Level 3: You no longer gain effects from potions.
 
 §_19**: You gain pure power. (Faith, +1 Purification)§d
 
-§_19***: You gain pure killing intent. (Faith, +2 Purification)§d
+§_19****: You gain pure killing intent. (Faith, +2 Purification)§d
 
 §_19******: You can receive a permanent blessing of Purity from Junko. (Once only)§d
 

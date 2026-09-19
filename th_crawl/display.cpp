@@ -4486,6 +4486,11 @@ void display_manager::sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 			DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 		}
 	}
+	if(!sub_text_prompt.empty()) {
+		RECT rc={ 0, 0, (LONG)option_mg.getWidth(), (LONG)fontDesc.Height };
+		dot_player.draw(pSprite, 0, 0, 0.0f, (float)option_mg.getWidth(), (float)fontDesc.Height, D3DCOLOR_ARGB(255, 0, 0, 0));
+		DrawTextUTF8(pfont, pSprite, sub_text_prompt, -1, &rc, DT_SINGLELINE | DT_NOCLIP, sub_text_prompt_color);
+	}
 	
 	if(isClicked(MIDDLE_UP)) {
 		g_keyQueue->push(InputedKey(MKIND_SCROLL_UP,0,0));

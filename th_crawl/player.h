@@ -175,6 +175,8 @@ struct shield_struct
 class players: public unit
 {
 public:
+	static const int WIKI_SEARCH_HISTORY_MAX = 20;
+	static const int WIKI_SEARCH_QUERY_MAX = 256;
 	coord_def prev_position;
 
 	name_infor name;
@@ -388,6 +390,7 @@ public:
 	int lastSelectMenu; //마지막에 선택했던 메뉴
 	char lastExplore; //마지막에 이동한 던전
 	string lastSearch; //마지막 검색한 단어
+	vector<string> wiki_search_history;
 	int yori_toyo_kill_count;
 	int max_power;
 

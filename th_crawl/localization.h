@@ -222,6 +222,8 @@ public:
 	static const vector<TextHelper>& getHelpCharacter(){return localizationVector.find(current_lang)->help_character;};
 	static void printWiki();
     static int getWikiLine(int id);
+	static int findWikiTitle(const string& query, int current_line, bool backward);
+	static vector<string> getWikiTitleCompletions(const string& prefix);
 	static int getHelpCharacterLine(int index);
 	static const vector<TextHelper>& getHelpGods(){return localizationVector.find(current_lang)->help_gods;};
 	static int getHelpGodsLine(int index);

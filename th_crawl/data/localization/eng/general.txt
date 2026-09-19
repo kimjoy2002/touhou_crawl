@@ -633,7 +633,7 @@ LOC_SYSTEM_BUFF_DROWNING,Drown
 LOC_SYSTEM_BUFF_CTELE_INTERUPT,-CTele
 LOC_SYSTEM_BUFF_STAT_PANALTY,-Stat
 LOC_SYSTEM_BUFF_STAT_EXHAUTED,Exhaust
-LOC_SYSTEM_BUFF_STAT_SUPER_GRAZE,Graze+
+LOC_SYSTEM_BUFF_STAT_SUPER_GRAZE,P.Graze
 LOC_SYSTEM_BUFF_STAT_TRANS_PANALTY,T.Penl
 LOC_SYSTEM_BUFF_STAT_SPELLCARD,Spell
 LOC_SYSTEM_BUFF_STAT_AUTMMN_INVISIBLE,Inv+
@@ -3027,7 +3027,7 @@ LOC_SYSTEM_SKL_MIKO_4,Gain Resistance
 LOC_SYSTEM_SKL_MIKO_5,Red Cloak, Blue Cloak
 LOC_SYSTEM_SKL_MIKO_6,Popularity Boom
 LOC_SYSTEM_SKL_SOULSHOT,Spiritual Attack
-LOC_SYSTEM_SKL_SUPER_GRAZE,Guts Graze
+LOC_SYSTEM_SKL_SUPER_GRAZE,Perfect Graze
 LOC_SYSTEM_SKL_UPGRADE_HANIWA,Enhance Haniwa
 LOC_SYSTEM_SKL_DELAY_HANIWA,Delay Enhancement
 LOC_SYSTEM_SKL_DRAW_CARD,Draw Card
@@ -3515,8 +3515,8 @@ LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_UNEQUIP,You no longer gain MP recovery from 
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_FAITH_CHARGING,You communed with a god through the amulet!
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_FAITH_CHARGING_FAIL,Without faith, your gathered piety faded into the sky.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER,You focus all your senses on evasion for a moment!
-LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END_ALMOST,Your grit-based grazing is about to end.
-LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END,Your grit-based grazing has ended.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END_ALMOST,Your Perfect Graze is about to end.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END,Your Perfect Graze has ended.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SMOKE,A thick fog rolls in, obscuring everything.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_RAIN,Heavy rain and thunder sweep through the dungeon.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SUNNY,Bright sunlight begins to shine into the dungeon.
@@ -5455,3 +5455,70 @@ LOC_SYSTEM_SPL_DESCRIBE_THROW_BUCKET,Throws a bucket of slippery liquid that it 
 LOC_SYSTEM_ATT_PIERCING,Piercing
 LOC_SYSTEM_TILE_DOLLSHOUSE_WALL,Wall
 LOC_SYSTEM_MAGIC_DOLL_LUNGE,{0} lunged at {1}.
+LOC_SYSTEM_PLAYER_SAKUYA,Sakuya
+LOC_SYSTEM_PLAYER_CIRNO,Cirno
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SAKUYA,A tricky type who throws knives to both sides. Use her knives to devise a unique combat strategy!\n Aptitude Bonus) +3 Short Blades Aptitude, +3 Danmaku Aptitude, +4 Space-Time Aptitude\n Bonus) Starts with a +2 Throwing Knife instead of a Broomstick. Her thrown knives fly faster and split apart.\n\n Sakuya throws Throwing Knives faster and creates duplicate knives that fly toward nearby enemies.\n However, Throwing Knives must be retrieved before they can be thrown again, demanding a unique fighting style.\n Make active use of her Space-Time magic.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_CIRNO,An ice fairy who never melts, even in the blazing heat. Create the right item for every situation!\n Stat Bonus) Strength +6, Intelligence -6\n Aptitude Bonus) +3 Fighting Aptitude, +2 Long Blades Aptitude, +2 Maces Aptitude, +3 Cold Aptitude, -3 Fire Aptitude\n Bonus) Cold Resistance ++, Fire Resistance -, can create an ice item every 3 levels.\n\n Cirno combines a high aptitude for Cold with fighting prowess unusual for a fairy.\n Create ice items at every multiple of 3 levels to grow stronger.\n She can make artifact equipment, danmaku, and even ice cream out of ice.\n Play her as a cold mage, or take advantage of her high Fighting aptitude.\n But if you enter melee combat, beware of the frailty common to fairies.
+LOC_SYSTEM_TRIBE_PROPERTY_SAKUYA_PASSIVE,Perfect and Elegant Maid
+LOC_SYSTEM_TRIBE_PROPERTY_CIRNO_PASSIVE,Ice Fairy
+LOC_SYSTEM_TRIBE_PROPERTY_CIRNO_ICE_CREATE,Create Ice Item
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SAKUYA_PASSIVE,You throw throwing knives quickly and launch duplicate knives to both sides.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CIRNO_PASSIVE,You are ice itself. (Cold Resistance +2, Fire Resistance -1)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CIRNO_ICE_CREATE,You can create an ice item every 3 levels.
+LOC_SYSTEM_SKL_CIRNO_ICE_CREATE,Create Ice Item
+LOC_SYSTEM_SKL_DESCRIBE_CIRNO_ICE_CREATE,Create three ice-infused items and choose one to keep.\nThe quality of the items gradually improves with each use.
+LOC_SYSTEM_GOD_SHOW_N_REMAIN,({0} remaining)
+LOC_SYSTEM_CIRNO_ICE_CREATE_READY,You can now create an item made of ice.
+LOC_SYSTEM_CIRNO_ICE_CREATE_USED,You created an item made of ice.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SAKUYA_PASSIVE,Throwing knives take 20% less time to throw.\nWhen throwing one, automatically target up to one nearby enemy on each side and launch duplicate knives at them simultaneously.\nDuplicate knives do not consume an item or remain on the ground.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CIRNO_PASSIVE,Increases Cold Resistance by 2 levels and decreases Fire Resistance by 1 level.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CIRNO_ICE_CREATE,Gain one use of Create Ice Item every 3 levels.\nIce items have the cold property and are offered as three choices.\nTheir quality improves with every use, and saved uses may be spent at any time.
+LOC_SYSTEM_ITEM_ICE_SWORD,Icicle Sword
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_SWORD,A greatsword made from an icicle.\nShe made it as huge and powerful as she could imagine, but sometimes its weight swings her around instead.
+LOC_SYSTEM_ITEM_ICE_DAGGER,Icicle Dagger
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_DAGGER,A small dagger made of ice.\nShe does not like fighting with daggers, but its small size let her shape it with precision and give it a keen edge.
+LOC_SYSTEM_ITEM_ICE_CRASHER,Great Crasher
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_CRASHER,A blunt weapon made from a massive block of ice.\nWhen her little head imagined the most powerful weapon possible, it produced a gigantic hammer.
+LOC_SYSTEM_ITEM_ICE_SPEAR,Icicle Spear
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_SPEAR,A spear made of ice.\nShe imagined the longest, largest icicle possible, and this weapon was the result.
+LOC_SYSTEM_ITEM_ICE_AXE,Icicle Axe
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_AXE,An axe made of ice.\nIt is quite sophisticated for something Cirno devised, though using it is simple enough.
+LOC_SYSTEM_ITEM_ICE_ICICLE,Icicle
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_ICICLE,A sharp icicle danmaku thrown at enemies.\nIt deals cold damage and freezes enemies it hits.
+LOC_SYSTEM_ITEM_ICE_RING,Ice Ring
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_RING,A ring fashioned from ice.
+LOC_SYSTEM_ITEM_ICE_CROWN,Ice Crown
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_CROWN,A crown fashioned from ice.
+LOC_SYSTEM_ITEM_ICE_CREAM,Ice Cream
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_CREAM,Cold and sweet ice cream that Cirno loves.\nIt restores a little Power and HP.
+LOC_SYSTEM_ITEM_ICE_ARMOUR,Ice Armour
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_ARMOUR,Armour made of ice.\nIt is so terribly cold that few could ever wear it.
+LOC_SYSTEM_ITEM_ICE_GLOVES,Ice Gloves
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_GLOVES,Gloves made of ice.\nOnly someone able to withstand frostbite of the hands could wear them.
+LOC_SYSTEM_ITEM_ICE_BOOTS,Ice Boots
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_BOOTS,Boots made of ice.\nIf you can endure their cold, they will protect your feet.
+LOC_SYSTEM_ITEM_ICE_CLOAK,Ice Cloak
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_CLOAK,A cloak made of ice.\nIt looks impressive, but cannot flutter in the wind.
+LOC_SYSTEM_ITEM_ICE_BOOK,Ice Book
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_BOOK,A book made of ice.\nCirno's idea of the strongest magic is written inside in crooked handwriting.
+LOC_SYSTEM_ITEM_EVOKE_ICE_FROG,Frozen Frog
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_ICE_FROG,A frozen frog.\nUsing it creates mist nearby and slows and freezes enemies. The closer the enemy, the stronger the effect.\nAfter it is used a certain number of times, the ice will melt and it will return to being an ordinary frog.
+LOC_SYSTEM_CIRNO_ICE_CREATE_SELECT,Choose an ice item.
+LOC_SYSTEM_CIRNO_ICE_CREATE_EXAMINE,Choose an ice item to examine.
+LOC_SYSTEM_CIRNO_ICE_CREATE_CONFIRM,Are you sure you want to choose this item?
+LOC_SYSTEM_ITEM_FROZEN_FROG_USE,Cold mist rises from the frozen frog.
+LOC_SYSTEM_ITEM_FROZEN_FROG_EMPTY,The frozen frog can no longer be used.
+LOC_SYSTEM_CIRNO_ICE_CREATE_SELECT_MODE,Select
+LOC_SYSTEM_CIRNO_ICE_CREATE_EXAMINE_MODE,Examine
+LOC_SYSTEM_ITEM_FROZEN_FROG_REMAIN,{0} uses remaining
+LOC_SYSTEM_CIRNO_LAEVATEIN_TOO_HOT,This weapon is too hot for you!
+LOC_SYSTEM_CIRNO_ICEFAIRYRING_EQUIP,Your mind cannot get any worse than it already is.
+LOC_SYSTEM_KNIFE_COLLECT_EMPTY,There are no thrown weapons within sight that you can retrieve.
+LOC_SYSTEM_KNIFE_COLLECT_DONE,You retrieved the nearby thrown weapons.
+LOC_SYSTEM_TIME_PARADOX_NO_SPACE,There is no room to create a duplicate.
+LOC_SYSTEM_SPELLCARD_CANCEL_WASTE_ASK,Cancelling will consume a use. Are you sure you want to cancel?
+LOC_SYSTEM_SPL_DOLL_SPEAR,Doll Placement
+LOC_SYSTEM_SPL_LITTLE_LEGION,Little Legion
+LOC_SYSTEM_SPL_DESCRIBE_DOLL_SPEAR,Summons two sword-wielding dolls that spin around the target.\nThe dolls cannot move, but continuously damage nearby creatures.
+LOC_SYSTEM_SPL_DESCRIBE_LITTLE_LEGION,Summons several dolls around the caster that are ready to fight immediately.\nThe summons are spearmen, archers, or self-destruct dolls, with 2 to 4 dolls of a single type appearing at once.\nThese dolls last only about 10 turns, and the caster cannot use the spell consecutively.\nWhen facing this spell, either avoid combat briefly or attack the summoner controlling the dolls.
+LOC_SYSTEM_WIKI_SEARCH_HINT,Press / or ? to search.

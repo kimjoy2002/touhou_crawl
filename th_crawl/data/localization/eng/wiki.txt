@@ -110,7 +110,7 @@ Ranged Accuracy Formula (Ranged Accuracy Formula, Ranged Accuracy, Danmaku Accur
 ================================================
 Base {Accuracy}: 8 + {Dexterity}/3
 Ranged Accuracy: {Danmaku} Accuracy + Danmaku Enchant + Danmaku Skill/2
-If it is an equippable {Weapon}, accuracy increases by an additional 3.
+Throwing knives and throwing spears gain an additional 3 accuracy.
 Afterward, various buffs are applied and {Evasion} and {Accuracy} are calculated. -> {Monster Evasion Formula}
 
 
@@ -325,3 +325,639 @@ Dazed
 ================================================
 Dazed is a status effect that reduces a monster’s {Accuracy} by 3 and lowers the cast frequency of {Spells} to 90%.
 It is mainly caused by the {Smash} ability of {Maces}.
+
+================================================
+Spells (Magic)
+================================================
+
+Spells can be learned from a {Spellbook} and cast with the z key.
+They cannot be cast during {Silence}, {Mad}, or {Confused}, and cost MP equal to their spell level.
+You cannot learn a spell above your current maximum spell level.
+You have 1 + {Level} + 2 * {Spellcasting} spell slots; memorizing a spell uses slots equal to its level.
+See {Spell Power} and {Spell Success Rate} for details.
+
+================================================
+Spell Power
+================================================
+
+{Spells} use the following power calculation:
+Spell Power = (average level of the required schools + {Spellcasting}/2 + A) * {Intelligence}/10 * B
+A can include an Intelligence {Potion} (+4) and {Mima}'s Conjuration bonus (+4).
+B can include {Enhanced} (2), {Weakened} (0.5), Mima's punishment (0.5),
+the {Half-Youkai}'s enhancement magic trait (1.3), and {Miko}'s magic enhancement (1.5).
+
+================================================
+Spell Success Rate
+================================================
+
+{Spells} use the following success calculation:
+Success value = average level of the required schools + {Intelligence}/6 + {Spellcasting}/4
+Difficulty = spell difficulty by level + {Equipment Penalty}
+Success rate = (success value - difficulty) * (28 + (success value - difficulty - 1) * -1.07) / 2 %
+If success value minus difficulty is greater than 14, the success rate is 99%.
+The difficulty values for spell levels 1 through 9 are -6, -2, 1, 4, 8, 11, 14, 17, and 21.
+The success value also changes with an Intelligence {Potion} (+2), a wizard's {Ring} (1 + number worn),
+{Drunkenness} (-2), {Byakuren}'s enhancement magic bonus (+2),
+{Mima}'s Conjuration bonus (+2), and {Space-Time Backlash} (reduced by its value).
+
+================================================
+Power (P Item, P)
+================================================
+
+Power is the third resource after {HP} and {MP}.
+It resembles hunger in other roguelikes, but reaching zero does not kill you.
+Below 2.00 Power, {Melee Damage} and {Danmaku Damage} gradually fall, reaching half at 0.00.
+You cannot cast {Spells} at 1.00 Power or less.
+Defeated enemies have a 50% chance to drop a P Item, while Power slowly falls over time.
+It normally decreases by 1 every 25-30 turns; {Power Sustain} can double or halve that rate.
+{Haste} and {Invisible} each make Power decrease five times faster.
+Some {Divine Powers} and most {Evocable Items} consume Power; {Food} and certain {Potions} restore it.
+
+================================================
+Confused (Confusion)
+================================================
+
+Confusion is a status effect that prevents most actions, including {Spells}, {Scrolls}, and {Evocable Items}.
+Some {Divine Powers} and {Potions} remain usable; a {Potion of Curing} normally removes it.
+Movement goes in a random direction. A confused player takes 1.2 times melee damage.
+Attacking a confused monster has a 25% chance to trigger Stage 2 {Stabbing},
+and a confused monster's {Evasion} is halved.
+{Confusion Resistance} prevents it, except for certain effects such as divine punishment.
+
+================================================
+Poisoned (Poison)
+================================================
+
+Poison deals damage over time. Higher poison values increase both its chance to trigger and its damage.
+The chance each turn is 1/5 below 15, 1/3 below 30, about 2/3 below 45, and 100% at 45 or above.
+Damage per tick is 1 below 50, 1d2 at 50-99, 1d3 at 100-124, and 1d4 at 125 or above.
+Monsters multiply that damage by another 1d3.
+Poison decreases by 1 each turn and can accumulate up to 150.
+With {Poison Resistance} of at least 1, ordinary poison does not apply; vulnerability doubles poison buildup.
+
+================================================
+Electrified
+================================================
+
+Each turn, Electrified has a 2/5 chance to strike a nearby creature with electricity.
+The strike seeks the nearest electrical conductor in range (electric resistance 2 or lower).
+It uses the source's {Spell Power}; see that entry for the calculation.
+When a monster causes it, its power is the monster's {Level} * 5.
+Power is capped at 50, and maximum damage is 9 + power/3 (about 25 at most).
+The effect can last up to 40 turns.
+
+================================================
+Paralyzed (Paralysis)
+================================================
+
+While paralyzed, you cannot act or move.
+Your {Evasion} and {Shield} guard chance become zero, so all attacks hit.
+
+================================================
+Graze
+================================================
+
+Graze completely avoids an otherwise avoidable ranged attack with a 1/5 chance.
+The Flow of Air trait increases this chance to 1/2.
+It can last up to 100 turns.
+
+================================================
+Silence
+================================================
+
+Silence prevents sound-based actions, including {Spells} and {Scrolls}.
+It has an area of effect that creates a {Silence Field} nearby.
+It can last up to 50 turns.
+
+================================================
+Sickened
+================================================
+
+Sickened prevents natural {HP} regeneration.
+It can accumulate up to 200 turns.
+
+================================================
+Veiling
+================================================
+
+Veiling is a wind shield that immediately reflects damage to a melee attacker, then disappears.
+The reflected damage increases with {Spell Power}, up to 20.
+
+================================================
+Invisible (Invisibility)
+================================================
+
+Invisible is a beneficial status. Enemies without see-invisible cannot spot you,
+and their {Detection} value falls by 70.
+{Glowing} or {Sunny Weather} negates invisibility.
+Power falls five times faster while you are invisible. The effect lasts up to 100 turns.
+
+================================================
+Muted
+================================================
+
+Muted is a status applied to enemies. While it lasts, they cannot use sound-based actions,
+including {Spells} and certain abilities.
+
+================================================
+Grabbing (Caught)
+================================================
+
+At two or more levels of {Yuugi}'s {Faith}, each melee attack has a 10% chance to grab a target.
+Some of Yuugi's {Divine Powers} gain additional effects while you are grabbing it.
+Moving ends the grab.
+
+================================================
+Ghost Form
+================================================
+
+Ghost Form comes from the {Okuri-Chochin}.
+It makes you invulnerable to all damage, but prevents nearly every action except movement.
+Each turn it consumes Power equal to 12 - power/3 + accumulated uses.
+Power here is max({Evocation} skill, {Level}/3 + {Evocation} skill * 2/3),
+so higher Evocation reduces the cost. Ghost Form ends when Power reaches zero.
+
+================================================
+Fear
+================================================
+
+Fear can be inflicted through {Satori}'s first-tier {Faith} ability, {Mind Reading}.
+The target flees from its opponent. Mind Reading can sometimes escalate Fear to {Crushed Will}.
+
+================================================
+Crushed Will
+================================================
+
+Crushed Will can be inflicted through {Satori}'s first-tier {Faith} ability, {Mind Reading}.
+Beyond {Fear}, the target permanently loses the will to fight.
+You immediately gain half of its experience value.
+Killing it gives no further experience, and it disappears after leaving your sight.
+
+================================================
+Mind Read
+================================================
+
+Mind Read is inflicted through {Satori}'s fourth-tier {Faith} ability.
+When the affected enemy attacks you, its {Accuracy} is reduced to one-third.
+An affected animal becomes a full ally, but will not follow you to another floor.
+
+================================================
+Mad (Madness)
+================================================
+
+Madness prevents complex actions such as {Spells} but greatly increases melee damage.
+It adds 1-10 to maximum melee and {Danmaku} damage.
+{Confusion Resistance} prevents it, and it can last up to 20 turns.
+A mad monster attacks the nearest creature without distinguishing friend from foe.
+Attacking a mad enemy can trigger Stage 1 {Stabbing}.
+Madness attacks have a 50% chance to inflict Madness for 3-8 turns.
+
+================================================
+Enhanced
+================================================
+
+Enhanced doubles all attack damage and {Spell Power}.
+
+================================================
+Weakened
+================================================
+
+Weakened halves all attack damage and {Spell Power}.
+
+================================================
+Oil
+================================================
+
+Taking a fire attack while covered in Oil immediately sets you on {Fire}.
+Certain attacks and oil-covered tiles apply Oil.
+
+================================================
+Fire (Burning)
+================================================
+
+Burning deals 3-4 fire damage each turn.
+Being covered in {Oil} can cause fire attacks to set you on Fire.
+
+================================================
+Side Effect
+================================================
+
+This status comes from {Eirin}'s fifth-tier {Faith} ability.
+HP restored by Eirin's healing ability accumulates as its value.
+During the final 10 turns, it deals min(remaining value, remaining value/remaining time + 1) damage each turn.
+This damage cannot kill you, but continues until the value reaches zero.
+
+================================================
+Stasis
+================================================
+
+Stasis is inflicted by enemies. It prevents you from using or receiving the effects
+of teleportation {Spells} and items.
+
+================================================
+Slay (Combat Power)
+================================================
+
+The Slay value increases your maximum melee and {Danmaku} damage and {Accuracy} by the same amount.
+A negative value reduces them instead.
+
+================================================
+Drowsy
+================================================
+
+Drowsy is inflicted by enemies. At 100, it forces you to {Sleep} for about 10 turns.
+
+================================================
+Fog
+================================================
+
+Fog is a {Weather} effect that reduces everyone's sight to two tiles.
+Fairies of the Misty Lake are immune to this weather.
+
+================================================
+Thunder
+================================================
+
+Thunder is a {Weather} effect. Lightning strikes at random each turn.
+It has a 1/10 chance to home in on a nearby enemy; otherwise, it has a 1/2 chance
+to strike a random location within eight tiles.
+The strike causes an electrical explosion dealing up to one-third of maximum HP.
+
+================================================
+Sunny Weather
+================================================
+
+Sunny Weather is a {Weather} effect. Everyone becomes {Glowing}, reducing {Evasion}
+and negating {Invisible}.
+
+================================================
+Tempest
+================================================
+
+Tempest is a {Weather} effect that multiplies everyone's movement delay by 0.7,
+increasing {Movement Speed}.
+
+================================================
+Drowning
+================================================
+
+If you cannot swim or {flight} while submerged, you lose one-tenth of maximum {HP} each turn.
+Lava also deals fire damage equal to one-third of maximum HP, in addition to drowning damage.
+Movement delay rises sharply while drowning.
+
+================================================
+Stat Penalty
+================================================
+
+This occurs when one of your {Stats} reaches zero. All action delays are doubled.
+
+================================================
+Perfect Graze
+================================================
+
+Perfect Graze activates when the Amulet of Graze is fully charged.
+While active, it avoids all avoidable attacks with 100% certainty.
+
+================================================
+Space-Time Backlash (Space-Time Penalty)
+================================================
+
+This debuff is the recoil from {Space-Time} magic. Some powerful spells add to its value.
+Later Space-Time {Spells} lose an equal amount from their {Spell Success Rate} value.
+
+================================================
+Drunk (Drunkenness)
+================================================
+
+Drunkenness can be caused by some {Potions}.
+Each time you move, there is about a 1/11 (9%) chance of moving in a random direction.
+It also reduces your {Spell Success Rate} value by 2.
+
+================================================
+Ghost
+================================================
+
+Ghost is a passive unlocked at the first tier of {Yuyuko}'s {Faith}.
+Every three turns, it checks whether to summon a ghost, with a chance of 5 + {Faith}/8 percent.
+Yuyuko's third-tier power raises the chance to 85% for a while.
+Summoned ghosts are one level below your {Level} and last 20-30 turns.
+
+================================================
+Dimensional Lock
+================================================
+
+{Yukari} and some enemies can impose Dimensional Lock.
+The visible area is fixed, and you cannot leave its barrier while the effect lasts.
+With Yukari's version, you can cross an edge and re-enter from the opposite side.
+Enemy-imposed Dimensional Lock does not allow this and also prevents use of stairs.
+
+================================================
+Time Stop
+================================================
+
+Time Stop is a buff from certain {Spells} and other effects.
+Everyone except you stops moving. It lasts up to 20 turns.
+
+================================================
+Silence Field
+================================================
+
+In a Silence Field, you cannot speak or use {Spells}, {Scrolls}, or certain {Divine Powers}.
+Even creatures able to cast without speaking cannot cast inside it.
+
+================================================
+Murderous Intent (Murderous)
+================================================
+
+Murderous Intent is a buff gained at the fourth tier of {Junko}'s {Faith}.
+It makes all your {Action Speed} 1.5 times faster, but ends when no enemy is in sight.
+
+================================================
+Haste
+================================================
+
+Haste makes all your {Action Speed} 1.5 times faster and can last up to 100 turns.
+It cancels out {Slowed} while both are active.
+Power decreases five times faster during Haste.
+
+================================================
+Slowed (Slow)
+================================================
+
+Slowed reduces all your {Action Speed} to 0.7 times normal and can last up to 100 turns.
+It cancels out {Haste} while both are active.
+
+================================================
+Kyou
+================================================
+
+Kyou is a curse corresponding to 1-3 points of bad luck, inflicted by some enemies.
+Bad luck can accumulate to 10: 1-3 is Kyou, 4-6 is {Daikyou}, and 7 or more is {BuddhaDeath}.
+Melee and {Danmaku} {Accuracy} falls by 5.
+Each time you gain a large amount of experience, bad luck decreases by 1.
+
+================================================
+Daikyou
+================================================
+
+Daikyou corresponds to 4-6 points of bad luck.
+At 1-3 the curse is {Kyou}, and at 7 or more it is {BuddhaDeath}.
+Melee and {Danmaku} {Accuracy} falls by 7, and about 5% of incoming attacks deal maximum damage.
+At this level or worse, a generated floor item has a 1/12 chance of becoming an unfavorable item.
+Gaining a large amount of experience reduces bad luck by 1.
+
+================================================
+BuddhaDeath
+================================================
+
+BuddhaDeath is the worst curse, corresponding to 7-10 points of bad luck.
+At 1-3 the curse is {Kyou}, and at 4-6 it is {Daikyou}.
+Melee and {Danmaku} {Accuracy} falls by 9, and about 10% of incoming attacks deal maximum damage.
+The chance of an unfavorable item rises to 1/6. Whenever you gain experience,
+there is a 50% chance that two or three UFOs will land nearby.
+Gaining a large amount of experience reduces bad luck by 1.
+
+================================================
+Frozen
+================================================
+
+Some cold attacks inflict Frozen.
+It increases movement delay by a fraction of (Frozen value + 1)/20.
+With cold resistance, Frozen is ignored if a 1d5 roll is lower than twice that resistance.
+Additional duration from stacking is halved, and the value is capped at 25.
+
+================================================
+Flight (Flight)
+================================================
+
+Flight lets you fly over water, lava, and certain other terrain.
+It lasts up to 100 turns.
+
+================================================
+Glowing
+================================================
+
+Attackers gain +5 {Accuracy} against a Glowing target.
+Glowing negates {Invisible} and halves {Stealth}.
+It can build up to 100, and {Sunny Weather} or a halo area can also apply it.
+
+================================================
+Swift
+================================================
+
+Swift improves {Movement Speed} by reducing movement delay by 2.
+
+================================================
+Superman
+================================================
+
+Superman is a buff from the fifth tier of {Byakuren}'s {Faith}.
+It fixes movement delay at 3 and can last up to 50 turns.
+
+================================================
+Night Blindness
+================================================
+
+Night Blindness reduces your vision to a single tile.
+Monsters can still see you normally. See-invisible makes you immune to it.
+
+================================================
+Sleep (Asleep)
+================================================
+
+Monsters may be asleep when generated or put to sleep by certain abilities.
+An asleep monster can wake through {Detection} if the player is in its sight.
+Attacking a sleeping target always triggers Stage 3 {Stabbing}, guaranteeing maximum damage.
+A sleeping player cannot act and has no {Evasion} or {Shield} guard chance.
+Each turn has a 50% chance to reduce the remaining sleep time by one, and an attack wakes the player immediately.
+{Drowsy} can cause Sleep.
+
+================================================
+Tracking
+================================================
+
+Some enemies inflict Tracking. All enemies on the floor learn your exact position and pursue you.
+
+================================================
+Overheat
+================================================
+
+Some powerful {Spells} cause Overheat.
+If you already have Overheat, gaining more deals damage equal to its current value.
+
+================================================
+Gluttony
+================================================
+
+Each point of Gluttony raises maximum melee and {Danmaku} damage and {Accuracy}.
+It stacks up to 9 and fades if you stop fighting.
+
+================================================
+HP (Health)
+================================================
+
+HP is your basic life resource. You die when it reaches zero.
+Maximum HP is approximately (8 + (1 + 3 * {Fighting})/2 + 9 * {Level}/2
++ {Fighting} * {Level}/14) * (HP attribute/10).
+It rises with Fighting and Level; racial and trait modifiers are then applied.
+Natural regeneration per 100 turns is approximately (maximum HP + 7) * 100 / (240-300).
+Each regeneration trait adds 40 to that rate, while reduced regeneration multiplies it by 0.7.
+
+================================================
+MP (Mana)
+================================================
+
+MP is spent on {Spells} and certain {Divine Powers} and {Evocable Items}.
+Spells cost MP equal to their level and cannot be cast without enough MP.
+Maximum MP rises by 1 each {Level}, with another 1 at every third level;
+it is approximately Level + Level/3.
+Natural regeneration per 100 turns is approximately (maximum MP/4 + 7) * 100 / (80-120).
+
+================================================
+Movement Speed (Movement Delay)
+================================================
+
+Movement delay is the time needed to move one tile, normally 10.
+{Swift} reduces it by 2, Sluggishness increases it by 6, and {Superman} fixes it at 3.
+{Frozen} increases it by a fraction of (Frozen value + 1)/20, while {Drowning} adds 10.
+
+================================================
+Potions (Potion)
+================================================
+
+Potions are consumed by drinking. Unidentified potions appear only by color
+until you drink or identify them.
+
+================================================
+Scrolls (Scroll)
+================================================
+
+Scrolls are consumed by reading. Unidentified scrolls have random names.
+They cannot be read while {Silence}, {Silence Field}, or {Confused}.
+
+================================================
+Evocable Items (Evocable Item)
+================================================
+
+Evocable Items are reusable tools activated while worn or held.
+Most consume {Power}, and they cannot be used while {Confused}.
+
+================================================
+Spellbook (Spellbooks)
+================================================
+
+A Spellbook lets you learn {Spells}, which you can then cast at any time.
+You cannot learn spells above your current maximum level.
+Memorizing one consumes spell slots equal to its level; you have
+1 + {Level} + 2 * {Spellcasting} slots in total.
+
+================================================
+Ring (Rings)
+================================================
+
+Rings are wearable accessories. You can wear one on each hand.
+
+================================================
+Food
+================================================
+
+Food is consumed to restore {Power}.
+
+================================================
+Spell Card (Spell Cards)
+================================================
+
+A Spell Card is an item with a powerful effect and a limited number of uses.
+Its power increases with your {Evocation} level.
+Identifying it reveals the exact number of uses.
+Effects such as a recharge {Scroll} can replenish its uses.
+
+================================================
+Danmaku (Ranged)
+================================================
+
+Danmaku items are ranged weapons that are thrown or fired.
+Their damage and accuracy follow the {Ranged Damage Formula} and {Ranged Accuracy Formula}.
+
+================================================
+Divine Powers (Divine Power)
+================================================
+
+Divine Powers are special abilities granted by the god you worship.
+They unlock as your {Faith} increases.
+
+================================================
+Armour Pieces (Armour Piece)
+================================================
+
+Armour Pieces are worn to gain {Defense} or {Shield}.
+Slots include body {Armour}, {Shield}, headwear, and cloaks.
+Heavy equipment causes an {Equipment Penalty}.
+
+================================================
+Spellcasting
+================================================
+
+Spellcasting is a core magic skill.
+It increases spell slots to 1 + {Level} + 2 * Spellcasting,
+adds Spellcasting/2 to {Spell Power}, and Spellcasting/4 to the success value in {Spell Success Rate}.
+
+================================================
+Fighting
+================================================
+
+Fighting is the basic melee skill.
+It adds Fighting/4 to base accuracy in the {Melee Accuracy Formula}
+and contributes to maximum {HP} through (1 + 3 * Fighting)/2 + Fighting * {Level}/14.
+
+================================================
+Dual Wield
+================================================
+
+Dual Wield means holding a weapon in each hand instead of a {Shield}.
+When using {Slash} with {Long Blades}, the success chances are multiplied.
+
+================================================
+Two-Hand Penalty (Two-Handed Penalty)
+================================================
+
+Some {Weapons} incur a penalty when used with a {Shield}.
+Depending on its stage, attack delay increases by 0.1-0.3 turns.
+
+================================================
+Power Sustain
+================================================
+
+Power Sustain affects how quickly {Power} falls, doubling or halving its rate.
+
+================================================
+Level
+================================================
+
+Level is your character level, gained by earning experience.
+Every three levels, you can raise one of your {Stats}.
+Maximum {HP} and the highest level of {Spells} you can learn also rise with Level.
+
+================================================
+Resistance
+================================================
+
+Resistance values include fire, cold, electricity, {Poison Resistance}, and {Confusion Resistance}.
+Fire, cold, and electrical resistance multiply the final damage taken.
+For monsters, vulnerability gives 1.5 times damage, slight resistance 0.5,
+strong resistance 0.2, and complete immunity zero.
+For players, vulnerability gives 1.5 times damage, one level of resistance 0.5,
+two levels 0.25, and three levels 0.125.
+
+================================================
+Poison Resistance
+================================================
+
+Poison Resistance prevents ordinary {Poison}.
+Strong poison still applies at one-third strength; poison vulnerability doubles buildup.
+
+================================================
+Confusion Resistance
+================================================
+
+Confusion Resistance prevents ordinary {Confusion} and {Madness}.

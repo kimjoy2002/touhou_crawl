@@ -1474,7 +1474,7 @@ int players::move(short_move x_mov, short_move y_mov)
 		else if(env[current_level].isSmokePos(move_x_,move_y_))
 		{
 			smoke* temp_smoke = env[current_level].isSmokePos2(move_x_,move_y_);
-			if(hp<temp_smoke->danger(this))
+			if(temp_smoke && hp<temp_smoke->danger(this))
 			{
 				you.SetInter(IT_SMOKE);
 				if(!ynPrompt(LOC_SYSTEM_FORBIDZONE_YN, LOC_SYSTEM_DANGER_MSG, CL_danger, false,false,true,false)) {

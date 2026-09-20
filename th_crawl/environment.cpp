@@ -165,6 +165,7 @@ void environment::LoadDatas(FILE *fp)
 	shadow_list.clear();
 	afterimage_list.clear();
 	item_list.clear();
+	smoke_list.clear();
 	effect_list.clear();
 	LoadData<int>(fp, floor);
 	LoadData<bool>(fp, make);
@@ -262,6 +263,21 @@ void environment::LoadDatas(FILE *fp)
 		smoke temp;
 		temp.LoadDatas(fp);
 		smoke_list.push_back(temp);
+	}
+	for(int x=0;x<DG_MAX_X;x++)
+	{
+		for(int y=0;y<DG_MAX_Y;y++)
+			dgtile[x][y].flag &= ~(FLAG_SMOKE | FLAG_SIGHT_SMOKE | FLAG_DANGER);
+	}
+	for(list<smoke>::iterator it=smoke_list.begin();it!=smoke_list.end();it++)
+	{
+		if(it->position.x < 0 || it->position.x >= DG_MAX_X || it->position.y < 0 || it->position.y >= DG_MAX_Y)
+			continue;
+		dgtile[it->position.x][it->position.y].flag |= FLAG_SMOKE;
+		if(it->sight_inter())
+			dgtile[it->position.x][it->position.y].flag |= FLAG_SIGHT_SMOKE;
+		if(it->type == SMT_DARK)
+			dgtile[it->position.x][it->position.y].flag |= FLAG_DANGER;
 	}
 	size_ = 0;
 	LoadData<int>(fp, size_);
@@ -1483,14 +1499,16 @@ bool environment::MakeSmoke(const coord_def &c, textures *t, smoke_type type_, i
 	if(!isSmokePos(c.x,c.y) && isMove(c.x,c.y,true))
 	{
 		WaitForSingleObject(mutx, INFINITE);
-		smoke_list.push_back(smoke(c, t, type_, time_, expand_, pt_temp));
+		smoke_list.push_back(smoke(c, t, type_, time_, expand_, floor, pt_temp));
 		ReleaseMutex(mutx);
 		return true;
 	}
 	if(override_ && isSmokePos(c.x,c.y) && isMove(c.x,c.y,true)) {
 		smoke* s_ = isSmokePos2(c.x, c.y, nullptr);
+		if(!s_)
+			return false;
 		WaitForSingleObject(mutx, INFINITE);
-		s_->init(c, t, type_, time_, expand_, pt_temp);
+		s_->init(c, t, type_, time_, expand_, floor, pt_temp);
 		ReleaseMutex(mutx);
 		return true;
 	}
@@ -2133,14 +2151,15 @@ bool environment::ActionSmokeEffect()
 			if(isSmokePos((*it).position.x,(*it).position.y))
 			{
 				smoke* temp = isSmokePos2((*it).position.x,(*it).position.y);
-				temp->effectSmoke(&(*it));
+				if(temp)
+					temp->effectSmoke(&(*it));
 			}
 		}
 	}
 	if(isSmokePos(you.position.x,you.position.y))
 	{
 		smoke* temp = isSmokePos2(you.position.x,you.position.y);
-		if(temp->effectSmoke(&you))
+		if(temp && temp->effectSmoke(&you))
 			return true;
 	}
 	return false;

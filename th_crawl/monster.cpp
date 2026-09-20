@@ -2630,7 +2630,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 		if(env[current_level].isSmokePos(position.x+x_mov,position.y+y_mov))
 		{
 			smoke* temp_smoke = env[current_level].isSmokePos2(position.x+x_mov,position.y+y_mov);
-			if(hp<temp_smoke->danger(this))
+			if(temp_smoke && hp<temp_smoke->danger(this))
 				return 0;
 		}
 		if(floor_effect* temp_floor = env[current_level].isFloorEffectPos(position.x+x_mov,position.y+y_mov))
@@ -7207,8 +7207,11 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, ostringstream& ss)
 		if(env[current_level].isSmokePos(position.x,position.y))
 		{
 			smoke* smoke_= env[current_level].isSmokePos2(position.x,position.y);
-			ss << smoke_->GetName();
-			return CL_normal;
+			if(smoke_)
+			{
+				ss << smoke_->GetName();
+				return CL_normal;
+			}
 		}
 		return CL_none;
 	case MSS_SUMMON:

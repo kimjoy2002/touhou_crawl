@@ -5626,3 +5626,4 @@ LOC_SYSTEM_SPELL_POWER_ENHANCE3,Your spell is tremendously empowered!
 LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_FLOOD,You are seized by the urge to drown someone.
 LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FLOOD,Your urge to drown someone fades.
 LOC_SYSTEM_SPL_KICK,Kick
+LOC_SYSTEM_PATCH_NOTE,Patch Notes

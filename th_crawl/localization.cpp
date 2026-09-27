@@ -61,6 +61,7 @@ void LocalzationManager::init(string type, bool init_) {
 		localizationVector.find(type)->monster_description_map.clear();
 		localizationVector.find(type)->help_command.clear();
 		localizationVector.find(type)->help_credit.clear();
+		localizationVector.find(type)->help_patchnote.clear();
 	}
 	
 	std::transform(type_.begin(), type_.end(), type_.begin(),
@@ -75,6 +76,7 @@ void LocalzationManager::init(string type, bool init_) {
 		initFileSimple(defaultFilePath, "help_pad.txt", localizationVector.find(type)->help_pad_command, nullptr);
 	if(!initFileSimple(filePath, "credit.txt", localizationVector.find(type)->help_credit, nullptr))
 		initFileSimple(defaultFilePath, "credit.txt", localizationVector.find(type)->help_credit, nullptr);
+	initFileSimple(defaultFilePath, "patchnote.txt", localizationVector.find(type)->help_patchnote, nullptr);
 	if(!initFileSimple(filePath, "wizardhelp.txt", localizationVector.find(type)->help_wizard, nullptr))
 		initFileSimple(defaultFilePath, "wizardhelp.txt", localizationVector.find(type)->help_wizard, nullptr);
 	if(!initFileSimple(filePath, "character.txt", localizationVector.find(type)->help_character, &localizationVector.find(type)->helpline_character))

@@ -503,6 +503,12 @@ bool morgue_menu(int value_);
 bool save_menu(int value_);
 bool score_menu(int value_);
 
+bool patchnote_menu(int value_)
+{
+	PatchNote_Show();
+	return false;
+}
+
 bool quit_menu(int value_)
 {
 	throw 0;
@@ -539,6 +545,7 @@ void start_mainmenu()
 		temp->push_back(menu_string("l - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_LEADERBOARD), true, CL_normal, 'l'));
 		temp->push_back(menu_string("m - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MORGUE), true, CL_normal, 'm'));
 		temp->push_back(menu_string("R - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_REPLAY), true, CL_normal, 'R'));
+		temp->push_back(menu_string("v - " + LocalzationManager::locString(LOC_SYSTEM_PATCH_NOTE), true, CL_normal, 'v'));
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("X - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_QUIT), true, CL_normal, 'X'));
 		m_mgr.menu_puls(0,temp);
@@ -553,6 +560,7 @@ void start_mainmenu()
 		m_mgr.menu_input_puls(0,'l',0,"",false,score_menu,0);
 		m_mgr.menu_input_puls(0,'m',0,"",false,morgue_menu,0);
 		m_mgr.menu_input_puls(0,'R',0,"",false,replay_menu,0);
+		m_mgr.menu_input_puls(0,'v',0,"",false,patchnote_menu,0);
 		m_mgr.menu_input_puls(0,'X',0,"",false,quit_menu,0);
 		
 		temp = make_unique<vector<menu_string>>();

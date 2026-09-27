@@ -16,6 +16,57 @@
 extern HANDLE mutx;
 extern display_manager DisplayManager;
 
+void PatchNote_Show()
+{
+	WaitForSingleObject(mutx, INFINITE);
+	deletesub();
+	for(TextHelper text_ : LocalzationManager::getHelpPatchNote()) {
+		printsub(text_.text,text_.enter,text_.color);
+	}
+	changedisplay(DT_SUB_TEXT);
+	setDisplayMove(DisplayManager.max_y);
+	ReleaseMutex(mutx);
+
+	while(1)
+	{
+		InputedKey inputedKey;
+		switch(waitkeyinput(inputedKey,true))
+		{
+		case VK_UP:
+			changemove(1);
+			break;
+		case VK_DOWN:
+			changemove(-1);
+			break;
+		case VK_PRIOR:
+		case GVK_LEFT_BUMPER:
+			changemove(DisplayManager.log_length);
+			break;
+		case VK_NEXT:
+		case GVK_RIGHT_BUMPER:
+			changemove(-DisplayManager.log_length);
+			break;
+		case -1:
+			if(inputedKey.mouse == MKIND_SCROLL_UP) {
+				changemove(1);
+				break;
+			} else if(inputedKey.mouse == MKIND_SCROLL_DOWN) {
+				changemove(-1);
+				break;
+			} else if(inputedKey.isRightClick()) {
+				return;
+			}
+			break;
+		case VK_ESCAPE:
+		case GVK_BUTTON_B:
+		case GVK_BUTTON_B_LONG:
+			return;
+		default:
+			break;
+		}
+	}
+}
+
 static void SetWikiSearchPrompt(const string& text, D3DCOLOR color = CL_normal)
 {
 	WaitForSingleObject(mutx, INFINITE);
@@ -119,6 +170,7 @@ void Help_Show()
 	printsub("c. " + LocalzationManager::locString(LOC_SYSTEM_CHARACTER_HELP),true,CL_normal, 'c');
 	printsub("g. " + LocalzationManager::locString(LOC_SYSTEM_GODS_HELP),true,CL_normal, 'g');	
 	printsub("h. " + LocalzationManager::locString(LOC_SYSTEM_WIKI_HELP),true,CL_normal, 'h');
+	printsub("v. " + LocalzationManager::locString(LOC_SYSTEM_PATCH_NOTE),true,CL_normal, 'v');
 	printsub(":. " + LocalzationManager::locString(LOC_SYSTEM_PROCESS_NOTE),true,CL_normal, ':');
 	printsub("0. " + LocalzationManager::locString(LOC_SYSTEM_PROCESS_CREDIT),true,CL_normal, '0');
 	changedisplay(DT_SUB_TEXT);
@@ -428,6 +480,11 @@ void Help_Show()
 			SetWikiSearchPrompt("");
 			break;
 		}
+		case 'V':
+		case 'v':
+			PatchNote_Show();
+			loop_ = false;
+			break;
 		case ':':
 			{	
 				WaitForSingleObject(mutx, INFINITE);

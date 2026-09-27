@@ -759,6 +759,7 @@ void view_log();
 void skill_view();
 void stat_view();
 void Help_Show();
+void PatchNote_Show();
 void rune_Show();
 void Iden_Show();
 void Weapon_Show();

@@ -1166,23 +1166,23 @@ const mon_infor mondata[] = {
 		
 	{MON_SANGHAI_DOLL,9,500,name_infor(MON_SANGHAI_DOLL),&img_mons_sacrifice_doll[0],50,0,16,
 		{15,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE | M_FLAG_CANT_NETURAL,99,1,7,'d' },
+		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE | M_FLAG_CANT_NETURAL,0,1,7,'d' },
 	
 	{MON_HOURAI_DOLL,12,600,name_infor(MON_HOURAI_DOLL),&img_mons_curse_doll,65,1,15,
 		{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,1,10,'d' },
+		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,1,1,10,'d' },
 
 	{MON_FRANCE_DOLL,14,1100,name_infor(MON_FRANCE_DOLL),&img_mons_france_doll,80,2,10,
 		{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,1,10,'d' },
+		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,2,1,10,'d' },
 		
 	{MON_LONDON_DOLL,10,700,name_infor(MON_LONDON_DOLL),&img_mons_london_doll,50,5,5,
 		{48,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE | M_FLAG_NO_ATK | M_FLAG_RANGE_ATTACK,99,1,10,'d' },
+		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE | M_FLAG_NO_ATK | M_FLAG_RANGE_ATTACK,1,1,10,'d' },
 		
 	{MON_NETHERLANDS_DOLL,13,850,name_infor(MON_NETHERLANDS_DOLL),&img_mons_netherlands_doll,90,2,20,
 		{24,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE,99,1,10,'d' },
+		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE,1,1,10,'d' },
 		
 	{MON_GOLIATH_DOLL,16,1500,name_infor(MON_GOLIATH_DOLL),&img_mons_goliath_doll[0],240,22,5,
 		{40,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
@@ -1198,7 +1198,7 @@ const mon_infor mondata[] = {
 
 	{MON_SPEAR_DOLL,10,500,name_infor(MON_SPEAR_DOLL),&img_mons_spear_doll,110,10,5,
 		{20,36,0},{ATT_NORMAL,ATT_NORMAL,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_PIERCING),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,99,1,10,'d' },
+		M_FLAG_OPEN_DOOR | M_FLAG_CAN_SEE_INVI | M_FLAG_INANIMATE,1,1,10,'d' },
 
 	{MON_TIME_PARADOX,4,0,name_infor(MON_TIME_PARADOX),&img_mons_default,15,0,5,
 		{0,0,0},{ATT_NONE,ATT_NONE,ATT_NONE},{name_infor(),name_infor(),name_infor()},
@@ -1206,5 +1206,5 @@ const mon_infor mondata[] = {
 
 	{MON_SPINNING_DOLL,5,0,name_infor(MON_SPINNING_DOLL),&img_mons_spinning_doll[0],30,4,0,
 		{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_NONE_MOVE | M_FLAG_IMMOBILE | M_FLAG_NONE_STAIR | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,10,'d' }
+		M_FLAG_NONE_MOVE | M_FLAG_IMMOBILE | M_FLAG_NONE_STAIR | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,0,0,10,'d' }
 };

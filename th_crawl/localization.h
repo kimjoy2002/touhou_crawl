@@ -93,6 +93,7 @@ public:
 	    vector<TextHelper> help_command;
 	    vector<TextHelper> help_pad_command;
 	    vector<TextHelper> help_credit;
+	    vector<TextHelper> help_patchnote;
 	    vector<TextHelper> help_wizard;
 	    vector<TextHelper> help_character;
 	    unordered_map<string, string, ci_hash, ci_equal> wiki_redirect;
@@ -218,6 +219,7 @@ public:
 	static const vector<TextHelper>& getHelpCommand(){return localizationVector.find(current_lang)->help_command;};
 	static const vector<TextHelper>& getHelpPadCommand(){return localizationVector.find(current_lang)->help_pad_command;};
 	static const vector<TextHelper>& getHelpCredit(){return localizationVector.find(current_lang)->help_credit;};
+	static const vector<TextHelper>& getHelpPatchNote(){return localizationVector.find(current_lang)->help_patchnote;};
 	static const vector<TextHelper>& getHelpWizard(){return localizationVector.find(current_lang)->help_wizard;};
 	static const vector<TextHelper>& getHelpCharacter(){return localizationVector.find(current_lang)->help_character;};
 	static void printWiki();

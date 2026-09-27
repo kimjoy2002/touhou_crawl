@@ -130,6 +130,7 @@ int CutSelect(int min, int max, int cur);
 
 void rand_seed(unsigned int seed_);
 void init_nonlogic_seed(unsigned int seed_);
+void reset_logic_random_seed();
 
 void log_replay_event(const std::string& message);
 void log_message(const char* file, int line, const std::string& message);

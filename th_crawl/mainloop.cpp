@@ -375,6 +375,7 @@ void charter_selete(bool first)
 
 	if(!ReplayClass.play)
 	{
+		reset_logic_random_seed();
 		g_selected.clear();
 		g_selected.assign(4, 0);
 		start_mainmenu();

@@ -6,6 +6,7 @@
 
 #include <random>
 #include <ctime>
+#include <chrono>
 #include <iostream>
 #include <fstream>
 #include <DirectXMath.h> 
@@ -76,10 +77,43 @@ void init_nonlogic_seed(unsigned int seed_)
 
 }
 
+void reset_logic_random_seed()
+{
+	static unsigned int seed_count = 0;
+	unsigned long long now_ = (unsigned long long)chrono::high_resolution_clock::now().time_since_epoch().count();
+	unsigned int seed_ = (unsigned int)now_ ^ (unsigned int)(now_ >> 32) ^ (++seed_count * 0x9e3779b9u);
+	seed_ ^= seed_ >> 16;
+	seed_ *= 0x7feb352du;
+	seed_ ^= seed_ >> 15;
+	seed_ *= 0x846ca68bu;
+	seed_ ^= seed_ >> 16;
+	map_list.random_number = seed_;
+}
+
+static unsigned int mix_logic_random(unsigned int value_)
+{
+	value_ ^= value_ >> 16;
+	value_ *= 0x7feb352du;
+	value_ ^= value_ >> 15;
+	value_ *= 0x846ca68bu;
+	value_ ^= value_ >> 16;
+	return value_;
+}
+
 static unsigned int next_logic_random()
 {
 	map_list.random_number = map_list.random_number * 1664525u + 1013904223u;
-	return map_list.random_number;
+	return mix_logic_random(map_list.random_number);
+}
+
+static unsigned int bounded_logic_random(unsigned int range_)
+{
+	unsigned int threshold_ = (0u - range_) % range_;
+	unsigned int value_;
+	do {
+		value_ = next_logic_random();
+	} while(value_ < threshold_);
+	return value_ % range_;
 }
 
 int LoopSelect(int min, int max, int cur)
@@ -172,8 +206,8 @@ float rand_float_impl(const char* file, int line, float min, float max)
 	}
 	//min = (float)(random_number % (int)((max - min)*100 + 1)) /100 + min;
 	//random_number = (((random_number*214013L + 2531011L)>>16)&0x7fff);
-	unsigned int rand_ = next_logic_random();
-	min = (float)(rand_ % (int)((max - min)*100 + 1)) /100 + min;
+	unsigned int range_ = (unsigned int)((max - min)*100 + 1);
+	min = (float)bounded_logic_random(range_) /100 + min;
 	
 	//min = (float)(map_list.random_number % (int)((max - min)*100 + 1)) /100 + min;
 
@@ -202,9 +236,8 @@ int rand_int_impl(const char* file, int line, int min, int max)
 	}
 	//min = (random_number % (max - min+1)) + min;
 	
-	unsigned int rand_ = next_logic_random();
 	unsigned int range = (unsigned int)((long long)max - min + 1);
-	min = (int)(rand_ % range) + min;
+	min = (int)bounded_logic_random(range) + min;
 	//map_list.random_number = (((map_list.random_number*214013L + 2531011L)>>16)&0x7fff);
 
 	return min;

@@ -354,6 +354,11 @@ bool g_auto = false;
 
 void auto_Move()
 {
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return;
+	}
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY),true,false,false,CL_danger);
@@ -816,7 +821,12 @@ bool Auto_Pick_Up(list<item>::iterator it)
 		return false;
 	if(!it->isautopick())
 		return false;
-	if(you.s_confuse)
+		
+	if(you.IsDiving())
+	{
+		return false;
+	}
+	if(you.s_confuse || you.s_lunatic)
 		return false;
 	if(!isShootingSprint() && env[current_level].insight_mon(MET_ENEMY))
 		return false;
@@ -1965,6 +1975,11 @@ void Stair_move_all() {
 
 bool Stair_move(bool down)
 {
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return false;
+	}
 	dungeon_tile_type type = env[current_level].dgtile[you.position.x][you.position.y].tile;
 	switch(env[current_level].getStairKind(you.position.x, you.position.y))
 	{

@@ -3288,7 +3288,7 @@ LOC_SYSTEM_ITEM_ARTIFACT_MAGICIAN,Magician
 LOC_SYSTEM_ITEM_ARTIFACT_AC,AC{0}
 LOC_SYSTEM_ITEM_ARTIFACT_EV,EV{0}
 LOC_SYSTEM_ITEM_ARTIFACT_CONFUSE_RESIST,rConf
-LOC_SYSTEM_ITEM_ARTIFACT_ELEC_RESIST,rE+
+LOC_SYSTEM_ITEM_ARTIFACT_ELEC_RESIST,rE{0}
 LOC_SYSTEM_ITEM_ARTIFACT_MAGIC_RESIST,MR+
 LOC_SYSTEM_ITEM_ARTIFACT_SLAY,Slay{0}
 LOC_SYSTEM_ITEM_ARTIFACT_HP_REGEN,HPRegen{0}
@@ -3310,7 +3310,7 @@ LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGICIAN,Increases spell success rate.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_AC,Defense changes by {0}.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_EV,Evasion changes by {0}.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_CONFUSE_RESIST,Grants resistance to confusion.
-LOC_SYSTEM_ITEM_ARTIFACT_INFO_ELEC_RESIST,Grants resistance to electricity.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_ELEC_RESIST,Increases or decreases electricity resistance. ({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGIC_RESIST,Grants magic resistance ({0}).
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_SLAY,Increases attack damage and accuracy. ({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_HP_REGEN,Increases health regeneration speed. ({0})
@@ -5522,3 +5522,107 @@ LOC_SYSTEM_SPL_LITTLE_LEGION,Little Legion
 LOC_SYSTEM_SPL_DESCRIBE_DOLL_SPEAR,Summons two sword-wielding dolls that spin around the target.\nThe dolls cannot move, but continuously damage nearby creatures.
 LOC_SYSTEM_SPL_DESCRIBE_LITTLE_LEGION,Summons several dolls around the caster that are ready to fight immediately.\nThe summons are spearmen, archers, or self-destruct dolls, with 2 to 4 dolls of a single type appearing at once.\nThese dolls last only about 10 turns, and the caster cannot use the spell consecutively.\nWhen facing this spell, either avoid combat briefly or attack the summoner controlling the dolls.
 LOC_SYSTEM_WIKI_SEARCH_HINT,Press / or ? to search.
+LOC_SYSTEM_ITEM_ARTIFACT_SHINING_NEEDLE_SWORD_NAME,Shining Needle Sword
+LOC_SYSTEM_ITEM_ARTIFACT_SHINING_NEEDLE_SWORD_DESCRIBE,A tiny needle said to be used as a sword by an inchling.\nIt seems far too small to serve properly in combat under ordinary circumstances.
+LOC_SYSTEM_ITEM_ARTIFACT_SWORD_OF_SCARLET_PERCEPTION_NAME,Sword of Scarlet Perception
+LOC_SYSTEM_ITEM_ARTIFACT_SWORD_OF_SCARLET_PERCEPTION_DESCRIBE,The Sword of Scarlet Perception said to be a celestial treasure.\nThe true sword is said to be a secret treasure that only celestials may touch.\nPerhaps this one is merely an imitation of the genuine article.
+LOC_SYSTEM_ITEM_ARTIFACT_GOLIATH_SWORD_NAME,Goliath Greatsword
+LOC_SYSTEM_ITEM_ARTIFACT_GOLIATH_SWORD_DESCRIBE,A massive greatsword once carried by an enormous doll.\nAn ordinary human or youkai would need both hands to wield it.\nIts tremendous size makes it difficult to swing, but the swing alone can strike enemies all around.
+LOC_SYSTEM_ITEM_ARTIFACT_REAPER_SCYTHE_NAME,Reaper's Scythe
+LOC_SYSTEM_ITEM_ARTIFACT_REAPER_SCYTHE_DESCRIBE,A massive scythe carried over the shoulder by a shinigami.\nSimply holding it creates the illusion that distant targets are right before your eyes.\nThis warped sense of distance makes it harder to handle than ordinary weapons.
+LOC_SYSTEM_ITEM_ARTIFACT_UNIDENTIFIED_TRIDENT_NAME,Unidentified Trident
+LOC_SYSTEM_ITEM_ARTIFACT_UNIDENTIFIED_TRIDENT_DESCRIBE1,It looks like an ordinary trident with no remarkable qualities.\nYet an aura of unknown nature can be felt within it.\nWith enough Scrolls of Identify, its true nature might be uncovered.
+LOC_SYSTEM_ITEM_ARTIFACT_UNIDENTIFIED_TRIDENT_DESCRIBE2,A trident gradually revealing its hidden power.\nLooking again, it resembles the weapon once carried by a great youkai of unidentified nature.\nWith more Scrolls of Identify, its true worth may be revealed.
+LOC_SYSTEM_ITEM_ARTIFACT_UNIDENTIFIED_TRIDENT_DESCRIBE3,The legendary trident said to have been carried by the great youkai Nue.\nAll of its hidden power has now been revealed.\nBut can a weapon whose identity has been exposed still truly be called Nue's weapon?
+LOC_SYSTEM_ITEM_ARTIFACT_SUNKEN_ANCHOR_NAME,Sinking Anchor
+LOC_SYSTEM_ITEM_ARTIFACT_SUNKEN_ANCHOR_DESCRIBE,A massive anchor imbued with the power of a ship phantom.\nMerely holding it fills you with the urge to sink something beneath the waves.
+LOC_SYSTEM_ITEM_ARTIFACT_YAMANBA_CLEAVER_NAME,Yamanba's Cleaver
+LOC_SYSTEM_ITEM_ARTIFACT_YAMANBA_CLEAVER_DESCRIBE,The weapon of a yamanba said to dwell deep in the mountains.\nThough it is a one-handed cleaver, it can also be thrown and put to many uses.
+LOC_SYSTEM_ITEM_ARTIFACT_BUTTERFLY_FAN_NAME,Death Butterfly Fan
+LOC_SYSTEM_ITEM_ARTIFACT_BUTTERFLY_FAN_DESCRIBE,A fan imbued with the power of a ghost.\nIt does not look very formidable as a blunt weapon, but the power within it feels somehow fatal.
+LOC_SYSTEM_ITEM_ARTIFACT_RED_MALLET_NAME,Red-Stained Mallet
+LOC_SYSTEM_ITEM_ARTIFACT_RED_MALLET_DESCRIBE,A huge mallet used for pounding rice cakes. Its head is stained with a red liquid.\nAt first glance it resembles blood, but it is really just strawberry sauce.\nRegardless of the stain, it is remarkably easy to swing and can send an unwary foe flying.
+LOC_SYSTEM_ITEM_ARTIFACT_IMMOVABLE_LIBRARY_NAME,Robe of Knowledge and Shade
+LOC_SYSTEM_ITEM_ARTIFACT_IMMOVABLE_LIBRARY_DESCRIBE,A purple robe once worn by a certain magician.\nIt has been treated to amplify magical power.\nThe price is such discomfort that merely wearing it makes moving feel like a chore.\nAt times, the cords on the robe almost seem to form stripes.
+LOC_SYSTEM_ITEM_ARTIFACT_FULLMOON_DRESS_NAME,Full-Moon Wolf Dress
+LOC_SYSTEM_ITEM_ARTIFACT_FULLMOON_DRESS_DESCRIBE,A loose-fitting dress emblazoned with a large full moon.\nIt is said that a werewolf chose this oversized design to conceal her fur.
+LOC_SYSTEM_ITEM_ARTIFACT_HANIWA_ARMOUR_NAME,Haniwa Stone Armour
+LOC_SYSTEM_ITEM_ARTIFACT_HANIWA_ARMOUR_DESCRIBE,Sturdy armour crafted personally by a sculptor god.\nThough made of clay, divine power has hardened it beyond most ordinary armour.
+LOC_SYSTEM_ITEM_ARTIFACT_OCCULT_CLOAK_NAME,Occult Cloak
+LOC_SYSTEM_ITEM_ARTIFACT_OCCULT_CLOAK_DESCRIBE,A splendid cloak made for the first president of the Secret Sealing Club.\nRunic letters line its interior, seeming to imbue its wearer with occult power.
+LOC_SYSTEM_ITEM_ARTIFACT_PEACH_HAT_NAME,Peach Hat
+LOC_SYSTEM_ITEM_ARTIFACT_PEACH_HAT_DESCRIBE,A celestial's hat adorned with a decorative peach.\nIt makes the wearer as hardy as a celestial and grants exceptional health regeneration.
+LOC_SYSTEM_ITEM_ARTIFACT_BOUNDARY_GLOVES_NAME,Boundary Youkai's Long Gloves
+LOC_SYSTEM_ITEM_ARTIFACT_BOUNDARY_GLOVES_DESCRIBE,Long white gloves reaching to the elbows, said to have been worn by a certain boundary youkai.\nThrown weapons cross a boundary and somehow find their way back into your hands.
+LOC_SYSTEM_ITEM_ARTIFACT_COWGIRL_BOOTS_NAME,Cowgirl Boots
+LOC_SYSTEM_ITEM_ARTIFACT_COWGIRL_BOOTS_DESCRIBE,Boots said to have been worn by a beast youkai with tremendous leg strength.\nSimply wearing them greatly enhances the force of your kicks.
+LOC_SYSTEM_ITEM_ARTIFACT_STOPWATCH_NAME,Special Stopwatch
+LOC_SYSTEM_ITEM_ARTIFACT_STOPWATCH_DESCRIBE,A stopwatch hanging from a silver chain.\nStaring at it creates the illusion that its hands are moving ever more slowly.
+LOC_SYSTEM_ITEM_ARTIFACT_SNAKE_RING_NAME,Snake Ring
+LOC_SYSTEM_ITEM_ARTIFACT_SNAKE_RING_DESCRIBE,A ring imbued with the power of a war god.\nIt greatly increases the wearer's health and strength.
+LOC_SYSTEM_ITEM_ARTIFACT_FROG_RING_NAME,Frog Ring
+LOC_SYSTEM_ITEM_ARTIFACT_FROG_RING_DESCRIBE,A ring imbued with the power of a native god. It lets the wearer swim through solid ground as though it were water.\nIts design looks charming, yet it also carries the feeling of endless calamity.
+LOC_SYSTEM_ITEM_ARTIFACT_WEATHER_TRIGGER,*Weather
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_WEATHER_TRIGGER,Attacks have a small chance to invoke random weather.
+LOC_SYSTEM_ITEM_ARTIFACT_WHIRLWIND,Whirlwind
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_WHIRLWIND,Attacks strike all enemies in the 8 surrounding tiles.
+LOC_SYSTEM_ITEM_ARTIFACT_INFINITE_REACH,Reach+∞
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_INFINITE_REACH,Can attack an enemy at any distance if nothing blocks the line between you.
+LOC_SYSTEM_ITEM_ARTIFACT_PULL,Pull
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_PULL,Pulls an attacked enemy directly in front of you.
+LOC_SYSTEM_ITEM_ARTIFACT_UNKNOWN_POWER,Unidentified
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_UNKNOWN_POWER,This weapon still contains hidden powers that have yet to be identified.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_FLOOD,Drowning
+LOC_SYSTEM_ITEM_WEAPON_BRAND_INFO_FLOOD,Has a chance to inflict Silence and prevent movement on enemies it hits.
+LOC_SYSTEM_ITEM_ARTIFACT_SWIM,Swimming
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_SWIM,Allows you to swim through water.
+LOC_SYSTEM_ITEM_ARTIFACT_INSTANT_DEATH,Instant Death
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_INSTANT_DEATH,Has a chance to instantly kill living enemies. The weaker they are than you, the greater the chance.
+LOC_SYSTEM_ITEM_ARTIFACT_KNOCKAWAY,Knockaway
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_KNOCKAWAY,Sends enemies killed by this weapon flying backward.
+LOC_SYSTEM_ITEM_ARTIFACT_JUMP,+Leap
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_JUMP,Allows you to leap at an enemy and attack it.
+LOC_SYSTEM_ITEM_ARTIFACT_RETURN,Return
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_RETURN,Thrown weapons have a 50% chance to return to your inventory.
+LOC_SYSTEM_ITEM_ARTIFACT_KICK,*Kick
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_KICK,Melee attacks have a chance to deliver a kick. Its chance and damage scale with Unarmed Combat.
+LOC_SYSTEM_ITEM_ARTIFACT_MAX_HP,HP{0}
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAX_HP,Maximum HP changes by {0}.
+LOC_SYSTEM_ITEM_ARTIFACT_DIVE,+Dive
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_DIVE,Allows you to dive underground and vanish from every enemy's sight.
+LOC_SYSTEM_ITEM_ARTIFACT_POWER,Power{0}
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_POWER,Maximum Power changes by {0} levels.
+LOC_SYSTEM_ITEM_ARTIFACT_TRIDENT_COMPLETE,{0} has revealed its entire true nature!
+LOC_SYSTEM_ITEM_ARTIFACT_REAPER_BLOCKED,Something before you prevents you from attacking such a distant enemy.
+LOC_SYSTEM_SKILL_DIVE,Dive
+LOC_SYSTEM_SKILL_DIVE_OFF,End Dive
+LOC_SYSTEM_SKILL_DIVE_INFO,Dive underground for a time. Nearby enemies cannot detect you while diving.\nYou may only move, attack, or leap in this state, and attacking or leaping ends the effect.\nYou also evade every ranged attack, but being hit by a melee attack ends the effect.
+LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION,You may only move, attack, or leap while diving.
+LOC_SYSTEM_ITEM_ARTIFACT_NUE_TRIDENT_NAME,Great Youkai Nue's Trident
+LOC_SYSTEM_ITEM_ARTIFACT_TRIDENT_REVEAL,Identifying the item reveals one of {0}'s hidden powers!
+LOC_SYSTEM_ITEM_ARTIFACT_WEATHER_TRIGGERED,{0} invokes {1} weather!
+LOC_SYSTEM_ITEM_ARTIFACT_PULL_TRIGGER,{0} pulls the distant {1} directly in front of you!
+LOC_SYSTEM_ITEM_ARTIFACT_INSTANT_DEATH_TRIGGER,{0} reaps {1}'s life!
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN11,An amulet depicting a dog
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIME_STOP,Amulet of Time Stop
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIME_STOP_SHORT,Time Stop
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIME_STOP,A pocket watch once carried by a certain maid.\nPress v at 100% charge to briefly stop all time except your own.\n
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIVE,While diving, enemies cannot detect you and you evade every projectile, but you may only move or attack.
+LOC_SYSTEM_BUFF_STAT_DIVE,Diving
+LOC_SYSTEM_YOU_DIVE,You dive into {0}.
+LOC_SYSTEM_YOU_DIVE_END_ALMOST,You are beginning to run out of breath.
+LOC_SYSTEM_YOU_DIVE_END,You hurriedly surface from {0}!
+LOC_SYSTEM_SKILL_ALREADY_DIVE,You cannot use this while already diving.
+LOC_SYSTEM_SKILL_DIVE_STOP,You emerge from {0}.
+LOC_SYSTEM_SKILL_DIVE_STOP_ATTACKED,The damage forces you out of your dive.
+LOC_SYSTEM_SKILL_DIVE_EXTINGUISH,The flames clinging to you go out.
+LOC_SYSTEM_SKILL_DIVE_JUMP,You leap powerfully out of {0}!
+LOC_SYSTEM_HIT_NORMAL_NO_OWNER,{0} hit{0==you?:s} {1!=you?the :}{1}.
+LOC_SYSTEM_FIGHT_MISS_NO_OWNER,{0} miss{0==you?:es} {1}.
+LOC_SYSTEM_FIGHT_GRAZED_NO_OWNER,{0} {0==you?are:is} grazed by {1}.
+LOC_SYSTEM_SPELL_POWER_ENHANCE1,Your spell is empowered!
+LOC_SYSTEM_SPELL_POWER_ENHANCE2,Your spell is greatly empowered!
+LOC_SYSTEM_SPELL_POWER_ENHANCE3,Your spell is tremendously empowered!
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_FLOOD,You are seized by the urge to drown someone.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FLOOD,Your urge to drown someone fades.
+LOC_SYSTEM_SPL_KICK,Kick

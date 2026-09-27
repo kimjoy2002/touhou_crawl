@@ -1519,14 +1519,15 @@ textures img_play_item_body[17] = {
 	textures(&texture_players01, 207),
 	textures(&texture_players01, 208)
 };
-textures img_play_item_hat[7] = {
+textures img_play_item_hat[8] = {
 	textures(&texture_players01, 224),
 	textures(&texture_players01, 225),
 	textures(&texture_players01, 226),
 	textures(&texture_players01, 227),
 	textures(&texture_players01, 228),
 	textures(&texture_players01, 229),
-	textures(&texture_players01, 230)
+	textures(&texture_players01, 230),
+	textures(&texture_players01, 231)
 };
 textures img_play_item_shield[4] = {
 	textures(&texture_players01, 256),
@@ -1562,7 +1563,7 @@ textures img_play_item_tribe[1] = {
 };
 
 
-textures img_play_item_fixed_artifact[18] = {
+textures img_play_item_fixed_artifact[33] = {
 	textures(&texture_players01, 321),//0, 팔괘로
 	textures(&texture_players01, 322),//1, 궁니르
 	textures(&texture_players01, 323),//2, 누관검
@@ -1581,6 +1582,21 @@ textures img_play_item_fixed_artifact[18] = {
 	textures(&texture_players01, 336),//15, 풀무장 캇파옷
 	textures(&texture_players01, 337),//16, 마계 메이드옷
 	textures(&texture_players01, 338),//17, 이부키효
+	textures(&texture_players01, 339),//18, 빛나는 휘침검
+	textures(&texture_players01, 340),//19, 비상의 검
+	textures(&texture_players01, 341),//20, 골리앗 대검
+	textures(&texture_players01, 342),//21, 사신의 낫
+	textures(&texture_players01, 343),//22, 정체불명의 삼지창
+	textures(&texture_players01, 344),//23, 침수의 닻
+	textures(&texture_players01, 345),//24, 야만바의 식칼
+	textures(&texture_players01, 346),//25, 사접의 부채
+	textures(&texture_players01, 347),//26, 붉게 물든 떡메
+	textures(&texture_players01, 348),//27, 지식과 그늘의 로브
+	textures(&texture_players01, 349),//28, 만월 늑대옷
+	textures(&texture_players01, 350),//29, 하니와 석갑옷
+	textures(&texture_players01, 351),//30, 오컬트 망토
+	textures(&texture_players01, 352),//31, 경계요괴의 긴 장갑
+	textures(&texture_players01, 353),//32, 카우걸 부츠
 };
 
 
@@ -1705,6 +1721,26 @@ textures img_item_fixed_artifact_helltshirt(&texture_item04, 4, 255);
 textures img_item_fixed_artifact_kappafullarmor(&texture_item04, 5, 255);
 textures img_item_fixed_artifact_maiduniform(&texture_item04, 6, 255);
 textures img_item_fixed_artifact_ibukisake(&texture_item04, 7, 255);
+textures img_item_fixed_artifact_shining_needle_sword(&texture_item04, 39, 255);
+textures img_item_fixed_artifact_sword_of_scarlet_perception(&texture_item04, 40, 255);
+textures img_item_fixed_artifact_goliath_sword(&texture_item04, 41, 255);
+textures img_item_fixed_artifact_reaper_scythe(&texture_item04, 42, 255);
+textures img_item_fixed_artifact_unidentified_trident(&texture_item04, 43, 255);
+textures img_item_fixed_artifact_sunken_anchor(&texture_item04, 44, 255);
+textures img_item_fixed_artifact_yamanba_cleaver(&texture_item04, 45, 255);
+textures img_item_fixed_artifact_butterfly_fan(&texture_item04, 46, 255);
+textures img_item_fixed_artifact_red_mallet(&texture_item04, 47, 255);
+textures img_item_fixed_artifact_immovable_library(&texture_item04, 48, 255);
+textures img_item_fixed_artifact_fullmoon_dress(&texture_item04, 49, 255);
+textures img_item_fixed_artifact_haniwa_armour(&texture_item04, 50, 255);
+textures img_item_fixed_artifact_occult_cloak(&texture_item04, 51, 255);
+textures img_item_fixed_artifact_peach_hat(&texture_item04, 52, 255);
+textures img_item_fixed_artifact_boundary_gloves(&texture_item04, 53, 255);
+textures img_item_fixed_artifact_cowgirl_boots(&texture_item04, 54, 255);
+textures img_item_fixed_artifact_stopwatch(&texture_item04, 55, 255);
+textures img_item_fixed_artifact_snake_ring(&texture_item04, 56, 255);
+textures img_item_fixed_artifact_frog_ring(&texture_item04, 57, 255);
+textures img_player_dive(&texture_monster02, 160, 255);
 
 textures img_item_ice[15] = {
 	textures(&texture_item04, 24, 255),
@@ -1824,6 +1860,7 @@ textures(&texture_item02, 117, 255),
 textures(&texture_item02, 118, 255),
 textures(&texture_item02, 119, 255),
 textures(&texture_item02, 120, 255),
+textures(&texture_item02, 121, 255),
 textures(&texture_item02, 121, 255)
 };
 
@@ -4331,6 +4368,78 @@ int texturetoint(textures* input)
 		return 722;
 	else if(input == &img_mons_spinning_doll[1])
 		return 723;
+	else if(input == &img_item_fixed_artifact_shining_needle_sword)
+		return 724;
+	else if(input == &img_item_fixed_artifact_sword_of_scarlet_perception)
+		return 725;
+	else if(input == &img_item_fixed_artifact_goliath_sword)
+		return 726;
+	else if(input == &img_item_fixed_artifact_reaper_scythe)
+		return 727;
+	else if(input == &img_item_fixed_artifact_unidentified_trident)
+		return 728;
+	else if(input == &img_item_fixed_artifact_sunken_anchor)
+		return 729;
+	else if(input == &img_item_fixed_artifact_yamanba_cleaver)
+		return 730;
+	else if(input == &img_item_fixed_artifact_butterfly_fan)
+		return 731;
+	else if(input == &img_item_fixed_artifact_red_mallet)
+		return 732;
+	else if(input == &img_item_fixed_artifact_immovable_library)
+		return 733;
+	else if(input == &img_item_fixed_artifact_fullmoon_dress)
+		return 734;
+	else if(input == &img_item_fixed_artifact_haniwa_armour)
+		return 735;
+	else if(input == &img_item_fixed_artifact_occult_cloak)
+		return 736;
+	else if(input == &img_item_fixed_artifact_peach_hat)
+		return 737;
+	else if(input == &img_item_fixed_artifact_boundary_gloves)
+		return 738;
+	else if(input == &img_item_fixed_artifact_cowgirl_boots)
+		return 739;
+	else if(input == &img_item_fixed_artifact_stopwatch)
+		return 740;
+	else if(input == &img_item_fixed_artifact_snake_ring)
+		return 741;
+	else if(input == &img_item_fixed_artifact_frog_ring)
+		return 742;
+	else if(input == &img_player_dive)
+		return 743;
+	else if(input == &img_play_item_hat[7])
+		return 744;
+	else if(input == &img_play_item_fixed_artifact[18])
+		return 745;
+	else if(input == &img_play_item_fixed_artifact[19])
+		return 746;
+	else if(input == &img_play_item_fixed_artifact[20])
+		return 747;
+	else if(input == &img_play_item_fixed_artifact[21])
+		return 748;
+	else if(input == &img_play_item_fixed_artifact[22])
+		return 749;
+	else if(input == &img_play_item_fixed_artifact[23])
+		return 750;
+	else if(input == &img_play_item_fixed_artifact[24])
+		return 751;
+	else if(input == &img_play_item_fixed_artifact[25])
+		return 752;
+	else if(input == &img_play_item_fixed_artifact[26])
+		return 753;
+	else if(input == &img_play_item_fixed_artifact[27])
+		return 754;
+	else if(input == &img_play_item_fixed_artifact[28])
+		return 755;
+	else if(input == &img_play_item_fixed_artifact[29])
+		return 756;
+	else if(input == &img_play_item_fixed_artifact[30])
+		return 757;
+	else if(input == &img_play_item_fixed_artifact[31])
+		return 758;
+	else if(input == &img_play_item_fixed_artifact[32])
+		return 759;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -5805,6 +5914,78 @@ textures* inttotexture(int input)
 		return &img_mons_spinning_doll[0];
 	case 723:
 		return &img_mons_spinning_doll[1];
+	case 724:
+		return &img_item_fixed_artifact_shining_needle_sword;
+	case 725:
+		return &img_item_fixed_artifact_sword_of_scarlet_perception;
+	case 726:
+		return &img_item_fixed_artifact_goliath_sword;
+	case 727:
+		return &img_item_fixed_artifact_reaper_scythe;
+	case 728:
+		return &img_item_fixed_artifact_unidentified_trident;
+	case 729:
+		return &img_item_fixed_artifact_sunken_anchor;
+	case 730:
+		return &img_item_fixed_artifact_yamanba_cleaver;
+	case 731:
+		return &img_item_fixed_artifact_butterfly_fan;
+	case 732:
+		return &img_item_fixed_artifact_red_mallet;
+	case 733:
+		return &img_item_fixed_artifact_immovable_library;
+	case 734:
+		return &img_item_fixed_artifact_fullmoon_dress;
+	case 735:
+		return &img_item_fixed_artifact_haniwa_armour;
+	case 736:
+		return &img_item_fixed_artifact_occult_cloak;
+	case 737:
+		return &img_item_fixed_artifact_peach_hat;
+	case 738:
+		return &img_item_fixed_artifact_boundary_gloves;
+	case 739:
+		return &img_item_fixed_artifact_cowgirl_boots;
+	case 740:
+		return &img_item_fixed_artifact_stopwatch;
+	case 741:
+		return &img_item_fixed_artifact_snake_ring;
+	case 742:
+		return &img_item_fixed_artifact_frog_ring;
+	case 743:
+		return &img_player_dive;
+	case 744:
+		return &img_play_item_hat[7];
+	case 745:
+		return &img_play_item_fixed_artifact[18];
+	case 746:
+		return &img_play_item_fixed_artifact[19];
+	case 747:
+		return &img_play_item_fixed_artifact[20];
+	case 748:
+		return &img_play_item_fixed_artifact[21];
+	case 749:
+		return &img_play_item_fixed_artifact[22];
+	case 750:
+		return &img_play_item_fixed_artifact[23];
+	case 751:
+		return &img_play_item_fixed_artifact[24];
+	case 752:
+		return &img_play_item_fixed_artifact[25];
+	case 753:
+		return &img_play_item_fixed_artifact[26];
+	case 754:
+		return &img_play_item_fixed_artifact[27];
+	case 755:
+		return &img_play_item_fixed_artifact[28];
+	case 756:
+		return &img_play_item_fixed_artifact[29];
+	case 757:
+		return &img_play_item_fixed_artifact[30];
+	case 758:
+		return &img_play_item_fixed_artifact[31];
+	case 759:
+		return &img_play_item_fixed_artifact[32];
 	default:
 		return &img_mons_default;
 	}

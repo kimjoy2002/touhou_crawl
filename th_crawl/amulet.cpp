@@ -30,7 +30,8 @@ LOCALIZATION_ENUM_KEY amulet_uniden_string[AMT_MAX] =
 	LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN7,
 	LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN8,
 	LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN9,
-	LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN10
+	LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN10,
+	LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN11
 };
 
 LOCALIZATION_ENUM_KEY amulet_iden_string[AMT_MAX] =
@@ -44,7 +45,8 @@ LOCALIZATION_ENUM_KEY amulet_iden_string[AMT_MAX] =
 	LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_GRAZE,
 	LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_WEATHER,
 	LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_OCCULT,
-	LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PURIFTY
+	LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PURIFTY,
+	LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIME_STOP
 };
 
 
@@ -70,6 +72,8 @@ string GetShortAmuletString(string lang,amulet_type amulet_) {
 		return LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_OCCULT_SHORT);
 	case AMT_PURIFTY:
 		return LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PURIFTY_SHORT);
+	case AMT_TIME_STOP:
+		return LocalzationManager::locString(lang, LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIME_STOP_SHORT);
 	default:
 		break;
 	}
@@ -77,7 +81,7 @@ string GetShortAmuletString(string lang,amulet_type amulet_) {
 }
 
 bool isGenerateAmulet(amulet_type amulet_) {
-	return amulet_ != AMT_PURIFTY;
+	return amulet_ != AMT_PURIFTY && amulet_ != AMT_TIME_STOP;
 }
 int isAmuletGotValue(amulet_type amulet_)
 {
@@ -416,7 +420,9 @@ bool evokeAmulet(amulet_type kind, int value_)
 			return false;	
 		}
 	}
-		break;
+	break;
+	case AMT_TIME_STOP:
+		return you.SetTheWorld(10);
 	default:
 		break;
 	}

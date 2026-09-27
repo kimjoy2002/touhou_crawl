@@ -197,7 +197,7 @@ static void AppendGameState(std::ostringstream& ss)
 	ss << "status poison=" << you.s_poison << " confuse=" << you.s_confuse;
 	ss << " slow=" << you.s_slow << " frozen=" << you.s_frozen;
 	ss << " paralyse=" << you.s_paralyse << " invisible=" << you.s_invisible;
-	ss << " swift=" << you.s_swift << "\n";
+	ss << " swift=" << you.s_swift <<  " dive=" << you.s_dive << "\n";
 
 	if(current_level < 0 || current_level >= MAXLEVEL)
 		return;

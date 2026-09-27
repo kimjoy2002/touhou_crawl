@@ -3551,6 +3551,10 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_FIRE), CL_danger,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_FIRE), this);
 			}
+			if (you.s_dive) {
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_DIVE), you.s_dive>5 ? CL_white_blue : CL_blue,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIVE), this);
+			}
 		}
 	}
 
@@ -4655,7 +4659,8 @@ bool display_manager::checkItemSimpleType(list<item>::iterator it) {
 		return false;
 	if(item_vt == IVT_UEQ_JEWELRY && !equip)
 		return false;
-	if(item_vt == IVT_UNIDEN && (*it).isiden())
+	if(item_vt == IVT_UNIDEN && (*it).isiden() &&
+		!((*it).fixed_artifact == FIXED_ARTIFACT_UNIDENTIFIED_TRIDENT && (*it).GetArtifactProperty(ART_UNKNOWN_POWER) > 0))
 		return false;
 	if(item_vt == IVT_THROW && !(*it).can_throw)
 		return false;

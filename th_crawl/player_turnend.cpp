@@ -734,6 +734,23 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			SetInter(IT_STAT);
 		}
 	}
+	
+	if(s_dive > 0)
+	{
+		s_dive--;
+		if(!s_dive)
+		{
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_YOU_DIVE_END, PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile])) + " ",false,false,false,CL_blue);
+			PlaySE("diveout");
+			EndDive();
+			SetInter(IT_STAT);
+		}
+		if(s_dive == 5)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_DIVE_END_ALMOST) + " ",false,false,false,CL_blue);
+			SetInter(IT_STAT);
+		}
+	}
 	if(s_superman)
 	{
 		s_superman--;

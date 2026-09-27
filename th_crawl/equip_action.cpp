@@ -16,6 +16,11 @@
 #include "option_manager.h"
 
 bool weapon_prev_fail() {
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return true;
+	}
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_SWAP_WEAPON),true,false,false,CL_danger);
@@ -186,6 +191,11 @@ void weapon_swap()
 
 
 bool armor_prev_fail(){
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return true;
+	}
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_SWAP_ARMOUR),true,false,false,CL_danger);
@@ -349,6 +359,11 @@ void Unequip_Armor()
 }
 
 bool jewelry_prev_fail() {
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return true;
+	}
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_EQUIP_JEWELRY),true,false,false,CL_danger);

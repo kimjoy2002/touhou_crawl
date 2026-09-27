@@ -1385,10 +1385,16 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_CONFUSE_SPORE:
 		case ATT_WEAK_SPORE:
 			if(a.order) {
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,CL_normal,
-					PlaceHolderHelper(name_.getName()),
-					PlaceHolderHelper(a.name.getName()),
-					PlaceHolderHelper(GetName()->getName()));
+				if(a.no_owner) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL_NO_OWNER,false,false,false,CL_normal,
+						PlaceHolderHelper(a.name.getName()),
+						PlaceHolderHelper(GetName()->getName()));
+				} else {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,CL_normal,
+						PlaceHolderHelper(name_.getName()),
+						PlaceHolderHelper(a.name.getName()),
+						PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 			break;
 		case ATT_SILVER:
@@ -1744,8 +1750,8 @@ bool monster::damage(attack_infor &a, bool perfect_, const coord_def* hit_pos)
 			back_stab = 3;
 		else if(s_confuse || s_fear || s_paralyse)
 			back_stab = 2;
-		else if(a.order && !(a.order)->isView(this))
-		{ //투명일때 조건
+		else if(a.unseen_attack || (a.order && !(a.order)->isView(this)))
+		{ //투명이나 잠수일때 조건
 			back_stab = 2;
 		}		
 		else if(s_lunatic)
@@ -2288,16 +2294,28 @@ bool monster::damage(attack_infor &a, bool perfect_, const coord_def* hit_pos)
 		if(a.order && (sight_ || only_invisible_))
 		{			
 			if(!graze_) {
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_MISS,false,false,false,CL_bad,
-					 PlaceHolderHelper(name_.getName()),
-					 PlaceHolderHelper(a.name.getName()),
-					 PlaceHolderHelper(GetName()->getName()));
+				if(a.no_owner) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_MISS_NO_OWNER,false,false,false,CL_bad,
+						 PlaceHolderHelper(a.name.getName()),
+						 PlaceHolderHelper(GetName()->getName()));
+				} else {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_MISS,false,false,false,CL_bad,
+						 PlaceHolderHelper(name_.getName()),
+						 PlaceHolderHelper(a.name.getName()),
+						 PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 			else {
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_GRAZED,false,false,false,CL_bad,
-					 PlaceHolderHelper(name_.getName()),
-					 PlaceHolderHelper(a.name.getName()),
-					 PlaceHolderHelper(GetName()->getName()));
+				if(a.no_owner) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_GRAZED_NO_OWNER,false,false,false,CL_bad,
+						 PlaceHolderHelper(a.name.getName()),
+						 PlaceHolderHelper(GetName()->getName()));
+				} else {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_GRAZED,false,false,false,CL_bad,
+						 PlaceHolderHelper(name_.getName()),
+						 PlaceHolderHelper(a.name.getName()),
+						 PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 		}
 		return false;
@@ -6355,6 +6373,8 @@ int monster::GetDetect()
 bool monster::you_detect()
 {
 	if(isArena())
+		return false;
+	if(you.IsDiving())
 		return false;
 	if (you.god == GT_OKINA) {
 		//오키나라면 문으로 투과할땐 보이지 않아야 함

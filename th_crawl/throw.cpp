@@ -105,6 +105,7 @@ attack_type GetWeapontoTanmac(weapon_brand brand)
 		case WB_MANA_REGEN:
 		case WB_FAST_CAST:
 		case WB_PROTECT:
+		case WB_FLOOD:
 		default:
 			break;
 	}
@@ -569,6 +570,7 @@ bool ThrowTamacInstance::oneturn(coord_def& hit_pos_) {
 					)
 				{
 					attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+					temp_att.no_owner = infor_.no_owner;
 					if(attack_prefix != nullptr) {
 						attack_prefix(temp_att, this);
 					}
@@ -584,6 +586,7 @@ bool ThrowTamacInstance::oneturn(coord_def& hit_pos_) {
 				) //플레이어는 자기자신에게 맞지않는 조건은 나중에 지울까?
 			{
 				attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+				temp_att.no_owner = infor_.no_owner;
 				if(attack_prefix != nullptr) {
 					attack_prefix(temp_att, this);
 				}
@@ -819,6 +822,7 @@ coord_def throwtanmac_temp(int graphic_type, textures* t_, beam_iterator& beam, 
 					)
 				{
 					attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+					temp_att.no_owner = infor_.no_owner;
 					if((*it).damage(temp_att))
 						penetrate--;
 				}
@@ -828,6 +832,7 @@ coord_def throwtanmac_temp(int graphic_type, textures* t_, beam_iterator& beam, 
 				) //플레이어는 자기자신에게 맞지않는 조건은 나중에 지울까?
 			{
 				attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+				temp_att.no_owner = infor_.no_owner;
 				if(you.damage(temp_att))
 					penetrate--;
 			}
@@ -969,6 +974,7 @@ bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &targe
 			)
 		{
 			attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+			temp_att.no_owner = infor_.no_owner;
 			(*it).damage(temp_att);
 		}
 	}
@@ -977,6 +983,7 @@ bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &targe
 		) //플레이어는 자기자신에게 맞지않는 조건은 나중에 지울까?
 	{
 		attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+		temp_att.no_owner = infor_.no_owner;
 		you.damage(temp_att);
 	}
 	return true;
@@ -1057,6 +1064,7 @@ bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_,
 							)
 						{
 							attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+							temp_att.no_owner = infor_.no_owner;
 							if((*it2).damage(temp_att))
 							{
 							}
@@ -1498,6 +1506,11 @@ list<item>::iterator ThrowSelect()
 }
 
 bool throw_prev_fail(bool no_speak){
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return true;
+	}
 	if(you.s_lunatic)
 	{
 		if(!no_speak)

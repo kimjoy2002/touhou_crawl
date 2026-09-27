@@ -101,6 +101,8 @@ void FMODSoundManager::Initialize() {
 	addSound("bash", "sound\\se\\bash.mp3");
 	addSound("splash", "sound\\se\\splash.mp3");
 	addSound("gift", "sound\\se\\gift.mp3");
+	addSound("dive", "sound\\se\\dive.mp3");
+	addSound("diveout", "sound\\se\\diveout.mp3");
     
     
 	loadBgmFromJson("sound\\bgm\\bgm.json");

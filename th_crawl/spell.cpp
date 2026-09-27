@@ -2237,6 +2237,11 @@ void Spell_Throw(spell_list spell_, vector<monster>::iterator it2, int smite_);
 
 bool spell_prev_fail() {
 	bool silence_ = env[current_level].isSilence(you.position);
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return true;
+	}
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_SPELL),true,false,false,CL_danger);

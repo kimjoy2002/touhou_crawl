@@ -1070,11 +1070,14 @@ bool players::damage(attack_infor &a, bool perfect_)
 		//볼트형 가드안되게 하려면 어떻게?
 	}
 
+	bool diving_graze = false;
+	if(IsDiving() && isGrazableAtt(a.type))
+		diving_graze = true;
 
 	name_infor name_;
 	if(a.order)	
 		name_ = (*a.order->GetName());
-	if((randA(1000)>=evasion*1000 && !graze_ && !you.s_super_graze) || perfect_)
+	if((randA(1000)>=evasion*1000 && !graze_ && !you.s_super_graze && !diving_graze) || perfect_)
 	{	
 		if(randA(1000)>shield_*1000 || perfect_)
 		{
@@ -1093,6 +1096,10 @@ bool players::damage(attack_infor &a, bool perfect_)
 			}
 			else if(damage_)
 			{
+				if(s_dive > 0) {
+					printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_STOP_ATTACKED),false,false,false,CL_small_danger);
+					EndDive(false);
+				}
 				enterlog();
 				a.damage = damage_;
 				dead_order = &a;
@@ -1400,7 +1407,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 	{
 		if (a.order)
 		{
-			if (!graze_ || you.s_super_graze) {
+			if (!graze_ || you.s_super_graze || diving_graze) {
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_EVADE,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
 					PlaceHolderHelper(name.getName()),
 					PlaceHolderHelper(name_.getName()),

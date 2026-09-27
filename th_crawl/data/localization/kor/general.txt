@@ -3288,7 +3288,7 @@ LOC_SYSTEM_ITEM_ARTIFACT_MAGICIAN,마법사
 LOC_SYSTEM_ITEM_ARTIFACT_AC,AC{0}
 LOC_SYSTEM_ITEM_ARTIFACT_EV,EV{0}
 LOC_SYSTEM_ITEM_ARTIFACT_CONFUSE_RESIST,혼란저항
-LOC_SYSTEM_ITEM_ARTIFACT_ELEC_RESIST,전기저항
+LOC_SYSTEM_ITEM_ARTIFACT_ELEC_RESIST,전기저항{0}
 LOC_SYSTEM_ITEM_ARTIFACT_MAGIC_RESIST,마법저항
 LOC_SYSTEM_ITEM_ARTIFACT_SLAY,전투력{0}
 LOC_SYSTEM_ITEM_ARTIFACT_HP_REGEN,체력재생{0}
@@ -3310,7 +3310,7 @@ LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGICIAN,마법성공율이 올라간다.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_AC,방어가 증감한다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_EV,회피가 증감한다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_CONFUSE_RESIST,혼란에 저항이 생긴다.
-LOC_SYSTEM_ITEM_ARTIFACT_INFO_ELEC_RESIST,전기에 저항이 생긴다.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_ELEC_RESIST,전기저항이 증감한다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGIC_RESIST,마법 저항이 생긴다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_SLAY,공격력과 명중률이 증감한다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_HP_REGEN,체력 재생 속도가 증감한다.({0})
@@ -3892,7 +3892,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,몽전대사묘의 태자를 부활시
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE,어느 이변에서나 중요한 그레이즈의 힘이 담긴 부적.\n착용하고 있으면 점차 충전이 되고 충전이 끝나면 당신은 탄막괴물이 된다.\n100%가 된 부적을 착용한 채로도 상시 그레이즈가 발동되어 원거리 탄막을 일정확률로 피할 수 있고\n100%상태에서 v를 누르면 근성회피가 발동되어 회피가능한 공격을 일정턴 100% 회피한다.\n그레이즈할때 나는 소리가 기분이 좋다. 그레이즈가 의미없던 시리즈도 있었다고...?\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,어느 불량 천인이 자신의 검의 힘을 부여한 부적. 그녀의 변덕스러운 성격이 부적에도 담겨있다.\n착용하고 있으면 주변의 기질 구슬을 흡수하고 충전이 끝나면 부적에 숨겨있던 기질이 발동된다.\n100%상태에서 v를 누르면 저장된 날씨가 발현되며 체력재생력을 높게 올린다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT,도시전설을 실체화하는 힘을 가진 오컬트볼의 힘이 담긴 부적.\n착용하고 있으면 오컬트의 기운을 흡수하고 충전이 끝나면 오컬트의 힘을 방출한다.\n100%상태에서 v를 누르면 시야내의 모든 적대적인 소환물을 추방하며\n부적안에 숨겨있는 오컬트의 힘을 요괴로서 구현화한다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PURIFTY,달의 도시의 힘이 깃들어있는 부적.\n착100%상태에서 v를 누르면 사용자의 나쁜 상태이상들을 순식간에 정화시킨다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PURIFTY,달의 도시의 힘이 깃들어있는 부적.\n100%상태에서 v를 누르면 사용자의 나쁜 상태이상들을 순식간에 정화시킨다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG,이 버그 부적은 멋도 없고 효과도 없다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_UKNOWN,이 부적은 아직 무슨 힘을 가지고 있는지 아직 알 수 가 없다.\n착용하면 무슨 힘을 숨기고 있는지 알 수 있을 것 같다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_STR,손에 낀 착용자의 근력을 강화시키거나 약화시키는 힘의 반지.\n그 증감량은 반지의 수치에 달려있다.\n
@@ -5522,3 +5522,107 @@ LOC_SYSTEM_SPL_LITTLE_LEGION,리틀 레기온
 LOC_SYSTEM_SPL_DESCRIBE_DOLL_SPEAR,대상 주변에 검을 들고 회전하는 인형 둘을 소환한다.\n인형은 움직이진 않지만 지속적으로 주변에 데미지를 입힌다.
 LOC_SYSTEM_SPL_DESCRIBE_LITTLE_LEGION,시전자 주변에 즉시 전투가 가능한 인형을 여럿 소환한다.\n소환되는 인형으론 창병, 궁수, 자폭병이 있으며 한번에 한 종류씩 2~4명이 소환된다.\n이 인형들은 10턴정도의 아주 짧은 시간만 지속되고 시전자는 연달아 마법을 사용할 수 없다.\n이 마법을 상대한다면 잠깐 전투를 피하거나 인형을 다루는 본체를 공격해야할 것이다.
 LOC_SYSTEM_WIKI_SEARCH_HINT,/나 ?키를 눌러서 검색할 수 있습니다.
+LOC_SYSTEM_ITEM_ARTIFACT_SHINING_NEEDLE_SWORD_NAME,빛나는 휘침검
+LOC_SYSTEM_ITEM_ARTIFACT_SHINING_NEEDLE_SWORD_DESCRIBE,난쟁이가 검처럼 사용한다는 작은 바늘.\n일반적으로 너무 작아서 제대로 전투용으로 사용하긴 어려워보인다.
+LOC_SYSTEM_ITEM_ARTIFACT_SWORD_OF_SCARLET_PERCEPTION_NAME,비상의 검
+LOC_SYSTEM_ITEM_ARTIFACT_SWORD_OF_SCARLET_PERCEPTION_DESCRIBE,천인의 보물이라고 하는 비상의 검.\n본래는 천인만이 만질 수 있는 비보라고 한다.\n아마 진품을 흉내낸 모조품일지도 모른다.
+LOC_SYSTEM_ITEM_ARTIFACT_GOLIATH_SWORD_NAME,골리앗 대검
+LOC_SYSTEM_ITEM_ARTIFACT_GOLIATH_SWORD_DESCRIBE,어딘가의 거대한 인형이 들고 있었던 큰 대검.\n일반적인 인간이나 요괴가 들기엔 양손으로 들어야한다.\n너무 거대하기에 휘두르는 게 어렵지만 그것만으로 주변의 적들에게 피해를 줄 수 있다.
+LOC_SYSTEM_ITEM_ARTIFACT_REAPER_SCYTHE_NAME,사신의 낫
+LOC_SYSTEM_ITEM_ARTIFACT_REAPER_SCYTHE_DESCRIBE,사신이 어깨에 걸치고 다니는 거대한 낫.\n들고있는 것만으로 멀리 있는 상대가 눈앞에 있는 듯한 착각이 든다.\n거리 감각이 어려워서 기존의 무기들보다 사용이 까다롭다.
+LOC_SYSTEM_ITEM_ARTIFACT_UNIDENTIFIED_TRIDENT_NAME,정체불명의 삼지창
+LOC_SYSTEM_ITEM_ARTIFACT_UNIDENTIFIED_TRIDENT_DESCRIBE1,아무런 특색이 없는 평범한 창처럼 보인다.\n하지만 무기 안에서 정체를 알 수 없는 오오라가 느껴진다.\n많은 식별의 두루마리가 있다면 이 무기의 정체를 파악할지도 모른다.
+LOC_SYSTEM_ITEM_ARTIFACT_UNIDENTIFIED_TRIDENT_DESCRIBE2,점차 숨겨진 힘을 드러내기 시작한 삼지창.\n다시보니 정체불명의 대요괴가 사용했던 창과 비슷하게 생겼다.\n더 많은 식별의 두루마리가 있다면 이 무기의 진가를 알 수 있을 것이다.
+LOC_SYSTEM_ITEM_ARTIFACT_UNIDENTIFIED_TRIDENT_DESCRIBE3,대요괴 누에가 들고있었다는 전설의 삼지창.\n그 숨겨진 능력이 모두 드러났다.\n하지만 정체를 들켜버린 무기는 과연 누에의 무기라 할 수 있을까?
+LOC_SYSTEM_ITEM_ARTIFACT_SUNKEN_ANCHOR_NAME,침수의 닻
+LOC_SYSTEM_ITEM_ARTIFACT_SUNKEN_ANCHOR_DESCRIBE,배유령의 힘이 깃든 거대한 닻.\n들고있기만해도 무언가를 바다에 빠트리고 싶다는 충동이 든다.
+LOC_SYSTEM_ITEM_ARTIFACT_YAMANBA_CLEAVER_NAME,야만바의 식칼
+LOC_SYSTEM_ITEM_ARTIFACT_YAMANBA_CLEAVER_DESCRIBE,산 속에 숨어산다는 야만바의 무기.\n한 손으로 들 수 있는 식칼이지만 던질수도있고 다용도로 쓰인다.
+LOC_SYSTEM_ITEM_ARTIFACT_BUTTERFLY_FAN_NAME,사접의 부채
+LOC_SYSTEM_ITEM_ARTIFACT_BUTTERFLY_FAN_DESCRIBE,유령의 힘이 깃든 부채.\n둔기로서는 그렇게 강해보이지않지만 깃든 힘이 무언가 치명적으로 느껴진다.
+LOC_SYSTEM_ITEM_ARTIFACT_RED_MALLET_NAME,붉게 물든 떡메
+LOC_SYSTEM_ITEM_ARTIFACT_RED_MALLET_DESCRIBE,떡을 찧는데 쓰는 거대한 떡메. 떡메 끝에 붉은 액체가 묻어있다.\n얼핏보면 핏자국처럼 보이지만 사실은 딸기 소의 자국이다.\n자국과 별개로 굉장히 휘두르기 좋은 무기로 방심한 상대방을 날려버릴 수 있다.
+LOC_SYSTEM_ITEM_ARTIFACT_IMMOVABLE_LIBRARY_NAME,지식과 그늘의 로브
+LOC_SYSTEM_ITEM_ARTIFACT_IMMOVABLE_LIBRARY_DESCRIBE,어느 마법사가 입고 있던 보라색 로브.\n마력을 증폭시키기 위한 처리가 되어있다.\n그 때문인지 옷이 불편해서 입기만해도 움직이기 귀찮아진다는 단점이 있다.\n옷에 달려있는 끈이 마치 줄무늬처럼도 보일때도 있다.
+LOC_SYSTEM_ITEM_ARTIFACT_FULLMOON_DRESS_NAME,만월 늑대옷
+LOC_SYSTEM_ITEM_ARTIFACT_FULLMOON_DRESS_DESCRIBE,보름달의 그림이 크게 그려져있는 펑퍼짐한 원피스.\n늑대인간이 자신의 털을 가리기위해 이런 큼직한 디자인으로 만들었다고 한다.
+LOC_SYSTEM_ITEM_ARTIFACT_HANIWA_ARMOUR_NAME,하니와 석갑옷
+LOC_SYSTEM_ITEM_ARTIFACT_HANIWA_ARMOUR_DESCRIBE,조형신이 직접 만든 단단한 갑옷.\n흙으로 만들어졌지만 신의 능력으로 웬만한 갑옷보다 단단해졌다.
+LOC_SYSTEM_ITEM_ARTIFACT_OCCULT_CLOAK_NAME,오컬트 망토
+LOC_SYSTEM_ITEM_ARTIFACT_OCCULT_CLOAK_DESCRIBE,비봉클럽의 초대회장을 위한 멋들어진 망토.\n내부엔 룬 문자가 새겨져있어서 착용자에 오컬트의 힘이 깃드는 것 같다.
+LOC_SYSTEM_ITEM_ARTIFACT_PEACH_HAT_NAME,복숭아 모자
+LOC_SYSTEM_ITEM_ARTIFACT_PEACH_HAT_DESCRIBE,머리위에 장식용 복숭아가 달려있는 천인의 모자.\n마치 천인의 육체처럼 단단해지고 높은 체력 재생력을 준다.
+LOC_SYSTEM_ITEM_ARTIFACT_BOUNDARY_GLOVES_NAME,경계요괴의 긴 장갑
+LOC_SYSTEM_ITEM_ARTIFACT_BOUNDARY_GLOVES_DESCRIBE,어느 경계요괴가 사용했다는 팔꿈치까지 오는 긴 흰색 장갑.\n던진 투척 무기가 경계를 타고 어느새 내 수중으로 돌아와있다.
+LOC_SYSTEM_ITEM_ARTIFACT_COWGIRL_BOOTS_NAME,카우걸 부츠
+LOC_SYSTEM_ITEM_ARTIFACT_COWGIRL_BOOTS_DESCRIBE,엄청난 각력을 가진 요수가 착용했다고하는 부츠.\n착용한 것만으로 발차기의 힘이 엄청나게 강화된다.
+LOC_SYSTEM_ITEM_ARTIFACT_STOPWATCH_NAME,특제 스톱워치
+LOC_SYSTEM_ITEM_ARTIFACT_STOPWATCH_DESCRIBE,끝에 은빛 시계가 달려있는 은빛 체인으로 만들어진 목걸이.\n가만히 보고있으면 바늘이 느리게 움직이는 듯한 착각이 든다.
+LOC_SYSTEM_ITEM_ARTIFACT_SNAKE_RING_NAME,뱀의 반지
+LOC_SYSTEM_ITEM_ARTIFACT_SNAKE_RING_DESCRIBE,군신의 힘이 깃든 반지.\n사용자의 체력과 힘을 큰 폭으로 올려준다.
+LOC_SYSTEM_ITEM_ARTIFACT_FROG_RING_NAME,개구리의 반지
+LOC_SYSTEM_ITEM_ARTIFACT_FROG_RING_DESCRIBE,토착신의 힘이 깃든 반지. 마치 지상을 물처럼 수영하듯이 헤엄칠 수 있게 된다.\n귀여워 보이는 디자인이지만 끝없는 재앙도 느껴진다.
+LOC_SYSTEM_ITEM_ARTIFACT_WEATHER_TRIGGER,*날씨
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_WEATHER_TRIGGER,공격시 낮은 확률로 무작위 날씨가 발현된다.
+LOC_SYSTEM_ITEM_ARTIFACT_WHIRLWIND,훨윈드
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_WHIRLWIND,공격시 주변 8칸의 적을 모두 공격한다.
+LOC_SYSTEM_ITEM_ARTIFACT_INFINITE_REACH,사거리+∞
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_INFINITE_REACH,직선상에 방해물이 없다면 얼마나 멀리 있는 적이든 공격할 수 있다.
+LOC_SYSTEM_ITEM_ARTIFACT_PULL,끌어당기기
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_PULL,공격한 적을 눈 앞으로 끌어당긴다.
+LOC_SYSTEM_ITEM_ARTIFACT_UNKNOWN_POWER,정체불명
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_UNKNOWN_POWER,이 무기엔 아직 식별되지않은 숨겨진 능력이 남아있습니다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_FLOOD,침수
+LOC_SYSTEM_ITEM_WEAPON_BRAND_INFO_FLOOD,맞은 상대에 일정확률로 침묵과 이동불가 효과를 부여한다.
+LOC_SYSTEM_ITEM_ARTIFACT_SWIM,수영
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_SWIM,물에서 수영할 수 있다.
+LOC_SYSTEM_ITEM_ARTIFACT_INSTANT_DEATH,즉사
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_INSTANT_DEATH,생명체인 적을 일정 확률로 즉사시킨다. 적이 나보다 약할수록 확률이 올라간다.
+LOC_SYSTEM_ITEM_ARTIFACT_KNOCKAWAY,날리기
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_KNOCKAWAY,적을 무기로 처치할때 뒤로 날려버린다.
+LOC_SYSTEM_ITEM_ARTIFACT_JUMP,+도약
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_JUMP,적에게 도약해서 공격할 수 있게 된다.
+LOC_SYSTEM_ITEM_ARTIFACT_RETURN,반환
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_RETURN,던진 투척 무기가 50% 확률로 소지품으로 돌아온다.
+LOC_SYSTEM_ITEM_ARTIFACT_KICK,*발차기
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_KICK,근접 공격시 일정확률로 발차기를 날린다. 확률과 피해량은 맨손 격투에 비례한다.
+LOC_SYSTEM_ITEM_ARTIFACT_MAX_HP,체력{0}
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAX_HP,체력이 {0}만큼 증감한다.
+LOC_SYSTEM_ITEM_ARTIFACT_DIVE,+잠수
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_DIVE,지상에 잠수하여 모든 적의 시야에서 사라질 수 있게 된다.
+LOC_SYSTEM_ITEM_ARTIFACT_POWER,파워{0}
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_POWER,최대 파워가 {0}칸 증감한다.
+LOC_SYSTEM_ITEM_ARTIFACT_TRIDENT_COMPLETE,{0:은|는} 모든 정체를 드러냈다!
+LOC_SYSTEM_ITEM_ARTIFACT_REAPER_BLOCKED,너무 먼 거리의 적을 공격하기엔 눈 앞의 무언가가 방해된다.
+LOC_SYSTEM_SKILL_DIVE,잠수
+LOC_SYSTEM_SKILL_DIVE_OFF,잠수 해제
+LOC_SYSTEM_SKILL_DIVE_INFO,일정 시간 잠수상태가 됩니다. 잠수 상태동안에는 주변의 적에게 들키지 않습니다.\n이 상태에서는 이동과 공격, 도약만 가능하며 공격이나 도약시 잠수 상태가 풀립니다.\n또한 원거리 공격을 전부 회피하지만 근접 공격을 받게되면 상태가 풀립니다.
+LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION,잠수 중에는 이동과 공격, 도약만 할 수 있다.
+LOC_SYSTEM_ITEM_ARTIFACT_NUE_TRIDENT_NAME,대요괴 누에의 삼지창
+LOC_SYSTEM_ITEM_ARTIFACT_TRIDENT_REVEAL,아이템 식별에 의해 {0}의 숨겨진 능력이 밝혀졌다!
+LOC_SYSTEM_ITEM_ARTIFACT_WEATHER_TRIGGERED,{0}에 의해 {1} 날씨가 발현되었다!
+LOC_SYSTEM_ITEM_ARTIFACT_PULL_TRIGGER,{0:이|가} 멀리 있는 {1:을|를} 당신의 앞으로 끌어당겼다!
+LOC_SYSTEM_ITEM_ARTIFACT_INSTANT_DEATH_TRIGGER,{0:이|가} {1}의 생명력을 거둔다!
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN11,개가 그려진 부적
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIME_STOP,시간정지의 부적
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIME_STOP_SHORT,시간정지
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIME_STOP,어딘가의 메이드가 들고다니던 회중시계.\n100%상태에서 v를 누르면 자기 자신을 제외한 모든 시간을 잠시동안 멈출 수 있다.\n
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIVE,잠수 중에는 적에게 들키지 않고 투사체를 모두 회피하지만 이동과 공격만 가능합니다.
+LOC_SYSTEM_BUFF_STAT_DIVE,잠수
+LOC_SYSTEM_YOU_DIVE,당신은 {0}에 잠수했다.
+LOC_SYSTEM_YOU_DIVE_END_ALMOST,당신의 숨이 차기 시작한다.
+LOC_SYSTEM_YOU_DIVE_END,당신은 급하게 {0}에서 올라왔다!
+LOC_SYSTEM_SKILL_ALREADY_DIVE,이미 잠수 도중에 사용할 수 없다.
+LOC_SYSTEM_SKILL_DIVE_STOP,당신은 {0}에서 올라왔다.
+LOC_SYSTEM_SKILL_DIVE_STOP_ATTACKED,당신은 피해를 받아 잠수가 풀렸다.
+LOC_SYSTEM_SKILL_DIVE_EXTINGUISH,당신에게 붙은 불이 꺼졌다.
+LOC_SYSTEM_SKILL_DIVE_JUMP,당신은 {0}속에서 힘차게 뛰쳐나왔다!
+LOC_SYSTEM_HIT_NORMAL_NO_OWNER,{0:은|는} {1}에게 명중했다.
+LOC_SYSTEM_FIGHT_MISS_NO_OWNER,{0:이|가} {1:을|를} 빗나갔다.
+LOC_SYSTEM_FIGHT_GRAZED_NO_OWNER,{0:이|가} {1}에게 그레이즈당했다.
+LOC_SYSTEM_SPELL_POWER_ENHANCE1,당신의 마법이 강화되었다!
+LOC_SYSTEM_SPELL_POWER_ENHANCE2,당신의 마법이 상당히 강화되었다!
+LOC_SYSTEM_SPELL_POWER_ENHANCE3,당신의 마법이 엄청나게 강화되었다!
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_FLOOD,당신은 누군가를 침수시키고 싶은 충동에 빠졌다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FLOOD,당신의 침수 충동은 사라졌다.
+LOC_SYSTEM_SPL_KICK,발차기

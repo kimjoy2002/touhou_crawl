@@ -687,9 +687,10 @@ void wiz_mode()
 			return;
 			case 'R':
 			{
-				int list[AMT_MAX] = { AMT_PERFECT, AMT_BLOSSOM, AMT_TIMES, AMT_FAITH, AMT_WAVE, AMT_SPIRIT, AMT_GRAZE,
+				const int amulet_count = 9;
+				int list[amulet_count] = { AMT_PERFECT, AMT_BLOSSOM, AMT_TIMES, AMT_FAITH, AMT_WAVE, AMT_SPIRIT, AMT_GRAZE,
 					AMT_WEATHER, AMT_OCCULT };
-				LOCALIZATION_ENUM_KEY keylist[AMT_MAX-1] = {
+				LOCALIZATION_ENUM_KEY keylist[amulet_count] = {
 					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PERFECT_SHORT,
 					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_BLOSSOM_SHORT,
 					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIMES_SHORT,
@@ -702,11 +703,11 @@ void wiz_mode()
 				};
 				enterlog();
 				std::vector<int> listkey;
-				for(int i = 0; i < AMT_MAX-1; i++) {
+				for(int i = 0; i < amulet_count; i++) {
 					ss.str("");
 					ss.clear();
 					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
-					printlog(ss.str(), (i==AMT_MAX-2?true:false), false, false, CL_help, (char)('a'+i));
+					printlog(ss.str(), (i==amulet_count-1?true:false), false, false, CL_help, (char)('a'+i));
 					listkey.push_back('a'+i);
 				}
 				ss.str("");

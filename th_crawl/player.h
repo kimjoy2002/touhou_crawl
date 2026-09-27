@@ -348,6 +348,7 @@ public:
 	shield_struct s_shield;
 	int s_acid;
 	int s_acid_turn;
+	int s_dive;
 
 
 	ALCHEMY_LIST alchemy_buff;
@@ -442,7 +443,7 @@ public:
 	void SetPrevAction(int key, char item = 0, int num = 0);
 	void maybeAction();
 	coord_def GetDisplayPos();
-	bool shockwave(monster* mons_, attack_infor temp_att);
+	bool shockwave(monster* mons_, attack_infor temp_att, item* weapon_);
 	bool attack(monster* mons_, equip_type type_, bool counter_);
 	int move(short_move x_mov, short_move y_mov);
 	int move(const coord_def &c);
@@ -550,6 +551,7 @@ public:
 	bool SetSick(int sick_);
 	bool SetVeiling(int veiling_, int value_);
 	bool SetInvisible(int invisible_);
+	bool SetDive(int dive_);
 	bool SetSaved(int saved){return true;};
 	bool SetTogleInvisible(bool off_);
 	bool SetBattleCount(int count_);
@@ -639,6 +641,8 @@ public:
 	bool Memorize(int spell, bool immediately = false);
 	bool isMemorize(int spell);
 	bool HasAbility(int skill_);
+	bool IsDiving();
+	void EndDive(bool speak_ = true);
 	int Ability(int skill_, bool god_, bool unset_, int immediately = 0);
 	bool Belief(god_type god_, int piety_, bool speak_=true);
 	bool StepUpDownPiety(int level_);
@@ -690,7 +694,7 @@ public:
 	bool isMemorizeSpell(int spell_);
 	bool CanMemorizeSpell(int spell_);
 	int CanSlash(attack_type att_type);
-	bool isView(){return true;};
+	bool isView(){return !IsDiving();};
 	bool isView(const monster* monster_info);
 	bool isYourShight(){return true;};	
 	bool isSightnonblocked(coord_def c, coord_def* return_firstpos = nullptr);//보이는 이 위치가 실제로 공격가능한지?(유리벽)

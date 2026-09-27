@@ -55,6 +55,8 @@ struct attack_infor
 	attack_type type;
 	name_infor name;
 	attack_with_weapon weapon_type;
+	bool no_owner = false;
+	bool unseen_attack = false;
 	attack_infor(int damage_,int max_damage_, int accuracy_, unit *order_, parent_type p_type_, attack_type type_,name_infor name_){damage=damage_;max_damage=max_damage_;accuracy=accuracy_;order=order_;p_type=p_type_;type=type_;name = name_;weapon_type = ATT_WEAPON_NONE;}
 };
 
@@ -70,6 +72,7 @@ struct beam_infor
 	beam_type type1; //빔의 타입. 직선형, 스마이트등등
 	attack_type type2; //빔의 속성
 	name_infor name;
+	bool no_owner = false;
 	beam_infor(int damage_, int max_damage_, int accuracy_, unit *order_, parent_type p_type_, int length_, int penetrate_, beam_type type1_, attack_type type2_,name_infor name_){damage=damage_;max_damage=max_damage_;accuracy=accuracy_;length=length_;penetrate=penetrate_;order=order_;p_type=p_type_;type1=type1_;type2=type2_;name = name_;}
 };
 

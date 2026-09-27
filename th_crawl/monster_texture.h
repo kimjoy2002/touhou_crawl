@@ -459,6 +459,26 @@ extern textures img_item_fixed_artifact_helltshirt;
 extern textures img_item_fixed_artifact_kappafullarmor;
 extern textures img_item_fixed_artifact_maiduniform;
 extern textures img_item_fixed_artifact_ibukisake;
+extern textures img_item_fixed_artifact_shining_needle_sword;
+extern textures img_item_fixed_artifact_sword_of_scarlet_perception;
+extern textures img_item_fixed_artifact_goliath_sword;
+extern textures img_item_fixed_artifact_reaper_scythe;
+extern textures img_item_fixed_artifact_unidentified_trident;
+extern textures img_item_fixed_artifact_sunken_anchor;
+extern textures img_item_fixed_artifact_yamanba_cleaver;
+extern textures img_item_fixed_artifact_butterfly_fan;
+extern textures img_item_fixed_artifact_red_mallet;
+extern textures img_item_fixed_artifact_immovable_library;
+extern textures img_item_fixed_artifact_fullmoon_dress;
+extern textures img_item_fixed_artifact_haniwa_armour;
+extern textures img_item_fixed_artifact_occult_cloak;
+extern textures img_item_fixed_artifact_peach_hat;
+extern textures img_item_fixed_artifact_boundary_gloves;
+extern textures img_item_fixed_artifact_cowgirl_boots;
+extern textures img_item_fixed_artifact_stopwatch;
+extern textures img_item_fixed_artifact_snake_ring;
+extern textures img_item_fixed_artifact_frog_ring;
+extern textures img_player_dive;
 
 
 

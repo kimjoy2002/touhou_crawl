@@ -157,11 +157,12 @@ bool evoke_evokable(item* item_, bool auto_, int auto_direc_, evoke_kind kind)
 	}
 	else if(!EvokeFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
-		SetSpellSight(EvokeLength(kind),EvokeFlagCheck(kind, S_FLAG_RECT)?2:1);
+		int evoke_length = (kind == EVK_SPEAR && item_ && item_->GetArtifactProperty(ART_INFINITE_REACH) > 0) ? 99 : EvokeLength(kind);
+		SetSpellSight(evoke_length,EvokeFlagCheck(kind, S_FLAG_RECT)?2:1);
 		beam_iterator beam(you.position,you.position);
-		projectile_infor infor(EvokeLength(kind),false,EvokeFlagCheck(kind, S_FLAG_SMITE), kind ==EVK_BOMB?-4: -3,false);
+		projectile_infor infor(evoke_length,false,EvokeFlagCheck(kind, S_FLAG_SMITE), kind ==EVK_BOMB?-4: -3,false);
 		auto it = you.item_list.end();
-		if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor, EvokeLength(kind), EvokeSector(kind), auto_))
+		if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor, evoke_length, EvokeSector(kind), auto_))
 		{
 			unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
 			you.SetBattleCount(30);
@@ -319,6 +320,17 @@ bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target)
 	{
 		beam_iterator beam(you.position,target);
 		if(CheckThrowPath(you.position,target,beam)){
+			if(item_ && item_->GetArtifactProperty(ART_INFINITE_REACH) > 0 && distan_coord(you.position, target) > 2) {
+				beam.init();
+				while(!beam.end()) {
+					if(*beam != target && *beam != you.position &&
+						env[current_level].isMonsterPos(beam->x, beam->y, &you)) {
+						printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_REAPER_BLOCKED), true, false, false, CL_normal);
+						return false;
+					}
+					beam++;
+				}
+			}
 			unit* target_unit = env[current_level].isMonsterPos(target.x, target.y, &you,NULL);
 			if(target_unit && !target_unit->isplayer()) {
 				monster* target_mon = (monster*)target_unit;
@@ -343,6 +355,8 @@ bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target)
 				return true;
 			}
 		}
+		if(item_ && item_->GetArtifactProperty(ART_INFINITE_REACH) > 0 && distan_coord(you.position, target) > 2)
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_REAPER_BLOCKED), true, false, false, CL_normal);
 		return false;
 	}
 	break;

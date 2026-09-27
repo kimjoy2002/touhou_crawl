@@ -26,6 +26,7 @@ enum weapon_brand
 	WB_PROTECT,
 	WB_FIREPLUS,
 	WB_SILVER,
+	WB_FLOOD,
 	WB_MAX
 };
 

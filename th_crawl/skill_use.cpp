@@ -1521,6 +1521,10 @@ bool skill_swako_jump(int power, bool short_, unit* order, coord_def target)
 	{
 		if(env[current_level].isMove(target.x,target.y) && !env[current_level].isMonsterPos(target.x,target.y))
 		{
+			if(order->isplayer() && you.IsDiving()) {
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_SKILL_DIVE_JUMP, PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile])),true,false,false,CL_white_blue);
+				you.EndDive(false);
+			}
 			you.SetXY(target.x,target.y);
 			PlaySE("jump");
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_JUMP) + " " ,false,false,false,CL_normal);
@@ -4823,8 +4827,40 @@ bool skill_cirno_ice_create(int level_)
 	return true;
 }
 
+bool skill_turn_dive(int pow, bool short_, unit* order, coord_def target)
+{
+	if(order->isplayer()) {
+		if(!you.s_dive)
+		{
+			PlaySE("dive");
+			you.SetDive(rand_int(10,15)+pow/4);
+			int temp = you.Ability(SKL_DIVE,false,true,1);
+			you.Ability(SKL_DIVE_OFF,false,false,temp);
+			return true;
+		}
+		else
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_ALREADY_DIVE),true,false,false,CL_normal);	
+	}
+	return false;
+}
+
+bool skill_off_dive(int pow, bool short_, unit* order, coord_def target)
+{
+	if(order->isplayer())
+	{
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_SKILL_DIVE_STOP, PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile])) + " ",false,false,false,CL_normal);
+		you.EndDive(false);
+		return true;
+	}
+	return false;
+}
+
 int UseSkill(skill_list skill, bool short_, coord_def &target)
 {
+	if(you.IsDiving() && skill != SKL_DIVE_OFF && skill != SKL_SWAKO_JUMP && skill != SKL_JUMPING_ATTACK) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION), true, false, false, CL_normal);
+		return 0;
+	}
 	int power=min(SkillCap(skill),SkillPow(skill));
 	if(SkillFlagCheck(skill, S_FLAG_SPEAK) && env[current_level].isSilence(you.position))
 	{
@@ -5177,6 +5213,12 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_CIRNO_ICE_CREATE:
 		return skill_cirno_ice_create(power);
+		break;
+	case SKL_DIVE:
+		return skill_turn_dive(power, short_, &you,target);
+		break;
+	case SKL_DIVE_OFF:
+		return skill_off_dive(power, short_, &you,target);
 		break;
 	default:
 		break;

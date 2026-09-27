@@ -1525,7 +1525,8 @@ bool item::isEvokable()
 	if (type == ITM_SPELL || type == ITM_MISCELLANEOUS)
 		return true;
 	if (type == ITM_AMULET) {
-		if (isCanEvoke((amulet_type)value1) && you.equipment[ET_NECK] == this && you.getAmuletPercent() >= 100) {
+		if (isCanEvoke((amulet_type)value1) &&
+			you.equipment[ET_NECK] == this && you.getAmuletPercent() >= 100) {
 			return true;
 		}
 	}

@@ -3789,6 +3789,7 @@ bool skill_jump_attack(int pow_, bool short_, unit* order, coord_def target)
 {
 	if(!order)
 		return false;
+	bool dive_attack_ = order->isplayer() && you.IsDiving();
 	unit* unit_ = env[current_level].isMonsterPos(target.x,target.y);
 	if(!unit_ || !order->isEnemyUnit(unit_))
 	{
@@ -3811,6 +3812,10 @@ bool skill_jump_attack(int pow_, bool short_, unit* order, coord_def target)
 	{
 		if(env[current_level].isMove(rit->x, rit->y, false, false) && !env[current_level].isMonsterPos(rit->x,rit->y) && env[current_level].isInSight(*rit))
 		{
+			if(order->isplayer() && you.IsDiving()) {
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_SKILL_DIVE_JUMP, PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile])),true,false,false,CL_white_blue);
+				you.EndDive(false);
+			}
 			order->SetXY((*rit));
 			
 			if (env[current_level].isInSight((*rit))) {
@@ -3820,6 +3825,7 @@ bool skill_jump_attack(int pow_, bool short_, unit* order, coord_def target)
 					 PlaceHolderHelper(unit_->GetName()->getName()));
 			}
 			attack_infor temp_att(order->GetAttack(false),order->GetAttack(true),order->GetHit(),order,order->GetParentType(),ATT_RUSH,name_infor(LOC_SYSTEM_ATT_LEAP));
+			temp_att.unseen_attack = dive_attack_;
 			unit_->damage(temp_att,false);
 			if(order)
 			{
@@ -8140,6 +8146,26 @@ static bool PlayerUseSpellInternal(spell_list skill, bool short_, coord_def &tar
 		printlog(LocalzationManager::formatString(LOC_SYSTEM_DEBUG_SPELLPOWER,PlaceHolderHelper(to_string(power)),PlaceHolderHelper(to_string(SpellCap(skill)))),true,false,false,CL_help);
 	}
 	echo_power_ = power;
+	float power_multi_ = 1.0f;
+	if(you.force_turn)
+		power_multi_ *= you.force_strong ? 2.0f : 0.5f;
+	if(you.GetPunish(GT_MIMA))
+		power_multi_ *= 0.5f;
+	if(you.GetProperty(TPT_SPELL_POWER) > 0)
+		power_multi_ *= 1.3f;
+	if(you.GetBuffOk(BUFFSTAT_SPL_POW))
+		power_multi_ *= 1.5f;
+	int magicboost_ = you.GetArtifactProperty(ART_MAGICBOOST);
+	for(int i = 0; i < magicboost_; i++)
+		power_multi_ *= 1.5f;
+
+	if(power_multi_ > 2.5f)
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_POWER_ENHANCE3) + " ",false,false,false,CL_white_blue);
+	else if(power_multi_ > 2.0f)
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_POWER_ENHANCE2) + " ",false,false,false,CL_white_blue);
+	else if(power_multi_ >= 1.3f)
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_POWER_ENHANCE1) + " ",false,false,false,CL_white_blue);
+
 	switch(skill)
 	{
 	case SPL_MON_TANMAC_SMALL:
@@ -8517,8 +8543,9 @@ bool PlayerUseSpell(spell_list skill, bool short_, coord_def &target)
 {
 	int echo_power_ = -1;
 	bool result_ = PlayerUseSpellInternal(skill,short_,target,echo_power_);
-	if(result_ && echo_power_ >= 0)
+	if(result_ && echo_power_ >= 0) {
 		TimeParadoxSpell(skill,echo_power_,target);
+	}
 	return result_;
 }
 

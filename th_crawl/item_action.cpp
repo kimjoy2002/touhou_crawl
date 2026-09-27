@@ -25,6 +25,12 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key);
 bool iteminfor_(int key_, bool gameover);
 
 bool pickup_prev_fail(bool no_speak) {
+	if(you.IsDiving())
+	{
+		if(!no_speak)
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return true;
+	}
 	if(you.s_lunatic)
 	{
 		if(!no_speak) {
@@ -384,7 +390,12 @@ void discard(list<item>::iterator it, int number)
 
 
 void iteminfor_discard()
-{	
+{
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return;
+	}
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_DISCRAD),true,false,false,CL_danger);
@@ -483,7 +494,12 @@ void iteminfor_discard()
 }
 
 void fast_discard(int delete_id, int delete_num)
-{	
+{
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return;
+	}
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_DISCRAD),true,false,false,CL_danger);
@@ -510,6 +526,11 @@ void fast_discard(int delete_id, int delete_num)
 }
 
 bool eat_prev_fail() {
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return true;
+	}
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_EAT),true,false,false,CL_danger);
@@ -615,6 +636,11 @@ void Eatting(char auto_)
 
 
 bool drink_prev_fail() {
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return true;
+	}
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_DRINK),true,false,false,CL_danger);
@@ -728,7 +754,11 @@ void Drinking(char auto_)
 }
 
 bool evoke_prev_fail() {
-	if(you.s_lunatic)
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return true;
+	}if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY),true,false,false,CL_danger);
 		return true;
@@ -833,6 +863,11 @@ void Spelllcard_Evoke(char auto_)
 void memorize_action(int spell_);
 
 bool read_prev_fail() {
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return true;
+	}
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_READ),true,false,false,CL_danger);

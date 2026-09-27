@@ -1166,7 +1166,7 @@ const mon_infor mondata[] = {
 		
 	{MON_SANGHAI_DOLL,9,500,name_infor(MON_SANGHAI_DOLL),&img_mons_sacrifice_doll[0],50,0,16,
 		{15,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE,99,1,7,'d' },
+		M_FLAG_OPEN_DOOR | M_FLAG_INANIMATE | M_FLAG_CANT_NETURAL,99,1,7,'d' },
 	
 	{MON_HOURAI_DOLL,12,600,name_infor(MON_HOURAI_DOLL),&img_mons_curse_doll,65,1,15,
 		{18,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},

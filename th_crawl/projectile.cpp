@@ -151,7 +151,8 @@ bool refreshPath_after(const coord_def &c, beam_iterator& beam, list<item>::iter
 
 
 
-	bool good_path = (!infor_->smite)?CheckThrowPath(you.position,you.search_pos,beam):env[current_level].isMove(you.search_pos.x,you.search_pos.y,true);
+	bool good_path = (!infor_->smite)?CheckThrowPath(you.position,you.search_pos,beam):
+		(env[current_level].isMove(you.search_pos.x,you.search_pos.y,true) && you.isSightnonblocked(you.search_pos));
 	int length_ = pow((float)abs(you.search_pos.x-you.position.x),2)+pow((float)abs(you.search_pos.y-you.position.y),2);
 	if(length_<3)
 		length_ = 1;
@@ -520,11 +521,13 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 			}
 		case -1:
 			if(inputedKey.mouse == MKIND_MAP_CURSOR) {
+				paintpath(you.search_pos, beam, it, false, infor_, m_len_, sector_);
 				you.search_pos = coord_def(inputedKey.val1, inputedKey.val2);
 				good_path = refreshPath(coord_def(you.position.x,you.position.y), beam, it, infor_, m_len_, sector_);
 				break;
 			}
 			else if(inputedKey.mouse == MKIND_MAP) {
+				paintpath(you.search_pos, beam, it, false, infor_, m_len_, sector_);
 				you.search_pos = coord_def(inputedKey.val1, inputedKey.val2);
 				good_path = refreshPath(coord_def(you.position.x,you.position.y), beam, it, infor_, m_len_, sector_);
 				paintpath(you.search_pos, beam, it, false, infor_, m_len_, sector_); 

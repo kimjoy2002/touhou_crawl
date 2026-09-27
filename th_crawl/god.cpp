@@ -1268,6 +1268,8 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 	case GT_YUYUKO:
 		if(mon_->s_ghost)
 		{
+			int original_id = mon_->id;
+			string original_name = mon_->name.getName();
 			if(you.god_value[GT_YUYUKO][0])
 			{
 				for(auto it = env[you.god_value[GT_YUYUKO][1]].mon_vector.begin();it != env[you.god_value[GT_YUYUKO][1]].mon_vector.end();it++)
@@ -1280,7 +1282,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			}
 				
 			{
-				monster *mon2_ = BaseSummon(mon_->id, -1, false, false,4,&you, mon_->position, SKD_OTHER, -1);
+				monster *mon2_ = BaseSummon(original_id, -1, false, false,4,&you, mon_->position, SKD_OTHER, -1);
 				if(mon2_)
 				{
 					if(mon2_->GetOriginalForm(mon2_->id) != MON_NONE_MONSTER) {
@@ -1288,9 +1290,9 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 					}
 					mon2_->id2 = mon2_->id;
 					mon2_->id = MON_ENSLAVE_GHOST;
-					mon2_->name = name_infor(LOC_SYSTEM_ENSLAVE_GHOST, (monster_index)mon_->id);
+					mon2_->name = name_infor(LOC_SYSTEM_ENSLAVE_GHOST, (monster_index)original_id);
 					LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_YUYUKO_ENSLAVE_GHOST,true,false,false,CL_normal,
-						PlaceHolderHelper(mon_->name.getName()));
+						PlaceHolderHelper(original_name));
 					you.god_value[GT_YUYUKO][0] = mon2_->map_id;
 					you.god_value[GT_YUYUKO][1] = current_level;
 
@@ -1306,7 +1308,7 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 					//그러나 레벨은 내려간다.
 					mon2_->LevelUpdown(-2);
 
-					AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_YUYUKO_ENSLAVE_GHOST,PlaceHolderHelper(mon_->name.getName())),CL_yuyuko);
+					AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_YUYUKO_ENSLAVE_GHOST,PlaceHolderHelper(original_name)),CL_yuyuko);
 				}
 			}
 		}

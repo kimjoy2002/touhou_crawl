@@ -1081,6 +1081,9 @@ void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x,
 	if(!onlyTile && sight && !(dgtile[tile_x][tile_y].flag & FLAG_LIGHT) &&
 		find(DisplayManager.sakuya_knife_path.begin(),DisplayManager.sakuya_knife_path.end(),coord_def(tile_x,tile_y)) != DisplayManager.sakuya_knife_path.end())
 		img_effect_gold.draw(pSprite, x, y, 0.0f, scale, scale, 45);
+	if(!onlyTile && !(dgtile[tile_x][tile_y].flag & FLAG_LIGHT) &&
+		find(DisplayManager.spell_half_path.begin(),DisplayManager.spell_half_path.end(),coord_def(tile_x,tile_y)) != DisplayManager.spell_half_path.end())
+		img_effect_gold.draw(pSprite, x, y, 0.0f, scale, scale, 45);
 
 	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_SILENCE)
 		img_effect_slience.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(80, 0, 255, 255));

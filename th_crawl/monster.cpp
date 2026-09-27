@@ -2782,6 +2782,18 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 	}
 	else
 	{		
+		if(!only_move && !s_confuse && !(flag & M_FLAG_NO_ATK))
+		{
+			coord_def target_pos_(position.x+x_mov, position.y+y_mov);
+			if(you.position == target_pos_ && isEnemyUnit(&you))
+				return AttackToYou(false);
+			if(unit* target_ = env[current_level].isMonsterPos(target_pos_.x, target_pos_.y, this))
+			{
+				monster* mon_ = (monster*)target_;
+				if(isEnemyMonster(mon_) || mon_->id == MON_BUSH)
+					return AttackToMon(mon_, false);
+			}
+		}
 		if(s_confuse)
 		{
 			return 1;
@@ -5663,6 +5675,8 @@ bool monster::SetFrozen(int frozen_)
 bool monster::SetCharm(int charm_)
 {	
 	if(!charm_)
+		return false;
+	if(s_ally == -1)
 		return false;
 
 	if(isYourShight())

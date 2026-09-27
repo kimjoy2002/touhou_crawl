@@ -639,17 +639,6 @@ void make_mushroom(int num, int freq)
         return true;
     };
 
-    auto diag_all_move = [&](int x, int y) {
-        static const int dx[4] = { 1,  1, -1, -1 };
-        static const int dy[4] = { 1, -1,  1, -1 };
-        for (int k = 0; k < 4; ++k) {
-            int nx = x + dx[k], ny = y + dy[k];
-            if (!in_bounds(nx, ny)) return false;
-            if (!env[num].isMove(coord_def(nx,ny), false)) return false;
-        }
-        return true;
-    };
-
     random_extraction<coord_def> candidates;
 
     for (int y = 0; y < DG_MAX_Y; ++y) {
@@ -658,7 +647,7 @@ void make_mushroom(int num, int freq)
 
             if (!t.isFloor()) continue;
             if (t.flag & FLAG_NO_MONSTER) continue;
-            if (!(cross_all_move(x, y) || diag_all_move(x, y))) continue;
+            if (!cross_all_move(x, y)) continue;
 
             candidates.push(coord_def(x, y));
         }
@@ -667,7 +656,7 @@ void make_mushroom(int num, int freq)
 	for(int i = 0; i < freq; i++) {
    		if(candidates.GetSize() > 0) {
 			coord_def c = candidates.pop();
-			if (!(cross_all_move(c.x, c.y) || diag_all_move(c.x, c.y))) continue;
+			if (!cross_all_move(c.x, c.y)) continue;
 			env[num].dgtile[c.x][c.y].tile = randA(1)?DG_MUSHROOM1:DG_MUSHROOM2;
 		}
 	}

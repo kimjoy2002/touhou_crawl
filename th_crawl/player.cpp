@@ -131,7 +131,7 @@ alchemy_buff(ALCT_NONE), alchemy_time(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
-,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0), prevSpell(0), lastSelectMenu(0), lastExplore(0), lastSearch(), yori_toyo_kill_count(0), max_power(500), currentSkillNum(0),god(GT_NONE), piety(0), gift_count(0), god_turn(0), suwako_meet(0),
+,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0), currentEvokeItem(0), prevSpell(0), lastSelectMenu(0), lastExplore(0), lastSearch(), yori_toyo_kill_count(0), max_power(500), currentSkillNum(0),god(GT_NONE), piety(0), gift_count(0), god_turn(0), suwako_meet(0),
 sight_reset(false), target(NULL), useMouseTammac(0), throw_weapon(NULL), quickMenu1(SYSCMD_QUICKTHROW), quickMenu2(SYSCMD_MAGIC), dead_order(NULL), dead_reason(DR_NONE)
 {
 	for(int i=0;i<2;i++)
@@ -367,6 +367,7 @@ void players::init() {
 		MemorizeSpell[i] = 0;
 	remainSpellPoiont = 1;
 	currentSpellNum = 0;
+	currentEvokeItem = 0;
 	prevSpell = 0;
 	lastSelectMenu = 0;
 	lastExplore = 0;
@@ -618,6 +619,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, *MemorizeSpell,52);
 	SaveData<int>(fp, remainSpellPoiont);
 	SaveData<int>(fp, currentSpellNum);
+	SaveData<char>(fp, currentEvokeItem);
 	SaveData<int>(fp, prevSpell);
 	SaveData<int>(fp, lastSelectMenu);
 	SaveData<char>(fp, lastExplore);
@@ -927,6 +929,10 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, *MemorizeSpell);
 	LoadData<int>(fp, remainSpellPoiont);
 	LoadData<int>(fp, currentSpellNum);
+	currentEvokeItem = 0;
+	if(!isPrevVersion(loading_version_string, "ver1.207")) {
+		LoadData<char>(fp, currentEvokeItem);
+	}
 	LoadData<int>(fp, prevSpell);
 	LoadData<int>(fp, lastSelectMenu);
 	if(!isPrevVersion(loading_version_string, "ver1.108")) {
@@ -5432,12 +5438,26 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 			}
 		}
 	}
-	for(it = item_list.begin(); it != item_list.end() && num != 'Z'+1;it++,num++)
+	bool used_id[52] = {};
+	for(it = item_list.begin(); it != item_list.end(); it++)
 	{
-		if((*it).id != num)
+		int id_num = asctonum(it->id);
+		if(id_num >= 0 && id_num < 52)
+			used_id[id_num] = true;
+	}
+	int free_id = 0;
+	while(free_id < 52 && used_id[free_id])
+		free_id++;
+	if(free_id < 52)
+		num = numtoasc(free_id);
+	else
+		num = 0;
+
+	for(it = item_list.begin(); it != item_list.end(); it++)
+	{
+		int id_num = asctonum(it->id);
+		if(id_num < 0 || id_num > free_id)
 			break;
-		if(num=='z')
-			num = 'A'-1;
 	}
 	if((num >= 'a' && num <= 'z') || (num >= 'A' && num <= 'Z'))
 	{
@@ -6428,12 +6448,12 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 		int your_size_ = GetProperty(TPT_SIZE);
 		if(your_size_>0)
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_TOO_BIG),true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_TOO_SMALL),true,false,false,CL_normal);
 			return 0;
 		}
 		if(your_size_<0)
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_TOO_SMALL),true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_TOO_BIG),true,false,false,CL_normal);
 			return 0;
 		}
 	}

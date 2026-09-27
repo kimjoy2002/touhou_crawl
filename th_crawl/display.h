@@ -165,6 +165,7 @@ public:
 	
 	vector<int> selection_vector;
 	vector<coord_def> sakuya_knife_path;
+	vector<coord_def> spell_half_path;
 	bool selection_description = false;
 	vector<int> spell_skill_vector;
 

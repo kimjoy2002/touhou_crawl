@@ -2440,9 +2440,9 @@ LOC_SYSTEM_FLOOR_EFFECT_GOLD,Coins
 LOC_SYSTEM_SPELL_CAST_PANALTY1,You felt lightheaded from magical backlash.
 LOC_SYSTEM_SPELL_CAST_PANALTY2,You felt a severe headache from magical backlash.
 LOC_SYSTEM_SPELL_CAST_PANALTY3,You suffered severe brain pain from magical backlash.
-LOC_SYSTEM_SPELL_NEED_POWER,Your brain took terrible damage from magical backlash.
-LOC_SYSTEM_SPELL_EXIST_POS,You need at least 1 Power to use magic!
-LOC_SYSTEM_SPELL_EXIST_SMOKE,You can't use that where someone already stands.
+LOC_SYSTEM_SPELL_NEED_POWER,You need at least 1 Power to use magic!
+LOC_SYSTEM_SPELL_EXIST_POS,You can't use that where someone already stands.
+LOC_SYSTEM_SPELL_EXIST_SMOKE,There is already smoke there.
 LOC_SYSTEM_SPELL_CURE_POISON,The poison has been cured.
 LOC_SYSTEM_SPELL_SHOULD_POISON,Can only be used while poisoned.
 LOC_SYSTEM_SPELL_CANT_BRAND,The spell has no effect.

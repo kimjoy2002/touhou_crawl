@@ -2442,7 +2442,7 @@ LOC_SYSTEM_SPELL_CAST_PANALTY2,마법 부작용으로 머리에 심한 두통을
 LOC_SYSTEM_SPELL_CAST_PANALTY3,마법 부작용으로 머리에 끔찍한 손상이 왔다.
 LOC_SYSTEM_SPELL_NEED_POWER,마법을 쓸려면 최소 파워가 1이상 있어야한다!
 LOC_SYSTEM_SPELL_EXIST_POS,이미 누군가 있는 위치에 사용할 수 없습니다.
-LOC_SYSTEM_SPELL_EXIST_SMOKE,이미 누군가 있는 위치에 사용할 수 없습니다.
+LOC_SYSTEM_SPELL_EXIST_SMOKE,이미 연기가 있는 위치에 사용할 수 없습니다.
 LOC_SYSTEM_SPELL_CURE_POISON,독이 치료되었다.
 LOC_SYSTEM_SPELL_SHOULD_POISON,독이 걸려있을때만 사용할 수 있다.
 LOC_SYSTEM_SPELL_CANT_BRAND,마법이 듣지 않는다.

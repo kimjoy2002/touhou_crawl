@@ -296,7 +296,7 @@ monster* haniwa_abil::createHaniwa(int index, bool first_) {
 	dif_rect_iterator rit(you.position, 2);
 	for (; !rit.end(); rit++)
 	{
-		if (env[current_level].isMove(rit->x, rit->y, true, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && env[current_level].isInSight(coord_def(rit->x, rit->y)) && you.position != (*rit))
+		if (env[current_level].isMove(rit->x, rit->y, false, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && env[current_level].isInSight(coord_def(rit->x, rit->y)) && you.position != (*rit))
 		{
             monster *haniwa_ = env[current_level].AddMonster(MON_HANIWA, M_FLAG_ALLY, *rit);
             you.haniwa_allys[index].map_id = haniwa_->map_id;

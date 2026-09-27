@@ -234,6 +234,10 @@ LRESULT CALLBACK d3d::WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch( msg )
 	{
+	case WM_ACTIVATEAPP:
+		if(wParam && option_mg.getFullscreen() && IsIconic(hwnd))
+			ShowWindow(hwnd, SW_RESTORE);
+		break;
     case WM_KILLFOCUS:
 	{
 		MSG fake_msg = {};

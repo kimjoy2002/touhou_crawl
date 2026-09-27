@@ -752,6 +752,8 @@ coord_def ThrowTamacInstance::endShoot(bool sleep_, bool without_laser) {
 coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_)
 {
 	ThrowTamacInstance throw_instance(t_, graphic_type, beam, infor_, item_, effect_delete, mimic_);
+	if(beam.GetMaxLength() == 0)
+		return throw_instance.endShoot(true, false);
 	while(true) {
 		coord_def hit_pos_;
 		if(throw_instance.oneturn(hit_pos_))
@@ -769,6 +771,11 @@ unit* throwtanmac_check_hit_(int graphic_type, textures* t_, beam_iterator& beam
 {
 	ThrowTamacInstance throw_instance(t_, graphic_type, beam, infor_, item_, effect_delete, mimic_);
 	throw_instance.attack_prefix = attack_prefix_;
+	if(beam.GetMaxLength() == 0)
+	{
+		throw_instance.endShoot(true, false);
+		return NULL;
+	}
 	while(true) {
 		coord_def hit_pos_;
 		if(throw_instance.oneturn(hit_pos_))
@@ -1266,6 +1273,7 @@ void ThrowSakuyaKnives(beam_iterator& beam, const vector<beam_iterator>& side_be
 void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bool set, projectile_infor* infor_, int m_len_, float sector_)
 {
 	vector<coord_def> side_path_;
+	vector<coord_def> half_path_;
 	if(set && infor_->isitem && item_ != you.item_list.end() && IsSakuyaKnife(&(*item_)))
 	{
 		for(beam_iterator side_beam : GetSakuyaKnifeBeams(c_,infor_->length))
@@ -1280,6 +1288,7 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 	}
 	WaitForSingleObject(mutx,INFINITE);
 	DisplayManager.sakuya_knife_path = side_path_;
+	DisplayManager.spell_half_path = half_path_;
 	ReleaseMutex(mutx);
 	if(m_len_ == -1)
 		m_len_ = beam.GetMaxLength();
@@ -1297,10 +1306,24 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 			rect_iterator rit(c_,range_, range_);
 			for(;!rit.end();rit++)
 			{
+				if(!infor_->skill && infor_->spell == SPL_THUNDER && !env[current_level].isMove(*rit,true))
+					continue;
+				if(!infor_->skill && infor_->spell == SPL_THUNDER && (*rit) != c_)
+				{
+					if(set)
+						half_path_.push_back(*rit);
+					continue;
+				}
 				if(set)
 					env[current_level].dgtile[(*rit).x][(*rit).y].flag = env[current_level].dgtile[(*rit).x][(*rit).y].flag | FLAG_LIGHT;
 				else
 					env[current_level].dgtile[(*rit).x][(*rit).y].flag = env[current_level].dgtile[(*rit).x][(*rit).y].flag & ~FLAG_LIGHT;	
+			}
+			if(!infor_->skill && infor_->spell == SPL_THUNDER && set)
+			{
+				WaitForSingleObject(mutx,INFINITE);
+				DisplayManager.spell_half_path = half_path_;
+				ReleaseMutex(mutx);
 			}
 		}
 		return;

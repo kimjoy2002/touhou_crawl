@@ -770,8 +770,9 @@ void evoke_logic(int key_, char auto_) {
 	changedisplay(DT_GAME);
 	if(you.Evoke(key_, auto_>0))
 	{
+		you.currentEvokeItem = key_;
 		you.TurnEnd();
-		you.SetPrevAction('V', key_);
+		you.SetPrevAction('v', key_);
 	}
 }
 
@@ -792,6 +793,8 @@ void Speed_Evoke()
 void Spelllcard_Evoke(char auto_)
 {
 	view_item(IVT_EVOKE,LOC_SYSTEM_DISPLAY_MANAGER_EVOKE);
+	if(auto_ == 0 && you.currentEvokeItem)
+		DisplayManager.setPositionToChar(you.currentEvokeItem);
 	while(1)
 	{
 		int key_ = auto_;

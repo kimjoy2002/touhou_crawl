@@ -201,8 +201,8 @@ Includes spears, javelin, scythe, and trident.
 Unarmed (Unarmed Combat)
 ================================================
 When attacking an enemy without a {Weapon} equipped, you attack unarmed.
-When using unarmed, attack delay is fixed at 0.6 turns, and
-the {Melee Damage Formula} and {Melee Accuracy Formula} are applied differently.
+When using unarmed, attack delay is fixed at 0.6 turns,
+and the {Melee Damage Formula} and {Melee Accuracy Formula} are applied differently.
 
 ================================================
 Stealth
@@ -848,8 +848,8 @@ Spellbook (Spellbooks)
 
 A Spellbook lets you learn {Spells}, which you can then cast at any time.
 You cannot learn spells above your current maximum level.
-Memorizing one consumes spell slots equal to its level; you have
-1 + {Level} + 2 * {Spellcasting} slots in total.
+Memorizing one consumes spell slots equal to its level;
+you have 1 + {Level} + 2 * {Spellcasting} slots in total.
 
 ================================================
 Ring (Rings)
@@ -1038,9 +1038,71 @@ Punishment
 ================================================
 
 Punishment is incurred by betraying a {God} or performing an action that god forbids.
-Each god has a separate punishment count. After enough experience is gained, the count falls by
-1 and that god delivers a punishment. This repeats until the count reaches 0.
+Each god has a separate punishment count.
+After enough experience is gained, the count falls by 1 and that god delivers a punishment.
+This repeats until the count reaches 0.
 While under punishment, that god's {Divine Powers}, passives, and initiation are unavailable.
+
+================================================
+Kanako (Yasaka Kanako)
+================================================
+
+Yasaka Kanako is a {God} of rain and wind, and also a god of war.
+She greatly benefits melee fighters and characters who use {Danmaku}.
+Only when Kanako kills an enemy herself do you gain {Faith}:
+weak enemies have a 33% chance and strong enemies (usually {Named}) a 100% chance to grant 1 Faith.
+(Kills by allies or summons do not count.)
+Killing an ally enrages Kanako and lowers Faith by 5.
+Faith also falls by 1 every 1,000 turns. Except as Sanae, abandoning Kanako gives 30 {Punishment}.
+-> {Sky-God Summon: Thrust}, {Sky-God Summon: Onbashira}, {Sky-God Summon: Wind}, {Kanako Gift}, {Kanako Punishment}
+
+================================================
+Sky-God Summon: Thrust
+================================================
+
+Sky-God Summon: Thrust is available at 1 star of {Kanako} {Faith}.
+It spends 2 Faith to charge at an enemy within range 6.
+There must be no obstacle in between, and the destination must be standable terrain.
+It deals from 1.4x up to 2.3x {Melee Damage} depending on distance.
+
+================================================
+Sky-God Summon: Onbashira (Onbashira)
+================================================
+
+Sky-God Summon: Onbashira is available at 3 stars of {Kanako} {Faith}.
+It spends 3 Faith to summon an Onbashira at a location within range 3.
+The Onbashira grants +3 {Combat Power} to the player within the surrounding 8 tiles; this stacks.
+It lasts 20 + 1d(Faith) turns and has 60 HP and 10 {Defense}.
+It also lets fired projectiles pass through regardless of side.
+Under Kanako's {Punishment}, it instead lowers Combat Power by 3 and immobilizes.
+
+================================================
+Sky-God Summon: Wind
+================================================
+
+Sky-God Summon: Wind is available at 5 stars of {Kanako} {Faith}.
+It spends 4 Faith to grant the Sky-God Summon: Wind state for 50 + 1d(Faith) turns.
+While active, every melee attack deals the same damage to all 8 surrounding tiles,
+and every {Danmaku} pierces all enemies within range.
+
+================================================
+Kanako Gift
+================================================
+
+{Kanako} gains 1 {Gift} counter each time she gains {Faith}.
+At 2+ stars, every 15 counters she gives a {Danmaku} gift with 100% chance;
+at 5+ stars, every 15 counters she gives a {Weapon} gift with 33% chance.
+A danmaku gift gives about half the amount of naturally generated danmaku.
+A weapon gift is weighted by your current weapon skills, and has a 25% chance to be an {Artifact}.
+
+================================================
+Kanako Punishment
+================================================
+
+Under {Kanako} {Punishment}, one of the following occurs:
+33%: irresistible, defense-ignoring damage equal to 40-80% of your current {HP}.
+33%: summons 1d4 {Onbashira} around you for 10-30 turns.
+33%: summons 3-5 hostile monsters from the same floor around you.
 
 ================================================
 Yuyuko (Yuyuko Saigyouji)
@@ -1073,10 +1135,10 @@ Binding Soul
 ================================================
 
 Binding Soul is available at 5 stars of {Yuyuko} {Faith}.
-It costs 5 {MP} and 4 faith and marks one enemy. If it dies, it returns as a semi-permanent
-allied {Ghost}.
-The ghost gains one rank of cold resistance and poison resistance, and its level is reduced by
-2.
+It costs 5 {MP} and 4 faith and marks one enemy.
+If it dies, it returns as a semi-permanent allied {Ghost}.
+The ghost gains one rank of cold resistance and poison resistance,
+and its level is reduced by 2.
 Only one bound soul may exist at a time.
 
 ================================================
@@ -1084,18 +1146,18 @@ Yuyuko Punishment
 ================================================
 
 Under {Yuyuko} {Punishment}, hostile ghosts appear around you.
-Between (2 + {Level}/10) and (5 + Level/3) are summoned for 20-40 turns, each one level below
-you.
+Between (2 + {Level}/10) and (5 + Level/3) are summoned for 20-40 turns,
+each one level below you.
 
 ================================================
 Mima
 ================================================
 
-Mima is a destruction-magic {God}. Only your own kills can grant {Faith}: 25% for weak enemies
-and 100% for strong enemies.
-Maximum {MP} rises with faith. At 1 star, kills may restore MP based on enemy strength; at 2
-stars, destruction {Spell Power} gains +4; at 4 stars, destruction
-{Spell Success Rate} gains +2.
+Mima is a destruction-magic {God}.
+Only your own kills can grant {Faith}: 25% for weak enemies and 100% for strong enemies.
+Maximum {MP} rises with faith. At 1 star, kills may restore MP based on enemy strength;
+at 2 stars, destruction {Spell Power} gains +4;
+at 4 stars, destruction {Spell Success Rate} gains +2.
 Abandoning Mima gives 30 {Punishment}.
 -> {Mima Gift}, {Mima Punishment}
 
@@ -1111,16 +1173,17 @@ Mima Punishment
 ================================================
 
 Under {Mima} {Punishment}, a random magical explosion erupts on your tile.
-Its base maximum damage is 15 + {Level}x5. Fire, electric, and cold explosions deal 100%
-damage; earth and poison deal 80%; destruction deals 60% and ignores half of {Defense}.
+Its base maximum damage is 15 + {Level}x5.
+Fire, electric, and cold explosions deal 100% damage; earth and poison deal 80%;
+destruction deals 60% and ignores half of {Defense}.
 
 ================================================
 Eirin (Eirin Yagokoro)
 ================================================
 
 Eirin Yagokoro is a pharmaceutical {God} whose powers focus on {Potions}.
-Praying over a beneficial potion grants {Faith} and changes it into a harmful potion; drinking
-potions and, occasionally, killing enemies can also grant faith.
+Praying over a beneficial potion grants {Faith} and changes it into a harmful potion;
+drinking potions and, occasionally, killing enemies can also grant faith.
 Abandoning Eirin gives 30 {Punishment}.
 -> {Eirin Potion Effects}, {Throw Potion}, {Body Modification}, {Emergency Transfusion},
 {Eirin Gift}, {Eirin Punishment}
@@ -1129,12 +1192,13 @@ Abandoning Eirin gives 30 {Punishment}.
 Eirin Potion Effects
 ================================================
 
-{Eirin} strengthens all {Potion} effects: healing is increased; Strength Increase, Haste, Slow,
-and Invisible last 30 turns longer; and Power potions grant 100 extra Power.
+{Eirin} strengthens all {Potion} effects: healing is increased;
+Strength Increase, Haste, Slow, and Invisible last 30 turns longer;
+and Power potions grant 100 extra Power.
 Harmful potions are identified automatically and gain extra effects by {Faith}:
-1 star, Poison grants faster movement; 2 stars, Stat Loss restores 15-50 {HP}; 3 stars,
-Confusion restores 15-30 {MP}; 4 stars, Slow grants invisibility; 5 stars, Paralysis lasts only
-1-2 turns and allows a Soul Shot.
+1 star, Poison grants faster movement; 2 stars, Stat Loss restores 15-50 {HP};
+3 stars, Confusion restores 15-30 {MP}; 4 stars, Slow grants invisibility;
+5 stars, Paralysis lasts only 1-2 turns and allows a Soul Shot.
 
 ================================================
 Throw Potion
@@ -1142,16 +1206,16 @@ Throw Potion
 
 Throw Potion is available at 2 stars of {Eirin} {Faith}.
 It costs 20-30 {Power} and one potion, creating a 3x3 cloud at the target.
-The cloud is poison, confusion, slow, cold, fire, or harmless mist and lasts from (7 + Faith/8)
-to (20 + Faith/8) turns.
+The cloud is poison, confusion, slow, cold, fire, or harmless mist,
+and lasts from (7 + Faith/8) to (20 + Faith/8) turns.
 
 ================================================
 Body Modification
 ================================================
 
 Body Modification is available at 3 stars of {Eirin} {Faith} and costs 20 faith.
-It replaces any previous modification with one random beneficial and one random harmful
-{Trait}, and temporarily lowers each of {Strength}, {Dexterity}, and {Intelligence} by 1-3.
+It replaces any previous modification with one random beneficial and one random harmful {Trait},
+and temporarily lowers each of {Strength}, {Dexterity}, and {Intelligence} by 1-3.
 Good traits: {Massive Wings}, {Sturdy}, {Potion Affinity}, {Sharp Mind}, {Toxic Body}
 Bad traits: {Shrunken Frame}, {Twisted Horns}, {Power Loss}, {Greeting Syndrome},
 {Potion Addiction}
@@ -1189,8 +1253,9 @@ Toxic Body
 ================================================
 
 Toxic Body is a beneficial {Body Modification} trait.
-It grants one rank of poison resistance. When an enemy within 2 tiles attacks you, there is a
-50% chance to create a poison cloud on it for 4 + 1d3 turns.
+It grants one rank of poison resistance.
+When an enemy within 2 tiles attacks you,
+there is a 50% chance to create a poison cloud on it for 4 + 1d3 turns.
 
 ================================================
 Shrunken Frame
@@ -1248,15 +1313,15 @@ Eirin Punishment
 ================================================
 
 Under {Eirin} {Punishment}, there is a 66% chance to force a random harmful potion effect.
-Otherwise, an experiment inflicts {Side Effect} equal to 70-80% of maximum {HP} and lowers a
-random stat by 1-4 three times.
+Otherwise, an experiment inflicts {Side Effect} equal to 70-80% of maximum {HP}
+and lowers a random stat by 1-4, three times.
 
 ================================================
 Satori (Satori Komeiji)
 ================================================
 
-Satori Komeiji is a mind-reading {God}. Every 100 new tiles explored has a 40% chance to grant
-1 {Faith}; kills advance her gift counter by 1.
+Satori Komeiji is a mind-reading {God}.
+Every 100 new tiles explored has a 40% chance to grant 1 {Faith}; kills advance her gift counter by 1.
 At 0 stars you can detect invisible creatures, at 2 stars first meeting an enemy maps a random
 part of the floor, and at 3 stars you sense nearby enemies.
 Satori gives no {Punishment} when abandoned.
@@ -1267,35 +1332,36 @@ Trauma
 ================================================
 
 Trauma is available at 1 star of {Satori} {Faith} and costs 3 faith.
-It frightens a target for 25-40 turns. A target analyzed by {Mind Reading}, or rarely an
-unanalyzed target, permanently loses morale as well.
+It frightens a target for 25-40 turns.
+A target analyzed by {Mind Reading}, or rarely an unanalyzed target,
+permanently loses morale as well.
 
 ================================================
 Mind Reading
 ================================================
 
 Mind Reading is available at 4 stars of {Satori} {Faith}.
-You channel while reading an enemy's mind; stronger enemies take longer, and targets requiring
-roughly over 20 turns cannot be analyzed.
-Confusion, paralysis, sleep, or losing sight interrupts the attempt. An analyzed target is
-guaranteed to suffer the permanent effect of {Trauma}.
+You channel while reading an enemy's mind; stronger enemies take longer,
+and targets requiring roughly over 20 turns cannot be analyzed.
+Confusion, paralysis, sleep, or losing sight interrupts the attempt.
+An analyzed target is guaranteed to suffer the permanent effect of {Trauma}.
 
 ================================================
 Satori Gift
 ================================================
 
-At 5 stars of {Faith}, every 10 gift-count reductions cause {Satori} to give food and restore 5
-+ 1d25 {HP} and 9 + 1d15 {MP}.
-Independently, it has a 50% chance to cure paralysis, confusion, poison, and disease; a 33%
-chance to grant 50 {Power}; a 20% chance to restore drained stats; and a 10% chance each to
-grant Strength, Dexterity, or Intelligence Increase for 50-80 turns.
+At 5 stars of {Faith}, every 10 gift-count reductions cause {Satori} to give food
+and restore 5 + 1d25 {HP} and 9 + 1d15 {MP}.
+Independently, it has a 50% chance to cure paralysis, confusion, poison, and disease;
+a 33% chance to grant 50 {Power}; a 20% chance to restore drained stats;
+and a 10% chance each to grant Strength, Dexterity, or Intelligence Increase for 50-80 turns.
 
 ================================================
 Yuugi (Yuugi Hoshiguma)
 ================================================
 
-Yuugi Hoshiguma is an oni {God}. Your own kills grant 1 {Faith} at 33% for weak enemies and
-100% for strong enemies.
+Yuugi Hoshiguma is an oni {God}.
+Your own kills grant 1 {Faith} at 33% for weak enemies and 100% for strong enemies.
 Drinking sake grants +10 {Evasion}; while {Drunk}, {HP} regeneration gains +100. At 2 stars,
 melee attacks have a 10% chance to leave the target {Caught}.
 Abandoning Yuugi gives 30 {Punishment}.
@@ -1315,8 +1381,8 @@ German Suplex
 
 German Suplex is available at 2 stars of {Yuugi} {Faith}.
 It costs 10-15 {Power} and 4 faith and requires an open tile behind you.
-Maximum damage is (one-turn melee damage)x(1 + Faith/100) + 2d(2 + Faith/20). Fixed enemies are
-immune.
+Maximum damage is (one-turn melee damage)x(1 + Faith/100) + 2d(2 + Faith/20).
+Fixed enemies are immune.
 A {Caught} target can be suplexed without spending faith.
 
 ================================================
@@ -1333,8 +1399,8 @@ Howl of Annihilation
 ================================================
 
 Howl of Annihilation is available at 4 stars of {Yuugi} {Faith}.
-It costs 20-30 {Power} and 5 faith and inflicts {Silence} on all visible enemies for (20 +
-Faith/5) to (40 + Faith/5) turns.
+It costs 20-30 {Power} and 5 faith and inflicts {Silence} on all visible enemies
+for (20 + Faith/5) to (40 + Faith/5) turns.
 Targets may resist it, but a {Caught} target cannot.
 
 ================================================
@@ -1342,8 +1408,8 @@ Triple Ultimate Technique
 ================================================
 
 Triple Ultimate Technique is available at 5 stars of {Yuugi} {Faith}.
-It costs 100 {Power} and 10 faith, producing one explosion per turn for 3 turns. Their radii
-are 2, 3, and 4, and each deals 4d(4 + stage + Faith/20) damage.
+It costs 100 {Power} and 10 faith, producing one explosion per turn for 3 turns.
+Their radii are 2, 3, and 4, and each deals 4d(4 + stage + Faith/20) damage.
 
 ================================================
 Yuugi Punishment
@@ -1358,8 +1424,8 @@ Under {Yuugi} {Punishment}, one effect is chosen:
 Junko
 ================================================
 
-Junko is a purified divine spirit and a {God} suited to characters who fight with {Danmaku} and
-buffs.
+Junko is a purified divine spirit,
+a {God} suited to characters who fight with {Danmaku} and buffs.
 Only your own kills grant {Faith}: 18% for weak enemies and 100% for strong enemies.
 Her powers are strong, but using them temporarily applies {Purification}, restricting spell
 cards, scrolls, and potions.
@@ -1381,8 +1447,8 @@ Simple Danmaku
 ================================================
 
 Simple Danmaku is available at 1 star of {Junko} {Faith}.
-It costs 1 {MP} and 5-10 {Power}, firing a projectile with 3d(4 + Faith/10) damage and 10 +
-Faith/15 accuracy.
+It costs 1 {MP} and 5-10 {Power},
+firing a projectile with 3d(4 + Faith/10) damage and 10 + Faith/15 accuracy.
 It adds 0.5 stage of {Purification} for 20-30 turns.
 
 ================================================
@@ -1390,8 +1456,8 @@ Pure Strength
 ================================================
 
 Pure Strength is available at 2 stars of {Junko} {Faith}.
-It costs 3 {MP} and 40-60 {Power}, granting {Strength Increase} for 25 + Power/5 + 1d(Faith/2)
-turns.
+It costs 3 {MP} and 40-60 {Power},
+granting {Strength Increase} for 25 + Power/5 + 1d(Faith/2) turns.
 It adds 1 stage of {Purification} for the same duration.
 
 ================================================
@@ -1399,8 +1465,8 @@ Pristine Murderous Intent
 ================================================
 
 Pristine Murderous Intent is available at 4 stars of {Junko} {Faith}.
-It costs 5 {MP} and 70-100 {Power}, granting {Murderous Intent} for 25 + Faith/5 + 1d(Faith/2)
-turns.
+It costs 5 {MP} and 70-100 {Power},
+granting {Murderous Intent} for 25 + Faith/5 + 1d(Faith/2) turns.
 It adds 2 stages of {Purification} for the same duration.
 
 ================================================
@@ -1422,19 +1488,21 @@ Refusing the blessing lowers faith to 140.
 Junko Punishment
 ================================================
 
-{Junko} always applies {Purification} for 50-80 turns under {Punishment}, then chooses one
-effect:
-33%: {Weakened} for 50-80 turns. 33%: {Slow} for 50-80 turns. 33%: lower a random stat by 1-2
-three times.
+{Junko} always applies {Purification} for 50-80 turns under {Punishment},
+then chooses one of the following:
+33%: {Weakened} for 50-80 turns.
+33%: {Slow} for 50-80 turns.
+33%: lower a random stat by 1-2, three times.
 
 ================================================
 Byakuren (Byakuren Hijiri)
 ================================================
 
-Byakuren Hijiri is a magician {God}. First seeing an enemy has about a 43% chance to grant 1
-{Faith}.
-At 1 star, the maximum spell level you can learn rises; at 3 stars, {Equipment Penalty} no
-longer lowers spell success; at 4 stars, buff {Spell Success Rate} gains +2.
+Byakuren Hijiri is a magician {God}.
+First seeing an enemy has about a 43% chance to grant 1 {Faith}.
+At 1 star, the maximum spell level you can learn rises;
+at 3 stars, {Equipment Penalty} no longer lowers spell success;
+at 4 stars, buff {Spell Success Rate} gains +2.
 Abandoning Byakuren gives 30 {Punishment}.
 -> {Mind Empowerment}, {Body Empowerment}, {Byakuren Gift}, {Byakuren Punishment}
 
@@ -1443,8 +1511,8 @@ Mind Empowerment
 ================================================
 
 Mind Empowerment is available at 2 stars of {Byakuren} {Faith}.
-It costs 20-30 {Power} and 5 faith, granting {Intelligence Increase} and +100 {MP} regeneration
-for 10 + 1d10 + Faith/10 turns.
+It costs 20-30 {Power} and 5 faith,
+granting {Intelligence Increase} and +100 {MP} regeneration for 10 + 1d10 + Faith/10 turns.
 
 ================================================
 Body Empowerment
@@ -1473,12 +1541,13 @@ Under {Byakuren} {Punishment}, one effect is chosen:
 Minoriko (Minoriko Aki)
 ================================================
 
-Minoriko Aki is a harvest {God}. Picking up a P item has a 2/3 chance to grant 1 {Faith}.
-At 1 star, food may be eaten at full {Power}, with a hidden cap 50 above normal. Above 2.00
-Power, {HP} and {MP} regeneration increase; every 100 Power grants up to 15 + 15% maximum HP
-and 10 + 12.5% maximum MP.
-At 3 stars, eating takes 1 turn and restores about 2-5 MP. At 5 stars, eating grants one rank
-of fire and cold resistance for 80-100 turns.
+Minoriko Aki is a harvest {God}.
+Picking up a P item has a 2/3 chance to grant 1 {Faith}.
+At 1 star, food may be eaten at full {Power}, with a hidden cap 50 above normal.
+Above 2.00 Power, {HP} and {MP} regeneration increase;
+every 100 Power grants up to 15 + 15% maximum HP and 10 + 12.5% maximum MP.
+At 3 stars, eating takes 1 turn and restores about 2-5 MP.
+At 5 stars, eating grants one rank of fire and cold resistance for 80-100 turns.
 Abandoning Minoriko gives 30 {Punishment}.
 -> {Restore Attributes}, {Restore Health}, {Minoriko Gift}, {Minoriko Punishment}
 
@@ -1507,9 +1576,10 @@ At 3 stars of {Faith}, every 30 gift-count reductions cause {Minoriko} to give f
 Minoriko Punishment
 ================================================
 
-Under {Minoriko} {Punishment}, one effect is chosen:
-50%: current {Power} is halved. 25%: current {HP} is halved and Disease lasts 80-120 turns.
-25%: a random stat falls by 1-4 three times.
+Under {Minoriko} {Punishment}, one of the following is chosen:
+50%: current {Power} is halved.
+25%: current {HP} is halved and Disease lasts 80-120 turns.
+25%: a random stat falls by 1-4, three times.
 
 ================================================
 Shinki
@@ -1534,8 +1604,8 @@ Summon Intermediate Demon
 ================================================
 
 Summon Intermediate Demon is available at 2 stars of {Shinki} {Faith}.
-It costs 30-50 {Power} and 3 faith, summoning Sara, Louise, or Elis for 90-120 turns. It has a
-3% chance to betray you.
+It costs 30-50 {Power} and 3 faith, summoning Sara, Louise, or Elis for 90-120 turns.
+It has a 3% chance to betray you.
 
 ================================================
 Summon Greater Demon
@@ -1550,17 +1620,18 @@ Shinki Punishment
 ================================================
 
 Under {Shinki} {Punishment}, 1 to (3 + {Level}/9) hostile demons appear for 90-120 turns.
-Their rank rises with level; lesser demons stop appearing from level 15, and greater demons can
-appear from level 14.
+Their rank rises with level; lesser demons stop appearing from level 15,
+and greater demons can appear from level 14.
 
 ================================================
 Shizuha (Shizuha Aki)
 ================================================
 
-Shizuha Aki is an autumn {God}. Your own kills grant 1 {Faith} at 33% for weak enemies and 100%
-for strong enemies.
-At 0 stars, an enemy's chance to shout on waking falls from 50% to 20%. At 1 star, moving or
-killing leaves {Autumn Leaves}; at 4 stars, movement delay on them is multiplied by 0.7.
+Shizuha Aki is an autumn {God}.
+Your own kills grant 1 {Faith} at 33% for weak enemies and 100% for strong enemies.
+At 0 stars, an enemy's chance to shout on waking falls from 50% to 20%.
+At 1 star, moving or killing leaves {Autumn Leaves};
+at 4 stars, movement delay on them is multiplied by 0.7.
 Abandoning Shizuha gives 30 {Punishment}.
 -> {Leaves of Madness}, {Maple Armour}, {Autumn Weapon Brand}, {Shizuha Punishment}
 
@@ -1568,10 +1639,10 @@ Abandoning Shizuha gives 30 {Punishment}.
 Autumn Leaves
 ================================================
 
-Moving creates {Autumn Leaves} for 3 + {Shizuha} {Faith}/10 turns; kills create them for 3 +
-Faith/20 turns.
-Standing on them lowers enemy {Detection} by 40. At 4 stars, movement delay is multiplied by
-0.7.
+Moving creates {Autumn Leaves} for 3 + {Shizuha} {Faith}/10 turns;
+kills create them for 3 + Faith/20 turns.
+Standing on them lowers enemy {Detection} by 40.
+At 4 stars, movement delay is multiplied by 0.7.
 Under punishment, they instead lower fire resistance by one rank and make {Noise} 20 per step.
 
 ================================================
@@ -1579,16 +1650,16 @@ Leaves of Madness
 ================================================
 
 Leaves of Madness is available at 2 stars of {Shizuha} {Faith}.
-It costs 4 {MP} and 2 faith, inflicting resistible {Confusion} on all enemies standing on
-autumn leaves for 6-15 + Faith/20 turns.
+It costs 4 {MP} and 2 faith, inflicting resistible {Confusion}
+on all enemies standing on autumn leaves for 6-15 + Faith/20 turns.
 
 ================================================
 Maple Armour
 ================================================
 
 Maple Armour is available at 3 stars of {Shizuha} {Faith} and costs 5 faith.
-It transforms worn body armour, removing its original material. While worshipping Shizuha, it
-grants +150 {Stealth}.
+It transforms worn body armour, removing its original material.
+While worshipping Shizuha, it grants +150 {Stealth}.
 The transformation cannot be reversed.
 
 ================================================
@@ -1602,18 +1673,19 @@ It permanently gives your weapon the Autumn brand and +1-2 enchantment.
 Shizuha Punishment
 ================================================
 
-Under {Shizuha} {Punishment}, one effect is chosen with equal chance:
-{Confusion} for 12-45 turns; autumn leaves and damage equal to 30-60% of current {HP}; or
-{Slow} and {Glowing} for 40-60 turns.
+Under {Shizuha} {Punishment}, one of the following is chosen:
+33%: {Confusion} for 12-45 turns.
+33%: scatter autumn leaves and backstab for 30-60% of current {HP}.
+33%: {Slow} and {Glowing} for 40-60 turns.
 
 ================================================
 Hina (Hina Kagiyama)
 ================================================
 
-Hina Kagiyama is a curse {God}. Every 100 new tiles explored has a 40% chance to grant 1
-{Faith}.
-At 0 stars you can see and identify curses on equipment. At 5 stars, each turn has a (80/11 x
-number of cursed equipped items)% chance to create a curse cloud.
+Hina Kagiyama is a curse {God}.
+Every 100 new tiles explored has a 40% chance to grant 1 {Faith}.
+At 0 stars you can see and identify curses on equipment.
+At 5 stars, each turn has a (80/11 x number of cursed equipped items)% chance to create a curse cloud.
 Abandoning Hina gives 30 {Punishment}.
 -> {Curse Absorption}, {Curse Weapon}, {Curse Armour}, {Curse Jewelry},
 {Imbue Weapon with Curse}, {Hina Punishment}
@@ -1640,16 +1712,16 @@ Curse Armour
 ================================================
 
 Curse Armour is available at 3 stars of {Hina} {Faith}.
-It curses one uncursed worn armour piece and grants {Reflection} for 25-40 turns. Body armour
-triples the duration.
+It curses one uncursed worn armour piece and grants {Reflection} for 25-40 turns.
+Body armour triples the duration.
 
 ================================================
 Curse Jewelry
 ================================================
 
 Curse Jewelry is available at 4 stars of {Hina} {Faith}.
-It curses one uncursed worn accessory, then restores 10-15 plus 25-35% of maximum {HP} and
-30-40% of maximum {MP}.
+It curses one uncursed worn accessory,
+then restores 10-15 plus 25-35% of maximum {HP} and 30-40% of maximum {MP}.
 
 ================================================
 Imbue Weapon with Curse
@@ -1662,20 +1734,22 @@ It permanently grants a weapon the Curse brand and +1-2 enchantment.
 Hina Punishment
 ================================================
 
-Under {Hina} {Punishment}, one effect is chosen:
-25%: {Slow} for 4-20 turns, irresistible Poison for 20-40 turns, and curse clouds. 50%: curse
-equipped items. 25%: {Confusion} for 12-45 turns.
+Under {Hina} {Punishment}, one of the following is chosen:
+25%: {Slow} for 4-20 turns, irresistible Poison for 20-40 turns, and curse clouds nearby.
+50%: curse one of your equipped items.
+25%: {Confusion} for 12-45 turns.
 
 ================================================
 Yukari (Yukari Yakumo)
 ================================================
 
-Yukari Yakumo is a boundary {God}. Your own kills grant 1 {Faith} at 33% for weak enemies and
-100% for strong enemies.
+Yukari Yakumo is a boundary {God}.
+Your own kills grant 1 {Faith} at 33% for weak enemies and 100% for strong enemies.
 Every 10 turns, an empty visible tile gains a {Gap} for 20-30 turns.
-At 1 star, surviving damage of at least 8% maximum {HP} gives a (damage%-7)/(damage%+1)%
-teleport chance. Damage below 25% causes Blink; at 25-49%, the chance for Dimensional Move is
-(damage%-24)/26; at 50% or more it is guaranteed.
+At 1 star, surviving damage of at least 8% maximum {HP}
+gives a (damage%-7)/(damage%+1)% teleport chance.
+Damage below 25% causes Blink; at 25-49%, the chance for Dimensional Move is (damage%-24)/26;
+at 50% or more it is guaranteed.
 Abandoning Yukari gives 30 {Punishment}.
 -> {Eyes that View Change}, {Fantasy Maniacal Rift}, {Quadruple Barrier},
 {Dimensional Lock (Yukari's Power)},
@@ -1715,17 +1789,18 @@ you to the opposite side, and all visible Gaps turn into Eyes of the Gap.
 Yukari Punishment
 ================================================
 
-Under {Yukari} {Punishment}, one effect is chosen:
-25%: {Confusion} for 6-18 turns and teleport. 50%: No Teleport for 20-30 turns and bring 2-3
-enemies nearby. 25%: summon (2 + {Level}/8) to (3 + Level/5) hostile Eyes of the Gap for 40-60
-turns.
+Under {Yukari} {Punishment}, one of the following is chosen:
+25%: {Confusion} for 6-18 turns and a random teleport.
+50%: No Teleport for 20-30 turns and bring 2-3 nearby enemies to you.
+25%: summon (2 + {Level}/8) to (3 + Level/5) hostile Eyes of the Gap for 40-60 turns.
 
 ================================================
 Okina (Okina Matara)
 ================================================
 
-Okina Matara is a hidden-door {God}. Your own kills grant 1 {Faith} at 33% for weak enemies and
-100% for strong enemies; faith falls by 1 every 1,000 turns.
+Okina Matara is a hidden-door {God}.
+Your own kills grant 1 {Faith} at 33% for weak enemies and 100% for strong enemies;
+faith falls by 1 every 1,000 turns.
 You pass through door tiles without spending a turn and can see through doors.
 Abandoning Okina gives 30 {Punishment}.
 -> {Create Door}, {Lock Door}, {Into the Backdoor}, {Crazy Backdancers},
@@ -1743,8 +1818,8 @@ Lock Door
 ================================================
 
 Lock Door is available at 2 stars of {Okina} {Faith}.
-It costs 2 {MP} and 2 faith, remotely closing and locking a door. It gains 1 + {Level}x6 {HP}
-and lasts 30 + 1d(Faith/10) turns.
+It costs 2 {MP} and 2 faith, remotely closing and locking a door.
+It gains 1 + {Level}x6 {HP} and lasts 30 + 1d(Faith/10) turns.
 
 ================================================
 Into the Backdoor
@@ -1776,17 +1851,17 @@ Okina Punishment
 
 Under {Okina} {Punishment}, one effect is chosen:
 50%: summon hostile Mai or Satono for 40-60 turns.
-50%: temporarily reduce maximum {HP} and {MP} by half. This always happens if no enemy is in
-sight.
-When a threatening enemy is nearby and you try to use a door, there is also a 50% chance that a
-hostile closed door blocks it for 31-60 turns.
+50%: temporarily reduce maximum {HP} and {MP} by half.
+This always happens if no enemy is in sight.
+When a threatening enemy is nearby and you try to use a door,
+there is also a 50% chance that a hostile closed door blocks it for 31-60 turns.
 
 ================================================
 Suwako (Suwako Moriya)
 ================================================
 
-Suwako Moriya is the highest of native {God}s. Instead of ordinary {Faith}, she grants one
-random ability at each stage:
+Suwako Moriya is the highest of native {God}s.
+Instead of ordinary {Faith}, she grants one random ability at each stage:
 Stage 1: {Frog Jump} / {Build Shrine} / {Water Gun} / {Frog Tongue}.
 Stage 2: restore {HP}, {MP}, or {Power} on kills / {Swimming} / {Protection from Death}.
 Stage 3: {Native God's Calamity} / {Excavation} / {Summon Frog} / {Build Statue}.
@@ -1800,23 +1875,23 @@ Suwako Punishment
 ================================================
 
 Under {Suwako} {Punishment}, one effect is chosen:
-50%: calamity inflicts {Slow} for 4-20 turns and irresistible {Poison} for 30-50 turns, and
-creates a mist cloud.
+50%: calamity inflicts {Slow} for 4-20 turns and irresistible {Poison} for 30-50 turns,
+and creates a mist cloud.
 50%: summon 2 to (4 + {Level}/6) frogs and giant toads for 60-120 turns.
 
 ================================================
 Joon & Shion (Joon and Shion, Joon & Shion Yorigami)
 ================================================
 
-Joon & Shion Yorigami are the most disastrous and troublesome pestilence-and-poverty sister
-{God}s.
-When you or an ally kills an enemy, weak enemies have a 33% chance and strong enemies a 100%
-chance to grant 1 {Faith}.
-At 0 stars, using a {Potion} or {Scroll} has a 25% chance to consume 2-3. Those on the floor
-vanish after about 1,000 turns, and discarded consumables have a 25% chance to vanish
-immediately.
-At 1 star you can use {Possession}; at 2 stars it gains Power-based effects; at 4 stars it
-gains consumable-based effects.
+Joon & Shion Yorigami are the most disastrous and troublesome
+pestilence-and-poverty sister {God}s.
+When you or an ally kills an enemy, weak enemies have a 33% chance
+and strong enemies a 100% chance to grant 1 {Faith}.
+At 0 stars, using a {Potion} or {Scroll} has a 25% chance to consume 2-3.
+Those on the floor vanish after about 1,000 turns, and discarded consumables
+have a 25% chance to vanish immediately.
+At 1 star you can use {Possession}; at 2 stars it gains Power-based effects;
+at 4 stars it gains consumable-based effects.
 Abandoning the sisters gives 30 {Punishment}.
 -> {Joon Possession}, {Shion Possession}, {Queen of Bubble}, {Misschance Scatter},
 {Absolute Loser}, {Joon & Shion Punishment}
@@ -1826,8 +1901,8 @@ Possession
 ================================================
 
 Possession is available at 1 star of {Joon & Shion} {Faith}.
-Choose Joon or Shion to possess you for 150-200 turns. After it ends, you must gain 6 faith
-before using it again.
+Choose Joon or Shion to possess you for 150-200 turns.
+After it ends, you must gain 6 faith before using it again.
 -> {Joon Possession}, {Shion Possession}
 
 ================================================
@@ -1835,8 +1910,8 @@ Joon Possession
 ================================================
 
 {Possession} by Joon immediately fills {Power}, but sets it to 300 when possession ends.
-At 2 stars of {Faith}, damage is multiplied by 1.30 to (1.30 + faith stage x 0.05), consuming
-0.01-0.10 Power whenever damage is dealt.
+At 2 stars of {Faith}, damage is multiplied by 1.30 to (1.30 + faith stage x 0.05),
+consuming 0.01-0.10 Power whenever damage is dealt.
 At 4 stars, wasting at least two consumables independently has a 20% chance each to grant
 {Haste}, {Strength Increase}, {Dexterity Increase}, {Intelligence Increase}, or +8 {Defense}.
 
@@ -1846,29 +1921,29 @@ Shion Possession
 
 {Possession} by Shion immediately restores (10-20 + 15-25% maximum {HP}) x (70 + {Faith}/2)% HP
 and (5-10 + 20-40% maximum HP) x (70 + Faith/2)% {MP}.
-Power penalties are ignored. Consumables on the floor vanish after about 100 turns and
-discarded ones vanish immediately.
+Power penalties are ignored. Consumables on the floor vanish after about 100 turns
+and discarded ones vanish immediately.
 At 2 stars, picking up a P item restores 1 + 6-10% maximum HP instead of Power.
-At 4 stars, death has a 10% chance per carried potion and scroll to be prevented. Up to 10
-random consumables are lost and you revive at 10% maximum HP.
+At 4 stars, death has a 10% chance per carried potion and scroll to be prevented.
+Up to 10 random consumables are lost and you revive at 10% maximum HP.
 
 ================================================
 Queen of Bubble
 ================================================
 
 Queen of Bubble is available at 5 stars of {Joon & Shion} {Faith} while Joon possesses you.
-It costs 5 {MP}, confusing all visible enemies for 5-10 + Faith/20 turns and dealing explosion
-damage equal to (20 + {Level}x2)x(Faith+400)/400.
+It costs 5 {MP}, confusing all visible enemies for 5-10 + Faith/20 turns
+and dealing explosion damage equal to (20 + {Level}x2)x(Faith+400)/400.
 It can be used once per {Possession}.
 
 ================================================
 Misschance Scatter
 ================================================
 
-Misschance Scatter is available at 5 stars of {Joon & Shion} {Faith} while Shion possesses
-you.
-It costs 5 {MP}, slowing all visible enemies for 20-40 + Faith/10 turns and spreading poverty
-clouds over a wide area.
+Misschance Scatter is available at 5 stars of {Joon & Shion} {Faith}
+while Shion possesses you.
+It costs 5 {MP}, slowing all visible enemies for 20-40 + Faith/10 turns
+and spreading poverty clouds over a wide area.
 It can be used once per {Possession}.
 
 ================================================
@@ -1876,30 +1951,31 @@ Absolute Loser
 ================================================
 
 Absolute Loser is available during {Possession} at 6 stars of {Joon & Shion} {Faith}.
-It lowers faith to 120 (5 stars) and fires the poverty god up to range 7. A living target
-cannot resist and is changed to {Level} 1, half maximum {HP}, 2 damage on each melee attack, 0
-{Defense}, and 5 {Evasion}; each spell's frequency becomes one fifth until death.
-It does not affect nonliving targets and can be used once per possession. Using it during
-{Shion Possession} changes the remaining duration to {Joon Possession}.
+It lowers faith to 120 (5 stars) and fires the poverty god up to range 7.
+A living target cannot resist and is changed to {Level} 1, half maximum {HP},
+2 damage on each melee attack, 0 {Defense}, and 5 {Evasion};
+each spell's frequency becomes one fifth until death.
+It does not affect nonliving targets and can be used once per possession.
+Using it during {Shion Possession} changes the remaining duration to {Joon Possession}.
 
 ================================================
 Joon & Shion Punishment
 ================================================
 
-Under {Joon & Shion} {Punishment}, one effect is chosen:
+Under {Joon & Shion} {Punishment}, one of the following is chosen:
 50%: Joon forcibly possesses you for 250-400 turns and removes 100 {Power}.
-50%: Shion forcibly possesses you for 250-400 turns and removes half of maximum {HP} and {MP}
-from their current values.
+50%: Shion forcibly possesses you for 250-400 turns and halves your current {HP} and {MP}.
 
 ================================================
 Lily (Lily White)
 ================================================
 
 Lily White is a spring-bringing fairy {God} who leads fairy companions.
-Every 100 new tiles explored has a 30% chance to grant 1 {Faith}. Each stage from 1 to 5 stars
-raises the fairy companion limit by one.
-You receive 70% of normal experience, and each companion on the current floor receives half
-that amount. Dead companions revive near you after enough experience is gained.
+Every 100 new tiles explored has a 30% chance to grant 1 {Faith}.
+Each stage from 1 to 5 stars raises the fairy companion limit by one.
+You receive 70% of normal experience,
+and each companion on the current floor receives half that amount.
+Dead companions revive near you after enough experience is gained.
 Abandoning Lily gives 30 {Punishment} and turns your fairy companions hostile.
 -> {Recruit Companion}, {Call Fairies}, {Spring Healing}, {Great Fairy Wars}, {Lily Punishment}
 
@@ -1923,8 +1999,8 @@ Spring Healing
 ================================================
 
 Spring Healing is available at 3 stars of {Lily} {Faith}.
-It costs 3 {MP} and 20-35 {Power}, restoring 10-35% of maximum {HP} to one fairy companion
-within range 7.
+It costs 3 {MP} and 20-35 {Power},
+restoring 10-35% of maximum {HP} to one fairy companion within range 7.
 
 ================================================
 Great Fairy Wars
@@ -1939,9 +2015,8 @@ In exchange, you are {Weakened} for 20-40 turns, halving both.
 Lily Punishment
 ================================================
 
-Under {Lily} {Punishment}, there is a 35% chance of {Weakened} for 20-40 turns, or a 65%
-chance to
-summon 3-5 hostile fairies for 60-120 turns.
+Under {Lily} {Punishment}, there is a 35% chance of {Weakened} for 20-40 turns,
+or a 65% chance to summon 3-5 hostile fairies for 60-120 turns.
 
 ================================================
 Seija (Seija Kijin)
@@ -1949,12 +2024,11 @@ Seija (Seija Kijin)
 
 Seija Kijin is an amanojaku {God}. Unlike other gods, she begins at a full 6 stars of {Faith};
 at stages 1-5, each stage grants +2 {Strength}, {Dexterity}, and {Intelligence}.
-After enough experience, there is a 2/3 chance for the {Gift} counter to fall by 1. Every 10
-reductions offers stolen treasure. Accepting it, or leaving the offer too long, lowers faith by
-one star.
+After enough experience, there is a 2/3 chance for the {Gift} counter to fall by 1.
+Every 10 reductions offers stolen treasure.
+Accepting it, or leaving the offer too long, lowers faith by one star.
 At 2 stars, a hostile summon from another god's {Punishment} grants {Haste} for 20-40 turns.
-Once
-you worship Seija, you can never worship another god.
+Once you worship Seija, you can never worship another god.
 Abandoning her gives 30 punishment.
 -> {Receive Treasure}, {Reverse Position}, {Overturning All Under Heaven}, {Seija Punishment}
 
@@ -1962,13 +2036,12 @@ Abandoning her gives 30 punishment.
 Receive Treasure (Seija Gift)
 ================================================
 
-Whenever Seija's gift counter falls by 10, four gods whose treasure you have not chosen are
-offered.
-Choosing one gives 9 of that god's {Punishment} and lowers Seija's {Faith} by one star. Each
-god's
-treasure can be taken only once.
-If you wait until another 10 counter reductions, the treasure disappears and faith still falls
-by one star.
+Whenever Seija's gift counter falls by 10,
+four gods whose treasure you have not chosen are offered.
+Choosing one gives 9 of that god's {Punishment} and lowers Seija's {Faith} by one star.
+Each god's treasure can be taken only once.
+If you wait until another 10 counter reductions,
+the treasure disappears and faith still falls by one star.
 
 {Byakuren}: 2-4 random spellbooks / {Kanako}: 3-5 random weapons
 {Suwako}: 2-4 random spell cards / {Minoriko}: 10 sweet potatoes
@@ -1997,27 +2070,26 @@ Overturning All Under Heaven
 ================================================
 
 Overturning All Under Heaven is available at 5 stars of {Seija} {Faith} and costs 100 {Power}.
-It inflicts irresistible {Confusion} on all visible monsters and randomly lowers each target's
-current {HP} to 30-70%. Allies are affected too.
-Confusion lasts from 5 to (20 + (your level - target level)x2) turns, with the level difference
-limited to -4 through +4.
+It inflicts irresistible {Confusion} on all visible monsters
+and randomly lowers each target's current {HP} to 30-70%. Allies are affected too.
+Confusion lasts from 5 to (20 + (your level - target level)x2) turns,
+with the level difference limited to -4 through +4.
 
 ================================================
 Seija Punishment
 ================================================
 
-Under {Seija} {Punishment}, one random god other than Seija and {Satori} receives 3-4
-punishment
-counts against you.
+Under {Seija} {Punishment}, one random god other than Seija and {Satori}
+receives 3-4 punishment counts against you.
 
 ================================================
 Miko (Toyosatomimi no Miko)
 ================================================
 
-Toyosatomimi no Miko is a hermit {God} who governs the universe. She uses {Popularity} instead
-of {Faith}.
-Popularity rises by defeating enemies and through powers such as {Desire Accumulation}; most
-effects bought with it last only until leaving the floor.
+Toyosatomimi no Miko is a hermit {God} who governs the universe.
+She uses {Popularity} instead of {Faith}.
+Popularity rises by defeating enemies and through powers such as {Desire Accumulation};
+most effects bought with it last only until leaving the floor.
 Abandoning Miko gives 30 {Punishment}.
 -> {Cloak of Teleportation}, {Halo}, {Gain Resistance}, {Red Cloak, Blue Cloak},
 {Popularity Boom}, {Miko Punishment}
@@ -2027,10 +2099,10 @@ Popularity
 ================================================
 
 Popularity is the resource used by {Miko} instead of {Faith}.
-You gain 0.5-2.5 when you or an ally kills an enemy. Descending ordinary stairs removes 5;
-ascending removes 15.
-Entering a new subdungeon for the first time sets it to 30. Entering one already visited, or
-leaving a dungeon, sets it to 0.
+You gain 0.5-2.5 when you or an ally kills an enemy.
+Descending ordinary stairs removes 5; ascending removes 15.
+Entering a new subdungeon for the first time sets it to 30.
+Entering one already visited, or leaving a dungeon, sets it to 0.
 
 ================================================
 Desire Accumulation
@@ -2038,8 +2110,8 @@ Desire Accumulation
 
 Desire Accumulation is a free {Miko} power usable once per floor.
 It reads visible enemies' desires and grants 1-5 {Popularity} per target according to strength.
-Allies, summoned enemies, and invulnerable enemies are excluded. It cannot be used after
-revisiting the floor.
+Allies, summoned enemies, and invulnerable enemies are excluded.
+It cannot be used after revisiting the floor.
 
 ================================================
 Cloak of Teleportation
@@ -2053,24 +2125,24 @@ Halo
 ================================================
 
 Halo is a {Miko} power.
-It costs 5 {Popularity} and lasts until leaving the floor, applying {Glowing} to you and every
-monster in range.
+It costs 5 {Popularity} and lasts until leaving the floor,
+applying {Glowing} to you and every monster in range.
 
 ================================================
 Gain Resistance
 ================================================
 
 Gain Resistance is a {Miko} power.
-It costs 15 {Popularity} and grants one chosen rank of fire, cold, electric, poison, or
-confusion resistance until leaving the floor.
+It costs 15 {Popularity} and grants one chosen rank
+of fire, cold, electric, poison, or confusion resistance until leaving the floor.
 It may be used for different resistances, but cannot stack the same resistance.
 
 ================================================
 Red Cloak, Blue Cloak
 ================================================
 
-Red Cloak, Blue Cloak is a {Miko} power costing 50 {Popularity}. Choose one effect until
-leaving the floor:
+Red Cloak, Blue Cloak is a {Miko} power costing 50 {Popularity}.
+Choose one effect until leaving the floor:
 Red Cloak: +6 {Damage}, +6 {Accuracy}, +100 {HP} regeneration.
 Blue Cloak: x1.5 {Spell Power}, +50 {MP} regeneration.
 Once chosen, it cannot be changed or selected again on that floor.
@@ -2080,8 +2152,8 @@ Popularity Boom
 ================================================
 
 Popularity Boom is a {Miko} power costing 100 {Popularity}.
-Choose double maximum {HP}, +250 {MP} regeneration, or permanent {Haste} until leaving the
-floor.
+Choose double maximum {HP}, +250 {MP} regeneration,
+or permanent {Haste} until leaving the floor.
 It can be selected only once on that floor.
 
 ================================================
@@ -2089,31 +2161,33 @@ Miko Punishment
 ================================================
 
 When {Miko} {Punishment} triggers, it makes {Noise} 20 and applies one effect for 80-160 turns:
-33%: {Frail}, halving maximum {HP}. 33%: {Slow}. 33%: fire and cold resistance each fall by one
-rank.
+33%: {Frail}, halving maximum {HP}.
+33%: {Slow}.
+33%: fire and cold resistance each fall by one rank.
 
 ================================================
 Keiki (Keiki Haniyasushin)
 ================================================
 
-Keiki Haniyasushin is the sculptor {God} who creates Haniwa. On joining, you receive one Haniwa
-but gain only 80% of normal experience.
-Every 100 new tiles explored has a 35% chance to advance the {Gift} counter. When filled, you
-choose a Haniwa upgrade.
-Once {Faith} is full, the Haniwa cannot be upgraded further. Abandoning Keiki gives 30
-{Punishment} and removes all your Haniwa.
+Keiki Haniyasushin is the sculptor {God} who creates Haniwa.
+On joining, you receive one Haniwa but gain only 80% of normal experience.
+Every 100 new tiles explored has a 35% chance to advance the {Gift} counter.
+When filled, you choose a Haniwa upgrade.
+Once {Faith} is full, the Haniwa cannot be upgraded further.
+Abandoning Keiki gives 30 {Punishment} and removes all your Haniwa.
 -> {Enhance Haniwa}, {Keiki Punishment}
 
 ================================================
 Enhance Haniwa
 ================================================
 
-While worshipping {Keiki}, you can upgrade a Haniwa whose level equals yours. Its base maximum
-{HP} is 10 + {Level}x5, {Defense} is 1, and damage is 3 + Level.
-Every 100 new tiles explored has a 35% chance to advance the {Gift} counter by 1. At 20, three
-upgrades are offered; at least one belongs to the category chosen most often.
-Postponing raises the next counter to 30. Choosing an upgrade raises {Faith} by its displayed
-cost. At 160 faith (6 stars), the Haniwa is complete.
+While worshipping {Keiki}, you can upgrade a Haniwa whose level equals yours.
+Its base maximum {HP} is 10 + {Level}x5, {Defense} is 1, and damage is 3 + Level.
+Every 100 new tiles explored has a 35% chance to advance the {Gift} counter by 1.
+At 20, three upgrades are offered; at least one belongs to the category chosen most often.
+Postponing raises the next counter to 30.
+Choosing an upgrade raises {Faith} by its displayed cost.
+At 160 faith (6 stars), the Haniwa is complete.
 -> {Haniwa Combat Upgrades}, {Haniwa Magic Upgrades}, {Haniwa Support Upgrades}, {Common Haniwa Upgrades}
 
 ================================================
@@ -2128,12 +2202,12 @@ Equip Shield (30): maximum {HP} x1.1 and {Defense} +3.
 Equip Golden Shield (60): requires Shield; Defense +10 more and intercepts attacks on you.
 Fire, Cold, Electric, or Poison Enchant (20 each): requires Sword, Spear, or Bow; only one.
 Sweet Poison (40): requires Poison Enchant; poison also slows living targets.
-Self-Destruct (15): on death, deals 4d(3 + {Level}/3 + Level/4) fire explosion damage to
-enemies within radius 2.
+Self-Destruct (15): on death, deals 4d(3 + {Level}/3 + Level/4) fire explosion damage
+to enemies within radius 2.
 Army (60): creates two Haniwa, each with about 3/4 level, HP, and damage.
 Expanded Army (60): requires Army; creates three, each at about 2/3 strength.
-Cleave Attack (90): offered only when Combat alone is the most developed category; attacks one
-other adjacent enemy. Incompatible with Spear and Bow.
+Cleave Attack (90): offered only when Combat alone is the most developed category;
+attacks one other adjacent enemy. Incompatible with Spear and Bow.
 -> {Enhance Haniwa}
 
 ================================================
@@ -2143,14 +2217,14 @@ Haniwa Magic Upgrades
 Small Danmaku Shot (30): uses a range-7 non-elemental danmaku spell.
 Medium Danmaku Shot (30): requires Small; makes it hit twice.
 Large Danmaku Shot (30): requires Medium; makes it hit three times.
-Fire, Cold, or Electric Danmaku (20 each): requires Small; choose one, changing its element and
-multiplying damage by 1.3.
+Fire, Cold, or Electric Danmaku (20 each): requires Small;
+choose one, changing its element and multiplying damage by 1.3.
 Explosive or Piercing Danmaku (30 each): requires Small; choose one.
 Use Blink (20): blinks away when an enemy is adjacent.
 Use Slow (30): casts Slow. Use Confuse (30): requires Slow and replaces it with Confuse.
 Use Haste (60): casts Haste on itself.
-Magic Specialization (50): offered only when Magic alone is most developed and Danmaku or Slow
-was learned; stops meleeing and uses all spells 1.2 times as often.
+Magic Specialization (50): offered only when Magic alone is most developed
+and Danmaku or Slow was learned; stops meleeing and uses all spells 1.2 times as often.
 -> {Enhance Haniwa}
 
 ================================================
@@ -2163,12 +2237,12 @@ Generate Artifact Weapon (90): makes it always an {Artifact}, but requires 100 c
 Generate Armour (50): after 50 checks, creates armour favoring empty slots.
 Generate Artifact Armour (90): always an artifact, but requires 120 checks.
 Generate Potion or Scroll (60 each): creates one after 40 checks.
-Item Identification (10): when picking up an unidentified item, each living Haniwa has a 1/3
-chance to identify it.
-Healer (30): while no enemy is visible, each Haniwa action has a 10% chance to restore 5-9
-{HP}.
-Item-generation upgrades are incompatible with Army and work only while a Haniwa is visible on
-the same floor.
+Item Identification (10): when picking up an unidentified item,
+each living Haniwa has a 1/3 chance to identify it.
+Healer (30): while no enemy is visible,
+each Haniwa action has a 10% chance to restore 5-9 {HP}.
+Item-generation upgrades are incompatible with Army
+and work only while a Haniwa is visible on the same floor.
 A kill check occurs at 33% for ordinary enemies and 100% for {Named} enemies.
 -> {Enhance Haniwa}
 
@@ -2176,8 +2250,8 @@ A kill check occurs at 33% for ordinary enemies and 100% for {Named} enemies.
 Common Haniwa Upgrades
 ================================================
 
-Toughness Up (20 each): stage 1 gives maximum {HP} x1.3 and {Defense} +1; later stages give
-maximum HP x1.3 and Defense +2.
+Toughness Up (20 each): stage 1 gives maximum {HP} x1.3 and {Defense} +1;
+later stages give maximum HP x1.3 and Defense +2.
 Quick Revival (30): reduces revival time from about 100-120 turns to 35-45.
 Horse Riding (60): action speed changes from 10 to 7; incompatible with Flying.
 Flying (20): always flies and reduces movement delay by 2; incompatible with Horse Riding.
@@ -2195,14 +2269,39 @@ Spearmen may appear from level 13, archers from 16, and cavalry from 19.
 Tenshi (Tenshi Hinanawi)
 ================================================
 
-Tenshi Hinanawi is the Girl of the Sphere of Neither Perception nor Non-Perception, an
-unpredictable {God}.
-Every 100 new tiles explored has a 20% chance to advance the {Gift} counter. At 5, Tenshi acts
-on a whim.
-Her actions depend greatly on {Tension}: high tension favors helpful blessings, while low
-tension favors harmful pranks.
-Abandoning Tenshi gives 30 {Punishment}. During punishment she acts by the same rules, but with
-more harmful results.
+Tenshi Hinanawi is the Girl of the Sphere of Neither Perception nor Non-Perception,
+an unpredictable {God}.
+Every 100 new tiles explored has a 20% chance to advance the {Gift} counter.
+At 5, Tenshi acts on a whim.
+Her actions depend greatly on {Tension}:
+high tension favors helpful blessings, while low tension favors harmful pranks.
+Abandoning Tenshi gives 30 {Punishment}.
+During punishment she acts by the same rules, but with more harmful results.
+
+================================================
+Instant Death
+================================================
+
+Instant Death is a {Fixed Artifact}-only option.
+When you strike a living (non-inanimate) enemy, it may be killed instantly.
+The chance is (8 + your {Level} - enemy level)%, clamped between 2% and 25%.
+That is, weaker enemies are easier to kill instantly, stronger ones harder.
+
+================================================
+Return
+================================================
+
+Return is a {Fixed Artifact}-only option.
+A thrown weapon has a 50% chance to return to your inventory.
+
+================================================
+Kick
+================================================
+
+Kick is a {Fixed Artifact}-only option (shown as *Kick on items).
+On a melee attack, it may add a kick.
+The chance is (15 + {Unarmed} skill)%, up to 50%,
+dealing 1 to (5 + Unarmed skill/2) damage with {Accuracy} 12 + Unarmed skill/2.
 
 ================================================
 Dive

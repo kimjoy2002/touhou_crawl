@@ -5870,7 +5870,7 @@ bool players::Read(char id_)
 					int use_num_ = 1;
 					if (you.god == GT_JOON_AND_SION || you.GetPunish(GT_JOON_AND_SION))
 					{
-						if (you.god_value[GT_JOON_AND_SION][0] == 1 || randA(3) >= 0)
+						if (you.god_value[GT_JOON_AND_SION][0] == 1 || randA(3) == 0)
 						{
 							use_num_ = rand_int(2, 3);
 						}
@@ -7372,11 +7372,6 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 			if(where_ == ET_ARMOR)
 				equipArmour((armour_kind)(*it).value5, plus_);
 
-
-			if(where_ == ET_ARMOR && (*it).value5==AMK_AUTUMN)
-			{
-				ResistUpDown(-1*plus_,RST_FIRE);
-			}
 		}
 
 

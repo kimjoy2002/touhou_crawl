@@ -141,11 +141,9 @@ She delights in watching loud enemies fall like leaves.
 §_08**: Inflicts confusion on all enemies standing on leaves. (MP, Faith)§d
 
 §_08***: You can convert your armor into Maple Armor. (Faith)§d
-(Maple Armor sacrifices your current armor to greatly reduce its penalties
-while giving extra defense and stealth bonuses.
-Lighter armors gain a bigger stealth bonus, while heavier armors lose more penalties.
-Also reduces turn cost for equipping/removing armor to 1/5.
-Downside: lowers fire resistance by 1 stage.)
+(Maple Armor removes the original armor type's resistance,
+but grants 150 Stealth while worshipping Shizuha.
+Once converted, it cannot be reverted to its original form.)
 
 §_08****: You move much faster while walking on leaves. (Passive)§d
 

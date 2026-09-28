@@ -1215,7 +1215,7 @@ bool skill_shinki_high_demon(int power, bool short_, unit* order, coord_def targ
 	{
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_SUMMON,false,false,false,CL_magic,
 			PlaceHolderHelper(mon_->name.getName()));
-		if(randA(99)<=(id_==MON_YUKI?5:id_==MON_MAI?5:3))
+		if(randA(99)<=(id_==MON_MAI?5:3))
 		{
 			PlaySE("laugh");
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SHINKI_SUMMON_FAIL,false,false,false,CL_danger,

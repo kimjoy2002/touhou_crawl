@@ -373,6 +373,7 @@ void Help_Show()
 			string search_query;
 			bool search_backward = false;
 			int search_line = -1;
+			vector<int> wiki_line_history;
 			while(loop_)
 			{
 				InputedKey inputedKey;
@@ -384,6 +385,9 @@ void Help_Show()
 				if(key_ >= 1000) {
 					int line = LocalzationManager::getWikiLine(key_-1000);
 					if(line != -1) {
+						int current_line = DisplayManager.max_y - DisplayManager.move;
+						if(current_line != line)
+							wiki_line_history.push_back(current_line);
 						setDisplayMove(DisplayManager.max_y-line);
 						DisplayManager.setPosition(0);
 					}
@@ -393,6 +397,14 @@ void Help_Show()
 
 				switch(key_)
 				{
+				case VK_BACK:
+					if(!wiki_line_history.empty()) {
+						int line = wiki_line_history.back();
+						wiki_line_history.pop_back();
+						setDisplayMove(max(0, DisplayManager.max_y-line));
+						DisplayManager.setPosition(0);
+					}
+					break;
 				case '/':
 				case '?':
 				{

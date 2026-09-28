@@ -1,0 +1,206 @@
+
+---------------------------------------------------------------------
+§c beta patch – ver1.208 (2026-09-28)§d
+---------------------------------------------------------------------
+
+§y* Feature Additions§d
+ * Added 19 new fixed artifacts.
+ * Added an in-game Patch Notes viewer to the main menu and help menu.
+
+§y* Gameplay & Interface Improvements§d
+ * Reduced the magic resistance of the dolls in the Doll's House to ordinary levels.
+ * Self-destructing dolls no longer spawn in the Arena.
+ * Removed random number bias that caused similar or clustered results.
+ * The evoke menu now selects the last successfully used evokable by default.
+ * Improved target highlighting for Dragon God's Wrath.
+ * Expanded Dungeon Suzunaan, primarily with information about gods.
+
+§y* Bug Fixes§d
+ * Fixed Yuki's betrayal rate in Shinki's ability being the same as Mai's.
+ * Fixed a leftover bug that caused Maple Armour to reduce fire resistance.
+ * Fixed Eirin's Potion Constitution having no effect.
+ * Fixed a bug where using a scroll while worshipping Joon and Shion always consumed 2–3 scrolls at once.
+ * Fixed newly acquired items sometimes being assigned an inventory letter that was already in use.
+ * Fixed artifact regeneration effects not being applied correctly.
+ * Fixed mushrooms blocking stairs or disconnecting passable areas in the Forest of Magic.
+ * Fixed Binding Soul creating a Ghost of Ghost instead of preserving the bound monster's identity.
+ * Fixed Haniwa spawning in water and drowning immediately.
+ * Land-based allies can now attack adjacent enemies hovering over water without entering the water.
+ * Fixed several incorrect messages, including armor size restrictions and Conjure Flame warnings.
+ * Fixed permanent Haniwa charm being replaced by a temporary Charm duration.
+
+
+---------------------------------------------------------------------
+§c beta patch – ver1.207 (2026-09-20)§d
+---------------------------------------------------------------------
+
+§y* Bug Fixes§d
+ * Fixed a crash caused by cloud-generating monsters, mainly those found in the Doll's House.
+
+
+---------------------------------------------------------------------
+§c beta patch – ver1.206 (2026-09-20)§d
+---------------------------------------------------------------------
+
+
+§y* Feature Additions§d
+ * Added Sakuya and Cirno as playable characters.
+  * Sakuya is a tricky maid who specializes in throwing knives.
+  * Cirno is an ice fairy who can create ice items every three levels.
+ * The Forest of Magic and the Scarlet Devil Mansion once again have an equal chance of appearing.
+ * Added Doll's House, a sub-dungeon accessible from the Forest of Magic.
+  * It has three floors, always appears when the Forest of Magic does, and contains the Rune of Dolls.
+  * It is the counterpart to the Scarlet Basement, but is currently considerably harder. The Scarlet Basement will be reworked in a future update.
+ * Reworked the Maid spells Bullet Retrieval and Time Paradox.
+  * Bullet Retrieval is now a level 2 spell that retrieves thrown weapons in a single cast.
+  * Time Paradox now summons a duplicate that copies your thrown weapons and spells a limited number of times.
+  * Throwing Knives and Javelins now gain +3 accuracy when thrown.
+ * Junko's final ability no longer inflicts permanent Purification.
+ * Expanded and improved the Dungeon Suzunaan wiki.
+ * Dolls war is now level 9 spell
+
+§y* Bug Fixes§d
+  * Fixed several bugs involving malformed maps, crashes caused by jump attacks, and Okina's backdoors.
+
+---------------------------------------------------------------------
+§c beta patch – ver1.205 (2025-09-26)§d
+---------------------------------------------------------------------
+
+§y* Bug Fixes§d
+ * Fixed an issue where auto-navigation could take incorrect routes or get stuck in an infinite loop.
+ * Added a save recovery mechanism to partially restore corrupted save files (not 100% guaranteed).
+ 
+ 
+---------------------------------------------------------------------
+§c beta patch – ver1.204 (2025-09-22)§d
+---------------------------------------------------------------------
+
+§y* Bug Fixes§d
+ * Fixed a critical bug where the Forest of Magic could not be entered.
+ * Fixed a bug where late-game dungeon monsters were not spawning.
+
+---------------------------------------------------------------------
+§c beta patch – ver1.203 (2025-09-21)§d
+---------------------------------------------------------------------
+
+§y* Feature Additions§d
+ * Added new subdungeon: Forest of Magic
+  * Replaces the Scarlet Devil Mansion branch. In this beta, it is set to always appear (100%) for testing.
+  * Future sub-branches of the Magic Forest will be added, but for now the Scarlet Devil Mansion Basement appears as a placeholder.
+
+§y* Bug Fixes & Adjustments§d
+ * Fixed a bug where Gungnir could be retrieved using the Bullet Retrieval spell.
+ * Fixed a bug where Momiji spawned with a small shield.
+ * Fixed a bug where the artifact Amulet of Perfection retained its options after being destroyed.
+ * Fixed an issue where mini game mode play could delete normal game save files.
+ * Fixed an issue where some vaults generated as impassable or could cause the game to freeze.
+ * Scoreboard now records cleared floors of the World of Lunatic Dream.
+ * Fixed an issue where spells inside spellbooks could not be searched.
+
+
+---------------------------------------------------------------------
+§c beta patch – ver1.202 (2025-08-12)§d
+---------------------------------------------------------------------
+
+§y* Bug Fixes & Minor Changes§d
+ * Fixed a bug where the Short Blade base damage increase was not applied to some artifacts.
+ * Fix bug where polearms could pierce through glass walls
+ * Fix issues with auto-attacking glass monsters and neutral targets
+ * Fixed an issue where artifacts always had auto-pickup enabled and Dropped Spellbook were always auto-picked up.
+ * Fixed an issue where score items could spawn outside the player’s line of sight.
+ * Added Japanese translation to Dungeon Suzunaan.
+
+
+---------------------------------------------------------------------
+§c beta patch – ver1.201 (2025-08-08)§d
+---------------------------------------------------------------------
+
+
+§y* Feature Additions§d
+ * Weapon Specialization
+  * Axe – Added shockwave ability that strikes enemies behind your target.
+  * Mace – Can inflict heavy damage and Dazed (reduces accuracy & magic frequency) once per enemy.
+  * Polearm – Can attack enemies two tiles away.
+  * Long Blade – Can Slash Away grazable projectiles when no enemies are nearby.
+  * Short Blade – Base damage increased by 1.
+ * Dungeon Suzunaan Open! (Beta)
+  * View in-game spoiler information in a wiki-like format.
+  * Currently limited entries, Korean & English only. Search function coming soon.
+
+§y* Balance Adjustments§d
+ * Increased base melee accuracy for warrior characters.
+
+§y* Bug Fixes & Minor Changes§d
+ * G key can now be used for dungeon exploration.
+ * Improved some translations.
+
+---------------------------------------------------------------------
+§c minor patch - ver1.117 (2025-07-29)§d
+---------------------------------------------------------------------
+
+
+§y* Feature Additions§d
+ * Added skill training focus via capital letters during skill selection
+ * Monster spell damage is now shown in dice format
+
+§y* Bug Fixes§d
+ * Fixed issues related to saving
+ * Fixed a bug where monsters with 2-tile reach could attack through glass walls
+ * Fixed a bug where Haniwa could attack 2 tiles away without wielding a spear
+ * Fixed item generation by Haniwa to properly display the --More-- prompt
+ * Fixed virtual keyboard not appearing when searching for items in Steam Deck
+ * Fixed a bug where clearing the Arena did not drop a Yin-Yang Orb, preventing win (Sorry to anyone who cleared!)
+ * Fixed a bug where Suwako could occasionally gift Koishi's hat
+ * Fixed some evokable items being able to attack enemies out of range
+ * Fixed a bug where doppelgangers appear when playing Minigame 1 as the Three Fairies
+ * Fixed Momiji starting with a See Invisible ring instead of the See Invisible trait
+ * Fixed certain monsters being unable to follow you through stairs when affected by Yuyuko's Binding Soul
+ * Minor text adjustments
+
+§y* Balance Adjustments§d
+ * Sunny’s invisibility activation chance is now always 100%
+ * Earth SpellCards can now destroy statues
+ * Fixed *Tele appearing too frequently on random artifacts; now more varied minor negative effect instead
+ * Reduced the chance of early-game artifact rings; increased the chance for artifact armor instead
+
+---------------------------------------------------------------------
+§c minor patch ver1.116 (2025-07-24)§d
+---------------------------------------------------------------------
+
+§y* Feature Additions§d
+ * Added a basic UI feature to display a monster’s general
+ * stats with x-v. (Approximate spell damage may be added next.)
+
+§y* Bug Fixes§d
+ * Fixed a bug where the numpad didn’t work when reading spellbooks.
+ * Fixed an issue where Haniwa’s spear didn’t attack two tiles ahead as intended.
+ * Fixed an infinite loop when trying to move to an inaccessible sub-dungeon.
+ * Fixed a bug where sub-dungeon entry warnings would repeat endlessly.
+ * Fixed a freeze that could occur while eating food.
+ * Fixed a bug where summoned units would occasionally disappear immediately after being summoned.
+ * Fixed an issue where the “Wait!” command didn’t work on summoned units.
+ * Fixed an issue where Danger Zones (no-explore areas) could not be removed properly.
+
+§y* Balance Adjustments§d
+ * Orb-run is now slightly easier.
+
+
+---------------------------------------------------------------------
+§c minor patch ver1.115 (2025-07-21)§d
+---------------------------------------------------------------------
+
+§y* Bug Fixes§d
+ * Fixed an infinite loop that could occur when auto-moving in unreachable maps.
+ * Fixed an issue where dangerous sub-dungeons would show a warning every single time you entered.
+ * Fixed a bug where gloves' descriptions were showing up on boots
+ * Fixed an issue where summoned units could be stacked without limit by summoning them from other floors.
+ * Fixed a crash that could occur when using the right-side menu with a gamepad.
+ * Fixed a bug where Star would steal Sunny’s ability.
+ * Fixed an issue where only the first page of the online scoreboard was viewable.
+ * BGM volume has been slightly reduced.
+ * Minor typo corrections.
+
+§y* Minor Balance Patch§d
+ * Greatly reduced the spawn rate of Cranes.
+ * Significantly reduced the Samurai’s attack damage.
+ * Slightly reduced the attack damage of cats.

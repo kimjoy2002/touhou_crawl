@@ -6890,6 +6890,8 @@ int monster::special_state(bool is_sight_for_monster) {
 }
 parent_type monster::GetParentType()
 {
+	if((mondata[id].flag & M_FLAG_DIRECT_KILL) && isUserAlly() && sm_info.parent_map_id == you.GetMapId())
+		return PRT_PLAYER;
 	return (isUserAlly() || s_lunatic)?PRT_ALLY:PRT_ENEMY;
 }
 bool monster::isUnique()

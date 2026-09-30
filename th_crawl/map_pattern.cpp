@@ -578,7 +578,7 @@ $$$...$$$";
 			makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_PAGODA);
 			map->item_list.push_back(mapdummy_item(t,coord_def(0,0)));		
 
-			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 			map->name = "NAZRIN_PAGODA";
 			return  "\
 #########\

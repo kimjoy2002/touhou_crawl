@@ -220,7 +220,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_MINORIKO);
 			map->sp_tile_list.push_back(DG_TEMPLE_SHIZUHA);
-			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 			random_extraction<monster_index> rand_;
 			if(!is_exist_named(MON_ORIN))
 				rand_.push(MON_ORIN);
@@ -589,6 +589,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			map->monster_list.push_back(mapdummy_mon(MON_FROG,M_FLAG_DECORATE,coord_def(0,0)));
 			map->event_list.push_back(mapdummy_event(EVL_NOISE,coord_def(0,0),EVT_SIGHT));
 			makeAunnTemple(map, coord_def(0, -3));
+			map->flag = FLAG_NO_STAIR;
 			map->name = "ALTAR_SWAKO_CIRNO";
 			return  "\
 #.........#\
@@ -610,7 +611,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			map->m_exit.y = map->size_y;
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_YUYUKO);
-			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;
+			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
 			if(!is_exist_named(MON_MISTIA)) {
 				map->monster_list.push_back(mapdummy_mon(MON_MISTIA,M_FLAG_DECORATE,coord_def(0,-1)));
 				set_exist_named(MON_MISTIA);
@@ -678,6 +679,7 @@ const char* real_altar_pattern(map_dummy* map, int id_)
 			map->sp_tile_list.clear();
 			map->sp_tile_list.push_back(DG_TEMPLE_YUUGI);
 			makeAunnTemple(map, coord_def(0, -3));
+			map->flag = FLAG_NO_STAIR;
 			map->name = "ALTAR_YUUGI_ARENA";
 			return  "\
 ###########\
@@ -1055,6 +1057,7 @@ B.B";
 				map->monster_list.push_back(mapdummy_mon(mon_,M_FLAG_DECORATE,coord_def(0,0)));
 			}
 			makeAunnTemple(map, coord_def(0, 2));
+			map->flag = FLAG_NO_STAIR;
 			map->name = "COMMON_ALTAR_INTHE_GLASS";
 			return  "\
 .......\

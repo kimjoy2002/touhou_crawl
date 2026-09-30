@@ -898,7 +898,7 @@ const mon_infor mondata[] = {
 	{ MON_ELEC_BALL, 1, 0, name_infor(MON_ELEC_BALL), &img_blast[2], 10, 0, 10,
 	{ 0,0,0 },{ ATT_NONE,ATT_NONE,ATT_NONE },{ name_infor(),name_infor(),name_infor() },
 		M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_CONFUSE |
-		M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE, 99, 0, 10,'*' },
+		M_FLAG_PASSED_ENEMY | M_FLAG_FLY | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE | M_FLAG_DIRECT_KILL, 99, 0, 10,'*' },
 
 	{ MON_HATATE, 10, 1221, name_infor(MON_HATATE), &img_named_hatate, 95, 2, 22,
 		{ 7,0,0 },{ ATT_NORMAL,ATT_NONE,ATT_NONE },{ name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor() },
@@ -1086,11 +1086,11 @@ const mon_infor mondata[] = {
 
 	{ MON_MISSLE, 1, 0, name_infor(MON_MISSLE), &img_tanmac_missle[1], 1, 10, 0,
 		{ 0, 0, 0 }, { ATT_NORMAL, ATT_NONE, ATT_NONE }, { name_infor(LOC_SYSTEM_ATT_NORMAL), name_infor(), name_infor() },
-		M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_STATE | M_FLAG_CAN_SEE_INVI | M_FLAG_NO_ATK | M_FLAG_PASSED_ALLY | M_FLAG_MISSLE, 99, 0, 7 ,')' },
+		M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_STATE | M_FLAG_CAN_SEE_INVI | M_FLAG_NO_ATK | M_FLAG_PASSED_ALLY | M_FLAG_MISSLE | M_FLAG_DIRECT_KILL, 99, 0, 7 ,')' },
 
 	{ MON_HOMING, 1, 0, name_infor(MON_HOMING), &img_tanmac_homing[1], 1, 10, 0,
 		{ 9, 0, 0 }, { ATT_NORMAL, ATT_NONE, ATT_NONE }, { name_infor(LOC_SYSTEM_ATT_NORMAL), name_infor(), name_infor() },
-		M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_STATE | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_MISSLE, 99, 0, 2 ,'*' },
+		M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_STATE | M_FLAG_CAN_SEE_INVI | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_MISSLE | M_FLAG_DIRECT_KILL, 99, 0, 2 ,'*' },
 
 	{MON_RABIT_GIANT,15,1375,name_infor(MON_RABIT_GIANT),&img_mons_rabbit_giant,110,10,5,
 		{40,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
@@ -1102,7 +1102,7 @@ const mon_infor mondata[] = {
 
 	{MON_COGWHEEL,1,0,name_infor(MON_COGWHEEL),&img_mons_elemental_harvester,50,1,10,
 		{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_ATK | M_FLAG_NO_STATE | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_MISSLE,99,1,7,'X' },
+		M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_ATK | M_FLAG_NO_STATE | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_MISSLE | M_FLAG_DIRECT_KILL,99,1,7,'X' },
 
 	{MON_YAMAINU,7,250,name_infor(MON_YAMAINU),&img_mons_yamainu,55,2,8,
 		{16,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_BITE),name_infor(),name_infor()},

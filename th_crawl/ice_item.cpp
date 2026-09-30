@@ -22,6 +22,25 @@ extern int g_menu_select;
 
 namespace
 {
+	bool IsCirnoInitialBookSpell(spell_list spell_)
+	{
+		for(int i=0;i<8;i++)
+		{
+			if(static_book_list[BOOK_COLD_BASE].spell[i] == spell_)
+				return true;
+		}
+		return false;
+	}
+
+	int GetCirnoIceBookSpellLevel(spell_list spell_)
+	{
+		if(spell_ == SPL_BLIZZARD)
+			return 12;
+		if(spell_ == SPL_PERFERT_FREEZE)
+			return 15;
+		return max(6,SpellLevel(spell_)*2);
+	}
+
 	ice_item_kind GetIceWeaponKind()
 	{
 		const skill_type skills_[5] = {
@@ -58,8 +77,10 @@ namespace
 	void MakeIceItemCandidates(int power)
 	{
 		random_extraction<int> types_;
-		for(int i=0;i<7;i++)
+		for(int i=0;i<6;i++)
 			types_.push(i);
+		if(you.level >= 12)
+			types_.push(6);
 		for(int i=0;i<3;i++)
 		{
 			ice_item_kind kind_ = ICE_ITEM_ICICLE;
@@ -169,7 +190,8 @@ item MakeIceItem(ice_item_kind kind_, int power)
 			for(int j=0;j<8;j++)
 			{
 				spell_list spell_ = (spell_list)static_book_list[i].spell[j];
-				if(spell_ == SPL_NONE || SpellLevel(spell_) > 2 + quality_*7/150)
+				if(spell_ == SPL_NONE || IsCirnoInitialBookSpell(spell_) ||
+					you.level < GetCirnoIceBookSpellLevel(spell_))
 					continue;
 				if(!spells_.insert(spell_).second)
 					continue;
@@ -183,7 +205,7 @@ item MakeIceItem(ice_item_kind kind_, int power)
 				}
 			}
 		}
-		t.value1 = cold_.GetSize()?cold_.pop():SPL_FROST;
+		t.value1 = cold_.GetSize()?cold_.pop():SPL_BLIZZARD;
 		random_extraction<int> other_;
 		for(int spell_ : spells_)
 		{

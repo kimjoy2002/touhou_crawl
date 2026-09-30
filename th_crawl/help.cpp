@@ -382,7 +382,7 @@ void Help_Show()
 				if(key_ == VK_RETURN || key_ == GVK_BUTTON_A || key_ == GVK_BUTTON_A_LONG) {
 					key_ = DisplayManager.positionToChar();
 				}
-				if(key_ >= 1000) {
+				if(key_ >= 1000 && key_ < GVK_BUTTON_A) {
 					int line = LocalzationManager::getWikiLine(key_-1000);
 					if(line != -1) {
 						int current_line = DisplayManager.max_y - DisplayManager.move;

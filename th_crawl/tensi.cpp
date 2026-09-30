@@ -258,7 +258,7 @@ void tensi_summon(int good_)
 	else if(you.level<=10)
 	{
 		summon_vector.push_back(MON_SNAKE);
-		summon_vector.push_back(MON_CRANE);
+		summon_vector.push_back(MON_SHOEBILL);
 		summon_vector.push_back(MON_BAKEKASA);
 		summon_vector.push_back(MON_FROG);
 	}

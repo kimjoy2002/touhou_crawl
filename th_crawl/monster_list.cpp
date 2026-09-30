@@ -1206,5 +1206,17 @@ const mon_infor mondata[] = {
 
 	{MON_SPINNING_DOLL,5,0,name_infor(MON_SPINNING_DOLL),&img_mons_spinning_doll[0],30,4,0,
 		{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_NONE_MOVE | M_FLAG_IMMOBILE | M_FLAG_NONE_STAIR | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,0,0,10,'d' }
+		M_FLAG_NONE_MOVE | M_FLAG_IMMOBILE | M_FLAG_NONE_STAIR | M_FLAG_NO_ATK | M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,0,0,10,'d' },
+
+	{MON_SHOEBILL,5,116,name_infor(MON_SHOEBILL),&img_mons_shoebill,30,3,10,
+		{8,8,18},{ATT_NORMAL,ATT_NORMAL,ATT_NORMAL},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(LOC_SYSTEM_ATT_PECK)},
+		M_FLAG_FLY | M_FLAG_ANIMAL,0,1,10,'C'},
+
+	{MON_YAMANBA,8,250,name_infor(MON_YAMANBA),&img_mons_yamanba,50,4,10,
+		{9,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_RANGE_ATTACK,0,1,10,'h'},
+
+	{MON_TORNADO_SPIRIT,6,120,name_infor(MON_TORNADO_SPIRIT),&img_mons_tornado_spirit,18,1,15,
+		{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_FLY,0,0,7,'m'}
 };

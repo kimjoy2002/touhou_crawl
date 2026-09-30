@@ -2127,7 +2127,7 @@ bool monster::damage(attack_infor &a, bool perfect_, const coord_def* hit_pos)
 					}
 				}
 
-				dead(a.p_type, !(a.order));
+				dead(a.p_type, !(a.order), false, a.order);
 			}
 
 			
@@ -3305,7 +3305,8 @@ bool monster::CanSpeak()
 	return false;
 }
 bool skill_suicide_bomb(int base_damage, int power, bool short_, unit* order, coord_def target, bool hurt_ally, bool self_hurt);
-bool monster::dead(parent_type reason_, bool message_, bool remove_)
+bool skill_counter_tanmac(unit* order, coord_def target);
+bool monster::dead(parent_type reason_, bool message_, bool remove_, unit* killer_)
 {
 	if(id == MON_GOLIATH_DOLL && parent_part_id != -1)
 	{
@@ -3313,8 +3314,21 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 			if(root.map_id == parent_part_id && root.isLive())
 			{
 				hp = 0;
-				return root.dead(reason_, message_, remove_);
+				return root.dead(reason_, message_, remove_, killer_);
 			}
+	}
+
+	bool counter_tanmac_ = isHaveSpell(SPL_COUNTER_TANMAC) && !remove_;
+	coord_def counter_target_ = position;
+	if(counter_tanmac_)
+	{
+		if(killer_ && killer_ != this)
+			counter_target_ = killer_->position;
+		else
+		{
+			coord_def direc_ = GetDirecToPos(randA(7));
+			counter_target_.set(position.x + direc_.x * 7, position.y + direc_.y * 7);
+		}
 	}
 
 	bool sight_ = false;
@@ -3387,7 +3401,11 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 
 	
 	if(isArena())
+	{
+		if(counter_tanmac_)
+			skill_counter_tanmac(this, counter_target_);
 		return true;
+	}
 
 	if(id == MON_ENSLAVE_GHOST)
 	{
@@ -3596,6 +3614,8 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 	}
 	if (!(flag & M_FLAG_SUMMON) && !remove_ && !isPart && !(flag & M_FLAG_UNHARM))
 		GodAccpect_KillMonster(this,reason_);
+	if(counter_tanmac_)
+		skill_counter_tanmac(this, counter_target_);
 	return true;
 }
 void monster::resetShadow() {
@@ -5069,7 +5089,7 @@ void monster::special_action(int delay_, bool smoke_)
 		break;
 	case MON_HOMING:
 		if (!smoke_){
-			image = special_value==1?&img_tanmac_homing_cyan[GetAngleToDirec(direction)]:&img_tanmac_homing[GetAngleToDirec(direction)];
+			image = special_value>=1?&img_tanmac_homing_cyan[GetAngleToDirec(direction)]:&img_tanmac_homing[GetAngleToDirec(direction)];
 			if(isUserAlly() && !env[current_level].isInSight(position) && summon_time > 0) {
 				summon_time = std::max(1, summon_time-10);
 			}

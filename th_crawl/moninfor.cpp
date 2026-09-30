@@ -18,6 +18,15 @@ extern HANDLE mutx;
 
 void _infor_(string str);
 
+bool UseRealAtkUpgrade(int mon_id) {
+	switch(mon_id) {
+		case MON_HOMING:
+			return true;
+	}
+	return false;
+}
+
+
 bool maybeUpgrade(int mon_id) {
 	switch(mon_id) {
 		case MON_GHOST:
@@ -125,11 +134,12 @@ void GetMonsterInfor(monster *it)
 			int aver_damage = 0;
 			int max_damage = 0;
 			int att_ = 0;
+			bool use_real_atk = UseRealAtkUpgrade(it->id);
 			for(int i = 0; i < 3;i++) {
 				if(mondata[it->id].atk_type[i] != ATT_NONE) {
-					aver_damage+=mondata[it->id].atk[i];
+					aver_damage+=use_real_atk?it->atk[i]:mondata[it->id].atk[i];
 					if(mondata[it->id].atk[i] > max_damage)
-						max_damage = mondata[it->id].atk[i];
+						max_damage = use_real_atk?it->atk[i]:mondata[it->id].atk[i];
 					all_key.insert(getKeyOfAttack(mondata[it->id].atk_type[i]));
 					att_ ++;
 				}

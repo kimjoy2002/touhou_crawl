@@ -228,6 +228,9 @@ extern textures img_mons_goliath_doll[4];
 extern textures img_mons_sacrifice_doll[2];
 extern textures img_mons_orrery_orb[];
 extern textures img_mons_spinning_doll[2];
+extern textures img_mons_shoebill;
+extern textures img_mons_yamanba;
+extern textures img_mons_tornado_spirit;
 
 
 
@@ -541,6 +544,7 @@ extern textures img_tanmac_knife[];
 extern textures img_tanmac_missle[];
 extern textures img_tanmac_homing[];
 extern textures img_tanmac_homing_cyan[];
+extern textures img_tanmac_axe[];
 extern textures img_star_tanmac[];
 extern textures img_score_item[];
 extern textures img_tanmac_small[6][4];

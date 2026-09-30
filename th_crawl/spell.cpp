@@ -64,7 +64,10 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_THROW_KNIFE:
 	case SPL_THROW_RABBIT:
 	case SPL_THROW_POTION:
+	case SPL_THROW_AXE:
 		return (S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
+	case SPL_COUNTER_TANMAC:
+		return (S_FLAG_IMMEDIATELY | S_FLAG_NO_COM) & flag;
 	case SPL_LUMINUS_STRIKE:
 		return (S_FLAG_SPEAK | S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_CONFUSE_CLOUD:
@@ -354,6 +357,7 @@ int SpellLength(spell_list skill, bool isPlayer)
 	case SPL_THROW_STAR:
 	case SPL_CURSE:
 	case SPL_THROW_BUCKET:
+	case SPL_THROW_AXE:
 		length_ = 7;
 		break;
 	case SPL_FLAME:	
@@ -879,6 +883,10 @@ string SpellString(spell_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_DOLL_SPEAR);
 	case SPL_LITTLE_LEGION:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_LITTLE_LEGION);
+	case SPL_THROW_AXE:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_THROW_AXE);
+	case SPL_COUNTER_TANMAC:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_COUNTER_TANMAC);
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_UKNOWN);
 	}
@@ -964,6 +972,7 @@ int SpellLevel(spell_list skill)
 	case SPL_THROW_DISH:
 	case SPL_SLEEP_SMITE:
 	case SPL_THROW_KNIFE:
+	case SPL_THROW_AXE:
 	case SPL_WARP_KICK:
 	case SPL_TOUGUE:
 	case SPL_WINDFLAW:
@@ -1170,6 +1179,8 @@ int SpellNoise(spell_list skill)
 	case SPL_DOLL_LUNGE:
 	case SPL_CURSE:
 	case SPL_THROW_BUCKET:
+	case SPL_THROW_AXE:
+	case SPL_COUNTER_TANMAC:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -1614,6 +1625,10 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_THROW_KNIFE:
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_THROW_AXE:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_COUNTER_TANMAC:
+		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_THROW_PLAYER:
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_EARTH) : (SKT_ERROR);
 	case SPL_THROW_AMULET:
@@ -1879,7 +1894,10 @@ int SpellCap(spell_list skill)
 	case SPL_SACRIFICE:
 	case SPL_DOLL_SPEAR:
 	case SPL_LITTLE_LEGION:
+	case SPL_THROW_AXE:
 		return 200;
+	case SPL_COUNTER_TANMAC:
+		return 0;
 	default:
 	case SPL_BLINK:
 	case SPL_CURE_POISON:

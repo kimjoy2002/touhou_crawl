@@ -1334,7 +1334,7 @@ $.........$";
 			rand_.push(MON_MOOK, 3);
 			rand_.push(MON_CROW, 3);
 			rand_.push(MON_FAIRY_GREEN_WARRIOR, 1);
-			rand_.push(MON_CRANE, 1);
+			rand_.push(MON_SHOEBILL, 1);
 			rand_.push(MON_ORANGE_MOOK, 1);
 			for (int i = 0; i < 5; i++)
 			{

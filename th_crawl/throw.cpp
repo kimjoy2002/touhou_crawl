@@ -437,6 +437,8 @@ textures* GetTanmacGraphic(int type, int direc, int count, int path)
 	case 54:
 	case 55:
 		return &img_star_tanmac[type-52];	
+	case 56:
+		return &img_tanmac_axe[count%4];
 	}
 }
 

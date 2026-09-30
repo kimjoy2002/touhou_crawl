@@ -1259,6 +1259,10 @@ textures img_mons_spinning_doll[] =
 	textures(&texture_monster02, 171, 255),
 	textures(&texture_monster02, 172, 255)
 };
+textures img_mons_shoebill(&texture_monster02, 161, 255);
+textures img_mons_yamanba(&texture_monster02, 162, 255);
+textures img_mons_tornado_spirit(&texture_monster02, 163, 255);
+
 textures img_mons_goliath_doll[] =
 {
 	textures(&texture_monster02, 152, 255),
@@ -2396,6 +2400,12 @@ textures img_sacrifice_countdown[] = {
 	textures(&texture_laser, 172, 255),
 	textures(&texture_laser, 173, 255),
 	textures(&texture_laser, 174, 255)
+};
+textures img_tanmac_axe[] = {
+	textures(&texture_laser, 176, 255),
+	textures(&texture_laser, 177, 255),
+	textures(&texture_laser, 178, 255),
+	textures(&texture_laser, 179, 255)
 };
 
 
@@ -4440,6 +4450,12 @@ int texturetoint(textures* input)
 		return 758;
 	else if(input == &img_play_item_fixed_artifact[32])
 		return 759;
+	else if(input == &img_mons_shoebill)
+		return 760;
+	else if(input == &img_mons_yamanba)
+		return 761;
+	else if(input == &img_mons_tornado_spirit)
+		return 762;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -5986,6 +6002,12 @@ textures* inttotexture(int input)
 		return &img_play_item_fixed_artifact[31];
 	case 759:
 		return &img_play_item_fixed_artifact[32];
+	case 760:
+		return &img_mons_shoebill;
+	case 761:
+		return &img_mons_yamanba;
+	case 762:
+		return &img_mons_tornado_spirit;
 	default:
 		return &img_mons_default;
 	}

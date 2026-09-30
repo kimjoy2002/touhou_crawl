@@ -885,7 +885,7 @@ int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MON
 				monsters.push(MON_FAIRY_GREEN);
 				break;
 			case SHT_MON_NORMAL_STRONG:
-				monsters.push(MON_CRANE);
+				monsters.push(MON_SHOEBILL);
 				monsters.push(MON_FROG);
 				monsters.push(MON_MARISAYUKKURI);
 				break;

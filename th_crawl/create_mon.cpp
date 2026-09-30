@@ -52,34 +52,40 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 14,  2,  3,  8,  2}, //캇파2~3
 	{ 18,  2,  6,  25,  2}, //캇파4~5
 	{ 24,  2,  4,  5,  2}, //인간부대(약함)
-	{ 29,  2,  7,  5,  2}, //주황모옥
-	{ 28,  2,  5,  10,  2}, //초록모옥
+	{ 29,  2,  7,  4,  2}, //주황모옥
+	{ 28,  2,  5,  7,  2}, //초록모옥
+	{131,  2,  6,  4,  3}, //회오리 정령
 
 	{ 20,  3,  9,  4,  3}, //거미1 뱀1	
 	{ 10,  3,  14,  3,  4}, //두루미 1
 	{ 4,   3,  7,  10 , 1}, //까마귀3
 	{ 16,  3,  9,  10,  1}, //파랑요정2 빨강요정2
-	{ 25,  3,  6,  7, 1}, //인간부대(중간)
+	{ 25,  3,  6,  4, 1}, //인간부대(중간)
 	{ 30,  3,  9,  5,  2}, //회색모옥
 	{ 10,  3,  11,  4,  5}, //두루미 1
+	{ 132, 3,  6,  3, 1}, //야만바
 
 	
-	{ 25,  4,  6,  20, 1}, //인간부대(중간)
+	{ 25,  4,  6,  10, 1}, //인간부대(중간)
 	{ 29,  4,  7,  10,  3}, //주황모옥
+	{ 132, 4,  6,  10, 1}, //야만바
 
 	
 	{ 21,  5,  11,  10,  1}, //요정 전사사격 호위부대
 	{ 35,  5,  14,  5, 4}, //마리사윳쿠리
-	{ 30,  5,  9,  10,  3}, //회색모옥
+	{ 30,  5,  9,  5,  3}, //회색모옥
+	{131,  5,  9,  5,  3}, //회오리 정령
 
 	
 	{ 22,  6,  12,  10, 1}, //깃발 요정 호위부대
 	{ 32,  6,  14,  15, 3}, //고양이
 	
 	{ 31,  7,  14,  20, 3}, //개구리
-	{ 26,  7,  14,  30, 1}, //인간부대(강함)
+	{ 26,  7,  14,  20, 1}, //인간부대(강함)
 	{ 33,  7,  14,  15, 4}, //까마귀텐구
 	{ 38,  7,  14,  8, 3}, //야마비코
+	{ 132,  7,  14,  10, 1}, //야만바
+	{ 133,  7,  14,  2, 1}, //회오리 정령 무더기
 
 
 	{ 34,  9,  14,  2, 5}, //오니
@@ -654,7 +660,7 @@ void create_id_to_mon(int id, int level, int strong)
 		index.push_back(pair<monster_index, int>(MON_SNAKE, strong));
 		break;
 	case 10:
-		index.push_back(pair<monster_index, int>(MON_CRANE, strong));
+		index.push_back(pair<monster_index, int>(randA(10)?MON_SHOEBILL:MON_CRANE, strong));
 		break;
 	case 11:
 		index.push_back(pair<monster_index, int>(MON_FAIRY_BLUE, strong+1));
@@ -1205,6 +1211,16 @@ void create_id_to_mon(int id, int level, int strong)
 		break;
 	case 130:
 		index.push_back(pair<monster_index, int>(MON_SPEAR_DOLL, strong));
+		break;
+	case 131:
+		index.push_back(pair<monster_index, int>(MON_TORNADO_SPIRIT, strong));
+		break;
+	case 132:
+		index.push_back(pair<monster_index, int>(MON_YAMANBA, strong));
+		break;
+	case 133:
+		for (int rand_ = rand_int(2, 4), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_TORNADO_SPIRIT, strong));
 		break;
 	}
 
@@ -2611,7 +2627,8 @@ int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 			rand_.push(MON_HUMAM_PRIEST, middle(power_));
 			rand_.push(MON_HUMAM_YINYANG, middle(power_));
 			rand_.push(MON_HUMAM_SAMURI, strong(power_));
-			rand_.push(MON_CRANE, strong(power_));
+			rand_.push(randA(10)?MON_SHOEBILL:MON_CRANE, strong(power_));
+			rand_.push(MON_TORNADO_SPIRIT, strong(power_));
 			rand_.push(MON_KATPA, weak(power_));
 			rand_.push(MON_MARISAYUKKURI, middle(power_));
 			rand_.push(MON_SNAKE, middle(power_));
@@ -2629,7 +2646,8 @@ int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 			rand_.push(MON_FAIRY_RED, weak(power_));
 			rand_.push(MON_FAIRY_GREEN_WARRIOR, middle(power_));
 			rand_.push(MON_FAIRY_BLUE_MAGICIAN, middle(power_));
-			rand_.push(MON_CRANE, middle(power_));
+			rand_.push(randA(10)?MON_SHOEBILL:MON_CRANE, middle(power_));
+			rand_.push(MON_TORNADO_SPIRIT, middle(power_));
 			rand_.push(MON_YAMABIKO, middle(power_));
 			rand_.push(MON_CROW_TENGU, strong(power_));
 			rand_.push(MON_RED_UFO, strong(power_));

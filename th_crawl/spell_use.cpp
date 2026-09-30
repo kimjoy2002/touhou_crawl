@@ -269,6 +269,12 @@
 #define SPL_BUCKET_DICE 2
 #define SPL_BUCKET_DAM(pow_) (8 + (pow_) /12)
 
+#define SPL_THROW_AXE_DICE 1
+#define SPL_THROW_AXE_DAM 14
+
+#define SPL_COUNTER_TANMAC_DICE 1
+#define SPL_COUNTER_TANMAC_DAM 12
+
 extern HANDLE mutx;
 extern int map_effect;
 
@@ -1846,7 +1852,7 @@ bool skill_summon_bird(int pow_, bool short_, unit* order, coord_def target)
 	}
 	else if(rand_<=70  || randA(2) == 0)//나중에 까마귀에서 바꾸자
 	{
-		id_ = MON_CRANE;
+		id_ = MON_SHOEBILL;
 		i=1;
 	}
 	else
@@ -3161,7 +3167,7 @@ bool skill_animal_change(int pow_, bool short_, unit* order, coord_def target)
 				if(hit_mon->GetLevel()<4)
 					 animal_id_ = randA(1)?MON_RAT:MON_CROW;
 				else if(hit_mon->GetLevel()<8)
-					 animal_id_ = randA(1)?MON_CRANE:MON_SNAKE;
+					 animal_id_ = randA(1)?MON_SHOEBILL:MON_SNAKE;
 				else if(hit_mon->GetLevel()<12)
 					 animal_id_ = randA(1)?MON_FROG:MON_ORANGE_CAT;
 				else/* if(hit_mon->GetLevel()<16)*/
@@ -5025,6 +5031,26 @@ bool skill_throw_sword(int pow_, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
+bool skill_throw_axe(int pow_, bool short_, unit* order, coord_def target)
+{
+	if(GetPositionGap(order->position.x, order->position.y, target.x, target.y) <= 1)
+		return false;
+	beam_iterator beam(order->position, order->position);
+	if(CheckThrowPath(order->position, target, beam))
+	{
+		beam_infor temp_infor(randC(SPL_THROW_AXE_DICE, SPL_THROW_AXE_DAM), SPL_THROW_AXE_DICE * SPL_THROW_AXE_DAM,
+			16, order, order->GetParentType(), SpellLength(SPL_THROW_AXE, order->isplayer()), 1,
+			BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_AXE));
+		if(short_)
+			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+
+		if(env[current_level].isInSight(order->position))
+			PlaySE("shoot_heavy");
+		throwtanmac(56, beam, temp_infor, NULL);
+		return true;
+	}
+	return false;
+}
 bool skill_throw_knife(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position, order->position);
@@ -5708,8 +5734,8 @@ bool skill_homing_tanmac(int pow_, bool short_, int base_damage, int type, unit*
 						mon_->memory_time = mon_->FoundTime();
 						mon_->target_pos = target;
 					}
-					mon_->atk[0] = base_damage;
 					mon_->special_value = type;
+					mon_->LevelUpdown(max(0, base_damage - mon_->atk[0]), 0.0f, 1.0f);
 					mon_->LevelUpdown(pow_/15,0.0f,2.0f);
 				}
 				mon_->direction = GetPositionToAngle(order->position.x, order->position.y, mon_->position.x, mon_->position.y);
@@ -5726,6 +5752,68 @@ bool skill_homing_tanmac(int pow_, bool short_, int base_damage, int type, unit*
 		}
 	}
 	return return_;
+}
+
+bool skill_counter_tanmac(unit* order, coord_def target)
+{
+	if(!order || target == order->position)
+		return false;
+	coord_def origin_ = order->position;
+	parent_type parent_type_ = order->GetParentType();
+	int parent_map_id_ = order->GetMapId();
+	bool player_owner_ = order->isplayer();
+	int neutrality_ = player_owner_ ? 0 : ((monster*)order)->s_neutrality;
+	int stating_direction_ = GetAngleToDirec(GetPositionToAngle(origin_.x, origin_.y, target.x, target.y));
+	vector<int> homing_ids_;
+
+	for(int i = 0; i < 2; i++)
+	{
+		for(int angle = 0; angle < 8; angle++)
+		{
+			int current_direction_ = (stating_direction_ + (angle + 1) * (i == 0 ? 1 : -1) + 8) % 8;
+			coord_def summon_position = origin_ + GetDirecToPos(current_direction_);
+			if(!summon_check(summon_position, summon_position, true, false))
+				continue;
+			uint64_t flag_ = M_FLAG_SUMMON;
+			if(parent_type_ == PRT_PLAYER || parent_type_ == PRT_ALLY)
+				flag_ |= M_FLAG_ALLY;
+			summon_info s_(parent_map_id_, SKD_OTHER, -1);
+			monster* mon_ = env[current_level].AddMonster_Summon(MON_HOMING, flag_, summon_position, s_, 5);
+			if(mon_)
+			{
+				if(!player_owner_)
+					mon_->SetNeutrality(neutrality_);
+				mon_->LevelUpdown(max(0, SPL_COUNTER_TANMAC_DAM - mon_->atk[0]), 0.0f, 1.0f);
+				mon_->special_value = 2;
+				mon_->direction = GetPositionToAngle(origin_.x, origin_.y, mon_->position.x, mon_->position.y);
+				mon_->image = &img_tanmac_homing_cyan[GetAngleToDirec(mon_->direction)];
+				mon_->PlusTimeDelay(-you.GetSpellDelay() + 2 * mon_->GetWalkDelay());
+				homing_ids_.push_back(mon_->map_id);
+			}
+			break;
+		}
+	}
+
+	unit* unit_hit_ = env[current_level].isMonsterPos(target.x, target.y);
+	for(int map_id_ : homing_ids_)
+	{
+		for(monster& homing_ : env[current_level].mon_vector)
+		{
+			if(homing_.map_id != map_id_ || !homing_.isLive())
+				continue;
+			if(unit_hit_)
+				homing_.FoundTarget(unit_hit_, homing_.FoundTime());
+			else
+			{
+				homing_.memory_time = homing_.FoundTime();
+				homing_.target_pos = target;
+			}
+			break;
+		}
+	}
+	if(!homing_ids_.empty() && env[current_level].isInSight(origin_))
+		PlaySE("shoot_heavy");
+	return !homing_ids_.empty();
 }
 
 bool skill_allround_tanmac(int pow_, bool short_, unit* order, coord_def target)
@@ -7554,6 +7642,12 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_SANNYO:
 		list->push_back(spell(SPL_SMOKING, 30));
 		break;
+	case MON_YAMANBA:
+		list->push_back(spell(SPL_THROW_AXE, 50));
+		break;
+	case MON_TORNADO_SPIRIT:
+		list->push_back(spell(SPL_COUNTER_TANMAC, 0));
+		break;
 	case MON_RABIT_ALCHEMIST:
 		list->push_back(spell(SPL_THROW_POTION, 33));
 		break;
@@ -7942,6 +8036,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_doll_spear(power, short_, order, target);
 	case SPL_LITTLE_LEGION:
 		return skill_little_legion(power, short_, order, target);
+	case SPL_THROW_AXE:
+		return skill_throw_axe(power, short_, order, target);
 	case SPL_TRACKING:
 		return skill_tracking(power, short_, order, target);
 	case SPL_DISCORD:
@@ -7957,7 +8053,7 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 	case SPL_SPEAKER_PHONE:
 		return skill_speaker_phone(power, short_, order, target);
 	case SPL_HOMING_TANMAC:
-		return skill_homing_tanmac(power, short_, 9, 0, order, target);
+		return skill_homing_tanmac(power, short_, 10, 0, order, target);
 	case SPL_ALLROUND_TANMAC:
 		return skill_allround_tanmac(power, short_, order, target);
 	case SPL_THROW_POTION:
@@ -8495,7 +8591,7 @@ static bool PlayerUseSpellInternal(spell_list skill, bool short_, coord_def &tar
 	case SPL_SPEAKER_PHONE:
 		return skill_speaker_phone(power, short_, &you, target);
 	case SPL_HOMING_TANMAC:
-		return skill_homing_tanmac(power, short_, 9, 0, &you, target);
+		return skill_homing_tanmac(power, short_, 10, 0, &you, target);
 	case SPL_ALLROUND_TANMAC:
 		return skill_allround_tanmac(power, short_, &you, target);
 	case SPL_THROW_POTION:
@@ -9331,6 +9427,20 @@ void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 	case SPL_DOLL_SPEAR:
 	case SPL_LITTLE_LEGION:
 		return;
+	case SPL_THROW_AXE:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_THROW_AXE_DICE << "d" << SPL_THROW_AXE_DAM << ")";
+		printsub(ss.str(), false, normal_dam);
+		return;
+	}
+	case SPL_COUNTER_TANMAC:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_COUNTER_TANMAC_DICE << "d" << SPL_COUNTER_TANMAC_DAM << " X 2)";
+		printsub(ss.str(), false, normal_dam);
+		return;
+	}
 	default:
 		return;
 	}

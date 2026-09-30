@@ -1100,9 +1100,9 @@ LOC_SYSTEM_YOU_SELFDESTRUCT_2,2...
 LOC_SYSTEM_YOU_SELFDESTRUCT_1,1...
 LOC_SYSTEM_YOU_RAD,You’ve been affected by radiation! ({0})
 LOC_SYSTEM_YOU_RAD_CURE,The side effects of the radiation have naturally healed. ({0})
-LOC_SYSTEM_MON_RED_DESIRE,Red Desire
-LOC_SYSTEM_MON_BLUE_DESIRE,Blue Desire
-LOC_SYSTEM_MON_GREEN_DESIRE,Green Desire
+LOC_SYSTEM_MON_RED_DESIRE,Red Divine Spirit
+LOC_SYSTEM_MON_BLUE_DESIRE,Blue Divine Spirit
+LOC_SYSTEM_MON_GREEN_DESIRE,Green Divine Spirit
 LOC_SYSTEM_MON_POISONED,{0} is poisoned.
 LOC_SYSTEM_MON_MORE_POISONED,{0}'s poison worsens.
 LOC_SYSTEM_MON_TELE,The space around {0} becomes unstable.
@@ -5627,3 +5627,8 @@ LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_FLOOD,You are seized by the urge to drown som
 LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FLOOD,Your urge to drown someone fades.
 LOC_SYSTEM_SPL_KICK,Kick
 LOC_SYSTEM_PATCH_NOTE,Patch Notes
+LOC_SYSTEM_SPL_THROW_AXE,Throw Axe
+LOC_SYSTEM_SPL_DESCRIBE_THROW_AXE,Throws a hand axe at a distant enemy. Cannot be used against adjacent targets.
+LOC_SYSTEM_SPL_COUNTER_TANMAC,Counter Shot
+LOC_SYSTEM_SPL_DESCRIBE_COUNTER_TANMAC,Fires two homing danmaku at the enemy upon death.
+LOC_SYSTEM_ATT_AXE,Axe

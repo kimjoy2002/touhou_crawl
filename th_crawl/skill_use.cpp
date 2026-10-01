@@ -1457,7 +1457,7 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 {
 	if(order->isplayer())
 	{
-		if(env[current_level].isBamboo())
+		if(env[current_level].isInfiniteMap())
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_DIMENSION_BAMBOO),true,false,false,CL_small_danger);
 			return false;

@@ -75,7 +75,9 @@ enum monster_flag : uint64_t
 	M_FLAG_AUTO_TARGETING = 1ull << 36, // 자동으로 주변 적을 타겟팅한다.
 	M_FLAG_IMMOBILE = 1ull << 37, //강제로 이동시킬 수 없음
 	M_FLAG_CAN_SWAP = 1ull << 38, //자리바꾸기는 가능
-	M_FLAG_DIRECT_KILL = 1ull << 39 //플레이어가 만든 공격형 소환물은 직접 처치로 취급
+	M_FLAG_DIRECT_KILL = 1ull << 39, //플레이어가 만든 공격형 소환물은 직접 처치로 취급
+	M_FLAG_CARELESS_MAGIC = 1ull << 40, //아군이 휘말리더라도 범위 마법을 사용
+	M_FLAG_RESIST_BURST = 1ull << 41 //폭파 공격에 면역
 };
 
 

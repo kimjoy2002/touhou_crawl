@@ -2002,6 +2002,7 @@ void SetResistMonster(monster* mon)
 		break;		
 	case MON_FLAN:
 	case MON_FLAN_BUNSIN:
+	case MON_FLAN_AFTERIMAGE:
 		mon->fire_resist=1;
 		mon->poison_resist=1;
 		break;

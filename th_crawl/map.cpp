@@ -15,6 +15,7 @@
 #include "armour.h"
 #include "evoke.h"
 #include "zigurrat.h"
+#include "scarlet_under.h"
 
 static list<pair<const map_dummy*,monster_index>> reserved_named;
 
@@ -400,7 +401,7 @@ void map_algorithms(int num)
 		}
 		else if(num == SCARLET_UNDER_LEVEL)
 		{
-			map_algorithms_under(num,DG_FLOOR,DG_RED_WALL);
+			map_algorithms_scarlet_under(num,DG_FLOOR,DG_RED_WALL,5,16,3,1800,4);
 		}
 		else if(num >= FORESTOFMAGIC_LEVEL && num <= FORESTOFMAGIC_LEVEL+MAX_FORESTOFMAGIC_LEVEL)
 		{
@@ -2051,37 +2052,7 @@ void map_algorithms_library(int num, dungeon_tile_type floor_tex, dungeon_tile_t
 
 void map_algorithms_under(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
-	for(int x = 0; x<DG_MAX_X; x++)
-	{	
-		for(int y=0; y<DG_MAX_Y; y++)
-		{
-			if((x-DG_MAX_X/2)*(x-DG_MAX_X/2) + (y-DG_MAX_Y/2)*(y-DG_MAX_Y/2) < 12*12)
-			{
-				env[num].dgtile[x][y].tile = floor_tex;
-			}
-			else 
-				env[num].dgtile[x][y].tile = wall_tex;
-		}
-	}
-
-
-	env[num].stair_up[0].x = DG_MAX_X/2-1;
-	env[num].stair_up[0].y = DG_MAX_Y/2+11;
-	env[num].dgtile[DG_MAX_X/2-1][DG_MAX_Y/2+11].tile = DG_RETURN_STAIR;
-
-	env[num].MakeEvent(21,coord_def(DG_MAX_X/2-1,DG_MAX_Y/2+11),EVT_SIGHT);
-
-	
-	item_infor t;
-	makeitem(ITM_GOAL, 0, &t, RUNE_SCARLET_UNDER);	
-	env[num].MakeItem(coord_def(DG_MAX_X/2,DG_MAX_Y/2-6),t);
-
-	if(!is_exist_named(MON_FLAN)){
-		monster* mon_ = env[num].AddMonster(MON_FLAN,0,coord_def(DG_MAX_X/2,DG_MAX_Y/2));
-		mon_->SetStrong(5);
-		set_exist_named(MON_FLAN);
-	}
-	setBaseFloorWall(num, floor_tex, wall_tex);
+	map_algorithms_scarlet_under(num,floor_tex,wall_tex,5,16,3,1800,4);
 }
 
 void map_algorithms_temple(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)

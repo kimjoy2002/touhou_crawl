@@ -616,6 +616,21 @@ textures img_auto_snow[48] = {
 	textures(&texture_dungeon02, 47)
 };
 
+textures img_auto_carpet[48] = {
+	textures(&texture_dungeon02, 128), textures(&texture_dungeon02, 129), textures(&texture_dungeon02, 130), textures(&texture_dungeon02, 131),
+	textures(&texture_dungeon02, 132), textures(&texture_dungeon02, 133), textures(&texture_dungeon02, 134), textures(&texture_dungeon02, 135),
+	textures(&texture_dungeon02, 136), textures(&texture_dungeon02, 137), textures(&texture_dungeon02, 138), textures(&texture_dungeon02, 139),
+	textures(&texture_dungeon02, 140), textures(&texture_dungeon02, 141), textures(&texture_dungeon02, 142), textures(&texture_dungeon02, 143),
+	textures(&texture_dungeon02, 144), textures(&texture_dungeon02, 145), textures(&texture_dungeon02, 146), textures(&texture_dungeon02, 147),
+	textures(&texture_dungeon02, 148), textures(&texture_dungeon02, 149), textures(&texture_dungeon02, 150), textures(&texture_dungeon02, 151),
+	textures(&texture_dungeon02, 152), textures(&texture_dungeon02, 153), textures(&texture_dungeon02, 154), textures(&texture_dungeon02, 155),
+	textures(&texture_dungeon02, 156), textures(&texture_dungeon02, 157), textures(&texture_dungeon02, 158), textures(&texture_dungeon02, 159),
+	textures(&texture_dungeon02, 160), textures(&texture_dungeon02, 161), textures(&texture_dungeon02, 162), textures(&texture_dungeon02, 163),
+	textures(&texture_dungeon02, 164), textures(&texture_dungeon02, 165), textures(&texture_dungeon02, 166), textures(&texture_dungeon02, 167),
+	textures(&texture_dungeon02, 168), textures(&texture_dungeon02, 169), textures(&texture_dungeon02, 170), textures(&texture_dungeon02, 171),
+	textures(&texture_dungeon02, 172), textures(&texture_dungeon02, 173), textures(&texture_dungeon02, 174), textures(&texture_dungeon02, 175)
+};
+
 textures img_dollshouse_floor(&texture_dungeon02, 48);
 textures img_auto_dollshouse_wall[48] = {
 	textures(&texture_dungeon02, 64), textures(&texture_dungeon02, 65), textures(&texture_dungeon02, 66), textures(&texture_dungeon02, 67),

@@ -2339,7 +2339,7 @@ bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX:
 	}
 
 	int blue_ = s_frozen==0?255:127 +  std::max(0, 25-s_frozen)*128/25;
-	bool is_ghost = (id == MON_ENSLAVE_GHOST || id == MON_TIME_PARADOX);
+	bool is_ghost = (id == MON_ENSLAVE_GHOST || id == MON_TIME_PARADOX || id == MON_FLAN_AFTERIMAGE);
 	D3DCOLOR color_ = D3DCOLOR_ARGB(is_ghost?128:255, blue_,blue_,255);
 
 	if(id == MON_TIME_PARADOX && sm_info.parent_map_id == you.GetMapId() && you.GetCharNameString().empty())
@@ -3038,6 +3038,7 @@ bool monster::tryMagic() {
 			for(;it != spell_lists.end();it++)
 			{
 				spell_list id_ = (spell_list)(it->num);
+				coord_def magic_target_ = target_pos;
 				int percent_ = it->percent;
 				if (s_clever  && percent_<90){
 					percent_ = percent_*1.5f;
@@ -3049,7 +3050,7 @@ bool monster::tryMagic() {
 				}
 				if(randA_1(100)<=percent_)
 				{
-					if(isMonSafeSkill(id_,this,target_pos))
+					if(isMonSafeSkill(id_,this,magic_target_))
 					{
 						if (SpellFlagCheck(id_, S_FLAG_SPEAK) && flag & M_FLAG_SPEAK)
 						{
@@ -3067,7 +3068,7 @@ bool monster::tryMagic() {
 								}
 							}
 						}
-						if(MonsterUseSpell(id_,false,this,SpellFlagCheck(id_,S_FLAG_IMMEDIATELY)?position:target_pos))
+						if(MonsterUseSpell(id_,false,this,SpellFlagCheck(id_,S_FLAG_IMMEDIATELY)?position:magic_target_))
 						{
 							Noise(position,SpellNoise(id_),this); //스펠을 사용한후 다른 몬스터로 둔갑할 수 있어. it을 사용하면 안됨
 							return true;
@@ -3105,7 +3106,8 @@ int monster::atkmove(int is_sight, bool only_move)
 			for(;it != spell_lists.end();it++)
 			{
 				spell_list id_ = (spell_list)(it->num);
-				if(isMonSafeSkill(id_,this,target_pos))
+				coord_def magic_target_ = target_pos;
+				if(isMonSafeSkill(id_,this,magic_target_))
 				{
 					float gap = GetPositionGap(position.x, position.y, target_pos.x, target_pos.y);
 					if(randA(4) >= max<int>(0,gap-3)) {
@@ -6637,7 +6639,7 @@ bool monster::isMonsterSight(coord_def c, boolean okina)
 	return true;
 }
 bool monster::isVulnerableSilver() {
-	if(flag & M_FLAG_SUMMON || id == MON_REMILIA || id == MON_REMILIAYUKKURI || id == MON_FLAN || id == MON_FLAN_BUNSIN || id == MON_VAMPIER_BAT) {
+	if(flag & M_FLAG_SUMMON || id == MON_REMILIA || id == MON_REMILIAYUKKURI || id == MON_FLAN || id == MON_FLAN_BUNSIN || id == MON_FLAN_AFTERIMAGE || id == MON_VAMPIER_BAT) {
 		return true;
 	}
 	return false;

@@ -441,7 +441,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 			if(it->isLive() && env[current_level].isInSight(it->position) && you.isSightnonblocked(it->position))
 			{
 				int power_ = power;
-				if (it->id == MON_REMILIA || it->id == MON_FLAN || it->id == MON_FLAN_BUNSIN ||
+				if (it->id == MON_REMILIA || it->id == MON_FLAN || it->id == MON_FLAN_BUNSIN || it->id == MON_FLAN_AFTERIMAGE ||
 					it->id == MON_VAMPIER_BAT) {
 					int damage_ = 10 + power_ / 12;
 					attack_infor attack_infor_(randC(3, damage_), 3 * (damage_), 99, &you, you.GetParentType(), ATT_SUN_BLAST, name_infor(LOC_SYSTEM_ATT_SUN));

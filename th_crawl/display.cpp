@@ -2101,7 +2101,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	}
 	
 	coord_def offset_ = coord_def();
-	if(env[current_level].isBamboo())
+	if(env[current_level].isInfiniteMap())
 	{
 		offset_.x = DG_MAX_X/2 - you.position.x;
 		offset_.y = DG_MAX_Y/2 - you.position.y;
@@ -2551,7 +2551,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 
 	{ //테두리
-		if(!env[current_level].isBamboo() && dot_size > 0) {
+		if(!env[current_level].isInfiniteMap() && dot_size > 0) {
 			sight_rect.draw(pSprite,GetDotX(minimap_offset_x, x_+sight_x,dot_size),GetDotY(dot_start_y,y_+sight_y,dot_size),0.0f,sight_x/24.0f*dot_size,sight_y/24.0f*dot_size,255);
 		}
 	}

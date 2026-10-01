@@ -25,6 +25,7 @@ extern textures img_auto_hell_wall[48];
 extern textures img_auto_lava[48];
 extern textures img_auto_oil[48];
 extern textures img_auto_snow[48];
+extern textures img_auto_carpet[48];
 extern textures img_dollshouse_floor;
 extern textures img_auto_dollshouse_wall[48];
 extern textures img_mons_default;

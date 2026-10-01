@@ -377,7 +377,7 @@ void auto_Move()
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
-	if(env[current_level].isBamboo())
+	if(env[current_level].isInfiniteMap())
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_AUTOTRAVEL_BAMBOO),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
@@ -1104,7 +1104,7 @@ void Search()
 		case 'E':
 		case 'e':
 		case GVK_BUTTON_X:
-			if (!env[current_level].isBamboo())
+			if (!env[current_level].isInfiniteMap())
 			{
 				env[current_level].AddForbid(you.search_pos);
 			}
@@ -1359,7 +1359,7 @@ void Wide_Search()
 		case 'E':
 		case 'e':
 		case GVK_BUTTON_X:
-			if (!env[current_level].isBamboo())
+			if (!env[current_level].isInfiniteMap())
 			{
 				env[current_level].AddForbid(you.search_pos);
 			}
@@ -2283,6 +2283,8 @@ bool Stair_move(bool down)
 			int floor_return=0;
 			coord_def pos_return(0,0);
 			bool preserve_return_map = false;
+			if(current_level == SCARLET_UNDER_LEVEL)
+				env[current_level].stair_up[0] = you.position;
 
 			
 			switch(current_level)
@@ -2303,9 +2305,12 @@ bool Stair_move(bool down)
 				pos_return = map_list.dungeon_enter[YOUKAI_MOUNTAIN].pos;
 				break;
 			case SCARLET_LEVEL:
-				floor_return = map_list.dungeon_enter[SCARLET_M].floor;
-				env[floor_return].MakeMap(true);
-				pos_return = map_list.dungeon_enter[SCARLET_M].pos;
+				{
+					int entrance_ = map_list.dungeon_enter[SCARLET_M].floor >= 0?SCARLET_M:FORESTOFMAGIC;
+					floor_return = map_list.dungeon_enter[entrance_].floor;
+					env[floor_return].MakeMap(true);
+					pos_return = map_list.dungeon_enter[entrance_].pos;
+				}
 				break;
 			case SCARLET_LIBRARY_LEVEL:
 				floor_return = map_list.dungeon_enter[SCARLET_L].floor;
@@ -2313,19 +2318,28 @@ bool Stair_move(bool down)
 				pos_return = map_list.dungeon_enter[SCARLET_L].pos;
 				break;
 			case SCARLET_UNDER_LEVEL: 
-				floor_return = map_list.dungeon_enter[SCARLET_U].floor;
-				env[floor_return].MakeMap(true);
-				pos_return = map_list.dungeon_enter[SCARLET_U].pos;
+				{
+					int entrance_ = map_list.dungeon_enter[SCARLET_U].floor >= 0?SCARLET_U:DOLLSHOUSE;
+					floor_return = map_list.dungeon_enter[entrance_].floor;
+					env[floor_return].MakeMap(true);
+					pos_return = map_list.dungeon_enter[entrance_].pos;
+				}
 				break;
 			case FORESTOFMAGIC_LEVEL:
-				floor_return = map_list.dungeon_enter[FORESTOFMAGIC].floor;
-				env[floor_return].MakeMap(true);
-				pos_return = map_list.dungeon_enter[FORESTOFMAGIC].pos;
+				{
+					int entrance_ = map_list.dungeon_enter[FORESTOFMAGIC].floor >= 0?FORESTOFMAGIC:SCARLET_M;
+					floor_return = map_list.dungeon_enter[entrance_].floor;
+					env[floor_return].MakeMap(true);
+					pos_return = map_list.dungeon_enter[entrance_].pos;
+				}
 				break;
 			case DOLLSHOUSE_LEVEL:
-				floor_return = map_list.dungeon_enter[DOLLSHOUSE].floor;
-				env[floor_return].MakeMap(true);
-				pos_return = map_list.dungeon_enter[DOLLSHOUSE].pos;
+				{
+					int entrance_ = map_list.dungeon_enter[DOLLSHOUSE].floor >= 0?DOLLSHOUSE:SCARLET_U;
+					floor_return = map_list.dungeon_enter[entrance_].floor;
+					env[floor_return].MakeMap(true);
+					pos_return = map_list.dungeon_enter[entrance_].pos;
+				}
 				break;
 			case BAMBOO_LEVEL: 
 				floor_return = map_list.dungeon_enter[BAMBOO].floor;
@@ -5100,7 +5114,7 @@ void floorMove()
 bool iteminfor_(item *item_, bool onlyinfor);
 void verylongMove(int level, coord_def pos);
 void findItem() {
-	if(env[current_level].isBamboo()) {
+	if(env[current_level].isInfiniteMap()) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SEARCH_ITEM_FAIL_BAMBOO), true, false, false, CL_help);
 		return;
 	}

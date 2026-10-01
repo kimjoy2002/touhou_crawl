@@ -30,6 +30,7 @@ enum AUTOTILE_KIND {
 	AUTOTILE_WATER,
 	AUTOTILE_OIL,
 	AUTOTILE_SNOW,
+	AUTOTILE_CARPET,
 	AUTOTILE_MAX
 };
 
@@ -125,6 +126,10 @@ public:
 			break;
 		case AUTOTILE_SNOW:
 			if (tile == DG_SNOW || tile == DG_SNOWMAN)
+				return true;
+			break;
+		case AUTOTILE_CARPET:
+			if (tile == DG_CARPET)
 				return true;
 			break;
 		}
@@ -366,6 +371,7 @@ public:
 	list<item>::iterator GetPositiontoitemend(coord_def position_);
 
 	bool isBamboo(){return floor == BAMBOO_LEVEL;};
+	bool isInfiniteMap(){return floor == BAMBOO_LEVEL || floor == SCARLET_UNDER_LEVEL;};
 	int isPandemonium(){return (floor >= PANDEMONIUM_LEVEL && floor <= PANDEMONIUM_LAST_LEVEL)?floor-PANDEMONIUM_LEVEL+1:0;};
 };
 

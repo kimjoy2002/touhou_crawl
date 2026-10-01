@@ -283,6 +283,8 @@ bool isMonsterhurtSpell(monster* use_, monster* target_, spell_list spell_)
 	//이 마법이 이 몬스터에게 제대로 듣는지
 	//true면 되도록 마법을 쓰는걸 피한다.
 	//false면 무시하고 쏜다. (공격이 안 듣거나 자신에 비해서 너무 약하거나)
+	if(spell_ == SPL_BURST && target_->flag & M_FLAG_RESIST_BURST)
+		return false;
 	boolean danger_ = false;
 	if (use_->isUserAlly() && target_->isUserAlly()) {
 		//만약 아군과 적이 모두 아군이면 사용을 안한다.
@@ -411,6 +413,50 @@ bool isBandAlly(monster* order, monster* other)
 
 
 
+
+static bool isMonSafeArea(spell_list skill, monster* order, const coord_def& target, int size_)
+{
+	rect_iterator rit(target,size_,size_);
+	while(!rit.end())
+	{
+		unit* temp = env[current_level].isMonsterPos((*rit).x,(*rit).y,order);
+		if(temp && temp->isLive() && !temp->isEnemyMonster(order))
+		{
+			if(temp->isplayer() || isMonsterhurtSpell(order,(monster*)temp,skill))
+				return false;
+		}
+		rit++;
+	}
+	return true;
+}
+
+static bool findMonSafeBurstTarget(spell_list skill, monster* order, coord_def& target, int size_)
+{
+	static const coord_def offset_[8] = {
+		coord_def(0,-1), coord_def(-1,0), coord_def(1,0), coord_def(0,1),
+		coord_def(-1,-1), coord_def(1,-1), coord_def(-1,1), coord_def(1,1)
+	};
+	for(const coord_def& offset : offset_)
+	{
+		coord_def candidate_ = target+offset;
+		if(candidate_ == order->position || !env[current_level].isMove(candidate_))
+			continue;
+		int length_ = GetLengthFromCenter(candidate_.x,candidate_.y,order->position.x,order->position.y);
+		if(SpellLength(skill,false) == 1)
+		{
+			if(length_ > 2)
+				continue;
+		}
+		else if(SpellLength(skill,false) && length_ > SpellLength(skill,false))
+			continue;
+		beam_iterator beam(order->position,order->position);
+		if(!CheckThrowPath(order->position,candidate_,beam) || !isMonSafeArea(skill,order,candidate_,size_))
+			continue;
+		target = candidate_;
+		return true;
+	}
+	return false;
+}
 
 bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 {
@@ -548,26 +594,11 @@ bool isMonSafeSkill(spell_list skill, monster* order, coord_def &target)
 	if(Spellsize(skill))
 	{
 		int size_ = Spellsize(skill);
-		rect_iterator rit(target,size_,size_);
-
-		while(!rit.end())
-		{
-
-			unit *temp = env[current_level].isMonsterPos((*rit).x, (*rit).y, order);
-			if(temp)
-			{	
-				if(temp->isLive() && !temp->isEnemyMonster(order) /*&& !temp->isPassedBullet(order)*/)
-				{
-					if(temp->isplayer() || isMonsterhurtSpell(order,(monster*)temp,skill))
-					{
-						return false;
-					}
-
-				}
-			}
-			rit++;
-		}
-		
+		bool safe_ = isMonSafeArea(skill,order,target,size_);
+		if(!safe_ && skill == SPL_BURST)
+			safe_ = findMonSafeBurstTarget(skill,order,target,size_);
+		if(!safe_ && !(order->flag & M_FLAG_CARELESS_MAGIC))
+			return false;
 	}
 
 	return true;
@@ -2804,7 +2835,7 @@ bool skill_burst(int pow_, bool short_, unit* order, coord_def target)
 			{
 				if(unit* hit_ = env[current_level].isMonsterPos(it->x,it->y))
 				{
-					if(hit_->GetId() != MON_FLAN && hit_->GetId() != MON_FLAN_BUNSIN) { //플랑은 면역(나중에 폭팔면역추가?)
+					if(hit_->isplayer() || !(((monster*)hit_)->flag & M_FLAG_RESIST_BURST)) {
 						attack_infor attack_infor_(randC(SPL_BURST_DICE,SPL_BURST_DAM(pow_)),SPL_BURST_DICE*SPL_BURST_DAM(pow_),99,order,order->GetParentType(),ATT_BURST,name_infor(LOC_SYSTEM_ATT_BURST));
 						hit_->damage(attack_infor_, true);				
 					}
@@ -7212,6 +7243,7 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 		list->push_back(spell(SPL_BURST, 18));
 		break;
 	case MON_FLAN_BUNSIN:
+	case MON_FLAN_AFTERIMAGE:
 		list->push_back(spell(SPL_BURST, 23));
 		break;
 	case MON_RABIT_BOMB:

@@ -41,6 +41,7 @@
 #include "map.h"
 #include "lilly.h"
 #include "soundmanager.h"
+#include "scarlet_under.h"
 #include <iomanip>
 
 
@@ -3427,6 +3428,10 @@ int players::CheckPeanltyTurn(int level_)
 	{
 		return penalty_turn[3];
 	}
+	else if (level_ == SCARLET_UNDER_LEVEL)
+	{
+		return get_scarlet_under_penalty_turn(level_);
+	}
 	return 0;
 }
 
@@ -4924,7 +4929,7 @@ interupt_type players::resetLOS(bool speak_)
 			{
 				env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_INSIGHT;
 
-				if(env[current_level].isBamboo())
+				if(env[current_level].isInfiniteMap())
 				{
 					env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_EXPLORE;
 				}
@@ -4945,7 +4950,7 @@ interupt_type players::resetLOS(bool speak_)
 					if(distan_coord(position,goal_)>((sight+1)*(sight+1)-1))
 					{
 						env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_INSIGHT;
-						if(env[current_level].isBamboo())
+						if(env[current_level].isInfiniteMap())
 						{
 							env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_EXPLORE;
 						}
@@ -5006,7 +5011,7 @@ interupt_type players::resetLOS(bool speak_)
 					else if(i == RT_END - 1)
 					{
 						env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_INSIGHT;
-						if(env[current_level].isBamboo())
+						if(env[current_level].isInfiniteMap())
 						{
 							env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_EXPLORE;
 						}

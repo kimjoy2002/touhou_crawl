@@ -212,6 +212,9 @@ void environment::LoadDatas(FILE *fp)
 			remapDungeonTile(dgtile[x][y].tile);
 		}
 	}
+	for (int x = 0; x < DG_MAX_X; x++)
+		for (int y = 0; y < DG_MAX_Y; y++)
+			calculateAutoTile(coord_def(x,y),AUTOTILE_CARPET);
 	LoadData<coord_def>(fp, *stair_up);
 	LoadData<coord_def>(fp, *stair_down);
 	int size_ = 0;
@@ -339,8 +342,11 @@ bool environment::MakeMap(bool return_)
 		allCalculateAutoTile();
 		if(isNormalGame())
 		{
-			create_mon(floor, GetLevelMonsterNum(floor,false));
-			create_item(floor,  GetLevelMonsterNum(floor,true));
+			if(floor != SCARLET_UNDER_LEVEL)
+			{
+				create_mon(floor, GetLevelMonsterNum(floor,false));
+				create_item(floor,  GetLevelMonsterNum(floor,true));
+			}
 			if(floor == 0) {
 				create_id_to_item(33, 0);
 			}
@@ -536,7 +542,7 @@ bool environment::magicmapping(int x_, int y_)
 {
 	if(x_<0 || x_>=DG_MAX_X || y_<0 || y_>=DG_MAX_Y)
 		return false;
-	if(isBamboo())
+	if(isInfiniteMap())
 		return false;
 
 	env[current_level].CheckForbid(coord_def(x_,y_));
@@ -765,6 +771,8 @@ char environment::getAsciiDot(int x_, int y_)
 		return ';';
 	case DG_SNOW:
 		return '^';
+	case DG_CARPET:
+		return '.';
 	default:
 		return ' ';
 	}
@@ -1035,6 +1043,10 @@ void environment::innerDrawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int ti
 		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y,0.0f,scale,scale, color_);
 		//img_auto_wall[0].draw(pSprite, x, y, color_);
 		img_auto_snow[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_SNOW])].draw(pSprite, x, y,0.0f,scale,scale, color_);
+	}
+	else if (dgtile[tile_x][tile_y].tile == DG_CARPET) {
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y,0.0f,scale,scale, color_);
+		img_auto_carpet[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_CARPET])].draw(pSprite, x, y,0.0f,scale,scale, color_);
 	}
 	else if (dgtile[tile_x][tile_y].tile == DG_DOLLSHOUSE_FLOOR) {
 		img_dollshouse_floor.draw(pSprite, x, y,0.0f,scale,scale, color_);
@@ -1430,7 +1442,7 @@ void environment::SummonClear(int map_id_)
 
 void environment::MakeShadow(const coord_def &c, textures *t, int original_id_, shadow_type type_, const string &name_)
 {
-	if(isBamboo())
+	if(isInfiniteMap())
 		return; //죽림에선 만들지 않는다.
 	WaitForSingleObject(mutx, INFINITE);
 	list<shadow>::iterator it;
@@ -2133,7 +2145,9 @@ bool environment::ActionEvent(int delay_)
 	for(it = event_list.begin();it != event_list.end() ;)
 	{
 		list<events>::iterator temp = it++;
-		if(!DisableMove(temp->position)) {
+		if(temp->id == EVL_SCARLET_UNDER_FRONTIER)
+			continue;
+		if(temp->id == EVL_SCARLET_UNDER || !DisableMove(temp->position)) {
 			if(!temp->action(delay_))
 			{
 				event_list.erase(temp);
@@ -2549,7 +2563,7 @@ bool environment::PostoCheckSight(coord_def center_, coord_def target_, int leng
 }
 bool environment::MakeMapping(int percent_)
 {
-	if(isBamboo())
+	if(isInfiniteMap())
 		return false;
 
 	for(int i = 0;i < DG_MAX_X;i++)
@@ -2587,7 +2601,7 @@ bool environment::MakeMapping(int percent_)
 bool environment::MakeMapping(coord_def center_, int length_, bool passed_, int percent_)
 {
 	
-	if(isBamboo())
+	if(isInfiniteMap())
 		return false;
 
 	set<coord_def> cd_set;

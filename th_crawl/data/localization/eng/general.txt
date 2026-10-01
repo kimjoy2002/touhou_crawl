@@ -5632,3 +5632,4 @@ LOC_SYSTEM_SPL_DESCRIBE_THROW_AXE,Throws a hand axe at a distant enemy. Cannot b
 LOC_SYSTEM_SPL_COUNTER_TANMAC,Counter Shot
 LOC_SYSTEM_SPL_DESCRIBE_COUNTER_TANMAC,Fires two homing danmaku at the enemy upon death.
 LOC_SYSTEM_ATT_AXE,Axe
+LOC_SYSTEM_TILE_CARPET,Carpet

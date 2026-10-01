@@ -396,7 +396,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 			if (waste_) //낭비시엔 의미가 없음
 				return true;
 			iden_list.scroll_list[kind].iden = 3;
-			if(env[current_level].isBamboo())
+			if(env[current_level].isInfiniteMap())
 			{				
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_MAPPING_BAMBOO),true,false,false,CL_normal);
 				if(pre_iden_){

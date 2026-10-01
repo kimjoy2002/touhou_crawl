@@ -259,6 +259,7 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 
 	DG_FLOOR_END = DG_DOLLSHOUSE_FLOOR,
 	DG_OIL,
 	DG_SNOW,
+	DG_CARPET,
 	DG_FLOOR_OBJECT = 25,
 	DG_OPEN_DOOR = DG_FLOOR_OBJECT, //오브젝트는 바닥+덮어쓰기 식일때
 	DG_DOWN_STAIR,

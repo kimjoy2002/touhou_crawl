@@ -1784,6 +1784,7 @@ textures img_item_ice[15] = {
 textures img_item_food_bread(&texture_item01, 0, 255);
 textures img_item_food_p_item(&texture_item01, 63, 255);
 textures img_mons_food_watermelon(&texture_monster02, 143, 255);
+textures img_item_food_cake(&texture_item04, 59, 255);
 
 textures img_item_potion[] = {textures(&texture_item02, 0, 255),
 	textures(&texture_item02, 1, 255),
@@ -2657,6 +2658,7 @@ textures img_state_slow(&texture_item01, 239, 255);
 textures img_state_neutral(&texture_item03, 194, 255);
 textures img_state_calling(&texture_item03, 213, 255);
 textures img_state_dazed(&texture_item04, 23, 255);
+textures img_state_spellcard(&texture_item04, 58, 255);
 
 textures dot_floor(&texture_dot_floor, 0, 0, 1, 1, 255);
 textures dot_wall(&texture_dot_wall, 0, 0, 1, 1, 255);
@@ -4471,6 +4473,8 @@ int texturetoint(textures* input)
 		return 761;
 	else if(input == &img_mons_tornado_spirit)
 		return 762;
+	else if(input == &img_item_food_cake)
+		return 763;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -6023,6 +6027,8 @@ textures* inttotexture(int input)
 		return &img_mons_yamanba;
 	case 762:
 		return &img_mons_tornado_spirit;
+	case 763:
+		return &img_item_food_cake;
 	default:
 		return &img_mons_default;
 	}

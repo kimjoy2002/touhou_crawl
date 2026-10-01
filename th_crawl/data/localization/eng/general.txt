@@ -5633,3 +5633,6 @@ LOC_SYSTEM_SPL_COUNTER_TANMAC,Counter Shot
 LOC_SYSTEM_SPL_DESCRIBE_COUNTER_TANMAC,Fires two homing danmaku at the enemy upon death.
 LOC_SYSTEM_ATT_AXE,Axe
 LOC_SYSTEM_TILE_CARPET,Carpet
+LOC_SYSTEM_ITEM_FOOD_CAKE,Cake
+LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE,A slice of cake found in the Scarlet Devil Mansion Basement.\nThe cake looks delicious, but its origin seems suspicious.\nShould you really eat it?
+LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE_VAMPIRE,A slice of cake found in the Scarlet Devil Mansion Basement.\nThe cake looks delicious, but its origin seems suspicious.\nThe cake smells irresistibly delicious!

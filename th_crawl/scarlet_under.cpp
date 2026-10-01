@@ -573,7 +573,11 @@ bool scarlet_under_reward(events* event_)
 				!env[current_level].isMove(pos_,false) || used_.find(pos_) != used_.end())
 				continue;
 			item_infor item_;
-			if(!env[current_level].MakeItem(pos_,CreateFloorItem(SCARLET_UNDER_LEVEL_LAST_LEVEL,&item_)))
+			if(i == 0)
+				makeitem(ITM_FOOD,0,&item_,6);
+			else
+				CreateFloorItem(SCARLET_UNDER_LEVEL_LAST_LEVEL,&item_);
+			if(!env[current_level].MakeItem(pos_,item_))
 				continue;
 			used_.insert(pos_);
 			break;

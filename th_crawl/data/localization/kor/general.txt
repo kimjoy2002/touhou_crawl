@@ -5633,3 +5633,6 @@ LOC_SYSTEM_SPL_COUNTER_TANMAC,반격탄
 LOC_SYSTEM_SPL_DESCRIBE_COUNTER_TANMAC,죽는 순간 적을 향해 두 발의 호밍 탄막을 날린다.
 LOC_SYSTEM_ATT_AXE,도끼
 LOC_SYSTEM_TILE_CARPET,카펫
+LOC_SYSTEM_ITEM_FOOD_CAKE,케이크
+LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE,홍마관 지하실에 있던 케이크 한조각.\n이 케이크는 먹음직스러워보이지만, 출처가 수상해보인다.\n정말 먹어도 되는걸까?
+LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE_VAMPIRE,홍마관 지하실에 있던 케이크 한조각.\n이 케이크는 먹음직스러워보이지만, 출처가 수상해보인다.\n케이크에서 참을 수 없을 정도로 맛있는 냄새가 난다!

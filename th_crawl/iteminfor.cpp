@@ -1482,7 +1482,10 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	}
 	break;
 	case ITM_FOOD:
-		if(ice_description_ == LOC_NONE)
+		if(it->value1 == 7)
+			_infor_(LocalzationManager::locString(you.tribe == TRI_VAMPIRE?
+				LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE_VAMPIRE:LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE));
+		else if(ice_description_ == LOC_NONE)
 			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_FOOD));
 		if (can_use_)
 		{

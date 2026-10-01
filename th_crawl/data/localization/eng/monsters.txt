@@ -298,3 +298,4 @@ MON_SPEAR_DOLL,Spear Doll,A combat doll that rapidly charges enemies with a spea
 MON_SHOEBILL,Shoebill,A bird with a massive bill and an expressionless face.\nIt spreads its wings and swoops in, attacking with its sharp bill.
 MON_YAMANBA,Yamanba,A youkai who lives hidden in the mountains.\nYamanba live alone rather than forming groups.\nWhen intruders enter their territory, they aggressively drive them away by throwing axes.
 MON_TORNADO_SPIRIT,Tornado Elemental,An elemental imbued with the power of a whirlwind.\nIt is a frail monster, easily swept away by a shot or two of danmaku,\nbut it is troublesome as it fires danmaku at its enemy upon death.
+MON_FLAN_AFTERIMAGE,Flandre's Afterimage,An afterimage of Flandre wandering the endless basement corridors.\nIt seems to be a clone Flandre once played with, but as it drifted farther from the original,\nits form gradually faded and weakened.

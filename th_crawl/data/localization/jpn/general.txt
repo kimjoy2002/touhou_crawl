@@ -5633,3 +5633,6 @@ LOC_SYSTEM_SPL_COUNTER_TANMAC,反撃弾
 LOC_SYSTEM_SPL_DESCRIBE_COUNTER_TANMAC,死ぬ瞬間、敵に向けて2発のホーミング弾幕を放つ。
 LOC_SYSTEM_ATT_AXE,斧
 LOC_SYSTEM_TILE_CARPET,カーペット
+LOC_SYSTEM_ITEM_FOOD_CAKE,ケーキ
+LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE,紅魔館の地下室にあったケーキの一切れ。\nこのケーキは美味しそうだが、出所が怪しい。\n本当に食べてもいいのだろうか？
+LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE_VAMPIRE,紅魔館の地下室にあったケーキの一切れ。\nこのケーキは美味しそうだが、出所が怪しい。\nケーキから我慢できないほど美味しそうな匂いがする！

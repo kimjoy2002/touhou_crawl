@@ -490,6 +490,7 @@ extern textures img_player_dive;
 extern textures img_item_food_bread;
 extern textures img_item_food_p_item;
 extern textures img_mons_food_watermelon;
+extern textures img_item_food_cake;
 
 extern textures img_item_potion[];
 
@@ -686,6 +687,7 @@ extern textures img_state_slow;
 extern textures img_state_neutral;
 extern textures img_state_calling;
 extern textures img_state_dazed;
+extern textures img_state_spellcard;
 
 
 int texturetoint(textures* input);

@@ -1,5 +1,46 @@
 
 ---------------------------------------------------------------------
+§c beta patch – ver1.209 (2026-10-02)§d
+---------------------------------------------------------------------
+
+§y* Feature Additions§d
+ * Added three new early-game monsters.
+  * Added the Shoebill.
+   * It has the same stats as the Crane, but fits the Touhou setting better.
+   * It replaces the Crane as a regular spawn. The Crane remains as an Easter egg, appearing at 10% of the Shoebill's rate.
+  * Added the Yamanba.
+   * It throws fairly powerful axes from range. It cannot throw them at adjacent targets, but still deals moderate damage in melee.
+   * It replaces roughly half of the Samurai parties that would normally appear.
+   * It serves as an early-game threat to magicians, similar to the role of centaurs in Dungeon Crawl.
+  * Added the Tornado Elemental.
+   * It is frail but fast, and fires Homing Danmaku as a counterattack when slain.
+   * Homing Danmaku will usually miss at point-blank range, making it mostly harmless to melee fighters.
+   * It appears in place of some early-game Mooks.
+ * Reworked the Scarlet Basement.
+  * With Sakuya's help, the Scarlet Basement is now a single-floor dungeon made up of endless corridors.
+  * While wandering its endless corridors, you may find a large room containing a rune, a large cache of items, and Flandre.
+  * Flandre's overall stats have been reduced, but she now uses her explosions more intelligently.
+  * Flandre now uses a special Spell Card when defeated.
+   * These Spell Cards are final danmaku patterns that certain unique monsters activate automatically when defeated.
+   * Flandre's Spell Card is the first trial implementation of this system. It probably will not be too difficult.
+
+§y* Gameplay & Interface Improvements§d
+ * Increased the base damage of the level 2 spell Homing Danmaku by 1, and made its actual damage clearer in its description.
+ * Cirno's magic gifts no longer grant spells already found in starting spellbooks.
+ * Halved the confusion duration inflicted on unique monsters by the Sun Spell Card.
+ * Reduced the Self-Destruct Doll's HP from 50 to 35 and the noise of its explosion from 32 to 28.
+ * Reduced the Spear Doll's maximum attack damage from 36 to 32.
+ * Only one Goliath Doll now appears on the final floor of the Doll's House.
+ * Enemies defeated by Homing Danmaku, Elemental Harvester, and similar effects now count as direct player kills.
+ * The weapon selection screen now highlights weapons suited to the selected race's aptitudes.
+ * Mutually exclusive runes are now shown on the same line in the rune overview.
+
+§y* Bug Fixes§d
+ * Fixed gamepad users being unable to leave Dungeon Suzunaan.
+ * Fixed some stairs being generated inside glass.
+ * Fixed several incorrect translations.
+
+---------------------------------------------------------------------
 §c beta patch – ver1.208 (2026-09-28)§d
 ---------------------------------------------------------------------
 

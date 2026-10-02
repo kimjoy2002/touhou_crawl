@@ -2804,18 +2804,50 @@ void rune_Show()
 
 	for(int i = 0; i<RUNE_MAX;i++)
 	{
-		if(i == RUNE_HAKUREI_ORB) {
+		if(i == RUNE_HAKUREI_ORB || i == RUNE_FORESTOFMAGIC || i == RUNE_DOLLSHOUSE) {
 			continue;
 		}
+		int rune_ = i;
+		string rune_name_;
+		if(i == RUNE_SCARLET)
+		{
+			if(map_list.dungeon_enter[FORESTOFMAGIC].detected || you.rune[RUNE_FORESTOFMAGIC])
+				rune_ = RUNE_FORESTOFMAGIC;
+			else if(map_list.dungeon_enter[SCARLET_M].detected || you.rune[RUNE_SCARLET])
+				rune_ = RUNE_SCARLET;
+			else
+			{
+				rune_ = -1;
+				rune_name_ = LocalzationManager::formatString(LOC_SYSTEM_OR,
+					PlaceHolderHelper(rune_string[RUNE_SCARLET]),
+					PlaceHolderHelper(rune_string[RUNE_FORESTOFMAGIC]));
+			}
+		}
+		else if(i == RUNE_SCARLET_UNDER)
+		{
+			if(map_list.dungeon_enter[FORESTOFMAGIC].detected || you.rune[RUNE_DOLLSHOUSE])
+				rune_ = RUNE_DOLLSHOUSE;
+			else if(map_list.dungeon_enter[SCARLET_M].detected || you.rune[RUNE_SCARLET_UNDER])
+				rune_ = RUNE_SCARLET_UNDER;
+			else
+			{
+				rune_ = -1;
+				rune_name_ = LocalzationManager::formatString(LOC_SYSTEM_OR,
+					PlaceHolderHelper(rune_string[RUNE_DOLLSHOUSE]),
+					PlaceHolderHelper(rune_string[RUNE_SCARLET_UNDER]));
+			}
+		}
+		if(rune_ >= 0)
+			rune_name_ = LocalzationManager::locString(rune_string[rune_]);
 		remain = 15;
-		remain -= PrintCharWidth(LocalzationManager::locString(rune_string[i]));
+		remain -= PrintCharWidth(rune_name_);
 		for(;remain>0;remain--)
 			SetText() += " ";
-		SetText() += LocalzationManager::locString(rune_string[i]);
+		SetText() += rune_name_;
 		SetText() += " :";
 
 
-		if(you.rune[i])
+		if(rune_ >= 0 && you.rune[rune_])
 		{
 			SetText() += " " + LocalzationManager::locString(LOC_SYSTEM_UI_RUNE_GAIN);
 		}

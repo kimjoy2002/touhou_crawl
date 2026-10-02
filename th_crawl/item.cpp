@@ -1089,7 +1089,6 @@ const D3DCOLOR item::item_color()
 			return_ = CL_bad;
 		}
 	}
-
 	return return_;
 }
 

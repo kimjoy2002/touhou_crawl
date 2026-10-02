@@ -19,6 +19,7 @@
 #include "tribe.h"
 #include "armour.h"
 #include "evoke.h"
+#include "skill.h"
 
 
 
@@ -69,6 +70,10 @@ void MakeStartItem(start_item_type select_, int num);
 skill_type WeaponSelect(int num)
 {
 	string blank(12,' ');
+	auto weapon_color_ = [](skill_type skill_)
+	{
+		return IsSuitableWeapon(you.tribe,skill_)?CL_normal:CL_bad;
+	};
 	WaitForSingleObject(mutx, INFINITE);
 	deletesub();
 	printsub("", true, CL_normal);
@@ -79,20 +84,20 @@ skill_type WeaponSelect(int num)
 	printsub("", true, CL_normal);
 	printsub("", true, CL_normal);
 	printsub(blank, false, CL_normal);
-	printsub("a - ", false, CL_normal);
-	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_SHORTBLADE) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_SHORTBLADE), true, CL_normal, 'a');
+	printsub("a - ", false, weapon_color_(SKT_SHORTBLADE));
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_SHORTBLADE) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_SHORTBLADE), true, weapon_color_(SKT_SHORTBLADE), 'a');
 	printsub(blank, false, CL_normal);
-	printsub("b - ", false, CL_normal);
-	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_AXE) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_AXE), true, CL_normal, 'b');
+	printsub("b - ", false, weapon_color_(SKT_AXE));
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_AXE) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_AXE), true, weapon_color_(SKT_AXE), 'b');
 	printsub(blank, false, CL_normal);
-	printsub("c - ", false, CL_normal);
-	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_MACE) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_MACE), true, CL_normal, 'c');
+	printsub("c - ", false, weapon_color_(SKT_MACE));
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_MACE) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_MACE), true, weapon_color_(SKT_MACE), 'c');
 	printsub(blank, false, CL_normal);
-	printsub("d - ", false, CL_normal);
-	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_SPEAR) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_SPEAR), true, CL_normal, 'd');
+	printsub("d - ", false, weapon_color_(SKT_SPEAR));
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_SPEAR) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_SPEAR), true, weapon_color_(SKT_SPEAR), 'd');
 	printsub(blank, false, CL_normal);
-	printsub("e - ", false, CL_normal);
-	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_LONGBLADE) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_LONGBLADE), true, CL_normal, 'e');
+	printsub("e - ", false, weapon_color_(SKT_LONGBLADE));
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_LONGBLADE) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_LONGBLADE), true, weapon_color_(SKT_LONGBLADE), 'e');
 	ReleaseMutex(mutx);
 
 	while(1)

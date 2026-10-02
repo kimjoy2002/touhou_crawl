@@ -21,6 +21,7 @@ void _infor_(string str);
 bool UseRealAtkUpgrade(int mon_id) {
 	switch(mon_id) {
 		case MON_HOMING:
+		case MON_BULLET:
 			return true;
 	}
 	return false;
@@ -136,11 +137,13 @@ void GetMonsterInfor(monster *it)
 			int att_ = 0;
 			bool use_real_atk = UseRealAtkUpgrade(it->id);
 			for(int i = 0; i < 3;i++) {
-				if(mondata[it->id].atk_type[i] != ATT_NONE) {
-					aver_damage+=use_real_atk?it->atk[i]:mondata[it->id].atk[i];
-					if(mondata[it->id].atk[i] > max_damage)
-						max_damage = use_real_atk?it->atk[i]:mondata[it->id].atk[i];
-					all_key.insert(getKeyOfAttack(mondata[it->id].atk_type[i]));
+				attack_type attack_type_ = use_real_atk?it->atk_type[i]:mondata[it->id].atk_type[i];
+				int attack_ = use_real_atk?it->atk[i]:mondata[it->id].atk[i];
+				if(attack_type_ != ATT_NONE) {
+					aver_damage+=attack_;
+					if(attack_ > max_damage)
+						max_damage = attack_;
+					all_key.insert(getKeyOfAttack(attack_type_));
 					att_ ++;
 				}
 			}
@@ -307,6 +310,10 @@ void GetMonsterInfor(monster *it)
 	}
 	if(it->flag & M_FLAG_RESIST_BLIZARD) {
 		_infor_(LocalzationManager::locString(LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BLIZARD));
+		_infor_("\n");
+	}
+	if(it->flag & M_FLAG_RESIST_BURST) {
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BURST));
 		_infor_("\n");
 	}
 	

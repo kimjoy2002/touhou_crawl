@@ -23,6 +23,7 @@
 #include "note.h"
 #include "beam.h"
 #include "replay.h"
+#include "unique_spellcard.h"
 #include "forbid.h"
 #include "soundmanager.h"
 #include "option_manager.h"
@@ -325,6 +326,10 @@ void environment::LoadDatas(FILE *fp)
 		}
 	}
 	repair_goliath_groups(*this);
+	if(isPrevVersion(loading_version_string,"ver1.208"))
+		for(monster& mon_ : mon_vector)
+			if(mon_.isLive())
+				SetupUniqueSpellcard(&mon_,floor);
 
 
 }
@@ -1068,26 +1073,36 @@ void environment::innerDrawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int ti
 }
 
 extern display_manager DisplayManager;
-void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, float scale, int count_, int max_mouseX, bool sight, bool onlyTile, bool draw_mouse)
+void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, float scale, int count_, int max_mouseX, bool sight, bool onlyTile, bool draw_mouse, bool spellcard_dark)
 {
+	auto tileColor = [spellcard_dark](int red_, int green_, int blue_)
+	{
+		if(spellcard_dark)
+		{
+			red_ = red_*7/10;
+			green_ = green_*7/10;
+			blue_ = blue_*7/10;
+		}
+		return D3DCOLOR_XRGB(red_,green_,blue_);
+	};
 	if (!isExplore(tile_x, tile_y))
 	{
-		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, D3DCOLOR_XRGB(160, 160, 255), sight);
+		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, tileColor(160,160,255), sight);
 	}
 	else if (dgtile[tile_x][tile_y].flag & FLAG_LIGHT)
 	{
-		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, D3DCOLOR_XRGB(255, 255, 255), sight);
+		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, tileColor(255,255,255), sight);
 		if(!onlyTile){
 			img_effect_gold.draw(pSprite, x, y, 0.0f, scale, scale, 100);
 		}
 	}
 	else if (isInSight(coord_def(tile_x, tile_y)) && sight)
 	{
-		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, D3DCOLOR_XRGB(255, 255, 255), sight);
+		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, tileColor(255,255,255), sight);
 	}
 	else
 	{
-		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, D3DCOLOR_XRGB(128, 128, 128), sight);
+		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, tileColor(128,128,128), sight);
 	}
 
 	if(!onlyTile && sight && !(dgtile[tile_x][tile_y].flag & FLAG_LIGHT) &&
@@ -1477,22 +1492,16 @@ void environment::MakeShadow(const coord_def &c, textures *t, int original_id_, 
 void environment::MakeAfterimage(const coord_def &c, textures *t, int start_alpha, int turn_, bool onTrun ) {
 
 	WaitForSingleObject(mutx, INFINITE);
-	list<afterimage>::iterator it;
-	for(it = afterimage_list.begin();;it++)
+	list<afterimage>::iterator it = afterimage_list.begin();
+	while(it != afterimage_list.end() &&
+		((*it).position.y < c.y || ((*it).position.y == c.y && (*it).position.x < c.x)))
+		it++;
+
+	while(it != afterimage_list.end() && (*it).position == c)
 	{
-		if(it == afterimage_list.end() || (*it).position.y > c.y || ((*it).position.y == c.y && (*it).position.x > c.x) )
-		{
-			afterimage_list.insert(it,afterimage(c,t,turn_,(float)start_alpha, onTrun));
-			ReleaseMutex(mutx);
-			return;
-		}
-		else if((*it).position.y == c.y && (*it).position.x == c.x)
-		{
-			afterimage_list.insert(it,afterimage(c,t,turn_,(float)start_alpha, onTrun));
-			ReleaseMutex(mutx);
-			return;
-		}
+		it = afterimage_list.erase(it);
 	}
+	afterimage_list.insert(it,afterimage(c,t,turn_,(float)start_alpha, onTrun));
 	ReleaseMutex(mutx);
 }
 
@@ -2707,7 +2716,8 @@ unit* environment::isMonsterPos(int x_,int y_, const unit* excep_, int* map_id_)
 	it = mon_vector.begin();
 	for(int i=0;i<MON_MAX_IN_FLOOR && it != mon_vector.end() ;i++,it++)
 	{
-		if((*it).isLive() && (*it).position.x == x_ && (*it).position.y == y_ && &(*it) != excep_)
+		if((*it).isLive() && !IsUniqueSpellcardHidden(&(*it)) &&
+			(*it).position.x == x_ && (*it).position.y == y_ && &(*it) != excep_)
 		{
 			if(it->id == MON_GOLIATH_DOLL && it->parent_part_id != -1)
 			{

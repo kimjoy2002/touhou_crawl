@@ -31,6 +31,7 @@
 #include "ring.h"
 #include "book.h"
 #include "spellcard.h"
+#include "unique_spellcard.h"
 #include "throw.h"
 #include "mon_infor.h"
 #include "localization.h"
@@ -2043,6 +2044,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 
 	//바탕 타일 그리기
+	bool unique_spellcard_active_ = IsUniqueSpellcardActive();
 	int x_ = you.GetDisplayPos().x-sight_x;
 	int y_ = you.GetDisplayPos().y-sight_y;
 	int tile_x_offset = 4.0f+calc_tile_size/2;
@@ -2068,7 +2070,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							sight = false;
 						}
 					}
-					env[current_level].drawTile(pSprite, i + x_, j + y_, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset, calc_tile_scale, you.turn, info_minX, sight, false, !already_draw);
+					env[current_level].drawTile(pSprite, i + x_, j + y_, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset, calc_tile_scale, you.turn, info_minX, sight, false, !already_draw, unique_spellcard_active_);
 				}
 				else {
 					int x = i*calc_tile_size + tile_x_offset;
@@ -4130,6 +4132,17 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			PlaceHolderHelper(joypadUtil::get("z", GVK_BUTTON_A)), PlaceHolderHelper(joypadUtil::get("x", GVK_LEFT_BUMPER)), PlaceHolderHelper(joypadUtil::get("c", GVK_RIGHT_BUMPER)), PlaceHolderHelper(joypadUtil::get("esc", GVK_BUTTON_B_LONG))), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 	}
 	drawInfoBox(pSprite, pfont);
+	if(monster* spellcard_owner_ = GetActiveUniqueSpellcard())
+	{
+		string spellcard_text_ = LocalzationManager::locString(GetUniqueSpellcardName(spellcard_owner_->spellcard_info.type));
+		spellcard_text_ += "  ";
+		if(spellcard_owner_->spellcard_info.max_turn < 0)
+			spellcard_text_ += "∞/∞";
+		else
+			spellcard_text_ += to_string(spellcard_owner_->spellcard_info.turn)+"/"+to_string(spellcard_owner_->spellcard_info.max_turn);
+		RECT spellcard_rc_ = {0,(LONG)(y+4),info_minX-8,(LONG)(y+fontDesc.Height+4)};
+		DrawTextUTF8_OutLine(pfont,pSprite,spellcard_text_.c_str(),-1,&spellcard_rc_,DT_RIGHT | DT_SINGLELINE | DT_NOCLIP,CL_magic);
+	}
 
 
 	if(dragging_item != nullptr){

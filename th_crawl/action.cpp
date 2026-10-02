@@ -33,6 +33,7 @@
 #include "floor.h"
 #include "projectile.h"
 #include "spellcard.h"
+#include "unique_spellcard.h"
 #include "throw.h"
 #include "rand_shuffle.h"
 #include "option_manager.h"
@@ -1975,6 +1976,8 @@ void Stair_move_all() {
 
 bool Stair_move(bool down)
 {
+	if(!CheckUniqueSpellcardFloorMove())
+		return false;
 	if(you.IsDiving())
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);

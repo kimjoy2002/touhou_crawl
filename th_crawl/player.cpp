@@ -234,6 +234,7 @@ void players::init() {
 	item_list.clear();
 	search_list.clear();
 	wiki_search_history.clear();
+	used_unique_spellcards.clear();
 	property_vector.clear();
 	action_vector.clear();
 	item_weight = 0;
@@ -658,12 +659,16 @@ void players::SaveDatas(FILE *fp)
 		for(int i=0;i<3;i++)
 			ice_item_candidates[i]->SaveDatas(fp);
 	}
+	SaveData<int>(fp,used_unique_spellcards.size());
+	for(unique_spellcard_type type_ : used_unique_spellcards)
+		SaveData<unique_spellcard_type>(fp,type_);
 }
 void players::LoadDatas(FILE *fp)
 {
 	item_list.clear();
 	search_list.clear();
 	wiki_search_history.clear();
+	used_unique_spellcards.clear();
 
 	//필수 정보
 	LoadData<int>(fp, level);
@@ -1007,6 +1012,19 @@ void players::LoadDatas(FILE *fp)
 				ice_item_candidates[i] = make_shared<item>();
 				ice_item_candidates[i]->LoadDatas(fp);
 			}
+		}
+	}
+	if(!isPrevVersion(loading_version_string, "ver1.208"))
+	{
+		int spellcard_count_ = 0;
+		LoadData<int>(fp,spellcard_count_);
+		for(int i=0;i<spellcard_count_;i++)
+		{
+			unique_spellcard_type type_ = USC_NONE;
+			LoadData<unique_spellcard_type>(fp,type_);
+			if(type_ > USC_NONE && type_ < USC_MAX &&
+				find(used_unique_spellcards.begin(),used_unique_spellcards.end(),type_) == used_unique_spellcards.end())
+				used_unique_spellcards.push_back(type_);
 		}
 	}
 }

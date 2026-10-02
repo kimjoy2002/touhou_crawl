@@ -17,8 +17,10 @@ void map_algorithms_scarlet_under(int num, dungeon_tile_type floor_tex_, dungeon
 	int corridor_width_, int grid_size_, int bend_frequency_, int exit_frequency_, int afterimage_count_);
 void scarlet_under_count(int num, events* controller_, dungeon_tile_type floor_tex_, dungeon_tile_type wall_tex_,
 	int corridor_width_, int grid_size_, int bend_frequency_, int exit_frequency_, int rune_exit_frequency_,
-	int room_frequency_, int room_min_distance_, int monster_frequency_);
+	int room_frequency_, int room_min_distance_, int monster_frequency_, int flan_escape_distance_,
+	int flan_escape_delay_);
 bool scarlet_under_reward(events* event_);
 int get_scarlet_under_penalty_turn(int num);
+bool scarlet_under_force_spellcard(events* event_);
 
 #endif // __SCARLET_UNDER_H__

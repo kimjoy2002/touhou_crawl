@@ -5316,8 +5316,11 @@ const char* dollshouse_last_vault_pattern(map_dummy* map)
 			map->monster_list.push_back(mapdummy_mon(MON_ALICE, M_FLAG_SHIELD, coord_def(0, 0)));
 			map->reserve_named(MON_ALICE);
 		}
-		map->monster_list.push_back(mapdummy_mon(MON_GOLIATH_DOLL, M_FLAG_SHIELD, coord_def(-5, 0)));
-		map->monster_list.push_back(mapdummy_mon(MON_GOLIATH_DOLL, M_FLAG_SHIELD, coord_def(5, 0)));
+		if(randA(1)) {
+			map->monster_list.push_back(mapdummy_mon(MON_GOLIATH_DOLL, M_FLAG_SHIELD, coord_def(-5, 0)));
+		} else {
+			map->monster_list.push_back(mapdummy_mon(MON_GOLIATH_DOLL, M_FLAG_SHIELD, coord_def(5, 0)));
+		}
 		
 
 		bool rune_ = randA(3);

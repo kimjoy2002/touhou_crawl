@@ -2423,6 +2423,14 @@ textures img_tanmac_axe[] = {
 	textures(&texture_laser, 178, 255),
 	textures(&texture_laser, 179, 255)
 };
+textures img_bullet[] = {
+	textures(&texture_laser, 180, 255),
+	textures(&texture_laser, 181, 255),
+	textures(&texture_laser, 182, 255),
+	textures(&texture_laser, 183, 255),
+	textures(&texture_laser, 184, 255),
+	textures(&texture_laser, 185, 255)
+};
 
 
 
@@ -4475,6 +4483,18 @@ int texturetoint(textures* input)
 		return 762;
 	else if(input == &img_item_food_cake)
 		return 763;
+	else if(input == &img_bullet[0])
+		return 764;
+	else if(input == &img_bullet[1])
+		return 765;
+	else if(input == &img_bullet[2])
+		return 766;
+	else if(input == &img_bullet[3])
+		return 767;
+	else if(input == &img_bullet[4])
+		return 768;
+	else if(input == &img_bullet[5])
+		return 769;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -6029,6 +6049,18 @@ textures* inttotexture(int input)
 		return &img_mons_tornado_spirit;
 	case 763:
 		return &img_item_food_cake;
+	case 764:
+		return &img_bullet[0];
+	case 765:
+		return &img_bullet[1];
+	case 766:
+		return &img_bullet[2];
+	case 767:
+		return &img_bullet[3];
+	case 768:
+		return &img_bullet[4];
+	case 769:
+		return &img_bullet[5];
 	default:
 		return &img_mons_default;
 	}

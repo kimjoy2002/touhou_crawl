@@ -9,6 +9,7 @@
 §yG§d      - Move to Another Floor
 §yH§d      - Restore HP/MP/P
 §yI§d      - Identify All Items
+§yS§d      - Spell Card Activation
 §yb§d      - Blink
 §ym§d      - Spawn Monster
 §yp§d      - Create Altar

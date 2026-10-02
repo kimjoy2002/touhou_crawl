@@ -30,6 +30,8 @@
 #include "rand_shuffle.h"
 #include "soundmanager.h"
 #include "shooting_sprint.h"
+#include "unique_spellcard.h"
+#include "spellcard/bullet.h"
 #include <set>
 
 
@@ -51,7 +53,8 @@ s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0),
 force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), s_oil(0), s_fire(0), fire_reason(PRT_NEUTRAL), s_none_move(0), s_dazed(0), bashed(false), debuf_boost(0),
 	summon_time(0), summon_parent(PRT_NEUTRAL), s_vulun_poison(0), 
 	s_acid(0), s_acid_turn(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0),walk_speed_bonus(0), time_delay(0), all_time_delay(0), 
-	speed(10), memory_time(0), first_contact(true), strong(1), special_value(0), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(),
+	speed(10), memory_time(0), first_contact(true), strong(1), special_value(0), spellcard_info(),
+	delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(),
 	direction(-1), sm_info(), state(MS_NORMAL), random_spell(false), wait(false)
 {
 	for(int i = 0; i < 3; i++) {
@@ -192,6 +195,7 @@ void monster::SaveDatas(FILE *fp)
 	{
 		(*it).SaveDatas(fp);
 	}
+	spellcard_info.SaveDatas(fp);
 	
 }
 void monster::LoadDatas(FILE *fp)
@@ -350,6 +354,8 @@ void monster::LoadDatas(FILE *fp)
 		temp.LoadDatas(fp);
 		item_lists.push_back(temp);
 	}
+	if(!isPrevVersion(loading_version_string, "ver1.208"))
+		spellcard_info.LoadDatas(fp);
 }
 void monster::ReTarget()
 {
@@ -449,6 +455,7 @@ void monster::init()
 	first_contact = true;
 	strong = 1;
 	special_value = 0;
+	spellcard_info.init();
 	delay_turn = 0;
 	while(!will_move.empty())
 		will_move.pop_back();
@@ -570,6 +577,8 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int
 		s_invisible = -1;
 	
 	SetSpell((monster_index)id_, this,&item_lists,&random_spell);
+	if(init_)
+		SetupUniqueSpellcard(this, map_num_);
 	return true;
 }	
 bool monster::ChangeMonster( int id_, uint64_t flag_)
@@ -590,6 +599,7 @@ void monster::FirstContact()
 {
 	if(!first_contact)
 		return;
+	UniqueSpellcardFirstContact(this);
 	if(id == MON_TEWI)
 	{
 		map_list.bamboo_tewi = true;
@@ -937,6 +947,12 @@ void monster::AfterMove(int map_num_, int x_, int y_) {
 	case MON_HOURAI_DOLL:
 		if(special_value > 0)
 			env[map_num_].MakeSmoke(coord_def(position.x, position.y), img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, this);
+		break;
+	case MON_BULLET:
+	{
+		bool in_wall_ = !env[map_num_].dgtile[position.x][position.y].isMove(true,true,false);
+		env[map_num_].MakeAfterimage(coord_def(position.x, position.y), image, in_wall_?10:30, 2);
+	}
 		break;
 	default:
 		break;
@@ -2089,6 +2105,8 @@ bool monster::damage(attack_infor &a, bool perfect_, const coord_def* hit_pos)
 				you.PowUpDown(-rand_int(1, 10), true);
 				createGold(position, rand_int(1, 2));
 			}
+			if(hp <= 0 && TryActivateUniqueSpellcard(this,a.p_type,a.order))
+				return true;
 			if(hp<=0)
 			{
 				if (sight_) {
@@ -2330,6 +2348,8 @@ bool monster::simple_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<D
 }
 bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_, float scale_)
 {
+	if(IsUniqueSpellcardHidden(this))
+		return false;
 	bool return_ = false;
 	if (s_glow) {
 		img_effect_halo.draw(pSprite, x_, y_,0.0f,scale_,scale_, 127);
@@ -2340,7 +2360,10 @@ bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX:
 
 	int blue_ = s_frozen==0?255:127 +  std::max(0, 25-s_frozen)*128/25;
 	bool is_ghost = (id == MON_ENSLAVE_GHOST || id == MON_TIME_PARADOX || id == MON_FLAN_AFTERIMAGE);
-	D3DCOLOR color_ = D3DCOLOR_ARGB(is_ghost?128:255, blue_,blue_,255);
+	int alpha_ = is_ghost?128:255;
+	if(id == MON_BULLET && !env[current_level].dgtile[position.x][position.y].isMove(true,true,false))
+		alpha_ = 80;
+	D3DCOLOR color_ = D3DCOLOR_ARGB(alpha_, blue_,blue_,255);
 
 	if(id == MON_TIME_PARADOX && sm_info.parent_map_id == you.GetMapId() && you.GetCharNameString().empty())
 	{
@@ -2381,6 +2404,11 @@ bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX:
 	{
 
 		int offset_ = 0;
+		if(spellcard_info.state == USCS_READY)
+		{
+			return_ = img_state_spellcard.draw(pSprite,x_+offset_,y_,0.0f,scale_,scale_,255);
+			offset_ -= 5;
+		}
 		for (monster_state_simple mss = MSS_SLEEP; mss < MSS_MAX; mss = (monster_state_simple)(mss + 1))
 		{
 			if (isSimpleState(mss))
@@ -2568,6 +2596,10 @@ int monster::AttackToYou(bool force_) {
 	{
 		num_ = randA(num_-1);
 		attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
+		if(id == MON_HOMING) {
+			temp_att.no_owner = true;
+			temp_att.name = name;
+		}
 		you.damage(temp_att);
 		multipleAttack(&you, temp_att);
 		enterlog();
@@ -2614,6 +2646,10 @@ int monster::AttackToMon(monster* mon_, bool force_) {
 	{
 		num_ = randA(num_-1);
 		attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
+		if(id == MON_HOMING) {
+			temp_att.no_owner = true;
+			temp_att.name = name;
+		}
 		mon_->damage(temp_att);
 		multipleAttack(mon_, temp_att);
 		enterlog();
@@ -2671,6 +2707,9 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 				 && it->parent_part_id == map_id && it->special_value != 1) {
 				//전갈은 자신의 몸을 뚫는다. 하지만 바로 뒤론 못감(머리 바로 뒤는 special_value가 1이다)
 				it->dead(PRT_NEUTRAL, false);
+			}
+			else if(isExistMon_ && it->id == MON_BULLET) {
+				it->hp = 0;
 			}
 			else if(isExistMon_ && (*it).flag & M_FLAG_MISSLE && !isMoveNotInturrpt(&(*it))) {
 				//이건 미사일류 몬스터라 사라져야함
@@ -2926,13 +2965,24 @@ int monster::move(const coord_def &c, bool only_move)
 	return move((c.x>position.x?MV_FRONT:(c.x==position.x?MV_NONE:MV_BACK)),(c.y>position.y?MV_FRONT:(c.y==position.y?MV_NONE:MV_BACK)), only_move);
 }
 bool monster::offsetmove(const coord_def &c)
-{		
+{
 	position += c;
 	target_pos += c;
+	if(id == MON_BULLET)
+	{
+		for(coord_def& route_ : will_move)
+			route_ += c;
+	}
 	if(position.x >= 0 && position.x < DG_MAX_X && position.y >= 0 && position.y < DG_MAX_Y )
 		return true;
 	else
 	{
+		if(IsUniqueSpellcardHidden(this))
+		{
+			position = you.position;
+			target_pos = you.position;
+			return true;
+		}
 		dead(PRT_NEUTRAL, false, true);
 		return false;
 	}
@@ -3287,12 +3337,16 @@ int monster::MoveToPos(coord_def pos_, bool only_move)
 }
 bool monster::isView()
 {
+	if(IsUniqueSpellcardHidden(this))
+		return false;
 	if(!s_glow && !s_oil && !s_fire && s_invisible && !you.invisible_view && !s_ally)
 		return false;
 	return true;
 }
 bool monster::isView(const monster* monster_info)
 {
+	if(IsUniqueSpellcardHidden(this))
+		return false;
 	if(!s_glow && !s_oil && !s_fire && s_invisible && !(monster_info->flag & M_FLAG_CAN_SEE_INVI) && !isAllyMonster(monster_info))
 		return false;
 	return true;
@@ -3319,6 +3373,8 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_, unit* kille
 				return root.dead(reason_, message_, remove_, killer_);
 			}
 	}
+	if(!remove_ && TryActivateUniqueSpellcard(this,reason_,killer_))
+		return false;
 
 	bool counter_tanmac_ = isHaveSpell(SPL_COUNTER_TANMAC) && !remove_;
 	coord_def counter_target_ = position;
@@ -3646,6 +3702,8 @@ void monster::resetShadow() {
 
 int monster::action(int delay_)
 {
+	if(IsUniqueSpellcardHidden(this))
+		return 0;
 	if(id == MON_GOLIATH_DOLL && parent_part_id != -1)
 		return 0;
 	if(id == MON_GOLIATH_DOLL && target && !target->isplayer())
@@ -3681,7 +3739,7 @@ int monster::action(int delay_)
 		is_sight_for_monster = true;
 	}
 
-	int delay_temp = delay_ * rand_int(9,11) / 10;  //움직임 randomizing
+	int delay_temp = id == MON_BULLET ? delay_ : delay_ * rand_int(9,11) / 10;  //움직임 randomizing
 	time_delay+=delay_temp; //움직임 randomizing
 	all_time_delay+=delay_temp;
 	if(flag & M_FLAG_CONFUSE)
@@ -3699,7 +3757,7 @@ int monster::action(int delay_)
 						PlaceHolderHelper(GetName()->getName()));
 				}
 			}
-			else {
+			else if(!(flag & M_FLAG_SILENT_DESPAWN)) {
 				env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
 				if (is_sight && id != MON_TRASH) {
 					LocalzationManager::printLogWithKey(LOC_SYSTEM_DEAD_SUMMON,true,false,false,CL_bad,
@@ -4780,6 +4838,8 @@ void monster::sightcheck(bool is_sight_)
 
 void monster::special_action(int delay_, bool smoke_)
 {
+	if(IsUniqueSpellcardHidden(this))
+		return;
 
 	switch (id)
 	{
@@ -6743,7 +6803,7 @@ static void sacrificeExplosion(monster* doll)
 			if(unit* hit = env[current_level].isMonsterPos(pos.x, pos.y, doll))
 				hit->damage(explosion, true);
 		}
-	Noise(doll->position, 32, doll);
+	Noise(doll->position, 28, doll);
 	if(visible)
 	{
 		PlaySE("bomb");
@@ -6789,6 +6849,9 @@ bool monster::sacrificeMove()
 
 int monster::special_state(bool is_sight_for_monster) {
 	switch(id) {
+	case MON_BULLET:
+		MoveBullet(this);
+		return 2;
 	case MON_SPINNING_DOLL:
 	{
 		image = &img_mons_spinning_doll[special_value%2];

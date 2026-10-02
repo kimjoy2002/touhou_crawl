@@ -5636,3 +5636,12 @@ LOC_SYSTEM_TILE_CARPET,Carpet
 LOC_SYSTEM_ITEM_FOOD_CAKE,Cake
 LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE,A slice of cake found in the Scarlet Devil Mansion Basement.\nThe cake looks delicious, but its origin seems suspicious.\nShould you really eat it?
 LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE_VAMPIRE,A slice of cake found in the Scarlet Devil Mansion Basement.\nThe cake looks delicious, but its origin seems suspicious.\nThe cake smells irresistibly delicious!
+LOC_SYSTEM_UNIQUE_SPELLCARD_FOUND,{0} appears to be carrying a Spell Card. Beware of their counterattack!
+LOC_SYSTEM_UNIQUE_SPELLCARD_ACTIVATE,{0}{0==you?r:'s} Spell Card activated!
+LOC_SYSTEM_UNIQUE_SPELLCARD_GET,{0}{0==you?r:'s} Spell Card captured!
+LOC_SYSTEM_UNIQUE_SPELLCARD_STAIR_BLOCK,The Spell Card prevents you from moving to another floor!
+LOC_SYSTEM_UNIQUE_SPELLCARD_FLAN_NAME,Secret Barrage "And Then Will There Be None?"
+LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BURST,Immune to explosions.
+LOC_SYSTEM_DEBUG_ACTIVATE_UNIQUE_SPELLCARD,Spell Card to activate
+LOC_SYSTEM_FIGHT_EVADE_NO_OWNER,{0} evade{0!=you?s:} {1}.
+LOC_SYSTEM_FIGHT_GRAZE_NO_OWNER,{0} graze{0!=you?s:} {1}.

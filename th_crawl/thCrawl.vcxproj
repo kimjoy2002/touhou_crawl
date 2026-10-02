@@ -211,6 +211,9 @@
     <ClCompile Include="speak.cpp" />
     <ClCompile Include="spell.cpp" />
     <ClCompile Include="spellcard.cpp" />
+	<ClCompile Include="unique_spellcard.cpp" />
+	<ClCompile Include="spellcard\bullet.cpp" />
+	<ClCompile Include="spellcard\flandre_spellcard.cpp" />
     <ClCompile Include="spell_infor.cpp" />
     <ClCompile Include="spell_use.cpp" />
     <ClCompile Include="sprint.cpp" />
@@ -287,6 +290,9 @@
     <ClInclude Include="soundmanager.h" />
     <ClInclude Include="speak.h" />
     <ClInclude Include="spellcard.h" />
+	<ClInclude Include="unique_spellcard.h" />
+	<ClInclude Include="spellcard\bullet.h" />
+	<ClInclude Include="spellcard\flandre_spellcard.h" />
     <ClInclude Include="sprint.h" />
     <ClInclude Include="steam_api.h" />
     <ClInclude Include="summon.h" />

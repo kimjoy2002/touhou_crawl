@@ -3024,7 +3024,15 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 		}
 		break;
 	case MON_FLAN:
-		if(type == MST_NORMAL)
+		if(type == MST_SPELLCARD)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_FLANDRE_SPELLCARD), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		else if(type == MST_SPELLCARD_FORCE)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_FLANDRE_SPELLCARD_FORCE), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		else if(type == MST_NORMAL)
 		{
 			if(you.char_type == UNIQ_START_SAKUYA)
 			{

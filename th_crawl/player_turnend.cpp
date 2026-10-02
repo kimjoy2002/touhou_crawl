@@ -23,6 +23,7 @@
 #include "god.h"
 #include "note.h"
 #include "spellcard.h"
+#include "unique_spellcard.h"
 #include "alchemy.h"
 #include "tensi.h"
 #include "replay.h"
@@ -323,6 +324,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	}
 
 	env[current_level].ActionMonster(delay_);
+	UniqueSpellcardTurnEnd();
 	WaitForSingleObject(mutx, INFINITE);
 	if(sight_reset) //몬스터가 만들어낸 구름에 시야가 가릴 경우가 생길경우
 		SetInter(resetLOS()); //굉장히 연산이 많이 들어가는 작업이므로 필요할때만 불러야함

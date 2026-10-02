@@ -8,6 +8,7 @@
 
 
 #include "player.h"
+#include "monster.h"
 #include "unit.h"
 #include "environment.h"
 #include "beam.h"
@@ -705,10 +706,16 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_THROW_SLOW_POISON:
 		if(a.order)
 		{
-			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
-				 PlaceHolderHelper(name_.getName()),
-				 PlaceHolderHelper(a.name.getName()),
-				 PlaceHolderHelper(name.getName()));
+			if(a.no_owner) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL_NO_OWNER,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
+					 PlaceHolderHelper(a.name.getName()),
+					 PlaceHolderHelper(name.getName()));
+			} else {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
+					 PlaceHolderHelper(name_.getName()),
+					 PlaceHolderHelper(a.name.getName()),
+					 PlaceHolderHelper(name.getName()));
+			}
 		}
 		break;
 	case ATT_SILVER:
@@ -978,6 +985,15 @@ void players::print_no_damage_message(attack_infor &a)
 }
 bool players::damage(attack_infor &a, bool perfect_)
 {
+	if(a.order && !a.order->isplayer())
+	{
+		monster* attack_mon_ = (monster*)a.order;
+		if(attack_mon_->id == MON_BULLET || attack_mon_->id == MON_HOMING)
+		{
+			a.no_owner = true;
+			a.name = attack_mon_->name;
+		}
+	}
 	int damage_ = calculate_damage(a.type,a.damage,a.max_damage);
 	int accuracy_ = a.accuracy;
 	float evasion = 0.0f;
@@ -1408,16 +1424,28 @@ bool players::damage(attack_infor &a, bool perfect_)
 		if (a.order)
 		{
 			if (!graze_ || you.s_super_graze || diving_graze) {
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_EVADE,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
-					PlaceHolderHelper(name.getName()),
-					PlaceHolderHelper(name_.getName()),
-					PlaceHolderHelper(a.name.getName()));
+				if(a.no_owner) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_EVADE_NO_OWNER,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
+						PlaceHolderHelper(name.getName()),
+						PlaceHolderHelper(a.name.getName()));
+				} else {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_EVADE,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
+						PlaceHolderHelper(name.getName()),
+						PlaceHolderHelper(name_.getName()),
+						PlaceHolderHelper(a.name.getName()));
+				}
 			}
 			else {
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_GRAZE,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
-					PlaceHolderHelper(name.getName()),
-					PlaceHolderHelper(name_.getName()),
-					PlaceHolderHelper(a.name.getName()));
+				if(a.no_owner) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_GRAZE_NO_OWNER,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
+						PlaceHolderHelper(name.getName()),
+						PlaceHolderHelper(a.name.getName()));
+				} else {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_GRAZE,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
+						PlaceHolderHelper(name.getName()),
+						PlaceHolderHelper(name_.getName()),
+						PlaceHolderHelper(a.name.getName()));
+				}
 			}
 			PlaySE("evade");
 			//if(GetArmourPanlty()<=2)

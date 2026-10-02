@@ -1827,3 +1827,5 @@ SPEAK_FLAN_NORMAL2_SAKUYA,{0:은|는} 말했다. "같이 놀만한 인간을 따
 SPEAK_FLAN_NORMAL3_SAKUYA,{0:은|는} 말했다. "위가 시끄럽던데, 사쿠야가 한거야?"
 SPEAK_FLAN_NORMAL4_SAKUYA,{0:은|는} 말했다. "오늘은 사쿠야가 놀아주는거구나!"
 SPEAK_FLAN_NORMAL5_SAKUYA,{0:은|는} 말했다. "요즘 운동이 부족했어. 잘 부탁해!"
+SPEAK_FLANDRE_SPELLCARD,{0:은|는} 외쳤다. "폭사한 줄 알았어? 그럼 죽어라!"
+SPEAK_FLANDRE_SPELLCARD_FORCE,{0:은|는} 외쳤다. "도망칠 수 있을거라 생각했어?"

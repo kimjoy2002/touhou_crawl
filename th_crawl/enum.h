@@ -707,6 +707,21 @@ enum spellcard_evoke_type
 	SPC_V_MAX
 };
 
+enum unique_spellcard_type
+{
+	USC_NONE,
+	USC_FLAN_AND_THEN_WILL_THERE_BE_NONE,
+	USC_MAX
+};
+
+enum unique_spellcard_state
+{
+	USCS_NONE,
+	USCS_READY,
+	USCS_ACTIVE,
+	USCS_CLEARED
+};
+
 
 
 
@@ -1005,7 +1020,9 @@ enum monster_speak_type
 	MST_CAMERA,
 	MST_PROPOSAL,
 	MST_PROPOSAL_ACCEPT,
-	MST_DEAD
+	MST_DEAD,
+	MST_SPELLCARD,
+	MST_SPELLCARD_FORCE
 };
 
 enum god_type

@@ -39,6 +39,7 @@
 #include "tribe.h"
 #include "evoke.h"
 #include "scroll.h"
+#include "unique_spellcard.h"
 
 
 extern HANDLE mutx;
@@ -3260,6 +3261,8 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 {
+	if(order->isplayer() && !CheckUniqueSpellcardFloorMove())
+		return false;
 	if (current_level == OKINA_LEVEL){
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_ALREADY), true, false, false, CL_normal);
 		return false;

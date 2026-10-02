@@ -20,6 +20,7 @@
 #include "evoke.h"
 #include "god.h"
 #include "tribe.h"
+#include "unique_spellcard.h"
 
 
 extern int g_menu_select;
@@ -205,7 +206,7 @@ void wiz_mode()
 	while(1)
 	{
 		vector<int> wizard_listkey = {
-			'A', 'C', 'D', 'E', 'G', 'H', 'I', 'b', 'm', 'p', 
+			'A', 'C', 'D', 'E', 'G', 'H', 'I', 'S', 'b', 'm', 'p',
 			'q', 'R', 'w', 'W', 'X', '>', '<', '^', '?', VK_ESCAPE
 		};
 		startSelection(wizard_listkey);
@@ -1268,6 +1269,71 @@ void wiz_mode()
 				you.s_the_world = -1;
 			}
 			break;
+		case 'S':
+		{
+			int type_ = USC_NONE+1;
+			ostringstream oss;
+			oss << LocalzationManager::locString(LOC_SYSTEM_DEBUG_ACTIVATE_UNIQUE_SPELLCARD)
+				<< " (" << (USC_NONE+1) << "~" << (USC_MAX-1) << ") :";
+			printlog(oss.str(),true,false,false,CL_help);
+
+			while(true)
+			{
+				deletelog();
+				ostringstream name_;
+				name_ << type_ << " (" << LocalzationManager::locString(
+					GetUniqueSpellcardName((unique_spellcard_type)type_)) << ")";
+				printlog(name_.str(),false,false,true,CL_normal);
+
+				InputedKey inputedKey;
+				key_ = waitkeyinput(inputedKey,true);
+				switch(key_)
+				{
+				case 'k':
+				case VK_UP:
+					type_ += 10;
+					break;
+				case 'j':
+				case VK_DOWN:
+					type_ -= 10;
+					break;
+				case 'h':
+				case VK_LEFT:
+					type_--;
+					break;
+				case 'l':
+				case VK_RIGHT:
+					type_++;
+					break;
+				case '0': case '1': case '2': case '3': case '4':
+				case '5': case '6': case '7': case '8': case '9':
+					type_ = key_-'0'+type_*10;
+					break;
+				case VK_RETURN:
+				case GVK_BUTTON_A:
+					enterlog();
+					WizardActivateUniqueSpellcard((unique_spellcard_type)type_);
+					return;
+				case VK_BACK:
+					type_ /= 10;
+					break;
+				case -1:
+					if(!inputedKey.isRightClick())
+						break;
+				case VK_ESCAPE:
+				case GVK_BUTTON_B:
+				case GVK_BUTTON_B_LONG:
+					enterlog();
+					printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE),true,false,false,CL_help);
+					return;
+				}
+				if(type_ <= USC_NONE)
+					type_ = USC_NONE+1;
+				if(type_ >= USC_MAX)
+					type_ = USC_MAX-1;
+			}
+		}
+		break;
 		case 'm': 
 		{
 			int id_ = 0;

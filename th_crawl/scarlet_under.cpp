@@ -13,6 +13,7 @@
 #include "floor.h"
 #include "mon_infor.h"
 #include "item.h"
+#include "unique_spellcard.h"
 
 extern HANDLE mutx;
 
@@ -280,6 +281,31 @@ namespace
 			get_scarlet_under_room_direction_value(direction_));
 		return true;
 	}
+
+	void try_scarlet_under_escape_spellcard(int num, int distance_, int delay_)
+	{
+		if(!you.rune[RUNE_SCARLET_UNDER])
+			return;
+		if(IsUniqueSpellcardUsed(USC_FLAN_AND_THEN_WILL_THERE_BE_NONE))
+			return;
+		for(events& event_ : env[num].event_list)
+			if(event_.id == EVL_SCARLET_UNDER_FLAN_SPELLCARD)
+				return;
+
+		for(monster& mon_ : env[num].mon_vector)
+		{
+			if(!mon_.isLive() || mon_.id != MON_FLAN || mon_.first_contact ||
+				mon_.spellcard_info.state != USCS_READY)
+				continue;
+			if(distan_coord(you.position,mon_.position) <= distance_*distance_)
+				return;
+			if(delay_ <= 0)
+				TryActivateUniqueSpellcardEscape(&mon_);
+			else
+				env[num].MakeEvent(EVL_SCARLET_UNDER_FLAN_SPELLCARD,you.position,EVT_COUNT,delay_+1);
+			return;
+		}
+	}
 }
 
 void map_algorithms_scarlet_under(int num, dungeon_tile_type floor_tex_, dungeon_tile_type wall_tex_,
@@ -325,9 +351,11 @@ void map_algorithms_scarlet_under(int num, dungeon_tile_type floor_tex_, dungeon
 
 void scarlet_under_count(int num, events* controller_, dungeon_tile_type floor_tex_, dungeon_tile_type wall_tex_,
 	int corridor_width_, int grid_size_, int bend_frequency_, int exit_frequency_, int rune_exit_frequency_,
-	int room_frequency_, int room_min_distance_, int monster_frequency_)
+	int room_frequency_, int room_min_distance_, int monster_frequency_, int flan_escape_distance_,
+	int flan_escape_delay_)
 {
 	controller_->count--;
+	try_scarlet_under_escape_spellcard(num,flan_escape_distance_,flan_escape_delay_);
 	coord_def offset_(0,0);
 	if(you.position.x<8 || you.position.x>DG_MAX_X-9)
 		offset_.x = DG_MAX_X/2-you.position.x;
@@ -380,7 +408,7 @@ void scarlet_under_count(int num, events* controller_, dungeon_tile_type floor_t
 		if(!mon_.isLive())
 			continue;
 		coord_def next_ = mon_.position+offset_;
-		if(mon_.id == MON_FLAN && !in_scarlet_under_map(next_))
+		if(mon_.id == MON_FLAN && !IsUniqueSpellcardHidden(&mon_) && !in_scarlet_under_map(next_))
 			unset_exist_named(MON_FLAN);
 		mon_.offsetmove(offset_);
 	}
@@ -461,6 +489,51 @@ int get_scarlet_under_penalty_turn(int num)
 		if(event_.id == EVL_SCARLET_UNDER)
 			return max(0,-event_.count-1);
 	return 0;
+}
+
+bool scarlet_under_force_spellcard(events* event_)
+{
+	if(IsUniqueSpellcardUsed(USC_FLAN_AND_THEN_WILL_THERE_BE_NONE))
+		return true;
+	for(monster& mon_ : env[current_level].mon_vector)
+	{
+		if(!mon_.isLive() || mon_.id != MON_FLAN)
+			continue;
+		if(mon_.spellcard_info.state == USCS_ACTIVE || mon_.spellcard_info.state == USCS_CLEARED)
+			return true;
+		if(mon_.spellcard_info.state == USCS_READY)
+			return TryActivateUniqueSpellcardEscape(&mon_);
+	}
+
+	monster* flan_ = nullptr;
+	for(int radius_=2;radius_<=8 && !flan_;radius_++)
+	{
+		for(int x_=-radius_;x_<=radius_ && !flan_;x_++)
+		{
+			for(int y_=-radius_;y_<=radius_;y_++)
+			{
+				if(max(abs(x_),abs(y_)) != radius_)
+					continue;
+				coord_def pos_ = you.position+coord_def(x_,y_);
+				if(!in_scarlet_under_map(pos_) || !env[current_level].isMove(pos_,false,false) ||
+					env[current_level].isMonsterPos(pos_.x,pos_.y))
+					continue;
+				flan_ = env[current_level].AddMonster(MON_FLAN,M_FLAG_WAKE,pos_);
+				if(flan_)
+				{
+					flan_->SetStrong(5);
+					flan_->state.SetState(MS_NORMAL);
+					flan_->first_contact = false;
+					set_exist_named(MON_FLAN);
+				}
+				break;
+			}
+		}
+	}
+	if(flan_ && TryActivateUniqueSpellcardEscape(flan_))
+		return true;
+	event_->count = 1;
+	return false;
 }
 
 bool scarlet_under_reward(events* event_)
@@ -560,7 +633,7 @@ bool scarlet_under_reward(events* event_)
 
 	const int item_radius_ = 7;
 	set<coord_def> used_;
-	int item_count_ = 15;
+	int item_count_ = 18;
 	for(int i=0;i<item_count_;i++)
 	{
 		for(int retry_=0;retry_<100;retry_++)

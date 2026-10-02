@@ -393,6 +393,7 @@ public:
 	char lastExplore; //마지막에 이동한 던전
 	string lastSearch; //마지막 검색한 단어
 	vector<string> wiki_search_history;
+	vector<unique_spellcard_type> used_unique_spellcards;
 	int yori_toyo_kill_count;
 	int max_power;
 

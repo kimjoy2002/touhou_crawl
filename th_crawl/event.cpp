@@ -378,12 +378,16 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	return 0;
 	case EVL_SCARLET_UNDER:
 	{
-		scarlet_under_count(current_level, event_, DG_FLOOR, DG_RED_WALL, 5, 16, 3, 5000, 2500, 4, 80, 600);
+		scarlet_under_count(current_level, event_, DG_FLOOR, DG_RED_WALL, 5, 16, 3, 5000, 1500, 2, 100, 450, 15, 3);
 	}
 	return 0;
 	case EVL_SCARLET_UNDER_REWARD:
 	{
 		return scarlet_under_reward(event_);
+	}
+	case EVL_SCARLET_UNDER_FLAN_SPELLCARD:
+	{
+		return scarlet_under_force_spellcard(event_);
 	}
 	case EVL_LUNATICTIME:
 	{

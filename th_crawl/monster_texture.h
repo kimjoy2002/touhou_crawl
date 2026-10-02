@@ -550,6 +550,7 @@ extern textures img_tanmac_axe[];
 extern textures img_star_tanmac[];
 extern textures img_score_item[];
 extern textures img_tanmac_small[6][4];
+extern textures img_bullet[6];
 extern textures img_joypad_arrow[];
 
 

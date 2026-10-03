@@ -268,7 +268,7 @@ const mon_infor mondata[] = {
 
 	{MON_WOLF_TENGU,12,1312,name_infor(MON_WOLF_TENGU),&img_mons_default,49,12,2,
 	{28,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI,1,2,13,'t' },
+	M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_CAN_SEE_INVI | M_FLAG_CANT_NETURAL,1,2,13,'t' },
 
 	{MON_MOMIZI,12,1923,name_infor(MON_MOMIZI),&img_named_momizi,212,18,2,
 	{35,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},

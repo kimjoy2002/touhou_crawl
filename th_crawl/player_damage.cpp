@@ -1135,7 +1135,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 					int max_num_ = min(10,damage_*40/ GetMaxHp());
 					burstCloud(half_youkai[1], rand_int(max(0,max_num_-2),max_num_));
 				}
-				if(s_mirror && GetHp()>0 && a.order)
+				if(s_mirror && GetHp()>0 && a.order && a.order != this)
 				{
 					a.order->HpUpDown(-damage_,DR_MIRROR, this);	
 					//a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,NULL,GetParentType(),ATT_VEILING,name_infor(LOC_SYSTEM_VEILING)), true);

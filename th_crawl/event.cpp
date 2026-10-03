@@ -1204,7 +1204,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 					while(1)
 					{
 						int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
-						if(env[current_level].isMove(x_,y_,false, false) && env[current_level].dgtile[x_][y_].flag & FLAG_NO_MONSTER && !env[current_level].isInSight(coord_def(x_,y_)))
+						if(env[current_level].isMove(x_,y_,false, false) && !(env[current_level].dgtile[x_][y_].flag & FLAG_NO_MONSTER) && !env[current_level].isInSight(coord_def(x_,y_)))
 						{
 							env[current_level].MakeEvent(EVL_KISME, coord_def(x_, y_), EVT_APPROACH_SMALL);
 							env[current_level].MakeSmoke(it->position, img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, NULL);

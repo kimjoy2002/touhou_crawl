@@ -395,7 +395,7 @@ void Noise(coord_def center_, int length_, const unit* excep_=NULL);
 bool Auto_Pick_Up(list<item>::iterator it);
 
 void SaveFile(bool test_ = false);
-void LoadFile();
+bool LoadFile();
 
 
 

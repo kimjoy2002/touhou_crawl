@@ -219,7 +219,7 @@ void map_dummy::make_map(environment& env_pointer, bool wall_, bool stair_input_
 	{
 		for(int j = -size_y;j<=size_y;j++)
 		{			
-			if(i+pos.x<0 || i+pos.x>=DG_MAX_X||j+pos.y<0 || j+pos.y>=DG_MAX_X)
+			if(i+pos.x<0 || i+pos.x>=DG_MAX_X||j+pos.y<0 || j+pos.y>=DG_MAX_Y)
 			{
 				break;
 			}
@@ -328,7 +328,7 @@ void map_dummy::eventmapmake(environment& env_pointer, int count, bool wall_)
 	{
 		for(int j = -size_y;j<=size_y;j++)
 		{			
-			if(i+pos.x<0 || i+pos.x>DG_MAX_X||j+pos.y<0 || j+pos.y>DG_MAX_X)
+			if(i+pos.x<0 || i+pos.x>=DG_MAX_X||j+pos.y<0 || j+pos.y>=DG_MAX_Y)
 			{
 				break;
 			}

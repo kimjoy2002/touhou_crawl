@@ -162,12 +162,17 @@ void environment::SaveDatas(FILE *fp)
 
 void environment::LoadDatas(FILE *fp)
 {
+	stair_vector.clear();
 	mon_vector.clear();
 	shadow_list.clear();
 	afterimage_list.clear();
 	item_list.clear();
 	smoke_list.clear();
 	effect_list.clear();
+	floor_list.clear();
+	event_list.clear();
+	speciel_map_name.clear();
+	forbid_list.clear();
 	LoadData<int>(fp, floor);
 	LoadData<bool>(fp, make);
 	LoadData<int>(fp, all_monster_id);
@@ -1376,6 +1381,9 @@ monster* environment::AddMonsterWithMoving(monster *mon_, int prev_floor, coord_
 			mon_vector.back().map_id = all_monster_id++;
 			mon_vector.back().SetXYPassFloor(prev_floor, floor, position_.x, position_.y);
 			mon_vector.back().prev_sight = false;
+			mon_vector.back().target = &you;
+			mon_vector.back().temp_target_map_id = you.GetMapId();
+			mon_vector.back().target_pos = you.position;
 			ReleaseMutex(mutx);
 			return &mon_vector.back();
 		}
@@ -1385,6 +1393,9 @@ monster* environment::AddMonsterWithMoving(monster *mon_, int prev_floor, coord_
 			(*it).map_id = all_monster_id++;
 			(*it).SetXYPassFloor(prev_floor, floor, position_.x, position_.y);
 			(*it).prev_sight = false;
+			(*it).target = &you;
+			(*it).temp_target_map_id = you.GetMapId();
+			(*it).target_pos = you.position;
 			ReleaseMutex(mutx);
 			return &(*it);
 		}
@@ -1597,7 +1608,7 @@ void environment::ClearWithoutLaserEffect()
 	WaitForSingleObject(mutx, INFINITE);
 	for(list<effect>::iterator it = effect_list.begin();it !=effect_list.end();) {
 		list<effect>::iterator temp = it++;
-		if(!(temp->position.x == you.position.x && temp->position.y < you.position.x)) {
+		if(!(temp->position.x == you.position.x && temp->position.y < you.position.y)) {
 			effect_list.erase(temp);
 		}
 	}
@@ -3107,15 +3118,28 @@ void SaveFile(bool test_)
 }
 
 
-void LoadFile()
+bool LoadFile()
 {
-	WaitForSingleObject(mutx, INFINITE);
-	FILE *fp;
+	DWORD wait_result = WaitForSingleObject(mutx, INFINITE);
+	if(wait_result != WAIT_OBJECT_0 && wait_result != WAIT_ABANDONED)
+		return false;
+	struct mutex_release_guard
+	{
+		HANDLE mutex;
+		~mutex_release_guard() { ReleaseMutex(mutex); }
+	} mutex_guard{mutx};
+
+	FILE *fp = NULL;
 
 	std::wstring wfilename = save_file_w[option_mg.getSaveSlot()-1];
     if (_wfopen_s(&fp, wfilename.c_str(), L"rb") != 0 || !fp) {
-        return;
+		return false;
     }
+	struct file_close_guard
+	{
+		FILE *file;
+		~file_close_guard() { if(file) fclose(file); }
+	} file_guard{fp};
 
 	int magic_number;
 	LoadData<int>(fp, magic_number); //version 1.11부터 매직넘버로 시작한다
@@ -3208,8 +3232,7 @@ void LoadFile()
 	
 
 
-	fclose(fp);
-	ReleaseMutex(mutx);
+	return true;
 }
 
 float GetDotX(int offset_, int x, int magnification)

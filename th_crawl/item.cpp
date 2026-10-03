@@ -1404,7 +1404,7 @@ bool item::isautopick()
 	case ITM_FOOD:
 		return iden_list.autopickup[(value1==0?0:1) + IDEN_CHECK_ETC_START];
 	case ITM_SCROLL:
-		if(value1 >= 0 && value1 < SCT_MAX-1 && iden_list.scroll_list[value1].iden == 3)
+		if(value1 >= 0 && value1 < SCT_MAX && iden_list.scroll_list[value1].iden == 3)
 		{
 			return iden_list.autopickup[value1 + IDEN_CHECK_SCROLL_START];
 			/*if(you.god == GT_YUKARI && (value1 == SCT_TELEPORT || value1 == SCT_BLINK))

@@ -49,7 +49,7 @@ int getEvokeItem() {
 
 void MakeEvokeItem(item_infor* t, int kind_)
 {	
-	if(kind_ == -1 || (kind_<0 && kind_>=EVK_MAX))
+	if(kind_ == -1 || kind_<0 || kind_>=EVK_MAX)
 		kind_= getEvokeItem();
 
 	t->value1 = kind_;

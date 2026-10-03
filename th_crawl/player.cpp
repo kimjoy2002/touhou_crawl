@@ -670,10 +670,13 @@ void players::SaveDatas(FILE *fp)
 }
 void players::LoadDatas(FILE *fp)
 {
+	buff_list.clear();
 	item_list.clear();
 	search_list.clear();
 	wiki_search_history.clear();
 	used_unique_spellcards.clear();
+	property_vector.clear();
+	action_vector.clear();
 
 	//필수 정보
 	LoadData<int>(fp, level);
@@ -5977,7 +5980,7 @@ bool players::Read(char id_)
 }
 bool players::Memorize(int spell_, bool immediately)
 {
-	if(spell_ <= SPL_NONE || spell_ > SPL_MAX)
+	if(spell_ <= SPL_NONE || spell_ >= SPL_MAX)
 		return false;
 	int skill_level_ = SpellLevel((spell_list)spell_);
 	

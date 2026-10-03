@@ -473,9 +473,9 @@ void monster::init()
 }
 bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int time_, coord_def position_, bool init_)
 {
-	if(id_ < 0 || id_ > MON_MAX)
+	if(id_ < 0 || id_ >= MON_MAX)
 		return false;
-	if(position_.x<0 || position_.x > DG_MAX_X || position_.y <0 || position_.y >DG_MAX_Y)
+	if(position_.x<0 || position_.x >= DG_MAX_X || position_.y <0 || position_.y >= DG_MAX_Y)
 		return false;
 
 	if(init_)

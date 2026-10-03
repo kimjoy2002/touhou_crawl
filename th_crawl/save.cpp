@@ -144,11 +144,10 @@ bool load_data(const std::wstring& path)
     if (attr == INVALID_FILE_ATTRIBUTES)
     {
         return false;
-    }
+	}
     else
 	{
-		LoadFile();
-		return true;
+		return LoadFile();
 	}
 }
 

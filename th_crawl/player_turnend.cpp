@@ -1512,7 +1512,7 @@ bool players::isMemorizeSpell(int spell_)
 bool players::CanMemorizeSpell(int spell_)
 {
 
-	if(spell_ <= SPL_NONE || spell_ > SPL_MAX)
+	if(spell_ <= SPL_NONE || spell_ >= SPL_MAX)
 		return false;
 	int skill_level_ = SpellLevel((spell_list)spell_);
 	

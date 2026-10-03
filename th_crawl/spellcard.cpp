@@ -315,16 +315,23 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 					PlaySE("stone");
 					for (int i = -1; i <= 1; i++)
 						for (int j = -1; j <= 1; j++)
-							env[current_level].MakeEffect(coord_def(pos.x + i, pos.y + j), &img_blast[1], false);
+						{
+							coord_def effect_pos(pos.x + i, pos.y + j);
+							if(effect_pos.x >= 0 && effect_pos.x < DG_MAX_X && effect_pos.y >= 0 && effect_pos.y < DG_MAX_Y)
+								env[current_level].MakeEffect(effect_pos, &img_blast[1], false);
+						}
 					for (int i = -1; i <= 1; i++)
 					{
 						for (int j = -1; j <= 1; j++)
 						{
-							if (env[current_level].isMove(pos.x + i, pos.y + j, true))
+							coord_def effect_pos(pos.x + i, pos.y + j);
+							if(effect_pos.x < 0 || effect_pos.x >= DG_MAX_X || effect_pos.y < 0 || effect_pos.y >= DG_MAX_Y)
+								continue;
+							if (env[current_level].isMove(effect_pos, true))
 							{
-								if (env[current_level].isInSight(coord_def(pos.x + i, pos.y + j)))
+								if (env[current_level].isInSight(effect_pos))
 								{
-									if (unit* hit_ = env[current_level].isMonsterPos(pos.x + i, pos.y + j))
+									if (unit* hit_ = env[current_level].isMonsterPos(effect_pos.x, effect_pos.y))
 									{
 										attack_infor temp_att(randC(3, 5 + power / 8), 3 * (5 + power / 8), 99, &you, you.GetParentType(), ATT_NORMAL_BLAST, name_infor(LOC_SYSTEM_ATT_V_EARTH_FRAG));
 										hit_->damage(temp_att, true);
@@ -333,11 +340,11 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 							}
 							else
 							{
-								if(i == 0 && j == 0 && env[current_level].dgtile[pos.x + i][pos.y + j].isEffectibleEarthSpellcard()) {
-									env[current_level].changeTile(coord_def(pos.x + i, pos.y + j), env[current_level].base_floor);
+								if(i == 0 && j == 0 && env[current_level].dgtile[effect_pos.x][effect_pos.y].isEffectibleEarthSpellcard()) {
+									env[current_level].changeTile(effect_pos, env[current_level].base_floor);
 								}
-								else if (env[current_level].dgtile[pos.x + i][pos.y + j].isBreakable())
-									env[current_level].changeTile(coord_def(pos.x + i, pos.y + j), env[current_level].base_floor);
+								else if (env[current_level].dgtile[effect_pos.x][effect_pos.y].isBreakable())
+									env[current_level].changeTile(effect_pos, env[current_level].base_floor);
 							}
 						}
 					}

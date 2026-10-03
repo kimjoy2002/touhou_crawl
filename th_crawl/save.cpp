@@ -166,25 +166,37 @@ bool load_data_onlyinfo(wstring path, players& temp_player)
 		if (_wfopen_s(&fp, wfilename.c_str(), L"rb") != 0 || !fp) {
 			return false;
 		}
-		int magic_number;
-		LoadData<int>(fp, magic_number); //version 1.11부터 매직넘버로 시작한다
-		int current_level_temp;
+		int magic_number = 0;
+		if(!LoadData<int>(fp, magic_number)) { //version 1.11부터 매직넘버로 시작한다
+			fclose(fp);
+			return false;
+		}
+		int current_level_temp = 0;
 		if(magic_number != 1999) {
 			//ver1.1에선 첫 int가 1999임
 			current_level_temp = magic_number;
 		} else {
 			{
 				char temp[256] = {};
-				LoadData(fp, temp);
+				if(!LoadData(fp, temp)) {
+					fclose(fp);
+					return false;
+				}
 				temp[sizeof(temp)-1] = '\0';
 				//loading_version_string = temp;
 			}
-			LoadData<int>(fp, current_level_temp);
+			if(!LoadData<int>(fp, current_level_temp)) {
+				fclose(fp);
+				return false;
+			}
 		}
-		LoadData<int>(fp, temp_player.level);
-		LoadData<tribe_type>(fp, temp_player.tribe);
-		LoadData<job_type>(fp, temp_player.job);
-		LoadData<unique_starting_type>(fp, temp_player.char_type);
+		if(!LoadData<int>(fp, temp_player.level) ||
+			!LoadData<tribe_type>(fp, temp_player.tribe) ||
+			!LoadData<job_type>(fp, temp_player.job) ||
+			!LoadData<unique_starting_type>(fp, temp_player.char_type)) {
+			fclose(fp);
+			return false;
+		}
 		fclose(fp);
 		//ReleaseMutex(mutx);
 		return true;

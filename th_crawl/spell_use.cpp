@@ -5750,25 +5750,25 @@ bool skill_homing_tanmac(int pow_, bool short_, int base_damage, int type, unit*
 				summon_info s_(order?order->GetMapId():-1,SKD_OTHER,-1);
 				monster* mon_=env[current_level].AddMonster_Summon(id_,flag_,summon_position,s_,10);
 
-				if(mon_){
-					if(order && !order->isplayer())
-					{
-						mon_->SetNeutrality(((monster*)order)->s_neutrality);
-					}
-					unit* unit_hit_ = env[current_level].isMonsterPos(target.x, target.y);
-					if(unit_hit_) {	
-						mon_->FoundTarget(unit_hit_, mon_->FoundTime());
-					}
-					else if(env[current_level].isInSight(summon_position))
-						mon_->CheckSightNewTarget();
-					else {
-						mon_->memory_time = mon_->FoundTime();
-						mon_->target_pos = target;
-					}
-					mon_->special_value = type;
-					mon_->LevelUpdown(max(0, base_damage - mon_->atk[0]), 0.0f, 1.0f);
-					mon_->LevelUpdown(pow_/15,0.0f,2.0f);
+				if(!mon_)
+					continue;
+				if(order && !order->isplayer())
+				{
+					mon_->SetNeutrality(((monster*)order)->s_neutrality);
 				}
+				unit* unit_hit_ = env[current_level].isMonsterPos(target.x, target.y);
+				if(unit_hit_) {
+					mon_->FoundTarget(unit_hit_, mon_->FoundTime());
+				}
+				else if(env[current_level].isInSight(summon_position))
+					mon_->CheckSightNewTarget();
+				else {
+					mon_->memory_time = mon_->FoundTime();
+					mon_->target_pos = target;
+				}
+				mon_->special_value = type;
+				mon_->LevelUpdown(max(0, base_damage - mon_->atk[0]), 0.0f, 1.0f);
+				mon_->LevelUpdown(pow_/15,0.0f,2.0f);
 				mon_->direction = GetPositionToAngle(order->position.x, order->position.y, mon_->position.x, mon_->position.y);
 				mon_->image = type==1?&img_tanmac_homing_cyan[GetAngleToDirec(mon_->direction)]:&img_tanmac_homing[GetAngleToDirec(mon_->direction)];
 				mon_->PlusTimeDelay(-you.GetSpellDelay()+2*mon_->GetWalkDelay());
@@ -6252,24 +6252,24 @@ bool skill_elemental_harvester(int pow_, bool short_, unit* order, coord_def tar
 			summon_info s_(order?order->GetMapId():-1,SKD_OTHER,-1);
 			monster* mon_=env[current_level].AddMonster_Summon(id_,flag_,summon_position,s_,10);
 
-			if(mon_){
-				if(order && !order->isplayer())
-				{
-					mon_->SetNeutrality(((monster*)order)->s_neutrality);
-				}
-				unit* unit_hit_ = env[current_level].isMonsterPos(target.x, target.y);
-				if(unit_hit_) {	
-					mon_->FoundTarget(unit_hit_, mon_->FoundTime());
-				}
-				else if(env[current_level].isInSight(summon_position))
-					mon_->CheckSightNewTarget();
-				else {
-					mon_->memory_time = mon_->FoundTime();
-					mon_->target_pos = target;
-				}
-				mon_->atk[0] = 25+pow_/10;
-				mon_->LevelUpdown(pow_/10,6.0f,1.0f);
+			if(!mon_)
+				return false;
+			if(order && !order->isplayer())
+			{
+				mon_->SetNeutrality(((monster*)order)->s_neutrality);
 			}
+			unit* unit_hit_ = env[current_level].isMonsterPos(target.x, target.y);
+			if(unit_hit_) {
+				mon_->FoundTarget(unit_hit_, mon_->FoundTime());
+			}
+			else if(env[current_level].isInSight(summon_position))
+				mon_->CheckSightNewTarget();
+			else {
+				mon_->memory_time = mon_->FoundTime();
+				mon_->target_pos = target;
+			}
+			mon_->atk[0] = 25+pow_/10;
+			mon_->LevelUpdown(pow_/10,6.0f,1.0f);
 			
 			int len_ = SpellLength(SPL_ELEMENTAL_HARVESTER, order->isplayer());
 			beam++;

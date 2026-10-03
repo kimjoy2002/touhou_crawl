@@ -696,7 +696,7 @@ void players::LoadDatas(FILE *fp)
 		temp[sizeof(temp)-1] = '\0';
 		user_name = temp;
 	}
-	int it;
+	int it = 0;
 	LoadData<int>(fp, it);
 	image = inttotexture(it);
 	LoadData<int>(fp, hp);
@@ -1155,8 +1155,9 @@ void players::SetXYPassFloor(int prev_floor, int new_floor, int x_, int y_) {
 
 	if(GetProperty(TPT_QUICK_DASH)) {
 		for(int i = 0;i < 8; i++) {
-			coord_def c_ = GetDirecToPos(i);
-			env[prev_floor].dgtile[position.x + c_.x][position.y + c_.y].flag &= ~FLAG_QUICK_DASH; 
+			coord_def c_ = position + GetDirecToPos(i);
+			if(c_.x >= 0 && c_.x < DG_MAX_X && c_.y >= 0 && c_.y < DG_MAX_Y)
+				env[prev_floor].dgtile[c_.x][c_.y].flag &= ~FLAG_QUICK_DASH;
 		}
 	}
 

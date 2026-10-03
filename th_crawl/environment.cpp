@@ -1593,6 +1593,8 @@ bool environment::MakeEvent(int id_, coord_def position_, event_type type_, int 
 
 void environment::MakeEffect(const coord_def &c, textures *t, bool over_sight_, float alpha_)
 {
+	if(c.x < 0 || c.x >= DG_MAX_X || c.y < 0 || c.y >= DG_MAX_Y)
+		return;
 	WaitForSingleObject(mutx, INFINITE);
 	effect_list.push_back(effect(c,t,over_sight_, alpha_));
 	ReleaseMutex(mutx);
@@ -3141,8 +3143,9 @@ bool LoadFile()
 		~file_close_guard() { if(file) fclose(file); }
 	} file_guard{fp};
 
-	int magic_number;
-	LoadData<int>(fp, magic_number); //version 1.11부터 매직넘버로 시작한다
+	int magic_number = 0;
+	if(!LoadData<int>(fp, magic_number)) //version 1.11부터 매직넘버로 시작한다
+		return false;
 	if(magic_number != 1999) {
 		//ver1.1에선 첫 int가 1999임
 		current_level = magic_number;
@@ -3150,11 +3153,13 @@ bool LoadFile()
 	} else {
 		{
 			char temp[256] = {};
-			LoadData(fp, temp);
+			if(!LoadData(fp, temp))
+				return false;
 			temp[sizeof(temp)-1] = '\0';
 			loading_version_string = temp;
 		}
-		LoadData<int>(fp, current_level);
+		if(!LoadData<int>(fp, current_level))
+			return false;
 	}
 
 	you.LoadDatas(fp);

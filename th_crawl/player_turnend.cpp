@@ -1344,8 +1344,9 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		
 		for(int i = 0;i < 8; i++) {
 			if(!can_dash[i] || onMonster[i]) {
-				coord_def c_ = GetDirecToPos(i);
-				env[current_level].dgtile[position.x + c_.x][position.y + c_.y].flag &= ~FLAG_QUICK_DASH;
+				coord_def c_ = position + GetDirecToPos(i);
+				if(c_.x >= 0 && c_.x < DG_MAX_X && c_.y >= 0 && c_.y < DG_MAX_Y)
+					env[current_level].dgtile[c_.x][c_.y].flag &= ~FLAG_QUICK_DASH;
 			} 
 		}
 	}

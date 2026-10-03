@@ -1298,7 +1298,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_ELEC_ENCHANT_BLAST:
 		bonus_damage = damage_ / 3;
 		damage_ -= bonus_damage;
-		bonus_damage *= GetColdResist();
+		bonus_damage *= GetElecResist();
 		break;
 	case ATT_WEATHER:
 		type_ = GetWeatherType(this, damage_, bonus_damage);
@@ -5222,6 +5222,8 @@ void monster::special_action(int delay_, bool smoke_)
 							return a->special_value < b->special_value;
 						});
 				monster *mon_ = env[current_level].AddMonster(MON_GIANT_CENTIPEDE_BODY, 0, prev_position_for_monster);
+				if(!mon_)
+					break;
 				mon_->parent_part_id = map_id;
 				mon_->special_value = 1;
 				mon_->max_hp = max_hp;
@@ -5328,6 +5330,8 @@ void monster::special_action(int delay_, bool smoke_)
 							return (a->special_value%100) < (b->special_value%100);
 						});
 				monster *mon_ = env[current_level].AddMonster(MON_OVERGROWTH_STEM, M_FLAG_NONE_MOVE, prev_position_for_monster);
+				if(!mon_)
+					break;
 				mon_->parent_part_id = map_id;
 				if(parent_part_id != -1) {
 					mon_->parent_part_id = parent_part_id;
@@ -5377,6 +5381,8 @@ void monster::special_action(int delay_, bool smoke_)
 						if (summon_check(coord_def(drit->x, drit->y), position, true, false))
 						{
 							monster *more_branch_ = env[current_level].AddMonster(MON_OVERGROWTH_STEM, 0, *drit);
+							if(!more_branch_)
+								continue;
 							more_branch_->parent_part_id = map_id;
 							more_branch_->special_value = 0;
 							more_branch_->max_hp = max_hp;
@@ -5403,6 +5409,8 @@ void monster::special_action(int delay_, bool smoke_)
 							if (summon_check(coord_def(drit->x, drit->y), position, true, false))
 							{
 								monster *watermelon_ = env[current_level].AddMonster(MON_OVERGROWTH_WATERMELON, 0, *drit);
+								if(!watermelon_)
+									continue;
 								watermelon_->target = target;
 								watermelon_->special_value = map_id;
 								item_infor t;
@@ -6428,28 +6436,33 @@ int monster::GetInvisible()
 bool monster::Teleport()
 {
 	bool prev_sight_ = isYourShight();
-	while(1)
+	vector<coord_def> candidates;
+	for(int x = 0; x < DG_MAX_X; x++)
 	{
-		int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
-		if(id == MON_GOLIATH_DOLL ? canPlaceGoliath(coord_def(x_, y_)) :
-			(env[current_level].isMove(x_,y_,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) && !env[current_level].isMonsterPos(x_,y_)))
+		for(int y = 0; y < DG_MAX_Y; y++)
 		{
-			env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
-			SetXY(x_, y_);
-			bool curr_sight_ = isYourShight();
-			if(prev_sight_ && !curr_sight_) {
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_TELEPORTING,true,false,false,CL_normal,
-					PlaceHolderHelper(GetName()->getName()));
-			}
-			else if(!prev_sight_ && curr_sight_) {
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_TELEPORTING_APPEAR,true,false,false,CL_small_danger,
-					PlaceHolderHelper(GetName()->getName()));
-			}
-
-			return true;
+			coord_def candidate(x,y);
+			if(id == MON_GOLIATH_DOLL ? canPlaceGoliath(candidate) :
+				(env[current_level].isMove(x,y,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) && !env[current_level].isMonsterPos(x,y)))
+				candidates.push_back(candidate);
 		}
 	}
+	if(candidates.empty())
+		return false;
 
+	coord_def destination = candidates[randA(static_cast<int>(candidates.size())-1)];
+	env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
+	SetXY(destination);
+	bool curr_sight_ = isYourShight();
+	if(prev_sight_ && !curr_sight_) {
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_TELEPORTING,true,false,false,CL_normal,
+			PlaceHolderHelper(GetName()->getName()));
+	}
+	else if(!prev_sight_ && curr_sight_) {
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_TELEPORTING_APPEAR,true,false,false,CL_small_danger,
+			PlaceHolderHelper(GetName()->getName()));
+	}
+	return true;
 }
 int monster::GetResist()
 {
@@ -7636,8 +7649,9 @@ void shadow::LoadDatas(FILE *fp)
 	LoadData<shadow_type>(fp, type);
 	LoadData<int>(fp, original_id);
 	LoadData<bool>(fp, unharm);
-	char temp[100];
-	LoadData<char>(fp, *temp);
+	char temp[100] = {};
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	name = temp;
 }
 

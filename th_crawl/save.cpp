@@ -71,22 +71,24 @@ void init_save_paths() {
 }
 
 std::string loadString(FILE* fp) {
-	int size;
-	fscanf_s(fp, "%d", &size);
-	fgetc(fp); // 공백 제거
-
-	std::string result(size, '\0'); 
-	for(int i=0;i<size;i++)
+	const int max_string_size = 1024 * 1024;
+	int size = 0;
+	if(!fp || fscanf_s(fp, "%d", &size) != 1 || size < 0)
+		return std::string();
+	if(fgetc(fp) == EOF)
+		return std::string();
+	if(size > max_string_size)
 	{
-		int temp_int = fgetc(fp);
-		if(temp_int != -1)
-		{
-			result[i] = temp_int;
-		}
-		else
-		{
-			result[i] = 0;
-		}
+		fseek(fp, size, SEEK_CUR);
+		return std::string();
+	}
+
+	std::string result(size, '\0');
+	if(size > 0)
+	{
+		size_t read_size = fread(&result[0], 1, size, fp);
+		if(read_size < static_cast<size_t>(size))
+			result.resize(read_size);
 	}
 	if (!result.empty() && result.back() == '\0') {
 		result.pop_back();
@@ -173,8 +175,9 @@ bool load_data_onlyinfo(wstring path, players& temp_player)
 			current_level_temp = magic_number;
 		} else {
 			{
-				char temp[256];
-				LoadData<char>(fp, *temp);
+				char temp[256] = {};
+				LoadData(fp, temp);
+				temp[sizeof(temp)-1] = '\0';
 				//loading_version_string = temp;
 			}
 			LoadData<int>(fp, current_level_temp);

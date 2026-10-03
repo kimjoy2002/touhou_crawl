@@ -19,6 +19,26 @@
 
 static list<pair<const map_dummy*,monster_index>> reserved_named;
 
+static bool find_stair_position(int floor_, const vector<coord_def>& used_, coord_def& result_)
+{
+	vector<coord_def> candidates;
+	for(int x = 0; x < DG_MAX_X; x++)
+	{
+		for(int y = 0; y < DG_MAX_Y; y++)
+		{
+			coord_def pos(x,y);
+			if(!env[floor_].dgtile[x][y].isFloor() || (env[floor_].dgtile[x][y].flag & FLAG_NO_STAIR) ||
+				find(used_.begin(), used_.end(), pos) != used_.end())
+				continue;
+			candidates.push_back(pos);
+		}
+	}
+	if(candidates.empty())
+		return false;
+	result_ = candidates[randA(static_cast<int>(candidates.size())-1)];
+	return true;
+}
+
 
 void map_infor::SaveDatas(FILE *fp) {
 	SaveData<int>(fp, MAX_SUB_DUNGEON);
@@ -797,13 +817,14 @@ void hell_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type 
 		delete *it;
 
 	
+	vector<coord_def> used_stair_positions;
 	for(int i=0;i<6;i++)
 	{
-		while(1)
-		{
-			int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1);
-			if(env[num].dgtile[x][y].isFloor()  && !(env[num].dgtile[x][y].flag & FLAG_NO_STAIR) )
-			{
+		coord_def stair_pos;
+		if(!find_stair_position(num, used_stair_positions, stair_pos))
+			break;
+		used_stair_positions.push_back(stair_pos);
+		int x = stair_pos.x, y = stair_pos.y;
 				if(i>2)
 				{
 					env[num].stair_up[i-3].x = x;
@@ -818,9 +839,6 @@ void hell_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type 
 						env[num].dgtile[x][y].tile = DG_DOWN_STAIR;	
 					
 				}
-				break;
-			}
-		}
 	}
 
 
@@ -981,13 +999,14 @@ void common_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 		delete *it;
 
 	
+	vector<coord_def> used_stair_positions;
 	for(int i=0;i<6;i++)
 	{
-		while(1)
-		{
-			int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1);
-			if(env[num].dgtile[x][y].isFloor()  && !(env[num].dgtile[x][y].flag & FLAG_NO_STAIR) )
-			{
+		coord_def stair_pos;
+		if(!find_stair_position(num, used_stair_positions, stair_pos))
+			break;
+		used_stair_positions.push_back(stair_pos);
+		int x = stair_pos.x, y = stair_pos.y;
 				if(i>2)
 				{
 					if(i==3 || !environment::isFirstFloor(num) || env[num].isPandemonium())
@@ -1016,9 +1035,6 @@ void common_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 					}
 					
 				}
-				break;
-			}
-		}
 	}
 
 }
@@ -1190,13 +1206,14 @@ void dream_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type
 
 	
 	
+	vector<coord_def> used_stair_positions;
 	for(int i=0;i<6;i++)
 	{
-		while(1)
-		{
-			int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1);
-			if(env[num].dgtile[x][y].isFloor()  && !(env[num].dgtile[x][y].flag & FLAG_NO_STAIR) )
-			{
+		coord_def stair_pos;
+		if(!find_stair_position(num, used_stair_positions, stair_pos))
+			break;
+		used_stair_positions.push_back(stair_pos);
+		int x = stair_pos.x, y = stair_pos.y;
 				if(i>2)
 				{
 					env[num].stair_up[i-3].x = x;
@@ -1213,9 +1230,6 @@ void dream_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type
 					//if(!environment::isLastFloor(num))
 					//	env[num].dgtile[x][y].tile = DG_DOWN_STAIR;	
 				}
-				break;
-			}
-		}
 	}
 }
 
@@ -2033,8 +2047,11 @@ void map_algorithms_library(int num, dungeon_tile_type floor_tex, dungeon_tile_t
 	}	
 	if(!is_exist_named(MON_PACHU)){
 		monster* mon_ = env[num].AddMonster(MON_PACHU,0,coord_def(DG_MAX_X/2,DG_MAX_Y/2));
-		mon_->SetStrong(5);
-		set_exist_named(MON_PACHU);
+		if(mon_)
+		{
+			mon_->SetStrong(5);
+			set_exist_named(MON_PACHU);
+		}
 	}
 	
 
@@ -2132,8 +2149,10 @@ void map_algorithms_okina(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 
 
 
-	env[num].AddMonster(MON_MAI2, M_FLAG_ALLY, coord_def(DG_MAX_X / 2+4, DG_MAX_Y / 2))->SetInvincibility(-1, false);
-	env[num].AddMonster(MON_SATONO, M_FLAG_ALLY, coord_def(DG_MAX_X / 2 - 4, DG_MAX_Y / 2))->SetInvincibility(-1, false);
+	if(monster* mai_ = env[num].AddMonster(MON_MAI2, M_FLAG_ALLY, coord_def(DG_MAX_X / 2+4, DG_MAX_Y / 2)))
+		mai_->SetInvincibility(-1, false);
+	if(monster* satono_ = env[num].AddMonster(MON_SATONO, M_FLAG_ALLY, coord_def(DG_MAX_X / 2 - 4, DG_MAX_Y / 2)))
+		satono_->SetInvincibility(-1, false);
 	setBaseFloorWall(num, floor_tex, wall_tex);
 }
 

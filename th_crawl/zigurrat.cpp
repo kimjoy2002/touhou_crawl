@@ -165,6 +165,8 @@ int getZigurratMonster(int ziggurat_level, int named_percent, int type, bool& dr
 void addZigguratNamed(int num, int mon_id_, int x_, int y_, int level_, int type)
 {
 	monster* mon_ = env[num].AddMonster(mon_id_, 0, coord_def(x_, y_));
+	if(!mon_)
+		return;
 	mon_->flag &= ~M_FLAG_UNIQUE;
 	mon_->flag |= M_FLAG_NONE_STAIR;
 	mon_->dream = true;

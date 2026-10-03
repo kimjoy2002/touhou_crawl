@@ -174,7 +174,7 @@ void environment::LoadDatas(FILE *fp)
 	LoadData<int>(fp, popular);
 	LoadData<dungeon_tile_type>(fp, base_floor);
 	LoadData<dungeon_tile_type>(fp, base_wall);
-	LoadData<dungeon_tile>(fp, **dgtile);
+	LoadData(fp, dgtile);
 	const bool load_ver_1202_or_older = isPrevVersion(loading_version_string, "ver1.202");
 	const bool load_ver_1205_or_older = isPrevVersion(loading_version_string, "ver1.205");
 	auto remapDungeonTile = [load_ver_1202_or_older, load_ver_1205_or_older](dungeon_tile_type& tile)
@@ -216,8 +216,8 @@ void environment::LoadDatas(FILE *fp)
 	for (int x = 0; x < DG_MAX_X; x++)
 		for (int y = 0; y < DG_MAX_Y; y++)
 			calculateAutoTile(coord_def(x,y),AUTOTILE_CARPET);
-	LoadData<coord_def>(fp, *stair_up);
-	LoadData<coord_def>(fp, *stair_down);
+	LoadData(fp, stair_up);
+	LoadData(fp, stair_down);
 	int size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i=0;i<size_;i++)
@@ -303,8 +303,9 @@ void environment::LoadDatas(FILE *fp)
 	LoadData<int>(fp, size_);
 	for (int i = 0; i<size_; i++)
 	{
-		char temp[256];
-		LoadData<char>(fp, *temp);
+		char temp[256] = {};
+		LoadData(fp, temp);
+		temp[sizeof(temp)-1] = '\0';
 		string name = temp;
 		speciel_map_name.push_back(temp);
 	}
@@ -448,15 +449,19 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_, bool p
 	ReleaseMutex(mutx);
 	if(current_level >= PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL)
 	{
-		while(1)
+		vector<coord_def> candidates;
+		for(int x = 0; x < DG_MAX_X; x++)
 		{
-			int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
-			if(env[current_level].isMove(x_,y_) && !env[current_level].isMonsterPos(x_,y_))
+			for(int y = 0; y < DG_MAX_Y; y++)
 			{
-				you.SetXYPassFloor(prev_level, current_level, x_,y_);
-				break;
+				if(env[current_level].isMove(x,y) && !env[current_level].isMonsterPos(x,y))
+					candidates.push_back(coord_def(x,y));
 			}
 		}
+		if(!candidates.empty())
+			you.SetXYPassFloor(prev_level, current_level, candidates[randA(static_cast<int>(candidates.size())-1)]);
+		else
+			you.SetXYPassFloor(prev_level, current_level, stair_up[0]);
 	}
 	else if(num_>=0 && num_ <3)
 		you.SetXYPassFloor(prev_level, current_level, (prev_level>floor && !isLastFloor(floor))?stair_down[num_]:stair_up[num_]);
@@ -3120,8 +3125,9 @@ void LoadFile()
 		loading_version_string = "ver1.1";
 	} else {
 		{
-			char temp[256];
-			LoadData<char>(fp, *temp);
+			char temp[256] = {};
+			LoadData(fp, temp);
+			temp[sizeof(temp)-1] = '\0';
 			loading_version_string = temp;
 		}
 		LoadData<int>(fp, current_level);

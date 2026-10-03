@@ -299,6 +299,8 @@ monster* haniwa_abil::createHaniwa(int index, bool first_) {
 		if (env[current_level].isMove(rit->x, rit->y, false, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && env[current_level].isInSight(coord_def(rit->x, rit->y)) && you.position != (*rit))
 		{
             monster *haniwa_ = env[current_level].AddMonster(MON_HANIWA, M_FLAG_ALLY, *rit);
+			if(!haniwa_)
+				continue;
             you.haniwa_allys[index].map_id = haniwa_->map_id;
             you.haniwa_allys[index].floor = current_level;
 

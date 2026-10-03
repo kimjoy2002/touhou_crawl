@@ -201,10 +201,12 @@ void bamboo_count(int num)
 
 				if(env[num].isMove(check_pos_.x, check_pos_.y, false) && !env[num].isInSight(check_pos_))
 				{
-					monster *temp = env[num].AddMonster(MON_TEWI,0,coord_def(DG_MAX_X/2,DG_MAX_Y/2));
-					temp->state.SetState(MS_NORMAL);
-					set_exist_named(MON_TEWI);
-					break;
+					if(monster *temp = env[num].AddMonster(MON_TEWI,0,coord_def(DG_MAX_X/2,DG_MAX_Y/2)))
+					{
+						temp->state.SetState(MS_NORMAL);
+						set_exist_named(MON_TEWI);
+						break;
+					}
 				}
 				rit++;
 			}
@@ -224,6 +226,11 @@ void bamboo_count(int num)
 			if(env[num].isMove(check_pos_.x, check_pos_.y, false) && !env[num].isInSight(check_pos_))
 			{
 				monster *temp = env[num].AddMonster(id_,0,*rit);
+				if(!temp)
+				{
+					rit++;
+					continue;
+				}
 				if(id_ == MON_RABIT_BOMB)
 				{
 					int level_up_ = min(max(map_list.bamboo_count/300-2,0),10);

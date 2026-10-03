@@ -70,16 +70,21 @@ void name_infor::SaveDatas(FILE *fp)
 
 void name_infor::LoadDatas(FILE *fp)
 {
-	char temp[256];
-	LoadData<char>(fp, *temp);
+	char temp[256] = {};
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	name_key = LocalzationManager::getMonsterEnumKey(temp);	
-	LoadData<char>(fp, *temp);
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	system_key = LocalzationManager::getLocalizationEnumKey(temp);	
-	LoadData<char>(fp, *temp);
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	name_param = LocalzationManager::getMonsterEnumKey(temp);	
-	LoadData<char>(fp, *temp);
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	param = LocalzationManager::getLocalizationEnumKey(temp);
-	LoadData<char>(fp, *temp);
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	postfix = temp;
 }
 
@@ -683,8 +688,9 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, prev_position.y);
 	name.LoadDatas(fp);
 	{
-		char temp[256];
-		LoadData<char>(fp, *temp);
+		char temp[256] = {};
+		LoadData(fp, temp);
+		temp[sizeof(temp)-1] = '\0';
 		user_name = temp;
 	}
 	int it;
@@ -801,7 +807,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, prev_real_turn);
 	LoadData<bool>(fp, player_move);
 	LoadData<int>(fp,explore_map);
-	LoadData<int>(fp, *penalty_turn);
+	LoadData(fp, penalty_turn);
 	LoadData<char>(fp, final_item);
 	LoadData<int>(fp, final_num);
 	//LoadData<int>(fp, hunger);
@@ -929,10 +935,10 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, uniden_invisible_view);
 	LoadData<int>(fp, uniden_power_keep);
 	LoadData<int>(fp, total_skill_exp);
-	LoadData<skill_exp_infor>(fp, *skill);
-	LoadData<int>(fp, *bonus_skill);
+	LoadData(fp, skill);
+	LoadData(fp, bonus_skill);
 	LoadData<int>(fp, pure_skill);
-	LoadData<int>(fp, *MemorizeSpell);
+	LoadData(fp, MemorizeSpell);
 	LoadData<int>(fp, remainSpellPoiont);
 	LoadData<int>(fp, currentSpellNum);
 	currentEvokeItem = 0;
@@ -953,29 +959,29 @@ void players::LoadDatas(FILE *fp)
 	if(!isPrevVersion(loading_version_string, "ver1.116")) {
 		LoadData<int>(fp, max_power);
 	}
-	LoadData<int>(fp, *MemorizeSkill);
-	LoadData<int>(fp, *MemorizeSkill_num);
+	LoadData(fp, MemorizeSkill);
+	LoadData(fp, MemorizeSkill_num);
 	LoadData<int>(fp, currentSkillNum);
 	LoadData<god_type>(fp, god);
 	LoadData<int>(fp, gift_count);
 	LoadData<int>(fp, piety);
-	LoadData<punish_struct>(fp, *punish);
+	LoadData(fp, punish);
 	LoadData<int>(fp, god_turn);
 	if(isPrevVersion(loading_version_string, "ver1.104")) {
 		//신이 20명
 		for(int i=0;i<20;i++)
-			LoadData<int>(fp, *(god_value[i]));
+			LoadData(fp, god_value[i]);
 	} else {
 		for(int i=0;i<GT_LAST;i++)
-			LoadData<int>(fp, *(god_value[i]));
+			LoadData(fp, god_value[i]);
 	}
-	LoadData<lilly_ally>(fp, *lilly_allys);	
+	LoadData(fp, lilly_allys);
 	if(!isPrevVersion(loading_version_string, "ver1.104")) {
-		LoadData<haniwa_ally>(fp, *haniwa_allys);	
+		LoadData(fp, haniwa_allys);
 	}
 	LoadData<int>(fp, suwako_meet);
-	LoadData<int>(fp, *half_youkai);
-	LoadData<int>(fp, *rune);
+	LoadData(fp, half_youkai);
+	LoadData(fp, rune);
 	LoadData<int>(fp, target);
 	LoadData<int>(fp, useMouseTammac);
 	{
@@ -3059,6 +3065,8 @@ void players::FairyRevive(bool speak_)
 						if (env[current_level].isMove(rit->x, rit->y, true, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && env[current_level].isInSight(coord_def(rit->x, rit->y)) && you.position != (*rit))
 						{
 							monster* mon_ = env[current_level].AddMonster(you.lilly_allys[i].id, M_FLAG_ALLY, coord_def(rit->x, rit->y));
+							if(!mon_)
+								continue;
 							if (!(mon_->flag & M_FLAG_UNIQUE))
 							{
 								mon_->name = name_infor(fairy_name[you.lilly_allys[i].name]);
@@ -4575,17 +4583,22 @@ int players::DeleteProperty(tribe_proper_type type_)
 }
 bool players::Teleport()
 {
-	while(1)
+	vector<coord_def> candidates;
+	for(int x = 0; x < DG_MAX_X; x++)
 	{
-		int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
-		if(env[current_level].isMove(x_,y_) && !env[current_level].isMonsterPos(x_,y_))
+		for(int y = 0; y < DG_MAX_Y; y++)
 		{
-			env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
-			SetXY(x_,y_);
-			return true;
+			if(env[current_level].isMove(x,y) && !env[current_level].isMonsterPos(x,y))
+				candidates.push_back(coord_def(x,y));
 		}
 	}
-	return false;
+	if(candidates.empty())
+		return false;
+
+	coord_def destination = candidates[randA(static_cast<int>(candidates.size())-1)];
+	env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
+	SetXY(destination);
+	return true;
 }
 bool players::Blink(int time_)
 {

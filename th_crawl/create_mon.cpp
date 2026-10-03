@@ -611,7 +611,7 @@ void Set_X_Y(int &x_, int x, int rand_x, int &y_, int y, int rand_y)
 	if(x_<0)
 		x_=0;
 	else if(x_>=DG_MAX_X)
-		x = DG_MAX_X-1;
+		x_ = DG_MAX_X-1;
 	if(y_<0)
 		y_=0;
 	else if(y_>=DG_MAX_Y)
@@ -1227,10 +1227,12 @@ void create_id_to_mon(int id, int level, int strong)
 	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;
 	for(auto it=index.begin();it!=index.end();it++)
 	{ 
-		int x_ = 0, y_ = 0;
+		int x_ = 0, y_ = 0, limit_ = 10000;
 		Set_X_Y(x_, x, rand_x, y_, y, rand_y);
 		while(!env[level].isMove(x_,y_) || (env[level].dgtile[x_][y_].flag & FLAG_NO_MONSTER) || env[level].isMonsterPos(x_,y_) || env[level].isStair(x_,y_))
 		{
+			if(limit_-- <= 0)
+				break;
 			if(it==index.begin())
 			{
 				x = randA(DG_MAX_X-1),y = randA(DG_MAX_Y-1);
@@ -1246,6 +1248,8 @@ void create_id_to_mon(int id, int level, int strong)
 			}
 			Set_X_Y(x_, x, rand_x, y_, y, rand_y);
 		}
+		if(limit_ <= 0)
+			continue;
 		if(monster* mon_ = env[level].AddMonster((*it).first,0,coord_def(x_,y_)))
 		{
 			mon_->SetStrong(max(1,min((*it).second, 5)));

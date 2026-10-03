@@ -1580,7 +1580,8 @@ void wiz_mode()
 						int id_ = create_bamboo_mon();
 						dif_rect_iterator rit(you.position,5,true);
 						monster *temp = env[current_level].AddMonster(id_,0,*rit);
-						temp->dead(PRT_PLAYER,false);
+						if(temp)
+							temp->dead(PRT_PLAYER,false);
 					}
 					wizard_cleanup_current_loot();
 					create_and_kill(EIENTEI_LEVEL);

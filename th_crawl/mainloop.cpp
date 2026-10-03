@@ -572,6 +572,8 @@ void charter_selete(bool first)
 				if (env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && you.position != (*rit))
 				{
 					monster* mon_ = env[current_level].AddMonster(MON_GHOST, M_FLAG_ALLY, *rit);
+					if(!mon_)
+						continue;
 					mon_->SetInvincibility(-1, false);
 					mon_->sm_info.parent_map_id = -2;
 					mon_->flag |= M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY;

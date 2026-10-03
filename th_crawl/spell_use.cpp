@@ -6742,8 +6742,11 @@ bool skill_spore_bomb(monster* order)
 		coord_def pos_ = can_pos.pop();
 		if(env[current_level].isMove(pos_)) {
 			monster *stem_ = env[current_level].AddMonster(mushrooms.choice(), 0, pos_);
-			stem_->PlusTimeDelay(-you.GetWalkDelay());
-			i--;
+			if(stem_)
+			{
+				stem_->PlusTimeDelay(-you.GetWalkDelay());
+				i--;
+			}
 		}
 	}
 	return true;

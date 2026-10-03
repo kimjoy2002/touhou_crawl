@@ -63,8 +63,9 @@ void replay_class::SaveDatas(FILE *fp)
 void replay_class::LoadDatas(FILE *fp)
 {
 	DeleteRpy();
-	char temp[1024];
-	LoadData<char>(fp, *temp);
+	char temp[1024] = {};
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	replay_string = ConvertUTF8ToUTF16(temp);
 	
 	LoadData<base_infor>(fp,infor);

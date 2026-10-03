@@ -64,8 +64,9 @@ void action_class::LoadDatas(FILE *fp)
 {	
 	LoadData<dump_action_type>(fp, type);
 
-	char temp[100];
-	LoadData<char>(fp, *temp);
+	char temp[100] = {};
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	name = temp;
 
 	for(int i=0;i<27;i++)

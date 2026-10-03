@@ -347,10 +347,13 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			{
 				printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_KISME_DROP), true, false, false, CL_small_danger);
 				monster *mon_ = env[current_level].AddMonster(MON_KISUME, M_FLAG_EVENT, (*rit));
-				mon_->SetStrong(5);
-				mon_->PlusTimeDelay(-mon_->GetWalkDelay()); //키스메는 떨어지고 바로 공격하지않는다.
-				MoreWait();
-				i--;
+				if(mon_)
+				{
+					mon_->SetStrong(5);
+					mon_->PlusTimeDelay(-mon_->GetWalkDelay()); //키스메는 떨어지고 바로 공격하지않는다.
+					MoreWait();
+					i--;
+				}
 			}
 		}
 	}
@@ -428,6 +431,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			{
 				printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_KOGASA_DROP), true, false, false, CL_small_danger);
 				monster *mon_ = env[current_level].AddMonster(MON_KOGASA, M_FLAG_EVENT, (*rit));
+				if(!mon_)
+					continue;
 				MoreWait();
 				printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_KOGASA_DROP2), true, false, false, CL_normal);
 				mon_->SetConfuse(5 + randA(5));
@@ -488,8 +493,11 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			if (env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && you.position != (*rit))
 			{
 				monster *mon_ = env[current_level].AddMonster(mon_id_, 0, (*rit));
-				mon_->SetStrong(base_>1?1:3);
-				i--;
+				if(mon_)
+				{
+					mon_->SetStrong(base_>1?1:3);
+					i--;
+				}
 			}
 		}
 	}
@@ -538,40 +546,42 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 					for (int j = 0; j < DG_MAX_Y; j++)
 						env[current_level].magicmapping(i, j);
 			}
-			while (1)
+			vector<coord_def> candidates;
+			for(int x = 0; x < DG_MAX_X; x++)
 			{
-				int x_ = randA(DG_MAX_X - 1), y_ = randA(DG_MAX_Y - 1);
-				if (!env[current_level].isInSight(coord_def(x_, y_)) && env[current_level].dgtile[x_][y_].isFloor() && !(env[current_level].dgtile[x_][y_].flag & FLAG_NO_STAIR))
+				for(int y = 0; y < DG_MAX_Y; y++)
 				{
-					env[current_level].changeTile(coord_def(x_, y_), DG_MOON_STAIR);
-					env[current_level].stair_vector.push_back(stair_info(coord_def(x_, y_), MOON_LEVEL));
-					rand_rect_iterator rect_it(coord_def(x_,y_),1,1);
+					coord_def pos(x,y);
+					if(!env[current_level].isInSight(pos) && env[current_level].dgtile[x][y].isFloor() &&
+						!(env[current_level].dgtile[x][y].flag & FLAG_NO_STAIR))
+						candidates.push_back(pos);
+				}
+			}
+			if(candidates.empty())
+				return 0;
 
+			coord_def stair_pos = candidates[randA(static_cast<int>(candidates.size())-1)];
+			env[current_level].changeTile(stair_pos, DG_MOON_STAIR);
+			env[current_level].stair_vector.push_back(stair_info(stair_pos, MOON_LEVEL));
+			rand_rect_iterator rect_it(stair_pos,1,1);
+			while (!rect_it.end()) {
+				env[current_level].changeTile((*rect_it), DG_DREAM_FLOOR2);
+				rect_it++;
+			}
 
-					while (!rect_it.end()) {
-						env[current_level].changeTile((*rect_it), DG_DREAM_FLOOR2);
-						rect_it++;
-					}
+			beam_iterator beam(stair_pos, you.position);
+			beam.init();
+			while (!beam.end()) {
+				env[current_level].changeTile((*beam), DG_DREAM_FLOOR2);
+				beam++;
+			}
+			env[current_level].changeTile((*beam), DG_DREAM_FLOOR2);
 
-
-
-					beam_iterator beam(coord_def(x_, y_), you.position);
-
-					beam.init();
-					while (!beam.end()) {
-						env[current_level].changeTile((*beam), DG_DREAM_FLOOR2);
-						beam++;
-					}
-					env[current_level].changeTile((*beam), DG_DREAM_FLOOR2);
-
-
-					if (!is_exist_named(MON_DOREMI)) {
-						monster *mon_ = env[current_level].AddMonster(MON_DOREMI, M_FLAG_EVENT, coord_def(x_, y_));
-						mon_->SetStrong(5); 
-						set_exist_named(MON_DOREMI);
-					}
-
-					break;
+			if (!is_exist_named(MON_DOREMI)) {
+				if(monster *mon_ = env[current_level].AddMonster(MON_DOREMI, M_FLAG_EVENT, stair_pos))
+				{
+					mon_->SetStrong(5);
+					set_exist_named(MON_DOREMI);
 				}
 			}
 			you.resetLOS();
@@ -610,15 +620,23 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			};
 			int mon_id_ = arr_[randA(5)];
 
-			while (1)
+			vector<coord_def> candidates;
+			for(int x = 0; x < DG_MAX_X; x++)
 			{
-				int x_ = randA(DG_MAX_X - 1), y_ = randA(DG_MAX_Y - 1);
-				if (env[current_level].isMove(x_, y_) && !env[current_level].isMonsterPos(x_, y_) && !env[current_level].isInSight(coord_def(x_, y_)))
+				for(int y = 0; y < DG_MAX_Y; y++)
 				{
-					monster *mon_ = env[current_level].AddMonster(mon_id_, 0, coord_def(x_, y_));
+					coord_def pos(x,y);
+					if(env[current_level].isMove(x,y) && !env[current_level].isMonsterPos(x,y) && !env[current_level].isInSight(pos))
+						candidates.push_back(pos);
+				}
+			}
+			if(!candidates.empty())
+			{
+				coord_def pos = candidates[randA(static_cast<int>(candidates.size())-1)];
+				if(monster *mon_ = env[current_level].AddMonster(mon_id_, 0, pos))
+				{
 					mon_->SetStrong(1);
 					mon_->AttackedTarget(&you);
-					break;
 				}
 			}
 
@@ -646,15 +664,23 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			};
 			int mon_id_ = arr_[randA(5)];
 
-			while (1)
+			vector<coord_def> candidates;
+			for(int x = 0; x < DG_MAX_X; x++)
 			{
-				int x_ = randA(DG_MAX_X - 1), y_ = randA(DG_MAX_Y - 1);
-				if (env[current_level].isMove(x_, y_) && !env[current_level].isMonsterPos(x_, y_) && !env[current_level].isInSight(coord_def(x_, y_)))
+				for(int y = 0; y < DG_MAX_Y; y++)
 				{
-					monster *mon_ = env[current_level].AddMonster(mon_id_, 0, coord_def(x_, y_));
+					coord_def pos(x,y);
+					if(env[current_level].isMove(x,y) && !env[current_level].isMonsterPos(x,y) && !env[current_level].isInSight(pos))
+						candidates.push_back(pos);
+				}
+			}
+			if(!candidates.empty())
+			{
+				coord_def pos = candidates[randA(static_cast<int>(candidates.size())-1)];
+				if(monster *mon_ = env[current_level].AddMonster(mon_id_, 0, pos))
+				{
 					mon_->SetStrong(1);
 					mon_->state.SetState(MS_NORMAL);
-					break;
 				}
 			}
 
@@ -707,6 +733,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 					printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_MARY_SAN3), true, false, false, CL_danger);
 					MoreWait();
 					monster *mon_ = env[current_level].AddMonster(MON_KOISHI, M_FLAG_EVENT, (*rit));
+					if(!mon_)
+						continue;
 					mon_->PlusTimeDelay(-mon_->GetWalkDelay()); //코이시는 떨어지고 바로 공격하지않는다.
 					mon_->SetStrong(5);
 					mon_->SetHaste(20 + randA(20));
@@ -723,6 +751,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	case EVL_KYOKO:
 	{
 		monster *kyoko_ = env[current_level].AddMonster(MON_KYOUKO, M_FLAG_EVENT, coord_def(0, -5) + event_->position);
+		if(!kyoko_)
+			return 0;
 
 		kyoko_->SetStrong(5);
 		for (int i = rand_int(2, 4); i > 0; i--)
@@ -738,6 +768,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			if (env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && you.position != (*rit))
 			{
 				monster *mon_ = env[current_level].AddMonster(MON_HUMAM_MAN, M_FLAG_EVENT | M_FLAG_NETURALY, (*rit));
+				if(!mon_)
+					continue;
 				mon_->hp = mon_->hp*rand_int(3, 9) / 10;
 				mon_->FoundTarget(kyoko_, mon_->FoundTime());
 				mon_->s_fear = 20 + randA(20);
@@ -765,6 +797,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		monster *sunny_ = env[current_level].AddMonster(MON_SUNNY, M_FLAG_EVENT, coord_def(1, 0) + event_->position);
 		monster *star_ = env[current_level].AddMonster(MON_STAR, M_FLAG_EVENT, coord_def(-1, 0) + event_->position);
 		monster *lunar_ = env[current_level].AddMonster(MON_LUNAR, M_FLAG_EVENT, coord_def(0, 0) + event_->position);
+		if(!sunny_ || !star_ || !lunar_)
+			return 1;
 
 		sunny_->SetStrong(5);
 		star_->SetStrong(5);
@@ -871,6 +905,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 				env[current_level].MakeSmoke(coord_def(i + event_->position.x, j + event_->position.y), img_fog_dark, SMT_DARK, rand_int(3, 4), 0, NULL);
 		if (distan_coord(you.position, event_->position) <= 2) {
 			monster *mon_ = env[current_level].AddMonster(MON_KOGASA, M_FLAG_EVENT, event_->position);
+			if(!mon_)
+				return 0;
 			
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_EVENT_KOGASA_SMOKE1,true,false,false,CL_speak,
 				PlaceHolderHelper(mon_->GetName()->getName()));
@@ -890,6 +926,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			if (env[current_level].isInSight((*rlt)))
 			{
 				monster *medi_ = env[current_level].AddMonster(MON_MEDICINE, M_FLAG_EVENT, event_->position);
+				if(!medi_)
+					return 0;
 
 				medi_->SetStrong(5);
 				medi_->PlusTimeDelay(-4 * medi_->GetWalkDelay());
@@ -903,7 +941,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 						rand_.push(MON_FAIRY_RED);
 						rand_.push(MON_KATPA);
 						monster *mon_ = env[current_level].AddMonster(rand_.pop(), M_FLAG_EVENT | M_FLAG_NETURALY, (*rlt2));
-
+						if(!mon_)
+							continue;
 						mon_->FoundTarget(medi_, mon_->FoundTime());
 						mon_->s_poison = 100;
 						mon_->SetPoisonReason(PRT_NEUTRAL);
@@ -940,6 +979,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 			if (env[current_level].isInSight((*rlt)))
 			{
 				monster *chen_ = env[current_level].AddMonster(MON_CHEN, M_FLAG_EVENT, event_->position);
+				if(!chen_)
+					return 0;
 
 				chen_->SetStrong(5);
 				chen_->s_confuse = 15;
@@ -951,7 +992,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 						rand_.push(MON_BLACK_CAT);
 						rand_.push(MON_WHITE_CAT);
 						monster *mon_ = env[current_level].AddMonster(rand_.pop(), M_FLAG_EVENT, (*rlt2));
-
+						if(!mon_)
+							continue;
 						mon_->SetStrong(1); 
 						mon_->s_confuse = 15;
 					}
@@ -964,6 +1006,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	case EVL_BROKEN_NESI:
 	{
 		monster *nesi_ = env[current_level].AddMonster(MON_NESI, M_FLAG_EVENT, event_->position);
+		if(!nesi_)
+			return 0;
 		nesi_->s_confuse = -1;
 		nesi_->exper = nesi_->exper / 2;
 		nesi_->SetStrong(1);
@@ -1086,6 +1130,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	case EVL_MIMA_SPARK_BOOK:
 	{
 		monster *book_ = env[current_level].AddMonster(MON_MAGIC_BOOK, M_FLAG_DECORATE, event_->position);
+		if(!book_)
+			return 0;
 		book_->spell_lists.clear();
 		book_->item_lists.clear();
 		
@@ -1190,6 +1236,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	case EVL_CREATE_KOGASA_STONE:
 	{
 		monster *tower_ = env[current_level].AddMonster(MON_CLUMSY_STONE_TOWER, 0, event_->position);
+		if(!tower_)
+			return 0;
 		tower_->image = &img_mons_stonetower[3+randA(1)];
 		return 1;
 	}
@@ -1210,6 +1258,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		while(!rand_pos.end()) {
 			if(env[current_level].isMove(event_->position, true) && env[current_level].isInSight(*rand_pos)) {
 				monster *stem_ = env[current_level].AddMonster(MON_OVERGROWTH_STEM, 0, event_->position);
+				if(!stem_)
+					return 0;
 				int target_angle = GetBaseAngle(GetPositionToAngle(event_->position.x,event_->position.y,rand_pos->x, rand_pos->y));
 				stem_->direction = target_angle;
 				stem_->PlusTimeDelay(-you.GetWalkDelay());

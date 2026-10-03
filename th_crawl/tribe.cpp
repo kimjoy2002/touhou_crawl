@@ -1343,6 +1343,8 @@ void tribe_property::gain(bool gain_)
 			if (env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && you.position != (*rit))
 			{
 				monster* mon_ = env[current_level].AddMonster(MON_MAGICAL_STAR, M_FLAG_ALLY, *rit);
+				if(!mon_)
+					continue;
 				mon_->SetInvincibility(-1, false);
 				mon_->sm_info.parent_map_id = -2;
 				mon_->spell_lists.clear();

@@ -1274,6 +1274,10 @@ void ThrowSakuyaKnives(beam_iterator& beam, const vector<beam_iterator>& side_be
 
 void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bool set, projectile_infor* infor_, int m_len_, float sector_)
 {
+	auto in_bounds_ = [](const coord_def& pos_)
+	{
+		return pos_.x >= 0 && pos_.x < DG_MAX_X && pos_.y >= 0 && pos_.y < DG_MAX_Y;
+	};
 	vector<coord_def> side_path_;
 	vector<coord_def> half_path_;
 	if(set && infor_->isitem && item_ != you.item_list.end() && IsSakuyaKnife(&(*item_)))
@@ -1308,6 +1312,8 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 			rect_iterator rit(c_,range_, range_);
 			for(;!rit.end();rit++)
 			{
+				if(!in_bounds_(*rit))
+					continue;
 				if(!infor_->skill && infor_->spell == SPL_THUNDER && !env[current_level].isMove(*rit,true))
 					continue;
 				if(!infor_->skill && infor_->spell == SPL_THUNDER && (*rit) != c_)
@@ -1383,6 +1389,8 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 			for(beam.init();!beam.end();)
 			{
 				auto temp_beam = beam++;
+				if(!in_bounds_(*temp_beam))
+					break;
 				//스마이트형이 아닌경우 부딪히면 터지기 마련이다.
 				bool block_ = false;
 				if(!env[current_level].isMove(*(beam),true))
@@ -1431,6 +1439,8 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 			rect_iterator rit((*beam),range_, range_);
 			for(;!rit.end();rit++)
 			{
+				if(!in_bounds_(*rit))
+					continue;
 				if(set)
 					env[current_level].dgtile[(*rit).x][(*rit).y].flag = env[current_level].dgtile[(*rit).x][(*rit).y].flag | FLAG_LIGHT;
 				else
@@ -1442,15 +1452,20 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 
 			for(beam.init();!beam.end();beam++)
 			{
+				if(!in_bounds_(*beam))
+					break;
 				if(set)
 					env[current_level].dgtile[(*beam).x][(*beam).y].flag = env[current_level].dgtile[(*beam).x][(*beam).y].flag | FLAG_LIGHT;
 				else
 					env[current_level].dgtile[(*beam).x][(*beam).y].flag = env[current_level].dgtile[(*beam).x][(*beam).y].flag & ~FLAG_LIGHT;	
 			}
-			if(set)
-				env[current_level].dgtile[(*beam).x][(*beam).y].flag = env[current_level].dgtile[(*beam).x][(*beam).y].flag | FLAG_LIGHT;
-			else
-				env[current_level].dgtile[(*beam).x][(*beam).y].flag = env[current_level].dgtile[(*beam).x][(*beam).y].flag & ~FLAG_LIGHT;	
+			if(in_bounds_(*beam))
+			{
+				if(set)
+					env[current_level].dgtile[(*beam).x][(*beam).y].flag = env[current_level].dgtile[(*beam).x][(*beam).y].flag | FLAG_LIGHT;
+				else
+					env[current_level].dgtile[(*beam).x][(*beam).y].flag = env[current_level].dgtile[(*beam).x][(*beam).y].flag & ~FLAG_LIGHT;
+			}
 		}
 	}
 }

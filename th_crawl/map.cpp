@@ -177,7 +177,7 @@ map_dummy::~map_dummy()
 	reserved_named.remove_if([this](const pair<const map_dummy*,monster_index>& entry_){
 		return entry_.first == this;
 	});
-	for(int i=0;i<size_x;i++)
+	for(int i=0;i<size_x*2+1;i++)
 		delete[] tiles[i];
 	delete[] tiles;
 }

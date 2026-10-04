@@ -1216,7 +1216,7 @@ int environment::CloseDoor(int x_,int y_)
 	else
 		return 0;
 }
-static monster* add_single_monster(environment& map, int id_, uint64_t flag_, coord_def position_, int time_)
+static monster* add_single_monster(environment& map, int id_, uint64_t flag_, coord_def position_, int time_, const monster* reserved_ = nullptr)
 {
 	WaitForSingleObject(mutx, INFINITE);
 	vector<monster>::iterator it;
@@ -1232,7 +1232,7 @@ static monster* add_single_monster(environment& map, int id_, uint64_t flag_, co
 			map.mon_vector.back().SetMonster(map.floor, map.all_monster_id++, id_, flag_, time_, position_);
 			return &(map.mon_vector.back());
 		}
-		else if(!(*it).isLive())
+		else if(!(*it).isLive() && &(*it) != reserved_)
 		{
 			if(map.all_monster_id<1)
 				map.all_monster_id = 1;
@@ -1262,10 +1262,10 @@ static bool can_place_goliath(environment& map, const coord_def& anchor)
 	return true;
 }
 
-monster* environment::AddMonster(int id_, uint64_t flag_, coord_def position_, int time_)
+monster* environment::AddMonster(int id_, uint64_t flag_, coord_def position_, int time_, const monster* reserved_)
 {
 	if(id_ != MON_GOLIATH_DOLL)
-		return add_single_monster(*this, id_, flag_, position_, time_);
+		return add_single_monster(*this, id_, flag_, position_, time_, reserved_);
 
 	coord_def anchor(-1, -1);
 	for(int radius = 0; radius <= 4 && anchor.x < 0; radius++)
@@ -1282,7 +1282,7 @@ monster* environment::AddMonster(int id_, uint64_t flag_, coord_def position_, i
 	if(anchor.x < 0)
 		return NULL;
 
-	monster* root = add_single_monster(*this, id_, flag_, anchor, time_);
+	monster* root = add_single_monster(*this, id_, flag_, anchor, time_, reserved_);
 	if(!root)
 		return NULL;
 	int root_id = root->map_id;
@@ -1294,7 +1294,7 @@ monster* environment::AddMonster(int id_, uint64_t flag_, coord_def position_, i
 	{
 		monster* body = add_single_monster(*this, id_,
 			flag_ | M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_NO_STATE | M_FLAG_DECORATE,
-			anchor + offsets[part], time_);
+			anchor + offsets[part], time_, reserved_);
 		if(!body)
 		{
 			for(monster& made : mon_vector)
@@ -1443,9 +1443,9 @@ void environment::clearLimitSummonMonster(int parent_map_id,SUMMON_KIND summon_i
     }
 }
 
-monster* environment::AddMonster_Summon(int id_, uint64_t flag_, coord_def position_, summon_info &info_, int time_ = 0)
+monster* environment::AddMonster_Summon(int id_, uint64_t flag_, coord_def position_, summon_info &info_, int time_, const monster* reserved_)
 {
-	monster* mon_ = AddMonster(id_, flag_, position_, time_);
+	monster* mon_ = AddMonster(id_, flag_, position_, time_, reserved_);
 	if(mon_)
 	{
 		mon_->sm_info = info_;
@@ -2262,6 +2262,10 @@ bool environment::MakeSilence(coord_def center_, int length_, bool on_)
 	{
 		for(int j=-length_/2;j<=length_/2;j++)
 		{
+			int x_ = center_.x+i;
+			int y_ = center_.y+j;
+			if(x_ < 0 || x_ >= DG_MAX_X || y_ < 0 || y_ >= DG_MAX_Y)
+				continue;
 			if(i*i+j*j<=length_*length_/4)
 			{
 				if(on_)
@@ -2285,6 +2289,10 @@ bool environment::MakeViolet(coord_def center_, int length_, bool on_)
 	{
 		for(int j=-length_/2;j<=length_/2;j++)
 		{
+			int x_ = center_.x+i;
+			int y_ = center_.y+j;
+			if(x_ < 0 || x_ >= DG_MAX_X || y_ < 0 || y_ >= DG_MAX_Y)
+				continue;
 			if(i*i+j*j<=length_*length_/4)
 			{
 				if(on_)
@@ -2309,6 +2317,10 @@ bool environment::MakeSantuary(coord_def center_, int length_, bool on_)
 	{
 		for (int j = -length_ / 2; j <= length_ / 2; j++)
 		{
+			int x_ = center_.x+i;
+			int y_ = center_.y+j;
+			if(x_ < 0 || x_ >= DG_MAX_X || y_ < 0 || y_ >= DG_MAX_Y)
+				continue;
 			if (i*i + j*j <= length_*length_ / 4)
 			{
 				if (on_)
@@ -2334,6 +2346,10 @@ bool environment::MakeHalo(coord_def center_, int length_, bool on_)
 	{
 		for(int j=-length_/2;j<=length_/2;j++)
 		{
+			int x_ = center_.x+i;
+			int y_ = center_.y+j;
+			if(x_ < 0 || x_ >= DG_MAX_X || y_ < 0 || y_ >= DG_MAX_Y)
+				continue;
 			if(i*i+j*j<=length_*length_/4)
 			{
 				if(on_)
@@ -2358,6 +2374,10 @@ bool environment::MakeRoyalflare(coord_def center_, int length_, bool on_)
 	{
 		for(int j=-length_/2;j<=length_/2;j++)
 		{
+			int x_ = center_.x+i;
+			int y_ = center_.y+j;
+			if(x_ < 0 || x_ >= DG_MAX_X || y_ < 0 || y_ >= DG_MAX_Y)
+				continue;
 			if(i*i+j*j<(length_/2+1)*(length_/2+1))
 			{
 				if(on_)
@@ -2759,7 +2779,7 @@ unit* environment::isMonsterPos(int x_,int y_, const unit* excep_, int* map_id_)
 shadow* environment::isShadowPos(int x_, int y_)
 {
 	list<shadow>::iterator it;
-	for (it = shadow_list.begin(); it != shadow_list.end();)
+	for (it = shadow_list.begin(); it != shadow_list.end();it++)
 	{
 		if (it->position.x == x_ && it->position.y == y_) {
 

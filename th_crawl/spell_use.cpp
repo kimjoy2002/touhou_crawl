@@ -5793,6 +5793,7 @@ bool skill_counter_tanmac(unit* order, coord_def target)
 	parent_type parent_type_ = order->GetParentType();
 	int parent_map_id_ = order->GetMapId();
 	bool player_owner_ = order->isplayer();
+	const monster* reserved_ = player_owner_ ? nullptr : static_cast<monster*>(order);
 	int neutrality_ = player_owner_ ? 0 : ((monster*)order)->s_neutrality;
 	int stating_direction_ = GetAngleToDirec(GetPositionToAngle(origin_.x, origin_.y, target.x, target.y));
 	vector<int> homing_ids_;
@@ -5809,7 +5810,7 @@ bool skill_counter_tanmac(unit* order, coord_def target)
 			if(parent_type_ == PRT_PLAYER || parent_type_ == PRT_ALLY)
 				flag_ |= M_FLAG_ALLY;
 			summon_info s_(parent_map_id_, SKD_OTHER, -1);
-			monster* mon_ = env[current_level].AddMonster_Summon(MON_HOMING, flag_, summon_position, s_, 5);
+			monster* mon_ = env[current_level].AddMonster_Summon(MON_HOMING, flag_, summon_position, s_, 5, reserved_);
 			if(mon_)
 			{
 				if(!player_owner_)

@@ -102,6 +102,8 @@ void text_manager::SetEnter()
 void text_manager::reset()
 {
 	WaitForSingleObject(mutx, INFINITE);
+	for(text_dummy* text_ : text_list)
+		delete text_;
 	text_list.clear();
 	length=0;
 	ReleaseMutex(mutx);

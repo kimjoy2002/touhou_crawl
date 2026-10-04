@@ -1650,6 +1650,8 @@ bool skill_swako_digging(int power, bool short_, unit* order, coord_def target)
 
 		while(length_>0)
 		{
+			if(beam->x < 0 || beam->x >= DG_MAX_X || beam->y < 0 || beam->y >= DG_MAX_Y)
+				break;
 			if (env[current_level].dgtile[beam->x][beam->y].isBreakable())
 				env[current_level].changeTile((*beam), env[current_level].base_floor);
 			beam++;

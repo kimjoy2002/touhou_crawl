@@ -119,6 +119,16 @@ int GetSummonMaxNumber(spell_list skill)
 		return 8;
 	case SPL_GROW_VINE:
 		return 5;
+	case SPL_ORRERIRES_SUN:
+		return 4;
+	case SPL_TIME_PARADOX:
+		return 1;
+	case SPL_DOLL_SPEAR:
+		return 2;
+	case SPL_LITTLE_LEGION:
+		return 4;
+	case SPL_GLACIER_WALL:
+		return 2;
 	default:
 		return -1;
 	}
@@ -179,6 +189,16 @@ SUMMON_KIND GetSummonKind(spell_list skill)
 		return SKD_SUMMON_GHOST;
 	case SPL_GROW_VINE:
 		return SKD_SUMMON_VINE;
+	case SPL_ORRERIRES_SUN:
+		return SKD_ORRERIRES_SUN;
+	case SPL_TIME_PARADOX:
+		return SKD_TIME_PARADOX;
+	case SPL_DOLL_SPEAR:
+		return SKD_DOLL_SPEAR;
+	case SPL_LITTLE_LEGION:
+		return SKD_LITTLE_LEGION;
+	case SPL_GLACIER_WALL:
+		return SKD_GLACIER_WALL;
 	default:
 		return SKD_OTHER;
 	}

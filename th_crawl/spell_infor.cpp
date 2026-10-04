@@ -490,10 +490,10 @@ string GetSpellInfor(spell_list spell, bool isPlayer)
 		break;	
 	case SPL_THROW_OIL:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_OIL);
-		break;	
+		break;
 	case SPL_HEAVENLY_STORM:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_HEAVENLY_STORM);
-		break;	
+		break;
 	case SPL_TRACKING:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_TRACKING);
 		break;	
@@ -550,6 +550,51 @@ string GetSpellInfor(spell_list spell, bool isPlayer)
 		break;
 	case SPL_ROYALFLARE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ROYALFLARE);
+		break;
+	case SPL_CONFUSE_SPORE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_CONFUSE_SPORE);
+		break;
+	case SPL_WEAKENDED_SPORE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_WEAKENDED_SPORE);
+		break;
+	case SPL_ACID_BOLT:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ACID_BOLT);
+		break;
+	case SPL_ORRERIRES_SUN:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_ORRERIRES_SUN);
+		break;
+	case SPL_THROW_STAR:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_STAR);
+		break;
+	case SPL_SACRIFICE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_SACRIFICE);
+		break;
+	case SPL_DOLL_LUNGE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_DOLL_LUNGE);
+		break;
+	case SPL_CURSE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_CURSE);
+		break;
+	case SPL_THROW_BUCKET:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_BUCKET);
+		break;
+	case SPL_DOLL_SPEAR:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_DOLL_SPEAR);
+		break;
+	case SPL_LITTLE_LEGION:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_LITTLE_LEGION);
+		break;
+	case SPL_THROW_AXE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_THROW_AXE);
+		break;
+	case SPL_COUNTER_TANMAC:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_COUNTER_TANMAC);
+		break;
+	case SPL_GLACIER_WALL:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_GLACIER_WALL);
+		break;
+	case SPL_COLD_ARMOUR:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_COLD_ARMOUR);
 		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_UKNOWN);
@@ -921,6 +966,13 @@ string GetSkillInfor(skill_list skill)
 		break;
 	case SKL_SILENCE:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SILENCE);
+		break;
+	case SKL_CIRNO_ICE_CREATE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_CIRNO_ICE_CREATE);
+		break;
+	case SKL_DIVE:
+	case SKL_DIVE_OFF:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_INFO);
 		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_UKNOWN);

@@ -57,15 +57,21 @@ int makeMonsterid(int min_level, int max_level)
 
 void createarenamon(int num, int mon_id_ ,bool left)
 {
-	int x_ = 0, y_ = 0;
-	do
+	vector<coord_def> candidates;
+	for(int x = DG_MAX_X/2+(left?-4:2); x <= DG_MAX_X/2+(left?-2:4); x++)
 	{
-		x_ = DG_MAX_X/2+(left?-3:3)+rand_int(-1,1), y_ = DG_MAX_Y/2+rand_int(-2,2);
+		for(int y = DG_MAX_Y/2-2; y <= DG_MAX_Y/2+2; y++)
+		{
+			if(env[num].isMove(x,y) && !env[num].isMonsterPos(x,y))
+				candidates.push_back(coord_def(x,y));
+		}
 	}
-	while(!env[num].isMove(x_,y_) || env[current_level].isMonsterPos(x_,y_));
+	if(candidates.empty())
+		return;
 
-	monster *mon_ = env[num].AddMonster(mon_id_,left?M_FLAG_NETURALY:0,coord_def(x_,y_));
-	mon_->state.SetState(MS_NORMAL);
+	coord_def pos = candidates[randA(static_cast<int>(candidates.size())-1)];
+	if(monster *mon_ = env[num].AddMonster(mon_id_,left?M_FLAG_NETURALY:0,pos))
+		mon_->state.SetState(MS_NORMAL);
 }
 
 

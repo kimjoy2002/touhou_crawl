@@ -8,6 +8,7 @@
 
 #include "textureUtility.h"
 #include "option_manager.h"
+#include "web_backend.h"
 
 
 //
@@ -42,6 +43,14 @@ bool SpriteDraw(shared_ptr<DirectX::SpriteBatch> pSprite, RECT rc, float scale_x
         floorf(x) + 0.5f,
         floorf(y) + 0.5f
     };
+
+#ifdef WEB_TILES
+    if (web::enabled())
+        web::recSprite(texture, rc, scale_x, scale_y, rotation_deg, x, y, color);
+#endif
+
+    if (!pSprite)
+        return true;
 
     // Draw
     pSprite->Draw(

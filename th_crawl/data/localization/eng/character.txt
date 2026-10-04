@@ -468,7 +468,7 @@ allowing you to deal damage while keeping your distance.
 * Begins with -5 Strength, +4 Intelligence, and +1 Dexterity.
 * Starts with a robe and a novice cryomancer’s spellbook.
 * Starts knowing Frost.
-* Can learn Frost Danmaku, Rapid Freeze, Frost Cloud, and Ice Bolt.
+* Can learn Frost Danmaku, Glacier Wall, Rapid Freeze, Cold Armour, and Ice Bolt.
 
 
 §23
@@ -555,7 +555,7 @@ so choosing the right effect for the situation is crucial.
 * Begins with -1 Strength, +1 Intelligence, and +1 Dexterity.
 * Starts with a robe and a novice alchemist’s spellbook.
 * Starts knowing Stone Fist.
-* Can learn Diamond Hardness, Poison Body, Summon Golem, and Emerald City.
+* Can learn Diamond Hardness, Poison Body, Cold Armour, and Emerald City.
 
 
 

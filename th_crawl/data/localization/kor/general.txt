@@ -1697,7 +1697,7 @@ LOC_SYSTEM_PLAYER_KOISHI,코이시
 LOC_SYSTEM_PLAYER_MOKOU,모코우
 LOC_SYSTEM_PLAYER_NITORI,니토리
 LOC_SYSTEM_PLAYER_THREE_FAIRIES,삼월정
-LOC_SYSTEM_PLAYER_SUNNY,써니
+LOC_SYSTEM_PLAYER_SUNNY,서니
 LOC_SYSTEM_PLAYER_STAR,스타
 LOC_SYSTEM_PLAYER_LUNA,루나
 LOC_SYSTEM_PLAYER_YOUMU,요우무
@@ -2442,7 +2442,7 @@ LOC_SYSTEM_SPELL_CAST_PANALTY2,마법 부작용으로 머리에 심한 두통을
 LOC_SYSTEM_SPELL_CAST_PANALTY3,마법 부작용으로 머리에 끔찍한 손상이 왔다.
 LOC_SYSTEM_SPELL_NEED_POWER,마법을 쓸려면 최소 파워가 1이상 있어야한다!
 LOC_SYSTEM_SPELL_EXIST_POS,이미 누군가 있는 위치에 사용할 수 없습니다.
-LOC_SYSTEM_SPELL_EXIST_SMOKE,이미 누군가 있는 위치에 사용할 수 없습니다.
+LOC_SYSTEM_SPELL_EXIST_SMOKE,이미 연기가 있는 위치에 사용할 수 없습니다.
 LOC_SYSTEM_SPELL_CURE_POISON,독이 치료되었다.
 LOC_SYSTEM_SPELL_SHOULD_POISON,독이 걸려있을때만 사용할 수 있다.
 LOC_SYSTEM_SPELL_CANT_BRAND,마법이 듣지 않는다.
@@ -2769,7 +2769,7 @@ LOC_SYSTEM_SPL_DESCRIBE_KANAME_DRILL,단단한 요석을 직선으로 날린다.
 LOC_SYSTEM_SPL_DESCRIBE_DIAMOND_HARDNESS,연금술의 힘으로 대지의 단단함을 몸에 두르는 기술.\n잠깐동안 약간의 방어력을 얻는다.\n
 LOC_SYSTEM_SPL_DESCRIBE_POISON_SKIN,자신의 몸에서 독기를 뿜어나오게 한다.\n방어적인 효과는 없지만 시전시간중에 근접한 모든 적에게 독을 건다.\n
 LOC_SYSTEM_SPL_DESCRIBE_STONE_FORM,잠시간 모든 고통에서 해방되는 무념무상의 상태가 된다.\n모든 데미지를 어느정도 반감하고 맨손 데미지가 강력해지지만 이동속도 또한 느려진다.\n
-LOC_SYSTEM_SPL_DESCRIBE_KNIFE_COLLECT,지속시간중에는 던진 탄막이 자동으로 회수하는 편리한 기술.\n명중 또한 소량 오른다.\n
+LOC_SYSTEM_SPL_DESCRIBE_KNIFE_COLLECT,시간을 약간 비틀어서 시야 안에 떨어진 투척무기들을 인벤토리로 즉시 회수한다.\n인벤이 가득 찬다던지하는 이유로 들 수 없는 경우 발밑으로 가져온다.
 LOC_SYSTEM_SPL_DESCRIBE_FLAN_BUSIN,플랑드르의 분신을 3체 만들어내는 스펠.\n분신들은 본체보다 약하지만 폭파스펠을 똑같이 쓸 수 있다.\n
 LOC_SYSTEM_SPL_DESCRIBE_BURST,적을 원거리에서 터트려버린다. 저항할수도 회피할수도 없다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUICIDE_BOMB,공격할시 자동으로 자폭한다.\n
@@ -2782,7 +2782,7 @@ LOC_SYSTEM_SPL_DESCRIBE_PERFERT_FREEZE,화면상의 모든 적에게 강력한 �
 LOC_SYSTEM_SPL_DESCRIBE_DRAW_POWER,시야내의 땅에 떨어져있는 모든 P템을 끌어모아서 P를 회복하는 마법.\n탑뷰방식에서 상단은 어디인가. 애초에 존재하긴 하는걸까?\n
 LOC_SYSTEM_SPL_DESCRIBE_ANIMAL_CHANGE,상대 한명을 영구히 동물로 만들어버리는 무서운 마법. 물론 동물에겐 쓸 수 없다.\n동물이 되면 강제로 자신의 동료가 된다. 또한 변신성공시 경험치도 그대로 받는다.\n동물이 된 동료는 영구적인 아군이지만 계단을 탈 수 없다.\n상대의 세기에 따라 더욱 강력한 동물로 변한다. 성공시키는건 어렵지만 성공시 효과는 탁월.\n
 LOC_SYSTEM_SPL_DESCRIBE_FIELD_VIOLET,파장을 조종하여 선택한 범위에 파이올렛 파장을 뿌린다.\n파장안에 든 모든 캐릭터는 적과 아군을 분간하지못하고 광기에 휩싸인다.\n이 상태로 죽은 적이라도 제대로 경험치를 받는다. 아군이나 플레이어도 광기에 휩싸일 수 있으니 조심.\n
-LOC_SYSTEM_SPL_DESCRIBE_TIME_PARADOX,탄막의 도플갱어를 만들어내서 2번 공격한다.\n사용후 패러독스 상태가 되면 딱 1번에 한해서 사용한 탄막 혹은 탄막마법이 2번 나간다.\n스파크나 화염폭풍같은 탄막이라고 보기 힘든 기술엔 적용되지 않는다.\n2번째 탄막은 탄막의 소모도 마나의 소모도 없으니 안심.\n
+LOC_SYSTEM_SPL_DESCRIBE_TIME_PARADOX,탄막을 따라하는 도플갱어를 만들어낸다.\n주변 2~3칸 거리에 움직이지 않는 분신을 하나 만든다.\n분신은 본체가 던지는 투척무기와 발사형 마법을 대상에게 가능할 경우 약한 위력으로 따라 쏜다.\n분신마다 던질 수 있는 제한 횟수가 있으며, 높은 레벨의 발사 마법은 더 빨리 소모한다.\n파워가 높을수록 체력과 지속시간, 그리고 던질 수 있는 제한 횟수가 늘어난다.\n
 LOC_SYSTEM_SPL_DESCRIBE_PRIVATE_SQ,주변의 시간을 느리게하여 상대적인 가속효과를 얻는 마법.\n시야 내의 모든 적에게 슬로우를 건다. 저항할 수 있다.\n
 LOC_SYSTEM_SPL_DESCRIBE_CONTROLED_BLINK,원하는 위치로 정밀하게 순간이동할 수 있는 시공마법의 꽃.\n사용후 높은 시공부작용을 받는다.\n
 LOC_SYSTEM_SPL_DESCRIBE_THE_WORLD,시공마법의 정점에 오른 자만이 쓸 수 있다는 궁극의 시공마법.\n잠시간 모든 시간을 멈추고 일방적으로 행동할 수 있다. 공격도 가능하다.\n어마어마한 시공부작용을 받는다. 연속으로 쓰는건 무리가 있다.\n
@@ -2806,7 +2806,7 @@ LOC_SYSTEM_SPL_DESCRIBE_SUMMON_NAMAZ,해당 위치에 거대한 나마즈를 낙
 LOC_SYSTEM_SPL_DESCRIBE_SCHEMA_TANMAC,경계 저편에서 날라오는 탄막.\n높은 레벨에서의 스키마는 더욱 강력한 탄막을 발사한다.\n
 LOC_SYSTEM_SPL_DESCRIBE_CHANGE,너구리의 특기인 둔갑술. 주변에 무엇이든지 둔갑할 수 있다.\n사용하면 근처에 보이는 가장 강한 몬스터로 둔갑한다. 같은 너구리로는 둔갑하지않는다.\n둔갑하면 잠시간 그 몬스터의 능력치와 마법을 쓸 수 있다. 다만 둔갑되도 소환술은 쓰지못한다.\n일정시간이 지나면 다시 원래 모습으로 돌아오고 죽여도 본래의 경험치를 준다.\n
 LOC_SYSTEM_SPL_DESCRIBE_UNLUCK,풍수를 통하여 주변의 운기를 조작한다.\n주변의 운기를 내려 지정한 상대의 불행을 초래하게 한다.\n운기가 내려간 적은 흉, 대흉, 불멸의 3가지 단계를 거치게 되며 \n공격이 잘 맞지않게되고, 피하기 힘들어지며 좋은 아이템을 얻는 운이 내려가게 된다.\n대흉이나 불멸은 가끔씩 단순히 불운하단 정도론 넘어가기 힘든만큼의 불행이 찾아온다.\n최대 데미지로 공격을 맞는다던지, 하늘에서 UFO가 떨어진다던지...\n하늘에서 UFO라고? 농담인게 당연하잖아!\n
-LOC_SYSTEM_SPL_DESCRIBE_THUNDER,하늘에서 벼락을 떨어뜨리는 마법.\n지정한 위치에서 3*3의 크기로 강력한 전기공격을 가한다.\n번개는 종잡을 수 없기 때문에 꼭 3*3의 범위에 모두 직격한다는 보장은 없다.\n
+LOC_SYSTEM_SPL_DESCRIBE_THUNDER,하늘에서 벼락을 떨어뜨리는 마법.\n지정한 적에게 3*3의 크기로 강력한 전기공격을 가한다.\n대상의 주변 무작위 위치에 번개가 치지만, 전도체가 있다면 우선적으로 피해를 주게 된다.\n
 LOC_SYSTEM_SPL_DESCRIBE_AIR_STRIKE,빠른 대기의 탄환을 적에게 날리는 마법.\n적을 관통하거나 아주 강력한 마법은 아니지만 다른 마법에 비해 시전하는 속도가 빠르다.\n다른 마법에 비해 2배 빠른 속도로 시전이 가능하다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_RACOON,다수의 너구리 부하를 한꺼번에 소환해내는 마미조의 특기.\n소환된 너구리는 강하지않지만 너구리들도 둔갑을 하기때문에 놔두면 귀찮은 일이 될지 모른다.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_YOUKAI,다양한 강력한 요괴를 불러내는 마법.\n오니, 제등요괴, 설녀가 소환된다. 한번에 하나씩 소환이 가능하다\n
@@ -3109,7 +3109,7 @@ LOC_SYSTEM_SKL_DESCRIBE_OKINA_5,언제든지 오키나의 신도는 자신의 �
 LOC_SYSTEM_SKL_DESCRIBE_JUNKO_1,단순하지만 강력한 물리 탄막을 쏜다. 캐릭터의 레벨에 비례해서 강해진다.\n순호의 권능은 사용하면 일시적인 순화가 일어나서 소모품의 사용에 제한이 걸린다.\n2번 사용할때마다 순화가 1단계씩 증가한다.\n
 LOC_SYSTEM_SKL_DESCRIBE_JUNKO_2,순수하게 강력한 힘을 일시적으로 얻는다. \n힘이 5증가하고 근접, 탄막공격력에 추가데미지가 생긴다.\n순호의 권능은 사용하면 일시적인 순화가 일어나서 소모품의 사용에 제한이 걸린다.\n1번 사용할때마다 순화가 1단계씩 증가한다.\n
 LOC_SYSTEM_SKL_DESCRIBE_JUNKO_3,적에 대한 살의를 증폭시켜 일시적으로 빠른 가속을 얻는다. \n모든 행동속도가 1.5배 빨라지지만 시야내의 적이 사라지게되면 살의 역시 사라진다.\n순호의 권능은 사용하면 일시적인 순화가 일어나서 소모품의 사용에 제한이 걸린다.\n1번 사용할때마다 순화가 2단계씩 증가한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_JUNKO_4,순호로부터 영구적인 순화의 축복을 받을 수 있다. 오로지 1번만 사용할 수 있다. \n스탯이 영구적으로 증가하고 3가지중 선택하여 순화 능력을 영구적으로 부여받을 수 있지만\n더 이상 순호의 권능을 사용할 수 없으며 영구적인 순화상태로 소모품 사용이 불가능해진다.\n만약 원하는 순화 선택지가 없으면 잠시 순화를 다음 선택으로 미룰 수 있지만 미루게되면\n다시 다음 순화 선택지가 나올때까지는 신앙을 다시 모아야 선택이 가능해진다.\n또한, 순화된 상태에서 순호를 배신하게되면 순화의 힘으로 무조건 죽게 된다.\n\n당신은 배신할수도 없으며 권능도 소모품도 사용할 수 없는 패널티를 감수할 각오가 되어있는가?\n
+LOC_SYSTEM_SKL_DESCRIBE_JUNKO_4,순호로부터 영구적인 순화의 축복을 받을 수 있다. 오로지 1번만 사용할 수 있다. \n3가지중 선택하여 순화 능력을 영구적으로 부여받을 수 있지만\n더 이상 순호의 권능을 사용할 수 없다.\n만약 원하는 순화 선택지가 없으면 잠시 순화를 다음 선택으로 미룰 수 있지만 미루게되면\n다시 다음 순화 선택지가 나올때까지는 신앙을 다시 모아야 선택이 가능해진다.\n또한, 축복을 받은 상태에서 순호를 배신하게되면 순화의 힘으로 무조건 죽게 된다.\n\n당신은 배신할 수도 없으며 권능을 다시 사용할 수도 없는 패널티를 감수할 각오가 되어있는가?\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_1,당신은 역병신인 죠온이나 빈곤신인 시온을 자신의 몸에 빙의시킬 수 있다.\n역병신과 빈곤신을 빙의하는 부담으로 둘의 저주가 강화되는 패널티를 안게되지만\n빙의는 일정시간 지속되며 빙의하는 동안엔 빙의 된 신의 권능을 사용할 수 있으며\n빙의가 끝나면 일정 신앙심을 얻은 후에 다시 빙의를 할 수 있게 된다.\n\n죠온은 빙의와 동시에 파워를 가득 채워주지만 소모품을 항상 2~3개씩 낭비하게 될것이며\n빙의가 풀렸을때 파워가 3.00이상 남아있을 경우는 강제로 파워가 3.00으로 줄어든다.\n시온은 빙의와 동시에 체력과 영력을 회복시키며 파워가 낮을때 받는 패널티를 없애주지만\n땅에 떨어진 소모품들이 사라지는 속도가 가속되며 땅에 떨어뜨린 소모품은 무조건 사라질것이다.\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_2,죠온에게 빙의하는 동안에 죠온의 스펠카드인 퀸 오브 버블을 사용할 수 있다.\n시야 내의 모든 적에게 저항불가능한 짧은 혼란을 걸며 시전자의 레벨에 비례한 데미지를 준다.\n사용하게 되면 다시 다음 빙의를 할때까지는 이 권능을 사용할 수 없게 된다.\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_3,시온에게 빙의하는 동안에 시온의 스펠카드인 미스찬스 스캐터을 사용할 수 있다.\n시야 내의 모든 적에게 저항불가능한 감속을 걸며 시야를 가리는 안개를 자신의 주변에 흩뿌린다.\n사용하게 되면 다시 다음 빙의를 할때까지는 이 권능을 사용할 수 없게 된다.\n
@@ -3288,7 +3288,7 @@ LOC_SYSTEM_ITEM_ARTIFACT_MAGICIAN,마법사
 LOC_SYSTEM_ITEM_ARTIFACT_AC,AC{0}
 LOC_SYSTEM_ITEM_ARTIFACT_EV,EV{0}
 LOC_SYSTEM_ITEM_ARTIFACT_CONFUSE_RESIST,혼란저항
-LOC_SYSTEM_ITEM_ARTIFACT_ELEC_RESIST,전기저항
+LOC_SYSTEM_ITEM_ARTIFACT_ELEC_RESIST,전기저항{0}
 LOC_SYSTEM_ITEM_ARTIFACT_MAGIC_RESIST,마법저항
 LOC_SYSTEM_ITEM_ARTIFACT_SLAY,전투력{0}
 LOC_SYSTEM_ITEM_ARTIFACT_HP_REGEN,체력재생{0}
@@ -3310,7 +3310,7 @@ LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGICIAN,마법성공율이 올라간다.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_AC,방어가 증감한다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_EV,회피가 증감한다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_CONFUSE_RESIST,혼란에 저항이 생긴다.
-LOC_SYSTEM_ITEM_ARTIFACT_INFO_ELEC_RESIST,전기에 저항이 생긴다.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_ELEC_RESIST,전기저항이 증감한다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGIC_RESIST,마법 저항이 생긴다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_SLAY,공격력과 명중률이 증감한다.({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_HP_REGEN,체력 재생 속도가 증감한다.({0})
@@ -3892,7 +3892,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,몽전대사묘의 태자를 부활시
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE,어느 이변에서나 중요한 그레이즈의 힘이 담긴 부적.\n착용하고 있으면 점차 충전이 되고 충전이 끝나면 당신은 탄막괴물이 된다.\n100%가 된 부적을 착용한 채로도 상시 그레이즈가 발동되어 원거리 탄막을 일정확률로 피할 수 있고\n100%상태에서 v를 누르면 근성회피가 발동되어 회피가능한 공격을 일정턴 100% 회피한다.\n그레이즈할때 나는 소리가 기분이 좋다. 그레이즈가 의미없던 시리즈도 있었다고...?\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,어느 불량 천인이 자신의 검의 힘을 부여한 부적. 그녀의 변덕스러운 성격이 부적에도 담겨있다.\n착용하고 있으면 주변의 기질 구슬을 흡수하고 충전이 끝나면 부적에 숨겨있던 기질이 발동된다.\n100%상태에서 v를 누르면 저장된 날씨가 발현되며 체력재생력을 높게 올린다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT,도시전설을 실체화하는 힘을 가진 오컬트볼의 힘이 담긴 부적.\n착용하고 있으면 오컬트의 기운을 흡수하고 충전이 끝나면 오컬트의 힘을 방출한다.\n100%상태에서 v를 누르면 시야내의 모든 적대적인 소환물을 추방하며\n부적안에 숨겨있는 오컬트의 힘을 요괴로서 구현화한다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PURIFTY,달의 도시의 힘이 깃들어있는 부적.\n착100%상태에서 v를 누르면 사용자의 나쁜 상태이상들을 순식간에 정화시킨다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PURIFTY,달의 도시의 힘이 깃들어있는 부적.\n100%상태에서 v를 누르면 사용자의 나쁜 상태이상들을 순식간에 정화시킨다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG,이 버그 부적은 멋도 없고 효과도 없다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_UKNOWN,이 부적은 아직 무슨 힘을 가지고 있는지 아직 알 수 가 없다.\n착용하면 무슨 힘을 숨기고 있는지 알 수 있을 것 같다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_STR,손에 낀 착용자의 근력을 강화시키거나 약화시키는 힘의 반지.\n그 증감량은 반지의 수치에 달려있다.\n
@@ -3960,7 +3960,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG,버그를 담은 발동템이다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1,이 템은 횟수제한없이 발동이 가능한 템이다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2,이 템은 횟수제한없이 발동이 가능한 템이다. 당신의 발동스킬에 비례해서 강력함이 결정된다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3,V키로 파워를 소모하여 발동할 수 있다.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,이 발동템을 사용할때마다 필요한 
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,이 발동템을 사용할때마다 필요한 파워
 LOC_SYSTEM_ITEM_DESCRIPTION_RUNE,이것은 각종 던전을 정복한 증거인 룬이다.\n3개를 모으면 최심부 하쿠레이 신사의 문을 열 수 있다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_YINYANG_ORB,이것은 강대한 힘을 가진 음양옥이다. 신사 내부에 정중하게 모셔져 있다.\n이 것을 가지고 탈출하면 이 이변을 끝내거나 엄청난 힘을 얻을 수 있을 것 같다.\n어떻게 사용하는지는 당신의 자유이다! 그러나 탈출할때까진 끝이 아니므로 조심하길!\n특히 신사의 홍백의 무녀가 눈에 불을 키고 당신을 쫓아올 것이다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE1,"잃어버린 애완동물을 찾습니다. - 코메이지 사토리"라고 적혀있는 종이다.\n당신의 사진이 붙어있다...\n
@@ -4080,7 +4080,7 @@ LOC_SYSTEM_GOD_MIKO_DESCRIPTION,토요사토미미노 미코는 몽전대사묘�
 LOC_SYSTEM_GOD_OKINA_TITLE,마타라 오키나 - 궁극의 절대비신
 LOC_SYSTEM_GOD_OKINA_DESCRIPTION,마타라 오키나는 배후에 숨어있는 비신으로 자세한 정체는 알려져있지않다.\n그녀는 자신의 일을 맡길 부하를 찾고있으며, 당신이 그 일을 할수도 있다.\n그녀의 신도가 되는 것으로 그녀의 문을 만드는 힘을 이용한 권능을 받을 수 있다.\n문을 자유자재로 타고다닐수도있고, 적의 등뒤에서 갑자기 등장할수도 있다.\n또한 다른 동료들을 부르는 것으로 생명력과 정신력을 끌어올릴수도 있다.\n그녀는 전투에서 승리하여 신의 존재감을 널리 알리는 것을 좋아한다.
 LOC_SYSTEM_GOD_JUNKO_TITLE,순호
-LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,순호는 원한이 순화된 신령으로 자신의 원한을 갚기위해 신도를 모집하고 있다.\n그녀의 신도가 된다면 단순하지만 강력한 순화의 능력을 받을 수 있다.\n그녀의 권능은 신앙심도 소모하지않지만 사용하게되면 일시적으로 순화상태에 빠지고\n순화 단계가 올라갈수록 소모품의 사용에 제한되는 패널티가 생긴다.\n기본적으로 권능에 의한 순화상태는 시간이 지나면 돌아오지만 순호가 아끼는 신도에게는 영구적인 순화를 내릴 수 있다.\n그녀의 축복은 너무 무겁기에 패널티도 크고 배신조차 허용되지않지만 그에 비견할만한 새로운 축복이 내려진다.\n그녀는 원한을 갚기위해 보이는 적을 모조리 죽이는 것을 좋아한다.
+LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,순호는 원한이 순화된 신령으로 자신의 원한을 갚기위해 신도를 모집하고 있다.\n그녀의 신도가 된다면 단순하지만 강력한 순화의 능력을 받을 수 있다.\n그녀의 권능은 신앙심도 소모하지않지만 사용하게되면 일시적으로 순화상태에 빠지고\n순화 단계가 올라갈수록 소모품의 사용에 제한되는 패널티가 생긴다.\n기본적으로 권능에 의한 순화상태는 시간이 지나면 돌아오며 순호가 아끼는 신도에게는 영구적인 순화의 축복이 내려진다.\n이 축복을 받은 이상 순호로부터 도망칠 수 없게 되지만 그에 비견할만한 새로운 능력이 내려진다.\n그녀는 원한을 갚기위해 보이는 적을 모조리 죽이는 것을 좋아한다.
 LOC_SYSTEM_GOD_KEIKI_TITLE,하니야스신 케이키 - 고립무원이 빚어낸 조형신
 LOC_SYSTEM_GOD_KEIKI_DESCRIPTION,케이키는 인간령들이 만들어낸 조형신이다.\n우상을 만들어내어 만들어낸 우상에 생명을 부여할 수 있다.\n그는 신도들을 보호하기위해 믿는 즉시 작은 하니와를 내려주며\n탐험을 하면서 점차 하니와를 신도의 입맛에 맞게 개조해나갈 수 있다.\n케이키는 우상을 만들기위해 당신의 경험치를 일부 가져갈 것이다.
 LOC_SYSTEM_GOD_BUG_TITLE,버그신
@@ -4496,7 +4496,7 @@ LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY3,당신은 문을 강제로 닫고 잠글 수
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY4,당신은 적의 등뒤로 이동할 수 있다.
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY5,당신은 크레이지 백댄서를 불러올 수 있다.
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY6,당신은 언제든지 등뒤에 있는 문을 열고 탈출 할 수 있다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1,당신은 순호의 축복에 의해 영구적으로 순화되었다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1,당신은 순호에게서 영구적인 순화의 축복을 받았다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2,당신은 일부 두루마리, 물약을 사용할 수 없다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3,당신은 스펠카드, 일부 두루마리, 물약을 사용할 수 없다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY4,당신은 모든 스탯이 5 증가한다.
@@ -4507,8 +4507,8 @@ LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3,3단계: 당신은 물약의 효과를 받
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY2,당신은 단순하지만 강력한 탄막을 날릴 수 있다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY3,당신은 순수한 힘을 얻을 수 있다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY4,당신은 순수한 살의를 얻을 수 있다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5,당신은 순호의 축복으로 영구적으로 순화할 수 있다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1,당신은 순호의 축복으로 영구적으로 순화되었다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5,당신은 순호에게서 영구적인 순화의 축복을 받을 수 있다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1,당신은 순호에게서 영구적인 순화의 축복을 받았다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2,스킬순화: 당신의 {0} 스킬레벨은 캐릭터 레벨과 항상 같다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3,저항순화: 당신의 {0:은|는} 무한대다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4,마력순화: 당신의 체력과 영력은 동일시된다.
@@ -5051,8 +5051,8 @@ LOC_SYSTEM_GOD_OKINA_PUNISH_DRAIN,오키나의 분노로 당신의 체력과 영
 LOC_SYSTEM_GOD_JUNKO_WELCOME,순호: 상아여, 보고 있는가?
 LOC_SYSTEM_GOD_JUNKO_TALK,순호: 상아여 보고있는가!
 LOC_SYSTEM_GOD_JUNKO_ABIL_HASTE_FAIL,시야에 살의를 표출할 적이 있어야 한다.
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,순화의 축복은 영구적인 순화 패널티를 얻게된다.
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN,또한 한번 고른 순화는 되돌릴 수 없다!
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,순화의 축복을 받으면 더 이상 순호의 권능을 사용할 수 없다.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN,한번 고른 순화는 되돌릴 수 없다!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ASK,어떤 능력을 순화하겠습니까?
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_OTHER,신앙심을 내리고 새로운 순화를 위해 이번 선택을 미룬다.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_REALLY,이번 선택을 미루면 다음 선택까지 시간이 걸립니다. 정말로 미루겠습니까?
@@ -5377,3 +5377,284 @@ LOC_SYSTEM_ITEM_ARTIFACT_HEAVY,무거움
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_LESS_POWER,최대 파워가 1칸 내려간다.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_CURSE,착용하고있으면 저절로 저주에 걸린다.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_HEAVY,이동 속도가 {0} 내려간다.
+LOC_SYSTEM_FIGHT_SLASH,{0:은|는} {1}의 {2:을|를} 검으로 베었다.
+LOC_SYSTEM_FLOOR_EFFECT_SCORE,점수아이템
+LOC_SYSTEM_DAZED,멍함
+LOC_SYSTEM_HIT_BASH,{0:은|는} {1:을|를} 둔기로 내리쳤다.
+LOC_SYSTEM_WIKI_HELP,던전 스즈나안
+LOC_SYSTEM_HELP_SHORTBLADE,단검은 암습 데미지가 높습니다.
+LOC_SYSTEM_HELP_LONGBLADE,장검은 멀리서오는 탄막의 상쇄가 가능합니다.
+LOC_SYSTEM_HELP_AXE,도끼는 공격시 적 후방에 충격파를 발생시킵니다.
+LOC_SYSTEM_HELP_MACE,둔기는 적에게 강타를 날려 멍함을 유발합니다.
+LOC_SYSTEM_HELP_SPEAR,창은 2칸 떨어진 적을 공격가능합니다.
+LOC_SYSTEM_DUNGEON_FORESTOFMAGIC,마법의 숲
+LOC_SYSTEM_DUNGEON_DOLLSHOUSE,인형의 집
+LOC_SYSTEM_TILE_STAIR_FORESTOFMAGIC,마법의 숲으로 가는 계단
+LOC_SYSTEM_TILE_STAIR_DOLLSHOUSE,인형의 집으로 가는 계단
+LOC_SYSTEM_ITEM_RUNE_FORESTOFMAGIC,마법의 룬
+LOC_SYSTEM_ITEM_RUNE_DOLLSHOUSE,인형의 룬
+LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX_IMMOBILE,이 적은 지면에 단단하게 고정되어 저먼 스플렉스를 할 수 없다!
+LOC_SYSTEM_GOD_YUUGI_THROW_IMMOBILE,이 적은 지면에 단단하게 고정되어 던질 수 없다!
+LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP_IMMOBILE,이 적은 자리를 뒤집을 수 없는 적이다.
+LOC_SYSTEM_GOD_OKINA_ABIL_LOCKED_DOOR_IMMOBILE,이 적은 문에서 비켜줄 수 없다!
+LOC_SYSTEM_GOD_SWAWKO_TOUGUE_IMMOBILE,이 적은 끌어 당길 수 없다.
+LOC_SYSTEM_IMMOBILE_FAIL,이 적은 바닥에 단단하게 고정되어있다.
+LOC_SYSTEM_STEM_GROWING,갑자기 근처의 줄기가 어마어마한 속도로 자라난다!
+LOC_SYSTEM_STEM_WITHERING,과성장해버린 줄기가 시들었다.
+LOC_SYSTEM_ITEM_FOOD_WATERMELEN,수박
+LOC_SYSTEM_TILE_MUSHROOM1,커다란 버섯
+LOC_SYSTEM_TILE_MUSHROOM2,커다란 버섯
+LOC_SYSTEM_MON_TREE_GIANT_DEAD,{0:이|가} 힘을 잃고 평범한 나무로 돌아왔다.
+LOC_SYSTEM_MON_TREE_GIANT_SUDDENLY,갑자기 허공에서 나무가 자라났다.
+LOC_SYSTEM_MON_TREE_GIANT_GROWING,그리고 나무에서 식물이 자라난다!
+LOC_SYSTEM_MON_TREE_GIANT_WITHERING,나무는 시들었다.
+LOC_SYSTEM_ATT_SPORE,포자
+LOC_SYSTEM_DUMP_DEATHREASON_SPORE,{0}에서 포자에 질식해죽었다.
+LOC_SYSTEM_DUMP_DEATHREASON_SPORE_BY,{0}에서 {1}의 포자에 질식해죽었다.
+LOC_SYSTEM_ATT_INFO_CONFUSE_SPORE,공격에 혼란을 유발하는 독이 포함되어있다.
+LOC_SYSTEM_ATT_INFO_WEAK_SPORE,공격에 약화를 유발하는 독이 포함되어있다.
+LOC_SYSTEM_SPL_DESCRIBE_CONFUSE_SPORE,커다란 머리를 흔들어 혼란 포자를 멀리 있는 상대에게 날리는 기술.\n자체적으로 데미지는 없지만 발사 경로에 혼란 구름이 생긴다.\n가까이 있을땐 쓰지 않는다.\n
+LOC_SYSTEM_SPL_DESCRIBE_WEAKENDED_SPORE,면역력을 약화시키는 포자를 주변에 뿌린다. 이 포자에 당하면 독저항이 일시적으로 사라진다.\n먼 거리까지 닿진않지만 면역을 약화시키는 포자가 주변에 퍼저있기때문에\n일정거리 안에 있다면 저항이나 위치 무관하게 당할 수 있다.\n
+LOC_SYSTEM_SPL_DESCRIBE_ACID_BOLT,산성 미사일을 발사하는 기술.\n이 공격에 당하면 일시적으로 방어력이 감소된다.\n또한 산성에 당한 동안에는 마이너스 방어력만큼 추가 피해를 받게 된다.\n
+LOC_SYSTEM_SPL_DESCRIBE_ORRERIRES_SUN,주변에 별 탄막을 적에게 주기적으로 발사하는 구슬을 4체 소환한다.\n마치 작은 우주를 형상화시킨듯한 마리사의 대표 마법.\n
+LOC_SYSTEM_SPL_DESCRIBE_THROW_STAR,별 모양의 탄막을 뿌린다.\n별 모양인걸 제외하면 일반적인 탄막과 크게 다르진않다.\n
+LOC_SYSTEM_SPL_CONFUSE_SPORE,혼란 포자 방출
+LOC_SYSTEM_SPL_WEAKENDED_SPORE,면역 약화 포자
+LOC_SYSTEM_SPL_ACID_BOLT,산성 볼트
+LOC_SYSTEM_SPL_ORRERIRES_SUN,오렐리즈 썬
+LOC_SYSTEM_SPL_THROW_STAR,별모양 탄막
+LOC_SYSTEM_ATT_STAR,별모양 탄막
+LOC_SYSTEM_MAGIC_WEAKENING_SPORE,{0:은|는} 공기중 퍼진 포자에 의해 독 면역력이 감소한다.
+LOC_SYSTEM_MON_NO_LONGER_VULUN_POISON,{0:은|는} 더 이상 독에 약하지않다.
+LOC_SYSTEM_VULUN_POISON,독취약
+LOC_SYSTEM_MON_VULUN_POISON,{0:은|는} 포자를 뒤집어쓰고 면역력이 약화되었다.
+LOC_SYSTEM_ATT_ACID,산성
+LOC_SYSTEM_HIT_ACID,{0}의 {1:은|는} {2}에게 명중하고 산성액을 뒤집어썼다.
+LOC_SYSTEM_BUFF_ACID,산성({0})
+LOC_SYSTEM_BUFF_DESCRIBE_ACID,산성은 수치만큼 방어력을 감소시킵니다. 산성으로 인해 방어력이 음수가 되면 더 큰 데미지를 받습니다.
+LOC_SYSTEM_ACID,산성
+LOC_SYSTEM_ATT_INFO_ACID,공격이 산성을 걸 수 있다.
+LOC_SYSTEM_SPL_SACRIFICE,새크리파이스
+LOC_SYSTEM_SPL_DESCRIBE_SACRIFICE,인형이 거대한 폭탄과 함께 자신의 몸을 던져서 공격한다.\n폭탄을 들면 다른 행동을 할 수 없고 적을 향해 달리기만 할 수 있지만,\n시간이 다 되면 주변 벽을 포함한 2칸 범위에 큰 폭발 피해를 준다.
+LOC_SYSTEM_MON_SWIFT,{0:은|는} 신속해졌다.
+LOC_SYSTEM_MON_MORE_SWIFT,{0:은|는} 더욱 오래 신속하게 움직일 수 있다.
+LOC_SYSTEM_MON_NO_LONGER_SWIFT,{0:은|는} 더 이상 신속하지 않다.
+LOC_SYSTEM_SPL_DOLL_LUNGE,인형 돌진
+LOC_SYSTEM_SPL_CURSE,저주
+LOC_SYSTEM_SPL_THROW_BUCKET,양동이 던지기
+LOC_SYSTEM_ATT_DOLL_LUNGE,창 돌진
+LOC_SYSTEM_ATT_BUCKET,양동이
+LOC_SYSTEM_BUFF_STAT_SLIPPERY,미끄러움
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLIPPERY,발밑이 미끄러워 계단을 이용할 수 없다.
+LOC_SYSTEM_STAIR_SLIPPERY,발밑이 미끄러워 계단을 이용할 수 없다!
+LOC_SYSTEM_YOU_SLIPPERY,당신은 미끄러운 액체를 뒤집어썼다.
+LOC_SYSTEM_YOU_SLIPPERY_END,몸에 묻은 미끄러운 액체가 사라졌다.
+LOC_SYSTEM_SPL_DESCRIBE_DOLL_LUNGE,창을 세우고 떨어진 적에게 순식간에 돌진하여 거리를 좁히고 데미지를 준다.\n2칸 이하의 너무 가까이 있는 적에겐 돌진 할 수 없고 연속으로 사용하지 못한다.
+LOC_SYSTEM_SPL_DESCRIBE_CURSE,자신의 몸에 못을 박아 체력을 깎아 대상에게 방어를 무시하는 데미지를 입힌다.\n이 공격은 시야에만 있으면 사용이 가능하며 회피할 수 없다.
+LOC_SYSTEM_SPL_DESCRIBE_THROW_BUCKET,청소를 위해 들고 있던 미끄러운 액체가 든 양동이를 던진다.\n이 액체를 맞으면 일시적으로 계단을 이용할 수 없는 미끄러움 상태가 되며, 더러운 물에 의해 감속, 혼란, 병의 무작위 상태이상에 걸린다.\n양동이는 하나이기때문에 연속으로 던지지는 못하는걸로 보인다.
+LOC_SYSTEM_ATT_PIERCING,찌르기 
+LOC_SYSTEM_TILE_DOLLSHOUSE_WALL,벽
+LOC_SYSTEM_MAGIC_DOLL_LUNGE,{0:은|는} {1}에게 돌격했다.
+LOC_SYSTEM_PLAYER_SAKUYA,사쿠야
+LOC_SYSTEM_PLAYER_CIRNO,치르노
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SAKUYA,좌우로 발사하는 트리키 타입. 나이프를 활용한 독특한 전투 전략을 활용하라!\n 적성보너스) 단검적성 +3, 탄막적성 +3, 시공마법적성 +4\n 보너스) 빗자루 대신 투척용 나이프+2, 나이프를 투척하면 빠르고, 분산되어 날라갑니다.\n\n 초보자팁) 사쿠야는 투척용 나이프를 던질때 더 빠르고, 주변에 나이프의 분신을 추가로 만들어 던집니다.\n 대신 투척용 나이프는 던지면 다시 회수해야 던질 수 있기때문에 독특한 싸움법이 요구됩니다.\n 가지고 있는 시공마법을 적극적으로 활용해보세요.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_CIRNO,녹지 않는 불볕더위 속의 빙정. 상황에 맞는 아이템을 만들어내라!\n 스탯보너스) 힘+6, 지능-6\n 적성보너스) 전투적성 +3, 장검적성 +2, 둔기적성 +2, 냉기마법적성 +3, 화염마법적성 -3\n 보너스) 냉기저항 ++, 화염저항 -, 3레벨마다 얼음으로 된 아이템을 만들 수 있습니다.\n\n 초보자팁) 치르노는 높은 냉기마법적성과 요정답지않은 전투적성을 같이 지녔습니다.\n 3레벨의 배수마다 얼음으로 된 아이템을 생성해서 강력해지세요.\n 얼음으로 만들어진 아티팩트 장비나, 탄막, 심지어 아이스크림도 만들 수 있습니다.\n 냉기술사처럼 사용하거나 높은 전투적성을 활용하세요.\n 다만 근접 전투를 하게 된다면 요정 특유의 연약함에 주의해야 합니다.
+LOC_SYSTEM_TRIBE_PROPERTY_SAKUYA_PASSIVE,소쇄한 메이드
+LOC_SYSTEM_TRIBE_PROPERTY_CIRNO_PASSIVE,얼음의 요정
+LOC_SYSTEM_TRIBE_PROPERTY_CIRNO_ICE_CREATE,얼음 아이템 생성
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SAKUYA_PASSIVE,당신은 투척용 나이프를 빠르게 던지며 좌우로 분신 나이프를 함께 발사한다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CIRNO_PASSIVE,당신은 냉기 그 자체다. (냉기저항 2단계, 화염취약 1단계)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CIRNO_ICE_CREATE,당신은 3레벨마다 얼음으로 된 아이템을 만들어낼 수 있다.
+LOC_SYSTEM_SKL_CIRNO_ICE_CREATE,얼음 아이템 생성
+LOC_SYSTEM_SKL_DESCRIBE_CIRNO_ICE_CREATE,얼음 속성이 부여된 아이템을 3개 만들어내고 그 중 하나를 선택해서 얻을 수 있다.\n아이템의 품질은 사용 횟수에 따라 점차 좋아진다.
+LOC_SYSTEM_GOD_SHOW_N_REMAIN,({0}번 남음)
+LOC_SYSTEM_CIRNO_ICE_CREATE_READY,당신의 이제 얼음으로 만들어진 아이템을 만들어낼 수 있다.
+LOC_SYSTEM_CIRNO_ICE_CREATE_USED,당신은 얼음으로 된 아이템을 만들어냈다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SAKUYA_PASSIVE,투척용 나이프의 투척 시간이 20% 줄어든다.\n투척용 나이프의 근처 적을 좌우 하나씩 자동으로 조준하여 분신 나이프를 동시에 발사한다.\n분신 나이프는 아이템을 소모하거나 바닥에 남기지 않는다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CIRNO_PASSIVE,냉기 저항이 2단계 증가하고 화염 저항이 1단계 감소한다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CIRNO_ICE_CREATE,3레벨마다 얼음으로 만든 아이템 생성 능력을 1회 얻는다.\n얼음으로 만들어진 아이템은 냉기 속성이 부여되어 있으며 3개의 선택지가 보여진다.\n능력 사용마다 품질이 점점 좋아지고 생성은 능력 사용을 통해 언제든지 할 수 있으며 모아둘 수 있다.
+LOC_SYSTEM_ITEM_ICE_SWORD,아이시클 소드
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_SWORD,고드름으로 만든 큰 대검이다.\n자신이 생각하기에 가장 거대하고 강하게 만들었지만 그 무게에 이기지못하고 휘둘리기도 한다. 
+LOC_SYSTEM_ITEM_ICE_DAGGER,아이시클 대거
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_DAGGER,얼음으로 만든 작은 단검이다.\n그녀는 단검으로 싸우는걸 좋아하진 않지만, 작은만큼 정교하고 날카롭게 다듬어져있다.
+LOC_SYSTEM_ITEM_ICE_CRASHER,그레이트 크래셔
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_CRASHER,커다란 얼음 덩어리로 만든 둔기다.\n그녀의 작은 머리로 가장 강력한 무기를 생각한 결과, 거대한 망치가 만들어졌다.
+LOC_SYSTEM_ITEM_ICE_SPEAR,아이시클 스피어
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_SPEAR,얼음으로 만든 창이다.\n최대한 길고 커다란 고드름을 생각했더니, 이런 무기가 나왔다.
+LOC_SYSTEM_ITEM_ICE_AXE,아이시클 액스
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_AXE,얼음으로 만든 도끼다.\n치르노가 생각해내기엔 꽤 고급스러운 무기지만, 사용법은 단순하다.
+LOC_SYSTEM_ITEM_ICE_ICICLE,고드름
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_ICICLE,던져서 적을 공격하는 날카로운 고드름 탄막이다.\n냉기 피해를 주고 맞은 적을 빙결시킨다.
+LOC_SYSTEM_ITEM_ICE_RING,얼음 반지
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_RING,얼음으로 가공한 반지다.
+LOC_SYSTEM_ITEM_ICE_CROWN,얼음 왕관
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_CROWN,얼음으로 가공한 왕관이다.
+LOC_SYSTEM_ITEM_ICE_CREAM,아이스크림
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_CREAM,치르노가 좋아하는 차갑고 달콤한 아이스크림이다.\n약간의 파워와 체력 회복 능력이 있다.
+LOC_SYSTEM_ITEM_ICE_ARMOUR,얼음 갑옷
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_ARMOUR,얼음으로 만들어진 갑옷이다.\n엄청나게 차갑기때문에, 입을 수 있는 자는 한정될 것이다.
+LOC_SYSTEM_ITEM_ICE_GLOVES,얼음 장갑
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_GLOVES,얼음으로 만든 장갑이다.\n손에 동상을 견딜 수 있는 자만이 낄 수 있을 것이다.
+LOC_SYSTEM_ITEM_ICE_BOOTS,얼음 신발
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_BOOTS,얼음으로 만든 신발이다.\n그 냉기를 버틸 수 있다면 발을 보호해줄 것이다.
+LOC_SYSTEM_ITEM_ICE_CLOAK,얼음 망토
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_CLOAK,얼음으로 만든 망토다.\n멋지지만 바람에 휘날리진 못한다.
+LOC_SYSTEM_ITEM_ICE_BOOK,얼음 책
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_BOOK,얼음으로 만든 책이다.\n삐뚤빼뚤한 글씨로 자신이 생각한 최강의 마법이 적혀있다.
+LOC_SYSTEM_ITEM_EVOKE_ICE_FROG,냉동 개구리
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_ICE_FROG,얼어붙은 개구리다.\n사용하면 주변에 안개를 만들고 적에게 감속과 빙결을 건다. 가까운 적일수록 효과가 강하다.\n일정 횟수를 사용하면 얼음이 녹아 평범한 개구리로 돌아갈 것이다.
+LOC_SYSTEM_CIRNO_ICE_CREATE_SELECT,얼음 아이템을 고르시오.
+LOC_SYSTEM_CIRNO_ICE_CREATE_EXAMINE,설명을 볼 얼음 아이템을 고르시오.
+LOC_SYSTEM_CIRNO_ICE_CREATE_CONFIRM,정말로 이 아이템을 고르겠습니까?
+LOC_SYSTEM_ITEM_FROZEN_FROG_USE,냉동 개구리에서 차가운 안개가 피어오른다.
+LOC_SYSTEM_ITEM_FROZEN_FROG_EMPTY,냉동 개구리는 더 이상 사용할 수 없다.
+LOC_SYSTEM_CIRNO_ICE_CREATE_SELECT_MODE,선택
+LOC_SYSTEM_CIRNO_ICE_CREATE_EXAMINE_MODE,설명
+LOC_SYSTEM_ITEM_FROZEN_FROG_REMAIN,{0}회남음
+LOC_SYSTEM_CIRNO_LAEVATEIN_TOO_HOT,이 무기는 당신에겐 너무 뜨겁다!
+LOC_SYSTEM_CIRNO_ICEFAIRYRING_EQUIP,당신은 더 이상 나빠질 머리가 없다.
+LOC_SYSTEM_KNIFE_COLLECT_EMPTY,시야내에 회수할 투척무기가 없다.
+LOC_SYSTEM_KNIFE_COLLECT_DONE,당신은 주변의 투척무기를 회수했다.
+LOC_SYSTEM_TIME_PARADOX_NO_SPACE,분신을 만들 공간이 없다.
+LOC_SYSTEM_SPELLCARD_CANCEL_WASTE_ASK,취소하면 횟수가 소모됩니다. 정말 취소하시겠습니까?
+LOC_SYSTEM_SPL_DOLL_SPEAR,인형조창
+LOC_SYSTEM_SPL_LITTLE_LEGION,리틀 레기온
+LOC_SYSTEM_SPL_DESCRIBE_DOLL_SPEAR,대상 주변에 검을 들고 회전하는 인형 둘을 소환한다.\n인형은 움직이진 않지만 지속적으로 주변에 데미지를 입힌다.
+LOC_SYSTEM_SPL_DESCRIBE_LITTLE_LEGION,시전자 주변에 즉시 전투가 가능한 인형을 여럿 소환한다.\n소환되는 인형으론 창병, 궁수, 자폭병이 있으며 한번에 한 종류씩 2~4명이 소환된다.\n이 인형들은 10턴정도의 아주 짧은 시간만 지속되고 시전자는 연달아 마법을 사용할 수 없다.\n이 마법을 상대한다면 잠깐 전투를 피하거나 인형을 다루는 본체를 공격해야할 것이다.
+LOC_SYSTEM_WIKI_SEARCH_HINT,/나 ?키를 눌러서 검색할 수 있습니다.
+LOC_SYSTEM_ITEM_ARTIFACT_SHINING_NEEDLE_SWORD_NAME,빛나는 휘침검
+LOC_SYSTEM_ITEM_ARTIFACT_SHINING_NEEDLE_SWORD_DESCRIBE,난쟁이가 검처럼 사용한다는 작은 바늘.\n일반적으로 너무 작아서 제대로 전투용으로 사용하긴 어려워보인다.
+LOC_SYSTEM_ITEM_ARTIFACT_SWORD_OF_SCARLET_PERCEPTION_NAME,비상의 검
+LOC_SYSTEM_ITEM_ARTIFACT_SWORD_OF_SCARLET_PERCEPTION_DESCRIBE,천인의 보물이라고 하는 비상의 검.\n본래는 천인만이 만질 수 있는 비보라고 한다.\n아마 진품을 흉내낸 모조품일지도 모른다.
+LOC_SYSTEM_ITEM_ARTIFACT_GOLIATH_SWORD_NAME,골리앗 대검
+LOC_SYSTEM_ITEM_ARTIFACT_GOLIATH_SWORD_DESCRIBE,어딘가의 거대한 인형이 들고 있었던 큰 대검.\n일반적인 인간이나 요괴가 들기엔 양손으로 들어야한다.\n너무 거대하기에 휘두르는 게 어렵지만 그것만으로 주변의 적들에게 피해를 줄 수 있다.
+LOC_SYSTEM_ITEM_ARTIFACT_REAPER_SCYTHE_NAME,사신의 낫
+LOC_SYSTEM_ITEM_ARTIFACT_REAPER_SCYTHE_DESCRIBE,사신이 어깨에 걸치고 다니는 거대한 낫.\n들고있는 것만으로 멀리 있는 상대가 눈앞에 있는 듯한 착각이 든다.\n거리 감각이 어려워서 기존의 무기들보다 사용이 까다롭다.
+LOC_SYSTEM_ITEM_ARTIFACT_UNIDENTIFIED_TRIDENT_NAME,정체불명의 삼지창
+LOC_SYSTEM_ITEM_ARTIFACT_UNIDENTIFIED_TRIDENT_DESCRIBE1,아무런 특색이 없는 평범한 창처럼 보인다.\n하지만 무기 안에서 정체를 알 수 없는 오오라가 느껴진다.\n많은 식별의 두루마리가 있다면 이 무기의 정체를 파악할지도 모른다.
+LOC_SYSTEM_ITEM_ARTIFACT_UNIDENTIFIED_TRIDENT_DESCRIBE2,점차 숨겨진 힘을 드러내기 시작한 삼지창.\n다시보니 정체불명의 대요괴가 사용했던 창과 비슷하게 생겼다.\n더 많은 식별의 두루마리가 있다면 이 무기의 진가를 알 수 있을 것이다.
+LOC_SYSTEM_ITEM_ARTIFACT_UNIDENTIFIED_TRIDENT_DESCRIBE3,대요괴 누에가 들고있었다는 전설의 삼지창.\n그 숨겨진 능력이 모두 드러났다.\n하지만 정체를 들켜버린 무기는 과연 누에의 무기라 할 수 있을까?
+LOC_SYSTEM_ITEM_ARTIFACT_SUNKEN_ANCHOR_NAME,침수의 닻
+LOC_SYSTEM_ITEM_ARTIFACT_SUNKEN_ANCHOR_DESCRIBE,배유령의 힘이 깃든 거대한 닻.\n들고있기만해도 무언가를 바다에 빠트리고 싶다는 충동이 든다.
+LOC_SYSTEM_ITEM_ARTIFACT_YAMANBA_CLEAVER_NAME,야만바의 식칼
+LOC_SYSTEM_ITEM_ARTIFACT_YAMANBA_CLEAVER_DESCRIBE,산 속에 숨어산다는 야만바의 무기.\n한 손으로 들 수 있는 식칼이지만 던질수도있고 다용도로 쓰인다.
+LOC_SYSTEM_ITEM_ARTIFACT_BUTTERFLY_FAN_NAME,사접의 부채
+LOC_SYSTEM_ITEM_ARTIFACT_BUTTERFLY_FAN_DESCRIBE,유령의 힘이 깃든 부채.\n둔기로서는 그렇게 강해보이지않지만 깃든 힘이 무언가 치명적으로 느껴진다.
+LOC_SYSTEM_ITEM_ARTIFACT_RED_MALLET_NAME,붉게 물든 떡메
+LOC_SYSTEM_ITEM_ARTIFACT_RED_MALLET_DESCRIBE,떡을 찧는데 쓰는 거대한 떡메. 떡메 끝에 붉은 액체가 묻어있다.\n얼핏보면 핏자국처럼 보이지만 사실은 딸기 소의 자국이다.\n자국과 별개로 굉장히 휘두르기 좋은 무기로 방심한 상대방을 날려버릴 수 있다.
+LOC_SYSTEM_ITEM_ARTIFACT_IMMOVABLE_LIBRARY_NAME,지식과 그늘의 로브
+LOC_SYSTEM_ITEM_ARTIFACT_IMMOVABLE_LIBRARY_DESCRIBE,어느 마법사가 입고 있던 보라색 로브.\n마력을 증폭시키기 위한 처리가 되어있다.\n그 때문인지 옷이 불편해서 입기만해도 움직이기 귀찮아진다는 단점이 있다.\n옷에 달려있는 끈이 마치 줄무늬처럼도 보일때도 있다.
+LOC_SYSTEM_ITEM_ARTIFACT_FULLMOON_DRESS_NAME,만월 늑대옷
+LOC_SYSTEM_ITEM_ARTIFACT_FULLMOON_DRESS_DESCRIBE,보름달의 그림이 크게 그려져있는 펑퍼짐한 원피스.\n늑대인간이 자신의 털을 가리기위해 이런 큼직한 디자인으로 만들었다고 한다.
+LOC_SYSTEM_ITEM_ARTIFACT_HANIWA_ARMOUR_NAME,하니와 석갑옷
+LOC_SYSTEM_ITEM_ARTIFACT_HANIWA_ARMOUR_DESCRIBE,조형신이 직접 만든 단단한 갑옷.\n흙으로 만들어졌지만 신의 능력으로 웬만한 갑옷보다 단단해졌다.
+LOC_SYSTEM_ITEM_ARTIFACT_OCCULT_CLOAK_NAME,오컬트 망토
+LOC_SYSTEM_ITEM_ARTIFACT_OCCULT_CLOAK_DESCRIBE,비봉클럽의 초대회장을 위한 멋들어진 망토.\n내부엔 룬 문자가 새겨져있어서 착용자에 오컬트의 힘이 깃드는 것 같다.
+LOC_SYSTEM_ITEM_ARTIFACT_PEACH_HAT_NAME,복숭아 모자
+LOC_SYSTEM_ITEM_ARTIFACT_PEACH_HAT_DESCRIBE,머리위에 장식용 복숭아가 달려있는 천인의 모자.\n마치 천인의 육체처럼 단단해지고 높은 체력 재생력을 준다.
+LOC_SYSTEM_ITEM_ARTIFACT_BOUNDARY_GLOVES_NAME,경계요괴의 긴 장갑
+LOC_SYSTEM_ITEM_ARTIFACT_BOUNDARY_GLOVES_DESCRIBE,어느 경계요괴가 사용했다는 팔꿈치까지 오는 긴 흰색 장갑.\n던진 투척 무기가 경계를 타고 어느새 내 수중으로 돌아와있다.
+LOC_SYSTEM_ITEM_ARTIFACT_COWGIRL_BOOTS_NAME,카우걸 부츠
+LOC_SYSTEM_ITEM_ARTIFACT_COWGIRL_BOOTS_DESCRIBE,엄청난 각력을 가진 요수가 착용했다고하는 부츠.\n착용한 것만으로 발차기의 힘이 엄청나게 강화된다.
+LOC_SYSTEM_ITEM_ARTIFACT_STOPWATCH_NAME,특제 스톱워치
+LOC_SYSTEM_ITEM_ARTIFACT_STOPWATCH_DESCRIBE,끝에 은빛 시계가 달려있는 은빛 체인으로 만들어진 목걸이.\n가만히 보고있으면 바늘이 느리게 움직이는 듯한 착각이 든다.
+LOC_SYSTEM_ITEM_ARTIFACT_SNAKE_RING_NAME,뱀의 반지
+LOC_SYSTEM_ITEM_ARTIFACT_SNAKE_RING_DESCRIBE,군신의 힘이 깃든 반지.\n사용자의 체력과 힘을 큰 폭으로 올려준다.
+LOC_SYSTEM_ITEM_ARTIFACT_FROG_RING_NAME,개구리의 반지
+LOC_SYSTEM_ITEM_ARTIFACT_FROG_RING_DESCRIBE,토착신의 힘이 깃든 반지. 마치 지상을 물처럼 수영하듯이 헤엄칠 수 있게 된다.\n귀여워 보이는 디자인이지만 끝없는 재앙도 느껴진다.
+LOC_SYSTEM_ITEM_ARTIFACT_WEATHER_TRIGGER,*날씨
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_WEATHER_TRIGGER,공격시 낮은 확률로 무작위 날씨가 발현된다.
+LOC_SYSTEM_ITEM_ARTIFACT_WHIRLWIND,훨윈드
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_WHIRLWIND,공격시 주변 8칸의 적을 모두 공격한다.
+LOC_SYSTEM_ITEM_ARTIFACT_INFINITE_REACH,사거리+∞
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_INFINITE_REACH,직선상에 방해물이 없다면 얼마나 멀리 있는 적이든 공격할 수 있다.
+LOC_SYSTEM_ITEM_ARTIFACT_PULL,끌어당기기
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_PULL,공격한 적을 눈 앞으로 끌어당긴다.
+LOC_SYSTEM_ITEM_ARTIFACT_UNKNOWN_POWER,정체불명
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_UNKNOWN_POWER,이 무기엔 아직 식별되지않은 숨겨진 능력이 남아있습니다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_FLOOD,침수
+LOC_SYSTEM_ITEM_WEAPON_BRAND_INFO_FLOOD,맞은 상대에 일정확률로 침묵과 이동불가 효과를 부여한다.
+LOC_SYSTEM_ITEM_ARTIFACT_SWIM,수영
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_SWIM,물에서 수영할 수 있다.
+LOC_SYSTEM_ITEM_ARTIFACT_INSTANT_DEATH,즉사
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_INSTANT_DEATH,생명체인 적을 일정 확률로 즉사시킨다. 적이 나보다 약할수록 확률이 올라간다.
+LOC_SYSTEM_ITEM_ARTIFACT_KNOCKAWAY,날리기
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_KNOCKAWAY,적을 무기로 처치할때 뒤로 날려버린다.
+LOC_SYSTEM_ITEM_ARTIFACT_JUMP,+도약
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_JUMP,적에게 도약해서 공격할 수 있게 된다.
+LOC_SYSTEM_ITEM_ARTIFACT_RETURN,반환
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_RETURN,던진 투척 무기가 50% 확률로 소지품으로 돌아온다.
+LOC_SYSTEM_ITEM_ARTIFACT_KICK,*발차기
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_KICK,근접 공격시 일정확률로 발차기를 날린다. 확률과 피해량은 맨손 격투에 비례한다.
+LOC_SYSTEM_ITEM_ARTIFACT_MAX_HP,체력{0}
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAX_HP,체력이 {0}만큼 증감한다.
+LOC_SYSTEM_ITEM_ARTIFACT_DIVE,+잠수
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_DIVE,지상에 잠수하여 모든 적의 시야에서 사라질 수 있게 된다.
+LOC_SYSTEM_ITEM_ARTIFACT_POWER,파워{0}
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_POWER,최대 파워가 {0}칸 증감한다.
+LOC_SYSTEM_ITEM_ARTIFACT_TRIDENT_COMPLETE,{0:은|는} 모든 정체를 드러냈다!
+LOC_SYSTEM_ITEM_ARTIFACT_REAPER_BLOCKED,너무 먼 거리의 적을 공격하기엔 눈 앞의 무언가가 방해된다.
+LOC_SYSTEM_SKILL_DIVE,잠수
+LOC_SYSTEM_SKILL_DIVE_OFF,잠수 해제
+LOC_SYSTEM_SKILL_DIVE_INFO,일정 시간 잠수상태가 됩니다. 잠수 상태동안에는 주변의 적에게 들키지 않습니다.\n이 상태에서는 이동과 공격, 도약만 가능하며 공격이나 도약시 잠수 상태가 풀립니다.\n또한 원거리 공격을 전부 회피하지만 근접 공격을 받게되면 상태가 풀립니다.
+LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION,잠수 중에는 이동과 공격, 도약만 할 수 있다.
+LOC_SYSTEM_ITEM_ARTIFACT_NUE_TRIDENT_NAME,대요괴 누에의 삼지창
+LOC_SYSTEM_ITEM_ARTIFACT_TRIDENT_REVEAL,아이템 식별에 의해 {0}의 숨겨진 능력이 밝혀졌다!
+LOC_SYSTEM_ITEM_ARTIFACT_WEATHER_TRIGGERED,{0}에 의해 {1} 날씨가 발현되었다!
+LOC_SYSTEM_ITEM_ARTIFACT_PULL_TRIGGER,{0:이|가} 멀리 있는 {1:을|를} 당신의 앞으로 끌어당겼다!
+LOC_SYSTEM_ITEM_ARTIFACT_INSTANT_DEATH_TRIGGER,{0:이|가} {1}의 생명력을 거둔다!
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN11,개가 그려진 부적
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIME_STOP,시간정지의 부적
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIME_STOP_SHORT,시간정지
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIME_STOP,어딘가의 메이드가 들고다니던 회중시계.\n100%상태에서 v를 누르면 자기 자신을 제외한 모든 시간을 잠시동안 멈출 수 있다.\n
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIVE,잠수 중에는 적에게 들키지 않고 투사체를 모두 회피하지만 이동과 공격만 가능합니다.
+LOC_SYSTEM_BUFF_STAT_DIVE,잠수
+LOC_SYSTEM_YOU_DIVE,당신은 {0}에 잠수했다.
+LOC_SYSTEM_YOU_DIVE_END_ALMOST,당신의 숨이 차기 시작한다.
+LOC_SYSTEM_YOU_DIVE_END,당신은 급하게 {0}에서 올라왔다!
+LOC_SYSTEM_SKILL_ALREADY_DIVE,이미 잠수 도중에 사용할 수 없다.
+LOC_SYSTEM_SKILL_DIVE_STOP,당신은 {0}에서 올라왔다.
+LOC_SYSTEM_SKILL_DIVE_STOP_ATTACKED,당신은 피해를 받아 잠수가 풀렸다.
+LOC_SYSTEM_SKILL_DIVE_EXTINGUISH,당신에게 붙은 불이 꺼졌다.
+LOC_SYSTEM_SKILL_DIVE_JUMP,당신은 {0}속에서 힘차게 뛰쳐나왔다!
+LOC_SYSTEM_HIT_NORMAL_NO_OWNER,{0:은|는} {1}에게 명중했다.
+LOC_SYSTEM_FIGHT_MISS_NO_OWNER,{0:이|가} {1:을|를} 빗나갔다.
+LOC_SYSTEM_FIGHT_GRAZED_NO_OWNER,{0:이|가} {1}에게 그레이즈당했다.
+LOC_SYSTEM_SPELL_POWER_ENHANCE1,당신의 마법이 강화되었다!
+LOC_SYSTEM_SPELL_POWER_ENHANCE2,당신의 마법이 상당히 강화되었다!
+LOC_SYSTEM_SPELL_POWER_ENHANCE3,당신의 마법이 엄청나게 강화되었다!
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_FLOOD,당신은 누군가를 침수시키고 싶은 충동에 빠졌다.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FLOOD,당신의 침수 충동은 사라졌다.
+LOC_SYSTEM_SPL_KICK,발차기
+LOC_SYSTEM_PATCH_NOTE,패치 노트
+LOC_SYSTEM_SPL_THROW_AXE,도끼 투척
+LOC_SYSTEM_SPL_DESCRIBE_THROW_AXE,손도끼를 적을 향해 멀리 던진다. 인접한 상대에게는 던지지 않는다.
+LOC_SYSTEM_SPL_COUNTER_TANMAC,반격탄
+LOC_SYSTEM_SPL_DESCRIBE_COUNTER_TANMAC,죽는 순간 적을 향해 두 발의 호밍 탄막을 날린다.
+LOC_SYSTEM_ATT_AXE,도끼
+LOC_SYSTEM_TILE_CARPET,카펫
+LOC_SYSTEM_ITEM_FOOD_CAKE,케이크
+LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE,홍마관 지하실에 있던 케이크 한조각.\n이 케이크는 먹음직스러워보이지만, 출처가 수상해보인다.\n정말 먹어도 되는걸까?
+LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE_VAMPIRE,홍마관 지하실에 있던 케이크 한조각.\n이 케이크는 먹음직스러워보이지만, 출처가 수상해보인다.\n케이크에서 참을 수 없을 정도로 맛있는 냄새가 난다!
+LOC_SYSTEM_UNIQUE_SPELLCARD_FOUND,{0:은|는} 스펠카드를 들고 있다. 적 처치 후 스펠카드 발동에 주의하라!
+LOC_SYSTEM_UNIQUE_SPELLCARD_ACTIVATE,{0}의 스펠카드 발동!
+LOC_SYSTEM_UNIQUE_SPELLCARD_GET,{0}의 스펠카드 획득!
+LOC_SYSTEM_UNIQUE_SPELLCARD_STAIR_BLOCK,스펠카드가 다른 층으로 이동하는 것을 막고 있다!
+LOC_SYSTEM_UNIQUE_SPELLCARD_FLAN_NAME,비탄 「그리고 아무도 없게 되는가?」
+LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BURST,폭발에 면역이 있다.
+LOC_SYSTEM_DEBUG_ACTIVATE_UNIQUE_SPELLCARD,발동할 스펠카드
+LOC_SYSTEM_FIGHT_EVADE_NO_OWNER,{0:은|는} {1:을|를} 피했다.
+LOC_SYSTEM_FIGHT_GRAZE_NO_OWNER,{0:은|는} {1:을|를} 그레이즈했다.
+LOC_SYSTEM_SPL_GLACIER_WALL,빙하벽
+LOC_SYSTEM_SPL_COLD_ARMOUR,냉기갑옷
+LOC_SYSTEM_SPL_DESCRIBE_GLACIER_WALL,인접한 위치에 단단한 빙하벽을 일시적으로 생성하는 냉기 마법.\n빙하벽은 만들어진 자리에서 이동하지 않으며 이동과 투사체를 막는다.\n
+LOC_SYSTEM_SPL_DESCRIBE_COLD_ARMOUR,얼음을 이용해서 일시적으로 몸을 보호하는 갑옷을 만든다.\n지속시간 동안 마법 위력에 비례해 높은 방어력을 얻는다.\n지속 시간이 끝나면 얼음 갑옷이 부서지며 주변 1칸에 폭발형 냉기 피해를 준다.\n만약 지속시간 중 최대 체력의 25% 이상 피해를 받았다면 폭발력이 증가하여 범위가 2칸으로 넓어진다.\n
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_ON,차가운 갑옷이 당신의 몸을 감쌌다.
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_OFF,냉기갑옷이 녹아 사라졌다.
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_BURST,냉기갑옷이 산산이 부서지며 냉기를 흩뿌렸다!
+LOC_SYSTEM_BUFF_STAT_COLD_ARMOUR,냉기갑옷
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_COLD_ARMOUR,냉기갑옷이 AC를 올려주고 있습니다. 지속 시간이 끝날때 주변 1칸에 냉기 피해를 줍니다.
+LOC_SYSTEM_BUFF_STAT_COLD_ARMOUR_PLUS,냉기갑옷+
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_COLD_ARMOUR_PLUS,냉기갑옷이 AC를 올려주고 있습니다. 일정 피해를 받은 덕분에 지속 시간이 끝날때 주변 2칸에 냉기 피해를 줍니다.
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_ALMOST_OFF,냉기갑옷이 불안정하다!
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_MELTING,냉기갑옷이 녹아내리고있다!

@@ -126,7 +126,7 @@ bool cantGeneratePotion(potion_type kind) {
 void drinkpotion(potion_type kind, bool waste_)
 {
 	int bonus = (you.god == GT_EIRIN && !you.GetPunish(GT_EIRIN))?1:0;
-	int multiple_ = you.GetProperty(TPT_GOOD_FOR_POTION)>1?2.0f:1.0f;
+	int multiple_ = you.GetProperty(TPT_GOOD_FOR_POTION)>=1?2.0f:1.0f;
 	you.addPotionAddict(true);
 	switch(kind)
 	{

@@ -18,13 +18,13 @@ smoke::smoke()
 : position(), image(NULL),type(SMT_NORMAL), time(1), expand(0), parent(PRT_NEUTRAL)
 {}
 
-smoke::smoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, parent_type parent_)
+smoke::smoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, int map_floor_, parent_type parent_)
 :position(c), image(t), type(type_), time(time_), expand(expand_), parent(parent_)
 {
-	onCreate();
+	onCreate(map_floor_);
 }
 
-void smoke::init(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, parent_type parent_)
+void smoke::init(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, int map_floor_, parent_type parent_)
 {
 	position = c;
 	image = t;
@@ -32,18 +32,18 @@ void smoke::init(const coord_def &c, textures *t, smoke_type type_, int time_, i
 	time = time_;
 	expand = expand_;
 	parent = parent_;
-	onCreate();
+	onCreate(map_floor_);
 }
-void smoke::onCreate() {
-	env[current_level].dgtile[position.x][position.y].flag |= FLAG_SMOKE;
+void smoke::onCreate(int map_floor_) {
+	env[map_floor_].dgtile[position.x][position.y].flag |= FLAG_SMOKE;
 	if(sight_inter())
 	{
-		env[current_level].dgtile[position.x][position.y].flag |= FLAG_SIGHT_SMOKE;
-		if(env[current_level].isInSight(position))
+		env[map_floor_].dgtile[position.x][position.y].flag |= FLAG_SIGHT_SMOKE;
+		if(map_floor_ == current_level && env[map_floor_].isInSight(position))
 			you.sight_reset = true;
 	}
 	if(type == SMT_DARK)
-		env[current_level].dgtile[position.x][position.y].flag |= FLAG_DANGER;
+		env[map_floor_].dgtile[position.x][position.y].flag |= FLAG_DANGER;
 }
 void smoke::SaveDatas(FILE *fp)
 {

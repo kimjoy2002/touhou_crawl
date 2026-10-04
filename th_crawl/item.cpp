@@ -7,11 +7,13 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "item.h"
+#include "ice_item.h"
 #include "monster_texture.h"
 #include "const.h"
 #include "potion.h"
 #include "player.h"
 #include "scroll.h"
+#include "skill_use.h"
 #include "ring.h"
 #include "save.h"
 #include "weapon.h"
@@ -154,7 +156,7 @@ void item_infor::LoadDatas(FILE *fp)
 	LoadData<bool>(fp, artifact);
 	if(!isPrevVersion(loading_version_string, "ver1.109")) {
 
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		for(int i = 0; i < size_; i++)
 		{
@@ -267,7 +269,7 @@ void item::LoadDatas(FILE *fp)
 	}
 
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		for(int i = 0; i < size_; i++)
 		{
@@ -278,7 +280,7 @@ void item::LoadDatas(FILE *fp)
 	}
 	if(!isPrevVersion(loading_version_string, "ver1.109")) {
 
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		for(int i = 0; i < size_; i++)
 		{
@@ -361,7 +363,7 @@ void Iden_collect::SaveDatas(FILE *fp) {
 }
 void Iden_collect::LoadDatas(FILE *fp) {
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -378,7 +380,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 	}
 
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -395,7 +397,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 	}
 
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -412,7 +414,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 	}
 	
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -429,7 +431,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 	}
 	
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -446,7 +448,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 	}
 	
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -463,7 +465,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 	}
 	
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -481,7 +483,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 
 	if(!isPrevVersion(loading_version_string, "ver1.113"))
 	{
-		int size_;
+		int size_ = 0;
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
@@ -497,7 +499,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 		}
 	}
 	
-    int size_, i;
+    int size_ = 0, i;
 	// 포션 자동줍기 로드
     LoadData<int>(fp, size_);
     for (i = 0; i < size_; ++i) {
@@ -509,9 +511,10 @@ void Iden_collect::LoadDatas(FILE *fp) {
             LoadData<bool>(fp, temp); // 초과분 무시
         }
     }
-    for (; i + IDEN_CHECK_POTION_START < IDEN_CHECK_POTION_END; ++i)
+    for (; i + IDEN_CHECK_POTION_START < IDEN_CHECK_POTION_END; ++i) {
         autopickup[IDEN_CHECK_POTION_START + i] = false; // 부족분 초기화
-
+	}
+	size_ = 0;
     // 스크롤 자동줍기 로드
     LoadData<int>(fp, size_);
     for (i = 0; i < size_; ++i) {
@@ -523,9 +526,10 @@ void Iden_collect::LoadDatas(FILE *fp) {
             LoadData<bool>(fp, temp);
         }
     }
-    for (; i + IDEN_CHECK_SCROLL_START < IDEN_CHECK_SCROLL_END; ++i)
+    for (; i + IDEN_CHECK_SCROLL_START < IDEN_CHECK_SCROLL_END; ++i) {
         autopickup[IDEN_CHECK_SCROLL_START + i] = false;
-
+	}
+	size_ = 0;
     // 반지 자동줍기 로드
     LoadData<int>(fp, size_);
     for (i = 0; i < size_; ++i) {
@@ -537,9 +541,10 @@ void Iden_collect::LoadDatas(FILE *fp) {
             LoadData<bool>(fp, temp);
         }
     }
-    for (; i + IDEN_CHECK_RING_START < IDEN_CHECK_RING_END; ++i)
+    for (; i + IDEN_CHECK_RING_START < IDEN_CHECK_RING_END; ++i){
         autopickup[IDEN_CHECK_RING_START + i] = false;
-
+	}
+	size_ = 0;
     // 아뮬렛 자동줍기 로드
     LoadData<int>(fp, size_);
     for (i = 0; i < size_; ++i) {
@@ -551,9 +556,10 @@ void Iden_collect::LoadDatas(FILE *fp) {
             LoadData<bool>(fp, temp);
         }
     }
-    for (; i + IDEN_CHECK_AMULET_START < IDEN_CHECK_AMULET_END; ++i)
+    for (; i + IDEN_CHECK_AMULET_START < IDEN_CHECK_AMULET_END; ++i){
         autopickup[IDEN_CHECK_AMULET_START + i] = false;
-
+	}
+	size_ = 0;
     // 스펠카드 자동줍기 로드
     LoadData<int>(fp, size_);
     for (i = 0; i < size_; ++i) {
@@ -565,9 +571,10 @@ void Iden_collect::LoadDatas(FILE *fp) {
             LoadData<bool>(fp, temp);
         }
     }
-    for (; i + IDEN_CHECK_SPC_START < IDEN_CHECK_SPC_END; ++i)
+    for (; i + IDEN_CHECK_SPC_START < IDEN_CHECK_SPC_END; ++i){
         autopickup[IDEN_CHECK_SPC_START + i] = false;
-
+	}
+	size_ = 0;
     // 책 자동줍기 로드 (미감정 포함)
     LoadData<int>(fp, size_);
     for (i = 0; i < size_; ++i) {
@@ -579,9 +586,10 @@ void Iden_collect::LoadDatas(FILE *fp) {
             LoadData<bool>(fp, temp);
         }
     }
-    for (; i + IDEN_CHECK_BOOK_START < IDEN_CHECK_BOOK_END; ++i)
+    for (; i + IDEN_CHECK_BOOK_START < IDEN_CHECK_BOOK_END; ++i){
         autopickup[IDEN_CHECK_BOOK_START + i] = false;
-
+	}
+	size_ = 0;
     // 기타 자동줍기 로드 (P아이템, 음식류 포함)
     LoadData<int>(fp, size_);
     for (i = 0; i < size_; ++i) {
@@ -593,8 +601,9 @@ void Iden_collect::LoadDatas(FILE *fp) {
             LoadData<bool>(fp, temp);
         }
     }
-    for (; i + IDEN_CHECK_ETC_START < IDEN_CHECK_ETC_END; ++i)
+    for (; i + IDEN_CHECK_ETC_START < IDEN_CHECK_ETC_END; ++i){
         autopickup[IDEN_CHECK_ETC_START + i] = false;
+	}
 }
 
 void Iden_collect_111::migrateIden111toCurrent(const Iden_collect_111& old_data, Iden_collect& new_data)
@@ -714,7 +723,7 @@ string item::GetName(int num_, bool simple_, string lang)
 	}
 	
 
-	if(type==ITM_GOAL && value1 >= 0 && value1 < 10)
+	if(type==ITM_GOAL && value1 >= 0 && value1 < RUNE_MAX)
 	{
 		temp += LocalzationManager::locString(lang, rune_string[value1]);
 		overwriteName = true;
@@ -750,7 +759,7 @@ string item::GetName(int num_, bool simple_, string lang)
 	}
 
 
-	if(fixed_artifact == FIXED_ARTIFACT_NONE && isArtifact() && identify) {
+	if(fixed_artifact == FIXED_ARTIFACT_NONE && isArtifact() && identify && GetIceItemDescription(this) == LOC_NONE) {
 		string randart_name = LocalzationManager::artifactString(lang, artifact_guid);
 		if(!randart_name.empty()) {
 			temp += randart_name;
@@ -828,7 +837,10 @@ string item::GetName(int num_, bool simple_, string lang)
 	}
 	if(type==ITM_MISCELLANEOUS)
 	{
-		temp += " {" + LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_EVOKE) + "}";
+		temp += " {" + LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_EVOKE);
+		if(identify && value1 == EVK_FROZEN_FROG)
+			temp += ", " + LocalzationManager::formatString(lang,LOC_SYSTEM_ITEM_FROZEN_FROG_REMAIN,PlaceHolderHelper(to_string(value4)));
+		temp += "}";
 	}
 	if (type == ITM_AMULET && you.equipment[ET_NECK] == this)
 	{
@@ -880,12 +892,21 @@ string item::GetName(int num_, bool simple_, string lang)
 		}
 		else
 		{
-			temp+=" {"+ LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_ARTIFACT) +"}";
+			temp+=" {";
+			if(type==ITM_AMULET)
+			{
+				if(iden_list.amulet_list[value1].iden == 2)  {
+					temp += GetShortAmuletString(lang,(amulet_type)value1);
+					temp+=", ";
+				}
+			}
+			temp+= LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_ARTIFACT) +"}";
 		}
 	}
 
 
-	if (type == ITM_BOOK && !iden_list.books_list[value0]) {
+	if (type == ITM_BOOK && !identify &&
+		(value0 < 0 || value0 >= BOOK_LAST || !iden_list.books_list[value0])) {
 		temp = second_name.getName(lang) + " ";
 	}
 
@@ -907,6 +928,17 @@ bool item::matches(const string& term_raw) {
         string name = tolower_ascii(GetName(-1, false, it.first));
         if (name.find(term) != string::npos)
             return true;
+		if(type == ITM_BOOK && (identify || iden_list.books_list[value0])) {
+			for (int i = 0; i < 8; i++)
+			{
+				spell_list spell_;
+				if ((spell_ = (spell_list)GetValue(i + 1)) != SPL_NONE)
+				{
+					if (SpellString(spell_).find(term) != string::npos)
+						return true;
+				}
+			}
+		}
 
         for (LOCALIZATION_ENUM_KEY tag : item_tag) {
             string tag_string = tolower_ascii(LocalzationManager::locString(it.first, tag));
@@ -1057,7 +1089,6 @@ const D3DCOLOR item::item_color()
 			return_ = CL_bad;
 		}
 	}
-
 	return return_;
 }
 
@@ -1358,7 +1389,7 @@ bool item::isautopick()
 	switch(type)
 	{
 	case ITM_POTION:
-		if(iden_list.potion_list[value1].iden)
+		if(value1 >= 0 && value1 < PT_MAX && iden_list.potion_list[value1].iden)
 		{	
 			return iden_list.autopickup[value1 + IDEN_CHECK_POTION_START];
 			/*if(isGoodPotion((potion_type)value1)>0 || you.god == GT_EIRIN || (you.god == GT_YUUGI && value1 == PT_ALCOHOL))
@@ -1373,7 +1404,7 @@ bool item::isautopick()
 	case ITM_FOOD:
 		return iden_list.autopickup[(value1==0?0:1) + IDEN_CHECK_ETC_START];
 	case ITM_SCROLL:
-		if(iden_list.scroll_list[value1].iden == 3)
+		if(value1 >= 0 && value1 < SCT_MAX && iden_list.scroll_list[value1].iden == 3)
 		{
 			return iden_list.autopickup[value1 + IDEN_CHECK_SCROLL_START];
 			/*if(you.god == GT_YUKARI && (value1 == SCT_TELEPORT || value1 == SCT_BLINK))
@@ -1390,20 +1421,26 @@ bool item::isautopick()
 		else
 			return true;
 	case ITM_SPELL:
-		if (iden_list.spellcard_list[value1].iden == 2)
+		if (value1 >= 0 && value1 < SPC_V_MAX && iden_list.spellcard_list[value1].iden == 2)
 		{
 			return iden_list.autopickup[value1 + IDEN_CHECK_SPC_START];
 		}
 		return true;
 	case ITM_AMULET:
-		if (iden_list.amulet_list[value1].iden == 2)
+		if(isArtifact()) {
+			return true;
+		}
+		if (value1 >= 0 && value1 < AMT_MAX && iden_list.amulet_list[value1].iden == 2)
 		{
 			return iden_list.autopickup[value1 + IDEN_CHECK_AMULET_START];
 		}
 		else
 			return true;
 	case ITM_RING:
-		if(iden_list.ring_list[value1].iden == 2)
+		if(isArtifact()) {
+			return true;
+		}
+		if(value1 >= 0 && value1 < RGT_MAX && iden_list.ring_list[value1].iden == 2)
 		{
 			return iden_list.autopickup[value1 + IDEN_CHECK_RING_START];
 			/*if(isGoodRing((ring_type)value1,identify?value2:1)>0)
@@ -1420,7 +1457,7 @@ bool item::isautopick()
 			return true;
 	case ITM_BOOK:
 	{
-		if (iden_list.books_list[value0]) {
+		if (value0 >= 0 && value0 < BOOK_LAST && iden_list.books_list[value0]) {
 			return iden_list.autopickup[value0 + 1 + IDEN_CHECK_BOOK_START];
 		}
 		return iden_list.autopickup[IDEN_CHECK_BOOK_START];
@@ -1428,7 +1465,12 @@ bool item::isautopick()
 	case ITM_MENUAL:
 		return true;
 	case ITM_THROW_TANMAC:
-		return iden_list.autopickup[value4 + 2 +IDEN_CHECK_ETC_START];
+	{
+		if(value4 >= 0 && value4 < TMT_MAX) {
+			return iden_list.autopickup[value4 + 2 +IDEN_CHECK_ETC_START];
+		}
+		return false;
+	}
 	default:
 		break;
 	}
@@ -1449,14 +1491,50 @@ bool item::isChargable()
 	return false;
 
 }
+bool item::canSlashTanmac() {
+	if(type == ITM_WEAPON_LONGBLADE) {
+		//장검은 탄막을 자를 수 있음
+		return true;
+	}	
+	return false;
+}	
+bool item::canReachAttack() {
+	if(type == ITM_WEAPON_SPEAR) {
+		//창은 사거리 공격가능
+		return true;
+	}	
+	return false;
+}
+bool item::canBashAttack() {
+	if(type == ITM_WEAPON_MACE) {
+		//창은 사거리 공격가능
+		return true;
+	}	
+	return false;
+}
+bool item::canShockwave() {
+	if(type == ITM_WEAPON_AXE) {
+		//창은 사거리 공격가능
+		return true;
+	}	
+	return false;
+}
 bool item::isEvokable()
-{
+	{
 	if (type == ITM_SPELL || type == ITM_MISCELLANEOUS)
 		return true;
 	if (type == ITM_AMULET) {
-		if (isCanEvoke((amulet_type)value1) && you.equipment[ET_NECK] == this && you.getAmuletPercent() >= 100) {
+		if (isCanEvoke((amulet_type)value1) &&
+			you.equipment[ET_NECK] == this && you.getAmuletPercent() >= 100) {
 			return true;
 		}
+	}
+	if(you.isequip(this)) {
+		if(canReachAttack()) {
+			//창은 사거리 공격가능
+			return true;
+		}
+
 	}
 	return false;
 

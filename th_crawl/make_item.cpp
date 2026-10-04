@@ -362,6 +362,56 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 			t->weight = 1.0f*t->num;
 			t->value = 30;
 			break;
+		case 4:
+			t->value1 = 5;
+			t->value2 = 0;
+			t->value3 = 0;
+			t->value4 = 0;
+			t->value5 = 50;
+			t->value6 = 0;
+			t->value7 = 0;
+			t->value8 = 0;
+			t->is_pile = true;
+			t->can_throw = false;
+			t->num = 1;
+			t->image = &img_mons_food_watermelon;
+			t->name = name_infor(LOC_SYSTEM_ITEM_FOOD_WATERMELEN);
+			t->weight = 5.0f*t->num;
+			t->value = 30;
+			break;
+		case 5:
+			t->value1 = 6;
+			t->value2 = 0;
+			t->value3 = 0;
+			t->value4 = 0;
+			t->value5 = 30;
+			t->value6 = 0;
+			t->value7 = 0;
+			t->value8 = 0;
+			t->is_pile = true;
+			t->can_throw = false;
+			t->image = &img_item_ice[8];
+			t->name = name_infor(LOC_SYSTEM_ITEM_ICE_CREAM);
+			t->weight = 1.0f;
+			t->value = 30;
+			break;
+		case 6:
+			t->value1 = 7;
+			t->value2 = 0;
+			t->value3 = 0;
+			t->value4 = 0;
+			t->value5 = 100;
+			t->value6 = 0;
+			t->value7 = 0;
+			t->value8 = 0;
+			t->is_pile = true;
+			t->can_throw = false;
+			t->num = 1;
+			t->image = &img_item_food_cake;
+			t->name = name_infor(LOC_SYSTEM_ITEM_FOOD_CAKE);
+			t->weight = 1.0f;
+			t->value = 30;
+			break;
 		}
 		break;
 	case ITM_POTION:
@@ -679,7 +729,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 			{
 				t->value0 = 0;
 				t->value1 = 4;
-				t->value2 = 7;
+				t->value2 = 8;
 				t->value6 = 0;
 				t->value7 = 10;
 				t->value8 = 5;
@@ -695,7 +745,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 			{
 				t->value0 = 1;
 				t->value1 = 5;
-				t->value2 = 6;
+				t->value2 = 7;
 				t->value5 = 0;
 				t->value6 = 0;
 				t->value7 = 10;
@@ -713,7 +763,7 @@ void WeaponMake(item_type type, int good_bad, item_infor* t, int pixed_type)
 			{
 				t->value0 = 2;
 				t->value1 = 2;
-				t->value2 = 8;
+				t->value2 = 9;
 				t->value6 = 0;
 				t->value7 = 13;
 				t->value8 = 5;

@@ -142,7 +142,7 @@ MON_TEWI,Tewi,A white rabbit living in the Bamboo Forest. Said to bring good luc
 MON_CLOWNPIECE,Clownpiece,A hell fairy holding a torch.\nJust looking at her might drive you mad.
 MON_DOREMI,Doremy,The dream-keeper who consumes dreams.\nUsually resides in the dream world. Leads you into the land of dreams.\nSummons dangerous illusions from various locations.
 MON_FAIRY_HERO,Fairy Hero,A playful fairy who loves mischief, often seen in groups.\nA master swordswoman among fairies — underestimating her could be fatal.
-MON_FAIRY_SOCERER,Fairy Spiritcaster,A playful fairy who loves mischief, often seen in groups.\nA fairy who has grasped the truth of all things. Her magic transcends the limits of her kind.
+MON_FAIRY_SOCERER,Fairy Elementalist,A playful fairy who loves mischief, often seen in groups.\nA fairy who has grasped the truth of all things. Her magic transcends the limits of her kind.
 MON_FAIRY_SUN_FLOWER,Sunflower Fairy,A playful fairy who loves mischief, often seen in groups.\nA cute fairy holding a sunflower, commanding other fairies.\nHer large sunflower gathers others, making her the leader of the fairies.
 MON_MOON_RABIT_SUPPORT,Moon Rabbit Supporter,A moon rabbit handling various chores on the Moon.\nActs as an informant. Specializes in communication and intel, not direct combat.
 MON_MOON_RABIT_ATTACK,Moon Rabbit Scout,A moon rabbit handling various chores on the Moon.\nAssigned to scouting and reconnaissance, taking on the riskiest missions.
@@ -155,7 +155,7 @@ MON_FIRE_CAR,Fire Cart,A cart from the Underworld said to carry corpses.\nIts wh
 MON_HELL_SPIDER,Tsuchigumo,A spider youkai known as a Tsuchigumo.\nIts bite causes severe poison and illness. It also pollutes rivers.
 MON_BLOOD_HAUNT,Bloodstained Wraith,A wraith tainted by the bloody pond of the Underworld.\nIts blood curse drains HP and cannot be blocked by armor or agility.
 MON_HELL_HOUND,Hell Hound,A dog from the Underworld. Possibly not your average mutt.\nHowls to summon allied hounds. Ignoring it may lead to overwhelming numbers.
-MON_DESIRE,Spirit,A manifestation of concentrated desire. Resembles human cravings.\nColor determines its type and attribute: red = fire, blue = ice, green = electricity.\nAttacks with corresponding element. Being hit reduces resistance to that element for a short time.
+MON_DESIRE,Divine Spirit,A manifestation of concentrated desire. Resembles human cravings.\nColor determines its type and attribute: red = fire, blue = ice, green = electricity.\nAttacks with corresponding element. Being hit reduces resistance to that element for a short time.
 MON_FLOWER_TANK,Flower Tank,A tank made by someone unknown.\nFires a fairly powerful cannon.
 MON_EVIL_EYE_TANK,Evil Eye Tank,A tank seemingly modeled after something from Makai.\nIts goofy appearance hides terrifying power.
 MON_SNOW_GIRL,Snow Girl,A yuki-onna who can control snow.\nJust getting close is enough to feel the chill.
@@ -271,3 +271,33 @@ MON_HOMING,Homing Shot,A homing projectile that chases a target.\nFlies toward i
 MON_RABIT_GIANT,Giant Rabbit,A giant rabbit with a muscular physique.\nThrough consistent nutrition and training, it developed an impressive body.\nRumor has it that Eirin's suspicious protein drinks may have helped...
 MON_RABIT_ALCHEMIST,Rabbit Alchemist,A rabbit wearing a gas mask and loaded with potions.\nStudied pharmaceutical alchemy under Eirin and discovered its own talent.\nDue to its master’s influence, it now acts more like a mad scientist.
 MON_COGWHEEL,Cogwheel,A gear created through alchemy.\nMoves around and deals damage to enemies in all 8 surrounding directions.
+MON_YAMAINU,Wild Dog,A wolf beast living in the Forest of Magic.\nThey travel in packs looking for prey.\nIt's said that some powerful wolves can even take human form.
+MON_CONFUSE_MUSHROOM,Confusing Mushroom Youkai,A mushroom youkai brought to life by the strange energy of the Forest of Magic.\nIt throws confusion spores that cause dizziness just by breathing them in.\nThese long-range spores can be resisted with poison resistance.
+MON_WEAKENING_MUSHROOM,Weakened Mushroom Youkai,A mushroom youkai animated by the Forest of Magic's strange energy.\nIt releases weakening spores upon close contact, which at first seem resistible,\nbut proximity causes temporary suppression of poison resistance.
+MON_MUSHROOM_GIANT,Mushroom Giant,A mushroom youkai that grew enormous under the forest's strange energy.\nVarious fungi grow on its body, allowing it to scatter many kinds of spores.\nBut its most terrifying trait is its overwhelming physical strength.
+MON_GIANT_STAG_BEETLE,Giant Stag Beetle,A stag beetle that grew massive from the Forest of Magic's influence.\nAside from its size, it's mostly the same—but its pincers are dangerously sharp.\nIts damage fluctuates wildly, catching the careless off guard.
+MON_GIANT_SLUG,Giant Slug,A massive slug that loves the dampness of the Forest of Magic.\nMany adventurers report hearing the slug’s haunting cries as hallucinations.\nSome smart ones are said to wear hats and cast wind magic...
+MON_GIANT_CENTIPEDE,Giant Centipede,A centipede whose elongated body has been enlarged by magic.\nIt uses venomous fangs and coils its body around prey to immobilize them.\nIts torso is tougher than its head, making it inefficient to attack.
+MON_GIANT_CENTIPEDE_BODY,Giant Centipede
+MON_SPORE,Mushroom Spore,A mass of spores found commonly in the Forest of Magic.\nWhen charged with magical energy and burst, it deals area damage and rapidly evolves nearby mushrooms into youkai.
+MON_MAN_EATING_FLOWER,Maneating Morning Glory,A carnivorous trumpet flower mutated by magic.\nIt lifts its roots to walk and emits powerful acid.
+MON_OVERGROWTH_MAGIC_FLOWER,Overgrown Magic Flower,A flower grown huge by strange energy.\nPerhaps due to overgrowth, it withers after a short time.\nFleeing is an option, but many adventurers fight it for the sweet watermelon reward.
+MON_OVERGROWTH_STEM,Overgrown Stem,A plant stem swollen by strange energy.\nIt too withers after some time.\nSome avoid it, others fight to obtain the delicious watermelon it guards.
+MON_OVERGROWTH_WATERMELON,Giant Watermelon,A watermelon enlarged by mysterious energy.\nIf the flower and stem monsters wither, the watermelon becomes inedible.
+MON_WIZARD,Reclusive Wizard,A wizard hiding deep within the Forest of Magic.\nVery on edge, as they detest having their territory invaded.
+MON_TREE_GIANT,Tree Giant,A huge tree youkai that can lift its roots to walk.\nOnce slain, it becomes an ordinary tree, but the remaining magical power often grows dangerous flowers—be wary.
+MON_SANGHAI_DOLL,Self-Destruct Doll,A doll ready to blow itself up at any moment.\nIt seems the main purpose of these dolls is not the explosion damage itself, but to serve as an alarm for intruders.
+MON_HOURAI_DOLL,Cursed Hourai Doll,A doll that sacrifices its own body to inflict curses.
+MON_FRANCE_DOLL,France Doll,A doll that uses cold magic.
+MON_LONDON_DOLL,Doll Archer,A doll that fires arrows with a bow.
+MON_NETHERLANDS_DOLL,Netherlands Doll,A doll that throws buckets filled with suspicious liquid.
+MON_GOLIATH_DOLL,Goliath Doll,A gigantic combat doll created by Alice.
+MON_MARISA,Marisa,A seemingly ordinary magician living in the Forest of Magic.\nShe stores all sorts of magical tools and (stolen) books in her house.\nCurrently researching a strange, powerful rune she found.\nIf you intend to interfere, you’ll have to get through her danmaku.
+MON_ORRERY_ORB,Orreries Orb,A magical orb created by Marisa.\nIt represents the starry sky and unleashes relentless star-shaped danmaku at enemies.
+MON_SPEAR_DOLL,Spear Doll,A combat doll that rapidly charges enemies with a spear.
+MON_SHOEBILL,Shoebill,A bird with a massive bill and an expressionless face.\nIt spreads its wings and swoops in, attacking with its sharp bill.
+MON_YAMANBA,Yamanba,A youkai who lives hidden in the mountains.\nYamanba live alone rather than forming groups.\nWhen intruders enter their territory, they aggressively drive them away by throwing axes.
+MON_TORNADO_SPIRIT,Tornado Elemental,An elemental imbued with the power of a whirlwind.\nIt is a frail monster, easily swept away by a shot or two of danmaku,\nbut it is troublesome as it fires danmaku at its enemy upon death.
+MON_FLAN_AFTERIMAGE,Flandre's Afterimage,An afterimage of Flandre wandering the endless basement corridors.\nIt seems to be a clone Flandre once played with, but as it drifted farther from the original,\nits form gradually faded and weakened.
+MON_BULLET,Danmaku,Danmaku formed from magical power.\nIt moves very slowly, making it easier to dodge than ordinary danmaku.\nWatch its path carefully, and you should be able to evade it simply by moving.
+MON_GLACIER_WALL,Glacier Wall,A solid wall of ice created through magic.\nAlthough it cannot move, it blocks all movement and projectiles from where it stands.

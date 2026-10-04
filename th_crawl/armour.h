@@ -50,6 +50,7 @@ LOCALIZATION_ENUM_KEY GetMaterialStringKey(material_kind kind_);
 void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t);
 void MakeArmourEnchant(int good_bad, item_infor* t);
 int ArmourExceptopn(armour_kind type);
+int GetArmourImageIndex(armour_kind type);
 void equipArmour(armour_kind type, int value);
 
 armour_kind GetRandomArmourType(int good_bad);

@@ -25,6 +25,9 @@ extern textures img_auto_hell_wall[48];
 extern textures img_auto_lava[48];
 extern textures img_auto_oil[48];
 extern textures img_auto_snow[48];
+extern textures img_auto_carpet[48];
+extern textures img_dollshouse_floor;
+extern textures img_auto_dollshouse_wall[48];
 extern textures img_mons_default;
 //여기추가하면 texturetoint도 추가해야함
 extern textures img_mons_reimu_yukkuri;
@@ -202,6 +205,36 @@ extern textures img_mons_stonetower[];
 extern textures img_mons_security_door;
 
 
+extern textures img_mons_yamainu;
+extern textures img_confuse_mushroom;
+extern textures img_mons_weakening_mushroom;
+extern textures img_mons_mushroom_giant;
+extern textures img_mons_stag_beetle;
+extern textures img_mons_giant_slug;
+extern textures img_mons_giant_centipede;
+extern textures img_mons_giant_centipede_body[];
+extern textures img_mons_spore;
+extern textures img_mons_eating_flower;
+extern textures img_mons_magic_flower;
+extern textures img_mons_magic_flower_stem[];
+extern textures img_mons_watermelon;
+extern textures img_mons_wizard;
+extern textures img_mons_tree_giant;
+extern textures img_mons_france_doll;
+extern textures img_mons_london_doll;
+extern textures img_mons_netherlands_doll;
+extern textures img_mons_spear_doll;
+extern textures img_mons_curse_doll;
+extern textures img_mons_goliath_doll[4];
+extern textures img_mons_sacrifice_doll[2];
+extern textures img_mons_orrery_orb[];
+extern textures img_mons_spinning_doll[2];
+extern textures img_mons_shoebill;
+extern textures img_mons_yamanba;
+extern textures img_mons_tornado_spirit;
+extern textures img_mons_glacier_wall;
+
+
 
 extern textures img_named_rumia;
 extern textures img_named_mistia;
@@ -304,6 +337,7 @@ extern textures img_mons_nareko;
 extern textures img_mons_mike;
 extern textures img_mons_takane;
 extern textures img_mons_sannyo;
+extern textures img_named_marisa;
 
 
 
@@ -326,6 +360,11 @@ extern textures img_play_item_shield[];
 extern textures img_play_item_weapon[];
 extern textures img_play_item_tribe[];
 extern textures img_play_item_fixed_artifact[];
+extern textures img_play_item_artifact_cloak;
+extern textures img_play_item_artifact_glove;
+extern textures img_play_item_artifact_boot;
+extern textures img_play_item_artifact_body[];
+extern textures img_play_item_artifact_hat[];
 
 
 
@@ -339,6 +378,16 @@ extern textures img_item_armor_armour_0;
 extern textures img_item_armor_armour_1;
 extern textures img_item_armor_armour_2;
 extern textures img_item_armor_armour_3;
+extern textures img_item_artifact_armor_armour_0;
+extern textures img_item_artifact_armor_armour_1;
+extern textures img_item_artifact_armor_armour_2;
+extern textures img_item_artifact_armor_armour_3;
+extern textures img_item_armor_special[][4];
+extern textures img_item_artifact_armor_special[][4];
+extern textures img_item_artifact_armor_cloak;
+extern textures img_item_artifact_armor_glove;
+extern textures img_item_artifact_armor_boot;
+extern textures img_item_artifact_armor_helmet[];
 
 extern textures img_item_autumn_armour[];
 
@@ -430,12 +479,34 @@ extern textures img_item_fixed_artifact_helltshirt;
 extern textures img_item_fixed_artifact_kappafullarmor;
 extern textures img_item_fixed_artifact_maiduniform;
 extern textures img_item_fixed_artifact_ibukisake;
+extern textures img_item_fixed_artifact_shining_needle_sword;
+extern textures img_item_fixed_artifact_sword_of_scarlet_perception;
+extern textures img_item_fixed_artifact_goliath_sword;
+extern textures img_item_fixed_artifact_reaper_scythe;
+extern textures img_item_fixed_artifact_unidentified_trident;
+extern textures img_item_fixed_artifact_sunken_anchor;
+extern textures img_item_fixed_artifact_yamanba_cleaver;
+extern textures img_item_fixed_artifact_butterfly_fan;
+extern textures img_item_fixed_artifact_red_mallet;
+extern textures img_item_fixed_artifact_immovable_library;
+extern textures img_item_fixed_artifact_fullmoon_dress;
+extern textures img_item_fixed_artifact_haniwa_armour;
+extern textures img_item_fixed_artifact_occult_cloak;
+extern textures img_item_fixed_artifact_peach_hat;
+extern textures img_item_fixed_artifact_boundary_gloves;
+extern textures img_item_fixed_artifact_cowgirl_boots;
+extern textures img_item_fixed_artifact_stopwatch;
+extern textures img_item_fixed_artifact_snake_ring;
+extern textures img_item_fixed_artifact_frog_ring;
+extern textures img_player_dive;
 
 
 
 
 extern textures img_item_food_bread;
 extern textures img_item_food_p_item;
+extern textures img_mons_food_watermelon;
+extern textures img_item_food_cake;
 
 extern textures img_item_potion[];
 
@@ -471,6 +542,7 @@ extern textures img_item_rune;
 
 extern textures img_tanmac_bill[]; //아이템 이미지론 1만 씁니다. 
 extern textures img_tanmac_amulet[]; //0씀
+extern textures img_tanmac_shockwave[];
 extern textures img_tanmac_oil_big[]; //아이템 이미지론 1만 씁니다. 
 extern textures img_tanmac_fire_big[]; //아이템 이미지론 1만 씁니다. 
 extern textures img_tanmac_fire_small[];//아이템 이미지론 1만 씁니다. 
@@ -490,11 +562,16 @@ extern textures img_tanmac_knife[];
 extern textures img_tanmac_missle[];
 extern textures img_tanmac_homing[];
 extern textures img_tanmac_homing_cyan[];
+extern textures img_tanmac_axe[];
+extern textures img_star_tanmac[];
+extern textures img_score_item[];
 extern textures img_tanmac_small[6][4];
+extern textures img_bullet[6];
 extern textures img_joypad_arrow[];
 
 
 extern textures img_laser_small[];
+extern textures img_sacrifice_countdown[5];
 
 extern textures img_fog_normal[];
 extern textures img_fog_fire[];
@@ -621,6 +698,13 @@ extern textures img_state_scary;
 extern textures img_state_ally;
 extern textures img_state_summon;
 extern textures img_state_haste;
+extern textures img_state_dazed;
+extern textures img_state_lunatic;
+extern textures img_state_slow;
+extern textures img_state_neutral;
+extern textures img_state_calling;
+extern textures img_state_dazed;
+extern textures img_state_spellcard;
 
 
 int texturetoint(textures* input);

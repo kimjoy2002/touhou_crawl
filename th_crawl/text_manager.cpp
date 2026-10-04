@@ -11,6 +11,7 @@
 #include "texture.h"
 #include "display.h"
 #include "const.h"
+#include "crash_dump.h"
 
 
 extern ID3D11Device* g_pd3dDevice;
@@ -101,6 +102,8 @@ void text_manager::SetEnter()
 void text_manager::reset()
 {
 	WaitForSingleObject(mutx, INFINITE);
+	for(text_dummy* text_ : text_list)
+		delete text_;
 	text_list.clear();
 	length=0;
 	ReleaseMutex(mutx);
@@ -123,6 +126,8 @@ void printlog(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_)
 	DisplayManager.text_log.add_text(text_, enter_, log_, temp_, color_);
 	DisplayManager.list_draw.clear();
 	ReleaseMutex(mutx);
+	if(!temp_)
+		AddCrashMessage(text_, enter_);
 }
 void printlog(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_, int char_)
 {
@@ -130,6 +135,8 @@ void printlog(string text_, bool enter_, bool log_, bool temp_, D3DCOLOR color_,
 	DisplayManager.text_log.add_text(text_, enter_, log_, temp_, color_, char_);
 	DisplayManager.list_draw.clear();
 	ReleaseMutex(mutx);
+	if(!temp_)
+		AddCrashMessage(text_, enter_);
 }
 void deletelog()
 {
@@ -219,14 +226,16 @@ void entersub()
 	ReleaseMutex(mutx);
 }
 
-void startSelection(vector<int> select_list) {
+void startSelection(vector<int> select_list, bool description_) {
 	WaitForSingleObject(mutx, INFINITE);
 	DisplayManager.selection_vector.clear();
 	DisplayManager.selection_vector = select_list;
+	DisplayManager.selection_description = description_;
 	ReleaseMutex(mutx);
 }
 void endSelection() {
 	WaitForSingleObject(mutx, INFINITE);
+	DisplayManager.selection_description = false;
 	DisplayManager.text_log.removeClickable();
 	DisplayManager.selection_vector.clear();
 	DisplayManager.list_draw.clear();

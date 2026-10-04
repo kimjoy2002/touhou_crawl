@@ -12,6 +12,7 @@
 #include "key.h"
 #include "replay.h"
 #include "steam_api.h"
+#include "crash_dump.h"
 #include <conio.h>
 #include <windows.h>
 #include <string>
@@ -28,11 +29,32 @@ extern std::atomic<bool> g_shutdownRequested;
 void saveReplay_cpp();
 std::unique_ptr<KeyInputQueue> g_keyQueue;
 
+// 버리는 입력도 보조키 상태는 반영한다.
+static void updateModifierKey(const InputedKey& inputedKey)
+{
+	if(inputedKey.mouse != MKIND_NONE)
+		return;
+	const MSG& msg = inputedKey.key;
+	if(msg.message == WM_KEYDOWN || msg.message == WM_KEYUP)
+	{
+		if(msg.wParam == VK_SHIFT)
+			shift_check = (msg.message == WM_KEYDOWN);
+		if(msg.wParam == VK_CONTROL)
+			ctrl_check = (msg.message == WM_KEYDOWN);
+	}
+	else if(msg.message == WM_KILLFOCUS)
+	{
+		shift_check = false;
+		ctrl_check = false;
+	}
+}
+
 bool isKeyinput(bool ablecursor)
 {
 	while(1) {
 		InputedKey inputedKey;
 		if(g_keyQueue->try_pop(inputedKey)) {
+			updateModifierKey(inputedKey);
 			if(!ablecursor && inputedKey.mouse == MKIND_MAP_CURSOR) {
 			}
 			else {
@@ -354,7 +376,9 @@ int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecurs
 		DWORD time2_ = timeGetTime();
 
 		ReplayClass.SaveReplayInput(immedity_?0:(time2_-time_) , return_, key);
-		LOG_KEY_INPUT(inputedkey_to_string(return_,key));
+		std::string input_log = inputedkey_to_string(return_,key);
+		LOG_KEY_INPUT(input_log);
+		AddCrashInput(input_log);
 
 		return return_;
 	}
@@ -443,7 +467,9 @@ int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecurs
 				for(int i = 0; i <(replay_speed==1?min(1000,(int)delay_):0); i++)
 					Sleep(1);
 			}
-			LOG_KEY_INPUT(inputedkey_to_string(return_,key));
+			std::string input_log = inputedkey_to_string(return_,key);
+			LOG_KEY_INPUT(input_log);
+			AddCrashInput(input_log);
 
 			return return_;
 		}
@@ -553,6 +579,7 @@ InputedKey KeyInputQueue::pop(int timeout_ms) {
 				return tk.key;
 			}
 			else {
+				updateModifierKey(tk.key);
 				queue_.pop();
 			}
 		}

@@ -146,6 +146,8 @@ public:
 	int tile_type;
 	text_manager text_log;
 	text_manager text_sub;
+	string sub_text_prompt;
+	D3DCOLOR sub_text_prompt_color = 0;
 	FontInfo fontDesc;
 	string text;
 	display_type state;
@@ -162,6 +164,9 @@ public:
 	textures *image;
 	
 	vector<int> selection_vector;
+	vector<coord_def> sakuya_knife_path;
+	vector<coord_def> spell_half_path;
+	bool selection_description = false;
 	vector<int> spell_skill_vector;
 
 	int current_position;
@@ -240,7 +245,7 @@ void add_stringblank(ostringstream& oss, int next_index);
 int printsub_utf8witdh(string text_, bool enter_, D3DCOLOR color_);
 void deletesub(bool reset_position = true);
 void entersub();
-void startSelection(vector<int> select_list);
+void startSelection(vector<int> select_list, bool description_ = false);
 void endSelection();
 void startAbilGrid(vector<int> select_list);
 void endAbilGrid();

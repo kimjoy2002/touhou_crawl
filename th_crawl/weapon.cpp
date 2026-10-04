@@ -114,6 +114,8 @@ LOCALIZATION_ENUM_KEY GetBrandString(weapon_brand brand, bool artifact_)
 			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_FIREPLUS:LOC_SYSTEM_ITEM_ARTIFACT_LAEVATEIN_FIREPLUS;
 		case WB_SILVER:
 			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_SILVER:LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_SILVER;
+		case WB_FLOOD:
+			return LOC_SYSTEM_ITEM_WEAPON_BRAND_FLOOD;
 		default:
 			return !artifact_?LOC_SYSTEM_ITEM_WEAPON_BRAND_OF_BUG:LOC_SYSTEM_ITEM_WEAPON_BRAND_BUG;
 	}	
@@ -146,6 +148,8 @@ string GetBrandInfor(weapon_brand brand)
 			return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_LAEVATEIN_FIREPLUS_INFO);
 		case WB_SILVER:
 			return LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_SILVERKNIFE_SILVER_INFO);
+		case WB_FLOOD:
+			return LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_INFO_FLOOD);
 		default:
 			return LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_DESCRIBE_BUG);	
 	}	

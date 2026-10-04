@@ -41,6 +41,10 @@ void MakeTanmac(item_infor* t, int select_);
 
 list<item>::iterator ThrowSelect();
 bool CheckThrowPath(coord_def start,coord_def target, beam_iterator &beam, bool passdoor = false);
+bool IsSakuyaKnife(const item* item_);
+vector<beam_iterator> GetSakuyaKnifeBeams(coord_def target_, int length_);
+vector<beam_iterator> GetSakuyaKnifeBeams(coord_def start_, coord_def target_, int length_);
+void ThrowSakuyaKnives(beam_iterator& beam, const vector<beam_iterator>& side_beams, const beam_infor& infor_, item* item_, bool mimic_, int graphic_type = 0);
 void paintpath(coord_def c_,beam_iterator &beam, list<item>::iterator item_, bool set, projectile_infor* infor_, int m_len, float sector_);
 
 
@@ -55,6 +59,8 @@ public:
 	unit* last_hit;
 	bool effect_delete;
 	bool mimic_;
+	int slashed;
+	std::vector<beam_iterator> slashed_beams;
 	void (*attack_prefix)(attack_infor& attack, ThrowTamacInstance* instance_);
 	//람다 추가(int반환 ThrowTamacInstance입력
 
@@ -76,6 +82,7 @@ public:
 	coord_def endShoot(bool sleep_, bool without_laser);
 };
 
+textures* GetTanmacGraphic(int type, int direc, int count, int path);
 
 coord_def throwtanmac(textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete = true, bool mimic_ = false);
 coord_def throwtanmac(int graphic_type,beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete = true, bool mimic_ = false);
@@ -84,6 +91,9 @@ unit* throwtanmac_check_hit(int graphic_type,beam_iterator& beam, const beam_inf
 
 bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &target, const beam_infor &infor_);
 bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_, float sector_ , function<void(coord_def)> func_, bool reverse_, bool effect_delete = true);
+int PathToNum_forstem(int path);
+int PathToNum(int path);
+
 
 void Quick_Throw(list<item>::iterator it, vector<monster>::iterator it2, bool auto_);
 void Select_Throw();

@@ -210,6 +210,9 @@
     <ClCompile Include="skill_use.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ice_item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="smoke.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -225,6 +228,15 @@
     <ClCompile Include="spellcard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+	<ClCompile Include="unique_spellcard.cpp">
+	  <Filter>Source Files</Filter>
+	</ClCompile>
+	<ClCompile Include="spellcard\bullet.cpp">
+	  <Filter>Source Files</Filter>
+	</ClCompile>
+	<ClCompile Include="spellcard\flandre_spellcard.cpp">
+	  <Filter>Source Files</Filter>
+	</ClCompile>
     <ClCompile Include="spell_infor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -434,6 +446,9 @@
     <ClInclude Include="skill_use.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ice_item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="smoke.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -446,6 +461,15 @@
     <ClInclude Include="spellcard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+	<ClInclude Include="unique_spellcard.h">
+	  <Filter>Header Files</Filter>
+	</ClInclude>
+	<ClInclude Include="spellcard\bullet.h">
+	  <Filter>Header Files</Filter>
+	</ClInclude>
+	<ClInclude Include="spellcard\flandre_spellcard.h">
+	  <Filter>Header Files</Filter>
+	</ClInclude>
     <ClInclude Include="shooting_sprint.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -17,6 +17,7 @@
 #include "armour.h"
 #include "evoke.h"
 #include "book.h"
+#include "ice_item.h"
 #include "option_manager.h"
 #include "tribe.h"
 #include "dump.h"
@@ -426,6 +427,11 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 				}
 				case 'w': //장착	
 					changedisplay(DT_GAME);
+					if(you.IsDiving())
+					{
+						printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+						return true;
+					}
 					if (you.s_lunatic)
 					{
 						printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
@@ -469,6 +475,11 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 					return true;
 				case 'u': //벗기
 					changedisplay(DT_GAME);
+					if(you.IsDiving())
+					{
+						printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+						return true;
+					}
 					if (you.s_lunatic)
 					{
 						printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
@@ -519,6 +530,11 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 					return true;
 				case 'q': //마시기
 					changedisplay(DT_GAME);
+					if(you.IsDiving())
+					{
+						printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+						return true;
+					}
 					if (you.s_lunatic)
 					{
 						printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
@@ -551,6 +567,11 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 					return true;
 				case 'e': //먹기
 					changedisplay(DT_GAME);
+					if(you.IsDiving())
+					{
+						printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+						return true;
+					}
 					if (you.s_lunatic)
 					{
 						printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
@@ -569,6 +590,11 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 					return true;
 				case 'r': //읽기
 					changedisplay(DT_GAME);
+					if(you.IsDiving())
+					{
+						printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+						return true;
+					}
 					if (you.s_lunatic)
 					{
 						printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
@@ -593,6 +619,11 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 					return true;
 				case 'v': //발동
 					changedisplay(DT_GAME);
+					if(you.IsDiving())
+					{
+						printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+						return true;
+					}
 					if (you.s_lunatic)
 					{
 						printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
@@ -606,7 +637,6 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 					}
 					if (you.Evoke(item_->id, false))
 					{
-						you.time_delay += you.GetNormalDelay();
 						you.TurnEnd();
 					}
 					return true;
@@ -614,6 +644,11 @@ bool iteminfor_(item *item_, bool onlyinfor) {
 				case 'D':
 					{
 						changedisplay(DT_GAME);
+						if(you.IsDiving())
+						{
+							printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+							return true;
+						}
 						if (you.s_lunatic)
 						{
 							printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY), true, false, false, CL_danger);
@@ -769,11 +804,14 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	printsub(blank,false,CL_normal);
 
 	bool fixed_artifact_ = false;
+	LOCALIZATION_ENUM_KEY ice_description_ = GetIceItemDescription(it);
 
 	if(it->fixed_artifact != FIXED_ARTIFACT_NONE) {
-		_infor_(GetFixedArtifact(it->fixed_artifact));
+		_infor_(GetFixedArtifact(it->fixed_artifact, it->value4));
 		fixed_artifact_ = true;
 	}
+	if(ice_description_ != LOC_NONE)
+		_infor_(LocalzationManager::locString(ice_description_));
 
 	switch (it->type)
 	{
@@ -788,7 +826,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		//case ITM_WEAPON_BOW:
 	{
 		skill_type ski_ = SKT_MACE;
-		if(!fixed_artifact_) {
+		if(!fixed_artifact_ && ice_description_ == LOC_NONE) {
 			switch (it->type)
 			{
 			case ITM_WEAPON_SHORTBLADE:
@@ -983,7 +1021,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO3));
 			_infor_("\n");
 			_infor_(LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_WEAPON_INFO4, 
-					PlaceHolderHelper(float_to_string(you.GetThrowDelay((*it).type, false) / 10.0f)),
+					PlaceHolderHelper(float_to_string(you.GetThrowDelay(it, false) / 10.0f)),
 					PlaceHolderHelper(to_string(you.GetSkillLevel(SKT_TANMAC, true)))));
 		}
 
@@ -1034,6 +1072,8 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		case TMT_DOGGOJEO:
 			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_DOGGOJEO));
 			break;
+		case TMT_ICICLE:
+			break;
 		}
 
 
@@ -1056,7 +1096,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 		temp.str("");
 		temp.clear();
-		temp << LocalzationManager::locString(LOC_SYSTEM_CURRENT_TANMAC_SPEED) << ": " <<  (you.GetThrowDelay((*it).type, false) / 10.0f);
+		temp << LocalzationManager::locString(LOC_SYSTEM_CURRENT_TANMAC_SPEED) << ": " <<  (you.GetThrowDelay(it, false) / 10.0f);
 		ss << temp.str();
 		if(PrintCharWidth(temp.str()) < 20)
 			ss << std::string(20-PrintCharWidth(temp.str()), ' ');
@@ -1084,7 +1124,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	case ITM_ARMOR_BODY_ARMOUR_2:
 	case ITM_ARMOR_BODY_ARMOUR_3:
 	{
-		if(!fixed_artifact_) {
+		if(!fixed_artifact_ && ice_description_ == LOC_NONE) {
 			switch (it->value5)
 			{
 			case AMK_NORMAL:
@@ -1287,7 +1327,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		switch (it->type)
 		{
 		case ITM_ARMOR_HEAD:
-			if(!fixed_artifact_)
+			if(!fixed_artifact_ && ice_description_ == LOC_NONE)
 				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_HEAD));
 			if (can_use_)
 			{
@@ -1304,7 +1344,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			}
 			break;
 		case ITM_ARMOR_CLOAK:
-			if(!fixed_artifact_)
+			if(!fixed_artifact_ && ice_description_ == LOC_NONE)
 				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_CLOAK));
 			if (can_use_)
 			{
@@ -1321,7 +1361,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			}
 			break;
 		case ITM_ARMOR_GLOVE:
-			if(!fixed_artifact_)
+			if(!fixed_artifact_ && ice_description_ == LOC_NONE)
 				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_GLOVE));
 			if (can_use_)
 			{
@@ -1338,7 +1378,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			}
 			break;
 		case ITM_ARMOR_BOOT:
-			if(!fixed_artifact_)
+			if(!fixed_artifact_ && ice_description_ == LOC_NONE)
 				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_BOOT));
 			if (can_use_)
 			{
@@ -1442,7 +1482,11 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	}
 	break;
 	case ITM_FOOD:
-		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_FOOD));
+		if(it->value1 == 7)
+			_infor_(LocalzationManager::locString(you.tribe == TRI_VAMPIRE?
+				LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE_VAMPIRE:LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE));
+		else if(ice_description_ == LOC_NONE)
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_FOOD));
 		if (can_use_)
 		{
 			use_text_.push_back({"(e)" + LocalzationManager::locString(LOC_SYSTEM_EAT),'e'});
@@ -1578,50 +1622,55 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	{
 		if(!fixed_artifact_){
 			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET));
-			if ((it->isArtifact() && it->identify) || iden_list.amulet_list[it->value1].iden == 2)
-			{
-				switch (it->value1)
-				{
-				case AMT_PERFECT:
-					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PERFECT));
-					break;
-				case AMT_BLOSSOM:
-					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BLOSSOM));
-					break;
-				case AMT_TIMES:
-					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIMES));
-					break;
-				case AMT_FAITH:
-					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH));
-					break;
-				case AMT_WAVE:
-					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE));
-					break;
-				case AMT_SPIRIT:
-					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT));
-					break;
-				case AMT_GRAZE:
-					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE));
-					break;
-				case AMT_WEATHER:
-					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER));
-					break;
-				case AMT_OCCULT:
-					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT));
-					break;
-				case AMT_PURIFTY:
-					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PURIFTY));
-					break;
-				default:
-					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG));
-					break;
-				}
-			}
-			else
-			{
-				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_UKNOWN));
-			}		
+		} else {
+			_infor_("\n\n");
 		}
+		if ((it->isArtifact() && it->identify) || iden_list.amulet_list[it->value1].iden == 2)
+		{
+			switch (it->value1)
+			{
+			case AMT_PERFECT:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PERFECT));
+				break;
+			case AMT_BLOSSOM:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BLOSSOM));
+				break;
+			case AMT_TIMES:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIMES));
+				break;
+			case AMT_FAITH:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH));
+				break;
+			case AMT_WAVE:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE));
+				break;
+			case AMT_SPIRIT:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT));
+				break;
+			case AMT_GRAZE:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE));
+				break;
+			case AMT_WEATHER:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER));
+				break;
+			case AMT_OCCULT:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT));
+				break;
+			case AMT_PURIFTY:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PURIFTY));
+				break;
+			case AMT_TIME_STOP:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIME_STOP));
+				break;
+			default:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BUG));
+				break;
+			}
+		}
+		else
+		{
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_UKNOWN));
+		}	
 
 		if (can_use_)
 		{
@@ -1645,7 +1694,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			if(fixed_artifact_){
 				_infor_("\n\n");
 			}
-			//if(!fixed_artifact_){
+			if(ice_description_ == LOC_NONE) {
 				switch (it->value1)
 				{
 				case RGT_STR:
@@ -1709,7 +1758,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 					_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_RING_BUG));
 					break;
 				}
-			//}
+			}
 		}
 		else
 		{
@@ -1733,7 +1782,8 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 	case ITM_BOOK:
 	{
 
-		_infor_(GetBookInfor((book_list)it->value0));
+		if(ice_description_ == LOC_NONE)
+			_infor_(GetBookInfor((book_list)it->value0));
 		_infor_("\n\n");
 		if (it->identify)
 		{
@@ -1816,6 +1866,9 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		case EVK_CAMERA:
 			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_CAMERA));
 			break;
+		case EVK_FROZEN_FROG:
+			_infor_(LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_ICE_FROG));
+			break;
 		default:
 			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG));
 			break;
@@ -1824,7 +1877,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		if (it->value1 == EVK_CAMERA) {
 			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1));
 		}
-		else {
+		else if(it->value1 != EVK_FROZEN_FROG) {
 			_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2));
 		}
 		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3));

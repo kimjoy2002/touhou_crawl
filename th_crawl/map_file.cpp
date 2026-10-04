@@ -24,6 +24,8 @@ bool environment::isFirstFloor(int level_)
 		level_ == SCARLET_LEVEL ||
 		level_ == SCARLET_LIBRARY_LEVEL ||
 		level_ == SCARLET_UNDER_LEVEL ||
+		level_ == FORESTOFMAGIC_LEVEL ||
+		level_ == DOLLSHOUSE_LEVEL ||
 		level_ == BAMBOO_LEVEL ||
 		level_ == EIENTEI_LEVEL ||
 		level_ == SUBTERRANEAN_LEVEL ||		
@@ -54,6 +56,8 @@ bool environment::isLastFloor(int level_)
 		level_ == SCARLET_LEVEL_LAST_LEVEL ||
 		level_ == SCARLET_LIBRARY_LEVEL_LAST_LEVEL ||
 		level_ == SCARLET_UNDER_LEVEL_LAST_LEVEL ||
+		level_ == FORESTOFMAGIC_LAST_LEVEL ||
+		level_ == DOLLSHOUSE_LAST_LEVEL ||
 		level_ == BAMBOO_LEVEL_LAST_LEVEL ||
 		level_ == EIENTEI_LEVEL_LAST_LEVEL ||
 		level_ == SUBTERRANEAN_LEVEL_LAST_LEVEL ||
@@ -114,22 +118,147 @@ int sprintMulti()
 	}
 	return 7;
 }
+void recoverMap() {
+	initMap();
+	for(int i = 0; i < MAXLEVEL; i++)
+	{
+		if(env[i].make) {
+			for(int x_ = 0; x_ < DG_MAX_X; x_++) {
+				for(int y_ = 0; y_ < DG_MAX_Y; y_++) {
+					dungeon_tile dgtile_ = env[i].dgtile[x_][y_];
+					switch(dgtile_.tile) {
+						default:
+							break;
+						case DG_TEMPLE_STAIR:
+							map_list.dungeon_enter[TEMPLE].floor = i;
+							map_list.dungeon_enter[TEMPLE].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[TEMPLE].detected = true;
+							break;
+						case DG_MISTY_LAKE_STAIR:	
+							map_list.dungeon_enter[MISTY_LAKE].floor = i;
+							map_list.dungeon_enter[MISTY_LAKE].pos = coord_def(x_,y_);				
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[MISTY_LAKE].detected = true;
+							break;
+						case DG_YOUKAI_MOUNTAIN_STAIR:
+							map_list.dungeon_enter[YOUKAI_MOUNTAIN].floor = i;
+							map_list.dungeon_enter[YOUKAI_MOUNTAIN].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[YOUKAI_MOUNTAIN].detected = true;
+							break;
+						case DG_SCARLET_STAIR:
+							map_list.dungeon_enter[SCARLET_M].floor = i;
+							map_list.dungeon_enter[SCARLET_M].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[SCARLET_M].detected = true;
+							break;				
+						case DG_SCARLET_L_STAIR:
+							map_list.dungeon_enter[SCARLET_L].floor = i;
+							map_list.dungeon_enter[SCARLET_L].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[SCARLET_L].detected = true;		
+							break;				
+						case DG_SCARLET_U_STAIR:
+							map_list.dungeon_enter[SCARLET_U].floor = i;
+							map_list.dungeon_enter[SCARLET_U].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[SCARLET_U].detected = true;		
+							break;	
+						case DG_FORESTOFMAGIC_STAIR:
+							map_list.dungeon_enter[FORESTOFMAGIC].floor = i;
+							map_list.dungeon_enter[FORESTOFMAGIC].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[FORESTOFMAGIC].detected = true;		
+							break;
+						case DG_DOLLSHOUSE_STAIR:
+							map_list.dungeon_enter[DOLLSHOUSE].floor = i;
+							map_list.dungeon_enter[DOLLSHOUSE].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[DOLLSHOUSE].detected = true;		
+							break;			
+						case DG_BAMBOO_STAIR:
+							map_list.dungeon_enter[BAMBOO].floor = i;
+							map_list.dungeon_enter[BAMBOO].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[BAMBOO].detected = true;		
+							break;				
+						case DG_EIENTEI_STAIR:	
+							break;				
+						case DG_SUBTERRANEAN_STAIR:
+							map_list.dungeon_enter[SUBTERRANEAN].floor = i;
+							map_list.dungeon_enter[SUBTERRANEAN].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[SUBTERRANEAN].detected = true;		
+							break;
+						case DG_YUKKURI_STAIR:
+							map_list.dungeon_enter[YUKKURI_D].floor = i;
+							map_list.dungeon_enter[YUKKURI_D].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[YUKKURI_D].detected = true;		
+							break;
+						case DG_DEPTH_STAIR:
+							map_list.dungeon_enter[DEPTH].floor = i;
+							map_list.dungeon_enter[DEPTH].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[DEPTH].detected = true;		
+							break;
+						case DG_DREAM_STAIR:
+							map_list.dungeon_enter[DREAM_D].floor = i;
+							map_list.dungeon_enter[DREAM_D].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[DREAM_D].detected = true;		
+							break;
+						case DG_MOON_STAIR:	
+							break;
+						case DG_PANDEMONIUM_STAIR:
+							map_list.dungeon_enter[PANDEMONIUM].floor = i;
+							map_list.dungeon_enter[PANDEMONIUM].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[PANDEMONIUM].detected = true;		
+							break;
+						case DG_HAKUREI_STAIR:
+							map_list.dungeon_enter[HAKUREI_D].floor = i;
+							map_list.dungeon_enter[HAKUREI_D].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[HAKUREI_D].detected = true;		
+							break;
+						case DG_ZIGURRAT_STAIR:
+							map_list.dungeon_enter[ZIGURRAT].floor = i;
+							map_list.dungeon_enter[ZIGURRAT].pos = coord_def(x_,y_);
+							if(dgtile_.flag & FLAG_EXPLORE)
+								map_list.dungeon_enter[ZIGURRAT].detected = true;
+							break;
+
+					}
+				}
+			}
+		}
+	}
+}
 
 void initMap()
 {
 	map_list.dungeon_enter[TEMPLE].set(false,0,0,rand_int(2,5));
 	map_list.dungeon_enter[MISTY_LAKE].set(false,0,0,rand_int(7,9));
 	map_list.dungeon_enter[YOUKAI_MOUNTAIN].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(1,2));
-	map_list.dungeon_enter[SCARLET_M].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(3,4));	
-	map_list.dungeon_enter[SCARLET_L].set(false,0,0,SCARLET_LEVEL+rand_int(1,2));	
-	map_list.dungeon_enter[SCARLET_U].set(false,0,0,SCARLET_LEVEL_LAST_LEVEL);
+	if(randA(1)) {
+		map_list.dungeon_enter[SCARLET_M].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(3,4));
+		map_list.dungeon_enter[FORESTOFMAGIC].set(false,0,0,-1);
+		map_list.dungeon_enter[SCARLET_U].set(false,0,0,SCARLET_LEVEL_LAST_LEVEL);
+	} else {
+		map_list.dungeon_enter[FORESTOFMAGIC].set(false,0,0,MISTY_LAKE_LEVEL+rand_int(3,4));
+		map_list.dungeon_enter[SCARLET_M].set(false,0,0,-1);
+		map_list.dungeon_enter[DOLLSHOUSE].set(false,0,0,FORESTOFMAGIC_LAST_LEVEL);
+	}
+	map_list.dungeon_enter[SCARLET_L].set(false,0,0,SCARLET_LEVEL+rand_int(1,2));
 	map_list.dungeon_enter[BAMBOO].set(false,0,0,rand_int(10,13));
 	map_list.dungeon_enter[SUBTERRANEAN].set(false,0,0,DEPTH_LEVEL+rand_int(1,3));
 
 
 
-	map_list.dungeon_enter[YUKKURI_D].set(false,0,0,YOUKAI_MOUNTAIN_LAST_LEVEL);	
-	map_list.dungeon_enter[DEPTH].set(false,0,0,MAX_DUNGEUN_LEVEL);	
+	map_list.dungeon_enter[YUKKURI_D].set(false,0,0,YOUKAI_MOUNTAIN_LAST_LEVEL);
+	map_list.dungeon_enter[DEPTH].set(false,0,0,MAX_DUNGEUN_LEVEL);
 	map_list.dungeon_enter[DREAM_D].set(false,0,0,DEPTH_LEVEL+rand_int(1,3));
 	//map_list.dungeon_enter[MOON_D].set(false,0,0,rand_int(10,13));
 	map_list.dungeon_enter[PANDEMONIUM].set(false,0,0,DEPTH_LEVEL+rand_int(1,3));
@@ -381,6 +510,12 @@ bool CommonValutMap(map_dummy* map, int pattern)
 		break;
 	case VP_HAKUREI_LAST_FAKE:
 		temp = hakurei_last_vault_pattern(map,true);
+		break;
+	case VP_FORESTOFMAGIC_LAST:
+		temp = forestofmagic_last_vault_pattern(map);
+		break;
+	case VP_DOLLSHOUSE_LAST:
+		temp = dollshouse_last_vault_pattern(map);
 		break;
 	default:
 		return false;
@@ -772,6 +907,10 @@ void map_dummy::patternSet()
 	{
 		PixedMap(this, scarlet_under_pattern(this));
 	}
+	else if(pattern == 100+DOLLSHOUSE) //인형방
+	{
+		PixedMap(this, dollshouse_pattern(this));
+	}
 	else if(pattern == 100+BAMBOO) //미궁의죽림
 	{
 		PixedMap(this, bamboo_pattern(this));
@@ -800,6 +939,11 @@ void map_dummy::patternSet()
 	{
 		PixedMap(this, hakurei_pattern(this));
 	}
+	else if(pattern == 100+FORESTOFMAGIC) //마법의 숲
+	{
+		//YoukaiEnterMap(this);		
+		PixedMap(this, forestofmagic_pattern(this));
+	}
 	else if (pattern == 100 + ZIGURRAT) //하쿠레이
 	{
 		PixedMap(this, zigurrat_pattern(this));
@@ -823,11 +967,9 @@ void map_dummy::patternSet()
 			break;
 		case VP_SCARLET_LAST:
 			PixedMap(this, scarlet_last_vault_pattern(this));
-			//temp = youkai_last_vault_pattern(map);
 			break;
 		case VP_EIENTEI_LAST:
 			PixedMap(this, eientei_vault_pattern(this));
-			//temp = youkai_last_vault_pattern(map);
 			break;
 		case VP_PANDEMONIUM_1_LAST:
 			PixedMap(this, pandemonium_baykuren_last_vault_pattern(this));
@@ -852,6 +994,12 @@ void map_dummy::patternSet()
 			break;
 		case VP_HAKUREI_LAST_FAKE:
 			PixedMap(this, hakurei_last_vault_pattern(this, true));
+			break;
+		case VP_FORESTOFMAGIC_LAST:
+			PixedMap(this, forestofmagic_last_vault_pattern(this));
+			break;
+		case VP_DOLLSHOUSE_LAST:
+			PixedMap(this, dollshouse_last_vault_pattern(this));
 			break;
 		default:
 			baseMap(this);

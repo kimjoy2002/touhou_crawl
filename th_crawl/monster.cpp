@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+#include "event.h"
 #include "monster.h"
 #include "keiki.h"
 #include "mon_infor.h"
@@ -29,8 +30,9 @@
 #include "rand_shuffle.h"
 #include "soundmanager.h"
 #include "shooting_sprint.h"
+#include "unique_spellcard.h"
+#include "spellcard/bullet.h"
 #include <set>
-
 
 
 
@@ -39,16 +41,20 @@
 
 coord_def inttodirec(int direc, int x_=0, int y_=0);
 bool evoke_bomb(int power, bool short_, unit* order, coord_def target);
+bool skill_spore_bomb(monster* order);
+static void sacrificeExplosion(monster* doll);
 
 monster::monster() 
-: map_id(-1), id(0), id2(0), level(1), exper(0), name(LOC_SYSTEM_NONE_STRING), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), first_position(0,0), prev_sight(false),
-ac(0), ev(0), flag(0), resist(0), sense(0), dream(false), s_poison(0), poison_reason(PRT_NEUTRAL), s_tele(0), s_might(0), s_clever(0), s_haste(0), s_confuse(0), s_slow(0), s_frozen(0), s_ally(0),
+: map_id(-1), id(0), id2(0), parent_part_id(-1), level(1), exper(0), name(LOC_SYSTEM_NONE_STRING), image(NULL),  hp(0), hp_recov(0), max_hp(0), prev_position(0,0), prev_position_for_monster(0,0), first_position(0,0), prev_sight(false),
+ac(0), ev(0), flag(0), resist(0), sense(0), dream(false), s_poison(0), poison_reason(PRT_NEUTRAL), s_tele(0), s_might(0), s_clever(0), s_haste(0), s_swift(0), s_confuse(0), s_slow(0), s_frozen(0), s_ally(0),
 s_elec(0), s_paralyse(0), s_glow(0), s_graze(0), s_silence(0), s_silence_range(0), s_sick(0), s_veiling(0), s_value_veiling(0), s_invisible(0),s_saved(0), s_mute(0), s_catch(0),
 s_ghost(0),
 s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0), s_exhausted(0),
-force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), s_oil(0), s_fire(0), fire_reason(PRT_NEUTRAL), s_none_move(0), debuf_boost(0),
-	summon_time(0), summon_parent(PRT_NEUTRAL),poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0),walk_speed_bonus(0), time_delay(0), 
-	speed(10), memory_time(0), first_contact(true), strong(1), special_value(0), delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(),
+force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), s_oil(0), s_fire(0), fire_reason(PRT_NEUTRAL), s_none_move(0), s_dazed(0), bashed(false), debuf_boost(0),
+	summon_time(0), summon_parent(PRT_NEUTRAL), s_vulun_poison(0), 
+	s_acid(0), s_acid_turn(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0),walk_speed_bonus(0), time_delay(0), all_time_delay(0), 
+	speed(10), memory_time(0), first_contact(true), strong(1), special_value(0), spellcard_info(),
+	delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(),
 	direction(-1), sm_info(), state(MS_NORMAL), random_spell(false), wait(false)
 {
 	for(int i = 0; i < 3; i++) {
@@ -67,7 +73,8 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, position.y);
 	SaveData<int>(fp, map_id);
 	SaveData<int>(fp, id);
-	SaveData<int>(fp, id2);	
+	SaveData<int>(fp, id2);
+	SaveData<int>(fp, parent_part_id);
 	SaveData<int>(fp, level);
 	SaveData<int>(fp, exper);
 	name.SaveDatas(fp);
@@ -77,6 +84,8 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, max_hp);
 	SaveData<int>(fp, prev_position.x);
 	SaveData<int>(fp, prev_position.y);
+	SaveData<int>(fp, prev_position_for_monster.x);
+	SaveData<int>(fp, prev_position_for_monster.y);
 	SaveData<int>(fp, first_position.x);
 	SaveData<int>(fp, first_position.y);
 	SaveData<bool>(fp, prev_sight);
@@ -98,6 +107,7 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_might);
 	SaveData<int>(fp, s_clever);
 	SaveData<int>(fp, s_haste);
+	SaveData<int>(fp, s_swift);
 	SaveData<int>(fp, s_confuse);
 	SaveData<int>(fp, s_slow);
 	SaveData<int>(fp, s_frozen);
@@ -130,9 +140,14 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_fire);
 	SaveData<parent_type>(fp,fire_reason);
 	SaveData<int>(fp, s_none_move);
+	SaveData<int>(fp, s_dazed);
+	SaveData<bool>(fp, bashed);
 	SaveData<int>(fp, debuf_boost);
 	SaveData<int>(fp, summon_time);
 	SaveData<parent_type>(fp, summon_parent);
+	SaveData<int>(fp, s_vulun_poison);
+	SaveData<int>(fp, s_acid);
+	SaveData<int>(fp, s_acid_turn);
 	SaveData<int>(fp, poison_resist);
 	SaveData<int>(fp, fire_resist);
 	SaveData<int>(fp, ice_resist);
@@ -141,6 +156,7 @@ void monster::SaveDatas(FILE *fp)
 	SaveData<int>(fp, wind_resist);
 	SaveData<int>(fp, walk_speed_bonus);
 	SaveData<int>(fp, time_delay);
+	SaveData<int>(fp, all_time_delay);
 	SaveData<int>(fp, speed);
 	SaveData<int>(fp, memory_time);
 	SaveData<bool>(fp, first_contact);
@@ -179,6 +195,7 @@ void monster::SaveDatas(FILE *fp)
 	{
 		(*it).SaveDatas(fp);
 	}
+	spellcard_info.SaveDatas(fp);
 	
 }
 void monster::LoadDatas(FILE *fp)
@@ -188,6 +205,9 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, map_id);
 	LoadData<int>(fp, id);
 	LoadData<int>(fp, id2);
+	if(!isPrevVersion(loading_version_string, "ver1.202")) {
+		LoadData<int>(fp, parent_part_id);
+	}
 	LoadData<int>(fp, level);
 	LoadData<int>(fp, exper);
 	name.LoadDatas(fp);
@@ -199,6 +219,10 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, max_hp);
 	LoadData<int>(fp, prev_position.x);
 	LoadData<int>(fp, prev_position.y);
+	if(!isPrevVersion(loading_version_string, "ver1.202")) {
+		LoadData<int>(fp, prev_position_for_monster.x);
+		LoadData<int>(fp, prev_position_for_monster.y);
+	}
 	LoadData<int>(fp, first_position.x);
 	LoadData<int>(fp, first_position.y);
 	LoadData<bool>(fp, prev_sight);
@@ -220,6 +244,9 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_might);
 	LoadData<int>(fp, s_clever);
 	LoadData<int>(fp, s_haste);
+	if(!isPrevVersion(loading_version_string, "ver1.205")) {
+		LoadData<int>(fp, s_swift);
+	}
 	LoadData<int>(fp, s_confuse);
 	LoadData<int>(fp, s_slow);
 	LoadData<int>(fp, s_frozen);
@@ -252,9 +279,18 @@ void monster::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_fire);
 	LoadData<parent_type>(fp,fire_reason);
 	LoadData<int>(fp, s_none_move);
+	if(!isPrevVersion(loading_version_string, "ver1.200")) {
+		LoadData<int>(fp, s_dazed);
+		LoadData<bool>(fp, bashed);
+	}
 	LoadData<int>(fp, debuf_boost);
 	LoadData<int>(fp, summon_time);
 	LoadData<parent_type>(fp, summon_parent);
+	if(!isPrevVersion(loading_version_string, "ver1.202")) {
+		LoadData<int>(fp, s_vulun_poison);
+		LoadData<int>(fp, s_acid);
+		LoadData<int>(fp, s_acid_turn);
+	}
 	LoadData<int>(fp, poison_resist);
 	LoadData<int>(fp, fire_resist);
 	LoadData<int>(fp, ice_resist);
@@ -265,6 +301,9 @@ void monster::LoadDatas(FILE *fp)
 		LoadData<int>(fp, walk_speed_bonus);
 	}
 	LoadData<int>(fp, time_delay);
+	if(!isPrevVersion(loading_version_string, "ver1.202")) {
+		LoadData<int>(fp, all_time_delay);
+	}
 	LoadData<int>(fp, speed);
 	LoadData<int>(fp, memory_time);
 	LoadData<bool>(fp, first_contact);
@@ -315,6 +354,8 @@ void monster::LoadDatas(FILE *fp)
 		temp.LoadDatas(fp);
 		item_lists.push_back(temp);
 	}
+	if(!isPrevVersion(loading_version_string, "ver1.208"))
+		spellcard_info.LoadDatas(fp);
 }
 void monster::ReTarget()
 {
@@ -327,6 +368,7 @@ void monster::init()
 	map_id=-1;
 	id=0;
 	id2=0;
+	parent_part_id=-1;
 	level=1;
 	exper=0;
 	name = name_infor(LOC_SYSTEM_NONE_STRING);
@@ -336,6 +378,8 @@ void monster::init()
 	max_hp=0;
 	prev_position.x = 0;
 	prev_position.y = 0;
+	prev_position_for_monster.x = 0;
+	prev_position_for_monster.y = 0;
 	first_position.x = 0;
 	first_position.y = 0;
 	prev_sight = false;
@@ -356,6 +400,7 @@ void monster::init()
 	s_might = 0;
 	s_clever = 0;
 	s_haste = 0;
+	s_swift = 0;
 	s_confuse = 0;
 	s_slow = 0;
 	s_frozen = 0;
@@ -388,9 +433,14 @@ void monster::init()
 	s_fire = 0;
 	fire_reason = PRT_NEUTRAL;
 	s_none_move = 0;
+	s_dazed = 0;
+	bashed = false;
 	debuf_boost = 0;
 	summon_time = 0;
 	summon_parent = PRT_NEUTRAL;
+	s_vulun_poison = 0;
+	s_acid = 0;
+	s_acid_turn = 0;
 	poison_resist = 0;
 	fire_resist = 0;
 	ice_resist = 0;
@@ -399,11 +449,13 @@ void monster::init()
 	wind_resist = 0;
 	walk_speed_bonus = 0;
 	time_delay = 0;
+	all_time_delay = 0;
 	speed = 10; 
 	memory_time = 0; 
 	first_contact = true;
 	strong = 1;
 	special_value = 0;
+	spellcard_info.init();
 	delay_turn = 0;
 	while(!will_move.empty())
 		will_move.pop_back();
@@ -421,9 +473,9 @@ void monster::init()
 }
 bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int time_, coord_def position_, bool init_)
 {
-	if(id_ < 0 || id_ > MON_MAX)
+	if(id_ < 0 || id_ >= MON_MAX)
 		return false;
-	if(position_.x<0 || position_.x > DG_MAX_X || position_.y <0 || position_.y >DG_MAX_Y)
+	if(position_.x<0 || position_.x >= DG_MAX_X || position_.y <0 || position_.y >= DG_MAX_Y)
 		return false;
 
 	if(init_)
@@ -481,6 +533,7 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int
 				state.SetState(MS_ATACK);
 		}
 		SetXY(map_num_, position_.x, position_.y, true);
+		prev_position_for_monster = position_;
 		first_position = position_;
 		if(flag & M_FLAG_ALLY)
 		{
@@ -524,6 +577,8 @@ bool monster::SetMonster(int map_num_, int map_id_, int id_, uint64_t flag_, int
 		s_invisible = -1;
 	
 	SetSpell((monster_index)id_, this,&item_lists,&random_spell);
+	if(init_)
+		SetupUniqueSpellcard(this, map_num_);
 	return true;
 }	
 bool monster::ChangeMonster( int id_, uint64_t flag_)
@@ -544,9 +599,19 @@ void monster::FirstContact()
 {
 	if(!first_contact)
 		return;
+	UniqueSpellcardFirstContact(this);
 	if(id == MON_TEWI)
 	{
 		map_list.bamboo_tewi = true;
+	}
+	if(id == MON_DIEFAIRY && you.char_type == UNIQ_START_CIRNO && map_list.tutorial == GM_NORMAL && !(flag & M_FLAG_SUMMON) && !isUserAlly())
+	{
+		SetNeutrality(-1);
+		target = NULL;
+		memory_time = 0;
+		will_move.clear();
+		state.SetState(MS_NORMAL);
+		printlog(LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_DIEFAIRY_FOUND_CIRNO), PlaceHolderHelper(GetName()->getName())),true,false,false,CL_speak);
 	}
 	if(!(flag & M_FLAG_SUMMON))
 	{
@@ -634,6 +699,11 @@ void monster::TurnLoad()
 	else
 		s_haste = 0;
 
+	if(s_swift-temp_turn>0)
+		s_swift-=temp_turn;
+	else
+		s_swift = 0;
+
 	if(s_confuse-temp_turn>0)
 		s_confuse-=temp_turn;
 	else
@@ -687,7 +757,11 @@ void monster::TurnLoad()
 		s_none_move-=temp_turn;
 	else
 		s_none_move = 0;
-	
+
+	if(s_dazed-temp_turn>0)
+		s_dazed-=temp_turn;
+	else
+		s_dazed = 0;
 
 	if(s_silence)
 	{
@@ -771,12 +845,12 @@ void monster::TurnLoad()
 	if(s_fire-temp_turn>0)
 		s_fire-=temp_turn;
 	else
-		force_turn =0;
+		s_fire =0;
 
 	if(flag & M_FLAG_CONFUSE)
 		s_confuse = 10;
 
-	if(!s_sick)
+	if(!s_sick && parent_part_id == -1)//파트는 힐을 안해
 		HpRecover(temp_turn);
 	if(flag & M_FLAG_SUMMON && summon_time>=0)
 	{
@@ -785,6 +859,15 @@ void monster::TurnLoad()
 			summon_time = 0;
 		if(summon_time<=0)
 			hp = 0;
+	}
+	if(s_vulun_poison-temp_turn>0)
+		s_vulun_poison-=temp_turn;
+	else
+		s_vulun_poison =0;
+	if(s_acid_turn-temp_turn>0) {
+		s_acid_turn-=temp_turn;
+	} else {
+		UnSetAcid();
 	}
 }
 void monster::SetX(int x_)
@@ -812,6 +895,15 @@ void monster::SetXYPassFloor(int prev_floor, int new_floor, int x_, int y_) {
 	if(position.x == x_ && position.y == y_ && prev_floor == new_floor)
 		return;
 
+	if(id == MON_GOLIATH_DOLL && parent_part_id == -1 && prev_floor == new_floor && prev_floor >= 0)
+	{
+		coord_def offset(x_ - position.x, y_ - position.y);
+		for(monster& part : env[prev_floor].mon_vector)
+			if(part.isLive() && part.parent_part_id == map_id)
+				part.SetXYPassFloor(prev_floor, new_floor,
+					part.position.x + offset.x, part.position.y + offset.y);
+	}
+
 
 	if(prev_floor != -1) {
 		if(s_silence)
@@ -825,7 +917,7 @@ void monster::SetXYPassFloor(int prev_floor, int new_floor, int x_, int y_) {
 		}
 		AfterMove(prev_floor, x_, y_);
 	}
-
+	prev_position_for_monster = position;
 	position.set(x_,y_);
 	for(auto it = env[new_floor].floor_list.begin(); it != env[new_floor].floor_list.end();it++)
 	{
@@ -850,6 +942,17 @@ void monster::AfterMove(int map_num_, int x_, int y_) {
 		break;
 	case MON_MISSLE:
 		env[map_num_].MakeSmoke(coord_def(position.x, position.y), img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, this);
+		break;
+	case MON_SANGHAI_DOLL:
+	case MON_HOURAI_DOLL:
+		if(special_value > 0)
+			env[map_num_].MakeSmoke(coord_def(position.x, position.y), img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, this);
+		break;
+	case MON_BULLET:
+	{
+		bool in_wall_ = !env[map_num_].dgtile[position.x][position.y].isMove(true,true,false);
+		env[map_num_].MakeAfterimage(coord_def(position.x, position.y), image, in_wall_?10:30, 2);
+	}
 		break;
 	default:
 		break;
@@ -1030,7 +1133,7 @@ bool monster::isMultipleAttack(bool canAttackFreindly) {
 	if(id == MON_YUMA2) {
 		return true;
 	}
-	if(id == MON_SONBITEN_SPINTOWIN || id == MON_COGWHEEL || (id == MON_ENSLAVE_GHOST && id2 == MON_SONBITEN_SPINTOWIN)) {
+	if(id == MON_SONBITEN_SPINTOWIN || id == MON_COGWHEEL || id == MON_SPINNING_DOLL || (id == MON_ENSLAVE_GHOST && id2 == MON_SONBITEN_SPINTOWIN)) {
 		return canAttackFreindly?false:true;
 	}
 
@@ -1054,7 +1157,8 @@ void monster::multipleAttack(unit* except, attack_infor& att_infor) {
 			if(it->isLive() && &(*it) != this && except != &(*it) && (isMultipleAttack(true) || isEnemyMonster(&(*it))) && distan_coord(it->position, position) < 4)
 			{
 				it->damage(att_infor);
-				break;
+				if(id != MON_SPINNING_DOLL)
+					break;
 			}
 		}
 		if(except != &you && (isMultipleAttack(true) || isEnemyUnit(&you)) && distan_coord(you.position, position) < 4) {
@@ -1125,14 +1229,26 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_COLD_ENCHANT_BLAST:
 	case ATT_ELEC_ENCHANT_BLAST:
 	case ATT_POISON_ENCHANT_BLAST:
+	case ATT_CONFUSE_SPORE:
+	case ATT_WEAK_SPORE:
+	case ATT_ACID_BYTE:
+	case ATT_THROW_ACID:
 	default:
-		damage_ -= randA(ac);
+		if(ac >= 0) {
+			damage_ -= randA(ac);
+		} else if (s_acid > 0) {
+			damage_ += randA(-ac);
+		}
 		if(damage_<0)
 			damage_ = 0;
 		break;
 	case ATT_AC_REDUCE_BLAST:
 	case ATT_HOOF:
-		damage_ -= randA(ac/2);
+		if(ac >= 0) {
+			damage_ -= randA(ac/2);
+		} else if (s_acid > 0) {
+			damage_ += randA(-ac/2);
+		}
 		if(damage_<0)
 			damage_ = 0;
 		break;
@@ -1148,6 +1264,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_BLOOD:
 	case ATT_BURST:
 	case ATT_DROWNING:
+	case ATT_POISON_BODY:
 		break;
 	}
 
@@ -1182,7 +1299,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_ELEC_ENCHANT_BLAST:
 		bonus_damage = damage_ / 3;
 		damage_ -= bonus_damage;
-		bonus_damage *= GetColdResist();
+		bonus_damage *= GetElecResist();
 		break;
 	case ATT_WEATHER:
 		type_ = GetWeatherType(this, damage_, bonus_damage);
@@ -1282,11 +1399,19 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_THROW_POISON_PYSICAL:
 		case ATT_THROW_SLOW_POISON:
 		case ATT_BEARTRAP:
+		case ATT_CONFUSE_SPORE:
+		case ATT_WEAK_SPORE:
 			if(a.order) {
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,CL_normal,
-					PlaceHolderHelper(name_.getName()),
-					PlaceHolderHelper(a.name.getName()),
-					PlaceHolderHelper(GetName()->getName()));
+				if(a.no_owner) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL_NO_OWNER,false,false,false,CL_normal,
+						PlaceHolderHelper(a.name.getName()),
+						PlaceHolderHelper(GetName()->getName()));
+				} else {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,CL_normal,
+						PlaceHolderHelper(name_.getName()),
+						PlaceHolderHelper(a.name.getName()),
+						PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 			break;
 		case ATT_SILVER:
@@ -1349,6 +1474,15 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 		case ATT_THROW_COLD_PYSICAL:
 			if(a.order) {
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_COLD,false,false,false,CL_normal,
+					PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(a.name.getName()),
+					PlaceHolderHelper(GetName()->getName()));
+			}
+			break;
+		case ATT_ACID_BYTE:
+		case ATT_THROW_ACID:
+			if(a.order) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_ACID,false,false,false,CL_normal,
 					PlaceHolderHelper(name_.getName()),
 					PlaceHolderHelper(a.name.getName()),
 					PlaceHolderHelper(GetName()->getName()));
@@ -1494,6 +1628,7 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_DROWNING_MONSTER,false,false,false,CL_normal,
 				PlaceHolderHelper(GetName()->getName()));
 			break;
+		case ATT_POISON_BODY:
 		case ATT_THROW_NONE_MASSAGE:
 			break;
 		}
@@ -1611,30 +1746,51 @@ void monster::print_no_damage_message(attack_infor &a)
 
 bool monster::damage(attack_infor &a, bool perfect_)
 {
+	return damage(a, perfect_, nullptr);
+}
+
+bool monster::damage(attack_infor &a, bool perfect_, const coord_def* hit_pos)
+{
+	if(id == MON_GOLIATH_DOLL && parent_part_id != -1)
+	{
+		for(monster& root : env[current_level].mon_vector)
+			if(root.isLive() && root.map_id == parent_part_id)
+			{
+				coord_def part_pos = position;
+				return root.damage(a, perfect_, &part_pos);
+			}
+	}
+
 	int back_stab = 0;
-	if(a.type < ATT_THROW_NORMAL)
+	if(isNormalAtt(a.type))
 	{ //백스탭레벨  3-맥스데미지 2-간간히 크리데미지 1-아주 드문 크리데미지
 		if(state.GetState() == MS_SLEEP || state.GetState() == MS_REST)
 			back_stab = 3;
 		else if(s_confuse || s_fear || s_paralyse)
 			back_stab = 2;
-		else if(a.order && !(a.order)->isView(this))
-		{ //투명일때 조건
+		else if(a.unseen_attack || (a.order && !(a.order)->isView(this)))
+		{ //투명이나 잠수일때 조건
 			back_stab = 2;
 		}		
 		else if(s_lunatic)
 			back_stab = 1;
 
 	}
+	bool canBash = false;
 	if(a.type == ATT_AUTUMN && back_stab == 0)
 	{
 		if(a.order && a.order->isplayer())
 		{
-			if(you.equipment[ET_WEAPON] && you.equipment[ET_WEAPON]->type == ITM_WEAPON_SHORTBLADE )
+			if(a.weapon_type == ATT_WEAPON_SHORTBLADE )
 			{
 				back_stab = 1;
 			}
 		}
+	}
+	
+	if(a.weapon_type == ATT_WEAPON_MACE )
+	{
+		canBash = true;
 	}
 	if(back_stab<=1 && GetMindReading() && a.order == &you)
 		back_stab = 2; //간파시 암습가능
@@ -1645,7 +1801,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 
 	bool player_joon_punch_ = false;
 
-	if (/*a.type < ATT_THROW_NORMAL &&*/ a.order && a.order->isplayer() && you.god == GT_JOON_AND_SION && !you.GetPunish(GT_JOON_AND_SION)
+	if (a.order && a.order->isplayer() && you.god == GT_JOON_AND_SION && !you.GetPunish(GT_JOON_AND_SION)
 		&& you.god_value[GT_JOON_AND_SION][0] == 1 && pietyLevel(you.piety) >= 2 &&
 		you.power >= 10 )
 	{
@@ -1661,6 +1817,28 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		a.max_damage *= multi_;
 	}
 
+	int BashPower = 0;
+	if(canBash && !bashed) {
+		int skill_ = 10;
+		float multi_ = 1.0f;
+		if(a.order && a.order->isplayer()) {
+			skill_ = you.GetSkillLevel(SKT_MACE, true);
+			multi_ += you.s_str*0.03f;
+		} else {
+			multi_ += 0.2f;
+		}
+		if(skill_+25 > randA(99)) {
+			BashPower = skill_ + 2;
+			a.damage *= multi_; //배쉬 데미지 1 + str*0.03 (10에서 1.3, 20에서 1.6)
+			a.max_damage *= multi_;
+		}
+		else {
+			canBash = false;
+		}
+	} else {
+		canBash = false;
+	}
+
 
 
 	int damage_ = calculate_damage(a.type,a.damage,a.max_damage, back_stab);
@@ -1674,7 +1852,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 
 	if(s_graze && randA(5) == 0)
 	{
-		if(a.type >= ATT_THROW_NORMAL && a.type < ATT_THROW_LAST)
+		if(isGrazableAtt(a.type))
 			graze_ = true;
 	}
 
@@ -1697,11 +1875,14 @@ bool monster::damage(attack_infor &a, bool perfect_)
 	}
 
 
+
+
 	name_infor name_;
 	if(a.order)
 		name_ = (*a.order->GetName());
 	int percent_ = min<int>(100,max<int>(10,55+(accuracy_-GetEv())*(accuracy_>GetEv()?3.5f:3)));
 
+	
 
 
 	if(wiz_list.wizard_mode == 1)
@@ -1753,6 +1934,9 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			Blink(10);
 			return false;
 		}
+
+
+
 		if (env[current_level].isSanctuary(position))
 		{
 			//성역에선 모든 데미지가 0
@@ -1763,7 +1947,13 @@ bool monster::damage(attack_infor &a, bool perfect_)
 
 		if(sight_ || only_invisible_)
 		{
-			print_damage_message(a, back_stab);
+			if(damage_ && canBash && !back_stab) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BASH,false,false,false,CL_normal,
+		 			PlaceHolderHelper(name_.getName()),
+					PlaceHolderHelper(GetName()->getName()));
+			} else {
+				print_damage_message(a, back_stab);
+			}
 		}
 		
 
@@ -1776,13 +1966,16 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		}
 		else if(damage_)
 		{
-			if ((sight_ || only_invisible_) && a.type < ATT_THROW_NORMAL) {
+
+			if(canBash) {
+				PlaySE("bash");
+			}
+			else if ((sight_ || only_invisible_) && isNormalAtt(a.type)) {
 				PlaySE("hit");
 			}
 
 			enterlog();
-			
-			hp-=damage_;
+			HpUpDown(-damage_, DR_HITTING, nullptr, true);
 			if(damage_/3 > 0 && a.type == ATT_VAMP && randA(2) == 0)
 			{
 				if(a.order)
@@ -1802,6 +1995,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			if(a.type == ATT_BEARTRAP) {
 				SetNoneMove(10);
 			}
+
 			
 			if (id == MON_LARVA)
 			{
@@ -1813,11 +2007,31 @@ bool monster::damage(attack_infor &a, bool perfect_)
 					}
 				}
 			}
-			if(id == MON_MUSHROOM && (randA(1) || hp<=0) )
+			if((id == MON_MUSHROOM || id == MON_MUSHROOM_GIANT) && (randA(1) || hp<=0) )
 			{
+				textures *fog_t = img_fog_poison;
+				smoke_type smoke_type = SMT_POISON;
+				if(id == MON_MUSHROOM_GIANT) {
+					switch(randA(4)) {
+						case 0:
+						case 1:
+						default:
+							//poison
+							break;
+						case 2:
+						case 3:
+							fog_t = img_fog_confusion;
+							smoke_type = SMT_CONFUSE;
+							break;
+						case 4:
+							fog_t = img_fog_slow;
+							smoke_type = SMT_SLOW;
+							break;
+					}
+				}
 				for(int i=-1;i<=1;i++){
 					for(int j=-1;j<=1;j++){
-							env[current_level].MakeSmoke(coord_def(position.x+i,position.y+j),img_fog_poison,SMT_POISON,rand_int(3,6),0,this);
+							env[current_level].MakeSmoke(coord_def(position.x+i,position.y+j),fog_t,smoke_type,rand_int(3,6),0,this);
 					}
 				}
 			}
@@ -1844,7 +2058,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			}
 			if(s_veiling)
 			{
-				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
+				if(a.order && a.type >=ATT_NORMAL && isNormalAtt(a.type))
 				{
 					attack_infor attack_infor_(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor(LOC_SYSTEM_VEILING));
 					a.order->damage(attack_infor_, true);
@@ -1852,11 +2066,49 @@ bool monster::damage(attack_infor &a, bool perfect_)
 					s_value_veiling = 0;
 				}
 			}
+
+			if(canBash) {
+				rand_rect_iterator rit(position, 2, 2);
+				int i = 2+randA(BashPower)/9;
+
+				if(!randA(1+(you.GetPunish(GT_SHINKI)?1:0)) && !isArena())
+				{
+					for (; !rit.end() ;rit++)
+					{
+						if (env[current_level].isMove(rit->x, rit->y, false)) {
+							item_infor temp;
+							env[current_level].MakeItem(coord_def(rit->x, rit->y),makePitem((monster_index)id, 1, &temp));
+							i--;
+							rit++;
+							break;
+						}		
+					}
+				}
+
+				for (; !rit.end() && i> 0; rit++)
+				{
+					if (env[current_level].isMove(rit->x, rit->y, false))
+					{
+						if (a.order && !a.order->isSightnonblocked(*rit)) {
+							continue;
+						}
+						int rand_ = randA(5);
+						env[current_level].MakeFloorEffect(coord_def(rit->x, rit->y), &img_score_item[rand_], &img_score_item[rand_],  FLOORT_SCORE_ITEM, rand_int(20, 30), &you);
+						i--;
+					}
+				}
+
+
+				SetDazed(BashPower/2+1, true);
+			}
+
 			if (player_joon_punch_)
 			{
 				you.PowUpDown(-rand_int(1, 10), true);
 				createGold(position, rand_int(1, 2));
 			}
+			if(hp <= 0 && TryActivateUniqueSpellcard(this,a.p_type,a.order))
+				return true;
 			if(hp<=0)
 			{
 				if (sight_) {
@@ -1895,7 +2147,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 					}
 				}
 
-				dead(a.p_type, !(a.order));
+				dead(a.p_type, !(a.order), false, a.order);
 			}
 
 			
@@ -1997,7 +2249,7 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		}
 		if(damage_ && a.order == &you)
 		{
-			if(a.type >= ATT_NORMAL && a.type < ATT_THROW_NORMAL && you.GetProperty(TPT_CONFUSE_ATTACK) && randA(4) == 0)
+			if(a.type >= ATT_NORMAL && isNormalAtt(a.type) && you.GetProperty(TPT_CONFUSE_ATTACK) && randA(4) == 0)
 			{
 				if(!confuse_resist)
 				{
@@ -2011,6 +2263,21 @@ bool monster::damage(attack_infor &a, bool perfect_)
 
 		if(a.type == ATT_OIL_BLAST) { 
 			SetOil(10, 50);
+		}
+		if(a.type == ATT_ACID_BYTE || a.type == ATT_THROW_ACID) {
+			you.SetAcid(3, 50);
+		}
+		if(a.type == ATT_CONFUSE_SPORE) { 
+			int temp_posion_resi = poison_resist - (s_vulun_poison?1:0);
+			if(((temp_posion_resi < 0)|| (temp_posion_resi<=0 && randA(2) == 0)) && s_confuse < 12) {
+				SetConfuse(rand_int(5,8));
+			}
+		}
+		if(a.type == ATT_WEAK_SPORE) { 
+			int temp_posion_resi = poison_resist - (s_vulun_poison?1:0);
+			if(((temp_posion_resi < 0)|| (temp_posion_resi<=0 && randA(1) == 0))) {
+				SetForceStrong(false, rand_int(10,20), true);
+			}
 		}
 
 		if(s_oil > 0 && (a.type == ATT_FIRE ||
@@ -2026,9 +2293,10 @@ bool monster::damage(attack_infor &a, bool perfect_)
 			s_oil = 0;
 		}
 		if(a.type == ATT_FIREPLUS&& randA(2) == 0) {
-			if(a.order != nullptr && env[current_level].isMove(position.x, position.y, true))
+			coord_def fire_pos = hit_pos?*hit_pos:position;
+			if(a.order != nullptr && env[current_level].isMove(fire_pos.x, fire_pos.y, true))
 			{
-				env[current_level].MakeSmoke(position,img_fog_fire,SMT_FIRE,rand_int(3,4),0,a.order);
+				env[current_level].MakeSmoke(fire_pos,img_fog_fire,SMT_FIRE,rand_int(3,4),0,a.order);
 			}
 		}
 
@@ -2046,16 +2314,28 @@ bool monster::damage(attack_infor &a, bool perfect_)
 		if(a.order && (sight_ || only_invisible_))
 		{			
 			if(!graze_) {
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_MISS,false,false,false,CL_bad,
-					 PlaceHolderHelper(name_.getName()),
-					 PlaceHolderHelper(a.name.getName()),
-					 PlaceHolderHelper(GetName()->getName()));
+				if(a.no_owner) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_MISS_NO_OWNER,false,false,false,CL_bad,
+						 PlaceHolderHelper(a.name.getName()),
+						 PlaceHolderHelper(GetName()->getName()));
+				} else {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_MISS,false,false,false,CL_bad,
+						 PlaceHolderHelper(name_.getName()),
+						 PlaceHolderHelper(a.name.getName()),
+						 PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 			else {
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_GRAZED,false,false,false,CL_bad,
-					 PlaceHolderHelper(name_.getName()),
-					 PlaceHolderHelper(a.name.getName()),
-					 PlaceHolderHelper(GetName()->getName()));
+				if(a.no_owner) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_GRAZED_NO_OWNER,false,false,false,CL_bad,
+						 PlaceHolderHelper(a.name.getName()),
+						 PlaceHolderHelper(GetName()->getName()));
+				} else {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_GRAZED,false,false,false,CL_bad,
+						 PlaceHolderHelper(name_.getName()),
+						 PlaceHolderHelper(a.name.getName()),
+						 PlaceHolderHelper(GetName()->getName()));
+				}
 			}
 		}
 		return false;
@@ -2070,6 +2350,8 @@ bool monster::simple_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<D
 }
 bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_, float scale_)
 {
+	if(IsUniqueSpellcardHidden(this))
+		return false;
 	bool return_ = false;
 	if (s_glow) {
 		img_effect_halo.draw(pSprite, x_, y_,0.0f,scale_,scale_, 127);
@@ -2079,9 +2361,34 @@ bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX:
 	}
 
 	int blue_ = s_frozen==0?255:127 +  std::max(0, 25-s_frozen)*128/25;
-	D3DCOLOR color_ = D3DCOLOR_ARGB(id == MON_ENSLAVE_GHOST?128:255, blue_,blue_,255);
+	bool is_ghost = (id == MON_ENSLAVE_GHOST || id == MON_TIME_PARADOX || id == MON_FLAN_AFTERIMAGE);
+	int alpha_ = is_ghost?128:255;
+	if(id == MON_BULLET && !env[current_level].dgtile[position.x][position.y].isMove(true,true,false))
+		alpha_ = 80;
+	D3DCOLOR color_ = D3DCOLOR_ARGB(alpha_, blue_,blue_,255);
 
-	return_ = image->draw(pSprite, x_, y_,0.0f,scale_,scale_,color_);
+	if(id == MON_TIME_PARADOX && sm_info.parent_map_id == you.GetMapId() && you.GetCharNameString().empty())
+	{
+		auto draw_equip_ = [&](equip_type type_)
+		{
+			item* item_ = you.equipment[type_];
+			if(item_ && item_->equip_image)
+				item_->equip_image->draw(pSprite,x_,y_,0.0f,scale_,scale_,color_);
+		};
+		draw_equip_(ET_CLOAK);
+		return_ = image->draw(pSprite,x_,y_,0.0f,scale_,scale_,color_);
+		if(you.tribe != TRI_FAIRY)
+		{
+			draw_equip_(ET_GLOVE);
+			draw_equip_(ET_BOOTS);
+			draw_equip_(ET_ARMOR);
+		}
+		draw_equip_(ET_HELMET);
+		draw_equip_(ET_WEAPON);
+		draw_equip_(ET_SHIELD);
+	}
+	else
+		return_ = image->draw(pSprite, x_, y_,0.0f,scale_,scale_,color_);
 	if (id == MON_DANCING_ARMOUR || id == MON_DANCING_WEAPON) {
 		img_mons_dancing_weapon.draw(pSprite, x_, y_,0.0f,scale_,scale_, 255);
 	}
@@ -2099,6 +2406,11 @@ bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX:
 	{
 
 		int offset_ = 0;
+		if(spellcard_info.state == USCS_READY)
+		{
+			return_ = img_state_spellcard.draw(pSprite,x_+offset_,y_,0.0f,scale_,scale_,255);
+			offset_ -= 5;
+		}
 		for (monster_state_simple mss = MSS_SLEEP; mss < MSS_MAX; mss = (monster_state_simple)(mss + 1))
 		{
 			if (isSimpleState(mss))
@@ -2110,11 +2422,20 @@ bool monster::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX:
 			}
 		}
 	}
-	if(return_)
+	bool draw_hp = id != MON_GOLIATH_DOLL ||
+		(parent_part_id != -1 && (special_value == 2 || special_value == 3));
+	if(return_ && draw_hp)
 	{
 		int hp_ = hp*5/max_hp;
 		if(hp_>=0 && hp_<5)
 			return_ = img_hp_graphic[hp_].draw(pSprite,x_,y_+12*scale_,0.0f,scale_,scale_,255);
+	}
+	if(return_ && (id == MON_SANGHAI_DOLL || id == MON_HOURAI_DOLL) &&
+		special_value > 0 && env[current_level].isInSight(position))
+	{
+		int countdown_index = min(4, max(0, (10 - special_value) / 2));
+		img_sacrifice_countdown[countdown_index].draw(pSprite, x_, y_ - 16 * scale_,
+			0.0f, scale_, scale_, 255);
 	}
 	return return_;
 }
@@ -2173,7 +2494,7 @@ bool monster::isMoveNotInturrpt(monster* mon) {
 	}
 	if(flag & M_FLAG_MISSLE && mon->flag & M_FLAG_MISSLE)
 		return true;
-	if(mon->flag & M_FLAG_NONE_MOVE && !canSwap(mon, false) && mon->position != target_pos)
+	if((mon->isImmobile() || mon->flag & M_FLAG_NONE_MOVE) && !canSwap(mon, false) && mon->position != target_pos)
 		return true;
 	return false;
 }
@@ -2264,6 +2585,10 @@ int monster::AttackToYou(bool force_) {
 	for(int i=0;i<3;i++,num_++)
 		if(atk_type[i] == ATT_NONE)
 			break;
+	if(id == MON_SPORE) {
+		dead(PRT_NEUTRAL,true);
+		return 1;
+	}
 	if(isHaveSpell(SPL_SUICIDE_BOMB))
 	{
 		MonsterUseSpell(SPL_SUICIDE_BOMB, false, this, you.position);
@@ -2273,9 +2598,33 @@ int monster::AttackToYou(bool force_) {
 	{
 		num_ = randA(num_-1);
 		attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
+		if(id == MON_HOMING) {
+			temp_att.no_owner = true;
+			temp_att.name = name;
+		}
 		you.damage(temp_att);
 		multipleAttack(&you, temp_att);
 		enterlog();
+
+		if(id == MON_GIANT_CENTIPEDE) {
+			coord_def next_ =  position;
+			int max_distance = 999;
+			rand_rect_iterator rand_(you.position, 1, 1);
+			while(!rand_.end()) {
+				if(position.distance_from(*rand_) == 1 &&
+				(position-*rand_).abs() < max_distance &&
+				!env[current_level].isMonsterPos(rand_->x, rand_->y)&&
+				 env[current_level].isMove(rand_->x, rand_->y)) {
+					next_ = *rand_;
+					max_distance = (position-*rand_).abs();
+				}
+				rand_++;
+			}
+			if(next_ != position) {
+				SetXY(next_.x, next_.y);
+			}
+			return 1;
+		}
 		return 1;
 	}
 	return 0;
@@ -2299,6 +2648,10 @@ int monster::AttackToMon(monster* mon_, bool force_) {
 	{
 		num_ = randA(num_-1);
 		attack_infor temp_att(GetAttack(num_,false),GetAttack(num_,true),GetHit(),this,GetParentType(),atk_type[num_],atk_name[num_]);
+		if(id == MON_HOMING) {
+			temp_att.no_owner = true;
+			temp_att.name = name;
+		}
 		mon_->damage(temp_att);
 		multipleAttack(mon_, temp_att);
 		enterlog();
@@ -2320,6 +2673,12 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 			y_mov = (short_move)rand_int(MV_BACK,MV_FRONT);
 		}while(x_mov == MV_NONE && y_mov == MV_NONE);
 	}
+	if(id == MON_GOLIATH_DOLL)
+	{
+		if(parent_part_id != -1)
+			return 0;
+		return moveGoliath(x_mov, y_mov, only_move);
+	}
 
 	if(!(flag & M_FLAG_NONE_MOVE) &&
 		env[current_level].isMove(position.x+x_mov,position.y+y_mov,isFly() || s_confuse, isSwim(), false/*flag & M_FLAG_CANT_GROUND*/, id == MON_SEIGA))
@@ -2327,7 +2686,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 		if(env[current_level].isSmokePos(position.x+x_mov,position.y+y_mov))
 		{
 			smoke* temp_smoke = env[current_level].isSmokePos2(position.x+x_mov,position.y+y_mov);
-			if(hp<temp_smoke->danger(this))
+			if(temp_smoke && hp<temp_smoke->danger(this))
 				return 0;
 		}
 		if(floor_effect* temp_floor = env[current_level].isFloorEffectPos(position.x+x_mov,position.y+y_mov))
@@ -2346,7 +2705,15 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 		{
 			bool isExistMon_ = (*it).isLive() && (*it).position.x == position.x+x_mov && (*it).position.y == position.y+y_mov;
 
-			if(isExistMon_ && (*it).flag & M_FLAG_MISSLE && !isMoveNotInturrpt(&(*it))) {
+			if(isExistMon_ && id == MON_GIANT_CENTIPEDE && it->id == MON_GIANT_CENTIPEDE_BODY
+				 && it->parent_part_id == map_id && it->special_value != 1) {
+				//전갈은 자신의 몸을 뚫는다. 하지만 바로 뒤론 못감(머리 바로 뒤는 special_value가 1이다)
+				it->dead(PRT_NEUTRAL, false);
+			}
+			else if(isExistMon_ && it->id == MON_BULLET) {
+				it->hp = 0;
+			}
+			else if(isExistMon_ && (*it).flag & M_FLAG_MISSLE && !isMoveNotInturrpt(&(*it))) {
 				//이건 미사일류 몬스터라 사라져야함
 				AttackToMon(&(*it), true);
 				it->dead(PRT_NEUTRAL, false);
@@ -2456,6 +2823,18 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 	}
 	else
 	{		
+		if(!only_move && !s_confuse && !(flag & M_FLAG_NO_ATK))
+		{
+			coord_def target_pos_(position.x+x_mov, position.y+y_mov);
+			if(you.position == target_pos_ && isEnemyUnit(&you))
+				return AttackToYou(false);
+			if(unit* target_ = env[current_level].isMonsterPos(target_pos_.x, target_pos_.y, this))
+			{
+				monster* mon_ = (monster*)target_;
+				if(isEnemyMonster(mon_) || mon_->id == MON_BUSH)
+					return AttackToMon(mon_, false);
+			}
+		}
 		if(s_confuse)
 		{
 			return 1;
@@ -2463,18 +2842,149 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 		return 0;
 	}
 }
+
+int monster::moveGoliath(short_move x_mov, short_move y_mov, bool only_move)
+{
+	static const coord_def offsets[4] = {
+		coord_def(0, 0), coord_def(1, 0), coord_def(0, 1), coord_def(1, 1)
+	};
+	coord_def destination = position + coord_def(x_mov, y_mov);
+	monster* attack_target = NULL;
+
+	for(const coord_def& offset : offsets)
+	{
+		coord_def pos = destination + offset;
+		if(pos.x < 0 || pos.x >= DG_MAX_X || pos.y < 0 || pos.y >= DG_MAX_Y ||
+			!env[current_level].isMove(pos, isFly(), isSwim(), flag & M_FLAG_CANT_GROUND))
+			return 0;
+
+		unit* occupied = env[current_level].isMonsterPos(pos.x, pos.y, this);
+		if(!occupied)
+			continue;
+		if(occupied->isplayer())
+		{
+			if(only_move || !isEnemyUnit(occupied) || flag & M_FLAG_NO_ATK)
+				return 0;
+			return AttackToYou(false);
+		}
+
+		monster* mon = (monster*)occupied;
+		if(mon->map_id == map_id || mon->parent_part_id == map_id)
+			continue;
+		if(isEnemyMonster(mon) || s_confuse || mon->id == MON_BUSH)
+			attack_target = mon;
+		else
+			return 0;
+	}
+
+	if(attack_target)
+	{
+		if(only_move)
+			return 0;
+		return AttackToMon(attack_target, false);
+	}
+	SetXY(destination);
+	return 2;
+}
+
+bool monster::canPlaceGoliath(const coord_def& anchor)
+{
+	static const coord_def offsets[4] = {
+		coord_def(0, 0), coord_def(1, 0), coord_def(0, 1), coord_def(1, 1)
+	};
+	for(const coord_def& offset : offsets)
+	{
+		coord_def pos = anchor + offset;
+		if(pos.x < 0 || pos.x >= DG_MAX_X || pos.y < 0 || pos.y >= DG_MAX_Y ||
+			!env[current_level].isMove(pos, isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) ||
+			you.position == pos)
+			return false;
+		unit* occupied = env[current_level].isMonsterPos(pos.x, pos.y, this);
+		if(occupied && (occupied->isplayer() ||
+			(((monster*)occupied)->map_id != map_id && ((monster*)occupied)->parent_part_id != map_id)))
+			return false;
+	}
+	return true;
+}
+
+int monster::moveGoliathToPos(const coord_def& target_, bool only_move)
+{
+	short_move direct_x = target_.x > position.x ? MV_FRONT :
+		(target_.x < position.x ? MV_BACK : MV_NONE);
+	short_move direct_y = target_.y > position.y ? MV_FRONT :
+		(target_.y < position.y ? MV_BACK : MV_NONE);
+	int direct_result = moveGoliath(direct_x, direct_y, only_move);
+	if(direct_result || (direct_x == MV_NONE && direct_y == MV_NONE))
+		return direct_result;
+
+	bool visited[DG_MAX_X][DG_MAX_Y] = {};
+	coord_def previous[DG_MAX_X][DG_MAX_Y];
+	deque<coord_def> open;
+	open.push_back(position);
+	visited[position.x][position.y] = true;
+	previous[position.x][position.y] = position;
+	coord_def goal(-1, -1);
+
+	while(!open.empty() && goal.x < 0)
+	{
+		coord_def current = open.front();
+		open.pop_front();
+		for(int y = -1; y <= 1 && goal.x < 0; y++)
+			for(int x = -1; x <= 1; x++)
+			{
+				if(x == 0 && y == 0)
+					continue;
+				coord_def next = current + coord_def(x, y);
+				if(next.x < 0 || next.x >= DG_MAX_X || next.y < 0 || next.y >= DG_MAX_Y ||
+					visited[next.x][next.y] || !canPlaceGoliath(next))
+					continue;
+				visited[next.x][next.y] = true;
+				previous[next.x][next.y] = current;
+				open.push_back(next);
+
+				int gap_x = target_.x < next.x ? next.x - target_.x :
+					(target_.x > next.x + 1 ? target_.x - (next.x + 1) : 0);
+				int gap_y = target_.y < next.y ? next.y - target_.y :
+					(target_.y > next.y + 1 ? target_.y - (next.y + 1) : 0);
+				if(gap_x <= 1 && gap_y <= 1)
+				{
+					goal = next;
+					break;
+				}
+			}
+	}
+
+	if(goal.x < 0)
+		return 0;
+	while(previous[goal.x][goal.y] != position)
+		goal = previous[goal.x][goal.y];
+	return moveGoliath((short_move)(goal.x - position.x),
+		(short_move)(goal.y - position.y), only_move);
+}
+
 int monster::move(const coord_def &c, bool only_move)
 {
 	return move((c.x>position.x?MV_FRONT:(c.x==position.x?MV_NONE:MV_BACK)),(c.y>position.y?MV_FRONT:(c.y==position.y?MV_NONE:MV_BACK)), only_move);
 }
 bool monster::offsetmove(const coord_def &c)
-{		
+{
 	position += c;
 	target_pos += c;
+	if(id == MON_BULLET)
+	{
+		for(coord_def& route_ : will_move)
+			route_ += c;
+	}
 	if(position.x >= 0 && position.x < DG_MAX_X && position.y >= 0 && position.y < DG_MAX_Y )
 		return true;
 	else
 	{
+		if(IsUniqueSpellcardHidden(this))
+		{
+			position = you.position;
+			target_pos = you.position;
+			return true;
+		}
 		dead(PRT_NEUTRAL, false, true);
 		return false;
 	}
@@ -2514,6 +3024,35 @@ bool monster::OpenDoor(const coord_def &c)
 
 int monster::longmove()
 {
+	if(id == MON_GOLIATH_DOLL)
+	{
+		if(direction < 0 || direction > 7)
+			direction = rand_int(0,7);
+		int result = move(inttodirec(direction,position.x,position.y), false);
+		if(result)
+		{
+			if(randA(15)==1)
+				direction = rand_int(0,7);
+			return result;
+		}
+
+		deque<int> directions;
+		for(int i=0;i<8;i++)
+			if(i != direction)
+				directions.push_back(i);
+		rand_shuffle(directions.begin(), directions.end());
+		for(int next_direction : directions)
+		{
+			coord_def next = inttodirec(next_direction, position.x, position.y);
+			if(canPlaceGoliath(next))
+			{
+				direction = next_direction;
+				return move(next, false);
+			}
+		}
+		return 0;
+	}
+
 	if(direction < 0 || direction > 7)
 		direction = rand_int(0,7);
 	int return_ = move(inttodirec(direction,position.x,position.y), false);
@@ -2551,15 +3090,19 @@ bool monster::tryMagic() {
 			for(;it != spell_lists.end();it++)
 			{
 				spell_list id_ = (spell_list)(it->num);
+				coord_def magic_target_ = target_pos;
 				int percent_ = it->percent;
 				if (s_clever  && percent_<90){
 					percent_ = percent_*1.5f;
 					if (percent_ > 90)
 						percent_ = 90;
 				}
+				if(s_dazed) {
+					percent_ = percent_*0.9f;
+				}
 				if(randA_1(100)<=percent_)
 				{
-					if(isMonSafeSkill(id_,this,target_pos))
+					if(isMonSafeSkill(id_,this,magic_target_))
 					{
 						if (SpellFlagCheck(id_, S_FLAG_SPEAK) && flag & M_FLAG_SPEAK)
 						{
@@ -2577,7 +3120,7 @@ bool monster::tryMagic() {
 								}
 							}
 						}
-						if(MonsterUseSpell(id_,false,this,SpellFlagCheck(id_,S_FLAG_IMMEDIATELY)?position:target_pos))
+						if(MonsterUseSpell(id_,false,this,SpellFlagCheck(id_,S_FLAG_IMMEDIATELY)?position:magic_target_))
 						{
 							Noise(position,SpellNoise(id_),this); //스펠을 사용한후 다른 몬스터로 둔갑할 수 있어. it을 사용하면 안됨
 							return true;
@@ -2615,7 +3158,8 @@ int monster::atkmove(int is_sight, bool only_move)
 			for(;it != spell_lists.end();it++)
 			{
 				spell_list id_ = (spell_list)(it->num);
-				if(isMonSafeSkill(id_,this,target_pos))
+				coord_def magic_target_ = target_pos;
+				if(isMonSafeSkill(id_,this,magic_target_))
 				{
 					float gap = GetPositionGap(position.x, position.y, target_pos.x, target_pos.y);
 					if(randA(4) >= max<int>(0,gap-3)) {
@@ -2754,9 +3298,14 @@ int monster::atkmove(int is_sight, bool only_move)
 }
 
 
+bool monster::isImmobile() {
+	return flag & M_FLAG_IMMOBILE;
+}
 bool monster::isCanMove()
 {
 	if(state.GetState() == MS_SLEEP)
+		return false;
+	if (isImmobile())
 		return false;
 	if (s_paralyse)
 		return false;
@@ -2777,6 +3326,9 @@ bool monster::isHaveSpell(spell_list sp)
 }
 int monster::MoveToPos(coord_def pos_, bool only_move)
 {
+	if(id == MON_GOLIATH_DOLL && parent_part_id == -1)
+		return moveGoliathToPos(pos_, only_move);
+
 	int move_ = 0;
 	close_beam_iterator it(position,pos_);
 	for(;!it.end() && !move_;it++)
@@ -2787,12 +3339,16 @@ int monster::MoveToPos(coord_def pos_, bool only_move)
 }
 bool monster::isView()
 {
+	if(IsUniqueSpellcardHidden(this))
+		return false;
 	if(!s_glow && !s_oil && !s_fire && s_invisible && !you.invisible_view && !s_ally)
 		return false;
 	return true;
 }
 bool monster::isView(const monster* monster_info)
 {
+	if(IsUniqueSpellcardHidden(this))
+		return false;
 	if(!s_glow && !s_oil && !s_fire && s_invisible && !(monster_info->flag & M_FLAG_CAN_SEE_INVI) && !isAllyMonster(monster_info))
 		return false;
 	return true;
@@ -2807,8 +3363,34 @@ bool monster::CanSpeak()
 	return false;
 }
 bool skill_suicide_bomb(int base_damage, int power, bool short_, unit* order, coord_def target, bool hurt_ally, bool self_hurt);
-bool monster::dead(parent_type reason_, bool message_, bool remove_)
+bool skill_counter_tanmac(unit* order, coord_def target);
+bool monster::dead(parent_type reason_, bool message_, bool remove_, unit* killer_)
 {
+	if(id == MON_GOLIATH_DOLL && parent_part_id != -1)
+	{
+		for(monster& root : env[current_level].mon_vector)
+			if(root.map_id == parent_part_id && root.isLive())
+			{
+				hp = 0;
+				return root.dead(reason_, message_, remove_, killer_);
+			}
+	}
+	if(!remove_ && TryActivateUniqueSpellcard(this,reason_,killer_))
+		return false;
+
+	bool counter_tanmac_ = isHaveSpell(SPL_COUNTER_TANMAC) && !remove_;
+	coord_def counter_target_ = position;
+	if(counter_tanmac_)
+	{
+		if(killer_ && killer_ != this)
+			counter_target_ = killer_->position;
+		else
+		{
+			coord_def direc_ = GetDirecToPos(randA(7));
+			counter_target_.set(position.x + direc_.x * 7, position.y + direc_.y * 7);
+		}
+	}
+
 	bool sight_ = false;
 	if(isYourShight())
 		sight_ = true;
@@ -2824,10 +3406,17 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 	{
 		ChangeMonster(MON_RACCON,0);
 	}
+	bool isPart = (parent_part_id != -1);
+	if(id == MON_GOLIATH_DOLL && !isPart)
+	{
+		for(monster& part : env[current_level].mon_vector)
+			if(part.parent_part_id == map_id)
+				part.hp = 0;
+	}
 
 
 
-	if (message_ && !remove_)
+	if (message_ && !remove_ && !isPart)
 	{
 		if (sight_){
 			if (flag & M_FLAG_UNIQUE && id != MON_ENSLAVE_GHOST) {
@@ -2872,7 +3461,11 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 
 	
 	if(isArena())
+	{
+		if(counter_tanmac_)
+			skill_counter_tanmac(this, counter_target_);
 		return true;
+	}
 
 	if(id == MON_ENSLAVE_GHOST)
 	{
@@ -2992,6 +3585,19 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		}		
 	}
 
+	
+	if (id == MON_SPORE) {
+		skill_spore_bomb(this);
+	}
+	if (id == MON_TREE_GIANT) {
+		env[current_level].MakeEvent(EVL_TREE, position, EVT_ALWAYS, rand_int(20,30));
+		if(isYourShight()) {
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_MON_TREE_GIANT_DEAD,
+				PlaceHolderHelper(GetName()->getName())) + " ",false,false,false,CL_bad);
+		} else if(env[current_level].isInSight(position)) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_MON_TREE_GIANT_SUDDENLY) + " ",false,false,false,CL_normal);
+		}
+	}
 
 	for(int i = 0; i < 5; i++)
 	{
@@ -3019,7 +3625,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		}
 	}
 
-	if(!(flag & M_FLAG_SUMMON) && !remove_ && !(flag & M_FLAG_UNHARM))
+	if(!(flag & M_FLAG_SUMMON) && !remove_ && !isPart && !(flag & M_FLAG_UNHARM))
 	{
 		if (reason_ == PRT_PLAYER && s_fear != -1 && !(flag & M_FLAG_COMPLETE_NETURALY)) //플레이어가 죽였다.
 		{
@@ -3032,11 +3638,13 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 		{
 			you.GetExp(exper/*(exper+1)/2*/); //더이상 동맹으로 경험치 절반은 되지않는다.
 		}
-		if(!randA(1+(you.GetPunish(GT_SHINKI)?1:0)) && !isArena())
+		if(!randA(1+(you.GetPunish(GT_SHINKI)?1:0)) && !isArena() && !bashed)
 		{
 			item_infor temp;
 			env[current_level].MakeItem(position,makePitem((monster_index)id, 1, &temp));
 		}
+	}
+	if(!(flag & M_FLAG_SUMMON) && !remove_ && !isPart) {
 		if (s_ally != -1 && !isArena())
 		{
 			if (!item_lists.empty())
@@ -3051,27 +3659,8 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 				}
 			}
 		}
-		//if(id == MON_MAGIC_BOOK)
-		//{
-		//	item_infor t;
-		//	item *it2;
-		//	it2 = env[current_level].MakeItem(position,makeCustomBook(&t));
-		//	list<spell>::iterator it = spell_lists.begin();
-		//	if(it != spell_lists.end()){
-		//		it2->value1 = it->num;
-		//		it++;
-		//	}
-		//	if(it != spell_lists.end()){
-		//		it2->value2 = it->num;
-		//		it++;
-		//	}
-		//	if(it != spell_lists.end()){
-		//		it2->value3 = it->num;
-		//		it++;
-		//	}
-		//}
 	}
-	if(flag & M_FLAG_UNIQUE && id != MON_ENSLAVE_GHOST && !remove_)
+	if(flag & M_FLAG_UNIQUE && id != MON_ENSLAVE_GHOST && !remove_ && !isPart)
 	{
 		if(reason_ == PRT_PLAYER || reason_ == PRT_ALLY)
 		{
@@ -3083,8 +3672,10 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_)
 
 		}
 	}
-	if (!(flag & M_FLAG_SUMMON) && !remove_ && !(flag & M_FLAG_UNHARM))
+	if (!(flag & M_FLAG_SUMMON) && !remove_ && !isPart && !(flag & M_FLAG_UNHARM))
 		GodAccpect_KillMonster(this,reason_);
+	if(counter_tanmac_)
+		skill_counter_tanmac(this, counter_target_);
 	return true;
 }
 void monster::resetShadow() {
@@ -3101,12 +3692,34 @@ void monster::resetShadow() {
 	}
 
 	prev_position = position;
+	if(id == MON_GOLIATH_DOLL && parent_part_id == -1)
+	{
+		for(monster& part : env[current_level].mon_vector)
+			if(part.isLive() && part.parent_part_id == map_id)
+				part.resetShadow();
+	}
 
 }
 
 
 int monster::action(int delay_)
 {
+	if(IsUniqueSpellcardHidden(this))
+		return 0;
+	if(id == MON_GOLIATH_DOLL && parent_part_id != -1)
+		return 0;
+	if(id == MON_GOLIATH_DOLL && target && !target->isplayer())
+	{
+		monster* target_monster = (monster*)target;
+		if(target_monster->map_id == map_id || target_monster->parent_part_id == map_id)
+		{
+			target = NULL;
+			memory_time = 0;
+			will_move.clear();
+			state.StateTransition(MSI_LOST);
+		}
+	}
+
 	bool is_sight = false, is_sight_for_monster = false;
 	if(env[current_level].isInSight(position, true))
 	{
@@ -3128,8 +3741,9 @@ int monster::action(int delay_)
 		is_sight_for_monster = true;
 	}
 
-
-	time_delay+=delay_ * rand_int(9,11) / 10; //움직임 randomizing
+	int delay_temp = id == MON_BULLET ? delay_ : delay_ * rand_int(9,11) / 10;  //움직임 randomizing
+	time_delay+=delay_temp; //움직임 randomizing
+	all_time_delay+=delay_temp;
 	if(flag & M_FLAG_CONFUSE)
 		s_confuse = 10;
 	if(flag & M_FLAG_SUMMON && summon_time>=0)
@@ -3145,7 +3759,7 @@ int monster::action(int delay_)
 						PlaceHolderHelper(GetName()->getName()));
 				}
 			}
-			else {
+			else if(!(flag & M_FLAG_SILENT_DESPAWN)) {
 				env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
 				if (is_sight && id != MON_TRASH) {
 					LocalzationManager::printLogWithKey(LOC_SYSTEM_DEAD_SUMMON,true,false,false,CL_bad,
@@ -3153,6 +3767,33 @@ int monster::action(int delay_)
 					PlaySE("kill_banashed");
 				}
 			}
+
+			
+			if(HasMultiTile() && parent_part_id == -1){
+				//전파
+				for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+				{
+					if (&(*it) != this && it->isLive() && it->parent_part_id != -1 && it->parent_part_id == map_id && 
+					it->flag & M_FLAG_SUMMON && it->summon_time>=0){
+						it->hp = 0;
+						env[current_level].MakeSmoke(it->position, img_fog_normal, SMT_NORMAL, 4, 0, this);
+					}
+				}
+			}
+			if(parent_part_id != -1) {
+				//내가 전파해야함
+				for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+				{
+					if (&(*it) != this && it->isLive() && (parent_part_id == it->map_id || 
+						it->parent_part_id == parent_part_id) && 
+					it->flag & M_FLAG_SUMMON && it->summon_time>=0){
+						it->hp = 0;
+						env[current_level].MakeSmoke(it->position, img_fog_normal, SMT_NORMAL, 4, 0, this);
+					}
+				}
+			}
+
+
 			env[current_level].SummonClear(map_id);
 			return 0;
 		}
@@ -3188,7 +3829,7 @@ int monster::action(int delay_)
 		{
 			if (poison_percent(s_poison) && !s_invincibility)
 			{
-				hp -= randA_1(3)*poison_damage(s_poison);
+				HpUpDown(-randA_1(3)*poison_damage(s_poison), DR_POISON, nullptr, true);
 				if(hp<=0)
 				{
 					dead(poison_reason, true); //아직 플레이어의 독은 없다.
@@ -3240,6 +3881,14 @@ int monster::action(int delay_)
 					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_HASTE,true,false,false,CL_normal,
 						PlaceHolderHelper(GetName()->getName()));
 				}
+			}
+		}
+		if(s_swift)
+		{
+			s_swift--;
+			if(is_sight && isView() && !s_swift) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_SWIFT,true,false,false,CL_normal,
+					PlaceHolderHelper(GetName()->getName()));
 			}
 		}
 
@@ -3539,7 +4188,7 @@ int monster::action(int delay_)
 				int damage_add =  (int)(damage_ + rand_float(0,0.99f));
 				if (damage_add > 0 && !s_invincibility)
 				{
-					hp -= damage_add;
+					HpUpDown(-damage_add, DR_FIRE, nullptr, true);
 					if(hp<=0)
 					{
 						dead(fire_reason, true);
@@ -3549,9 +4198,35 @@ int monster::action(int delay_)
 			}
 		}
 
+
+		if(s_vulun_poison)
+		{
+			s_vulun_poison--;
+			if (!s_vulun_poison)
+			{
+				if (is_sight && isView())
+				{
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_NO_LONGER_VULUN_POISON,true,false,false,CL_normal,
+						PlaceHolderHelper(GetName()->getName()));
+				}
+			}
+		}
+
 		if (s_none_move > 0)
 		{
 			s_none_move--;
+		}
+
+		if (s_dazed > 0)
+		{
+			s_dazed--;
+		}
+		if (s_acid_turn > 0)
+		{
+			s_acid_turn--;
+			if(s_acid_turn == 0) {
+				UnSetAcid();
+			}
 		}
 
 		bool move_ = false;
@@ -3684,7 +4359,7 @@ int monster::action(int delay_)
 				//	target = NULL;
 				//}
 			}
-			if(!s_sick)
+			if(!s_sick && parent_part_id == -1)
 				HpRecover();
 			if(target && !target->isLive())
 			{
@@ -4165,6 +4840,8 @@ void monster::sightcheck(bool is_sight_)
 
 void monster::special_action(int delay_, bool smoke_)
 {
+	if(IsUniqueSpellcardHidden(this))
+		return;
 
 	switch (id)
 	{
@@ -4447,6 +5124,11 @@ void monster::special_action(int delay_, bool smoke_)
 			}
 		}
 		break;
+	case MON_SANGHAI_DOLL:
+	case MON_HOURAI_DOLL:
+		if(!smoke_ && special_value > 0 && --special_value == 0)
+			sacrificeExplosion(this);
+		break;
 	case MON_SONBITEN_SPINTOWIN:
 		if (smoke_){
 			for (int i = -1; i < 2; i++)
@@ -4471,7 +5153,7 @@ void monster::special_action(int delay_, bool smoke_)
 		break;
 	case MON_HOMING:
 		if (!smoke_){
-			image = special_value==1?&img_tanmac_homing_cyan[GetAngleToDirec(direction)]:&img_tanmac_homing[GetAngleToDirec(direction)];
+			image = special_value>=1?&img_tanmac_homing_cyan[GetAngleToDirec(direction)]:&img_tanmac_homing[GetAngleToDirec(direction)];
 			if(isUserAlly() && !env[current_level].isInSight(position) && summon_time > 0) {
 				summon_time = std::max(1, summon_time-10);
 			}
@@ -4525,6 +5207,239 @@ void monster::special_action(int delay_, bool smoke_)
 			}
 		}
 		break;
+	case MON_GIANT_CENTIPEDE:
+		if (!smoke_) {
+			if(position != prev_position_for_monster && position.distance_from(prev_position_for_monster) == 1 &&
+				!env[current_level].isMonsterPos(prev_position_for_monster.x, prev_position_for_monster.y)) {
+				vector<monster*> body_vector;
+				for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+				{
+					if (it->isLive() && it->parent_part_id != -1 && it->parent_part_id == map_id && it->id == MON_GIANT_CENTIPEDE_BODY){
+						it->special_value++;
+						body_vector.push_back(&(*it));
+					}
+				}
+				std::sort(body_vector.begin(), body_vector.end(),
+						[](monster* a, monster* b) {
+							return a->special_value < b->special_value;
+						});
+				monster *mon_ = env[current_level].AddMonster(MON_GIANT_CENTIPEDE_BODY, 0, prev_position_for_monster);
+				if(!mon_)
+					break;
+				mon_->parent_part_id = map_id;
+				mon_->special_value = 1;
+				mon_->max_hp = max_hp;
+				mon_->hp = hp;
+				mon_->target = target;
+
+				if(flag & M_FLAG_SUMMON) {
+					mon_->flag |= M_FLAG_SUMMON;
+					mon_->summon_time = summon_time;
+					mon_->summon_parent = summon_parent;
+					mon_->sm_info = sm_info;
+				}
+				{ //머리 이미지 조정
+					int path_ = 80+GetPosToDirec(position,mon_->position);
+					int index_ = PathToNum_forstem(path_);
+					if(index_ < 8) {
+						image = &img_mons_giant_centipede_body[index_];
+					}
+				}
+
+				if(body_vector.size() != 0) { //중간
+					monster* tail_ = body_vector[0];
+					int path_ = 10*GetPosToDirec(mon_->position,position);
+					path_ += GetPosToDirec(mon_->position,tail_->position);
+					int index_ = PathToNum_forstem(path_);
+					if(index_ < 36) {
+						mon_->image = &img_mons_giant_centipede_body[index_];
+					}
+				} else { //맨 끝
+					coord_def dir = prev_position_for_monster - position;
+					coord_def temp = prev_position_for_monster + dir;
+					int path_ = 10*GetPosToDirec(mon_->position,position);
+					path_ += GetPosToDirec(mon_->position,temp);
+					int index_ = PathToNum_forstem(path_);
+					if(index_ < 36) {
+						mon_->image = &img_mons_giant_centipede_body[index_];
+					}
+				}
+				//몸통은 최대 8칸임
+				for(int i = 0; i < body_vector.size(); i++) {
+					if(body_vector[i]->special_value > 7) {
+						body_vector[i]->dead(PRT_NEUTRAL, false, true);
+					}
+				}
+			}
+		} 
+		break;
+	case MON_OVERGROWTH_WATERMELON:
+		if (!smoke_) {
+			bool close_stem = false;
+			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+			{
+				if (it->isLive() && it->id == MON_OVERGROWTH_STEM && position.distance_from(it->position) <= 1){
+					close_stem = true;
+				}
+			}
+			if(!close_stem)
+				dead(PRT_NEUTRAL, false, false);
+		}
+		break;
+	case MON_OVERGROWTH_MAGIC_FLOWER:
+		if (!smoke_) {
+			if(parent_part_id == -1 && all_time_delay > 500) { //대충 100턴지남
+				bool inSight_ = env[current_level].isInSight(position);
+				for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+				{
+					if (it->isLive() && it->parent_part_id == map_id){
+						it->dead(PRT_NEUTRAL, false, true);
+						if(env[current_level].isInSight(it->position)) {
+							inSight_ = true;
+						}
+					}
+					if (it->isLive() && it->special_value == map_id){
+						it->dead(PRT_NEUTRAL, false, true);
+						if(env[current_level].isInSight(it->position)) {
+							inSight_ = true;
+						}
+					}
+				}
+				dead(PRT_NEUTRAL, false, true);
+				if (env[current_level].isInSight(position)) {
+					printlog(LocalzationManager::locString(LOC_SYSTEM_STEM_WITHERING) + " ", false, false, false, CL_bad);
+				}
+			}
+		}
+		break;
+	case MON_OVERGROWTH_STEM:
+		if (!smoke_) {
+			if(special_value == 0 && position != prev_position_for_monster && position.distance_from(prev_position_for_monster) == 1 &&
+				!env[current_level].isMonsterPos(prev_position_for_monster.x, prev_position_for_monster.y)) {
+				vector<monster*> body_vector;
+				for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+				{
+					if (it->isLive() && &(*it) != this && it->special_value != 0 
+					 && it->parent_part_id != -1
+					 && it->special_value/100 == map_id 
+					 && it->id == MON_OVERGROWTH_STEM){
+						it->special_value++;
+						body_vector.push_back(&(*it));
+					}
+				}
+				std::sort(body_vector.begin(), body_vector.end(),
+						[](monster* a, monster* b) {
+							return (a->special_value%100) < (b->special_value%100);
+						});
+				monster *mon_ = env[current_level].AddMonster(MON_OVERGROWTH_STEM, M_FLAG_NONE_MOVE, prev_position_for_monster);
+				if(!mon_)
+					break;
+				mon_->parent_part_id = map_id;
+				if(parent_part_id != -1) {
+					mon_->parent_part_id = parent_part_id;
+				}
+				mon_->special_value = map_id*100 + 1;
+				mon_->max_hp = max_hp;
+				mon_->hp = hp;
+				mon_->target = target;
+				if(flag & M_FLAG_SUMMON) {
+					mon_->flag |= M_FLAG_SUMMON;
+					mon_->summon_time = summon_time;
+					mon_->summon_parent = summon_parent;
+					mon_->sm_info = sm_info;
+				}
+
+				{ //머리 이미지 조정
+					int path_ = GetPosToDirec(position,mon_->position);
+					path_+= 10*loopInt(0, 7, path_+4);
+					int index_ = PathToNum_forstem(path_);
+					if(index_ > 8 && index_ < 36) {
+						image = &img_mons_magic_flower_stem[index_-8];
+					}
+				}
+
+				if(body_vector.size() != 0) { //중간
+					monster* tail_ = body_vector[0];
+					int path_ = 10*GetPosToDirec(mon_->position,position);
+					path_ += GetPosToDirec(mon_->position,tail_->position);
+					int index_ = PathToNum_forstem(path_);
+					if(index_ > 8 && index_ < 36) {
+						mon_->image = &img_mons_magic_flower_stem[index_-8];
+					}
+				} else { //맨 끝
+					coord_def dir = prev_position_for_monster - position;
+					coord_def temp = prev_position_for_monster + dir;
+					int path_ = 10*GetPosToDirec(mon_->position,position);
+					path_ += GetPosToDirec(mon_->position,temp);
+					int index_ = PathToNum_forstem(path_);
+					if(index_ > 8 && index_ < 36) {
+						mon_->image = &img_mons_magic_flower_stem[index_-8];
+					}
+				}
+				if(((body_vector.size() == 5 && randA(1)) || body_vector.size() == 3) && parent_part_id == -1) {
+					dif_rect_iterator drit(prev_position_for_monster, 1, true);
+					for (; !drit.end(); drit++)
+					{
+						if (summon_check(coord_def(drit->x, drit->y), position, true, false))
+						{
+							monster *more_branch_ = env[current_level].AddMonster(MON_OVERGROWTH_STEM, 0, *drit);
+							if(!more_branch_)
+								continue;
+							more_branch_->parent_part_id = map_id;
+							more_branch_->special_value = 0;
+							more_branch_->max_hp = max_hp;
+							more_branch_->hp = hp;
+							more_branch_->target = target;
+							more_branch_->direction = GetBaseAngle(direction + 180);
+							if(flag & M_FLAG_SUMMON) {
+								more_branch_->flag |= M_FLAG_SUMMON;
+								more_branch_->summon_time = summon_time;
+								more_branch_->summon_parent = summon_parent;
+								more_branch_->sm_info = sm_info;
+							}
+							break;
+						}
+					}
+				}
+
+				if(randA(4) ==  0 && !(flag & M_FLAG_SUMMON)){
+					int temp_ = body_vector.size();
+					if(temp_ == 1 || temp_ == 2 || temp_ == 4 || temp_ == 6) {
+						dif_rect_iterator drit(prev_position_for_monster, 1, true);
+						for (; !drit.end(); drit++)
+						{
+							if (summon_check(coord_def(drit->x, drit->y), position, true, false))
+							{
+								monster *watermelon_ = env[current_level].AddMonster(MON_OVERGROWTH_WATERMELON, 0, *drit);
+								if(!watermelon_)
+									continue;
+								watermelon_->target = target;
+								watermelon_->special_value = map_id;
+								item_infor t;
+								makeitem(ITM_FOOD, 0, &t, 4);
+								watermelon_->item_lists.push_back(t);
+								break;
+							}
+						}
+					}
+				}
+
+
+				if(special_value == 0) {
+					if(parent_part_id == -1) {
+						if(body_vector.size() > 6) {
+							ChangeMonster(MON_OVERGROWTH_MAGIC_FLOWER,0);
+						}
+					}
+					else {
+						if((body_vector.size() == 3 && randA(1)) || body_vector.size() > 3) {
+							ChangeMonster(MON_OVERGROWTH_MAGIC_FLOWER,0);
+						}
+					}
+				}
+			}
+		}
+		break;
 	default:
 		break;
 	}
@@ -4554,7 +5469,7 @@ void monster::DrainAll(bool item_, bool unit_) {
 	{
 		if((*it).isLive() && !(it->position == position))
 		{
-			if(!(it->flag & M_FLAG_NONE_MOVE)) {
+			if(!it->isImmobile() && !(it->flag & M_FLAG_NONE_MOVE)) {
 				beam_iterator beam(it->position,position);
 				if(CheckThrowPath(it->position,position,beam))
 				{
@@ -4607,14 +5522,16 @@ bool monster::SetPoison(int poison_, int max_, bool strong_)
 {
 	if(!poison_)
 		return false;
-	if(poison_resist>0 && !strong_)
+	if(poison_resist>0 && s_vulun_poison == 0 && !strong_)
 		return false;
 	if(s_poison >= max_)
 		return false;
 	else if(poison_resist<0)
 		poison_*=2;
-	else if(poison_resist>0 && strong_)
+	else if(poison_resist>0 && strong_ && s_vulun_poison == 0)
 		poison_/=3;
+	else if(poison_resist == 0 && s_vulun_poison > 0)
+		poison_*=2;
 
 	if(isYourShight())
 	{
@@ -4647,7 +5564,7 @@ bool monster::HpRecover(int turn_)
 		hp_recov -= speed*turn_;
 		while((hp_recov)<=0)
 		{
-			hp++;
+			HpUpDown(1, DR_EFFECT);
 			HpRecoverDelay();
 			if(hp == max_hp)
 			{
@@ -4659,7 +5576,13 @@ bool monster::HpRecover(int turn_)
 	}
 	return false;
 }
-int monster::HpUpDown(int value_,damage_reason reason, unit *order_)
+bool monster::HasMultiTile() {
+	if(id == MON_GIANT_CENTIPEDE || id == MON_OVERGROWTH_MAGIC_FLOWER || id == MON_GOLIATH_DOLL) {
+		return true;
+	}
+	return false;
+}
+int monster::HpUpDown(int value_,damage_reason reason, unit *order_, bool non_dead)
 {
 	if (s_invincibility) {
 		return 0;
@@ -4668,8 +5591,29 @@ int monster::HpUpDown(int value_,damage_reason reason, unit *order_)
 	if(hp >= max_hp)
 	{
 		hp = max_hp;		
-	}	
-	if(hp<=0)
+	}
+	if(reason != DR_SPREAD) {
+		if(HasMultiTile() && parent_part_id == -1){
+			//전파
+			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+			{
+				if (&(*it) != this && it->isLive() && it->parent_part_id != -1 && it->parent_part_id == map_id){
+					it->HpUpDown(value_, DR_SPREAD, order_, false);
+				}
+			}
+		}
+		if(parent_part_id != -1) {
+			//내가 전파해야함
+			for (auto it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
+			{
+				if (&(*it) != this && it->isLive() && (parent_part_id == it->map_id || 
+					it->parent_part_id == parent_part_id)){
+					it->HpUpDown(value_, DR_SPREAD, order_, false);
+				}
+			}
+		}
+	}
+	if(hp<=0 && !non_dead)
 	{
 		dead(order_?order_->GetParentType():PRT_NEUTRAL,order_?true:false);
 	}
@@ -4823,6 +5767,8 @@ bool monster::SetFrozen(int frozen_)
 bool monster::SetCharm(int charm_)
 {	
 	if(!charm_)
+		return false;
+	if(s_ally == -1)
 		return false;
 
 	if(isYourShight())
@@ -5096,7 +6042,17 @@ bool monster::SetSaved(int saved_)
 
 bool monster::SetSwift(int swift_)
 {
-	return false;
+	if(swift_ <= 0)
+		return false;
+	if(isYourShight())
+	{
+		LocalzationManager::printLogWithKey(s_swift ? LOC_SYSTEM_MON_MORE_SWIFT : LOC_SYSTEM_MON_SWIFT,
+			false,false,false,CL_normal, PlaceHolderHelper(GetName()->getName()));
+	}
+	s_swift += swift_;
+	if(s_swift > 100)
+		s_swift = 100;
+	return true;
 }
 bool monster::SetFear(int fear_)
 {
@@ -5318,12 +6274,60 @@ bool monster::SetFire(int fire_, parent_type type_, bool from_oil) {
 		s_fire = 30;
 	return true;
 }
+
+bool monster::SetVulunPoison(int time_) {
+	if(!time_)
+		return false;
+	if(isYourShight())
+	{
+		if(!s_vulun_poison) {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_VULUN_POISON,false,false,false,CL_normal,
+				PlaceHolderHelper(GetName()->getName()));
+		}
+	}
+	s_vulun_poison += time_;
+	if(s_vulun_poison>100)
+		s_vulun_poison = 100;
+	return true;
+}
+
 bool monster::SetNoneMove(int s_none_move_) {
 	if(s_none_move < s_none_move_)
 		s_none_move = s_none_move_;
 	return true;
 }
+
+bool monster::SetDazed(int s_dazed_, bool bashed_) {
+	if(s_dazed < s_dazed_)
+		s_dazed = s_dazed_;
+	bashed = bashed_;
+	return true;
+}
+bool monster::UnSetAcid() {
+	s_acid_turn = 0;
+	ac+=s_acid;
+	s_acid = 0;
+	return true;
+}
+bool monster::SetAcid(int acid_, int turn_) {
+	if(randA(s_acid + 15) > 7) {//산성확률 기본50%, 올라갈수록 감소하여 23%까지 
+		//저항 추가?
+		return true;
+	}
+	s_acid_turn = turn_;
+	if(s_acid+acid_ > 15) {
+		acid_ = 15-s_acid;
+	}
+	if(acid_ > 0) {
+		s_acid += acid_;
+		ac -= acid_;
+	}
+	return true;
+}
 bool monster::canSwap(monster* target_mon, bool able_enemy) {
+	if(target_mon->isImmobile()) {
+		return false;
+	}
 	if(!isCantInterupt() && target_mon->isCantInterupt()) {
 		return true;
 	}
@@ -5409,7 +6413,10 @@ bool monster::Blink(int time_)
 		{
 			x_ = temp_x_;
 			y_ = temp_y_;
-			if((i>=time_ || i%5 == 0) && env[current_level].isMove(x_,y_,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) && !env[current_level].isMonsterPos(x_,y_) && !(you.position.x == x_ && you.position.y == y_) && !env[current_level].isSmokePos(x_,y_))
+			if((i>=time_ || i%5 == 0) &&
+				(id == MON_GOLIATH_DOLL ? canPlaceGoliath(coord_def(x_, y_)) :
+				(env[current_level].isMove(x_,y_,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) && !env[current_level].isMonsterPos(x_,y_) && !(you.position.x == x_ && you.position.y == y_))) &&
+				!env[current_level].isSmokePos(x_,y_))
 			{
 				prev_x = x_;
 				prev_y = y_;
@@ -5431,27 +6438,33 @@ int monster::GetInvisible()
 bool monster::Teleport()
 {
 	bool prev_sight_ = isYourShight();
-	while(1)
+	vector<coord_def> candidates;
+	for(int x = 0; x < DG_MAX_X; x++)
 	{
-		int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
-		if(env[current_level].isMove(x_,y_,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) && !env[current_level].isMonsterPos(x_,y_))
+		for(int y = 0; y < DG_MAX_Y; y++)
 		{
-			env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
-			SetXY(x_, y_);
-			bool curr_sight_ = isYourShight();
-			if(prev_sight_ && !curr_sight_) {
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_TELEPORTING,true,false,false,CL_normal,
-					PlaceHolderHelper(GetName()->getName()));
-			}
-			else if(!prev_sight_ && curr_sight_) {
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_TELEPORTING_APPEAR,true,false,false,CL_small_danger,
-					PlaceHolderHelper(GetName()->getName()));
-			}
-
-			return true;
+			coord_def candidate(x,y);
+			if(id == MON_GOLIATH_DOLL ? canPlaceGoliath(candidate) :
+				(env[current_level].isMove(x,y,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) && !env[current_level].isMonsterPos(x,y)))
+				candidates.push_back(candidate);
 		}
 	}
+	if(candidates.empty())
+		return false;
 
+	coord_def destination = candidates[randA(static_cast<int>(candidates.size())-1)];
+	env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
+	SetXY(destination);
+	bool curr_sight_ = isYourShight();
+	if(prev_sight_ && !curr_sight_) {
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_TELEPORTING,true,false,false,CL_normal,
+			PlaceHolderHelper(GetName()->getName()));
+	}
+	else if(!prev_sight_ && curr_sight_) {
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MON_TELEPORTING_APPEAR,true,false,false,CL_small_danger,
+			PlaceHolderHelper(GetName()->getName()));
+	}
+	return true;
 }
 int monster::GetResist()
 {
@@ -5472,6 +6485,8 @@ bool monster::you_detect()
 {
 	if(isArena())
 		return false;
+	if(you.IsDiving())
+		return false;
 	if (you.god == GT_OKINA) {
 		//오키나라면 문으로 투과할땐 보이지 않아야 함
 		if (isMonsterSight(you.position, true) == false)
@@ -5486,6 +6501,8 @@ bool monster::isYourShight()
 }
 bool monster::isEnemyUnit(unit* unit_info)
 {
+	if(!unit_info)
+		return false;
 	if(unit_info->isplayer())
 	{
 		return !isUserAlly() && !isCompleteNeutral();
@@ -5497,6 +6514,12 @@ bool monster::isEnemyUnit(unit* unit_info)
 }
 bool monster::isEnemyMonster(const monster* monster_info)
 {
+	if(monster_info && id == MON_GOLIATH_DOLL &&
+		(monster_info->map_id == map_id || monster_info->parent_part_id == map_id ||
+		(parent_part_id != -1 &&
+			(monster_info->map_id == parent_part_id || monster_info->parent_part_id == parent_part_id))))
+		return false;
+
 	if(isUserAlly() && monster_info->isUserAlly())
 	{
 		if(s_lunatic)
@@ -5691,7 +6714,7 @@ bool monster::isMonsterSight(coord_def c, boolean okina)
 	return true;
 }
 bool monster::isVulnerableSilver() {
-	if(flag & M_FLAG_SUMMON || id == MON_REMILIA || id == MON_REMILIAYUKKURI || id == MON_FLAN || id == MON_FLAN_BUNSIN || id == MON_VAMPIER_BAT) {
+	if(flag & M_FLAG_SUMMON || id == MON_REMILIA || id == MON_REMILIAYUKKURI || id == MON_FLAN || id == MON_FLAN_BUNSIN || id == MON_FLAN_AFTERIMAGE || id == MON_VAMPIER_BAT) {
 		return true;
 	}
 	return false;
@@ -5764,8 +6787,102 @@ bool monster::special_move(bool is_sight_for_monster, bool can_bounce, float ang
 	return false;
 }
 
+static void sacrificeExplosion(monster* doll)
+{
+	if(!doll || !doll->isLive())
+		return;
+	bool visible = false;
+	for(int y = -2; y <= 2; y++) {
+		for(int x = -2; x <= 2; x++)
+		{
+			if(abs(x) == 2 && abs(y) == 2)
+				continue;
+			coord_def pos = doll->position + coord_def(x, y);
+			if(pos.x < 0 || pos.x >= DG_MAX_X || pos.y < 0 || pos.y >= DG_MAX_Y)
+				continue;
+			if(env[current_level].dgtile[pos.x][pos.y].isBreakable())
+				env[current_level].changeTile(pos, env[current_level].base_floor);
+			env[current_level].MakeEffect(pos, &img_blast[0], false);
+			visible |= env[current_level].isInSight(pos);
+		}
+	}
+	attack_infor explosion = get_sacrifice_dam(getMonsterSpellPower(SPL_SACRIFICE, doll, -1), doll);
+	for(int y = -2; y <= 2; y++)
+		for(int x = -2; x <= 2; x++)
+		{
+			if(abs(x) == 2 && abs(y) == 2)
+				continue;
+			coord_def pos = doll->position + coord_def(x, y);
+			if(pos.x < 0 || pos.x >= DG_MAX_X || pos.y < 0 || pos.y >= DG_MAX_Y)
+				continue;
+			if(unit* hit = env[current_level].isMonsterPos(pos.x, pos.y, doll))
+				hit->damage(explosion, true);
+		}
+	Noise(doll->position, 28, doll);
+	if(visible)
+	{
+		PlaySE("bomb");
+		Sleep(300);
+	}
+	env[current_level].ClearEffect();
+	you.resetLOS();
+	doll->dead(PRT_NEUTRAL, false);
+}
+
+bool monster::sacrificeMove()
+{
+	if(target)
+	{
+		int target_angle = GetBaseAngle(GetPositionToAngle(position.x, position.y,
+			target->position.x, target->position.y));
+		direction = MoveAngleTowards(direction, target_angle, 30);
+	}
+	coord_def next = inttodirec(GetAngleToDirec(direction), position.x, position.y);
+	unit* occupied = env[current_level].isMonsterPos(next.x, next.y, this);
+	if(env[current_level].isMove(next, isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) && !occupied)
+	{
+		SetXY(next);
+	}
+	else
+	{
+		for(int i = 0; i < 10; i++)
+		{
+			direction = GetBaseAngle(direction + rand_int(120, 240));
+			next = inttodirec(GetAngleToDirec(direction), position.x, position.y);
+			if(env[current_level].isMove(next, isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) &&
+				!env[current_level].isMonsterPos(next.x, next.y, this))
+				break;
+		}
+	}
+	int move_direction = GetAngleToDirec(direction);
+	if(move_direction >= 5 && move_direction < 8)
+		image = &img_mons_sacrifice_doll[0];
+	else if(move_direction >= 1 && move_direction < 4)
+		image = &img_mons_sacrifice_doll[1];
+	return true;
+}
+
 int monster::special_state(bool is_sight_for_monster) {
 	switch(id) {
+	case MON_BULLET:
+		MoveBullet(this);
+		return 2;
+	case MON_SPINNING_DOLL:
+	{
+		image = &img_mons_spinning_doll[special_value%2];
+		special_value++;
+		attack_infor temp_att(GetAttack(0,false),GetAttack(0,true),GetHit(),this,GetParentType(),atk_type[0],atk_name[0]);
+		multipleAttack(nullptr,temp_att);
+	}
+	return 1;
+	case MON_SANGHAI_DOLL:
+	case MON_HOURAI_DOLL:
+		if(special_value > 0)
+		{
+			sacrificeMove();
+			return 2;
+		}
+		break;
 	case MON_ENSLAVE_GHOST:
 	{
 		if(id2 != MON_SONBITEN_SPINTOWIN)
@@ -5839,6 +6956,13 @@ int monster::special_state(bool is_sight_for_monster) {
 		}
 	}
 	return 2;
+	case MON_OVERGROWTH_STEM:
+	{
+		if(!special_move(is_sight_for_monster, true, 30)) {	
+			return 1;
+		}
+	}
+	return 2;
 	default:
 		break;
 	}
@@ -5846,6 +6970,8 @@ int monster::special_state(bool is_sight_for_monster) {
 }
 parent_type monster::GetParentType()
 {
+	if((mondata[id].flag & M_FLAG_DIRECT_KILL) && isUserAlly() && sm_info.parent_map_id == you.GetMapId())
+		return PRT_PLAYER;
 	return (isUserAlly() || s_lunatic)?PRT_ALLY:PRT_ENEMY;
 }
 bool monster::isUnique()
@@ -5896,6 +7022,9 @@ int monster::GetHit(equip_type type_)
 		return 99;
 	}
 	int hit_ = level*1.5f+8;
+	if(s_dazed) {
+		hit_-=3;
+	}
 	return hit_;
 }
 int monster::GetEv()
@@ -5949,6 +7078,8 @@ int monster::GetWalkDelay(float multi_) {
 	if (you.s_weather == 4 && you.s_weather_turn > 0) {
 		speed_ = speed_*7/10;
 	}
+	if(s_swift)
+		speed_ = speed_*7/10;
 	if(speed_ <= 0)
 		speed_ = 1; 
 	return speed_;
@@ -6010,6 +7141,8 @@ bool monster::isSimpleState(monster_state_simple state_)
 			return (s_slow != 0) && s_haste == 0;
 		case MSS_HASTE:
 			return (s_haste != 0) && s_slow == 0;
+		case MSS_SWIFT:
+			return s_swift > 0;
 		case MSS_POISON:
 			return (s_poison != 0);
 		case MSS_FEAR:
@@ -6034,6 +7167,12 @@ bool monster::isSimpleState(monster_state_simple state_)
 			return (s_communication > 0);
 		case MSS_ALLY:
 			return (isUserAlly());
+		case MSS_DAZED:
+			return (s_dazed > 0);
+		case MSS_VULUN_POISON:
+			return s_vulun_poison>0;
+		case MSS_ACID:
+			return s_acid>0;
 		default:
 			break;
 	}
@@ -6055,6 +7194,8 @@ monster_state_simple monster::GetSimpleState()
 		temp = MSS_SLOW;
 	if((s_haste != 0) && s_slow == 0)
 		temp = MSS_HASTE;
+	if(s_swift)
+		temp = MSS_SWIFT;
 	if(s_oil)
 		temp = MSS_OIL;
 	if(s_poison)
@@ -6063,6 +7204,8 @@ monster_state_simple monster::GetSimpleState()
 		temp = MSS_FIRE;
 	if(s_none_move)
 		temp = MSS_NONE_MOVE;
+	if(s_dazed)
+		temp = MSS_DAZED;
 	if(s_fear)
 		temp = MSS_FEAR;
 	if (s_confuse && (flag & M_FLAG_CONFUSE) == 0)
@@ -6079,6 +7222,10 @@ monster_state_simple monster::GetSimpleState()
 		temp = MSS_NEUTRAL;
 	if(isUserAlly())
 		temp = MSS_ALLY;
+	if(s_vulun_poison)
+		temp = MSS_VULUN_POISON;
+	if(s_acid)
+		temp = MSS_ACID;
 	return temp;
 }
 bool monster::isRabbit() {
@@ -6176,6 +7323,14 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, ostringstream& ss)
 		}
 		else
 			return CL_none;
+	case MSS_SWIFT:
+		if(s_swift)
+		{
+			ss << LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SWIFT);
+			return CL_normal;
+		}
+		else
+			return CL_none;
 	case MSS_SLOW:
 		if(s_slow && !s_haste)
 		{
@@ -6188,8 +7343,11 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, ostringstream& ss)
 		if(env[current_level].isSmokePos(position.x,position.y))
 		{
 			smoke* smoke_= env[current_level].isSmokePos2(position.x,position.y);
-			ss << smoke_->GetName();
-			return CL_normal;
+			if(smoke_)
+			{
+				ss << smoke_->GetName();
+				return CL_normal;
+			}
 		}
 		return CL_none;
 	case MSS_SUMMON:
@@ -6374,6 +7532,27 @@ D3DCOLOR monster::GetStateString(monster_state_simple state_, ostringstream& ss)
 			return CL_normal;
 		}
 		return CL_none;
+	case MSS_DAZED:
+		if (s_dazed)
+		{
+			ss << LocalzationManager::locString(LOC_SYSTEM_DAZED);
+			return CL_normal;
+		}
+		return CL_none;
+	case MSS_VULUN_POISON:
+		if (s_vulun_poison)
+		{
+			ss << LocalzationManager::locString(LOC_SYSTEM_VULUN_POISON);
+			return CL_normal;
+		}
+		return CL_none;
+	case MSS_ACID:
+		if (s_acid)
+		{
+			ss << LocalzationManager::locString(LOC_SYSTEM_ACID);
+			return CL_normal;
+		}
+		return CL_none;
 	case MSS_NEUTRAL:
 		if(isCompleteNeutral())
 		{
@@ -6472,8 +7651,9 @@ void shadow::LoadDatas(FILE *fp)
 	LoadData<shadow_type>(fp, type);
 	LoadData<int>(fp, original_id);
 	LoadData<bool>(fp, unharm);
-	char temp[100];
-	LoadData<char>(fp, *temp);
+	char temp[100] = {};
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	name = temp;
 }
 
@@ -6537,4 +7717,56 @@ coord_def inttodirec(int direc, int x_, int y_)
 	else if(direc>=3 && direc < 6)
 		y += 1;
 	return coord_def(x,y);
+}
+
+bool isNormalAtt(attack_type type) {
+	if(type>ATT_DROWNING) {
+		//enum 세이브 호환성을 위해 별도로 뺌
+		switch(type) {
+			case ATT_CONFUSE_SPORE:
+			case ATT_WEAK_SPORE:
+			case ATT_ACID_BYTE:
+				return true;
+			case ATT_THROW_ACID:
+				return false;
+			default:
+				break;
+		}
+
+	}
+	return type < ATT_THROW_NORMAL;
+}
+bool isGrazableAtt(attack_type type) {
+	if(type>ATT_DROWNING) {
+		//enum 세이브 호환성을 위해 별도로 뺌
+		switch(type) {
+			case ATT_CONFUSE_SPORE:
+			case ATT_WEAK_SPORE:
+			case ATT_ACID_BYTE:
+				return false;
+			case ATT_THROW_ACID:
+				return true;
+			default:
+				break;
+		}
+
+
+	}
+	return type >= ATT_THROW_NORMAL && type < ATT_THROW_LAST;
+}
+bool CantGaurdAtt(attack_type type) {
+	if(type>ATT_DROWNING) {
+		//enum 세이브 호환성을 위해 별도로 뺌
+		switch(type) {
+			case ATT_CONFUSE_SPORE:
+			case ATT_WEAK_SPORE:
+			case ATT_ACID_BYTE:
+			case ATT_THROW_ACID:
+				return false;
+			default:
+				break;
+		}
+
+	}
+	return type >= ATT_NO_GUARD;
 }

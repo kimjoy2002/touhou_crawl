@@ -28,6 +28,8 @@ enum sub_dungeon
 	PANDEMONIUM,
 	HAKUREI_D,
 	ZIGURRAT,
+	FORESTOFMAGIC,
+	DOLLSHOUSE,
 	MAX_SUB_DUNGEON
 };
 enum valut_pattern
@@ -44,6 +46,8 @@ enum valut_pattern
 	VP_SUBTERRANEAN_LAST,
 	VP_HAKUREI_LAST,
 	VP_HAKUREI_LAST_FAKE,
+	VP_FORESTOFMAGIC_LAST,
+	VP_DOLLSHOUSE_LAST,
 	VP_LAST
 };
 
@@ -67,6 +71,26 @@ public:
 	int bamboo_rate;
 	bool bamboo_tewi;
 	unsigned int random_number;
+
+	void SaveDatas(FILE *fp);
+	void LoadDatas(FILE *fp);
+};
+
+
+
+class map_infor_202 //202버전을 위한 임시..
+{
+public:
+	pos_infor dungeon_enter[14];
+	pos_infor temple[23];
+	int tutorial;
+	int god_num;
+	int bamboo_count;
+	int bamboo_rate;
+	bool bamboo_tewi;
+	unsigned int random_number;
+
+	static void migrateInfor202toCurrent(const map_infor_202& old_data, map_infor& new_data);
 };
 
 
@@ -128,6 +152,9 @@ public:
 	map_dummy(int floor_, coord_def pos_,bool wall_,int size_x_,int size_y_,int pattern_, dungeon_tile_type floor_tex_, dungeon_tile_type wall_tex_);
 	~map_dummy();
 	void patternSet(); 
+	bool is_exist_named(monster_index id_) const;
+	void reserve_named(monster_index id_);
+	bool isVaild(int offset);
 	bool collution(const coord_def& point,int size_x_ = 0,int size_y_ = 0);
 	bool plus_collution(const coord_def& point,int size_x_,int size_y_);
 	void make_map(environment& env_pointer, bool wall_ = true, bool stair_input_ = false);
@@ -146,6 +173,7 @@ public:
 
 extern map_infor map_list;
 
+void recoverMap();
 void initMap();
 void map_algorithms(int num);
 const char* common_base_pattern(int floor_, map_dummy* map);
@@ -153,6 +181,8 @@ const char* temple_pattern(map_dummy* map);
 const char* misty_lake_pattern(map_dummy* map);
 const char* youkai_mountain_pattern(map_dummy* map);
 const char* scarlet_pattern(map_dummy* map);
+const char* forestofmagic_pattern(map_dummy* map);
+const char* dollshouse_pattern(map_dummy* map);
 
 const char* scarlet_library_pattern(map_dummy* map);
 const char* scarlet_under_pattern(map_dummy* map);
@@ -171,6 +201,8 @@ const char* zigurrat_pattern(map_dummy* map);
 
 const char* youkai_last_vault_pattern(map_dummy* map);
 const char* scarlet_last_vault_pattern(map_dummy* map);
+const char* forestofmagic_last_vault_pattern(map_dummy* map);
+const char* dollshouse_last_vault_pattern(map_dummy* map);
 const char* eientei_vault_pattern(map_dummy* map);
 const char* pandemonium_baykuren_last_vault_pattern(map_dummy* map);
 const char* pandemonium_ice_last_vault_pattern(map_dummy* map);

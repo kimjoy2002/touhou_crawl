@@ -23,6 +23,7 @@
 #include "god.h"
 #include "note.h"
 #include "spellcard.h"
+#include "unique_spellcard.h"
 #include "alchemy.h"
 #include "tensi.h"
 #include "replay.h"
@@ -260,16 +261,52 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	}
 	if(alchemy_buff == ALCT_POISON_BODY)
 	{
+		vector<pair<int, int>> poison_body_targets_;
+		int poison_body_ticks_ = max(0, delay_) / 10;
+		const int poison_body_remainder_ = max(0, delay_) % 10;
+		if(poison_body_remainder_ > 0 && randA(9) < poison_body_remainder_)
+			poison_body_ticks_++;
 		for(auto it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end(); it++)
 		{
-			if((you.position.x-it->position.x)*(you.position.x-it->position.x)+(you.position.y-it->position.y)*(you.position.y-it->position.y)<=2)
-			{		
-				if(!it->isUserAlly())
-					it->SetPoison(5+randA(5), 50, false);
+			if(it->isLive() && you.isEnemyUnit(&(*it)) &&
+				(you.position.x-it->position.x)*(you.position.x-it->position.x)+(you.position.y-it->position.y)*(you.position.y-it->position.y)<=2)
+				poison_body_targets_.push_back(make_pair(it->GetMapId(),
+					it->GetPoisonResist() - (it->s_vulun_poison > 0 ? 1 : 0)));
+		}
+		ReleaseMutex(mutx);
+		for(const auto& target_ : poison_body_targets_)
+		{
+			unit* unit_ = env[current_level].GetMapIDtoUnit(target_.first);
+			if(!unit_ || unit_->isplayer() || !unit_->isLive() || !you.isEnemyUnit(unit_))
+				continue;
+			monster* mon_ = static_cast<monster*>(unit_);
+			if((you.position.x-mon_->position.x)*(you.position.x-mon_->position.x)+
+				(you.position.y-mon_->position.y)*(you.position.y-mon_->position.y)>2)
+				continue;
+
+			if(poison_body_ticks_ > 0 && target_.second <= 0)
+			{
+				const int min_damage_ = target_.second < 0 ? 2 : 1;
+				const int max_damage_ = target_.second < 0 ? 4 : 3;
+				int damage_ = 0;
+				for(int i = 0; i < poison_body_ticks_; i++)
+					damage_ += rand_int(min_damage_, max_damage_);
+				attack_infor attack_infor_(damage_, max_damage_*poison_body_ticks_, 99,
+					&you, you.GetParentType(), ATT_POISON_BODY, name_infor(LOC_SYSTEM_ATT_POISON));
+				mon_->damage(attack_infor_, true);
 			}
+
+			unit_ = env[current_level].GetMapIDtoUnit(target_.first);
+			if(!unit_ || unit_->isplayer() || !unit_->isLive() || !you.isEnemyUnit(unit_))
+				continue;
+			mon_ = static_cast<monster*>(unit_);
+			if((you.position.x-mon_->position.x)*(you.position.x-mon_->position.x)+
+				(you.position.y-mon_->position.y)*(you.position.y-mon_->position.y)<=2)
+				mon_->SetPoison(5+randA(5), 50, false);
 		}
 	}
-	ReleaseMutex(mutx);
+	else
+		ReleaseMutex(mutx);
 	if(alchemy_buff == ALCT_PHILOSOPHERS_STONE)
 	{
 		int sight_mon_ = env[current_level].insight_mon(MET_ENEMY);
@@ -323,6 +360,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	}
 
 	env[current_level].ActionMonster(delay_);
+	UniqueSpellcardTurnEnd();
 	WaitForSingleObject(mutx, INFINITE);
 	if(sight_reset) //몬스터가 만들어낸 구름에 시야가 가릴 경우가 생길경우
 		SetInter(resetLOS()); //굉장히 연산이 많이 들어가는 작업이므로 필요할때만 불러야함
@@ -544,13 +582,21 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		
 		if(alchemy_time == 0)
 		{
+			if(alchemy_buff == ALCT_COLD_ARMOUR)
+			{
+				int burst_range_ = alchemy_cold_armour_damage*4 >= GetMaxHp()?2:1;
+				ReleaseMutex(mutx);
+				skill_cold_armour_burst(alchemy_cold_armour_power,burst_range_,this);
+				WaitForSingleObject(mutx, INFINITE);
+			}
 			alchemyonoff(alchemy_buff,false);
 			SetInter(IT_STAT);
 			alchemy_buff= ALCT_NONE;
 		}
-		else if(alchemy_time == 10)
+		else if(alchemy_time == (alchemy_buff == ALCT_COLD_ARMOUR?3:10))
 		{
 			alchemyalmostoff(alchemy_buff);
+			SetInter(IT_STAT);
 		}
 
 	}
@@ -731,6 +777,23 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		if(s_invisible == 10)
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_INVISIBLE_END_ALMOST) + " ",false,false,false,CL_blue);
+			SetInter(IT_STAT);
+		}
+	}
+	
+	if(s_dive > 0)
+	{
+		s_dive--;
+		if(!s_dive)
+		{
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_YOU_DIVE_END, PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile])) + " ",false,false,false,CL_blue);
+			PlaySE("diveout");
+			EndDive();
+			SetInter(IT_STAT);
+		}
+		if(s_dive == 5)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_DIVE_END_ALMOST) + " ",false,false,false,CL_blue);
 			SetInter(IT_STAT);
 		}
 	}
@@ -959,6 +1022,12 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	{
 		s_none_move--;
 	}
+	if(s_slippery > 0)
+	{
+		s_slippery--;
+		if(!s_slippery)
+			printlog(LocalzationManager::locString(LOC_SYSTEM_YOU_SLIPPERY_END) + " ", false, false, false, CL_blue);
+	}
 	if(s_spellcard)
 	{
 		s_spellcard--;
@@ -1137,6 +1206,13 @@ interupt_type players::TurnEnd(bool *item_delete_)
 			s_glutton = 0;
 		}
 	}
+	if(s_acid) 
+	{
+		s_acid_turn--;
+		if(s_acid_turn == 0) {
+			UnSetAcid();
+		}
+	}
 	if(GetProperty(TPT_POTION_ADDICTION)) {
 		addPotionAddict(false);
 	} else {
@@ -1312,8 +1388,9 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		
 		for(int i = 0;i < 8; i++) {
 			if(!can_dash[i] || onMonster[i]) {
-				coord_def c_ = GetDirecToPos(i);
-				env[current_level].dgtile[position.x + c_.x][position.y + c_.y].flag &= ~FLAG_QUICK_DASH;
+				coord_def c_ = position + GetDirecToPos(i);
+				if(c_.x >= 0 && c_.x < DG_MAX_X && c_.y >= 0 && c_.y < DG_MAX_Y)
+					env[current_level].dgtile[c_.x][c_.y].flag &= ~FLAG_QUICK_DASH;
 			} 
 		}
 	}
@@ -1396,6 +1473,8 @@ bool players::TraningStealth()
 }
 
 bool players::isEnemyUnit(unit* unit_info) {
+	if(!unit_info)
+		return false;
 	if(unit_info->isplayer())
 		return false;
 	return !unit_info->isUserAlly() && !unit_info->isCompleteNeutral();
@@ -1478,7 +1557,7 @@ bool players::isMemorizeSpell(int spell_)
 bool players::CanMemorizeSpell(int spell_)
 {
 
-	if(spell_ <= SPL_NONE || spell_ > SPL_MAX)
+	if(spell_ <= SPL_NONE || spell_ >= SPL_MAX)
 		return false;
 	int skill_level_ = SpellLevel((spell_list)spell_);
 	
@@ -1614,7 +1693,7 @@ void GameOver()
 		WaitForSingleObject(mutx, INFINITE);
 		if(!replay_mode_)
 			dump_ok = Dump(1,&dump_);
-		if((wiz_list.wizard_mode != 2 || you.dead_reason == DR_ESCAPE || you.dead_reason == DR_QUIT) && !replay_mode_)
+		if(isNormalGame() && (wiz_list.wizard_mode != 2 || you.dead_reason == DR_ESCAPE || you.dead_reason == DR_QUIT) && !replay_mode_)
 			delete_file();
 		ReleaseMutex(mutx);
 

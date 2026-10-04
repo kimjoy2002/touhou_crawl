@@ -44,6 +44,8 @@ enum dungeon_level
 	MAX_MOON_LEVEL=0,
 	MAX_PANDEMONIUM_LEVEL=3,
 	MAX_HAKUREI_LEVEL=4,
+	MAX_FORESTOFMAGIC_LEVEL=3,
+	MAX_DOLLSHOUSE_LEVEL=2,
 
 
 	TEMPLE_LEVEL = MAX_DUNGEUN_LEVEL+1,
@@ -94,6 +96,12 @@ enum dungeon_level
 
 	ZIGURRAT_LEVEL,
 
+	FORESTOFMAGIC_LEVEL,
+	FORESTOFMAGIC_LAST_LEVEL = FORESTOFMAGIC_LEVEL + MAX_FORESTOFMAGIC_LEVEL,
+
+	DOLLSHOUSE_LEVEL,
+	DOLLSHOUSE_LAST_LEVEL = DOLLSHOUSE_LEVEL+MAX_DOLLSHOUSE_LEVEL,	
+	
 	MAXLEVEL
 
 };
@@ -229,6 +237,8 @@ enum round_type
 };
 
 //던전타일종류
+//추가시 const.cpp의 LOC_SYSTEM_TILE_XXX도 추가해야함
+//
 enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 player.cpp의 resetLOS()에 추가하자
 {
 	DG_NONE = 0,
@@ -245,9 +255,11 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 
 	DG_PANDE_FLOOR7,
     DG_DREAM_FLOOR2,
 	DG_HELL_FLOOR,
-	DG_FLOOR_END = DG_HELL_FLOOR,
+	DG_DOLLSHOUSE_FLOOR,
+	DG_FLOOR_END = DG_DOLLSHOUSE_FLOOR,
 	DG_OIL,
 	DG_SNOW,
+	DG_CARPET,
 	DG_FLOOR_OBJECT = 25,
 	DG_OPEN_DOOR = DG_FLOOR_OBJECT, //오브젝트는 바닥+덮어쓰기 식일때
 	DG_DOWN_STAIR,
@@ -269,8 +281,10 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 
 	DG_PANDEMONIUM_STAIR,
 	DG_HAKUREI_STAIR,
 	DG_ZIGURRAT_STAIR,
+	DG_FORESTOFMAGIC_STAIR,
+	DG_DOLLSHOUSE_STAIR,
 	DG_SUB_STAIR_MAX,
-	DG_RETURN_STAIR = DG_SUB_STAIR_MAX,
+	DG_RETURN_STAIR = 65,
 	DG_TEMPLE_FIRST,
 	DG_TEMPLE_JOON_AND_SION = DG_TEMPLE_FIRST,
 	DG_TEMPLE_BYAKUREN,
@@ -296,8 +310,8 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 
 	DG_TEMPLE_KEIKI,
 	DG_TEMPLE_TENKYUU,
 	DG_TEMPLE_LAST = DG_TEMPLE_TENKYUU,
-	DG_NONE_MOVE = 70,
-	DG_WALL = 70,
+	DG_NONE_MOVE = 100,
+	DG_WALL = 100,
 	DG_STONE_WALL,
 	DG_RED_WALL,
 	DG_BOOK_WALL,
@@ -312,7 +326,8 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 
 	DG_TREE,
 	DG_SUN_FLOWER,
 	DG_HELL_WALL,
-	DG_WALL_END = DG_HELL_WALL,
+	DG_DOLLSHOUSE_WALL,
+	DG_WALL_END = DG_DOLLSHOUSE_WALL,
 	DG_METAL_WALL,
 	DG_WALL2,
 	DG_WALL3,
@@ -323,6 +338,8 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 
 	DG_GLASS,
 	DG_STATUE,
 	DG_STATUE2,
+	DG_MUSHROOM1,
+	DG_MUSHROOM2,
 	DG_SEA, //여기부터 바다
 	DG_LAVA,
 	DG_OBJECT_END = DG_LAVA,
@@ -467,7 +484,9 @@ enum unique_starting_type
 	UNIQ_START_SUNNY,
 	UNIQ_START_STAR,
 	UNIQ_START_LUNA,
-	UNIQ_START_YOUMU
+	UNIQ_START_YOUMU,
+	UNIQ_START_SAKUYA,
+	UNIQ_START_CIRNO
 };
 
 
@@ -533,6 +552,15 @@ enum skill_type //고치면 skill.cpp의 스킬스트링부분추가. player.cpp
 	SKT_EVOCATE,
 	SKT_STEALTH,
 	SKT_MAX
+};
+
+enum attack_with_weapon {
+	ATT_WEAPON_NONE=0,
+	ATT_WEAPON_SHORTBLADE,
+	ATT_WEAPON_LONGBLADE,
+	ATT_WEAPON_MACE,
+	ATT_WEAPON_AXE,
+	ATT_WEAPON_SPEAR
 };
 
 enum item_type //추가시 env의 isSimpleType 살필것+item_type_simple도 추가하기+ const 스트링도 추가하고+GetItemTypeSting도 추가해야함
@@ -679,6 +707,21 @@ enum spellcard_evoke_type
 	SPC_V_MAX
 };
 
+enum unique_spellcard_type
+{
+	USC_NONE,
+	USC_FLAN_AND_THEN_WILL_THERE_BE_NONE,
+	USC_MAX
+};
+
+enum unique_spellcard_state
+{
+	USCS_NONE,
+	USCS_READY,
+	USCS_ACTIVE,
+	USCS_CLEARED
+};
+
 
 
 
@@ -751,6 +794,7 @@ enum tanmac_type
 	TMT_POISON_NEEDLE,
 	TMT_KIKU_COMPRESSER,
 	TMT_DOGGOJEO,
+	TMT_ICICLE,
 	TMT_MAX
 };
 
@@ -771,7 +815,8 @@ enum damage_reason
 	DR_JUNKO,
 	DR_SLEEP,
 	DR_GHOST,
-	DR_FIRE
+	DR_FIRE,
+	DR_SPREAD
 };
 
 
@@ -863,6 +908,11 @@ enum attack_type //추가시 monster와 player의 데미지 메세지(print_no_d
 	ATT_PSYCHO, //벽에 부딪히다.
 	ATT_NORMAL_HIT,
 	ATT_DROWNING, //익사
+	ATT_CONFUSE_SPORE, //혼란포자
+	ATT_WEAK_SPORE, //약체포자
+	ATT_ACID_BYTE, //산성 깨물기
+	ATT_THROW_ACID,
+	ATT_POISON_BODY, //독의 육체 인접 피해(AC 무시)
 	ATT_MAX
 };
 
@@ -901,6 +951,7 @@ enum monster_state_simple //표시용 상태
 	MSS_MIGHT,
 	MSS_CLEVER,
 	MSS_HASTE,
+	MSS_SWIFT,
 	MSS_SLOW,
 	MSS_SMOKE_ABOVE,
 	MSS_SUMMON,
@@ -930,6 +981,9 @@ enum monster_state_simple //표시용 상태
 	MSS_OIL,
 	MSS_FIRE,
 	MSS_NONE_MOVE,
+	MSS_DAZED,
+	MSS_VULUN_POISON,
+	MSS_ACID,
 	MSS_MAX
 };
 
@@ -967,7 +1021,9 @@ enum monster_speak_type
 	MST_CAMERA,
 	MST_PROPOSAL,
 	MST_PROPOSAL_ACCEPT,
-	MST_DEAD
+	MST_DEAD,
+	MST_SPELLCARD,
+	MST_SPELLCARD_FORCE
 };
 
 enum god_type
@@ -1014,6 +1070,8 @@ enum rune_kind
 	RUNE_PANDEMONIUM_ICE,
 	RUNE_PANDEMONIUM_SHINKI,
 	RUNE_HAKUREI_ORB,
+	RUNE_FORESTOFMAGIC,
+	RUNE_DOLLSHOUSE,
 	RUNE_MAX
 };
 

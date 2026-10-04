@@ -18,10 +18,21 @@ extern HANDLE mutx;
 
 void _infor_(string str);
 
+bool UseRealAtkUpgrade(int mon_id) {
+	switch(mon_id) {
+		case MON_HOMING:
+		case MON_BULLET:
+			return true;
+	}
+	return false;
+}
+
+
 bool maybeUpgrade(int mon_id) {
 	switch(mon_id) {
 		case MON_GHOST:
 		case MON_ONBASIRA:
+		case MON_GLACIER_WALL:
 		case MON_MAGICAL_STAR:
 		case MON_GOLEM:
 		case MON_SCHEMA_EYE:
@@ -30,7 +41,7 @@ bool maybeUpgrade(int mon_id) {
 		case MON_KANAME:
 		case MON_HANIWA:
 		case MON_SECURIRY_DOOR:
-		case MON_COGWHEEL:
+		case MON_TIME_PARADOX:
 			return true;
 	}
 	return false;
@@ -65,6 +76,12 @@ LOCALIZATION_ENUM_KEY getKeyOfAttack(attack_type type) {
 		return LOC_SYSTEM_ATT_INFO_SLEEP;
 	case ATT_BEARTRAP:
 		return LOC_SYSTEM_ATT_INFO_BEARTRAP;
+	case ATT_CONFUSE_SPORE:
+		return LOC_SYSTEM_ATT_INFO_CONFUSE_SPORE;
+	case ATT_WEAK_SPORE:
+		return LOC_SYSTEM_ATT_INFO_WEAK_SPORE;
+	case ATT_ACID_BYTE:
+		return LOC_SYSTEM_ATT_INFO_ACID;
 	default:
 		break;
 	}
@@ -119,12 +136,15 @@ void GetMonsterInfor(monster *it)
 			int aver_damage = 0;
 			int max_damage = 0;
 			int att_ = 0;
+			bool use_real_atk = UseRealAtkUpgrade(it->id);
 			for(int i = 0; i < 3;i++) {
-				if(mondata[it->id].atk_type[i] != ATT_NONE) {
-					aver_damage+=mondata[it->id].atk[i];
-					if(mondata[it->id].atk[i] > max_damage)
-						max_damage = mondata[it->id].atk[i];
-					all_key.insert(getKeyOfAttack(mondata[it->id].atk_type[i]));
+				attack_type attack_type_ = use_real_atk?it->atk_type[i]:mondata[it->id].atk_type[i];
+				int attack_ = use_real_atk?it->atk[i]:mondata[it->id].atk[i];
+				if(attack_type_ != ATT_NONE) {
+					aver_damage+=attack_;
+					if(attack_ > max_damage)
+						max_damage = attack_;
+					all_key.insert(getKeyOfAttack(attack_type_));
 					att_ ++;
 				}
 			}
@@ -140,6 +160,22 @@ void GetMonsterInfor(monster *it)
 				_infor_(")");
 				_infor_("\n");
 			}
+		}
+	}
+	if(it->id == MON_COGWHEEL || it->id == MON_SPINNING_DOLL)
+	{
+		int max_damage = it->GetAttack(0,true);
+		if(max_damage > 0)
+		{
+			_infor_(LocalzationManager::locString(LOC_SYSTEM_ABOUT_DAMAGE));
+			_infor_(": ");
+			float value = max_damage / 2.0f;
+			std::ostringstream oss;
+			oss << std::fixed << std::setprecision((value == (int)value) ? 0 : 1) << value;
+			_infor_(oss.str());
+			_infor_(" (1~");
+			_infor_(std::to_string(max_damage));
+			_infor_(")\n");
 		}
 	}
 
@@ -275,6 +311,10 @@ void GetMonsterInfor(monster *it)
 	}
 	if(it->flag & M_FLAG_RESIST_BLIZARD) {
 		_infor_(LocalzationManager::locString(LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BLIZARD));
+		_infor_("\n");
+	}
+	if(it->flag & M_FLAG_RESIST_BURST) {
+		_infor_(LocalzationManager::locString(LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BURST));
 		_infor_("\n");
 	}
 	

@@ -50,6 +50,16 @@ public:
     TextHelper(string text, bool enter, D3DCOLOR color) : text(std::move(text)), enter(enter), color(color){};
 };
 
+class WikiHelper {
+public:
+    string text;
+    bool enter;
+    D3DCOLOR color;
+    WikiHelper(string text, bool enter, D3DCOLOR color) : text(std::move(text)), enter(enter), color(color){};
+};
+
+
+
 struct localizationInfo {
     std::string name;
     std::string font;
@@ -59,7 +69,7 @@ struct localizationInfo {
 class LocalzationManager {
 public:
     static OrderedMap<string, localizationInfo> localization_type;
-private:
+	static const int wiki_enter = 4;
 // 전역 변수로 사용
 	static unordered_map<string, LOCALIZATION_ENUM_KEY> localization_enum_map;
 	static unordered_map<LOCALIZATION_ENUM_KEY, string> localization_enum_reverse_map;
@@ -72,6 +82,7 @@ private:
 	static unordered_set<string> english_article;
 
     class LocalzationData {
+
     public:
 	    unordered_map<LOCALIZATION_ENUM_KEY, string> localization_map;
 	    unordered_map<SPEAK_ENUM_KEY, string> speak_map;
@@ -82,8 +93,13 @@ private:
 	    vector<TextHelper> help_command;
 	    vector<TextHelper> help_pad_command;
 	    vector<TextHelper> help_credit;
+	    vector<TextHelper> help_patchnote;
 	    vector<TextHelper> help_wizard;
 	    vector<TextHelper> help_character;
+	    unordered_map<string, string, ci_hash, ci_equal> wiki_redirect;
+	    unordered_map<string, shared_ptr<vector<WikiHelper>>, ci_hash, ci_equal> wiki_map;
+	    BiMap wiki_id_matching;
+	    unordered_map<string, int, ci_hash, ci_equal> wikiline;
 	    vector<int> helpline_character;
 	    vector<TextHelper> help_gods;
 	    vector<int> helpline_gods;
@@ -95,14 +111,16 @@ private:
     static D3DCOLOR getColorFromCode(const string& code);
     static D3DCOLOR parseMultiColorLine(const string& line, vector<TextHelper>& outVector, D3DCOLOR currentColor, int current_line, vector<int>* helpline);
     static pair<string, D3DCOLOR> parseColorTag(const string& line);
-    static void initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector, vector<int>* helpline);
-    static void initFileArtifact(const string& path, const string& filename, vector<string>& baseVector, vector<string>& wordVector);
+    static bool initFileSimple(const string& path, const string& filename, vector<TextHelper>& saveVector, vector<int>* helpline);
+    static void parsingWikiInfo(string key, string content, unordered_map<string, shared_ptr<vector<WikiHelper>>, ci_hash, ci_equal>& wiki_map, unordered_map<string, int, ci_hash, ci_equal>& wikiline, int& current_line, BiMap& wiki_id_matching);
+    static bool parseWikiFile(const string& path, const string& filename, unordered_map<string, string, ci_hash, ci_equal>& wiki_redirect, unordered_map<string, shared_ptr<vector<WikiHelper>>, ci_hash, ci_equal>& wiki_map, unordered_map<string, int, ci_hash, ci_equal>& wikiline, BiMap& wiki_id_matching);
+	static bool initFileArtifact(const string& path, const string& filename, vector<string>& baseVector, vector<string>& wordVector);
     template<typename EnumType>
-    static void initFile(const string& path, const string& filename, unordered_map<string, EnumType>& enum_map, int argument_num, function<void(EnumType, vector<string>, vector<string>)> func) {
+    static bool initFile(const string& path, const string& filename, unordered_map<string, EnumType>& enum_map, int argument_num, function<void(EnumType, vector<string>, vector<string>)> func) {
         ifstream file(path + filename);
         if (!file) {
             string error_msg = "Error: Cannot open localization file: " + path + filename;
-            return;
+            return false;
         }
 
         string line;
@@ -172,6 +190,7 @@ private:
         }
 
         file.close();
+        return true;
     }
 
 
@@ -200,8 +219,13 @@ public:
 	static const vector<TextHelper>& getHelpCommand(){return localizationVector.find(current_lang)->help_command;};
 	static const vector<TextHelper>& getHelpPadCommand(){return localizationVector.find(current_lang)->help_pad_command;};
 	static const vector<TextHelper>& getHelpCredit(){return localizationVector.find(current_lang)->help_credit;};
+	static const vector<TextHelper>& getHelpPatchNote(){return localizationVector.find(current_lang)->help_patchnote;};
 	static const vector<TextHelper>& getHelpWizard(){return localizationVector.find(current_lang)->help_wizard;};
 	static const vector<TextHelper>& getHelpCharacter(){return localizationVector.find(current_lang)->help_character;};
+	static void printWiki();
+    static int getWikiLine(int id);
+	static int findWikiTitle(const string& query, int current_line, bool backward);
+	static vector<string> getWikiTitleCompletions(const string& prefix);
 	static int getHelpCharacterLine(int index);
 	static const vector<TextHelper>& getHelpGods(){return localizationVector.find(current_lang)->help_gods;};
 	static int getHelpGodsLine(int index);

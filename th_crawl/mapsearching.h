@@ -30,7 +30,7 @@ public:
 	void addNode(MapNode* node, int floor);
 	void addStair(MapNode* node, int floor);
 
-	static void initMapNode();
+	static void initMapNode(bool temp);
 	static MapNode* getFirstNode();
 	static MapNode* getNode(int level_);
 	static void testLoopAllNode();

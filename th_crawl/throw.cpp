@@ -8,6 +8,7 @@
 
 #include "monster.h"
 #include "mon_infor.h"
+#include "soundmanager.h"
 #include "monster_texture.h"
 #include "item.h"
 #include "environment.h"
@@ -18,6 +19,9 @@
 #include "rect.h"
 #include "weapon.h"
 #include "option_manager.h"
+#include "tribe.h"
+
+extern HANDLE mutx;
 
 
 int GetTanmacGraphicType(tanmac_type type)
@@ -34,6 +38,8 @@ int GetTanmacGraphicType(tanmac_type type)
 			return 18;
 		case TMT_DOGGOJEO:
 			return 43;
+		case TMT_ICICLE:
+			return 19;
 		/*아이템에서 나오지않는 번호들
 			return 10;
 			return 11;
@@ -68,6 +74,8 @@ attack_type GetTanmacAttackType(tanmac_type type)
 			return ATT_THROW_NORMAL;			
 		case TMT_POISON_NEEDLE:
 			return ATT_THROW_WEAK_POISON;
+		case TMT_ICICLE:
+			return ATT_THROW_FREEZING;
 		default:
 			break;
 	}
@@ -97,6 +105,7 @@ attack_type GetWeapontoTanmac(weapon_brand brand)
 		case WB_MANA_REGEN:
 		case WB_FAST_CAST:
 		case WB_PROTECT:
+		case WB_FLOOD:
 		default:
 			break;
 	}
@@ -113,6 +122,8 @@ bool TanmacDeleteRand(tanmac_type type, bool isCanDelete_)
 		case TMT_DOGGOJEO:
 			return isCanDelete_?true:(randA(9)==0);
 		case TMT_KIKU_COMPRESSER:
+			return true;
+		case TMT_ICICLE:
 			return true;
 		default:
 			break;
@@ -208,12 +219,88 @@ void MakeTanmac(item_infor* t, int select_)
 		t->weight = 0.5f*t->num;
 		t->value = 20;
 		break;
+	case TMT_ICICLE:
+		t->value1 = 6;
+		t->value2 = 9;
+		t->value3 = 0;
+		t->value4 = TMT_ICICLE;
+		t->value5 = 0;
+		t->value6 = 0;
+		t->value7 = 0;
+		t->value8 = 0;
+		t->num = 10;
+		t->is_pile = true;
+		t->can_throw = true;
+		t->image = GetTanmacBaseGraphic(t->value4);
+		t->name = name_infor(GetTanmacKey(t->value4));
+		t->weight = 0.5f*t->num;
+		t->value = 20;
+		break;
 	default:
 		break;
 	}
 
 
 }
+
+int PathToNum_forstem(int path)
+{
+	//줄기형 몬스터(지네, 줄기) 사용타일을 정하기위한 switch문
+	//7 0 1
+	//6 * 2
+	//5 4 3
+	//위와 같은 타일대로한다.
+	//여기서 십의자리에서 들어가서 일의 자리로 나간다고 가정(들어가는것과 나가는것이 바뀌어도 같음)
+	//여기서 특수케이스로 8은 시작점일때로 취급한다. (도착점은 없다.)
+	//해당 경로에 맞는 이미지배열의 인덱스를 리턴한다.
+
+	//레이저와 다른점 = 20부터 90도, 45도 각도를 위한 부분임
+	switch(path)
+	{
+	case 80:case 8:return 0;
+	case 81:case 18:return 1;
+	case 82:case 28:return 2;
+	case 83:case 38:return 3;
+	case 84:case 48:return 4;
+	case 85:case 58:return 5;
+	case 86:case 68:return 6;
+	case 87:case 78:return 7;
+	case 30:case 3:return 8;
+	case 40:case 4:return 9;
+	case 41:case 14:return 10;
+	case 50:case 5:return 11;
+	case 51:case 15:return 12;
+	case 52:case 25:return 13;
+	case 61:case 16:return 14;
+	case 62:case 26:return 15;
+	case 63:case 36:return 16;
+	case 72:case 27:return 17;
+	case 73:case 37:return 18;
+	case 74:case 47:return 19;
+
+	case 20:case 2:return 20; //90도
+	case 24:case 42:return 21;
+	case 46:case 64:return 22;
+	case 60:case 6:return 23;
+	case 31:case 13:return 24;
+	case 53:case 35:return 25;
+	case 75:case 57:return 26;
+	case 71:case 17:return 27;
+
+	case 10:case 1:return 28; //45도
+	case 21:case 12:return 29;
+	case 32:case 23:return 30;
+	case 43:case 34:return 31;
+	case 54:case 45:return 32;
+	case 65:case 56:return 33;
+	case 76:case 67:return 34;
+	case 70:case 7:return 35;
+
+	default:return 0;
+	}
+}
+
+
 int PathToNum(int path)
 {
 	//레이져(주로 전기계열)의 사용타일을 정하기위한 switch문
@@ -343,6 +430,15 @@ textures* GetTanmacGraphic(int type, int direc, int count, int path)
 		return &img_tanmac_oil_big[direc];
 	case 50:
 		return &img_effect_rock_uplift[count%3+1];
+	case 51:
+		return &img_tanmac_shockwave[direc];
+	case 52:
+	case 53:
+	case 54:
+	case 55:
+		return &img_star_tanmac[type-52];	
+	case 56:
+		return &img_tanmac_axe[count%4];
 	}
 }
 
@@ -395,6 +491,8 @@ textures* GetTanmacBaseGraphic(int type)
 		return &img_item_kikuichi;
 	case TMT_DOGGOJEO:
 		return &img_item_doggojeo;
+	case TMT_ICICLE:
+		return &img_item_ice[5];
 	}
 }
 
@@ -412,6 +510,8 @@ LOCALIZATION_ENUM_KEY GetTanmacKey(int type)
 		return LOC_SYSTEM_ITEM_TANMAC_KIKU_COMPRESSER;
 	case TMT_DOGGOJEO:
 		return LOC_SYSTEM_ITEM_TANMAC_DOGGOJEO;
+	case TMT_ICICLE:
+		return LOC_SYSTEM_ITEM_ICE_ICICLE;
 	}
 }
 
@@ -432,6 +532,8 @@ void ThrowTamacInstance::init() {
 	count = 0;
 	last_hit = nullptr;
 	path = 8;
+	slashed = 0;
+	slashed_beams.clear();
 	switch(infor_.type1)
 	{
 	case BMT_NORMAL:
@@ -462,47 +564,86 @@ bool ThrowTamacInstance::oneturn(coord_def& hit_pos_) {
 	case BMT_WALL:
 	case BMT_PENETRATE:
 	default:
-		for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
-		{
-			if((*it).isLive() && (*it).position.x == (*beam).x && (*it).position.y == (*beam).y &&
-				!(*it).isPassedBullet(infor_.order, true)
-				)
+		if(slashed == 0) {
+			for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
+			{
+				if((*it).isLive() && (*it).position.x == (*beam).x && (*it).position.y == (*beam).y &&
+					!(*it).isPassedBullet(infor_.order, true)
+					)
+				{
+					attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+					temp_att.no_owner = infor_.no_owner;
+					if(attack_prefix != nullptr) {
+						attack_prefix(temp_att, this);
+					}
+					if((*it).damage(temp_att)) {
+						hit_pos_ = (*beam);
+						last_hit = &(*it);
+						penetrate--;
+					}
+				}
+			}
+			if(!infor_.order->isplayer() && you.position.x == (*beam).x && you.position.y == (*beam).y &&				
+				!you.isPassedBullet(infor_.order, true)
+				) //플레이어는 자기자신에게 맞지않는 조건은 나중에 지울까?
 			{
 				attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+				temp_att.no_owner = infor_.no_owner;
 				if(attack_prefix != nullptr) {
 					attack_prefix(temp_att, this);
 				}
-				if((*it).damage(temp_att)) {
+				int slash_ = you.CanSlash(infor_.type2);
+				if(!item_ && slash_ && randA(99) < slash_) {
+					slashed = 1;
+					if(env[current_level].isInSight(*beam)) {
+						PlaySE("slash");
+						name_infor name_;
+						if(infor_.order)	
+							name_ = (*infor_.order->GetName());
+						LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_SLASH,true,false,false,CL_bad,
+							PlaceHolderHelper(you.name.getName()),
+							PlaceHolderHelper(name_.getName()),
+							PlaceHolderHelper(infor_.name.getName()));
+					}
+					
+					std::pair<beam_iterator, beam_iterator> beams_ =  split_beam(beam, 45.0f);
+					slashed_beams.push_back(beams_.first);
+					slashed_beams.push_back(beams_.second);
+				}
+				else if(you.damage(temp_att)) {
 					hit_pos_ = (*beam);
-					last_hit = &(*it);
+					last_hit = &you;
 					penetrate--;
 				}
 			}
-		}
-		if(!infor_.order->isplayer() && you.position.x == (*beam).x && you.position.y == (*beam).y &&				
-			!you.isPassedBullet(infor_.order, true)
-			) //플레이어는 자기자신에게 맞지않는 조건은 나중에 지울까?
-		{
-			attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
-			if(attack_prefix != nullptr) {
-				attack_prefix(temp_att, this);
+			path = 10*GetPosToDirec((*beam),prev);
+			coord_def postion_ = (*beam);
+			prev = *(beam++);
+			path += (penetrate>0 && length>0)?GetPosToDirec(prev,(*beam)):9;
+			if(t_)
+				env[current_level].MakeEffect(postion_,t_,false);
+			else if(graphic_type || !item_)
+				env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path),false);
+			else if(item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
+				env[current_level].MakeEffect(postion_,item_->image,false);
+		} else {
+			for(auto& beam_ : slashed_beams) {
+				int path_ = 10*GetPosToDirec((*beam_),prev);
+				coord_def postion_ = (*beam_);
+				prev = *(beam_++);
+				path_ += (penetrate>0 && length>0)?GetPosToDirec(prev,(*beam_)):9;
+				if(env[current_level].isMove(postion_,true)) {
+					if(t_)
+						env[current_level].MakeEffect(postion_,t_,false, 0.4f);
+					else if(graphic_type || !item_)
+						env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path_),false, 0.4f);
+					else if(item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
+						env[current_level].MakeEffect(postion_,item_->image,false, 0.4f);
+				}
 			}
-			if(you.damage(temp_att)) {
-				hit_pos_ = (*beam);
-				last_hit = &you;
-				penetrate--;
-			}
+			slashed++;
+
 		}
-		path = 10*GetPosToDirec((*beam),prev);
-		coord_def postion_ = (*beam);
-		prev = *(beam++);
-		path += (penetrate>0 && length>0)?GetPosToDirec(prev,(*beam)):9;
-		if(t_)
-			env[current_level].MakeEffect(postion_,t_,false);
-		else if(graphic_type || !item_)
-			env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path),false);
-		else if(item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
-			env[current_level].MakeEffect(postion_,item_->image,false);
 	}
 	
 	return false;
@@ -527,6 +668,9 @@ bool ThrowTamacInstance::oneturn_after(bool without_laser) {
 			}
 		}
 	}
+	if(slashed == 2) {
+		return true;
+	}
 	
 	return !(env[current_level].isMove(*(beam),true) && penetrate>0 && length>0);
 }
@@ -545,8 +689,9 @@ coord_def ThrowTamacInstance::endShoot(bool sleep_, bool without_laser) {
 			prev = *(beam++);
 			//벽에 부딪히는?
 		}
+		bool returned = infor_.order == &you && you.s_knife_collect  && (item_?item_->fixed_artifact != FIXED_ARTIFACT_GUNGNIR:true);
 
-		if(item_ && !mimic_ && (infor_.order != &you || !you.s_knife_collect))
+		if(item_ && !mimic_ && !returned)
 		{
 			if(!(item_->type>=ITM_THROW_FIRST && item_->type<ITM_THROW_LAST) || !TanmacDeleteRand((tanmac_type)item_->value4, false))
 			{
@@ -609,6 +754,8 @@ coord_def ThrowTamacInstance::endShoot(bool sleep_, bool without_laser) {
 coord_def throwtanmac_(int graphic_type, textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_)
 {
 	ThrowTamacInstance throw_instance(t_, graphic_type, beam, infor_, item_, effect_delete, mimic_);
+	if(beam.GetMaxLength() == 0)
+		return throw_instance.endShoot(true, false);
 	while(true) {
 		coord_def hit_pos_;
 		if(throw_instance.oneturn(hit_pos_))
@@ -626,6 +773,11 @@ unit* throwtanmac_check_hit_(int graphic_type, textures* t_, beam_iterator& beam
 {
 	ThrowTamacInstance throw_instance(t_, graphic_type, beam, infor_, item_, effect_delete, mimic_);
 	throw_instance.attack_prefix = attack_prefix_;
+	if(beam.GetMaxLength() == 0)
+	{
+		throw_instance.endShoot(true, false);
+		return NULL;
+	}
 	while(true) {
 		coord_def hit_pos_;
 		if(throw_instance.oneturn(hit_pos_))
@@ -679,6 +831,7 @@ coord_def throwtanmac_temp(int graphic_type, textures* t_, beam_iterator& beam, 
 					)
 				{
 					attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+					temp_att.no_owner = infor_.no_owner;
 					if((*it).damage(temp_att))
 						penetrate--;
 				}
@@ -688,6 +841,7 @@ coord_def throwtanmac_temp(int graphic_type, textures* t_, beam_iterator& beam, 
 				) //플레이어는 자기자신에게 맞지않는 조건은 나중에 지울까?
 			{
 				attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+				temp_att.no_owner = infor_.no_owner;
 				if(you.damage(temp_att))
 					penetrate--;
 			}
@@ -717,7 +871,9 @@ coord_def throwtanmac_temp(int graphic_type, textures* t_, beam_iterator& beam, 
 			//벽에 부딪히는?
 		}
 
-		if(item_ && !mimic_ && (infor_.order != &you || !you.s_knife_collect))
+		bool returned = infor_.order == &you && you.s_knife_collect  && (item_?item_->fixed_artifact != FIXED_ARTIFACT_GUNGNIR:true);
+
+		if(item_ && !mimic_ && !returned)
 		{
 			if(!(item_->type>=ITM_THROW_FIRST && item_->type<ITM_THROW_LAST) || !TanmacDeleteRand((tanmac_type)item_->value4, false))
 			{
@@ -827,6 +983,7 @@ bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &targe
 			)
 		{
 			attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+			temp_att.no_owner = infor_.no_owner;
 			(*it).damage(temp_att);
 		}
 	}
@@ -835,6 +992,7 @@ bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &targe
 		) //플레이어는 자기자신에게 맞지않는 조건은 나중에 지울까?
 	{
 		attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+		temp_att.no_owner = infor_.no_owner;
 		you.damage(temp_att);
 	}
 	return true;
@@ -915,6 +1073,7 @@ bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_,
 							)
 						{
 							attack_infor temp_att(infor_.damage,infor_.max_damage,infor_.accuracy,infor_.order,infor_.p_type,infor_.type2,infor_.name);
+							temp_att.no_owner = infor_.no_owner;
 							if((*it2).damage(temp_att))
 							{
 							}
@@ -1006,8 +1165,137 @@ bool CheckThrowPath(coord_def start,coord_def target, beam_iterator &beam, bool 
 	return false;
 }
 
+bool IsSakuyaKnife(const item* item_)
+{
+	return you.GetProperty(TPT_SAKUYA_PASSIVE) && item_ && item_->can_throw &&
+		item_->type == ITM_WEAPON_SHORTBLADE && item_->value0 == 1;
+}
+
+vector<beam_iterator> GetSakuyaKnifeBeams(coord_def target_, int length_)
+{
+	return GetSakuyaKnifeBeams(you.position,target_,length_);
+}
+
+vector<beam_iterator> GetSakuyaKnifeBeams(coord_def start_, coord_def target_, int length_)
+{
+	vector<beam_iterator> beams_;
+	if(target_ == start_ || length_ <= 0)
+		return beams_;
+	float angle_ = atan2((float)(target_.y-start_.y),(float)(target_.x-start_.x));
+	unit* main_ = env[current_level].isMonsterPos(target_.x,target_.y,&you);
+	unit* selected_ = NULL;
+	for(int side_=-1;side_<=1;side_+=2)
+	{
+		float best_angle_ = GetDegToRad(45.0f);
+		int best_distance_ = (length_+1)*(length_+1);
+		monster* best_ = NULL;
+		beam_iterator side_beam(start_,target_);
+		for(monster& mon_ : env[current_level].mon_vector)
+		{
+			if(!mon_.isLive() || !mon_.isYourShight() || !you.isEnemyUnit(&mon_) || (mon_.flag & M_FLAG_UNHARM) || mon_.isPassedBullet(&you,true))
+				continue;
+			unit* root_ = env[current_level].isMonsterPos(mon_.position.x,mon_.position.y,&you);
+			if(root_ == main_ || root_ == selected_)
+				continue;
+			int dx_ = mon_.position.x-start_.x, dy_ = mon_.position.y-start_.y;
+			int distance_ = dx_*dx_+dy_*dy_;
+			if(distance_ == 0 || distance_ >= (length_+1)*(length_+1))
+				continue;
+			float delta_ = atan2((float)dy_,(float)dx_) - angle_;
+			delta_ = atan2(sin(delta_),cos(delta_))*side_;
+			if(delta_ <= 0.000001f || delta_ > GetDegToRad(45.0f)+0.000001f)
+				continue;
+			float diff_ = GetDegToRad(45.0f) - delta_;
+			if(diff_ > best_angle_ || (diff_ == best_angle_ && distance_ >= best_distance_))
+				continue;
+			beam_iterator path_(start_,mon_.position);
+			if(!CheckThrowPath(start_,mon_.position,path_))
+				continue;
+			bool blocked_ = false;
+			for(path_.init();!path_.end();path_++)
+			{
+				unit* hit_ = env[current_level].isMonsterPos(path_->x,path_->y,&you);
+				if(hit_ && hit_ != root_ && !hit_->isPassedBullet(&you,true))
+				{
+					blocked_ = true;
+					break;
+				}
+			}
+			if(blocked_)
+				continue;
+			best_ = &mon_;
+			best_angle_ = diff_;
+			best_distance_ = distance_;
+			side_beam = path_;
+		}
+		if(best_)
+		{
+			selected_ = env[current_level].isMonsterPos(best_->position.x,best_->position.y,&you);
+			side_beam.init();
+			beams_.push_back(side_beam);
+		}
+	}
+	return beams_;
+}
+
+void ThrowSakuyaKnives(beam_iterator& beam, const vector<beam_iterator>& side_beams, const beam_infor& infor_, item* item_, bool mimic_, int graphic_type)
+{
+	list<shared_ptr<ThrowTamacInstance>> tanmac_list;
+	tanmac_list.push_back(make_shared<ThrowTamacInstance>(nullptr,graphic_type,beam,infor_,item_,false,mimic_));
+	beam_infor side_infor = infor_;
+	side_infor.length = you.getThrowLength();
+	for(beam_iterator side_beam : side_beams)
+		tanmac_list.push_back(make_shared<ThrowTamacInstance>(item_->image,0,side_beam,side_infor,nullptr,false,true));
+	while(!tanmac_list.empty())
+	{
+		for(auto it = tanmac_list.begin();it != tanmac_list.end();)
+		{
+			auto temp = it++;
+			coord_def hit_pos_;
+			if((*temp)->oneturn(hit_pos_))
+			{
+				(*temp)->endShoot(false,false);
+				tanmac_list.erase(temp);
+			}
+		}
+		Sleep(16);
+		for(auto it = tanmac_list.begin();it != tanmac_list.end();)
+		{
+			auto temp = it++;
+			if((*temp)->oneturn_after(false))
+			{
+				(*temp)->endShoot(false,false);
+				tanmac_list.erase(temp);
+			}
+		}
+	}
+	env[current_level].ClearEffect();
+}
+
 void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bool set, projectile_infor* infor_, int m_len_, float sector_)
 {
+	auto in_bounds_ = [](const coord_def& pos_)
+	{
+		return pos_.x >= 0 && pos_.x < DG_MAX_X && pos_.y >= 0 && pos_.y < DG_MAX_Y;
+	};
+	vector<coord_def> side_path_;
+	vector<coord_def> half_path_;
+	if(set && infor_->isitem && item_ != you.item_list.end() && IsSakuyaKnife(&(*item_)))
+	{
+		for(beam_iterator side_beam : GetSakuyaKnifeBeams(c_,infor_->length))
+		{
+			for(side_beam.init();;side_beam++)
+			{
+				side_path_.push_back(*side_beam);
+				if(side_beam.end())
+					break;
+			}
+		}
+	}
+	WaitForSingleObject(mutx,INFINITE);
+	DisplayManager.sakuya_knife_path = side_path_;
+	DisplayManager.spell_half_path = half_path_;
+	ReleaseMutex(mutx);
 	if(m_len_ == -1)
 		m_len_ = beam.GetMaxLength();
 
@@ -1024,10 +1312,26 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 			rect_iterator rit(c_,range_, range_);
 			for(;!rit.end();rit++)
 			{
+				if(!in_bounds_(*rit))
+					continue;
+				if(!infor_->skill && infor_->spell == SPL_THUNDER && !env[current_level].isMove(*rit,true))
+					continue;
+				if(!infor_->skill && infor_->spell == SPL_THUNDER && (*rit) != c_)
+				{
+					if(set)
+						half_path_.push_back(*rit);
+					continue;
+				}
 				if(set)
 					env[current_level].dgtile[(*rit).x][(*rit).y].flag = env[current_level].dgtile[(*rit).x][(*rit).y].flag | FLAG_LIGHT;
 				else
 					env[current_level].dgtile[(*rit).x][(*rit).y].flag = env[current_level].dgtile[(*rit).x][(*rit).y].flag & ~FLAG_LIGHT;	
+			}
+			if(!infor_->skill && infor_->spell == SPL_THUNDER && set)
+			{
+				WaitForSingleObject(mutx,INFINITE);
+				DisplayManager.spell_half_path = half_path_;
+				ReleaseMutex(mutx);
 			}
 		}
 		return;
@@ -1085,6 +1389,8 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 			for(beam.init();!beam.end();)
 			{
 				auto temp_beam = beam++;
+				if(!in_bounds_(*temp_beam))
+					break;
 				//스마이트형이 아닌경우 부딪히면 터지기 마련이다.
 				bool block_ = false;
 				if(!env[current_level].isMove(*(beam),true))
@@ -1133,6 +1439,8 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 			rect_iterator rit((*beam),range_, range_);
 			for(;!rit.end();rit++)
 			{
+				if(!in_bounds_(*rit))
+					continue;
 				if(set)
 					env[current_level].dgtile[(*rit).x][(*rit).y].flag = env[current_level].dgtile[(*rit).x][(*rit).y].flag | FLAG_LIGHT;
 				else
@@ -1144,15 +1452,20 @@ void paintpath(coord_def c_, beam_iterator &beam, list<item>::iterator item_, bo
 
 			for(beam.init();!beam.end();beam++)
 			{
+				if(!in_bounds_(*beam))
+					break;
 				if(set)
 					env[current_level].dgtile[(*beam).x][(*beam).y].flag = env[current_level].dgtile[(*beam).x][(*beam).y].flag | FLAG_LIGHT;
 				else
 					env[current_level].dgtile[(*beam).x][(*beam).y].flag = env[current_level].dgtile[(*beam).x][(*beam).y].flag & ~FLAG_LIGHT;	
 			}
-			if(set)
-				env[current_level].dgtile[(*beam).x][(*beam).y].flag = env[current_level].dgtile[(*beam).x][(*beam).y].flag | FLAG_LIGHT;
-			else
-				env[current_level].dgtile[(*beam).x][(*beam).y].flag = env[current_level].dgtile[(*beam).x][(*beam).y].flag & ~FLAG_LIGHT;	
+			if(in_bounds_(*beam))
+			{
+				if(set)
+					env[current_level].dgtile[(*beam).x][(*beam).y].flag = env[current_level].dgtile[(*beam).x][(*beam).y].flag | FLAG_LIGHT;
+				else
+					env[current_level].dgtile[(*beam).x][(*beam).y].flag = env[current_level].dgtile[(*beam).x][(*beam).y].flag & ~FLAG_LIGHT;
+			}
 		}
 	}
 }
@@ -1233,6 +1546,11 @@ list<item>::iterator ThrowSelect()
 }
 
 bool throw_prev_fail(bool no_speak){
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return true;
+	}
 	if(you.s_lunatic)
 	{
 		if(!no_speak)

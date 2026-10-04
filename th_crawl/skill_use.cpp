@@ -9,6 +9,7 @@
 
 #include "unit.h"
 #include "skill_use.h"
+#include "ice_item.h"
 #include "throw.h"
 #include "beam.h"
 #include "keiki.h"
@@ -37,6 +38,8 @@
 #include "soundmanager.h"
 #include "tribe.h"
 #include "evoke.h"
+#include "scroll.h"
+#include "unique_spellcard.h"
 
 
 extern HANDLE mutx;
@@ -870,10 +873,14 @@ bool skill_yuugi_german(int pow, bool short_, unit* order, coord_def target)
 		if(you.isEnemyMonster(mon_))
 		{
 			coord_def offset_ = you.position+you.position - mon_->position;
+			if(mon_->isImmobile()) {
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX_IMMOBILE),true,false,false,CL_normal);
+				return false;
+			}
 			if(!env[current_level].isMove(offset_))
 			{
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX_NOT_ENOUGH_TILE),true,false,false,CL_normal);
-				return false;	
+				return false;
 			}
 			if(env[current_level].isMonsterPos(offset_.x,offset_.y,order))
 			{
@@ -905,6 +912,10 @@ bool skill_yuugi_throw(int power, bool short_, unit* order, coord_def target)
 		bool no_cost_ = (you.s_catch && mon_->s_catch);
 		if(you.isEnemyMonster(mon_))
 		{
+			if(mon_->isImmobile()) {
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_THROW_IMMOBILE),true,false,false,CL_normal);
+				return false;
+			}
 			int throw_length_ = 7;
 			SetSpellSight(throw_length_, 1);
 			beam_iterator beam(you.position,you.position);
@@ -1205,7 +1216,7 @@ bool skill_shinki_high_demon(int power, bool short_, unit* order, coord_def targ
 	{
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_MAGIC_SUMMON,false,false,false,CL_magic,
 			PlaceHolderHelper(mon_->name.getName()));
-		if(randA(99)<=(id_==MON_YUKI?5:id_==MON_MAI?5:3))
+		if(randA(99)<=(id_==MON_MAI?5:3))
 		{
 			PlaySE("laugh");
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_SHINKI_SUMMON_FAIL,false,false,false,CL_danger,
@@ -1349,6 +1360,11 @@ bool skill_yuyuko_enslave(int power, bool short_, unit* order, coord_def target)
 		return false;	
 	if(unit* hit_mon = DebufBeam(SKL_YUYUKO_3, order, target))
 	{
+		
+		if(hit_mon->isImmobile()) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_IMMOBILE_FAIL),true,false,false,CL_normal);
+			return false;
+		}
 		/*
 	if(unit* hit_mon = env[current_level].isMonsterPos(target.x,target.y,order))
 	{*/
@@ -1442,7 +1458,7 @@ bool skill_yukari_dimension(int power, bool short_, unit* order, coord_def targe
 {
 	if(order->isplayer())
 	{
-		if(env[current_level].isBamboo())
+		if(env[current_level].isInfiniteMap())
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUKARI_DIMENSION_BAMBOO),true,false,false,CL_small_danger);
 			return false;
@@ -1506,6 +1522,10 @@ bool skill_swako_jump(int power, bool short_, unit* order, coord_def target)
 	{
 		if(env[current_level].isMove(target.x,target.y) && !env[current_level].isMonsterPos(target.x,target.y))
 		{
+			if(order->isplayer() && you.IsDiving()) {
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_SKILL_DIVE_JUMP, PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile])),true,false,false,CL_white_blue);
+				you.EndDive(false);
+			}
 			you.SetXY(target.x,target.y);
 			PlaySE("jump");
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_JUMP) + " " ,false,false,false,CL_normal);
@@ -1553,9 +1573,14 @@ bool skill_swako_water_gun(int power, bool short_, unit* order, coord_def target
 bool skill_swako_tongue(int power, bool short_, unit* order, coord_def target)
 {
 	if(!order->isplayer())
-		return false;	
+		return false;
 	if(unit* hit_mon = DebufBeam(SKL_SWAKO_TOUGUE, order, target))
 	{
+		if(hit_mon->isImmobile()) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SWAWKO_TOUGUE_IMMOBILE),true,false,false,CL_normal);
+			return false;
+		}
+
 		beam_iterator beam(order->position,target);
 		if(CheckThrowPath(order->position,target,beam))
 		{
@@ -1625,6 +1650,8 @@ bool skill_swako_digging(int power, bool short_, unit* order, coord_def target)
 
 		while(length_>0)
 		{
+			if(beam->x < 0 || beam->x >= DG_MAX_X || beam->y < 0 || beam->y >= DG_MAX_Y)
+				break;
 			if (env[current_level].dgtile[beam->x][beam->y].isBreakable())
 				env[current_level].changeTile((*beam), env[current_level].base_floor);
 			beam++;
@@ -2512,6 +2539,8 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 	
 	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_GIFT_APPEAR),true,false,false,CL_dark_good);
 
+	
+	PlaySE("gift");
 	AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_SEIJA_GIFT, PlaceHolderHelper(GetGodString(next_))),CL_help);
 	you.god_value[GT_SEIJA][2] = 0;
 	MoreWait();
@@ -2555,7 +2584,12 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 bool skill_seija_1(int power, bool short_, unit* order, coord_def target)
 {
 	if(unit* hit_mon = env[current_level].isMonsterPos(target.x,target.y,order))
-	{	
+	{
+		if(hit_mon->isImmobile()) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP_IMMOBILE),true,false,false,CL_normal);
+			return false;
+		}
+
 		hit_mon->SetXY(you.position.x,you.position.y);
 		you.SetXY(target.x,target.y);
 
@@ -2989,6 +3023,10 @@ bool skill_okina_2(int power, bool short_, unit* order, coord_def target)
 		if (env[current_level].dgtile[target.x][target.y].isOpenDoor() || env[current_level].dgtile[target.x][target.y].isCloseDoor()) {
 
 			if (unit_) {
+				if(unit_->isImmobile()) {
+					printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_LOCKED_DOOR_IMMOBILE),true,false,false,CL_normal);
+					return false;
+				}
 
 				rand_rect_iterator rit(unit_->position, 1, 1, true);
 				while (!rit.end()) {
@@ -3225,6 +3263,8 @@ bool skill_okina_4(int power, bool short_, unit* order, coord_def target)
 }
 bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 {
+	if(order->isplayer() && !CheckUniqueSpellcardFloorMove())
+		return false;
 	if (current_level == OKINA_LEVEL){
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_ALREADY), true, false, false, CL_normal);
 		return false;
@@ -3256,6 +3296,7 @@ bool skill_okina_5(int power, bool short_, unit* order, coord_def target)
 	you.god_value[GT_OKINA][0] = current_level;
 	you.god_value[GT_OKINA][1] = you.position.x;
 	you.god_value[GT_OKINA][2] = you.position.y;
+	you.god_value[GT_OKINA][3] = current_level == ZIGURRAT_LEVEL ? you.ziggurat_level : -1;
 	env[OKINA_LEVEL].EnterMap(0, dq);
 	printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_OKINA_ABIL_DOOR_ESCAPE_WELCOME), true, false, false, CL_normal);
 
@@ -3357,7 +3398,6 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 
 	int kind_ = 0;
 	bool loop_ = true;
-	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO), true, false, false, CL_danger);
 	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN) +" ", false, false, false, CL_danger);
 	while (loop_) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ASK), true, false, false, CL_help);
@@ -3719,7 +3759,7 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 	printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_TALK), true, false, false, CL_junko);
 	you.god_value[GT_JUNKO][3] = kind_;
 	you.Ability(SKL_JUNKO_4, true, true);
-	you.SetPureTurn(30, -1);
+	//you.SetPureTurn(30, -1);
 
 
 	return true;
@@ -4669,6 +4709,7 @@ bool skill_upgrade_haniwa(int power, bool short_, unit* order, coord_def target)
 		return false;
 	}
 
+	PlaySE("gift");
 	AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_KEIKI_GIFT, PlaceHolderHelper(haniwa_abil_list[next_].name)),CL_help);
 	you.god_value[GT_KEIKI][3] = 0;
 	you.god_value[GT_KEIKI][4] = 0;
@@ -4782,8 +4823,49 @@ bool skill_emerald_city(int power, bool short_, unit* order, coord_def target);
 bool skill_stone_uplift(int power, bool short_, unit* order, coord_def target);
 
 
+bool skill_cirno_ice_create(int level_)
+{
+	if(level_ <= 0 || !CreateIceItem(level_))
+		return false;
+	you.Ability(SKL_CIRNO_ICE_CREATE,false,true);
+	printlog(LocalzationManager::formatString(LOC_SYSTEM_CIRNO_ICE_CREATE_USED),true,false,false,CL_normal);
+	return true;
+}
+
+bool skill_turn_dive(int pow, bool short_, unit* order, coord_def target)
+{
+	if(order->isplayer()) {
+		if(!you.s_dive)
+		{
+			PlaySE("dive");
+			you.SetDive(rand_int(10,15)+pow/4);
+			int temp = you.Ability(SKL_DIVE,false,true,1);
+			you.Ability(SKL_DIVE_OFF,false,false,temp);
+			return true;
+		}
+		else
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_ALREADY_DIVE),true,false,false,CL_normal);	
+	}
+	return false;
+}
+
+bool skill_off_dive(int pow, bool short_, unit* order, coord_def target)
+{
+	if(order->isplayer())
+	{
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_SKILL_DIVE_STOP, PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile])) + " ",false,false,false,CL_normal);
+		you.EndDive(false);
+		return true;
+	}
+	return false;
+}
+
 int UseSkill(skill_list skill, bool short_, coord_def &target)
 {
+	if(you.IsDiving() && skill != SKL_DIVE_OFF && skill != SKL_SWAKO_JUMP && skill != SKL_JUMPING_ATTACK) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION), true, false, false, CL_normal);
+		return 0;
+	}
 	int power=min(SkillCap(skill),SkillPow(skill));
 	if(SkillFlagCheck(skill, S_FLAG_SPEAK) && env[current_level].isSilence(you.position))
 	{
@@ -5133,6 +5215,15 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_SILENCE:
 		return skill_silence(power,short_, &you,target);
+		break;
+	case SKL_CIRNO_ICE_CREATE:
+		return skill_cirno_ice_create(power);
+		break;
+	case SKL_DIVE:
+		return skill_turn_dive(power, short_, &you,target);
+		break;
+	case SKL_DIVE_OFF:
+		return skill_off_dive(power, short_, &you,target);
 		break;
 	default:
 		break;

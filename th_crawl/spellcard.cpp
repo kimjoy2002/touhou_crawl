@@ -16,6 +16,7 @@
 #include "mon_infor.h"
 #include "rect.h"
 #include "tribe.h"
+#include "key.h"
 
 int GetDebufPower(spell_list skill, int power_);//디버프의 파워
 
@@ -44,32 +45,45 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 
 	if(!SpellcardFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
-		SetSpellSight(SpellcardLength(kind),SpellcardFlagCheck(kind, S_FLAG_RECT)?2:1);
-		beam_iterator beam(you.position,you.position);
-		projectile_infor infor(SpellcardLength(kind),false,SpellcardFlagCheck(kind, S_FLAG_SMITE),-2,false);
-		auto it = you.item_list.end();
-		if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor, SpellcardLength(kind), SpellcardSector(kind), auto_))
+		while(true)
 		{
-			if(fail_)
-				return true;
-			unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
-			you.SetBattleCount(30);
-			if(unit_)
-				you.youAttack(unit_);
-			if(EvokeSpellcard(kind, short_ == 2, power, you.search_pos))
+			SetSpellSight(SpellcardLength(kind),SpellcardFlagCheck(kind, S_FLAG_RECT)?2:1);
+			beam_iterator beam(you.position,you.position);
+			projectile_infor infor(SpellcardLength(kind),false,SpellcardFlagCheck(kind, S_FLAG_SMITE),-2,false);
+			auto it = you.item_list.end();
+			if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor, SpellcardLength(kind), SpellcardSector(kind), auto_))
 			{
-				you.PowUpDown(-1* Spellcardusepower(kind,false),true);
+				if(fail_)
+				{
+					SetSpellSight(0,0);
+					return true;
+				}
+				unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
+				you.SetBattleCount(30);
+				if(unit_)
+					you.youAttack(unit_);
+				if(EvokeSpellcard(kind, short_ == 2, power, you.search_pos))
+				{
+					you.PowUpDown(-1* Spellcardusepower(kind,false),true);
+					SetSpellSight(0,0);
+					return true;
+				}
 				SetSpellSight(0,0);
-				return true;
+				if(iden_)
+					return false;
+				MoreWait();
 			}
-		}
-		else
-		{
-			SetSpellSight(0,0);
-			if(iden_)
-				return false;
 			else
-				return true;
+			{
+				SetSpellSight(0,0);
+				if(iden_)
+					return false;
+				bool cancel_ = ynPrompt(LOC_SYSTEM_SPELLCARD_CANCEL_WASTE_ASK, LOC_EMPTYSTRING, CL_help, false,false,true,true);
+				enterlog();
+				if(cancel_)
+					return true;
+			}
+			auto_ = false;
 		}
 	}			
 	else if(SpellcardFlagCheck(kind, S_FLAG_IMMEDIATELY))
@@ -301,16 +315,23 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 					PlaySE("stone");
 					for (int i = -1; i <= 1; i++)
 						for (int j = -1; j <= 1; j++)
-							env[current_level].MakeEffect(coord_def(pos.x + i, pos.y + j), &img_blast[1], false);
+						{
+							coord_def effect_pos(pos.x + i, pos.y + j);
+							if(effect_pos.x >= 0 && effect_pos.x < DG_MAX_X && effect_pos.y >= 0 && effect_pos.y < DG_MAX_Y)
+								env[current_level].MakeEffect(effect_pos, &img_blast[1], false);
+						}
 					for (int i = -1; i <= 1; i++)
 					{
 						for (int j = -1; j <= 1; j++)
 						{
-							if (env[current_level].isMove(pos.x + i, pos.y + j, true))
+							coord_def effect_pos(pos.x + i, pos.y + j);
+							if(effect_pos.x < 0 || effect_pos.x >= DG_MAX_X || effect_pos.y < 0 || effect_pos.y >= DG_MAX_Y)
+								continue;
+							if (env[current_level].isMove(effect_pos, true))
 							{
-								if (env[current_level].isInSight(coord_def(pos.x + i, pos.y + j)))
+								if (env[current_level].isInSight(effect_pos))
 								{
-									if (unit* hit_ = env[current_level].isMonsterPos(pos.x + i, pos.y + j))
+									if (unit* hit_ = env[current_level].isMonsterPos(effect_pos.x, effect_pos.y))
 									{
 										attack_infor temp_att(randC(3, 5 + power / 8), 3 * (5 + power / 8), 99, &you, you.GetParentType(), ATT_NORMAL_BLAST, name_infor(LOC_SYSTEM_ATT_V_EARTH_FRAG));
 										hit_->damage(temp_att, true);
@@ -319,11 +340,11 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 							}
 							else
 							{
-								if(i == 0 && j == 0 && env[current_level].dgtile[pos.x + i][pos.y + j].isEffectibleEarthSpellcard()) {
-									env[current_level].changeTile(coord_def(pos.x + i, pos.y + j), env[current_level].base_floor);
+								if(i == 0 && j == 0 && env[current_level].dgtile[effect_pos.x][effect_pos.y].isEffectibleEarthSpellcard()) {
+									env[current_level].changeTile(effect_pos, env[current_level].base_floor);
 								}
-								else if (env[current_level].dgtile[pos.x + i][pos.y + j].isBreakable())
-									env[current_level].changeTile(coord_def(pos.x + i, pos.y + j), env[current_level].base_floor);
+								else if (env[current_level].dgtile[effect_pos.x][effect_pos.y].isBreakable())
+									env[current_level].changeTile(effect_pos, env[current_level].base_floor);
 							}
 						}
 					}
@@ -357,7 +378,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				ThrowSector(25, beam, temp_infor, SpellcardSector(SPC_V_AIR), [&](coord_def c_) {
 					if (unit* unit_ = env[current_level].isMonsterPos(c_.x, c_.y))
 					{
-						if (you.isSightnonblocked(c_))
+						if (!unit_->isImmobile() && you.isSightnonblocked(c_))
 						{
 							coord_def push_(c_ - you.position + c_);
 							beam_iterator beam(c_, push_);
@@ -427,7 +448,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 			if(it->isLive() && env[current_level].isInSight(it->position) && you.isSightnonblocked(it->position))
 			{
 				int power_ = power;
-				if (it->id == MON_REMILIA || it->id == MON_FLAN || it->id == MON_FLAN_BUNSIN ||
+				if (it->id == MON_REMILIA || it->id == MON_FLAN || it->id == MON_FLAN_BUNSIN || it->id == MON_FLAN_AFTERIMAGE ||
 					it->id == MON_VAMPIER_BAT) {
 					int damage_ = 10 + power_ / 12;
 					attack_infor attack_infor_(randC(3, damage_), 3 * (damage_), 99, &you, you.GetParentType(), ATT_SUN_BLAST, name_infor(LOC_SYSTEM_ATT_SUN));
@@ -439,7 +460,11 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				}
 				else if(it->CalcuateMR(power_))
 				{
-					it->SetConfuse(rand_int(3, 8) + randA(power_ / 5));
+					int turn_ = rand_int(3, 8) + randA(power_ / 5);
+					if(it->isUnique()) {
+						turn_ = max(1,turn_ / 3);
+					}
+					it->SetConfuse(turn_);
 				}
 				else if(it->isYourShight())
 				{

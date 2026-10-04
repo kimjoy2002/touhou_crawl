@@ -67,7 +67,14 @@
         "optional": "cpp",
         "string_view": "cpp",
         "valarray": "cpp",
-        "xhash": "cpp"
+        "xhash": "cpp",
+        "xstddef": "cpp"
     },
-    "C_Cpp.errorSquiggles": "enabled"
+    "C_Cpp.errorSquiggles": "enabled",
+    "cmake.configureOnOpen": false,
+    "cmake.configureOnEdit": false,
+    "cmake.automaticReconfigure": false,
+    "cmake.generator": "Visual Studio 16 2019",
+    "cmake.toolset": "ClangCL",
+    "cmake.platform": "x64"
 }

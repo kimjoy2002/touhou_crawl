@@ -21,6 +21,8 @@ enum evoke_kind
 	EVK_SKY_TORPEDO,
 	EVK_MAGIC_HAMMER,
 	EVK_CAMERA,
+	EVK_SPEAR,
+	EVK_FROZEN_FROG,
 	EVK_MAX
 };
 
@@ -28,6 +30,7 @@ struct item_infor;
 class item;
 
 bool isCanGenerate(evoke_kind evk);
+bool isFakeEvoke(evoke_kind evk);
 
 bool evoke_evokable(item* item_, bool auto_, int auto_direc_, evoke_kind kind);
 int Evokeusepower(evoke_kind skill, bool max_);

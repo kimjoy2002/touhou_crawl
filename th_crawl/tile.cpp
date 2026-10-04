@@ -31,10 +31,13 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_DREAM_FLOOR2:
 	case DG_HELL_FLOOR:
 	case DG_SNOW:
+	case DG_CARPET:
+	case DG_DOLLSHOUSE_FLOOR:
 		return DOT_FLOOR;
 	case DG_WALL:
 	case DG_GLASS:
 	case DG_STATUE:
+	case DG_STATUE2:
 	case DG_STONE_WALL:
 	case DG_RED_WALL:
 	case DG_BOOK_WALL:
@@ -55,6 +58,9 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_SNOWMAN:
 	case DG_GRAVE:
 	case DG_IZAKAYA:
+	case DG_MUSHROOM1:
+	case DG_MUSHROOM2:
+	case DG_DOLLSHOUSE_WALL:
 		return DOT_WALL;
 	case DG_CLOSE_DOOR:
 	case DG_OPEN_DOOR:
@@ -69,6 +75,8 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_SCARLET_STAIR:					
 	case DG_SCARLET_L_STAIR:
 	case DG_SCARLET_U_STAIR:
+	case DG_FORESTOFMAGIC_STAIR:
+	case DG_DOLLSHOUSE_STAIR:
 	case DG_BAMBOO_STAIR:
 	case DG_EIENTEI_STAIR:
 	case DG_SUBTERRANEAN_STAIR:

@@ -12,6 +12,7 @@
 #include "environment.h"
 #include "const.h"
 #include "player.h"
+#include "web_backend.h"
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -46,6 +47,19 @@ void steam_manager::setCurrentMainMenuInfo() {
 	setCurrentInfo("","","",0,"");
 }
 void steam_manager::setCurrentInfo(string tribe, string job, string charname, int level, string which) {
+#ifdef WEB_TILES
+	if (web::enabled()) {
+		std::string st;
+		if (!(tribe.empty() && job.empty())) {
+			std::ostringstream ss;
+			if (!charname.empty()) ss << charname << " ";
+			ss << tribe << " " << job << " Lv" << level;
+			if (!which.empty()) ss << " / " << which;
+			st = ss.str();
+		}
+		web::setStatus(st.c_str());
+	}
+#endif
 	if(!init)
 		return;
 
@@ -307,7 +321,7 @@ bool steam_manager::sendScore(const ScoreEntry& entry)
 
     int timestamp = static_cast<int>(std::time(nullptr));
     // 리더보드 핸들 얻
-    int details[16] = {
+    int details[17] = {
         entry.level,         // 0
         entry.tribe,         // 1
         entry.job,           // 2
@@ -323,7 +337,8 @@ bool steam_manager::sendScore(const ScoreEntry& entry)
         entry.version,       // 12
         timestamp,           // 13
         entry.dungeon_level, // 14
-        entry.att_type       // 15 
+        entry.att_type,      // 15 
+        entry.ziggurat_level // 16
     };
 
     // 스코어 업로드 (score + details)
@@ -332,7 +347,7 @@ bool steam_manager::sendScore(const ScoreEntry& entry)
         k_ELeaderboardUploadScoreMethodKeepBest,
         entry.score,
         details,
-        16
+        17
     );
     return true;
 }
@@ -432,9 +447,9 @@ void steam_manager::OnDownloadLeaderboard(LeaderboardScoresDownloaded_t* pResult
     for (int i = 0; i < pResult->m_cEntryCount; ++i)
     {
         LeaderboardEntry_t entry;
-        int details[16] = {};
+        int details[17] = {};
         if (SteamUserStats()->GetDownloadedLeaderboardEntry(
-            pResult->m_hSteamLeaderboardEntries, i, &entry, details, 16))
+            pResult->m_hSteamLeaderboardEntries, i, &entry, details, 17))
         {
             ScoreEntry score;
             score.username = SteamFriends()->GetFriendPersonaName(entry.m_steamIDUser);
@@ -455,6 +470,7 @@ void steam_manager::OnDownloadLeaderboard(LeaderboardScoresDownloaded_t* pResult
             score.timestamp = details[13];
             score.dungeon_level= details[14];
             score.att_type = details[15];
+            score.ziggurat_level = details[16];
 
             m_tempEntries.push_back(score);
         }

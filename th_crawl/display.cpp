@@ -8,6 +8,7 @@
 
 #include "d3dUtility.h"
 #include "textureUtility.h"
+#include "web_backend.h"
 #include "environment.h"
 #include "texture.h"
 #include "display.h"
@@ -30,6 +31,7 @@
 #include "ring.h"
 #include "book.h"
 #include "spellcard.h"
+#include "unique_spellcard.h"
 #include "throw.h"
 #include "mon_infor.h"
 #include "localization.h"
@@ -71,7 +73,11 @@ int greed_max_y = 8;
 
 
 void text_dummy::calculateWitdh() {
+#ifdef WEB_TILES
+	if (!g_pfont && !web::headless()) return;
+#else
 	if (!g_pfont) return;
+#endif
 
 	//부정확해
 	//DirectX::XMVECTOR sizeVec = g_pfont->MeasureString(PreserveTrailingSpaces(text).c_str());
@@ -121,7 +127,7 @@ extern Microsoft::WRL::ComPtr<ID3D11SamplerState> g_pPointSampler;
 
 
 
-extern bool g_changefullscreen;
+extern std::atomic<bool> g_changefullscreen;
 void OnResize(int width, int height);
 void ToggleFullscreen(bool fullscreen);
 
@@ -130,13 +136,15 @@ bool Display(float timeDelta)
 	WaitForSingleObject(mutx, INFINITE);
 
 	
-	if(g_changefullscreen) {
-		g_changefullscreen = false;
+	if(g_changefullscreen.exchange(false)) {
 		ToggleFullscreen(option_mg.getFullscreen());
 	}
 
 	CalcFPS(timeDelta);
-	if (g_pImmediateContext && g_pRenderTargetView)
+
+	const bool hasDevice = (g_pImmediateContext && g_pRenderTargetView);
+
+	if (hasDevice)
 	{
 		// Clear background (검정색)
 		const float clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
@@ -147,14 +155,22 @@ bool Display(float timeDelta)
             g_pAlphaBlendState.Get(),
             g_pPointSampler.Get(), // ✅ POINT filtering
             nullptr, nullptr);
+	}
 
-		DisplayManager.draw(g_pSprite, g_pfont);
-		
+#ifdef WEB_TILES
+	if (web::enabled()) web::beginFrame(option_mg.getWidth(), option_mg.getHeight());
+#endif
+	DisplayManager.draw(g_pSprite, g_pfont);   // headless 시 g_pSprite/g_pfont 는 null
+#ifdef WEB_TILES
+	if (web::enabled()) web::endFrame();
+#endif
+
+	if (hasDevice)
+	{
 		g_pSprite->End();
-
 		g_pSwapChain->Present(1, 0);
 	}
-	
+
 	ReleaseMutex(mutx);
 	return true;
 }
@@ -174,7 +190,13 @@ void display_manager::initText() {
 }
 void display_manager::Getfontinfor()
 {
-	if (!g_pfont) return;
+	if (!g_pfont) {
+		fontDesc.Height = 20;
+		fontDesc.Width = 10;
+		fontDesc.Size = 20;
+		log_length = (option_mg.getHeight() - 25) / fontDesc.Height;
+		return;
+	}
 
 	// 예시 텍스트로 평균적인 너비/높이 측정
 	std::wstring sample = L"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -412,7 +434,7 @@ void display_manager::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<
 }
 
 int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::SpriteBatch> pSprite, LPCWSTR text, int count, LPRECT pRect, DWORD format, D3DCOLOR color, bool drawOutline = false, D3DCOLOR outlineColor = 0xFF000000) {
-    if (!pFont || !text || !pRect) {
+    if (!text || !pRect) {
         return 0;
     }
 
@@ -427,10 +449,14 @@ int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::Spri
     DirectX::XMVECTOR colorVec = D3DCOLOR_to_XMVECTOR(color);
     DirectX::XMVECTOR outlineColorVec = D3DCOLOR_to_XMVECTOR(outlineColor);
 
-    // 문자열 크기 측정
-    DirectX::XMVECTOR sizeVec = pFont->MeasureString(wtext.c_str());
+    // 문자열 크기 측정 (fontDesc 로 근사)
     DirectX::XMFLOAT2 size;
-    DirectX::XMStoreFloat2(&size, sizeVec);
+    if (pFont) {
+        DirectX::XMStoreFloat2(&size, pFont->MeasureString(wtext.c_str()));
+    } else {
+        size.x = (float)(PrintCharWidth(wtext) * DisplayManager.fontDesc.Width);
+        size.y = (float)DisplayManager.fontDesc.Height;
+    }
 
     // 정렬 계산
     float x = (float)pRect->left;
@@ -450,7 +476,7 @@ int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::Spri
         y = (float)pRect->bottom - size.y;
 	}
 
-	if (drawOutline) {
+	if (drawOutline && pFont && pSprite) {
 		DirectX::XMFLOAT2 pos = { x, y };
 		static const DirectX::XMFLOAT2 offsets[] = {
 			{ -2,  0 }, { 2,  0 }, { 0, -2 }, { 0,  2 },
@@ -461,15 +487,19 @@ int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::Spri
 			pFont->DrawString(pSprite.get(), wtext.c_str(), outlinePos, outlineColorVec);
 		}
 	}
-    // Draw
-    pFont->DrawString(pSprite.get(), wtext.c_str(), { x, y }, colorVec);
+#ifdef WEB_TILES
+    if (web::enabled())
+        web::recText(wtext.c_str(), x, y, color);
+#endif
+    if (pFont && pSprite)
+        pFont->DrawString(pSprite.get(), wtext.c_str(), { x, y }, colorVec);
 
     return (int)wtext.size();  // 반환값은 출력한 글자 수
 }
 
 
 int DrawTextUTF8_OutLine(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::SpriteBatch> pSprite, const char* text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
-    if (!pFont || !text || !pRect) {
+    if (!text || !pRect) {
         return 0;
     }
 
@@ -480,7 +510,7 @@ int DrawTextUTF8_OutLine(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<Direc
 }
 
 int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::SpriteBatch> pSprite, const char* text, int count, LPRECT pRect, DWORD format, D3DCOLOR color) {
-    if (!pFont || !text || !pRect) {
+    if (!text || !pRect) {
         return 0;
     }
 
@@ -1757,8 +1787,11 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	ss.str("");
 	ss.clear();
 	ss << LocalzationManager::locString(LOC_SYSTEM_ITEM_RUNE_RUNE) << ": ";
-	for(int i=0;i<RUNE_HAKUREI_ORB;i++)
-	{		
+	for(int i = 0; i<RUNE_MAX;i++)
+	{
+		if(i == RUNE_HAKUREI_ORB) {
+			continue;
+		}
 		if(you.rune[i])
 		{
 			if(i!=0)
@@ -1999,6 +2032,9 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 						msg.wParam = draw_dummy.clickable;
 						g_keyQueue->push(InputedKey(msg));
 					}
+					else if(selection_description && isClicked(RIGHT_CLICK)) {
+						g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,draw_dummy.clickable,0));
+					}
 					already_draw = true;
 				}
 			}
@@ -2008,6 +2044,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 
 	//바탕 타일 그리기
+	bool unique_spellcard_active_ = IsUniqueSpellcardActive();
 	int x_ = you.GetDisplayPos().x-sight_x;
 	int y_ = you.GetDisplayPos().y-sight_y;
 	int tile_x_offset = 4.0f+calc_tile_size/2;
@@ -2033,7 +2070,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 							sight = false;
 						}
 					}
-					env[current_level].drawTile(pSprite, i + x_, j + y_, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset, calc_tile_scale, you.turn, info_minX, sight, false, !already_draw);
+					env[current_level].drawTile(pSprite, i + x_, j + y_, i*calc_tile_size + tile_x_offset, j*calc_tile_size + tile_x_offset, calc_tile_scale, you.turn, info_minX, sight, false, !already_draw, unique_spellcard_active_);
 				}
 				else {
 					int x = i*calc_tile_size + tile_x_offset;
@@ -2066,7 +2103,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	}
 	
 	coord_def offset_ = coord_def();
-	if(env[current_level].isBamboo())
+	if(env[current_level].isInfiniteMap())
 	{
 		offset_.x = DG_MAX_X/2 - you.position.x;
 		offset_.y = DG_MAX_Y/2 - you.position.y;
@@ -2423,7 +2460,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			{
 				if(abs((*it).position.x -x_-sight_x)<=sight_x && abs((*it).position.y -y_-sight_y)<=sight_y)
 				{
-					(*it).image->draw(pSprite,((*it).position.x-x_)*calc_tile_size+tile_x_offset,((*it).position.y-y_)*calc_tile_size+tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, 255);
+					(*it).image->draw(pSprite,((*it).position.x-x_)*calc_tile_size+tile_x_offset,((*it).position.y-y_)*calc_tile_size+tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale, (int)( 255 * it->alpha));
 				}
 			}
 		}
@@ -2455,6 +2492,28 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	if(you.search)
 	{
 		img_effect_select.draw(pSprite,(you.search_pos.x-x_)*calc_tile_size+tile_x_offset,(you.search_pos.y-y_)*calc_tile_size+tile_x_offset,0.0f,calc_tile_scale,calc_tile_scale,D3DCOLOR_XRGB(255,255,255));
+	}
+
+	if(widesearch && wiz_list.wizard_mode == 1)
+	{
+		ostringstream coord_text;
+		coord_text << "(" << you.search_pos.x << ", " << you.search_pos.y << ")";
+		int cursor_x = (you.search_pos.x - x_) * calc_tile_size + tile_x_offset;
+		int cursor_y = (you.search_pos.y - y_) * calc_tile_size + tile_x_offset;
+		int coord_width = PrintCharWidth(coord_text.str()) * fontDesc.Width;
+		int coord_left = cursor_x + calc_tile_size / 2 + 4;
+		if(coord_left + coord_width >= info_minX)
+			coord_left = cursor_x - calc_tile_size / 2 - coord_width - 4;
+		int coord_top = max(0, min((int)(cursor_y - fontDesc.Height / 2),
+			(int)(option_mg.getHeight() - fontDesc.Height)));
+		RECT rc = {
+			coord_left,
+			coord_top,
+			coord_left + coord_width,
+			(LONG)(coord_top + fontDesc.Height)
+		};
+		DrawTextUTF8_OutLine(pfont, pSprite, coord_text.str().c_str(), -1, &rc,
+			DT_SINGLELINE | DT_NOCLIP, CL_help);
 	}
 
 	if(g_gamepad_on[0]) {
@@ -2494,7 +2553,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 
 	{ //테두리
-		if(!env[current_level].isBamboo() && dot_size > 0) {
+		if(!env[current_level].isInfiniteMap() && dot_size > 0) {
 			sight_rect.draw(pSprite,GetDotX(minimap_offset_x, x_+sight_x,dot_size),GetDotY(dot_start_y,y_+sight_y,dot_size),0.0f,sight_x/24.0f*dot_size,sight_y/24.0f*dot_size,255);
 		}
 	}
@@ -2681,8 +2740,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		ss.str("");
 		ss.clear();
 		ss << std::setfill(' ') << std::setw(4) << you.GetDisplayAc();
-		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_AC)+ ((you.alchemy_buff == ALCT_DIAMOND_HARDNESS)?5:0);
-		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (temp_buff_value_>0?CL_white_blue:(temp_buff_value_<0?CL_small_danger:CL_STAT)));
+		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_AC)+ ((you.alchemy_buff == ALCT_DIAMOND_HARDNESS)?5:0)
+			+ ((you.alchemy_buff == ALCT_COLD_ARMOUR)?you.alchemy_cold_armour_ac:0);
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, 
+		you.s_acid?CL_danger:
+		((temp_buff_value_>0?CL_white_blue:(temp_buff_value_<0?CL_small_danger:CL_STAT))));
 		rc.left += fontDesc.Width*PrintCharWidth(ss.str());
 
 
@@ -3179,6 +3241,10 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				stateDraw.addState(LocalzationManager::formatString(LOC_SYSTEM_BUFF_STAT_GLUTTON, PlaceHolderHelper(to_string(you.s_glutton))),CL_white_blue,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_GLUTTON), this);
 			}
+			if(you.s_acid_turn > 0) {
+				stateDraw.addState(LocalzationManager::formatString(LOC_SYSTEM_BUFF_ACID, PlaceHolderHelper(to_string(you.s_acid))),CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_ACID), this);
+			}
 			if(you.GetPotionAddictLevel() > 0) {
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_POTIONADDICT),
 				   (you.GetPotionAddictLevel()==3?CL_danger:(you.GetPotionAddictLevel()==2?CL_small_danger:CL_warning)),
@@ -3278,6 +3344,17 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			{
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_ROYALFLARE), CL_alchemy,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_ROYALFLARE), this);
+			}
+			if(you.alchemy_buff == ALCT_COLD_ARMOUR)
+			{
+				bool burst_ready_ = you.alchemy_cold_armour_damage*4 >= you.GetMaxHp();
+				D3DCOLOR armour_color_ = you.alchemy_time <= 3?(burst_ready_?CL_blue:CL_dark_alchemy):
+					(burst_ready_?CL_white_blue:CL_alchemy);
+				stateDraw.addState(LocalzationManager::locString(burst_ready_?
+					LOC_SYSTEM_BUFF_STAT_COLD_ARMOUR_PLUS:LOC_SYSTEM_BUFF_STAT_COLD_ARMOUR),
+					armour_color_,
+					LocalzationManager::locString(burst_ready_?
+					LOC_SYSTEM_BUFF_DESCRIBE_STAT_COLD_ARMOUR_PLUS:LOC_SYSTEM_BUFF_DESCRIBE_STAT_COLD_ARMOUR), this);
 			}
 			if(you.s_unluck > 0)
 			{
@@ -3416,6 +3493,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				stateDraw.addState(you.s_swift>0 ? LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SWIFT) : LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SLUGGISH), you.s_swift>10 ? CL_white_blue : (you.s_swift>0 ? CL_blue : CL_danger),
 					you.s_swift > 0 ? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SWIFT) : LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLUGGISH), this);
 			}
+			if(you.s_slippery)
+			{
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SLIPPERY), CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLIPPERY), this);
+			}
 			if(you.s_superman)
 			{
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SUPERMAN), you.s_superman>5 ? CL_white_puple : CL_magic,
@@ -3482,6 +3564,10 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			{
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_FIRE), CL_danger,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_FIRE), this);
+			}
+			if (you.s_dive) {
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_DIVE), you.s_dive>5 ? CL_white_blue : CL_blue,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIVE), this);
 			}
 		}
 	}
@@ -4058,6 +4144,17 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			PlaceHolderHelper(joypadUtil::get("z", GVK_BUTTON_A)), PlaceHolderHelper(joypadUtil::get("x", GVK_LEFT_BUMPER)), PlaceHolderHelper(joypadUtil::get("c", GVK_RIGHT_BUMPER)), PlaceHolderHelper(joypadUtil::get("esc", GVK_BUTTON_B_LONG))), -1, &rc, DT_SINGLELINE | DT_NOCLIP,CL_normal);
 	}
 	drawInfoBox(pSprite, pfont);
+	if(monster* spellcard_owner_ = GetActiveUniqueSpellcard())
+	{
+		string spellcard_text_ = LocalzationManager::locString(GetUniqueSpellcardName(spellcard_owner_->spellcard_info.type));
+		spellcard_text_ += "  ";
+		if(spellcard_owner_->spellcard_info.max_turn < 0)
+			spellcard_text_ += "∞/∞";
+		else
+			spellcard_text_ += to_string(spellcard_owner_->spellcard_info.turn)+"/"+to_string(spellcard_owner_->spellcard_info.max_turn);
+		RECT spellcard_rc_ = {0,(LONG)(y+4),info_minX-8,(LONG)(y+fontDesc.Height+4)};
+		DrawTextUTF8_OutLine(pfont,pSprite,spellcard_text_.c_str(),-1,&spellcard_rc_,DT_RIGHT | DT_SINGLELINE | DT_NOCLIP,CL_magic);
+	}
 
 
 	if(dragging_item != nullptr){
@@ -4344,7 +4441,8 @@ void display_manager::sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 	{
 		list<text_dummy*>::iterator it;
 		it = text_sub.text_list.end();
-		it--;
+		if(it != text_sub.text_list.begin())
+			it--;
 		int view_length = log_length;
 		int i = view_length+(move>0?move:0);
 		while(i)
@@ -4416,6 +4514,11 @@ void display_manager::sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 			ss << string(blank, ' ') << "↓";
 			DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_help);
 		}
+	}
+	if(!sub_text_prompt.empty()) {
+		RECT rc={ 0, 0, (LONG)option_mg.getWidth(), (LONG)fontDesc.Height };
+		dot_player.draw(pSprite, 0, 0, 0.0f, (float)option_mg.getWidth(), (float)fontDesc.Height, D3DCOLOR_ARGB(255, 0, 0, 0));
+		DrawTextUTF8(pfont, pSprite, sub_text_prompt, -1, &rc, DT_SINGLELINE | DT_NOCLIP, sub_text_prompt_color);
 	}
 	
 	if(isClicked(MIDDLE_UP)) {
@@ -4568,7 +4671,7 @@ bool display_manager::checkVaildItemView(item_type_simple i) {
 	if (item_vt == IVT_SPELLCARD && i != ITMS_SPELL) {
 		return false;
 	}
-	if(item_vt == IVT_EVOKE && i != ITMS_SPELL && i != ITMS_MISCELLANEOUS && i != ITMS_JEWELRY)
+	if(item_vt == IVT_EVOKE && i != ITMS_SPELL && i != ITMS_MISCELLANEOUS && i != ITMS_JEWELRY && i != ITMS_WEAPON)
 		return false;
 	if(item_vt == IVT_CURSE_ENCHANT && (i != ITMS_WEAPON && i != ITMS_ARMOR))
 		return false;
@@ -4581,7 +4684,8 @@ bool display_manager::checkItemSimpleType(list<item>::iterator it) {
 		return false;
 	if(item_vt == IVT_UEQ_JEWELRY && !equip)
 		return false;
-	if(item_vt == IVT_UNIDEN && (*it).isiden())
+	if(item_vt == IVT_UNIDEN && (*it).isiden() &&
+		!((*it).fixed_artifact == FIXED_ARTIFACT_UNIDENTIFIED_TRIDENT && (*it).GetArtifactProperty(ART_UNKNOWN_POWER) > 0))
 		return false;
 	if(item_vt == IVT_THROW && !(*it).can_throw)
 		return false;
@@ -4639,7 +4743,28 @@ void display_manager::setPosition(int value_, int char_) {
 		} 
 	}
 	else if(state == DT_SUB_TEXT) {
-		for(list<text_dummy*>::iterator it = text_sub.text_list.begin(); it != text_sub.text_list.end();it++)
+		list<text_dummy*>::iterator it;
+		it = text_sub.text_list.end();
+		if(it != text_sub.text_list.begin())
+			it--;
+		int view_length = log_length;
+		int i = view_length+(move>0?move:0);
+		while(i)
+		{
+			if(it == text_sub.text_list.begin())
+				break;
+			it--;
+			if((*it)->enter)
+			{
+				i--;
+				if(i<=0)
+				{
+					it++;
+					break;
+				}
+			}
+		}
+		for(i = 0;i < view_length && it != text_sub.text_list.end();it++)
 		{
 			if((*it)->clickable > 0) {
 				max_position++;
@@ -4647,6 +4772,9 @@ void display_manager::setPosition(int value_, int char_) {
 					current_position = max_position;
 					return;
 				}
+			}
+			if((*it)->enter) {
+				i++;
 			}
 		}
 		if(char_ == -1) {
@@ -4742,7 +4870,28 @@ int display_manager::positionToChar() {
 		}
 	}  
 	else if(state == DT_SUB_TEXT) {
-		for(list<text_dummy*>::iterator it = text_sub.text_list.begin(); it != text_sub.text_list.end();it++)
+		list<text_dummy*>::iterator it;
+		it = text_sub.text_list.end();
+		if(it != text_sub.text_list.begin())
+			it--;
+		int view_length = log_length;
+		int i = view_length+(move>0?move:0);
+		while(i)
+		{
+			if(it == text_sub.text_list.begin())
+				break;
+			it--;
+			if((*it)->enter)
+			{
+				i--;
+				if(i<=0)
+				{
+					it++;
+					break;
+				}
+			}
+		}
+		for(i = 0;i < view_length && it != text_sub.text_list.end();it++)
 		{
 			if((*it)->clickable > 0) {
 				if(max_position == current_position) {

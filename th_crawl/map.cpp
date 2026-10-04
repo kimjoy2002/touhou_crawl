@@ -8,13 +8,123 @@
 
 #include "map.h"
 #include "throw.h"
+#include "save.h"
 #include "enum.h"
 #include "mon_infor.h"
 #include "event.h"
 #include "armour.h"
 #include "evoke.h"
 #include "zigurrat.h"
+#include "scarlet_under.h"
 
+static list<pair<const map_dummy*,monster_index>> reserved_named;
+
+static bool find_stair_position(int floor_, const vector<coord_def>& used_, coord_def& result_)
+{
+	vector<coord_def> candidates;
+	for(int x = 0; x < DG_MAX_X; x++)
+	{
+		for(int y = 0; y < DG_MAX_Y; y++)
+		{
+			coord_def pos(x,y);
+			if(!env[floor_].dgtile[x][y].isFloor() || (env[floor_].dgtile[x][y].flag & FLAG_NO_STAIR) ||
+				find(used_.begin(), used_.end(), pos) != used_.end())
+				continue;
+			candidates.push_back(pos);
+		}
+	}
+	if(candidates.empty())
+		return false;
+	result_ = candidates[randA(static_cast<int>(candidates.size())-1)];
+	return true;
+}
+
+
+void map_infor::SaveDatas(FILE *fp) {
+	SaveData<int>(fp, MAX_SUB_DUNGEON);
+	for(int i = 0; i < MAX_SUB_DUNGEON; i++) {
+		SaveData<pos_infor>(fp, dungeon_enter[i]);
+	}
+	SaveData<int>(fp, GT_LAST);
+	for(int i = 0; i < GT_LAST; i++) {
+		SaveData<pos_infor>(fp, temple[i]);
+	}
+	SaveData<int>(fp, tutorial);
+	SaveData<int>(fp, god_num);
+	SaveData<int>(fp, bamboo_count);
+	SaveData<int>(fp, bamboo_rate);
+	SaveData<bool>(fp, bamboo_tewi);
+	SaveData<unsigned int>(fp, random_number);
+}
+
+
+void map_infor::LoadDatas(FILE *fp) {
+	
+	{
+		int size_ = 0;
+		LoadData<int>(fp, size_);
+		int i = 0;
+		for(; i < size_; i++) {
+			if(i < MAX_SUB_DUNGEON) {
+				LoadData<pos_infor>(fp, dungeon_enter[i]);
+			} else {
+				pos_infor temp;
+				LoadData<pos_infor>(fp,temp);
+			}
+		}
+		for(; i < MAX_SUB_DUNGEON; i++) {
+			dungeon_enter[i] = pos_infor();
+		}
+	}
+	{
+		int size_ = 0;
+		LoadData<int>(fp, size_);
+		int i = 0;
+		for(; i < size_; i++) {
+			if(i < GT_LAST) {
+				LoadData<pos_infor>(fp, temple[i]);
+			} else {
+				pos_infor temp;
+				LoadData<pos_infor>(fp,temp);
+			}
+		}
+		for(; i < GT_LAST; i++) {
+			temple[i] = pos_infor();
+		}
+	}
+	LoadData<int>(fp, tutorial);
+	LoadData<int>(fp, god_num);
+	LoadData<int>(fp, bamboo_count);
+	LoadData<int>(fp, bamboo_rate);
+	LoadData<bool>(fp, bamboo_tewi);
+	LoadData<unsigned int>(fp, random_number);
+}
+
+void map_infor_202::migrateInfor202toCurrent(const map_infor_202& old_data, map_infor& new_data)
+{
+	for(int i = 0; i < MAX_SUB_DUNGEON; i++) {
+		if(i < 14) {
+			new_data.dungeon_enter[i] = old_data.dungeon_enter[i];
+		} else {
+			new_data.dungeon_enter[i] = pos_infor();
+		}
+	}
+	
+	for(int i = 0; i < GT_LAST; i++) {
+		if(i < 23) {
+			new_data.temple[i] = old_data.temple[i];
+		} else {
+			new_data.temple[i] = pos_infor();
+		}
+	}
+
+	new_data.tutorial = old_data.tutorial;
+	new_data.god_num = old_data.god_num;
+	new_data.bamboo_count = old_data.bamboo_count;
+	new_data.bamboo_rate = old_data.bamboo_rate;
+	new_data.bamboo_tewi = old_data.bamboo_tewi;
+	new_data.random_number = old_data.random_number;
+}
 
 
 
@@ -64,11 +174,35 @@ connect_enter(false),connect_exit(false),floor_tex(floor_tex_),wall_tex(wall_tex
 }
 map_dummy::~map_dummy()
 {
-	for(int i=0;i<size_x;i++)
+	reserved_named.remove_if([this](const pair<const map_dummy*,monster_index>& entry_){
+		return entry_.first == this;
+	});
+	for(int i=0;i<size_x*2+1;i++)
 		delete[] tiles[i];
 	delete[] tiles;
 }
-
+bool map_dummy::is_exist_named(monster_index id_) const
+{
+	if(::is_exist_named(id_))
+		return true;
+	for(const auto& entry_ : reserved_named)
+		if(entry_.second == id_)
+			return true;
+	return false;
+}
+void map_dummy::reserve_named(monster_index id_)
+{
+	auto entry_ = make_pair((const map_dummy*)this,id_);
+	if(find(reserved_named.begin(),reserved_named.end(),entry_) == reserved_named.end())
+		reserved_named.push_back(entry_);
+}
+bool map_dummy::isVaild(int offset) {
+	if(pos.x-size_x < offset || pos.x+size_x>=DG_MAX_X-offset || pos.y-size_y<offset || pos.y+size_y>=DG_MAX_Y-offset)
+	{
+		return false;
+	}
+	return true;
+}
 bool map_dummy::collution(const coord_def& point,int size_x_,int size_y_)
 {
 	return ( abs(point.x-pos.x) <= size_x_ + size_x + 1 && abs(point.y-pos.y) <= size_y_ + size_y + 1 );
@@ -85,7 +219,7 @@ void map_dummy::make_map(environment& env_pointer, bool wall_, bool stair_input_
 	{
 		for(int j = -size_y;j<=size_y;j++)
 		{			
-			if(i+pos.x<0 || i+pos.x>DG_MAX_X||j+pos.y<0 || j+pos.y>DG_MAX_X)
+			if(i+pos.x<0 || i+pos.x>=DG_MAX_X||j+pos.y<0 || j+pos.y>=DG_MAX_Y)
 			{
 				break;
 			}
@@ -120,7 +254,18 @@ void map_dummy::make_map(environment& env_pointer, bool wall_, bool stair_input_
 	for(list<mapdummy_mon>::iterator it = monster_list.begin();it!=monster_list.end();it++)
 	{
 		monster* mon_ = env_pointer.AddMonster(it->id,it->flag,it->pos+pos,0);
+		if(!mon_)
+		{
+			reserved_named.remove(make_pair((const map_dummy*)this,(monster_index)it->id));
+			continue;
+		}
 		mon_->SetStrong(mon_->isUnique()?5:1);
+		auto entry_ = find(reserved_named.begin(),reserved_named.end(),make_pair((const map_dummy*)this,(monster_index)it->id));
+		if(entry_ != reserved_named.end())
+		{
+			set_exist_named((monster_index)it->id);
+			reserved_named.erase(entry_);
+		}
 	}
 	for (auto it = pos_list.begin(); it != pos_list.end(); it++) {
 		it->operator+=(pos);
@@ -140,6 +285,17 @@ void map_dummy::make_map(environment& env_pointer, bool wall_, bool stair_input_
 	for(list<mapdummy_event>::iterator it = event_list.begin();it!=event_list.end();it++)
 	{
 		env_pointer.MakeEvent(it->id,it->position+pos,it->type, -1, it->value);
+	}
+	// 나중에 이벤트로 등장하는 네임드도 맵 배치가 끝나면 출현을 확정한다.
+	for(auto it = reserved_named.begin();it != reserved_named.end();)
+	{
+		if(it->first == this)
+		{
+			set_exist_named(it->second);
+			it = reserved_named.erase(it);
+		}
+		else
+			it++;
 	}
 
 
@@ -172,7 +328,7 @@ void map_dummy::eventmapmake(environment& env_pointer, int count, bool wall_)
 	{
 		for(int j = -size_y;j<=size_y;j++)
 		{			
-			if(i+pos.x<0 || i+pos.x>DG_MAX_X||j+pos.y<0 || j+pos.y>DG_MAX_X)
+			if(i+pos.x<0 || i+pos.x>=DG_MAX_X||j+pos.y<0 || j+pos.y>=DG_MAX_Y)
 			{
 				break;
 			}
@@ -210,6 +366,7 @@ coord_def map_dummy::getNextPos()
 	return c;
 }
 
+void make_mushroom(int num, int freq);
 void make_lake(int num, int repeat, boolean lava);
 
 void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
@@ -264,7 +421,20 @@ void map_algorithms(int num)
 		}
 		else if(num == SCARLET_UNDER_LEVEL)
 		{
-			map_algorithms_under(num,DG_FLOOR,DG_RED_WALL);
+			map_algorithms_scarlet_under(num,DG_FLOOR,DG_RED_WALL,5,16,3,1800,4);
+		}
+		else if(num >= FORESTOFMAGIC_LEVEL && num <= FORESTOFMAGIC_LEVEL+MAX_FORESTOFMAGIC_LEVEL)
+		{
+			map_algorithms03(70,3,4,12, num,DG_GRASS,DG_TREE);
+			make_mushroom(num, rand_int(20,30));
+		}
+		else if(num >= DOLLSHOUSE_LEVEL && num < DOLLSHOUSE_LAST_LEVEL)
+		{
+			map_algorithms04(num,DG_DOLLSHOUSE_FLOOR,DG_DOLLSHOUSE_WALL);
+		}
+		else if(num == DOLLSHOUSE_LAST_LEVEL)
+		{
+			map_algorithms03(70,3,4,12, num,DG_DOLLSHOUSE_FLOOR,DG_DOLLSHOUSE_WALL);
 		}
 		else if(num == BAMBOO_LEVEL)
 		{
@@ -415,6 +585,14 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 	{
 		vector_.push_back(VP_SCARLET_LAST);		
 	}
+	if(floor == FORESTOFMAGIC_LAST_LEVEL)
+	{
+		vector_.push_back(VP_FORESTOFMAGIC_LAST);			
+	}
+	if(floor == DOLLSHOUSE_LAST_LEVEL)
+	{
+		vector_.push_back(VP_DOLLSHOUSE_LAST);		
+	}
 	if(floor == EIENTEI_LEVEL_LAST_LEVEL)
 	{
 		vector_.push_back(VP_EIENTEI_LAST);		
@@ -461,6 +639,50 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 
 	return;
 }
+
+
+
+void make_mushroom(int num, int freq)
+{
+
+    const auto in_bounds = [](int x, int y) {
+        return (0 <= x && x < DG_MAX_X) && (0 <= y && y < DG_MAX_Y);
+    };
+
+    auto cross_all_move = [&](int x, int y) {
+        static const int dx[4] = { 1, -1, 0, 0 };
+        static const int dy[4] = { 0, 0, 1, -1 };
+        for (int k = 0; k < 4; ++k) {
+            int nx = x + dx[k], ny = y + dy[k];
+            if (!in_bounds(nx, ny)) return false;
+            if (!env[num].isMove(coord_def(nx,ny), false)) return false;
+        }
+        return true;
+    };
+
+    random_extraction<coord_def> candidates;
+
+    for (int y = 0; y < DG_MAX_Y; ++y) {
+        for (int x = 0; x < DG_MAX_X; ++x) {
+            auto& t = env[num].dgtile[x][y];
+
+            if (!t.isFloor()) continue;
+            if (t.flag & FLAG_NO_MONSTER) continue;
+            if (!cross_all_move(x, y)) continue;
+
+            candidates.push(coord_def(x, y));
+        }
+    }
+
+	for(int i = 0; i < freq; i++) {
+   		if(candidates.GetSize() > 0) {
+			coord_def c = candidates.pop();
+			if (!cross_all_move(c.x, c.y)) continue;
+			env[num].dgtile[c.x][c.y].tile = randA(1)?DG_MUSHROOM1:DG_MUSHROOM2;
+		}
+	}
+}
+
 
 void make_lake(int num, int repeat, boolean lava)
 {
@@ -595,13 +817,14 @@ void hell_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type 
 		delete *it;
 
 	
+	vector<coord_def> used_stair_positions;
 	for(int i=0;i<6;i++)
 	{
-		while(1)
-		{
-			int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1);
-			if(env[num].dgtile[x][y].isFloor()  && !(env[num].dgtile[x][y].flag & FLAG_NO_STAIR) )
-			{
+		coord_def stair_pos;
+		if(!find_stair_position(num, used_stair_positions, stair_pos))
+			break;
+		used_stair_positions.push_back(stair_pos);
+		int x = stair_pos.x, y = stair_pos.y;
 				if(i>2)
 				{
 					env[num].stair_up[i-3].x = x;
@@ -616,9 +839,6 @@ void hell_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type 
 						env[num].dgtile[x][y].tile = DG_DOWN_STAIR;	
 					
 				}
-				break;
-			}
-		}
 	}
 
 
@@ -779,13 +999,14 @@ void common_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 		delete *it;
 
 	
+	vector<coord_def> used_stair_positions;
 	for(int i=0;i<6;i++)
 	{
-		while(1)
-		{
-			int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1);
-			if(env[num].dgtile[x][y].isFloor()  && !(env[num].dgtile[x][y].flag & FLAG_NO_STAIR) )
-			{
+		coord_def stair_pos;
+		if(!find_stair_position(num, used_stair_positions, stair_pos))
+			break;
+		used_stair_positions.push_back(stair_pos);
+		int x = stair_pos.x, y = stair_pos.y;
 				if(i>2)
 				{
 					if(i==3 || !environment::isFirstFloor(num) || env[num].isPandemonium())
@@ -814,9 +1035,6 @@ void common_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 					}
 					
 				}
-				break;
-			}
-		}
 	}
 
 }
@@ -988,13 +1206,14 @@ void dream_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type
 
 	
 	
+	vector<coord_def> used_stair_positions;
 	for(int i=0;i<6;i++)
 	{
-		while(1)
-		{
-			int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1);
-			if(env[num].dgtile[x][y].isFloor()  && !(env[num].dgtile[x][y].flag & FLAG_NO_STAIR) )
-			{
+		coord_def stair_pos;
+		if(!find_stair_position(num, used_stair_positions, stair_pos))
+			break;
+		used_stair_positions.push_back(stair_pos);
+		int x = stair_pos.x, y = stair_pos.y;
 				if(i>2)
 				{
 					env[num].stair_up[i-3].x = x;
@@ -1011,9 +1230,6 @@ void dream_map_make_last(int num, dungeon_tile_type floor_tex, dungeon_tile_type
 					//if(!environment::isLastFloor(num))
 					//	env[num].dgtile[x][y].tile = DG_DOWN_STAIR;	
 				}
-				break;
-			}
-		}
 	}
 }
 
@@ -1092,6 +1308,11 @@ void map_algorithms01(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 			coord_def temp_coord(randA(DG_MAX_X-(r_size_x+2)*2-1-m_size*2)+r_size_x+2+m_size,randA(DG_MAX_Y-(r_size_y+2)*2-1-m_size*2)+r_size_y+2+m_size);		
 			
 			map_dummy* temp = new map_dummy(num, temp_coord, true,r_size_x,r_size_y, pattern_,floor_tex,wall_tex); //랜덤한 맵더미
+
+			if(!temp->isVaild(m_size + 2)) {
+				delete temp;
+				continue;
+			}
 
 			vector<map_dummy*>::iterator it;
 			for (it=vec_special_map.begin();it!=vec_special_map.end();it++) 
@@ -1195,6 +1416,10 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 			map_dummy* temp = new map_dummy(num,temp_coord, false,r_size_x,r_size_y,pattern_,floor_tex,wall_tex); //랜덤한 맵더미
 			
 			
+			if(!temp->isVaild(2)) {
+				delete temp;
+				continue;
+			}
 
 
 			vector<map_dummy*>::iterator it;
@@ -1251,6 +1476,12 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 
 			coord_def temp_coord(next_x,next_y);		
 			map_dummy* temp = new map_dummy(num,temp_coord, false,r_size_x,r_size_y,0,floor_tex,wall_tex); //랜덤한 맵더미
+
+
+			if(!temp->isVaild(2)) {
+				delete temp;
+				continue;
+			}
 
 			if(step)
 			{
@@ -1344,6 +1575,147 @@ void map_algorithms02(int num, int piece, int weight, dungeon_tile_type floor_te
 
 
 
+static bool is_connectivity_floor(dungeon_tile& tile)
+{
+	return tile.isMove(false, false, false) || tile.isDoor();
+}
+
+static void repair_disconnected_map(int num)
+{
+	environment& map = env[num];
+	coord_def anchor(-1, -1);
+	for(int i = 0; i < 3 && anchor.x < 0; i++)
+	{
+		coord_def stairs[2] = { map.stair_up[i], map.stair_down[i] };
+		for(const coord_def& stair : stairs)
+		{
+			if(stair.x >= 0 && stair.x < DG_MAX_X && stair.y >= 0 && stair.y < DG_MAX_Y &&
+				map.dgtile[stair.x][stair.y].isStair())
+			{
+				anchor = stair;
+				break;
+			}
+		}
+	}
+	if(anchor.x < 0)
+		return;
+
+	vector<coord_def> required_targets;
+	for(int x = 0; x < DG_MAX_X; x++)
+		for(int y = 0; y < DG_MAX_Y; y++)
+			if(map.dgtile[x][y].isStair())
+				required_targets.push_back(coord_def(x, y));
+	for(const item& item_info : map.item_list)
+		if(item_info.type == ITM_ORB &&
+			item_info.position.x >= 0 && item_info.position.x < DG_MAX_X &&
+			item_info.position.y >= 0 && item_info.position.y < DG_MAX_Y)
+			required_targets.push_back(item_info.position);
+
+	const int dx[8] = { 1, -1, 0, 0, 1, 1, -1, -1 };
+	const int dy[8] = { 0, 0, 1, -1, 1, -1, 1, -1 };
+	const int infinity = DG_MAX_X * DG_MAX_Y + 1;
+
+	for(int repair_count = 0; repair_count < DG_MAX_X * DG_MAX_Y; repair_count++)
+	{
+		bool reachable[DG_MAX_X][DG_MAX_Y] = {};
+		vector<coord_def> pending(1, anchor);
+		reachable[anchor.x][anchor.y] = true;
+		while(!pending.empty())
+		{
+			coord_def current = pending.back();
+			pending.pop_back();
+			for(int direction = 0; direction < 8; direction++)
+			{
+				int x = current.x + dx[direction];
+				int y = current.y + dy[direction];
+				if(x < 0 || x >= DG_MAX_X || y < 0 || y >= DG_MAX_Y ||
+					reachable[x][y] || !is_connectivity_floor(map.dgtile[x][y]))
+					continue;
+				reachable[x][y] = true;
+				pending.push_back(coord_def(x, y));
+			}
+		}
+
+		coord_def required_target(-1, -1);
+		for(const coord_def& target : required_targets)
+			if(!reachable[target.x][target.y])
+			{
+				required_target = target;
+				break;
+			}
+		if(required_target.x < 0)
+			return;
+
+		int distance[DG_MAX_X][DG_MAX_Y];
+		coord_def previous[DG_MAX_X][DG_MAX_Y];
+		deque<coord_def> search;
+		for(int x = 0; x < DG_MAX_X; x++)
+		{
+			for(int y = 0; y < DG_MAX_Y; y++)
+			{
+				distance[x][y] = infinity;
+				previous[x][y] = coord_def(-1, -1);
+				if(reachable[x][y])
+				{
+					distance[x][y] = 0;
+					search.push_back(coord_def(x, y));
+				}
+			}
+		}
+
+		coord_def target(-1, -1);
+		while(!search.empty())
+		{
+			coord_def current = search.front();
+			search.pop_front();
+			if(current == required_target)
+			{
+				target = current;
+				break;
+			}
+			for(int direction = 0; direction < 8; direction++)
+			{
+				int x = current.x + dx[direction];
+				int y = current.y + dy[direction];
+				if(x < 0 || x >= DG_MAX_X || y < 0 || y >= DG_MAX_Y)
+					continue;
+				dungeon_tile& tile = map.dgtile[x][y];
+				bool floor = is_connectivity_floor(tile);
+				if(!floor && !tile.isBreakable())
+					continue;
+				int next_distance = distance[current.x][current.y] + (floor ? 0 : 1);
+				if(next_distance >= distance[x][y])
+					continue;
+				distance[x][y] = next_distance;
+				previous[x][y] = current;
+				if(floor)
+					search.push_front(coord_def(x, y));
+				else
+					search.push_back(coord_def(x, y));
+			}
+		}
+		if(target.x < 0)
+		{
+			return;
+		}
+
+		vector<coord_def> carved;
+		coord_def current = target;
+		while(!reachable[current.x][current.y])
+		{
+			if(!is_connectivity_floor(map.dgtile[current.x][current.y]))
+			{
+				map.dgtile[current.x][current.y].tile = map.base_floor;
+				carved.push_back(current);
+			}
+			coord_def next = previous[current.x][current.y];
+			if(next.x < 0)
+				return;
+			current = next;
+		}
+	}
+}
+
 void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
 	vector<map_dummy*> vec_map;
@@ -1379,6 +1751,12 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 
 			coord_def temp_coord(next_x,next_y);		
 			map_dummy* temp = new map_dummy(num,temp_coord, false,r_size_x,r_size_y,1,floor_tex,wall_tex); //랜덤한 맵더미
+
+
+			if(!temp->isVaild(2)) {
+				delete temp;
+				continue;
+			}
 
 			if(step)
 			{
@@ -1445,7 +1823,7 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 		if(!special_enter.empty())
 		{
 			special_ = true;
-			repeat = 9999;//특수패턴은 (거의)무한반복시킴
+			repeat = 999;//특수패턴은 (거의)무한반복시킴
 			pattern_ = special_enter.back();
 			special_enter.pop_back();
 		}
@@ -1463,6 +1841,12 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 
 			map_dummy* temp = new map_dummy(num,temp_coord, false,r_size_x,r_size_y,pattern_,floor_tex,wall_tex); //랜덤한 맵더미
 			
+
+			if(!temp->isVaild(5)) {
+				delete temp;
+				continue;
+			}
+
 			vector<map_dummy*>::iterator it;
 			for (it=vec_map.begin();it!=vec_map.end();it++) 
 			{
@@ -1509,10 +1893,11 @@ void map_algorithms03(int repeat_,int size_mn_,int size_mx_, int m_size_,int num
 	setBaseFloorWall(num, floor_tex, wall_tex);
 	
 	common_map_make_last(num, 	
-	floor_tex,wall_tex,
-	vec_map,
-	vec_special_map, 
-	false, false, false, false, 11, 0);
+		floor_tex,wall_tex,
+		vec_map,
+		vec_special_map,
+		false, false, false, false, 11, 0);
+	repair_disconnected_map(num);
 
 
 }
@@ -1550,6 +1935,12 @@ void map_algorithms04(int num, dungeon_tile_type floor_tex, dungeon_tile_type wa
 			coord_def temp_coord(randA(DG_MAX_X-(r_size_x+2)*2-1-m_size*2)+r_size_x+2+m_size,randA(DG_MAX_Y-(r_size_y+2)*2-1-m_size*2)+r_size_y+2+m_size);		
 			
 			map_dummy* temp = new map_dummy(num, temp_coord, true,r_size_x,r_size_y, pattern_,floor_tex,wall_tex); //랜덤한 맵더미
+
+
+			if(!temp->isVaild(2)) {
+				delete temp;
+				continue;
+			}
 
 			vector<map_dummy*>::iterator it;
 			for (it=vec_special_map.begin();it!=vec_special_map.end();it++) 
@@ -1656,8 +2047,11 @@ void map_algorithms_library(int num, dungeon_tile_type floor_tex, dungeon_tile_t
 	}	
 	if(!is_exist_named(MON_PACHU)){
 		monster* mon_ = env[num].AddMonster(MON_PACHU,0,coord_def(DG_MAX_X/2,DG_MAX_Y/2));
-		mon_->SetStrong(5);
-		set_exist_named(MON_PACHU);
+		if(mon_)
+		{
+			mon_->SetStrong(5);
+			set_exist_named(MON_PACHU);
+		}
 	}
 	
 
@@ -1675,37 +2069,7 @@ void map_algorithms_library(int num, dungeon_tile_type floor_tex, dungeon_tile_t
 
 void map_algorithms_under(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
 {
-	for(int x = 0; x<DG_MAX_X; x++)
-	{	
-		for(int y=0; y<DG_MAX_Y; y++)
-		{
-			if((x-DG_MAX_X/2)*(x-DG_MAX_X/2) + (y-DG_MAX_Y/2)*(y-DG_MAX_Y/2) < 12*12)
-			{
-				env[num].dgtile[x][y].tile = floor_tex;
-			}
-			else 
-				env[num].dgtile[x][y].tile = wall_tex;
-		}
-	}
-
-
-	env[num].stair_up[0].x = DG_MAX_X/2-1;
-	env[num].stair_up[0].y = DG_MAX_Y/2+11;
-	env[num].dgtile[DG_MAX_X/2-1][DG_MAX_Y/2+11].tile = DG_RETURN_STAIR;
-
-	env[num].MakeEvent(21,coord_def(DG_MAX_X/2-1,DG_MAX_Y/2+11),EVT_SIGHT);
-
-	
-	item_infor t;
-	makeitem(ITM_GOAL, 0, &t, RUNE_SCARLET_UNDER);	
-	env[num].MakeItem(coord_def(DG_MAX_X/2,DG_MAX_Y/2-6),t);
-
-	if(!is_exist_named(MON_FLAN)){
-		monster* mon_ = env[num].AddMonster(MON_FLAN,0,coord_def(DG_MAX_X/2,DG_MAX_Y/2));
-		mon_->SetStrong(5);
-		set_exist_named(MON_FLAN);
-	}
-	setBaseFloorWall(num, floor_tex, wall_tex);
+	map_algorithms_scarlet_under(num,floor_tex,wall_tex,5,16,3,1800,4);
 }
 
 void map_algorithms_temple(int num, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex)
@@ -1785,8 +2149,10 @@ void map_algorithms_okina(int num, dungeon_tile_type floor_tex, dungeon_tile_typ
 
 
 
-	env[num].AddMonster(MON_MAI2, M_FLAG_ALLY, coord_def(DG_MAX_X / 2+4, DG_MAX_Y / 2))->SetInvincibility(-1, false);
-	env[num].AddMonster(MON_SATONO, M_FLAG_ALLY, coord_def(DG_MAX_X / 2 - 4, DG_MAX_Y / 2))->SetInvincibility(-1, false);
+	if(monster* mai_ = env[num].AddMonster(MON_MAI2, M_FLAG_ALLY, coord_def(DG_MAX_X / 2+4, DG_MAX_Y / 2)))
+		mai_->SetInvincibility(-1, false);
+	if(monster* satono_ = env[num].AddMonster(MON_SATONO, M_FLAG_ALLY, coord_def(DG_MAX_X / 2 - 4, DG_MAX_Y / 2)))
+		satono_->SetInvincibility(-1, false);
 	setBaseFloorWall(num, floor_tex, wall_tex);
 }
 

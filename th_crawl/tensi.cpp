@@ -258,7 +258,7 @@ void tensi_summon(int good_)
 	else if(you.level<=10)
 	{
 		summon_vector.push_back(MON_SNAKE);
-		summon_vector.push_back(MON_CRANE);
+		summon_vector.push_back(MON_SHOEBILL);
 		summon_vector.push_back(MON_BAKEKASA);
 		summon_vector.push_back(MON_FROG);
 	}
@@ -359,19 +359,22 @@ void tensi_tele(bool good_)
 {
 	int max_monster_ = good_?99:0;
 	coord_def final(0,0);
+	vector<coord_def> candidates;
+	for(int x = 0; x < DG_MAX_X; x++)
+	{
+		for(int y = 0; y < DG_MAX_Y; y++)
+		{
+			if(env[current_level].isMove(x,y) && !env[current_level].isMonsterPos(x,y))
+				candidates.push_back(coord_def(x,y));
+		}
+	}
+	if(candidates.empty())
+		return;
+
 	for(int i = 0; i < 20; i++)
 	{
 		int monster_ = 0;
-		coord_def c_;
-		while(1)
-		{
-			int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
-			if(env[current_level].isMove(x_,y_) && !env[current_level].isMonsterPos(x_,y_))
-			{
-				c_ = coord_def(x_,y_);
-				break;
-			}
-		}
+		coord_def c_ = candidates[randA(static_cast<int>(candidates.size())-1)];
 		
 
 		vector<monster>::iterator it;

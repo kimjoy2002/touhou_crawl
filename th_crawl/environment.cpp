@@ -16,12 +16,14 @@
 #include "rect.h"
 #include "event.h"
 #include "mon_infor.h"
+#include "mapsearching.h"
 #include "key.h"
 #include "smoke.h"
 #include "floor.h"
 #include "note.h"
 #include "beam.h"
 #include "replay.h"
+#include "unique_spellcard.h"
 #include "forbid.h"
 #include "soundmanager.h"
 #include "option_manager.h"
@@ -36,6 +38,8 @@ extern HANDLE mutx;
 
 extern optionManager option_mg;
 extern POINT MousePoint;
+
+static void repair_goliath_groups(environment& map);
 
 
 
@@ -158,21 +162,68 @@ void environment::SaveDatas(FILE *fp)
 
 void environment::LoadDatas(FILE *fp)
 {
+	stair_vector.clear();
 	mon_vector.clear();
 	shadow_list.clear();
 	afterimage_list.clear();
 	item_list.clear();
+	smoke_list.clear();
 	effect_list.clear();
+	floor_list.clear();
+	event_list.clear();
+	speciel_map_name.clear();
+	forbid_list.clear();
 	LoadData<int>(fp, floor);
 	LoadData<bool>(fp, make);
 	LoadData<int>(fp, all_monster_id);
 	LoadData<int>(fp, popular);
 	LoadData<dungeon_tile_type>(fp, base_floor);
 	LoadData<dungeon_tile_type>(fp, base_wall);
-	LoadData<dungeon_tile>(fp, **dgtile);
-	LoadData<coord_def>(fp, *stair_up);
-	LoadData<coord_def>(fp, *stair_down);
-	int size_;
+	LoadData(fp, dgtile);
+	const bool load_ver_1202_or_older = isPrevVersion(loading_version_string, "ver1.202");
+	const bool load_ver_1205_or_older = isPrevVersion(loading_version_string, "ver1.205");
+	auto remapDungeonTile = [load_ver_1202_or_older, load_ver_1205_or_older](dungeon_tile_type& tile)
+	{
+		int value = static_cast<int>(tile);
+		if(load_ver_1202_or_older) {
+			//신규 서브던전 및 버섯 타일 추가 이전의 enum 값을 현재 위치로 이동
+			if(value >= 95) { //당시 DG_SEA
+				value += 32;
+			}
+			else if(value >= 70) { //당시 DG_NONE_MOVE
+				value += 30;
+			}
+			else if(value >= 44) { //당시 DG_RETURN_STAIR
+				value += 21;
+			}
+		}
+		if(load_ver_1205_or_older) {
+			//ver1.206에서 바닥 범위 끝과 벽 범위 끝에 인형의 집 타일이 추가됨
+			if(value >= 14 && value < 25) { //당시 DG_OIL ~ DG_FLOOR_OBJECT 이전
+				value += 1;
+			}
+			else if(value >= 115) { //당시 DG_METAL_WALL 이후
+				value += 1;
+			}
+		}
+		tile = static_cast<dungeon_tile_type>(value);
+	};
+
+	remapDungeonTile(base_floor);
+	remapDungeonTile(base_wall);
+	for (int x = 0; x < DG_MAX_X; x++)
+	{
+		for (int y = 0; y < DG_MAX_Y; y++)
+		{
+			remapDungeonTile(dgtile[x][y].tile);
+		}
+	}
+	for (int x = 0; x < DG_MAX_X; x++)
+		for (int y = 0; y < DG_MAX_Y; y++)
+			calculateAutoTile(coord_def(x,y),AUTOTILE_CARPET);
+	LoadData(fp, stair_up);
+	LoadData(fp, stair_down);
+	int size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i=0;i<size_;i++)
 	{	
@@ -180,6 +231,7 @@ void environment::LoadDatas(FILE *fp)
 		temp.LoadDatas(fp);
 		stair_vector.push_back(temp);
 	}
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i=0;i<size_;i++)
 	{	
@@ -187,6 +239,7 @@ void environment::LoadDatas(FILE *fp)
 		temp.LoadDatas(fp);
 		mon_vector.push_back(temp);
 	}
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i=0;i<size_;i++)
 	{	
@@ -195,6 +248,7 @@ void environment::LoadDatas(FILE *fp)
 		shadow_list.push_back(temp);
 	}
 	if(!isPrevVersion(loading_version_string, "ver1.102")) {
+		size_ = 0;
 		LoadData<int>(fp, size_);
 		for(int i=0;i<size_;i++)
 		{	
@@ -203,6 +257,7 @@ void environment::LoadDatas(FILE *fp)
 			afterimage_list.push_back(temp);
 		}
 	}
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i=0;i<size_;i++)
 	{	
@@ -210,6 +265,7 @@ void environment::LoadDatas(FILE *fp)
 		temp.LoadDatas(fp);
 		item_list.push_back(temp);
 	}
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i=0;i<size_;i++)
 	{	
@@ -217,6 +273,22 @@ void environment::LoadDatas(FILE *fp)
 		temp.LoadDatas(fp);
 		smoke_list.push_back(temp);
 	}
+	for(int x=0;x<DG_MAX_X;x++)
+	{
+		for(int y=0;y<DG_MAX_Y;y++)
+			dgtile[x][y].flag &= ~(FLAG_SMOKE | FLAG_SIGHT_SMOKE | FLAG_DANGER);
+	}
+	for(list<smoke>::iterator it=smoke_list.begin();it!=smoke_list.end();it++)
+	{
+		if(it->position.x < 0 || it->position.x >= DG_MAX_X || it->position.y < 0 || it->position.y >= DG_MAX_Y)
+			continue;
+		dgtile[it->position.x][it->position.y].flag |= FLAG_SMOKE;
+		if(it->sight_inter())
+			dgtile[it->position.x][it->position.y].flag |= FLAG_SIGHT_SMOKE;
+		if(it->type == SMT_DARK)
+			dgtile[it->position.x][it->position.y].flag |= FLAG_DANGER;
+	}
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i=0;i<size_;i++)
 	{	
@@ -224,6 +296,7 @@ void environment::LoadDatas(FILE *fp)
 		temp.LoadDatas(fp);
 		floor_list.push_back(temp);
 	}
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i=0;i<size_;i++)
 	{	
@@ -231,14 +304,17 @@ void environment::LoadDatas(FILE *fp)
 		temp.LoadDatas(fp);
 		event_list.push_back(temp);
 	}
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for (int i = 0; i<size_; i++)
 	{
-		char temp[256];
-		LoadData<char>(fp, *temp);
+		char temp[256] = {};
+		LoadData(fp, temp);
+		temp[sizeof(temp)-1] = '\0';
 		string name = temp;
 		speciel_map_name.push_back(temp);
 	}
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for (int i = 0; i<size_; i++)
 	{
@@ -255,6 +331,11 @@ void environment::LoadDatas(FILE *fp)
 			(*it).target = GetMapIDtoUnit((*it).temp_target_map_id);
 		}
 	}
+	repair_goliath_groups(*this);
+	if(isPrevVersion(loading_version_string,"ver1.208"))
+		for(monster& mon_ : mon_vector)
+			if(mon_.isLive())
+				SetupUniqueSpellcard(&mon_,floor);
 
 
 }
@@ -272,8 +353,11 @@ bool environment::MakeMap(bool return_)
 		allCalculateAutoTile();
 		if(isNormalGame())
 		{
-			create_mon(floor, GetLevelMonsterNum(floor,false));
-			create_item(floor,  GetLevelMonsterNum(floor,true));
+			if(floor != SCARLET_UNDER_LEVEL)
+			{
+				create_mon(floor, GetLevelMonsterNum(floor,false));
+				create_item(floor,  GetLevelMonsterNum(floor,true));
+			}
 			if(floor == 0) {
 				create_id_to_item(33, 0);
 			}
@@ -307,6 +391,10 @@ bool environment::MakeMap(bool return_)
 		case SCARLET_LEVEL+MAX_SCARLET_LEVEL:
 		case SCARLET_LIBRARY_LEVEL:
 		case SCARLET_UNDER_LEVEL:
+		case FORESTOFMAGIC_LEVEL:
+		case FORESTOFMAGIC_LEVEL + MAX_FORESTOFMAGIC_LEVEL:
+		case DOLLSHOUSE_LEVEL:
+		case DOLLSHOUSE_LEVEL + MAX_DOLLSHOUSE_LEVEL:
 		case BAMBOO_LEVEL:
 		case EIENTEI_LEVEL:
 		case SUBTERRANEAN_LEVEL:
@@ -336,7 +424,7 @@ bool environment::MakeMap(bool return_)
 	}
 	return false;
 }
-void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
+void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_, bool preserve_instance_map)
 {
 	if (floor == current_level) {
 	//같은 층끼리 움직이는거라면 몬스터를 끌어오면 안된다.
@@ -356,7 +444,7 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 
 	int dq_n=0;
 	
-	bool first_ = MakeMap(false);
+	bool first_ = MakeMap(preserve_instance_map);
 	enterBgm(first_);
 	WaitForSingleObject(mutx, INFINITE);
 	int prev_level = current_level;
@@ -366,15 +454,19 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_)
 	ReleaseMutex(mutx);
 	if(current_level >= PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL)
 	{
-		while(1)
+		vector<coord_def> candidates;
+		for(int x = 0; x < DG_MAX_X; x++)
 		{
-			int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
-			if(env[current_level].isMove(x_,y_) && !env[current_level].isMonsterPos(x_,y_))
+			for(int y = 0; y < DG_MAX_Y; y++)
 			{
-				you.SetXYPassFloor(prev_level, current_level, x_,y_);
-				break;
+				if(env[current_level].isMove(x,y) && !env[current_level].isMonsterPos(x,y))
+					candidates.push_back(coord_def(x,y));
 			}
 		}
+		if(!candidates.empty())
+			you.SetXYPassFloor(prev_level, current_level, candidates[randA(static_cast<int>(candidates.size())-1)]);
+		else
+			you.SetXYPassFloor(prev_level, current_level, stair_up[0]);
 	}
 	else if(num_>=0 && num_ <3)
 		you.SetXYPassFloor(prev_level, current_level, (prev_level>floor && !isLastFloor(floor))?stair_down[num_]:stair_up[num_]);
@@ -465,7 +557,7 @@ bool environment::magicmapping(int x_, int y_)
 {
 	if(x_<0 || x_>=DG_MAX_X || y_<0 || y_>=DG_MAX_Y)
 		return false;
-	if(isBamboo())
+	if(isInfiniteMap())
 		return false;
 
 	env[current_level].CheckForbid(coord_def(x_,y_));
@@ -489,7 +581,13 @@ bool environment::magicmapping(int x_, int y_)
 		break;				
 	case DG_SCARLET_U_STAIR:
 		map_list.dungeon_enter[SCARLET_U].detected = true;		
-		break;				
+		break;	
+	case DG_FORESTOFMAGIC_STAIR:
+		map_list.dungeon_enter[FORESTOFMAGIC].detected = true;		
+		break;
+	case DG_DOLLSHOUSE_STAIR:
+		map_list.dungeon_enter[DOLLSHOUSE].detected = true;		
+		break;			
 	case DG_BAMBOO_STAIR:
 		map_list.dungeon_enter[BAMBOO].detected = true;		
 		break;				
@@ -560,6 +658,8 @@ stair_kind environment::getStairKind(int x_, int y_)
 	case DG_BAMBOO_STAIR:
 	case DG_EIENTEI_STAIR:
 	case DG_SUBTERRANEAN_STAIR:
+	case DG_FORESTOFMAGIC_STAIR:
+	case DG_DOLLSHOUSE_STAIR:
 	case DG_YUKKURI_STAIR:
 	case DG_DEPTH_STAIR:
 	case DG_DREAM_STAIR:
@@ -595,6 +695,7 @@ char environment::getAsciiDot(int x_, int y_)
 	case DG_PANDE_FLOOR7:
 	case DG_DREAM_FLOOR2:
 	case DG_HELL_FLOOR:
+	case DG_DOLLSHOUSE_FLOOR:
 		return '.';
 	case DG_OPEN_DOOR:
 		return '/';
@@ -658,6 +759,7 @@ char environment::getAsciiDot(int x_, int y_)
 	case DG_PANDE_WALL6:
 	case DG_PANDE_WALL7:
 	case DG_HELL_WALL:
+	case DG_DOLLSHOUSE_WALL:
 		return '#';
 	case DG_TREE:
 	case DG_SUN_FLOWER:
@@ -674,6 +776,9 @@ char environment::getAsciiDot(int x_, int y_)
 	case DG_STATUE:
 	case DG_STATUE2:
 		return '&';
+	case DG_MUSHROOM1:
+	case DG_MUSHROOM2:
+		return 'P';
 	case DG_SEA:
 	case DG_LAVA:
 		return '~';
@@ -681,6 +786,8 @@ char environment::getAsciiDot(int x_, int y_)
 		return ';';
 	case DG_SNOW:
 		return '^';
+	case DG_CARPET:
+		return '.';
 	default:
 		return ' ';
 	}
@@ -952,6 +1059,17 @@ void environment::innerDrawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int ti
 		//img_auto_wall[0].draw(pSprite, x, y, color_);
 		img_auto_snow[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_SNOW])].draw(pSprite, x, y,0.0f,scale,scale, color_);
 	}
+	else if (dgtile[tile_x][tile_y].tile == DG_CARPET) {
+		img_dungeon01[env[current_level].base_floor].draw(pSprite, x, y,0.0f,scale,scale, color_);
+		img_auto_carpet[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_CARPET])].draw(pSprite, x, y,0.0f,scale,scale, color_);
+	}
+	else if (dgtile[tile_x][tile_y].tile == DG_DOLLSHOUSE_FLOOR) {
+		img_dollshouse_floor.draw(pSprite, x, y,0.0f,scale,scale, color_);
+	}
+	else if (dgtile[tile_x][tile_y].tile == DG_DOLLSHOUSE_WALL) {
+		img_dollshouse_floor.draw(pSprite, x, y,0.0f,scale,scale, color_);
+		img_auto_dollshouse_wall[getAutoTileNum(dgtile[tile_x][tile_y].autotile_bitmap[AUTOTILE_WALL])].draw(pSprite, x, y,0.0f,scale,scale, color_);
+	}
 	else if (!dgtile[tile_x][tile_y].isNormal()) {
 		dgtile[tile_x][tile_y].draw(pSprite, x, y, scale, color_, count_);
 	}
@@ -965,27 +1083,44 @@ void environment::innerDrawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int ti
 }
 
 extern display_manager DisplayManager;
-void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, float scale, int count_, int max_mouseX, bool sight, bool onlyTile, bool draw_mouse)
+void environment::drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, float scale, int count_, int max_mouseX, bool sight, bool onlyTile, bool draw_mouse, bool spellcard_dark)
 {
+	auto tileColor = [spellcard_dark](int red_, int green_, int blue_)
+	{
+		if(spellcard_dark)
+		{
+			red_ = red_*7/10;
+			green_ = green_*7/10;
+			blue_ = blue_*7/10;
+		}
+		return D3DCOLOR_XRGB(red_,green_,blue_);
+	};
 	if (!isExplore(tile_x, tile_y))
 	{
-		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, D3DCOLOR_XRGB(160, 160, 255), sight);
+		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, tileColor(160,160,255), sight);
 	}
 	else if (dgtile[tile_x][tile_y].flag & FLAG_LIGHT)
 	{
-		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, D3DCOLOR_XRGB(255, 255, 255), sight);
+		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, tileColor(255,255,255), sight);
 		if(!onlyTile){
 			img_effect_gold.draw(pSprite, x, y, 0.0f, scale, scale, 100);
 		}
 	}
 	else if (isInSight(coord_def(tile_x, tile_y)) && sight)
 	{
-		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, D3DCOLOR_XRGB(255, 255, 255), sight);
+		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, tileColor(255,255,255), sight);
 	}
 	else
 	{
-		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, D3DCOLOR_XRGB(128, 128, 128), sight);
+		innerDrawTile(pSprite, tile_x, tile_y, x, y, scale, count_, tileColor(128,128,128), sight);
 	}
+
+	if(!onlyTile && sight && !(dgtile[tile_x][tile_y].flag & FLAG_LIGHT) &&
+		find(DisplayManager.sakuya_knife_path.begin(),DisplayManager.sakuya_knife_path.end(),coord_def(tile_x,tile_y)) != DisplayManager.sakuya_knife_path.end())
+		img_effect_gold.draw(pSprite, x, y, 0.0f, scale, scale, 45);
+	if(!onlyTile && !(dgtile[tile_x][tile_y].flag & FLAG_LIGHT) &&
+		find(DisplayManager.spell_half_path.begin(),DisplayManager.spell_half_path.end(),coord_def(tile_x,tile_y)) != DisplayManager.spell_half_path.end())
+		img_effect_gold.draw(pSprite, x, y, 0.0f, scale, scale, 45);
 
 	if (isInSight(coord_def(tile_x, tile_y)) && dgtile[tile_x][tile_y].flag & FLAG_SILENCE)
 		img_effect_slience.draw(pSprite, x, y, 0.0f, scale, scale, D3DCOLOR_ARGB(80, 0, 255, 255));
@@ -1081,33 +1216,155 @@ int environment::CloseDoor(int x_,int y_)
 	else
 		return 0;
 }
-monster* environment::AddMonster(int id_, uint64_t flag_, coord_def position_, int time_)
+static monster* add_single_monster(environment& map, int id_, uint64_t flag_, coord_def position_, int time_, const monster* reserved_ = nullptr)
 {
 	WaitForSingleObject(mutx, INFINITE);
 	vector<monster>::iterator it;
-	it = mon_vector.begin();
+	it = map.mon_vector.begin();
 	for(int i=0;i<MON_MAX_IN_FLOOR;i++,it++)
 	{
-		if(it == mon_vector.end())
+		if(it == map.mon_vector.end())
 		{
-			mon_vector.push_back(monster());
-			if(all_monster_id<1)
-				all_monster_id = 1;
+			map.mon_vector.push_back(monster());
+			if(map.all_monster_id<1)
+				map.all_monster_id = 1;
 			ReleaseMutex(mutx);
-			mon_vector.back().SetMonster(floor, all_monster_id++, id_, flag_, time_, position_);
-			return &(mon_vector.back());
+			map.mon_vector.back().SetMonster(map.floor, map.all_monster_id++, id_, flag_, time_, position_);
+			return &(map.mon_vector.back());
 		}
-		else if(!(*it).isLive())
+		else if(!(*it).isLive() && &(*it) != reserved_)
 		{
-			if(all_monster_id<1)
-				all_monster_id = 1;
+			if(map.all_monster_id<1)
+				map.all_monster_id = 1;
 			ReleaseMutex(mutx);
-			(*it).SetMonster(floor, all_monster_id++, id_, flag_, time_, position_);
+			(*it).SetMonster(map.floor, map.all_monster_id++, id_, flag_, time_, position_);
 			return &(*it);
 		}
 	}
 	ReleaseMutex(mutx);
 	return NULL;
+}
+
+static bool can_place_goliath(environment& map, const coord_def& anchor)
+{
+	static const coord_def offsets[4] = {
+		coord_def(0, 0), coord_def(1, 0), coord_def(0, 1), coord_def(1, 1)
+	};
+	for(const coord_def& offset : offsets)
+	{
+		coord_def pos = anchor + offset;
+		if(pos.x < 0 || pos.x >= DG_MAX_X || pos.y < 0 || pos.y >= DG_MAX_Y ||
+			!map.dgtile[pos.x][pos.y].isMove(false, false, false) ||
+			map.isMonsterPos(pos.x, pos.y) ||
+			(map.floor == current_level && you.position == pos))
+			return false;
+	}
+	return true;
+}
+
+monster* environment::AddMonster(int id_, uint64_t flag_, coord_def position_, int time_, const monster* reserved_)
+{
+	if(id_ != MON_GOLIATH_DOLL)
+		return add_single_monster(*this, id_, flag_, position_, time_, reserved_);
+
+	coord_def anchor(-1, -1);
+	for(int radius = 0; radius <= 4 && anchor.x < 0; radius++)
+	{
+		for(int y = position_.y - radius; y <= position_.y + radius && anchor.x < 0; y++)
+			for(int x = position_.x - radius; x <= position_.x + radius; x++)
+				if((radius == 0 || abs(x - position_.x) == radius || abs(y - position_.y) == radius) &&
+					can_place_goliath(*this, coord_def(x, y)))
+				{
+					anchor = coord_def(x, y);
+					break;
+				}
+	}
+	if(anchor.x < 0)
+		return NULL;
+
+	monster* root = add_single_monster(*this, id_, flag_, anchor, time_, reserved_);
+	if(!root)
+		return NULL;
+	int root_id = root->map_id;
+	static const coord_def offsets[4] = {
+		coord_def(0, 0), coord_def(1, 0), coord_def(0, 1), coord_def(1, 1)
+	};
+	vector<int> created_ids(1, root_id);
+	for(int part = 1; part < 4; part++)
+	{
+		monster* body = add_single_monster(*this, id_,
+			flag_ | M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_NO_STATE | M_FLAG_DECORATE,
+			anchor + offsets[part], time_, reserved_);
+		if(!body)
+		{
+			for(monster& made : mon_vector)
+				if(find(created_ids.begin(), created_ids.end(), made.map_id) != created_ids.end())
+					made.hp = 0;
+			return NULL;
+		}
+		body->parent_part_id = root_id;
+		body->special_value = part;
+		body->image = &img_mons_goliath_doll[part];
+		body->exper = 0;
+		body->item_lists.clear();
+		created_ids.push_back(body->map_id);
+	}
+	return (monster*)GetMapIDtoUnit(root_id);
+}
+
+static void repair_goliath_groups(environment& map)
+{
+	vector<int> root_ids;
+	for(monster& mon : map.mon_vector)
+		if(mon.isLive() && mon.id == MON_GOLIATH_DOLL && mon.parent_part_id == -1)
+			root_ids.push_back(mon.map_id);
+
+	static const coord_def offsets[4] = {
+		coord_def(0, 0), coord_def(1, 0), coord_def(0, 1), coord_def(1, 1)
+	};
+	for(int root_id : root_ids)
+	{
+		monster* root = (monster*)map.GetMapIDtoUnit(root_id);
+		if(!root)
+			continue;
+		root->image = &img_mons_goliath_doll[0];
+		bool exists[4] = { true, false, false, false };
+		for(monster& part : map.mon_vector)
+			if(part.isLive() && part.parent_part_id == root_id &&
+				part.special_value >= 1 && part.special_value < 4)
+				exists[part.special_value] = true;
+
+		coord_def anchor = root->position;
+		for(int part_index = 1; part_index < 4; part_index++)
+		{
+			if(exists[part_index])
+				continue;
+			coord_def pos = anchor + offsets[part_index];
+			if(pos.x < 0 || pos.x >= DG_MAX_X || pos.y < 0 || pos.y >= DG_MAX_Y ||
+				!map.dgtile[pos.x][pos.y].isMove(root->isFly(), root->isSwim(), root->flag & M_FLAG_CANT_GROUND))
+				continue;
+			unit* occupied = map.isMonsterPos(pos.x, pos.y);
+			if(occupied && (occupied->isplayer() || ((monster*)occupied)->map_id != root_id))
+				continue;
+
+			monster* body = add_single_monster(map, MON_GOLIATH_DOLL,
+				root->flag | M_FLAG_NONE_MOVE | M_FLAG_NO_ATK | M_FLAG_NO_STATE | M_FLAG_DECORATE,
+				pos, root->summon_time);
+			root = (monster*)map.GetMapIDtoUnit(root_id);
+			if(!body || !root)
+				break;
+			body->parent_part_id = root_id;
+			body->special_value = part_index;
+			body->image = &img_mons_goliath_doll[part_index];
+			body->hp = root->hp;
+			body->max_hp = root->max_hp;
+			body->exper = 0;
+			body->item_lists.clear();
+			body->state = root->state;
+			body->target = root->target;
+			body->temp_target_map_id = root->temp_target_map_id;
+		}
+	}
 }
 monster* environment::AddMonsterWithMoving(monster *mon_, int prev_floor, coord_def position_, int time_)
 {
@@ -1124,6 +1381,9 @@ monster* environment::AddMonsterWithMoving(monster *mon_, int prev_floor, coord_
 			mon_vector.back().map_id = all_monster_id++;
 			mon_vector.back().SetXYPassFloor(prev_floor, floor, position_.x, position_.y);
 			mon_vector.back().prev_sight = false;
+			mon_vector.back().target = &you;
+			mon_vector.back().temp_target_map_id = you.GetMapId();
+			mon_vector.back().target_pos = you.position;
 			ReleaseMutex(mutx);
 			return &mon_vector.back();
 		}
@@ -1133,6 +1393,9 @@ monster* environment::AddMonsterWithMoving(monster *mon_, int prev_floor, coord_
 			(*it).map_id = all_monster_id++;
 			(*it).SetXYPassFloor(prev_floor, floor, position_.x, position_.y);
 			(*it).prev_sight = false;
+			(*it).target = &you;
+			(*it).temp_target_map_id = you.GetMapId();
+			(*it).target_pos = you.position;
 			ReleaseMutex(mutx);
 			return &(*it);
 		}
@@ -1180,9 +1443,9 @@ void environment::clearLimitSummonMonster(int parent_map_id,SUMMON_KIND summon_i
     }
 }
 
-monster* environment::AddMonster_Summon(int id_, uint64_t flag_, coord_def position_, summon_info &info_, int time_ = 0)
+monster* environment::AddMonster_Summon(int id_, uint64_t flag_, coord_def position_, summon_info &info_, int time_, const monster* reserved_)
 {
-	monster* mon_ = AddMonster(id_, flag_, position_, time_);
+	monster* mon_ = AddMonster(id_, flag_, position_, time_, reserved_);
 	if(mon_)
 	{
 		mon_->sm_info = info_;
@@ -1210,7 +1473,7 @@ void environment::SummonClear(int map_id_)
 
 void environment::MakeShadow(const coord_def &c, textures *t, int original_id_, shadow_type type_, const string &name_)
 {
-	if(isBamboo())
+	if(isInfiniteMap())
 		return; //죽림에선 만들지 않는다.
 	WaitForSingleObject(mutx, INFINITE);
 	list<shadow>::iterator it;
@@ -1245,22 +1508,16 @@ void environment::MakeShadow(const coord_def &c, textures *t, int original_id_, 
 void environment::MakeAfterimage(const coord_def &c, textures *t, int start_alpha, int turn_, bool onTrun ) {
 
 	WaitForSingleObject(mutx, INFINITE);
-	list<afterimage>::iterator it;
-	for(it = afterimage_list.begin();;it++)
+	list<afterimage>::iterator it = afterimage_list.begin();
+	while(it != afterimage_list.end() &&
+		((*it).position.y < c.y || ((*it).position.y == c.y && (*it).position.x < c.x)))
+		it++;
+
+	while(it != afterimage_list.end() && (*it).position == c)
 	{
-		if(it == afterimage_list.end() || (*it).position.y > c.y || ((*it).position.y == c.y && (*it).position.x > c.x) )
-		{
-			afterimage_list.insert(it,afterimage(c,t,turn_,(float)start_alpha, onTrun));
-			ReleaseMutex(mutx);
-			return;
-		}
-		else if((*it).position.y == c.y && (*it).position.x == c.x)
-		{
-			afterimage_list.insert(it,afterimage(c,t,turn_,(float)start_alpha, onTrun));
-			ReleaseMutex(mutx);
-			return;
-		}
+		it = afterimage_list.erase(it);
 	}
+	afterimage_list.insert(it,afterimage(c,t,turn_,(float)start_alpha, onTrun));
 	ReleaseMutex(mutx);
 }
 
@@ -1282,14 +1539,16 @@ bool environment::MakeSmoke(const coord_def &c, textures *t, smoke_type type_, i
 	if(!isSmokePos(c.x,c.y) && isMove(c.x,c.y,true))
 	{
 		WaitForSingleObject(mutx, INFINITE);
-		smoke_list.push_back(smoke(c, t, type_, time_, expand_, pt_temp));
+		smoke_list.push_back(smoke(c, t, type_, time_, expand_, floor, pt_temp));
 		ReleaseMutex(mutx);
 		return true;
 	}
 	if(override_ && isSmokePos(c.x,c.y) && isMove(c.x,c.y,true)) {
 		smoke* s_ = isSmokePos2(c.x, c.y, nullptr);
+		if(!s_)
+			return false;
 		WaitForSingleObject(mutx, INFINITE);
-		s_->init(c, t, type_, time_, expand_, pt_temp);
+		s_->init(c, t, type_, time_, expand_, floor, pt_temp);
 		ReleaseMutex(mutx);
 		return true;
 	}
@@ -1332,10 +1591,12 @@ bool environment::MakeEvent(int id_, coord_def position_, event_type type_, int 
 	return true;
 }
 
-void environment::MakeEffect(const coord_def &c, textures *t, bool over_sight_)
+void environment::MakeEffect(const coord_def &c, textures *t, bool over_sight_, float alpha_)
 {
+	if(c.x < 0 || c.x >= DG_MAX_X || c.y < 0 || c.y >= DG_MAX_Y)
+		return;
 	WaitForSingleObject(mutx, INFINITE);
-	effect_list.push_back(effect(c,t,over_sight_));
+	effect_list.push_back(effect(c,t,over_sight_, alpha_));
 	ReleaseMutex(mutx);
 }
 void environment::ClearEffect()
@@ -1349,7 +1610,7 @@ void environment::ClearWithoutLaserEffect()
 	WaitForSingleObject(mutx, INFINITE);
 	for(list<effect>::iterator it = effect_list.begin();it !=effect_list.end();) {
 		list<effect>::iterator temp = it++;
-		if(!(temp->position.x == you.position.x && temp->position.y < you.position.x)) {
+		if(!(temp->position.x == you.position.x && temp->position.y < you.position.y)) {
 			effect_list.erase(temp);
 		}
 	}
@@ -1514,6 +1775,14 @@ void environment::enterBgm(boolean first_)
 		StopCurrentBGM("scarlet");
 		PlayBGM("scarlet");
 		break;
+	case FORESTOFMAGIC_LEVEL:
+		StopCurrentBGM("forestofmagic");
+		PlayBGM("forestofmagic");
+		break;
+	case DOLLSHOUSE_LEVEL:
+		StopCurrentBGM("forestofmagic");
+		PlayBGM("forestofmagic");
+		break;
 	case BAMBOO_LEVEL:
 		StopCurrentBGM("bamboo");
 		PlayBGM("bamboo");
@@ -1570,6 +1839,10 @@ void environment::playBgm() {
 		PlayBGM("scarlet");
 	else if (floor >= SCARLET_UNDER_LEVEL && floor <= SCARLET_UNDER_LEVEL + MAX_SCARLET_UNDER_LEVEL)
 		PlayBGM("scarlet");
+	else if (floor >= FORESTOFMAGIC_LEVEL && floor <= FORESTOFMAGIC_LEVEL + MAX_FORESTOFMAGIC_LEVEL)
+		PlayBGM("forestofmagic");
+	else if (floor >= DOLLSHOUSE_LEVEL && floor <= DOLLSHOUSE_LEVEL + MAX_DOLLSHOUSE_LEVEL)
+		PlayBGM("forestofmagic");
 	else if (floor >= BAMBOO_LEVEL && floor <= BAMBOO_LEVEL + MAX_BAMBOO_LEVEL)
 		PlayBGM("bamboo");
 	else if (floor >= EIENTEI_LEVEL && floor <= EIENTEI_LEVEL + MAX_EIENTEI_LEVEL)
@@ -1685,6 +1958,45 @@ item* environment::AddItem(const coord_def &c, item *t, int num_)
 	}
 	ReleaseMutex(mutx);
 	return NULL;
+}
+
+item* environment::MoveItem(const coord_def& from, const coord_def& to)
+{
+    // 같은 칸이면 굳이 이동할 필요 없음. 해당 칸의 첫 아이템 포인터만 반환
+    if (from == to) {
+        WaitForSingleObject(mutx, INFINITE);
+        for (auto it = item_list.begin(); it != item_list.end(); ++it) {
+            const auto& p = it->position;
+            if (p.y > from.y || (p.y == from.y && p.x > from.x)) break;
+            if (p.y == from.y && p.x == from.x) {
+                item* ret = &(*it);
+                ReleaseMutex(mutx);
+                return ret;
+            }
+        }
+        ReleaseMutex(mutx);
+        return nullptr;
+    }
+
+    WaitForSingleObject(mutx, INFINITE);
+
+    auto it = item_list.begin();
+    for (; it != item_list.end(); ++it) {
+        const auto& p = it->position;
+        if (p.y > from.y || (p.y == from.y && p.x > from.x)) break; 
+        if (p.y == from.y && p.x == from.x) break;
+    }
+    if (it == item_list.end() || it->position != from) {
+        ReleaseMutex(mutx);
+        return nullptr;
+    }
+
+    item moving = *it;
+    moving.position = to;
+    item_list.erase(it);
+
+    ReleaseMutex(mutx);
+    return AddItem(to, &moving, 0);
 }
 
 void environment::AddSpecialMapInfo(string string_)
@@ -1860,7 +2172,9 @@ bool environment::ActionEvent(int delay_)
 	for(it = event_list.begin();it != event_list.end() ;)
 	{
 		list<events>::iterator temp = it++;
-		if(!DisableMove(temp->position)) {
+		if(temp->id == EVL_SCARLET_UNDER_FRONTIER)
+			continue;
+		if(temp->id == EVL_SCARLET_UNDER || !DisableMove(temp->position)) {
 			if(!temp->action(delay_))
 			{
 				event_list.erase(temp);
@@ -1881,14 +2195,15 @@ bool environment::ActionSmokeEffect()
 			if(isSmokePos((*it).position.x,(*it).position.y))
 			{
 				smoke* temp = isSmokePos2((*it).position.x,(*it).position.y);
-				temp->effectSmoke(&(*it));
+				if(temp)
+					temp->effectSmoke(&(*it));
 			}
 		}
 	}
 	if(isSmokePos(you.position.x,you.position.y))
 	{
 		smoke* temp = isSmokePos2(you.position.x,you.position.y);
-		if(temp->effectSmoke(&you))
+		if(temp && temp->effectSmoke(&you))
 			return true;
 	}
 	return false;
@@ -1947,6 +2262,10 @@ bool environment::MakeSilence(coord_def center_, int length_, bool on_)
 	{
 		for(int j=-length_/2;j<=length_/2;j++)
 		{
+			int x_ = center_.x+i;
+			int y_ = center_.y+j;
+			if(x_ < 0 || x_ >= DG_MAX_X || y_ < 0 || y_ >= DG_MAX_Y)
+				continue;
 			if(i*i+j*j<=length_*length_/4)
 			{
 				if(on_)
@@ -1970,6 +2289,10 @@ bool environment::MakeViolet(coord_def center_, int length_, bool on_)
 	{
 		for(int j=-length_/2;j<=length_/2;j++)
 		{
+			int x_ = center_.x+i;
+			int y_ = center_.y+j;
+			if(x_ < 0 || x_ >= DG_MAX_X || y_ < 0 || y_ >= DG_MAX_Y)
+				continue;
 			if(i*i+j*j<=length_*length_/4)
 			{
 				if(on_)
@@ -1994,6 +2317,10 @@ bool environment::MakeSantuary(coord_def center_, int length_, bool on_)
 	{
 		for (int j = -length_ / 2; j <= length_ / 2; j++)
 		{
+			int x_ = center_.x+i;
+			int y_ = center_.y+j;
+			if(x_ < 0 || x_ >= DG_MAX_X || y_ < 0 || y_ >= DG_MAX_Y)
+				continue;
 			if (i*i + j*j <= length_*length_ / 4)
 			{
 				if (on_)
@@ -2019,6 +2346,10 @@ bool environment::MakeHalo(coord_def center_, int length_, bool on_)
 	{
 		for(int j=-length_/2;j<=length_/2;j++)
 		{
+			int x_ = center_.x+i;
+			int y_ = center_.y+j;
+			if(x_ < 0 || x_ >= DG_MAX_X || y_ < 0 || y_ >= DG_MAX_Y)
+				continue;
 			if(i*i+j*j<=length_*length_/4)
 			{
 				if(on_)
@@ -2043,6 +2374,10 @@ bool environment::MakeRoyalflare(coord_def center_, int length_, bool on_)
 	{
 		for(int j=-length_/2;j<=length_/2;j++)
 		{
+			int x_ = center_.x+i;
+			int y_ = center_.y+j;
+			if(x_ < 0 || x_ >= DG_MAX_X || y_ < 0 || y_ >= DG_MAX_Y)
+				continue;
 			if(i*i+j*j<(length_/2+1)*(length_/2+1))
 			{
 				if(on_)
@@ -2275,7 +2610,7 @@ bool environment::PostoCheckSight(coord_def center_, coord_def target_, int leng
 }
 bool environment::MakeMapping(int percent_)
 {
-	if(isBamboo())
+	if(isInfiniteMap())
 		return false;
 
 	for(int i = 0;i < DG_MAX_X;i++)
@@ -2313,7 +2648,7 @@ bool environment::MakeMapping(int percent_)
 bool environment::MakeMapping(coord_def center_, int length_, bool passed_, int percent_)
 {
 	
-	if(isBamboo())
+	if(isInfiniteMap())
 		return false;
 
 	set<coord_def> cd_set;
@@ -2419,10 +2754,23 @@ unit* environment::isMonsterPos(int x_,int y_, const unit* excep_, int* map_id_)
 	it = mon_vector.begin();
 	for(int i=0;i<MON_MAX_IN_FLOOR && it != mon_vector.end() ;i++,it++)
 	{
-		if((*it).isLive() && (*it).position.x == x_ && (*it).position.y == y_ && &(*it) != excep_)
+		if((*it).isLive() && !IsUniqueSpellcardHidden(&(*it)) &&
+			(*it).position.x == x_ && (*it).position.y == y_ && &(*it) != excep_)
 		{
+			if(it->id == MON_GOLIATH_DOLL && it->parent_part_id != -1)
+			{
+				for(monster& root : mon_vector)
+					if(root.isLive() && root.map_id == it->parent_part_id)
+					{
+						if(&root == excep_)
+							return NULL;
+						if(map_id_)
+							*map_id_ = root.map_id;
+						return &root;
+					}
+			}
 			if(map_id_)
-				(*map_id_) = (*it).map_id;
+				*map_id_ = it->map_id;
 			return &(*it);
 		}
 	}
@@ -2431,7 +2779,7 @@ unit* environment::isMonsterPos(int x_,int y_, const unit* excep_, int* map_id_)
 shadow* environment::isShadowPos(int x_, int y_)
 {
 	list<shadow>::iterator it;
-	for (it = shadow_list.begin(); it != shadow_list.end();)
+	for (it = shadow_list.begin(); it != shadow_list.end();it++)
 	{
 		if (it->position.x == x_ && it->position.y == y_) {
 
@@ -2529,9 +2877,9 @@ int environment::insight_mon(monster_enemy_type type_) //타입은 동맹,적등
 	}
 	return num_;
 }
-monster* environment::close_mon(int x_,int y_, monster_enemy_type type_)
+monster* environment::close_mon(int x_,int y_, monster_enemy_type type_, int max_len_)
 {
-	int dis_=999;
+	int dis_=max_len_;
 	monster* return_=NULL;
 	vector<monster>::iterator it;
 	it = mon_vector.begin();
@@ -2540,7 +2888,7 @@ monster* environment::close_mon(int x_,int y_, monster_enemy_type type_)
 		if((*it).isLive() && (*it).isYourShight())
 		{
 			int dis2_=max(abs((*it).position.x-x_),abs((*it).position.y-y_));
-			if(type_ == MET_ENEMY && ((*it).flag & M_FLAG_UNHARM || (*it).isUserAlly()))
+			if(type_ == MET_ENEMY && ((*it).flag & M_FLAG_UNHARM || (*it).flag & M_FLAG_DECORATE || (*it).isCompleteNeutral()  || (*it).isUserAlly()))
 				continue;
 			if(dis_>dis2_){
 				dis_= dis2_;
@@ -2685,6 +3033,44 @@ list<item>::iterator environment::GetPositiontoitemend(coord_def position_)
 }
 
 
+static void SaveWikiSearchHistory(FILE *fp)
+{
+	const char marker[4] = {'W', 'I', 'K', '1'};
+	fwrite(marker, 1, sizeof(marker), fp);
+	int start = max(0, (int)you.wiki_search_history.size() - players::WIKI_SEARCH_HISTORY_MAX);
+	int count = (int)you.wiki_search_history.size() - start;
+	fwrite(&count, sizeof(count), 1, fp);
+	for(int i=start;i<(int)you.wiki_search_history.size();i++) {
+		const string& query = you.wiki_search_history[i];
+		int length = min(players::WIKI_SEARCH_QUERY_MAX, (int)query.size());
+		fwrite(&length, sizeof(length), 1, fp);
+		fwrite(query.data(), 1, length, fp);
+	}
+}
+
+static void LoadWikiSearchHistory(FILE *fp)
+{
+	you.wiki_search_history.clear();
+	char marker[4];
+	if(fread(marker, 1, sizeof(marker), fp) != sizeof(marker) ||
+		marker[0] != 'W' || marker[1] != 'I' || marker[2] != 'K' || marker[3] != '1')
+		return;
+	int count = 0;
+	if(fread(&count, sizeof(count), 1, fp) != 1 || count < 0 || count > players::WIKI_SEARCH_HISTORY_MAX)
+		return;
+	vector<string> history;
+	for(int i=0;i<count;i++) {
+		int length = 0;
+		if(fread(&length, sizeof(length), 1, fp) != 1 || length < 0 || length > players::WIKI_SEARCH_QUERY_MAX)
+			return;
+		string query(length, '\0');
+		if(length > 0 && fread(&query[0], 1, length, fp) != (size_t)length)
+			return;
+		history.push_back(query);
+	}
+	you.wiki_search_history = history;
+}
+
 void SaveFile(bool test_)
 { 
 	if(ReplayClass.ReplayMode())
@@ -2728,6 +3114,7 @@ void SaveFile(bool test_)
 
 	you.SaveDatas(fp);
 
+	SaveData<int>(fp, MAXLEVEL);
 	for(int i = 0; i < MAXLEVEL; i++)
 	{
 		env[i].SaveDatas(fp);
@@ -2738,11 +3125,12 @@ void SaveFile(bool test_)
 	{
 		SaveData<unique_infor>(fp, (*it));
 	}
-	SaveData<map_infor>(fp,map_list);
+	map_list.SaveDatas(fp);
 	SaveData<wiz_infor>(fp,wiz_list);
 	save_note.SaveDatas(fp);
 
 	ReplayClass.SaveDatas(fp);
+	SaveWikiSearchHistory(fp);
 
 
 
@@ -2752,35 +3140,76 @@ void SaveFile(bool test_)
 }
 
 
-void LoadFile()
+bool LoadFile()
 {
-	WaitForSingleObject(mutx, INFINITE);
-	FILE *fp;
+	DWORD wait_result = WaitForSingleObject(mutx, INFINITE);
+	if(wait_result != WAIT_OBJECT_0 && wait_result != WAIT_ABANDONED)
+		return false;
+	struct mutex_release_guard
+	{
+		HANDLE mutex;
+		~mutex_release_guard() { ReleaseMutex(mutex); }
+	} mutex_guard{mutx};
+
+	FILE *fp = NULL;
 
 	std::wstring wfilename = save_file_w[option_mg.getSaveSlot()-1];
     if (_wfopen_s(&fp, wfilename.c_str(), L"rb") != 0 || !fp) {
-        return;
+		return false;
     }
+	struct file_close_guard
+	{
+		FILE *file;
+		~file_close_guard() { if(file) fclose(file); }
+	} file_guard{fp};
 
-	int magic_number;
-	LoadData<int>(fp, magic_number); //version 1.11부터 매직넘버로 시작한다
+	int magic_number = 0;
+	if(!LoadData<int>(fp, magic_number)) //version 1.11부터 매직넘버로 시작한다
+		return false;
 	if(magic_number != 1999) {
 		//ver1.1에선 첫 int가 1999임
 		current_level = magic_number;
 		loading_version_string = "ver1.1";
 	} else {
 		{
-			char temp[256];
-			LoadData<char>(fp, *temp);
+			char temp[256] = {};
+			if(!LoadData(fp, temp))
+				return false;
+			temp[sizeof(temp)-1] = '\0';
 			loading_version_string = temp;
 		}
-		LoadData<int>(fp, current_level);
+		if(!LoadData<int>(fp, current_level))
+			return false;
 	}
 
 	you.LoadDatas(fp);
-	for(int i = 0; i < MAXLEVEL; i++)
-	{
-		env[i].LoadDatas(fp);	
+
+	if(!isPrevVersion(loading_version_string, "ver1.202")) {
+		int size_=0;
+		LoadData<int>(fp, size_);
+		int i = 0;
+		for(; i < size_ && i < MAXLEVEL; i++)
+		{
+			env[i].LoadDatas(fp);
+			env[i].floor = i;
+		}
+		for(; i < MAXLEVEL; i++)
+		{
+			env[i].init();
+			env[i].floor = i;
+		}
+	} else {
+		int i = 0;
+		for(; i < 63 && i < MAXLEVEL; i++)
+		{
+			env[i].LoadDatas(fp);
+			env[i].floor = i;
+		}
+		for(; i < MAXLEVEL; i++)
+		{
+			env[i].init();
+			env[i].floor = i;
+		}
 	}
 	if(isPrevVersion(loading_version_string, "ver1.111")) {
 		Iden_collect_111 temp;
@@ -2799,17 +3228,36 @@ void LoadFile()
 		LoadData<unique_infor>(fp,temp);
 		unique_list.push_back(temp);
 	}
-	LoadData<map_infor>(fp,map_list);
+	if(isPrevVersion(loading_version_string, "ver1.202")) {
+		map_infor_202 temp;
+		LoadData<map_infor_202>(fp,temp);
+		map_infor_202::migrateInfor202toCurrent(temp, map_list);
+	} else {
+		map_list.LoadDatas(fp);
+	}
+
+
+	//깨진 파일 개선
+	if(map_list.dungeon_enter[TEMPLE].floor == -1) {
+		//파일이 깨졌음
+		recoverMap(); //복구 시도
+	}
+
+	//임시로 맵에 따라 강제 재조정
+	if(map_list.dungeon_enter[SCARLET_M].floor == -1) {
+		MapNode::initMapNode(true);//임시 재정렬
+	}
+
 	LoadData<wiz_infor>(fp,wiz_list);
 	save_note.LoadDatas(fp);
 	
 	ReplayClass.LoadDatas(fp);
+	LoadWikiSearchHistory(fp);
 
 	
 
 
-	fclose(fp);
-	ReleaseMutex(mutx);
+	return true;
 }
 
 float GetDotX(int offset_, int x, int magnification)
@@ -2821,7 +3269,7 @@ float GetDotY(int offset_, int y, int magnification)
 	return offset_+y*magnification;
 }
 
-string CurrentLevelString(int level)
+string CurrentLevelString(int level, int ziggurat_level)
 {
 	ostringstream ss;
 
@@ -2846,6 +3294,10 @@ string CurrentLevelString(int level)
 		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET_LIBRARY);
 	else if(level_ >= SCARLET_UNDER_LEVEL && level_ <= SCARLET_UNDER_LEVEL+MAX_SCARLET_UNDER_LEVEL)
 		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET_UNDER);
+	else if(level_ >= FORESTOFMAGIC_LEVEL && level_ <= FORESTOFMAGIC_LEVEL+MAX_FORESTOFMAGIC_LEVEL)
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_FORESTOFMAGIC) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(level_+1-FORESTOFMAGIC_LEVEL)));
+	else if(level_ >= DOLLSHOUSE_LEVEL && level_ <= DOLLSHOUSE_LEVEL+MAX_DOLLSHOUSE_LEVEL)
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DOLLSHOUSE) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(level_+1-DOLLSHOUSE_LEVEL)));
 	else if(level_ >= BAMBOO_LEVEL && level_ <= BAMBOO_LEVEL+MAX_BAMBOO_LEVEL)
 		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_BAMBOO);
 	else if(level_ >= EIENTEI_LEVEL && level_ <= EIENTEI_LEVEL+MAX_EIENTEI_LEVEL)
@@ -2875,7 +3327,7 @@ string CurrentLevelString(int level)
 	else if (level_ == OKINA_LEVEL)
 		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_OKINA);
 	else if (level_ == ZIGURRAT_LEVEL)
-		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_ZIGURRAT) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(you.ziggurat_level)));
+		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_ZIGURRAT) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(ziggurat_level)));
 	else
 		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_UKNOWN_DUNGEON);
 
@@ -2910,6 +3362,10 @@ int GetLevelMonsterNum(int level, bool item_)
 			return 18;
 		else if(level_ >= DEPTH_LEVEL && level_ <= DEPTH_LAST_LEVEL)
 			return 15;
+		else if(level_ >= DOLLSHOUSE_LEVEL && level_ < DOLLSHOUSE_LAST_LEVEL)
+			return 25;
+		else if(level_ == DOLLSHOUSE_LAST_LEVEL)
+			return 12;
 		else if (level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)
 			return 12 * multi_;
 		else if(level_ == MOON_LEVEL)

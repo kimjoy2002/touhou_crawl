@@ -15,6 +15,7 @@
 #include "projectile.h"
 #include "god.h"
 #include "dump.h"
+#include "tribe.h"
 #include <algorithm>
 using namespace std;
 extern HANDLE mutx;
@@ -149,6 +150,10 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 		return ((S_FLAG_DELAYED) & flag);
 	case SKL_JUMPING_ATTACK:
 		return ((S_FLAG_SMITE | S_FLAG_DELAYED) & flag);
+	case SKL_CIRNO_ICE_CREATE:
+	case SKL_DIVE:
+	case SKL_DIVE_OFF:
+		return (S_FLAG_IMMEDIATELY & flag);
 	default:
 		return false;
 	}
@@ -475,6 +480,12 @@ string SkillString(skill_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_MISSLE);
 	case SKL_SILENCE:
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_SILENCE);
+	case SKL_CIRNO_ICE_CREATE:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_CIRNO_ICE_CREATE);
+	case SKL_DIVE:
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE);
+	case SKL_DIVE_OFF:
+		return LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_OFF);
 	case SKL_NONE:
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_UKNOWN);
@@ -561,6 +572,7 @@ int SkillCap(skill_list skill)
 	case SKL_FIREBALL:
 	case SKL_MISSLE:
 	case SKL_SILENCE:
+	case SKL_CIRNO_ICE_CREATE:
 		return 200;
 	case SKL_LEVITATION:
 		return 75;
@@ -656,6 +668,8 @@ int SkillNoise(skill_list skill)
 	case SKL_JUNKO_2:
 	case SKL_JUNKO_3:
 	case SKL_JUNKO_4:
+	case SKL_DIVE:
+	case SKL_DIVE_OFF:
 		return 4;
 	case SKL_KANAKO_1:
 	case SKL_KANAKO_2:
@@ -810,7 +824,10 @@ int SkillPow(skill_list skill)
 	case SKL_INVISIBLE:
 	case SKL_FIREBALL:
 	case SKL_MISSLE:
+	case SKL_DIVE:
 		return you.GetSkillLevel(SKT_EVOCATE, true) *5;
+	case SKL_CIRNO_ICE_CREATE:
+		return GetCirnoIceCreateLevel();
 	case SKL_GRAZE:
 	case SKL_GRAZE_OFF:
 	case SKL_LEVITATION_OFF:
@@ -848,6 +865,8 @@ int SkillDiffer(skill_list skill)
 		return SkillDiffer_simple(-3,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
 	case SKL_MISSLE:
 		return SkillDiffer_simple(-2,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
+	case SKL_DIVE:
+		return SkillDiffer_simple(-3,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
 	case SKL_BYAKUREN_1:
 		return 100;
 		//return SkillDiffer_simple(-3,SKT_SPELLCASTING,SKT_ERROR,SKT_ERROR);
@@ -956,6 +975,8 @@ int SkillDiffer(skill_list skill)
 	case SKL_HARD_SELL:
 	case SKL_CREATE_SHOP:
 	case SKL_SILENCE:
+	case SKL_CIRNO_ICE_CREATE:
+	case SKL_DIVE_OFF:
 		return 100;
 	case SKL_NONE:
 	default:
@@ -1480,6 +1501,15 @@ bool SkillPlusCost(skill_list skill,bool check_)
 		if(!check_)
 			you.PowUpDown(-(20+randA(10)),true);
 		return true;
+	case SKL_DIVE:
+		if(check_ && you.power<100)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
+			return false;
+		}
+		if(!check_)
+			you.PowUpDown(-(15+randA(5)),true);
+		return true;
 	case SKL_SILENCE:
 		if(check_ && you.power<100)
 		{
@@ -1740,6 +1770,7 @@ bool SkillPlusCost(skill_list skill,bool check_)
 	case SKL_DRAW_CARD:
 	case SKL_HARD_SELL:
 	case SKL_CREATE_SHOP:
+	case SKL_CIRNO_ICE_CREATE:
 	default:
 		return true;
 	}
@@ -1954,6 +1985,11 @@ string SkillCostString(skill_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_SOME);
 	case SKL_MISSLE:
 		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_LITTLE);
+	case SKL_CIRNO_ICE_CREATE:
+		return LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_N_REMAIN,
+			PlaceHolderHelper(to_string(GetCirnoIceCreateCount())));
+	case SKL_DIVE:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_LITTLE);
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:
@@ -2002,7 +2038,7 @@ int GetSpellBombRange(spell_list spell)
 
 
 void SkillUse(char auto_)
-{	
+{
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY),true,false,false,CL_danger);
@@ -2038,6 +2074,11 @@ void SkillUse(char auto_)
 				{
 					if(!GetDisplayMove()) //스킬사용
 					{
+						if(you.IsDiving() && skill_ != SKL_DIVE_OFF)
+						{
+							printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+							break;
+						}
 						if(you.pure_mp && SkillMana(skill_)>=you.GetMp())
 						{
 							printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_JUNKO_PURIFICATION_MP_WARN), true, false, false, CL_normal);

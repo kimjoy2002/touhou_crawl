@@ -63,8 +63,9 @@ void replay_class::SaveDatas(FILE *fp)
 void replay_class::LoadDatas(FILE *fp)
 {
 	DeleteRpy();
-	char temp[1024];
-	LoadData<char>(fp, *temp);
+	char temp[1024] = {};
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	replay_string = ConvertUTF8ToUTF16(temp);
 	
 	LoadData<base_infor>(fp,infor);
@@ -687,7 +688,8 @@ bool morgue_menu(int value_)
                 SYSTEMTIME stC;
                 FileTimeToSystemTime(&file_vector[cur].localtime, &stC);
 
-                printsub(ss.str(), false, CL_normal, char_);
+                bool crash_file = file_vector[cur].path.rfind(L"crash-", 0) == 0;
+                printsub(ss.str(), false, crash_file ? CL_danger : CL_normal, char_);
                 if (60 - PrintCharWidth(ss.str()) > 0)
                     printsub(string(60 - PrintCharWidth(ss.str()), ' '), false, CL_normal);
                 else
@@ -882,7 +884,8 @@ bool score_menu(int value_)
 							entry.last_damage, 
 							entry.dungeon_level,
 							entry.rune >= 100,
-							entry.rune % 100);
+							entry.rune % 100,
+							entry.ziggurat_level);
 
 						printsub("     ", false, CL_normal);
 						printsub(WithBlankString(death_reason.str(), 61), false,(entry.rune >= 100 && entry.damage_reason == DR_ESCAPE)?CL_green: CL_warning);

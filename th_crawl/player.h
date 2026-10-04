@@ -17,6 +17,7 @@
 
 
 class monster;
+class item;
 class beam_iterator;
 class tribe_property;
 class action_class;
@@ -80,6 +81,7 @@ enum buff_type //겹쳐져선 안되는 버프들
 	BUFF_WEAK_RF,
 	BUFF_WEAK_RC,
 	BUFF_WEAK_RE,
+	BUFF_WEAK_RP,
 	BUFF_MAX
 };
 enum action_type
@@ -173,6 +175,8 @@ struct shield_struct
 class players: public unit
 {
 public:
+	static const int WIKI_SEARCH_HISTORY_MAX = 20;
+	static const int WIKI_SEARCH_QUERY_MAX = 256;
 	coord_def prev_position;
 
 	name_infor name;
@@ -319,6 +323,7 @@ public:
 	int s_unluck;
 	int s_super_graze;
 	int s_none_move;
+	int s_slippery;
 	int s_night_sight;
 	int s_night_sight_turn;
 	int s_sleep;
@@ -341,10 +346,16 @@ public:
 	int s_glutton_turn;
 	int s_potion_addict;
 	shield_struct s_shield;
+	int s_acid;
+	int s_acid_turn;
+	int s_dive;
 
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
+	int alchemy_cold_armour_ac;
+	int alchemy_cold_armour_damage;
+	int alchemy_cold_armour_power;
 
 
 
@@ -379,10 +390,13 @@ public:
 	int MemorizeSpell[52];
 	int remainSpellPoiont;
 	int currentSpellNum;
+	char currentEvokeItem;
 	int prevSpell;
 	int lastSelectMenu; //마지막에 선택했던 메뉴
 	char lastExplore; //마지막에 이동한 던전
 	string lastSearch; //마지막 검색한 단어
+	vector<string> wiki_search_history;
+	vector<unique_spellcard_type> used_unique_spellcards;
 	int yori_toyo_kill_count;
 	int max_power;
 
@@ -408,6 +422,9 @@ public:
 	item *throw_weapon;
 	SYSTEM_COMMAND_KIND quickMenu1;
 	SYSTEM_COMMAND_KIND quickMenu2;
+	shared_ptr<item> ice_item_candidates[3];
+	int ice_item_candidate_power = 0;
+	bool ice_item_candidate_ready = false;
 
 	attack_infor *dead_order;
 	damage_reason dead_reason;
@@ -431,6 +448,7 @@ public:
 	void SetPrevAction(int key, char item = 0, int num = 0);
 	void maybeAction();
 	coord_def GetDisplayPos();
+	bool shockwave(monster* mons_, attack_infor temp_att, item* weapon_);
 	bool attack(monster* mons_, equip_type type_, bool counter_);
 	int move(short_move x_mov, short_move y_mov);
 	int move(const coord_def &c);
@@ -464,6 +482,7 @@ public:
 	int GetThrowHit(const item* it);
 	attack_weapon_type GetAttackType();
 	int GetThrowDelay(item_type type_, bool random_ = true);
+	int GetThrowDelay(item* item_, bool random_ = true);
 	int GetSpellDelay();
 	int GetNormalDelay();
 	int GetWalkDelay(float multi_ = 1.0f);
@@ -476,7 +495,7 @@ public:
 	//hunger_type GetHunger();
 	int HpRecoverDelay(int delay_ = 0);
 	interupt_type HpRecover(int delay_);
-	int HpUpDown(int value_,damage_reason reason, unit *order_ = nullptr);
+	int HpUpDown(int value_,damage_reason reason, unit *order_ = nullptr, bool non_dead = false);
 	int MpRecoverDelay(int delay_ = 0,bool set_ = false);
 	interupt_type MpRecover(int delay_);
 	int MpUpDown(int value_);
@@ -537,6 +556,7 @@ public:
 	bool SetSick(int sick_);
 	bool SetVeiling(int veiling_, int value_);
 	bool SetInvisible(int invisible_);
+	bool SetDive(int dive_);
 	bool SetSaved(int saved){return true;};
 	bool SetTogleInvisible(bool off_);
 	bool SetBattleCount(int count_);
@@ -559,7 +579,7 @@ public:
 	bool SetTheWorld(int s_the_world_);
 	bool SetManaDelay(int s_mana_delay_);
 	bool SetKnifeCollect(int s_knife_collect_);
-	bool SetAlchemyBuff(ALCHEMY_LIST buff_, int time_);
+	bool SetAlchemyBuff(ALCHEMY_LIST buff_, int time_, int value_ = 0, int power_ = 0);
 	bool SetSpellcard(int s_spellcard_){s_spellcard= s_spellcard_; return true;};
 	int isSetMikoBuff(int temp_);
 	int reSetMikoBuff();
@@ -584,6 +604,8 @@ public:
 	bool SetShield(int percent_, int turn_);
 	bool SetOverheat(int overheat_, int turn_);
 	bool SetGlutton(int glutton_, int turn_);
+	bool UnSetAcid();
+	bool SetAcid(int acid_, int turn_);
 	int AbsorbShield(int damage_);
 	
 	int GetInvisible();
@@ -624,6 +646,8 @@ public:
 	bool Memorize(int spell, bool immediately = false);
 	bool isMemorize(int spell);
 	bool HasAbility(int skill_);
+	bool IsDiving();
+	void EndDive(bool speak_ = true);
 	int Ability(int skill_, bool god_, bool unset_, int immediately = 0);
 	bool Belief(god_type god_, int piety_, bool speak_=true);
 	bool StepUpDownPiety(int level_);
@@ -674,7 +698,8 @@ public:
 	bool isPassedBullet(unit* order, bool really = false);
 	bool isMemorizeSpell(int spell_);
 	bool CanMemorizeSpell(int spell_);
-	bool isView(){return true;};
+	int CanSlash(attack_type att_type);
+	bool isView(){return !IsDiving();};
 	bool isView(const monster* monster_info);
 	bool isYourShight(){return true;};	
 	bool isSightnonblocked(coord_def c, coord_def* return_firstpos = nullptr);//보이는 이 위치가 실제로 공격가능한지?(유리벽)
@@ -720,6 +745,7 @@ void fast_discard(int delete_id, int delete_num);
 void Eatting(char auto_);
 void Drinking(char auto_);
 //void Spelllcard_Declare();
+void Speed_Evoke();
 void Spelllcard_Evoke(char auto_);
 void Reading(char auto_);
 void Equip_Weapon(); //무기장착
@@ -737,6 +763,7 @@ void view_log();
 void skill_view();
 void stat_view();
 void Help_Show();
+void PatchNote_Show();
 void rune_Show();
 void Iden_Show();
 void Weapon_Show();

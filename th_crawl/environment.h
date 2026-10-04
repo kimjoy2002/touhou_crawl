@@ -30,6 +30,7 @@ enum AUTOTILE_KIND {
 	AUTOTILE_WATER,
 	AUTOTILE_OIL,
 	AUTOTILE_SNOW,
+	AUTOTILE_CARPET,
 	AUTOTILE_MAX
 };
 
@@ -65,7 +66,7 @@ public:
 	}
 	bool isMove(bool fly_, bool swim_, bool no_ground_, bool seiga_ = false)
 	{
-		return ((!no_ground_ && tile<DG_NONE_MOVE )|| 
+		return ((!no_ground_ && tile<DG_NONE_MOVE)||
 			((fly_ || swim_) && tile == DG_SEA) ||
 			((fly_) && tile == DG_LAVA)) || 
 			(seiga_ && tile == DG_NONE_MOVE);
@@ -103,6 +104,8 @@ public:
 	}
 	bool isNormal()
 	{
+		if(tile == DG_DOLLSHOUSE_FLOOR || tile == DG_DOLLSHOUSE_WALL)
+			return false;
 		return img_dungeon01[tile].isNormal();
 	}
 	bool isAutoTile(int i)
@@ -110,7 +113,7 @@ public:
 		switch (i)
 		{
 		case AUTOTILE_WALL:
-			if ((tile >= DG_WALL && tile <= DG_GLASS) || (tile == DG_OPEN_DOOR))
+			if ((tile >= DG_WALL && tile <= DG_GLASS) || tile == DG_OPEN_DOOR)
 				return true;
 			break;
 		case AUTOTILE_WATER:
@@ -123,6 +126,10 @@ public:
 			break;
 		case AUTOTILE_SNOW:
 			if (tile == DG_SNOW || tile == DG_SNOWMAN)
+				return true;
+			break;
+		case AUTOTILE_CARPET:
+			if (tile == DG_CARPET)
 				return true;
 			break;
 		}
@@ -190,7 +197,7 @@ public:
 	void LoadDatas(FILE *fp);
 	bool isInstanceMap();
 	bool MakeMap(bool return_); //return_ 은 되돌아오는 계단일때 전용(이때는 대나무숲을 만들지 않는다.)
-	void EnterMap(int num_, deque<monster*> &dq, coord_def pos_= coord_def(0,0));
+	void EnterMap(int num_, deque<monster*> &dq, coord_def pos_= coord_def(0,0), bool preserve_instance_map = false);
 	bool isMove(int x_,int y_, bool fly_ = false, bool swim_ = false, bool no_ground_ = false, bool seiga_ = false)
 	{
 		int sight_ = 7;
@@ -280,20 +287,20 @@ public:
 	void calculateAutoTile(coord_def pos, AUTOTILE_KIND kind);
 	void allCalculateAutoTile();
 	void innerDrawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, float scale, int count_, D3DCOLOR color_, bool sight);
-	void drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, float scale, int count_, int max_mouseX, bool sight, bool onlyTile, bool draw_mouse);
+	void drawTile(shared_ptr<DirectX::SpriteBatch> pSprite, int tile_x, int tile_y, float x, float y, float scale, int count_, int max_mouseX, bool sight, bool onlyTile, bool draw_mouse, bool spellcard_dark = false);
 	bool changeTile(coord_def c, dungeon_tile_type tile, bool noAutoCacul = false);
 	int CloseDoor(int x_,int y_); //0은 문없음 1은 닫음 -1은 어딘가 걸려있음
-	monster* AddMonster(int id_, uint64_t flag_, coord_def position_, int time_ = 0);
+	monster* AddMonster(int id_, uint64_t flag_, coord_def position_, int time_ = 0, const monster* reserved_ = nullptr);
 	monster* AddMonsterWithMoving(monster *mon_, int prev_floor, coord_def position_, int time_ = 0);
 	void clearLimitSummonMonster(int parent_map_id,SUMMON_KIND summon_id, int max_num, monster* except_);
-	monster* AddMonster_Summon(int id_, uint64_t flag_, coord_def position_, summon_info &info_ , int time_);
+	monster* AddMonster_Summon(int id_, uint64_t flag_, coord_def position_, summon_info &info_ , int time_, const monster* reserved_ = nullptr);
 	void SummonClear(int map_id_);
 	void MakeShadow(const coord_def &c, textures *t, int original_id_, shadow_type type_= SWT_MONSTER, const string &name_ = "");
 	void MakeAfterimage(const coord_def &c, textures *t, int start_alpha, int turn_, bool onTrun = false);
 	bool MakeSmoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, unit* parent_ = NULL, bool override_ = false);
 	bool MakeFloorEffect(const coord_def &c, textures *t,textures *t2, floor_type type_, int time_, unit* parent_ = NULL);
 	bool MakeEvent(int id_, coord_def position_, event_type type_, int count_ = -1, int value = 0);
-	void MakeEffect(const coord_def &c, textures *t, bool over_sight_); //over_sight_ : 시야 밖에서의 이펙트도 볼것인가?
+	void MakeEffect(const coord_def &c, textures *t, bool over_sight_, float alpha_ = 1.0f); //over_sight_ : 시야 밖에서의 이펙트도 볼것인가?
 	void ClearEffect();
 	void ClearWithoutLaserEffect();
 	void ClearAllShadow();
@@ -307,6 +314,7 @@ public:
 	monster* movingfloor(const coord_def &c, int prev_floor_, monster* mon_);
 	item* MakeItem(const coord_def &c, const item_infor &t, int num_ = 0);
 	item* AddItem(const coord_def &c, item *t, int num_ = 0);
+	item* MoveItem(const coord_def& from, const coord_def& to);
 	void AddSpecialMapInfo(string string_);
 	void DeleteItem(const list<item>::iterator it);
 	bool DeleteItem(const item *item_);
@@ -353,7 +361,7 @@ public:
 	smoke* isSmokePos2(int x_,int y_, const smoke* excep_ = NULL);//해당 위치에 구름이 있냐 없냐(포인터 리턴)
 	monster* getRandomMonster(bool except_melee); //시야내 랜덤 몬스터 리턴
 	int insight_mon(monster_enemy_type type_);//시야내 몬스터갯수
-	monster* close_mon(int x_,int y_, monster_enemy_type type_);//가장 가까이 있는 몬스터리턴
+	monster* close_mon(int x_,int y_, monster_enemy_type type_, int max_len_);//가장 가까이 있는 몬스터리턴
 	void item_view_set();
 	int new_item_interupt();//시야에 새로운 아이템있으면 메세지보내고 갯수리턴
 	item* close_item(vector<item*> &item_vector_);//가장 가까운 아이템의 정보를 리턴
@@ -363,6 +371,7 @@ public:
 	list<item>::iterator GetPositiontoitemend(coord_def position_);
 
 	bool isBamboo(){return floor == BAMBOO_LEVEL;};
+	bool isInfiniteMap(){return floor == BAMBOO_LEVEL || floor == SCARLET_UNDER_LEVEL;};
 	int isPandemonium(){return (floor >= PANDEMONIUM_LEVEL && floor <= PANDEMONIUM_LAST_LEVEL)?floor-PANDEMONIUM_LEVEL+1:0;};
 };
 
@@ -380,13 +389,13 @@ int sprintMulti();
 
 float GetDotX(int offset_, int x, int magnification);
 float GetDotY(int offset_, int y, int magnification);
-string CurrentLevelString(int level = -1);
+string CurrentLevelString(int level = -1, int ziggurat_level = you.ziggurat_level);
 int GetLevelMonsterNum(int level, bool item_);
 void Noise(coord_def center_, int length_, const unit* excep_=NULL);
 bool Auto_Pick_Up(list<item>::iterator it);
 
 void SaveFile(bool test_ = false);
-void LoadFile();
+bool LoadFile();
 
 
 

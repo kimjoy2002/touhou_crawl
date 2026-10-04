@@ -31,6 +31,12 @@ if (MSVC)
 endif()
 add_definitions(-DNOMINMAX)
 
+# webtiles
+option(WEB_TILES "Build webtiles(browser) backend" ON)
+if (WEB_TILES)
+    add_definitions(-DWEB_TILES)
+endif()
+
 
 
 
@@ -75,7 +81,7 @@ add_executable(${PROJECT_NAME} ${SRC_FILES})
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE WIN32 _WINDOWS)
 target_link_options(${PROJECT_NAME} PRIVATE /SUBSYSTEM:WINDOWS)
-target_link_libraries(${PROJECT_NAME} d3d11 ${STEAM_API_LIB} ${DirectXTK_LIB} ${FMOD_LIB})
+target_link_libraries(${PROJECT_NAME} d3d11 dbghelp ${STEAM_API_LIB} ${DirectXTK_LIB} ${FMOD_LIB})
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     message("Debug Build")

@@ -33,6 +33,7 @@
 #include "floor.h"
 #include "projectile.h"
 #include "spellcard.h"
+#include "unique_spellcard.h"
 #include "throw.h"
 #include "rand_shuffle.h"
 #include "option_manager.h"
@@ -291,8 +292,37 @@ void auto_battle()
 		printlog(LocalzationManager::locString(LOC_SYSTEM_AUTOBATTLE_DANGERHP),true,false,false,CL_small_danger);
 		return;
 	}
+	bool can_reach = false; 
+	bool can_reach_right = false; 
+	
+	if(you.equipment[ET_WEAPON] && you.equipment[ET_WEAPON]->canReachAttack()) {
+		can_reach = true;
+	} else if((you.GetProperty(TPT_DUAL_WEAPON) && you.equipment[ET_SHIELD] && you.equipment[ET_SHIELD]->canReachAttack())) {
+		can_reach_right = true;
+	}
+	monster* mon_ = env[current_level].close_mon(you.position.x,you.position.y, MET_ENEMY, 999);
 
-	monster* mon_ = env[current_level].close_mon(you.position.x,you.position.y, MET_ENEMY);
+
+	if(can_reach || can_reach_right) {
+		int abs_ = std::max(abs(mon_->position.x - you.position.x), abs(mon_->position.y - you.position.y));
+		if(abs_ == 2 && you.isSightnonblocked(mon_->position)) {
+			if(can_reach) {
+				you.attack(mon_, ET_WEAPON, false);
+				you.doingActionDump(DACT_MELEE, you.equipment[ET_WEAPON]->GetName());
+			}
+			if(mon_->isLive() && can_reach_right) {
+				you.attack(mon_, ET_SHIELD, false);
+				you.doingActionDump(DACT_MELEE, you.equipment[ET_SHIELD]->GetName());
+			}
+			you.time_delay += you.GetAtkDelay();
+			you.TurnEnd();
+			you.SetPrevAction(VK_TAB);
+			return;
+		}
+	}
+
+
+
 	if(mon_)
 	{
 		if(useAutoTanmac(mon_)) {
@@ -325,6 +355,11 @@ bool g_auto = false;
 
 void auto_Move()
 {
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return;
+	}
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY),true,false,false,CL_danger);
@@ -343,7 +378,7 @@ void auto_Move()
 		while(!you.will_move.empty()){you.will_move.pop();}	
 		return;
 	}
-	if(env[current_level].isBamboo())
+	if(env[current_level].isInfiniteMap())
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_AUTOTRAVEL_BAMBOO),true,false,false,CL_small_danger);
 		while(!you.will_move.empty()){you.will_move.pop();}	
@@ -483,6 +518,13 @@ bool stack_move(bool auto_)
 			return false;
 		}
 		env[current_level].item_view_set();
+
+		if(monster* unit_ = (monster*)env[current_level].isMonsterPos(temp.x, temp.y, &you)) {
+			if(unit_->isCompleteNeutral()) {
+				//이동 실패
+				return false;
+			}
+		}
 
 		right_move = Move(temp);
 
@@ -780,7 +822,12 @@ bool Auto_Pick_Up(list<item>::iterator it)
 		return false;
 	if(!it->isautopick())
 		return false;
-	if(you.s_confuse)
+		
+	if(you.IsDiving())
+	{
+		return false;
+	}
+	if(you.s_confuse || you.s_lunatic)
 		return false;
 	if(!isShootingSprint() && env[current_level].insight_mon(MET_ENEMY))
 		return false;
@@ -1058,7 +1105,7 @@ void Search()
 		case 'E':
 		case 'e':
 		case GVK_BUTTON_X:
-			if (!env[current_level].isBamboo())
+			if (!env[current_level].isInfiniteMap())
 			{
 				env[current_level].AddForbid(you.search_pos);
 			}
@@ -1313,7 +1360,7 @@ void Wide_Search()
 		case 'E':
 		case 'e':
 		case GVK_BUTTON_X:
-			if (!env[current_level].isBamboo())
+			if (!env[current_level].isInfiniteMap())
 			{
 				env[current_level].AddForbid(you.search_pos);
 			}
@@ -1754,6 +1801,11 @@ bool CheckDimension()
 }
 bool warning(dungeon_tile_type type, bool down)
 {//경고메시지를 주는 곳		
+	if(you.s_slippery > 0)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SLIPPERY), true, false, false, CL_danger);
+		return false;
+	}
 	switch(type)
 	{
 	case DG_YUKKURI_STAIR:
@@ -1863,6 +1915,20 @@ bool warning(dungeon_tile_type type, bool down)
 			}
 		}
 		break;
+	case DG_DOLLSHOUSE_STAIR:
+		if(down)
+		{
+			if(env[DOLLSHOUSE_LEVEL].make)
+				return true;
+			if(ynPrompt(LOC_SYSTEM_STAIR_SUBDUNGEON_WARN, LOC_SYSTEM_WISDOM, CL_danger, false,false,false,false)) {
+				enterlog();
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		break;
 	default:
 		break;
 	}
@@ -1892,6 +1958,8 @@ void Stair_move_all() {
 	case DG_PANDEMONIUM_STAIR:
 	case DG_HAKUREI_STAIR:
 	case DG_ZIGURRAT_STAIR:
+	case DG_FORESTOFMAGIC_STAIR:
+	case DG_DOLLSHOUSE_STAIR:
 		Stair_move(true);
 		break;
 	case DG_UP_STAIR:
@@ -1908,6 +1976,13 @@ void Stair_move_all() {
 
 bool Stair_move(bool down)
 {
+	if(!CheckUniqueSpellcardFloorMove())
+		return false;
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return false;
+	}
 	dungeon_tile_type type = env[current_level].dgtile[you.position.x][you.position.y].tile;
 	switch(env[current_level].getStairKind(you.position.x, you.position.y))
 	{
@@ -2030,7 +2105,13 @@ bool Stair_move(bool down)
 					break;			
 				case DG_SCARLET_U_STAIR:
 					next_ = SCARLET_UNDER_LEVEL;
-					break;			
+					break;
+				case DG_FORESTOFMAGIC_STAIR:
+					next_ = FORESTOFMAGIC_LEVEL;
+					break;
+				case DG_DOLLSHOUSE_STAIR:
+					next_ = DOLLSHOUSE_LEVEL;
+					break;
 				case DG_BAMBOO_STAIR:
 					next_ = BAMBOO_LEVEL;
 					break;
@@ -2079,7 +2160,7 @@ bool Stair_move(bool down)
 					break;
 				case DG_HAKUREI_STAIR:
 					next_ = HAKUREI_LEVEL;
-					break;			
+					break;
 				default:
 					break;
 			}
@@ -2204,6 +2285,9 @@ bool Stair_move(bool down)
 			}
 			int floor_return=0;
 			coord_def pos_return(0,0);
+			bool preserve_return_map = false;
+			if(current_level == SCARLET_UNDER_LEVEL)
+				env[current_level].stair_up[0] = you.position;
 
 			
 			switch(current_level)
@@ -2224,20 +2308,42 @@ bool Stair_move(bool down)
 				pos_return = map_list.dungeon_enter[YOUKAI_MOUNTAIN].pos;
 				break;
 			case SCARLET_LEVEL:
-				floor_return = map_list.dungeon_enter[SCARLET_M].floor;
-				env[floor_return].MakeMap(true);
-				pos_return = map_list.dungeon_enter[SCARLET_M].pos;
-				break;				
+				{
+					int entrance_ = map_list.dungeon_enter[SCARLET_M].floor >= 0?SCARLET_M:FORESTOFMAGIC;
+					floor_return = map_list.dungeon_enter[entrance_].floor;
+					env[floor_return].MakeMap(true);
+					pos_return = map_list.dungeon_enter[entrance_].pos;
+				}
+				break;
 			case SCARLET_LIBRARY_LEVEL:
 				floor_return = map_list.dungeon_enter[SCARLET_L].floor;
 				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[SCARLET_L].pos;
 				break;
 			case SCARLET_UNDER_LEVEL: 
-				floor_return = map_list.dungeon_enter[SCARLET_U].floor;
-				env[floor_return].MakeMap(true);
-				pos_return = map_list.dungeon_enter[SCARLET_U].pos;
-				break;				
+				{
+					int entrance_ = map_list.dungeon_enter[SCARLET_U].floor >= 0?SCARLET_U:DOLLSHOUSE;
+					floor_return = map_list.dungeon_enter[entrance_].floor;
+					env[floor_return].MakeMap(true);
+					pos_return = map_list.dungeon_enter[entrance_].pos;
+				}
+				break;
+			case FORESTOFMAGIC_LEVEL:
+				{
+					int entrance_ = map_list.dungeon_enter[FORESTOFMAGIC].floor >= 0?FORESTOFMAGIC:SCARLET_M;
+					floor_return = map_list.dungeon_enter[entrance_].floor;
+					env[floor_return].MakeMap(true);
+					pos_return = map_list.dungeon_enter[entrance_].pos;
+				}
+				break;
+			case DOLLSHOUSE_LEVEL:
+				{
+					int entrance_ = map_list.dungeon_enter[DOLLSHOUSE].floor >= 0?DOLLSHOUSE:SCARLET_U;
+					floor_return = map_list.dungeon_enter[entrance_].floor;
+					env[floor_return].MakeMap(true);
+					pos_return = map_list.dungeon_enter[entrance_].pos;
+				}
+				break;
 			case BAMBOO_LEVEL: 
 				floor_return = map_list.dungeon_enter[BAMBOO].floor;
 				env[floor_return].MakeMap(true);
@@ -2257,7 +2363,7 @@ bool Stair_move(bool down)
 				floor_return = map_list.dungeon_enter[YUKKURI_D].floor;
 				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[YUKKURI_D].pos;
-				break;				
+				break;
 			case DEPTH_LEVEL:
 				floor_return = map_list.dungeon_enter[DEPTH].floor;
 				env[floor_return].MakeMap(true);
@@ -2293,7 +2399,6 @@ bool Stair_move(bool down)
 				env[floor_return].MakeMap(true);
 				pos_return = map_list.dungeon_enter[ZIGURRAT].pos;
 				break;
-
 			}
 			if(current_level>=SUBTERRANEAN_LEVEL && current_level<=SUBTERRANEAN_LEVEL_LAST_LEVEL)
 			{
@@ -2303,8 +2408,11 @@ bool Stair_move(bool down)
 			}
 			if (current_level == OKINA_LEVEL) {
 				floor_return = you.god_value[GT_OKINA][0];// map_list.dungeon_enter[SUBTERRANEAN].floor;
-				env[floor_return].MakeMap(true);
+				if (floor_return == ZIGURRAT_LEVEL && you.god_value[GT_OKINA][3] > 0) {
+					you.ziggurat_level = you.god_value[GT_OKINA][3];
+				}
 				pos_return = coord_def(you.god_value[GT_OKINA][1], you.god_value[GT_OKINA][2]);//map_list.dungeon_enter[SUBTERRANEAN].pos;
+				preserve_return_map = true;
 				//floor_return = map_list.dungeon_enter[SUBTERRANEAN].floor;
 				//env[floor_return].MakeMap(true);
 				//pos_return = map_list.dungeon_enter[SUBTERRANEAN].pos;
@@ -2322,7 +2430,7 @@ bool Stair_move(bool down)
 			rand_shuffle(dq.begin(),dq.end());
 			you.time_delay += you.GetNormalDelay();
 			you.TurnEnd();
-			env[floor_return].EnterMap(-1,dq,pos_return);
+			env[floor_return].EnterMap(-1,dq,pos_return,preserve_return_map);
 			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_RETURN),true,false,false,CL_normal);
 			GodAccpect_Stair(false, true);
 			PlaySE("stair");
@@ -2694,17 +2802,52 @@ void rune_Show()
 
 
 
-	for(int i = 0; i<RUNE_HAKUREI_ORB;i++)
+	for(int i = 0; i<RUNE_MAX;i++)
 	{
+		if(i == RUNE_HAKUREI_ORB || i == RUNE_FORESTOFMAGIC || i == RUNE_DOLLSHOUSE) {
+			continue;
+		}
+		int rune_ = i;
+		string rune_name_;
+		if(i == RUNE_SCARLET)
+		{
+			if(map_list.dungeon_enter[FORESTOFMAGIC].detected || you.rune[RUNE_FORESTOFMAGIC])
+				rune_ = RUNE_FORESTOFMAGIC;
+			else if(map_list.dungeon_enter[SCARLET_M].detected || you.rune[RUNE_SCARLET])
+				rune_ = RUNE_SCARLET;
+			else
+			{
+				rune_ = -1;
+				rune_name_ = LocalzationManager::formatString(LOC_SYSTEM_OR,
+					PlaceHolderHelper(rune_string[RUNE_SCARLET]),
+					PlaceHolderHelper(rune_string[RUNE_FORESTOFMAGIC]));
+			}
+		}
+		else if(i == RUNE_SCARLET_UNDER)
+		{
+			if(map_list.dungeon_enter[FORESTOFMAGIC].detected || you.rune[RUNE_DOLLSHOUSE])
+				rune_ = RUNE_DOLLSHOUSE;
+			else if(map_list.dungeon_enter[SCARLET_M].detected || you.rune[RUNE_SCARLET_UNDER])
+				rune_ = RUNE_SCARLET_UNDER;
+			else
+			{
+				rune_ = -1;
+				rune_name_ = LocalzationManager::formatString(LOC_SYSTEM_OR,
+					PlaceHolderHelper(rune_string[RUNE_DOLLSHOUSE]),
+					PlaceHolderHelper(rune_string[RUNE_SCARLET_UNDER]));
+			}
+		}
+		if(rune_ >= 0)
+			rune_name_ = LocalzationManager::locString(rune_string[rune_]);
 		remain = 15;
-		remain -= PrintCharWidth(LocalzationManager::locString(rune_string[i]));
+		remain -= PrintCharWidth(rune_name_);
 		for(;remain>0;remain--)
 			SetText() += " ";
-		SetText() += LocalzationManager::locString(rune_string[i]);
+		SetText() += rune_name_;
 		SetText() += " :";
 
 
-		if(you.rune[i])
+		if(rune_ >= 0 && you.rune[rune_])
 		{
 			SetText() += " " + LocalzationManager::locString(LOC_SYSTEM_UI_RUNE_GAIN);
 		}
@@ -3215,9 +3358,77 @@ void dungeonView()
 
 
 				
-				if(floor2_>=4) //홍마관
+				if(floor2_>=4) //홍마관 & 마법의숲
 				{
-					if(map_list.dungeon_enter[SCARLET_M].detected)
+					if(map_list.dungeon_enter[FORESTOFMAGIC].detected)
+					{
+						printsub(blank.str(),false,CL_warning);
+						printsub("│└",false,CL_normal);
+						printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_FORESTOFMAGIC) + " ",false,CL_warning);
+						int floor3_ = 0;	
+						for(int i=FORESTOFMAGIC_LEVEL;i<=FORESTOFMAGIC_LAST_LEVEL;i++)
+						{
+							if(env[i].make)
+								floor3_++;
+							else
+								break;
+						}
+						oss.str("");
+						oss.clear();
+						oss<<'('<<setw(2)<<setfill(' ')<<floor3_<<'/'<<setw(2)<<setfill(' ')<<(MAX_FORESTOFMAGIC_LEVEL+1)<<')';
+						printsub(oss.str(),false,CL_normal);
+				
+						oss.str("");
+						oss.clear();
+						oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_MISTYLAKE)<<' '<<LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(map_list.dungeon_enter[FORESTOFMAGIC].floor+1-MISTY_LAKE_LEVEL)))<<"  ";
+						printsub(oss.str(),false,CL_help);
+
+						//***룬있음
+						oss.str("");
+						oss.clear();
+						oss<<"*"<<LocalzationManager::locString(rune_string[RUNE_FORESTOFMAGIC])<<"* ";
+						printsub(oss.str(),true,you.rune[RUNE_FORESTOFMAGIC]?CL_magic:CL_bad);
+						//***룬끝
+						
+						if(floor3_>=4) //인형의 집
+						{
+							if(map_list.dungeon_enter[DOLLSHOUSE].detected)
+							{
+								printsub(blank.str(),false,CL_warning);
+								printsub("│  └",false,CL_normal);
+								printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DOLLSHOUSE) + " ",false,CL_warning);
+				
+
+								oss.str("");
+								oss.clear();
+								oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_FORESTOFMAGIC)<<' '<<LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(map_list.dungeon_enter[DOLLSHOUSE].floor+1-FORESTOFMAGIC_LEVEL)))<<"  ";
+								printsub(oss.str(),false,CL_help);
+
+								//***룬있음
+								oss.str("");
+								oss.clear();
+								oss<<"*"<<LocalzationManager::locString(rune_string[RUNE_DOLLSHOUSE])<<"* ";
+								printsub(oss.str(),true,you.rune[RUNE_DOLLSHOUSE]?CL_magic:CL_bad);
+								//***룬끝
+							}
+							else
+							{
+								printsub(blank.str(),false,CL_warning);
+								printsub("│  └",false,CL_normal);
+								printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DOLLSHOUSE) + " ",false,CL_bad);
+								
+								oss.str("");
+								oss.clear();
+								oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_FORESTOFMAGIC)<<' '<<
+									LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper("4"));
+								printsub(oss.str(),true,CL_STAT);
+							}
+						}
+
+						printsub(blank.str(),false,CL_warning);
+						printsub("│",true,CL_normal);
+					}
+					else if(map_list.dungeon_enter[SCARLET_M].detected)
 					{
 						printsub(blank.str(),false,CL_warning);
 						printsub("│└",false,CL_normal);
@@ -3315,7 +3526,8 @@ void dungeonView()
 					{
 						printsub(blank.str(),false,CL_warning);
 						printsub("│└",false,CL_normal);
-						printsub(LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET) + " ",false,CL_bad);
+						printsub(LocalzationManager::formatString(LOC_SYSTEM_OR, PlaceHolderHelper(LOC_SYSTEM_DUNGEON_SCARLET), PlaceHolderHelper(LOC_SYSTEM_DUNGEON_FORESTOFMAGIC))
+							 + " ",false,CL_bad);
 						oss.str("");
 						oss.clear();
 						oss<<LocalzationManager::locString(LOC_SYSTEM_DUNGEON_MISTYLAKE)<<' '<<
@@ -3944,7 +4156,7 @@ void More_Item_Action()
 			deletelog();
 			if(you.GetProperty(TPT_DUAL_WEAPON)) {
 				if(!you.unequipdualweapon())
-				{				
+				{
 					printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY),true,false,false,CL_normal);
 				}
 			}
@@ -4218,7 +4430,7 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 
 
 	set<int> set_skill;
-	multimap<int,int> map_skill;
+	vector<pair<int,int>> spell_candidates;
 
 
 	for(list<item>::iterator it = you.item_list.begin();it!=you.item_list.end();it++)
@@ -4252,11 +4464,33 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 				set_skill.insert(it->value8);
 		}
 	}
-	for (set<int>::iterator it=set_skill.begin();it!=set_skill.end();it++) 
-		map_skill.insert(pair<int,int>(100-you.GetSpellSuccess((*it)),(*it)));
+	for (set<int>::iterator it=set_skill.begin();it!=set_skill.end();it++)
+		spell_candidates.push_back(pair<int,int>(100-you.GetSpellSuccess((*it)),(*it)));
+
+	stable_sort(spell_candidates.begin(),spell_candidates.end(),[](const pair<int,int>& left_, const pair<int,int>& right_)
+	{
+		if(left_.first != right_.first)
+			return left_.first < right_.first;
+		if(left_.first != 100)
+			return false;
+
+		int left_level_ = SpellLevel((spell_list)left_.second);
+		int right_level_ = SpellLevel((spell_list)right_.second);
+		if(left_level_ != right_level_)
+			return left_level_ < right_level_;
+
+		auto school_count_ = [](spell_list spell_)
+		{
+			int count_ = 0;
+			while(count_ < 3 && SpellSchool(spell_,count_) != SKT_ERROR)
+				count_++;
+			return count_;
+		};
+		return school_count_((spell_list)left_.second) < school_count_((spell_list)right_.second);
+	});
 
 	char sp_char='a';
-	for (multimap<int,int>::iterator it=map_skill.begin();it!=map_skill.end();it++) 
+	for (vector<pair<int,int>>::iterator it=spell_candidates.begin();it!=spell_candidates.end();it++)
 	{
 
 		int miscast_level_ = SpellMiscastingLevel(SpellLevel((spell_list)it->second), 100-you.GetSpellSuccess((spell_list)it->second));
@@ -4325,7 +4559,7 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 		{
 			int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
 			int spell_ = SPL_NONE;
-			for (multimap<int,int>::iterator it=map_skill.begin();it!=map_skill.end();it++) 
+			for (vector<pair<int,int>>::iterator it=spell_candidates.begin();it!=spell_candidates.end();it++)
 			{
 				if(!(num--))
 				{
@@ -4362,7 +4596,7 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {				
 				int num = asctonum(inputedKey.val1);
 				int spell_ = SPL_NONE;
-				for (multimap<int,int>::iterator it=map_skill.begin();it!=map_skill.end();it++) 
+				for (vector<pair<int,int>>::iterator it=spell_candidates.begin();it!=spell_candidates.end();it++)
 				{
 					if(!(num--))
 					{
@@ -4646,9 +4880,51 @@ void auto_tanmac_onoff()
 }
 
 
-void verylongMove(int level, coord_def pos)
+void verylongMove(int level, coord_def pos, bool stop_at_dungeon_)
 {
-	if (current_level != level) { 
+	auto reached_destination_ = [level, stop_at_dungeon_]()
+	{
+		if(!stop_at_dungeon_)
+			return current_level == level;
+
+		switch(level)
+		{
+		case 0:
+			return current_level >= 0 && current_level <= MAX_DUNGEUN_LEVEL;
+		case MISTY_LAKE_LEVEL:
+			return current_level >= MISTY_LAKE_LEVEL && current_level <= MISTY_LAKE_LAST_LEVEL;
+		case YOUKAI_MOUNTAIN_LEVEL:
+			return current_level >= YOUKAI_MOUNTAIN_LEVEL && current_level <= YOUKAI_MOUNTAIN_LAST_LEVEL;
+		case SCARLET_LEVEL:
+			return current_level >= SCARLET_LEVEL && current_level <= SCARLET_LEVEL_LAST_LEVEL;
+		case SCARLET_LIBRARY_LEVEL:
+			return current_level >= SCARLET_LIBRARY_LEVEL && current_level <= SCARLET_LIBRARY_LEVEL_LAST_LEVEL;
+		case SCARLET_UNDER_LEVEL:
+			return current_level >= SCARLET_UNDER_LEVEL && current_level <= SCARLET_UNDER_LEVEL_LAST_LEVEL;
+		case BAMBOO_LEVEL:
+			return current_level >= BAMBOO_LEVEL && current_level <= BAMBOO_LEVEL_LAST_LEVEL;
+		case YUKKURI_LEVEL:
+			return current_level >= YUKKURI_LEVEL && current_level <= YUKKURI_LAST_LEVEL;
+		case DEPTH_LEVEL:
+			return current_level >= DEPTH_LEVEL && current_level <= DEPTH_LAST_LEVEL;
+		case DREAM_LEVEL:
+			return current_level >= DREAM_LEVEL && current_level <= DREAM_LAST_LEVEL;
+		case SUBTERRANEAN_LEVEL:
+			return current_level >= SUBTERRANEAN_LEVEL && current_level <= SUBTERRANEAN_LEVEL_LAST_LEVEL;
+		case PANDEMONIUM_LEVEL:
+			return current_level >= PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL;
+		case HAKUREI_LEVEL:
+			return current_level >= HAKUREI_LEVEL && current_level <= HAKUREI_LAST_LEVEL;
+		case FORESTOFMAGIC_LEVEL:
+			return current_level >= FORESTOFMAGIC_LEVEL && current_level <= FORESTOFMAGIC_LAST_LEVEL;
+		case DOLLSHOUSE_LEVEL:
+			return current_level >= DOLLSHOUSE_LEVEL && current_level <= DOLLSHOUSE_LAST_LEVEL;
+		default:
+			return current_level == level;
+		}
+	};
+
+	if (!reached_destination_()) {
 		bool onemore = false;
 		do {
 			queue<list<coord_def>> stairMap;
@@ -4722,16 +4998,20 @@ void verylongMove(int level, coord_def pos)
 					else {
 						break;
 					}
+					if(reached_destination_())
+						break;
 					stairMap.pop();
 				}
+			} else {
+				return;
 			}
-			if(onemore && current_level == level) {
+			if(onemore && reached_destination_()) {
 				onemore = false;
 			}
 		} while(onemore);
 	}
 
-	if (current_level == level) { 
+	if (reached_destination_()) {
 		if(pos != coord_def(-1, -1)) {
 			Long_Move(pos, true);
 		}
@@ -4757,6 +5037,10 @@ void floorMove()
 		enter_.push_back(pair<char, string>('m', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_YOUKAI_MOUNTAIN)));
 	if (map_list.dungeon_enter[SCARLET_M].detected)
 		enter_.push_back(pair<char, string>('s', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET)));
+	if (map_list.dungeon_enter[FORESTOFMAGIC].detected)
+		enter_.push_back(pair<char, string>('f', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_FORESTOFMAGIC)));
+	if (map_list.dungeon_enter[DOLLSHOUSE].detected)
+		enter_.push_back(pair<char, string>('o', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DOLLSHOUSE)));
 	if (map_list.dungeon_enter[SCARLET_L].detected)
 		enter_.push_back(pair<char, string>('b', LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET_LIBRARY)));
 	if (map_list.dungeon_enter[SCARLET_U].detected)
@@ -4855,6 +5139,18 @@ void floorMove()
 	case 'M':
 		next_ = YOUKAI_MOUNTAIN_LAST_LEVEL;
 		break;
+	case 'f':
+		next_ = FORESTOFMAGIC_LEVEL;
+		break;
+	case 'F':
+		next_ = FORESTOFMAGIC_LAST_LEVEL;
+		break;
+	case 'o':
+		next_ = DOLLSHOUSE_LEVEL;
+		break;
+	case 'O':
+		next_ = DOLLSHOUSE_LAST_LEVEL;
+		break;
 	case 's':
 		next_ = SCARLET_LEVEL;
 		break;
@@ -4912,14 +5208,14 @@ void floorMove()
 
 
 	you.lastExplore = key_;
-	verylongMove(next_, coord_def(-1,-1));
+	verylongMove(next_, coord_def(-1,-1), key_ >= 'a' && key_ <= 'z');
 
 }
 
 bool iteminfor_(item *item_, bool onlyinfor);
-void verylongMove(int level, coord_def pos);
+void verylongMove(int level, coord_def pos, bool stop_at_dungeon_);
 void findItem() {
-	if(env[current_level].isBamboo()) {
+	if(env[current_level].isInfiniteMap()) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SEARCH_ITEM_FAIL_BAMBOO), true, false, false, CL_help);
 		return;
 	}
@@ -5002,7 +5298,7 @@ void findItem() {
 			item* item_ = &*std::next(you.search_list.begin(), num_);
 			if(item_ != nullptr) {
 				changedisplay(DT_GAME);
-				verylongMove(item_->search_field.level, item_->position);
+				verylongMove(item_->search_field.level, item_->position, false);
 				break;
 			}
 		}

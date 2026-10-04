@@ -10,6 +10,7 @@
 #include "key.h"
 #include "replay.h"
 #include "option_manager.h"
+#include "web_backend.h"
 #include <shlobj.h>
 #include <filesystem>
 
@@ -29,6 +30,19 @@ std::wstring morgue_path_w;
 
 
 void init_save_paths() {
+#ifdef WEB_TILES
+    if (web::enabled() && !web::userDir().empty()) {
+        std::filesystem::path base = std::filesystem::u8path(web::userDir());
+        std::filesystem::create_directories(base);
+        option_mg.init((base / L"config.ini").wstring());
+        for (int i = 0; i < 3; i++)
+            save_file_w[i] = (base / saveslot_wstring[i]).wstring();
+        user_name_file_w = (base / L"user_name.txt").wstring();
+        replay_path_w = (base / L"replay").wstring();
+        morgue_path_w = (base / L"morgue").wstring();
+        return;
+    }
+#endif
     wchar_t appDataPath[MAX_PATH];
     if (SUCCEEDED(SHGetFolderPathW(NULL, CSIDL_PROFILE, NULL, 0, appDataPath))) {
         std::filesystem::path base(appDataPath);
@@ -57,22 +71,24 @@ void init_save_paths() {
 }
 
 std::string loadString(FILE* fp) {
-	int size;
-	fscanf_s(fp, "%d", &size);
-	fgetc(fp); // 공백 제거
-
-	std::string result(size, '\0'); 
-	for(int i=0;i<size;i++)
+	const int max_string_size = 1024 * 1024;
+	int size = 0;
+	if(!fp || fscanf_s(fp, "%d", &size) != 1 || size < 0)
+		return std::string();
+	if(fgetc(fp) == EOF)
+		return std::string();
+	if(size > max_string_size)
 	{
-		int temp_int = fgetc(fp);
-		if(temp_int != -1)
-		{
-			result[i] = temp_int;
-		}
-		else
-		{
-			result[i] = 0;
-		}
+		fseek(fp, size, SEEK_CUR);
+		return std::string();
+	}
+
+	std::string result(size, '\0');
+	if(size > 0)
+	{
+		size_t read_size = fread(&result[0], 1, size, fp);
+		if(read_size < static_cast<size_t>(size))
+			result.resize(read_size);
 	}
 	if (!result.empty() && result.back() == '\0') {
 		result.pop_back();
@@ -128,11 +144,10 @@ bool load_data(const std::wstring& path)
     if (attr == INVALID_FILE_ATTRIBUTES)
     {
         return false;
-    }
+	}
     else
 	{
-		LoadFile();
-		return true;
+		return LoadFile();
 	}
 }
 
@@ -151,24 +166,37 @@ bool load_data_onlyinfo(wstring path, players& temp_player)
 		if (_wfopen_s(&fp, wfilename.c_str(), L"rb") != 0 || !fp) {
 			return false;
 		}
-		int magic_number;
-		LoadData<int>(fp, magic_number); //version 1.11부터 매직넘버로 시작한다
-		int current_level_temp;
+		int magic_number = 0;
+		if(!LoadData<int>(fp, magic_number)) { //version 1.11부터 매직넘버로 시작한다
+			fclose(fp);
+			return false;
+		}
+		int current_level_temp = 0;
 		if(magic_number != 1999) {
 			//ver1.1에선 첫 int가 1999임
 			current_level_temp = magic_number;
 		} else {
 			{
-				char temp[256];
-				LoadData<char>(fp, *temp);
+				char temp[256] = {};
+				if(!LoadData(fp, temp)) {
+					fclose(fp);
+					return false;
+				}
+				temp[sizeof(temp)-1] = '\0';
 				//loading_version_string = temp;
 			}
-			LoadData<int>(fp, current_level_temp);
+			if(!LoadData<int>(fp, current_level_temp)) {
+				fclose(fp);
+				return false;
+			}
 		}
-		LoadData<int>(fp, temp_player.level);
-		LoadData<tribe_type>(fp, temp_player.tribe);
-		LoadData<job_type>(fp, temp_player.job);
-		LoadData<unique_starting_type>(fp, temp_player.char_type);
+		if(!LoadData<int>(fp, temp_player.level) ||
+			!LoadData<tribe_type>(fp, temp_player.tribe) ||
+			!LoadData<job_type>(fp, temp_player.job) ||
+			!LoadData<unique_starting_type>(fp, temp_player.char_type)) {
+			fclose(fp);
+			return false;
+		}
 		fclose(fp);
 		//ReleaseMutex(mutx);
 		return true;

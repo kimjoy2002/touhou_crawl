@@ -739,6 +739,8 @@ bool shootingLineInfo::process(int stage_count) {
 		if(unit_.count == count) {
 			coord_def start_pos = unit_.path->start;
 			monster* mon_ = (monster*)env[current_level].AddMonster(mon[unit_.type], 0, start_pos);
+			if(!mon_)
+				continue;
 			
 			for(int step : unit_.path->path_steps) {
 				if(step != 8) {
@@ -885,7 +887,7 @@ int getMonsterForSprint(SHOOTING_STAGE_LEVEL base_level, int count, SHOOTING_MON
 				monsters.push(MON_FAIRY_GREEN);
 				break;
 			case SHT_MON_NORMAL_STRONG:
-				monsters.push(MON_CRANE);
+				monsters.push(MON_SHOEBILL);
 				monsters.push(MON_FROG);
 				monsters.push(MON_MARISAYUKKURI);
 				break;

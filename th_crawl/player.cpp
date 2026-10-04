@@ -18,6 +18,7 @@
 #include "skill_use.h"
 #include "mon_infor.h"
 #include "ring.h"
+#include "amulet.h"
 #include "save.h"
 #include "key.h"
 #include "keiki.h"
@@ -25,6 +26,7 @@
 #include "god.h"
 #include "steam_api.h"
 #include "throw.h"
+#include "time_paradox.h"
 #include "note.h"
 #include "spellcard.h"
 #include "rect.h"
@@ -39,6 +41,7 @@
 #include "map.h"
 #include "lilly.h"
 #include "soundmanager.h"
+#include "scarlet_under.h"
 #include <iomanip>
 
 
@@ -67,16 +70,21 @@ void name_infor::SaveDatas(FILE *fp)
 
 void name_infor::LoadDatas(FILE *fp)
 {
-	char temp[256];
-	LoadData<char>(fp, *temp);
+	char temp[256] = {};
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	name_key = LocalzationManager::getMonsterEnumKey(temp);	
-	LoadData<char>(fp, *temp);
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	system_key = LocalzationManager::getLocalizationEnumKey(temp);	
-	LoadData<char>(fp, *temp);
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	name_param = LocalzationManager::getMonsterEnumKey(temp);	
-	LoadData<char>(fp, *temp);
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	param = LocalzationManager::getLocalizationEnumKey(temp);
-	LoadData<char>(fp, *temp);
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	postfix = temp;
 }
 
@@ -122,13 +130,14 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_mana_regen(0), s_superman(0), s_spellcard(0), s_slaying(0), s_autumn(0), s_wind(0), s_knife_collect(0), s_drunken(0), s_catch(0), s_ghost(0),
  s_dimension(0), s_timestep(0),  s_mirror(0), s_lunatic(0), s_paradox(0), s_trans_panalty(0), s_the_world(0), s_mana_delay(0),
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
-force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
+force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_slippery(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
 s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_evoke_ghost_level(0), s_oil(0), s_fire(0), s_tracking(0), s_shooting_turn(0), s_overheat(0), s_overheat_turn(0),
-s_regen(0), s_selfdestruct(0), s_glutton(0), s_glutton_turn(0), s_potion_addict(0), s_shield(), alchemy_buff(ALCT_NONE), alchemy_time(0),
+s_regen(0), s_selfdestruct(0), s_glutton(0), s_glutton_turn(0), s_potion_addict(0), s_shield(), s_acid(0), s_acid_turn(0), s_dive(0),
+alchemy_buff(ALCT_NONE), alchemy_time(0), alchemy_cold_armour_ac(0), alchemy_cold_armour_damage(0), alchemy_cold_armour_power(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
-,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0), prevSpell(0), lastSelectMenu(0), lastExplore(0), lastSearch(), yori_toyo_kill_count(0), max_power(500), currentSkillNum(0),god(GT_NONE), piety(0), gift_count(0), god_turn(0), suwako_meet(0),
+,total_skill_exp(0), pure_skill(-1), remainSpellPoiont(1), currentSpellNum(0), currentEvokeItem(0), prevSpell(0), lastSelectMenu(0), lastExplore(0), lastSearch(), yori_toyo_kill_count(0), max_power(500), currentSkillNum(0),god(GT_NONE), piety(0), gift_count(0), god_turn(0), suwako_meet(0),
 sight_reset(false), target(NULL), useMouseTammac(0), throw_weapon(NULL), quickMenu1(SYSCMD_QUICKTHROW), quickMenu2(SYSCMD_MAGIC), dead_order(NULL), dead_reason(DR_NONE)
 {
 	for(int i=0;i<2;i++)
@@ -167,6 +176,10 @@ players::~players()
 {
 }
 void players::init() {
+	ice_item_candidate_power = 0;
+	ice_item_candidate_ready = false;
+	for(int i=0;i<3;i++)
+		ice_item_candidates[i].reset();
 
 	prev_position = coord_def(0,0);
 	name = name_infor(LOC_SYSTEM_YOU);
@@ -225,6 +238,8 @@ void players::init() {
 	buff_list.clear();
 	item_list.clear();
 	search_list.clear();
+	wiki_search_history.clear();
+	used_unique_spellcards.clear();
 	property_vector.clear();
 	action_vector.clear();
 	item_weight = 0;
@@ -299,6 +314,7 @@ void players::init() {
 	s_unluck = 0;
 	s_super_graze = 0;
 	s_none_move = 0;
+	s_slippery = 0;
 	s_night_sight = 0;
 	s_night_sight_turn = 0;
 	s_sleep = 0;
@@ -324,8 +340,14 @@ void players::init() {
 	s_shield.value = 0;
 	s_shield.turn = 0;
 	s_shield.max_turn = 0;
+	s_acid = 0;
+	s_acid_turn = 0;
+	s_dive  = 0;
 	alchemy_buff = ALCT_NONE;
 	alchemy_time = 0;
+	alchemy_cold_armour_ac = 0;
+	alchemy_cold_armour_damage = 0;
+	alchemy_cold_armour_power = 0;
 	teleport_curse = false;
 	magician_bonus = 0;
 	poison_resist = 0;
@@ -355,6 +377,7 @@ void players::init() {
 		MemorizeSpell[i] = 0;
 	remainSpellPoiont = 1;
 	currentSpellNum = 0;
+	currentEvokeItem = 0;
 	prevSpell = 0;
 	lastSelectMenu = 0;
 	lastExplore = 0;
@@ -550,6 +573,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_unluck);
 	SaveData<int>(fp, s_super_graze);
 	SaveData<int>(fp, s_none_move);
+	SaveData<int>(fp, s_slippery);
 	SaveData<int>(fp, s_night_sight);
 	SaveData<int>(fp, s_night_sight_turn);
 	SaveData<int>(fp, s_sleep);
@@ -572,8 +596,14 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_glutton_turn);
 	SaveData<int>(fp, s_potion_addict);
 	SaveData<shield_struct>(fp, s_shield);
+	SaveData<int>(fp, s_acid);
+	SaveData<int>(fp, s_acid_turn);
+	SaveData<int>(fp, s_dive);
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
+	SaveData<int>(fp, alchemy_cold_armour_ac);
+	SaveData<int>(fp, alchemy_cold_armour_damage);
+	SaveData<int>(fp, alchemy_cold_armour_power);
 
 	
 	SaveData<int>(fp, teleport_curse);
@@ -602,6 +632,7 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, *MemorizeSpell,52);
 	SaveData<int>(fp, remainSpellPoiont);
 	SaveData<int>(fp, currentSpellNum);
+	SaveData<char>(fp, currentEvokeItem);
 	SaveData<int>(fp, prevSpell);
 	SaveData<int>(fp, lastSelectMenu);
 	SaveData<char>(fp, lastExplore);
@@ -628,11 +659,30 @@ void players::SaveDatas(FILE *fp)
 	SaveData<char>(fp, throw_weapon?throw_weapon->id:0);
 	SaveData<SYSTEM_COMMAND_KIND>(fp, quickMenu1);
 	SaveData<SYSTEM_COMMAND_KIND>(fp, quickMenu2);
+	bool save_ice_item_candidates_ = ice_item_candidate_ready;
+	for(int i=0;i<3;i++)
+		if(!ice_item_candidates[i])
+			save_ice_item_candidates_ = false;
+	SaveData<bool>(fp, save_ice_item_candidates_);
+	if(save_ice_item_candidates_)
+	{
+		SaveData<int>(fp, ice_item_candidate_power);
+		for(int i=0;i<3;i++)
+			ice_item_candidates[i]->SaveDatas(fp);
+	}
+	SaveData<int>(fp,used_unique_spellcards.size());
+	for(unique_spellcard_type type_ : used_unique_spellcards)
+		SaveData<unique_spellcard_type>(fp,type_);
 }
 void players::LoadDatas(FILE *fp)
 {
+	buff_list.clear();
 	item_list.clear();
 	search_list.clear();
+	wiki_search_history.clear();
+	used_unique_spellcards.clear();
+	property_vector.clear();
+	action_vector.clear();
 
 	//필수 정보
 	LoadData<int>(fp, level);
@@ -647,11 +697,12 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, prev_position.y);
 	name.LoadDatas(fp);
 	{
-		char temp[256];
-		LoadData<char>(fp, *temp);
+		char temp[256] = {};
+		LoadData(fp, temp);
+		temp[sizeof(temp)-1] = '\0';
 		user_name = temp;
 	}
-	int it;
+	int it = 0;
 	LoadData<int>(fp, it);
 	image = inttotexture(it);
 	LoadData<int>(fp, hp);
@@ -708,7 +759,7 @@ void players::LoadDatas(FILE *fp)
 		LoadData<buff_class>(fp, temp);
 		buff_list.push_back(temp);
 	}
-
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i = 0; i < size_; i++)
 	{
@@ -717,6 +768,7 @@ void players::LoadDatas(FILE *fp)
 		item_list.push_back(temp);
 	}
 	
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i = 0; i < size_; i++)
 	{
@@ -726,6 +778,7 @@ void players::LoadDatas(FILE *fp)
 	}
 
 	
+	size_ = 0;
 	LoadData<int>(fp, size_);
 	for(int i = 0; i < size_; i++)
 	{
@@ -763,7 +816,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, prev_real_turn);
 	LoadData<bool>(fp, player_move);
 	LoadData<int>(fp,explore_map);
-	LoadData<int>(fp, *penalty_turn);
+	LoadData(fp, penalty_turn);
 	LoadData<char>(fp, final_item);
 	LoadData<int>(fp, final_num);
 	//LoadData<int>(fp, hunger);
@@ -821,6 +874,9 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_unluck); 
 	LoadData<int>(fp, s_super_graze);
 	LoadData<int>(fp, s_none_move);
+	if(!isPrevVersion(loading_version_string, "ver1.205")) {
+		LoadData<int>(fp, s_slippery);
+	}
 	LoadData<int>(fp, s_night_sight); 
 	LoadData<int>(fp, s_night_sight_turn);
 	LoadData<int>(fp, s_sleep);
@@ -831,7 +887,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, s_weather_turn);
 	LoadData<int>(fp, s_evoke_ghost);
 	if(!isPrevVersion(loading_version_string, "ver1.113")) {
-		SaveData<int>(fp, s_evoke_ghost_level);
+		LoadData<int>(fp, s_evoke_ghost_level);
 	}
 	LoadData<int>(fp, s_oil);
 	LoadData<int>(fp, s_fire);
@@ -857,9 +913,25 @@ void players::LoadDatas(FILE *fp)
 	if(!isPrevVersion(loading_version_string, "ver1.11")) {
 		LoadData<shield_struct>(fp, s_shield);
 	}
+	if(!isPrevVersion(loading_version_string, "ver1.202")) {
+		LoadData<int>(fp, s_acid);
+		LoadData<int>(fp, s_acid_turn);
+	}
+	if(!isPrevVersion(loading_version_string, "ver1.207")) {
+		LoadData<int>(fp, s_dive);
+	}
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
 	LoadData<int>(fp, alchemy_time);
+	alchemy_cold_armour_ac = 0;
+	alchemy_cold_armour_damage = 0;
+	alchemy_cold_armour_power = 0;
+	if(!isPrevVersion(loading_version_string, "ver1.209"))
+	{
+		LoadData<int>(fp, alchemy_cold_armour_ac);
+		LoadData<int>(fp, alchemy_cold_armour_damage);
+		LoadData<int>(fp, alchemy_cold_armour_power);
+	}
 	
 	LoadData<int>(fp, teleport_curse);
 	LoadData<int>(fp, magician_bonus);
@@ -881,12 +953,16 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, uniden_invisible_view);
 	LoadData<int>(fp, uniden_power_keep);
 	LoadData<int>(fp, total_skill_exp);
-	LoadData<skill_exp_infor>(fp, *skill);
-	LoadData<int>(fp, *bonus_skill);
+	LoadData(fp, skill);
+	LoadData(fp, bonus_skill);
 	LoadData<int>(fp, pure_skill);
-	LoadData<int>(fp, *MemorizeSpell);
+	LoadData(fp, MemorizeSpell);
 	LoadData<int>(fp, remainSpellPoiont);
 	LoadData<int>(fp, currentSpellNum);
+	currentEvokeItem = 0;
+	if(!isPrevVersion(loading_version_string, "ver1.207")) {
+		LoadData<char>(fp, currentEvokeItem);
+	}
 	LoadData<int>(fp, prevSpell);
 	LoadData<int>(fp, lastSelectMenu);
 	if(!isPrevVersion(loading_version_string, "ver1.108")) {
@@ -901,29 +977,29 @@ void players::LoadDatas(FILE *fp)
 	if(!isPrevVersion(loading_version_string, "ver1.116")) {
 		LoadData<int>(fp, max_power);
 	}
-	LoadData<int>(fp, *MemorizeSkill);
-	LoadData<int>(fp, *MemorizeSkill_num);
+	LoadData(fp, MemorizeSkill);
+	LoadData(fp, MemorizeSkill_num);
 	LoadData<int>(fp, currentSkillNum);
 	LoadData<god_type>(fp, god);
 	LoadData<int>(fp, gift_count);
 	LoadData<int>(fp, piety);
-	LoadData<punish_struct>(fp, *punish);
+	LoadData(fp, punish);
 	LoadData<int>(fp, god_turn);
 	if(isPrevVersion(loading_version_string, "ver1.104")) {
 		//신이 20명
 		for(int i=0;i<20;i++)
-			LoadData<int>(fp, *(god_value[i]));
+			LoadData(fp, god_value[i]);
 	} else {
 		for(int i=0;i<GT_LAST;i++)
-			LoadData<int>(fp, *(god_value[i]));
+			LoadData(fp, god_value[i]);
 	}
-	LoadData<lilly_ally>(fp, *lilly_allys);	
+	LoadData(fp, lilly_allys);
 	if(!isPrevVersion(loading_version_string, "ver1.104")) {
-		LoadData<haniwa_ally>(fp, *haniwa_allys);	
+		LoadData(fp, haniwa_allys);
 	}
 	LoadData<int>(fp, suwako_meet);
-	LoadData<int>(fp, *half_youkai);
-	LoadData<int>(fp, *rune);
+	LoadData(fp, half_youkai);
+	LoadData(fp, rune);
 	LoadData<int>(fp, target);
 	LoadData<int>(fp, useMouseTammac);
 	{
@@ -945,6 +1021,36 @@ void players::LoadDatas(FILE *fp)
 		LoadData<SYSTEM_COMMAND_KIND>(fp, quickMenu1);
 		LoadData<SYSTEM_COMMAND_KIND>(fp, quickMenu2);
 	}
+	ice_item_candidate_ready = false;
+	ice_item_candidate_power = 0;
+	for(int i=0;i<3;i++)
+		ice_item_candidates[i].reset();
+	if(!isPrevVersion(loading_version_string, "ver1.205"))
+	{
+		LoadData<bool>(fp, ice_item_candidate_ready);
+		if(ice_item_candidate_ready)
+		{
+			LoadData<int>(fp, ice_item_candidate_power);
+			for(int i=0;i<3;i++)
+			{
+				ice_item_candidates[i] = make_shared<item>();
+				ice_item_candidates[i]->LoadDatas(fp);
+			}
+		}
+	}
+	if(!isPrevVersion(loading_version_string, "ver1.208"))
+	{
+		int spellcard_count_ = 0;
+		LoadData<int>(fp,spellcard_count_);
+		for(int i=0;i<spellcard_count_;i++)
+		{
+			unique_spellcard_type type_ = USC_NONE;
+			LoadData<unique_spellcard_type>(fp,type_);
+			if(type_ > USC_NONE && type_ < USC_MAX &&
+				find(used_unique_spellcards.begin(),used_unique_spellcards.end(),type_) == used_unique_spellcards.end())
+				used_unique_spellcards.push_back(type_);
+		}
+	}
 }
 
 bool players::Draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x_, float y_, float scale_)
@@ -955,6 +1061,8 @@ bool players::Draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x_, float y_,
 	if (s_veiling) {
 		img_effect_veiling.draw(pSprite, x_, y_, 0.0f, scale_,scale_, 255);
 	}
+	if(IsDiving())
+		return img_player_dive.draw(pSprite, x_, y_, 0.0f, scale_, scale_, 255);
 	if (!GetCharNameString().empty())
 	{
 		if (you.image) {
@@ -1021,6 +1129,8 @@ bool players::isSwim()
 		return true;
 	if(GetProperty(TPT_SWIM))
 		return true;
+	if(GetArtifactProperty(ART_SWIM) > 0)
+		return true;
 	else
 		return false;
 };
@@ -1060,8 +1170,9 @@ void players::SetXYPassFloor(int prev_floor, int new_floor, int x_, int y_) {
 
 	if(GetProperty(TPT_QUICK_DASH)) {
 		for(int i = 0;i < 8; i++) {
-			coord_def c_ = GetDirecToPos(i);
-			env[prev_floor].dgtile[position.x + c_.x][position.y + c_.y].flag &= ~FLAG_QUICK_DASH; 
+			coord_def c_ = position + GetDirecToPos(i);
+			if(c_.x >= 0 && c_.x < DG_MAX_X && c_.y >= 0 && c_.y < DG_MAX_Y)
+				env[prev_floor].dgtile[c_.x][c_.y].flag &= ~FLAG_QUICK_DASH;
 		}
 	}
 
@@ -1111,8 +1222,37 @@ coord_def players::GetDisplayPos()
 	}
 }
 
+bool players::shockwave(monster* mon_, attack_infor temp_att, item* weapon_) {
+	if(!mon_)
+		return false;
+
+	temp_att.name = name_infor(LOC_SYSTEM_ATT_SHOCKWAVE);
+
+	beam_iterator beam(you.position,mon_->position);
+	coord_def prev = *(beam++);
+	if(env[current_level].isMove(*beam, true)) {
+		int path_ = 10*GetPosToDirec((*beam),prev);
+		env[current_level].MakeEffect((*beam),GetTanmacGraphic(51, beam.GetDirec(), 0,path_),false, 0.4f);
+		if(monster *unit_ = (monster*)env[current_level].isMonsterPos(beam->x,beam->y, &you))
+		{
+			if(you.isEnemyMonster(unit_) && !unit_->isPassedBullet(&you)) {
+			if(unit_->damage(temp_att)) {
+				if(unit_->isLive() && weapon_ && weapon_->value5 == WB_FLOOD && randA(1) == 0) {
+					int value_ = rand_int(15, 30);
+					mon_->SetMute(value_);
+					mon_->SetNoneMove(value_);
+				}
+			}
+			}
+		}
+		return true;
+	}
+	return false;
+}
 bool players::attack(monster* mon_, equip_type type_, bool counter_)
 {
+	bool dive_attack_ = IsDiving();
+	EndDive();
 	if (s_evoke_ghost) {
 		return false;
 	}
@@ -1132,6 +1272,10 @@ bool players::attack(monster* mon_, equip_type type_, bool counter_)
 		att_name = LOC_SYSTEM_ATT_STONE_PUNCH;
 	}
 	attack_infor temp_att(GetAttack(false, type_),GetAttack(true, type_),GetHit(type_),this,GetParentType(),brand_,name_infor(att_name));
+	temp_att.unseen_attack = dive_attack_;
+	coord_def attacked_position = mon_->position;
+	
+	
 	if(equipment[type_] && equipment[type_]->type >= ITM_WEAPON_FIRST && equipment[type_]->type <= ITM_WEAPON_CLOSE)
 	{
 		doingActionDump(DACT_MELEE, equipment[type_]->name.getName());
@@ -1148,8 +1292,35 @@ bool players::attack(monster* mon_, equip_type type_, bool counter_)
 		doingActionDump(DACT_MELEE, LocalzationManager::locString(LOC_SYSTEM_UI_INEFFICIENT));
 	}
 
+	if(equipment[type_]) {
+		switch(equipment[type_]->type) {
+			case ITM_WEAPON_SHORTBLADE:
+				temp_att.weapon_type = ATT_WEAPON_SHORTBLADE;
+				break;
+			case ITM_WEAPON_LONGBLADE:
+				temp_att.weapon_type = ATT_WEAPON_LONGBLADE;
+				break;
+			case ITM_WEAPON_MACE:
+				temp_att.weapon_type = ATT_WEAPON_MACE;
+				break;
+			case ITM_WEAPON_AXE:
+				temp_att.weapon_type = ATT_WEAPON_AXE;
+				break;
+			case ITM_WEAPON_SPEAR:
+				temp_att.weapon_type = ATT_WEAPON_SPEAR;
+				break;
+			default:
+				break;
+		}
+	}
+	bool canShockwave = false, doShockwave = false;
 
-	if(mon_->damage(temp_att))
+	if(equipment[type_] && equipment[type_]->canShockwave()) {
+		canShockwave = true;
+	}
+
+	bool hit_ = mon_->damage(temp_att);
+	if(hit_)
 	{
 		if(mon_->isLive()&& you.god == GT_YUUGI && !you.GetPunish(GT_YUUGI) && pietyLevel(you.piety)>=2 && randA(10) == 0)
 		{
@@ -1163,6 +1334,66 @@ bool players::attack(monster* mon_, equip_type type_, bool counter_)
 			alchemy_time = 0;
 		}
 	}
+
+	item* attack_weapon = equipment[type_];
+	if(hit_ && attack_weapon) {
+		if(!mon_->isLive() && attack_weapon->GetArtifactProperty(ART_KNOCKAWAY) > 0 && !mon_->isImmobile()) {
+			coord_def direction(mon_->position.x > you.position.x ? 1 : (mon_->position.x < you.position.x ? -1 : 0),
+				mon_->position.y > you.position.y ? 1 : (mon_->position.y < you.position.y ? -1 : 0));
+			int knock_distance = rand_int(1, max(1, temp_att.max_damage / 5));
+			coord_def target(attacked_position.x + direction.x * knock_distance,
+				attacked_position.y + direction.y * knock_distance);
+			beam_iterator beam(attacked_position,target);
+			int damage_ = 5 + mon_->level + GetSkillLevel(SKT_MACE, true);
+			beam_infor knock_infor(randC(1,damage_),damage_,15,this,GetParentType(),knock_distance,1,
+				BMT_PENETRATE,ATT_THROW_NORMAL,mon_->name);
+			knock_infor.no_owner = true;
+			PlaySE("shoot_heavy");
+			coord_def final_ = throwtanmac(mon_->image,beam,knock_infor,NULL);
+			if(final_ != attacked_position) {
+				mon_->SetXY(final_);
+				while(env[current_level].MoveItem(attacked_position,final_)) {
+				}
+			}
+		}
+		if(mon_->isLive() && attack_weapon->value5 == WB_FLOOD && randA(1) == 0) {
+			int value_ = rand_int(15, 30);
+			mon_->SetMute(value_);
+			mon_->SetNoneMove(value_);
+		}
+		if(mon_->isLive() && attack_weapon->GetArtifactProperty(ART_INSTANT_DEATH) > 0 && !(mon_->flag & M_FLAG_INANIMATE)) {
+			int chance = max(2, min(25, 8 + you.level - mon_->level));
+			if(randA(99) < chance) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_ARTIFACT_INSTANT_DEATH_TRIGGER, true, false, false, CL_magic,
+					PlaceHolderHelper(attack_weapon->GetNameString()), PlaceHolderHelper(mon_->GetName()->getName()));
+				mon_->dead(PRT_PLAYER, true, false);
+			}
+		}
+		if(mon_->isLive() && !mon_->isImmobile() && attack_weapon->GetArtifactProperty(ART_PULL) > 0 && distan_coord(you.position, mon_->position) > 1) {
+			coord_def pull_pos(you.position.x + (mon_->position.x > you.position.x ? 1 : (mon_->position.x < you.position.x ? -1 : 0)),
+				you.position.y + (mon_->position.y > you.position.y ? 1 : (mon_->position.y < you.position.y ? -1 : 0)));
+			if(env[current_level].isMove(pull_pos, mon_->isFly(), mon_->isSwim()) &&
+				!env[current_level].isMonsterPos(pull_pos.x, pull_pos.y, &you)) {
+				string monster_name = mon_->GetName()->getName();
+				mon_->SetXY(pull_pos);
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_ARTIFACT_PULL_TRIGGER, true, false, false, CL_magic,
+					PlaceHolderHelper(attack_weapon->GetNameString()), PlaceHolderHelper(monster_name));
+			}
+		}
+		if(attack_weapon->GetArtifactProperty(ART_WEATHER_TRIGGER) > 0 && randA(11) == 0) {
+			int weather = rand_int(1, 4);
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_ARTIFACT_WEATHER_TRIGGERED, true, false, false, CL_white_blue,
+				PlaceHolderHelper(attack_weapon->GetNameString()), PlaceHolderHelper(getWeatherName(weather-1)));
+			you.SetWeather(weather, rand_int(15, 30));
+		}
+	}
+
+	if(canShockwave) {
+		if(shockwave(mon_, temp_att, attack_weapon)) {
+			doShockwave = true;
+		}
+	}
+
 	you.SetBattleCount(30);
 	youAttack(mon_);
 	if(mon_->isLive() && you.GetProperty(TPT_HORN))
@@ -1185,7 +1416,7 @@ bool players::attack(monster* mon_, equip_type type_, bool counter_)
 			mon_->damage(temp_att_, false);
 		}
 	}
-	if(s_wind)
+	if(s_wind || (attack_weapon && attack_weapon->GetArtifactProperty(ART_WHIRLWIND) > 0))
 	{					
 		for(rect_iterator rlt(you.position,1,1);!rlt.end();rlt++)
 		{
@@ -1193,8 +1424,22 @@ bool players::attack(monster* mon_, equip_type type_, bool counter_)
 			if(unit_ && unit_ != mon_ && !unit_->isUserAlly())
 			{
 				unit_->damage(temp_att, false);
+				
+				if(canShockwave && !unit_->isplayer()) {
+					if(shockwave((monster*)unit_, temp_att, attack_weapon)) {
+						doShockwave = true;
+					}
+				}
 
 			}
+		}
+	}
+	if(mon_->isLive() && GetArtifactProperty(ART_KICK) > 0) {
+		int skill_ = GetSkillLevel(SKT_UNWEAPON, true);
+		if(randA(99) < min(50, 15 + skill_)) {
+			int damage_ = 5 + skill_ / 2;
+			attack_infor kick_att(randA_1(damage_), damage_, 12 + skill_ / 2, this, GetParentType(), ATT_NORMAL, name_infor(LOC_SYSTEM_SPL_KICK));
+			mon_->damage(kick_att, false);
 		}
 	}
 	if(GetArtifactProperty(ART_LUNATIC) > 0) {
@@ -1214,6 +1459,10 @@ bool players::attack(monster* mon_, equip_type type_, bool counter_)
 			}
 					
 		}
+	}
+	if(doShockwave) {
+		Sleep(16);
+		env[current_level].ClearEffect();
 	}
     return true;
 }
@@ -1281,11 +1530,11 @@ int players::move(short_move x_mov, short_move y_mov)
 		}
 		else if(mon_)
 		{
-			if(mon_->isUserAlly() && !(mon_->flag & M_FLAG_NONE_MOVE))
+			if(mon_->isUserAlly() && ((!(mon_->flag & M_FLAG_NONE_MOVE) && !mon_->isImmobile()) ||  mon_->flag & M_FLAG_CAN_SWAP))
 			{
 				if(env[current_level].isMove(position.x, position.y, mon_->isFly(), mon_->isSwim(), mon_->flag & M_FLAG_CANT_GROUND) && env[current_level].isMove(move_x_,move_y_,isFly(),isSwim() || drowned))
 				{
-					PositionSwap(mon_);								
+					PositionSwap(mon_);	
 					//printlog(LocalzationManager::locString(LOC_SYSTEM_SWAP_ALLY) + " ",false,false,false,CL_bad);
 					time_delay += GetWalkDelay();//이동속도만큼 이동
 					prev_action = ACTT_WALK;
@@ -1294,7 +1543,7 @@ int players::move(short_move x_mov, short_move y_mov)
 				else
 					return 0;
 			}
-			else if(mon_->isUserAlly() && (mon_->flag & M_FLAG_NONE_MOVE))
+			else if(mon_->isUserAlly() && ((mon_->flag & M_FLAG_NONE_MOVE) || mon_->isImmobile()))
 			{
 				printlog(LocalzationManager::locString(LOC_SYSTEM_CANT_SWAP_ALLY),true,false,false,CL_normal);
 				you.SetInter(IT_MAP_FIND);
@@ -1355,7 +1604,7 @@ int players::move(short_move x_mov, short_move y_mov)
 		else if(env[current_level].isSmokePos(move_x_,move_y_))
 		{
 			smoke* temp_smoke = env[current_level].isSmokePos2(move_x_,move_y_);
-			if(hp<temp_smoke->danger(this))
+			if(temp_smoke && hp<temp_smoke->danger(this))
 			{
 				you.SetInter(IT_SMOKE);
 				if(!ynPrompt(LOC_SYSTEM_FORBIDZONE_YN, LOC_SYSTEM_DANGER_MSG, CL_danger, false,false,true,false)) {
@@ -1399,7 +1648,7 @@ int players::move(short_move x_mov, short_move y_mov)
 
 		if(env[current_level].isMove(move_x_,move_y_,isFly(),isSwim()) ||
 			(drowned && (env[current_level].dgtile[move_x_][move_y_].tile == DG_SEA ||
-				env[current_level].dgtile[move_x_][move_y_].tile == DG_LAVA)
+				(!IsDiving() && env[current_level].dgtile[move_x_][move_y_].tile == DG_LAVA))
 			))
 		{
 			int quick_ = GetProperty(TPT_QUICK_DASH);
@@ -1890,6 +2139,13 @@ int players::GetThrowDelay(item_type type_, bool random_)
 		delay_ += rand_float(0.99f, 0.0f);
 	return delay_;
 }
+int players::GetThrowDelay(item* item_, bool random_)
+{
+	int delay_ = GetThrowDelay(item_->type,random_);
+	if(IsSakuyaKnife(item_))
+		delay_ = max(1,(int)(delay_*0.8f));
+	return delay_;
+}
 int players::GetSpellDelay()
 {
 	if(equipment[ET_WEAPON] && equipment[ET_WEAPON]->value5 == WB_FAST_CAST)
@@ -1991,9 +2247,9 @@ int players::GetSpellPower(int s1_, int s2_, int s3_)
 		power_ *= 1.5f;
 	}
 	
-	if(GetArtifactProperty(ART_MAGICBOOST) > 0) {
+	int magicboost_ = GetArtifactProperty(ART_MAGICBOOST);
+	for(int i = 0; i < magicboost_; i++)
 		power_ *= 1.5f;
-	}
 
 	return power_;
 }
@@ -2186,7 +2442,7 @@ int players::HpRecoverDelay(int delay_)
 		cacul_ += 100 * you.GetBuffOk(BUFFSTAT_REGEN);
 	}
 	if(s_regen) {
-		cacul_ += s_regen;
+		cacul_ += 40*s_regen;
 	}
 	if(GetProperty(TPT_REGEN)>0)
 	{
@@ -2226,7 +2482,7 @@ interupt_type players::HpRecover(int delay_)
 bool skill_suicide_bomb(int power, bool short_, unit* order, coord_def target);
 void deadlog();
 void resurectionlog(string reason);
-int players::HpUpDown(int value_,damage_reason reason, unit *order_)
+int players::HpUpDown(int value_,damage_reason reason, unit *order_, bool non_dead)
 {
 	int prev_value_ = value_;
 	if (value_ > 0 && s_evoke_ghost) {
@@ -2293,6 +2549,7 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_)
 			{
 				if (&(*it) == equipment[ET_NECK]) {
 					you.resetAmuletPercent((amulet_type)equipment[ET_NECK]->value1, true);
+					you.unequip(ET_NECK, true);
 					DeleteItem(it);
 					break;
 				}
@@ -2827,6 +3084,8 @@ void players::FairyRevive(bool speak_)
 						if (env[current_level].isMove(rit->x, rit->y, true, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && env[current_level].isInSight(coord_def(rit->x, rit->y)) && you.position != (*rit))
 						{
 							monster* mon_ = env[current_level].AddMonster(you.lilly_allys[i].id, M_FLAG_ALLY, coord_def(rit->x, rit->y));
+							if(!mon_)
+								continue;
 							if (!(mon_->flag & M_FLAG_UNIQUE))
 							{
 								mon_->name = name_infor(fairy_name[you.lilly_allys[i].name]);
@@ -3214,6 +3473,10 @@ int players::CheckPeanltyTurn(int level_)
 	{
 		return penalty_turn[3];
 	}
+	else if (level_ == SCARLET_UNDER_LEVEL)
+	{
+		return get_scarlet_under_penalty_turn(level_);
+	}
 	return 0;
 }
 
@@ -3507,7 +3770,7 @@ bool players::SetLevitation(int levitation_)
 	return true;
 }
 bool players::NowLevitation() {
-	return ((GetProperty(TPT_BIG_WING) > 0) || s_levitation);
+	return !IsDiving() && ((GetProperty(TPT_BIG_WING) > 0) || s_levitation);
 }
 bool players::SetGlow(int glow_, bool no_speak, bool setting)
 {
@@ -3611,6 +3874,31 @@ bool players::SetInvisible(int invisible_)
 	power_decre = 0;
 	if(s_invisible>100)
 		s_invisible = 100;
+	return true;
+}
+bool players::SetDive(int dive_)
+{
+	if(!dive_ || s_dive)
+		return false;
+	if(s_fire)
+	{
+		s_fire = 0;
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_EXTINGUISH),true,false,false,CL_white_blue);
+	}
+	if(s_levitation)
+	{
+		s_levitation = 0;
+		if(HasAbility(SKL_LEVITATION_OFF))
+		{
+			int temp = Ability(SKL_LEVITATION_OFF,false,true,1);
+			Ability(SKL_LEVITATION,false,false,temp);
+		}
+	}
+	printlog(LocalzationManager::formatString(LOC_SYSTEM_YOU_DIVE, PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile])) + " ",false,false,false,CL_white_blue);
+	s_dive += dive_;
+	power_decre = 0;
+	if(s_dive>100)
+		s_dive = 100;
 	return true;
 }
 bool players::SetTogleInvisible(bool off_)
@@ -4206,6 +4494,27 @@ bool players::SetGlutton(int glutton_, int turn_) {
 	s_glutton_turn = turn_;
 	return true;
 }
+bool players::UnSetAcid() {
+	s_acid_turn = 0;
+	AcUpDown(0, s_acid);
+	s_acid = 0;
+	return true;
+}
+bool players::SetAcid(int acid_, int turn_) {
+	if(randA(s_acid + 15) > 7) {//산성확률 기본50%, 올라갈수록 감소하여 23%까지 
+		//저항 추가?
+		return true;
+	}
+	s_acid_turn = turn_;
+	if(s_acid+acid_ > 15) {
+		acid_ = 15-s_acid;
+	}
+	if(acid_ > 0) {
+		s_acid += acid_;
+		AcUpDown(0, -acid_);
+	}
+	return true;
+}
 int players::AbsorbShield(int damage_) {
 	if(!damage_ || s_shield.percent == 0)
 		return damage_;
@@ -4293,17 +4602,22 @@ int players::DeleteProperty(tribe_proper_type type_)
 }
 bool players::Teleport()
 {
-	while(1)
+	vector<coord_def> candidates;
+	for(int x = 0; x < DG_MAX_X; x++)
 	{
-		int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
-		if(env[current_level].isMove(x_,y_) && !env[current_level].isMonsterPos(x_,y_))
+		for(int y = 0; y < DG_MAX_Y; y++)
 		{
-			env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
-			SetXY(x_,y_);
-			return true;
+			if(env[current_level].isMove(x,y) && !env[current_level].isMonsterPos(x,y))
+				candidates.push_back(coord_def(x,y));
 		}
 	}
-	return false;
+	if(candidates.empty())
+		return false;
+
+	coord_def destination = candidates[randA(static_cast<int>(candidates.size())-1)];
+	env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, 4, 0, this);
+	SetXY(destination);
+	return true;
 }
 bool players::Blink(int time_)
 {
@@ -4548,6 +4862,10 @@ string GetUniqueCharString(int char_type){
 		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_LUNA);
 	case UNIQ_START_YOUMU:
 		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_YOUMU);
+	case UNIQ_START_SAKUYA:
+		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_SAKUYA);
+	case UNIQ_START_CIRNO:
+		return LocalzationManager::locString(LOC_SYSTEM_PLAYER_CIRNO);
 	default:
 		return "";
 	}
@@ -4615,6 +4933,8 @@ const char* GetUniqueStartStatString(unique_starting_type start) {
     case UNIQ_START_STAR:   return "Star";
     case UNIQ_START_LUNA:   return "Luna";
     case UNIQ_START_YOUMU:  return "Youmu";
+    case UNIQ_START_SAKUYA: return "Sakuya";
+    case UNIQ_START_CIRNO:  return "Cirno";
     default: return "Unknown";
     }
 }
@@ -4659,7 +4979,7 @@ interupt_type players::resetLOS(bool speak_)
 			{
 				env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_INSIGHT;
 
-				if(env[current_level].isBamboo())
+				if(env[current_level].isInfiniteMap())
 				{
 					env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_EXPLORE;
 				}
@@ -4680,7 +5000,7 @@ interupt_type players::resetLOS(bool speak_)
 					if(distan_coord(position,goal_)>((sight+1)*(sight+1)-1))
 					{
 						env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_INSIGHT;
-						if(env[current_level].isBamboo())
+						if(env[current_level].isInfiniteMap())
 						{
 							env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_EXPLORE;
 						}
@@ -4741,7 +5061,7 @@ interupt_type players::resetLOS(bool speak_)
 					else if(i == RT_END - 1)
 					{
 						env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_INSIGHT;
-						if(env[current_level].isBamboo())
+						if(env[current_level].isInfiniteMap())
 						{
 							env[current_level].dgtile[x][y].flag = env[current_level].dgtile[x][y].flag & ~FLAG_EXPLORE;
 						}
@@ -4782,6 +5102,8 @@ interupt_type players::resetLOS(bool speak_)
 						case DG_SCARLET_STAIR:							
 						case DG_SCARLET_L_STAIR:
 						case DG_SCARLET_U_STAIR:
+						case DG_FORESTOFMAGIC_STAIR:
+						case DG_DOLLSHOUSE_STAIR:
 						case DG_BAMBOO_STAIR:
 						case DG_EIENTEI_STAIR:
 						case DG_SUBTERRANEAN_STAIR:
@@ -4789,7 +5111,7 @@ interupt_type players::resetLOS(bool speak_)
 						case DG_DEPTH_STAIR:
 						case DG_DREAM_STAIR:
 						case DG_MOON_STAIR:		
-						case DG_PANDEMONIUM_STAIR:	
+						case DG_PANDEMONIUM_STAIR:
 						case DG_HAKUREI_STAIR:
 						case DG_TEMPLE_JOON_AND_SION:
 						case DG_TEMPLE_BYAKUREN:
@@ -4834,10 +5156,16 @@ interupt_type players::resetLOS(bool speak_)
 								break;				
 							case DG_SCARLET_U_STAIR:
 								map_list.dungeon_enter[SCARLET_U].detected = true;		
-								break;				
+								break;
+							case DG_FORESTOFMAGIC_STAIR:
+								map_list.dungeon_enter[FORESTOFMAGIC].detected = true;		
+								break;
+							case DG_DOLLSHOUSE_STAIR:
+								map_list.dungeon_enter[DOLLSHOUSE].detected = true;		
+								break;
 							case DG_BAMBOO_STAIR:
 								map_list.dungeon_enter[BAMBOO].detected = true;		
-								break;				
+								break;
 							case DG_EIENTEI_STAIR:	
 								break;				
 							case DG_SUBTERRANEAN_STAIR:
@@ -4990,7 +5318,7 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 		{
 			PowUpDown(t->value5);
 			if (speak_)
-				printlog(LocalzationManager::locString(LOC_SYSTEM_PICKUP_PITEM), false, false, false, CL_normal);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_PICKUP_PITEM)+" ", false, false, false, CL_normal);
 		}
 		ReleaseMutex(mutx);
 		if (speak_)
@@ -5165,12 +5493,26 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 			}
 		}
 	}
-	for(it = item_list.begin(); it != item_list.end() && num != 'Z'+1;it++,num++)
+	bool used_id[52] = {};
+	for(it = item_list.begin(); it != item_list.end(); it++)
 	{
-		if((*it).id != num)
+		int id_num = asctonum(it->id);
+		if(id_num >= 0 && id_num < 52)
+			used_id[id_num] = true;
+	}
+	int free_id = 0;
+	while(free_id < 52 && used_id[free_id])
+		free_id++;
+	if(free_id < 52)
+		num = numtoasc(free_id);
+	else
+		num = 0;
+
+	for(it = item_list.begin(); it != item_list.end(); it++)
+	{
+		int id_num = asctonum(it->id);
+		if(id_num < 0 || id_num > free_id)
 			break;
-		if(num=='z')
-			num = 'A'-1;
 	}
 	if((num >= 'a' && num <= 'z') || (num >= 'A' && num <= 'Z'))
 	{
@@ -5243,6 +5585,10 @@ bool players::DeleteItem(const list<item>::iterator it, int num_)
 
 bool players::Eat(char id_)
 {
+	if(IsDiving()) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION), true, false, false, CL_normal);
+		return false;
+	}
 	list<item>::iterator it;
 	for(it = item_list.begin(); it != item_list.end();it++)
 	{
@@ -5250,6 +5596,12 @@ bool players::Eat(char id_)
 		{
 			if((*it).type == ITM_FOOD)
 			{
+				if(power >= GetMaxPower() && god != GT_MINORIKO &&
+					(it->name.getSystemKey() != LOC_SYSTEM_ITEM_ICE_CREAM || GetHp() >= GetMaxHp()))
+				{
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ALREADY_FULL_POWER),true,false,false,CL_normal);
+					return false;
+				}
 				if(!you.isequip(it))
 				{
 					if((*it).value1 == 0)
@@ -5278,6 +5630,8 @@ bool players::Eat(char id_)
 					}
 					printlog(LocalzationManager::locString(LOC_SYSTEM_EAT_FINISH),false,false,false,CL_normal);
 					PowUpDown((*it).value5);
+					if((*it).name.getSystemKey() == LOC_SYSTEM_ITEM_ICE_CREAM)
+						HpUpDown(6+randA_1(9),DR_POTION);
 					DeleteItem(it,1);
 					enterlog();
 					return true;		
@@ -5300,6 +5654,10 @@ bool players::Eat(char id_)
 }
 bool players::Drink(char id_)
 {
+	if(IsDiving()) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION), true, false, false, CL_normal);
+		return false;
+	}
 	if (you.s_pure_turn && you.s_pure >= 20)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_PURITY_PENALTY_POTION), true, false, false, CL_normal);
@@ -5405,8 +5763,13 @@ bool players::Drink(char id_)
 	printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_NOT_EXIST),true,false,false,CL_normal);
 	return false;
 }
+bool evoke_prev_fail();
 bool players::Evoke(char id_, bool auto_)
 {
+	if(IsDiving()) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION), true, false, false, CL_normal);
+		return false;
+	}
 	for(auto it = item_list.begin(); it != item_list.end(); it++)
 	{
 		if((*it).id == id_)
@@ -5420,6 +5783,10 @@ bool players::Evoke(char id_, bool auto_)
 			WaitForSingleObject(mutx, INFINITE);
 			if((*it).type == ITM_SPELL)
 			{
+				if(evoke_prev_fail()) {
+					ReleaseMutex(mutx);
+					return false;
+				}
 				if(((*it).identify || (*it).value3 == -1) && (*it).value1 <= 0)
 				{
 					printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_EMPTY),true,false,false,CL_normal);
@@ -5436,6 +5803,7 @@ bool players::Evoke(char id_, bool auto_)
 						printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_EMPTY),true,false,false,CL_normal);
 						(*it).value3 = -1; //-1이면 비어있는것이 확정
 						ReleaseMutex(mutx);
+						you.time_delay += you.GetNormalDelay();
 						return true;
 					}
 					iden_list.spellcard_list[(*it).value2].iden = 2;
@@ -5446,18 +5814,39 @@ bool players::Evoke(char id_, bool auto_)
 					ReleaseMutex(mutx);
 					
 					you.doingActionDump(DACT_EVOKE, (*it).name.getName());
+					you.time_delay += you.GetNormalDelay();
 					return true;
 				}
 				return false;
 			}
+			if((*it).type == ITM_WEAPON_SPEAR)
+			{
+				ReleaseMutex(mutx);
+
+				if(evoke_evokable(&(*it), auto_, 0, EVK_SPEAR))
+				{
+					you.time_delay += you.GetAtkDelay();
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
 			if((*it).type == ITM_MISCELLANEOUS)
 			{
+				if(evoke_prev_fail()) {
+					ReleaseMutex(mutx);
+					return false;
+				}
 				ReleaseMutex(mutx);
 
 				if(evoke_evokable(&(*it), auto_, 0, (evoke_kind)(*it).value1))
 				{
 					it->identify = true;
 					you.doingActionDump(DACT_EVOKE, (*it).name.getName());
+					you.time_delay += you.GetNormalDelay();
+					if(it->value1 == EVK_FROZEN_FROG && it->value4 <= 0)
+						DeleteItem(it);
 					return true;
 				}
 				else {
@@ -5466,6 +5855,10 @@ bool players::Evoke(char id_, bool auto_)
 			}
 			if ((*it).type == ITM_AMULET)
 			{
+				if(evoke_prev_fail()) {
+					ReleaseMutex(mutx);
+					return false;
+				}
 				if (equipment[ET_NECK] != &(*it))
 				{
 					printlog(LocalzationManager::locString(LOC_SYSTEM_EVOKE_ONLY_EQUIP_AMULET), true, false, false, CL_normal);
@@ -5489,6 +5882,7 @@ bool players::Evoke(char id_, bool auto_)
 					(*it).value3++;
 					you.doingActionDump(DACT_EVOKE, (*it).name.getName());
 					resetAmuletPercent((amulet_type)(*it).value1, true);
+					you.time_delay += you.GetNormalDelay();
 					return true;
 				}
 				else
@@ -5510,6 +5904,10 @@ bool players::Evoke(char id_, bool auto_)
 }
 bool players::Read(char id_)
 {
+	if(IsDiving()) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION), true, false, false, CL_normal);
+		return false;
+	}
 	list<item>::iterator it;
 	for(it = item_list.begin(); it != item_list.end();it++)
 	{
@@ -5527,7 +5925,7 @@ bool players::Read(char id_)
 					int use_num_ = 1;
 					if (you.god == GT_JOON_AND_SION || you.GetPunish(GT_JOON_AND_SION))
 					{
-						if (you.god_value[GT_JOON_AND_SION][0] == 1 || randA(3) >= 0)
+						if (you.god_value[GT_JOON_AND_SION][0] == 1 || randA(3) == 0)
 						{
 							use_num_ = rand_int(2, 3);
 						}
@@ -5598,7 +5996,7 @@ bool players::Read(char id_)
 }
 bool players::Memorize(int spell_, bool immediately)
 {
-	if(spell_ <= SPL_NONE || spell_ > SPL_MAX)
+	if(spell_ <= SPL_NONE || spell_ >= SPL_MAX)
 		return false;
 	int skill_level_ = SpellLevel((spell_list)spell_);
 	
@@ -5658,6 +6056,25 @@ bool players::HasAbility(int skill_) {
 			return true;
 	}
 	return false;
+}
+bool players::IsDiving()
+{
+	return s_dive > 0;
+}
+void players::EndDive(bool speak_)
+{
+	if(s_dive > 0) {
+		if(speak_)
+		{
+			printlog(LocalzationManager::formatString(LOC_SYSTEM_SKILL_DIVE_STOP, PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[you.position.x][you.position.y].tile])) + " ",false,false,false,CL_normal);
+		}
+		PlaySE("diveout");
+	}
+	s_dive = 0;	
+	if(HasAbility(SKL_DIVE_OFF))
+		Ability(SKL_DIVE_OFF, false, true, 1);
+	if(GetArtifactProperty(ART_DIVE) > 0)
+		Ability(SKL_DIVE, false, false, 1);
 }
 int players::Ability(int skill_, bool god_, bool unset_, int immediately)
 {
@@ -5889,15 +6306,25 @@ bool players::PunishUpDown(int punish_, god_type god_ , bool absolutely_ )
 
 bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_, beam_iterator& beam)
 {
-	//던질때 장비된 아이템이면 장비가 풀리도록 만들어야함
-	//저주받은 템은 던질 수 없다!
 	if((*it).can_throw)
 	{
+		equip_type equipped_slot_ = getequipslot(&(*it));
+		if(equipped_slot_ != ET_LAST && (*it).curse)
+		{
+			(*it).identify_curse = true;
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY),true,false,false,CL_normal);
+			return false;
+		}
+
+		EndDive();
 		
 		bool kiku_ = ((*it).type >= ITM_THROW_FIRST && (*it).type < ITM_THROW_LAST && (*it).value4 == TMT_KIKU_COMPRESSER);
+		bool sakuya_ = IsSakuyaKnife(&(*it));
 		
 		if(!CheckSucide(you.position, target_pos_, false,kiku_?1:0 , false))
 			return false;
+		bool returned = (you.s_knife_collect && (*it).fixed_artifact != FIXED_ARTIFACT_GUNGNIR) ||
+			(you.GetArtifactProperty(ART_RETURN) > 0 && randA(1) == 0);
 
 
 		int type_ = 0;		
@@ -5928,6 +6355,10 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 				temp_infor.type2 = GetWeapontoTanmac((weapon_brand)(*it).value5);
 		}
 
+		// 장착한 무기를 던질 때 장비 효과를 남기지 않고 즉시 해제한다.
+		if(equipped_slot_ != ET_LAST)
+			unequip(equipped_slot_, true);
+
 		if(kiku_)
 		{ //키쿠이치 컴프레서 전용
 
@@ -5939,7 +6370,7 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 			for(int i=0;i<(you.GetParadox()?2:1);i++)
 			{
 				PlaySE("throw");
-				coord_def c_ = throwtanmac(type_,beam,temp_infor,&(*it));
+				coord_def c_ = throwtanmac(type_,beam,temp_infor,&(*it),true,returned || (you.GetParadox()&&i==0));
 				int power_ = GetSkillLevel(SKT_TANMAC, true)*5;
 				attack_infor temp_att(randC(3,5+power_/8),3*(5+power_/8),99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_KIKU_SPRAY));
 				PlaySE("bomb"); 
@@ -5952,19 +6383,28 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 		
 			if(short_)
 				temp_infor.length = length_;
+			vector<beam_iterator> side_beams;
+			if(sakuya_)
+				side_beams = GetSakuyaKnifeBeams(beam.target,getThrowLength());
 			for(int i=0;i<(you.GetParadox()?2:1);i++)
 			{
-				PlaySE("shoot");
-				throwtanmac(type_,beam,temp_infor,&(*it), true, (you.GetParadox()&&i==0)?true:false);
+				PlaySE((*it).type == ITM_WEAPON_SHORTBLADE && (*it).value0 == 1?"knife":"shoot");
+				if(sakuya_)
+					ThrowSakuyaKnives(beam,side_beams,temp_infor,&(*it),returned || (you.GetParadox()&&i==0),type_);
+				else
+					throwtanmac(type_,beam,temp_infor,&(*it),true,returned || (you.GetParadox()&&i==0));
 			}
 		}
 		you.SetParadox(0);
+		TimeParadoxThrow(&(*it),target_pos_,temp_infor,type_);
 
 		doingActionDump(DACT_SHOOT, (*it).name.getName());
 
 
-		time_delay += GetThrowDelay((*it).type);
-		if((!s_knife_collect || TanmacDeleteRand(tanmac_type_, false)) && DeleteItem(it,1))
+		time_delay += GetThrowDelay(&(*it));
+
+
+		if((!returned || TanmacDeleteRand(tanmac_type_, false)) && DeleteItem(it,1))
 		{
 			if (throw_weapon == NULL)
 			{
@@ -6047,6 +6487,15 @@ void players::resetAmuletPercent(amulet_type type_, bool use_)
 }
 bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 {
+	if(IsDiving()) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION), true, false, false, CL_normal);
+		return false;
+	}
+	if(char_type == UNIQ_START_CIRNO && it->fixed_artifact == FIXED_ARTIFACT_LAEVATEIN)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_CIRNO_LAEVATEIN_TOO_HOT),true,false,false,CL_normal);
+		return false;
+	}
 	for(equip_type i = ET_FIRST;i!=ET_LAST;i=(equip_type)(i+1))
 	{
 		if(equipment[i] == &(*it))
@@ -6064,12 +6513,12 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 		int your_size_ = GetProperty(TPT_SIZE);
 		if(your_size_>0)
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_TOO_BIG),true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_TOO_SMALL),true,false,false,CL_normal);
 			return 0;
 		}
 		if(your_size_<0)
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_TOO_SMALL),true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EQUIP_TOO_BIG),true,false,false,CL_normal);
 			return 0;
 		}
 	}
@@ -6093,6 +6542,8 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 
 		equip_stat_change(&(*it), type_, true);
 		equipment[type_] = &(*it);
+		if((*it).GetArtifactProperty(ART_CURSE) > 0 && !(*it).curse && randA(2) == 0)
+			(*it).Curse(true,type_);
 		ReSetASPanlty();
 		if(type_ == ET_WEAPON)
 		{
@@ -6131,6 +6582,8 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 			ostringstream ss;
 			ss << (*it).id << " - " << (*it).GetName() << " (" << LocalzationManager::locString(LOC_SYSTEM_EQUIP) << ")";
 			printlog(ss.str(),true,false,false,(*it).item_color());
+			if(char_type == UNIQ_START_CIRNO && it->fixed_artifact == FIXED_ARTIFACT_ICEFAIRYRING)
+				printlog(LocalzationManager::locString(LOC_SYSTEM_CIRNO_ICEFAIRYRING_EQUIP),true,false,false,CL_normal);
 
 			
 			if(type_ == ET_ARMOR)
@@ -6705,8 +7158,11 @@ int players::getThrowLength() {
 int players::haveGoal()
 {
 	int goal_ = 0;
-	for(int i=0;i<RUNE_HAKUREI_ORB;i++)
+	for(int i = 0; i<RUNE_MAX;i++)
 	{
+		if(i == RUNE_HAKUREI_ORB) {
+			continue;
+		}
 
 		if(rune[i]>0)
 			goal_++;
@@ -6753,6 +7209,10 @@ bool players::isPossibeEquip(equip_type type_, bool massage_)
 }
 bool players::unequip(equip_type type_, bool force_)
 {
+	if(!force_ && IsDiving()) {
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION), true, false, false, CL_normal);
+		return false;
+	}
 	if(type_ < 0 || type_ >= ET_LAST) {
 		return true;
 	}
@@ -6794,6 +7254,8 @@ bool players::unequip(equip_type type_, bool force_)
 				PlaceHolderHelper(equipment[type_]->GetName(), equipment[type_]->item_color()));
 		}
 		equipment[type_] = NULL;
+		if(GetArtifactProperty(ART_PERMAINVI) > 0)
+			s_invisible = -1;
 		ReSetASPanlty();
 		ReleaseMutex(mutx);
 		if(!force_)
@@ -6892,6 +7354,9 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 			case WB_SILVER:
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_SILVER),true,false,false,CL_white_blue);	
 				break;
+			case WB_FLOOD:
+				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_FLOOD),true,false,false,CL_white_blue);
+				break;
 			default:			
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_BUG),true,false,false,CL_danger);	
 				break;		
@@ -6942,6 +7407,9 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 				case WB_SILVER:
 					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_SILVER),true,false,false,CL_white_blue);	
 					break;
+				case WB_FLOOD:
+					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FLOOD),true,false,false,CL_normal);
+					break;
 				default:			
 					printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_BUG),true,false,false,CL_danger);	
 					break;		
@@ -6971,11 +7439,6 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 			if(where_ == ET_ARMOR)
 				equipArmour((armour_kind)(*it).value5, plus_);
 
-
-			if(where_ == ET_ARMOR && (*it).value5==AMK_AUTUMN)
-			{
-				ResistUpDown(-1*plus_,RST_FIRE);
-			}
 		}
 
 
@@ -7014,6 +7477,8 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 	{
 		for(auto it2 = (*it).atifact_vector.begin(); it2 != (*it).atifact_vector.end(); it2++)
 		{
+			if(char_type == UNIQ_START_CIRNO && it->fixed_artifact == FIXED_ARTIFACT_ICEFAIRYRING && it2->kind == ART_INT && it2->value == -9)
+				continue;
 			effectartifact((artifact_type)it2->kind, it2->value * plus_);
 		}
 		(*it).identify = true;
@@ -7122,6 +7587,40 @@ bool players::GetCloudResist()
 	return GetProperty(TPT_CLOUD_RESIST);
 }
 
+int players::CanSlash(attack_type att_type) {
+	int percent_ = 0;
+	for(int i = 0; i < 2; i++) {
+		equip_type et = (i == 0?ET_WEAPON:ET_SHIELD);
+		bool check_mon_ = false;
+		monster* mon_ = nullptr;
+		if(you.equipment[et] && you.equipment[et]->isweapon() && you.equipment[et]->canSlashTanmac()) {
+			if(!check_mon_) {
+				mon_ = env[current_level].close_mon(you.position.x,you.position.y, MET_ENEMY, 2);
+				check_mon_ = true;
+			}
+			if(mon_ == nullptr) {
+				//근처에 적이 없고
+				if(!s_confuse && !s_paralyse) {
+					//혼란이나 마비상태가 아니며, (광기는 가능!)
+					if(isGrazableAtt(att_type)) {
+						//기본적으로 그레이즈가 되는 기술들
+						int long_blade = GetSkillLevel(SKT_LONGBLADE, true);
+						if(long_blade >= 8) {//최소 롱 블레이드 스킬이 8이상
+							if(percent_ == 0) {
+								percent_ = 15 + (long_blade-7)*1.5f;//최대확률 45%
+							} else {
+								float temp = 120 + (long_blade-7)*1.5f;
+								percent_ = (int)(percent_*temp/100);
+								
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return percent_;
+}
 
 void players::burstCloud(int kind_, int rate_)
 {	
@@ -7165,6 +7664,8 @@ bool players::isView(const monster* monster_info)
 {
 	
 	if(isArena() || s_evoke_ghost)
+		return false;
+	if(IsDiving())
 		return false;
 	if((you.s_invisible || you.togle_invisible) && 
 		!(you.s_glow || you.GetBuffOk(BUFFSTAT_HALO)) &&

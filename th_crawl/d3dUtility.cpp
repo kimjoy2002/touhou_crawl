@@ -14,6 +14,8 @@
 #include "key.h"
 #include "soundmanager.h"
 #include "joypad.h"
+#include "crash_dump.h"
+#include "web_backend.h"
 #include <wrl/client.h>
 #include <imm.h>
 #include <XInput.h>
@@ -81,6 +83,10 @@ unsigned int WINAPI GameLoop(void *arg);
 unsigned int WINAPI DrawLoop(void *arg);
 unsigned int WINAPI GameInnerLoop();
 bool d3d::InitD3D11(HINSTANCE hInstance, int width, int height, bool windowed){
+#ifdef WEB_TILES
+    if (web::enabled() && web::headless())
+        return true;
+#endif
     WNDCLASS wc = {};
     wc.style = CS_HREDRAW | CS_VREDRAW;
     wc.lpfnWndProc = d3d::WndProc;
@@ -144,17 +150,23 @@ bool d3d::InitD3D11(HINSTANCE hInstance, int width, int height, bool windowed){
 
 void OnResize(int width, int height)
 {
+    if (!g_pSwapChain || !g_pd3dDevice || !g_pImmediateContext || width <= 0 || height <= 0) return;
+
     if (g_pImmediateContext) g_pImmediateContext->OMSetRenderTargets(0, 0, 0);
-    if (g_pRenderTargetView) g_pRenderTargetView->Release();
+    if (g_pRenderTargetView) {
+        g_pRenderTargetView->Release();
+        g_pRenderTargetView = nullptr;
+    }
 
 
 	if (option_mg.getFullscreen()) {
 		DXGI_OUTPUT_DESC outputDesc;
 		Microsoft::WRL::ComPtr<IDXGIOutput> output;
-		g_pSwapChain->GetContainingOutput(&output);
-		output->GetDesc(&outputDesc);
-		width = outputDesc.DesktopCoordinates.right - outputDesc.DesktopCoordinates.left;
-		height = outputDesc.DesktopCoordinates.bottom - outputDesc.DesktopCoordinates.top;
+		if (SUCCEEDED(g_pSwapChain->GetContainingOutput(&output)) &&
+            SUCCEEDED(output->GetDesc(&outputDesc))) {
+            width = outputDesc.DesktopCoordinates.right - outputDesc.DesktopCoordinates.left;
+            height = outputDesc.DesktopCoordinates.bottom - outputDesc.DesktopCoordinates.top;
+        }
 	}
 
     HRESULT hr = g_pSwapChain->ResizeBuffers(
@@ -165,8 +177,9 @@ void OnResize(int width, int height)
     hr = g_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&pBackBuffer);
     if (FAILED(hr)) return;
 
-    g_pd3dDevice->CreateRenderTargetView(pBackBuffer, nullptr, &g_pRenderTargetView);
+    hr = g_pd3dDevice->CreateRenderTargetView(pBackBuffer, nullptr, &g_pRenderTargetView);
     pBackBuffer->Release();
+    if (FAILED(hr)) return;
 
     g_pImmediateContext->OMSetRenderTargets(1, &g_pRenderTargetView, nullptr);
 
@@ -194,10 +207,11 @@ void OnResize(int width, int height)
 
 void ToggleFullscreen(bool fullscreen)
 {
-    if (!g_pSwapChain || !g_pd3dDevice) return;
+    if (!g_pSwapChain || !g_pd3dDevice || !g_pImmediateContext) return;
 
     UINT width = option_mg.getWidth();
     UINT height = option_mg.getHeight();
+    HRESULT hr = S_OK;
 
     // 디스플레이 해상도 전환
     if (fullscreen)
@@ -215,14 +229,22 @@ void ToggleFullscreen(bool fullscreen)
             DXGI_MODE_DESC closestMode = {};
             if (SUCCEEDED(output->FindClosestMatchingMode(&targetMode, &closestMode, g_pd3dDevice)))
             {
-                g_pSwapChain->ResizeTarget(&closestMode);
+                hr = g_pSwapChain->ResizeTarget(&closestMode);
+                if (SUCCEEDED(hr)) {
+                    width = closestMode.Width;
+                    height = closestMode.Height;
+                }
             }
         }
 
-        g_pSwapChain->SetFullscreenState(TRUE, nullptr);
+        hr = g_pSwapChain->SetFullscreenState(TRUE, nullptr);
+        if (FAILED(hr)) return;
     }
     else
     {
+        hr = g_pSwapChain->SetFullscreenState(FALSE, nullptr);
+        if (FAILED(hr)) return;
+
         DXGI_MODE_DESC windowedMode = {};
         windowedMode.Width = width;
         windowedMode.Height = height;
@@ -231,42 +253,41 @@ void ToggleFullscreen(bool fullscreen)
         windowedMode.RefreshRate.Denominator = 1;
 
         g_pSwapChain->ResizeTarget(&windowedMode);
-        g_pSwapChain->SetFullscreenState(FALSE, nullptr);
     }
 
-    Sleep(50); // 전환 대기 (안 하면 버퍼 접근 실패할 수 있음)
-
+    g_pImmediateContext->OMSetRenderTargets(0, nullptr, nullptr);
     if (g_pRenderTargetView) {
         g_pRenderTargetView->Release();
         g_pRenderTargetView = nullptr;
     }
+    g_pImmediateContext->Flush();
 
     // 스왑체인 버퍼 리사이즈
-    HRESULT hr = g_pSwapChain->ResizeBuffers(
+    hr = g_pSwapChain->ResizeBuffers(
         0, width, height, DXGI_FORMAT_UNKNOWN, DXGI_SWAP_CHAIN_FLAG_ALLOW_MODE_SWITCH);
-    if (FAILED(hr)) return;
-
-
-    // 렌더타겟 및 뷰포트 재설정
-    if (g_pImmediateContext) g_pImmediateContext->OMSetRenderTargets(0, 0, 0);
-    if (g_pRenderTargetView) { g_pRenderTargetView->Release(); g_pRenderTargetView = nullptr; }
 
     Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
-    hr = g_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&backBuffer);
-    if (FAILED(hr)) return;
+    HRESULT bufferHr = g_pSwapChain->GetBuffer(
+        0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(backBuffer.GetAddressOf()));
+    if (FAILED(bufferHr)) return;
 
-    g_pd3dDevice->CreateRenderTargetView(backBuffer.Get(), nullptr, &g_pRenderTargetView);
+    bufferHr = g_pd3dDevice->CreateRenderTargetView(backBuffer.Get(), nullptr, &g_pRenderTargetView);
+    if (FAILED(bufferHr)) return;
     g_pImmediateContext->OMSetRenderTargets(1, &g_pRenderTargetView, nullptr);
+
+    D3D11_TEXTURE2D_DESC backBufferDesc = {};
+    backBuffer->GetDesc(&backBufferDesc);
 
     D3D11_VIEWPORT vp = {};
     vp.TopLeftX = 0;
     vp.TopLeftY = 0;
-    vp.Width = (FLOAT)width;
-    vp.Height = (FLOAT)height;
+    vp.Width = static_cast<FLOAT>(backBufferDesc.Width);
+    vp.Height = static_cast<FLOAT>(backBufferDesc.Height);
     vp.MinDepth = 0.0f;
     vp.MaxDepth = 1.0f;
     g_pImmediateContext->RSSetViewports(1, &vp);
 
+    if (FAILED(hr)) return;
 
 	if (!option_mg.getFullscreen()) {
 		// 창 모드 전환 시 윈도우 스타일 복원
@@ -280,7 +301,7 @@ void ToggleFullscreen(bool fullscreen)
 }
 
 
-extern bool g_changefullscreen;
+extern std::atomic<bool> g_changefullscreen;
 int d3d::EnterMsgLoop()
 {
 	MSG msg;
@@ -303,7 +324,7 @@ int d3d::EnterMsgLoop()
 			if(msg.message == WM_SYSKEYDOWN && (msg.wParam == VK_RETURN && (msg.lParam & (1 << 29))) ) {
 				// Alt + Enter 감지
 				option_mg.setFullscreen(!option_mg.getFullscreen());
-				g_changefullscreen = true;
+				g_changefullscreen.store(true);
 			} else {
 				if (msg.message == WM_QUIT)
 					break;
@@ -379,7 +400,7 @@ unsigned int WINAPI DrawLoop(void *arg)
 			}
 			return 1;
 		}
-		__except (1)
+		__except (CrashDumpExceptionFilter(GetExceptionInformation()))
 		{
 		}
 	}
@@ -387,11 +408,11 @@ unsigned int WINAPI DrawLoop(void *arg)
 	{
 		g_ThreadCnt--;
 	}
-    g_pSwapChain->SetFullscreenState(FALSE, NULL);
-	g_pd3dDevice->Release();
-	g_pImmediateContext->Release();
-	g_pSwapChain->Release();
-	g_pRenderTargetView->Release();
+    if (g_pSwapChain) g_pSwapChain->SetFullscreenState(FALSE, NULL);
+	if (g_pd3dDevice) g_pd3dDevice->Release();
+	if (g_pImmediateContext) g_pImmediateContext->Release();
+	if (g_pSwapChain) g_pSwapChain->Release();
+	if (g_pRenderTargetView) g_pRenderTargetView->Release();
 	return 0;
 }
 
@@ -424,7 +445,7 @@ unsigned int WINAPI SoundLoop(void *arg)
 			}
 			return 1;
 		}
-		__except (1)
+		__except (CrashDumpExceptionFilter(GetExceptionInformation()))
 		{
 		}
 	}
@@ -441,6 +462,7 @@ unsigned int ExceptionGameLoop() {
 		return GameInnerLoop();
 	}
 	catch(std::exception& e) {
+		CrashDumpMessage(e.what());
 		std::string msg = "exception occurs! : ";
 		msg += e.what();
 		::MessageBoxA(0, msg.c_str(), "Error", MB_OK | MB_ICONERROR);
@@ -479,7 +501,7 @@ unsigned int WINAPI GameLoop(void *arg)
 		{
 			return ExceptionGameLoop();
 		}
-		__except(1)
+		__except(CrashDumpExceptionFilter(GetExceptionInformation()))
 		{
 		}
 	}
@@ -524,6 +546,9 @@ void InputInitialize(HINSTANCE hinstance)
 bool one_turn_click = true;
 
 bool isInScreen() {
+#ifdef WEB_TILES
+	if (web::enabled()) return false;
+#endif
 	POINT cursorPos;
 	GetCursorPos(&cursorPos);
 	RECT clientRect;
@@ -541,7 +566,11 @@ bool isInScreen() {
 
 
 bool isClicked(MOUSE_BUTTON button) {
-	if(!one_turn_click || GetForegroundWindow() != hwnd) {
+	bool fgOk = (GetForegroundWindow() == hwnd);
+#ifdef WEB_TILES
+	if (web::enabled()) fgOk = true;
+#endif
+	if(!one_turn_click || !fgOk) {
 		return false;
 	}
 
@@ -615,6 +644,24 @@ std::tuple<bool, POINT> isRealese()
 
 void InputUpdate()
 {
+#ifdef WEB_TILES
+    if (web::enabled()) {
+        int mx = 0, my = 0, btn = 0;
+        web::nextMouseFrame(mx, my, btn);
+        PreviousMouseState = CurrentMouseState;
+        ZeroMemory(&CurrentMouseState, sizeof(CurrentMouseState));
+        CurrentMouseState.rgbButtons[0] = (btn & 1) ? (char)0x80 : 0;
+        CurrentMouseState.rgbButtons[1] = (btn & 2) ? (char)0x80 : 0;
+        CurrentMouseState.rgbButtons[2] = (btn & 4) ? (char)0x80 : 0;
+        MousePoint.x = mx; MousePoint.y = my;
+        if ((CurrentMouseState.rgbButtons[0] & 0x80) && !(PreviousMouseState.rgbButtons[0] & 0x80))
+            prev_click_pos = MousePoint;
+        if (!(CurrentMouseState.rgbButtons[0] & 0x80) && (PreviousMouseState.rgbButtons[0] & 0x80))
+            finish_click_pos = MousePoint;
+        one_turn_click = true;
+        return;
+    }
+#endif
     if (!Mouse) return;
 
 	Mouse -> Acquire();

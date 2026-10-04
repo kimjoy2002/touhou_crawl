@@ -58,6 +58,12 @@ enum spell_list
 	SPL_ARROW,SPL_HANIWA_MAGIC_TANMAC,SPL_HANIWA_MAGIC_TANMAC2,SPL_HANIWA_MAGIC_TANMAC3,
 	SPL_BLINK_AWAY, SPL_ELEMENTAL_HARVESTER, SPL_NIGHTMARE_MANIFEST,
 	SPL_ROYALFLARE,
+	SPL_CONFUSE_SPORE, SPL_WEAKENDED_SPORE, SPL_ACID_BOLT, SPL_ORRERIRES_SUN, SPL_THROW_STAR,
+	SPL_SACRIFICE,
+	SPL_DOLL_LUNGE, SPL_CURSE, SPL_THROW_BUCKET,
+	SPL_DOLL_SPEAR, SPL_LITTLE_LEGION,
+	SPL_THROW_AXE, SPL_COUNTER_TANMAC,
+	SPL_GLACIER_WALL, SPL_COLD_ARMOUR,
 	SPL_MAX
 };
 
@@ -165,6 +171,9 @@ enum skill_list
 	SKL_FIREBALL,
 	SKL_MISSLE,
 	SKL_SILENCE,
+	SKL_CIRNO_ICE_CREATE,
+	SKL_DIVE,
+	SKL_DIVE_OFF,
 	SKL_MAX
 };
 
@@ -239,7 +248,8 @@ int GetSpellBombRange(spell_list spell);
 bool skill_philosopher_passive(int power, unit* order);
 bool skill_elec_passive(int power, unit* order);
 bool skill_elec_ball_bomb(int power, unit* order);
-
+void skill_cold_armour_burst(int power, int range, unit* order);
+attack_infor get_sacrifice_dam(int pow_, unit* doll);
 
 
 

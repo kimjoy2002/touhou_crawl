@@ -97,7 +97,13 @@ void FMODSoundManager::Initialize() {
 	addSound("thunder", "sound\\se\\thunder.mp3");
 	addSound("door", "sound\\se\\door.mp3");
 	addSound("royalflare", "sound\\se\\royalflare.mp3");
-
+	addSound("slash", "sound\\se\\slash.mp3");
+	addSound("bash", "sound\\se\\bash.mp3");
+	addSound("splash", "sound\\se\\splash.mp3");
+	addSound("gift", "sound\\se\\gift.mp3");
+	addSound("dive", "sound\\se\\dive.mp3");
+	addSound("diveout", "sound\\se\\diveout.mp3");
+    
     
 	loadBgmFromJson("sound\\bgm\\bgm.json");
 }

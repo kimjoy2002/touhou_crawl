@@ -262,6 +262,10 @@ public:
 	bool isautopick();
 	bool isArtifact();
 	bool isChargable();
+	bool canSlashTanmac();
+	bool canReachAttack();
+	bool canBashAttack();
+	bool canShockwave();
 	bool isEvokable();
 	bool isBreakable();
 	bool isNameAccent();

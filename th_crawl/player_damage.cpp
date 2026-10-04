@@ -8,6 +8,7 @@
 
 
 #include "player.h"
+#include "monster.h"
 #include "unit.h"
 #include "environment.h"
 #include "beam.h"
@@ -32,6 +33,25 @@
 extern HANDLE mutx;
 skill_type itemtoskill(item_type type_);
 extern int shieldPanaltyOfWeapon(item_type type, int weapon_kind);
+
+static bool isFireAttackForColdArmour(attack_type type_)
+{
+	switch(type_)
+	{
+	case ATT_FIRE:
+	case ATT_FIREPLUS:
+	case ATT_FIRE_WEAK:
+	case ATT_THROW_FIRE:
+	case ATT_THROW_FIRE_PYSICAL:
+	case ATT_CLOUD_FIRE:
+	case ATT_FIRE_BLAST:
+	case ATT_FIRE_PYSICAL_BLAST:
+	case ATT_FIRE_ENCHANT_BLAST:
+		return true;
+	default:
+		return false;
+	}
+}
 
 
 
@@ -174,7 +194,7 @@ int players::GetAttack(bool max_, equip_type type_)
 
 int players::GetHit(equip_type type_)
 {
-	int hit_ = 2+s_dex/3+ GetSkillLevel(SKT_FIGHT, true)/4;
+	int hit_ = 5+s_dex/3+ GetSkillLevel(SKT_FIGHT, true)/4;
 	if(equipment[type_] && equipment[type_]->type >= ITM_WEAPON_FIRST && equipment[type_]->type <= ITM_WEAPON_CLOSE)
 	{
 		skill_type skill_ = itemtoskill(equipment[type_]->type);
@@ -247,7 +267,7 @@ int players::GetAtkDelay()
 
 			delay_ = real_delay_+rand_float(0.99f,0.0f);
 		}
-		else if(equipment[ET_WEAPON])
+		else if(equipment[type_])
 			delay_ = 10;
 		
 		if(delay_<2)
@@ -358,11 +378,13 @@ int players::GetThrowAttack(const item* it, bool max_)
 
 int players::GetThrowHit(const item* it)
 {
-	int hit_ = 3+s_dex/2;	
+	int hit_ = 8+s_dex/3;
 
 	if (!(it->type >= ITM_THROW_FIRST && it->type<ITM_THROW_LAST))
 	{//이것은 장착무기이다..
-		hit_ = 1 + it->value1 + it->value4 + GetSkillLevel(SKT_TANMAC, true) / 2;
+		hit_ = 3 + it->value1 + it->value4 + GetSkillLevel(SKT_TANMAC, true) / 2;
+		if((it->type == ITM_WEAPON_SHORTBLADE || it->type == ITM_WEAPON_SPEAR) && it->value0 == 1)
+			hit_ += 3;
 	}
 	else
 	{
@@ -503,6 +525,9 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_THROW_SLOW_POISON:
 	case ATT_BEARTRAP:
 	case ATT_POISON_ENCHANT_BLAST:
+	case ATT_CONFUSE_SPORE:
+	case ATT_WEAK_SPORE:
+	case ATT_ACID_BYTE:
 	default:
 		{//데미지 계산공식
 			//최종데미지  :  1d(percent_*damage_) - 0d(ac_dec)
@@ -512,13 +537,17 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 			//최종데미지가 0보다 작으면 0이된다.
 			float percent_ = 1.0f;
 			int ac_dec=0;
-			for(int i = ac; i>0; i--)
-				percent_ -= (i<=15?0.008f:(i<=30?0.01f:0.005f));/*
-			for(int i = 4, j=3 ; j <= ac ; j+=i++)
-				ac_dec++;*/
-			ac_dec = (ac+1)/3;
+			if(ac >= 0) {
+				for(int i = ac; i>0; i--)
+					percent_ -= (i<=15?0.008f:(i<=30?0.01f:0.005f));
+			} else if(s_acid > 0) { //산성이 붙어야 마이너스 AC를 적용
+				for(int i = ac; i<0; i++)
+					percent_ += (i>=-5?0.01f:(i>=-10?0.015f:0.02f));
+			}
+			if(ac >= 0) {
+				ac_dec = (ac+1)/3;
+			}
 			damage_ = (int)round(damage_*percent_) - randA(ac_dec);
-			//damage_ = randA_1((int)round(damage_*percent_)) - randA(ac_dec);
 			if(damage_<0)
 				damage_ = 0;
 		}
@@ -528,9 +557,16 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 		{
 			float percent_ = 1.0f;
 			int ac_dec=0;
-			for(int i = ac/2; i>0; i--)
-				percent_ -= (i<=15?0.008f:(i<=30?0.01f:0.005f));
-			ac_dec = (ac/2+1)/3;
+			if(ac >= 0) {
+				for(int i = ac/2; i>0; i--)
+					percent_ -= (i<=15?0.008f:(i<=30?0.01f:0.005f));
+			} else if(s_acid > 0) { //산성이 붙어야 마이너스 AC를 적용
+				for(int i = ac; i<0; i++)
+					percent_ += (i>=-5?0.01f:(i>=-10?0.015f:0.02f));
+			}
+			if(ac >= 0) {
+				ac_dec = (ac/2+1)/3;
+			}
 			damage_ = (int)round(damage_*percent_) - randA(ac_dec);
 			//damage_ = randA_1((int)round(damage_*percent_)) - randA(ac_dec);
 			if(damage_<0)
@@ -550,6 +586,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_BLOOD:	
 	case ATT_BURST:
 	case ATT_DROWNING:
+	case ATT_POISON_BODY:
 		break;
 	}
 
@@ -689,10 +726,16 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_THROW_SLOW_POISON:
 		if(a.order)
 		{
-			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
-				 PlaceHolderHelper(name_.getName()),
-				 PlaceHolderHelper(a.name.getName()),
-				 PlaceHolderHelper(name.getName()));
+			if(a.no_owner) {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL_NO_OWNER,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
+					 PlaceHolderHelper(a.name.getName()),
+					 PlaceHolderHelper(name.getName()));
+			} else {
+				LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_NORMAL,false,false,false,a.order->isView()?CL_normal:CL_small_danger,
+					 PlaceHolderHelper(name_.getName()),
+					 PlaceHolderHelper(a.name.getName()),
+					 PlaceHolderHelper(name.getName()));
+			}
 		}
 		break;
 	case ATT_SILVER:
@@ -841,11 +884,23 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 	case ATT_COLD_ENCHANT_BLAST:
 	case ATT_ELEC_ENCHANT_BLAST:
 	case ATT_POISON_ENCHANT_BLAST:
+	case ATT_CONFUSE_SPORE:
+	case ATT_WEAK_SPORE:
 		if(a.order)
 		{
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_BLAST,false,false,false,CL_normal,
 				 PlaceHolderHelper(GetName()->getName()),
 				 PlaceHolderHelper(a.name.getName()));
+		}
+		break;
+	case ATT_ACID_BYTE:
+	case ATT_THROW_ACID:
+		if(a.order)
+		{
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_ACID,false,false,false,CL_normal,
+				PlaceHolderHelper(name_.getName()),
+				PlaceHolderHelper(a.name.getName()),
+				PlaceHolderHelper(GetName()->getName()));
 		}
 		break;
 	case ATT_SUN_BLAST:
@@ -916,6 +971,7 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_DROWNING,false,false,false,CL_normal,
 			PlaceHolderHelper(GetName()->getName()));
 		break;
+	case ATT_POISON_BODY:
 	case ATT_THROW_NONE_MASSAGE:
 		break;
 	}			
@@ -950,6 +1006,15 @@ void players::print_no_damage_message(attack_infor &a)
 }
 bool players::damage(attack_infor &a, bool perfect_)
 {
+	if(a.order && !a.order->isplayer())
+	{
+		monster* attack_mon_ = (monster*)a.order;
+		if(attack_mon_->id == MON_BULLET || attack_mon_->id == MON_HOMING)
+		{
+			a.no_owner = true;
+			a.name = attack_mon_->name;
+		}
+	}
 	int damage_ = calculate_damage(a.type,a.damage,a.max_damage);
 	int accuracy_ = a.accuracy;
 	float evasion = 0.0f;
@@ -958,7 +1023,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 	if (accuracy_ >= 99)
 		perfect_ = true;
 
-	if(a.type < ATT_THROW_NORMAL)
+	if(isNormalAtt(a.type))
 	{
 		if(s_paralyse)
 			damage_ *= 1.2f;
@@ -981,7 +1046,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 	
 	if(s_graze && randA(GetProperty(TPT_GRAZE_CONTROL)?2:5) == 0)
 	{
-		if(a.type >= ATT_THROW_NORMAL && a.type < ATT_THROW_LAST)
+		if(isGrazableAtt(a.type))
 			graze_ = true;
 	}
 
@@ -1032,23 +1097,26 @@ bool players::damage(attack_infor &a, bool perfect_)
      // (SH / breaking+SH)의 확률로 가드!
 	 //단 실드가 통하지 않는 공격일경우 최종확률이 0이됨(나중에 넣기)
 		float breaking = 75;
-		if(a.type >= ATT_THROW_NORMAL && a.type < ATT_THROW_LAST)
+		if(isGrazableAtt(a.type))
 			breaking -= 15;
 		shield_ = (float)sh/(sh+breaking);
-		if(a.type >= ATT_NO_GUARD)
+		if(CantGaurdAtt(a.type))
 			shield_ = 0;
 		if(you.s_sleep<0 || you.s_paralyse)
 			shield_ = 0;
 		//볼트형 가드안되게 하려면 어떻게?
 	}
 
+	bool diving_graze = false;
+	if(IsDiving() && isGrazableAtt(a.type))
+		diving_graze = true;
 
 	name_infor name_;
 	if(a.order)	
 		name_ = (*a.order->GetName());
-	if((randA(1000)>=evasion*1000 && !graze_ && !you.s_super_graze) || perfect_)
+	if((randA(1000)>=evasion*1000 && !graze_ && !you.s_super_graze && !diving_graze) || perfect_)
 	{	
-		if(randA(1000)>shield_*1000 || perfect_)
+		if(randA(1000)>shield_*1000 || shield_ <= 0.0f || perfect_)
 		{
 			if (env[current_level].isSanctuary(position) || s_evoke_ghost)
 			{
@@ -1056,6 +1124,15 @@ bool players::damage(attack_infor &a, bool perfect_)
 				damage_ = 0;
 			}
 			print_damage_message(a,damage_!=0);
+			if(alchemy_buff == ALCT_COLD_ARMOUR && isFireAttackForColdArmour(a.type))
+			{
+				const int prev_alchemy_time_ = alchemy_time;
+				alchemy_time = max(1,alchemy_time/2);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_MELTING) + " ",false,false,false,CL_small_danger);
+				if(prev_alchemy_time_ > 3 && alchemy_time <= 3)
+					alchemyalmostoff(alchemy_buff);
+				SetInter(IT_STAT);
+			}
 
 			if (s_sleep < 0 && a.type == ATT_SLEEP)
 			{
@@ -1065,6 +1142,12 @@ bool players::damage(attack_infor &a, bool perfect_)
 			}
 			else if(damage_)
 			{
+				if(alchemy_buff == ALCT_COLD_ARMOUR)
+					alchemy_cold_armour_damage += damage_;
+				if(s_dive > 0) {
+					printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_STOP_ATTACKED),false,false,false,CL_small_danger);
+					EndDive(false);
+				}
 				enterlog();
 				a.damage = damage_;
 				dead_order = &a;
@@ -1084,7 +1167,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 					int max_num_ = min(10,damage_*40/ GetMaxHp());
 					burstCloud(half_youkai[1], rand_int(max(0,max_num_-2),max_num_));
 				}
-				if(s_mirror && GetHp()>0 && a.order)
+				if(s_mirror && GetHp()>0 && a.order && a.order != this)
 				{
 					a.order->HpUpDown(-damage_,DR_MIRROR, this);	
 					//a.order->damage(attack_infor(randA_1(s_value_veiling),s_value_veiling,99,NULL,GetParentType(),ATT_VEILING,name_infor(LOC_SYSTEM_VEILING)), true);
@@ -1172,6 +1255,19 @@ bool players::damage(attack_infor &a, bool perfect_)
 			if(a.type == ATT_OIL_BLAST) {
 				you.SetOil(10, 50);
 			}
+			if(a.type == ATT_ACID_BYTE || a.type == ATT_THROW_ACID) {
+				you.SetAcid(3, 50);
+			}
+			if(a.type == ATT_CONFUSE_SPORE) { 
+				if(((poison_resist < 0)|| (poison_resist<=0 && randA(2) == 0)) && s_confuse < 12) {
+					SetConfuse(rand_int(5,8));
+				}
+			}
+			if(a.type == ATT_WEAK_SPORE) { 
+				if(((poison_resist < 0)|| (poison_resist<=0)) && randA(1) == 0) {
+					SetForceStrong(false, rand_int(10,20), true);
+				}
+			}
 			if(s_oil > 0 && (a.type == ATT_FIRE ||
 				a.type == ATT_FIREPLUS ||
 				a.type == ATT_FIRE_WEAK ||
@@ -1206,7 +1302,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 
 			if(s_veiling && GetHp()>0)
 			{
-				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
+				if(a.order && a.type >=ATT_NORMAL && isNormalAtt(a.type))
 				{
 					attack_infor attack_infor_(randA_1(s_value_veiling),s_value_veiling,99,this,GetParentType(),ATT_VEILING,name_infor(LOC_SYSTEM_VEILING));
 					a.order->damage(attack_infor_, true);
@@ -1265,7 +1361,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 
 			if(GetProperty(TPT_FORCE_OF_NATURE) && GetHp()>0 && randA(1))
 			{
-				if(a.order && a.type >=ATT_NORMAL && a.type < ATT_THROW_NORMAL)
+				if(a.order && a.type >=ATT_NORMAL && isNormalAtt(a.type))
 				{
 					switch(half_youkai[1])
 					{
@@ -1359,17 +1455,29 @@ bool players::damage(attack_infor &a, bool perfect_)
 	{
 		if (a.order)
 		{
-			if (!graze_ || you.s_super_graze) {
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_EVADE,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
-					PlaceHolderHelper(name.getName()),
-					PlaceHolderHelper(name_.getName()),
-					PlaceHolderHelper(a.name.getName()));
+			if (!graze_ || you.s_super_graze || diving_graze) {
+				if(a.no_owner) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_EVADE_NO_OWNER,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
+						PlaceHolderHelper(name.getName()),
+						PlaceHolderHelper(a.name.getName()));
+				} else {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_EVADE,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
+						PlaceHolderHelper(name.getName()),
+						PlaceHolderHelper(name_.getName()),
+						PlaceHolderHelper(a.name.getName()));
+				}
 			}
 			else {
-				LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_GRAZE,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
-					PlaceHolderHelper(name.getName()),
-					PlaceHolderHelper(name_.getName()),
-					PlaceHolderHelper(a.name.getName()));
+				if(a.no_owner) {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_GRAZE_NO_OWNER,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
+						PlaceHolderHelper(name.getName()),
+						PlaceHolderHelper(a.name.getName()));
+				} else {
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_GRAZE,true,false,false,a.order->isView()?CL_bad:CL_small_danger,
+						PlaceHolderHelper(name.getName()),
+						PlaceHolderHelper(name_.getName()),
+						PlaceHolderHelper(a.name.getName()));
+				}
 			}
 			PlaySE("evade");
 			//if(GetArmourPanlty()<=2)

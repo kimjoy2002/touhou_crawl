@@ -11,6 +11,7 @@
 
 #include "enum.h"
 #include "d3dUtility.h"
+#include <vector>
 
 typedef struct skill_exp_infor
 {
@@ -32,10 +33,12 @@ int GetMaxSkillExp(const skill_exp_infor &skill);
 int GetBaseSkillExp();
 //int GetSkillDisplay(int aptit_);
 D3DCOLOR GetSkillColor(int aptit_);
+bool IsSuitableWeapon(tribe_type tribe_, skill_type skill_);
 
 
 extern int aptitude[TRI_MAX][SKT_MAX];
 extern int exp_aptitude[TRI_MAX];
+extern const std::vector<skill_type> suitable_weapon[TRI_MAX];
 
 
 #endif // __SKILL_H__

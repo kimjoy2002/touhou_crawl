@@ -6,6 +6,7 @@
 
 #include <random>
 #include <ctime>
+#include <chrono>
 #include <iostream>
 #include <fstream>
 #include <DirectXMath.h> 
@@ -74,6 +75,45 @@ void init_nonlogic_seed(unsigned int seed_)
 {
 	rand_engine_nonlogic.seed((unsigned long)(seed_));
 
+}
+
+void reset_logic_random_seed()
+{
+	static unsigned int seed_count = 0;
+	unsigned long long now_ = (unsigned long long)chrono::high_resolution_clock::now().time_since_epoch().count();
+	unsigned int seed_ = (unsigned int)now_ ^ (unsigned int)(now_ >> 32) ^ (++seed_count * 0x9e3779b9u);
+	seed_ ^= seed_ >> 16;
+	seed_ *= 0x7feb352du;
+	seed_ ^= seed_ >> 15;
+	seed_ *= 0x846ca68bu;
+	seed_ ^= seed_ >> 16;
+	map_list.random_number = seed_;
+}
+
+static unsigned int mix_logic_random(unsigned int value_)
+{
+	value_ ^= value_ >> 16;
+	value_ *= 0x7feb352du;
+	value_ ^= value_ >> 15;
+	value_ *= 0x846ca68bu;
+	value_ ^= value_ >> 16;
+	return value_;
+}
+
+static unsigned int next_logic_random()
+{
+	map_list.random_number = map_list.random_number * 1664525u + 1013904223u;
+	return mix_logic_random(map_list.random_number);
+}
+
+static unsigned int bounded_logic_random(unsigned int range_)
+{
+	unsigned int threshold_ = (0u - range_) % range_;
+	unsigned int value_;
+	do {
+		value_ = next_logic_random();
+	} while(value_ < threshold_);
+	return value_ % range_;
 }
 
 int LoopSelect(int min, int max, int cur)
@@ -166,10 +206,8 @@ float rand_float_impl(const char* file, int line, float min, float max)
 	}
 	//min = (float)(random_number % (int)((max - min)*100 + 1)) /100 + min;
 	//random_number = (((random_number*214013L + 2531011L)>>16)&0x7fff);
-	rand_seed(map_list.random_number);
-	int rand_ = abs((int)rand_engine());
-	min = (float)(rand_ % (int)((max - min)*100 + 1)) /100 + min;
-	map_list.random_number = rand_;
+	unsigned int range_ = (unsigned int)((max - min)*100 + 1);
+	min = (float)bounded_logic_random(range_) /100 + min;
 	
 	//min = (float)(map_list.random_number % (int)((max - min)*100 + 1)) /100 + min;
 
@@ -198,17 +236,12 @@ int rand_int_impl(const char* file, int line, int min, int max)
 	}
 	//min = (random_number % (max - min+1)) + min;
 	
-	rand_seed(map_list.random_number);
-	int rand_ = rand_engine();
-	min = (rand_engine() % (max - min+1)) + min;
-	map_list.random_number = rand_;
+	unsigned int range = (unsigned int)((long long)max - min + 1);
+	min = (int)bounded_logic_random(range) + min;
 	//map_list.random_number = (((map_list.random_number*214013L + 2531011L)>>16)&0x7fff);
 
 	return min;
 }
-
-
-
 
 int rand_int_with_nonlogic(int min, int max)
 {
@@ -226,6 +259,15 @@ int rand_int_with_nonlogic(int min, int max)
 }
 
 
+bool startsWith(const std::string& str, const std::string& prefix) {
+    return str.size() >= prefix.size() &&
+           str.compare(0, prefix.size(), prefix) == 0;
+}
+
+float GetDegToRad(float angle_degrees) {
+	return ((angle_degrees) *  DirectX::XM_PI / 180.0f);
+}
+
 float GetPositionToAngle(float start_x, float start_y, float target_x, float target_y)
 {
 	return atan2(target_y - start_y, target_x - start_x) * 180 / DirectX::XM_PI;
@@ -238,6 +280,12 @@ float GetPositionToAngle2(float start_x, float start_y, float target_x, float ta
 
 }
 
+int loopInt(int min, int max, int cur) {
+	int size = max-min+1;
+	while(min>cur)cur+=size;
+	while(max<cur)cur-=size;
+	return cur;
+}
 float GetBaseAngle(float angle)
 {
 	while(angle <= 0 || angle > 360)
@@ -597,6 +645,25 @@ string WithBlankString(const string& str, int size, bool left) {
 		result += std::string(size - display_width, ' ');
 
 	return result;
+}
+wchar_t fold_ascii_w(wchar_t ch) {
+    if (ch >= L'A' && ch <= L'Z') return static_cast<wchar_t>(ch - L'A' + L'a');
+    return ch;
+}
+
+bool UnicodeCodepointLess(const std::string& a, const std::string& b) {
+    const std::wstring wa = ConvertUTF8ToUTF16(a);
+    const std::wstring wb = ConvertUTF8ToUTF16(b);
+
+    size_t i = 0, j = 0;
+    while (i < wa.size() && j < wb.size()) {
+        const wchar_t ca = fold_ascii_w(wa[i]);
+        const wchar_t cb = fold_ascii_w(wb[j]);
+        if (ca < cb) return true;
+        if (ca > cb) return false;
+        ++i; ++j;
+    }
+    return wa.size() < wb.size();
 }
 
 bool IsCJKWideChar(wchar_t ch)

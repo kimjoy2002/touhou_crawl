@@ -15,6 +15,7 @@
 #include "Astar.h"
 #include "monster_texture.h"
 #include "summon.h"
+#include "unique_spellcard.h"
 #include <set>
 
 struct item_infor;
@@ -34,6 +35,7 @@ public:
 	int map_id;
 	int id;
 	int id2; //ENSLAVE_GHOST용도
+	int parent_part_id; //만약 이 모형에 부모가 있다면
 	int level;
 	int exper;
 	name_infor name;
@@ -41,7 +43,8 @@ public:
 	int hp;
 	int hp_recov;
 	int max_hp;
-	coord_def prev_position;
+	coord_def prev_position; //몬스터의 이전 위치(플레이어 턴 기준)
+	coord_def prev_position_for_monster;//몬스터의 이전 경로(움직일때마다 초기화)
 	coord_def first_position;
 	bool prev_sight;
 	int ac;
@@ -60,6 +63,7 @@ public:
 	int s_might;
 	int s_clever;
 	int s_haste;
+	int s_swift;
 	int s_confuse;
 	int s_slow;
 	int s_frozen;
@@ -92,9 +96,14 @@ public:
 	int s_fire;
 	parent_type fire_reason;
 	int s_none_move;
+	int s_dazed;
+	bool bashed;
 	int debuf_boost;
 	int summon_time;
 	parent_type summon_parent;
+	int s_vulun_poison;
+	int s_acid;
+	int s_acid_turn;
 
 	
 	int poison_resist;
@@ -107,11 +116,13 @@ public:
 
 
 	int time_delay; //누적되어있는시간
+	int all_time_delay; //살아있는 모든 시간
 	int speed; //행동시간 (누적되어있는시간/행동시간=행동턴)
 	int memory_time; //기억력
 	bool first_contact; //이 몬스터를 처음 보았다.
 	int strong; //강하기
 	int special_value;//캐릭터별 전용 밸류
+	unique_spellcard_info spellcard_info;
 
 	int delay_turn; //다른층으로 도망친 턴. 이 턴만큼 회복등등...
 
@@ -176,12 +187,17 @@ public:
 	int AttackToYou(bool force_);
 	int AttackToMon(monster* mon_, bool force_);
 	int move(short_move x_mov, short_move y_mov, bool only_move);
+	int moveGoliath(short_move x_mov, short_move y_mov, bool only_move);
+	int moveGoliathToPos(const coord_def& target_, bool only_move);
+	bool canPlaceGoliath(const coord_def& anchor);
+	bool sacrificeMove();
 	int move(const coord_def &c, bool only_move);
 	bool offsetmove(const coord_def &c);
 	bool OpenDoor(const coord_def &c);
 	int longmove();
 	bool tryMagic();
 	int atkmove(int is_sight, bool only_move=false);
+	bool isImmobile();
 	bool isCanMove();
 	bool isHaveSpell(spell_list sp);
 	int MoveToPos(coord_def pos_, bool only_move);
@@ -192,7 +208,8 @@ public:
 	void print_damage_message(attack_infor &a, bool back_stab);
 	void print_no_damage_message(attack_infor &a);
 	bool damage(attack_infor &a, bool perfect_ = false);
-	bool dead(parent_type reason_, bool message_, bool remove_ = false); //remove는 증발시키기(아예 경험치나 관련도 없이)
+	bool damage(attack_infor &a, bool perfect_, const coord_def* hit_pos);
+	bool dead(parent_type reason_, bool message_, bool remove_ = false, unit* killer_ = nullptr); //remove는 증발시키기(아예 경험치나 관련도 없이)
 	void resetShadow();
 	int action(int delay_);
 	void sightcheck(bool is_sight_); //시야에 들어오면 덤빈다.
@@ -203,7 +220,9 @@ public:
 	bool SetPoison(int poison_, int max_, bool strong_);
 	int HpRecoverDelay();
 	bool HpRecover(int trun_ = 1);
-	int HpUpDown(int value_,damage_reason reason, unit *order_ = nullptr);
+	bool HasMultiTile();
+	bool SpreadDamage(int value_, unit *order_);
+	int HpUpDown(int value_,damage_reason reason, unit *order_ = nullptr, bool non_dead = false);
 	void SetStrong(int strong_) {strong = strong_;};
 	bool SetTele(int tele_);
 	bool SetMight(int might_);
@@ -239,7 +258,11 @@ public:
 	bool SetSleep(int s_sleep_);
 	bool SetOil(int oil_, int max_);
 	bool SetFire(int fire_, parent_type type_, bool from_oil);
+	bool SetVulunPoison(int time_);
 	bool SetNoneMove(int s_none_move);
+	bool SetDazed(int s_dazed_, bool bashed_);
+	bool UnSetAcid();
+	bool SetAcid(int acid_, int turn_);
 	bool canSwap(monster* target_mon, bool able_enemy = false);
 	int PlusTimeDelay(int delay_)
 	{
@@ -350,8 +373,15 @@ public:
 	textures *image;
 	coord_def position;
 	bool over_sight;
-	effect():image(NULL),position(),over_sight(false){}
-	effect(const coord_def &c, textures *t, bool over_sight_):image(t),position(c),over_sight(over_sight_){};
+	float alpha;
+	effect():image(NULL),position(),over_sight(false), alpha(1.0f){}
+	effect(const coord_def &c, textures *t, bool over_sight_):image(t),position(c),over_sight(over_sight_), alpha(1.0f){};
+	effect(const coord_def &c, textures *t, bool over_sight_, float alpha):image(t),position(c),over_sight(over_sight_), alpha(alpha){};
 };
+
+bool isNormalAtt(attack_type type);
+bool isGrazableAtt(attack_type type);
+bool CantGaurdAtt(attack_type type);
+
 
 #endif // __MONSTER_H__

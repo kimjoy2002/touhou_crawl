@@ -26,9 +26,9 @@ public:
 	int expand;
 	parent_type parent;
 	smoke();
-	smoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, parent_type parent_ = PRT_NEUTRAL);
-	void init(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, parent_type parent_ = PRT_NEUTRAL);
-	void onCreate();
+	smoke(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, int map_floor_, parent_type parent_ = PRT_NEUTRAL);
+	void init(const coord_def &c, textures *t, smoke_type type_, int time_, int expand_, int map_floor_, parent_type parent_ = PRT_NEUTRAL);
+	void onCreate(int map_floor_);
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
 	bool draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_, float scale_);

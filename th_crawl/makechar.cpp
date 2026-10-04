@@ -19,6 +19,7 @@
 #include "tribe.h"
 #include "armour.h"
 #include "evoke.h"
+#include "skill.h"
 
 
 
@@ -56,7 +57,8 @@ enum start_item_type
 	SIT_CAMERA,
 	SIT_TEST_POTION,
 	SIT_TEST_RING,
-	SIT_TEST_SCROLL
+	SIT_TEST_SCROLL,
+	SIT_MOMIZI_SHIELD
 };
 
 
@@ -68,6 +70,10 @@ void MakeStartItem(start_item_type select_, int num);
 skill_type WeaponSelect(int num)
 {
 	string blank(12,' ');
+	auto weapon_color_ = [](skill_type skill_)
+	{
+		return IsSuitableWeapon(you.tribe,skill_)?CL_normal:CL_bad;
+	};
 	WaitForSingleObject(mutx, INFINITE);
 	deletesub();
 	printsub("", true, CL_normal);
@@ -78,20 +84,20 @@ skill_type WeaponSelect(int num)
 	printsub("", true, CL_normal);
 	printsub("", true, CL_normal);
 	printsub(blank, false, CL_normal);
-	printsub("a - ", false, CL_normal);
-	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_SHORTBLADE), true, CL_normal, 'a');
+	printsub("a - ", false, weapon_color_(SKT_SHORTBLADE));
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_SHORTBLADE) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_SHORTBLADE), true, weapon_color_(SKT_SHORTBLADE), 'a');
 	printsub(blank, false, CL_normal);
-	printsub("b - ", false, CL_normal);
-	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_AXE), true, CL_normal, 'b');
+	printsub("b - ", false, weapon_color_(SKT_AXE));
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_AXE) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_AXE), true, weapon_color_(SKT_AXE), 'b');
 	printsub(blank, false, CL_normal);
-	printsub("c - ", false, CL_normal);
-	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_MACE), true, CL_normal, 'c');
+	printsub("c - ", false, weapon_color_(SKT_MACE));
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_MACE) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_MACE), true, weapon_color_(SKT_MACE), 'c');
 	printsub(blank, false, CL_normal);
-	printsub("d - ", false, CL_normal);
-	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_SPEAR), true, CL_normal, 'd');
+	printsub("d - ", false, weapon_color_(SKT_SPEAR));
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_SPEAR) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_SPEAR), true, weapon_color_(SKT_SPEAR), 'd');
 	printsub(blank, false, CL_normal);
-	printsub("e - ", false, CL_normal);
-	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_LONGBLADE), true, CL_normal, 'e');
+	printsub("e - ", false, weapon_color_(SKT_LONGBLADE));
+	printsub(LocalzationManager::locString(LOC_SYSTEM_SKILL_LONGBLADE) + ": " + LocalzationManager::locString(LOC_SYSTEM_HELP_LONGBLADE), true, weapon_color_(SKT_LONGBLADE), 'e');
 	ReleaseMutex(mutx);
 
 	while(1)
@@ -341,6 +347,14 @@ void MakeStartItem(start_item_type select_, int num)
 		you.equiparmor('a'+num,false);
 		env[current_level].DeleteItem(it);	
 		break;
+	case SIT_MOMIZI_SHIELD:
+		it = env[current_level].MakeItem(you.position, makeitem(ITM_ARMOR_SHIELD, 0, &t, 25));
+		(*it).identify = true;
+		(*it).identify_curse = true;
+		you.additem(it,false);
+		you.equiparmor('a'+num,false);
+		env[current_level].DeleteItem(it);	
+		break;
 	case SIT_FOOD:	
 		it = env[current_level].MakeItem(you.position,makeitem(ITM_FOOD, 0, &t, 0));
 		(*it).identify = true;
@@ -499,7 +513,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 			MakeStartItem(SIT_LONGBLADE,0);
 			you.GiveSkillExp(SKT_LONGBLADE,60,false);
 			MakeStartItem(SIT_ARMOUR_1,1);
-			MakeStartItem(SIT_SMALL_SHIELD,2);
+			MakeStartItem(SIT_MOMIZI_SHIELD,2);
 
 		}
 		you.GiveSkillExp(SKT_FIGHT,30,false);
@@ -875,7 +889,13 @@ void SetJobs(job_type select_, unique_starting_type type)
 		break;
 	case JOB_MADE:
 		you.max_hp+=2;		
-		MakeStartItem(SIT_BROOM,0);
+		if(type == UNIQ_START_SAKUYA)
+		{
+			MakeStartItem(SIT_THROWING_KNIFE,0);
+			you.equip('a',ET_WEAPON,false);
+		}
+		else
+			MakeStartItem(SIT_BROOM,0);
 		MakeStartItem(SIT_MAID,1);
 		MakeStartItem(SIT_BOOK,2);
 		MakeStartItem(SIT_THROWING_KNIFE,3);
@@ -883,7 +903,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		MakeStartItem(SIT_THROWING_KNIFE,5);
 		MakeStartItem(SIT_THROWING_KNIFE,6);
 		you.GiveSkillExp(SKT_FIGHT,30,false);
-		you.GiveSkillExp(SKT_MACE,30,false);
+		you.GiveSkillExp(type == UNIQ_START_SAKUYA?SKT_SHORTBLADE:SKT_MACE,30,false);
 		you.GiveSkillExp(SKT_DODGE,30,false);
 		you.GiveSkillExp(SKT_TANMAC,60,false);
 		you.GiveSkillExp(SKT_STEALTH,30,false);
@@ -1243,5 +1263,42 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 		}
 
+	}
+	else if(type == UNIQ_START_SAKUYA)
+	{
+		if(aptit_)
+		{
+			you.skill[SKT_SHORTBLADE].aptit +=3;
+			you.skill[SKT_TANMAC].aptit +=3;
+			you.skill[SKT_TRANS].aptit +=4;
+		}
+		else
+		{
+			you.SetProperty(TPT_SAKUYA_PASSIVE,1);
+			set_exist_named(MON_SAKUYA);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+		}
+	}
+	else if(type == UNIQ_START_CIRNO)
+	{
+		if(aptit_)
+		{
+			you.skill[SKT_FIGHT].aptit +=3;
+			you.skill[SKT_LONGBLADE].aptit +=2;
+			you.skill[SKT_MACE].aptit +=2;
+			you.skill[SKT_COLD].aptit +=3;
+			you.skill[SKT_FIRE].aptit -=3;
+		}
+		else
+		{
+			you.SetProperty(TPT_CIRNO_PASSIVE,2);
+			you.SetProperty(TPT_CIRNO_ICE_CREATE,0);
+			you.StatUpDown(6,STAT_STR);
+			you.StatUpDown(-6,STAT_INT);
+			set_exist_named(MON_CIRNO);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
+		}
 	}
 }

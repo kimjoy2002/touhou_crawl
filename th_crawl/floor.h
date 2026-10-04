@@ -13,13 +13,14 @@
 #include "common.h"
 #include "unit.h"
 
-enum floor_type //아래 있는 것이 우선순위가 높다.
+enum floor_type
 {
 	FLOORT_NORMAL = 0,
 	FLOORT_GOLD,
 	FLOORT_AUTUMN,
 	FLOORT_STONE,
 	FLOORT_SCHEMA,
+	FLOORT_SCORE_ITEM,
 	FLOORT_MAX
 };
 
@@ -56,6 +57,8 @@ public:
 
 	string GetName();
 };
+
+int getPriorityFloorEffect(floor_type type);
 
 
 

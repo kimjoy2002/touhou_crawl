@@ -25,6 +25,7 @@
 #include "tribe.h"
 #include "network.h"
 #include "steam_api.h"
+#include "web_backend.h"
 #include "replay.h"
 #include "mon_infor.h"
 #include "mapsearching.h"
@@ -44,7 +45,7 @@ extern bool ableWiz;
 
 extern HANDLE mutx;
 
-const char *version_string = "ver1.118";
+const char *version_string = "ver1.301";
 extern int g_tile_size;
 
 int version_string_to_int() {
@@ -285,6 +286,13 @@ extern void start_mainmenu();
 
 
 string getDefaultLang() {
+#ifdef WEB_TILES
+	if (web::enabled() && !web::lang().empty()) {
+		string wl = web::lang();
+		std::transform(wl.begin(), wl.end(), wl.begin(), ::toupper);
+		return wl;
+	}
+#endif
 	string lang = option_mg.getLang();
     std::transform(lang.begin(), lang.end(), lang.begin(), ::toupper);
 
@@ -335,6 +343,10 @@ void charter_selete(bool first)
 		{
 			you.user_name = user_name;
 		}
+#ifdef WEB_TILES
+		if (web::enabled() && !web::userName().empty())
+			you.user_name = web::userName();
+#endif
 
 		SetText() += LocalzationManager::formatString(LOC_SYSTEM_TITLE_YOUR_NAME, PlaceHolderHelper(you.user_name));
 		SetText() += "\n";
@@ -358,11 +370,12 @@ void charter_selete(bool first)
 
 	
 	init_state();
-	MapNode::initMapNode();
+	MapNode::initMapNode(false);
 	map_list.tutorial = GM_TITLE;
 
 	if(!ReplayClass.play)
 	{
+		reset_logic_random_seed();
 		g_selected.clear();
 		g_selected.assign(4, 0);
 		start_mainmenu();
@@ -559,6 +572,8 @@ void charter_selete(bool first)
 				if (env[current_level].isMove(rit->x, rit->y, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && you.position != (*rit))
 				{
 					monster* mon_ = env[current_level].AddMonster(MON_GHOST, M_FLAG_ALLY, *rit);
+					if(!mon_)
+						continue;
 					mon_->SetInvincibility(-1, false);
 					mon_->sm_info.parent_map_id = -2;
 					mon_->flag |= M_FLAG_NO_ATK | M_FLAG_LEADER_SUMMON | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY;
@@ -607,6 +622,7 @@ vector<int> parseVersion(const string& ver) {
     return result;
 }
 
+//같거나 적다
 bool isPrevVersion(const string& versionstring, const string& targetstring) {
     vector<int> v1 = parseVersion(versionstring);
     vector<int> v2 = parseVersion(targetstring);
@@ -1242,6 +1258,7 @@ void MainLoop()
 			findItem();
 			break;
 		case 0x07: //전체층 이동
+		case 'G':
 			if (isNormalGame())
 				floorMove();
 			break;
@@ -1298,6 +1315,8 @@ void MainLoop()
 		//	//Eat_Power();
 		//	break;
 		case 'v':
+			Speed_Evoke();
+			break;
 		case 'V':
 			Spelllcard_Evoke(0);
 			break;
@@ -1405,7 +1424,7 @@ void MainLoop()
 	}
 }
 
-bool g_changefullscreen = false;
+std::atomic<bool> g_changefullscreen = false;
 extern display_manager DisplayManager;
 
 bool loading_font(string font_name);
@@ -1589,11 +1608,11 @@ bool option_menu(int value_)
 			if(should_reload) {
 				if(display == LOC_SYSTEM_OPTION_MENU_FULLSCREEN) {
 					option_mg.setFullscreen(true);
-					g_changefullscreen = true;
+					g_changefullscreen.store(true);
 	
 				}else if(display == LOC_SYSTEM_OPTION_MENU_WINDOWED) {
 					option_mg.setFullscreen(false);
-					g_changefullscreen = true;
+					g_changefullscreen.store(true);
 				}
 			}
 			StopCurrentBGM(nullptr);

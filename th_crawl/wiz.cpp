@@ -20,13 +20,14 @@
 #include "evoke.h"
 #include "god.h"
 #include "tribe.h"
+#include "unique_spellcard.h"
 
 
 extern int g_menu_select;
 extern HANDLE mutx;
 wiz_infor wiz_list;
 extern int create_bamboo_mon();
-bool ableWiz = false;
+bool ableWiz = true;
 
 void checkWizardModeFromCmdLine(const char* cmdLine) {
     std::string cmd(cmdLine);
@@ -36,6 +37,120 @@ void checkWizardModeFromCmdLine(const char* cmdLine) {
 }
 
 bool skill_summon_bug(int pow, bool short_, unit* order, coord_def target);
+
+static bool is_wizard_p_item(const item& item_)
+{
+	return item_.type == ITM_FOOD && item_.value1 == 0;
+}
+
+static int wizard_item_count(const coord_def& pos)
+{
+	int count = 0;
+	for(const item& item_ : env[current_level].item_list)
+		if(item_.position == pos)
+			count++;
+	return count;
+}
+
+static coord_def wizard_loot_position()
+{
+	for(int range = 0; range < max(DG_MAX_X, DG_MAX_Y); range++)
+	{
+		for(int y = you.position.y - range; y <= you.position.y + range; y++)
+		{
+			for(int x = you.position.x - range; x <= you.position.x + range; x++)
+			{
+				if(range && x != you.position.x - range && x != you.position.x + range &&
+					y != you.position.y - range && y != you.position.y + range)
+					continue;
+				coord_def pos(x, y);
+				if(!env[current_level].isMove(pos) || env[current_level].isMonsterPos(x, y, &you))
+					continue;
+				if(wizard_item_count(pos) < 52)
+					return pos;
+			}
+		}
+	}
+	return you.position;
+}
+
+static void wizard_cleanup_current_loot()
+{
+	for(list<item>::iterator it = env[current_level].item_list.begin(); it != env[current_level].item_list.end(); )
+	{
+		list<item>::iterator temp = it++;
+		if(is_wizard_p_item(*temp))
+			env[current_level].DeleteItem(&(*temp));
+		else if(wizard_item_count(temp->position) > 52)
+			temp->position = wizard_loot_position();
+	}
+}
+
+static int wizard_clear_target()
+{
+	vector<string> dungeon_list = {
+		LocalzationManager::locString(LOC_SYSTEM_DUNGEON) + " " + LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(map_list.dungeon_enter[MISTY_LAKE].floor + 1))),
+		LocalzationManager::locString(LOC_SYSTEM_DUNGEON_MISTYLAKE),
+		LocalzationManager::locString(LOC_SYSTEM_DUNGEON) + " " + LocalzationManager::locString(LOC_SYSTEM_DUNGEON_LAST_FLOOR),
+		LocalzationManager::locString(LOC_SYSTEM_DUNGEON_YOUKAI_MOUNTAIN),
+		LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SCARLET),
+		LocalzationManager::locString(LOC_SYSTEM_DUNGEON_EINENTEI),
+		LocalzationManager::locString(LOC_SYSTEM_DUNGEON_DEPTH),
+		LocalzationManager::locString(LOC_SYSTEM_DUNGEON_MOON),
+		LocalzationManager::locString(LOC_SYSTEM_DUNGEON_SUBTERRANEAN),
+		LocalzationManager::locString(LOC_SYSTEM_DUNGEON_PANDEMONIUM),
+		LocalzationManager::locString(LOC_SYSTEM_DUNGEON_HAKUREI)
+	};
+	vector<int> listkey;
+	for(int i = 0; i < dungeon_list.size(); i++)
+	{
+		char key = 'a' + i;
+		printlog(string(1, key) + " - " + dungeon_list[i] + "  ", (i % 3 == 2), false, false, CL_help, key);
+		listkey.push_back(key);
+	}
+	enterlog();
+	printlog(LocalzationManager::locString(LOC_SYSTEM_AUTOEXPLORE_WHERE), true, false, false, CL_help);
+	listkey.push_back(VK_ESCAPE);
+	startSelection(listkey);
+	g_menu_select = -1;
+	int key = 0;
+	while(true)
+	{
+		key = waitkeyinput(true);
+		if(key == VK_RIGHT)
+		{
+			if(++g_menu_select >= dungeon_list.size())
+				g_menu_select = 0;
+			continue;
+		}
+		if(key == VK_LEFT)
+		{
+			if(--g_menu_select < 0)
+				g_menu_select = dungeon_list.size() - 1;
+			continue;
+		}
+		if(key == VK_UP)
+		{
+			if(g_menu_select - 3 >= 0)
+				g_menu_select -= 3;
+			continue;
+		}
+		if(key == VK_DOWN)
+		{
+			if(g_menu_select + 3 < dungeon_list.size())
+				g_menu_select += 3;
+			continue;
+		}
+		if((key == VK_RETURN || key == GVK_BUTTON_A) && g_menu_select >= 0 && g_menu_select < dungeon_list.size())
+			key = 'a' + g_menu_select;
+		break;
+	}
+	endSelection();
+	g_menu_select = -1;
+	if(key < 'a' || key >= 'a' + dungeon_list.size())
+		return -1;
+	return key - 'a';
+}
 
 void create_and_kill(int floor, float percent_ = 1.0f) {
 	env[floor].MakeMap(true);
@@ -48,17 +163,26 @@ void create_and_kill(int floor, float percent_ = 1.0f) {
 		for(list<item>::iterator it = env[floor].item_list.begin(); it != env[floor].item_list.end(); )
 		{
 			list<item>::iterator temp = it++;
+			if(is_wizard_p_item(*temp))
+			{
+				env[floor].DeleteItem(&(*temp));
+				continue;
+			}
 			if(percent_ > 0.0f && rand_float(0.0f,1.0f) <= percent_)
 			{
 				temp->Identify();
-				env[current_level].AddItem(you.position, &(*temp));
+				env[current_level].AddItem(wizard_loot_position(), &(*temp));
 				env[floor].DeleteItem(&(*temp));
 			}
 		}
 	} else {
-		for(list<item>::iterator it = env[current_level].item_list.begin(); it != env[current_level].item_list.end(); it++)
+		for(list<item>::iterator it = env[current_level].item_list.begin(); it != env[current_level].item_list.end(); )
 		{
-			it->position = you.position;
+			list<item>::iterator temp = it++;
+			if(is_wizard_p_item(*temp))
+				env[current_level].DeleteItem(&(*temp));
+			else
+				temp->position = wizard_loot_position();
 		}
 	}
 }
@@ -82,7 +206,7 @@ void wiz_mode()
 	while(1)
 	{
 		vector<int> wizard_listkey = {
-			'A', 'C', 'D', 'E', 'G', 'H', 'I', 'b', 'm', 'p', 
+			'A', 'C', 'D', 'E', 'G', 'H', 'I', 'S', 'b', 'm', 'p',
 			'q', 'R', 'w', 'W', 'X', '>', '<', '^', '?', VK_ESCAPE
 		};
 		startSelection(wizard_listkey);
@@ -335,24 +459,25 @@ void wiz_mode()
 			return;
 			case 'e':
 			{
-				int list[EVK_MAX-1] = { EVK_PAGODA,EVK_AIR_SCROLL,EVK_DREAM_SOUL,EVK_BOMB, EVK_GHOST_BALL, EVK_SKY_TORPEDO, EVK_MAGIC_HAMMER };
+				int list[] = { EVK_PAGODA,EVK_AIR_SCROLL,EVK_DREAM_SOUL,EVK_BOMB, EVK_GHOST_BALL, EVK_SKY_TORPEDO, EVK_MAGIC_HAMMER, EVK_FROZEN_FROG };
 				
-				LOCALIZATION_ENUM_KEY keylist[EVK_MAX-1] = {
+				LOCALIZATION_ENUM_KEY keylist[] = {
 					LOC_SYSTEM_ITEM_EVOKE_PAGODA,
 					LOC_SYSTEM_ITEM_EVOKE_AIR_SCROLL,
 					LOC_SYSTEM_ITEM_EVOKE_DREAM_SOUL,
 					LOC_SYSTEM_ITEM_EVOKE_BOMB,
 					LOC_SYSTEM_ITEM_EVOKE_GHOST_BALL,
 					LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO,
-					LOC_SYSTEM_ITEM_EVOKE_MAGIC_HAMMER
+					LOC_SYSTEM_ITEM_EVOKE_MAGIC_HAMMER,
+					LOC_SYSTEM_ITEM_EVOKE_ICE_FROG
 				};
 				enterlog();
 				std::vector<int> listkey;
-				for(int i = 0; i < EVK_MAX-1; i++) {
+				for(int i = 0; i < sizeof(list)/sizeof(list[0]); i++) {
 					ss.str("");
 					ss.clear();
 					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
-					printlog(ss.str(), (i==EVK_MAX-2?true:false), false, false, CL_help, (char)('a'+i));
+					printlog(ss.str(), (i==sizeof(list)/sizeof(list[0])-1?true:false), false, false, CL_help, (char)('a'+i));
 					listkey.push_back('a'+i);
 				}
 				listkey.push_back(VK_ESCAPE);
@@ -380,7 +505,7 @@ void wiz_mode()
 					break;
 				}
 				g_menu_select = -1;
-				if (key_ >= 'a' && key_ <= 'g')
+				if (key_ >= 'a' && key_ < 'a'+sizeof(list)/sizeof(list[0]))
 				{
 					item_infor t;
 					makeitem(ITM_MISCELLANEOUS, 0, &t, list[key_ - 'a']);
@@ -563,9 +688,10 @@ void wiz_mode()
 			return;
 			case 'R':
 			{
-				int list[AMT_MAX] = { AMT_PERFECT, AMT_BLOSSOM, AMT_TIMES, AMT_FAITH, AMT_WAVE, AMT_SPIRIT, AMT_GRAZE,
+				const int amulet_count = 9;
+				int list[amulet_count] = { AMT_PERFECT, AMT_BLOSSOM, AMT_TIMES, AMT_FAITH, AMT_WAVE, AMT_SPIRIT, AMT_GRAZE,
 					AMT_WEATHER, AMT_OCCULT };
-				LOCALIZATION_ENUM_KEY keylist[AMT_MAX-1] = {
+				LOCALIZATION_ENUM_KEY keylist[amulet_count] = {
 					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_PERFECT_SHORT,
 					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_BLOSSOM_SHORT,
 					LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIMES_SHORT,
@@ -578,11 +704,11 @@ void wiz_mode()
 				};
 				enterlog();
 				std::vector<int> listkey;
-				for(int i = 0; i < AMT_MAX-1; i++) {
+				for(int i = 0; i < amulet_count; i++) {
 					ss.str("");
 					ss.clear();
 					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
-					printlog(ss.str(), (i==AMT_MAX-2?true:false), false, false, CL_help, (char)('a'+i));
+					printlog(ss.str(), (i==amulet_count-1?true:false), false, false, CL_help, (char)('a'+i));
 					listkey.push_back('a'+i);
 				}
 				ss.str("");
@@ -715,7 +841,7 @@ void wiz_mode()
 			deque<monster*> dq;
 			dungeon_level next_ = TEMPLE_LEVEL;
 
-			pair<char,LOCALIZATION_ENUM_KEY> keylist[17] = {
+			pair<char,LOCALIZATION_ENUM_KEY> keylist[19] = {
 				make_pair('d',LOC_SYSTEM_DUNGEON),
 				make_pair('t',LOC_SYSTEM_DUNGEON_TEMPLE),
 				make_pair('l',LOC_SYSTEM_DUNGEON_MISTYLAKE),
@@ -723,6 +849,8 @@ void wiz_mode()
 				make_pair('s',LOC_SYSTEM_DUNGEON_SCARLET),
 				make_pair('b',LOC_SYSTEM_DUNGEON_SCARLET_LIBRARY),
 				make_pair('u',LOC_SYSTEM_DUNGEON_SCARLET_UNDER),
+				make_pair('f',LOC_SYSTEM_DUNGEON_FORESTOFMAGIC),
+				make_pair('O',LOC_SYSTEM_DUNGEON_DOLLSHOUSE),
 				make_pair('a',LOC_SYSTEM_DUNGEON_BAMBOO),
 				make_pair('e',LOC_SYSTEM_DUNGEON_EINENTEI),
 				make_pair('y',LOC_SYSTEM_DUNGEON_YUKKURI),
@@ -736,10 +864,10 @@ void wiz_mode()
 			};
 			enterlog();
 			std::vector<int> listkey;
-			for(int i = 0; i < 17; i++) {
+			for(int i = 0; i < 19; i++) {
 				ostringstream ss;
 				ss << string(1,keylist[i].first) << "-" << LocalzationManager::locString(keylist[i].second) << " ";
-				printlog(ss.str(), (i==16?true:false), false, false, CL_help, keylist[i].first);
+				printlog(ss.str(), (i==18?true:false), false, false, CL_help, keylist[i].first);
 				listkey.push_back(keylist[i].first);
 			}
 			listkey.push_back(VK_ESCAPE);
@@ -815,6 +943,13 @@ void wiz_mode()
 			case 'U':
 				next_ = SCARLET_UNDER_LEVEL;
 				break;
+			case 'f':
+			case 'F':
+				next_ = FORESTOFMAGIC_LEVEL;
+				break;
+			case 'O':
+				next_ = DOLLSHOUSE_LEVEL;
+				break;
 			case 'a':
 			case 'A':
 				next_ = BAMBOO_LEVEL;
@@ -846,7 +981,6 @@ void wiz_mode()
 				next_ = DREAM_LEVEL;
 				break;
 			case 'o':
-			case 'O':
 				next_ = MOON_LEVEL;
 				break;
 			case 'k':
@@ -1135,6 +1269,71 @@ void wiz_mode()
 				you.s_the_world = -1;
 			}
 			break;
+		case 'S':
+		{
+			int type_ = USC_NONE+1;
+			ostringstream oss;
+			oss << LocalzationManager::locString(LOC_SYSTEM_DEBUG_ACTIVATE_UNIQUE_SPELLCARD)
+				<< " (" << (USC_NONE+1) << "~" << (USC_MAX-1) << ") :";
+			printlog(oss.str(),true,false,false,CL_help);
+
+			while(true)
+			{
+				deletelog();
+				ostringstream name_;
+				name_ << type_ << " (" << LocalzationManager::locString(
+					GetUniqueSpellcardName((unique_spellcard_type)type_)) << ")";
+				printlog(name_.str(),false,false,true,CL_normal);
+
+				InputedKey inputedKey;
+				key_ = waitkeyinput(inputedKey,true);
+				switch(key_)
+				{
+				case 'k':
+				case VK_UP:
+					type_ += 10;
+					break;
+				case 'j':
+				case VK_DOWN:
+					type_ -= 10;
+					break;
+				case 'h':
+				case VK_LEFT:
+					type_--;
+					break;
+				case 'l':
+				case VK_RIGHT:
+					type_++;
+					break;
+				case '0': case '1': case '2': case '3': case '4':
+				case '5': case '6': case '7': case '8': case '9':
+					type_ = key_-'0'+type_*10;
+					break;
+				case VK_RETURN:
+				case GVK_BUTTON_A:
+					enterlog();
+					WizardActivateUniqueSpellcard((unique_spellcard_type)type_);
+					return;
+				case VK_BACK:
+					type_ /= 10;
+					break;
+				case -1:
+					if(!inputedKey.isRightClick())
+						break;
+				case VK_ESCAPE:
+				case GVK_BUTTON_B:
+				case GVK_BUTTON_B_LONG:
+					enterlog();
+					printlog(LocalzationManager::locString(LOC_SYSTEM_CANCLE),true,false,false,CL_help);
+					return;
+				}
+				if(type_ <= USC_NONE)
+					type_ = USC_NONE+1;
+				if(type_ >= USC_MAX)
+					type_ = USC_MAX-1;
+			}
+		}
+		break;
 		case 'm': 
 		{
 			int id_ = 0;
@@ -1241,6 +1440,15 @@ void wiz_mode()
 			enterlog();
 		}
 			break;
+		case 'c':
+			{
+				//make crash
+				string* str_ = NULL;
+				printlog(*str_, false, false, false, CL_normal);
+
+				break;
+			}
+			break;
 		case 'C':
 			{
 				for(vector<monster>::iterator it = env[current_level].mon_vector.begin(); it != env[current_level].mon_vector.end(); it++)
@@ -1256,6 +1464,9 @@ void wiz_mode()
 			break;
 		case 'E':
 			{
+				int clear_target = wizard_clear_target();
+				if(clear_target < 0)
+					break;
 				//---------------------------------------일반던전(안개호수 입구까지)--------------------------------------------
 				int prevexp_=0, exp_ = 0;
 				for(int i = 0; i <= map_list.dungeon_enter[MISTY_LAKE].floor; i++)
@@ -1272,9 +1483,7 @@ void wiz_mode()
 					printlog(oss.str(),true,false,false,CL_normal);
 				}
 
-				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
-				key_ = waitkeyinput(true);
-				if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
+				if(clear_target == 0) {
 					break;
 				}
 				//---------------------------------------안개호수--------------------------------------------
@@ -1296,9 +1505,7 @@ void wiz_mode()
 				}
 				prevexp_ = exp_;
 
-				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
-				key_ = waitkeyinput(true);
-				if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
+				if(clear_target == 1) {
 					break;
 				}
 				//----------------------------------------------나머지 던전 (9~15)-------------------------------------------------
@@ -1317,9 +1524,7 @@ void wiz_mode()
 				prevexp_ = exp_;
 
 
-				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
-				key_ = waitkeyinput(true);
-				if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
+				if(clear_target == 2) {
 					break;
 				}
 				//----------------------------------------------요괴산-------------------------------------------------
@@ -1340,9 +1545,7 @@ void wiz_mode()
 				prevexp_ = exp_;
 
 
-				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
-				key_ = waitkeyinput(true);
-				if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
+				if(clear_target == 3) {
 					break;
 				}
 				//----------------------------------------------홍마관-------------------------------------------------
@@ -1365,9 +1568,7 @@ void wiz_mode()
 				}
 				prevexp_ = exp_;
 				
-				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
-				key_ = waitkeyinput(true);
-				if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
+				if(clear_target == 4) {
 					break;
 				}
 				//----------------------------------------------영원정-------------------------------------------------
@@ -1379,8 +1580,10 @@ void wiz_mode()
 						int id_ = create_bamboo_mon();
 						dif_rect_iterator rit(you.position,5,true);
 						monster *temp = env[current_level].AddMonster(id_,0,*rit);
-						temp->dead(PRT_PLAYER,false);
+						if(temp)
+							temp->dead(PRT_PLAYER,false);
 					}
+					wizard_cleanup_current_loot();
 					create_and_kill(EIENTEI_LEVEL);
 				}
 				exp_ = you.exper;
@@ -1394,9 +1597,7 @@ void wiz_mode()
 				}
 				prevexp_ = exp_;
 				
-				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
-				key_ = waitkeyinput(true);
-				if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
+				if(clear_target == 5) {
 					break;
 				}
 				//-----------------------------------------------짐승길--------------------------------------------------
@@ -1417,20 +1618,12 @@ void wiz_mode()
 				}
 				prevexp_ = exp_;
 				
-				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
-				key_ = waitkeyinput(true);
-				if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
+				if(clear_target == 6) {
 					break;
 				}
 
-				random_extraction<int> rand_ext;
-				rand_ext.push(0);
-				rand_ext.push(1);
-				rand_ext.push(2);
-				
 				bool end_ = false;
-				while(rand_ext.GetSize() > 0) {
-					int pop_ = rand_ext.pop();
+				for(int pop_ = 0; pop_ < 3 && !end_; pop_++) {
 					switch (pop_) {
 						default:
 							break;
@@ -1452,9 +1645,7 @@ void wiz_mode()
 							}
 							prevexp_ = exp_;
 							
-							printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
-							key_ = waitkeyinput(true);
-							if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
+							if(clear_target == 7) {
 								end_ =  true;
 								break;
 							}
@@ -1481,9 +1672,7 @@ void wiz_mode()
 							}
 							prevexp_ = exp_;
 							
-							printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
-							key_ = waitkeyinput(true);
-							if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
+							if(clear_target == 8) {
 								end_ =  true;
 								break;
 							}
@@ -1518,9 +1707,7 @@ void wiz_mode()
 							}
 							prevexp_ = exp_;
 							
-							printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_DUNGEON_CONTINUE) + "(y/n)",true,false,false,CL_help);
-							key_ = waitkeyinput(true);
-							if(key_ != 'y' && key_ != 'Y' && key_ != GVK_BUTTON_A  && key_ !=  GVK_BUTTON_A_LONG) {
+							if(clear_target == 9) {
 								end_ =  true;
 								break;
 							}

@@ -36,10 +36,12 @@ void note_dummy::SaveDatas(FILE *fp)
 void note_dummy::LoadDatas(FILE *fp)
 {
 	LoadData<int>(fp, turn);
-	char temp[1024];
-	LoadData<char>(fp, *temp);
+	char temp[1024] = {};
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	place = temp;
-	LoadData<char>(fp, *temp);
+	LoadData(fp, temp);
+	temp[sizeof(temp)-1] = '\0';
 	text = temp;
 	LoadData<D3DCOLOR>(fp, color);
 }

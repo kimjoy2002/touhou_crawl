@@ -55,7 +55,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES1,Fairy Wars! The Three Fairies of Ligh
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES2,Bonus) Trust Lily and start with two fairy companions.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3,Beginner Tip: You’ll always fight with companions. They revive after gaining XP, even if they die.\nUse the 'a' key to invoke divine powers. Recruit or summon fairy allies!\nYou still get the same XP even if allies land the kill. Prioritize your survival!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU1,Fierce Iaido Slash Type. Cut down your enemies swiftly!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU2,Aptitude Bonus) +3 Longblade Aptitude, +2 Evasion Aptitude, -2 Armor Aptitude, -2 Shield Aptitude
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU2,Aptitude Bonus) +3 Longblade Aptitude, +2 Evasion Aptitude, -2 Armour Aptitude, -2 Shield Aptitude
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU3,Bonus) Dual Wielding and Quick Dash(Enhances at level 18) traits. Starts with two +0 Katana instead of a Venom Shuriken.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_YOUMU4,Beginner Tip) A character with top-tier melee damage.\nHer weak defense means you should quickly close in and eliminate enemies.\nPay attention to tile effects to check when your movement speed increases.\nDon't forget: your approach ability is also useful for escaping.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT,Choose your Species.
@@ -63,20 +63,20 @@ LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP_APTIT,? to see the species aptitu
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_SELECT_HELP,See the species descriptions in capital letters.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_HUMAN,Balanced stats and aptitude. Levels up quickly.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WIZARD,A wizard by species. Weak in melee but excels at magic.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_FAIRY,Masters of elemental magic but frail and small, unable to wear heavy armor.\nStarts with fast HP/MP regen and high stealth. Takes reduced damage from clouds.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_FAIRY,Masters of elemental magic but frail and small, unable to wear heavy armour.\nStarts with fast HP/MP regen and high stealth. Takes reduced damage from clouds.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CROWTENGU,Can fly. Decent combat abilities and strong air magic aptitude.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WOLFTENGU,10% more HP, excellent melee aptitude, but poor with magic.\nStarts with a strong jaw mutation for bonus melee attacks.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_KAPPA,High spear skill proficiency and can swim.\nHas decent magic aptitude (except fire and earth) and excellent evoke aptitude.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_NECOMATA,Fleet-footed with natural claws, excels in unarmed combat.\nLow HP and poor with weapons and armor.\nWeak in elemental magic, but strong in alchemy, mental magic, and especially space-time magic.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_NECOMATA,Fleet-footed with natural claws, excels in unarmed combat.\nLow HP and poor with weapons and armour.\nWeak in elemental magic, but strong in alchemy, mental magic, and especially space-time magic.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_OARFISH,Slow mover but tough with scale mutations that harden with level.\nMediocre weapon aptitude, average magic skills, but excels in air techniques.\nCan swim and starts with electricity resistance.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CHEUKUMOGAMI,Small-bodied and starts with poison resistance.\nDecent combat aptitude, poor at magic.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_ONI,High combat power but poor weapon and magic skills.\nLarge body prevents wearing heavy armor. Has high HP and horns for bonus damage.\nDue to the Heavy Drinker trait, you suffer little to no penalties while drunk.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_ONI,High combat power but poor weapon and magic skills.\nLarge body prevents wearing heavy armour. Has high HP and horns for bonus damage.\nDue to the Heavy Drinker trait, you suffer little to no penalties while drunk.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_HALFYOUKAI,Grows slowly and has poor overall aptitude, but evolves with yokai traits.\nAt Lv4, you discover your yokai bloodline, gaining traits at Lv4, 9, 13, and 18.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WRAITH,Starts with cold and poison resistance and high stealth.\nOverall aptitude is poor, but has decent HP aptitude compared to other species.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_VAMPIRE,High HP regen and low MP regen. Uses HP to cast spells.\nGood at combat, stealth, and evasion, but poor weapon and armor aptitude.\nMagic aptitude is decent overall but weak in alchemy. Strong summoning aptitude.\nCan see invisibility and has fast MP drain.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_VAMPIRE,High HP regen and low MP regen. Uses HP to cast spells.\nGood at combat, stealth, and evasion, but poor weapon and armour aptitude.\nMagic aptitude is decent overall but weak in alchemy. Strong summoning aptitude.\nCan see invisibility and has fast MP drain.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT,Choose your background.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SELECT_HELP,View background descriptions in capital letters.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WARRIOR,A typical heavy-armored melee fighter.\nStarts with a chosen weapon, iron shield, and armor.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WARRIOR,A typical heavy-armoured melee fighter.\nStarts with a chosen weapon, iron shield, and armour.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_WIZARD,Uses a wide variety of spells adaptable to many situations.\nStarts with a beginner’s spellbook and learns magic danmaku.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_SHAMAN,A melee fighter who uses Kanako’s power as her shrine maiden.\nWields a gohei and starts with shrine maiden clothes, worshipping Kanako.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_GLADIATOR,A hybrid evasion fighter skilled in both ranged and melee combat.\nStarts with a chosen weapon, venom shurikens, and a small shield.
@@ -165,15 +165,15 @@ LOC_SYSTEM_NOT_CARRYING_WEAPON,You are not wielding a weapon.
 LOC_SYSTEM_ALREADY_EQUIP,Already equipped.
 LOC_SYSTEM_ALREADY_USE,This item is already in use.
 LOC_SYSTEM_ALREADY_EQUIP_JEWERLY,You are already wearing this piece of jewelry.
-LOC_SYSTEM_EQUIP_ISNT_ARMOUR,This item is not armor.
+LOC_SYSTEM_EQUIP_ISNT_ARMOUR,This item is not armour.
 LOC_SYSTEM_EQUIP_ISNT_JEWERLY,This item is not jewelry.
-LOC_SYSTEM_EQUIP_TOO_BIG,This armor is too big for you to wear.
-LOC_SYSTEM_EQUIP_TOO_SMALL,This armor is too small for you to wear.
+LOC_SYSTEM_EQUIP_TOO_BIG,This armour is too big for you to wear.
+LOC_SYSTEM_EQUIP_TOO_SMALL,This armour is too small for you to wear.
 LOC_SYSTEM_EQUIP_CURSE_ITEM,Yikes! This item is terrifyingly cold.
 LOC_SYSTEM_EQUIP_ALLITEM_CURSE,All your equipment is cursed.
-LOC_SYSTEM_EQUIP_PANALTY_WARN1,Uncomfortable armor affects your accuracy.
-LOC_SYSTEM_EQUIP_PANALTY_WARN2,Uncomfortable armor affects both your movement speed and accuracy.
-LOC_SYSTEM_EQUIP_PANALTY_WARN3,You’re receiving severe penalties from your armor.
+LOC_SYSTEM_EQUIP_PANALTY_WARN1,Uncomfortable armour affects your accuracy.
+LOC_SYSTEM_EQUIP_PANALTY_WARN2,Uncomfortable armour affects both your movement speed and accuracy.
+LOC_SYSTEM_EQUIP_PANALTY_WARN3,You’re receiving severe penalties from your armour.
 LOC_SYSTEM_EQUIP_CANT_SPELLCARD,You can’t unequip a spell card while declaring it.
 LOC_SYSTEM_SHEILD_PANALTY1,You equipped a weapon and shield together. (Attack speed -0.1)
 LOC_SYSTEM_SHEILD_PANALTY2,This weapon is a bit awkward to use with a shield. (Attack speed -0.2)
@@ -253,7 +253,7 @@ LOC_SYSTEM_CANT_MOVE_WITH_OBJECT,You can’t move! Something is holding you in p
 LOC_SYSTEM_STASIS_PENALTY,You can’t teleport while stasis interference is active.
 LOC_SYSTEM_LUNATIC_PENALTY,You can't do that while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_SWAP_WEAPON,You can't switch weapons while consumed by madness!
-LOC_SYSTEM_LUNATIC_PENALTY_SWAP_ARMOUR,You can't switch armor while consumed by madness!
+LOC_SYSTEM_LUNATIC_PENALTY_SWAP_ARMOUR,You can't switch armour while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_EQUIP_JEWELRY,You can't switch jewelry while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_PICKUP,You can't pick anything up while consumed by madness!
 LOC_SYSTEM_LUNATIC_PENALTY_DISCRAD,You can't discard anything while consumed by madness!
@@ -265,7 +265,7 @@ LOC_SYSTEM_LUNATIC_PENALTY_THROW,You can't throw while consumed by madness!
 LOC_SYSTEM_GHOST_PENALTY,You can't do that as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_LEARN_SPELL,You can't learn magic as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_SWAP_WEAPON,You can't switch weapons as a ghost.
-LOC_SYSTEM_GHOST_PENALTY_SWAP_ARMOUR,You can't switch armor as a ghost.
+LOC_SYSTEM_GHOST_PENALTY_SWAP_ARMOUR,You can't switch armour as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_EQUIP_JEWELRY,You can't equip accessories as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_PICKUP,You can't pick things up as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_DISCRAD,You can't discard things as a ghost.
@@ -281,7 +281,7 @@ LOC_SYSTEM_PURITY_PENALTY_SPELLCARD,You're too purified to use Spell Cards.
 LOC_SYSTEM_SILENCE_PENALTY,You can't make a sound.
 LOC_SYSTEM_DROWNED_PENALTY,You can't do that while drowning!
 LOC_SYSTEM_DROWNED_PENALTY_WEAPON,You can't change weapons while drowning!
-LOC_SYSTEM_DROWNED_PENALTY_ARMOUR,You can't change armor while drowning!
+LOC_SYSTEM_DROWNED_PENALTY_ARMOUR,You can't change armour while drowning!
 LOC_SYSTEM_DROWNED_PENALTY_EAT,You can't eat while drowning!
 LOC_SYSTEM_DROWNED_PENALTY_DRINK,You can't drink while drowning!
 LOC_SYSTEM_DROWNED_PENALTY_READ,You can't read while drowning!
@@ -383,10 +383,10 @@ LOC_SYSTEM_HEAL_OTHER,{0} healed {1}.
 LOC_SYSTEM_IDENTIFY_ITEM,This is {0}.
 LOC_SYSTEM_IDENTIFY_HANIWA,Haniwa identified {0}.
 LOC_SYSTEM_UNEQUIP_ITEM,You unequip {0}.
-LOC_SYSTEM_EQUIP_PANALTY1,Your armor is fairly comfortable.
-LOC_SYSTEM_EQUIP_PANALTY2,Your armor is uncomfortable.
-LOC_SYSTEM_EQUIP_PANALTY3,Your armor is very uncomfortable.
-LOC_SYSTEM_EQUIP_PANALTY4,Your armor is wearing you.
+LOC_SYSTEM_EQUIP_PANALTY1,Your armour is fairly comfortable.
+LOC_SYSTEM_EQUIP_PANALTY2,Your armour is uncomfortable.
+LOC_SYSTEM_EQUIP_PANALTY3,Your armour is very uncomfortable.
+LOC_SYSTEM_EQUIP_PANALTY4,Your armour is wearing you.
 LOC_SYSTEM_EXPERIENCE_SHOW_LEVEL,You are a level {0} {1} {2}.
 LOC_SYSTEM_EXPERIENCE_SHOW_REMAIN,{0} XP to the next level.
 LOC_SYSTEM_EXPERIENCE_SHOW_MAX,You have reached the maximum level.
@@ -424,8 +424,8 @@ LOC_SYSTEM_DISCARD,Discard
 LOC_SYSTEM_THROW,Danmaku / Throw
 LOC_SYSTEM_EQUIP_WEAPON,Equip Weapon
 LOC_SYSTEM_UNEQUIP_WEAPON,Unequip Weapon
-LOC_SYSTEM_EQUIP_ARMOUR,Equip Armor
-LOC_SYSTEM_UNEQUIP_ARMOUR,Unequip Armor
+LOC_SYSTEM_EQUIP_ARMOUR,Equip Armour
+LOC_SYSTEM_UNEQUIP_ARMOUR,Unequip Armour
 LOC_SYSTEM_EQUIP_JEWELRY,Equip Jewelry
 LOC_SYSTEM_UNEQUIP_JEWELRY,Unequip Jewelry
 LOC_SYSTEM_FIND_ITEM,Search Item
@@ -457,7 +457,7 @@ LOC_SYSTEM_INFORMATION_COMMAND,Additional Information Window
 LOC_SYSTEM_INFORMATION_CHARACTER,Character Information
 LOC_SYSTEM_INFORMATION_FAITH,Faith Information
 LOC_SYSTEM_INFORMATION_INDENTIFY,Identified Items
-LOC_SYSTEM_INFORMATION_PROPERTY,Property Information
+LOC_SYSTEM_INFORMATION_PROPERTY,Traits Information
 LOC_SYSTEM_INFORMATION_SPELL,Learned Spells
 LOC_SYSTEM_INFORMATION_LEARN_SPELL,Learn New Spell
 LOC_SYSTEM_INFORMATION_SKILL,Skill Window
@@ -633,7 +633,7 @@ LOC_SYSTEM_BUFF_DROWNING,Drown
 LOC_SYSTEM_BUFF_CTELE_INTERUPT,-CTele
 LOC_SYSTEM_BUFF_STAT_PANALTY,-Stat
 LOC_SYSTEM_BUFF_STAT_EXHAUTED,Exhaust
-LOC_SYSTEM_BUFF_STAT_SUPER_GRAZE,Graze+
+LOC_SYSTEM_BUFF_STAT_SUPER_GRAZE,P.Graze
 LOC_SYSTEM_BUFF_STAT_TRANS_PANALTY,T.Penl
 LOC_SYSTEM_BUFF_STAT_SPELLCARD,Spell
 LOC_SYSTEM_BUFF_STAT_AUTMMN_INVISIBLE,Inv+
@@ -694,10 +694,10 @@ LOC_SYSTEM_BUFF_STAT_OVERHEAT,Overheat ({0})
 LOC_SYSTEM_BUFF_STAT_GLUTTON,Gluttony ({0})
 LOC_SYSTEM_BUFF_STAT_POTIONADDICT,Withdrawal
 LOC_SYSTEM_BUFF_DESCRIBE_RISK,Risk indicates how dangerous your current situation is.
-LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY1,Your armor and shield are too heavy! Your evasion, stealth, magic, accuracy, and movement speed are reduced by the penalty.
-LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY2,This is the total penalty from your armor and shield. Your evasion, stealth, magic success rate, accuracy, and movement speed are reduced accordingly.
-LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY3,This is the total penalty from your armor and shield. It reduces your evasion, stealth, magic success rate, and accuracy.
-LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY4,This is the total penalty from your armor and shield. It lowers your evasion, stealth, and magic success rate.
+LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY1,Your armour and shield are too heavy! Your evasion, stealth, magic, accuracy, and movement speed are reduced by the penalty.
+LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY2,This is the total penalty from your armour and shield. Your evasion, stealth, magic success rate, accuracy, and movement speed are reduced accordingly.
+LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY3,This is the total penalty from your armour and shield. It reduces your evasion, stealth, magic success rate, and accuracy.
+LOC_SYSTEM_BUFF_DESCRIBE_EQUIP_PENALTY4,This is the total penalty from your armour and shield. It lowers your evasion, stealth, and magic success rate.
 LOC_SYSTEM_BUFF_DESCRIBE_EIRIN_POISON,You will take continuous damage over time based on the value.
 LOC_SYSTEM_BUFF_DESCRIBE_STASIS,You can't use translocation magic or items.
 LOC_SYSTEM_BUFF_DESCRIBE_RFIRE_UP,Your fire resistance has increased.
@@ -867,8 +867,8 @@ LOC_SYSTEM_PROJECTILE_NOT_EXIST,No projectiles available.
 LOC_SYSTEM_PROJECTILE_DIRECTION,Which direction do you want to fire?
 LOC_SYSTEM_DISPLAY_MANAGER_NORMAL_ITEM,Which item would you like to choose?
 LOC_SYSTEM_DISPLAY_MANAGER_EQ_WEAPON,Which weapon would you like to equip?
-LOC_SYSTEM_DISPLAY_MANAGER_EQ_ARMOUR,Which armor would you like to equip?
-LOC_SYSTEM_DISPLAY_MANAGER_UEQ_ARMOUR,Which armor would you like to unequip?
+LOC_SYSTEM_DISPLAY_MANAGER_EQ_ARMOUR,Which armour would you like to equip?
+LOC_SYSTEM_DISPLAY_MANAGER_UEQ_ARMOUR,Which armour would you like to unequip?
 LOC_SYSTEM_DISPLAY_MANAGER_EQ_JEWELRY,Which accessory would you like to equip?
 LOC_SYSTEM_DISPLAY_MANAGER_UEQ_JEWELRY,Which accessory would you like to unequip?
 LOC_SYSTEM_DISPLAY_MANAGER_PICK,Which item would you like to pick up?
@@ -882,8 +882,8 @@ LOC_SYSTEM_DISPLAY_MANAGER_GAMEOVER,Your items
 LOC_SYSTEM_DISPLAY_MANAGER_USE,What would you like to use?
 LOC_SYSTEM_DISPLAY_MANAGER_USE_TO,Which item would you like to use it on?
 LOC_SYSTEM_DISPLAY_MANAGER_IDEN,Which item would you like to identify?
-LOC_SYSTEM_DISPLAY_MANAGER_ARMOUR,Which armor would you like to choose?
-LOC_SYSTEM_DISPLAY_MANAGER_ENCHANT_ARMOUR,Which armor would you like to enhance?
+LOC_SYSTEM_DISPLAY_MANAGER_ARMOUR,Which armour would you like to choose?
+LOC_SYSTEM_DISPLAY_MANAGER_ENCHANT_ARMOUR,Which armour would you like to enhance?
 LOC_SYSTEM_DISPLAY_MANAGER_JEWELRY,Which accessory would you like to choose?
 LOC_SYSTEM_DISPLAY_MANAGER_JUNKO,Which item would you like to purify?
 LOC_SYSTEM_DISPLAY_MANAGER_JUNKO_SKILL,Which skill would you like to purify?
@@ -897,7 +897,7 @@ LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL,Select a spell to view details. (Press {0}
 LOC_SYSTEM_DISPLAY_MANAGER_INFO_SPELL_SIMPLE,Select a spell to view details.
 LOC_SYSTEM_DISPLAY_MANAGER_IDEN_VIEW,Identified items & Auto-pickup settings
 LOC_SYSTEM_DISPLAY_MANAGER_NO_IDEN,No identified items.
-LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW,Your properties (Press a letter for detailed info.)
+LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW,Your traits (Press a letter for detailed info.)
 LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY_VIEW_PAD,Your traits (Press {0} for more details.)
 LOC_SYSTEM_DISPLAY_MANAGER_PROPERTY,Traits
 LOC_SYSTEM_DISPLAY_MANAGER_EFFECT,Effects
@@ -940,8 +940,8 @@ LOC_SYSTEM_TAG_WEAPON_LONGBLADE,Longsword
 LOC_SYSTEM_TAG_WEAPON_AXE,Axe
 LOC_SYSTEM_TAG_WEAPON_MACE,Mace
 LOC_SYSTEM_TAG_WEAPON_SPEAR,Spear
-LOC_SYSTEM_TAG_ARMOUR,Armor
-LOC_SYSTEM_TAG_BODY,Body Armor
+LOC_SYSTEM_TAG_ARMOUR,Armour
+LOC_SYSTEM_TAG_BODY,Body Armour
 LOC_SYSTEM_TAG_BODY0,Cloth
 LOC_SYSTEM_TAG_BODY1,Leather
 LOC_SYSTEM_TAG_BODY2,Chain
@@ -1100,9 +1100,9 @@ LOC_SYSTEM_YOU_SELFDESTRUCT_2,2...
 LOC_SYSTEM_YOU_SELFDESTRUCT_1,1...
 LOC_SYSTEM_YOU_RAD,You’ve been affected by radiation! ({0})
 LOC_SYSTEM_YOU_RAD_CURE,The side effects of the radiation have naturally healed. ({0})
-LOC_SYSTEM_MON_RED_DESIRE,Red Desire
-LOC_SYSTEM_MON_BLUE_DESIRE,Blue Desire
-LOC_SYSTEM_MON_GREEN_DESIRE,Green Desire
+LOC_SYSTEM_MON_RED_DESIRE,Red Divine Spirit
+LOC_SYSTEM_MON_BLUE_DESIRE,Blue Divine Spirit
+LOC_SYSTEM_MON_GREEN_DESIRE,Green Divine Spirit
 LOC_SYSTEM_MON_POISONED,{0} is poisoned.
 LOC_SYSTEM_MON_MORE_POISONED,{0}'s poison worsens.
 LOC_SYSTEM_MON_TELE,The space around {0} becomes unstable.
@@ -1264,7 +1264,7 @@ LOC_SYSTEM_HIT_BLLIZARD,{0} {0==you?are:is} swept into the blizzard.
 LOC_SYSTEM_HIT_BURST,{0} explode{0==you?:s}.
 LOC_SYSTEM_HIT_TWIST,{0} {0==you?are:is} swept up in the wind.
 LOC_SYSTEM_HIT_CURSED,{0} {0==you?are:is} cursed.
-LOC_SYSTEM_HIT_VEILING,{0} {0==you?are:is} cut by the wind armor.
+LOC_SYSTEM_HIT_VEILING,{0} {0==you?are:is} cut by the wind armour.
 LOC_SYSTEM_HIT_RUSH,{0} {0==you?are:is} struck.
 LOC_SYSTEM_HIT_BUMP,{0} bump{0==you?:s} into {1}.
 LOC_SYSTEM_HIT_BUMP_WALL,{0} crash{0==you?:es} into a wall.
@@ -1598,8 +1598,8 @@ LOC_SYSTEM_SEIJA_GOD_SHINKI2,Seija: I was surprised Makai wasn’t a total wreck
 LOC_SYSTEM_SEIJA_GOD_SHINKI3,Seija: It’s easy to get lost in Makai. Be careful if you ever go.
 LOC_SYSTEM_SEIJA_GOD_SHINKI4,Seija: The demons chased me endlessly… Take this and try to throw them off my trail, yeah?
 LOC_SYSTEM_SEIJA_GOD_YUUGI1,Seija: I’d rather avoid fighting an oni. Run as fast as you can.
-LOC_SYSTEM_SEIJA_GOD_YUUGI2,Seija: These armors are one of the oni’s treasures. Too bad I got to them first.
-LOC_SYSTEM_SEIJA_GOD_YUUGI3,Seija: You’ll need armor if you want to survive a punch from an oni.
+LOC_SYSTEM_SEIJA_GOD_YUUGI2,Seija: These armours are one of the oni’s treasures. Too bad I got to them first.
+LOC_SYSTEM_SEIJA_GOD_YUUGI3,Seija: You’ll need armour if you want to survive a punch from an oni.
 LOC_SYSTEM_SEIJA_GOD_YUUGI4,Seija: I think I have a personality that oni love to hate. Mind dealing with them for me?
 LOC_SYSTEM_SEIJA_GOD_SHIZUHA1,Seija: Fallen maple leaves are just pathetic, don’t you think?
 LOC_SYSTEM_SEIJA_GOD_SHIZUHA2,Seija: That god seemed like they’d leave no impression at all. Here, take this.
@@ -1825,7 +1825,7 @@ LOC_SYSTEM_TUTORIAL3,Kanako said: Use the numpad or the y, u, b, n keys to move 
 LOC_SYSTEM_TUTORIAL3_PAD,Kanako said: Hold the left stick and press {0} to move diagonally.
 LOC_SYSTEM_TUTORIAL4,Kanako said: Press {0} to automatically move to unexplored areas.
 LOC_SYSTEM_TUTORIAL5,Kanako said: Press {0} to pick up items and try equipping them.
-LOC_SYSTEM_TUTORIAL6,Kanako said: Press W to equip armor, w for weapons, I for info, and d to drop.
+LOC_SYSTEM_TUTORIAL6,Kanako said: Press W to equip armour, w for weapons, I for info, and d to drop.
 LOC_SYSTEM_TUTORIAL6_PAD,Kanako said: Press {0} to open the side menu. Move the cursor to an item and press {1}.
 LOC_SYSTEM_TUTORIAL6_PAD2,Kanako said: While the cursor is on the item, hold {0} to view its description.
 LOC_SYSTEM_TUTORIAL7,Kanako said: Crawl is all about constant combat-just run into enemies to attack.
@@ -2055,7 +2055,7 @@ LOC_SYSTEM_TRIBE_PROPERTY_EYE,Keen Eyes
 LOC_SYSTEM_TRIBE_PROPERTY_FUR,Fluffy Fur
 LOC_SYSTEM_TRIBE_PROPERTY_REGEN1,Powerful Regeneration
 LOC_SYSTEM_TRIBE_PROPERTY_REGEN2,Weak Regeneration
-LOC_SYSTEM_TRIBE_PROPERTY_SLAY,Combat Instincts
+LOC_SYSTEM_TRIBE_PROPERTY_SLAY,Battle Sense
 LOC_SYSTEM_TRIBE_PROPERTY_CONFUSE_ATTACK,Confusing Strike
 LOC_SYSTEM_TRIBE_PROPERTY_MAGIC_RESIST,Magic Resistance
 LOC_SYSTEM_TRIBE_PROPERTY_SKIN_AC,Tough Skin
@@ -2139,8 +2139,8 @@ LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POISON_RESIST,You are resistant to poison.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STEALTH,You move stealthily. ({0})
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_FLY,You have large wings that allow you to fly.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SWIM,You can swim.
-LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SIZE1,You are too large for heavy armor to fit properly.
-LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SIZE2,You are too small for heavy armor to fit properly.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SIZE1,You are too large for heavy armour to fit properly.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SIZE2,You are too small for heavy armour to fit properly.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HORN,You have horns on your head.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_GHOST_FOOT,As a ghost, you have no legs.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CHEUKUMOGAMI,Your true body is a tool.
@@ -2213,7 +2213,7 @@ LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_STURDY,Your body is chemically enhanced and s
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_GOOD_FOR_POTION,Potions work more effectively on you.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_INTELLIGENCE,Your mind is exceptionally sharp. (Int{0}, Conf Resist)
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POISON_BODY,Your body emits poison. (Poison Resistance, releases poison cloud when hit)
-LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_WEAK_ARMOUR,Your body has shrunk, reducing AC gained from armor.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_WEAK_ARMOUR,Your body has shrunk, reducing AC gained from armour.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_TWISTED_HORN,A horn has sprouted from your head, making headgear incompatible.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_POWERLESS,Your maximum Power has decreased.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_TICK,You unconsciously greet new enemies you encounter.
@@ -2247,10 +2247,10 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POISON_RESIST,Your poison resistance increases.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STEALTH,Your stealth increases. The stealth effect is multiplied by the value.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_FLY,You can toggle flying through abilities.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SWIM,You can move through deep water as if it were flat ground.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SIZE1,You can't wear armor heavier than cloth or leather.\nYour large size also penalizes evasion.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SIZE2,You can't wear armor heavier than cloth or leather.\nHowever, your small size boosts evasion.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SIZE1,You can't wear armour heavier than cloth or leather.\nYour large size also penalizes evasion.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SIZE2,You can't wear armour heavier than cloth or leather.\nHowever, your small size boosts evasion.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_HORN,You gain a headbutt attack from your horns.\nIt triggers occasionally during attacks and more often when unarmed.\nYou can't wear headgear.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_GHOST_FOOT,Your legs are ghostly and don't physically exist.\nYou can't wear leg armor.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_GHOST_FOOT,Your legs are ghostly and don't physically exist.\nYou can't wear leg armour.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CHEUKUMOGAMI,You can't drop your true form, the tool.\nWhen wielding it, related skills gain a bonus of {0}.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_HP,Your HP is genetically determined.\nFinal HP is multiplied by the value.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_INVISIBLE,You remain invisible while out of combat.\nAttacking cancels the effect.
@@ -2313,7 +2313,7 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STURDY,Your muscles have bulked up due to chemi
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_GOOD_FOR_POTION,Your body is highly compatible with potions.\nPotion effects are increased by 100%.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_INTELLIGENCE,Your intelligence has been chemically boosted to unnatural levels.\nIntelligence increases by {0}, and you are more resistant to confusion and madness.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POISON_BODY,Your body continuously leaks poison.\nGrants poison resistance and sometimes generates a poison cloud under attackers when hit.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_WEAK_ARMOUR,Due to drug side effects, your body has shrunk.\nArmor no longer fits well, and the AC gained from armor is halved.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_WEAK_ARMOUR,Due to drug side effects, your body has shrunk.\nArmour no longer fits well, and the AC gained from armour is halved.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_TWISTED_HORN,An unsightly horn has grown on your head.\nYou can no longer wear headgear.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_POWERLESS,Your maximum Power is capped at 4.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_TICK,You have a chance to greet any enemy you see for the first time.\nThis greeting creates noise that alerts and awakens nearby enemies.
@@ -2337,7 +2337,7 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_MISSLE,You launch 4 homing missiles periodi
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_COMSUMABLE,Immediately grants 9–11 random consumables when acquired.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_STG_DEFAULT_ABIL,Special shooting mode rules:\n\nStanding still for 1 turn fires upward based on melee power.\nPicking up items takes no turn; P items are auto-picked up from 1 tile away.\nInfinite throw range and vision; spell range doubled.\nAll items appear identified.\nShots never hit allies.\nMap and items scroll downward.\nStat boosts on level-up are automatic.\n
 LOC_SYSTEM_TRIBE_PROPERTY_HEAD_UNEQUIP,Your headgear has been unequipped!
-LOC_SYSTEM_TRIBE_PROPERTY_FOOT_UNEQUIP,Your leg armor has been unequipped!
+LOC_SYSTEM_TRIBE_PROPERTY_FOOT_UNEQUIP,Your leg armour has been unequipped!
 LOC_SYSTEM_TRIBE_PROPERTY_HAND_UNEQUIP,Your gloves have been unequipped!
 LOC_SYSTEM_TRIBE_PROPERTY_CLOAK_UNEQUIP,Your cloak has been unequipped!
 LOC_SYSTEM_TRIBE_PROPERTY_LIFESAVE_REMOVE,You've grown strong enough to lose one resurrection.
@@ -2440,9 +2440,9 @@ LOC_SYSTEM_FLOOR_EFFECT_GOLD,Coins
 LOC_SYSTEM_SPELL_CAST_PANALTY1,You felt lightheaded from magical backlash.
 LOC_SYSTEM_SPELL_CAST_PANALTY2,You felt a severe headache from magical backlash.
 LOC_SYSTEM_SPELL_CAST_PANALTY3,You suffered severe brain pain from magical backlash.
-LOC_SYSTEM_SPELL_NEED_POWER,Your brain took terrible damage from magical backlash.
-LOC_SYSTEM_SPELL_EXIST_POS,You need at least 1 Power to use magic!
-LOC_SYSTEM_SPELL_EXIST_SMOKE,You can't use that where someone already stands.
+LOC_SYSTEM_SPELL_NEED_POWER,You need at least 1 Power to use magic!
+LOC_SYSTEM_SPELL_EXIST_POS,You can't use that where someone already stands.
+LOC_SYSTEM_SPELL_EXIST_SMOKE,There is already smoke there.
 LOC_SYSTEM_SPELL_CURE_POISON,The poison has been cured.
 LOC_SYSTEM_SPELL_SHOULD_POISON,Can only be used while poisoned.
 LOC_SYSTEM_SPELL_CANT_BRAND,The spell has no effect.
@@ -2806,7 +2806,7 @@ LOC_SYSTEM_SPL_DESCRIBE_SUMMON_NAMAZ,Drops a giant Namazu at the targeted locati
 LOC_SYSTEM_SPL_DESCRIBE_SCHEMA_TANMAC,Danmaku that flies in from beyond the gap.\nHigh-level gap casts stronger danmaku.\n
 LOC_SYSTEM_SPL_DESCRIBE_CHANGE,A raccoon’s specialty transformation magic.\nTransforms into the strongest visible enemy nearby, but not into another raccoon.\nTemporarily gains the stats and spells of that monster, except summoning. Reverts after some time and grants full EXP when defeated.\n
 LOC_SYSTEM_SPL_DESCRIBE_UNLUCK,Manipulates local fortune using feng shui.\nInflicts misfortune on a targeted enemy, reducing their luck through three stages: Misfortune, Great Misfortune, and Calamity.\nBad luck makes attacks land more, dodging harder, and item drops worse.\nCalamity can lead to absurd disasters-like a UFO falling from the sky.\nA UFO? Just kidding! Maybe.\n
-LOC_SYSTEM_SPL_DESCRIBE_THUNDER,Calls down a thunderbolt from the sky, striking a 3x3 area with powerful electric damage.\nHowever, the lightning is unpredictable and may not hit every spot.\n
+LOC_SYSTEM_SPL_DESCRIBE_THUNDER,Calls down a thunderbolt from the sky.\nIt strikes a 3x3 area around the targeted enemy with powerful electric damage.\nLightning strikes random positions around the target, prioritizing electrical conductors.\n
 LOC_SYSTEM_SPL_DESCRIBE_AIR_STRIKE,Fires fast-moving air bullets at the enemy.\nNot very powerful or piercing, but casts much faster than other spells-up to twice as fast.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_RACOON,Mamizou’s specialty that summons multiple raccoon minions at once.\nThey're weak, but since raccoons can also transform, leaving them alone might cause trouble.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMON_YOUKAI,Summons a variety of powerful youkai.\nOni, lantern youkai, and yuki-onna may appear.\nOnly one can be summoned at a time.\n
@@ -2860,7 +2860,7 @@ LOC_SYSTEM_SPL_DESCRIBE_CLOSE_DOOR,Activates Scarlet Devil Mansion’s emergency
 LOC_SYSTEM_SPL_DESCRIBE_SPEAKER_PHONE,Sounds an alert to allies using a loudspeaker.\nLinked to the Scarlet Devil Mansion’s internal security system, some distant groups may hear it and come.\nHowever, since they’re walking, you may have time to escape.\nRumor has it the head maid on the same floor arrives as if by teleportation.\n
 LOC_SYSTEM_SPL_DESCRIBE_HOMING_TANMAC,Summons two small energy-based homing danmaku.\nThey are slower than normal shots and need time to reach targets.\nHigh accuracy on hit, but may miss if terrain is tight or enemies are too close.
 LOC_SYSTEM_SPL_DESCRIBE_ALLROUND_TANMAC,Casts danmaku in all directions.\nAutomatically targets threatening enemies within range.\nFires mid-sized danmaku but doesn’t pierce enemies.
-LOC_SYSTEM_SPL_DESCRIBE_THROW_POTION,Throws a random potion.\nCreates an explosion with random properties and a 3x3 cloud effect at impact.
+LOC_SYSTEM_SPL_DESCRIBE_THROW_POTION,Throws a random potion.\nCreates an explosion with random element and a 3x3 cloud effect at impact.
 LOC_SYSTEM_SPL_DESCRIBE_THROW_RABBIT,Throws a nearby rabbit at an enemy.\nA combo move trained at Eientei.
 LOC_SYSTEM_SPL_DESCRIBE_ARROW,The Haniwa uses a bow to attack distant enemies.
 LOC_SYSTEM_SPL_DESCRIBE_HANIWA_MAGIC_TANMAC,A small magical danmaku that flies toward distant enemies.
@@ -2874,16 +2874,16 @@ LOC_SYSTEM_SPL_DESCRIBE_UKNOWN,A spell with no existing description.\n
 LOC_SYSTEM_SPL_DESCRIBE_ALCHEMY,This spell is an alchemy buff.\nOnly one alchemy buff can be active at a time.\nCasting another will overwrite the previous one.\n
 LOC_SYSTEM_SPL_DESCRIBE_SUMMONING,This spell can summon up to {0} creatures.\n
 LOC_SYSTEM_SPL_DESCRIBE_CAN_USE_SILIENCE,This spell can be used even while silenced.\n
-LOC_SYSTEM_SKILL_FIGHT,Fight
+LOC_SYSTEM_SKILL_FIGHT,Fighting
 LOC_SYSTEM_SKILL_UNWEAPON,Unarmed Combat
-LOC_SYSTEM_SKILL_SHORTBLADE,Short Blade
-LOC_SYSTEM_SKILL_LONGBLADE,Long Blade
-LOC_SYSTEM_SKILL_MACE,Mace
-LOC_SYSTEM_SKILL_AXE,Axe
-LOC_SYSTEM_SKILL_SPEAR,Spear
+LOC_SYSTEM_SKILL_SHORTBLADE,Short Blades
+LOC_SYSTEM_SKILL_LONGBLADE,Long Blades
+LOC_SYSTEM_SKILL_MACE,Maces
+LOC_SYSTEM_SKILL_AXE,Axes
+LOC_SYSTEM_SKILL_SPEAR,Polearms
 LOC_SYSTEM_SKILL_TANMAC,Danmaku
-LOC_SYSTEM_SKILL_DODGE,Dodge
-LOC_SYSTEM_SKILL_ARMOUR,Armor
+LOC_SYSTEM_SKILL_DODGE,Dodging
+LOC_SYSTEM_SKILL_ARMOUR,Armour
 LOC_SYSTEM_SKILL_SHIELD,Shield
 LOC_SYSTEM_SKILL_SPELLCASTING,Spellcasting
 LOC_SYSTEM_SKILL_FIRE,Fire
@@ -2936,7 +2936,7 @@ LOC_SYSTEM_SKL_EIRIN_2,Emergency Transfusion
 LOC_SYSTEM_SKL_BYAKUREN_1,Mind Empowerment
 LOC_SYSTEM_SKL_BYAKUREN_2,Body Empowerment
 LOC_SYSTEM_SKL_SIZUHA_1,Leaves of Madness
-LOC_SYSTEM_SKL_SIZUHA_2,Autumn Armor
+LOC_SYSTEM_SKL_SIZUHA_2,Autumn Armour
 LOC_SYSTEM_SKL_SIZUHA_3,Imbue Weapon with Autumn
 LOC_SYSTEM_SKL_MINORIKO_1,Restore Attributes
 LOC_SYSTEM_SKL_MINORIKO_2,Restore Health
@@ -2983,7 +2983,7 @@ LOC_SYSTEM_SKL_SWAKO_MISYAGUZI,Summon Mishaguji
 LOC_SYSTEM_SKL_SWAKO_SWAKO_HAT,Suwako's Hat
 LOC_SYSTEM_SKL_HINA_1,Curse Absorption
 LOC_SYSTEM_SKL_HINA_2,Curse Weapon (Empower)
-LOC_SYSTEM_SKL_HINA_3,Curse Armor (Reflect)
+LOC_SYSTEM_SKL_HINA_3,Curse Armour (Reflect)
 LOC_SYSTEM_SKL_HINA_4,Curse Jewelry (Heal)
 LOC_SYSTEM_SKL_HINA_5,Imbue Weapon with Curse
 LOC_SYSTEM_SKL_JUMPING_ATTACK,Jumping Attack
@@ -3027,7 +3027,7 @@ LOC_SYSTEM_SKL_MIKO_4,Gain Resistance
 LOC_SYSTEM_SKL_MIKO_5,Red Cloak, Blue Cloak
 LOC_SYSTEM_SKL_MIKO_6,Popularity Boom
 LOC_SYSTEM_SKL_SOULSHOT,Spiritual Attack
-LOC_SYSTEM_SKL_SUPER_GRAZE,Guts Graze
+LOC_SYSTEM_SKL_SUPER_GRAZE,Perfect Graze
 LOC_SYSTEM_SKL_UPGRADE_HANIWA,Enhance Haniwa
 LOC_SYSTEM_SKL_DELAY_HANIWA,Delay Enhancement
 LOC_SYSTEM_SKL_DRAW_CARD,Draw Card
@@ -3052,7 +3052,7 @@ LOC_SYSTEM_SKL_DESCRIBE_EIRIN_2,Eirin’s ultimate divine technique.\nConsumes h
 LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_1,Byakuren’s body enhancement magic that temporarily boosts Intelligence.\nIncreases INT by 5, improves spell success and power recovery rate.\n
 LOC_SYSTEM_SKL_DESCRIBE_BYAKUREN_2,Byakuren’s body enhancement magic that temporarily boosts Dexterity (W).\nMovement speed increases dramatically.\nDoes not stack with Haste and lasts briefly.\nSuperhuman speed!\n
 LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_1,Drives enemies standing on autumn leaves into madness.\nInflicts Confusion by comparing their magic resistance.\n
-LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_2,Replaces your non-artifact body armor with Maple Armor.\nIncreases stealth while you have faith in Shizuha.\nHowever, it removes previous resistances.\nMaple Armor cannot be reverted once equipped.\n
+LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_2,Replaces your non-artifact body armour with Maple Armour.\nIncreases stealth while you have faith in Shizuha.\nHowever, it removes previous resistances.\nMaple Armour cannot be reverted once equipped.\n
 LOC_SYSTEM_SKL_DESCRIBE_SIZUHA_3,Permanently enchants your weapon with the Maple brand and +1-2.\nMaple-branded weapons can deal large backstab damage, even if not a dagger.\nDaggers gain a backstab chance on normal attacks.\n
 LOC_SYSTEM_SKL_DESCRIBE_MINORIKO_1,Removes harmful debuffs and stat reductions.\nConsumes faith and a small amount of MP.\n
 LOC_SYSTEM_SKL_DESCRIBE_MINORIKO_2,Consumes a food item in your inventory to greatly restore HP.\nCosts high faith, mana, and 1 MP segment.\nBetter food restores more HP.\n
@@ -3088,7 +3088,7 @@ LOC_SYSTEM_SKL_DESCRIBE_SWAKO_SLEEP,Burrows underground for a short time, becomi
 LOC_SYSTEM_SKL_DESCRIBE_SWAKO_MISYAGUZI,Temporarily summons the powerful Mishaguji deity under Suwako’s command.\nOnly one can be summoned at a time.\nIt deals strong curse-based attacks.\n
 LOC_SYSTEM_SKL_DESCRIBE_HINA_1,Converts negative cursed equipment enchantments into positive ones.\nCosts only MP.\n
 LOC_SYSTEM_SKL_DESCRIBE_HINA_2,Temporarily curses your current weapon with the Curse Brand.\nDeals unavoidable poison damage and has a chance to slow enemies.\nIf already cursed, strengthens instead.\nCannot be used on already cursed weapons.\n
-LOC_SYSTEM_SKL_DESCRIBE_HINA_3,Temporarily curses your armor to reflect all incoming damage.\nLasts longer on body armor.\nCannot be used on already cursed armor.\n
+LOC_SYSTEM_SKL_DESCRIBE_HINA_3,Temporarily curses your armour to reflect all incoming damage.\nLasts longer on body armour.\nCannot be used on already cursed armour.\n
 LOC_SYSTEM_SKL_DESCRIBE_HINA_4,Temporarily curses your accessory, restoring HP and MP.\nCannot be used if already cursed.\n
 LOC_SYSTEM_SKL_DESCRIBE_HINA_5,Permanently enchants your weapon with the Curse Brand and +1-2.\nDeals unavoidable poison damage and may slow the enemy.\n
 LOC_SYSTEM_SKL_DESCRIBE_BREATH,Fires a straight-line breath matching your dragon element.\nCauses fatigue, preventing immediate reuse.\n
@@ -3109,7 +3109,7 @@ LOC_SYSTEM_SKL_DESCRIBE_OKINA_5,Okina’s followers can escape into the Back Doo
 LOC_SYSTEM_SKL_DESCRIBE_JUNKO_1,Fires a simple but powerful physical danmaku.\nDamage scales with level.\nEach use increases a Purification level, limiting item use.\nTwo uses = +1 Purification.\n
 LOC_SYSTEM_SKL_DESCRIBE_JUNKO_2,Temporarily gains pure power.\nSTR +5, boosts melee and danmaku damage.\nEach use increases Purification level by 1, limiting item use.\n
 LOC_SYSTEM_SKL_DESCRIBE_JUNKO_3,Enhances bloodlust for a burst of speed.\nAll actions are 1.5x faster while enemies are in sight.\nBloodlust fades if no enemies remain.\nEach use increases Purification by 2.\n
-LOC_SYSTEM_SKL_DESCRIBE_JUNKO_4,Grants a one-time permanent blessing of Purity from Junko.\nChoose one of three passive effects and gain permanent stat boosts.\nYou can no longer use Junko’s powers or items.\nIf you betray Junko in this state, you die instantly.\nYou can delay the choice but must regain Faith later to retry.\n
+LOC_SYSTEM_SKL_DESCRIBE_JUNKO_4,Grants a one-time permanent blessing of Purity from Junko.\nChoose one of three passive effects to gain permanently.\nYou can no longer use Junko's powers.\nIf you betray Junko after receiving the blessing, you die instantly.\nYou can delay the choice but must regain Faith later to retry.\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_1,Become possessed by Joon (plague god) or Shion (poverty god).\nWhile possessed, use their powers but suffer stronger curses.\nAfter possession ends, gain Faith before reusing.\nJoon fills your MP but wastes 2-3 items and resets MP to 3.00 if over.\nShion restores HP/MP, removes low MP penalties, but causes all dropped items to vanish faster.\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_2,While possessed by Joon, use Queen of Bubble.\nConfuses all enemies briefly and deals damage based on your level.\nUnavailable until the next possession.\n
 LOC_SYSTEM_SKL_DESCRIBE_JOON_AND_SION_3,While possessed by Shion, use Misfortune Scatter.\nSlows all enemies and spreads mist to obscure vision.\nUnavailable until the next possession.\n
@@ -3139,7 +3139,7 @@ LOC_SYSTEM_SKL_DESCRIBE_SILENCE,Erases nearby sounds.\nLuna's prized ability, of
 LOC_SYSTEM_SKL_DESCRIBE_UKNOWN,An unknown ability.\n
 LOC_SYSTEM_ITEM_CATEGORY_WEAPON,Weapon
 LOC_SYSTEM_ITEM_CATEGORY_TANMAC,Danmaku
-LOC_SYSTEM_ITEM_CATEGORY_ARMOUR,Armor
+LOC_SYSTEM_ITEM_CATEGORY_ARMOUR,Armour
 LOC_SYSTEM_ITEM_CATEGORY_POTION,Potion
 LOC_SYSTEM_ITEM_CATEGORY_FOOD,Food
 LOC_SYSTEM_ITEM_CATEGORY_SCROLL,Scroll
@@ -3258,7 +3258,7 @@ LOC_SYSTEM_ITEM_ARMOUR_T_KAPPA,{0} Kappa Suit
 LOC_SYSTEM_ITEM_ARMOUR_T_FIRE,{0} Fire-Rat Robe
 LOC_SYSTEM_ITEM_ARMOUR_T_MAID,{0} Maid Uniform
 LOC_SYSTEM_ITEM_ARMOUR_T_POISON,{0} Doll Dress
-LOC_SYSTEM_ITEM_ARMOUR_T_AUTUMN,{0} Maple Armor
+LOC_SYSTEM_ITEM_ARMOUR_T_AUTUMN,{0} Maple Armour
 LOC_SYSTEM_ITEM_ARMOUR_SHIELD_ROUNDSHIELD,Wooden Shield
 LOC_SYSTEM_ITEM_ARMOUR_SHIELD_IRONSHIELD,Iron Shield
 LOC_SYSTEM_ITEM_ARMOUR_SHIELD_KITESHIELD,Kite Shield
@@ -3288,7 +3288,7 @@ LOC_SYSTEM_ITEM_ARTIFACT_MAGICIAN,Magician
 LOC_SYSTEM_ITEM_ARTIFACT_AC,AC{0}
 LOC_SYSTEM_ITEM_ARTIFACT_EV,EV{0}
 LOC_SYSTEM_ITEM_ARTIFACT_CONFUSE_RESIST,rConf
-LOC_SYSTEM_ITEM_ARTIFACT_ELEC_RESIST,rE+
+LOC_SYSTEM_ITEM_ARTIFACT_ELEC_RESIST,rE{0}
 LOC_SYSTEM_ITEM_ARTIFACT_MAGIC_RESIST,MR+
 LOC_SYSTEM_ITEM_ARTIFACT_SLAY,Slay{0}
 LOC_SYSTEM_ITEM_ARTIFACT_HP_REGEN,HPRegen{0}
@@ -3310,7 +3310,7 @@ LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGICIAN,Increases spell success rate.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_AC,Defense changes by {0}.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_EV,Evasion changes by {0}.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_CONFUSE_RESIST,Grants resistance to confusion.
-LOC_SYSTEM_ITEM_ARTIFACT_INFO_ELEC_RESIST,Grants resistance to electricity.
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_ELEC_RESIST,Increases or decreases electricity resistance. ({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAGIC_RESIST,Grants magic resistance ({0}).
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_SLAY,Increases attack damage and accuracy. ({0})
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_HP_REGEN,Increases health regeneration speed. ({0})
@@ -3515,8 +3515,8 @@ LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_UNEQUIP,You no longer gain MP recovery from 
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_FAITH_CHARGING,You communed with a god through the amulet!
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_FAITH_CHARGING_FAIL,Without faith, your gathered piety faded into the sky.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER,You focus all your senses on evasion for a moment!
-LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END_ALMOST,Your grit-based grazing is about to end.
-LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END,Your grit-based grazing has ended.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END_ALMOST,Your Perfect Graze is about to end.
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_GRAZE_SUPER_END,Your Perfect Graze has ended.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SMOKE,A thick fog rolls in, obscuring everything.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_RAIN,Heavy rain and thunder sweep through the dungeon.
 LOC_SYSTEM_ITEM_JEWELRY_AMULET_WEATHER_SUNNY,Bright sunlight begins to shine into the dungeon.
@@ -3601,7 +3601,7 @@ LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_TELEPORT,Scroll of Teleportation
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_IDENTIFY,Scroll of Identify
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_NONE,Scroll of Scribbles
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CURSE_WEAPON,Scroll of Weapon Curse
-LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CURSE_ARMOUR,Scroll of Armor Curse
+LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CURSE_ARMOUR,Scroll of Armour Curse
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_REMOVE_CURSE,Scroll of Remove Curse
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_BLINK,Scroll of Blink
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_MAPPING,Scroll of Mapping
@@ -3622,7 +3622,7 @@ LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_TELEPORT_SHORT,Teleport
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_IDENTIFY_SHORT,Identify
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_NONE_SHORT,Scribbles
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CURSE_WEAPON_SHORT,Weapon Curse
-LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CURSE_ARMOUR_SHORT,Armor Curse
+LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CURSE_ARMOUR_SHORT,Armour Curse
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_REMOVE_CURSE_SHORT,Remove Curse
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_BLINK_SHORT,Blink
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_MAPPING_SHORT,Mapping
@@ -3663,7 +3663,7 @@ LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN21,Thick Bark Scroll
 LOC_SYSTEM_ITEM_SCROLL_JUST_DOODLE,This scroll appears to be nothing but doodles.
 LOC_SYSTEM_ITEM_SCROLL_CURSE_ITEM,The equipped {0} shone black.
 LOC_SYSTEM_ITEM_SCROLL_CURSE_ITEM_FAIL,You can’t curse this item any further.
-LOC_SYSTEM_ITEM_SCROLL_CURSE_ARMOUR_FAIL,You’re not wearing any armor that can be cursed.
+LOC_SYSTEM_ITEM_SCROLL_CURSE_ARMOUR_FAIL,You’re not wearing any armour that can be cursed.
 LOC_SYSTEM_ITEM_SCROLL_REMOVE_CURSE,The curse on your equipment has been lifted.
 LOC_SYSTEM_ITEM_SCROLL_REMOVE_CURSE_FAIL,None of your equipment is cursed.
 LOC_SYSTEM_ITEM_SCROLL_REMOVE_CURSE_HINA_FAIL,Hina interfered with your misfortune cleansing!
@@ -3813,7 +3813,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_AMULET,This cheap amulet used by Reimu has po
 LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_POISON_NEEDLE,A shuriken that embeds into the target when thrown.\nIt deals little damage, but appears to be coated in poison.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_COMPRESSER,One of the Kappa's inventions-a bomb filled with highly compressed water.\nWhen thrown, it bursts all at once.\nLikely to hit a wide area.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_TANMAC_DOGGOJEO,An ancient Indian weapon said to be used by Buddhist monks during training.\nIt looks like an ordinary handle, but releases magic when thrown with great force.\nUnlike other danmaku, this one pierces through enemies.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_NORMAL,Comfortable clothing for everyday wear.\nSignificantly reduces the base penalty for non-fabric armor.\nHowever, since the minimum penalty is the same as other outfits, this benefit disappears once you're used to armor.\n\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_NORMAL,Comfortable clothing for everyday wear.\nSignificantly reduces the base penalty for non-fabric armour.\nHowever, since the minimum penalty is the same as other outfits, this benefit disappears once you're used to armour.\n\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MIKO,A shrine maiden's garment.\nBlessed by the gods, it protects the mind and grants confusion resistance while worn.\n\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_WING,A winged robe said to be worn by the messengers of the Dragon Palace.\nConducts electricity, granting resistance to lightning while worn.\n\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_KAPPA,A blue uniform worn like standard attire among Kappa.\nDesigned to withstand river chills, granting cold resistance while worn.\n\n
@@ -3823,8 +3823,8 @@ LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_POISON,A doll from the lily-of-the-valley fie
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_AUTUMN,A garment made of autumn leaves-surprisingly, it's properly crafted.\nWith faith in Shizuha, you'll blend into your surroundings and drastically increase stealth.\n\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL0,A cloth outfit designed for easy movement.\nMade from tough fabric that withstands frequent grazing!\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL1,A suit made of durable material.\nLess flexible than cloth, but quite lightweight.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL2,Armor bound with chains.\nSturdy, but not as protective as plate armor.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL3,Armor reinforced with steel plates.\nHinders magic and movement, but ensures your safety.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL2,Armour bound with chains.\nSturdy, but not as protective as plate armour.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_MATERIAL3,Armour reinforced with steel plates.\nHinders magic and movement, but ensures your safety.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SHIELD,A shield used to block enemy attacks. Cannot be equipped with two-handed weapons.\nAlso works (unfairly) to block danmaku.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_HEAD,An accessory worn on the head. The foundation of fashion.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_CLOAK,A stylish cloak worn over the body.\n
@@ -3855,12 +3855,12 @@ LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_TELEPORT,A scroll that causes strange telepor
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_IDENTIFY,Scroll of Identification. Allows you to identify items you’re holding. Very important.\nSaid to resemble the power of a certain half-demon shopkeeper.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_NONE,Just some scribbles left by prankster fairies!\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_WEAPON,Curses your current weapon. Cursed gear can’t be removed until the curse is lifted.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_ARMOUR,Curses your current armor. Cursed gear can’t be removed until the curse is lifted.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_ARMOUR,Curses your current armour. Cursed gear can’t be removed until the curse is lifted.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_REMOVE_CURSE,Lifts curses on your equipment. Also removes that unpleasant feeling.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BLINK,Teleports you to a random visible location.\nExcellent for emergency escapes.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_MAPPING,Reveals the map of your current floor.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ENCHANT_WEAPON_,Enhances the attack and accuracy of your current weapon. Also removes curses.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ENCHANT_ARMOUR,Enhances the defense of your selected armor. Also removes curses.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ENCHANT_ARMOUR,Enhances the defense of your selected armour. Also removes curses.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_FOG,Creates fog.\nThe fog blocks vision for both you and enemies.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_DETECT_CURSE,A scroll that detects cursed items in your inventory.\nIt still works even if nothing is cursed.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_JEWELRY,A scroll that curses your jewelry.\nRandomly curses either a ring or necklace you’re wearing.\n
@@ -3960,7 +3960,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG,A bug-infused evokable item.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1,This item can be evoked without usage limits.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2,This item can be evoked without usage limits. Its power scales with your Evoke skill.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3,Press 'V' to evoke using Power.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,Each time this evokable item is used, it requires
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,Each time this evokable item is used, it requires Power
 LOC_SYSTEM_ITEM_DESCRIPTION_RUNE,This is a rune proving you’ve conquered dungeons.\nCollect 3 to open the final door of the Hakurei Shrine.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_YINYANG_ORB,This is the powerful Yin-Yang Orb. It’s enshrined within the shrine.\nTake it to escape or harness its power-but beware!\nThe red-white shrine maiden will chase you relentlessly.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE1,A flyer reading “Missing Pet - Komeiji Satori.”\nIt has your photo on it...\n
@@ -4054,7 +4054,7 @@ LOC_SYSTEM_GOD_SHINKI_DESCRIPTION,Shinki is the god and creator of Makai.\nShe u
 LOC_SYSTEM_GOD_MINORIKO_TITLE,Minoriko Aki - Symbol of Abundance and Plenty
 LOC_SYSTEM_GOD_MINORIKO_DESCRIPTION,Minoriko is the god of autumn harvests and blesses her followers with abundance.\nHer followers receive bountiful food that restores fullness and HP.\nYou gain faith by picking up P items.
 LOC_SYSTEM_GOD_SHIZUHA_TITLE,Shizuha Aki - Symbol of Loneliness and Demise
-LOC_SYSTEM_GOD_SHIZUHA_DESCRIPTION,Shizuha Aki is the god of autumn leaves.\nShe lowers your presence, allowing you to move stealthily.\nHer powers greatly benefit assassins and reduce heavy armor penalties.\nShe delights in watching loud enemies fall like leaves.
+LOC_SYSTEM_GOD_SHIZUHA_DESCRIPTION,Shizuha Aki is the god of autumn leaves.\nShe lowers your presence, allowing you to move stealthily.\nHer powers greatly benefit assassins and reduce heavy armour penalties.\nShe delights in watching loud enemies fall like leaves.
 LOC_SYSTEM_GOD_EIRIN_TITLE,Eirin Yagokoro - Brain of the Moon
 LOC_SYSTEM_GOD_EIRIN_DESCRIPTION,She is the moon's top sage and a genius pharmacist who can make any medicine.\nHer followers receive potions with additional effects.\nDramatic treatments such as body modifications are also possible.\nThose who accept becoming test subjects are rewarded.\nYou gain faith by praying over beneficial potions or drinking them.\nOccasionally, you may also gain faith by defeating enemies.
 LOC_SYSTEM_GOD_KANAKO_TITLE,Kanako Yasaka - The Avatar of Mountains and Lakes
@@ -4080,7 +4080,7 @@ LOC_SYSTEM_GOD_MIKO_DESCRIPTION,Toyosatomimi no Miko is a sage of the Mausoleum 
 LOC_SYSTEM_GOD_OKINA_TITLE,Okina Matara - The Ultimate Hidden God
 LOC_SYSTEM_GOD_OKINA_DESCRIPTION,Okina Matara is a hidden, mysterious god whose true identity is unknown.\nShe seeks subordinates to do her bidding-you might be one.\nAs her follower, you gain door-based powers.\nYou can teleport through doors or appear behind enemies.\nYou can also call allies to boost HP and MP.\nShe enjoys spreading her divine presence through victorious battles.
 LOC_SYSTEM_GOD_JUNKO_TITLE,Junko
-LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,Junko is a divine spirit purified by hatred, seeking vengeance.\nHer powers are simple but strong.\nThey require no piety but cause temporary Purified status.\nHigher Purification limits item usage.\nNormally this fades over time, but her favorite followers may be permanently purified.\nHer blessings are heavy, with great penalties and no betrayal allowed, but immense rewards.\nShe enjoys slaying every visible enemy.
+LOC_SYSTEM_GOD_JUNKO_DESCRIPTION,Junko is a divine spirit purified by hatred, seeking vengeance.\nHer powers are simple but strong.\nThey require no piety but cause temporary Purified status.\nHigher Purification limits item usage.\nNormally this fades over time, while her favorite followers may receive a permanent blessing of Purity.\nOnce you receive this blessing, you can no longer escape from Junko, but she grants immense power in return.\nShe enjoys slaying every visible enemy.
 LOC_SYSTEM_GOD_KEIKI_TITLE,Keiki Haniyasushin - The Sculptor God Crafted by Utter Isolation
 LOC_SYSTEM_GOD_KEIKI_DESCRIPTION,Keiki is a god of creation born from human spirits.\nShe grants life to crafted idols.\nShe gives a small Haniwa upon faith and allows you to customize it as you explore.\nKeiki takes a portion of your experience to create idols.
 LOC_SYSTEM_GOD_BUG_TITLE,Bug God
@@ -4100,7 +4100,7 @@ LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY1_ADD,Hijiri increases your maximum learnab
 LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY1_REMOVE,Your maximum learnable magic level is no longer increased.
 LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY2_ADD,You can now temporarily boost your Intelligence.
 LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY2_REMOVE,You can no longer boost your Intelligence temporarily.
-LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY3_ADD,With enhanced Strength, you ignore low armor penalties to magic failure.
+LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY3_ADD,With enhanced Strength, you ignore low armour penalties to magic failure.
 LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY3_REMOVE,You no longer receive the blessing of Strength enhancement.
 LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY4_ADD,Hijiri now assists your enhancement spells.
 LOC_SYSTEM_GOD_BYAKUREN_GAIN_ABLILITY4_REMOVE,You are no longer assisted by Hijiri’s enhancement support.
@@ -4200,8 +4200,8 @@ LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY1_ADD,You leave behind stealthy traces of au
 LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY1_REMOVE,You no longer leave leaf traces behind.
 LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY2_ADD,You can inflict confusion on monsters standing on leaves.
 LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY2_REMOVE,You can no longer confuse monsters standing on leaves.
-LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY3_ADD,You can turn your equipped armor into leaf armor.
-LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY3_REMOVE,You can no longer turn your armor into leaf armor.
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY3_ADD,You can turn your equipped armour into leaf armour.
+LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY3_REMOVE,You can no longer turn your armour into leaf armour.
 LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY4_ADD,You can move very quickly when walking on leaves.
 LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY4_REMOVE,You can no longer move quickly on leaves.
 LOC_SYSTEM_GOD_SHIZUHA_GAIN_ABLILITY6_ADD,You can imbue your weapon with the power of leaves once.
@@ -4211,8 +4211,8 @@ LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY1_ADD,You can convert negative enchantments on 
 LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY1_REMOVE,You can no longer reverse enchantments on cursed items.
 LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY2_ADD,You can curse your weapon to gain powerful strength.
 LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY2_REMOVE,You can no longer gain strength by cursing your weapon.
-LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY3_ADD,You can curse your armor to reflect all damage.
-LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY3_REMOVE,You can no longer reflect damage through cursed armor.
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY3_ADD,You can curse your armour to reflect all damage.
+LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY3_REMOVE,You can no longer reflect damage through cursed armour.
 LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY4_ADD,You can curse your accessories to recover HP and MP.
 LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY4_REMOVE,You can no longer recover HP and MP by cursing accessories.
 LOC_SYSTEM_GOD_HINA_GAIN_ABLILITY5_ADD,You now spread curses wherever you go.
@@ -4360,7 +4360,7 @@ LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6,While possessed, you can use the Mos
 LOC_SYSTEM_GOD_SHOW_JOON_AND_SION_ABLILITY6_1,You can use the ultimate strategy to possess the enemy with the Poverty God.
 LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY1,Byakuren increases the maximum spell level you can learn.
 LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY2,You can momentarily boost your intelligence.
-LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY3,Your strength increases, allowing you to ignore magic failure from low-tier armor penalties.
+LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY3,Your strength increases, allowing you to ignore magic failure from low-tier armour penalties.
 LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY4,Byakuren supports your enhancement spells.
 LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY5,You can momentarily boost your willpower.
 LOC_SYSTEM_GOD_SHOW_BYAKUREN_ABLILITY6,You sometimes get a magic book from Byakuren.
@@ -4427,13 +4427,13 @@ LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY1,Shizuha reduces the chance of enemies shou
 LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY2,You leave behind autumn leaves when you move or defeat enemies.
 LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY3,Walking on leaves lets you move very stealthily.
 LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY4,You can confuse all enemies standing on leaves.
-LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY5,You can turn your armor into leaf armor.
+LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY5,You can turn your armour into leaf armour.
 LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY6,You move very quickly while walking on leaves.
 LOC_SYSTEM_GOD_SHOW_SHIZUHA_ABLILITY7,You can imbue your weapon with the leaf brand once.
 LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY1,You can detect and identify cursed equipment in your sight.
 LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY2,You can convert negative enchantments on equipped cursed gear into positives.
 LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY3,You can temporarily imbue your weapon with the power of curses.
-LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY4,You can temporarily reflect all damage using cursed armor.
+LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY4,You can temporarily reflect all damage using cursed armour.
 LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY5,You can temporarily imbue accessories with curses to heal HP.
 LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY6,Wearing cursed items spreads curses around you.
 LOC_SYSTEM_GOD_SHOW_HINA_ABLILITY7,You can imbue your weapon with a curse brand once.
@@ -4496,7 +4496,7 @@ LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY3,You can forcibly shut and lock doors.
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY4,You can teleport behind an enemy.
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY5,You can summon the Crazy Back Dancer.
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY6,You can open a door behind you to escape anytime.
-LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1,You are permanently purified by Junko’s blessing.
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1,You received a permanent blessing of Purity from Junko.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2,You cannot use certain scrolls and potions.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3,You cannot use spell cards, and some scrolls and potions.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY4,All your stats are increased by 5.
@@ -4507,8 +4507,8 @@ LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3,Stage 3: You are unaffected by potions.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY2,You can unleash simple but powerful danmaku.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY3,You can gain pure power.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY4,You can gain pure murderous intent.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5,You can be permanently purified by Junko's blessing.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1,You have been permanently purified by Junko’s blessing.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5,You can receive a permanent blessing of Purity from Junko.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_1,You received a permanent blessing of Purity from Junko.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_2,Skill Purity: Your {0} skill level always matches your character level.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_3,Resistance Purity: Your {0} is infinite.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4,Magic Purity: Your HP and MP are treated as the same.
@@ -4616,7 +4616,7 @@ LOC_SYSTEM_GOD_KEIKI_CREATE,Keiki has gifted you {0}!
 LOC_SYSTEM_GOD_KEIKI_REVIVE,{0} has been reformed!
 LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_P,Your Haniwa created a P item.
 LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_WEAPON,Your Haniwa created a weapon.
-LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_ARMOUR,Your Haniwa created armor.
+LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_ARMOUR,Your Haniwa created armour.
 LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_POTION,Your Haniwa created a potion.
 LOC_SYSTEM_GOD_KEIKI_HANIWA_CREATE_SCROLL,Your Haniwa created a scroll.
 LOC_SYSTEM_GOD_KEIKI_WELCOME,Keiki: I’ll craft you the perfect idol!
@@ -4707,10 +4707,10 @@ LOC_SYSTEM_GOD_SHIZUHA_LETTY_ACCECPT,Shizuha clapped. "Splendid."
 LOC_SYSTEM_GOD_SHIZUHA_CONFUSE_FAIL,There are no enemies on the visible maple leaves.
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_ARTIFACT,Artifacts cannot be transformed.
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_ALREADY,This item is already turned into a maple leaf.
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_UNEQUIP,You are not wearing any armor.
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_SHOULD,You must wear armor to use this.
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_UNEQUIP,You are not wearing any armour.
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_SHOULD,You must wear armour to use this.
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR_YN,Do you want to imbue {0} with Autumn's defense?
-LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR,Your armor has transformed into a giant maple leaf!
+LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_ARMOUR,Your armour has transformed into a giant maple leaf!
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND_YN,You can imbue your current weapon with the Maple Brand once. Proceed?
 LOC_SYSTEM_GOD_SHIZUHA_AUTUMN_BRAND,{0} radiates a somber, apocalyptic aura.
 LOC_SYSTEM_GOD_SHIZUHA_MAKE_NOISE,Stepping on the leaves made a loud rustling noise.
@@ -4728,7 +4728,7 @@ LOC_SYSTEM_GOD_HINA_TALK7,Hina: You'll stay with me until the end, right?
 LOC_SYSTEM_GOD_HINA_CURSE_EQUIPMENT1,Hina infused your equipment with misfortune!
 LOC_SYSTEM_GOD_HINA_CURSE_EQUIPMENT2,{0} you were wearing glowed darkly.
 LOC_SYSTEM_GOD_HINA_ABIL_WEAPON_MINUS_TO_PLUS,Hina has purified the misfortune from your weapon.
-LOC_SYSTEM_GOD_HINA_ABIL_ARMOUR_MINUS_TO_PLUS,Hina has purified the misfortune from your armor.
+LOC_SYSTEM_GOD_HINA_ABIL_ARMOUR_MINUS_TO_PLUS,Hina has purified the misfortune from your armour.
 LOC_SYSTEM_GOD_HINA_ABIL_ONLY_MINUS,Only items with negative enchantments can be selected.
 LOC_SYSTEM_GOD_HINA_ABIL_ONLY_CURSE,Can only be used on cursed items.
 LOC_SYSTEM_GOD_HINA_ABIL_CANT_ARTIFACT,Cannot be used on artifacts.
@@ -4737,8 +4737,8 @@ LOC_SYSTEM_GOD_HINA_ABIL_ALREAY_CURSE,Already cursed.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON,{0} is brimming with cursed power.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_FAIL,This weapon cannot be cursed.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_WEAPON_MIGHT,{0} glowed darkly, filling you with mysterious strength.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_FAIL,This armor cannot be cursed.
-LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ONLY_ARMOUR,Can only be used on armor.
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_FAIL,This armour cannot be cursed.
+LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ONLY_ARMOUR,Can only be used on armour.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ARMOUR_MIRROR,{0} glowed darkly - you now reflect all damage.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_JEWELRY_FAIL,This accessory cannot be cursed.
 LOC_SYSTEM_GOD_HINA_ABIL_CURSE_ONLY_JEWELRY,Can only be used on accessories.
@@ -4884,7 +4884,7 @@ LOC_SYSTEM_GOD_SEIJA_GIFT_MIMA3,While under Mima’s punishment, all your spell 
 LOC_SYSTEM_GOD_SEIJA_GIFT_SHINKI1,Shinki: Receive several spirit scrolls.
 LOC_SYSTEM_GOD_SEIJA_GIFT_SHINKI2,Shinki may punish you by summoning hostile Makai dwellers around you.
 LOC_SYSTEM_GOD_SEIJA_GIFT_SHINKI3,During her punishment, the drop rate of P-items from enemies is reduced.
-LOC_SYSTEM_GOD_SEIJA_GIFT_YUUGI1,Yuugi: Receive several random pieces of armor.
+LOC_SYSTEM_GOD_SEIJA_GIFT_YUUGI1,Yuugi: Receive several random pieces of armour.
 LOC_SYSTEM_GOD_SEIJA_GIFT_YUUGI2,Yuugi may force you into drunkenness, throw you while dealing damage,
 LOC_SYSTEM_GOD_SEIJA_GIFT_YUUGI3,or summon powerful oni around you.
 LOC_SYSTEM_GOD_SEIJA_GIFT_SHIZUHA1,Shizuha: Receive a weapon with the Maple brand.
@@ -4919,7 +4919,7 @@ LOC_SYSTEM_GOD_SEIJA_GIFT_MIKO3,inflicting Slow, or temporarily lowering your fi
 LOC_SYSTEM_GOD_SEIJA_GIFT_OKINA1,Okina: Receive several sanctuary scrolls.
 LOC_SYSTEM_GOD_SEIJA_GIFT_OKINA2,Okina may summon hostile backup dancers around you to cheer on nearby monsters,
 LOC_SYSTEM_GOD_SEIJA_GIFT_OKINA3,or drain your HP and MP.
-LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO1,Junko: Receive several weapon and armor enhancement scrolls.
+LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO1,Junko: Receive several weapon and armour enhancement scrolls.
 LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO2,Junko may punish you by weakening, slowing, or
 LOC_SYSTEM_GOD_SEIJA_GIFT_JUNKO3,temporarily reducing your stats.
 LOC_SYSTEM_GOD_SEIJA_GIFT_KEIKI1,Keiki: You receive a Scroll of Acquisition.
@@ -5051,8 +5051,8 @@ LOC_SYSTEM_GOD_OKINA_PUNISH_DRAIN,Okina’s rage has drained your HP and MP!
 LOC_SYSTEM_GOD_JUNKO_WELCOME,Junko: Chang’e, are you watching?
 LOC_SYSTEM_GOD_JUNKO_TALK,Junko: Chang’e, are you watching!?
 LOC_SYSTEM_GOD_JUNKO_ABIL_HASTE_FAIL,There must be an enemy in sight showing intent to kill.
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,The Blessing of Purification applies a permanent purification penalty.
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN,Also, once you choose a purification, it cannot be undone!
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_INFO,Receiving the Blessing of Purification prevents further use of Junko's powers.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_WARN,Once you choose a purification, it cannot be undone!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ASK,Which ability would you like to purify?
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_OTHER,Decrease faith and postpone this choice for a new purification.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_REALLY,Postponing this choice will delay the next one. Are you sure you want to wait?
@@ -5138,8 +5138,8 @@ LOC_SYSTEM_HANIWA_A_MAGICIAN_NAME,Magic Specialization
 LOC_SYSTEM_HANIWA_A_CREATE_P_NAME,Generate P Item
 LOC_SYSTEM_HANIWA_A_CREATE_WEAPON_NAME,Generate Weapon
 LOC_SYSTEM_HANIWA_A_CREATE_WEAPON_ARTIFACT_NAME,Generate Artifact Weapon
-LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_NAME,Generate Armor
-LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_ARTIFACT_NAME,Generate Artifact Armor
+LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_NAME,Generate Armour
+LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_ARTIFACT_NAME,Generate Artifact Armour
 LOC_SYSTEM_HANIWA_A_CREATE_POTION_NAME,Generate Potion
 LOC_SYSTEM_HANIWA_A_CREATE_SCROLL_NAME,Generate Scroll
 LOC_SYSTEM_HANIWA_A_WARN_NAMED_NAME,Danger Detection
@@ -5184,8 +5184,8 @@ LOC_SYSTEM_HANIWA_A_MAGICIAN_INFO,Stops melee attacks and increases magic usage 
 LOC_SYSTEM_HANIWA_A_CREATE_P_INFO,Occasionally generates P items.
 LOC_SYSTEM_HANIWA_A_CREATE_WEAPON_INFO,Occasionally generates weapons.
 LOC_SYSTEM_HANIWA_A_CREATE_WEAPON_ARTIFACT_INFO,Generates artifact weapons less frequently.
-LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_INFO,Occasionally generates armor.
-LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_ARTIFACT_INFO,Generates artifact armor less frequently.
+LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_INFO,Occasionally generates armour.
+LOC_SYSTEM_HANIWA_A_CREATE_ARMOUR_ARTIFACT_INFO,Generates artifact armour less frequently.
 LOC_SYSTEM_HANIWA_A_CREATE_POTION_INFO,Occasionally generates potions.
 LOC_SYSTEM_HANIWA_A_CREATE_SCROLL_INFO,Occasionally generates scrolls.
 LOC_SYSTEM_HANIWA_A_WARN_NAMED_INFO,Warns when a named enemy is present on the floor.
@@ -5240,8 +5240,8 @@ LOC_SYSTEM_DUMP_DEATHREASON_SPEAR,Skewered at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_SPEAR_BY,Skewered  by {1} at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_VAMP,Drained of life at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_VAMP_BY,Drained of life by {1} at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_VEILING,Cut down by wind armor at {0}.
-LOC_SYSTEM_DUMP_DEATHREASON_VEILING_BY,Sliced by {1}'s wind armor at  {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_VEILING,Cut down by wind armour at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_VEILING_BY,Sliced by {1}'s wind armour at  {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_RUSH,Hit by a sudden rush and died at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_RUSH_BY,Run over by {1} at {0}.
 LOC_SYSTEM_DUMP_DEATHREASON_WALL,Smashed into a wall at {0}.
@@ -5377,3 +5377,284 @@ LOC_SYSTEM_ITEM_ARTIFACT_HEAVY,Heavy
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_LESS_POWER,Maximum Power is reduced by 1.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_CURSE,Automatically cursed while equipped.
 LOC_SYSTEM_ITEM_ARTIFACT_INFO_HEAVY,Movement speed is reduced by {0}.
+LOC_SYSTEM_FIGHT_SLASH,{0} slash{0!=you?s:} {1}{1==you?r:'s} {2} with a long blade.
+LOC_SYSTEM_FLOOR_EFFECT_SCORE,Score Items
+LOC_SYSTEM_DAZED,Dazed
+LOC_SYSTEM_HIT_BASH,{0} bash{0==you?:es} {1!=you?the :}{1} with a mace.
+LOC_SYSTEM_WIKI_HELP,Dungeon Suzunaan
+LOC_SYSTEM_HELP_SHORTBLADE,Short blades deal high backstab damage.
+LOC_SYSTEM_HELP_LONGBLADE,Long blades can slash away incoming projectiles.
+LOC_SYSTEM_HELP_AXE,Axes generate shockwaves to the rear when attacking.
+LOC_SYSTEM_HELP_MACE,Maces can smash enemies, causing Dazed.
+LOC_SYSTEM_HELP_SPEAR,Spears can attack enemies two tiles away.
+LOC_SYSTEM_DUNGEON_FORESTOFMAGIC,Forest of Magic
+LOC_SYSTEM_DUNGEON_DOLLSHOUSE,Doll's House
+LOC_SYSTEM_TILE_STAIR_FORESTOFMAGIC,Stairs to the Forest of Magic
+LOC_SYSTEM_TILE_STAIR_DOLLSHOUSE,Stairs to the Doll's House
+LOC_SYSTEM_ITEM_RUNE_FORESTOFMAGIC,Rune of Magic
+LOC_SYSTEM_ITEM_RUNE_DOLLSHOUSE,Rune of Dolls
+LOC_SYSTEM_GOD_YUUGI_GARMAN_SUPLEX_IMMOBILE,This enemy is firmly fixed to the ground and cannot be German suplexed!
+LOC_SYSTEM_GOD_YUUGI_THROW_IMMOBILE,This enemy is firmly fixed to the ground and cannot be thrown!
+LOC_SYSTEM_GOD_SEIJA_ABIL_SWAP_IMMOBILE,This enemy cannot be position-swapped.
+LOC_SYSTEM_GOD_OKINA_ABIL_LOCKED_DOOR_IMMOBILE,This enemy cannot move away from the door!
+LOC_SYSTEM_GOD_SWAWKO_TOUGUE_IMMOBILE,This enemy cannot be pulled.
+LOC_SYSTEM_IMMOBILE_FAIL,This enemy is firmly rooted to the ground.
+LOC_SYSTEM_STEM_GROWING,Nearby stems suddenly grow at an incredible speed!
+LOC_SYSTEM_STEM_WITHERING,The overgrown stem has withered.
+LOC_SYSTEM_ITEM_FOOD_WATERMELEN,Watermelon
+LOC_SYSTEM_TILE_MUSHROOM1,Large Mushroom
+LOC_SYSTEM_TILE_MUSHROOM2,Large Mushroom
+LOC_SYSTEM_MON_TREE_GIANT_DEAD,{0} has lost its strength and returned to an ordinary tree.
+LOC_SYSTEM_MON_TREE_GIANT_SUDDENLY,A tree suddenly grows out of thin air.
+LOC_SYSTEM_MON_TREE_GIANT_GROWING,And plants sprout from the tree!
+LOC_SYSTEM_MON_TREE_GIANT_WITHERING,The tree has withered.
+LOC_SYSTEM_ATT_SPORE,Spore
+LOC_SYSTEM_DUMP_DEATHREASON_SPORE,Suffocated by spores at {0}.
+LOC_SYSTEM_DUMP_DEATHREASON_SPORE_BY,Suffocated by {1}'s spores at {0}.
+LOC_SYSTEM_ATT_INFO_CONFUSE_SPORE,This attack contains a poison that causes confusion.
+LOC_SYSTEM_ATT_INFO_WEAK_SPORE,This attack contains a poison that causes weakness.
+LOC_SYSTEM_SPL_DESCRIBE_CONFUSE_SPORE,A technique that shakes a giant cap to launch confusion spores at a distant target.\nDeals no damage but leaves behind a cloud of confusion along the path.\nNot used at close range.\n
+LOC_SYSTEM_SPL_DESCRIBE_WEAKENDED_SPORE,Scatters spores that weaken immunity around the user. Victims temporarily lose poison resistance.\nWhile not far-reaching, these spores spread in the area,\nand anyone within range may be affected regardless of resistance or position.\n
+LOC_SYSTEM_SPL_DESCRIBE_ACID_BOLT,Fires an acidic missile.\nHit enemies temporarily lose defense,\nand while affected by acid, they take extra damage equal to the negative defense.\n
+LOC_SYSTEM_SPL_DESCRIBE_ORRERIRES_SUN,Summons four orbs that periodically shoot star danmaku at nearby enemies.\nOne of Marisa's signature spells, forming a miniature universe.\n
+LOC_SYSTEM_SPL_DESCRIBE_THROW_STAR,Fires star-shaped danmaku.\nAside from the shape, it behaves like a standard bullet pattern.\n
+LOC_SYSTEM_SPL_CONFUSE_SPORE,Confusion Spores
+LOC_SYSTEM_SPL_WEAKENDED_SPORE,Immunity-Weakening Spores
+LOC_SYSTEM_SPL_ACID_BOLT,Acid Bolt
+LOC_SYSTEM_SPL_ORRERIRES_SUN,Orreries Sun
+LOC_SYSTEM_SPL_THROW_STAR,Star Danmaku
+LOC_SYSTEM_ATT_STAR,Star Danmaku
+LOC_SYSTEM_MAGIC_WEAKENING_SPORE,{0} has reduced poison resistance due to airborne spores.
+LOC_SYSTEM_MON_NO_LONGER_VULUN_POISON,{0} is no longer vulnerable to poison.
+LOC_SYSTEM_VULUN_POISON,Pois-
+LOC_SYSTEM_MON_VULUN_POISON,{0} is weakened after being covered in spores.
+LOC_SYSTEM_ATT_ACID,Acid
+LOC_SYSTEM_HIT_ACID,{0}{0==you?r:'s} {1} hits {2} and burns with acid.
+LOC_SYSTEM_BUFF_ACID,Acid ({0})
+LOC_SYSTEM_BUFF_DESCRIBE_ACID,Acid reduces your defense by the indicated amount. If your defense drops below zero, you'll take increased damage.
+LOC_SYSTEM_ACID,Acid
+LOC_SYSTEM_ATT_INFO_ACID,This attack can apply Acid.
+LOC_SYSTEM_SPL_SACRIFICE,Sacrifice
+LOC_SYSTEM_SPL_DESCRIBE_SACRIFICE,The doll throws itself at the enemy with a massive bomb.\nWhile carrying the bomb, it cannot perform any other actions and can only run toward enemies.\nWhen the timer runs out, it deals massive explosion damage in a 2-tile radius, including surrounding walls.
+LOC_SYSTEM_MON_SWIFT,{0} becomes swift.
+LOC_SYSTEM_MON_MORE_SWIFT,{0} can move swiftly for longer.
+LOC_SYSTEM_MON_NO_LONGER_SWIFT,{0} is no longer swift.
+LOC_SYSTEM_SPL_DOLL_LUNGE,Doll Charge
+LOC_SYSTEM_SPL_CURSE,Curse
+LOC_SYSTEM_SPL_THROW_BUCKET,Throw Bucket
+LOC_SYSTEM_ATT_DOLL_LUNGE,Spear charge
+LOC_SYSTEM_ATT_BUCKET,Bucket
+LOC_SYSTEM_BUFF_STAT_SLIPPERY,Slippery
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_SLIPPERY,You cannot use stairs while covered in slippery liquid.
+LOC_SYSTEM_STAIR_SLIPPERY,You are too slippery to use the stairs!
+LOC_SYSTEM_YOU_SLIPPERY,You are covered in slippery liquid.
+LOC_SYSTEM_YOU_SLIPPERY_END,The slippery liquid wears off.
+LOC_SYSTEM_SPL_DESCRIBE_DOLL_LUNGE,Readies its spear and lunges at a distant enemy in an instant, closing the distance and dealing damage.\nCannot lunge at enemies that are too close, within 2 tiles, and cannot be used consecutively.
+LOC_SYSTEM_SPL_DESCRIBE_CURSE,Drives nails into its own body, sacrificing HP to deal damage to the target that ignores AC.\nThis attack can be used on any target within sight and cannot be evaded.
+LOC_SYSTEM_SPL_DESCRIBE_THROW_BUCKET,Throws a bucket of slippery liquid that it was carrying for cleaning.\nTargets hit by the liquid temporarily become Slippery, preventing them from using stairs, and the dirty water randomly inflicts Slow, Confusion, or Sick.\nIt appears to have only one bucket, so it cannot throw one consecutively.
+LOC_SYSTEM_ATT_PIERCING,Piercing
+LOC_SYSTEM_TILE_DOLLSHOUSE_WALL,Wall
+LOC_SYSTEM_MAGIC_DOLL_LUNGE,{0} lunged at {1}.
+LOC_SYSTEM_PLAYER_SAKUYA,Sakuya
+LOC_SYSTEM_PLAYER_CIRNO,Cirno
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SAKUYA,A tricky type who throws knives to both sides. Use her knives to devise a unique combat strategy!\n Aptitude Bonus) +3 Short Blades Aptitude, +3 Danmaku Aptitude, +4 Space-Time Aptitude\n Bonus) Starts with a +2 Throwing Knife instead of a Broomstick. Her thrown knives fly faster and split apart.\n\n Beginner Tip: Sakuya throws Throwing Knives faster and creates duplicate knives that fly toward nearby enemies.\n However, Throwing Knives must be retrieved before they can be thrown again, demanding a unique fighting style.\n Make active use of her Space-Time magic.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_CIRNO,An ice fairy who never melts, even in the blazing heat. Create the right item for every situation!\n Stat Bonus) Strength +6, Intelligence -6\n Aptitude Bonus) +3 Fighting Aptitude, +2 Long Blades Aptitude, +2 Maces Aptitude, +3 Cold Aptitude, -3 Fire Aptitude\n Bonus) Cold Resistance ++, Fire Resistance -, can create an ice item every 3 levels.\n\n Beginner Tip: Cirno combines a high aptitude for Cold with fighting prowess unusual for a fairy.\n Create ice items at every multiple of 3 levels to grow stronger.\n She can make artifact equipment, danmaku, and even ice cream out of ice.\n Play her as a cold mage, or take advantage of her high Fighting aptitude.\n But if you enter melee combat, beware of the frailty common to fairies.
+LOC_SYSTEM_TRIBE_PROPERTY_SAKUYA_PASSIVE,Perfect and Elegant Maid
+LOC_SYSTEM_TRIBE_PROPERTY_CIRNO_PASSIVE,Ice Fairy
+LOC_SYSTEM_TRIBE_PROPERTY_CIRNO_ICE_CREATE,Create Ice Item
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_SAKUYA_PASSIVE,You throw throwing knives quickly and launch duplicate knives to both sides.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CIRNO_PASSIVE,You are ice itself. (Cold Resistance +2, Fire Resistance -1)
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_CIRNO_ICE_CREATE,You can create an ice item every 3 levels.
+LOC_SYSTEM_SKL_CIRNO_ICE_CREATE,Create Ice Item
+LOC_SYSTEM_SKL_DESCRIBE_CIRNO_ICE_CREATE,Create three ice-infused items and choose one to keep.\nThe quality of the items gradually improves with each use.
+LOC_SYSTEM_GOD_SHOW_N_REMAIN,({0} remaining)
+LOC_SYSTEM_CIRNO_ICE_CREATE_READY,You can now create an item made of ice.
+LOC_SYSTEM_CIRNO_ICE_CREATE_USED,You created an item made of ice.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_SAKUYA_PASSIVE,Throwing knives take 20% less time to throw.\nWhen throwing one, automatically target up to one nearby enemy on each side and launch duplicate knives at them simultaneously.\nDuplicate knives do not consume an item or remain on the ground.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CIRNO_PASSIVE,Increases Cold Resistance by 2 levels and decreases Fire Resistance by 1 level.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_CIRNO_ICE_CREATE,Gain one use of Create Ice Item every 3 levels.\nIce items have the cold property and are offered as three choices.\nTheir quality improves with every use, and saved uses may be spent at any time.
+LOC_SYSTEM_ITEM_ICE_SWORD,Icicle Sword
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_SWORD,A greatsword made from an icicle.\nShe made it as huge and powerful as she could imagine, but sometimes its weight swings her around instead.
+LOC_SYSTEM_ITEM_ICE_DAGGER,Icicle Dagger
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_DAGGER,A small dagger made of ice.\nShe does not like fighting with daggers, but its small size let her shape it with precision and give it a keen edge.
+LOC_SYSTEM_ITEM_ICE_CRASHER,Great Crasher
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_CRASHER,A blunt weapon made from a massive block of ice.\nWhen her little head imagined the most powerful weapon possible, it produced a gigantic hammer.
+LOC_SYSTEM_ITEM_ICE_SPEAR,Icicle Spear
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_SPEAR,A spear made of ice.\nShe imagined the longest, largest icicle possible, and this weapon was the result.
+LOC_SYSTEM_ITEM_ICE_AXE,Icicle Axe
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_AXE,An axe made of ice.\nIt is quite sophisticated for something Cirno devised, though using it is simple enough.
+LOC_SYSTEM_ITEM_ICE_ICICLE,Icicle
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_ICICLE,A sharp icicle danmaku thrown at enemies.\nIt deals cold damage and freezes enemies it hits.
+LOC_SYSTEM_ITEM_ICE_RING,Ice Ring
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_RING,A ring fashioned from ice.
+LOC_SYSTEM_ITEM_ICE_CROWN,Ice Crown
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_CROWN,A crown fashioned from ice.
+LOC_SYSTEM_ITEM_ICE_CREAM,Ice Cream
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_CREAM,Cold and sweet ice cream that Cirno loves.\nIt restores a little Power and HP.
+LOC_SYSTEM_ITEM_ICE_ARMOUR,Ice Armour
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_ARMOUR,Armour made of ice.\nIt is so terribly cold that few could ever wear it.
+LOC_SYSTEM_ITEM_ICE_GLOVES,Ice Gloves
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_GLOVES,Gloves made of ice.\nOnly someone able to withstand frostbite of the hands could wear them.
+LOC_SYSTEM_ITEM_ICE_BOOTS,Ice Boots
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_BOOTS,Boots made of ice.\nIf you can endure their cold, they will protect your feet.
+LOC_SYSTEM_ITEM_ICE_CLOAK,Ice Cloak
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_CLOAK,A cloak made of ice.\nIt looks impressive, but cannot flutter in the wind.
+LOC_SYSTEM_ITEM_ICE_BOOK,Ice Book
+LOC_SYSTEM_ITEM_DESCRIPTION_ICE_BOOK,A book made of ice.\nCirno's idea of the strongest magic is written inside in crooked handwriting.
+LOC_SYSTEM_ITEM_EVOKE_ICE_FROG,Frozen Frog
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_ICE_FROG,A frozen frog.\nUsing it creates mist nearby and slows and freezes enemies. The closer the enemy, the stronger the effect.\nAfter it is used a certain number of times, the ice will melt and it will return to being an ordinary frog.
+LOC_SYSTEM_CIRNO_ICE_CREATE_SELECT,Choose an ice item.
+LOC_SYSTEM_CIRNO_ICE_CREATE_EXAMINE,Choose an ice item to examine.
+LOC_SYSTEM_CIRNO_ICE_CREATE_CONFIRM,Are you sure you want to choose this item?
+LOC_SYSTEM_ITEM_FROZEN_FROG_USE,Cold mist rises from the frozen frog.
+LOC_SYSTEM_ITEM_FROZEN_FROG_EMPTY,The frozen frog can no longer be used.
+LOC_SYSTEM_CIRNO_ICE_CREATE_SELECT_MODE,Select
+LOC_SYSTEM_CIRNO_ICE_CREATE_EXAMINE_MODE,Examine
+LOC_SYSTEM_ITEM_FROZEN_FROG_REMAIN,{0} uses remaining
+LOC_SYSTEM_CIRNO_LAEVATEIN_TOO_HOT,This weapon is too hot for you!
+LOC_SYSTEM_CIRNO_ICEFAIRYRING_EQUIP,Your mind cannot get any worse than it already is.
+LOC_SYSTEM_KNIFE_COLLECT_EMPTY,There are no thrown weapons within sight that you can retrieve.
+LOC_SYSTEM_KNIFE_COLLECT_DONE,You retrieved the nearby thrown weapons.
+LOC_SYSTEM_TIME_PARADOX_NO_SPACE,There is no room to create a duplicate.
+LOC_SYSTEM_SPELLCARD_CANCEL_WASTE_ASK,Cancelling will consume a use. Are you sure you want to cancel?
+LOC_SYSTEM_SPL_DOLL_SPEAR,Doll Placement
+LOC_SYSTEM_SPL_LITTLE_LEGION,Little Legion
+LOC_SYSTEM_SPL_DESCRIBE_DOLL_SPEAR,Summons two sword-wielding dolls that spin around the target.\nThe dolls cannot move, but continuously damage nearby creatures.
+LOC_SYSTEM_SPL_DESCRIBE_LITTLE_LEGION,Summons several dolls around the caster that are ready to fight immediately.\nThe summons are spearmen, archers, or self-destruct dolls, with 2 to 4 dolls of a single type appearing at once.\nThese dolls last only about 10 turns, and the caster cannot use the spell consecutively.\nWhen facing this spell, either avoid combat briefly or attack the summoner controlling the dolls.
+LOC_SYSTEM_WIKI_SEARCH_HINT,Press / or ? to search.
+LOC_SYSTEM_ITEM_ARTIFACT_SHINING_NEEDLE_SWORD_NAME,Shining Needle Sword
+LOC_SYSTEM_ITEM_ARTIFACT_SHINING_NEEDLE_SWORD_DESCRIBE,A tiny needle said to be used as a sword by an inchling.\nIt seems far too small to serve properly in combat under ordinary circumstances.
+LOC_SYSTEM_ITEM_ARTIFACT_SWORD_OF_SCARLET_PERCEPTION_NAME,Sword of Scarlet Perception
+LOC_SYSTEM_ITEM_ARTIFACT_SWORD_OF_SCARLET_PERCEPTION_DESCRIBE,The Sword of Scarlet Perception said to be a celestial treasure.\nThe true sword is said to be a secret treasure that only celestials may touch.\nPerhaps this one is merely an imitation of the genuine article.
+LOC_SYSTEM_ITEM_ARTIFACT_GOLIATH_SWORD_NAME,Goliath Greatsword
+LOC_SYSTEM_ITEM_ARTIFACT_GOLIATH_SWORD_DESCRIBE,A massive greatsword once carried by an enormous doll.\nAn ordinary human or youkai would need both hands to wield it.\nIts tremendous size makes it difficult to swing, but the swing alone can strike enemies all around.
+LOC_SYSTEM_ITEM_ARTIFACT_REAPER_SCYTHE_NAME,Reaper's Scythe
+LOC_SYSTEM_ITEM_ARTIFACT_REAPER_SCYTHE_DESCRIBE,A massive scythe carried over the shoulder by a shinigami.\nSimply holding it creates the illusion that distant targets are right before your eyes.\nThis warped sense of distance makes it harder to handle than ordinary weapons.
+LOC_SYSTEM_ITEM_ARTIFACT_UNIDENTIFIED_TRIDENT_NAME,Unidentified Trident
+LOC_SYSTEM_ITEM_ARTIFACT_UNIDENTIFIED_TRIDENT_DESCRIBE1,It looks like an ordinary trident with no remarkable qualities.\nYet an aura of unknown nature can be felt within it.\nWith enough Scrolls of Identify, its true nature might be uncovered.
+LOC_SYSTEM_ITEM_ARTIFACT_UNIDENTIFIED_TRIDENT_DESCRIBE2,A trident gradually revealing its hidden power.\nLooking again, it resembles the weapon once carried by a great youkai of unidentified nature.\nWith more Scrolls of Identify, its true worth may be revealed.
+LOC_SYSTEM_ITEM_ARTIFACT_UNIDENTIFIED_TRIDENT_DESCRIBE3,The legendary trident said to have been carried by the great youkai Nue.\nAll of its hidden power has now been revealed.\nBut can a weapon whose identity has been exposed still truly be called Nue's weapon?
+LOC_SYSTEM_ITEM_ARTIFACT_SUNKEN_ANCHOR_NAME,Sinking Anchor
+LOC_SYSTEM_ITEM_ARTIFACT_SUNKEN_ANCHOR_DESCRIBE,A massive anchor imbued with the power of a ship phantom.\nMerely holding it fills you with the urge to sink something beneath the waves.
+LOC_SYSTEM_ITEM_ARTIFACT_YAMANBA_CLEAVER_NAME,Yamanba's Cleaver
+LOC_SYSTEM_ITEM_ARTIFACT_YAMANBA_CLEAVER_DESCRIBE,The weapon of a yamanba said to dwell deep in the mountains.\nThough it is a one-handed cleaver, it can also be thrown and put to many uses.
+LOC_SYSTEM_ITEM_ARTIFACT_BUTTERFLY_FAN_NAME,Death Butterfly Fan
+LOC_SYSTEM_ITEM_ARTIFACT_BUTTERFLY_FAN_DESCRIBE,A fan imbued with the power of a ghost.\nIt does not look very formidable as a blunt weapon, but the power within it feels somehow fatal.
+LOC_SYSTEM_ITEM_ARTIFACT_RED_MALLET_NAME,Red-Stained Mallet
+LOC_SYSTEM_ITEM_ARTIFACT_RED_MALLET_DESCRIBE,A huge mallet used for pounding rice cakes. Its head is stained with a red liquid.\nAt first glance it resembles blood, but it is really just strawberry sauce.\nRegardless of the stain, it is remarkably easy to swing and can send an unwary foe flying.
+LOC_SYSTEM_ITEM_ARTIFACT_IMMOVABLE_LIBRARY_NAME,Robe of Knowledge and Shade
+LOC_SYSTEM_ITEM_ARTIFACT_IMMOVABLE_LIBRARY_DESCRIBE,A purple robe once worn by a certain magician.\nIt has been treated to amplify magical power.\nThe price is such discomfort that merely wearing it makes moving feel like a chore.\nAt times, the cords on the robe almost seem to form stripes.
+LOC_SYSTEM_ITEM_ARTIFACT_FULLMOON_DRESS_NAME,Full-Moon Wolf Dress
+LOC_SYSTEM_ITEM_ARTIFACT_FULLMOON_DRESS_DESCRIBE,A loose-fitting dress emblazoned with a large full moon.\nIt is said that a werewolf chose this oversized design to conceal her fur.
+LOC_SYSTEM_ITEM_ARTIFACT_HANIWA_ARMOUR_NAME,Haniwa Stone Armour
+LOC_SYSTEM_ITEM_ARTIFACT_HANIWA_ARMOUR_DESCRIBE,Sturdy armour crafted personally by a sculptor god.\nThough made of clay, divine power has hardened it beyond most ordinary armour.
+LOC_SYSTEM_ITEM_ARTIFACT_OCCULT_CLOAK_NAME,Occult Cloak
+LOC_SYSTEM_ITEM_ARTIFACT_OCCULT_CLOAK_DESCRIBE,A splendid cloak made for the first president of the Secret Sealing Club.\nRunic letters line its interior, seeming to imbue its wearer with occult power.
+LOC_SYSTEM_ITEM_ARTIFACT_PEACH_HAT_NAME,Peach Hat
+LOC_SYSTEM_ITEM_ARTIFACT_PEACH_HAT_DESCRIBE,A celestial's hat adorned with a decorative peach.\nIt makes the wearer as hardy as a celestial and grants exceptional health regeneration.
+LOC_SYSTEM_ITEM_ARTIFACT_BOUNDARY_GLOVES_NAME,Boundary Youkai's Long Gloves
+LOC_SYSTEM_ITEM_ARTIFACT_BOUNDARY_GLOVES_DESCRIBE,Long white gloves reaching to the elbows, said to have been worn by a certain boundary youkai.\nThrown weapons cross a boundary and somehow find their way back into your hands.
+LOC_SYSTEM_ITEM_ARTIFACT_COWGIRL_BOOTS_NAME,Cowgirl Boots
+LOC_SYSTEM_ITEM_ARTIFACT_COWGIRL_BOOTS_DESCRIBE,Boots said to have been worn by a beast youkai with tremendous leg strength.\nSimply wearing them greatly enhances the force of your kicks.
+LOC_SYSTEM_ITEM_ARTIFACT_STOPWATCH_NAME,Special Stopwatch
+LOC_SYSTEM_ITEM_ARTIFACT_STOPWATCH_DESCRIBE,A stopwatch hanging from a silver chain.\nStaring at it creates the illusion that its hands are moving ever more slowly.
+LOC_SYSTEM_ITEM_ARTIFACT_SNAKE_RING_NAME,Snake Ring
+LOC_SYSTEM_ITEM_ARTIFACT_SNAKE_RING_DESCRIBE,A ring imbued with the power of a war god.\nIt greatly increases the wearer's health and strength.
+LOC_SYSTEM_ITEM_ARTIFACT_FROG_RING_NAME,Frog Ring
+LOC_SYSTEM_ITEM_ARTIFACT_FROG_RING_DESCRIBE,A ring imbued with the power of a native god. It lets the wearer swim through solid ground as though it were water.\nIts design looks charming, yet it also carries the feeling of endless calamity.
+LOC_SYSTEM_ITEM_ARTIFACT_WEATHER_TRIGGER,*Weather
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_WEATHER_TRIGGER,Attacks have a small chance to invoke random weather.
+LOC_SYSTEM_ITEM_ARTIFACT_WHIRLWIND,Whirlwind
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_WHIRLWIND,Attacks strike all enemies in the 8 surrounding tiles.
+LOC_SYSTEM_ITEM_ARTIFACT_INFINITE_REACH,Reach+∞
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_INFINITE_REACH,Can attack an enemy at any distance if nothing blocks the line between you.
+LOC_SYSTEM_ITEM_ARTIFACT_PULL,Pull
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_PULL,Pulls an attacked enemy directly in front of you.
+LOC_SYSTEM_ITEM_ARTIFACT_UNKNOWN_POWER,Unidentified
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_UNKNOWN_POWER,This weapon still contains hidden powers that have yet to be identified.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_FLOOD,Drowning
+LOC_SYSTEM_ITEM_WEAPON_BRAND_INFO_FLOOD,Has a chance to inflict Silence and prevent movement on enemies it hits.
+LOC_SYSTEM_ITEM_ARTIFACT_SWIM,Swimming
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_SWIM,Allows you to swim through water.
+LOC_SYSTEM_ITEM_ARTIFACT_INSTANT_DEATH,Instant Death
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_INSTANT_DEATH,Has a chance to instantly kill living enemies. The weaker they are than you, the greater the chance.
+LOC_SYSTEM_ITEM_ARTIFACT_KNOCKAWAY,Knockaway
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_KNOCKAWAY,Sends enemies killed by this weapon flying backward.
+LOC_SYSTEM_ITEM_ARTIFACT_JUMP,+Leap
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_JUMP,Allows you to leap at an enemy and attack it.
+LOC_SYSTEM_ITEM_ARTIFACT_RETURN,Return
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_RETURN,Thrown weapons have a 50% chance to return to your inventory.
+LOC_SYSTEM_ITEM_ARTIFACT_KICK,*Kick
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_KICK,Melee attacks have a chance to deliver a kick. Its chance and damage scale with Unarmed Combat.
+LOC_SYSTEM_ITEM_ARTIFACT_MAX_HP,HP{0}
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_MAX_HP,Maximum HP changes by {0}.
+LOC_SYSTEM_ITEM_ARTIFACT_DIVE,+Dive
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_DIVE,Allows you to dive underground and vanish from every enemy's sight.
+LOC_SYSTEM_ITEM_ARTIFACT_POWER,Power{0}
+LOC_SYSTEM_ITEM_ARTIFACT_INFO_POWER,Maximum Power changes by {0} levels.
+LOC_SYSTEM_ITEM_ARTIFACT_TRIDENT_COMPLETE,{0} has revealed its entire true nature!
+LOC_SYSTEM_ITEM_ARTIFACT_REAPER_BLOCKED,Something before you prevents you from attacking such a distant enemy.
+LOC_SYSTEM_SKILL_DIVE,Dive
+LOC_SYSTEM_SKILL_DIVE_OFF,End Dive
+LOC_SYSTEM_SKILL_DIVE_INFO,Dive underground for a time. Nearby enemies cannot detect you while diving.\nYou may only move, attack, or leap in this state, and attacking or leaping ends the effect.\nYou also evade every ranged attack, but being hit by a melee attack ends the effect.
+LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION,You may only move, attack, or leap while diving.
+LOC_SYSTEM_ITEM_ARTIFACT_NUE_TRIDENT_NAME,Great Youkai Nue's Trident
+LOC_SYSTEM_ITEM_ARTIFACT_TRIDENT_REVEAL,Identifying the item reveals one of {0}'s hidden powers!
+LOC_SYSTEM_ITEM_ARTIFACT_WEATHER_TRIGGERED,{0} invokes {1} weather!
+LOC_SYSTEM_ITEM_ARTIFACT_PULL_TRIGGER,{0} pulls the distant {1} directly in front of you!
+LOC_SYSTEM_ITEM_ARTIFACT_INSTANT_DEATH_TRIGGER,{0} reaps {1}'s life!
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_UNIDEN11,An amulet depicting a dog
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIME_STOP,Amulet of Time Stop
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_IDEN_TIME_STOP_SHORT,Time Stop
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIME_STOP,A pocket watch once carried by a certain maid.\nPress v at 100% charge to briefly stop all time except your own.\n
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_DIVE,While diving, enemies cannot detect you and you evade every projectile, but you may only move or attack.
+LOC_SYSTEM_BUFF_STAT_DIVE,Diving
+LOC_SYSTEM_YOU_DIVE,You dive into {0}.
+LOC_SYSTEM_YOU_DIVE_END_ALMOST,You are beginning to run out of breath.
+LOC_SYSTEM_YOU_DIVE_END,You hurriedly surface from {0}!
+LOC_SYSTEM_SKILL_ALREADY_DIVE,You cannot use this while already diving.
+LOC_SYSTEM_SKILL_DIVE_STOP,You emerge from {0}.
+LOC_SYSTEM_SKILL_DIVE_STOP_ATTACKED,The damage forces you out of your dive.
+LOC_SYSTEM_SKILL_DIVE_EXTINGUISH,The flames clinging to you go out.
+LOC_SYSTEM_SKILL_DIVE_JUMP,You leap powerfully out of {0}!
+LOC_SYSTEM_HIT_NORMAL_NO_OWNER,{0} hit{0==you?:s} {1!=you?the :}{1}.
+LOC_SYSTEM_FIGHT_MISS_NO_OWNER,{0} miss{0==you?:es} {1}.
+LOC_SYSTEM_FIGHT_GRAZED_NO_OWNER,{0} {0==you?are:is} grazed by {1}.
+LOC_SYSTEM_SPELL_POWER_ENHANCE1,Your spell is empowered!
+LOC_SYSTEM_SPELL_POWER_ENHANCE2,Your spell is greatly empowered!
+LOC_SYSTEM_SPELL_POWER_ENHANCE3,Your spell is tremendously empowered!
+LOC_SYSTEM_ITEM_WEAPON_BRAND_EQUIP_FLOOD,You are seized by the urge to drown someone.
+LOC_SYSTEM_ITEM_WEAPON_BRAND_UNEQUIP_FLOOD,Your urge to drown someone fades.
+LOC_SYSTEM_SPL_KICK,Kick
+LOC_SYSTEM_PATCH_NOTE,Patch Notes
+LOC_SYSTEM_SPL_THROW_AXE,Throw Axe
+LOC_SYSTEM_SPL_DESCRIBE_THROW_AXE,Throws a hand axe at a distant enemy. Cannot be used against adjacent targets.
+LOC_SYSTEM_SPL_COUNTER_TANMAC,Counter Shot
+LOC_SYSTEM_SPL_DESCRIBE_COUNTER_TANMAC,Fires two homing danmaku at the enemy upon death.
+LOC_SYSTEM_ATT_AXE,Axe
+LOC_SYSTEM_TILE_CARPET,Carpet
+LOC_SYSTEM_ITEM_FOOD_CAKE,Cake
+LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE,A slice of cake found in the Scarlet Devil Mansion Basement.\nThe cake looks delicious, but its origin seems suspicious.\nShould you really eat it?
+LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE_VAMPIRE,A slice of cake found in the Scarlet Devil Mansion Basement.\nThe cake looks delicious, but its origin seems suspicious.\nThe cake smells irresistibly delicious!
+LOC_SYSTEM_UNIQUE_SPELLCARD_FOUND,{0} appears to be carrying a Spell Card. Beware of Spell Card activation after her defeat!
+LOC_SYSTEM_UNIQUE_SPELLCARD_ACTIVATE,{0}{0==you?r:'s} Spell Card activated!
+LOC_SYSTEM_UNIQUE_SPELLCARD_GET,{0}{0==you?r:'s} Spell Card captured!
+LOC_SYSTEM_UNIQUE_SPELLCARD_STAIR_BLOCK,The Spell Card prevents you from moving to another floor!
+LOC_SYSTEM_UNIQUE_SPELLCARD_FLAN_NAME,Secret Barrage "And Then Will There Be None?"
+LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BURST,Immune to explosions.
+LOC_SYSTEM_DEBUG_ACTIVATE_UNIQUE_SPELLCARD,Spell Card to activate
+LOC_SYSTEM_FIGHT_EVADE_NO_OWNER,{0} evade{0!=you?s:} {1}.
+LOC_SYSTEM_FIGHT_GRAZE_NO_OWNER,{0} graze{0!=you?s:} {1}.
+LOC_SYSTEM_SPL_GLACIER_WALL,Glacier Wall
+LOC_SYSTEM_SPL_COLD_ARMOUR,Cold Armour
+LOC_SYSTEM_SPL_DESCRIBE_GLACIER_WALL,A cold spell that temporarily creates a solid glacier wall in an adjacent tile.\nThe glacier wall remains where it was created, blocking both movement and projectiles.\n
+LOC_SYSTEM_SPL_DESCRIBE_COLD_ARMOUR,Forms a temporary suit of armour from ice to protect the caster.\nIt grants high AC based on spell power for its duration.\nWhen the duration expires, the ice armour shatters, dealing explosive cold damage within 1 tile.\nIf you take at least 25% of your maximum HP in damage during its duration, the explosion grows stronger and reaches 2 tiles.\n
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_ON,Cold armour envelops your body.
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_OFF,Your cold armour melts away.
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_BURST,Your cold armour shatters, scattering freezing air!
+LOC_SYSTEM_BUFF_STAT_COLD_ARMOUR,Cold Armour
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_COLD_ARMOUR,Cold Armour is increasing your AC. When it expires, it deals cold damage within 1 tile.
+LOC_SYSTEM_BUFF_STAT_COLD_ARMOUR_PLUS,Cold Armour+
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_COLD_ARMOUR_PLUS,Cold Armour is increasing your AC. After taking enough damage, it will deal cold damage within 2 tiles when it expires.
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_ALMOST_OFF,Your cold armour is becoming unstable!
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_MELTING,Your cold armour is melting!

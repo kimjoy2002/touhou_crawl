@@ -8,6 +8,8 @@
 #include <process.h>
 #include <string>
 #include <d3d11.h>
+#include <algorithm>
+#include <cctype>
 #include <time.h>
 #include <vector>
 #include <unordered_map>
@@ -38,12 +40,97 @@ inline DirectX::XMVECTOR D3DCOLOR_to_XMVECTOR(D3DCOLOR c) {
 
 struct coord_def;
 
+struct ci_hash {
+    size_t operator()(const std::string& s) const noexcept {
+        std::string lower = s;
+        std::transform(lower.begin(), lower.end(), lower.begin(),
+                    [](unsigned char c){ return std::tolower(c); });
+        return std::hash<std::string>{}(lower);
+    }
+};
+struct ci_equal {
+    bool operator()(const std::string& a, const std::string& b) const noexcept {
+        if (a.size() != b.size()) return false;
+        for (size_t i = 0; i < a.size(); ++i) {
+            if (std::tolower(static_cast<unsigned char>(a[i])) !=
+                std::tolower(static_cast<unsigned char>(b[i]))) {
+                return false;
+            }
+        }
+        return true;
+    }
+};
+
+
+
+class BiMap {
+    unordered_map<int, string> id_to_str;
+    unordered_map<string, int, ci_hash, ci_equal> str_to_id;
+
+public:
+    bool insert(int id, const string& str) {
+        if (id_to_str.count(id) || str_to_id.count(str))
+            return false;
+
+        id_to_str[id] = str;
+        str_to_id[str] = id;
+        return true;
+    }
+
+    bool eraseById(int id) {
+        auto it = id_to_str.find(id);
+        if (it == id_to_str.end()) return false;
+        str_to_id.erase(it->second);
+        id_to_str.erase(it);
+        return true;
+    }
+
+    bool eraseByStr(const string& str) {
+        auto it = str_to_id.find(str);
+        if (it == str_to_id.end()) return false;
+        id_to_str.erase(it->second);
+        str_to_id.erase(it);
+        return true;
+    }
+
+    string getStr(int id) const {
+        auto it = id_to_str.find(id);
+        return it != id_to_str.end() ? it->second : "";
+    }
+
+    int getId(const string& str) const {
+        auto it = str_to_id.find(str);
+        return it != str_to_id.end() ? it->second : -1;
+    }
+
+    bool containsId(int id) const {
+        return id_to_str.count(id);
+    }
+
+    bool containsStr(const string& str) const {
+        return str_to_id.count(str);
+    }
+    size_t size() const {
+        return id_to_str.size();
+    }
+
+    void clear() {
+        id_to_str.clear();
+        str_to_id.clear();
+    }
+
+    bool empty() const {
+        return id_to_str.empty();
+    }
+};
+
 int LoopSelect(int min, int max, int cur);
 int CutSelect(int min, int max, int cur);
 
 
 void rand_seed(unsigned int seed_);
 void init_nonlogic_seed(unsigned int seed_);
+void reset_logic_random_seed();
 
 void log_replay_event(const std::string& message);
 void log_message(const char* file, int line, const std::string& message);
@@ -61,14 +148,16 @@ float rand_float_impl(const char* file, int line, float min, float max);
 int rand_int_impl(const char* file, int line, int min, int max);
 #define rand_int(x, y) rand_int_impl(__FILE__, __LINE__, (x), (y))
 int rand_int_with_nonlogic(int min, int max); //이 무작위는 게임에 영향을 주지않아야함
+bool startsWith(const std::string& str, const std::string& prefix);
 
-
-
+float GetDegToRad(float angle_degrees);
 float GetPositionToAngle(float start_x, float start_y, float target_x, float target_y);
 
 float GetPositionToAngle2(float start_x, float start_y, float target_x, float target_y);
 
 float GetBaseAngle(float angle);
+
+int loopInt(int min, int max, int cur);
 
 int GetLengthFromCenter(int x, int y, int cx, int cy);
 int GetPosToDirec(const coord_def &start, const coord_def &target);
@@ -396,6 +485,7 @@ int distan_coord(const coord_def& a, const coord_def& b);
 wstring ConvertUTF8ToUTF16(const string& utf8Str);
 string ConvertUTF16ToUTF8(const wstring& utf16Str);
 string WithBlankString(const string& str, int size, bool left = true);
+bool UnicodeCodepointLess(const std::string& a, const std::string& b);
 
 int PrintCharWidth(const wstring& text);
 int PrintCharWidth(const string& text);

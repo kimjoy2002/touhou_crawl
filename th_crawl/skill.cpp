@@ -47,6 +47,37 @@ int exp_aptitude[TRI_MAX]=
 /*요괴*/	120
 };
 
+const std::vector<skill_type> suitable_weapon[TRI_MAX] =
+{
+/*인간*/	{},
+/*마법사*/	{SKT_SHORTBLADE,SKT_MACE},
+/*요정*/	{SKT_SHORTBLADE, SKT_SPEAR},
+/*카라스텐구*/	{SKT_MACE, SKT_AXE, SKT_SPEAR},
+/*백랑텐구*/	{SKT_LONGBLADE,SKT_MACE,SKT_AXE,SKT_SPEAR},
+/*캇파*/	{SKT_SPEAR},
+/*네코마타*/	{},
+/*용궁의사자*/	{},
+/*츠구모가미*/	{},
+/*오니*/	{SKT_MACE},
+/*반요*/	{},
+/*망령*/	{SKT_SHORTBLADE},
+/*뱀파이어*/	{},
+/*요괴*/	{}
+};
+
+bool IsSuitableWeapon(tribe_type tribe_, skill_type skill_)
+{
+	if(tribe_ < TRI_FIRST || tribe_ >= TRI_MAX || skill_ == SKT_ERROR)
+		return true;
+	const std::vector<skill_type>& list_ = suitable_weapon[tribe_];
+	if(list_.empty())
+		return true;
+	for(skill_type type_ : list_)
+		if(type_ == skill_)
+			return true;
+	return false;
+}
+
 
 
 int AptCal(int aptitu_)
@@ -74,6 +105,8 @@ int AptCal(int aptitu_)
 		return 60;
 	case 4:
 		return 50;
+	case 5:
+		return 42;
 	}
 }
 
@@ -270,6 +303,9 @@ D3DCOLOR GetSkillColor(int aptit_)
 		break;
 	case 4:
 		return D3DCOLOR_XRGB(50,50,255);
+		break;
+	case 5:
+		return D3DCOLOR_XRGB(25,25,255);
 		break;
 	}
 }

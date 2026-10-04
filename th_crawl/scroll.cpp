@@ -28,6 +28,129 @@ extern int g_menu_select;
 #include <algorithm>
 extern HANDLE mutx;
 
+static bool identifyUnidentifiedTrident(item* item_)
+{
+	if(!item_ || item_->fixed_artifact != FIXED_ARTIFACT_UNIDENTIFIED_TRIDENT)
+		return false;
+	for(auto it = item_->atifact_vector.begin(); it != item_->atifact_vector.end(); ++it) {
+		if(it->kind != ART_UNKNOWN_POWER || it->value <= 0)
+			continue;
+		int used = 18 - it->value;
+		it->value--;
+		int remaining = it->value;
+		if(used % 2 == 0) {
+			int special = used / 2;
+			if(special % 3 == 0) {
+				vector<artifact_type> existing;
+				artifact_type resist[] = { ART_FIRE_RESIS, ART_ICE_RESIS, ART_ELEC_RESIS, ART_POISON_RESIS, ART_CONFUSE_RESIS, ART_MAGIC_RESIS };
+				
+				for(artifact_type resist_type : resist) {
+					for(const auto& value : item_->atifact_vector) {
+						if(value.kind == resist_type) { existing.push_back(resist_type); break; }
+					}
+				}
+
+				auto can_stack = [](artifact_type type) {
+					return type == ART_FIRE_RESIS ||
+						type == ART_ICE_RESIS ||
+						type == ART_ELEC_RESIS;
+				};
+				vector<artifact_type> candidates;
+
+				if(existing.size() >= 2) {
+					for(artifact_type type : existing) {
+						if(can_stack(type))
+							candidates.push_back(type);
+					}
+				}
+				else if(existing.size() == 1) {
+					if(can_stack(existing[0])) {
+						for(artifact_type type : resist) {
+							auto found = std::find_if(
+								item_->atifact_vector.begin(),
+								item_->atifact_vector.end(),
+								[&](const atifact_infor& value) {
+									return value.kind == type;
+								}
+							);
+
+							if(found == item_->atifact_vector.end() || can_stack(type))
+								candidates.push_back(type);
+						}
+					}
+					else {
+						candidates.push_back(ART_FIRE_RESIS);
+						candidates.push_back(ART_ICE_RESIS);
+						candidates.push_back(ART_ELEC_RESIS);
+					}
+				}
+				else {
+					for(artifact_type type : resist)
+						candidates.push_back(type);
+				}
+
+				if(!candidates.empty()) {
+					artifact_type add = candidates[randA((int)candidates.size() - 1)];
+
+					auto found = std::find_if(
+						item_->atifact_vector.begin(),
+						item_->atifact_vector.end(),
+						[&](const atifact_infor& value) {
+							return value.kind == add;
+						}
+					);
+
+					if(found == item_->atifact_vector.end()) {
+						item_->atifact_vector.push_back(atifact_infor(add, 1));
+					}
+					else {
+						found->value++;
+					}
+
+					if(you.isequip(item_))
+						effectartifact(add, 1);
+				}
+			} else {
+				vector<artifact_type> existing;
+				artifact_type stats[] = { ART_STR, ART_DEX, ART_INT, ART_AC, ART_EV };
+				for(artifact_type stat : stats) {
+					for(const auto& value : item_->atifact_vector) {
+						if(value.kind == stat) { existing.push_back(stat); break; }
+					}
+				}
+				artifact_type add = existing.size() >= 2 ? existing[randA((int)existing.size()-1)] : stats[randA(4)];
+				auto found = std::find_if(item_->atifact_vector.begin(), item_->atifact_vector.end(),
+					[&](const atifact_infor& value) { return value.kind == add; });
+				if(found == item_->atifact_vector.end()) {
+					item_->atifact_vector.push_back(atifact_infor(add, 1));
+				}
+				else {
+					found->value++;
+				}
+				if(you.isequip(item_))
+					effectartifact(add, 1);
+			}
+		}
+		if(remaining % 2 == 0)
+			item_->value4++;
+		if(remaining == 0) {
+			auto unknown = std::find_if(item_->atifact_vector.begin(), item_->atifact_vector.end(),
+				[](const atifact_infor& value) { return value.kind == ART_UNKNOWN_POWER; });
+			if(unknown != item_->atifact_vector.end())
+				item_->atifact_vector.erase(unknown);
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_ARTIFACT_TRIDENT_COMPLETE, true, false, false, CL_green,
+				PlaceHolderHelper(item_->GetNameString()));
+			item_->name = name_infor(LOC_SYSTEM_ITEM_ARTIFACT_NUE_TRIDENT_NAME);
+		} else {
+			LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_ARTIFACT_TRIDENT_REVEAL, true, false, false, CL_green,
+				PlaceHolderHelper(item_->GetNameString()));
+			
+		}
+		return true;
+	}
+	return false;
+}
+
 LOCALIZATION_ENUM_KEY scroll_uniden_string[SCT_MAX]=
 {
 	LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN1,
@@ -98,7 +221,6 @@ bool skill_santuary(int pow, bool short_, unit* order, coord_def target);
 bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_);
 bool amnesia_scroll(bool pre_iden_);
 bool brand_weapon_scroll(bool pre_iden_);
-bool aquire_scroll(bool pre_iden_);
 
 
 scroll_type goodbadscroll(int good_bad)
@@ -274,7 +396,7 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 			if (waste_) //낭비시엔 의미가 없음
 				return true;
 			iden_list.scroll_list[kind].iden = 3;
-			if(env[current_level].isBamboo())
+			if(env[current_level].isInfiniteMap())
 			{				
 				printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_MAPPING_BAMBOO),true,false,false,CL_normal);
 				if(pre_iden_){
@@ -473,7 +595,15 @@ bool identity_scroll(bool pre_iden_)
 			item *item_ = you.GetItem(key_);
 			if(item_)
 			{
-				if(!item_->isiden())
+				if(identifyUnidentifiedTrident(item_))
+				{
+					std::string temp(1, item_->id);
+					printlog(temp,false,false,false,item_->item_color());
+					printlog(" - ",false,false,false,item_->item_color());
+					printlog(item_->GetName(),true,false,false,item_->item_color());
+					return true;
+				}
+				else if(!item_->isiden())
 				{
 					item_->Identify();
 					std::string temp(1, item_->id);
@@ -1391,7 +1521,7 @@ bool brand_weapon_scroll(bool pre_iden_)
 		}
 	}
 }
-bool aquire_scroll(bool pre_iden_)
+bool aquire_scroll(bool pre_iden_, bool cancel_)
 {
 	if(!pre_iden_) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_ACQUIRE) + " ", true, false, false, CL_help);
@@ -1421,6 +1551,11 @@ bool aquire_scroll(bool pre_iden_)
 	g_menu_select = -1;
 	while(true) {
 		key_ = waitkeyinput(true);
+		if(cancel_ && (key_ == VK_ESCAPE || key_ == GVK_BUTTON_B || key_ == GVK_BUTTON_B_LONG)) {
+			endSelection();
+			g_menu_select = -1;
+			return false;
+		}
 		if(key_ == VK_RIGHT){
 			if(++g_menu_select>create_listkey.size()-1)
 				g_menu_select = 0;
@@ -1432,6 +1567,8 @@ bool aquire_scroll(bool pre_iden_)
 		} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
 			if(create_listkey.size() > g_menu_select) {
 				key_ = create_listkey[g_menu_select];
+			} else if(cancel_) {
+				continue;
 			} else {
 				break;
 			}

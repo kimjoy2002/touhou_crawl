@@ -6,6 +6,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
+#include "dump.h"
 #include "evoke.h"
 #include "skill_use.h"
 #include "projectile.h"
@@ -18,6 +19,7 @@
 #include "god.h"
 #include "rect.h"
 #include "speak.h"
+#include "smoke.h"
 
 
 LOCALIZATION_ENUM_KEY evoke_string[EVK_MAX]=
@@ -29,7 +31,9 @@ LOCALIZATION_ENUM_KEY evoke_string[EVK_MAX]=
 	LOC_SYSTEM_ITEM_EVOKE_GHOST_BALL,
 	LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO,
 	LOC_SYSTEM_ITEM_EVOKE_MAGIC_HAMMER,
-	LOC_SYSTEM_ITEM_EVOKE_CAMERA
+	LOC_SYSTEM_ITEM_EVOKE_CAMERA,
+	LOC_NONE, //창의 근접 발동
+	LOC_SYSTEM_ITEM_EVOKE_ICE_FROG
 };
 
 int getEvokeItem() {
@@ -45,7 +49,7 @@ int getEvokeItem() {
 
 void MakeEvokeItem(item_infor* t, int kind_)
 {	
-	if(kind_ == -1 || (kind_<0 && kind_>=EVK_MAX))
+	if(kind_ == -1 || kind_<0 || kind_>=EVK_MAX)
 		kind_= getEvokeItem();
 
 	t->value1 = kind_;
@@ -68,6 +72,11 @@ void MakeEvokeItem(item_infor* t, int kind_)
 	t->name = name_infor(evoke_string[kind_]);
 	t->weight = 1.0f;
 	t->value = 300;
+	if(kind_ == EVK_FROZEN_FROG)
+	{
+		t->image = &img_item_ice[14];
+		t->value4 = rand_int(3,5);
+	}
 }
 
 
@@ -87,6 +96,8 @@ bool isCanGenerate(evoke_kind evk) {
 		case EVK_SKY_TORPEDO:
 		case EVK_MAGIC_HAMMER:
 		case EVK_CAMERA:
+		case EVK_SPEAR:
+		case EVK_FROZEN_FROG:
 			return false;
 		default:
 			break;
@@ -94,6 +105,16 @@ bool isCanGenerate(evoke_kind evk) {
 	return true;
 }
 
+bool isFakeEvoke(evoke_kind evk) {
+	//이건 Evoke용 아이템은 아니지만 발동으로 사용하게 하기위한 가짜 발동템
+	switch(evk) {
+		case EVK_SPEAR:
+			return true;
+		default:
+			break;
+	}
+	return false;
+}
 bool evoke_evokable(item* item_, bool auto_, int auto_direc_, evoke_kind kind)
 {
 	if(you.s_confuse)
@@ -102,16 +123,18 @@ bool evoke_evokable(item* item_, bool auto_, int auto_direc_, evoke_kind kind)
 		return false;
 	}
 
-	if(you.power < Evokeusepower(kind,true))
-	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_TOO_LOW_P_EVOKE),true,false,false,CL_small_danger);	
-		return false;
-	}
+	if(!isFakeEvoke(kind)) {
+		if(you.power < Evokeusepower(kind,true))
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_TOO_LOW_P_EVOKE),true,false,false,CL_small_danger);	
+			return false;
+		}
 
-	if(randA(99) >= EvokeSuccece(kind))
-	{		
-		printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);	
-		return true;
+		if(randA(99) >= EvokeSuccece(kind))
+		{		
+			printlog(LocalzationManager::locString(LOC_SYSTEM_NOTHING_HAPPEND),true,false,false,CL_normal);	
+			return true;
+		}
 	}
 
 	if(EvokeFlagCheck(kind, S_FLAG_DIREC))
@@ -134,11 +157,12 @@ bool evoke_evokable(item* item_, bool auto_, int auto_direc_, evoke_kind kind)
 	}
 	else if(!EvokeFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
-		SetSpellSight(EvokeLength(kind),EvokeFlagCheck(kind, S_FLAG_RECT)?2:1);
+		int evoke_length = (kind == EVK_SPEAR && item_ && item_->GetArtifactProperty(ART_INFINITE_REACH) > 0) ? 99 : EvokeLength(kind);
+		SetSpellSight(evoke_length,EvokeFlagCheck(kind, S_FLAG_RECT)?2:1);
 		beam_iterator beam(you.position,you.position);
-		projectile_infor infor(EvokeLength(kind),false,EvokeFlagCheck(kind, S_FLAG_SMITE), kind ==EVK_BOMB?-4: -3,false);
+		projectile_infor infor(evoke_length,false,EvokeFlagCheck(kind, S_FLAG_SMITE), kind ==EVK_BOMB?-4: -3,false);
 		auto it = you.item_list.end();
-		if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor, EvokeLength(kind), EvokeSector(kind), auto_))
+		if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor, evoke_length, EvokeSector(kind), auto_))
 		{
 			unit *unit_ = env[current_level].isMonsterPos(you.search_pos.x,you.search_pos.y,0, &(you.target));
 			you.SetBattleCount(30);
@@ -192,8 +216,10 @@ int Evokeusepower(evoke_kind skill, bool max_)
 		return 100;
 	case EVK_CAMERA:
 		return 100;
+	case EVK_SPEAR:
+		return 0;
 	default:
-		return false;
+		return 0;
 	}
 }
 
@@ -212,6 +238,10 @@ bool EvokeFlagCheck(evoke_kind skill, skill_flag flag)
 	case EVK_DREAM_SOUL:
 	case EVK_GHOST_BALL:
 	case EVK_MAGIC_HAMMER:
+		return (S_FLAG_IMMEDIATELY) & flag;
+	case EVK_SPEAR:
+		return (S_FLAG_SMITE) & flag;
+	case EVK_FROZEN_FROG:
 		return (S_FLAG_IMMEDIATELY) & flag;
 	default:
 		return false;
@@ -234,6 +264,8 @@ int EvokeLength(evoke_kind skill)
 	case EVK_GHOST_BALL:
 	case EVK_MAGIC_HAMMER:
 		return 0;
+	case EVK_SPEAR:
+		return 2;
 	default:
 		return false;
 	}
@@ -284,6 +316,50 @@ bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target)
 	{
 	default:
 		break;
+	case EVK_SPEAR:
+	{
+		beam_iterator beam(you.position,target);
+		if(CheckThrowPath(you.position,target,beam)){
+			if(item_ && item_->GetArtifactProperty(ART_INFINITE_REACH) > 0 && distan_coord(you.position, target) > 2) {
+				beam.init();
+				while(!beam.end()) {
+					if(*beam != target && *beam != you.position &&
+						env[current_level].isMonsterPos(beam->x, beam->y, &you)) {
+						printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_REAPER_BLOCKED), true, false, false, CL_normal);
+						return false;
+					}
+					beam++;
+				}
+			}
+			unit* target_unit = env[current_level].isMonsterPos(target.x, target.y, &you,NULL);
+			if(target_unit && !target_unit->isplayer()) {
+				monster* target_mon = (monster*)target_unit;
+				equip_type type_ = you.getequipslot(item_);
+				if(type_ != ET_LAST) {
+					you.attack(target_mon, type_, false);
+					you.doingActionDump(DACT_MELEE, item_->GetName());
+				}
+				if(target_mon->isLive() && you.GetProperty(TPT_DUAL_WEAPON)) {
+					if(type_ == ET_WEAPON) {
+						if(you.equipment[ET_SHIELD] && you.equipment[ET_SHIELD]->isweapon() &&  you.equipment[ET_SHIELD]->canReachAttack()) {
+							you.attack(target_mon, type_, false);
+							you.doingActionDump(DACT_MELEE, you.equipment[ET_SHIELD]->GetName());
+						}
+					} else if(type_ == ET_WEAPON){
+						if(you.equipment[ET_WEAPON] && you.equipment[ET_WEAPON]->isweapon() &&  you.equipment[ET_WEAPON]->canReachAttack()) {
+							you.attack(target_mon, type_, false);
+							you.doingActionDump(DACT_MELEE, you.equipment[ET_WEAPON]->GetName());
+						}
+					}
+				}
+				return true;
+			}
+		}
+		if(item_ && item_->GetArtifactProperty(ART_INFINITE_REACH) > 0 && distan_coord(you.position, target) > 2)
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_REAPER_BLOCKED), true, false, false, CL_normal);
+		return false;
+	}
+	break;
 	case EVK_PAGODA:
 		{
 			beam_iterator beam(you.position,target);
@@ -299,7 +375,7 @@ bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target)
 				you.SetParadox(0); 
 				return true;
 			}
-			return false;	
+			return false;
 		}	
 	case EVK_AIR_SCROLL:
 		{
@@ -680,6 +756,40 @@ bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target)
 			}
 		}
 		return false;
+	}
+	case EVK_FROZEN_FROG:
+	{
+		if(!item_ || item_->value4 <= 0)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_FROZEN_FROG_EMPTY),true,false,false,CL_normal);
+			return false;
+		}
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_FROZEN_FROG_USE),true,false,false,CL_normal);
+		map<unit*,int> targets_;
+		rect_iterator rit(you.position,3,3);
+		for(;!rit.end();rit++)
+		{
+			if(!you.isSightnonblocked(*rit))
+				continue;
+			unit* target_ = env[current_level].isMonsterPos(rit->x,rit->y,&you);
+			if(target_ && you.isEnemyUnit(target_))
+			{
+				int distance_ = max(abs(rit->x-you.position.x),abs(rit->y-you.position.y));
+				auto it = targets_.find(target_);
+				if(it == targets_.end() || distance_ < it->second)
+					targets_[target_] = distance_;
+			}
+		}
+		for(auto target_ : targets_)
+		{
+			target_.first->SetSlow(11-3*target_.second);
+			target_.first->SetFrozen(16-4*target_.second);
+		}
+		
+		PlaySE("cold");
+		MakeCloud(you.position,img_fog_normal,SMT_FOG,rand_int(15,20),rand_int(8,12),0,3,&you);
+		item_->value4--;
+		return true;
 	}
 	}
 	return false;

@@ -46,40 +46,46 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 27,  1,  14,  8,  3}, //우산요괴
 	{ 28,  1,  5,  5,  2}, //초록모옥
 	
-	{ 10,  2,  2,  2,  5}, //두루미 1(아주 드물게)
+	{ 10,  2,  2,  1,  5}, //두루미 1(아주 드물게)
 	{  9,  2,  5,  10,  4}, //뱀 1
 	{ 15,  2,  9,  20,  1}, //초록요정2 파랑요정1 빨강요정1
 	{ 14,  2,  3,  8,  2}, //캇파2~3
 	{ 18,  2,  6,  25,  2}, //캇파4~5
 	{ 24,  2,  4,  5,  2}, //인간부대(약함)
-	{ 29,  2,  7,  5,  2}, //주황모옥
-	{ 28,  2,  5,  10,  2}, //초록모옥
+	{ 29,  2,  7,  4,  2}, //주황모옥
+	{ 28,  2,  5,  7,  2}, //초록모옥
+	{131,  2,  6,  4,  3}, //회오리 정령
 
 	{ 20,  3,  9,  4,  3}, //거미1 뱀1	
 	{ 10,  3,  14,  3,  4}, //두루미 1
 	{ 4,   3,  7,  10 , 1}, //까마귀3
 	{ 16,  3,  9,  10,  1}, //파랑요정2 빨강요정2
-	{ 25,  3,  6,  7, 1}, //인간부대(중간)
+	{ 25,  3,  6,  4, 1}, //인간부대(중간)
 	{ 30,  3,  9,  5,  2}, //회색모옥
 	{ 10,  3,  11,  4,  5}, //두루미 1
+	{ 132, 3,  6,  3, 1}, //야만바
 
 	
-	{ 25,  4,  6,  20, 1}, //인간부대(중간)
+	{ 25,  4,  6,  10, 1}, //인간부대(중간)
 	{ 29,  4,  7,  10,  3}, //주황모옥
+	{ 132, 4,  6,  10, 1}, //야만바
 
 	
 	{ 21,  5,  11,  10,  1}, //요정 전사사격 호위부대
 	{ 35,  5,  14,  5, 4}, //마리사윳쿠리
-	{ 30,  5,  9,  10,  3}, //회색모옥
+	{ 30,  5,  9,  5,  3}, //회색모옥
+	{131,  5,  9,  5,  3}, //회오리 정령
 
 	
 	{ 22,  6,  12,  10, 1}, //깃발 요정 호위부대
 	{ 32,  6,  14,  15, 3}, //고양이
 	
 	{ 31,  7,  14,  20, 3}, //개구리
-	{ 26,  7,  14,  30, 1}, //인간부대(강함)
+	{ 26,  7,  14,  20, 1}, //인간부대(강함)
 	{ 33,  7,  14,  15, 4}, //까마귀텐구
 	{ 38,  7,  14,  8, 3}, //야마비코
+	{ 132,  7,  14,  10, 1}, //야만바
+	{ 133,  7,  14,  2, 1}, //회오리 정령 무더기
 
 
 	{ 34,  9,  14,  2, 5}, //오니
@@ -87,7 +93,7 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 36,  9,  14,  3, 3}, //키메이마루
 
 	{ 37,  10,  14,  5, 3}, //레밀리아 윳쿠
-	{ 53,  10,  14,  5, 3}, //매	
+	{ 53,  10,  14,  5, 3}, //매
 	{ 54,  10,  14,  5, 3}, //호랑이
 
 	
@@ -115,6 +121,7 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 28,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  2,  1}, //초록모옥
 	{ 30,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+2,  2,  1}, //회색모옥
 	{ 102,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL+4,  8,  1}, //안개요정
+	{ 63,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL, 2, 5}, //큰두꺼비
 	
 	{ 21,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  5,  1}, //요정 전사사격 호위부대
 	{ 22,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  8, 1}, //깃발 요정 호위부대
@@ -124,12 +131,11 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 94,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  5, 3}, //버섯요괴
 	{ 103,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  1, 5}, //츠치노코
 	{ 65,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+4,  1,  5}, //요정영웅부대(가끔!)
+	{ 63,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+2, 3, 5}, //큰두꺼비
 		
 	{ 22,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 5, 1}, //깃발 요정 호위부대
 	{ 65,  MISTY_LAKE_LEVEL+2,  MISTY_LAKE_LEVEL+4, 1, 5}, //요정영웅부대
 	
-	{ 63,  MISTY_LAKE_LEVEL,  MISTY_LAKE_LEVEL, 2, 5}, //큰두꺼비
-	{ 63,  MISTY_LAKE_LEVEL+1,  MISTY_LAKE_LEVEL+2, 3, 5}, //큰두꺼비
 	{ 63,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4, 6, 5}, //큰두꺼비
 	{ 103,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4,  3, 5}, //츠치노코
 
@@ -200,8 +206,6 @@ mon_group normal_group[] = //일반몹 그룹
 	//영원정
 	{ 95,  EIENTEI_LEVEL,  EIENTEI_LEVEL, 10,  3}, //토끼들
 	{ 106, EIENTEI_LEVEL,  EIENTEI_LEVEL, 2,  3}, //토끼 거인
-
-
 
 	//윳쿠리굴
 	{ 2,  YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL-1, 2,  1}, //레이무윳쿠리
@@ -321,6 +325,38 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 82,  HAKUREI_LEVEL+3,  HAKUREI_LAST_LEVEL, 10,  5}, //이블 전차
 	//{ 88, HAKUREI_LAST_LEVEL,  HAKUREI_LAST_LEVEL, 10,  35}, //음양옥
 
+	//FORESTOFMAGIC_LEVEL
+	{ 111,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+2, 15,  1}, //야마이누
+	{ 94,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+1, 15,  1}, //버섯요괴
+	{ 112,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+1, 10,  1}, //혼란버섯요괴
+	{ 113,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+2, 5,  3}, //마비버섯요괴
+	{ 103,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+3, 1,  4}, //츠치노코
+	{ 114,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+3, 7,  1}, //버섯들
+	{ 116,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+3, 5,  3}, //사슴벌레
+	{ 120,  FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+3, 2,  3}, //식인꽃
+	
+	{ 117, FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 1,  3}, //민달팽이
+	{ 54, FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 3,  3}, //호랑이
+	{ 119,  FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 5,  3}, //포자
+	{ 120,  FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 5,  3}, //식인꽃
+	{ 129,  FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3, 2,  2}, //과성장 줄기
+	
+	{ 118,  FORESTOFMAGIC_LEVEL+2,  FORESTOFMAGIC_LEVEL+3, 5,  3}, //지네
+	{ 121,  FORESTOFMAGIC_LEVEL+2,  FORESTOFMAGIC_LEVEL+3, 5,  3}, //은둔 마법사
+	{ 129,  FORESTOFMAGIC_LEVEL+2,  FORESTOFMAGIC_LEVEL+3, 8,  2}, //과성장 줄기
+
+	{ 122,  FORESTOFMAGIC_LEVEL+3,  FORESTOFMAGIC_LEVEL+3, 6,  5}, //나무 거인
+	
+	//인형의집
+	{ 123, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 8,  1}, //상해인형
+	{ 124, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 8, 1}, //봉래인형
+	{ 125, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 3, 3}, //프랑스인형
+	{ 126, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 10, 1}, //인형 궁수
+	{ 130, DOLLSHOUSE_LEVEL,    DOLLSHOUSE_LAST_LEVEL, 5, 3}, //인형 창병
+	{ 130, DOLLSHOUSE_LEVEL+1,    DOLLSHOUSE_LAST_LEVEL, 7, 3}, //인형 창병
+	{ 125, DOLLSHOUSE_LEVEL+1,    DOLLSHOUSE_LAST_LEVEL, 4, 3}, //프랑스인형
+	{ 127, DOLLSHOUSE_LEVEL+1,  DOLLSHOUSE_LAST_LEVEL, 5, 4}, //네덜란드인형
+
 	{ -1,  0,  0,  0,  0} //배열의 끝
 };
 
@@ -374,13 +410,13 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 
 	{ 57,  YOUKAI_MOUNTAIN_LEVEL , YOUKAI_MOUNTAIN_LEVEL + 3,  20,  4 }, //프리즘리버
 	{ 65,  YOUKAI_MOUNTAIN_LEVEL , YOUKAI_MOUNTAIN_LEVEL + 3,  20,  4 }, //나루미
+	{ 69,  YOUKAI_MOUNTAIN_LEVEL,   YOUKAI_MOUNTAIN_LEVEL + 3,  10,  3}, //쿠타카
 	{  84,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  30,  3}, //산뇨
 	{  12,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  60,  4}, //모미지
 	{  22,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3, 20,  3}, //츠쿠모
 	{  16,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  20,  3}, //나즈린
 	//{  13,  YOUKAI_MOUNTAIN_LEVEL+4,  YOUKAI_MOUNTAIN_LEVEL+4,  100,  5}, //아야(현재버젼에선 벌트로 등장)
 	{  21,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+3,  10,  3}, //파르시
-	{ 69,  YOUKAI_MOUNTAIN_LEVEL,   YOUKAI_MOUNTAIN_LEVEL + 3,  10,  3}, //쿠타카
 	{  76,   YOUKAI_MOUNTAIN_LEVEL+2,   YOUKAI_MOUNTAIN_LEVEL + 3,  20,  5}, //손미천
 	//{  19,  YOUKAI_MOUNTAIN_LEVEL+1, YOUKAI_MOUNTAIN_LEVEL+2,  30,  3}, //니토리(현재버젼에선 벌트로 등장)
 
@@ -389,14 +425,12 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{ 65,  SCARLET_LEVEL , SCARLET_LEVEL + 3,  20,  4 }, //나루미
 	{  21,  SCARLET_LEVEL+1,  SCARLET_LEVEL+3,  10,  3}, //파르시
 	//{  25,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  40,  4}, //파츄리(아마 벌트고정)
-	{  26,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  50,  3}, //소악마
 	{ 69,  SCARLET_LEVEL+1,   SCARLET_LEVEL + 3,  10,  3}, //쿠타카
 	{  75,   SCARLET_LEVEL+1,   SCARLET_LEVEL + 3,  20,  3}, //치야리
 	//{  27,  MISTY_LAKE_LEVEL+3,  MISTY_LAKE_LEVEL+4,  60,  4}, //메이린(아마 벌트고정)
+	{  26,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  50,  3}, //소악마
 	{  28,  SCARLET_LEVEL+2,  SCARLET_LEVEL+3,  100,  4}, //사쿠야
 	//{  29,  SCARLET_LEVEL+4,  SCARLET_LEVEL+4,  60,  5}, //레밀리아 아마 벌트 고정
-	
-	
 
 	{ 18,  YUKKURI_LEVEL, YUKKURI_LAST_LEVEL-1, 20,  28}, //세키반키
 	{  21,  YUKKURI_LEVEL,  YUKKURI_LAST_LEVEL-1,  5,  3}, //파르시
@@ -409,7 +443,6 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{ 21,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  10,  3}, //파르시
 	{ 24,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //이치린
 	{ 37,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  15,  3}, //레티
-	{ 43,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //앨리스
 	{ 50,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //토지코
 	{ 51,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //후토
 	{ 53,  DEPTH_LEVEL,  DEPTH_LAST_LEVEL,  20,  3}, //세이가
@@ -436,6 +469,15 @@ mon_group unigue_group[] = //네임드몹 그룹 확률은 100이 최고
 	{ 37,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL-1,  30,  3}, //스이카
 	{ 59,  HAKUREI_LEVEL,  HAKUREI_LAST_LEVEL-1,  20,  3 }, //스미레코
 	{ 72,  HAKUREI_LEVEL+ 1,  HAKUREI_LAST_LEVEL-1, 10,  3 }, //사키
+
+
+	{ 62, FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+1, 10,  1}, //라바
+	{  9, FORESTOFMAGIC_LEVEL,  FORESTOFMAGIC_LEVEL+1, 10,  1}, //삼월정
+	{ 20,  FORESTOFMAGIC_LEVEL+1 , FORESTOFMAGIC_LEVEL + 2,  20,  3 }, //카게로
+	{ 21,  FORESTOFMAGIC_LEVEL+1,  FORESTOFMAGIC_LEVEL+3,  10,  3}, //파르시
+	{ 74,  FORESTOFMAGIC_LEVEL+1 , FORESTOFMAGIC_LEVEL + 3,  30,  4 }, //에노코
+	{ 65,  FORESTOFMAGIC_LEVEL+1 , FORESTOFMAGIC_LEVEL + 3,  30,  4 }, //나루미
+
 
 	{ -1,  0,  0,  0,  0} //배열의 끝
 };
@@ -519,7 +561,6 @@ void create_mon(int floor, int num_)
 {
 	if(num_ == 0)
 		return;
-
 	int i = 0, total=0, num = num_?num_:10;
 	vector<mon_group*> group;
 	group.reserve(128);
@@ -570,7 +611,7 @@ void Set_X_Y(int &x_, int x, int rand_x, int &y_, int y, int rand_y)
 	if(x_<0)
 		x_=0;
 	else if(x_>=DG_MAX_X)
-		x = DG_MAX_X-1;
+		x_ = DG_MAX_X-1;
 	if(y_<0)
 		y_=0;
 	else if(y_>=DG_MAX_Y)
@@ -619,7 +660,7 @@ void create_id_to_mon(int id, int level, int strong)
 		index.push_back(pair<monster_index, int>(MON_SNAKE, strong));
 		break;
 	case 10:
-		index.push_back(pair<monster_index, int>(MON_CRANE, strong));
+		index.push_back(pair<monster_index, int>(randA(10)?MON_SHOEBILL:MON_CRANE, strong));
 		break;
 	case 11:
 		index.push_back(pair<monster_index, int>(MON_FAIRY_BLUE, strong+1));
@@ -1051,15 +1092,147 @@ void create_id_to_mon(int id, int level, int strong)
 		for (int rand_ = rand_int(3, 5), i = 0; i<rand_; i++)
 			index.push_back(pair<monster_index, int>(MON_OTTER_SPIRIT, strong));
 		break;
+
+	case 111:
+		for (int rand_ = rand_int(2, 3), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_YAMAINU, strong));
+		break;
+	case 112:
+		index.push_back(pair<monster_index, int>(MON_CONFUSE_MUSHROOM, strong));
+		break;
+	case 113:
+		index.push_back(pair<monster_index, int>(MON_WEAKENING_MUSHROOM, strong));
+		break;
+	case 114:
+		for (int rand_ = rand_int(1, 2), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_MUSHROOM, strong));
+		index.push_back(pair<monster_index, int>(MON_CONFUSE_MUSHROOM, strong));
+		for (int rand_ = rand_int(0, 1), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_WEAKENING_MUSHROOM, strong));
+		break;
+	case 115:
+		index.push_back(pair<monster_index, int>(MON_MUSHROOM_GIANT, strong));
+		break;
+	case 116:
+		index.push_back(pair<monster_index, int>(MON_GIANT_STAG_BEETLE, strong));
+		break;
+	case 117:
+		index.push_back(pair<monster_index, int>(MON_GIANT_SLUG, strong));
+		break;
+	case 118:
+		index.push_back(pair<monster_index, int>(MON_GIANT_CENTIPEDE, strong));
+		break;
+	case 119:
+		index.push_back(pair<monster_index, int>(MON_SPORE, strong));
+		break;
+	case 120:
+		index.push_back(pair<monster_index, int>(MON_MAN_EATING_FLOWER, strong));
+		break;
+	case 121:
+		index.push_back(pair<monster_index, int>(MON_WIZARD, strong));
+		break;
+	case 122:
+		index.push_back(pair<monster_index, int>(MON_TREE_GIANT, strong));
+		break;
+	case 123:
+		for (int rand_ = rand_int(1, 2), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_SANGHAI_DOLL, strong));
+		break;
+	case 124:
+		index.push_back(pair<monster_index, int>(MON_HOURAI_DOLL, strong));
+		break;
+	case 125:
+		index.push_back(pair<monster_index, int>(MON_FRANCE_DOLL, strong));
+		break;
+	case 126:
+		for (int rand_ = rand_int(2, 4), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_LONDON_DOLL, strong));
+		break;
+	case 127:
+		index.push_back(pair<monster_index, int>(MON_NETHERLANDS_DOLL, strong));
+		break;
+	case 128:
+		index.push_back(pair<monster_index, int>(MON_GOLIATH_DOLL, strong));
+		break;
+	case 129://줄기(이벤트로 추가필요)
+		{
+			const auto in_bounds = [](int x, int y) {
+				return (0 <= x && x < DG_MAX_X) && (0 <= y && y < DG_MAX_Y);
+			};
+
+			auto has_adjacent_tree_4 = [&](int x, int y) {
+				static const int dx[4] = {1,-1,0,0};
+				static const int dy[4] = {0,0,1,-1};
+				for (int k = 0; k < 4; ++k) {
+					int nx = x + dx[k], ny = y + dy[k];
+					if (!in_bounds(nx, ny)) continue;
+					if (env[level].dgtile[nx][ny].tile == DG_TREE) return true;
+				}
+				return false;
+			};
+
+			auto has_adjacent_move_4 = [&](int x, int y) {
+				static const int dx[4] = {1,-1,0,0};
+				static const int dy[4] = {0,0,1,-1};
+				for (int k = 0; k < 4; ++k) {
+					int nx = x + dx[k], ny = y + dy[k];
+					if (!in_bounds(nx, ny)) continue;
+					if (env[level].dgtile[nx][ny].isMove(true, false, false)) return true;
+				}
+				return false;
+			};
+
+			std::vector<coord_def> candidates;
+			candidates.reserve((DG_MAX_X * DG_MAX_Y) / 8);
+
+			for (int y = 0; y < DG_MAX_Y; ++y) {
+				for (int x = 0; x < DG_MAX_X; ++x) {
+					// 1) 자기 칸 이동 가능
+					if (!env[level].isMove(x, y, true)) continue;
+
+					// 2) 몬스터 금지 플래그가 없어야 함
+					if (env[level].dgtile[x][y].flag & FLAG_NO_MONSTER) continue;
+
+					// 3) 나무 인접(4방)
+					if (!has_adjacent_tree_4(x, y)) continue;
+
+					// 4) 인접칸 중 최소 1칸 이동 가능(4방)
+					if (!has_adjacent_move_4(x, y)) continue;
+
+					candidates.emplace_back(x, y);
+				}
+			}
+
+			if (!candidates.empty()) {
+				const int idx = randA((int)candidates.size()-1);
+				env[level].MakeEvent(EVL_OVERGROWING, candidates[idx], EVT_APPROACH_BIG);
+			}
+		}
+		break;
+	case 130:
+		index.push_back(pair<monster_index, int>(MON_SPEAR_DOLL, strong));
+		break;
+	case 131:
+		index.push_back(pair<monster_index, int>(MON_TORNADO_SPIRIT, strong));
+		break;
+	case 132:
+		index.push_back(pair<monster_index, int>(MON_YAMANBA, strong));
+		break;
+	case 133:
+		for (int rand_ = rand_int(2, 4), i = 0; i<rand_; i++)
+			index.push_back(pair<monster_index, int>(MON_TORNADO_SPIRIT, strong));
+		break;
 	}
 
 	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;
 	for(auto it=index.begin();it!=index.end();it++)
 	{ 
-		int x_ = 0, y_ = 0;
+		int x_ = 0, y_ = 0, limit_ = 10000;
 		Set_X_Y(x_, x, rand_x, y_, y, rand_y);
 		while(!env[level].isMove(x_,y_) || (env[level].dgtile[x_][y_].flag & FLAG_NO_MONSTER) || env[level].isMonsterPos(x_,y_) || env[level].isStair(x_,y_))
 		{
+			if(limit_-- <= 0)
+				break;
 			if(it==index.begin())
 			{
 				x = randA(DG_MAX_X-1),y = randA(DG_MAX_Y-1);
@@ -1075,6 +1248,8 @@ void create_id_to_mon(int id, int level, int strong)
 			}
 			Set_X_Y(x_, x, rand_x, y_, y, rand_y);
 		}
+		if(limit_ <= 0)
+			continue;
 		if(monster* mon_ = env[level].AddMonster((*it).first,0,coord_def(x_,y_)))
 		{
 			mon_->SetStrong(max(1,min((*it).second, 5)));
@@ -1188,6 +1363,7 @@ int get_unique_to_id(int m_id)
 	case MON_MIKE: return 82;
 	case MON_TAKANE: return 83;
 	case MON_SANNYO: return 84;
+	case MON_MARISA: return 85;
 	}
 }
 
@@ -1501,6 +1677,9 @@ void create_id_to_unique(int id, int level)
 	case 84:
 		index.push_back(MON_SANNYO);
 		break;
+	case 85:
+		index.push_back(MON_MARISA);
+		break;
 	}
 
 	int x = randA(DG_MAX_X-1),y=randA(DG_MAX_Y-1),rand_x=0,rand_y=0, r=2+index.size()/3,k=0;
@@ -1733,6 +1912,12 @@ void SetResistMonster(monster* mon)
 		mon->poison_resist=1;
 		mon->confuse_resist=1;
 		break;		
+	case MON_GLACIER_WALL:
+		mon->ice_resist=3;
+		mon->fire_resist=-1;
+		mon->poison_resist=1;
+		mon->confuse_resist=1;
+		break;
 	case MON_RED_UFO:
 		mon->fire_resist=2;
 		break;
@@ -1809,7 +1994,7 @@ void SetResistMonster(monster* mon)
 		mon->ice_resist=3;
 		mon->fire_resist=3;
 		mon->poison_resist=1;
-		break;		
+		break;
 	case MON_GOLEM:
 		mon->elec_resist=3;
 		mon->ice_resist=2;
@@ -1827,6 +2012,7 @@ void SetResistMonster(monster* mon)
 		break;		
 	case MON_FLAN:
 	case MON_FLAN_BUNSIN:
+	case MON_FLAN_AFTERIMAGE:
 		mon->fire_resist=1;
 		mon->poison_resist=1;
 		break;
@@ -2279,6 +2465,107 @@ void SetResistMonster(monster* mon)
 		mon->poison_resist = 1;
 		mon->confuse_resist = 1;
 		break;
+	case MON_YAMAINU:
+		break;
+	case MON_CONFUSE_MUSHROOM:
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
+	case MON_WEAKENING_MUSHROOM:
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
+	case MON_MUSHROOM_GIANT:
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
+	case MON_GIANT_STAG_BEETLE:
+		mon->elec_resist = 1;
+		break;
+	case MON_GIANT_SLUG:
+		mon->fire_resist = 1;
+		mon->ice_resist = 1;
+		mon->elec_resist = 1;
+		break;
+	case MON_GIANT_CENTIPEDE:
+		mon->confuse_resist = 1;
+		break;
+	case MON_GIANT_CENTIPEDE_BODY:
+		mon->fire_resist = 2;
+		mon->ice_resist = 2;
+		mon->elec_resist = 2;
+		mon->confuse_resist = 1;
+		break;
+	case MON_SPORE:
+		mon->elec_resist = 2;
+		mon->poison_resist = 1;
+		mon->confuse_resist = 1;
+		break;
+	case MON_MAN_EATING_FLOWER:
+		mon->fire_resist = -1;
+		mon->poison_resist = 1;
+		break;
+	case MON_OVERGROWTH_MAGIC_FLOWER:
+		mon->fire_resist = -1;
+		mon->ice_resist = 2;
+		mon->elec_resist = 2;
+		mon->poison_resist = 1;
+		break;
+	case MON_OVERGROWTH_STEM:
+		mon->fire_resist = -1;
+		mon->ice_resist = 2;
+		mon->elec_resist = 2;
+		mon->poison_resist = 1;
+		break;
+	case MON_OVERGROWTH_WATERMELON:
+		break;
+	case MON_WIZARD:
+		mon->fire_resist = 1;
+		mon->ice_resist = 1;
+		break;
+	case MON_TREE_GIANT:
+		mon->fire_resist = -1;
+		mon->ice_resist = 2;
+		mon->elec_resist = 2;
+		mon->poison_resist = 1;
+		break;
+	case MON_SANGHAI_DOLL:
+		mon->fire_resist=2;
+		mon->poison_resist=1;
+		break;
+	case MON_HOURAI_DOLL:
+		mon->poison_resist=1;
+		break;
+	case MON_FRANCE_DOLL:
+		mon->ice_resist=3;
+		mon->poison_resist=1;
+		break;
+	case MON_LONDON_DOLL:
+		mon->ice_resist=2;
+		mon->poison_resist=1;
+		break;
+	case MON_NETHERLANDS_DOLL:
+		mon->poison_resist=1;
+		break;
+	case MON_GOLIATH_DOLL:
+		mon->fire_resist = 1;
+		mon->ice_resist = 1;
+		mon->elec_resist = 2;
+		mon->poison_resist=1;
+		break;
+	case MON_SPEAR_DOLL:
+		mon->fire_resist = 1;
+		mon->poison_resist=1;
+		break;
+	case MON_MARISA :
+		mon->ice_resist = 1;
+		break;
+	case MON_ORRERY_ORB:
+		mon->elec_resist=3;
+		mon->ice_resist=3;
+		mon->fire_resist=3;
+		mon->poison_resist=1;
+		break;
 	}
 }
 
@@ -2351,7 +2638,8 @@ int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 			rand_.push(MON_HUMAM_PRIEST, middle(power_));
 			rand_.push(MON_HUMAM_YINYANG, middle(power_));
 			rand_.push(MON_HUMAM_SAMURI, strong(power_));
-			rand_.push(MON_CRANE, strong(power_));
+			rand_.push(randA(10)?MON_SHOEBILL:MON_CRANE, strong(power_));
+			rand_.push(MON_TORNADO_SPIRIT, strong(power_));
 			rand_.push(MON_KATPA, weak(power_));
 			rand_.push(MON_MARISAYUKKURI, middle(power_));
 			rand_.push(MON_SNAKE, middle(power_));
@@ -2369,7 +2657,8 @@ int getMonsterFromFloor(int level_, getMonsterFromFloor_flag power_)
 			rand_.push(MON_FAIRY_RED, weak(power_));
 			rand_.push(MON_FAIRY_GREEN_WARRIOR, middle(power_));
 			rand_.push(MON_FAIRY_BLUE_MAGICIAN, middle(power_));
-			rand_.push(MON_CRANE, middle(power_));
+			rand_.push(randA(10)?MON_SHOEBILL:MON_CRANE, middle(power_));
+			rand_.push(MON_TORNADO_SPIRIT, middle(power_));
 			rand_.push(MON_YAMABIKO, middle(power_));
 			rand_.push(MON_CROW_TENGU, strong(power_));
 			rand_.push(MON_RED_UFO, strong(power_));

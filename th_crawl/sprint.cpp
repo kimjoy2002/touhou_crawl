@@ -458,6 +458,8 @@ bool addMonster_sprint(int num, int mon_id, map_dummy* map)
 		return false;
 
 	monster* mon_ = env[num].AddMonster(mon_id, 0, c);
+	if(!mon_)
+		return false;
 	mon_->SetStrong(mon_->isUnique()?5: 3);
 	return true;
 }

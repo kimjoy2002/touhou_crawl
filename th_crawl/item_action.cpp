@@ -11,6 +11,7 @@
 #include "key.h"
 #include "player.h"
 #include "beam.h"
+#include "tribe.h"
 #include "skill_use.h"
 #include "monster_texture.h"
 #include "spellcard.h"
@@ -24,6 +25,12 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key);
 bool iteminfor_(int key_, bool gameover);
 
 bool pickup_prev_fail(bool no_speak) {
+	if(you.IsDiving())
+	{
+		if(!no_speak)
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return true;
+	}
 	if(you.s_lunatic)
 	{
 		if(!no_speak) {
@@ -383,7 +390,12 @@ void discard(list<item>::iterator it, int number)
 
 
 void iteminfor_discard()
-{	
+{
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return;
+	}
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_DISCRAD),true,false,false,CL_danger);
@@ -482,7 +494,12 @@ void iteminfor_discard()
 }
 
 void fast_discard(int delete_id, int delete_num)
-{	
+{
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return;
+	}
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_DISCRAD),true,false,false,CL_danger);
@@ -509,6 +526,11 @@ void fast_discard(int delete_id, int delete_num)
 }
 
 bool eat_prev_fail() {
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return true;
+	}
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_EAT),true,false,false,CL_danger);
@@ -525,6 +547,12 @@ bool eat_prev_fail() {
 	}
 	if(you.power >= you.GetMaxPower() && !(you.god == GT_MINORIKO))
 	{
+		if(you.GetHp() < you.GetMaxHp())
+		{
+			for(auto& item_ : you.item_list)
+				if(item_.type == ITM_FOOD && item_.name.getSystemKey() == LOC_SYSTEM_ITEM_ICE_CREAM)
+					return false;
+		}
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ALREADY_FULL_POWER),true,false,false,CL_normal);
 		return true;
 	}
@@ -608,6 +636,11 @@ void Eatting(char auto_)
 
 
 bool drink_prev_fail() {
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return true;
+	}
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_DRINK),true,false,false,CL_danger);
@@ -721,7 +754,11 @@ void Drinking(char auto_)
 }
 
 bool evoke_prev_fail() {
-	if(you.s_lunatic)
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return true;
+	}if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY),true,false,false,CL_danger);
 		return true;
@@ -733,18 +770,31 @@ void evoke_logic(int key_, char auto_) {
 	changedisplay(DT_GAME);
 	if(you.Evoke(key_, auto_>0))
 	{
-		you.time_delay += you.GetNormalDelay();
+		you.currentEvokeItem = key_;
 		you.TurnEnd();
 		you.SetPrevAction('v', key_);
 	}
 }
 
+void Speed_Evoke()
+{
+	if(you.equipment[ET_WEAPON] && you.equipment[ET_WEAPON]->isEvokable()) {
+		evoke_logic(you.equipment[ET_WEAPON]->id,0);
+		you.SetPrevAction('v', you.equipment[ET_WEAPON]->id);
+	} else if((you.GetProperty(TPT_DUAL_WEAPON) && you.equipment[ET_SHIELD] && you.equipment[ET_SHIELD]->isEvokable())) {
+		evoke_logic(you.equipment[ET_SHIELD]->id,0);
+		you.SetPrevAction('v', you.equipment[ET_SHIELD]->id);
+	} else {
+		Spelllcard_Evoke(0);
+	}
+}
+
+
 void Spelllcard_Evoke(char auto_)
 {
-	if(evoke_prev_fail()) {
-		return;
-	}
 	view_item(IVT_EVOKE,LOC_SYSTEM_DISPLAY_MANAGER_EVOKE);
+	if(auto_ == 0 && you.currentEvokeItem)
+		DisplayManager.setPositionToChar(you.currentEvokeItem);
 	while(1)
 	{
 		int key_ = auto_;
@@ -816,6 +866,11 @@ void Spelllcard_Evoke(char auto_)
 void memorize_action(int spell_);
 
 bool read_prev_fail() {
+	if(you.IsDiving())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_ONLY_ACTION),true,false,false,CL_normal);
+		return true;
+	}
 	if(you.s_lunatic)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_LUNATIC_PENALTY_READ),true,false,false,CL_danger);

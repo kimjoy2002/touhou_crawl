@@ -4430,7 +4430,7 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 
 
 	set<int> set_skill;
-	multimap<int,int> map_skill;
+	vector<pair<int,int>> spell_candidates;
 
 
 	for(list<item>::iterator it = you.item_list.begin();it!=you.item_list.end();it++)
@@ -4464,11 +4464,33 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 				set_skill.insert(it->value8);
 		}
 	}
-	for (set<int>::iterator it=set_skill.begin();it!=set_skill.end();it++) 
-		map_skill.insert(pair<int,int>(100-you.GetSpellSuccess((*it)),(*it)));
+	for (set<int>::iterator it=set_skill.begin();it!=set_skill.end();it++)
+		spell_candidates.push_back(pair<int,int>(100-you.GetSpellSuccess((*it)),(*it)));
+
+	stable_sort(spell_candidates.begin(),spell_candidates.end(),[](const pair<int,int>& left_, const pair<int,int>& right_)
+	{
+		if(left_.first != right_.first)
+			return left_.first < right_.first;
+		if(left_.first != 100)
+			return false;
+
+		int left_level_ = SpellLevel((spell_list)left_.second);
+		int right_level_ = SpellLevel((spell_list)right_.second);
+		if(left_level_ != right_level_)
+			return left_level_ < right_level_;
+
+		auto school_count_ = [](spell_list spell_)
+		{
+			int count_ = 0;
+			while(count_ < 3 && SpellSchool(spell_,count_) != SKT_ERROR)
+				count_++;
+			return count_;
+		};
+		return school_count_((spell_list)left_.second) < school_count_((spell_list)right_.second);
+	});
 
 	char sp_char='a';
-	for (multimap<int,int>::iterator it=map_skill.begin();it!=map_skill.end();it++) 
+	for (vector<pair<int,int>>::iterator it=spell_candidates.begin();it!=spell_candidates.end();it++)
 	{
 
 		int miscast_level_ = SpellMiscastingLevel(SpellLevel((spell_list)it->second), 100-you.GetSpellSuccess((spell_list)it->second));
@@ -4537,7 +4559,7 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 		{
 			int num = (key_ >= 'a' && key_ <= 'z')?(key_-'a'):(key_-'A'+26);
 			int spell_ = SPL_NONE;
-			for (multimap<int,int>::iterator it=map_skill.begin();it!=map_skill.end();it++) 
+			for (vector<pair<int,int>>::iterator it=spell_candidates.begin();it!=spell_candidates.end();it++)
 			{
 				if(!(num--))
 				{
@@ -4574,7 +4596,7 @@ void run_spell() //만약 마법레벨이 52개를 넘어간다면 배울수없�
 			if(inputedKey.mouse == MKIND_ITEM_DESCRIPTION) {				
 				int num = asctonum(inputedKey.val1);
 				int spell_ = SPL_NONE;
-				for (multimap<int,int>::iterator it=map_skill.begin();it!=map_skill.end();it++) 
+				for (vector<pair<int,int>>::iterator it=spell_candidates.begin();it!=spell_candidates.end();it++)
 				{
 					if(!(num--))
 					{

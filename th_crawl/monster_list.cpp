@@ -1216,8 +1216,8 @@ const mon_infor mondata[] = {
 		{9,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_RANGE_ATTACK,0,1,10,'h'},
 
-	{MON_TORNADO_SPIRIT,6,120,name_infor(MON_TORNADO_SPIRIT),&img_mons_tornado_spirit,18,1,15,
-		{10,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{MON_TORNADO_SPIRIT,6,120,name_infor(MON_TORNADO_SPIRIT),&img_mons_tornado_spirit,15,1,15,
+		{8,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_FLY,0,0,7,'m'},
 
 	{MON_FLAN_AFTERIMAGE,16,500,name_infor(MON_FLAN_AFTERIMAGE),&img_named_flandre,125,5,10,
@@ -1227,5 +1227,10 @@ const mon_infor mondata[] = {
 	{MON_BULLET,1,0,name_infor(MON_BULLET),&img_bullet[0],1,0,0,
 		{12,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_TANMAC),name_infor(),name_infor()},
 		M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_STATE | M_FLAG_NONE_STAIR | M_FLAG_CANT_NETURAL |
-		M_FLAG_MISSLE | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_SILENT_DESPAWN,99,0,10,'*'}
+		M_FLAG_MISSLE | M_FLAG_PASSED_ALLY | M_FLAG_PASSED_ENEMY | M_FLAG_SILENT_DESPAWN,99,0,10,'*'},
+
+	{MON_GLACIER_WALL,1,0,name_infor(MON_GLACIER_WALL),&img_mons_glacier_wall,10,5,0,
+		{0,0,0},{ATT_NONE,ATT_NONE,ATT_NONE},{name_infor(),name_infor(),name_infor()},
+		M_FLAG_NONE_MOVE | M_FLAG_IMMOBILE | M_FLAG_NONE_STAIR | M_FLAG_NO_ATK |
+		M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,10,'#'}
 };

@@ -14,10 +14,19 @@
 
 
 
-bool players::SetAlchemyBuff(ALCHEMY_LIST buff_, int time_)
+bool players::SetAlchemyBuff(ALCHEMY_LIST buff_, int time_, int value_, int power_)
 {	
 	if(buff_ == alchemy_buff)
 	{
+		if(alchemy_buff == ALCT_COLD_ARMOUR)
+		{
+			if(value_ > alchemy_cold_armour_ac)
+			{
+				UpDownBuff(BUFFSTAT_AC,value_-alchemy_cold_armour_ac);
+				alchemy_cold_armour_ac = value_;
+			}
+			alchemy_cold_armour_power = max(alchemy_cold_armour_power,power_);
+		}
 		if(alchemy_buff == ALCT_ROYALFLARE) {
 			env[current_level].MakeRoyalflare(you.position, GetRoyalRange(false), false);
 		}
@@ -41,6 +50,12 @@ bool players::SetAlchemyBuff(ALCHEMY_LIST buff_, int time_)
 		if(alchemy_time == 0)
 			return false;
 		alchemy_buff = buff_;
+		if(alchemy_buff == ALCT_COLD_ARMOUR)
+		{
+			alchemy_cold_armour_ac = value_;
+			alchemy_cold_armour_damage = 0;
+			alchemy_cold_armour_power = power_;
+		}
 	
 		alchemyonoff(alchemy_buff,true);
 	}
@@ -69,6 +84,8 @@ int Getalchemytime(ALCHEMY_LIST list_)
 		break;
 	case ALCT_ROYALFLARE:
 		return 30;
+	case ALCT_COLD_ARMOUR:
+		break;
 	}
 	return 100;
 }
@@ -101,6 +118,10 @@ void alchemyalmostoff(ALCHEMY_LIST list_)
 		break;
 	case ALCT_ROYALFLARE:
 		break;		
+	case ALCT_COLD_ARMOUR:
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_ALMOST_OFF),false,false,false,CL_blue);
+
+		break;
 	}
 }
 void alchemyonoff(ALCHEMY_LIST list_,bool onoff_)
@@ -162,5 +183,20 @@ void alchemyonoff(ALCHEMY_LIST list_,bool onoff_)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_ROYALFLAR_OFF),false,false,false,CL_blue);
 		break;
 	}
+	case ALCT_COLD_ARMOUR:
+		if(onoff_)
+		{
+			you.UpDownBuff(BUFFSTAT_AC,you.alchemy_cold_armour_ac);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_ON),true,false,false,CL_white_blue);
+		}
+		else
+		{
+			you.UpDownBuff(BUFFSTAT_AC,-you.alchemy_cold_armour_ac);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_OFF),false,false,false,CL_blue);
+			you.alchemy_cold_armour_ac = 0;
+			you.alchemy_cold_armour_damage = 0;
+			you.alchemy_cold_armour_power = 0;
+		}
+		break;
 	}
 }

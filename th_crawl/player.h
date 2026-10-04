@@ -353,6 +353,9 @@ public:
 
 	ALCHEMY_LIST alchemy_buff;
 	int alchemy_time;
+	int alchemy_cold_armour_ac;
+	int alchemy_cold_armour_damage;
+	int alchemy_cold_armour_power;
 
 
 
@@ -576,7 +579,7 @@ public:
 	bool SetTheWorld(int s_the_world_);
 	bool SetManaDelay(int s_mana_delay_);
 	bool SetKnifeCollect(int s_knife_collect_);
-	bool SetAlchemyBuff(ALCHEMY_LIST buff_, int time_);
+	bool SetAlchemyBuff(ALCHEMY_LIST buff_, int time_, int value_ = 0, int power_ = 0);
 	bool SetSpellcard(int s_spellcard_){s_spellcard= s_spellcard_; return true;};
 	int isSetMikoBuff(int temp_);
 	int reSetMikoBuff();

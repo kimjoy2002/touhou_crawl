@@ -2740,7 +2740,8 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		ss.str("");
 		ss.clear();
 		ss << std::setfill(' ') << std::setw(4) << you.GetDisplayAc();
-		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_AC)+ ((you.alchemy_buff == ALCT_DIAMOND_HARDNESS)?5:0);
+		temp_buff_value_ = you.GetBuffOk(BUFFSTAT_AC)+ ((you.alchemy_buff == ALCT_DIAMOND_HARDNESS)?5:0)
+			+ ((you.alchemy_buff == ALCT_COLD_ARMOUR)?you.alchemy_cold_armour_ac:0);
 		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, 
 		you.s_acid?CL_danger:
 		((temp_buff_value_>0?CL_white_blue:(temp_buff_value_<0?CL_small_danger:CL_STAT))));
@@ -3343,6 +3344,17 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			{
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_ROYALFLARE), CL_alchemy,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_ROYALFLARE), this);
+			}
+			if(you.alchemy_buff == ALCT_COLD_ARMOUR)
+			{
+				bool burst_ready_ = you.alchemy_cold_armour_damage*4 >= you.GetMaxHp();
+				D3DCOLOR armour_color_ = you.alchemy_time <= 3?(burst_ready_?CL_blue:CL_dark_alchemy):
+					(burst_ready_?CL_white_blue:CL_alchemy);
+				stateDraw.addState(LocalzationManager::locString(burst_ready_?
+					LOC_SYSTEM_BUFF_STAT_COLD_ARMOUR_PLUS:LOC_SYSTEM_BUFF_STAT_COLD_ARMOUR),
+					armour_color_,
+					LocalzationManager::locString(burst_ready_?
+					LOC_SYSTEM_BUFF_DESCRIBE_STAT_COLD_ARMOUR_PLUS:LOC_SYSTEM_BUFF_DESCRIBE_STAT_COLD_ARMOUR), this);
 			}
 			if(you.s_unluck > 0)
 			{

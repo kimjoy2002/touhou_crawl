@@ -32,6 +32,7 @@ bool maybeUpgrade(int mon_id) {
 	switch(mon_id) {
 		case MON_GHOST:
 		case MON_ONBASIRA:
+		case MON_GLACIER_WALL:
 		case MON_MAGICAL_STAR:
 		case MON_GOLEM:
 		case MON_SCHEMA_EYE:

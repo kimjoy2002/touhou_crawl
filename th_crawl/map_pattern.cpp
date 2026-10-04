@@ -1025,6 +1025,7 @@ EEEEEEE\
 				/*map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM;*/
 				map->sp_tile_list.push_back(randomTemple());
 				map->name = "COMMON_HIDDEN_TEMPLE";
+				map->flag = FLAG_NO_MONSTER | FLAG_NO_STAIR | FLAG_NO_ITEM;
 				return  "\
 .....\
 .###.\

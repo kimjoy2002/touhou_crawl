@@ -63,6 +63,7 @@ enum spell_list
 	SPL_DOLL_LUNGE, SPL_CURSE, SPL_THROW_BUCKET,
 	SPL_DOLL_SPEAR, SPL_LITTLE_LEGION,
 	SPL_THROW_AXE, SPL_COUNTER_TANMAC,
+	SPL_GLACIER_WALL, SPL_COLD_ARMOUR,
 	SPL_MAX
 };
 
@@ -247,6 +248,7 @@ int GetSpellBombRange(spell_list spell);
 bool skill_philosopher_passive(int power, unit* order);
 bool skill_elec_passive(int power, unit* order);
 bool skill_elec_ball_bomb(int power, unit* order);
+void skill_cold_armour_burst(int power, int range, unit* order);
 attack_infor get_sacrifice_dam(int pow_, unit* doll);
 
 

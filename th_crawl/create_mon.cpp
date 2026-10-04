@@ -46,7 +46,7 @@ mon_group normal_group[] = //일반몹 그룹
 	{ 27,  1,  14,  8,  3}, //우산요괴
 	{ 28,  1,  5,  5,  2}, //초록모옥
 	
-	{ 10,  2,  2,  2,  5}, //두루미 1(아주 드물게)
+	{ 10,  2,  2,  1,  5}, //두루미 1(아주 드물게)
 	{  9,  2,  5,  10,  4}, //뱀 1
 	{ 15,  2,  9,  20,  1}, //초록요정2 파랑요정1 빨강요정1
 	{ 14,  2,  3,  8,  2}, //캇파2~3
@@ -1912,6 +1912,12 @@ void SetResistMonster(monster* mon)
 		mon->poison_resist=1;
 		mon->confuse_resist=1;
 		break;		
+	case MON_GLACIER_WALL:
+		mon->ice_resist=3;
+		mon->fire_resist=-1;
+		mon->poison_resist=1;
+		mon->confuse_resist=1;
+		break;
 	case MON_RED_UFO:
 		mon->fire_resist=2;
 		break;

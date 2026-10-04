@@ -5645,3 +5645,15 @@ LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BURST,Immune to explosions.
 LOC_SYSTEM_DEBUG_ACTIVATE_UNIQUE_SPELLCARD,Spell Card to activate
 LOC_SYSTEM_FIGHT_EVADE_NO_OWNER,{0} evade{0!=you?s:} {1}.
 LOC_SYSTEM_FIGHT_GRAZE_NO_OWNER,{0} graze{0!=you?s:} {1}.
+LOC_SYSTEM_SPL_GLACIER_WALL,Glacier Wall
+LOC_SYSTEM_SPL_COLD_ARMOUR,Cold Armour
+LOC_SYSTEM_SPL_DESCRIBE_GLACIER_WALL,A cold spell that temporarily creates a solid glacier wall in an adjacent tile.\nThe glacier wall remains where it was created, blocking both movement and projectiles.\n
+LOC_SYSTEM_SPL_DESCRIBE_COLD_ARMOUR,Forms a temporary suit of armour from ice to protect the caster.\nIt grants high AC based on spell power for its duration.\nWhen the duration expires, the ice armour shatters, dealing explosive cold damage within 1 tile.\nIf you take at least 25% of your maximum HP in damage during its duration, the explosion grows stronger and reaches 2 tiles.\n
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_ON,Cold armour envelops your body.
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_OFF,Your cold armour melts away.
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_BURST,Your cold armour shatters, scattering freezing air!
+LOC_SYSTEM_BUFF_STAT_COLD_ARMOUR,Cold Armour
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_COLD_ARMOUR,Cold Armour is increasing your AC. When it expires, it deals cold damage within 1 tile.
+LOC_SYSTEM_BUFF_STAT_COLD_ARMOUR_PLUS,Cold Armour+
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_COLD_ARMOUR_PLUS,Cold Armour is increasing your AC. After taking enough damage, it will deal cold damage within 2 tiles when it expires.
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_ALMOST_OFF,Your cold armour is becoming unstable!

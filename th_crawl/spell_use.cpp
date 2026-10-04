@@ -114,7 +114,7 @@
 #define SPL_HYPNOSIS_OTHERMON_DAM(pow_) (6 + (pow_) / 8)
 
 #define SPL_LASER_DICE 2
-#define SPL_LASER_DAM(pow_) (9 + (pow_) / 8)
+#define SPL_LASER_DAM(pow_) (8 + (pow_) / 8)
 
 #define SPL_SPARK_DICE 5
 #define SPL_SPARK_DAM(pow_) (9 + (pow_) / 18)
@@ -177,6 +177,9 @@
 
 #define SPL_THUNDER_DICE 3
 #define SPL_THUNDER_DAM(pow_) (12 + (pow_) /12)
+
+#define SPL_COLD_ARMOUR_DICE 3
+#define SPL_COLD_ARMOUR_DAM(pow_) (7 + (pow_) /8)
 
 #define SPL_AIR_STRIKE_DICE 1
 #define SPL_AIR_STRIKE_DAM(pow_) (16 + (pow_) /4)
@@ -4064,26 +4067,65 @@ bool skill_unluck(int pow_, bool short_, unit* order, coord_def target)
 
 bool skill_thunder(int pow_, bool short_, unit* order, coord_def target)
 {
+	if(!order)
+		return false;
+	unit* target_unit_ = env[current_level].isMonsterPos(target.x,target.y);
+	if(!target_unit_ || !order->isEnemyUnit(target_unit_))
+	{
+		if(order->isplayer())
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_SHOULD_TARGET_ENEMY),true,false,false,CL_normal);
+		return false;
+	}
 	if(env[current_level].isMove(target.x, target.y, true))
 	{
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("thunder");
 		}
+		vector<coord_def> conductors_;
+		vector<coord_def> others_;
 		vector<coord_def> vt_;
+		vt_.push_back(target);
+
+		// 중심을 제외한 전격 수를 시전 시작에 확정한다. 위력 0에서 1칸,
+		// 용신의 번개 위력 상한에서 최대 7칸까지 퍼진다.
+		int extra_count_ = 1 + min(6,max(0,pow_)*6/max(1,SpellCap(SPL_THUNDER)));
+		rect_iterator rit(target,1,1);
+		for(;!rit.end();rit++)
 		{
-			rect_iterator rit(target,1,1);
-			for(;!rit.end();rit++)
+			if((*rit) == target || !env[current_level].isMove(rit->x,rit->y,true))
+				continue;
+
+			bool conductor_ = false;
+			if(unit* unit_ = env[current_level].isMonsterPos(rit->x,rit->y))
 			{
-				if(randA(randA(600))<pow_+100 || (*rit) == target)
-				{
-					if(env[current_level].isMove(rit->x,rit->y,true))
-					{
-						env[current_level].MakeEffect(*rit,&img_blast[2],false);
-						vt_.push_back(*rit);
-					}
-				}
+				if(unit_->isplayer())
+					conductor_ = you.elec_resist <= 2;
+				else
+					conductor_ = static_cast<monster*>(unit_)->elec_resist <= 2;
 			}
+			(conductor_?conductors_:others_).push_back(*rit);
 		}
+
+		rand_shuffle(conductors_.begin(),conductors_.end());
+		rand_shuffle(others_.begin(),others_.end());
+		for(const coord_def& pos_ : conductors_)
+		{
+			if(extra_count_ <= 0)
+				break;
+			--extra_count_;
+			vt_.push_back(pos_);
+		}
+		for(const coord_def& pos_ : others_)
+		{
+			if(extra_count_ <= 0)
+				break;
+			--extra_count_;
+			vt_.push_back(pos_);
+		}
+
+		for(const coord_def& pos_ : vt_)
+			env[current_level].MakeEffect(pos_,&img_blast[2],false);
+
 		for(auto it = vt_.begin();it != vt_.end();it++)
 		{
 			if(env[current_level].isMove(it->x,it->y,true))
@@ -4103,6 +4145,50 @@ bool skill_thunder(int pow_, bool short_, unit* order, coord_def target)
 	}
 	return false;
 }
+
+bool skill_glacier_wall(int pow_, bool short_, unit* order, coord_def target)
+{
+	if(!order || max(abs(order->position.x-target.x),abs(order->position.y-target.y)) > 1)
+		return false;
+
+	int time_ = rand_int(20,30)+max(0,pow_)/10;
+	if(monster* mon_ = BaseSummon(MON_GLACIER_WALL,time_,true,false,0,order,target,
+		SKD_GLACIER_WALL,GetSummonMaxNumber(SPL_GLACIER_WALL)))
+	{
+		mon_->LevelUpdown(2+pow_/15+randA(pow_)/30, 7);
+		if(env[current_level].isInSight(order->position) || env[current_level].isInSight(target))
+			PlaySE("cold");
+		return true;
+	}
+	if(order->isplayer())
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_CANT_CREATE_POSITION),true,false,false,CL_normal);
+	return false;
+}
+
+bool skill_cold_armour(int pow_, bool short_, unit* order, coord_def target)
+{
+	if(!order || !order->isplayer())
+		return false;
+
+	int ac_ = 9+min(11,max(0,pow_)/15);
+	int time_ = rand_int(20,40)+max(0,pow_)/20;
+	you.SetAlchemyBuff(ALCT_COLD_ARMOUR,time_,ac_,pow_);
+	PlaySE("buff");
+	return true;
+}
+
+void skill_cold_armour_burst(int pow_, int range_, unit* order)
+{
+	if(!order)
+		return;
+	printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_BURST),true,false,false,CL_white_blue);
+	PlaySE("cold");
+	env[current_level].MakeNoise(order->position,8,NULL);
+	base_bomb(randC(SPL_COLD_ARMOUR_DICE,SPL_COLD_ARMOUR_DAM(pow_)),
+		SPL_COLD_ARMOUR_DICE*SPL_COLD_ARMOUR_DAM(pow_),range_,ATT_COLD_BLAST,order,
+		name_infor(LOC_SYSTEM_SPL_COLD_ARMOUR),order->position);
+}
+
 bool skill_air_strike(int pow_, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
@@ -5810,7 +5896,7 @@ bool skill_counter_tanmac(unit* order, coord_def target)
 			if(parent_type_ == PRT_PLAYER || parent_type_ == PRT_ALLY)
 				flag_ |= M_FLAG_ALLY;
 			summon_info s_(parent_map_id_, SKD_OTHER, -1);
-			monster* mon_ = env[current_level].AddMonster_Summon(MON_HOMING, flag_, summon_position, s_, 5, reserved_);
+			monster* mon_ = env[current_level].AddMonster_Summon(MON_HOMING, flag_, summon_position, s_, 3, reserved_);
 			if(mon_)
 			{
 				if(!player_owner_)
@@ -8122,6 +8208,8 @@ bool MonsterUseSpell(spell_list skill, bool short_, monster* order, coord_def &t
 		return skill_orrerires_sun(power,short_,order,target);
 	case SPL_THROW_STAR:
 		return skill_throw_star(power,short_,order,target);
+	case SPL_GLACIER_WALL:
+		return skill_glacier_wall(power,short_,order,target);
 	default:
 		return false;
 	}
@@ -8664,6 +8752,10 @@ static bool PlayerUseSpellInternal(spell_list skill, bool short_, coord_def &tar
 		return skill_doll_spear(power,short_,&you,target);
 	case SPL_LITTLE_LEGION:
 		return skill_little_legion(power,short_,&you,target);
+	case SPL_GLACIER_WALL:
+		return skill_glacier_wall(power,short_,&you,target);
+	case SPL_COLD_ARMOUR:
+		return skill_cold_armour(power,short_,&you,target);
 	default:
 		return false;
 	}
@@ -9475,6 +9567,16 @@ void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 		ostringstream ss;
 		ss << "(" << SPL_COUNTER_TANMAC_DICE << "d" << SPL_COUNTER_TANMAC_DAM << " X 2)";
 		printsub(ss.str(), false, normal_dam);
+		return;
+	}
+	case SPL_GLACIER_WALL:
+		return;
+	case SPL_COLD_ARMOUR:
+	{
+		ostringstream ss;
+		ss << "(AC +" << 9+min(11,max(0,pow_)/15) << ", "
+			<< SPL_COLD_ARMOUR_DICE << "d" << SPL_COLD_ARMOUR_DAM(pow_) << ")";
+		printsub(ss.str(), false, cold_dam);
 		return;
 	}
 	default:

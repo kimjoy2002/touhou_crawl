@@ -68,6 +68,8 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 		return (S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_COUNTER_TANMAC:
 		return (S_FLAG_IMMEDIATELY | S_FLAG_NO_COM) & flag;
+	case SPL_GLACIER_WALL:
+		return (S_FLAG_SUMMON | S_FLAG_SMITE | S_FLAG_SPEAK) & flag;
 	case SPL_LUMINUS_STRIKE:
 		return (S_FLAG_SPEAK | S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_CONFUSE_CLOUD:
@@ -252,6 +254,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_AUTUMN_BLADE:
 	case SPL_PHILOSOPHERS_STONE:
 	case SPL_ROYALFLARE:
+	case SPL_COLD_ARMOUR:
 		return (S_FLAG_BUF | S_FLAG_SPEAK | S_FLAG_IMMEDIATELY) & flag;	
 	case SPL_HASTE_ALL:
 	case SPL_DISCORD:
@@ -426,6 +429,7 @@ int SpellLength(spell_list skill, bool isPlayer)
 	case SPL_FROZEN:
 	case SPL_THROW_PLAYER:
 	case SPL_MEGATON_KICK:
+	case SPL_GLACIER_WALL:
 		length_ = 1;
 		break;
 	case SPL_SUMMON_BUG:
@@ -887,6 +891,10 @@ string SpellString(spell_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_THROW_AXE);
 	case SPL_COUNTER_TANMAC:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_COUNTER_TANMAC);
+	case SPL_GLACIER_WALL:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_GLACIER_WALL);
+	case SPL_COLD_ARMOUR:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_COLD_ARMOUR);
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_UKNOWN);
 	}
@@ -936,7 +944,6 @@ int SpellLevel(spell_list skill)
 	case SPL_KNIFE_COLLECT:
 		return 2;
 	case SPL_CONFUSE:
-	case SPL_FREEZE:
 	case SPL_FIRE_WALL:
 	case SPL_MON_TANMAC_MIDDLE:
 	case SPL_POISON_BRAND:
@@ -954,8 +961,10 @@ int SpellLevel(spell_list skill)
 	case SPL_GROW_VINE:
 	case SPL_CONFUSE_SPORE:
 	case SPL_THROW_STAR:
+	case SPL_GLACIER_WALL:
 		return 3;
 	case SPL_SMITE:
+	case SPL_FREEZE:
 	case SPL_FIRE_BALL:
 	case SPL_WHIRLWIND:
 	case SPL_DISCHARGE:
@@ -980,6 +989,7 @@ int SpellLevel(spell_list skill)
 	case SPL_CLOSE_DOOR:
 	case SPL_HANIWA_MAGIC_TANMAC2:
 	case SPL_WEAKENDED_SPORE:
+	case SPL_COLD_ARMOUR:
 		return 4;
 	case SPL_SILENCE:
 	case SPL_VENOM_BOLT:
@@ -1125,6 +1135,7 @@ int SpellNoise(spell_list skill)
 	case SPL_SLEEP_SMITE:
 	case SPL_BLINK_AWAY:
 	case SPL_NIGHTMARE_MANIFEST:
+	case SPL_GLACIER_WALL:
 		return 0;//소음없음
 	case SPL_SHOCK:
 	case SPL_VEILING:
@@ -1181,6 +1192,7 @@ int SpellNoise(spell_list skill)
 	case SPL_THROW_BUCKET:
 	case SPL_THROW_AXE:
 	case SPL_COUNTER_TANMAC:
+	case SPL_COLD_ARMOUR:
 		return 4; //적은 소음
 	case SPL_SUMMON_OPTION:
 	case SPL_FREEZE:
@@ -1629,6 +1641,10 @@ skill_type SpellSchool(spell_list skill, int num)
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_COUNTER_TANMAC:
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_GLACIER_WALL:
+		return num == 0 ? (SKT_COLD) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
+	case SPL_COLD_ARMOUR:
+		return num == 0 ? (SKT_COLD) : num == 1 ? (SKT_ALCHEMY) : (SKT_ERROR);
 	case SPL_THROW_PLAYER:
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_EARTH) : (SKT_ERROR);
 	case SPL_THROW_AMULET:
@@ -1757,7 +1773,7 @@ int SpellCap(spell_list skill)
 	case SPL_KNIFE_COLLECT:
 	case SPL_FREEZE:
 	case SPL_HOMING_TANMAC:
-		return 75;
+		return 100;
 	case SPL_MEDICINE_CLOUD:
 	case SPL_SMITE:
 	case SPL_FIRE_BALL:
@@ -1791,6 +1807,8 @@ int SpellCap(spell_list skill)
 	case SPL_THUNDER:
 	case SPL_AIR_STRIKE:
 	case SPL_EMERALD_CITY:
+	case SPL_GLACIER_WALL:
+	case SPL_COLD_ARMOUR:
 		return 150;
 	case SPL_SUMMON_SEKIBANKI:
 	case SPL_SPARK:

@@ -546,13 +546,21 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		
 		if(alchemy_time == 0)
 		{
+			if(alchemy_buff == ALCT_COLD_ARMOUR)
+			{
+				int burst_range_ = alchemy_cold_armour_damage*4 >= GetMaxHp()?2:1;
+				ReleaseMutex(mutx);
+				skill_cold_armour_burst(alchemy_cold_armour_power,burst_range_,this);
+				WaitForSingleObject(mutx, INFINITE);
+			}
 			alchemyonoff(alchemy_buff,false);
 			SetInter(IT_STAT);
 			alchemy_buff= ALCT_NONE;
 		}
-		else if(alchemy_time == 10)
+		else if(alchemy_time == (alchemy_buff == ALCT_COLD_ARMOUR?3:10))
 		{
 			alchemyalmostoff(alchemy_buff);
+			SetInter(IT_STAT);
 		}
 
 	}

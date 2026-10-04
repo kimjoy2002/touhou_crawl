@@ -1112,6 +1112,8 @@ bool players::damage(attack_infor &a, bool perfect_)
 			}
 			else if(damage_)
 			{
+				if(alchemy_buff == ALCT_COLD_ARMOUR)
+					alchemy_cold_armour_damage += damage_;
 				if(s_dive > 0) {
 					printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_STOP_ATTACKED),false,false,false,CL_small_danger);
 					EndDive(false);

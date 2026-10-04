@@ -232,6 +232,7 @@ extern textures img_mons_spinning_doll[2];
 extern textures img_mons_shoebill;
 extern textures img_mons_yamanba;
 extern textures img_mons_tornado_spirit;
+extern textures img_mons_glacier_wall;
 
 
 

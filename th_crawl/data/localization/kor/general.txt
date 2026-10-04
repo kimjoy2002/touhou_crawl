@@ -5645,3 +5645,15 @@ LOC_SYSTEM_MONSTER_DESCRIPTION_RESIST_BURST,폭발에 면역이 있다.
 LOC_SYSTEM_DEBUG_ACTIVATE_UNIQUE_SPELLCARD,발동할 스펠카드
 LOC_SYSTEM_FIGHT_EVADE_NO_OWNER,{0:은|는} {1:을|를} 피했다.
 LOC_SYSTEM_FIGHT_GRAZE_NO_OWNER,{0:은|는} {1:을|를} 그레이즈했다.
+LOC_SYSTEM_SPL_GLACIER_WALL,빙하벽
+LOC_SYSTEM_SPL_COLD_ARMOUR,냉기갑옷
+LOC_SYSTEM_SPL_DESCRIBE_GLACIER_WALL,인접한 위치에 단단한 빙하벽을 일시적으로 생성하는 냉기 마법.\n빙하벽은 만들어진 자리에서 이동하지 않으며 이동과 투사체를 막는다.\n
+LOC_SYSTEM_SPL_DESCRIBE_COLD_ARMOUR,얼음을 이용해서 일시적으로 몸을 보호하는 갑옷을 만든다.\n지속시간 동안 마법 위력에 비례해 높은 방어력을 얻는다.\n지속 시간이 끝나면 얼음 갑옷이 부서지며 주변 1칸에 폭발형 냉기 피해를 준다.\n만약 지속시간 중 최대 체력의 25% 이상 피해를 받았다면 폭발력이 증가하여 범위가 2칸으로 넓어진다.\n
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_ON,차가운 갑옷이 당신의 몸을 감쌌다.
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_OFF,냉기갑옷이 녹아 사라졌다.
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_BURST,냉기갑옷이 산산이 부서지며 냉기를 흩뿌렸다!
+LOC_SYSTEM_BUFF_STAT_COLD_ARMOUR,냉기갑옷
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_COLD_ARMOUR,냉기갑옷이 AC를 올려주고 있습니다. 지속 시간이 끝날때 주변 1칸에 냉기 피해를 줍니다.
+LOC_SYSTEM_BUFF_STAT_COLD_ARMOUR_PLUS,냉기갑옷+
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_COLD_ARMOUR_PLUS,냉기갑옷이 AC를 올려주고 있습니다. 일정 피해를 받은 덕분에 지속 시간이 끝날때 주변 2칸에 냉기 피해를 줍니다.
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_ALMOST_OFF,냉기갑옷이 불안정하다!

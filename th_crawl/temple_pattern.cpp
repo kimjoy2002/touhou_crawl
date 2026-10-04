@@ -1057,7 +1057,7 @@ B.B";
 				map->monster_list.push_back(mapdummy_mon(mon_,M_FLAG_DECORATE,coord_def(0,0)));
 			}
 			makeAunnTemple(map, coord_def(0, 2));
-			map->flag = FLAG_NO_STAIR;
+			map->flag = FLAG_NO_STAIR | FLAG_NO_MONSTER | FLAG_NO_ITEM;
 			map->name = "COMMON_ALTAR_INTHE_GLASS";
 			return  "\
 .......\

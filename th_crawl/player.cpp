@@ -133,7 +133,7 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
 force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_slippery(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
 s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_evoke_ghost_level(0), s_oil(0), s_fire(0), s_tracking(0), s_shooting_turn(0), s_overheat(0), s_overheat_turn(0),
 s_regen(0), s_selfdestruct(0), s_glutton(0), s_glutton_turn(0), s_potion_addict(0), s_shield(), s_acid(0), s_acid_turn(0), s_dive(0),
-alchemy_buff(ALCT_NONE), alchemy_time(0),
+alchemy_buff(ALCT_NONE), alchemy_time(0), alchemy_cold_armour_ac(0), alchemy_cold_armour_damage(0), alchemy_cold_armour_power(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
 uniden_poison_resist(0), uniden_fire_resist(0), uniden_ice_resist(0), uniden_elec_resist(0),uniden_confuse_resist(0), uniden_invisible_view(0), uniden_power_keep(0)
@@ -345,6 +345,9 @@ void players::init() {
 	s_dive  = 0;
 	alchemy_buff = ALCT_NONE;
 	alchemy_time = 0;
+	alchemy_cold_armour_ac = 0;
+	alchemy_cold_armour_damage = 0;
+	alchemy_cold_armour_power = 0;
 	teleport_curse = false;
 	magician_bonus = 0;
 	poison_resist = 0;
@@ -598,6 +601,9 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp, s_dive);
 	SaveData<ALCHEMY_LIST>(fp, alchemy_buff);
 	SaveData<int>(fp, alchemy_time);
+	SaveData<int>(fp, alchemy_cold_armour_ac);
+	SaveData<int>(fp, alchemy_cold_armour_damage);
+	SaveData<int>(fp, alchemy_cold_armour_power);
 
 	
 	SaveData<int>(fp, teleport_curse);
@@ -917,6 +923,15 @@ void players::LoadDatas(FILE *fp)
 
 	LoadData<ALCHEMY_LIST>(fp, alchemy_buff);
 	LoadData<int>(fp, alchemy_time);
+	alchemy_cold_armour_ac = 0;
+	alchemy_cold_armour_damage = 0;
+	alchemy_cold_armour_power = 0;
+	if(!isPrevVersion(loading_version_string, "ver1.209"))
+	{
+		LoadData<int>(fp, alchemy_cold_armour_ac);
+		LoadData<int>(fp, alchemy_cold_armour_damage);
+		LoadData<int>(fp, alchemy_cold_armour_power);
+	}
 	
 	LoadData<int>(fp, teleport_curse);
 	LoadData<int>(fp, magician_bonus);

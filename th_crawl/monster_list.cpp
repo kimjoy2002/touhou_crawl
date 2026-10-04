@@ -473,7 +473,7 @@ const mon_infor mondata[] = {
 	{18,0,0},{ATT_VAMP,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_CAN_SEE_INVI | M_FLAG_ANIMAL,0,1,5,'b' },
 	{MON_DEAGAMA,12,800,name_infor(MON_DEAGAMA),&img_mons_dagama,110,10,2,
-	{25,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+	{20,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 	M_FLAG_ANIMAL | M_FLAG_SWIM,3,1,10,'C' },
 	{MON_RABBIT,3,5,name_infor(MON_RABBIT),&img_mons_rabit,20,0,15,
 	{9,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
@@ -1029,8 +1029,8 @@ const mon_infor mondata[] = {
 		M_FLAG_OPEN_DOOR | M_FLAG_FAIRY | M_FLAG_SPEAK | M_FLAG_FLY,0,1,10,'f'},
 
 	{MON_TSUCHINOKO,13,900,name_infor(MON_TSUCHINOKO),&img_mons_tsuchinoko,150,3,3,
-		{35,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
-		M_FLAG_ANIMAL | M_FLAG_SWIM,0,0,12,'S'},
+		{34,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_ANIMAL | M_FLAG_SWIM,0,0,13,'S'},
 
 	{MON_VINE,1,0,name_infor(MON_VINE),&img_mons_vine,30,0,0,
 		{0,0,0},{ATT_NONE,ATT_NONE,ATT_NONE},{name_infor(),name_infor(),name_infor()},

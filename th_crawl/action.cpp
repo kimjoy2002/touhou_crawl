@@ -4880,9 +4880,51 @@ void auto_tanmac_onoff()
 }
 
 
-void verylongMove(int level, coord_def pos)
+void verylongMove(int level, coord_def pos, bool stop_at_dungeon_)
 {
-	if (current_level != level) { 
+	auto reached_destination_ = [level, stop_at_dungeon_]()
+	{
+		if(!stop_at_dungeon_)
+			return current_level == level;
+
+		switch(level)
+		{
+		case 0:
+			return current_level >= 0 && current_level <= MAX_DUNGEUN_LEVEL;
+		case MISTY_LAKE_LEVEL:
+			return current_level >= MISTY_LAKE_LEVEL && current_level <= MISTY_LAKE_LAST_LEVEL;
+		case YOUKAI_MOUNTAIN_LEVEL:
+			return current_level >= YOUKAI_MOUNTAIN_LEVEL && current_level <= YOUKAI_MOUNTAIN_LAST_LEVEL;
+		case SCARLET_LEVEL:
+			return current_level >= SCARLET_LEVEL && current_level <= SCARLET_LEVEL_LAST_LEVEL;
+		case SCARLET_LIBRARY_LEVEL:
+			return current_level >= SCARLET_LIBRARY_LEVEL && current_level <= SCARLET_LIBRARY_LEVEL_LAST_LEVEL;
+		case SCARLET_UNDER_LEVEL:
+			return current_level >= SCARLET_UNDER_LEVEL && current_level <= SCARLET_UNDER_LEVEL_LAST_LEVEL;
+		case BAMBOO_LEVEL:
+			return current_level >= BAMBOO_LEVEL && current_level <= BAMBOO_LEVEL_LAST_LEVEL;
+		case YUKKURI_LEVEL:
+			return current_level >= YUKKURI_LEVEL && current_level <= YUKKURI_LAST_LEVEL;
+		case DEPTH_LEVEL:
+			return current_level >= DEPTH_LEVEL && current_level <= DEPTH_LAST_LEVEL;
+		case DREAM_LEVEL:
+			return current_level >= DREAM_LEVEL && current_level <= DREAM_LAST_LEVEL;
+		case SUBTERRANEAN_LEVEL:
+			return current_level >= SUBTERRANEAN_LEVEL && current_level <= SUBTERRANEAN_LEVEL_LAST_LEVEL;
+		case PANDEMONIUM_LEVEL:
+			return current_level >= PANDEMONIUM_LEVEL && current_level <= PANDEMONIUM_LAST_LEVEL;
+		case HAKUREI_LEVEL:
+			return current_level >= HAKUREI_LEVEL && current_level <= HAKUREI_LAST_LEVEL;
+		case FORESTOFMAGIC_LEVEL:
+			return current_level >= FORESTOFMAGIC_LEVEL && current_level <= FORESTOFMAGIC_LAST_LEVEL;
+		case DOLLSHOUSE_LEVEL:
+			return current_level >= DOLLSHOUSE_LEVEL && current_level <= DOLLSHOUSE_LAST_LEVEL;
+		default:
+			return current_level == level;
+		}
+	};
+
+	if (!reached_destination_()) {
 		bool onemore = false;
 		do {
 			queue<list<coord_def>> stairMap;
@@ -4956,18 +4998,20 @@ void verylongMove(int level, coord_def pos)
 					else {
 						break;
 					}
+					if(reached_destination_())
+						break;
 					stairMap.pop();
 				}
 			} else {
 				return;
 			}
-			if(onemore && current_level == level) {
+			if(onemore && reached_destination_()) {
 				onemore = false;
 			}
 		} while(onemore);
 	}
 
-	if (current_level == level) { 
+	if (reached_destination_()) {
 		if(pos != coord_def(-1, -1)) {
 			Long_Move(pos, true);
 		}
@@ -5164,12 +5208,12 @@ void floorMove()
 
 
 	you.lastExplore = key_;
-	verylongMove(next_, coord_def(-1,-1));
+	verylongMove(next_, coord_def(-1,-1), key_ >= 'a' && key_ <= 'z');
 
 }
 
 bool iteminfor_(item *item_, bool onlyinfor);
-void verylongMove(int level, coord_def pos);
+void verylongMove(int level, coord_def pos, bool stop_at_dungeon_);
 void findItem() {
 	if(env[current_level].isInfiniteMap()) {
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SEARCH_ITEM_FAIL_BAMBOO), true, false, false, CL_help);
@@ -5254,7 +5298,7 @@ void findItem() {
 			item* item_ = &*std::next(you.search_list.begin(), num_);
 			if(item_ != nullptr) {
 				changedisplay(DT_GAME);
-				verylongMove(item_->search_field.level, item_->position);
+				verylongMove(item_->search_field.level, item_->position, false);
 				break;
 			}
 		}

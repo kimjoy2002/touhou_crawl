@@ -60,7 +60,7 @@
 #define SPL_FROST_DAM(pow_) (10 + (pow_) / 5)
 
 #define SPL_FREEZE_DICE 2
-#define SPL_FREEZE_DAM(pow_) (13 + (pow_) / 6)
+#define SPL_FREEZE_DAM(pow_) (15 + (pow_) / 6)
 
 #define SPL_STING_DICE 1
 #define SPL_STING_DAM(pow_) (6 + (pow_) / 6)
@@ -1235,7 +1235,7 @@ bool skill_elec(int pow_, bool short_, unit* order, coord_def target)
 		if((*it).isLive() && (*it).elec_resist <= 2)
 		{
 			int length_ = pow((float)abs(order->position.x-it->position.x),2)+pow((float)abs(order->position.y-it->position.y),2);
-			if(!length_ || length_ > SpellLength(SPL_SHOCK, order->isplayer())*SpellLength(SPL_SHOCK, order->isplayer())) //만약 거리를 벗어날경우 실패한다.
+			if(!length_ || GetLengthFromCenter(it->position.x, it->position.y, order->position.x, order->position.y) > SpellLength(SPL_SHOCK, order->isplayer())) //만약 거리를 벗어날경우 실패한다.
 				continue;
 			beam_iterator beam(order->position,order->position);
 			if(!CheckThrowPath(order->position,it->position, beam))//경로가 제대로 안 세워질경우 실패
@@ -1255,7 +1255,7 @@ bool skill_elec(int pow_, bool short_, unit* order, coord_def target)
 	while(1) //루프안됨
 	{
 		int length_ = pow((float)abs(order->position.x-you.position.x),2)+pow((float)abs(order->position.y-you.position.y),2);
-		if(!length_ || length_ > SpellLength(SPL_SHOCK, order->isplayer())*SpellLength(SPL_SHOCK, order->isplayer())) //만약 거리를 벗어날경우 실패한다.
+		if(!length_ || GetLengthFromCenter(you.position.x, you.position.y, order->position.x, order->position.y) > SpellLength(SPL_SHOCK, order->isplayer())) //만약 거리를 벗어날경우 실패한다.
 			break;
 		beam_iterator beam(order->position,order->position);
 		if(!CheckThrowPath(order->position,you.position, beam))//경로가 제대로 안 세워질경우 실패

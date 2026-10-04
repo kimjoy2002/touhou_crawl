@@ -5657,3 +5657,4 @@ LOC_SYSTEM_BUFF_DESCRIBE_STAT_COLD_ARMOUR,Cold Armour is increasing your AC. Whe
 LOC_SYSTEM_BUFF_STAT_COLD_ARMOUR_PLUS,Cold Armour+
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_COLD_ARMOUR_PLUS,Cold Armour is increasing your AC. After taking enough damage, it will deal cold damage within 2 tiles when it expires.
 LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_ALMOST_OFF,Your cold armour is becoming unstable!
+LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_MELTING,Your cold armour is melting!

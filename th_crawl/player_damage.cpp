@@ -34,6 +34,25 @@ extern HANDLE mutx;
 skill_type itemtoskill(item_type type_);
 extern int shieldPanaltyOfWeapon(item_type type, int weapon_kind);
 
+static bool isFireAttackForColdArmour(attack_type type_)
+{
+	switch(type_)
+	{
+	case ATT_FIRE:
+	case ATT_FIREPLUS:
+	case ATT_FIRE_WEAK:
+	case ATT_THROW_FIRE:
+	case ATT_THROW_FIRE_PYSICAL:
+	case ATT_CLOUD_FIRE:
+	case ATT_FIRE_BLAST:
+	case ATT_FIRE_PYSICAL_BLAST:
+	case ATT_FIRE_ENCHANT_BLAST:
+		return true;
+	default:
+		return false;
+	}
+}
+
 
 
 
@@ -1105,6 +1124,15 @@ bool players::damage(attack_infor &a, bool perfect_)
 				damage_ = 0;
 			}
 			print_damage_message(a,damage_!=0);
+			if(alchemy_buff == ALCT_COLD_ARMOUR && isFireAttackForColdArmour(a.type))
+			{
+				const int prev_alchemy_time_ = alchemy_time;
+				alchemy_time = max(1,alchemy_time/2);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_SPELL_ALCHEMY_COLD_ARMOUR_MELTING) + " ",false,false,false,CL_small_danger);
+				if(prev_alchemy_time_ > 3 && alchemy_time <= 3)
+					alchemyalmostoff(alchemy_buff);
+				SetInter(IT_STAT);
+			}
 
 			if (s_sleep < 0 && a.type == ATT_SLEEP)
 			{

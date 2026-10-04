@@ -5636,7 +5636,7 @@ LOC_SYSTEM_TILE_CARPET,Carpet
 LOC_SYSTEM_ITEM_FOOD_CAKE,Cake
 LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE,A slice of cake found in the Scarlet Devil Mansion Basement.\nThe cake looks delicious, but its origin seems suspicious.\nShould you really eat it?
 LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE_VAMPIRE,A slice of cake found in the Scarlet Devil Mansion Basement.\nThe cake looks delicious, but its origin seems suspicious.\nThe cake smells irresistibly delicious!
-LOC_SYSTEM_UNIQUE_SPELLCARD_FOUND,{0} appears to be carrying a Spell Card. Beware of their counterattack!
+LOC_SYSTEM_UNIQUE_SPELLCARD_FOUND,{0} appears to be carrying a Spell Card. Beware of Spell Card activation after her defeat!
 LOC_SYSTEM_UNIQUE_SPELLCARD_ACTIVATE,{0}{0==you?r:'s} Spell Card activated!
 LOC_SYSTEM_UNIQUE_SPELLCARD_GET,{0}{0==you?r:'s} Spell Card captured!
 LOC_SYSTEM_UNIQUE_SPELLCARD_STAIR_BLOCK,The Spell Card prevents you from moving to another floor!

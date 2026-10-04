@@ -899,11 +899,17 @@ void MakeArtifact(item* item_, int good_bad_, bool cant_fixed)
 	if(item_->type >= ITM_ARMOR_BODY_FIRST && item_->type < ITM_ARMOR_BODY_LAST)
 	{
 		int armour_image_ = GetArmourImageIndex((armour_kind)item_->value5);
+		material_kind material_ = (material_kind)(item_->type-ITM_ARMOR_BODY_ARMOUR_0);
 		if(armour_image_ >= 0)
 		{
-			material_kind material_ = (material_kind)(item_->type-ITM_ARMOR_BODY_ARMOUR_0);
 			item_->image = &img_item_artifact_armor_special[armour_image_][material_];
 			item_->equip_image = &img_play_item_artifact_body[armour_image_];
+		}
+		else if((armour_kind)item_->value5 == AMK_NORMAL)
+		{
+			item_->image = material_ == MTK_PLATE ? &img_item_artifact_armor_armour_3 :
+				material_ == MTK_CHAIN ? &img_item_artifact_armor_armour_2 :
+				material_ == MTK_LEATHER ? &img_item_artifact_armor_armour_1 : &img_item_artifact_armor_armour_0;
 		}
 	}
 	else if(item_->type == ITM_ARMOR_CLOAK)

@@ -7244,6 +7244,8 @@ bool players::unequip(equip_type type_, bool force_)
 				PlaceHolderHelper(equipment[type_]->GetName(), equipment[type_]->item_color()));
 		}
 		equipment[type_] = NULL;
+		if(GetArtifactProperty(ART_PERMAINVI) > 0)
+			s_invisible = -1;
 		ReSetASPanlty();
 		ReleaseMutex(mutx);
 		if(!force_)

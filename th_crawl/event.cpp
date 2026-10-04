@@ -381,7 +381,7 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	return 0;
 	case EVL_SCARLET_UNDER:
 	{
-		scarlet_under_count(current_level, event_, DG_FLOOR, DG_RED_WALL, 5, 16, 3, 5000, 1500, 2, 100, 450, 15, 3);
+		scarlet_under_count(current_level, event_, DG_FLOOR, DG_RED_WALL, 5, 16, 3, 5000, 1500, 1, 100, 450, 15, 3);
 	}
 	return 0;
 	case EVL_SCARLET_UNDER_REWARD:

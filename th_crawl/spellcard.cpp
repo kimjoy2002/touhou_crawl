@@ -462,7 +462,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				{
 					int turn_ = rand_int(3, 8) + randA(power_ / 5);
 					if(it->isUnique()) {
-						turn_ = max(1,turn_ / 2);
+						turn_ = max(1,turn_ / 3);
 					}
 					it->SetConfuse(turn_);
 				}

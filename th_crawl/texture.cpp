@@ -1690,6 +1690,10 @@ textures img_item_artifact_armor_helmet[6] = {
 	textures(&texture_item04, 115, 255),
 	textures(&texture_item04, 116, 255)
 };
+textures img_item_artifact_armor_armour_0(&texture_item04, 117, 255);
+textures img_item_artifact_armor_armour_1(&texture_item04, 118, 255);
+textures img_item_artifact_armor_armour_2(&texture_item04, 119, 255);
+textures img_item_artifact_armor_armour_3(&texture_item04, 120, 255);
 
 textures img_item_autumn_armour[] =
 {	
@@ -4693,6 +4697,14 @@ int texturetoint(textures* input)
 		return 841;
 	else if(input == &img_play_item_artifact_hat[5])
 		return 842;
+	else if(input == &img_item_artifact_armor_armour_0)
+		return 843;
+	else if(input == &img_item_artifact_armor_armour_1)
+		return 844;
+	else if(input == &img_item_artifact_armor_armour_2)
+		return 845;
+	else if(input == &img_item_artifact_armor_armour_3)
+		return 846;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -6404,6 +6416,14 @@ textures* inttotexture(int input)
 		return &img_play_item_artifact_hat[4];
 	case 842:
 		return &img_play_item_artifact_hat[5];
+	case 843:
+		return &img_item_artifact_armor_armour_0;
+	case 844:
+		return &img_item_artifact_armor_armour_1;
+	case 845:
+		return &img_item_artifact_armor_armour_2;
+	case 846:
+		return &img_item_artifact_armor_armour_3;
 	default:
 		return &img_mons_default;
 	}

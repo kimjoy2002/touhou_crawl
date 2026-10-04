@@ -5636,7 +5636,7 @@ LOC_SYSTEM_TILE_CARPET,カーペット
 LOC_SYSTEM_ITEM_FOOD_CAKE,ケーキ
 LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE,紅魔館の地下室にあったケーキの一切れ。\nこのケーキは美味しそうだが、出所が怪しい。\n本当に食べてもいいのだろうか？
 LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE_VAMPIRE,紅魔館の地下室にあったケーキの一切れ。\nこのケーキは美味しそうだが、出所が怪しい。\nケーキから我慢できないほど美味しそうな匂いがする！
-LOC_SYSTEM_UNIQUE_SPELLCARD_FOUND,{0}はスペルカードを持っている。反撃に注意せよ！
+LOC_SYSTEM_UNIQUE_SPELLCARD_FOUND,{0}はスペルカードを持っている。撃破後のスペルカード発動に注意せよ！
 LOC_SYSTEM_UNIQUE_SPELLCARD_ACTIVATE,{0}のスペルカード発動！
 LOC_SYSTEM_UNIQUE_SPELLCARD_GET,{0}のスペルカード取得！
 LOC_SYSTEM_UNIQUE_SPELLCARD_STAIR_BLOCK,スペルカードが別の階への移動を阻んでいる！

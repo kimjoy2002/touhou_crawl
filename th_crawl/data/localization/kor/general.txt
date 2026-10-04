@@ -5636,7 +5636,7 @@ LOC_SYSTEM_TILE_CARPET,카펫
 LOC_SYSTEM_ITEM_FOOD_CAKE,케이크
 LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE,홍마관 지하실에 있던 케이크 한조각.\n이 케이크는 먹음직스러워보이지만, 출처가 수상해보인다.\n정말 먹어도 되는걸까?
 LOC_SYSTEM_ITEM_DESCRIPTION_FOOD_CAKE_VAMPIRE,홍마관 지하실에 있던 케이크 한조각.\n이 케이크는 먹음직스러워보이지만, 출처가 수상해보인다.\n케이크에서 참을 수 없을 정도로 맛있는 냄새가 난다!
-LOC_SYSTEM_UNIQUE_SPELLCARD_FOUND,{0:은|는} 스펠카드를 들고 있다. 저항에 주의하라!
+LOC_SYSTEM_UNIQUE_SPELLCARD_FOUND,{0:은|는} 스펠카드를 들고 있다. 적 처치 후 스펠카드 발동에 주의하라!
 LOC_SYSTEM_UNIQUE_SPELLCARD_ACTIVATE,{0}의 스펠카드 발동!
 LOC_SYSTEM_UNIQUE_SPELLCARD_GET,{0}의 스펠카드 획득!
 LOC_SYSTEM_UNIQUE_SPELLCARD_STAIR_BLOCK,스펠카드가 다른 층으로 이동하는 것을 막고 있다!

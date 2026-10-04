@@ -1,5 +1,25 @@
 
 ---------------------------------------------------------------------
+§c beta patch – ver1.301 (2026-10-05)§d
+---------------------------------------------------------------------
+
+§y* Balance Adjustments§d
+ * Reduced the Giant Toad's attack damage from 25 to 20.
+ * Reduced the Tsuchinoko's attack damage from 35 to 34 and slightly slowed its actions.
+ * Increased Rapid Freeze's base damage by 2.
+ * Fire attacks now halve the remaining duration of Cold Armour.
+ * Further reduced the confusion duration inflicted on unique monsters by the Sun Spell Card to one-third of the normal duration.
+ * Increased the chance of Flandre's room appearing in the Scarlet Basement.
+
+§y* Gameplay & Interface Improvements§d
+ * Added distinct artifact sprites for ordinary cloth, leather, chain, and plate armour.
+
+§y* Bug Fixes§d
+ * Fixed Shock sometimes failing to detect conductive targets within its stated range.
+ * Fixed Ctrl+G branch travel continuing toward the first floor after entering the selected branch.
+
+
+---------------------------------------------------------------------
 §c beta patch – ver1.210 (2026-10-04)§d
 ---------------------------------------------------------------------
 

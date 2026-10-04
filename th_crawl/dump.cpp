@@ -344,6 +344,7 @@ void GetDeathReason(stringstream& death_reason, damage_reason dead_reason, int a
 				break;
 			case ATT_POISON_BLAST:
 			case ATT_POISON_ENCHANT_BLAST:
+			case ATT_POISON_BODY:
 				if (hasmonster) {
 					death_reason << LocalzationManager::formatString(LOC_SYSTEM_DUMP_DEATHREASON_POISON_BY, PlaceHolderHelper(CurrentLevelString(level, ziggurat_level)), PlaceHolderHelper(temp_reason.str()));
 				} else {

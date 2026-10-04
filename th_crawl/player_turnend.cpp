@@ -261,16 +261,52 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	}
 	if(alchemy_buff == ALCT_POISON_BODY)
 	{
+		vector<pair<int, int>> poison_body_targets_;
+		int poison_body_ticks_ = max(0, delay_) / 10;
+		const int poison_body_remainder_ = max(0, delay_) % 10;
+		if(poison_body_remainder_ > 0 && randA(9) < poison_body_remainder_)
+			poison_body_ticks_++;
 		for(auto it = env[current_level].mon_vector.begin();it != env[current_level].mon_vector.end(); it++)
 		{
-			if((you.position.x-it->position.x)*(you.position.x-it->position.x)+(you.position.y-it->position.y)*(you.position.y-it->position.y)<=2)
-			{		
-				if(!it->isUserAlly())
-					it->SetPoison(5+randA(5), 50, false);
+			if(it->isLive() && you.isEnemyUnit(&(*it)) &&
+				(you.position.x-it->position.x)*(you.position.x-it->position.x)+(you.position.y-it->position.y)*(you.position.y-it->position.y)<=2)
+				poison_body_targets_.push_back(make_pair(it->GetMapId(),
+					it->GetPoisonResist() - (it->s_vulun_poison > 0 ? 1 : 0)));
+		}
+		ReleaseMutex(mutx);
+		for(const auto& target_ : poison_body_targets_)
+		{
+			unit* unit_ = env[current_level].GetMapIDtoUnit(target_.first);
+			if(!unit_ || unit_->isplayer() || !unit_->isLive() || !you.isEnemyUnit(unit_))
+				continue;
+			monster* mon_ = static_cast<monster*>(unit_);
+			if((you.position.x-mon_->position.x)*(you.position.x-mon_->position.x)+
+				(you.position.y-mon_->position.y)*(you.position.y-mon_->position.y)>2)
+				continue;
+
+			if(poison_body_ticks_ > 0 && target_.second <= 0)
+			{
+				const int min_damage_ = target_.second < 0 ? 2 : 1;
+				const int max_damage_ = target_.second < 0 ? 4 : 3;
+				int damage_ = 0;
+				for(int i = 0; i < poison_body_ticks_; i++)
+					damage_ += rand_int(min_damage_, max_damage_);
+				attack_infor attack_infor_(damage_, max_damage_*poison_body_ticks_, 99,
+					&you, you.GetParentType(), ATT_POISON_BODY, name_infor(LOC_SYSTEM_ATT_POISON));
+				mon_->damage(attack_infor_, true);
 			}
+
+			unit_ = env[current_level].GetMapIDtoUnit(target_.first);
+			if(!unit_ || unit_->isplayer() || !unit_->isLive() || !you.isEnemyUnit(unit_))
+				continue;
+			mon_ = static_cast<monster*>(unit_);
+			if((you.position.x-mon_->position.x)*(you.position.x-mon_->position.x)+
+				(you.position.y-mon_->position.y)*(you.position.y-mon_->position.y)<=2)
+				mon_->SetPoison(5+randA(5), 50, false);
 		}
 	}
-	ReleaseMutex(mutx);
+	else
+		ReleaseMutex(mutx);
 	if(alchemy_buff == ALCT_PHILOSOPHERS_STONE)
 	{
 		int sight_mon_ = env[current_level].insight_mon(MET_ENEMY);

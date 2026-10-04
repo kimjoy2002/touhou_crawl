@@ -1,5 +1,37 @@
 
 ---------------------------------------------------------------------
+§c beta patch – ver1.210 (2026-10-04)§d
+---------------------------------------------------------------------
+
+§y* Feature Additions§d
+ * Added two new spells.
+  * Added Glacier Wall, a level 3 Cold spell that summons a stationary glacier wall on an adjacent tile.
+   * Glacier walls block movement and projectiles from both allies and enemies.
+  * Added Cold Armour, a level 4 Cold/Alchemy spell that grants AC for a limited time and deals explosive cold damage nearby when it expires.
+   * As an Alchemy buff, it grants 10–20 AC based on spell power. When it expires, it deals explosive cold damage within 1 tile.
+   * If you take damage equal to at least 25% of your maximum HP while it is active, the explosion radius increases to 2 tiles.
+
+§y* Balance Adjustments§d
+ * Reduced the Tornado Elemental's HP and attack damage, and shortened the duration of its counterattack Homing Danmaku.
+ * Reduced the base damage of the level 4 spell Laser by 1.
+ * Reduced the spawn rate of accessories on early floors.
+ * Changed Dragon God's Wrath: it must now target an enemy, but has less randomness and prioritizes electrically conductive enemies within its area.
+ * Increased Rapid Freeze's spell level by 1 and its maximum spell power from 75 to 100.
+ * Removed Frost Cloud from the Beginner's Cryomancy Book and added Glacier Wall and Cold Armour.
+ * Removed Summon Golem from the Beginner's Alchemy Book and added Cold Armour.
+ * Poison Body now deals a small amount of AC-ignoring damage each turn to adjacent enemies.
+
+§y* Gameplay & Interface Improvements§d
+ * Improved the sprites for armour types that come in multiple materials.
+
+§y* Bug Fixes§d
+ * Fixed a crash when reflecting Koishi's Self Injury damage.
+ * Fixed Wolf Tengu appearing in the Arena.
+ * Fixed monsters using cold resistance instead of electric resistance for certain electrical damage.
+ * Fixed attacks occasionally being blocked by the player's body even at 0 SH.
+
+
+---------------------------------------------------------------------
 §c beta patch – ver1.209 (2026-10-02)§d
 ---------------------------------------------------------------------
 

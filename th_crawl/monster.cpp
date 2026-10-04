@@ -1264,6 +1264,7 @@ int monster::calculate_damage(attack_type &type_, int atk, int max_atk, int back
 	case ATT_BLOOD:
 	case ATT_BURST:
 	case ATT_DROWNING:
+	case ATT_POISON_BODY:
 		break;
 	}
 
@@ -1627,6 +1628,7 @@ void monster::print_damage_message(attack_infor &a, bool back_stab)
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_DROWNING_MONSTER,false,false,false,CL_normal,
 				PlaceHolderHelper(GetName()->getName()));
 			break;
+		case ATT_POISON_BODY:
 		case ATT_THROW_NONE_MASSAGE:
 			break;
 		}

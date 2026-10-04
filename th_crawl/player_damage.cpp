@@ -567,6 +567,7 @@ int players::calculate_damage(attack_type &type_, int atk, int max_atk)
 	case ATT_BLOOD:	
 	case ATT_BURST:
 	case ATT_DROWNING:
+	case ATT_POISON_BODY:
 		break;
 	}
 
@@ -951,6 +952,7 @@ void players::print_damage_message(attack_infor &a, bool damaged_)
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_HIT_DROWNING,false,false,false,CL_normal,
 			PlaceHolderHelper(GetName()->getName()));
 		break;
+	case ATT_POISON_BODY:
 	case ATT_THROW_NONE_MASSAGE:
 		break;
 	}			
@@ -1095,7 +1097,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 		name_ = (*a.order->GetName());
 	if((randA(1000)>=evasion*1000 && !graze_ && !you.s_super_graze && !diving_graze) || perfect_)
 	{	
-		if(randA(1000)>shield_*1000 || perfect_)
+		if(randA(1000)>shield_*1000 || shield_ <= 0.0f || perfect_)
 		{
 			if (env[current_level].isSanctuary(position) || s_evoke_ghost)
 			{

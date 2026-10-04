@@ -6306,10 +6306,16 @@ bool players::PunishUpDown(int punish_, god_type god_ , bool absolutely_ )
 
 bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_, beam_iterator& beam)
 {
-	//던질때 장비된 아이템이면 장비가 풀리도록 만들어야함
-	//저주받은 템은 던질 수 없다!
 	if((*it).can_throw)
 	{
+		equip_type equipped_slot_ = getequipslot(&(*it));
+		if(equipped_slot_ != ET_LAST && (*it).curse)
+		{
+			(*it).identify_curse = true;
+			printlog(LocalzationManager::locString(LOC_SYSTEM_CURSED_PENALTY),true,false,false,CL_normal);
+			return false;
+		}
+
 		EndDive();
 		
 		bool kiku_ = ((*it).type >= ITM_THROW_FIRST && (*it).type < ITM_THROW_LAST && (*it).value4 == TMT_KIKU_COMPRESSER);
@@ -6348,6 +6354,10 @@ bool players::Throw(list<item>::iterator it, coord_def target_pos_, bool short_,
 			if((*it).value5)
 				temp_infor.type2 = GetWeapontoTanmac((weapon_brand)(*it).value5);
 		}
+
+		// 장착한 무기를 던질 때 장비 효과를 남기지 않고 즉시 해제한다.
+		if(equipped_slot_ != ET_LAST)
+			unequip(equipped_slot_, true);
 
 		if(kiku_)
 		{ //키쿠이치 컴프레서 전용

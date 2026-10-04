@@ -17,6 +17,7 @@
 §y* Bug Fixes§d
  * Fixed Shock sometimes failing to detect conductive targets within its stated range.
  * Fixed Ctrl+G branch travel continuing toward the first floor after entering the selected branch.
+ * Fixed equipped throwable artifacts retaining and repeatedly stacking their stat bonuses when thrown.
 
 
 ---------------------------------------------------------------------

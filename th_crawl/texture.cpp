@@ -1619,6 +1619,27 @@ textures img_play_item_fixed_artifact[33] = {
 	textures(&texture_players01, 353),//32, 카우걸 부츠
 };
 
+textures img_play_item_artifact_cloak(&texture_players01, 98);
+textures img_play_item_artifact_glove(&texture_players01, 129);
+textures img_play_item_artifact_boot(&texture_players01, 161);
+// 날개옷, 캇파옷, 불쥐옷, 메이드옷, 인형옷, 무녀옷
+textures img_play_item_artifact_body[6] = {
+	textures(&texture_players01, 210),
+	textures(&texture_players01, 211),
+	textures(&texture_players01, 212),
+	textures(&texture_players01, 213),
+	textures(&texture_players01, 214),
+	textures(&texture_players01, 209)
+};
+textures img_play_item_artifact_hat[6] = {
+	textures(&texture_players01, 232),
+	textures(&texture_players01, 233),
+	textures(&texture_players01, 234),
+	textures(&texture_players01, 235),
+	textures(&texture_players01, 236),
+	textures(&texture_players01, 237)
+};
+
 
 
 
@@ -1640,6 +1661,35 @@ textures img_item_armor_armour_0(&texture_item01, 136, 255);
 textures img_item_armor_armour_1(&texture_item01, 137, 255);
 textures img_item_armor_armour_2(&texture_item01, 138, 255);
 textures img_item_armor_armour_3(&texture_item01, 139, 255);
+
+// 날개옷, 캇파옷, 불쥐옷, 메이드옷, 인형옷, 무녀옷 (천, 가죽, 사슬, 판금)
+textures img_item_armor_special[6][4] = {
+	{textures(&texture_item04, 60, 255), textures(&texture_item04, 61, 255), textures(&texture_item04, 62, 255), textures(&texture_item04, 63, 255)},
+	{textures(&texture_item04, 64, 255), textures(&texture_item04, 65, 255), textures(&texture_item04, 66, 255), textures(&texture_item04, 67, 255)},
+	{textures(&texture_item04, 68, 255), textures(&texture_item04, 69, 255), textures(&texture_item04, 70, 255), textures(&texture_item04, 71, 255)},
+	{textures(&texture_item04, 72, 255), textures(&texture_item04, 73, 255), textures(&texture_item04, 74, 255), textures(&texture_item04, 75, 255)},
+	{textures(&texture_item04, 76, 255), textures(&texture_item04, 77, 255), textures(&texture_item04, 78, 255), textures(&texture_item04, 79, 255)},
+	{textures(&texture_item04, 80, 255), textures(&texture_item04, 81, 255), textures(&texture_item04, 82, 255), textures(&texture_item04, 83, 255)}
+};
+textures img_item_artifact_armor_special[6][4] = {
+	{textures(&texture_item04, 84, 255), textures(&texture_item04, 85, 255), textures(&texture_item04, 86, 255), textures(&texture_item04, 87, 255)},
+	{textures(&texture_item04, 88, 255), textures(&texture_item04, 89, 255), textures(&texture_item04, 90, 255), textures(&texture_item04, 91, 255)},
+	{textures(&texture_item04, 92, 255), textures(&texture_item04, 93, 255), textures(&texture_item04, 94, 255), textures(&texture_item04, 95, 255)},
+	{textures(&texture_item04, 96, 255), textures(&texture_item04, 97, 255), textures(&texture_item04, 98, 255), textures(&texture_item04, 99, 255)},
+	{textures(&texture_item04, 100, 255), textures(&texture_item04, 101, 255), textures(&texture_item04, 102, 255), textures(&texture_item04, 103, 255)},
+	{textures(&texture_item04, 104, 255), textures(&texture_item04, 105, 255), textures(&texture_item04, 106, 255), textures(&texture_item04, 107, 255)}
+};
+textures img_item_artifact_armor_cloak(&texture_item04, 108, 255);
+textures img_item_artifact_armor_glove(&texture_item04, 109, 255);
+textures img_item_artifact_armor_boot(&texture_item04, 110, 255);
+textures img_item_artifact_armor_helmet[6] = {
+	textures(&texture_item04, 112, 255),
+	textures(&texture_item04, 111, 255),
+	textures(&texture_item04, 113, 255),
+	textures(&texture_item04, 114, 255),
+	textures(&texture_item04, 115, 255),
+	textures(&texture_item04, 116, 255)
+};
 
 textures img_item_autumn_armour[] =
 {	
@@ -4498,6 +4548,151 @@ int texturetoint(textures* input)
 		return 769;
 	else if(input == &img_mons_glacier_wall)
 		return 770;
+
+	else if(input == &img_item_armor_special[0][0])
+		return 771;
+	else if(input == &img_item_armor_special[0][1])
+		return 772;
+	else if(input == &img_item_armor_special[0][2])
+		return 773;
+	else if(input == &img_item_armor_special[0][3])
+		return 774;
+	else if(input == &img_item_armor_special[1][0])
+		return 775;
+	else if(input == &img_item_armor_special[1][1])
+		return 776;
+	else if(input == &img_item_armor_special[1][2])
+		return 777;
+	else if(input == &img_item_armor_special[1][3])
+		return 778;
+	else if(input == &img_item_armor_special[2][0])
+		return 779;
+	else if(input == &img_item_armor_special[2][1])
+		return 780;
+	else if(input == &img_item_armor_special[2][2])
+		return 781;
+	else if(input == &img_item_armor_special[2][3])
+		return 782;
+	else if(input == &img_item_armor_special[3][0])
+		return 783;
+	else if(input == &img_item_armor_special[3][1])
+		return 784;
+	else if(input == &img_item_armor_special[3][2])
+		return 785;
+	else if(input == &img_item_armor_special[3][3])
+		return 786;
+	else if(input == &img_item_armor_special[4][0])
+		return 787;
+	else if(input == &img_item_armor_special[4][1])
+		return 788;
+	else if(input == &img_item_armor_special[4][2])
+		return 789;
+	else if(input == &img_item_armor_special[4][3])
+		return 790;
+	else if(input == &img_item_armor_special[5][0])
+		return 791;
+	else if(input == &img_item_armor_special[5][1])
+		return 792;
+	else if(input == &img_item_armor_special[5][2])
+		return 793;
+	else if(input == &img_item_armor_special[5][3])
+		return 794;
+	else if(input == &img_item_artifact_armor_special[0][0])
+		return 795;
+	else if(input == &img_item_artifact_armor_special[0][1])
+		return 796;
+	else if(input == &img_item_artifact_armor_special[0][2])
+		return 797;
+	else if(input == &img_item_artifact_armor_special[0][3])
+		return 798;
+	else if(input == &img_item_artifact_armor_special[1][0])
+		return 799;
+	else if(input == &img_item_artifact_armor_special[1][1])
+		return 800;
+	else if(input == &img_item_artifact_armor_special[1][2])
+		return 801;
+	else if(input == &img_item_artifact_armor_special[1][3])
+		return 802;
+	else if(input == &img_item_artifact_armor_special[2][0])
+		return 803;
+	else if(input == &img_item_artifact_armor_special[2][1])
+		return 804;
+	else if(input == &img_item_artifact_armor_special[2][2])
+		return 805;
+	else if(input == &img_item_artifact_armor_special[2][3])
+		return 806;
+	else if(input == &img_item_artifact_armor_special[3][0])
+		return 807;
+	else if(input == &img_item_artifact_armor_special[3][1])
+		return 808;
+	else if(input == &img_item_artifact_armor_special[3][2])
+		return 809;
+	else if(input == &img_item_artifact_armor_special[3][3])
+		return 810;
+	else if(input == &img_item_artifact_armor_special[4][0])
+		return 811;
+	else if(input == &img_item_artifact_armor_special[4][1])
+		return 812;
+	else if(input == &img_item_artifact_armor_special[4][2])
+		return 813;
+	else if(input == &img_item_artifact_armor_special[4][3])
+		return 814;
+	else if(input == &img_item_artifact_armor_special[5][0])
+		return 815;
+	else if(input == &img_item_artifact_armor_special[5][1])
+		return 816;
+	else if(input == &img_item_artifact_armor_special[5][2])
+		return 817;
+	else if(input == &img_item_artifact_armor_special[5][3])
+		return 818;
+	else if(input == &img_item_artifact_armor_cloak)
+		return 819;
+	else if(input == &img_item_artifact_armor_glove)
+		return 820;
+	else if(input == &img_item_artifact_armor_boot)
+		return 821;
+	else if(input == &img_item_artifact_armor_helmet[0])
+		return 822;
+	else if(input == &img_item_artifact_armor_helmet[1])
+		return 823;
+	else if(input == &img_item_artifact_armor_helmet[2])
+		return 824;
+	else if(input == &img_item_artifact_armor_helmet[3])
+		return 825;
+	else if(input == &img_item_artifact_armor_helmet[4])
+		return 826;
+	else if(input == &img_item_artifact_armor_helmet[5])
+		return 827;
+	else if(input == &img_play_item_artifact_cloak)
+		return 828;
+	else if(input == &img_play_item_artifact_glove)
+		return 829;
+	else if(input == &img_play_item_artifact_boot)
+		return 830;
+	else if(input == &img_play_item_artifact_body[0])
+		return 831;
+	else if(input == &img_play_item_artifact_body[1])
+		return 832;
+	else if(input == &img_play_item_artifact_body[2])
+		return 833;
+	else if(input == &img_play_item_artifact_body[3])
+		return 834;
+	else if(input == &img_play_item_artifact_body[4])
+		return 835;
+	else if(input == &img_play_item_artifact_body[5])
+		return 836;
+	else if(input == &img_play_item_artifact_hat[0])
+		return 837;
+	else if(input == &img_play_item_artifact_hat[1])
+		return 838;
+	else if(input == &img_play_item_artifact_hat[2])
+		return 839;
+	else if(input == &img_play_item_artifact_hat[3])
+		return 840;
+	else if(input == &img_play_item_artifact_hat[4])
+		return 841;
+	else if(input == &img_play_item_artifact_hat[5])
+		return 842;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -4524,7 +4719,6 @@ textures* inttotexture(int input)
 		int cur = input - 1000;
 		return &img_playable_character[cur / COLOR_NUM][cur % COLOR_NUM];
 	}
-
 	switch(input)
 	{
 	case 1:
@@ -6066,6 +6260,150 @@ textures* inttotexture(int input)
 		return &img_bullet[5];
 	case 770:
 		return &img_mons_glacier_wall;
+	case 771:
+		return &img_item_armor_special[0][0];
+	case 772:
+		return &img_item_armor_special[0][1];
+	case 773:
+		return &img_item_armor_special[0][2];
+	case 774:
+		return &img_item_armor_special[0][3];
+	case 775:
+		return &img_item_armor_special[1][0];
+	case 776:
+		return &img_item_armor_special[1][1];
+	case 777:
+		return &img_item_armor_special[1][2];
+	case 778:
+		return &img_item_armor_special[1][3];
+	case 779:
+		return &img_item_armor_special[2][0];
+	case 780:
+		return &img_item_armor_special[2][1];
+	case 781:
+		return &img_item_armor_special[2][2];
+	case 782:
+		return &img_item_armor_special[2][3];
+	case 783:
+		return &img_item_armor_special[3][0];
+	case 784:
+		return &img_item_armor_special[3][1];
+	case 785:
+		return &img_item_armor_special[3][2];
+	case 786:
+		return &img_item_armor_special[3][3];
+	case 787:
+		return &img_item_armor_special[4][0];
+	case 788:
+		return &img_item_armor_special[4][1];
+	case 789:
+		return &img_item_armor_special[4][2];
+	case 790:
+		return &img_item_armor_special[4][3];
+	case 791:
+		return &img_item_armor_special[5][0];
+	case 792:
+		return &img_item_armor_special[5][1];
+	case 793:
+		return &img_item_armor_special[5][2];
+	case 794:
+		return &img_item_armor_special[5][3];
+	case 795:
+		return &img_item_artifact_armor_special[0][0];
+	case 796:
+		return &img_item_artifact_armor_special[0][1];
+	case 797:
+		return &img_item_artifact_armor_special[0][2];
+	case 798:
+		return &img_item_artifact_armor_special[0][3];
+	case 799:
+		return &img_item_artifact_armor_special[1][0];
+	case 800:
+		return &img_item_artifact_armor_special[1][1];
+	case 801:
+		return &img_item_artifact_armor_special[1][2];
+	case 802:
+		return &img_item_artifact_armor_special[1][3];
+	case 803:
+		return &img_item_artifact_armor_special[2][0];
+	case 804:
+		return &img_item_artifact_armor_special[2][1];
+	case 805:
+		return &img_item_artifact_armor_special[2][2];
+	case 806:
+		return &img_item_artifact_armor_special[2][3];
+	case 807:
+		return &img_item_artifact_armor_special[3][0];
+	case 808:
+		return &img_item_artifact_armor_special[3][1];
+	case 809:
+		return &img_item_artifact_armor_special[3][2];
+	case 810:
+		return &img_item_artifact_armor_special[3][3];
+	case 811:
+		return &img_item_artifact_armor_special[4][0];
+	case 812:
+		return &img_item_artifact_armor_special[4][1];
+	case 813:
+		return &img_item_artifact_armor_special[4][2];
+	case 814:
+		return &img_item_artifact_armor_special[4][3];
+	case 815:
+		return &img_item_artifact_armor_special[5][0];
+	case 816:
+		return &img_item_artifact_armor_special[5][1];
+	case 817:
+		return &img_item_artifact_armor_special[5][2];
+	case 818:
+		return &img_item_artifact_armor_special[5][3];
+	case 819:
+		return &img_item_artifact_armor_cloak;
+	case 820:
+		return &img_item_artifact_armor_glove;
+	case 821:
+		return &img_item_artifact_armor_boot;
+	case 822:
+		return &img_item_artifact_armor_helmet[0];
+	case 823:
+		return &img_item_artifact_armor_helmet[1];
+	case 824:
+		return &img_item_artifact_armor_helmet[2];
+	case 825:
+		return &img_item_artifact_armor_helmet[3];
+	case 826:
+		return &img_item_artifact_armor_helmet[4];
+	case 827:
+		return &img_item_artifact_armor_helmet[5];
+	case 828:
+		return &img_play_item_artifact_cloak;
+	case 829:
+		return &img_play_item_artifact_glove;
+	case 830:
+		return &img_play_item_artifact_boot;
+	case 831:
+		return &img_play_item_artifact_body[0];
+	case 832:
+		return &img_play_item_artifact_body[1];
+	case 833:
+		return &img_play_item_artifact_body[2];
+	case 834:
+		return &img_play_item_artifact_body[3];
+	case 835:
+		return &img_play_item_artifact_body[4];
+	case 836:
+		return &img_play_item_artifact_body[5];
+	case 837:
+		return &img_play_item_artifact_hat[0];
+	case 838:
+		return &img_play_item_artifact_hat[1];
+	case 839:
+		return &img_play_item_artifact_hat[2];
+	case 840:
+		return &img_play_item_artifact_hat[3];
+	case 841:
+		return &img_play_item_artifact_hat[4];
+	case 842:
+		return &img_play_item_artifact_hat[5];
 	default:
 		return &img_mons_default;
 	}

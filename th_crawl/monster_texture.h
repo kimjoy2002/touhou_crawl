@@ -360,6 +360,11 @@ extern textures img_play_item_shield[];
 extern textures img_play_item_weapon[];
 extern textures img_play_item_tribe[];
 extern textures img_play_item_fixed_artifact[];
+extern textures img_play_item_artifact_cloak;
+extern textures img_play_item_artifact_glove;
+extern textures img_play_item_artifact_boot;
+extern textures img_play_item_artifact_body[];
+extern textures img_play_item_artifact_hat[];
 
 
 
@@ -373,6 +378,12 @@ extern textures img_item_armor_armour_0;
 extern textures img_item_armor_armour_1;
 extern textures img_item_armor_armour_2;
 extern textures img_item_armor_armour_3;
+extern textures img_item_armor_special[][4];
+extern textures img_item_artifact_armor_special[][4];
+extern textures img_item_artifact_armor_cloak;
+extern textures img_item_artifact_armor_glove;
+extern textures img_item_artifact_armor_boot;
+extern textures img_item_artifact_armor_helmet[];
 
 extern textures img_item_autumn_armour[];
 

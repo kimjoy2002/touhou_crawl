@@ -63,6 +63,27 @@ LOCALIZATION_ENUM_KEY GetMaterialStringKey(material_kind kind_)
 	return LOC_SYSTEM_ITEM_ARMOUR_M_ROBE;
 }
 
+int GetArmourImageIndex(armour_kind type)
+{
+	switch(type)
+	{
+	case AMK_WING:
+		return 0;
+	case AMK_KAPPA:
+		return 1;
+	case AMK_FIRE:
+		return 2;
+	case AMK_MAID:
+		return 3;
+	case AMK_POISON:
+		return 4;
+	case AMK_MIKO:
+		return 5;
+	default:
+		return -1;
+	}
+}
+
 
 
 void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
@@ -115,7 +136,7 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		break;		
 	case AMK_MIKO:
 	{
-		t->image = &img_item_armor_robe;
+		t->image = &img_item_armor_special[GetArmourImageIndex(type)][material];
 		t->equip_image = &img_play_item_body[10];
 		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_T_MIKO, GetMaterialStringKey(material));
 		t->weight = 6.0f*(material*0.5 + 1);
@@ -123,35 +144,35 @@ void MakeBaseArmour(armour_kind type, material_kind material, item_infor* t)
 		break;
 	}
 	case AMK_WING:
-		t->image = &img_item_armor_relec;
+		t->image = &img_item_armor_special[GetArmourImageIndex(type)][material];
 		t->equip_image = &img_play_item_body[12];
 		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_T_WING, GetMaterialStringKey(material));
 		t->weight = 3.0f*(material*0.5+1);
 		t->value = 80+(material*20);
 		break;		
 	case AMK_KAPPA:
-		t->image = &img_item_armor_rcold;
+		t->image = &img_item_armor_special[GetArmourImageIndex(type)][material];
 		t->equip_image = &img_play_item_body[13];
 		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_T_KAPPA, GetMaterialStringKey(material));
 		t->weight = 8.0f*(material*0.5+1);
 		t->value = 80+(material*20);
 		break;		
 	case AMK_FIRE:
-		t->image = &img_item_armor_rfire;
+		t->image = &img_item_armor_special[GetArmourImageIndex(type)][material];
 		t->equip_image = &img_play_item_body[14];
 		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_T_FIRE, GetMaterialStringKey(material));
 		t->weight = 8.0f*(material*0.5+1);
 		t->value = 80+(material*20);
 		break;		
 	case AMK_MAID:
-		t->image = &img_item_armor_rmagic;
+		t->image = &img_item_armor_special[GetArmourImageIndex(type)][material];
 		t->equip_image = &img_play_item_body[15];
 		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_T_MAID, GetMaterialStringKey(material));
 		t->weight = 8.0f*(material*0.5+1);
 		t->value = 80+(material*20);
 		break;		
 	case AMK_POISON:
-		t->image = &img_item_armor_rpois;
+		t->image = &img_item_armor_special[GetArmourImageIndex(type)][material];
 		t->equip_image = &img_play_item_body[16];
 		t->name = name_infor(LOC_SYSTEM_ITEM_ARMOUR_T_POISON, GetMaterialStringKey(material));
 		t->weight = 6.0f*(material*0.5+1);

@@ -896,6 +896,43 @@ void MakeArtifact(item* item_, int good_bad_, bool cant_fixed)
 	{
 		item_->value4 = randA(item_->value1)+randA(2)+randA(1+good_bad_)-2;
 	}
+	if(item_->type >= ITM_ARMOR_BODY_FIRST && item_->type < ITM_ARMOR_BODY_LAST)
+	{
+		int armour_image_ = GetArmourImageIndex((armour_kind)item_->value5);
+		if(armour_image_ >= 0)
+		{
+			material_kind material_ = (material_kind)(item_->type-ITM_ARMOR_BODY_ARMOUR_0);
+			item_->image = &img_item_artifact_armor_special[armour_image_][material_];
+			item_->equip_image = &img_play_item_artifact_body[armour_image_];
+		}
+	}
+	else if(item_->type == ITM_ARMOR_CLOAK)
+	{
+		item_->image = &img_item_artifact_armor_cloak;
+		item_->equip_image = &img_play_item_artifact_cloak;
+	}
+	else if(item_->type == ITM_ARMOR_GLOVE)
+	{
+		item_->image = &img_item_artifact_armor_glove;
+		item_->equip_image = &img_play_item_artifact_glove;
+	}
+	else if(item_->type == ITM_ARMOR_BOOT)
+	{
+		item_->image = &img_item_artifact_armor_boot;
+		item_->equip_image = &img_play_item_artifact_boot;
+	}
+	else if(item_->type == ITM_ARMOR_HEAD)
+	{
+		for(int i=0;i<6;i++)
+		{
+			if(item_->image == &img_item_armor_helmet[i])
+			{
+				item_->image = &img_item_artifact_armor_helmet[i];
+				item_->equip_image = &img_play_item_artifact_hat[i];
+				break;
+			}
+		}
+	}
 
 	if (item_->type >= ITM_WEAPON_FIRST && item_->type<ITM_WEAPON_LAST)
 	{

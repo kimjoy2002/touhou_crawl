@@ -15,6 +15,7 @@
 #include "joypad.h"
 #include "key.h"
 #include "soundmanager.h"
+#include "keyconfig.h"
 #include <wrl/client.h>
 #include <imm.h>
 #include <XInput.h>
@@ -28,6 +29,10 @@ steady_clock::time_point g_button_press_time[6] = {};
 SHORT g_gamepad_xlx[2];
 SHORT g_gamepad_xly[2];
 boolean g_gamepad_on[2];
+bool g_dash_modifier_active = false;
+bool g_dash_modifier_used = false;
+bool g_prev_dash_modifier_active = false;
+char g_prev_dash_direction = 0;
 steady_clock::time_point g_repeat_start_time[6] = {};
 steady_clock::time_point g_last_repeat_emit[6] = {};
 WORD prev_buttons;
@@ -52,6 +57,86 @@ constexpr bool ENABLE_REPEAT_FOR[6] = {
     true  // RB
 };
 
+static char GamepadDirectionFromStick(SHORT x, SHORT y)
+{
+	if(abs(x) <= XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE && abs(y) <= XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE)
+		return 0;
+	float angle = atan2f(static_cast<float>(y), static_cast<float>(x));
+	if(angle >= -3.14159f * 7 / 8 && angle < -3.14159f * 5 / 8) return 'b';
+	if(angle >= -3.14159f * 5 / 8 && angle < -3.14159f * 3 / 8) return 'j';
+	if(angle >= -3.14159f * 3 / 8 && angle < -3.14159f * 1 / 8) return 'n';
+	if(angle >= -3.14159f * 1 / 8 && angle <  3.14159f * 1 / 8) return 'l';
+	if(angle >=  3.14159f * 1 / 8 && angle <  3.14159f * 3 / 8) return 'u';
+	if(angle >=  3.14159f * 3 / 8 && angle <  3.14159f * 5 / 8) return 'k';
+	if(angle >=  3.14159f * 5 / 8 && angle <  3.14159f * 7 / 8) return 'y';
+	return 'h';
+}
+
+static char GamepadDirectionFromDpad(WORD buttons)
+{
+	bool up = (buttons & XINPUT_GAMEPAD_DPAD_UP) != 0;
+	bool down = (buttons & XINPUT_GAMEPAD_DPAD_DOWN) != 0;
+	bool left = (buttons & XINPUT_GAMEPAD_DPAD_LEFT) != 0;
+	bool right = (buttons & XINPUT_GAMEPAD_DPAD_RIGHT) != 0;
+	if(up == down) up = down = false;
+	if(left == right) left = right = false;
+	if(up && left) return 'y';
+	if(up && right) return 'u';
+	if(down && left) return 'b';
+	if(down && right) return 'n';
+	if(up) return 'k';
+	if(down) return 'j';
+	if(left) return 'h';
+	if(right) return 'l';
+	return 0;
+}
+
+static char DashDirection(char direction)
+{
+	switch(direction)
+	{
+	case 'k': return 'K'; case 'j': return 'J';
+	case 'h': return 'H'; case 'l': return 'L';
+	case 'b': return 'B'; case 'n': return 'N';
+	case 'y': return 'Y'; case 'u': return 'U';
+	default: return 0;
+	}
+}
+
+static void PushGamepadDirection(char direction, bool dash)
+{
+	char key = dash ? DashDirection(direction) : direction;
+	if(!key)
+		return;
+	MSG fake_msg = {};
+	fake_msg.message = GAMEPAD_DIRECTION_MESSAGE;
+	fake_msg.wParam = key;
+	g_keyQueue->push(fake_msg);
+}
+
+static bool IsDashModifierPhysicalKey(int short_key, int long_key = 0)
+{
+	return keybind_mg.is_gamepad_dash_key(short_key) ||
+		(long_key != 0 && keybind_mg.is_gamepad_dash_key(long_key));
+}
+
+static bool IsDashModifierDown(const XINPUT_STATE& state)
+{
+	WORD buttons = state.Gamepad.wButtons;
+	for(int i = 0; i < 6; ++i)
+		if(IsDashModifierPhysicalKey(SHORT_KEYS[i], LONG_KEYS[i]) && (buttons & BUTTON_MASKS[i]))
+			return true;
+	if(IsDashModifierPhysicalKey(GVK_LT) && state.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
+		return true;
+	if(IsDashModifierPhysicalKey(GVK_RT) && state.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD)
+		return true;
+	if(IsDashModifierPhysicalKey(GVK_BACK) && (buttons & XINPUT_GAMEPAD_BACK))
+		return true;
+	if(IsDashModifierPhysicalKey(GVK_START) && (buttons & XINPUT_GAMEPAD_START))
+		return true;
+	return false;
+}
+
 bool joypadUtil::isUsingPad() {
     if(option_mg.getInputPrompt() == 0) {
         return usingPad;
@@ -72,51 +157,37 @@ std::string joypadUtil::get(const std::string& kbKey, wchar_t gamepadKey, Prompt
     if (!isUsingPad())
         return kbKey;
 
+    gamepadKey = static_cast<wchar_t>(keybind_mg.physical_gamepad_key(gamepadKey));
+	std::string result = getRawGamepad(gamepadKey);
+	return result.empty() ? kbKey : result;
+}
+
+std::string joypadUtil::getRawGamepad(wchar_t gamepadKey) {
     GamepadType type = steam_mg.getCurrentGamepadType();
 
     switch (gamepadKey) {
     case GVK_BUTTON_A:
     case GVK_BUTTON_A_LONG:
     {
-        string key_;
-        switch (type) {
-        case GAMEPAD_PS: key_ = "[x]";
-        case GAMEPAD_NINTENDO: key_ = "[B]";
-        default: key_ = "[A]";
-        }
+		string key_ = type == GAMEPAD_PS ? "[x]" : type == GAMEPAD_NINTENDO ? "[B]" : "[A]";
         return gamepadKey==GVK_BUTTON_A_LONG?(LocalzationManager::formatString(LOC_SYSTEM_JOYPAD_HOLD,PlaceHolderHelper(key_))):key_;
     }
     case GVK_BUTTON_B:
     case GVK_BUTTON_B_LONG:
     {
-        string key_;
-        switch (type) {
-        case GAMEPAD_PS: key_ = "[○]";
-        case GAMEPAD_NINTENDO: key_ = "[A]";
-        default: key_ = "[B]";
-        }
+		string key_ = type == GAMEPAD_PS ? "[○]" : type == GAMEPAD_NINTENDO ? "[A]" : "[B]";
         return gamepadKey==GVK_BUTTON_B_LONG?(LocalzationManager::formatString(LOC_SYSTEM_JOYPAD_HOLD,PlaceHolderHelper(key_))):key_;
     }
     case GVK_BUTTON_X:
     case GVK_BUTTON_X_LONG:
     {
-        string key_;
-        switch (type) {
-        case GAMEPAD_PS: key_ = "[□]";
-        case GAMEPAD_NINTENDO: key_ = "[Y]";
-        default: key_ = "[X]";
-        }
+		string key_ = type == GAMEPAD_PS ? "[□]" : type == GAMEPAD_NINTENDO ? "[Y]" : "[X]";
         return gamepadKey==GVK_BUTTON_X_LONG?(LocalzationManager::formatString(LOC_SYSTEM_JOYPAD_HOLD,PlaceHolderHelper(key_))):key_;
     }
     case GVK_BUTTON_Y:
     case GVK_BUTTON_Y_LONG:
     {
-        string key_;
-        switch (type) {
-        case GAMEPAD_PS: key_ = "[△]";
-        case GAMEPAD_NINTENDO: key_ = "[X]";
-        default: key_ = "[Y]";
-        }
+		string key_ = type == GAMEPAD_PS ? "[△]" : type == GAMEPAD_NINTENDO ? "[X]" : "[Y]";
         return gamepadKey==GVK_BUTTON_Y_LONG?(LocalzationManager::formatString(LOC_SYSTEM_JOYPAD_HOLD,PlaceHolderHelper(key_))):key_;
     }
     case GVK_LEFT_BUMPER:
@@ -138,14 +209,22 @@ std::string joypadUtil::get(const std::string& kbKey, wchar_t gamepadKey, Prompt
         return (type == GAMEPAD_PS) ? "[Options]" : "[Start]";
 
     default:
-        return kbKey;
+		return "";
     }
 }
 
 void ClickKey(wchar_t key)
 {
-	if(key == GVK_BUTTON_A) {
+	if(keybind_mg.gamepad_command_for_physical(key) == GVK_BUTTON_A) {
 		if(g_gamepad_on[0]) {
+			if(g_dash_modifier_used)
+				return;
+			if(g_dash_modifier_active)
+			{
+				PushGamepadDirection(GamepadDirectionFromStick(g_gamepad_xlx[0], g_gamepad_xly[0]), true);
+				g_dash_modifier_used = true;
+				return;
+			}
 			float angle = atan2f((float)g_gamepad_xly[0], (float)g_gamepad_xlx[0]); // 라디안: -π ~ π
 
 			// 8방향 분할
@@ -161,7 +240,7 @@ void ClickKey(wchar_t key)
 
 			if (vi_key) {
 				MSG fake_msg = {};
-				fake_msg.message = WM_CHAR;
+				fake_msg.message = GAMEPAD_DIRECTION_MESSAGE;
 				fake_msg.wParam = vi_key;
 				g_keyQueue->push(fake_msg);
 			}
@@ -205,17 +284,29 @@ void ProcessGamepadInput()
 		else 
 			g_gamepad_on[1] = false;
 
+		g_dash_modifier_active = IsDashModifierDown(state);
+		char dash_direction = GamepadDirectionFromStick(g_gamepad_xlx[0], g_gamepad_xly[0]);
+		if(!dash_direction)
+			dash_direction = GamepadDirectionFromDpad(buttons);
+		if(g_dash_modifier_active && dash_direction &&
+			(!g_prev_dash_modifier_active || dash_direction != g_prev_dash_direction))
+		{
+			PushGamepadDirection(dash_direction, true);
+			g_dash_modifier_used = true;
+		}
+
         // ABXY 버튼 처리 (짧게/길게)
         for (int i = 0; i < 6; ++i) {
             bool now_pressed = (buttons & BUTTON_MASKS[i]);
             bool was_pressed = (prev_buttons & BUTTON_MASKS[i]);
+			bool dash_modifier_button = IsDashModifierPhysicalKey(SHORT_KEYS[i], LONG_KEYS[i]);
 
 			if (now_pressed && was_pressed && g_button_press_time[i].time_since_epoch().count()!= 0) {
 				auto now = steady_clock::now();
 				auto held_duration = duration_cast<milliseconds>(now - g_button_press_time[i]).count();
 				
 				// 최초 반복 조건 충족
-				if (held_duration >= LONG_PRESS_THRESHOLD_MS) {
+				if (held_duration >= LONG_PRESS_THRESHOLD_MS && !(dash_modifier_button && g_dash_modifier_used)) {
                     if(ENABLE_REPEAT_FOR[i] || (i == 0 && g_gamepad_on[0]) ) {
                         //반복입력 가능한 키는 스틱+a(특수처리) 와 l1, r1
                         auto since_last_emit = duration_cast<milliseconds>(now - g_last_repeat_emit[i]).count();
@@ -242,42 +333,42 @@ void ProcessGamepadInput()
                 auto duration = duration_cast<milliseconds>(now - g_button_press_time[i]).count();
                 g_button_press_time[i] = steady_clock::time_point();
                 g_last_repeat_emit[i] = steady_clock::time_point();
-                if(duration < LONG_PRESS_THRESHOLD_MS) {
+                if(duration < LONG_PRESS_THRESHOLD_MS && !(dash_modifier_button && g_dash_modifier_used)) {
                     ClickKey(SHORT_KEYS[i]);
                 }
             }
         }
 
-        if (buttons & XINPUT_GAMEPAD_DPAD_UP && !(prev_buttons & XINPUT_GAMEPAD_DPAD_UP)) {
+        if (!g_dash_modifier_active && (buttons & XINPUT_GAMEPAD_DPAD_UP) && !(prev_buttons & XINPUT_GAMEPAD_DPAD_UP)) {
 			MSG fake_msg = {};
-			fake_msg.message = WM_CHAR;
+			fake_msg.message = GAMEPAD_DPAD_MESSAGE;
 			fake_msg.wParam = VK_UP;
 			g_keyQueue->push(fake_msg);
 		}
 
-        if (buttons & XINPUT_GAMEPAD_DPAD_DOWN && !(prev_buttons & XINPUT_GAMEPAD_DPAD_DOWN)) {
+        if (!g_dash_modifier_active && (buttons & XINPUT_GAMEPAD_DPAD_DOWN) && !(prev_buttons & XINPUT_GAMEPAD_DPAD_DOWN)) {
 			MSG fake_msg = {};
-			fake_msg.message = WM_CHAR;
+			fake_msg.message = GAMEPAD_DPAD_MESSAGE;
 			fake_msg.wParam = VK_DOWN;
 			g_keyQueue->push(fake_msg);
 		}
 
-        if (buttons & XINPUT_GAMEPAD_DPAD_LEFT && !(prev_buttons & XINPUT_GAMEPAD_DPAD_LEFT)) {
+        if (!g_dash_modifier_active && (buttons & XINPUT_GAMEPAD_DPAD_LEFT) && !(prev_buttons & XINPUT_GAMEPAD_DPAD_LEFT)) {
 			MSG fake_msg = {};
-			fake_msg.message = WM_CHAR;
+			fake_msg.message = GAMEPAD_DPAD_MESSAGE;
 			fake_msg.wParam = VK_LEFT;
 			g_keyQueue->push(fake_msg);
 		}
 
-        if (buttons & XINPUT_GAMEPAD_DPAD_RIGHT && !(prev_buttons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
+        if (!g_dash_modifier_active && (buttons & XINPUT_GAMEPAD_DPAD_RIGHT) && !(prev_buttons & XINPUT_GAMEPAD_DPAD_RIGHT)) {
 			MSG fake_msg = {};
-			fake_msg.message = WM_CHAR;
+			fake_msg.message = GAMEPAD_DPAD_MESSAGE;
 			fake_msg.wParam = VK_RIGHT;
 			g_keyQueue->push(fake_msg);
 		}
 		
         bool now_lt = state.Gamepad.bLeftTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD;
-        if (now_lt && !prev_lt) {
+        if (now_lt && !prev_lt && !(g_dash_modifier_active && IsDashModifierPhysicalKey(GVK_LT))) {
             MSG fake_msg = {};
             fake_msg.message = WM_CHAR;
             fake_msg.wParam = GVK_LT;
@@ -286,7 +377,7 @@ void ProcessGamepadInput()
         prev_lt = now_lt;
 
         bool now_rt = state.Gamepad.bRightTrigger > XINPUT_GAMEPAD_TRIGGER_THRESHOLD;
-        if (now_rt && !prev_rt) {
+        if (now_rt && !prev_rt && !(g_dash_modifier_active && IsDashModifierPhysicalKey(GVK_RT))) {
             MSG fake_msg = {};
             fake_msg.message = WM_CHAR;
             fake_msg.wParam = GVK_RT;
@@ -294,6 +385,10 @@ void ProcessGamepadInput()
         }
         prev_rt = now_rt;
         
+		g_prev_dash_modifier_active = g_dash_modifier_active;
+		g_prev_dash_direction = g_dash_modifier_active ? dash_direction : 0;
 		prev_buttons = buttons;
+		if(!g_dash_modifier_active)
+			g_dash_modifier_used = false;
     }
 }

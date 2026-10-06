@@ -13,6 +13,7 @@
 #include "replay.h"
 #include "steam_api.h"
 #include "crash_dump.h"
+#include "keyconfig.h"
 #include <conio.h>
 #include <windows.h>
 #include <string>
@@ -88,7 +89,24 @@ int waitkeyinput_inter(InputedKey& inputedKey, bool direction_, bool immedity_, 
 		if(inputedKey.mouse == MKIND_NONE) {
 
 			MSG msg = inputedKey.key;
-			if(msg.message == WM_CHAR)
+			if(msg.message == GAMEPAD_DIRECTION_MESSAGE)
+			{
+				return static_cast<int>(msg.wParam);
+			}
+			else if(msg.message == GAMEPAD_DPAD_MESSAGE)
+			{
+				if(direction_)
+					return static_cast<int>(msg.wParam);
+				switch(msg.wParam)
+				{
+				case VK_UP: return 'k';
+				case VK_DOWN: return 'j';
+				case VK_LEFT: return 'h';
+				case VK_RIGHT: return 'l';
+				default: return 0;
+				}
+			}
+			else if(msg.message == WM_CHAR)
 			{
 				if(msg.wParam == 1) //A+컨트롤
 				{
@@ -114,15 +132,31 @@ int waitkeyinput_inter(InputedKey& inputedKey, bool direction_, bool immedity_, 
 			}
 			else if(msg.message == WM_KEYDOWN)
 			{
+				bool shift_down = shift_check || (GetKeyState(VK_SHIFT) & 0x8000) != 0;
 				switch(msg.wParam)
 				{
+				case VK_INSERT:
+				case VK_DELETE:
+				case VK_F1:
+				case VK_F2:
+				case VK_F3:
+				case VK_F4:
+				case VK_F5:
+				case VK_F6:
+				case VK_F7:
+				case VK_F8:
+				case VK_F9:
+				case VK_F10:
+				case VK_F11:
+				case VK_F12:
+					return make_virtual_key_code(static_cast<int>(msg.wParam));
 				case '8':
 					if(direction_ || shift_check) break; //원래는 if(direction_)만있었는데 뭔가 꼬임
 					return (shift_check)?'*':'k';
 				case VK_UP:
 				case VK_NUMPAD8:
 					if(direction_) return VK_UP;
-					return (shift_check) ? 'K' : 'k';
+					return shift_down ? 'K' : 'k';
 					break;
 				case '4':
 					if(direction_ || shift_check) break;
@@ -130,7 +164,7 @@ int waitkeyinput_inter(InputedKey& inputedKey, bool direction_, bool immedity_, 
 				case VK_LEFT:
 				case VK_NUMPAD4:	
 					if(direction_) return VK_LEFT;
-					return (shift_check) ? 'H' : 'h';
+					return shift_down ? 'H' : 'h';
 					break;
 				case '6':
 					if(direction_ || shift_check) break;
@@ -138,7 +172,7 @@ int waitkeyinput_inter(InputedKey& inputedKey, bool direction_, bool immedity_, 
 				case VK_RIGHT:
 				case VK_NUMPAD6:	
 					if(direction_) return VK_RIGHT;
-					return (shift_check) ? 'L' : 'l';
+					return shift_down ? 'L' : 'l';
 					break;
 				case '2':
 					if(direction_ || shift_check) break;
@@ -146,7 +180,7 @@ int waitkeyinput_inter(InputedKey& inputedKey, bool direction_, bool immedity_, 
 				case VK_DOWN:
 				case VK_NUMPAD2:	
 					if(direction_) return VK_DOWN;
-					return (shift_check) ? 'J' : 'j';
+					return shift_down ? 'J' : 'j';
 					break;			
 				case '1':		
 					if(direction_ || shift_check) break;
@@ -205,9 +239,21 @@ int waitkeyinput_inter(InputedKey& inputedKey, bool direction_, bool immedity_, 
 	return 0;
 }
 
-int waitkeyinput(bool direction_, bool immedity_, bool ablecursor) {
+int waitkeyinput(bool direction_, bool immedity_, bool ablecursor, bool command_context, bool raw_input, int movement_context) {
 	InputedKey temp;
-	return waitkeyinput(temp, direction_,  immedity_, ablecursor);
+	return waitkeyinput(temp, direction_, immedity_, ablecursor, command_context, raw_input, movement_context);
+}
+
+int waitkeyinput_movement(InputedKey& key, bool ablecursor, bool allow_long_move, int input_context)
+{
+	return waitkeyinput(key, false, false, ablecursor, false, false,
+		input_context == KEY_INPUT_DEFAULT ? (allow_long_move ? KEY_INPUT_LONG_MOVEMENT : KEY_INPUT_MOVEMENT) : input_context);
+}
+
+int waitkeyinput_movement(bool ablecursor, bool allow_long_move, int input_context)
+{
+	InputedKey key;
+	return waitkeyinput_movement(key, ablecursor, allow_long_move, input_context);
 }
 
 
@@ -365,13 +411,60 @@ void clearKey() {
 	}
 }
 
-int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecursor)
+static bool isFixedDirectionInput(const InputedKey& key)
+{
+	if(key.mouse != MKIND_NONE)
+		return false;
+	const MSG& msg = key.key;
+	if(msg.message == GAMEPAD_DIRECTION_MESSAGE || msg.message == GAMEPAD_DPAD_MESSAGE)
+		return true;
+	if(msg.message != WM_KEYDOWN)
+		return false;
+	switch(msg.wParam)
+	{
+	case VK_UP:
+	case VK_DOWN:
+	case VK_LEFT:
+	case VK_RIGHT:
+	case VK_NUMPAD1:
+	case VK_NUMPAD2:
+	case VK_NUMPAD3:
+	case VK_NUMPAD4:
+	case VK_NUMPAD6:
+	case VK_NUMPAD7:
+	case VK_NUMPAD8:
+	case VK_NUMPAD9:
+	case '1':
+	case '2':
+	case '3':
+	case '4':
+	case '6':
+	case '7':
+	case '8':
+	case '9':
+		return true;
+	default:
+		return false;
+	}
+}
+
+int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecursor, bool command_context, bool raw_input, int movement_context)
 {
 	if(ReplayClass.auto_key == false)
 	{
 		DWORD time_ = timeGetTime();
 
-		int return_ = waitkeyinput_inter(key, direction_,immedity_, ablecursor);
+		int return_ = 0;
+		if(!keybind_mg.pop_macro_input(return_, direction_))
+		{
+			return_ = waitkeyinput_inter(key, direction_,immedity_, ablecursor);
+			return_ = keybind_mg.process_input(return_, command_context, isFixedDirectionInput(key), raw_input, movement_context);
+		}
+		else
+		{
+			key = InputedKey();
+			ZeroMemory(&key.key, sizeof(key.key));
+		}
 	
 		DWORD time2_ = timeGetTime();
 

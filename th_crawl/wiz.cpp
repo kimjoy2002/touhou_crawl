@@ -1286,7 +1286,7 @@ void wiz_mode()
 				printlog(name_.str(),false,false,true,CL_normal);
 
 				InputedKey inputedKey;
-				key_ = waitkeyinput(inputedKey,true);
+				key_ = waitkeyinput_movement(inputedKey);
 				switch(key_)
 				{
 				case 'k':
@@ -1349,7 +1349,7 @@ void wiz_mode()
 				printlog(oss.str(), false, false, true, CL_normal);
 
 				InputedKey inputedKey;
-				key_ = waitkeyinput(inputedKey,true);
+				key_ = waitkeyinput_movement(inputedKey);
 				switch (key_) {
 				case 'k':
 				case VK_UP:

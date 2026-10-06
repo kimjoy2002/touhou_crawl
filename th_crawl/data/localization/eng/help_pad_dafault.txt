@@ -1,0 +1,18 @@
+<Pad Key Bindings>
+D-Pad  - Move
+Left Stick + A - Move (Equivalent to keyboard keys yuhjklbn)
+↖↑↗    y k u
+←·→ <> h . l
+↙↓↘    b j n
+A      - Pick up, use stairs, pray at altar, wait 1 turn
+                         (Left action takes priority based on situation)
+Hold A - Recover for 100 turns
+B      - Cancel
+Hold B - Inspect map
+X      - Quick Menu 1 (default: Magic or Throw)
+Hold X - Quick Menu 2 (default: Divine Power or Activated Ability)
+Y      - Open right-side menu/item window
+Hold Y - View carried items
+LB     - Auto combat
+RB     - Auto explore
+LT/RT  - Zoom out/in

@@ -149,6 +149,10 @@ D3DCOLOR LocalzationManager::parseMultiColorLine(const string& line, vector<Text
 				}
 			}
 		}
+		else if (i + 2 < line.size() && line.substr(i, 3) == "§t") {
+			currentText.push_back('\x1D');
+			i += 3;
+		}
 		else if (i + 2 < line.size() && line.substr(i, 2) == "§") {
 			if (!currentText.empty()) {
 				outVector.emplace_back(currentText, false, currentColor);

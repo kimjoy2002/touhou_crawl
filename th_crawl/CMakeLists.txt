@@ -79,9 +79,28 @@ endif()
 file(GLOB_RECURSE SRC_FILES *.cpp)
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 
+set(HELP_DEFAULT_GENERATOR "${CMAKE_SOURCE_DIR}/data/temp/generate_help_defaults.ps1")
+if(EXISTS "${HELP_DEFAULT_GENERATOR}")
+    add_custom_target(generate_help_defaults ALL
+        COMMAND powershell.exe -NoProfile -ExecutionPolicy Bypass
+        -File "${HELP_DEFAULT_GENERATOR}"
+        -SourceRoot "${CMAKE_SOURCE_DIR}"
+        -OutputRoot "${CMAKE_SOURCE_DIR}/data"
+        BYPRODUCTS
+            "${CMAKE_SOURCE_DIR}/data/localization/kor/help_default.txt"
+            "${CMAKE_SOURCE_DIR}/data/localization/kor/help_pad_dafault.txt"
+            "${CMAKE_SOURCE_DIR}/data/localization/eng/help_default.txt"
+            "${CMAKE_SOURCE_DIR}/data/localization/eng/help_pad_dafault.txt"
+            "${CMAKE_SOURCE_DIR}/data/localization/jpn/help_default.txt"
+            "${CMAKE_SOURCE_DIR}/data/localization/jpn/help_pad_dafault.txt"
+        VERBATIM
+    )
+    add_dependencies(${PROJECT_NAME} generate_help_defaults)
+endif()
+
 target_compile_definitions(${PROJECT_NAME} PRIVATE WIN32 _WINDOWS)
 target_link_options(${PROJECT_NAME} PRIVATE /SUBSYSTEM:WINDOWS)
-target_link_libraries(${PROJECT_NAME} d3d11 dbghelp ${STEAM_API_LIB} ${DirectXTK_LIB} ${FMOD_LIB})
+target_link_libraries(${PROJECT_NAME} d3d11 dbghelp shell32 ${STEAM_API_LIB} ${DirectXTK_LIB} ${FMOD_LIB})
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     message("Debug Build")

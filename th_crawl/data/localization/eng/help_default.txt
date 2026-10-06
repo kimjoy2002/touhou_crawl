@@ -1,0 +1,38 @@
+<Movement>                                                          <Magic>
+Arrow keys - The following keys function the same                   M      - Memorize spells
+↖↑↗    7 8 9    y k u                                               z,Z    - Cast spells
+←·→ <> 4 5 6 <> h . l                                               I      - View memorized spells
+↙↓↘    1 2 3    b j n
+o      - Auto-explore
+                                                                    <Character Info>
+                                                                    @      - Quick character status
+<Dungeon Exploration>                                               %      - Detailed character info
+5      - Rest for 100 turns                                         ^      - Religion status
+x      - Examine surroundings                                       \      - Identified items
+./s    - Wait for 1 turn                                            A      - View character traits
+X      - Open dungeon map                                           [      - View equipped armor
+<,>    - Use stairs (up/down)                                       }      - View current weapon
+O,C    - Open/close doors                                           "      - View current accessory
+G/ctrl-G - Global Travel                                            E      - View experience
+                                                                    m      - View skill list
+<Item Management>                                                   ]      - View collected runes
+i      - Inventory                                                  ctrl-O - Dungeon progression
+,/g    - Pick up items
+d      - Drop item
+D      - Drop most recent item                                      <Non-Gameplay Commands>
+e      - Eat (food)                                                 ctrl-P - View message history
+r      - Read (scrolls, books)                                      S      - Save and quit
+q      - Drink (potions)                                            ctrl-S - Save and quit (no prompt)
+f/F    - Quick/targeted throw                                       ctrl-Q - Quit without saving
+v/V    - Quick evoke/Evoke menu                                     #      - Create game dump
+w      - Equip weapon (use '-' for unarmed)                         +/-    - Zoom In/Out screen
+W/T    - Equip/unequip armor
+P/R    - Equip/unequip accessory                                    <Convenience Features>
+'      - Swap weapon (a, b hotkeys)                                 `      - Repeat last action
+ctrl-A - Toggle auto-pickup                                         ~      - Macro settings
+ctrl-F - Item Search
+
+
+<Abilities>
+p      - Pray
+a      - Use god powers or abilities

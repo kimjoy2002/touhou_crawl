@@ -43,6 +43,10 @@ enum GamepadVirtualKey : wchar_t
     GVK_START          = 0xE00E
 };
 
+// 아날로그 스틱 이동은 사용자가 바꾼 vi 이동키와 구분되어야 한다.
+constexpr unsigned int GAMEPAD_DIRECTION_MESSAGE = 0x8037;
+constexpr unsigned int GAMEPAD_DPAD_MESSAGE = 0x8038;
+
 
 class joypadUtil {
     static bool isGamepadConnected();
@@ -51,6 +55,7 @@ public:
     static bool isUsingPad();
     static void initJoypad();
     static std::string get(const std::string& kbKey, wchar_t gamepadKey, PromptType promptType = PROMPT_NONE);
+	static std::string getRawGamepad(wchar_t gamepadKey);
 };
 void ProcessGamepadInput();
 

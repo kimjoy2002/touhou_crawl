@@ -4476,20 +4476,42 @@ void display_manager::sub_text_draw(shared_ptr<DirectX::SpriteBatch> pSprite, sh
 			DrawTextUTF8(pfont,pSprite, (*it)->text.c_str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, (*it)->color);
 			
 			if((*it)->clickable > 0) {
-				if(able_text_pos == current_position) {
-					DrawRectOutline(pSprite, rc, 2, D3DCOLOR_ARGB(255, 0, 255, 0));
+				bool group_start = it == text_sub.text_list.begin();
+				if(!group_start)
+				{
+					auto prev = it;
+					--prev;
+					group_start = (*prev)->enter || (*prev)->clickable != (*it)->clickable;
 				}
-				able_text_pos++;
-				if (MousePoint.x > rc.left && MousePoint.x <= rc.right &&
-					MousePoint.y > rc.top && MousePoint.y <= rc.bottom){
-					DrawRectOutline(pSprite, rc, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
-					if(isClicked(LEFT_CLICK)) {
-						MSG msg;
-						msg.message = WM_CHAR;
-						msg.wParam = (*it)->clickable;
-						g_keyQueue->push(InputedKey(msg));
-					} else if(isClicked(RIGHT_CLICK)) {
-						g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,(*it)->clickable,0));
+				if(group_start)
+				{
+					RECT group_rc = rc;
+					auto next = it;
+					while(!(*next)->enter)
+					{
+						auto candidate = next;
+						++candidate;
+						if(candidate == text_sub.text_list.end() || (*candidate)->clickable != (*it)->clickable)
+							break;
+						group_rc.right += static_cast<LONG>((*candidate)->width);
+						next = candidate;
+					}
+					if(able_text_pos == current_position)
+						DrawRectOutline(pSprite, group_rc, 2, D3DCOLOR_ARGB(255, 0, 255, 0));
+					able_text_pos++;
+					if(MousePoint.x > group_rc.left && MousePoint.x <= group_rc.right &&
+						MousePoint.y > group_rc.top && MousePoint.y <= group_rc.bottom)
+					{
+						DrawRectOutline(pSprite, group_rc, 2, D3DCOLOR_ARGB(255, 255, 0, 0));
+						if(isClicked(LEFT_CLICK))
+						{
+							MSG msg;
+							msg.message = WM_CHAR;
+							msg.wParam = (*it)->clickable;
+							g_keyQueue->push(InputedKey(msg));
+						}
+						else if(isClicked(RIGHT_CLICK))
+							g_keyQueue->push(InputedKey(MKIND_ITEM_DESCRIPTION,(*it)->clickable,0));
 					}
 				}
 			}
@@ -4764,15 +4786,19 @@ void display_manager::setPosition(int value_, int char_) {
 				}
 			}
 		}
+		int previous_clickable = 0;
+		bool previous_enter = true;
 		for(i = 0;i < view_length && it != text_sub.text_list.end();it++)
 		{
-			if((*it)->clickable > 0) {
+			if((*it)->clickable > 0 && (previous_enter || previous_clickable != (*it)->clickable)) {
 				max_position++;
 				if(char_ != -1 && (*it)->clickable == char_) {
 					current_position = max_position;
 					return;
 				}
 			}
+			previous_clickable = (*it)->clickable;
+			previous_enter = (*it)->enter;
 			if((*it)->enter) {
 				i++;
 			}
@@ -4891,14 +4917,18 @@ int display_manager::positionToChar() {
 				}
 			}
 		}
+		int previous_clickable = 0;
+		bool previous_enter = true;
 		for(i = 0;i < view_length && it != text_sub.text_list.end();it++)
 		{
-			if((*it)->clickable > 0) {
+			if((*it)->clickable > 0 && (previous_enter || previous_clickable != (*it)->clickable)) {
 				if(max_position == current_position) {
 					return (*it)->clickable;
 				}
 				max_position++;
 			}
+			previous_clickable = (*it)->clickable;
+			previous_enter = (*it)->enter;
 		}
 	}  else if(state == DT_ITEM) {
 		list<item>::iterator first,end;

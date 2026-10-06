@@ -802,7 +802,7 @@ bool blink_scroll(bool pre_iden_)
 	while(1)
 	{
 		InputedKey inputedKey;
-		int key_ = waitkeyinput(inputedKey,false,false, true);
+		int key_ = waitkeyinput_movement(inputedKey, true, false, KEY_INPUT_MAP_SEARCH);
 		switch(key_)
 		{
 		case 'k':

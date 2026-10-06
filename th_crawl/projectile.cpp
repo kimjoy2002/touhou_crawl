@@ -342,7 +342,7 @@ int Common_Throw(list<item>::iterator& it, vector<monster>::iterator it2, beam_i
 		}
 		selection_list.push_back(VK_ESCAPE);
 		startSelection(selection_list);
-		int key_ = auto_? VK_RETURN : waitkeyinput(inputedKey, false, false, true);
+		int key_ = auto_? VK_RETURN : waitkeyinput_movement(inputedKey, true, false, KEY_INPUT_PROJECTILE);
 		endSelection();
 		switch(key_)
 		{
@@ -578,7 +578,7 @@ int Direc_Throw(int auto_direc_, coord_def* c)
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_PROJECTILE_DIRECTION),true,false,true,CL_help);
 		InputedKey inputedKey;
-		int key_= (auto_direc_>0? auto_direc_ :waitkeyinput(inputedKey));
+		int key_= (auto_direc_>0? auto_direc_ :waitkeyinput_movement(inputedKey, false, false, KEY_INPUT_PROJECTILE));
 		switch(key_)
 		{
 		case 'k':

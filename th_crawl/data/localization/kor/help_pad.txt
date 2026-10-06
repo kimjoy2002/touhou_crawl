@@ -1,18 +1,18 @@
 ﻿§b<패드 키 대응>§d 
 §y십자키§d              - 이동
-§y왼쪽 조이스틱 + A§d   - 이동 (키보드 yuhjklbn키에 대응)
+§y왼쪽 조이스틱 + {KEY:PAD_CONFIRM}§d   - 이동 (키보드 yuhjklbn키에 대응)
 §y↖↑↗    y k u§d
 §y←·→ <> h . l§d
 §y↙↓↘    b j n§d
-§yA§d                   - 줍기, 계단타기, 제단에 기도, 1턴 대기
+§y{KEY:PAD_CONFIRM}§d                   - 줍기, 계단타기, 제단에 기도, 1턴 대기
                       (상황에 따라 왼쪽이 우선)
-§yA 길게 누르기§d       - 100턴 회복
-§yB§d                   - 캔슬
-§yB 길게 누르기§d       - 맵을 조사
-§yX§d                   - 퀵메뉴 1 (기본값 마법, 투척)
-§yX 길게 누르기§d       - 퀵메뉴 2 (기본값 권능 혹은 발동능력사용)
-§yY§d                   - 우측 메뉴/아이템 창으로 전환
-§yY 길게 누르기§d       - 가지고 있는 아이템
-§yL1§d                  - 자동전투
-§yL2§d                  - 자동탐색
-§yL3,L4§d               - 화면 확대/축소
+§y{KEY:PAD_LONG_REST}§d       - 100턴 회복
+§y{KEY:PAD_CANCEL}§d                   - 캔슬
+§y{KEY:PAD_WIDE_SEARCH}§d       - 맵을 조사
+§y{KEY:PAD_QUICK_1}§d                   - 퀵메뉴 1 (기본값 마법, 투척)
+§y{KEY:PAD_QUICK_2}§d       - 퀵메뉴 2 (기본값 권능 혹은 발동능력사용)
+§y{KEY:PAD_RIGHT_MENU}§d                   - 우측 메뉴/아이템 창으로 전환
+§y{KEY:PAD_INVENTORY}§d       - 가지고 있는 아이템
+§y{KEY:PAD_AUTO_ATTACK}§d                  - 자동전투
+§y{KEY:PAD_AUTO_TRAVEL}§d                  - 자동탐색
+§y{KEY:PAD_ZOOM_OUT}/{KEY:PAD_ZOOM_IN}§d               - 화면 축소/확대

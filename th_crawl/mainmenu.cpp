@@ -18,6 +18,7 @@
 #include "network.h"
 #include "option_manager.h"
 #include "replay.h"
+#include "keyconfig.h"
 
 
 extern bool saveexit;
@@ -541,6 +542,7 @@ void start_mainmenu()
 		temp->push_back(menu_string(LocalzationManager::locString(LOC_SYSTEM_MAINMENU_ETC), true, CL_help));
 		temp->push_back(menu_string("", true, CL_normal));
 		temp->push_back(menu_string("o - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_OPTION), true, CL_normal, 'o'));
+		temp->push_back(menu_string("k - " + key_config_menu_name(), true, CL_normal, 'k'));
 		temp->push_back(menu_string("s - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_SAVE), true, CL_normal, 's'));
 		temp->push_back(menu_string("l - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_LEADERBOARD), true, CL_normal, 'l'));
 		temp->push_back(menu_string("m - " + LocalzationManager::locString(LOC_SYSTEM_MAINMENU_MORGUE), true, CL_normal, 'm'));
@@ -556,6 +558,7 @@ void start_mainmenu()
 		m_mgr.menu_input_puls(0, 'd', 1, "", false, sprint2s, 0);
 		m_mgr.menu_input_puls(0, 'e', 1, "", false, sprint3s, 0);
 		m_mgr.menu_input_puls(0,'o',-3,"",false,option_menu,0);
+		m_mgr.menu_input_puls(0,'k',0,"",false,key_config_menu,0);
 		m_mgr.menu_input_puls(0,'s',0,"",false,save_menu,0);
 		m_mgr.menu_input_puls(0,'l',0,"",false,score_menu,0);
 		m_mgr.menu_input_puls(0,'m',0,"",false,morgue_menu,0);

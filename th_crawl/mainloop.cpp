@@ -31,6 +31,7 @@
 #include "mapsearching.h"
 #include "soundmanager.h"
 #include "localization.h"
+#include "keyconfig.h"
 #include <string>
 #include <sstream>
 #include <iomanip>
@@ -1132,7 +1133,7 @@ void MainLoop()
 			you.youMaxiExp = false;
 		}
 		InputedKey inputedKey;
-		int char_ = waitkeyinput(inputedKey);
+		int char_ = waitkeyinput(inputedKey, false, false, false, true);
 
 		you.prev_hp[1] = you.GetHp();
 		you.prev_mp[1] = you.GetMp();
@@ -1181,17 +1182,39 @@ void MainLoop()
 		case 'u':
 			action_Move('u', coord_def(you.position.x+1,you.position.y-1));
 			break;
+		case 'K':
+			Run_Move(coord_def(0,-1), 'K');
+			break;
+		case 'J':
+			Run_Move(coord_def(0,1), 'J');
+			break;
+		case 'H':
+			Run_Move(coord_def(-1,0), 'H');
+			break;
+		case 'L':
+			Run_Move(coord_def(1,0), 'L');
+			break;
+		case 'B':
+			Run_Move(coord_def(-1,1), 'B');
+			break;
+		case 'N':
+			Run_Move(coord_def(1,1), 'N');
+			break;
+		case 'Y':
+			Run_Move(coord_def(-1,-1), 'Y');
+			break;
+		case 'U':
+			Run_Move(coord_def(1,-1), 'U');
+			break;
 		case 'x': //주위탐색
 			Search();
 			break;
-		case 's': //턴스킵
 		case '.': //턴스킵
 			if(isShootingSprint()){
 				you.shooing_fire();
 			}
 			action_turn_skip();
 			break;
-		case 'g':
 		case ',': //줍기
 			PickUp();
 			break;
@@ -1257,7 +1280,6 @@ void MainLoop()
 		case 0x06: //아이템 검색
 			findItem();
 			break;
-		case 0x07: //전체층 이동
 		case 'G':
 			if (isNormalGame())
 				floorMove();
@@ -1303,9 +1325,6 @@ void MainLoop()
 			break;
 		case '@':
 			Simple_State_Show();
-			break;
-		case 'N':
-			//sendScore();
 			break;
 		case 'E':
 			Experience_Show();
@@ -1381,6 +1400,9 @@ void MainLoop()
 			break;
 		case '`':
 			repeat_action();
+			break;
+		case '~':
+			macro_add_query();
 			break;
 		case GVK_BUTTON_A://패드 A
 			stand_action();

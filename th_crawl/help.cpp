@@ -11,6 +11,7 @@
 #include "display.h"
 #include "key.h"
 #include "note.h"
+#include "keyconfig.h"
 
 
 extern HANDLE mutx;
@@ -197,19 +198,7 @@ void Help_Show()
 			bool isPadHelp = (input_=='p');
 			WaitForSingleObject(mutx, INFINITE);
 			deletesub();
-			if(isPadHelp) {
-				printsub("                                   --- " + LocalzationManager::locString(LOC_SYSTEM_PAD_COMMAND_LIST) + " ---",true,CL_normal);
-				printsub("",true,CL_normal);
-				for(TextHelper text_ : LocalzationManager::getHelpPadCommand()) {
-					printsub(text_.text,text_.enter,text_.color);
-				}
-			} else {
-				printsub("                                   --- " + LocalzationManager::locString(LOC_SYSTEM_COMMAND_LIST) + " ---",true,CL_normal);
-				printsub("",true,CL_normal);
-				for(TextHelper text_ : LocalzationManager::getHelpCommand()) {
-					printsub(text_.text,text_.enter,text_.color);
-				}
-			}
+			print_key_binding_help(isPadHelp);
 			changedisplay(DT_SUB_TEXT);
 			setDisplayMove(DisplayManager.max_y);
 			ReleaseMutex(mutx);

@@ -11,7 +11,9 @@
 #include "common.h"
 #include <stdio.h>
 #include "soundmanager.h"
+#include "keyconfig.h"
 #include <sys/stat.h>
+#include <filesystem>
 
 optionManager option_mg;
 
@@ -104,6 +106,7 @@ void optionManager::init(wstring fileName) {
 		GetPrivateProfileStringW(_T(L"config"), _T(L"language"), _T(ConvertUTF8ToUTF16(steam_lang).c_str()), szBuf, MAX_STR_SIZE, fileName.c_str());
 		lang = wcharToUtf8(szBuf);
 	}
+	keybind_mg.init(std::filesystem::path(fileName).parent_path());
 }
 
 void optionManager::createNewFile(wstring fileName) {

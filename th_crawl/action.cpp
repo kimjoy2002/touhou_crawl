@@ -132,6 +132,123 @@ bool Long_Move(const coord_def &c, bool speak_)
 	return stack_move(false);
 }
 
+
+const coord_def run_directions[8] = {
+	coord_def(0, -1), coord_def(1, -1), coord_def(1, 0), coord_def(1, 1),
+	coord_def(0, 1), coord_def(-1, 1), coord_def(-1, 0), coord_def(-1, -1)
+};
+
+bool run_in_bounds(const coord_def& position)
+{
+	return position.x >= 0 && position.x < DG_MAX_X && position.y >= 0 && position.y < DG_MAX_Y;
+}
+
+int run_direction_index(const coord_def& direction)
+{
+	for(int i = 0; i < 8; ++i)
+		if(run_directions[i].x == direction.x && run_directions[i].y == direction.y)
+			return i;
+	return -1;
+}
+
+int run_base_feature(const coord_def& position)
+{
+	if(!run_in_bounds(position))
+		return DG_WALL;
+	dungeon_tile_type tile = env[current_level].dgtile[position.x][position.y].tile;
+	if(tile >= DG_WALL && tile <= DG_WALL3)
+		return DG_WALL;
+	return tile;
+}
+
+bool diagonal_run_passes_door(const coord_def& position, int direction_index)
+{
+	const int side_indices[2] = {(direction_index + 6) % 8, (direction_index + 2) % 8};
+	for(int side_index : side_indices)
+	{
+		coord_def side = position + run_directions[side_index];
+		if(run_in_bounds(side) && env[current_level].isDoor(side.x, side.y))
+			return true;
+	}
+	return false;
+}
+
+bool Run_Move(const coord_def &direction, int command)
+{
+	clearKey();
+	while(!you.will_move.empty())
+		you.will_move.pop();
+	you.search = false;
+	if(env[current_level].insight_mon(MET_ENEMY))
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_LOS_MON),true,false,false,CL_small_danger);
+		return false;
+	}
+	if(you.s_confuse)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_CONFUSE_WARNING),true,false,false,CL_small_danger);
+		return false;
+	}
+	if(you.s_dimension)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_DIMENSTION),true,false,false,CL_small_danger);
+		return false;
+	}
+	if(you.resetLOS() == IT_MAP_DANGER)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_MAP_DANGER),true,false,false,CL_small_danger);
+		return false;
+	}
+
+	int direction_index = run_direction_index(direction);
+	if(direction_index < 0)
+		return false;
+
+	const int check_indices[3] = {
+		(direction_index + 7) % 8,
+		direction_index,
+		(direction_index + 1) % 8
+	};
+	int starting_features[3];
+	for(int i = 0; i < 3; ++i)
+		starting_features[i] = run_base_feature(you.position + run_directions[check_indices[i]]);
+
+	std::vector<coord_def> path;
+	coord_def current = you.position;
+	bool first_step = true;
+	while(true)
+	{
+		if(!first_step)
+		{
+			bool terrain_changed = false;
+			for(int i = 0; i < 3; ++i)
+			{
+				if(run_base_feature(current + run_directions[check_indices[i]]) != starting_features[i])
+				{
+					terrain_changed = true;
+					break;
+				}
+			}
+			if(terrain_changed || (direction.x != 0 && direction.y != 0 &&
+				diagonal_run_passes_door(current, direction_index)))
+				break;
+		}
+
+		coord_def next = current + direction;
+		if(!run_in_bounds(next) || !env[current_level].isMove(next, you.isFly(), you.isSwim()))
+			break;
+		path.push_back(next);
+		current = next;
+		first_step = false;
+	}
+	if(path.empty())
+		return false;
+	for(auto it = path.rbegin(); it != path.rend(); ++it)
+		you.will_move.push(*it);
+	you.SetPrevAction(command);
+	return stack_move(false);
+}
+
 void repeat_action()
 {
 	int key_ = you.prev_action_key.key;
@@ -1023,7 +1140,7 @@ void Search()
 	while(1)
 	{
 		InputedKey inputedKey;
-		switch(waitkeyinput(inputedKey,false,false, true))
+		switch(waitkeyinput_movement(inputedKey, true, true, KEY_INPUT_MAP_SEARCH))
 		{
 		case 'k':
 			Move(coord_def(you.position.x,you.position.y-1));  //위
@@ -1181,7 +1298,7 @@ void Wide_Search()
 	{
 		InputedKey inputedKey;
 		startSelection({'v', '.', '<', '>', 'e', VK_ESCAPE});
-		switch(waitkeyinput(inputedKey))
+		switch(waitkeyinput_movement(inputedKey, true, true, KEY_INPUT_MAP_SEARCH))
 		{
 		case '0':
 		case '1':
@@ -1474,7 +1591,7 @@ void Open_Close_door()
 		while(door_num>1)
 		{
 			InputedKey inputedKey;
-			switch(waitkeyinput(inputedKey))
+			switch(waitkeyinput_movement(inputedKey))
 			{
 			case 'k':
 				temp = coord_def(you.position.x,you.position.y-1);
@@ -1592,7 +1709,7 @@ void Close_door()
 		while(door_num>1)
 		{
 			InputedKey inputedKey;
-			switch(waitkeyinput(inputedKey))
+			switch(waitkeyinput_movement(inputedKey))
 			{
 			case 'k':
 				temp = coord_def(you.position.x,you.position.y-1);
@@ -1701,7 +1818,7 @@ void Open_door()
 		while(door_num>1)
 		{
 			InputedKey inputedKey;
-			switch(waitkeyinput(inputedKey))
+			switch(waitkeyinput_movement(inputedKey))
 			{
 			case 'k':
 				temp = coord_def(you.position.x,you.position.y-1);

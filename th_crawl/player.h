@@ -722,6 +722,7 @@ const char* GetUniqueStartStatString(unique_starting_type start);
 int action_Move(int key, const coord_def &c); //메인루프에서의 이동
 int Move(const coord_def &c); //이동한다.
 bool Long_Move(const coord_def &c, bool speak_); //길게 이동한다.
+bool Run_Move(const coord_def &direction, int command); //한 방향으로 위험 요소를 만날 때까지 연속 이동한다.
 void repeat_action();
 void auto_battle();//자동전투
 void auto_Move(); //자동으로 이동한다.

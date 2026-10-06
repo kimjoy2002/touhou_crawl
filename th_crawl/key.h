@@ -20,8 +20,20 @@ using namespace std;
 
 struct InputedKey;
 
-int waitkeyinput(InputedKey& key, bool direction_ = false, bool immedity_ = false, bool ablecursor = false);
-int waitkeyinput(bool direction_ = false, bool immedity_ = false, bool ablecursor = false);
+enum key_input_context
+{
+	KEY_INPUT_DEFAULT = 0,
+	KEY_INPUT_MOVEMENT = 1,
+	KEY_INPUT_LONG_MOVEMENT = 2,
+	KEY_INPUT_MAP_SEARCH = 3,
+	KEY_INPUT_PROJECTILE = 4,
+	KEY_INPUT_DASH_MODIFIER = 5
+};
+
+int waitkeyinput(InputedKey& key, bool direction_ = false, bool immedity_ = false, bool ablecursor = false, bool command_context = false, bool raw_input = false, int movement_context = 0);
+int waitkeyinput(bool direction_ = false, bool immedity_ = false, bool ablecursor = false, bool command_context = false, bool raw_input = false, int movement_context = 0);
+int waitkeyinput_movement(InputedKey& key, bool ablecursor = false, bool allow_long_move = false, int input_context = KEY_INPUT_DEFAULT);
+int waitkeyinput_movement(bool ablecursor = false, bool allow_long_move = false, int input_context = KEY_INPUT_DEFAULT);
 void clearKey();
 bool ynPromptSimple(LOCALIZATION_ENUM_KEY prompt_key, LOCALIZATION_ENUM_KEY canclePrompt_key, D3DCOLOR promptColor);
 bool ynPrompt(LOCALIZATION_ENUM_KEY prompt_key, LOCALIZATION_ENUM_KEY canclePrompt_key, D3DCOLOR promptColor, bool temp, bool uppercase, bool loop, bool log);

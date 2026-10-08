@@ -785,12 +785,12 @@ void Speed_Evoke()
 		evoke_logic(you.equipment[ET_SHIELD]->id,0);
 		you.SetPrevAction('v', you.equipment[ET_SHIELD]->id);
 	} else {
-		Spelllcard_Evoke(0);
+		EvokeItemMenu(0);
 	}
 }
 
 
-void Spelllcard_Evoke(char auto_)
+void EvokeItemMenu(char auto_)
 {
 	view_item(IVT_EVOKE,LOC_SYSTEM_DISPLAY_MANAGER_EVOKE);
 	if(auto_ == 0 && you.currentEvokeItem)

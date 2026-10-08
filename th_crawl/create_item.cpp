@@ -1,4 +1,4 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 파일이름: create_item.cpp
 //
@@ -437,9 +437,9 @@ item_infor& id_to_item(int id, item_infor* item_)
 	case 25://책
 		makeitem(ITM_BOOK,0,item_);
 		break;
-	case 26://스펠카드
-		makeitem(ITM_SPELL,0,item_);
-		//index.push_back(createSpellCard(1, 0, item_));
+	case 26://기계 도구
+		makeitem(ITM_MACHINE,0,item_);
+		//index.push_back(createMachine(1, 0, item_));
 		break;
 	case 27://아티펙트 무기
 		makeitem((item_type)rand_int(ITM_WEAPON_FIRST,ITM_WEAPON_CLOSE),randA(2)?0:(randA(3)?1:-1),item_);

@@ -668,7 +668,7 @@ SPEAK_PARSI_DUNGEON_NORMAL3,{0}が言った。「地上世界って羨ましい�
 SPEAK_PARSI_DUNGEON_NORMAL4,{0}が言った。「河童も人間も群れて行動するでしょ？羨ましいよ！」
 SPEAK_PARSI_DUNGEON_NORMAL5,{0}が言った。「このダンジョン、すごく雑に作られてるね。他のゲームの綺麗なダンジョン生成が羨ましい！」
 SPEAK_PARSI_DUNGEON_NORMAL6,{0}が言った。「oキー押してみた？他のゲームのパスファインディングが羨ましい！」
-SPEAK_PARSI_DUNGEON_NORMAL7,{0}が言った。「大地のスペルカード持ってる？壁を壊せるなんて羨ましいな！」
+SPEAK_PARSI_DUNGEON_NORMAL7,{0}が言った。「掘削ドリル持ってる？壁を壊せるなんて羨ましいな！」
 SPEAK_PARSI_DUNGEON_TEMPLE1,{0}が言った。「祭壇がいっぱいあるね。君は何を信じるの？羨ましい！」
 SPEAK_PARSI_DUNGEON_TEMPLE2,{0}が言った。「私を神殿まで連れてきてくれるなんて、その優しさが羨ましい！」
 SPEAK_PARSI_DUNGEON_TEMPLE3,{0}が言った。「神殿まで送ってくれても、私は神様なんか信じないけどね。」

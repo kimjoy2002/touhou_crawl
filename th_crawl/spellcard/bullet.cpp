@@ -100,12 +100,33 @@ bool MoveBullet(monster* mon_)
 	}
 	if(next_ == you.position)
 	{
+		if(mon_->sm_info.parent_map_id == you.GetMapId())
+		{
+			RemoveBullet(mon_);
+			return true;
+		}
 		attack_infor attack_(mon_->GetAttack(0,false),mon_->GetAttack(0,true),mon_->special_value,
 			mon_,PRT_ENEMY,mon_->atk_type[0],mon_->atk_name[0]);
 		attack_.no_owner = true;
 		you.damage(attack_);
 		RemoveBullet(mon_);
 		return true;
+	}
+	if(mon_->sm_info.parent_map_id == you.GetMapId())
+	{
+		unit* hit_ = env[current_level].isMonsterPos(next_.x,next_.y,mon_);
+		if(hit_ && !hit_->isplayer())
+		{
+			monster* target_ = static_cast<monster*>(hit_);
+			if(you.isEnemyUnit(target_))
+			{
+				attack_infor attack_(mon_->GetAttack(0,false),mon_->GetAttack(0,true),mon_->special_value,
+					&you,PRT_PLAYER,mon_->atk_type[0],mon_->atk_name[0]);
+				target_->damage(attack_);
+			}
+			RemoveBullet(mon_);
+			return true;
+		}
 	}
 	if(HasNonBulletMonster(next_,mon_))
 	{

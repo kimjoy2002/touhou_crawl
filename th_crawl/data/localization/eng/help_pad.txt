@@ -8,7 +8,7 @@
                          (Left action takes priority based on situation)
 §y{KEY:PAD_LONG_REST}§d              - Recover for 100 turns
 §y{KEY:PAD_CANCEL}§d                   - Cancel
-§y{KEY:PAD_WIDE_SEARCH}§d              - Inspect map
+§y{KEY:PAD_DASH_MODIFIER}§d              - Run
 §y{KEY:PAD_QUICK_1}§d                   - Quick Menu 1 (default: Magic or Throw)
 §y{KEY:PAD_QUICK_2}§d              - Quick Menu 2 (default: Divine Power or Activated Ability)
 §y{KEY:PAD_RIGHT_MENU}§d                   - Open right-side menu/item window

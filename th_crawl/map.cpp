@@ -1,4 +1,4 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 파일이름: map.cpp
 //
@@ -2505,7 +2505,7 @@ void map_algorithms_tuto03(int num)
 	env[num].MakeEvent(EVL_SIGHT_P,coord_def(37,8),EVT_SIGHT);	
 
 	env[num].MakeEvent(30,coord_def(43,7),EVT_SIGHT);
-	env[num].MakeItem(coord_def(42,7),makeitem(ITM_SPELL, 0, &t, SPC_V_FIRE));
+	env[num].MakeItem(coord_def(42,7),makeitem(ITM_MACHINE, 0, &t, MCH_FLAMETHROWER));
 	env[num].MakeItem(coord_def(44,7),makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_PAGODA));
 
 

@@ -8,7 +8,7 @@
                       (상황에 따라 왼쪽이 우선)
 §y{KEY:PAD_LONG_REST}§d       - 100턴 회복
 §y{KEY:PAD_CANCEL}§d                   - 캔슬
-§y{KEY:PAD_WIDE_SEARCH}§d       - 맵을 조사
+§y{KEY:PAD_DASH_MODIFIER}§d       - 대쉬
 §y{KEY:PAD_QUICK_1}§d                   - 퀵메뉴 1 (기본값 마법, 투척)
 §y{KEY:PAD_QUICK_2}§d       - 퀵메뉴 2 (기본값 권능 혹은 발동능력사용)
 §y{KEY:PAD_RIGHT_MENU}§d                   - 우측 메뉴/아이템 창으로 전환

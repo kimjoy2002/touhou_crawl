@@ -1,4 +1,4 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 파일이름: item.h
 //
@@ -93,12 +93,12 @@ struct amulet_iden
 	iden(false), type(0)
 	{};
 };
-struct spellcard_iden
+struct machine_iden
 {
-	char iden; //1은 사용함, 2는 식별
-	int type;
-	spellcard_iden():
-	iden(false), type(0)
+	char found;
+	int legacy_type; //기존 세이브 레이아웃 호환용
+	machine_iden():
+	found(false), legacy_type(0)
 	{};
 };
 
@@ -120,11 +120,11 @@ enum iden_check
 
 	IDEN_CHECK_AMULET_END = IDEN_CHECK_AMULET_START + AMT_MAX,
 
-	IDEN_CHECK_SPC_START = IDEN_CHECK_AMULET_END,
+	IDEN_CHECK_MACHINE_START = IDEN_CHECK_AMULET_END,
 
-	IDEN_CHECK_SPC_END = IDEN_CHECK_SPC_START + SPC_V_MAX,
+	IDEN_CHECK_MACHINE_END = IDEN_CHECK_MACHINE_START + MCH_MAX,
 
-	IDEN_CHECK_BOOK_START = IDEN_CHECK_SPC_END,
+	IDEN_CHECK_BOOK_START = IDEN_CHECK_MACHINE_END,
 
 	IDEN_CHECK_BOOK_END = IDEN_CHECK_BOOK_START + 1 + BOOK_LAST, //1은 미감정 책
 
@@ -144,11 +144,11 @@ public:
 	scroll_iden scroll_list[SCT_MAX];
 	ring_iden ring_list[RGT_MAX];
 	amulet_iden amulet_list[AMT_MAX];
-	spellcard_iden spellcard_list[SPC_V_MAX];
+	machine_iden machine_list[MCH_MAX];
 	bool fixed_artifact[FIXED_ARTIFACT_MAX];
 	bool books_list[BOOK_LAST];
 	bool evoke_list[EVK_MAX];
-	bool autopickup[IDEN_CHECK_END-1];
+	bool autopickup[IDEN_CHECK_END];
 
 	void SaveDatas(FILE *fp);
 	void LoadDatas(FILE *fp);
@@ -157,14 +157,16 @@ public:
 class Iden_collect_111 //111버전을 위한 임시..
 {
 public:
+	static const int LEGACY_MACHINE_COUNT = 7;
+	static const int LEGACY_AUTOPICKUP_COUNT = IDEN_CHECK_END-(MCH_MAX-LEGACY_MACHINE_COUNT);
 	potion_iden potion_list[PT_MAX];
 	scroll_iden scroll_list[SCT_MAX-1];
 	ring_iden ring_list[RGT_MAX];
 	amulet_iden amulet_list[AMT_MAX];
-	spellcard_iden spellcard_list[SPC_V_MAX];
+	machine_iden machine_list[LEGACY_MACHINE_COUNT];
 	bool fixed_artifact[FIXED_ARTIFACT_MAX];
 	bool books_list[BOOK_LAST];
-	bool autopickup[IDEN_CHECK_END];
+	bool autopickup[LEGACY_AUTOPICKUP_COUNT];
 
 	static void migrateIden111toCurrent(const Iden_collect_111& old_data, Iden_collect& new_data);
 };
@@ -209,9 +211,9 @@ public:
 	
 	int value1; //value1 - 무기,탄막-명중력 방어구-AC 방패-SH 음식,물약,스크롤,링-종류 책-마법 스펠카드-횟수 발동템-종류
 	
-	int value2; //value2 - 무기,탄막-공격력 방어구,방패-EV  음식-만복도 링-수치 스펠카드-종류 아뮬렛-(오컬트)
+	int value2; //value2 - 무기,탄막-공격력 방어구,방패-EV  음식-만복도 링-수치 기계-종류 아뮬렛-(오컬트)
 
-	int value3;	//value3 - 방어구-최소 EV패널티 탄막-인챈트 음식-신선도 스펠카드-사용예측횟수 아뮬렛-오컬트발동여부
+	int value3;	//value3 - 방어구-최소 EV패널티 탄막-인챈트 음식-신선도 기계-사용예측횟수 아뮬렛-오컬트발동여부
 	
 	int value4; //value4 - 무기-인챈트 방어구-AC+ 방패-SH+ 탄막-종류 음식(p템)-몬스터id 발동템-(일부) 사용횟수
 
@@ -262,6 +264,11 @@ public:
 	bool isautopick();
 	bool isArtifact();
 	bool isChargable();
+	bool HasInstalledMachine(installed_machine_type type_);
+	bool HasAnyInstalledMachine();
+	int InstalledMachinePowerUsage();
+	bool CanInstallMachine(installed_machine_type type_);
+	void InstallMachine(installed_machine_type type_);
 	bool canSlashTanmac();
 	bool canReachAttack();
 	bool canBashAttack();

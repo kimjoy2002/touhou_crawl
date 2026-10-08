@@ -252,6 +252,109 @@ public:
 
 };
 
+static int CurrentMachineMigrationAptitude(skill_type skill_)
+{
+	int aptit = aptitude[you.tribe][skill_];
+	if(skill_ == SKT_ENGINEERING)
+	{
+		if(you.char_type == UNIQ_START_SANAE)
+			aptit += 3;
+		else if(you.char_type == UNIQ_START_NITORI)
+			aptit += 1;
+	}
+	else if(skill_ == SKT_MAGIC_DEVICE && you.char_type == UNIQ_START_MARISA)
+	{
+		aptit += 1;
+	}
+	return aptit;
+}
+
+static void ApplyMachineMigration(skill_type destination_)
+{
+	skill_exp_infor old_evocation = you.skill[SKT_MAGIC_DEVICE];
+	const int engineering_aptit = CurrentMachineMigrationAptitude(SKT_ENGINEERING);
+	const int magical_devices_aptit = CurrentMachineMigrationAptitude(SKT_MAGIC_DEVICE);
+
+	you.skill[SKT_ENGINEERING] = skill_exp_infor();
+	you.skill[SKT_ENGINEERING].aptit = engineering_aptit;
+	you.skill[SKT_MAGIC_DEVICE] = skill_exp_infor();
+	you.skill[SKT_MAGIC_DEVICE].aptit = magical_devices_aptit;
+
+	skill_exp_infor &destination = you.skill[destination_];
+	destination.exper = old_evocation.exper;
+	destination.level = GetSkillLevelFromExp(destination.exper, destination.aptit);
+	destination.onoff = old_evocation.onoff;
+
+	if(you.pure_skill == SKT_MAGIC_DEVICE)
+		you.pure_skill = destination_;
+}
+extern int g_menu_select;
+
+void SelectMachineMigration()
+{
+	const int exper = you.skill[SKT_MAGIC_DEVICE].exper;
+	const int engineering_level = GetSkillLevelFromExp(exper, CurrentMachineMigrationAptitude(SKT_ENGINEERING));
+	const int magical_devices_level = GetSkillLevelFromExp(exper, CurrentMachineMigrationAptitude(SKT_MAGIC_DEVICE));
+
+	if(exper == 0)
+		return;
+
+	bool loop_ = true;
+	while(loop_)
+	{
+		deletelog();
+		printlog(LocalzationManager::locString(LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_WARNING),true,false,true,CL_small_danger);
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_ENGINEERING,
+			PlaceHolderHelper(to_string(engineering_level))), true,false,true, CL_help, 'a');
+		printlog(LocalzationManager::formatString(LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_MAGICAL_DEVICES,
+			PlaceHolderHelper(to_string(magical_devices_level))), true,false,true, CL_help, 'b');
+
+		startSelection({'a', 'b'});
+
+
+		int key_;
+		g_menu_select = -1;
+		while(true) {
+			key_ = waitkeyinput(true);
+
+			if(key_ == VK_RIGHT){
+				if(++g_menu_select>1)
+					g_menu_select = 0;
+				continue;
+			} else if (key_ == VK_LEFT) {
+				if(--g_menu_select<0)
+					g_menu_select = 1;
+				continue;
+			} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+				switch(g_menu_select) {
+					case 0:
+						key_ = 'a';
+						break;
+					case 1:
+						key_ = 'b';
+						break;
+					default:
+						break;
+				}
+			}
+			endSelection();
+			break;
+		}
+		g_menu_select = -1;
+
+
+		if(key_ == 'a' || key_ == 'A') {
+			ApplyMachineMigration(SKT_ENGINEERING);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_MIGRATION_FINISH), true,false,false, CL_help);
+			return;
+		} else if(key_ == 'b' || key_ == 'B') {
+			ApplyMachineMigration(SKT_MAGIC_DEVICE);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_MIGRATION_FINISH), true,false,false, CL_help);
+			return;
+		}
+	}
+}
+
 
 bool checkSavefile(int value_)
 {

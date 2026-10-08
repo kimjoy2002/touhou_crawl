@@ -8,7 +8,7 @@
                          （状況により左側の動作が優先される）
 §y{KEY:PAD_LONG_REST}§d            - 100ターン休憩
 §y{KEY:PAD_CANCEL}§d                   - キャンセル
-§y{KEY:PAD_WIDE_SEARCH}§d            - マップを調べる
+§y{KEY:PAD_DASH_MODIFIER}§d            - ダッシュ
 §y{KEY:PAD_QUICK_1}§d                   - クイックメニュー1（初期設定：魔法または投擲）
 §y{KEY:PAD_QUICK_2}§d            - クイックメニュー2（初期設定：信仰能力または発動能力）
 §y{KEY:PAD_RIGHT_MENU}§d                   - 右メニュー／アイテム画面に切替

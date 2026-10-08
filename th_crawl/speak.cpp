@@ -636,7 +636,7 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 			case 2:
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_STAR_NORMAL3), PlaceHolderHelper(monster_info->GetName()->getName()));
 			case 3:
-				if(you.s_invisible || you.togle_invisible)
+				if(you.GetInvisible() || you.togle_invisible)
 				{
 					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_STAR_NORMAL4), PlaceHolderHelper(monster_info->GetName()->getName()));
 				}
@@ -645,7 +645,7 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 				return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_STAR_NORMAL5), PlaceHolderHelper(monster_info->GetName()->getName()));
 				}
 			case 4:
-				if(you.s_invisible || you.togle_invisible)
+				if(you.GetInvisible() || you.togle_invisible)
 				{
 					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_STAR_NORMAL6), PlaceHolderHelper(monster_info->GetName()->getName()));
 				}
@@ -654,7 +654,7 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_STAR_NORMAL7), PlaceHolderHelper(monster_info->GetName()->getName()));
 				}
 			case 5:
-				if(you.s_invisible || you.togle_invisible)
+				if(you.GetInvisible() || you.togle_invisible)
 				{
 					return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_STAR_NORMAL8), PlaceHolderHelper(monster_info->GetName()->getName()));
 				}

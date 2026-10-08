@@ -243,6 +243,7 @@ bool skill_abusion(int power, bool short_, unit* order, coord_def target);
 
 bool evokeAmulet(amulet_type kind, int value_) 
 {
+	const int power = you.level * 5;
 
 	switch (kind)
 	{
@@ -254,7 +255,7 @@ bool evokeAmulet(amulet_type kind, int value_)
 	case AMT_BLOSSOM:
 		PlaySE("soul_shot");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_SOULSHOT) + " ", false, false, false, CL_white_blue);
-		skill_soul_shot(0, &you, you.position);
+		skill_soul_shot(power, &you, you.position);
 		break;
 	case AMT_WAVE:
 		PlaySE("buff");
@@ -300,33 +301,33 @@ bool evokeAmulet(amulet_type kind, int value_)
 		break;
 	case AMT_OCCULT:
 		PlaySE("summon");
-		skill_abusion(you.level * 5, false, &you, you.position);
+		skill_abusion(power, false, &you, you.position);
 		switch (value_)
 		{
 		case OCT_NESI:
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON,
 				PlaceHolderHelper(LOC_SYSTEM_ITEM_OCCULT_NESI)), true, false, false, CL_magic);
-			skill_summon_occult_nesi(you.level * 5, false, &you, you.position);
+			skill_summon_occult_nesi(power, false, &you, you.position);
 			break;
 		case OCT_LONG:
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON,
 				PlaceHolderHelper(LOC_SYSTEM_ITEM_OCCULT_LONG)), true, false, false, CL_magic);
-			skill_summon_occult_long(you.level * 5, false, &you, you.position);
+			skill_summon_occult_long(power, false, &you, you.position);
 			break;
 		case OCT_SHORT:
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON_MANY,
 				PlaceHolderHelper(LOC_SYSTEM_ITEM_OCCULT_SHORT)), true, false, false, CL_magic);
-			skill_summon_occult_small(you.level * 5, false, &you, you.position);
+			skill_summon_occult_small(power, false, &you, you.position);
 			break;
 		case OCT_DISH:
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON,
 				PlaceHolderHelper(LOC_SYSTEM_ITEM_OCCULT_DISH)), true, false, false, CL_magic);
-			skill_summon_occult_dish(you.level * 5, false, &you, you.position);
+			skill_summon_occult_dish(power, false, &you, you.position);
 			break;
 		case OCT_KUNEKUNE:
 			printlog(LocalzationManager::formatString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_OCCULT_SUMMON,
 				PlaceHolderHelper(LOC_SYSTEM_ITEM_OCCULT_KUNEKUNE)), true, false, false, CL_magic);
-			skill_summon_occult_kunekune(you.level * 5, false, &you, you.position);
+			skill_summon_occult_kunekune(power, false, &you, you.position);
 			break;
 		default:
 			break;

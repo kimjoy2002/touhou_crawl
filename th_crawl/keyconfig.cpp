@@ -802,7 +802,8 @@ void key_binding_manager::init_defaults()
 	add_gamepad(gamepad_bindings, "PAD_CONFIRM", LOC_SYSTEM_KEYCONFIG_ACTION_PAD_CONFIRM, GVK_BUTTON_A, GVK_BUTTON_A);
 	add_gamepad(gamepad_bindings, "PAD_LONG_REST", LOC_SYSTEM_KEYCONFIG_ACTION_LONG_REST, GVK_BUTTON_A_LONG, GVK_BUTTON_A_LONG);
 	add_gamepad(gamepad_bindings, "PAD_CANCEL", LOC_SYSTEM_KEYCONFIG_ACTION_PAD_CANCEL, GVK_BUTTON_B, GVK_BUTTON_B);
-	add_gamepad(gamepad_bindings, "PAD_WIDE_SEARCH", LOC_SYSTEM_KEYCONFIG_ACTION_WIDE_SEARCH, GVK_BUTTON_B_LONG, GVK_BUTTON_B_LONG);
+	add_gamepad(gamepad_bindings, "PAD_WIDE_SEARCH", LOC_SYSTEM_KEYCONFIG_ACTION_WIDE_SEARCH,
+		GVK_BUTTON_B_LONG, {}, KEY_INPUT_DEFAULT);
 	add_gamepad(gamepad_bindings, "PAD_QUICK_1", LOC_SYSTEM_KEYCONFIG_ACTION_PAD_QUICK_1, GVK_BUTTON_X, GVK_BUTTON_X);
 	add_gamepad(gamepad_bindings, "PAD_QUICK_2", LOC_SYSTEM_KEYCONFIG_ACTION_PAD_QUICK_2, GVK_BUTTON_X_LONG, GVK_BUTTON_X_LONG);
 	add_gamepad(gamepad_bindings, "PAD_RIGHT_MENU", LOC_SYSTEM_KEYCONFIG_ACTION_PAD_RIGHT_MENU, GVK_BUTTON_Y, GVK_BUTTON_Y);
@@ -812,7 +813,7 @@ void key_binding_manager::init_defaults()
 	add_gamepad(gamepad_bindings, "PAD_ZOOM_OUT", LOC_SYSTEM_KEYCONFIG_ACTION_ZOOM_OUT, GVK_LT, GVK_LT);
 	add_gamepad(gamepad_bindings, "PAD_ZOOM_IN", LOC_SYSTEM_KEYCONFIG_ACTION_ZOOM_IN, GVK_RT, GVK_RT);
 	add_gamepad(gamepad_bindings, "PAD_DASH_MODIFIER", LOC_SYSTEM_KEYCONFIG_ACTION_PAD_DASH,
-		GVK_BUTTON_B, {GVK_BUTTON_B}, KEY_INPUT_DASH_MODIFIER);
+		GVK_BUTTON_B, {GVK_BUTTON_B_LONG}, KEY_INPUT_DASH_MODIFIER);
 
 	add_gamepad(gamepad_bindings, "PAD_SEARCH_CONFIRM", LOC_SYSTEM_KEYCONFIG_ACTION_SEARCH_CONFIRM,
 		GVK_BUTTON_A, {GVK_BUTTON_A}, KEY_INPUT_MAP_SEARCH);
@@ -1316,7 +1317,11 @@ bool key_binding_manager::has_conflict(bool gamepad, size_t index) const
 		return false;
 	for(int key : entries[index].keys)
 		for(size_t other = 0; other < entries.size(); ++other)
-			if(other != index && entries[other].input_context == entries[index].input_context &&
+			if(other != index &&
+				(entries[other].input_context == entries[index].input_context ||
+					(gamepad &&
+						((entries[index].input_context == KEY_INPUT_DASH_MODIFIER && entries[other].input_context == KEY_INPUT_DEFAULT) ||
+						 (entries[other].input_context == KEY_INPUT_DASH_MODIFIER && entries[index].input_context == KEY_INPUT_DEFAULT)))) &&
 				std::find(entries[other].keys.begin(), entries[other].keys.end(), key) != entries[other].keys.end())
 				return true;
 	return false;
@@ -1645,14 +1650,14 @@ void print_key_binding_help(bool gamepad)
 	const auto& help = gamepad ? LocalzationManager::getHelpPadCommand() : LocalzationManager::getHelpCommand();
 	constexpr char help_tab_marker = '\x1D';
 	constexpr int help_tab_column = 72;
-	auto align_help_separator = [](std::string text, int current_width)
+	auto align_help_separator = [gamepad](std::string text, int current_width)
 	{
 		size_t separator = text.find("- ");
 		if(separator == std::string::npos || separator == 0 ||
 			text.find_first_not_of(' ', 0) != separator)
 			return text;
 
-		constexpr int help_description_column = 7;
+		int help_description_column = gamepad?20:9;
 		int local_width = current_width >= help_tab_column ?
 			current_width - help_tab_column : current_width;
 		int padding = local_width <= help_description_column ?

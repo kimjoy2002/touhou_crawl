@@ -46,7 +46,7 @@ extern bool ableWiz;
 
 extern HANDLE mutx;
 
-const char *version_string = "ver1.301";
+const char *version_string = "ver1.302";
 extern int g_tile_size;
 
 int version_string_to_int() {
@@ -284,6 +284,7 @@ void Test_char_init(item_type item_, int bonus)
 
 void addItem_temp(item_type item_type_, int item_id, int num);
 extern void start_mainmenu();
+extern void SelectMachineMigration();
 
 
 string getDefaultLang() {
@@ -591,6 +592,8 @@ void charter_selete(bool first)
 
 
 	changedisplay(DT_GAME);
+	if(saveexit && isPrevVersion(loading_version_string,"ver1.301"))
+		SelectMachineMigration();
 	saveexit = true;
 }
 
@@ -960,7 +963,7 @@ bool ForMouseClick(MOUSE_KIND mouse_type, int val1, int val2) {
 				} else{
 					you.Eat(key_);
 				}
-			} else if(item_->isSimpleType(ITMS_SPELL)) {
+			} else if(item_->isSimpleType(ITMS_MACHINE)) {
 				//스펠카드->발동
 				if(evoke_prev_fail()) {
 					return true;
@@ -1337,7 +1340,7 @@ void MainLoop()
 			Speed_Evoke();
 			break;
 		case 'V':
-			Spelllcard_Evoke(0);
+			EvokeItemMenu(0);
 			break;
 		case 'p':
 			Pray();

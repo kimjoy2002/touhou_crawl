@@ -205,6 +205,22 @@ When using unarmed, attack delay is fixed at 0.6 turns,
 and the {Melee Damage Formula} and {Melee Accuracy Formula} are applied differently.
 
 ================================================
+Engineering
+================================================
+
+Engineering represents the pinnacle of kappa technology as well as the wondrous technology of Outsiders.
+Machines do not use magic, but generally consume their own ammunition.
+Some machines can be attached to equipment for continued use, but doing so consumes electricity.
+Your available electricity generally equals your Engineering level.
+
+================================================
+Magical Devices
+================================================
+
+Magical Devices is the skill of using unusual enchanted tools, which generally draw on magical power.
+Some can be used almost indefinitely, but may directly consume the user's {Power} or {MP}.
+
+================================================
 Stealth
 ================================================
 Base stealth is determined by {Dexterity} * 3 + Stealth skill level * 15.
@@ -474,8 +490,8 @@ Ghost Form
 Ghost Form comes from the {Okuri-Chochin}.
 It makes you invulnerable to all damage, but prevents nearly every action except movement.
 Each turn it consumes Power equal to 12 - power/3 + accumulated uses.
-Power here is max({Evocation} skill, {Level}/3 + {Evocation} skill * 2/3),
-so higher Evocation reduces the cost. Ghost Form ends when Power reaches zero.
+Power here is max({Magical Devices} skill, {Level}/3 + {Magical Devices} skill * 2/3),
+so higher Magical Devices skill reduces the cost. Ghost Form ends when Power reaches zero.
 
 ================================================
 Fear
@@ -836,11 +852,12 @@ Scrolls are consumed by reading. Unidentified scrolls have random names.
 They cannot be read while {Silence}, {Silence Field}, or {Confused}.
 
 ================================================
-Evocable Items (Evocable Item)
+Usable Tools (Tools, Evocable Items)
 ================================================
 
-Evocable Items are reusable tools activated while worn or held.
-Most consume {Power}, and they cannot be used while {Confused}.
+These tools are used with the V key.
+They are divided into {Magical Devices}, which use Power or MP, and {Mechanical Tools}, which rely on Electrical Load or ammunition.
+Most cannot be used while {Confused}.
 
 ================================================
 Spellbook (Spellbooks)
@@ -864,13 +881,14 @@ Food
 Food is consumed to restore {Power}.
 
 ================================================
-Spell Card (Spell Cards)
+Mechanical Tools
 ================================================
 
-A Spell Card is an item with a powerful effect and a limited number of uses.
-Its power increases with your {Evocation} level.
-Identifying it reveals the exact number of uses.
-Effects such as a recharge {Scroll} can replenish its uses.
+Mechanical tools are powerful machines that come in ammunition-based and installable forms.
+Ammunition-based machines expend ammunition when used, and their power increases with Engineering.
+Identifying one reveals its exact remaining ammunition, which can be replenished with effects such as a charging {Scroll}.
+Installable machines can be attached to specified equipment and add to your {Electrical Load} while worn.
+If your Electrical Load exceeds its limit, none of your installable machines will function.
 
 ================================================
 Danmaku (Ranged)
@@ -1427,8 +1445,8 @@ Junko
 Junko is a purified divine spirit,
 a {God} suited to characters who fight with {Danmaku} and buffs.
 Only your own kills grant {Faith}: 18% for weak enemies and 100% for strong enemies.
-Her powers are strong, but using them temporarily applies {Purification}, restricting spell
-cards, scrolls, and potions.
+Her powers are strong, but using them temporarily applies {Purification}, restricting
+{Mechanical Tools}, {Scrolls}, and {Potions} according to its stage.
 Abandoning Junko gives 30 {Punishment}.
 -> {Simple Danmaku}, {Pure Strength}, {Pristine Murderous Intent}, {Blessing of Purification},
 {Junko Punishment}
@@ -1438,7 +1456,7 @@ Purification
 ================================================
 
 Purification is a penalty caused by {Junko}'s powers and has three stages.
-Stage 1 prevents using {Spell Cards}. Stage 2 also prevents most {Scrolls}, except Identify,
+Stage 1 prevents using {Mechanical Tools}. Stage 2 also prevents most {Scrolls}, except Identify,
 Enchant, Remove Curse, and Acquirement. Stage 3 also prevents potion effects.
 Its duration is shown separately for each stage.
 
@@ -1481,7 +1499,7 @@ Mana makes {HP} and {MP} function as a single resource.
 Power doubles maximum {Power} and Power recovery.
 Life grants two extra lives.
 Equipment raises one chosen item to its maximum enchantment +5, including artifacts.
-System allows {Spell Cards} during {Purification} and triples talisman recharge speed.
+System allows {Mechanical Tools} during {Purification} and triples talisman recharge speed.
 Refusing the blessing lowers faith to 140.
 
 ================================================
@@ -2044,12 +2062,12 @@ If you wait until another 10 counter reductions,
 the treasure disappears and faith still falls by one star.
 
 {Byakuren}: 2-4 random spellbooks / {Kanako}: 3-5 random weapons
-{Suwako}: 2-4 random spell cards / {Minoriko}: 10 sweet potatoes
+{Suwako}: 2-4 random mechanical tools / {Minoriko}: 10 sweet potatoes
 {Mima}: Mima's Sealed Grimoire / {Shinki}: 2-4 Scrolls of Spirit Strike
 {Yuugi}: 2-4 random armour pieces / {Shizuha}: a weapon with Autumn Brand
 {Hina}: 2-3 random cursed rings
 {Yukari}: 3-7 Scrolls of Spatial Movement and 0-3 Scrolls of Teleportation
-{Eirin}: 6-12 random potions / {Yuyuko}: 2 random evocable items
+{Eirin}: 6-12 random potions / {Yuyuko}: 2 random magical devices
 {Satori}: 7-12 Scrolls of Identify / {Tenshi}: 4-8 random floor-1 items
 {Lily}: 4-7 stacks of danmaku / {Joon & Shion}: 2 random talismans
 {Miko}: an artifact cloak / {Okina}: 2-4 Scrolls of Sanctuary
@@ -2311,6 +2329,6 @@ Dive is one of the player's buffs.
 When activated, you dive underground, vanish from every enemy's sight, and reduce enemy
 {Detection} by 70.
 Attacking an enemy that is already awake also triggers Stage 2 {Stabbing}.
-It lasts 10-15 + ({Evocations} skill x 5)/4 turns.
+It lasts 10-15 + ({Magical Devices} skill x 5)/4 turns.
 While diving, you may only move or attack. Attacking or taking damage ends the effect
 immediately.

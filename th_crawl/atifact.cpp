@@ -1,4 +1,4 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 파일이름: atifact.cpp
 //
@@ -101,7 +101,7 @@ int GetAtifactValue(artifact_type ring_, int good_bad_)
 			{
 				skill_ = randA(SKT_MAX - 1);
 			} while (skill_ == SKT_FIGHT || skill_ == SKT_SPELLCASTING || skill_ == SKT_DODGE ||
-				skill_ == SKT_ARMOUR || skill_ == SKT_SHIELD || skill_ == SKT_EVOCATE);
+				skill_ == SKT_ARMOUR || skill_ == SKT_SHIELD || skill_ == SKT_MAGIC_DEVICE);
 			skill_ += randA_1(4) * 100;
 			return skill_;
 		}

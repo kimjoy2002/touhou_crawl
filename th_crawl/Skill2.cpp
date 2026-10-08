@@ -1,4 +1,4 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 파일이름: skill.cpp
 //
@@ -820,12 +820,12 @@ int SkillPow(skill_list skill)
 		//return you.skill[SKT_SPELLCASTING].level*5;
 	case SKL_SIZUHA_2:
 		return you.piety;
-	case SKL_LEVITATION:
-	case SKL_INVISIBLE:
 	case SKL_FIREBALL:
 	case SKL_MISSLE:
 	case SKL_DIVE:
-		return you.GetSkillLevel(SKT_EVOCATE, true) *5;
+	case SKL_LEVITATION:
+	case SKL_INVISIBLE:
+		return you.GetSkillLevel(SKT_MAGIC_DEVICE, true) *5;
 	case SKL_CIRNO_ICE_CREATE:
 		return GetCirnoIceCreateLevel();
 	case SKL_GRAZE:
@@ -854,19 +854,19 @@ int SkillDiffer(skill_list skill)
 	switch(skill)
 	{
 	case SKL_LEVITATION:
-		return SkillDiffer_simple(-4,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
+		return SkillDiffer_simple(-4,SKT_MAGIC_DEVICE,SKT_ERROR,SKT_ERROR);
 	case SKL_INVISIBLE:
 		if(you.char_type == UNIQ_START_SUNNY) {
 			return 100;
 		} else {
-			return SkillDiffer_simple(0,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
+			return SkillDiffer_simple(0,SKT_MAGIC_DEVICE,SKT_ERROR,SKT_ERROR);
 		}
 	case SKL_FIREBALL:
-		return SkillDiffer_simple(-3,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
+		return SkillDiffer_simple(-3,SKT_MAGIC_DEVICE,SKT_ERROR,SKT_ERROR);
 	case SKL_MISSLE:
-		return SkillDiffer_simple(-2,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
+		return SkillDiffer_simple(-2,SKT_MAGIC_DEVICE,SKT_ERROR,SKT_ERROR);
 	case SKL_DIVE:
-		return SkillDiffer_simple(-3,SKT_EVOCATE,SKT_ERROR,SKT_ERROR);
+		return SkillDiffer_simple(-3,SKT_MAGIC_DEVICE,SKT_ERROR,SKT_ERROR);
 	case SKL_BYAKUREN_1:
 		return 100;
 		//return SkillDiffer_simple(-3,SKT_SPELLCASTING,SKT_ERROR,SKT_ERROR);
@@ -1793,7 +1793,7 @@ void SkillUseTraning(skill_list skill)
 	//case SKL_GRAZE:
 	//case SKL_LEVITATION:
 	//case SKL_INVISIBLE:
-	//	you.SkillTraining(SKT_EVOCATE,1);
+	//	you.SkillTraining(SKT_MAGIC_DEVICE,1);
 	//	return;		
 	//case SKL_NONE:
 	//case SKL_GRAZE_OFF:

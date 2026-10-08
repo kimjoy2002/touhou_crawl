@@ -78,7 +78,7 @@ extern LOCALIZATION_ENUM_KEY item_armor_string;
 extern LOCALIZATION_ENUM_KEY item_potion_string;
 extern LOCALIZATION_ENUM_KEY item_food_string;
 extern LOCALIZATION_ENUM_KEY item_scroll_string;
-extern LOCALIZATION_ENUM_KEY item_spell_string;
+extern LOCALIZATION_ENUM_KEY item_machine_string;
 extern LOCALIZATION_ENUM_KEY item_jewelry_string;
 extern LOCALIZATION_ENUM_KEY item_book_string;
 extern LOCALIZATION_ENUM_KEY item_miscellaneous_string;

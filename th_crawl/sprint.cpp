@@ -1,4 +1,4 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 파일이름: sprint.cpp
 //
@@ -25,7 +25,7 @@ enum REWARD_ITEM_TYPE
 	REWARD_BONUS_FOR_EARLY, //초반에 도움이 될만한 아이템
 	REWARD_BONUS_RANDOM, //전체적인 랜덤(포션 두루마리 제외)
 	REWARD_BONUS_FOR_MIDDLE, //스펙업에 도움이 될만한 아이템
-	REWARD_SPELLCARD,
+	REWARD_MACHINE,
 	REWARD_BOOK,
 	REWARD_RING,
 	REWARD_RING_ARTI,
@@ -295,7 +295,7 @@ void map_algorithms_sprint(int num)
 	addMonster_sprint(num, MON_YAMABUSH_TENGU, &sprint_map);
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
-	reward_item(num, REWARD_SPELLCARD, &sprint_map);
+	reward_item(num, REWARD_MACHINE, &sprint_map);
 	//엔터
 
 	reward_item(num, REWARD_BONUS_RANDOM, &sprint_map);
@@ -469,7 +469,7 @@ random_extraction<int> rand_scroll_necessary;
 random_extraction<int> rand_scroll_option;
 random_extraction<int> rand_potion_option;
 random_extraction<int> rand_ring_necessary;
-random_extraction<int> rand_spell_card;//스펠카드(땅제외)
+random_extraction<int> rand_machine;//기계 도구(굴착드릴 제외)
 random_extraction<int> rand_book;//책
 random_extraction<int> rand_ring_option;//반지(골고루)
 random_extraction<int> rand_armour2;//보조방어구
@@ -486,7 +486,7 @@ void reward_random_init()
 	rand_scroll_option.clear();
 	rand_potion_option.clear();
 	rand_ring_necessary.clear();
-	rand_spell_card.clear();
+	rand_machine.clear();
 	rand_book.clear();
 	rand_ring_option.clear();
 	rand_armour2.clear();
@@ -532,12 +532,12 @@ void reward_random_init()
 	rand_ring_necessary.push(RGT_MAGIC_RESIS, 1);
 
 
-	rand_spell_card.push(SPC_V_FIRE, 3);
-	rand_spell_card.push(SPC_V_ICE, 3);
-	rand_spell_card.push(SPC_V_AIR, 3);
-	rand_spell_card.push(SPC_V_METAL, 3);
-	rand_spell_card.push(SPC_V_INVISIBLE, 1);
-	rand_spell_card.push(SPC_V_SUN, 1);
+	rand_machine.push(MCH_FLAMETHROWER, 3);
+	rand_machine.push(MCH_FREEZE_SPRAYER, 3);
+	rand_machine.push(MCH_LARGE_FAN, 3);
+	rand_machine.push(MCH_SCRAP_LAUNCHER, 3);
+	rand_machine.push(MCH_OPTICAL_CAMOUFLAGE, 1);
+	rand_machine.push(MCH_SUN_LAMP, 1);
 
 	for (int i = 0; i < BOOK_LAST; i++) {
 		if(i != BOOK_TRANSITION)
@@ -592,7 +592,7 @@ void reward_random_init()
 	rand_tanmac.push(TMT_DOGGOJEO, 1);
 
 	rand_bonus_for_early.push(REWARD_POTION);
-	rand_bonus_for_early.push(REWARD_SPELLCARD);
+	rand_bonus_for_early.push(REWARD_MACHINE);
 	rand_bonus_for_early.push(REWARD_TANMAC);
 
 	rand_bonus_for_middle.push(REWARD_RING);
@@ -604,7 +604,7 @@ void reward_random_init()
 	rand_bonus_for_random.push(REWARD_SMALL_SCROLL,4);
 	rand_bonus_for_random.push(REWARD_SMALL_POTION,4);
 	rand_bonus_for_random.push(REWARD_NECC_RING);
-	rand_bonus_for_random.push(REWARD_SPELLCARD);
+	rand_bonus_for_random.push(REWARD_MACHINE);
 	rand_bonus_for_random.push(REWARD_TANMAC,2);
 	rand_bonus_for_random.push(REWARD_RING,2);
 	rand_bonus_for_random.push(REWARD_AMULET);
@@ -697,18 +697,18 @@ bool reward_item2(int num, REWARD_ITEM_TYPE reward_id, coord_def c)
 		{
 			return reward_item2(num, (REWARD_ITEM_TYPE)rand_bonus_for_random.choice(), c);
 		}
-		case REWARD_SPELLCARD:
+		case REWARD_MACHINE:
 		{
 			for (int i = 1; i > 0; i--) {
 				int id_ = -1;
-				if (rand_spell_card.GetSize()) {
-					id_ = rand_spell_card.choice();
+				if (rand_machine.GetSize()) {
+					id_ = rand_machine.choice();
 				}
 				else {
 					break;
 				}
 				item_infor t;
-				makeitem(ITM_SPELL, 1, &t, id_);
+				makeitem(ITM_MACHINE, 1, &t, id_);
 				env[num].MakeItem(c, t);
 			}
 			break;

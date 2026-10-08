@@ -188,7 +188,7 @@ bool skill_off_levitation(int pow, bool short_, unit* order, coord_def target)
 }
 bool skill_turn_invisible(int pow, bool short_, unit* order, coord_def target)
 {
-	if(order->isplayer() && !you.s_invisible)
+	if(order->isplayer() && !you.GetInvisible())
 	{
 		PlaySE("buff");
 		you.SetInvisible(rand_int(15,25)+pow/2);
@@ -196,7 +196,7 @@ bool skill_turn_invisible(int pow, bool short_, unit* order, coord_def target)
 		you.Ability(SKL_INVISIBLE_OFF,false,false,temp);
 		return true;
 	}
-	else if(order->isplayer() && you.s_invisible)
+	else if(order->isplayer() && you.GetInvisible())
 		printlog(LocalzationManager::locString(LOC_SYSTEM_SKILL_ALREADY_INVISIBLE),true,false,false,CL_normal);	
 
 	return false;
@@ -3516,7 +3516,8 @@ bool skill_junko_4(int power, bool short_, unit* order, coord_def target)
 			int key_ = waitkeyinput(true);
 			if ((key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z'))
 			{
-				int num = (key_ >= 'a' && key_ <= 'z') ? key_ - 'a' : key_ - 'A' + 26;
+				int display_num = (key_ >= 'a' && key_ <= 'z') ? key_ - 'a' : key_ - 'A' + 26;
+				int num = display_num < SKT_MAX ? skill_from_display_index(display_num) : display_num;
 				if (num < SKT_MAX && you.GetSkillLevel(num, false) < 27 && !you.cannotSkillup(num))
 				{
 					if (you.skill[num].aptit < 0)

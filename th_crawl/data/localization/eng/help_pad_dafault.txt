@@ -8,7 +8,7 @@ A      - Pick up, use stairs, pray at altar, wait 1 turn
                          (Left action takes priority based on situation)
 Hold A - Recover for 100 turns
 B      - Cancel
-Hold B - Inspect map
+NONE   - Run
 X      - Quick Menu 1 (default: Magic or Throw)
 Hold X - Quick Menu 2 (default: Divine Power or Activated Ability)
 Y      - Open right-side menu/item window

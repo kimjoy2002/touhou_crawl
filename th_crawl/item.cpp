@@ -25,6 +25,70 @@
 #include "armour.h"
 #include "amulet.h"
 
+static string InstalledMachineOptionString(item* item_, const string& lang)
+{
+	if(!item_)
+		return "";
+	string result_;
+	for(int bit_ = 1; bit_ < IMT_MAX; bit_ <<= 1)
+	{
+		installed_machine_type machine_ = (installed_machine_type)bit_;
+		if(!item_->HasInstalledMachine(machine_))
+			continue;
+		LOCALIZATION_ENUM_KEY key_ = InstalledMachineOptionName(machine_);
+		if(key_ == LOC_NONE)
+			continue;
+		if(!result_.empty())
+			result_ += ", ";
+		result_ += LocalzationManager::locString(lang,key_);
+	}
+	return result_;
+}
+
+template<typename T>
+static void MigrateLegacySkyTorpedo(T* item_)
+{
+	if(!item_ || item_->type != ITM_MISCELLANEOUS || item_->value1 != EVK_SKY_TORPEDO)
+		return;
+	item_->type = ITM_MACHINE;
+	item_->value1 = 1;
+	item_->value2 = MCH_SKY_TORPEDO;
+	item_->value3 = 0;
+	item_->value4 = 0;
+	item_->value5 = 0;
+	item_->value6 = 0;
+	item_->value7 = 0;
+	item_->value8 = 0;
+	item_->is_pile = false;
+	item_->can_throw = false;
+	item_->image = MachineItemImage(MCH_SKY_TORPEDO,true);
+	item_->name = name_infor(LOC_SYSTEM_MACHINE_ITEM);
+	item_->weight = 2.0f;
+	item_->value = 200;
+	if(find(item_->item_tag.begin(),item_->item_tag.end(),LOC_SYSTEM_TAG_MACHINE) == item_->item_tag.end())
+		item_->item_tag.push_back(LOC_SYSTEM_TAG_MACHINE);
+}
+
+static void RestoreMachineDiscoveryFromPlayer(Iden_collect& collection_)
+{
+	for(item& item_ : you.item_list)
+		if(item_.type == ITM_MACHINE && item_.value2 >= 0 && item_.value2 < MCH_MAX)
+			collection_.machine_list[item_.value2].found = true;
+	for(int slot_ = ET_ARMOR; slot_ < ET_ARMOR_END; ++slot_)
+	{
+		item* armour_ = you.equipment[slot_];
+		if(!armour_)
+			continue;
+		for(int bit_ = 1; bit_ < IMT_MAX; bit_ <<= 1)
+		{
+			installed_machine_type installed_ = (installed_machine_type)bit_;
+			const installed_machine_info* info_ = GetInstalledMachineInfo(installed_);
+			if(info_ && armour_->HasInstalledMachine(installed_))
+				collection_.machine_list[info_->source_type].found = true;
+		}
+	}
+}
+
 
 
 
@@ -72,7 +136,7 @@ item::item(const coord_def &c, const item_infor &t)
 	now_find = false;
 	curse = t.curse;
 	identify = false;
-	if((type >= ITM_THROW_FIRST && type < ITM_THROW_LAST) || type == ITM_POTION ||type == ITM_FOOD||type == ITM_SCROLL||type == ITM_SPELL||type == ITM_MISCELLANEOUS)
+	if((type >= ITM_THROW_FIRST && type < ITM_THROW_LAST) || type == ITM_POTION ||type == ITM_FOOD||type == ITM_SCROLL||type == ITM_MACHINE||type == ITM_MISCELLANEOUS)
 		identify_curse = true;
 	else
 		identify_curse = false;
@@ -164,6 +228,12 @@ void item_infor::LoadDatas(FILE *fp)
 			LoadData<LOCALIZATION_ENUM_KEY>(fp, temp);
 			item_tag.push_back(temp);
 		}
+	}
+	MigrateLegacySkyTorpedo(this);
+	if(isPrevVersion(loading_version_string, "ver1.301")) {
+		if(type == ITM_MACHINE)
+			image = MachineItemImage((machine_type)value2,
+				value1 > 0 || IsInstallableMachine((machine_type)value2));
 	}
 }
 void item::SaveDatas(FILE *fp)
@@ -289,6 +359,12 @@ void item::LoadDatas(FILE *fp)
 			item_tag.push_back(temp);
 		}
 	}
+	MigrateLegacySkyTorpedo(this);
+	if(isPrevVersion(loading_version_string, "ver1.301")) {
+		if(type == ITM_MACHINE)
+			image = MachineItemImage((machine_type)value2,
+				value1 > 0 || IsInstallableMachine((machine_type)value2));
+	}
 }
 
 
@@ -309,9 +385,9 @@ void Iden_collect::SaveDatas(FILE *fp) {
 	for(int i = 0; i < AMT_MAX; i++) {
 		SaveData<amulet_iden>(fp, amulet_list[i]);
 	}
-	SaveData<int>(fp, SPC_V_MAX);
-	for(int i = 0; i < SPC_V_MAX; i++) {
-		SaveData<spellcard_iden>(fp, spellcard_list[i]);
+	SaveData<int>(fp, MCH_MAX);
+	for(int i = 0; i < MCH_MAX; i++) {
+		SaveData<machine_iden>(fp, machine_list[i]);
 	}
 	SaveData<int>(fp, FIXED_ARTIFACT_MAX);
 	for(int i = 0; i < FIXED_ARTIFACT_MAX; i++) {
@@ -346,9 +422,9 @@ void Iden_collect::SaveDatas(FILE *fp) {
     for (int i = IDEN_CHECK_AMULET_START; i < IDEN_CHECK_AMULET_END; ++i)
         SaveData<bool>(fp, autopickup[i]);
 
-    // 스펠카드 자동줍기 저장
-    SaveData<int>(fp, SPC_V_MAX);
-    for (int i = IDEN_CHECK_SPC_START; i < IDEN_CHECK_SPC_END; ++i)
+	// 기계 도구 자동줍기 저장
+    SaveData<int>(fp, MCH_MAX);
+    for (int i = IDEN_CHECK_MACHINE_START; i < IDEN_CHECK_MACHINE_END; ++i)
         SaveData<bool>(fp, autopickup[i]);
 
     // 책 자동줍기 저장 (미감정 포함)
@@ -435,15 +511,22 @@ void Iden_collect::LoadDatas(FILE *fp) {
 		LoadData<int>(fp, size_);
 		int i = 0;
 		for(; i < size_; i++) {
-			if(i < SPC_V_MAX) {
-				LoadData<spellcard_iden>(fp, spellcard_list[i]);
+			if(i < MCH_MAX) {
+				LoadData<machine_iden>(fp, machine_list[i]);
 			} else {
-				spellcard_iden temp;
-				LoadData<spellcard_iden>(fp,temp);
+				machine_iden temp;
+				LoadData<machine_iden>(fp,temp);
 			}
 		}
-		for(; i < SPC_V_MAX; i++) {
-			spellcard_list[i] = spellcard_iden();
+		for(; i < MCH_MAX; i++) {
+			machine_list[i] = machine_iden();
+		}
+		for(i = 0; i < MCH_MAX; i++) {
+			machine_list[i].legacy_type = i;
+			if(isPrevVersion(loading_version_string,"ver1.301"))
+				machine_list[i].found = false;
+			else
+				machine_list[i].found = machine_list[i].found != 0;
 		}
 	}
 	
@@ -563,16 +646,16 @@ void Iden_collect::LoadDatas(FILE *fp) {
     // 스펠카드 자동줍기 로드
     LoadData<int>(fp, size_);
     for (i = 0; i < size_; ++i) {
-        int index = IDEN_CHECK_SPC_START + i;
-        if (index < IDEN_CHECK_SPC_END)
+        int index = IDEN_CHECK_MACHINE_START + i;
+        if (index < IDEN_CHECK_MACHINE_END)
             LoadData<bool>(fp, autopickup[index]);
         else {
             bool temp;
             LoadData<bool>(fp, temp);
         }
     }
-    for (; i + IDEN_CHECK_SPC_START < IDEN_CHECK_SPC_END; ++i){
-        autopickup[IDEN_CHECK_SPC_START + i] = false;
+    for (; i + IDEN_CHECK_MACHINE_START < IDEN_CHECK_MACHINE_END; ++i){
+        autopickup[IDEN_CHECK_MACHINE_START + i] = false;
 	}
 	size_ = 0;
     // 책 자동줍기 로드 (미감정 포함)
@@ -614,11 +697,25 @@ void Iden_collect_111::migrateIden111toCurrent(const Iden_collect_111& old_data,
 
 	memcpy(new_data.ring_list, old_data.ring_list, sizeof(old_data.ring_list));
 	memcpy(new_data.amulet_list, old_data.amulet_list, sizeof(old_data.amulet_list));
-	memcpy(new_data.spellcard_list, old_data.spellcard_list, sizeof(old_data.spellcard_list));
+	for(int i = 0; i < MCH_MAX; i++) {
+		new_data.machine_list[i].found = false;
+		new_data.machine_list[i].legacy_type = i;
+	}
 
 	memcpy(new_data.fixed_artifact, old_data.fixed_artifact, sizeof(old_data.fixed_artifact));
 	memcpy(new_data.books_list, old_data.books_list, sizeof(old_data.books_list));
-	memcpy(new_data.autopickup, old_data.autopickup, sizeof(old_data.autopickup));
+	memset(new_data.autopickup, 0, sizeof(new_data.autopickup));
+	const int legacy_machine_end_ = IDEN_CHECK_MACHINE_START+Iden_collect_111::LEGACY_MACHINE_COUNT;
+	const int legacy_book_start_ = legacy_machine_end_;
+	const int legacy_book_count_ = 1+BOOK_LAST;
+	const int legacy_etc_start_ = legacy_book_start_+legacy_book_count_;
+	const int legacy_etc_count_ = 2+TMT_MAX;
+	memcpy(new_data.autopickup,old_data.autopickup,legacy_machine_end_*sizeof(bool));
+	memcpy(&new_data.autopickup[IDEN_CHECK_BOOK_START],
+		&old_data.autopickup[legacy_book_start_],legacy_book_count_*sizeof(bool));
+	memcpy(&new_data.autopickup[IDEN_CHECK_ETC_START],
+		&old_data.autopickup[legacy_etc_start_],legacy_etc_count_*sizeof(bool));
+	RestoreMachineDiscoveryFromPlayer(new_data);
 }
 
 
@@ -729,12 +826,10 @@ string item::GetName(int num_, bool simple_, string lang)
 		overwriteName = true;
 	}
 
-	if(type==ITM_SPELL)
+	if(type==ITM_MACHINE)
 	{
-		if(iden_list.spellcard_list[value2].iden == 2) {
-			temp+=LocalzationManager::formatString(lang, LOC_SYSTEM_SPELLCARD_IDENTIFY, SpellcardName((spellcard_evoke_type)value2));
-			overwriteName = true;
-		}
+		temp+=LocalzationManager::formatString(lang, LOC_SYSTEM_MACHINE_IDENTIFY, MachineName((machine_type)value2));
+		overwriteName = true;
 	}
 	if(type==ITM_AMULET)
 	{
@@ -815,23 +910,23 @@ string item::GetName(int num_, bool simple_, string lang)
 		temp += "("+LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_USED)+")";
 	if(!isArtifact() && (type==ITM_SCROLL && iden_list.scroll_list[value1].iden == 2))
 		temp += "("+LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_SELECTED_USED)+")";
-	if(type==ITM_SPELL)
+	if(type==ITM_MACHINE)
 	{
-		if(identify)
+		if(identify && !IsInstallableMachine((machine_type)value2))
 		{
 			char temp2[32];
-			sprintf_s(temp2,32,"(%d/%d)",value1,SpellcardMaxCharge((spellcard_evoke_type)value2));
+			sprintf_s(temp2,32,"(%d/%d)",value1,MachineMaxCharge((machine_type)value2));
 			temp += temp2;
 		}
 		if(!identify && value3)
 		{
 			std::ostringstream ss;
 			if(value3>0)
-				ss<<"("<<LocalzationManager::formatString(lang,LOC_SYSTEM_ITEM_SPELLCARD_USED, PlaceHolderHelper(to_string(value3))) << ")";
+				ss<<"("<<LocalzationManager::formatString(lang,LOC_SYSTEM_ITEM_MACHINE_USED, PlaceHolderHelper(to_string(value3))) << ")";
 			else if(value3 == -1)
-				ss<<"("<<LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_SPELLCARD_EMPTY) << ")";
+				ss<<"("<<LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_MACHINE_EMPTY) << ")";
 			else if(value3 == -2)
-				ss<<"("<<LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_SPELLCARD_CHARGED) << ")";
+				ss<<"("<<LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_MACHINE_CHARGED) << ")";
 			temp += ss.str();
 		}
 	}
@@ -847,6 +942,12 @@ string item::GetName(int num_, bool simple_, string lang)
 		std::ostringstream ss;
 		ss << " (" << you.getAmuletPercent() << "%)";  // ostringstream 사용
 		temp += ss.str();
+	}
+	if(!isArtifact() && isarmor() && value8)
+	{
+		string installed_ = InstalledMachineOptionString(this,lang);
+		if(!installed_.empty())
+			temp += " {" + installed_ + "}";
 	}
 	
 	if(isArtifact() && ((type>=ITM_WEAPON_FIRST && type< ITM_WEAPON_LAST)||(type>=ITM_ARMOR_FIRST && type< ITM_ARMOR_LAST)||(type>=ITM_JEWELRY_FIRST && type< ITM_JEWELRY_LAST)))
@@ -887,6 +988,14 @@ string item::GetName(int num_, bool simple_, string lang)
 					base_ = true;
 				arti_ += GetAtifactString(lang,(artifact_type)it->kind,it->value);
 			}
+			string installed_ = InstalledMachineOptionString(this,lang);
+			if(!installed_.empty())
+			{
+				if(base_)
+					arti_ += ", ";
+				arti_ += installed_;
+				base_ = true;
+			}
 			arti_ += "}";
 			temp+=arti_;
 		}
@@ -900,7 +1009,11 @@ string item::GetName(int num_, bool simple_, string lang)
 					temp+=", ";
 				}
 			}
-			temp+= LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_ARTIFACT) +"}";
+			temp+= LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_ARTIFACT);
+			string installed_ = InstalledMachineOptionString(this,lang);
+			if(!installed_.empty())
+				temp += ", " + installed_;
+			temp += "}";
 		}
 	}
 
@@ -986,6 +1099,7 @@ textures* item::GetEquipTexture()
 {
 	return equip_image;
 }
+
 const D3DCOLOR item::item_color()	
 {	
 	D3DCOLOR return_ = CL_STAT;
@@ -1035,13 +1149,12 @@ const D3DCOLOR item::item_color()
 			return_ = (color_ == 0)?CL_bad:((color_ == -1)?CL_small_danger:CL_STAT);
 		}
 		break;
-	case ITM_SPELL:
+	case ITM_MACHINE:
 		if (you.s_pure_turn && you.s_pure >= 10 && !you.GetProperty(TPT_PURE_SYSTEM))
 		{
 			return_ = CL_bad;
 		}
-		else if(iden_list.spellcard_list[value2].iden ==2 &&
-			value2 == SPC_V_SUN && you.tribe == TRI_VAMPIRE){
+		else if(value2 == MCH_SUN_LAMP && you.tribe == TRI_VAMPIRE){
 			return_ = CL_magic;
 		}
 		break;
@@ -1104,11 +1217,6 @@ bool item::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::Sp
 			}
 
 		}
-		else if(type == ITM_SPELL) {
-			if (iden_list.spellcard_list[value2].iden) {
-				img_item_spellcard_kind[min(SPC_V_MAX-1,max(0,value2))].draw(pSprite, x_, y_, 0.0f, scale_, scale_, alpha_);
-			}
-		}
 		else if (type == ITM_SCROLL) {
 			if (iden_list.scroll_list[value1].iden == 3) {
 				img_item_scroll_kind[min(SCT_MAX - 1, max(0, value1))].draw(pSprite, x_, y_, 0.0f, scale_, scale_, alpha_);
@@ -1153,8 +1261,8 @@ bool item::isSimpleType(item_type_simple type_)
 	case ITMS_SCROLL:
 		return (type==ITM_SCROLL);
 		break;
-	case ITMS_SPELL:
-		return (type==ITM_SPELL);
+	case ITMS_MACHINE:
+		return (type==ITM_MACHINE);
 		break;
 	case ITMS_JEWELRY:
 		return (type>=ITM_JEWELRY_FIRST && type<=ITM_JEWELRY_LAST);
@@ -1420,11 +1528,9 @@ bool item::isautopick()
 		}
 		else
 			return true;
-	case ITM_SPELL:
-		if (value1 >= 0 && value1 < SPC_V_MAX && iden_list.spellcard_list[value1].iden == 2)
-		{
-			return iden_list.autopickup[value1 + IDEN_CHECK_SPC_START];
-		}
+	case ITM_MACHINE:
+		if (value2 >= 0 && value2 < MCH_MAX)
+			return iden_list.autopickup[value2 + IDEN_CHECK_MACHINE_START];
 		return true;
 	case ITM_AMULET:
 		if(isArtifact()) {
@@ -1483,13 +1589,52 @@ bool item::isArtifact()
 }
 bool item::isChargable()
 {
-	if(type == ITM_SPELL)
+	if(type == ITM_MACHINE)
 	{
-		if(value1<SpellcardMaxCharge((spellcard_evoke_type)value2))
+		if(IsInstallableMachine((machine_type)value2))
+			return false;
+		if(value1<MachineMaxCharge((machine_type)value2))
 			return true;
 	}
 	return false;
 
+}
+
+bool item::HasInstalledMachine(installed_machine_type type_)
+{
+	return isarmor() && (value8 & (int)type_) != 0;
+}
+
+bool item::HasAnyInstalledMachine()
+{
+	return isarmor() && (value8 & (IMT_MAX-1)) != 0;
+}
+
+int item::InstalledMachinePowerUsage()
+{
+	if(!isarmor())
+		return 0;
+	int power_ = 0;
+	for(int bit_ = 1; bit_ < IMT_MAX; bit_ <<= 1)
+	{
+		installed_machine_type machine_ = (installed_machine_type)bit_;
+		if(HasInstalledMachine(machine_))
+			power_ += InstalledMachinePower(machine_);
+	}
+	return power_;
+}
+
+bool item::CanInstallMachine(installed_machine_type type_)
+{
+	if(!isarmor() || HasInstalledMachine(type_))
+		return false;
+	return CanInstallMachineAt(type_,GetArmorType());
+}
+
+void item::InstallMachine(installed_machine_type type_)
+{
+	if(CanInstallMachine(type_))
+		value8 |= (int)type_;
 }
 bool item::canSlashTanmac() {
 	if(type == ITM_WEAPON_LONGBLADE) {
@@ -1521,7 +1666,7 @@ bool item::canShockwave() {
 }
 bool item::isEvokable()
 	{
-	if (type == ITM_SPELL || type == ITM_MISCELLANEOUS)
+	if (type == ITM_MACHINE || type == ITM_MISCELLANEOUS)
 		return true;
 	if (type == ITM_AMULET) {
 		if (isCanEvoke((amulet_type)value1) &&
@@ -1567,8 +1712,8 @@ void item::Identify()
 			unidenequipring((ring_type)value1, value2*(-1));
 		you.auto_equip_iden();
 		break;
-	case ITM_SPELL:		
-		iden_list.spellcard_list[value2].iden = 2;
+	case ITM_MACHINE:
+		iden_list.machine_list[value2].found = true;
 		break;
 	case ITM_AMULET:
 		iden_list.amulet_list[value1].iden = 2;
@@ -1765,6 +1910,8 @@ bool item::pick()
 		throw_item = false;
 	}
 	prev_sight = false;
+	if(type == ITM_MACHINE && value2 >= 0 && value2 < MCH_MAX)
+		iden_list.machine_list[value2].found = true;
 	return return_;
 }
 
@@ -1802,8 +1949,6 @@ int item::action(int delay_)
 				identify = true;
 			else if(type==ITM_RING && !isArtifact() && iden_list.ring_list[value1].iden == 2 && !isRingGotValue((ring_type)value1))
 				identify = true;
-			//else if(type==ITM_SPELLCARD && iden_list.scroll_list[value1].iden == 2 && !isAmuletGotValue((amulet_type)value1))
-			//	identify = true;
 		}
 
 	}
@@ -1891,8 +2036,8 @@ string GetItemTypeSting(item_type_simple type)
 		return LocalzationManager::locString(item_food_string);
 	case ITMS_SCROLL:
 		return LocalzationManager::locString(item_scroll_string);
-	case ITMS_SPELL:
-		return LocalzationManager::locString(item_spell_string);
+	case ITMS_MACHINE:
+		return LocalzationManager::locString(item_machine_string);
 	case ITMS_JEWELRY:
 		return LocalzationManager::locString(item_jewelry_string);
 	case ITMS_BOOK:

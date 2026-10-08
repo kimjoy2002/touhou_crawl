@@ -798,12 +798,12 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				num++;
 			}
 		}
-		else if (i >= IDEN_CHECK_SPC_START && i < IDEN_CHECK_SPC_END) {
-			int cur_ = i - IDEN_CHECK_SPC_START;
-			if (i == IDEN_CHECK_SPC_START) {
+		else if (i >= IDEN_CHECK_MACHINE_START && i < IDEN_CHECK_MACHINE_END) {
+			int cur_ = i - IDEN_CHECK_MACHINE_START;
+			if (i == IDEN_CHECK_MACHINE_START) {
 				first_ = true;
 			}
-			if (iden_list.spellcard_list[cur_].iden == 2)
+			if (iden_list.machine_list[cur_].found)
 			{
 				if (first_)
 				{
@@ -811,7 +811,7 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					rc.top += fontDesc.Height;
 					ss.str("");
 					ss.clear();
-					ss << "<" << LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_SPELLCARD) << ">";
+					ss << "<" << LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_MACHINE) << ">";
 					DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_STAT);
 					rc.top += 3*fontDesc.Height;
 					first_ = false;
@@ -819,11 +819,11 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 				rc.left = two_;
 				rc2=rc;
-				img_item_spellcard.draw(pSprite, rc.left - 24, rc.top + 6, 255);
+				MachineItemImage((machine_type)cur_,true)->draw(pSprite, rc.left - 24, rc.top + 6, 255);
 
 				ss.str("");
 				ss.clear();
-				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::formatString(LOC_SYSTEM_SPELLCARD_IDENTIFY, PlaceHolderHelper(SpellcardName((spellcard_evoke_type)cur_)));
+				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::formatString(LOC_SYSTEM_MACHINE_IDENTIFY, PlaceHolderHelper(MachineName((machine_type)cur_)));
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
 				rc2.bottom = rc2.top + fontDesc.Height;
@@ -1081,7 +1081,7 @@ void display_manager::skill_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 
 	int max_skillname = 10;
 	for(int i = SKT_FIGHT; i < SKT_MAX; i++) {
-		max_skillname = min(20, max(max_skillname, PrintCharWidth(skill_string((skill_type)i))));
+		max_skillname = min(20, max(max_skillname, PrintCharWidth(skill_string(skill_from_display_index(i)))));
 	}
 
 	int dif[6] = {4, 10, 5, 6, 7, 11};
@@ -1142,51 +1142,52 @@ void display_manager::skill_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 
 	while(skt < SKT_MAX)
 	{
+		skill_type skill_ = skill_from_display_index(skt);
 		for(i = 0;i<1;i++)
 		{
 			RECT rc2={ rc.left, rc.top,  rc.right, (LONG)(rc.top+fontDesc.Height)};
-			D3DCOLOR color_ = you.GetSkillLevel(skt, true) < 27 && !you.cannotSkillup(skt) ?
-				(you.bonus_skill[skt]? (you.skill[skt].onoff == 2 ? CL_white_blue : (you.skill[skt].onoff == 1 ? CL_blue : CL_darkblue)) :
+			D3DCOLOR color_ = you.GetSkillLevel(skill_, true) < 27 && !you.cannotSkillup(skill_) ?
+				(you.bonus_skill[skill_]? (you.skill[skill_].onoff == 2 ? CL_white_blue : (you.skill[skill_].onoff == 1 ? CL_blue : CL_darkblue)) :
 
-				(you.skill[skt].onoff == 2 ? CL_normal : (you.skill[skt].onoff == 1 ? CL_STAT : CL_verybad))) :
-				you.pure_skill == skt ? CL_junko : CL_warning;
+				(you.skill[skill_].onoff == 2 ? CL_normal : (you.skill[skill_].onoff == 1 ? CL_STAT : CL_verybad))) :
+				you.pure_skill == skill_ ? CL_junko : CL_warning;
 			ss.str("");
 			ss.clear();
-			ss << ((you.GetSkillLevel(skt, false)==27 || you.cannotSkillup(skt)) ?' ':sk_char) << ' ' << ((you.GetSkillLevel(skt, false) ==27 || you.cannotSkillup(skt) )?' ':(you.skill[skt].onoff ==2?'*':(you.skill[skt].onoff ==1?'+':'-')));
+			ss << ((you.GetSkillLevel(skill_, false)==27 || you.cannotSkillup(skill_)) ?' ':sk_char) << ' ' << ((you.GetSkillLevel(skill_, false) ==27 || you.cannotSkillup(skill_) )?' ':(you.skill[skill_].onoff ==2?'*':(you.skill[skill_].onoff ==1?'+':'-')));
 			sk_char++;
 			DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
 			rc.left += offset[0];
 			ss.str("");
 			ss.clear();
-			if(PrintCharWidth(skill_string((skill_type)skt)) < (dif[1]-2))
-				ss << std::string((dif[1]-2)-PrintCharWidth(skill_string((skill_type)skt)), ' ');
-			ss << skill_string((skill_type)skt);
+			if(PrintCharWidth(skill_string(skill_)) < (dif[1]-2))
+				ss << std::string((dif[1]-2)-PrintCharWidth(skill_string(skill_)), ' ');
+			ss << skill_string(skill_);
 			DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
 			rc.left += offset[1];
 			ss.str("");
 			ss.clear();
-			ss << std::setw(2) << std::right << you.GetSkillLevel(skt, true);
+			ss << std::setw(2) << std::right << you.GetSkillLevel(skill_, true);
 			DrawTextUTF8(pfont,pSprite,	ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
 			rc.left += offset[2];
 			ss.str("");
 			ss.clear();
-			if(you.GetSkillLevel(skt, false)<27 && !you.cannotSkillup(skt))
-				ss << "(" << std::setw(2) << std::right << GetSkillPercent(you.skill[skt]) << "%)";
+			if(you.GetSkillLevel(skill_, false)<27 && !you.cannotSkillup(skill_))
+				ss << "(" << std::setw(2) << std::right << GetSkillPercent(you.skill[skill_]) << "%)";
 			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, color_);
 			rc.left += offset[3];
 			ss.str("");
 			ss.clear();
-			ss << std::setw(3) << std::right << you.skill[skt].aptit;
-			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,GetSkillColor(you.skill[skt].aptit));
+			ss << std::setw(3) << std::right << you.skill[skill_].aptit;
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,GetSkillColor(you.skill[skill_].aptit));
 			rc.left += offset[4];
 			
 			ss.str("");
 			ss.clear();
-			if (you.GetSkillLevel(skt, false) < 27 && !you.cannotSkillup(skt))
+			if (you.GetSkillLevel(skill_, false) < 27 && !you.cannotSkillup(skill_))
 			{
 				int base_skill = GetBaseSkillExp();
-				int skill_pecent = GetMaxSkillExp(you.skill[skt]);
-				exp_to_skill_exp(you.GetSkillLevel(skt, false));
+				int skill_pecent = GetMaxSkillExp(you.skill[skill_]);
+				exp_to_skill_exp(you.GetSkillLevel(skill_, false));
 
 				float value_ = (float)skill_pecent / base_skill;
 
@@ -1195,7 +1196,7 @@ void display_manager::skill_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 			
 				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
 			}
-			else if (you.pure_skill == skt)
+			else if (you.pure_skill == skill_)
 			{
 				DrawTextUTF8(pfont,pSprite,  LocalzationManager::locString(LOC_SYSTEM_SKILL_JUNKA), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_junko);
 			
@@ -1237,7 +1238,7 @@ void display_manager::skill_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 			case SKT_TANMAC - 1:
 			case SKT_TANMAC:
 			case SKT_SPELLCASTING:
-			case SKT_EVOCATE-1:
+			case SKT_MAGIC_DEVICE-1:
 				rc.top += fontDesc.Height;
 				break;
 			default:
@@ -1387,6 +1388,22 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	rc.left = 30;
 	rc.top += fontDesc.Height;		
+
+	if(you.GetSkillLevel(SKT_ENGINEERING,true) >= 1)
+	{
+		int machine_power_usage_ = you.GetMachinePowerUsage();
+		int machine_power_capacity_ = you.GetMachinePowerCapacity();
+		ss.str("");
+		ss.clear();
+		ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_MACHINE_POWER);
+		if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_MACHINE_POWER)) < 4)
+			ss << std::string(4-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_MACHINE_POWER)), ' ');
+		ss << ":" << machine_power_usage_ << "/" << machine_power_capacity_;
+		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,
+			machine_power_usage_ > machine_power_capacity_ ? CL_danger : CL_normal);
+	}
+	rc.left = 30;
+	rc.top += fontDesc.Height;
 	rc.top += fontDesc.Height;		
 
 	int resist_ = you.fire_resist - you.uniden_fire_resist;
@@ -2701,8 +2718,24 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		ss << "   " << pow_ / 100 << "." << std::setfill('0') << std::setw(2) << pow_ % 100;
 		DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.power == 1000 ? CL_junko :(pow_<=100?CL_danger:(pow_<=200?CL_warning:(pow_==you.GetMaxPower()?CL_good:CL_normal))));
 
-		int power_blank_ = PrintCharWidth(ss.str());
-		rc.left += power_blank_*fontDesc.Width;
+		int power_blank_ = PrintCharWidth(ss.str())+1;
+		rc.left += (power_blank_)*fontDesc.Width;
+
+		if(you.GetSkillLevel(SKT_ENGINEERING,true) >= 1)
+		{
+			int machine_power_usage_ = you.GetMachinePowerUsage();
+			int machine_power_capacity_ = you.GetMachinePowerCapacity();
+			bool machine_power_over_ = machine_power_usage_ > machine_power_capacity_;
+			img_machine_power_icon.draw(pSprite,rc.left+16,rc.top+7,
+				(D3DCOLOR)(machine_power_over_ ? CL_danger : CL_STAT));
+			ss.str("");
+			ss.clear();
+			ss << "   " << machine_power_usage_ << "/" << machine_power_capacity_;
+			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,
+				machine_power_over_ ? CL_danger : CL_STAT);
+			power_blank_ += PrintCharWidth(ss.str())+1;
+			rc.left += fontDesc.Width*(PrintCharWidth(ss.str())+1);
+		}
 
 		ss.str("");
 		ss.clear();
@@ -3141,6 +3174,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			{
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_EXHAUTED), CL_warning,  LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_EXHAUTED), this);
 			}
+			if(you.IsMachinePowerOverloaded())
+			{
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_MACHINE_OVERLOAD), CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_MACHINE_OVERLOAD), this);
+			}
 			if (you.s_super_graze)
 			{
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SUPER_GRAZE), you.s_super_graze>3 ? CL_normal : CL_white_blue, LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SUPER_GRAZE), this);
@@ -3475,13 +3513,13 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_VEILING), CL_normal,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_VEILING), this);
 			}
-			if(you.s_invisible || you.togle_invisible)
+			if(you.GetInvisible() || you.togle_invisible)
 			{
 				bool glow_ = (you.s_glow || you.GetBuffOk(BUFFSTAT_HALO));
 				bool oil_ = (you.s_oil);
 				bool fire_ = (you.s_fire);
 				bool tracking_ = you.s_tracking;
-				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_INVISIBLE), (glow_ || oil_ || fire_ || tracking_) ? CL_bad : ((you.togle_invisible || you.s_invisible == -1) ? CL_speak : you.s_invisible>10 ? CL_white_blue : CL_blue),
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_INVISIBLE), (glow_ || oil_ || fire_ || tracking_) ? CL_bad : ((you.togle_invisible || you.GetInvisible() == -1) ? CL_speak : you.GetInvisible()>10 ? CL_white_blue : CL_blue),
 					glow_? LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_INVISIBLE_MEANLESS) : LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_INVISIBLE), this);
 			}
 			if(you.s_tracking) {
@@ -4264,9 +4302,11 @@ void display_manager::item_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	case IVT_THROW:
 	case IVT_ARMOR:
 	case IVT_ARMOR_ENCHANT:
-	case IVT_SPELLCARD:
+	case IVT_MACHINE:
 	case IVT_EVOKE:
 	case IVT_CURSE_ENCHANT:
+	case IVT_INSTALL_BODY_MACHINE:
+	case IVT_INSTALL_ARMOUR_MACHINE:
 	{
     	std::ostringstream oss;
 		oss << "<"<< LocalzationManager::locString(LOC_SYSTEM_INVENTORY) <<">  (" << LocalzationManager::locString(LOC_SYSTEM_INVENTORY_ITEM) <<" " << you.item_list.size() << " / 52)";
@@ -4628,9 +4668,11 @@ bool display_manager::makeItemForItemDraw(list<item>::iterator& first, list<item
 	case IVT_ARMOR:
 	case IVT_ARMOR_ENCHANT:
 	case IVT_PURE_ITEM:
-	case IVT_SPELLCARD:
+	case IVT_MACHINE:
 	case IVT_EVOKE:
 	case IVT_CURSE_ENCHANT:
+	case IVT_INSTALL_BODY_MACHINE:
+	case IVT_INSTALL_ARMOUR_MACHINE:
 		first = you.item_list.begin();
 		end = you.item_list.end();
 		break;
@@ -4690,12 +4732,14 @@ bool display_manager::checkVaildItemView(item_type_simple i) {
 		return false;
 	if( (item_vt == IVT_EQ_JEWELRY || item_vt == IVT_UEQ_JEWELRY ) && i != ITMS_JEWELRY)
 		return false;
-	if (item_vt == IVT_SPELLCARD && i != ITMS_SPELL) {
+	if (item_vt == IVT_MACHINE && i != ITMS_MACHINE) {
 		return false;
 	}
-	if(item_vt == IVT_EVOKE && i != ITMS_SPELL && i != ITMS_MISCELLANEOUS && i != ITMS_JEWELRY && i != ITMS_WEAPON)
+	if(item_vt == IVT_EVOKE && i != ITMS_MACHINE && i != ITMS_MISCELLANEOUS && i != ITMS_JEWELRY && i != ITMS_WEAPON)
 		return false;
 	if(item_vt == IVT_CURSE_ENCHANT && (i != ITMS_WEAPON && i != ITMS_ARMOR))
+		return false;
+	if((item_vt == IVT_INSTALL_BODY_MACHINE || item_vt == IVT_INSTALL_ARMOUR_MACHINE) && i != ITMS_ARMOR)
 		return false;
 	return true;
 }
@@ -4711,11 +4755,13 @@ bool display_manager::checkItemSimpleType(list<item>::iterator it) {
 		return false;
 	if(item_vt == IVT_THROW && !(*it).can_throw)
 		return false;
-	if(item_vt == IVT_SPELLCARD && !(*it).isChargable())
+	if(item_vt == IVT_MACHINE && !(*it).isChargable())
 		return false;				
 	if(item_vt == IVT_ARMOR_ENCHANT && !(*it).isEnhantable())
 		return false;				
 	if (item_vt == IVT_CURSE_ENCHANT && (!(it->curse) || !(it->identify_curse)))
+		return false;
+	if(item_vt == IVT_INSTALL_BODY_MACHINE && it->GetArmorType() != ET_ARMOR)
 		return false;
 	if (item_vt == IVT_EVOKE && !(*it).isEvokable())
 		return false;

@@ -1,4 +1,4 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 파일이름: seija.cpp
 //
@@ -230,12 +230,12 @@ void seija_real_gift(int key_)
 				{
 					random_extraction<int> rand_;
 
-					for(int j=SKT_SPELLCASTING+1; j<SKT_EVOCATE;j++)
+					for(int j=SKT_SPELLCASTING+1; j<SKT_MAGIC_DEVICE;j++)
 					{
 						rand_.push(i, you.GetSkillLevel(j, false)>15?15:(you.GetSkillLevel(j, false)>1?5:1));
 					}
 					book_list book_ = BOOK_FIRST;
-					for(int j=SKT_SPELLCASTING+1; j<SKT_EVOCATE;j++)
+					for(int j=SKT_SPELLCASTING+1; j<SKT_MAGIC_DEVICE;j++)
 					{
 						book_ = SchoolToBook((skill_type)rand_.pop());
 						if(!iden_list.books_list[book_])
@@ -262,7 +262,7 @@ void seija_real_gift(int key_)
 				for(int i = rand_int(2,4); i > 0; i--)
 				{
 					item_infor t;
-					env[current_level].MakeItem(you.position,makeitem(ITM_SPELL, 0, &t, randA(SPC_V_MAX-1)));
+					env[current_level].MakeItem(you.position,makeitem(ITM_MACHINE, 0, &t, randA(MCH_SKY_TORPEDO-1)));
 				}
 			}
 			break;

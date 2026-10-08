@@ -311,7 +311,7 @@ void repeat_action()
 		Quick_Throw(you.GetThrowIter(), you.GetTargetIter(), true);  //TODO
 		break;
 	case 'v':
-		Spelllcard_Evoke(you.prev_action_key.item); //TODO
+		EvokeItemMenu(you.prev_action_key.item); //TODO
 		break;
 	case 'p':
 		Pray(); 
@@ -2623,7 +2623,8 @@ void skill_view()
 				bool isUpperCase = false;
 				if(key_ >= 'A' && key_ <= 'Z')
 					isUpperCase = true;
-				int num = (key_ >= 'a' && key_ <= 'z')?key_-'a':key_-'A';
+				int display_num = (key_ >= 'a' && key_ <= 'z')?key_-'a':key_-'A';
+				int num = skill_from_display_index(display_num);
 				if (num < SKT_MAX && you.GetSkillLevel(num,false) < 27 && !you.cannotSkillup(num))
 				{
 					if(!isUpperCase) {
@@ -3025,9 +3026,9 @@ void Iden_Show()
 			if (iden_list.amulet_list[cur].iden == 2)
 				curList.push_back(i);
 		}
-		else if (i >= IDEN_CHECK_SPC_START && i < IDEN_CHECK_SPC_END) {
-			int cur = i - IDEN_CHECK_SPC_START;
-			if (iden_list.spellcard_list[cur].iden == 2)
+		else if (i >= IDEN_CHECK_MACHINE_START && i < IDEN_CHECK_MACHINE_END) {
+			int cur = i - IDEN_CHECK_MACHINE_START;
+			if (iden_list.machine_list[cur].found)
 				curList.push_back(i);
 		}
 		else if (i >= IDEN_CHECK_BOOK_START && i < IDEN_CHECK_BOOK_END) {
@@ -4259,7 +4260,7 @@ void More_Item_Action()
 		case 'V':
 			endSelection();
 			deletelog();
-			Spelllcard_Evoke(0);
+			EvokeItemMenu(0);
 			g_menu_select = -1;
 			return;
 		case 'w':

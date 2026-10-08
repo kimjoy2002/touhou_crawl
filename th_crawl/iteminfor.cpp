@@ -23,6 +23,7 @@
 #include "dump.h"
 #include "god.h"
 #include "mon_infor.h"
+#include "spellcard.h"
 #include <set>
 #include <iomanip> 
 
@@ -1577,40 +1578,36 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		}
 	}
 	break;
-	case ITM_SPELL:
+	case ITM_MACHINE:
 	{
-		if (iden_list.spellcard_list[it->value2].iden == 2)
+		if (it->value2 >= 0 && it->value2 < MCH_MAX)
 		{
-			switch (it->value2)
-			{
-			case SPC_V_FIRE:
-				_infor_( LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_FIRE));
-				break;
-			case SPC_V_ICE:
-				_infor_( LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_ICE));
-				break;
-			case SPC_V_EARTH:
-				_infor_( LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_EARTH));
-				break;
-			case SPC_V_AIR:
-				_infor_( LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_AIR));
-				break;
-			case SPC_V_INVISIBLE:
-				_infor_( LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_INVISIBLE));
-				break;
-			case SPC_V_METAL:
-				_infor_( LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_METAL));
-				break;
-			case SPC_V_SUN:
-				_infor_( LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_SUN));
-				break;
-			default:
-				_infor_( LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_BUG));
-				break;
-			}
-			_infor_("\n");
+			machine_type machine_ = (machine_type)it->value2;
+			_infor_(LocalzationManager::locString(MachineDescription(machine_)));
+			_infor_("\n\n");
 		}
-		_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD));
+		_infor_(LocalzationManager::locString(IsInstallableMachine((machine_type)it->value2) ?
+			LOC_SYSTEM_ITEM_DESCRIPTION_INSTALLABLE_MACHINE : LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE));
+
+		if (it->value2 >= 0 && it->value2 < MCH_MAX)
+		{
+			machine_type machine_ = (machine_type)it->value2;
+			installed_machine_type installed_ = MachineToInstalledType(machine_);
+			if(installed_ != IMT_NONE)
+			{
+				_infor_("\n");
+				_infor_(LocalzationManager::formatString(LOC_SYSTEM_MACHINE_INSTALL_POWER,
+					PlaceHolderHelper(to_string(InstalledMachinePower(installed_)))));
+				_infor_("\n");
+				_infor_(LocalzationManager::formatString(LOC_SYSTEM_MACHINE_INSTALL_SLOTS,
+					PlaceHolderHelper(InstalledMachineSlotsString(installed_,LocalzationManager::current_lang))));
+				_infor_("\n");
+				_infor_(LocalzationManager::formatString(LOC_SYSTEM_MACHINE_MAX_LEVEL,
+					PlaceHolderHelper(to_string(InstalledMachineMaxLevel(installed_)))));
+				_infor_("\n");
+			}
+		}
+
 		if (can_use_)
 		{
 			use_text_.push_back({"(v)" + LocalzationManager::locString(LOC_SYSTEM_EVOKE),'v'});

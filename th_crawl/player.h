@@ -470,6 +470,13 @@ public:
 	int GetDisplayEv();
 	int GetDisplayAc();
 	int GetDisplaySh();
+	int GetMachinePowerCapacity();
+	int GetMachinePowerUsage();
+	bool IsMachinePowerOverloaded();
+	bool HasActiveInstalledMachine(installed_machine_type type_);
+	void UpdateMachinePowerOverload(bool was_overloaded_);
+	void ProcessInstalledMachines(int delay_);
+	bool FirePunchMachine(monster* mon_, bool immediate_ = false);
 	int GetAttack(bool max, equip_type type_ = ET_WEAPON);
 	int GetHit(equip_type type_ = ET_WEAPON);
 	int GetAtkDelay();
@@ -747,7 +754,7 @@ void Eatting(char auto_);
 void Drinking(char auto_);
 //void Spelllcard_Declare();
 void Speed_Evoke();
-void Spelllcard_Evoke(char auto_);
+void EvokeItemMenu(char auto_);
 void Reading(char auto_);
 void Equip_Weapon(); //무기장착
 void weapon_swap(); //무기스왑

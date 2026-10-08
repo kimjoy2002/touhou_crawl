@@ -1,4 +1,4 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 파일이름: god.cpp
 //
@@ -294,12 +294,12 @@ void byakuren_gift(bool speak_)
 	for(int i = 0; i < 40 && gift_book == -1; i++)
 	{
 		vector<bookgift_class> q;
-		for(int j=SKT_SPELLCASTING+1; j<SKT_EVOCATE;j++)
+		for(int j=SKT_SPELLCASTING+1; j<SKT_MAGIC_DEVICE;j++)
 		{
 			q.push_back(bookgift_class(you.GetSkillLevel(j, false),you.skill[j].exper,j));
 		}
 		sort(q.begin(),q.end(),bookgift_compare());
-		for(int j=SKT_SPELLCASTING+1; j<SKT_EVOCATE;j++)
+		for(int j=SKT_SPELLCASTING+1; j<SKT_MAGIC_DEVICE;j++)
 		{
 			if(q.back().level == 0 )
 				break;

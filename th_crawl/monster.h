@@ -122,6 +122,7 @@ public:
 	bool first_contact; //이 몬스터를 처음 보았다.
 	int strong; //강하기
 	int special_value;//캐릭터별 전용 밸류
+	int machine_punch_cooldown;
 	unique_spellcard_info spellcard_info;
 
 	int delay_turn; //다른층으로 도망친 턴. 이 턴만큼 회복등등...

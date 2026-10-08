@@ -28,13 +28,13 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU2,적성보너스) 탄막적성 +3, 회�
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU3,보너스) 24개의 호밍아뮬렛, 신은 믿고 시작하지않는다.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU4,초보자팁) f로 부적을 발사할 수 있습니다. 꼭 근접하기전에 부적을 먼저 던집시다.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA1,무한관통 & 상시공격형. 탄막은 파워! 보이자마자 죽이자!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA2,적성보너스) 주문시전적성 +2, 파괴마법적성 +3, 회피적성 +1
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA2,적성보너스) 주문시전적성 +2, 파괴마법적성 +3, 회피적성 +1, 마도구학적성 +1
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA3,보너스) +2 빗자루, 영력의 반지, 파괴의 마법책
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA4,초보자팁) z키로 마법을 쓰고 M키로 마법을 배웁니다. 항상 5키로 마나를 가득 채우고 다닙시다.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE1,고위력 & 광범위 작렬형. 스와코님의 말씀대로!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE2,적성보너스) 전투적성 +2, 회피적성 +1, 발동적성 +3
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,보너스) 신앙깊음 특성. 대지의 스펠카드(9), 대기의 스펠카드(9), 스와코를 믿고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4,초보자팁) V로 스펠카드가 사용가능합니다. 대지의 스펠카드는 벽에 맞춰서 폭발데미지를 줍시다.\n스와코님은 자비로우시니 원한다면 다른 신을 믿어도 좋습니다!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE2,적성보너스) 전투적성 +2, 회피적성 +1, 기계공학적성 +3
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,보너스) 신앙깊음 특성. 굴착드릴(9), 대형 선풍기(9), 스와코를 믿고 시작한다.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4,초보자팁) V로 기계 도구를 사용할 수 있습니다. 굴착드릴은 벽에 맞춰서 폭발데미지를 줍시다.\n스와코님은 자비로우시니 원한다면 다른 신을 믿어도 좋습니다!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI1,자동탐색 & 자동공격형. O와 TAB이 당신을 지켜줄지어니
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI2,적성보너스) 장검적성 +1
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,보너스) +2 언월도, +2 철방패, +2 사슬 중갑옷, 상처치료물약 2개, 힘물약 2개, 투명감지 특성
@@ -48,9 +48,9 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU2,적성보너스) 체력 +20%, 전투적
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,보너스) 9레벨, 18레벨에 다다르면 부활가능
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4,초보자팁) 9레벨, 18레벨에 다다르면 부활이 가능합니다. 부활할때 체력과 영력이 회복되고 폭발합니다.\n좀 더 안전하게 플레이하세요!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI1,태고! 트라이아스기의 캇파. 아이템의 힘으로 돌파하라!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2,적성보너스) 둔기적성 +2, 발동적성 +1
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2,적성보너스) 둔기적성 +2, 기계공학적성 +1
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI3,보너스) 천 캇파옷과 공중어뢰, 네시의 오컬트 부적을 들고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4,초보자팁) V를 이용하여 발동템을 사용 가능합니다. 공중어뢰는 장거리 탄막을 발사합니다.\n 장착중인 오컬트 부적은 경험치를 모아서 충전이 가능합니다. 100% 충전이 끝나면 V키로 네시를 출격시키세요!\n 발동템은 영구적인 템이지만 P의 소모가 격렬하니 남용은 금물입니다. 위험한 적과 싸울때 사용합시다.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4,초보자팁) V를 사용하면 설치형 기계를 장비에 설치할 수 있습니다. \n장착 중인 오컬트 부적은 경험치를 모아 충전합니다. 100% 충전이 끝나면 V키로 네시를 출격시키세요!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES1,요정대전쟁! 빛의 삼요정. 혼자보단 같이 싸워라!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES2,보너스) 릴리를 믿고 다른 두 요정과 동료가 되어 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3,초보자팁) 항상 동료와 함께 싸울 수 있습니다. 동료는 죽어도 경험치를 먹다보면 부활합니다.\n a키로 신의 권능을 쓸 수 있습니다. 새로운 요정 동료를 얻거나 동료를 호출하면서 싸웁시다.\n 동료가 잡아도 얻는 경험치는 다르지않습니다. 자신의 안전을 최우선으로 지킵시다.
@@ -66,7 +66,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WIZARD,종족으로서의 마법사. 근접�
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_FAIRY,원소마법을 잘다루지만 매우 연약하고 몸집이 작아서 무거운 갑옷을 입지 못한다.\n빠른 체력, 영력 재생력과 높은 스텔스를 들고 시작하며 구름의 데미지를 반감해서 받는다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CROWTENGU,비행이 가능. 괜찮은 전투능력과 좋은 대기마법 적성을 가졌다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WOLFTENGU,10% 높은체력, 높은 근접 전투 적성을 가졌다. 마법은 잘 못 다룬다.\n강한 턱 변이를 들고 시작해 근접공격에서 추가공격을 할 수 있다.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_KAPPA,높은 창스킬 숙련도를 가지고있으며 수영이 가능하다.\n불과 대지마법을 제외한 괜찮은 마법 적성을 가졌다. 또한 매우 높은 발동적성을 지녔다.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_KAPPA,높은 창스킬 숙련도를 가지고있으며 수영이 가능하다.\n불과 대지마법을 제외한 괜찮은 마법 적성을 가졌다. 또한 매우 높은 기계공학적성을 지녔다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_NECOMATA,빠른 이동속도를 지녔고, 손톱이 자라있어 맨손격투에 강하다.\n체력이 약하고 무기,갑옷,방패는 잘 다루지 못한다.\n속성마법은 잘 다루지못하지만 연금술, 정신마법, 특히 전이마법에 강하다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_OARFISH,느린 이동속도를 지녔지만 높은 체력과 레벨에 따라 단단해지는 비늘 변이가 있다.\n무기적성은 좀 나쁘고 무난한 마법적성을 지녔지만 유독 대기술이 특출나게 높다.\n수영을 할 수 있고 전기저항을 1단계 들고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CHEUKUMOGAMI,몸집이 작고 독저항을 가지고 시작한다.\n전투적인 적성이 좋은 편이고 마법 적성은 그리 좋지 못하다.
@@ -96,7 +96,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_JOB_FANATIC,특정 신에 광적인 믿음을 가�
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ASSASSIN,은신술과 암살의 대가들로 적을 비겁하게 기습한다.\n단검과 독침, 높은 은신치를 가지고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_FARMER,우리들이 밥을 먹을 수 있도록 농사를 지으시는 고마우신 분들.\n선택한 무기와 3개의 빵, 미노리코를 믿고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_MADE,단검정도 던지는건 메이드의 기본 소양 아닌가요?\n빗자루와 4개의 투척용 나이프와 메이드의 복, 그리고 메이드의 기본소양을 들고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ENGINEER,도구를 잘 다루는 만능 기술자.\n선택한 무기와 냉기 스펠카드를 들고 시작한다.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ENGINEER,도구를 잘 다루는 만능 기술자.\n선택한 무기와 펀칭머신을 들고 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_MISSING,우연히 환상향에 흘러들어가버린 우리들이다?\n음식과 전혀 전투에 도움되지않는 카메라만 들고 시작한다.\n아무런 능력도 힘도 없지만 죽기전에 기념촬영 정도는 할 수 있을 것 같다.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY1,3요정중 빛을 다루는 햇빛의 요정.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY2,적성보너스) 주문시전적성 +1, 파괴마법적성 +2
@@ -134,6 +134,9 @@ LOC_SYSTEM_SAVE_MENU_DELETE,삭제
 LOC_SYSTEM_SAVE_MENU_DELETE_SELECT,삭제할 세이브를 선택하세요.
 LOC_SYSTEM_SAVE_MENU_USED,사용중
 LOC_SYSTEM_SAVE_MENU_DELETE_REALLY,해당 세이브가 영구히 사라집니다. 정말로 삭제하시겠습니까?
+LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_WARNING,주의) 이번 패치로 발동이 기계공학, 마도구학으로 분리되었습니다. 경험치를 옮길 스킬을 선택하세요.
+LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_ENGINEERING,a. 발동 경험치를 기계공학으로 옮기기 (옮기고 난 후 레벨: {0})
+LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_MAGICAL_DEVICES,b. 발동 경험치를 마도구학으로 옮기기 (옮기고 난 후 레벨: {0})
 LOC_SYSTEM_WELCOME_FIRST,환상향에 온걸 환영한다!
 LOC_SYSTEM_WELCOME,환상향에 돌아온걸 환영한다!
 LOC_SYSTEM_LOS_MON,시야안에 몬스터가 있다.
@@ -277,7 +280,7 @@ LOC_SYSTEM_GHOST_PENALTY_SPELL,유령 상태에선 마법을 쓸 수 없다.
 LOC_SYSTEM_GHOST_PENALTY_THROW,유령 상태에선 무언가를 던질 수 없다.
 LOC_SYSTEM_PURITY_PENALTY_SCROLL,당신은 두루마리의 효과를 사용하기엔 너무 순화되어있다.
 LOC_SYSTEM_PURITY_PENALTY_POTION,당신은 물약의 맛을 느끼기엔 너무 순화되어있다.
-LOC_SYSTEM_PURITY_PENALTY_SPELLCARD,당신은 스펠카드를 쓰기엔 너무 순화되어있다.
+LOC_SYSTEM_PURITY_PENALTY_MACHINE,당신은 기계 도구를 쓰기엔 너무 순화되어있다.
 LOC_SYSTEM_SILENCE_PENALTY,당신은 소리를 낼 수 없다.
 LOC_SYSTEM_DROWNED_PENALTY,물에 빠진 상태에선 할 수 없다!
 LOC_SYSTEM_DROWNED_PENALTY_WEAPON,물에 빠진 상태에선 무기를 바꿀 수 없다!
@@ -714,9 +717,9 @@ LOC_SYSTEM_BUFF_DESCRIBE_SLAY,당신의 근접, 탄막공격력이 수치만큼 
 LOC_SYSTEM_BUFF_DESCRIBE_SLEEPING,졸음이 오고있습니다. 수치가 100이 되면 강제로 잠을 잡니다.
 LOC_SYSTEM_BUFF_DESCRIBE_JUNKA0,당신은 아직 순화의 패널티를 받고있지 않습니다.
 LOC_SYSTEM_BUFF_DESCRIBE_JUNKA1,두루마리, 물약을 사용할 수 없습니다. (일부 부여형 두루마리는 가능)
-LOC_SYSTEM_BUFF_DESCRIBE_JUNKA2,스펠카드, 두루마리, 물약을 사용할 수 없습니다. (일부 부여형 두루마리는 가능)
-LOC_SYSTEM_BUFF_DESCRIBE_JUNKA3,스펠카드, 두루마리를 사용할 수 없습니다. (일부 부여형 두루마리는 가능)
-LOC_SYSTEM_BUFF_DESCRIBE_JUNKA4,스펠카드를 사용할 수 없습니다.
+LOC_SYSTEM_BUFF_DESCRIBE_JUNKA2,기계 도구, 두루마리, 물약을 사용할 수 없습니다. (일부 부여형 두루마리는 가능)
+LOC_SYSTEM_BUFF_DESCRIBE_JUNKA3,기계 도구, 두루마리를 사용할 수 없습니다. (일부 부여형 두루마리는 가능)
+LOC_SYSTEM_BUFF_DESCRIBE_JUNKA4,기계 도구를 사용할 수 없습니다.
 LOC_SYSTEM_BUFF_DESCRIBE_FOG,짙은 안개로 인하여 모두의 시야가 급격히 줄어듭니다.
 LOC_SYSTEM_BUFF_DESCRIBE_THUNDER,주변에 무작위로 천둥번개가 떨어집니다.
 LOC_SYSTEM_BUFF_DESCRIBE_SUNNY,주변의 모두가 빛나게되어 회피가 낮아지고 투명이 효과를 잃습니다.
@@ -887,7 +890,7 @@ LOC_SYSTEM_DISPLAY_MANAGER_ENCHANT_ARMOUR,무슨 방어구를 강화하겠습니
 LOC_SYSTEM_DISPLAY_MANAGER_JEWELRY,무슨 장신구를 고르시겠습니까?
 LOC_SYSTEM_DISPLAY_MANAGER_JUNKO,무슨 아이템을 순화할거야?
 LOC_SYSTEM_DISPLAY_MANAGER_JUNKO_SKILL,어떤 스킬을 순화할거지?
-LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_SPELLCARD,무슨 스펠카드를 충전하시겠습니까?
+LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_MACHINE,무슨 기계 도구를 충전하시겠습니까?
 LOC_SYSTEM_DISPLAY_MANAGER_THROW,무엇을 던지겠습니까?
 LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL,사용할 마법을 선택하세요. ({0}로 설명을 볼 수 있다.)
 LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL_FIELD,사용할 마법을 선택하세요.
@@ -956,7 +959,7 @@ LOC_SYSTEM_TAG_JEWELRY,장신구
 LOC_SYSTEM_TAG_RING,반지
 LOC_SYSTEM_TAG_AMULET,목걸이
 LOC_SYSTEM_TAG_EVOKE,발동아이템
-LOC_SYSTEM_TAG_SPELLCARD,스펠카드
+LOC_SYSTEM_TAG_MACHINE,기계 도구
 LOC_SYSTEM_TAG_FOOD,음식
 LOC_SYSTEM_TAG_POTION,포션
 LOC_SYSTEM_TAG_SCROLL,두루마리
@@ -2195,7 +2198,7 @@ LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_MP,당신의 체력과 영력은 동일�
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_POWER,당신은 항상 풀파워다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_LIFE1,당신은 2개의 추가 생명이 남아있다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_LIFE2,당신은 1개의 추가 생명이 남아있다.
-LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_SYSTEM,당신은 순화 상태에서도 스펠카드를 사용할 수 있으며 부적의 충전속도가 3배가 된다.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_SYSTEM,당신은 순화 상태에서도 기계 도구를 사용할 수 있으며 부적의 충전속도가 3배가 된다.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP_LOSS,당신은 살이 심하게 빠졌다. (체력 {0}%, EV{1})
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_WEAK,당신은 약간 무식해졌다. (힘{0}, 민첩{1}, 지능{1})
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_OVERHEAT,당신은 공격할때마다 점점 과열된다. ({0})
@@ -2295,7 +2298,7 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_ELEC_IMUNE,당신은 순호의 축복으로 전
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_MP,당신은 순호의 축복으로 영력과 체력이 동일시 되었다.\n체력과 영력이 동일한 수치로 관리되어 데미지를 입을때, 마법을 사용할때 사용할 수 있다.\n또한 기존의 체력회복력과 영력회복력이 합산되어 더 빠른 회복을 하게된다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_POWER,당신은 순호의 축복으로 항상 풀파워모드이며 떨어지지않는다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_LIFE,당신은 순호의 축복으로 죽어도 다시 부활할 수 있다.\n단, 순호를 배신하여 생긴 죽음은 이 축복으로 상쇄가 불가능하다.\n당신의 추가 생명은 {0}개 남았다.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_SYSTEM,당신은 순호의 축복으로 슈팅 시스템에서 가져온 아이템 효과가 강화되었다.\n때문에 순화상태에서도 스펠카드가 사용이 가능하게 되었다.\n또한, 평상시보다 부적의 충전속도가 3배로 빨라지게된다.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_SYSTEM,당신은 순호의 축복으로 슈팅 시스템에서 가져온 아이템 효과가 강화되었다.\n때문에 순화상태에서도 기계 도구를 사용할 수 있게 되었다.\n또한, 평상시보다 부적의 충전속도가 3배로 빨라지게된다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_HP_LOSS,당신의 체중이 감소하여 날씬해졌다.\n체력이 {0}% 감소하는 대신 EV를 {1} 얻는다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_WEAK,당신은 약간 무식해진 느낌이 든다.\n힘을 {0} 얻는 대신 지능과 민첩이 {1} 내려간다.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_OVERHEAT,당신은 공격할때마다 몸이 뜨거워진다.\n공격시 낮은 확률로 과열을 얻으면서 주변에 시야를 가리는 연기를 뱉어낸다.\n과열 상태이상은 얻을때마다 이미 가지고 있는 과열 상태의 수치만큼 체력이 감소한다.
@@ -2895,7 +2898,8 @@ LOC_SYSTEM_SKILL_ALCHEMY,연금술
 LOC_SYSTEM_SKILL_MENTAL,정신마법
 LOC_SYSTEM_SKILL_SUMMON,소환마법
 LOC_SYSTEM_SKILL_TRANS,시공마법
-LOC_SYSTEM_SKILL_EVOCATE,발동
+LOC_SYSTEM_SKILL_MAGIC_DEVICE,마도구학
+LOC_SYSTEM_SKILL_ENGINEERING,기계공학
 LOC_SYSTEM_SKILL_STEALTH,은밀
 LOC_SYSTEM_SKILL_UNKNOWN,알수없음
 LOC_SYSTEM_SKILL_LEAST_ONE,최소한 하나의 스킬을 켜야합니다!
@@ -3133,8 +3137,8 @@ LOC_SYSTEM_SKL_DESCRIBE_DELAY_HANIWA,하니와 강화를 다음번으로 미룬�
 LOC_SYSTEM_SKL_DESCRIBE_DRAW_CARD,미구현
 LOC_SYSTEM_SKL_DESCRIBE_HARD_SELL,미구현
 LOC_SYSTEM_SKL_DESCRIBE_CREATE_SHOP,미구현
-LOC_SYSTEM_SKL_DESCRIBE_FIREBALL,제어봉의 화력을 집중하여 구체화된 화염의 탄막을 발사한다.\n사용자의 발동 스킬에 비례해서 성공률과 데미지가 증가한다.\n
-LOC_SYSTEM_SKL_DESCRIBE_MISSLE,마개조된 캇파의 옷에 달린 미사일 포대로부터 미사일을 발사한다.\n높은 유도 성능을 가졌지만 적으로 날라가는데 시간이 걸린다.\n또한 자기 자신도 유폭 피해를 넓은 공간과 충분한 거리가 없으면 위험하다.\n사용자의 발동 스킬에 비례해서 성공률과 데미지가 증가한다.\n
+LOC_SYSTEM_SKL_DESCRIBE_FIREBALL,제어봉의 화력을 집중하여 구체화된 화염의 탄막을 발사한다.\n사용자의 마도구학에 비례해서 성공률과 데미지가 증가한다.\n
+LOC_SYSTEM_SKL_DESCRIBE_MISSLE,마개조된 캇파의 옷에 달린 미사일 포대로부터 미사일을 발사한다.\n높은 유도 성능을 가졌지만 적으로 날라가는데 시간이 걸린다.\n또한 자기 자신도 유폭 피해를 넓은 공간과 충분한 거리가 없으면 위험하다.\n사용자의 마도구학에 비례해서 성공률과 데미지가 증가한다.\n
 LOC_SYSTEM_SKL_DESCRIBE_SILENCE,주변의 소리를 지운다.\n루나가 숨박꼭질의 최종병기라고 불릴 정도로 자신있어햐는 능력.\n하지만 오히려 부자연스럽게 소리를 지우기에 은밀함에는 도움이 안된다.\n대신 범위안의 영창이 필요한 마법을 못하게 만드는 효과가 있다.\n
 LOC_SYSTEM_SKL_DESCRIBE_UKNOWN,모르는 능력.\n
 LOC_SYSTEM_ITEM_CATEGORY_WEAPON,무기
@@ -3143,10 +3147,10 @@ LOC_SYSTEM_ITEM_CATEGORY_ARMOUR,방어구
 LOC_SYSTEM_ITEM_CATEGORY_POTION,물약
 LOC_SYSTEM_ITEM_CATEGORY_FOOD,음식
 LOC_SYSTEM_ITEM_CATEGORY_SCROLL,두루마리
-LOC_SYSTEM_ITEM_CATEGORY_SPELLCARD,스펠카드
+LOC_SYSTEM_ITEM_CATEGORY_MACHINE,기계 도구
 LOC_SYSTEM_ITEM_CATEGORY_JEWELRY,장신구
 LOC_SYSTEM_ITEM_CATEGORY_BOOK,책
-LOC_SYSTEM_ITEM_CATEGORY_EVOCABLE,발동
+LOC_SYSTEM_ITEM_CATEGORY_EVOCABLE,마도구
 LOC_SYSTEM_ITEM_CATEGORY_GOAL,중요
 LOC_SYSTEM_ITEM_CATEGORY_OTHER,기타
 LOC_SYSTEM_ITEM_CURSED,저주받은 {0}
@@ -3154,23 +3158,23 @@ LOC_SYSTEM_ITEM_UNCURSED,저주받지않은 {0}
 LOC_SYSTEM_ITEM_PILED,{0}개의 {1}
 LOC_SYSTEM_ITEM_USED,사용
 LOC_SYSTEM_ITEM_SELECTED_USED,선택사용
-LOC_SYSTEM_ITEM_SPELLCARD_USED,사용횟수: {0}
-LOC_SYSTEM_ITEM_SPELLCARD_EMPTY,비어있음
-LOC_SYSTEM_ITEM_SPELLCARD_CHARGED,충전됨
+LOC_SYSTEM_ITEM_MACHINE_USED,사용횟수: {0}
+LOC_SYSTEM_ITEM_MACHINE_EMPTY,비어있음
+LOC_SYSTEM_ITEM_MACHINE_CHARGED,충전됨
 LOC_SYSTEM_ITEM_FIXED_ARTIFACT,고정 아티팩트
 LOC_SYSTEM_ITEM_NOT_EXIST,존재하지 않는 아이템입니다.
-LOC_SYSTEM_SPELLCARD,스펠카드
-LOC_SYSTEM_SPELLCARD_IDENTIFY,{0}의 스펠카드
-LOC_SYSTEM_SPELLCARD_INVISIBLE,투명
-LOC_SYSTEM_SPELLCARD_FIRE,화염
-LOC_SYSTEM_SPELLCARD_ICE,냉기
-LOC_SYSTEM_SPELLCARD_AIR,대기
-LOC_SYSTEM_SPELLCARD_METAL,금속
-LOC_SYSTEM_SPELLCARD_EARTH,대지
-LOC_SYSTEM_SPELLCARD_SUN,태양
-LOC_SYSTEM_SPELLCARD_AIR_EFFECT,{0:은|는} 바람에 밀려나갔다.
-LOC_SYSTEM_SPELLCARD_EARTH_CANT_BREAK,암석탄이 {0}에 부딪혔지만 미동도 하지 않았다.
-LOC_SYSTEM_SPELLCARD_SUN_SET,강렬한 빛이 주변을 비추었다!
+LOC_SYSTEM_MACHINE_ITEM,기계 도구
+LOC_SYSTEM_MACHINE_IDENTIFY,{0}
+LOC_SYSTEM_MACHINE_OPTICAL_CAMOUFLAGE,광학미채
+LOC_SYSTEM_MACHINE_FLAMETHROWER,화염방사기
+LOC_SYSTEM_MACHINE_FREEZE_SPRAYER,빙결 분사기
+LOC_SYSTEM_MACHINE_LARGE_FAN,대형 선풍기
+LOC_SYSTEM_MACHINE_SCRAP_LAUNCHER,고철발사기
+LOC_SYSTEM_MACHINE_DRILL,굴착드릴
+LOC_SYSTEM_MACHINE_SUN_LAMP,태양등
+LOC_SYSTEM_MACHINE_LARGE_FAN_EFFECT,{0:은|는} 바람에 밀려나갔다.
+LOC_SYSTEM_MACHINE_DRILL_CANT_BREAK,굴착드릴이 {0}에 부딪혔지만 미동도 하지 않았다.
+LOC_SYSTEM_MACHINE_SUN_LAMP_SET,강렬한 빛이 주변을 비추었다!
 LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_DAGGER,대거
 LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_THROWING_KNIFE,투척용 나이프
 LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_SHORTSWORD,숏소드
@@ -3354,7 +3358,7 @@ LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_RAD_INFO,데미지를 받았을때 낮은 �
 LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_NAME,제어봉
 LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_DESCRIBE,팔에 낄 수 있는 거대한 제어봉, 제 3의 다리라고도 부른다.\n착용하고 직접 휘두를 수도 있고, 파워를 댓가로 내부에서 화염을 발사할수도 있다.\n숨겨진 효과로 어디선가 핵융합의 방사능을 막아준다고 한다.
 LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_FIREBALL,화염구
-LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_FIREBALL_INFO,파워를 소모하여 팔에서 화염구를 발사할 수 있다. 위력은 발동술에 비례한다.
+LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_FIREBALL_INFO,파워를 소모하여 팔에서 화염구를 발사할 수 있다. 위력은 마도구학에 비례한다.
 LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_NAME,지네의 삽 곡괭이
 LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_DESCRIBE,홍룡동에서 살고있는 오오무카데의 삽과 곡괭이.\n황금빛을 뛰고 있으며 산을 깍아낼 정도로 단단하다.\n삽과 곡괭이가 한 쌍이다보니 양손을 사용하여 들어야한다.\n사용자가 독을 지닌 지네이다보니까, 그녀의 장비에도 독이 스며든것처럼 보인다.
 LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_GLUTTON,폭식
@@ -3613,7 +3617,7 @@ LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_DETECT_CURSE,저주탐지의 두루마리
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CURSE_JEWELRY,장신구저주의 두루마리
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_SILENCE,정적의 두루마리
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_SOUL_SHOT,영격 두루마리
-LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CHARGING,스펠카드충전의 두루마리
+LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CHARGING,충전의 두루마리
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_AMNESIA,망각의 두루마리
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_SANTUARY,성역의 두루마리
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_BRAND_WEAPON,마법무기의 두루마리
@@ -3679,8 +3683,8 @@ LOC_SYSTEM_ITEM_SCROLL_ENCHANT_ARMOUR,{0:이|가} 초록색으로 빛났다.
 LOC_SYSTEM_ITEM_SCROLL_DETECT_CURSE,인벤토리의 저주를 탐지했다.
 LOC_SYSTEM_ITEM_SCROLL_CURSE_JEWELLY_FAIL,저주걸 수 있는 장신구가 없다.
 LOC_SYSTEM_ITEM_SCROLL_SOULSHOT,팡!
-LOC_SYSTEM_ITEM_SCROLL_CHARGE_SPELLCARD_FAIL,당신의 소지품에 충전할 수 있는 스펠카드가 없다.
-LOC_SYSTEM_ITEM_SCROLL_CHARGE_SPELLCARD,{0:이|가} 충전되었다.
+LOC_SYSTEM_ITEM_SCROLL_CHARGE_MACHINE_FAIL,당신의 소지품에 충전할 수 있는 기계 도구가 없다.
+LOC_SYSTEM_ITEM_SCROLL_CHARGE_MACHINE,{0:이|가} 충전되었다.
 LOC_SYSTEM_ITEM_SCROLL_AMNESIA_ASK,{0} 마법을 잊겠습니까?
 LOC_SYSTEM_ITEM_SCROLL_AMNESIA_SUCCESS,당신은 {0} 마법을 잊었다.
 LOC_SYSTEM_ITEM_SCROLL_BRAND_NORMAL,{0:이|가} 알수없는 빛에 휩싸였다!
@@ -3866,29 +3870,29 @@ LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_DETECT_CURSE,소지품중에 저주가 걸린
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_JEWELRY,장착하고 있는 장신구에 저주를 거는 두루마리.\n반지와 목걸이중 무작위 한개의 장신구에 저주가 걸린다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SILENCE,주변의 소음을 줄이는 두루마리. 일시적으로 정적상태가 된다.\n정적범위안에 있는 적은 마법을 사용하지못하며 범위는 시간이 지나면 점점 줄어든다.\n단, 자신도 소리를 내야하는 마법과 두루마리, 권능을 사용하지 못하게 된다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SOUL_SHOT,영격을 사용하는 두루마리, 주변의 적에게 저항할 수 없는 짧은 마비를 건다.\n효과는 절대적이지만 P를 한칸 강제로 소모하게된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CHARGING,스펠카드를 충전하는 두루마리. 어느정도 사용한 스펠카드의 충전양을 충전한다.\n스펠카드의 최대치가 높을수록 충전하는 양도 늘어난다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CHARGING,기계 도구를 충전하는 두루마리. 어느 정도 사용한 기계 도구의 잔탄을 충전한다.\n최대 잔탄수가 높을수록 충전하는 양도 늘어난다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_AMNESIA,배운 마법을 잊는 망각의 두루마리. 사용시 배우고 있는 마법중에 하나를 선택하여 잊는다.\n마법을 배울때 사용한 레벨은 돌려받는다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SANTUARY,읽은 순간 넓은 성역을 펼치는 두루마리. 성역에서는 모든 공격의 데미지를 무효로 한다.\n산 속에 사는 어느 야만바가 만들었다고 하는 귀한 두루마리.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BRAND_WEAPON,지금 들고 있는 무기에 마법적인 힘을 부여하는 두루마리.\n어떤 마법이 부여될지는 알 수 없으며 기존에 부여된 마법적인 힘은 덮어씌워진다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ACQUIREMENT,물건을 창조해내는 힘이 담겨있는 두루마리.\n두루마리를 읽으면서 원하는 종류를 선택하면 해당하는 종류의 물건을 받을 수 있다.\n획득하는 아이템은 발견하지않은 템이 나올 가능성이 높고 현재 스킬과 연관된 아이템이 나오기 쉽다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BUG,버그의 두루마리. 얼른 제작자에게 버그로 신고해버리자!\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_UNKNOWN,알 수 없는 문자들이 나열되어있는 두루마리.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD,스펠카드는 정해진 횟수내에서 마음대로 사용할 수 있으나 초과하면 더이상 사용할 수 없게된다.\n정확한 남은 갯수는 식별을 해야 확인할 수 있다. 스펠카드는 발동술에 비례해서 위력이 올라간다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_FIRE,화염의 기운을 담은 스펠카드다.\n사용하면 원하는 방향의 넓은 범위로 화염구름을 생성한다.\n발동스킬이 높으면 구름의 지속시간이 길어진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_ICE,냉기의 기운을 담은 스펠카드다.\n상대에게 강력한 냉기공격을 가한다.\n발동스킬이 높으면 데미지가 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_EARTH,대지의 기운을 담은 스펠카드다.\n자체 위력은 낮지만 벽에 부딪히면 벽을 폭발시켜 높은 범위 데미지를 입힌다.\n발동스킬이 높으면 데미지가 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_AIR,대기의 기운을 담은 스펠카드다.\n부채꼴의 넓은 범위에 탄막을 날려 범위내의 적들을 날려버린다.\n발동스킬이 높으면 날리는 정도와 위력이 강해진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_INVISIBLE,달빛의 기운을 담은 스펠카드다.\n사용한 사람을 일정시간 투명하게 만든다.\n발동스킬이 높으면 투명의 지속시간이 길어진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_METAL,금속의 기운을 담은 스펠카드다.\n사용하면 전방으로 철가시를 3연속으로 발사한다.\n발동스킬이 높으면 데미지가 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_SUN,태양의 기운을 담은 스펠카드다.\n사용하면 큰 빛을 발산하여 주변의 적을 빛나게 하고 혼란을 건다.\n혼란은 강할수록 저항할 수 있으며 무생물에겐 걸리지않는다.\n또한, 흡혈귀에겐 단순한 혼란효과 이상의 데미지를 줄 수 있다고 한다.\n발동스킬이 높으면 지속시간과 혼란이 걸릴 확률이 늘어난다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_BUG,버그의 스펠카드다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE,기계 도구는 바로 사용가능한 잔탄형과 장비에 설치하는 설치형 두 종류가 있다.\n잔탄형 기계도구는 정해진 횟수 내에서 사용할 수 있으나\n잔탄을 모두 소모하면 더 이상 사용할 수 없다.\n정확한 잔탄수는 식별해야 확인할 수 있다. 기계공학에 비례해서 위력이 올라간다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_FIRE,연료 분사기에 토치를 연결하여 사용하는 간이 화염방사기. 오물은 소독이다!\n사용하면 원하는 방향의 넓은 범위에 화염구름을 생성한다.\n기계공학이 높으면 구름의 지속시간이 길어진다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_ICE,냉매를 강한 압력으로 분출하는 분사기.\n일직선으로 관통이 가능한 강한 냉기 탄막을 발사한다.\n기계공학이 높으면 데미지가 높아진다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_EARTH,암석을 뚫는데 최적화된 전동형 드릴. 전원을 키면 전방으로 날라간다.\n자체 위력은 낮지만 벽에 부딪히면 벽을 폭발시켜 높은 범위 데미지를 입힌다.\n기계공학이 높으면 데미지가 높아진다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_AIR,강한 바람을 일으키는 거대한 선풍기다.\n부채꼴의 넓은 범위에 탄막을 날려 범위 내의 적들을 날려버린다.\n기계공학이 높으면 날리는 정도와 위력이 강해진다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_INVISIBLE,캇파의 최신 기술인 광학미채. 망토에 장착하면 빛을 굴절시켜 투명한 모습이 된다.\n기본적으로 겁쟁이인 캇파들에게 가장 인기가 많은 발명품이다.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_METAL,투입구에 고철을 집어넣어서 활용할 수 있는 투박하게 만들어진 총.\n사용하면 전방으로 고철덩어리를 3연속으로 발사한다.\n기계공학이 높으면 데미지가 높아진다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_SUN,태양처럼 강렬한 빛을 내는 기계 도구다.\n사용하면 큰 빛을 발산하여 주변의 적을 빛나게 하고 혼란을 건다.\n혼란은 강할수록 저항할 수 있으며 무생물에겐 걸리지 않는다.\n또한 흡혈귀에겐 단순한 혼란 효과 이상의 데미지를 줄 수 있다고 한다.\n기계공학이 높으면 지속시간과 혼란이 걸릴 확률이 늘어난다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_BUG,고장 난 기계 도구다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET,미지의 힘이 담겨있는 부적. 기본적으론 아무런 힘도 가지고 있지않는 평범한 부적이지만\n착용한 채로 경험치를 얻으면 부적의 충전량이 점점 충전되며 100%가 되면 힘을 발휘한다.\n만약 착용하고있는 부적을 벗으면 그 즉시 충전량이 0%로 떨어지므로 주의해야한다.\n\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PERFECT,미래를 체험한다고 하는 에이린의 감주약의 효능이 녹아들어있는 부적.\n다른 부적에 비해 아주 느린 속도로 충전이 되지만 힘이 모이면 죽음을 회피할 수 있다.\n100%가 된 부적을 착용한 채로 죽게되면 체력이 전부 회복되어 부활한다.\n단, 이 방법으로 부활하게되면 부적은 불타 사라지게된다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BLOSSOM,춘설이변에 쓰인 봄의 기운을 모아서 특수한 결계를 발동시킬 수 있는 부적.\n착용하고 있으면 주변의 봄의 기운이 모이고 충전이 되면 영격을 발동할 수 있게 된다.\n100%가 된 부적을 착용한 채로 v를 누르면 영격이 발동되어 주변의 적을 일정시간 마비시킨다.\n발동후에는 충전치가 0%가 되어 다시 충전할 수 있게 된다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIMES,영야이변을 해결할때 사용된 주술의 힘이 담긴 부적.\n착용하고 있으면 주변의 각부가 모이고 충전이 되면 파워 아이템을 생산할 수 있다.\n100%가 되면 자동으로 주변에 파워아이템이 떨어진다.\n발동후에는 충전치가 0%가 되어 다시 충전할 수 있게 된다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH,모리야신사에서 개발한 신앙의 힘을 모을 수 있는 부적.\n착용하고 있으면 주변의 신앙이 모이고 충전이 되면 신들과의 관계가 좋아진다.\n100%가 되면 자동으로 현재 신앙심이 조금 오른후 충전치가 다시 0%이 된다.\n몇몇 신은 신앙을 모으지않기때문에 이 부적의 효능이 없을 수 있다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE,지저같은 지하에서도 멀리 있는 상대와 통신이 가능하도록 개조된 부적.\n착용하고 있으면 전파수신감도가 점점 좋아지고 충전이 되면 수신된 전파가 영력으로 환원된다.\n100%가 된 부적을 착용한 채로도 영력의 회복력이 조금 올라가며\n100%가 된 부적을 착용한 채로 v를 누르면 영력을 순간적으로 회복할 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,몽전대사묘의 태자를 부활시킬때도 사용되었다던 신령을 담을 수 있는 부적.\n착용하고 있으면 주변의 신령이 모이고 충전이 되면 가진 스펠카드에 신령을 불어넣을 수 있다.\n100%가 된 부적을 착용한 채로 v를 누르면 가지고 있는 스펠카드 1장을 충전할 수 있다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,몽전대사묘의 태자를 부활시킬때도 사용되었다던 신령을 담을 수 있는 부적.\n착용하고 있으면 주변의 신령이 모이고 충전이 되면 가진 기계 도구에 신령을 불어넣을 수 있다.\n100%가 된 부적을 착용한 채로 v를 누르면 가지고 있는 기계 도구 1개를 충전할 수 있다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE,어느 이변에서나 중요한 그레이즈의 힘이 담긴 부적.\n착용하고 있으면 점차 충전이 되고 충전이 끝나면 당신은 탄막괴물이 된다.\n100%가 된 부적을 착용한 채로도 상시 그레이즈가 발동되어 원거리 탄막을 일정확률로 피할 수 있고\n100%상태에서 v를 누르면 근성회피가 발동되어 회피가능한 공격을 일정턴 100% 회피한다.\n그레이즈할때 나는 소리가 기분이 좋다. 그레이즈가 의미없던 시리즈도 있었다고...?\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,어느 불량 천인이 자신의 검의 힘을 부여한 부적. 그녀의 변덕스러운 성격이 부적에도 담겨있다.\n착용하고 있으면 주변의 기질 구슬을 흡수하고 충전이 끝나면 부적에 숨겨있던 기질이 발동된다.\n100%상태에서 v를 누르면 저장된 날씨가 발현되며 체력재생력을 높게 올린다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT,도시전설을 실체화하는 힘을 가진 오컬트볼의 힘이 담긴 부적.\n착용하고 있으면 오컬트의 기운을 흡수하고 충전이 끝나면 오컬트의 힘을 방출한다.\n100%상태에서 v를 누르면 시야내의 모든 적대적인 소환물을 추방하며\n부적안에 숨겨있는 오컬트의 힘을 요괴로서 구현화한다.\n
@@ -3905,8 +3909,8 @@ LOC_SYSTEM_ITEM_DESCRIPTION_RING_POISON_RESIS,독에 대한 내성을 얻는 반
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_FIRE_RESIS,화염에 대한 저항을 얻는 반지. 총 3단계까지 중첩저항을 얻을 수 있다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_ICE_RESIS,냉기에 대한 저항을 얻는 반지. 총 3단계까지 중첩저항을 얻을 수 있다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_SEE_INVISIBLE,착용하고 있으면 투명한 적을 볼 수 있게 된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_LEVITATION,비행을 사용할 수 있는 반지. 착용하면 능력사용에서 비행발동이 생긴다.\n비행상태에서는 깊은물따위를 건널 수 있게된다.\n사용에는 발동스킬이 필요하며 P가 약간 소모된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_INVISIBLE,투명을 사용할 수 있는 반지. 착용하면 능력사용에서 투명발동이 생긴다.\n투명상태에서는 적에게 들킬 확률이 매우 낮아지게 된다.\n투명상태에서는 P의 소모량이 가속되는 단점이 있다.\n사용에는 발동스킬이 필요하며 P가 약간 소모된다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_LEVITATION,비행을 사용할 수 있는 반지. 착용하면 능력사용에서 비행발동이 생긴다.\n비행상태에서는 깊은물따위를 건널 수 있게된다.\n사용에는 마도구학이 필요하며 P가 약간 소모된다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_INVISIBLE,투명을 사용할 수 있는 반지. 착용하면 능력사용에서 투명발동이 생긴다.\n투명상태에서는 적에게 들킬 확률이 매우 낮아지게 된다.\n투명상태에서는 P의 소모량이 가속되는 단점이 있다.\n사용에는 마도구학이 필요하며 P가 약간 소모된다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_MANA,착용시 최대마나가 증가하는 반지.\n착용해제시 원래대로 돌아온다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGACIAN,착용시 마법성공률과 마법파워를 상승시키는 반지.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_AC,착용시 방어가 증감하는 반지.\n증감 되는 수치는 반지에 적혀진 숫자와 같다.\n
@@ -3948,19 +3952,19 @@ LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_ULTI,텐구가 주인공인 박진감 넘�
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMY_ULTI,어느 저택안에있는 큰 도서관에 꽂혀있던 연금술의 모든 것이 적혀있는 마도서.\n알아보기 힘들고 애매하게 적혀있어서 연금술의 대가가 아니면 내용을 이해하는건 힘들어보인다.\n적혀있는 지저분한 낙서로 봐선 이 책의 원 주인도 내용을 잘 이해하지 못했던거같다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_LIGHT_BASE,광탄을 사용하여 탄막 전투에서 쓸만한 마법들을 담은 기초 책.\n지나가던 요정에서부터 숙련된 마법사까지 모두 쓰는 탄막 전투의 기본기다.
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_FIRE_EXTEND,작열지옥에서 발간된 인기 잡지.\n뜨거운 작열지옥터에 알맞게 이열치열을 강조하는 각종 마법들이 수록되어있다.\n화염 마법에 자신있는 여러 환상향 주민들의 토론서이기도 하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA,누군가가 잃어버린 보탑. 강력한 힘이 담겨있다.\n발동하게되면 안에 모여있던 힘이 레이저의 형태로 발사된다.\n발동 스킬이 높아지면 데미지가 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL,어딘가의 주지승이 쓰고 있던 경전. 마법의 힘이 담겨 있다.\n발동하게되면 파워를 대가로 사용자의 영력을 순식간에 회복시켜준다.\n발동 스킬이 높아지면 회복되는 영력이 많아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL,꿈의 세계에서 해메고있던 영혼이다.\n사용하면 꿈의 세계로부터 환상의 실체화가 잠시동안 가능하다.\n어딘가의 지역에 있던 몬스터 무리들이 아군이 되어 소환된다.\n발동 스킬이 높아지면 더욱 강한 아군이 소환된다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BOMB,아주 거대한 폭탄. 마법의 힘으로 점화가 가능하다.\n발동하게되면 폭탄이 점화되어 목표지점으로 던질 수 있다.\n던진 폭탄은 바로 터지진않지만 몇 턴이 지나면 큰 폭발이 일어난다.\n폭탄은 한 칸을 차지하며 적에 의해 파괴되면 폭파하지않고 파괴되어버린다.\n발동템이므로 사용해도 소모되진않는다. 신비한 마법의 힘이 작용하는 것 같다.\n발동 스킬이 높아지면 데미지와 폭탄의 체력이 높아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL,사람없이 등불만 떠다닌다는 괴담의 하나로 유령이 들고다닌다는 등불이다.\n발동하여 손에 들면 아무에게도 보이지않고 공격당하지않는 유령화상태가 된다.\n발동시 자신의 현재 남은 체력이 30%~70%까지 감소되고 발동된다.\n발동중엔 누구에게도 공격을 받지않는 무적상태지만 체력은 회복되지않고 파워가 빠르게 떨어진다.\n한번 더 발동해서 종료하거나 파워가 0이되면 자동으로 종료된다.\n유령화상태에선 이동만 가능하여 아이템, 마법, 공격등의 모든 행동이 불가능하다.\n사용할수록 점차 열화되면서 효율이 나빠진다.\n발동 스킬이 높아지면 발동시 감소되는 체력과 발동중 떨어지는 파워소모가 낮아진다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_SKY_TORPEDO,캇파가 물밖에서도 쏠 수 있도록 개량한 어뢰.\n잘 생각해보면 미사일과 별반 다를게 없다.\n발동 스킬이 높아지면 데미지가 높아진다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA,누군가가 잃어버린 보탑. 강력한 힘이 담겨있다.\n발동하게되면 안에 모여있던 힘이 레이저의 형태로 발사된다.\n마도구학이 높아지면 데미지가 높아진다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL,어딘가의 주지승이 쓰고 있던 경전. 마법의 힘이 담겨 있다.\n발동하게되면 파워를 대가로 사용자의 영력을 순식간에 회복시켜준다.\n마도구학이 높아지면 회복되는 영력이 많아진다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL,꿈의 세계에서 해메고있던 영혼이다.\n사용하면 꿈의 세계로부터 환상의 실체화가 잠시동안 가능하다.\n어딘가의 지역에 있던 몬스터 무리들이 아군이 되어 소환된다.\n마도구학이 높아지면 더욱 강한 아군이 소환된다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BOMB,아주 거대한 폭탄. 마법의 힘으로 점화가 가능하다.\n발동하게되면 폭탄이 점화되어 목표지점으로 던질 수 있다.\n던진 폭탄은 바로 터지진않지만 몇 턴이 지나면 큰 폭발이 일어난다.\n폭탄은 한 칸을 차지하며 적에 의해 파괴되면 폭파하지않고 파괴되어버린다.\n마도구이므로 사용해도 소모되진않는다. 신비한 마법의 힘이 작용하는 것 같다.\n마도구학이 높아지면 데미지와 폭탄의 체력이 높아진다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL,사람없이 등불만 떠다닌다는 괴담의 하나로 유령이 들고다닌다는 등불이다.\n발동하여 손에 들면 아무에게도 보이지않고 공격당하지않는 유령화상태가 된다.\n발동시 자신의 현재 남은 체력이 30%~70%까지 감소되고 발동된다.\n발동중엔 누구에게도 공격을 받지않는 무적상태지만 체력은 회복되지않고 파워가 빠르게 떨어진다.\n한번 더 발동해서 종료하거나 파워가 0이되면 자동으로 종료된다.\n유령화상태에선 이동만 가능하여 아이템, 마법, 공격등의 모든 행동이 불가능하다.\n사용할수록 점차 열화되면서 효율이 나빠진다.\n마도구학이 높아지면 발동시 감소되는 체력과 발동중 떨어지는 파워소모가 낮아진다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_SKY_TORPEDO,캇파가 물밖에서도 쏠 수 있도록 개량한 어뢰.\n잘 생각해보면 미사일과 별반 다를게 없다.\n기계공학이 높아지면 데미지가 높아진다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_MAGIC_HAMMER,소인족이 다룬다고 하는 요술망치. 본래 주인은 오니라고 한다.\n사용하면 실로 엄청난 효과들을 원하는대로 파워 1칸만으로 사용할 수 있게 된다.\n단, 요술망치를 사용하는것은 큰 위험부담이 따르게되며 사용자를 자멸시킨다고 한다.\n요술망치를 사용시 10%의 확률로 정반대의 효과가 발휘될 가능성이 있다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_CAMERA,환상향에 떨어지기전에 우연히 들고오게된 카메라.\n기묘한 힘을 사용하여 왠지 필름없이도 찍을 수 있어보인다.\n당신의 생존엔 전혀 도움이 안되지만 미소녀들을 찍어서 기념사진을 보관할수도 있다.\n그렇게 고성능은 아닌지라 너무 멀리있는 상대엔 찍기 힘들어 보인다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG,버그를 담은 발동템이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1,이 템은 횟수제한없이 발동이 가능한 템이다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2,이 템은 횟수제한없이 발동이 가능한 템이다. 당신의 발동스킬에 비례해서 강력함이 결정된다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG,버그를 담은 도구다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1,이 마도구는 횟수 제한 없이 사용할 수 있다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2,이 마도구는 횟수 제한 없이 사용할 수 있다. 당신의 마도구학 스킬에 비례해서 강력함이 결정된다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3,V키로 파워를 소모하여 발동할 수 있다.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,이 발동템을 사용할때마다 필요한 파워
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,이 마도구를 사용할 때마다 필요한 파워
 LOC_SYSTEM_ITEM_DESCRIPTION_RUNE,이것은 각종 던전을 정복한 증거인 룬이다.\n3개를 모으면 최심부 하쿠레이 신사의 문을 열 수 있다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_YINYANG_ORB,이것은 강대한 힘을 가진 음양옥이다. 신사 내부에 정중하게 모셔져 있다.\n이 것을 가지고 탈출하면 이 이변을 끝내거나 엄청난 힘을 얻을 수 있을 것 같다.\n어떻게 사용하는지는 당신의 자유이다! 그러나 탈출할때까진 끝이 아니므로 조심하길!\n특히 신사의 홍백의 무녀가 눈에 불을 키고 당신을 쫓아올 것이다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE1,"잃어버린 애완동물을 찾습니다. - 코메이지 사토리"라고 적혀있는 종이다.\n당신의 사진이 붙어있다...\n
@@ -4498,10 +4502,10 @@ LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY5,당신은 크레이지 백댄서를 불러�
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY6,당신은 언제든지 등뒤에 있는 문을 열고 탈출 할 수 있다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1,당신은 순호에게서 영구적인 순화의 축복을 받았다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2,당신은 일부 두루마리, 물약을 사용할 수 없다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3,당신은 스펠카드, 일부 두루마리, 물약을 사용할 수 없다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3,당신은 기계 도구, 일부 두루마리, 물약을 사용할 수 없다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY4,당신은 모든 스탯이 5 증가한다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1,순호의 힘은 강력하지만 당신을 일시적으로 순화시킨다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_1,1단계: 당신은 스펠카드를 사용할 수 없다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_1,1단계: 당신은 기계 도구를 사용할 수 없다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_2,2단계: 당신은 일부 두루마리의 효과를 사용할 수 없다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3,3단계: 당신은 물약의 효과를 받지 않는다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY2,당신은 단순하지만 강력한 탄막을 날릴 수 있다.
@@ -4515,7 +4519,7 @@ LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4,마력순화: 당신의 체력과 영력�
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5,파워순화: 당신의 최대 파워와 파워 회복량이 2배가 된다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_6,생명순화: 당신은 추가 목숨을 받았다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_7,장비순화: 당신은 가지고 있던 장비를 순화했다.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8,시스템순화: 당신은 스펠카드 사용이 허가되고 부적의 충전속도가 3배가 되었다.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8,시스템순화: 당신은 기계 도구 사용이 허가되고 부적의 충전속도가 3배가 되었다.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_BUG,알수없는 버그 순화
 LOC_SYSTEM_GOD_ABLILITES,권능들
 LOC_SYSTEM_GOD_COMMON_ACCECPT,{0:은|는} 당신의 살생을 기뻐했다.
@@ -4872,7 +4876,7 @@ LOC_SYSTEM_GOD_SEIJA_GIFT_JOON_AND_SION3,또한 징벌로 당신에게 강제로
 LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO1,카나코: 무작위 무작위 무기를 여럿을 받습니다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO2,카나코는 징벌로 당신에게 데미지를 주거나 온바시라를 꽂아서 발을 묶거나
 LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO3,던전의 적대적인 몬스터들을 당신의 주위로 불러들이기도 합니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO1,스와코: 스펠카드를 몇 개 받습니다.
+LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO1,스와코: 기계 도구를 몇 개 받습니다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO2,스와코는 당신에게 저주를 걸어 저항할 수 없는 감속과 독을 걸거나
 LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO3,당신의 주변에 적대적인 개구리들을 소환합니다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_MINORIKO1,미노리코: 다수의 고구마를 받습니다.
@@ -4899,7 +4903,7 @@ LOC_SYSTEM_GOD_SEIJA_GIFT_YUKARI3,적들을 불러오기도하며 이형의 눈�
 LOC_SYSTEM_GOD_SEIJA_GIFT_EIRIN1,에이린: 무작위 물약 더미를 받습니다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_EIRIN2,에이린은 당신에 나쁜 물약을 먹이거나 당신에게 수상한 실험을 하여 부작용을
 LOC_SYSTEM_GOD_SEIJA_GIFT_EIRIN3,남깁니다. 또한 징벌중에 당신이 마시는 물약의 효과가 일정 확률로 사라집니다.
-LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO1,유유코: 무작위 발동템들을 받습니다.
+LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO1,유유코: 무작위 마도구들을 받습니다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO2,유유코는 징벌로 당신의 주변에 많은 적대적인 유령들을 소환시킵니다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO3,소환되는 유령들은 당신이 강해질수록 강해집니다.
 LOC_SYSTEM_GOD_SEIJA_GIFT_SATORI1,사토리: 식별두루마리 여럿을 받습니다.
@@ -5063,7 +5067,7 @@ LOC_SYSTEM_GOD_JUNKO_PURIFICATION_MP,마력순화: 체력과 영력이 동일시
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_POWER,파워순화: 당신의 최대 파워와 파워 회복량이 2배가 된다.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_LIFE,생명순화: 추가 목숨을 2개 얻는다.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM,장비순화: 선택한 장비의 강화치가 최대 강화치+5가 된다. 아티팩트도 가능.
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SYSTEM,시스템순화: 부적의 충전속도가 3배가 되고 순화시에도 스펠카드 사용이 가능.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SYSTEM,시스템순화: 부적의 충전속도가 3배가 되고 순화시에도 기계 도구 사용이 가능.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_BUG,버그순화: 버그이므로 이걸 선택하면 안된다.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_APTIT,적성이 0이상인 스킬만 선택할 수 있다!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_ASK,정말 {0} 스킬을 순화할거야? (현재 레벨 {1})
@@ -5320,8 +5324,8 @@ LOC_SYSTEM_DEBUG_WHICH,<위자드모드> 어느 명령어?  ( ? - 도움말 )
 LOC_SYSTEM_DEBUG_CREATE_ITEM,어느 아이템을 얻어볼까?
 LOC_SYSTEM_DEBUG_CREATE_POTION,어느 물약을 얻어볼까?
 LOC_SYSTEM_DEBUG_CREATE_SCROLL,어느 두루마리를 얻어볼까?
-LOC_SYSTEM_DEBUG_CREATE_EVOKE,어느 발동템을 얻어볼까?
-LOC_SYSTEM_DEBUG_CREATE_SPELLCARD,어느 스펠카드를 얻어볼까?
+LOC_SYSTEM_DEBUG_CREATE_EVOKE,어느 마도구를 얻어볼까?
+LOC_SYSTEM_DEBUG_CREATE_MACHINE,어느 기계 도구를 얻어볼까?
 LOC_SYSTEM_DEBUG_CREATE_RING,어느 반지를 얻어볼까?
 LOC_SYSTEM_DEBUG_CREATE_AMULET,어느 부적을 얻어볼까?
 LOC_SYSTEM_DEBUG_TRAVEL_DUNGEON,어느 던전으로 이동해볼까? (대문자로 마지막층)
@@ -5516,7 +5520,7 @@ LOC_SYSTEM_CIRNO_ICEFAIRYRING_EQUIP,당신은 더 이상 나빠질 머리가 없
 LOC_SYSTEM_KNIFE_COLLECT_EMPTY,시야내에 회수할 투척무기가 없다.
 LOC_SYSTEM_KNIFE_COLLECT_DONE,당신은 주변의 투척무기를 회수했다.
 LOC_SYSTEM_TIME_PARADOX_NO_SPACE,분신을 만들 공간이 없다.
-LOC_SYSTEM_SPELLCARD_CANCEL_WASTE_ASK,취소하면 횟수가 소모됩니다. 정말 취소하시겠습니까?
+LOC_SYSTEM_MACHINE_CANCEL_WASTE_ASK,취소하면 횟수가 소모됩니다. 정말 취소하시겠습니까?
 LOC_SYSTEM_SPL_DOLL_SPEAR,인형조창
 LOC_SYSTEM_SPL_LITTLE_LEGION,리틀 레기온
 LOC_SYSTEM_SPL_DESCRIBE_DOLL_SPEAR,대상 주변에 검을 들고 회전하는 인형 둘을 소환한다.\n인형은 움직이진 않지만 지속적으로 주변에 데미지를 입힌다.
@@ -5804,3 +5808,32 @@ LOC_SYSTEM_KEYCONFIG_ACTION_TARGET_NEXT,다음 대상
 LOC_SYSTEM_KEYCONFIG_ACTION_THROW_PREV,이전 투척물
 LOC_SYSTEM_KEYCONFIG_ACTION_THROW_NEXT,다음 투척물
 LOC_SYSTEM_KEYCONFIG_ACTION_THROW_INFO,투척물 정보
+LOC_SYSTEM_MACHINE_PUNCH,펀칭머신
+LOC_SYSTEM_MACHINE_DEFENSE_FRAGMENT,간이 보호막 생성기
+LOC_SYSTEM_MACHINE_OPTION_PUNCH,펀치
+LOC_SYSTEM_MACHINE_OPTION_OPTICAL_CAMOUFLAGE,광학미채
+LOC_SYSTEM_MACHINE_OPTION_DEFENSE_FRAGMENT,방어
+LOC_SYSTEM_MACHINE_OPTION_SKY_TORPEDO,공중어뢰
+LOC_SYSTEM_MACHINE_INSTALL_SELECT,어느 방어구에 설치하겠습니까?
+LOC_SYSTEM_MACHINE_INSTALL_INVALID,그 방어구에는 이 기계를 설치할 수 없다.
+LOC_SYSTEM_MACHINE_INSTALLED,{0:을|를} {1}에 설치했다.
+LOC_SYSTEM_MACHINE_INSTALL_POWER,이 기계는 설치하고 사용하기에 전력이 {0} 필요합니다.
+LOC_SYSTEM_MACHINE_INSTALL_SLOTS,이 기계는 다음의 장비에 설치 가능합니다: {0}
+LOC_SYSTEM_MACHINE_MAX_LEVEL,이 기계는 기계공학 {0}레벨에서 최대 성능을 냅니다.
+LOC_SYSTEM_MACHINE_SLOT_BODY,몸통 방어구
+LOC_SYSTEM_MACHINE_SLOT_SHIELD,방패
+LOC_SYSTEM_MACHINE_SLOT_HEAD,모자
+LOC_SYSTEM_MACHINE_SLOT_CLOAK,망토
+LOC_SYSTEM_MACHINE_SLOT_GLOVE,장갑
+LOC_SYSTEM_MACHINE_SLOT_BOOTS,신발
+LOC_SYSTEM_ITEM_DESCRIPTION_INSTALLABLE_MACHINE,기계 도구는 바로 사용가능한 잔탄형과 장비에 설치하는 설치형 두 종류가 있다.\n설치형 기계는 장비에 부착하여 효과를 지속적으로 발휘할 수 있다.\n기계마다 설치할 수 있는 위치가 정해져있고 각 장비에 하나의 기계만 설치할 수 있다.\n설치된 기계는 장비를 파괴하거나, 특정 아이템을 사용하기 전엔 회수가 불가능하다.\n설치해서 사용하는데는 전력이 필요하며 전력은 기계공학 레벨을 올려서 충당 가능하다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_PUNCH,캇파들의 장난감같은 무기. 많은 캇파들이 이를 큰 가방에 숨겨놓고는 한다.\n나를 인식한 3칸이내 거리의 자동으로 펀치 글러브를 발사한다.\n한 번 공격한 적에게는 당분간은 다시 발동하지 않는다.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_DEFENSE_FRAGMENT,방어구에 덧대서 방어력을 올릴 수 있는 고철 장치.\n전력을 공급하면 캇파 특제 실드가 발동하면서 단순한 덧댄 고철 이상의 효과를 낸다.\n단점으로는, 무거운 무게때문에 전력 여부와 상관없이 설치시 이동 속도가 감소한다는 사실이다.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_SKY_TORPEDO,주변 적에게 자동으로 공중 어뢰를 뿌리는 발사 장치다.\n어뢰는 주변 적을 향해 자동으로 유도되며 폭발 데미지를 입힌다.\n꽤나 스마트한 어뢰로, 사용자나 아군들에게는 피해를 입히지않는다.
+LOC_SYSTEM_BUFF_STAT_MACHINE_OVERLOAD,전력-
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_MACHINE_OVERLOAD,허용 전력을 넘어서 모든 설치형 기계들이 효과를 발휘하지 못합니다.
+LOC_SYSTEM_ATT_PUNCH,★펀치
+LOC_SYSTEM_SHORT_MACHINE_POWER,전력
+LOC_SYSTEM_MACHINE_POWER_OVER_EQUIP,장착중인 장비의 전력이 최대 전력을 초과하고있다!
+LOC_SYSTEM_TAG_MAGIC_DEVICE,마도구
+LOC_SYSTEM_MIGRATION_FINISH,스킬 경험치가 이전되었습니다.

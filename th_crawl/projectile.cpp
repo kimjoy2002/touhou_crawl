@@ -1,4 +1,4 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 파일이름: projectile.cpp
 //
@@ -81,7 +81,7 @@ void refreshPath_before(const coord_def &c, beam_iterator& beam, list<item>::ite
 
 	if (infor_->smite)
 		paintpath(you.search_pos, beam, it, false, infor_, m_len_, sector_);
-	if (infor_->spell == -2 && SpellcardFlagCheck((spellcard_evoke_type)infor_->spell, S_FLAG_DEBUF))
+	if (infor_->spell == -2 && MachineFlagCheck((machine_type)infor_->spell, S_FLAG_DEBUF))
 	{
 		spell_list sp_ = (spell_list)infor_->spell;
 		int power_ = min(SpellCap(sp_), you.GetSpellPower(SpellSchool(sp_, 0), SpellSchool(sp_, 1), SpellSchool(sp_, 2)));
@@ -115,7 +115,7 @@ void refreshPath_before(const coord_def &c, beam_iterator& beam, list<item>::ite
 void refreshThrowString(const coord_def &c, beam_iterator& beam, list<item>::iterator it, projectile_infor* infor_, int m_len_, float sector_)
 {
 	throwstring(it, infor_);
-	if (infor_->spell == -2 && SpellcardFlagCheck((spellcard_evoke_type)infor_->spell, S_FLAG_DEBUF))
+	if (infor_->spell == -2 && MachineFlagCheck((machine_type)infor_->spell, S_FLAG_DEBUF))
 	{
 		spell_list sp_ = (spell_list)infor_->spell;
 		int power_ = min(SpellCap(sp_), you.GetSpellPower(SpellSchool(sp_, 0), SpellSchool(sp_, 1), SpellSchool(sp_, 2)));

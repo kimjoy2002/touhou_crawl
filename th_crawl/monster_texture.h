@@ -1,4 +1,4 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 파일이름: monster_texture.h
 //
@@ -515,6 +515,9 @@ extern textures img_item_scroll;
 extern textures img_item_book[];
 extern textures img_item_potion_kind[];
 extern textures img_item_spellcard_kind[];
+extern textures img_item_machine_kind[];
+extern textures img_item_machine_empty_kind[];
+extern textures img_machine_power_icon;
 extern textures img_item_scroll_kind[];
 extern textures img_item_amulet_kind[];
 extern textures img_item_ring_kind[];
@@ -528,6 +531,7 @@ extern textures img_item_needle;
 extern textures img_item_kikuichi;
 extern textures img_item_doggojeo;
 extern textures img_item_spellcard;
+extern textures img_tanmac_punch[8];
 extern textures img_item_sweet_potato;
 extern textures img_item_chocolet;
 extern textures img_item_cucumber;

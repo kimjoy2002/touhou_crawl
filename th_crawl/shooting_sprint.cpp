@@ -1,4 +1,4 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 파일이름: sprint.cpp
 //
@@ -464,19 +464,19 @@ void shooting_reward_random_init()
 	}
 
 	
-	//나오면 좋은 스펠카드
-	random_extraction<int> able_spellcard;
+	//나오면 좋은 기계 도구
+	random_extraction<int> able_machine;
 	
 	addToRandomStage(0, 4, 1, ITM_RING, ITM_ARMOR_HEAD,3);
 
-	able_spellcard.push(SPC_V_FIRE);
-	able_spellcard.push(SPC_V_ICE);
-	able_spellcard.push(SPC_V_AIR);
-	able_spellcard.push(SPC_V_METAL);
-	able_spellcard.push(SPC_V_SUN);
+	able_machine.push(MCH_FLAMETHROWER);
+	able_machine.push(MCH_FREEZE_SPRAYER);
+	able_machine.push(MCH_LARGE_FAN);
+	able_machine.push(MCH_SCRAP_LAUNCHER);
+	able_machine.push(MCH_SUN_LAMP);
 
 	for(int i = 0; i < 3; i++) {		
-		addToRandomStage(0, 5, 1, ITM_SPELL, able_spellcard.pop());
+		addToRandomStage(0, 5, 1, ITM_MACHINE, able_machine.pop());
 	}
 
 	//나오면 좋은 아뮬렛

@@ -252,23 +252,8 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		t->weight = 1.0f;
 		t->value = 200;
 		break;
-	case ITM_SPELL:
-		t->value2 = select_!=-1?(spellcard_evoke_type)select_:randA(SPC_V_MAX-1);
-		t->value1 = SpellcardMaxCharge((spellcard_evoke_type)t->value2)*rand_float(0.2f,1);
-		t->value3 = 0;
-		t->value4 = 0;
-		t->value5 = 0;
-		t->value6 = 0;
-		t->value7 = 0;
-		t->value8 = 0;
-		t->is_pile = false;
-		t->can_throw = false;
-		t->item_tag.push_back(LOC_SYSTEM_TAG_EVOKE);
-		t->item_tag.push_back(LOC_SYSTEM_TAG_SPELLCARD);
-		t->image = &img_item_spellcard;
-		t->name = name_infor(LOC_SYSTEM_SPELLCARD);
-		t->weight = 2.0f;
-		t->value = 200;
+	case ITM_MACHINE:
+		createMachine(good_bad,select_,t);
 		break;
 	case ITM_AMULET:
 	{
@@ -473,6 +458,7 @@ item_infor& makeitem(item_type type, int good_bad, item_infor* t, int select_)
 		break;
 	case ITM_MISCELLANEOUS:	
 		t->item_tag.push_back(LOC_SYSTEM_TAG_EVOKE);
+		t->item_tag.push_back(LOC_SYSTEM_TAG_MAGIC_DEVICE);
 		MakeEvokeItem(t,select_);
 		break;
 	case ITM_GOAL:
@@ -1256,14 +1242,11 @@ void init_identify() //미식별아이템을 구별못하게 섞음
 			iden_list.amulet_list[i].type = dq[i];
 		}
 	}//끝
-	{//스펠카드
-		deque<int> dq;
-		for(int i=0;i<SPC_V_MAX;i++)
-			dq.push_back(i);
-		rand_shuffle(dq.begin(),dq.end());
-		for(int i=0;i<SPC_V_MAX;i++)
+	{
+		for(int i=0;i<MCH_MAX;i++)
 		{
-			iden_list.spellcard_list[i].type = dq[i];
+			iden_list.machine_list[i].found = false;
+			iden_list.machine_list[i].legacy_type = i;
 		}
 	}//끝
 	{//고정아티팩트
@@ -1319,7 +1302,7 @@ void init_identify() //미식별아이템을 구별못하게 섞음
 			else
 				iden_list.autopickup[i] = false;
 		}
-		else if (i >= IDEN_CHECK_SPC_START && i < IDEN_CHECK_SPC_END) {
+		else if (i >= IDEN_CHECK_MACHINE_START && i < IDEN_CHECK_MACHINE_END) {
 			iden_list.autopickup[i] = true;
 		}
 		else if (i >= IDEN_CHECK_BOOK_START && i < IDEN_CHECK_BOOK_END) {

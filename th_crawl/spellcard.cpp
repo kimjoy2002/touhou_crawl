@@ -21,13 +21,13 @@
 int GetDebufPower(spell_list skill, int power_);//디버프의 파워
 
 extern int map_effect;
-bool SpellcardFlagCheck(spellcard_evoke_type skill, skill_flag flag);
-int Spellcardusepower(spellcard_evoke_type skill, bool max_);
-int SpellcardLength(spellcard_evoke_type skill);
-bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def &target);
+bool MachineFlagCheck(machine_type skill, skill_flag flag);
+int MachineUsePower(machine_type skill, bool max_);
+int MachineLength(machine_type skill);
+bool UseMachine(machine_type kind, bool short_, int power, coord_def &target);
 
 
-bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden_, bool auto_)
+bool evoke_machine(machine_type kind, int power, bool fail_, bool iden_, bool auto_)
 {
 	if(you.s_confuse)
 	{
@@ -36,22 +36,20 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 	}
 	if (you.s_pure_turn && you.s_pure >= 10 && !you.GetProperty(TPT_PURE_SYSTEM))
 	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_PURITY_PENALTY_SPELLCARD), true, false, false, CL_normal);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_PURITY_PENALTY_MACHINE), true, false, false, CL_normal);
 		return false;
 	}
 
 
-	PlaySE("spellcard");
-
-	if(!SpellcardFlagCheck(kind, S_FLAG_IMMEDIATELY))
+	if(!MachineFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
 		while(true)
 		{
-			SetSpellSight(SpellcardLength(kind),SpellcardFlagCheck(kind, S_FLAG_RECT)?2:1);
+			SetSpellSight(MachineLength(kind),MachineFlagCheck(kind, S_FLAG_RECT)?2:1);
 			beam_iterator beam(you.position,you.position);
-			projectile_infor infor(SpellcardLength(kind),false,SpellcardFlagCheck(kind, S_FLAG_SMITE),-2,false);
+			projectile_infor infor(MachineLength(kind),false,MachineFlagCheck(kind, S_FLAG_SMITE),-2,false);
 			auto it = you.item_list.end();
-			if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor, SpellcardLength(kind), SpellcardSector(kind), auto_))
+			if(int short_ = Common_Throw(it, you.GetTargetIter(), beam, &infor, MachineLength(kind), MachineSector(kind), auto_))
 			{
 				if(fail_)
 				{
@@ -62,9 +60,9 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 				you.SetBattleCount(30);
 				if(unit_)
 					you.youAttack(unit_);
-				if(EvokeSpellcard(kind, short_ == 2, power, you.search_pos))
+				if(UseMachine(kind, short_ == 2, power, you.search_pos))
 				{
-					you.PowUpDown(-1* Spellcardusepower(kind,false),true);
+					you.PowUpDown(-1* MachineUsePower(kind,false),true);
 					SetSpellSight(0,0);
 					return true;
 				}
@@ -78,7 +76,7 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 				SetSpellSight(0,0);
 				if(iden_)
 					return false;
-				bool cancel_ = ynPrompt(LOC_SYSTEM_SPELLCARD_CANCEL_WASTE_ASK, LOC_EMPTYSTRING, CL_help, false,false,true,true);
+				bool cancel_ = ynPrompt(LOC_SYSTEM_MACHINE_CANCEL_WASTE_ASK, LOC_EMPTYSTRING, CL_help, false,false,true,true);
 				enterlog();
 				if(cancel_)
 					return true;
@@ -86,13 +84,13 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 			auto_ = false;
 		}
 	}			
-	else if(SpellcardFlagCheck(kind, S_FLAG_IMMEDIATELY))
+	else if(MachineFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
 		if(fail_)
 			return true;
-		if(EvokeSpellcard(kind, false, power, you.position))
+		if(UseMachine(kind, false, power, you.position))
 		{
-			you.PowUpDown(-1* Spellcardusepower(kind,false),true);
+			you.PowUpDown(-1* MachineUsePower(kind,false),true);
 			return true;
 		}
 	}
@@ -100,33 +98,39 @@ bool evoke_spellcard(spellcard_evoke_type kind, int power, bool fail_, bool iden
 }
 
 
-void createSpellCard(int goodbad, int select_, item_infor* t)
+void createMachine(int goodbad, int select_, item_infor* t)
 {
 	//셀렉트는나중에 속성 스펠카드로..
 	//나중에 속성에 따른 스펠카드, 발동 선언에 맞춘 세기 정도 가치 정도 다 잘 바꿔보자
 	//지금은 구현이 목적
-	t->value2 = select_!=1?(spellcard_evoke_type)select_:randA(SPC_V_MAX-1);
-	t->value1 = SpellcardMaxCharge((spellcard_evoke_type)t->value2)*rand_float(0.2f,1);
+	t->type = ITM_MACHINE;
+	t->value2 = select_!=-1?(machine_type)select_:randA(MCH_SKY_TORPEDO-1);
+	t->value1 = IsInstallableMachine((machine_type)t->value2) ? 1 :
+		MachineMaxCharge((machine_type)t->value2)*rand_float(0.2f,1);
 	t->value3 = 0;
 	t->value4 = 0;
 	t->value5 = 0;
 	t->value6 = 0;
 	t->is_pile = false;
 	t->can_throw = false;
-	t->image = &img_mons_default;
-	t->name = name_infor(LOC_SYSTEM_SPELLCARD);
+	t->item_tag.clear();
+	t->item_tag.push_back(LOC_SYSTEM_TAG_EVOKE);
+	t->item_tag.push_back(LOC_SYSTEM_TAG_MACHINE);
+	t->image = MachineItemImage((machine_type)t->value2,
+		t->value1 > 0 || IsInstallableMachine((machine_type)t->value2));
+	t->name = name_infor(LOC_SYSTEM_MACHINE_ITEM);
 	t->weight = 2.0f;
 	t->value = 200;
 }
 
 
-float SpellcardSector(spellcard_evoke_type skill)
+float MachineSector(machine_type skill)
 {
 	switch(skill)
 	{
-	case SPC_V_FIRE:
+	case MCH_FLAMETHROWER:
 		return 0.4f;
-	case SPC_V_AIR:
+	case MCH_LARGE_FAN:
 		return 0.4f;
 	default:
 		return 0;
@@ -134,22 +138,22 @@ float SpellcardSector(spellcard_evoke_type skill)
 }
 
 
-bool SpellcardFlagCheck(spellcard_evoke_type skill, skill_flag flag)
+bool MachineFlagCheck(machine_type skill, skill_flag flag)
 {
 	switch(skill)
 	{
 
-	case SPC_V_FIRE:
-	case SPC_V_ICE:
-	case SPC_V_AIR:
+	case MCH_FLAMETHROWER:
+	case MCH_FREEZE_SPRAYER:
+	case MCH_LARGE_FAN:
 		return (S_FLAG_PENETRATE) & flag;
-	case SPC_V_EARTH:
+	case MCH_DRILL:
 		return (0) & flag;
-	case SPC_V_INVISIBLE:
+	case MCH_OPTICAL_CAMOUFLAGE:
 		return (S_FLAG_IMMEDIATELY) & flag;
-	case SPC_V_METAL:
+	case MCH_SCRAP_LAUNCHER:
 		return (0)& flag;
-	case SPC_V_SUN:
+	case MCH_SUN_LAMP:
 		return (S_FLAG_IMMEDIATELY)& flag;
 	default:
 		return false;
@@ -157,63 +161,247 @@ bool SpellcardFlagCheck(spellcard_evoke_type skill, skill_flag flag)
 }
 
 
-LOCALIZATION_ENUM_KEY SpellcardName(spellcard_evoke_type skill)
+LOCALIZATION_ENUM_KEY MachineName(machine_type skill)
 {
 	switch(skill)
 	{
-	case SPC_V_INVISIBLE: //월-투명+회피
-		return LOC_SYSTEM_SPELLCARD_INVISIBLE;
-	case SPC_V_FIRE: //화-구름생성
-		return LOC_SYSTEM_SPELLCARD_FIRE;
-	case SPC_V_ICE: //수-관통형볼트
-		return LOC_SYSTEM_SPELLCARD_ICE;
-	case SPC_V_AIR: //목-밀쳐내기
-		return LOC_SYSTEM_SPELLCARD_AIR;
-	case SPC_V_METAL://금-
-		return LOC_SYSTEM_SPELLCARD_METAL;
-	case SPC_V_EARTH: //토-벽파괴
-		return LOC_SYSTEM_SPELLCARD_EARTH;
-	case SPC_V_SUN://일-주변 몬스터 혼란+투명해제
-		return LOC_SYSTEM_SPELLCARD_SUN;
+	case MCH_OPTICAL_CAMOUFLAGE: //월-투명+회피
+		return LOC_SYSTEM_MACHINE_OPTICAL_CAMOUFLAGE;
+	case MCH_FLAMETHROWER: //화-구름생성
+		return LOC_SYSTEM_MACHINE_FLAMETHROWER;
+	case MCH_FREEZE_SPRAYER: //수-관통형볼트
+		return LOC_SYSTEM_MACHINE_FREEZE_SPRAYER;
+	case MCH_LARGE_FAN: //목-밀쳐내기
+		return LOC_SYSTEM_MACHINE_LARGE_FAN;
+	case MCH_SCRAP_LAUNCHER://금-
+		return LOC_SYSTEM_MACHINE_SCRAP_LAUNCHER;
+	case MCH_DRILL: //토-벽파괴
+		return LOC_SYSTEM_MACHINE_DRILL;
+	case MCH_SUN_LAMP://일-주변 몬스터 혼란+투명해제
+		return LOC_SYSTEM_MACHINE_SUN_LAMP;
+	case MCH_PUNCH:
+		return LOC_SYSTEM_MACHINE_PUNCH;
+	case MCH_BARRIER_GENERATOR:
+		return LOC_SYSTEM_MACHINE_DEFENSE_FRAGMENT;
+	case MCH_SKY_TORPEDO:
+		return LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO;
 	default:
 		return LOC_NONE;
 	}
 }
-int SpellcardMaxCharge(spellcard_evoke_type skill)
+
+LOCALIZATION_ENUM_KEY MachineDescription(machine_type skill)
 {
 	switch(skill)
 	{
-	case SPC_V_FIRE:
+	case MCH_FLAMETHROWER:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_FIRE;
+	case MCH_FREEZE_SPRAYER:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_ICE;
+	case MCH_DRILL:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_EARTH;
+	case MCH_LARGE_FAN:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_AIR;
+	case MCH_OPTICAL_CAMOUFLAGE:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_INVISIBLE;
+	case MCH_SCRAP_LAUNCHER:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_METAL;
+	case MCH_SUN_LAMP:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_SUN;
+	case MCH_PUNCH:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_PUNCH;
+	case MCH_BARRIER_GENERATOR:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_DEFENSE_FRAGMENT;
+	case MCH_SKY_TORPEDO:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_SKY_TORPEDO;
+	default:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_BUG;
+	}
+}
+
+textures* MachineItemImage(machine_type machine_, bool charged_)
+{
+	if(machine_ < 0 || machine_ >= MCH_MAX)
+		return &img_item_machine_kind[0];
+	return charged_ ? &img_item_machine_kind[machine_] : &img_item_machine_empty_kind[machine_];
+}
+
+int MachineMaxCharge(machine_type skill)
+{
+	switch(skill)
+	{
+	case MCH_FLAMETHROWER:
 		return 9;
-	case SPC_V_ICE:
+	case MCH_FREEZE_SPRAYER:
 		return 15;
-	case SPC_V_EARTH:
+	case MCH_DRILL:
 		return 15;
-	case SPC_V_AIR:
+	case MCH_LARGE_FAN:
 		return 9;
-	case SPC_V_INVISIBLE:
+	case MCH_OPTICAL_CAMOUFLAGE:
 		return 6;
-	case SPC_V_METAL:
+	case MCH_SCRAP_LAUNCHER:
 		return 15;
-	case SPC_V_SUN:
+	case MCH_SUN_LAMP:
 		return 9;
+	case MCH_PUNCH:
+	case MCH_BARRIER_GENERATOR:
+	case MCH_SKY_TORPEDO:
+		return 1;
 	default:
 		return false;
 	}
 }
 
-int Spellcardusepower(spellcard_evoke_type skill, bool max_)
+bool IsInstallableMachine(machine_type skill)
+{
+	return MachineToInstalledType(skill) != IMT_NONE;
+}
+
+installed_machine_type MachineToInstalledType(machine_type skill)
+{
+	switch(skill)
+	{
+	case MCH_OPTICAL_CAMOUFLAGE:
+		return IMT_OPTICAL_CAMOUFLAGE;
+	case MCH_PUNCH:
+		return IMT_PUNCH;
+	case MCH_BARRIER_GENERATOR:
+		return IMT_BARRIER_GENERATOR;
+	case MCH_SKY_TORPEDO:
+		return IMT_SKY_TORPEDO;
+	default:
+		return IMT_NONE;
+	}
+}
+
+const installed_machine_info* GetInstalledMachineInfo(installed_machine_type machine_)
+{
+	static const unsigned int all_armour_slots_ =
+		(1u<<ET_ARMOR)|(1u<<ET_SHIELD)|(1u<<ET_HELMET)|
+		(1u<<ET_CLOAK)|(1u<<ET_GLOVE)|(1u<<ET_BOOTS);
+	static const installed_machine_info punch_ =
+		{IMT_PUNCH,MCH_PUNCH,2,8,1u<<ET_ARMOR,LOC_SYSTEM_MACHINE_OPTION_PUNCH};
+	static const installed_machine_info camouflage_ =
+		{IMT_OPTICAL_CAMOUFLAGE,MCH_OPTICAL_CAMOUFLAGE,12,0,1u<<ET_CLOAK,LOC_SYSTEM_MACHINE_OPTION_OPTICAL_CAMOUFLAGE};
+	static const installed_machine_info barrier_ =
+		{IMT_BARRIER_GENERATOR,MCH_BARRIER_GENERATOR,3,0,all_armour_slots_,LOC_SYSTEM_MACHINE_OPTION_DEFENSE_FRAGMENT};
+	static const installed_machine_info torpedo_ =
+		{IMT_SKY_TORPEDO,MCH_SKY_TORPEDO,7,0,all_armour_slots_,LOC_SYSTEM_MACHINE_OPTION_SKY_TORPEDO};
+
+	switch(machine_)
+	{
+	case IMT_PUNCH:
+		return &punch_;
+	case IMT_OPTICAL_CAMOUFLAGE:
+		return &camouflage_;
+	case IMT_BARRIER_GENERATOR:
+		return &barrier_;
+	case IMT_SKY_TORPEDO:
+		return &torpedo_;
+	default:
+		return nullptr;
+	}
+}
+
+LOCALIZATION_ENUM_KEY InstalledMachineOptionName(installed_machine_type machine_)
+{
+	const installed_machine_info* info_ = GetInstalledMachineInfo(machine_);
+	return info_ ? info_->option_name : LOC_NONE;
+}
+
+int InstalledMachinePower(installed_machine_type machine_)
+{
+	const installed_machine_info* info_ = GetInstalledMachineInfo(machine_);
+	return info_ ? info_->power : 0;
+}
+
+int InstalledMachineMaxLevel(installed_machine_type machine_)
+{
+	const installed_machine_info* info_ = GetInstalledMachineInfo(machine_);
+	return info_ ? info_->max_engineering_level : 0;
+}
+
+bool CanInstallMachineAt(installed_machine_type machine_, equip_type slot_)
+{
+	if(slot_ < ET_ARMOR || slot_ >= ET_ARMOR_END)
+		return false;
+	const installed_machine_info* info_ = GetInstalledMachineInfo(machine_);
+	return info_ && (info_->equip_mask & (1u<<slot_)) != 0;
+}
+
+void equipMachine(installed_machine_type machine_)
+{
+	switch(machine_)
+	{
+	case IMT_BARRIER_GENERATOR:
+		you.AcUpDown(0,3);
+		break;
+	case IMT_PUNCH:
+	case IMT_OPTICAL_CAMOUFLAGE:
+	case IMT_SKY_TORPEDO:
+	case IMT_NONE:
+	default:
+		break;
+	}
+}
+
+void unequipMachine(installed_machine_type machine_)
+{
+	switch(machine_)
+	{
+	case IMT_BARRIER_GENERATOR:
+		you.AcUpDown(0,-3);
+		break;
+	case IMT_PUNCH:
+	case IMT_OPTICAL_CAMOUFLAGE:
+	case IMT_SKY_TORPEDO:
+	case IMT_NONE:
+	default:
+		break;
+	}
+}
+
+static LOCALIZATION_ENUM_KEY MachineSlotName(equip_type slot_)
+{
+	switch(slot_)
+	{
+	case ET_ARMOR: return LOC_SYSTEM_MACHINE_SLOT_BODY;
+	case ET_SHIELD: return LOC_SYSTEM_MACHINE_SLOT_SHIELD;
+	case ET_HELMET: return LOC_SYSTEM_MACHINE_SLOT_HEAD;
+	case ET_CLOAK: return LOC_SYSTEM_MACHINE_SLOT_CLOAK;
+	case ET_GLOVE: return LOC_SYSTEM_MACHINE_SLOT_GLOVE;
+	case ET_BOOTS: return LOC_SYSTEM_MACHINE_SLOT_BOOTS;
+	default: return LOC_NONE;
+	}
+}
+
+string InstalledMachineSlotsString(installed_machine_type machine_, const string& lang)
+{
+	string result_;
+	for(int slot_ = ET_ARMOR; slot_ < ET_ARMOR_END; ++slot_)
+	{
+		if(!CanInstallMachineAt(machine_,(equip_type)slot_))
+			continue;
+		if(!result_.empty())
+			result_ += ", ";
+		result_ += LocalzationManager::locString(lang,MachineSlotName((equip_type)slot_));
+	}
+	return result_;
+}
+
+int MachineUsePower(machine_type skill, bool max_)
 {
 	switch(skill)
 	{
 
-	case SPC_V_FIRE:
-	case SPC_V_ICE:
-	case SPC_V_EARTH:
-	case SPC_V_AIR:
-	case SPC_V_INVISIBLE:
-	case SPC_V_METAL:
-	case SPC_V_SUN:
+	case MCH_FLAMETHROWER:
+	case MCH_FREEZE_SPRAYER:
+	case MCH_DRILL:
+	case MCH_LARGE_FAN:
+	case MCH_OPTICAL_CAMOUFLAGE:
+	case MCH_SCRAP_LAUNCHER:
+	case MCH_SUN_LAMP:
 		return 0;
 	default:
 		return false;
@@ -221,21 +409,21 @@ int Spellcardusepower(spellcard_evoke_type skill, bool max_)
 }
 
 
-int SpellcardLength(spellcard_evoke_type skill)
+int MachineLength(machine_type skill)
 {
 	switch(skill)
 	{
 
-	case SPC_V_FIRE:
-	case SPC_V_ICE:
-	case SPC_V_EARTH:
+	case MCH_FLAMETHROWER:
+	case MCH_FREEZE_SPRAYER:
+	case MCH_DRILL:
 		return 7;
-	case SPC_V_AIR:
+	case MCH_LARGE_FAN:
 		return 6;
-	case SPC_V_INVISIBLE:
-	case SPC_V_SUN:
+	case MCH_OPTICAL_CAMOUFLAGE:
+	case MCH_SUN_LAMP:
 		return 0;
-	case SPC_V_METAL:
+	case MCH_SCRAP_LAUNCHER:
 		return 6;
 	default:
 		return false;
@@ -246,9 +434,9 @@ int SpellcardLength(spellcard_evoke_type skill)
 
 
 
-bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def &target)
+bool UseMachine(machine_type kind, bool short_, int power, coord_def &target)
 {
-	if(target == you.position && !SpellcardFlagCheck(kind,S_FLAG_SEIF) && !SpellcardFlagCheck(kind, S_FLAG_IMMEDIATELY))
+	if(target == you.position && !MachineFlagCheck(kind,S_FLAG_SEIF) && !MachineFlagCheck(kind, S_FLAG_IMMEDIATELY))
 	{
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ASK_SUICIDE),true,false,false,CL_small_danger);	
 		return false;
@@ -257,13 +445,13 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 
 	switch (kind)
 	{
-	case SPC_V_FIRE:
+	case MCH_FLAMETHROWER:
 	{
 		beam_iterator beam(you.position, target);
 		if (CheckThrowPath(you.position, target, beam))
 		{
 			PlaySE("fire");
-			beam_infor temp_infor(0, 0, 99, &you, you.GetParentType(), SpellcardLength(kind), 8, BMT_PENETRATE, ATT_THROW_FIRE, name_infor(LOC_SYSTEM_ATT_V_FIRE));
+			beam_infor temp_infor(0, 0, 99, &you, you.GetParentType(), MachineLength(kind), 8, BMT_PENETRATE, ATT_THROW_FIRE, name_infor(LOC_SYSTEM_ATT_V_FIRE));
 			ThrowSector(0, beam, temp_infor, GetSpellSector(SPL_FIRE_SPREAD), [&](coord_def c_) {
 				if (you.isSightnonblocked(c_))
 				{
@@ -276,11 +464,11 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 		}
 		return false;
 	}
-	case SPC_V_ICE:
+	case MCH_FREEZE_SPRAYER:
 	{
 		beam_iterator beam(you.position, target);
 		if (CheckThrowPath(you.position, target, beam)) {
-			beam_infor temp_infor(randC(3, 6 + power / 6), 3 * (6 + power / 6), 16, &you, you.GetParentType(), SpellcardLength(kind), 8, BMT_PENETRATE, ATT_THROW_COLD, name_infor(LOC_SYSTEM_ATT_COLD));
+			beam_infor temp_infor(randC(3, 6 + power / 6), 3 * (6 + power / 6), 16, &you, you.GetParentType(), MachineLength(kind), 8, BMT_PENETRATE, ATT_THROW_COLD, name_infor(LOC_SYSTEM_ATT_COLD));
 			if (short_)
 				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
@@ -293,7 +481,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 		}
 		return false;
 	}
-	case SPC_V_EARTH:
+	case MCH_DRILL:
 	{
 
 		beam_iterator beam(you.position, target);
@@ -302,7 +490,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 			//beam_infor temp_infor(0,0,15,order,order->GetParentType(),length_,1,BMT_NORMAL,ATT_THROW_NONE_MASSAGE,name_infor(LOC_SYSTEM_ATT_FIREBALL));
 			//coord_def pos = throwtanmac(16,beam,temp_infor,NULL);
 
-			beam_infor temp_infor(randC(2, 4 + power / 8), 2 * (4 + power / 8), 10, &you, you.GetParentType(), SpellcardLength(kind), 1, BMT_WALL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_V_EARTH_SHOT));
+			beam_infor temp_infor(randC(2, 4 + power / 8), 2 * (4 + power / 8), 10, &you, you.GetParentType(), MachineLength(kind), 1, BMT_WALL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_V_EARTH_SHOT));
 			if (short_)
 				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
@@ -310,7 +498,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 			{
 				PlaySE("shoot");
 				coord_def pos = throwtanmac(26, beam, temp_infor, NULL);
-				if (env[current_level].dgtile[pos.x][pos.y].isEffectibleEarthSpellcard())
+				if (env[current_level].dgtile[pos.x][pos.y].isEffectibleDrill())
 				{
 					PlaySE("stone");
 					for (int i = -1; i <= 1; i++)
@@ -340,7 +528,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 							}
 							else
 							{
-								if(i == 0 && j == 0 && env[current_level].dgtile[effect_pos.x][effect_pos.y].isEffectibleEarthSpellcard()) {
+								if(i == 0 && j == 0 && env[current_level].dgtile[effect_pos.x][effect_pos.y].isEffectibleDrill()) {
 									env[current_level].changeTile(effect_pos, env[current_level].base_floor);
 								}
 								else if (env[current_level].dgtile[effect_pos.x][effect_pos.y].isBreakable())
@@ -352,7 +540,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 				}
 				else if (!env[current_level].dgtile[pos.x][pos.y].isMove(true, true, false))
 				{
-					LocalzationManager::printLogWithKey(LOC_SYSTEM_SPELLCARD_EARTH_CANT_BREAK,true,false,false,CL_normal,
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_MACHINE_DRILL_CANT_BREAK,true,false,false,CL_normal,
 						 PlaceHolderHelper(dungeon_tile_tribe_type_string[env[current_level].dgtile[pos.x][pos.y].tile]));
 					env[current_level].MakeNoise(target, 8, NULL);
 				}
@@ -365,17 +553,17 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 		}
 		return false;
 	}
-	case SPC_V_AIR:
+	case MCH_LARGE_FAN:
 	{
 		beam_iterator beam(you.position, target);
 		if (CheckThrowPath(you.position, target, beam)) {
-			beam_infor temp_infor(randC(3, 3 + power / 12), 3 * (3 + power / 12), 99, &you, you.GetParentType(), SpellcardLength(kind), 8, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_V_AIR));
+			beam_infor temp_infor(randC(3, 3 + power / 12), 3 * (3 + power / 12), 99, &you, you.GetParentType(), MachineLength(kind), 8, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_V_AIR));
 
 
 			for (int i = 0; i < (you.GetParadox() ? 2 : 1); i++)
 			{
 				PlaySE("wind");
-				ThrowSector(25, beam, temp_infor, SpellcardSector(SPC_V_AIR), [&](coord_def c_) {
+				ThrowSector(25, beam, temp_infor, MachineSector(MCH_LARGE_FAN), [&](coord_def c_) {
 					if (unit* unit_ = env[current_level].isMonsterPos(c_.x, c_.y))
 					{
 						if (!unit_->isImmobile() && you.isSightnonblocked(c_))
@@ -402,7 +590,7 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 							}
 							if (real_knock_)
 							{
-								LocalzationManager::printLogWithKey(LOC_SYSTEM_SPELLCARD_AIR_EFFECT,false,false,false,CL_normal,
+								LocalzationManager::printLogWithKey(LOC_SYSTEM_MACHINE_LARGE_FAN_EFFECT,false,false,false,CL_normal,
 									PlaceHolderHelper(unit_->GetName()->getName()));
 							}
 						}
@@ -417,14 +605,14 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 		}
 		return false;
 	}
-	case SPC_V_INVISIBLE:
+	case MCH_OPTICAL_CAMOUFLAGE:
 		you.SetInvisible(rand_int(20, 30) + randA(power / 4));
 		return true;
-	case SPC_V_METAL:
+	case MCH_SCRAP_LAUNCHER:
 	{
 		beam_iterator beam(you.position, target);
 		if (CheckThrowPath(you.position, target, beam)) {
-			beam_infor temp_infor(randC(1, 13 + power / 6), 1 * (13 + power / 6), 14, &you, you.GetParentType(), SpellcardLength(kind), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_V_METAL));
+			beam_infor temp_infor(randC(1, 13 + power / 6), 1 * (13 + power / 6), 14, &you, you.GetParentType(), MachineLength(kind), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_V_METAL));
 			if (short_)
 				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
 
@@ -437,9 +625,9 @@ bool EvokeSpellcard(spellcard_evoke_type kind, bool short_, int power, coord_def
 		}
 		return false;
 	}
-	case SPC_V_SUN:
+	case MCH_SUN_LAMP:
 	{
-		printlog(LocalzationManager::locString(LOC_SYSTEM_SPELLCARD_SUN_SET), true, false, false, CL_warning);
+		printlog(LocalzationManager::locString(LOC_SYSTEM_MACHINE_SUN_LAMP_SET), true, false, false, CL_warning);
 		map_effect = 2;
 		Sleep(500);
 		map_effect = 0;

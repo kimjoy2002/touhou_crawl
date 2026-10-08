@@ -563,7 +563,7 @@ Once you receive this blessing, you can no longer escape from Junko, but she gra
 She enjoys slaying every visible enemy.
 
 
-Purification Level 1: You cannot use spell cards.
+Purification Level 1: You cannot use mechanical tools.
 Purification Level 2: You cannot use most scrolls. (Only essential scrolls such as enchantment and uncurse scrolls are allowed.)
 Purification Level 3: You no longer gain effects from potions.
 
@@ -589,7 +589,7 @@ Available Purification Blessings:
 - Power Purification: Maximum power and power regeneration are doubled.
 - Life Purification: Gain 2 extra lives.
 - Equipment Purification: Selected equipment gains +5 over its maximum enchantment (even artifacts).
-- System Purification: Amulet charge rate triples, and you can use spell cards even while purified.
+- System Purification: Amulet charge rate triples, and you can use mechanical tools even while purified.
 
 *If you betray Junko after receiving the blessing, you will be instantly destroyed—purified by divine wrath.
 

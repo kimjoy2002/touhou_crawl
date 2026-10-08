@@ -1201,7 +1201,7 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 		bool ok_ = false;
 		for(auto it = you.item_list.begin();it != you.item_list.end(); it++)
 		{
-			if((*it).isSimpleType(ITMS_SPELL) && (*it).isChargable())
+			if((*it).isSimpleType(ITMS_MACHINE) && (*it).isChargable())
 			{
 				ok_ = true;
 				break;
@@ -1209,14 +1209,14 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 		}
 		if(!ok_)
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_CHARGE_SPELLCARD_FAIL),true,false,false,CL_normal);
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_CHARGE_MACHINE_FAIL),true,false,false,CL_normal);
 			if(pre_iden_)
 				return false;
 			else
 				return true;
 		}
 		if (iden_list.scroll_list[SCT_CHARGING].iden == 3 || ablity_)
-			view_item(IVT_SPELLCARD, LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_SPELLCARD);
+			view_item(IVT_MACHINE, LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_MACHINE);
 		else
 			view_item(IVT_SELECT, LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 	}
@@ -1256,14 +1256,15 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 			{
 				if(item_->isChargable())
 				{
-					int charging_= SpellcardMaxCharge((spellcard_evoke_type)item_->value2) * rand_float(0.3f,0.7f);
+					int charging_= MachineMaxCharge((machine_type)item_->value2) * rand_float(0.3f,0.7f);
 
-					LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_CHARGE_SPELLCARD,true,false,false,CL_good,
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_CHARGE_MACHINE,true,false,false,CL_good,
 						PlaceHolderHelper(item_->GetName()));
 
 					item_->value1 += charging_;
-					if(item_->value1>SpellcardMaxCharge((spellcard_evoke_type)item_->value2))
-						item_->value1 = SpellcardMaxCharge((spellcard_evoke_type)item_->value2);
+					if(item_->value1>MachineMaxCharge((machine_type)item_->value2))
+						item_->value1 = MachineMaxCharge((machine_type)item_->value2);
+					item_->image = MachineItemImage((machine_type)item_->value2,true);
 					item_->value3 = -2; 					
 
 					return true;
@@ -1295,7 +1296,7 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 		else if(key_ == '*')
 		{	
 			if(iden_list.scroll_list[SCT_CHARGING].iden == 3 || ablity_)
-				view_item(IVT_SPELLCARD,LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_SPELLCARD);
+				view_item(IVT_MACHINE,LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_MACHINE);
 			else
 				view_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 		}
@@ -1305,7 +1306,7 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 				if(iteminfor_(inputedKey.val1, true))
 					break;
 				if(iden_list.scroll_list[SCT_CHARGING].iden == 3 || ablity_)
-					rollback_item(IVT_SPELLCARD,LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_SPELLCARD);
+					rollback_item(IVT_MACHINE,LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_MACHINE);
 				else
 					rollback_item(IVT_SELECT,LOC_SYSTEM_DISPLAY_MANAGER_USE_TO);
 				setDisplayMove(get_item_move_);
@@ -1736,12 +1737,12 @@ bool aquire_scroll(bool pre_iden_, bool cancel_)
 		for(int i = 0; i < 40 && gift_book == -1; i++)
 		{
 			vector<bookgift_class> q;
-			for(int j=SKT_SPELLCASTING+1; j<SKT_EVOCATE;j++)
+			for(int j=SKT_SPELLCASTING+1; j<SKT_MAGIC_DEVICE;j++)
 			{
 				q.push_back(bookgift_class(you.GetSkillLevel(j, false),you.skill[j].exper,j));
 			}
 			sort(q.begin(),q.end(),bookgift_compare());
-			for(int j=SKT_SPELLCASTING+1; j<SKT_EVOCATE;j++)
+			for(int j=SKT_SPELLCASTING+1; j<SKT_MAGIC_DEVICE;j++)
 			{
 				if(q.back().level == 0 )
 					break;

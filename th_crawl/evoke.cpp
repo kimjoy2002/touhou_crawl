@@ -1,4 +1,4 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 파일이름: evoke.cpp
 //
@@ -20,6 +20,7 @@
 #include "rect.h"
 #include "speak.h"
 #include "smoke.h"
+#include "spellcard.h"
 
 
 LOCALIZATION_ENUM_KEY evoke_string[EVK_MAX]=
@@ -51,6 +52,11 @@ void MakeEvokeItem(item_infor* t, int kind_)
 {	
 	if(kind_ == -1 || kind_<0 || kind_>=EVK_MAX)
 		kind_= getEvokeItem();
+	if(kind_ == EVK_SKY_TORPEDO)
+	{
+		createMachine(0,MCH_SKY_TORPEDO,t);
+		return;
+	}
 
 	t->value1 = kind_;
 	t->value2 = 0;
@@ -89,6 +95,11 @@ int EvokeLength(evoke_kind skill);
 float EvokeSector(evoke_kind skill);
 int EvokeSuccece(evoke_kind skill);
 bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target);
+
+static skill_type EvokeSkill(evoke_kind kind)
+{
+	return SKT_MAGIC_DEVICE;
+}
 
 
 bool isCanGenerate(evoke_kind evk) {
@@ -284,7 +295,7 @@ int EvokeSuccece(evoke_kind skill)
 	switch(skill)
 	{
 	case EVK_AIR_SCROLL:
-		return 30+ you.GetSkillLevel(SKT_EVOCATE, true)*7;
+		return 30+ you.GetSkillLevel(SKT_MAGIC_DEVICE, true)*7;
 	default:
 		return 100;
 	}
@@ -310,8 +321,9 @@ bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target)
 		}
 		return false;
 	}
-	int level_ = you.GetSkillLevel(SKT_EVOCATE, true);
-	level_ = max(level_,you.level/3 + you.GetSkillLevel(SKT_EVOCATE, true)*2/3);
+	const skill_type skill_ = EvokeSkill(kind);
+	int level_ = you.GetSkillLevel(skill_, true);
+	level_ = max(level_,you.level/3 + you.GetSkillLevel(skill_, true)*2/3);
 	switch(kind)
 	{
 	default:

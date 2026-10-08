@@ -140,7 +140,7 @@ int GetHazard()
 					danger_ *= 0.5f;
 				if((*it).s_haste)
 					danger_ *= 1.5f;
-				if((*it).s_invisible && !you.s_invisible)
+				if((*it).s_invisible && !you.GetInvisible())
 					danger_ *= 1.5f;
 				if((*it).s_might)
 					danger_ *= 1.5f;

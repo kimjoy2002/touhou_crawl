@@ -162,9 +162,11 @@ enum item_view_type
 	IVT_ARMOR,
 	IVT_ARMOR_ENCHANT,
 	IVT_PURE_ITEM,
-	IVT_SPELLCARD,
+	IVT_MACHINE,
 	IVT_EVOKE,
 	IVT_CURSE_ENCHANT,
+	IVT_INSTALL_BODY_MACHINE,
+	IVT_INSTALL_ARMOUR_MACHINE,
 	IVT_SEARCH
 };
 
@@ -549,8 +551,9 @@ enum skill_type //고치면 skill.cpp의 스킬스트링부분추가. player.cpp
 	SKT_MENTAL,
 	SKT_SUMMON,
 	SKT_TRANS,
-	SKT_EVOCATE,
+	SKT_MAGIC_DEVICE,
 	SKT_STEALTH,
+	SKT_ENGINEERING,
 	SKT_MAX
 };
 
@@ -599,7 +602,7 @@ enum item_type //추가시 env의 isSimpleType 살필것+item_type_simple도 추
 
 	ITM_SCROLL,
 
-	ITM_SPELL,
+	ITM_MACHINE,
 
 	ITM_JEWELRY_FIRST,
 	ITM_AMULET = ITM_JEWELRY_FIRST,
@@ -642,7 +645,7 @@ enum item_type_simple
 	ITMS_POTION,
 	ITMS_FOOD,
 	ITMS_SCROLL,
-	ITMS_SPELL,
+	ITMS_MACHINE,
 	ITMS_JEWELRY,
 	ITMS_BOOK,
 	ITMS_MISCELLANEOUS,
@@ -695,16 +698,30 @@ enum potion_type
 	PT_MAX
 };
 
-enum spellcard_evoke_type
+enum machine_type
 {
-	SPC_V_FIRE,
-	SPC_V_ICE,
-	SPC_V_EARTH,
-	SPC_V_AIR,
-	SPC_V_INVISIBLE, 
-	SPC_V_METAL,
-	SPC_V_SUN,
-	SPC_V_MAX
+	MCH_FLAMETHROWER,
+	MCH_FREEZE_SPRAYER,
+	MCH_DRILL,
+	MCH_LARGE_FAN,
+	MCH_OPTICAL_CAMOUFLAGE,
+	MCH_SCRAP_LAUNCHER,
+	MCH_SUN_LAMP,
+	MCH_PUNCH,
+	MCH_BARRIER_GENERATOR,
+	MCH_SKY_TORPEDO,
+	MCH_MAX
+};
+
+
+enum installed_machine_type
+{
+	IMT_NONE = 0,
+	IMT_PUNCH = 1 << 0,
+	IMT_OPTICAL_CAMOUFLAGE = 1 << 1,
+	IMT_BARRIER_GENERATOR = 1 << 2,
+	IMT_SKY_TORPEDO = 1 << 3,
+	IMT_MAX = 1 << 4
 };
 
 enum unique_spellcard_type

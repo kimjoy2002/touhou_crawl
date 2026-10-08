@@ -1,4 +1,4 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 파일이름: texture.cpp
 //
@@ -1903,6 +1903,33 @@ textures(&texture_item02, 69, 255),
 textures(&texture_item02, 70, 255),
 textures(&texture_item02, 71, 255)};
 
+
+textures img_item_machine_kind[] = {
+	textures(&texture_item04, 121, 255), // 화염방사기
+	textures(&texture_item04, 123, 255), // 빙결 분사기
+	textures(&texture_item04, 127, 255), // 굴착드릴
+	textures(&texture_item04, 129, 255), // 대형 선풍기
+	textures(&texture_item04, 133, 255), // 광학미채
+	textures(&texture_item04, 131, 255), // 고철발사기
+	textures(&texture_item04, 125, 255), // 태양등
+	textures(&texture_item04, 134, 255), // 펀칭머신
+	textures(&texture_item04, 135, 255), // 간이 보호막 생성기
+	textures(&texture_item03, 28, 255)   // 공중어뢰
+};
+textures img_item_machine_empty_kind[] = {
+	textures(&texture_item04, 122, 255),
+	textures(&texture_item04, 124, 255),
+	textures(&texture_item04, 128, 255),
+	textures(&texture_item04, 130, 255),
+	textures(&texture_item04, 133, 255),
+	textures(&texture_item04, 132, 255),
+	textures(&texture_item04, 126, 255),
+	textures(&texture_item04, 134, 255),
+	textures(&texture_item04, 135, 255),
+	textures(&texture_item03, 28, 255)
+};
+textures img_machine_power_icon(&texture_item04, 136, 255);
+
 textures img_item_scroll_kind[] = { textures(&texture_item02, 80, 255),
 textures(&texture_item02, 81, 255),
 textures(&texture_item02, 82, 255),
@@ -2485,6 +2512,11 @@ textures img_bullet[] = {
 	textures(&texture_laser, 183, 255),
 	textures(&texture_laser, 184, 255),
 	textures(&texture_laser, 185, 255)
+};
+
+textures img_tanmac_punch[8] = {
+	textures(&texture_laser, 186, 255), textures(&texture_laser, 187, 255), textures(&texture_laser, 188, 255), textures(&texture_laser, 189, 255),
+	textures(&texture_laser, 190, 255), textures(&texture_laser, 191, 255), textures(&texture_laser, 192, 255), textures(&texture_laser, 193, 255)
 };
 
 
@@ -4705,6 +4737,62 @@ int texturetoint(textures* input)
 		return 845;
 	else if(input == &img_item_artifact_armor_armour_3)
 		return 846;
+	else if(input == &img_tanmac_punch[0])
+		return 847;
+	else if(input == &img_tanmac_punch[1])
+		return 848;
+	else if(input == &img_tanmac_punch[2])
+		return 849;
+	else if(input == &img_tanmac_punch[3])
+		return 850;
+	else if(input == &img_tanmac_punch[4])
+		return 851;
+	else if(input == &img_tanmac_punch[5])
+		return 852;
+	else if(input == &img_tanmac_punch[6])
+		return 853;
+	else if(input == &img_tanmac_punch[7])
+		return 854;
+	else if(input == &img_item_machine_kind[0])
+		return 855;
+	else if(input == &img_item_machine_kind[1])
+		return 856;
+	else if(input == &img_item_machine_kind[2])
+		return 857;
+	else if(input == &img_item_machine_kind[3])
+		return 858;
+	else if(input == &img_item_machine_kind[4])
+		return 859;
+	else if(input == &img_item_machine_kind[5])
+		return 860;
+	else if(input == &img_item_machine_kind[6])
+		return 861;
+	else if(input == &img_item_machine_kind[7])
+		return 862;
+	else if(input == &img_item_machine_kind[8])
+		return 863;
+	else if(input == &img_item_machine_kind[9])
+		return 864;
+	else if(input == &img_item_machine_empty_kind[0])
+		return 865;
+	else if(input == &img_item_machine_empty_kind[1])
+		return 866;
+	else if(input == &img_item_machine_empty_kind[2])
+		return 867;
+	else if(input == &img_item_machine_empty_kind[3])
+		return 868;
+	else if(input == &img_item_machine_empty_kind[4])
+		return 869;
+	else if(input == &img_item_machine_empty_kind[5])
+		return 870;
+	else if(input == &img_item_machine_empty_kind[6])
+		return 871;
+	else if(input == &img_item_machine_empty_kind[7])
+		return 872;
+	else if(input == &img_item_machine_empty_kind[8])
+		return 873;
+	else if(input == &img_item_machine_empty_kind[9])
+		return 874;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -6424,6 +6512,62 @@ textures* inttotexture(int input)
 		return &img_item_artifact_armor_armour_2;
 	case 846:
 		return &img_item_artifact_armor_armour_3;
+	case 847:
+		return &img_tanmac_punch[0];
+	case 848:
+		return &img_tanmac_punch[1];
+	case 849:
+		return &img_tanmac_punch[2];
+	case 850:
+		return &img_tanmac_punch[3];
+	case 851:
+		return &img_tanmac_punch[4];
+	case 852:
+		return &img_tanmac_punch[5];
+	case 853:
+		return &img_tanmac_punch[6];
+	case 854:
+		return &img_tanmac_punch[7];
+	case 855:
+		return &img_item_machine_kind[0];
+	case 856:
+		return &img_item_machine_kind[1];
+	case 857:
+		return &img_item_machine_kind[2];
+	case 858:
+		return &img_item_machine_kind[3];
+	case 859:
+		return &img_item_machine_kind[4];
+	case 860:
+		return &img_item_machine_kind[5];
+	case 861:
+		return &img_item_machine_kind[6];
+	case 862:
+		return &img_item_machine_kind[7];
+	case 863:
+		return &img_item_machine_kind[8];
+	case 864:
+		return &img_item_machine_kind[9];
+	case 865:
+		return &img_item_machine_empty_kind[0];
+	case 866:
+		return &img_item_machine_empty_kind[1];
+	case 867:
+		return &img_item_machine_empty_kind[2];
+	case 868:
+		return &img_item_machine_empty_kind[3];
+	case 869:
+		return &img_item_machine_empty_kind[4];
+	case 870:
+		return &img_item_machine_empty_kind[5];
+	case 871:
+		return &img_item_machine_empty_kind[6];
+	case 872:
+		return &img_item_machine_empty_kind[7];
+	case 873:
+		return &img_item_machine_empty_kind[8];
+	case 874:
+		return &img_item_machine_empty_kind[9];
 	default:
 		return &img_mons_default;
 	}

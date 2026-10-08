@@ -628,6 +628,12 @@ bool Dump(int type, wstring *filename_)
 			ss << std::string(4-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_INT)), ' ');
 		ss << ":" << you.s_int << "\n";
 	}
+	if(you.GetSkillLevel(SKT_ENGINEERING,true) >= 1) {
+		ss << LocalzationManager::locString(LOC_SYSTEM_SHORT_MACHINE_POWER) << ": "
+			<< you.GetMachinePowerUsage() << "/" << you.GetMachinePowerCapacity() << "\n";
+	}
+	
+	ss << "\n";
 
 	int max_length_fcep = 4;
 	max_length_fcep = max(max_length_fcep, PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_SHORT_FIRE_RESIST)));
@@ -942,20 +948,21 @@ bool Dump(int type, wstring *filename_)
 	int skt = 0;
 	while(skt < SKT_MAX)
 	{
-		if (you.pure_skill == skt)
+		skill_type skill_ = skill_from_display_index(skt);
+		if (you.pure_skill == skill_)
 		{
-			if(PrintCharWidth(skill_string((skill_type)skt)) < 12) {
-				ss << std::string(12-PrintCharWidth(skill_string((skill_type)skt)), ' ');
+			if(PrintCharWidth(skill_string(skill_)) < 12) {
+				ss << std::string(12-PrintCharWidth(skill_string(skill_)), ' ');
 			}
-			ss << skill_string((skill_type)skt);
-			ss << ' ' << std::setw(3) << you.GetSkillLevel(skt, false) << " (" <<  LocalzationManager::locString(LOC_SYSTEM_SKILL_JUNKA) << ")\n";
+			ss << skill_string(skill_);
+			ss << ' ' << std::setw(3) << you.GetSkillLevel(skill_, false) << " (" <<  LocalzationManager::locString(LOC_SYSTEM_SKILL_JUNKA) << ")\n";
 		}
-		else if (you.GetSkillLevel(skt, false)) {
-			if(PrintCharWidth(skill_string((skill_type)skt)) < 12) {
-				ss << std::string(12-PrintCharWidth(skill_string((skill_type)skt)), ' ');
+		else if (you.GetSkillLevel(skill_, false)) {
+			if(PrintCharWidth(skill_string(skill_)) < 12) {
+				ss << std::string(12-PrintCharWidth(skill_string(skill_)), ' ');
 			}
-			ss << skill_string((skill_type)skt);
-			ss << ' ' << std::setw(3) << you.GetSkillLevel(skt, false) << " (" << GetSkillPercent(you.skill[skt]) << "%)\n";
+			ss << skill_string(skill_);
+			ss << ' ' << std::setw(3) << you.GetSkillLevel(skill_, false) << " (" << GetSkillPercent(you.skill[skill_]) << "%)\n";
 		}
 		skt++;
 	}

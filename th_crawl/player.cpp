@@ -42,6 +42,8 @@
 #include "lilly.h"
 #include "soundmanager.h"
 #include "scarlet_under.h"
+#include "display.h"
+#include "option_manager.h"
 #include <iomanip>
 
 
@@ -955,6 +957,20 @@ void players::LoadDatas(FILE *fp)
 	LoadData<int>(fp, total_skill_exp);
 	LoadData(fp, skill);
 	LoadData(fp, bonus_skill);
+	if(isPrevVersion(loading_version_string, "ver1.301"))
+	{
+		skill[SKT_ENGINEERING] = skill_exp_infor();
+		skill[SKT_ENGINEERING].aptit = aptitude[tribe][SKT_ENGINEERING];
+		if(char_type == UNIQ_START_SANAE)
+			skill[SKT_ENGINEERING].aptit += 3;
+		else if(char_type == UNIQ_START_NITORI)
+			skill[SKT_ENGINEERING].aptit += 1;
+		bonus_skill[SKT_ENGINEERING] = 0;
+		skill[SKT_MAGIC_DEVICE].aptit = aptitude[tribe][SKT_MAGIC_DEVICE];
+		if(char_type == UNIQ_START_MARISA)
+			skill[SKT_MAGIC_DEVICE].aptit += 1;
+		skill[SKT_MAGIC_DEVICE].level = GetSkillLevelFromExp(skill[SKT_MAGIC_DEVICE].exper, skill[SKT_MAGIC_DEVICE].aptit);
+	}
 	LoadData<int>(fp, pure_skill);
 	LoadData(fp, MemorizeSpell);
 	LoadData<int>(fp, remainSpellPoiont);
@@ -1261,6 +1277,7 @@ bool players::attack(monster* mon_, equip_type type_, bool counter_)
 	if(type_ < 0 || type_ >= ET_LAST) {
 		return false;
 	}
+	bool sleeping_punch_ = mon_->state.GetState() == MS_SLEEP || mon_->state.GetState() == MS_REST;
 			
 	attack_type brand_ = ATT_NORMAL;
 	if(equipment[type_])
@@ -1320,6 +1337,8 @@ bool players::attack(monster* mon_, equip_type type_, bool counter_)
 	}
 
 	bool hit_ = mon_->damage(temp_att);
+	if(sleeping_punch_ && mon_->isLive())
+		FirePunchMachine(mon_,true);
 	if(hit_)
 	{
 		if(mon_->isLive()&& you.god == GT_YUUGI && !you.GetPunish(GT_YUUGI) && pietyLevel(you.piety)>=2 && randA(10) == 0)
@@ -2122,6 +2141,134 @@ int players::GetDisplaySh()
 {
 	return (you.s_sleep<0 || you.s_paralyse) ? 0 : sh;
 }
+
+int players::GetMachinePowerCapacity()
+{
+	int level_ = GetSkillLevel(SKT_ENGINEERING,true);
+	if(level_ <= 9)
+		return level_;
+	if(level_ <= 18)
+		return 9+(level_-9)*2;
+	return 27+(level_-18)*3;
+}
+
+int players::GetMachinePowerUsage()
+{
+	int usage_ = 0;
+	for(int i = ET_ARMOR; i < ET_ARMOR_END; ++i)
+	{
+		item* armour_ = equipment[i];
+		if(armour_)
+			usage_ += armour_->InstalledMachinePowerUsage();
+	}
+	return usage_;
+}
+
+bool players::IsMachinePowerOverloaded()
+{
+	return GetMachinePowerUsage() > GetMachinePowerCapacity();
+}
+
+bool players::HasActiveInstalledMachine(installed_machine_type type_)
+{
+	if(IsMachinePowerOverloaded())
+		return false;
+	for(int i = ET_ARMOR; i < ET_ARMOR_END; ++i)
+		if(equipment[i] && equipment[i]->HasInstalledMachine(type_))
+			return true;
+	return false;
+}
+
+static void ChangeInstalledMachineEffects(item* armour_, bool equip_)
+{
+	if(!armour_)
+		return;
+	for(int bit_ = 1; bit_ < IMT_MAX; bit_ <<= 1)
+	{
+		installed_machine_type machine_ = (installed_machine_type)bit_;
+		if(!armour_->HasInstalledMachine(machine_))
+			continue;
+		if(equip_)
+			equipMachine(machine_);
+		else
+			unequipMachine(machine_);
+	}
+}
+
+void players::UpdateMachinePowerOverload(bool was_overloaded_)
+{
+	bool is_overloaded_ = IsMachinePowerOverloaded();
+	if(was_overloaded_ == is_overloaded_)
+		return;
+	for(int slot_ = ET_ARMOR; slot_ < ET_ARMOR_END; ++slot_)
+	{
+		if(equipment[slot_])
+			ChangeInstalledMachineEffects(equipment[slot_],!is_overloaded_);
+	}
+}
+
+bool players::FirePunchMachine(monster* mon_, bool immediate_)
+{
+	if(!mon_ || !mon_->isLive() || !isEnemyUnit(mon_) ||
+		!HasActiveInstalledMachine(IMT_PUNCH) ||
+		mon_->machine_punch_cooldown > 0)
+		return false;
+
+	int dx_ = mon_->position.x-position.x;
+	int dy_ = mon_->position.y-position.y;
+	int distance_ = max(abs(dx_),abs(dy_));
+	if(!immediate_ && distance_ > 3)
+		return false;
+
+	beam_iterator path_(position,mon_->position);
+	if(!CheckThrowPath(position,mon_->position,path_))
+		return false;
+
+	beam_iterator occupied_path_(position,mon_->position);
+	while(!occupied_path_.end())
+	{
+		coord_def check_ = *occupied_path_;
+		if(check_ != position && check_ != mon_->position &&
+			env[current_level].isMonsterPos(check_.x,check_.y))
+			return false;
+		occupied_path_++;
+	}
+
+	int direction_ = GetPosToDirec(position,mon_->position);
+	int engineering_ = min(GetSkillLevel(SKT_ENGINEERING,true),InstalledMachineMaxLevel(IMT_PUNCH));
+	int max_damage_ = 10+engineering_;
+	int hit_ = 15+engineering_/2;
+
+	beam_infor punch_(randA_1(max_damage_),max_damage_,hit_,this,GetParentType(),
+		max(1,distance_),1,BMT_NORMAL,ATT_NORMAL_HIT,name_infor(LOC_SYSTEM_ATT_PUNCH));
+	PlaySE("shoot_heavy");
+	throwtanmac(&img_tanmac_punch[direction_],path_,punch_,NULL);
+	mon_->machine_punch_cooldown = 100;
+	return true;
+}
+
+void players::ProcessInstalledMachines(int delay_)
+{
+	(void)delay_;
+	for(monster& mon_ : env[current_level].mon_vector)
+		if(mon_.isLive() && !mon_.isYourShight() && mon_.machine_punch_cooldown > 0)
+			mon_.machine_punch_cooldown--;
+	if(!HasActiveInstalledMachine(IMT_PUNCH))
+		return;
+	vector<int> targets_;
+	for(monster& mon_ : env[current_level].mon_vector)
+	{
+		if(mon_.isLive() && mon_.isYourShight() && isEnemyUnit(&mon_) &&
+			mon_.state.GetState() == MS_ATACK && mon_.target == this)
+			targets_.push_back(mon_.GetMapId());
+	}
+	for(int map_id_ : targets_)
+	{
+		unit* unit_ = env[current_level].GetMapIDtoUnit(map_id_);
+		if(unit_ && !unit_->isplayer())
+			FirePunchMachine(static_cast<monster*>(unit_),false);
+	}
+}
 int players::GetThrowDelay(item_type type_, bool random_)
 {
 	float real_delay_ = 14; //기본 딜레이 14
@@ -2883,7 +3030,7 @@ int players::PowDecreaseDelay(int delay_)
 	{
 		up_/=up_>0?5:(up_<0?30:20);
 	}
-	if(s_invisible || togle_invisible)
+	if(GetInvisible() || togle_invisible)
 	{
 		up_/=up_>0?5:(up_<0?30:20);
 	}
@@ -3317,6 +3464,8 @@ int players::GetNeedExp(int level_)
 }
 bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 {
+	bool machine_was_overloaded_ =
+		skill_ == SKT_ENGINEERING && IsMachinePowerOverloaded();
 	if(!speak_)
 	{
 		you.skill[skill_].onoff = 1;
@@ -3411,7 +3560,11 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 		{
 			remainSpellPoiont+=2;
 		}
-		if(skill_ == SKT_SPELLCASTING || skill_ == SKT_EVOCATE)
+		else if(skill_ == SKT_ENGINEERING)
+		{
+			UpdateMachinePowerOverload(machine_was_overloaded_);
+		}
+		if(skill_ == SKT_SPELLCASTING || skill_ == SKT_MAGIC_DEVICE)
 		{
 			//최대 마나는 나중에 손보자...
 			//그냥 렙마다; 최대마나 1증가
@@ -3419,7 +3572,7 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 			{
 				if((GetSkillLevel(skill_, false) > GetSkillLevel(SKT_SPELLCASTING, false)) || skill_ == SKT_SPELLCASTING)
 				{
-					if((skill[skill_].level > GetSkillLevel(SKT_EVOCATE, false)) || skill_ == SKT_EVOCATE)
+					if((skill[skill_].level > GetSkillLevel(SKT_MAGIC_DEVICE, false)) || skill_ == SKT_MAGIC_DEVICE)
 					{
 						mp++;
 						max_mp++;
@@ -4528,7 +4681,7 @@ int players::AbsorbShield(int damage_) {
 }
 int players::GetInvisible()
 {
-	return s_invisible;
+	return HasActiveInstalledMachine(IMT_OPTICAL_CAMOUFLAGE) ? -1 : s_invisible;
 }
 int players::GetResist()
 {
@@ -5764,6 +5917,84 @@ bool players::Drink(char id_)
 	return false;
 }
 bool evoke_prev_fail();
+
+static bool InstallMachineTool(list<item>::iterator machine_it)
+{
+	machine_type tool_kind_ = (machine_type)machine_it->value2;
+	installed_machine_type machine_ = MachineToInstalledType(tool_kind_);
+	if(machine_ == IMT_NONE)
+		return false;
+
+	view_item(IVT_INSTALL_ARMOUR_MACHINE,LOC_SYSTEM_MACHINE_INSTALL_SELECT);
+	char selected_ = 0;
+	while(true)
+	{
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey,true);
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A)
+			key_ = DisplayManager.positionToChar();
+		if((key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z'))
+		{
+			selected_ = (char)key_;
+			break;
+		}
+		if(key_ == VK_DOWN)
+			DisplayManager.addPosition(1);
+		else if(key_ == VK_UP)
+			DisplayManager.addPosition(-1);
+		else if(key_ == VK_PRIOR)
+			changemove(-option_mg.getHeight());
+		else if(key_ == VK_NEXT)
+			changemove(option_mg.getHeight());
+		else if(key_ == -1 && inputedKey.mouse == MKIND_SCROLL_UP)
+			changemove(-32);
+		else if(key_ == -1 && inputedKey.mouse == MKIND_SCROLL_DOWN)
+			changemove(32);
+		else if(key_ == -1 && inputedKey.isRightClick())
+			break;
+		else if(key_ == VK_ESCAPE || key_ == GVK_BUTTON_B || key_ == GVK_BUTTON_B_LONG)
+			break;
+	}
+	changedisplay(DT_GAME);
+	if(!selected_)
+		return false;
+
+	auto target_ = you.item_list.end();
+	for(auto it_ = you.item_list.begin(); it_ != you.item_list.end(); ++it_)
+		if(it_->id == selected_)
+		{
+			target_ = it_;
+			break;
+		}
+	if(target_ == you.item_list.end() || !target_->CanInstallMachine(machine_))
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_MACHINE_INSTALL_INVALID),true,false,false,CL_normal);
+		return false;
+	}
+
+	string tool_name_ = machine_it->GetName();
+	string armour_name_ = target_->GetName();
+	WaitForSingleObject(mutx, INFINITE);
+	bool machine_was_overloaded_ = you.IsMachinePowerOverloaded();
+	target_->InstallMachine(machine_);
+	iden_list.machine_list[tool_kind_].found = true;
+	machine_it->identify = true;
+	if(you.isequip(&(*target_)) && !machine_was_overloaded_)
+		equipMachine(machine_);
+	you.UpdateMachinePowerOverload(machine_was_overloaded_);
+	LocalzationManager::printLogWithKey(LOC_SYSTEM_MACHINE_INSTALLED,true,false,false,CL_white_blue,
+		PlaceHolderHelper(tool_name_),PlaceHolderHelper(armour_name_));
+	if(you.isequip(&(*target_)) && you.IsMachinePowerOverloaded())
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_MACHINE_POWER_OVER_EQUIP),
+			true,false,false,CL_small_danger);
+	}
+	you.DeleteItem(machine_it,1);
+	ReleaseMutex(mutx);
+	you.time_delay += you.GetNormalDelay();
+	return true;
+}
+
 bool players::Evoke(char id_, bool auto_)
 {
 	if(IsDiving()) {
@@ -5781,11 +6012,16 @@ bool players::Evoke(char id_, bool auto_)
 				return false;
 			}
 			WaitForSingleObject(mutx, INFINITE);
-			if((*it).type == ITM_SPELL)
+			if((*it).type == ITM_MACHINE)
 			{
 				if(evoke_prev_fail()) {
 					ReleaseMutex(mutx);
 					return false;
+				}
+				if(IsInstallableMachine((machine_type)(*it).value2))
+				{
+					ReleaseMutex(mutx);
+					return InstallMachineTool(it);
 				}
 				if(((*it).identify || (*it).value3 == -1) && (*it).value1 <= 0)
 				{
@@ -5794,8 +6030,8 @@ bool players::Evoke(char id_, bool auto_)
 					return false;	
 				}
 				ReleaseMutex(mutx);
-				int bonus_pow_ = 11+max(you.level*3+ GetSkillLevel(SKT_EVOCATE, true)*4 , GetSkillLevel(SKT_EVOCATE, true) * 7);
-				if(evoke_spellcard((spellcard_evoke_type)(*it).value2, bonus_pow_,(*it).value1 == 0, iden_list.spellcard_list[(*it).value2].iden == 2, auto_))
+				int bonus_pow_ = 11+max(you.level*3+ GetSkillLevel(SKT_ENGINEERING, true)*4 , GetSkillLevel(SKT_ENGINEERING, true) * 7);
+				if(evoke_machine((machine_type)(*it).value2, bonus_pow_,(*it).value1 == 0, true, auto_))
 				{
 					WaitForSingleObject(mutx, INFINITE);
 					if(!(*it).value1)
@@ -5806,8 +6042,10 @@ bool players::Evoke(char id_, bool auto_)
 						you.time_delay += you.GetNormalDelay();
 						return true;
 					}
-					iden_list.spellcard_list[(*it).value2].iden = 2;
+					iden_list.machine_list[(*it).value2].found = true;
 					(*it).value1--;
+					(*it).image = MachineItemImage((machine_type)(*it).value2,
+						(*it).value1 > 0 || IsInstallableMachine((machine_type)(*it).value2));
 					if((*it).value3<0)
 						(*it).value3 = 0;
 					(*it).value3++;//사용예측 횟수를 늘린다.
@@ -6537,11 +6775,15 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 		if(speak_)
 			PlaySE("equip");
 		WaitForSingleObject(mutx, INFINITE);
+		bool machine_was_overloaded_ = IsMachinePowerOverloaded();
 		//자동식별 추가
 		(*it).equipIdentify();
 
 		equip_stat_change(&(*it), type_, true);
 		equipment[type_] = &(*it);
+		if(!machine_was_overloaded_)
+			ChangeInstalledMachineEffects(&(*it),true);
+		UpdateMachinePowerOverload(machine_was_overloaded_);
 		if((*it).GetArtifactProperty(ART_CURSE) > 0 && !(*it).curse && randA(2) == 0)
 			(*it).Curse(true,type_);
 		ReSetASPanlty();
@@ -6582,6 +6824,11 @@ bool players::equip(list<item>::iterator &it, equip_type type_, bool speak_)
 			ostringstream ss;
 			ss << (*it).id << " - " << (*it).GetName() << " (" << LocalzationManager::locString(LOC_SYSTEM_EQUIP) << ")";
 			printlog(ss.str(),true,false,false,(*it).item_color());
+			if(IsMachinePowerOverloaded() && (*it).HasAnyInstalledMachine())
+			{
+				printlog(LocalzationManager::locString(LOC_SYSTEM_MACHINE_POWER_OVER_EQUIP),
+					true,false,false,CL_small_danger);
+			}
 			if(char_type == UNIQ_START_CIRNO && it->fixed_artifact == FIXED_ARTIFACT_ICEFAIRYRING)
 				printlog(LocalzationManager::locString(LOC_SYSTEM_CIRNO_ICEFAIRYRING_EQUIP),true,false,false,CL_normal);
 
@@ -7233,6 +7480,9 @@ bool players::unequip(equip_type type_, bool force_)
 		}
 
 		WaitForSingleObject(mutx, INFINITE);
+		bool machine_was_overloaded_ = IsMachinePowerOverloaded();
+		if(!machine_was_overloaded_)
+			ChangeInstalledMachineEffects(equipment[type_],false);
 		equip_stat_change(equipment[type_], type_, false);
 		if(!force_)
 		{
@@ -7254,6 +7504,7 @@ bool players::unequip(equip_type type_, bool force_)
 				PlaceHolderHelper(equipment[type_]->GetName(), equipment[type_]->item_color()));
 		}
 		equipment[type_] = NULL;
+		UpdateMachinePowerOverload(machine_was_overloaded_);
 		if(GetArtifactProperty(ART_PERMAINVI) > 0)
 			s_invisible = -1;
 		ReSetASPanlty();
@@ -7460,18 +7711,6 @@ void players::equip_stat_change(item *it, equip_type where_, bool equip_bool)
 			(*it).identify = true;
 		}
 	}
-	//else if((*it).type == ITM_SPELLCARD && where_ == ET_NECK)
-	//{	
-	//	if(!(*it).identify)
-	//		(*it).identify = true;
-	//	(*it).autoIdentify();
-	//	//bool iden_ = equipamulet((amulet_type)(*it).value1, (*it).value2*plus_);
-	//	//if(iden_ && !(*it).identify)
-	//	//	(*it).identify = true;
-	//	//(*it).autoIdentify();
-	//	//if(!(*it).identify)
-	//	//	unidenequipamulet((amulet_type)(*it).value1, (*it).value2*plus_);
-	//}
 	
 	if((*it).isArtifact())
 	{
@@ -7667,7 +7906,7 @@ bool players::isView(const monster* monster_info)
 		return false;
 	if(IsDiving())
 		return false;
-	if((you.s_invisible || you.togle_invisible) && 
+	if((you.GetInvisible() || you.togle_invisible) &&
 		!(you.s_glow || you.GetBuffOk(BUFFSTAT_HALO)) &&
 		!(you.s_oil) &&
 		!(you.s_fire) &&

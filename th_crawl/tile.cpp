@@ -9,7 +9,7 @@
 
 #include "environment.h"
 
-bool dungeon_tile::isEffectibleEarthSpellcard() {
+bool dungeon_tile::isEffectibleDrill() {
 	return isBreakable() || tile == DG_IZAKAYA || tile == DG_GRAVE || tile == DG_STATUE || tile == DG_STATUE2;
 }
 

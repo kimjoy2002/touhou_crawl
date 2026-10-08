@@ -259,7 +259,7 @@ void wiz_mode()
 			printlog("p-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_POTION) + " ", false, false, false, CL_help, 'p');
 			printlog("s-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_SCROLL) + " ", false, false, false, CL_help, 's');
 			printlog("e-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_EVOCABLE) + " ", false, false, false, CL_help, 'e');
-			printlog("v-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_SPELLCARD) + " ", false, false, false, CL_help, 'v');
+			printlog("v-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_MACHINE) + " ", false, false, false, CL_help, 'v');
 			printlog("r-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_RING) + " ", false, false, false, CL_help, 'r');
 			printlog("b-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_BOOK) + " ", false, false, false, CL_help, 'b');
 			printlog("a-" + LocalzationManager::locString(LOC_SYSTEM_ITEM_CATEGORY_ARMOUR) + " ", false, false, false, CL_help, 'a');
@@ -459,7 +459,7 @@ void wiz_mode()
 			return;
 			case 'e':
 			{
-				int list[] = { EVK_PAGODA,EVK_AIR_SCROLL,EVK_DREAM_SOUL,EVK_BOMB, EVK_GHOST_BALL, EVK_SKY_TORPEDO, EVK_MAGIC_HAMMER, EVK_FROZEN_FROG };
+				int list[] = { EVK_PAGODA,EVK_AIR_SCROLL,EVK_DREAM_SOUL,EVK_BOMB, EVK_GHOST_BALL, EVK_MAGIC_HAMMER, EVK_FROZEN_FROG };
 				
 				LOCALIZATION_ENUM_KEY keylist[] = {
 					LOC_SYSTEM_ITEM_EVOKE_PAGODA,
@@ -467,7 +467,6 @@ void wiz_mode()
 					LOC_SYSTEM_ITEM_EVOKE_DREAM_SOUL,
 					LOC_SYSTEM_ITEM_EVOKE_BOMB,
 					LOC_SYSTEM_ITEM_EVOKE_GHOST_BALL,
-					LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO,
 					LOC_SYSTEM_ITEM_EVOKE_MAGIC_HAMMER,
 					LOC_SYSTEM_ITEM_EVOKE_ICE_FROG
 				};
@@ -519,29 +518,33 @@ void wiz_mode()
 			return;
 			case 'v':
 			{
-				int list[SPC_V_MAX] = { SPC_V_FIRE,SPC_V_ICE,SPC_V_EARTH,SPC_V_AIR,SPC_V_INVISIBLE,SPC_V_METAL, SPC_V_SUN };
+				int list[MCH_MAX] = { MCH_FLAMETHROWER,MCH_FREEZE_SPRAYER,MCH_DRILL,MCH_LARGE_FAN,MCH_OPTICAL_CAMOUFLAGE,MCH_SCRAP_LAUNCHER, MCH_SUN_LAMP,
+					MCH_PUNCH,MCH_BARRIER_GENERATOR,MCH_SKY_TORPEDO };
 				
-				LOCALIZATION_ENUM_KEY keylist[SPC_V_MAX] = {
-					LOC_SYSTEM_SPELLCARD_FIRE,
-					LOC_SYSTEM_SPELLCARD_ICE,
-					LOC_SYSTEM_SPELLCARD_EARTH,
-					LOC_SYSTEM_SPELLCARD_AIR,
-					LOC_SYSTEM_SPELLCARD_INVISIBLE,
-					LOC_SYSTEM_SPELLCARD_METAL,
-					LOC_SYSTEM_SPELLCARD_SUN
+				LOCALIZATION_ENUM_KEY keylist[MCH_MAX] = {
+					LOC_SYSTEM_MACHINE_FLAMETHROWER,
+					LOC_SYSTEM_MACHINE_FREEZE_SPRAYER,
+					LOC_SYSTEM_MACHINE_DRILL,
+					LOC_SYSTEM_MACHINE_LARGE_FAN,
+					LOC_SYSTEM_MACHINE_OPTICAL_CAMOUFLAGE,
+					LOC_SYSTEM_MACHINE_SCRAP_LAUNCHER,
+					LOC_SYSTEM_MACHINE_SUN_LAMP,
+					LOC_SYSTEM_MACHINE_PUNCH,
+					LOC_SYSTEM_MACHINE_DEFENSE_FRAGMENT,
+					LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO
 				};
 				
 				enterlog();
 				std::vector<int> listkey;
-				for(int i = 0; i < SPC_V_MAX; i++) {
+				for(int i = 0; i < MCH_MAX; i++) {
 					ss.str("");
 					ss.clear();
 					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
-					printlog(ss.str(), (i==SPC_V_MAX-1?true:false), false, false, CL_help, (char)('a'+i));
+					printlog(ss.str(), (i==MCH_MAX-1?true:false), false, false, CL_help, (char)('a'+i));
 					listkey.push_back('a'+i);
 				}
 				listkey.push_back(VK_ESCAPE);
-				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_SPELLCARD), false, false, false, CL_help);
+				printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_MACHINE), false, false, false, CL_help);
 				startSelection(listkey);
 				g_menu_select = -1;
 				while(true) {
@@ -565,10 +568,10 @@ void wiz_mode()
 					break;
 				}
 				g_menu_select = -1;
-				if (key_ >= 'a' && key_ <= 'g')
+				if (key_ >= 'a' && key_ < 'a'+MCH_MAX)
 				{
 					item_infor t;
-					makeitem(ITM_SPELL, 0, &t, list[key_ - 'a']);
+					makeitem(ITM_MACHINE, 0, &t, list[key_ - 'a']);
 					env[current_level].MakeItem(you.position, t);
 					enterlog();
 				}

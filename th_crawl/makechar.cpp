@@ -1,4 +1,4 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 파일이름: makechar.cpp
 //
@@ -440,8 +440,7 @@ void MakeStartItem(start_item_type select_, int num)
 		env[current_level].DeleteItem(it);	
 		break;
 	case SIT_RECHARGING_SCROLL:
-		it = env[current_level].MakeItem(you.position,makeitem(ITM_SPELL, 0, &t, SPC_V_ICE));
-		it->value1 = 9;
+		it = env[current_level].MakeItem(you.position,makeitem(ITM_MACHINE, 0, &t, MCH_PUNCH));
 		it->Identify();
 		you.additem(it,false);
 		env[current_level].DeleteItem(it);		
@@ -932,7 +931,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		MakeStartItem(SIT_RECHARGING_SCROLL,2);
 		you.GiveSkillExp(SKT_FIGHT,40,false);
 		you.GiveSkillExp(SKT_DODGE,40,false);
-		you.GiveSkillExp(SKT_EVOCATE,60,false);
+		you.GiveSkillExp(SKT_ENGINEERING,60,false);
 		you.quickMenu2 = SYSCMD_QUICKTHROW;
 		you.quickMenu2 = SYSCMD_SKILL;
 		break;
@@ -943,7 +942,7 @@ void SetJobs(job_type select_, unique_starting_type type)
 		MakeStartItem(SIT_FOOD,2);
 
 		you.GiveSkillExp(SKT_DODGE, 60, false);
-		you.GiveSkillExp(SKT_EVOCATE, 60, false);
+		you.GiveSkillExp(SKT_MAGIC_DEVICE, 60, false);
 		you.GiveSkillExp(SKT_STEALTH, 60, false);
 		you.quickMenu1 = SYSCMD_QUICKTHROW;
 		you.quickMenu2 = SYSCMD_SKILL;
@@ -1008,6 +1007,7 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			you.skill[SKT_SPELLCASTING].aptit +=2;
 			you.skill[SKT_CONJURE].aptit +=3;
 			you.skill[SKT_DODGE].aptit +=1;
+			you.skill[SKT_MAGIC_DEVICE].aptit +=1;
 		}
 		else
 		{			
@@ -1051,21 +1051,21 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 		{
 			you.skill[SKT_FIGHT].aptit +=2;
 			you.skill[SKT_DODGE].aptit +=1;
-			you.skill[SKT_EVOCATE].aptit +=3;
+			you.skill[SKT_ENGINEERING].aptit +=3;
 		}
 		else
 		{		
-			it = env[current_level].MakeItem(you.position,makeitem(ITM_SPELL, 0, &t, SPC_V_EARTH));
+			it = env[current_level].MakeItem(you.position,makeitem(ITM_MACHINE, 0, &t, MCH_DRILL));
 			it->value1 = 9;
 			it->Identify();
 			you.additem(it,false);
 			env[current_level].DeleteItem(it);
-			it = env[current_level].MakeItem(you.position,makeitem(ITM_SPELL, 0, &t, SPC_V_AIR));
+			it = env[current_level].MakeItem(you.position,makeitem(ITM_MACHINE, 0, &t, MCH_LARGE_FAN));
 			it->value1 = 9;
 			it->Identify();
 			you.additem(it,false);
 			env[current_level].DeleteItem(it);	
-			you.skill[SKT_EVOCATE].onoff = 1;
+			you.skill[SKT_ENGINEERING].onoff = 1;
 			you.SetProperty(TPT_RELIGIOUS, 1);
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
@@ -1156,11 +1156,11 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 		if(aptit_)
 		{
 			you.skill[SKT_MACE].aptit +=2;
-			you.skill[SKT_EVOCATE].aptit +=1;
+			you.skill[SKT_ENGINEERING].aptit +=1;
 		}
 		else
 		{
-			it = env[current_level].MakeItem(you.position,makeitem(ITM_MISCELLANEOUS, 0, &t, EVK_SKY_TORPEDO));
+			it = env[current_level].MakeItem(you.position,makeitem(ITM_MACHINE, 0, &t, MCH_SKY_TORPEDO));
 			you.additem(it,false);
 			env[current_level].DeleteItem(it);
 			it = env[current_level].MakeItem(you.position, makeitem(ITM_AMULET, 0, &t, AMT_OCCULT));

@@ -1,4 +1,4 @@
-﻿//////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 //
 // 파일이름: player_.cpp
 //
@@ -359,6 +359,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 		}
 	}
 
+	ProcessInstalledMachines(delay_);
 	env[current_level].ActionMonster(delay_);
 	UniqueSpellcardTurnEnd();
 	WaitForSingleObject(mutx, INFINITE);
@@ -921,8 +922,8 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	{
 		ReleaseMutex(mutx);
 
-		int level_ = you.GetSkillLevel(SKT_EVOCATE, true);
-		level_ = max(level_, you.level / 3 + you.GetSkillLevel(SKT_EVOCATE, true) * 2 / 3);
+		int level_ = you.GetSkillLevel(SKT_MAGIC_DEVICE, true);
+		level_ = max(level_, you.level / 3 + you.GetSkillLevel(SKT_MAGIC_DEVICE, true) * 2 / 3);
 
 		int power_decre_ = 12 - level_ / 3;
 		power_decre_ += you.s_evoke_ghost_level; //많이 쓸떄마다 점차 소모값이 커짐

@@ -28,13 +28,13 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU2,Aptitude Bonus) +3 Danmaku Aptitude, +3
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU3,Bonus) 24 Homing Amulets. Start without relying on the gods.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_REIMU4,Beginner Tip: Press 'f' to fire amulets. Always throw them before getting close!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA1,Infinite piercing & Always-on Attacks. Danmaku is power! Kill on sight!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA2,Aptitude Bonus) +2 Spellcasting Aptitude, +3 Conjuration Magic Aptitude, +1 Dodge Aptitude
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA2,Aptitude Bonus) +2 Spellcasting Aptitude, +3 Conjuration Magic Aptitude, +1 Dodge Aptitude, +1 Magical Devices Aptitude
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA3,Bonus) +2 Broom, MP Ring, Book of Destruction
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MARISA4,Beginner Tip: Use 'z' to cast spells and 'M' to learn new ones. Keep your MP full with the 5 key!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE1,High-power & Wide explosion type. Just as Suwako commands!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE2,Aptitude Bonus) +2 Fight Aptitude, +1 Dodge Aptitude, +3 Evoke Aptitude
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,Bonus) Devout trait. Spell Card of Earth (9), Spell Card of Air (9), Starts with faith in Suwako.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4,Beginner Tip: Press 'V' to use spell cards. Earth spell cards explode on walls for area damage!\nSuwako is merciful, so if you wish, you may worship another god.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE2,Aptitude Bonus) +2 Fight Aptitude, +1 Dodge Aptitude, +3 Engineering Aptitude
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE3,Bonus) Devout trait. Excavation Drill (9), Large Fan (9), Starts with faith in Suwako.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_SANAE4,Beginner Tip: Press 'V' to use mechanical tools. Aim the Excavation Drill at walls for explosive damage!\nSuwako is merciful, so if you wish, you may worship another god.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI1,Auto-explore & Auto-attack Type. Let 'O' and 'TAB' guard you.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI2,Aptitude Bonus) +1 Longblade Aptitude
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOMIZI3,Bonus) +2 Crescent Blade, +2 Iron Shield, +2 Chainmail, 2 Wound Healing Potions, 2 Might Potions, See Invisibility trait
@@ -48,9 +48,9 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU2,Aptitude Bonus) HP +20%, +2 Fight Aptit
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,Bonus) You can revive upon reaching levels 9 and 18.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4,Beginner Tip) You can revive when you reach levels 9 and 18. You’ll recover HP and MP and explode upon revival.\nPlay a bit more safely!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI1,Ancient! The triassic Kappa. Break through with the power of items!
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2,Aptitude Bonus) +2 Mace Aptitude, +1 Evoke Aptitude
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2,Aptitude Bonus) +2 Mace Aptitude, +1 Engineering Aptitude
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI3,Bonus) Starts with Cloth Kappa Suit, Aerial Torpedo, and Neshii’s Occult Amulet
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4,Beginner Tip: Use 'V' to evoke items. The aerial torpedo fires long-range danmaku.\nOccult amulets charge with XP. When fully charged, press 'V' to launch Neshii!\nEvokable items are permanent but consume lots of MP. Use them wisely in tough battles.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4,Beginner Tip: Press 'V' to install installable machines onto equipment. \nEquipped Occult Amulets charge with XP. When fully charged, press 'V' to launch Neshii!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES1,Fairy Wars! The Three Fairies of Light. It's better to fight together!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES2,Bonus) Trust Lily and start with two fairy companions.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3,Beginner Tip: You’ll always fight with companions. They revive after gaining XP, even if they die.\nUse the 'a' key to invoke divine powers. Recruit or summon fairy allies!\nYou still get the same XP even if allies land the kill. Prioritize your survival!
@@ -66,7 +66,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WIZARD,A wizard by species. Weak in melee but
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_FAIRY,Masters of elemental magic but frail and small, unable to wear heavy armour.\nStarts with fast HP/MP regen and high stealth. Takes reduced damage from clouds.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CROWTENGU,Can fly. Decent combat abilities and strong air magic aptitude.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_WOLFTENGU,10% more HP, excellent melee aptitude, but poor with magic.\nStarts with a strong jaw mutation for bonus melee attacks.
-LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_KAPPA,High spear skill proficiency and can swim.\nHas decent magic aptitude (except fire and earth) and excellent evoke aptitude.
+LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_KAPPA,High spear skill proficiency and can swim.\nHas decent magic aptitude (except fire and earth) and excellent Engineering aptitude.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_NECOMATA,Fleet-footed with natural claws, excels in unarmed combat.\nLow HP and poor with weapons and armour.\nWeak in elemental magic, but strong in alchemy, mental magic, and especially space-time magic.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_OARFISH,Slow mover but tough with scale mutations that harden with level.\nMediocre weapon aptitude, average magic skills, but excels in air techniques.\nCan swim and starts with electricity resistance.
 LOC_SYSTEM_MAINMENU_MAINGAME_TRIBE_CHEUKUMOGAMI,Small-bodied and starts with poison resistance.\nDecent combat aptitude, poor at magic.
@@ -96,7 +96,7 @@ LOC_SYSTEM_MAINMENU_MAINGAME_JOB_FANATIC,Fanatics with blind devotion to a speci
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ASSASSIN,Masters of stealth and assassination who ambush enemies.\nStarts with a dagger, poison darts, and high stealth.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_FARMER,The kind souls who farm so we can eat.\nStarts with a chosen weapon, 3 Breads, and belief in Minoriko.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_MADE,Throwing knives is just basic maid etiquette, right?\nStarts with a broom, 4 throwing knives, a maid outfit, and Maid’s Code of Conduct.
-LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ENGINEER,A versatile technician skilled with tools.\nStarts with a chosen weapon and a SpellCard of Ice.
+LOC_SYSTEM_MAINMENU_MAINGAME_JOB_ENGINEER,A versatile engineer skilled with tools.\nStarts with a chosen weapon and a Punching Machine.
 LOC_SYSTEM_MAINMENU_MAINGAME_JOB_MISSING,People like us who accidentally ended up in Gensokyo.\nStarts with food and a useless camera that won’t help in combat.\nHas no powers or strength, but might be able to take a memorial photo before dying.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY1,One of the Three Fairies of Light, controls sunlight.
 LOC_SYSTEM_MAINMENU_MAINGAME_FAIRIES_SUNNY2,Aptitude Bonus) Spellcasting +1, Destruction Magic +2
@@ -134,6 +134,9 @@ LOC_SYSTEM_SAVE_MENU_DELETE,Delete
 LOC_SYSTEM_SAVE_MENU_DELETE_SELECT,Select a save to delete.
 LOC_SYSTEM_SAVE_MENU_USED,In Use
 LOC_SYSTEM_SAVE_MENU_DELETE_REALLY,This save will be permanently deleted. Are you sure?
+LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_WARNING,Warning: Evocation has been split into Engineering and Magical Devices in this update. Choose which skill will receive the experience.
+LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_ENGINEERING,a. Transfer Evocation experience to Engineering (level after transfer: {0})
+LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_MAGICAL_DEVICES,b. Transfer Evocation experience to Magical Devices (level after transfer: {0})
 LOC_SYSTEM_WELCOME_FIRST,Welcome to Gensokyo!
 LOC_SYSTEM_WELCOME,Welcome back to Gensokyo!
 LOC_SYSTEM_LOS_MON,You see a monster.
@@ -277,7 +280,7 @@ LOC_SYSTEM_GHOST_PENALTY_SPELL,You can't use magic as a ghost.
 LOC_SYSTEM_GHOST_PENALTY_THROW,You can't throw as a ghost.
 LOC_SYSTEM_PURITY_PENALTY_SCROLL,You're too pure to use this scroll.
 LOC_SYSTEM_PURITY_PENALTY_POTION,You're too pure to taste this potion.
-LOC_SYSTEM_PURITY_PENALTY_SPELLCARD,You're too purified to use Spell Cards.
+LOC_SYSTEM_PURITY_PENALTY_MACHINE,You're too purified to use mechanical tools.
 LOC_SYSTEM_SILENCE_PENALTY,You can't make a sound.
 LOC_SYSTEM_DROWNED_PENALTY,You can't do that while drowning!
 LOC_SYSTEM_DROWNED_PENALTY_WEAPON,You can't change weapons while drowning!
@@ -714,9 +717,9 @@ LOC_SYSTEM_BUFF_DESCRIBE_SLAY,Your melee and danmaku attack power changes based 
 LOC_SYSTEM_BUFF_DESCRIBE_SLEEPING,You're getting sleepy. At 100, you'll fall asleep automatically.
 LOC_SYSTEM_BUFF_DESCRIBE_JUNKA0,You are not currently affected by the purification penalty.
 LOC_SYSTEM_BUFF_DESCRIBE_JUNKA1,You can't use scrolls or potions. (Some enchanted scrolls may be allowed.)
-LOC_SYSTEM_BUFF_DESCRIBE_JUNKA2,You can't use spell cards, scrolls, or potions. (Some enchanted scrolls may be allowed.)
-LOC_SYSTEM_BUFF_DESCRIBE_JUNKA3,You can't use spell cards or scrolls. (Some enchanted scrolls may be allowed.)
-LOC_SYSTEM_BUFF_DESCRIBE_JUNKA4,You can't use spell cards.
+LOC_SYSTEM_BUFF_DESCRIBE_JUNKA2,You can't use mechanical tools, scrolls, or potions. (Some enchanted scrolls may be allowed.)
+LOC_SYSTEM_BUFF_DESCRIBE_JUNKA3,You can't use mechanical tools or scrolls. (Some enchanted scrolls may be allowed.)
+LOC_SYSTEM_BUFF_DESCRIBE_JUNKA4,You can't use mechanical tools.
 LOC_SYSTEM_BUFF_DESCRIBE_FOG,A thick fog greatly reduces everyone's vision.
 LOC_SYSTEM_BUFF_DESCRIBE_THUNDER,Lightning strikes randomly around the area.
 LOC_SYSTEM_BUFF_DESCRIBE_SUNNY,Everyone around you glows, lowering evasion and nullifying invisibility.
@@ -887,7 +890,7 @@ LOC_SYSTEM_DISPLAY_MANAGER_ENCHANT_ARMOUR,Which armour would you like to enhance
 LOC_SYSTEM_DISPLAY_MANAGER_JEWELRY,Which accessory would you like to choose?
 LOC_SYSTEM_DISPLAY_MANAGER_JUNKO,Which item would you like to purify?
 LOC_SYSTEM_DISPLAY_MANAGER_JUNKO_SKILL,Which skill would you like to purify?
-LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_SPELLCARD,Which spell card would you like to recharge?
+LOC_SYSTEM_DISPLAY_MANAGER_CHARGING_MACHINE,Which mechanical tool would you like to recharge?
 LOC_SYSTEM_DISPLAY_MANAGER_THROW,What would you like to throw?
 LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL,Select a spell to use. (Press {0} for details.)
 LOC_SYSTEM_DISPLAY_MANAGER_USE_SPELL_FIELD,Select the spell to use.
@@ -956,7 +959,7 @@ LOC_SYSTEM_TAG_JEWELRY,Jewelry
 LOC_SYSTEM_TAG_RING,Ring
 LOC_SYSTEM_TAG_AMULET,Amulet
 LOC_SYSTEM_TAG_EVOKE,Evocable Item
-LOC_SYSTEM_TAG_SPELLCARD,Spell Card
+LOC_SYSTEM_TAG_MACHINE,Mechanical Tool
 LOC_SYSTEM_TAG_FOOD,Food
 LOC_SYSTEM_TAG_POTION,Potion
 LOC_SYSTEM_TAG_SCROLL,Scroll
@@ -2195,7 +2198,7 @@ LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_MP,Your HP and MP are treated as the sam
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_POWER,You are always at full power.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_LIFE1,You have 2 extra lives remaining.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_LIFE2,You have 1 extra life remaining.
-LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_SYSTEM,You can use spell cards while purified, and talisman recharge speed is tripled.
+LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_PURE_SYSTEM,You can use mechanical tools while purified, and talisman recharge speed is tripled.
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_HP_LOSS,You’ve lost a lot of weight. (HP {0}%, EV {1})
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_WEAK,You’ve become slightly dull. (STR {0}, AGI {1}, INT {1})
 LOC_SYSTEM_TRIBE_PROPERTY_DESCRIBE_OVERHEAT,You overheat with every attack. ({0})
@@ -2295,7 +2298,7 @@ LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_ELEC_IMUNE,Blessed by Junko, you are immune to 
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_MP,Blessed by Junko, your HP and MP are unified.\nYou use the same value for both taking damage and casting spells.\nHP and MP regeneration are also combined for faster recovery.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_POWER,Blessed by Junko, you are always in full power mode and never lose power.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_LIFE,Blessed by Junko, you can revive after death.\nHowever, death caused by betraying Junko cannot be reversed.\nYou have {0} extra lives remaining.
-LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_SYSTEM,Blessed by Junko, item effects from the shooting system are enhanced.\nYou can use spell cards even while purified.\nTalisman recharge speed is tripled.
+LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_PURE_SYSTEM,Blessed by Junko, item effects from the shooting system are enhanced.\nYou can use mechanical tools even while purified.\nTalisman recharge speed is tripled.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_HP_LOSS,You’ve become slimmer due to weight loss.\nHP decreases by {0}% but EV increases by {1}.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_WEAK,You feel slightly dumbed down.\nGain {0} STR, but lose {1} AGI and INT.
 LOC_SYSTEM_TRIBE_PROPERTY_DETAIL_OVERHEAT,You heat up with every attack.\nYou may emit vision-blocking smoke and overheat.\nOverheat damage scales with existing stacks.
@@ -2895,7 +2898,8 @@ LOC_SYSTEM_SKILL_ALCHEMY,Alchemy
 LOC_SYSTEM_SKILL_MENTAL,Mental
 LOC_SYSTEM_SKILL_SUMMON,Summoning
 LOC_SYSTEM_SKILL_TRANS,Space-Time
-LOC_SYSTEM_SKILL_EVOCATE,Evocation
+LOC_SYSTEM_SKILL_MAGIC_DEVICE,Magical Devices
+LOC_SYSTEM_SKILL_ENGINEERING,Engineering
 LOC_SYSTEM_SKILL_STEALTH,Stealth
 LOC_SYSTEM_SKILL_UNKNOWN,Unknown
 LOC_SYSTEM_SKILL_LEAST_ONE,You must enable at least one skill!
@@ -3133,8 +3137,8 @@ LOC_SYSTEM_SKL_DESCRIBE_DELAY_HANIWA,Postpones the Haniwa upgrade.\nUse this if 
 LOC_SYSTEM_SKL_DESCRIBE_DRAW_CARD,Not implemented.
 LOC_SYSTEM_SKL_DESCRIBE_HARD_SELL,Not implemented.
 LOC_SYSTEM_SKL_DESCRIBE_CREATE_SHOP,Not implemented.
-LOC_SYSTEM_SKL_DESCRIBE_FIREBALL,Concentrates power through the control rod to launch a fireball.\nSuccess rate and damage scale with Evoke skill.\n
-LOC_SYSTEM_SKL_DESCRIBE_MISSLE,Fires a missile from the modified Kappa suit.\nMissiles have strong tracking but travel slowly.\nCaution: they can cause splash damage if space is limited.\nSuccess rate and damage scale with Evoke skill.\n
+LOC_SYSTEM_SKL_DESCRIBE_FIREBALL,Concentrates power through the control rod to launch a fireball.\nSuccess rate and damage scale with Magical Devices skill.\n
+LOC_SYSTEM_SKL_DESCRIBE_MISSLE,Fires a missile from the modified Kappa suit.\nMissiles have strong tracking but travel slowly.\nCaution: they can cause splash damage if space is limited.\nSuccess rate and damage scale with Magical Devices skill.\n
 LOC_SYSTEM_SKL_DESCRIBE_SILENCE,Erases nearby sounds.\nLuna's prized ability, often called her ultimate hide-and-seek technique.\nHowever, the unnatural silence makes stealth worse.\nInstead, it prevents all chanting-based spellcasting within the area.
 LOC_SYSTEM_SKL_DESCRIBE_UKNOWN,An unknown ability.\n
 LOC_SYSTEM_ITEM_CATEGORY_WEAPON,Weapon
@@ -3143,10 +3147,10 @@ LOC_SYSTEM_ITEM_CATEGORY_ARMOUR,Armour
 LOC_SYSTEM_ITEM_CATEGORY_POTION,Potion
 LOC_SYSTEM_ITEM_CATEGORY_FOOD,Food
 LOC_SYSTEM_ITEM_CATEGORY_SCROLL,Scroll
-LOC_SYSTEM_ITEM_CATEGORY_SPELLCARD,Spell Card
+LOC_SYSTEM_ITEM_CATEGORY_MACHINE,Mechanical Tool
 LOC_SYSTEM_ITEM_CATEGORY_JEWELRY,Accessory
 LOC_SYSTEM_ITEM_CATEGORY_BOOK,Book
-LOC_SYSTEM_ITEM_CATEGORY_EVOCABLE,Evocable
+LOC_SYSTEM_ITEM_CATEGORY_EVOCABLE,Magical Device
 LOC_SYSTEM_ITEM_CATEGORY_GOAL,Important
 LOC_SYSTEM_ITEM_CATEGORY_OTHER,Miscellaneous
 LOC_SYSTEM_ITEM_CURSED,Cursed {0}
@@ -3154,23 +3158,23 @@ LOC_SYSTEM_ITEM_UNCURSED,Uncursed {0}
 LOC_SYSTEM_ITEM_PILED,{1} x {0}
 LOC_SYSTEM_ITEM_USED,Used
 LOC_SYSTEM_ITEM_SELECTED_USED,Use Selected
-LOC_SYSTEM_ITEM_SPELLCARD_USED,Uses: {0}
-LOC_SYSTEM_ITEM_SPELLCARD_EMPTY,Empty
-LOC_SYSTEM_ITEM_SPELLCARD_CHARGED,Charged
+LOC_SYSTEM_ITEM_MACHINE_USED,Uses: {0}
+LOC_SYSTEM_ITEM_MACHINE_EMPTY,Empty
+LOC_SYSTEM_ITEM_MACHINE_CHARGED,Charged
 LOC_SYSTEM_ITEM_FIXED_ARTIFACT,Fixed Artifact
 LOC_SYSTEM_ITEM_NOT_EXIST,That item does not exist.
-LOC_SYSTEM_SPELLCARD,SpellCard
-LOC_SYSTEM_SPELLCARD_IDENTIFY,SpellCard of {0}
-LOC_SYSTEM_SPELLCARD_INVISIBLE,Invisibility
-LOC_SYSTEM_SPELLCARD_FIRE,Fire
-LOC_SYSTEM_SPELLCARD_ICE,Ice
-LOC_SYSTEM_SPELLCARD_AIR,Wind
-LOC_SYSTEM_SPELLCARD_METAL,Metal
-LOC_SYSTEM_SPELLCARD_EARTH,Earth
-LOC_SYSTEM_SPELLCARD_SUN,Sun
-LOC_SYSTEM_SPELLCARD_AIR_EFFECT,{0} was blown away by the wind.
-LOC_SYSTEM_SPELLCARD_EARTH_CANT_BREAK,The Rock Bullet hit {0}, but it didn't budge.
-LOC_SYSTEM_SPELLCARD_SUN_SET,A blinding light illuminates the surroundings!
+LOC_SYSTEM_MACHINE_ITEM,Mechanical Tool
+LOC_SYSTEM_MACHINE_IDENTIFY,{0}
+LOC_SYSTEM_MACHINE_OPTICAL_CAMOUFLAGE,Optical Camouflage
+LOC_SYSTEM_MACHINE_FLAMETHROWER,Flamethrower
+LOC_SYSTEM_MACHINE_FREEZE_SPRAYER,Freeze Sprayer
+LOC_SYSTEM_MACHINE_LARGE_FAN,Large Fan
+LOC_SYSTEM_MACHINE_SCRAP_LAUNCHER,Scrap Launcher
+LOC_SYSTEM_MACHINE_DRILL,Excavation Drill
+LOC_SYSTEM_MACHINE_SUN_LAMP,Sun Lamp
+LOC_SYSTEM_MACHINE_LARGE_FAN_EFFECT,{0} was blown away by the wind.
+LOC_SYSTEM_MACHINE_DRILL_CANT_BREAK,The Excavation Drill struck {0}, but it didn't budge.
+LOC_SYSTEM_MACHINE_SUN_LAMP_SET,A blinding light illuminates the surroundings!
 LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_DAGGER,Dagger
 LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_THROWING_KNIFE,Throwing Knife
 LOC_SYSTEM_ITEM_WEAPON_SHORTBLADE_SHORTSWORD,Shortsword
@@ -3354,7 +3358,7 @@ LOC_SYSTEM_ITEM_ARTIFACT_NUCLEARBOOT_RAD_INFO,Taking damage has a small chance t
 LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_NAME,Control Rod
 LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_DESCRIBE,A giant rod worn on the arm, also called a third leg.\nCan be swung or used to launch fire using Power.\nSecretly protects against radiation from nuclear fusion.
 LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_FIREBALL,Fireball
-LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_FIREBALL_INFO,Consumes Power to launch a fireball from the arm. Power scales with evoke skill.
+LOC_SYSTEM_ITEM_ARTIFACT_CONTROLROD_FIREBALL_INFO,Consumes Power to launch a fireball from the arm. Power scales with Magical Devices skill.
 LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_NAME,Centipede’s Shovel & Pickaxe
 LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_DESCRIBE,A golden toolset used by a centipede from Hongryudong.\nSaid to be strong enough to cleave mountains.\nAs a pair, they require both hands.\nPoisoned due to the toxic nature of their owner.
 LOC_SYSTEM_ITEM_ARTIFACT_PICKANDSHOVELS_GLUTTON,Gluttony
@@ -3613,7 +3617,7 @@ LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_DETECT_CURSE,Scroll of Detect Curse
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CURSE_JEWELRY,Scroll of Jewelry Curse
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_SILENCE,Scroll of Silence
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_SOUL_SHOT,Scroll of Spiritual Attack
-LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CHARGING,Scroll of Recharge
+LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_CHARGING,Scroll of Recharging
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_AMNESIA,Scroll of Amnesia
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_SANTUARY,Scroll of Sanctuary
 LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_BRAND_WEAPON,Scroll of Brand Weapon
@@ -3679,8 +3683,8 @@ LOC_SYSTEM_ITEM_SCROLL_ENCHANT_ARMOUR,{0} shone green.
 LOC_SYSTEM_ITEM_SCROLL_DETECT_CURSE,You detected curses in your inventory.
 LOC_SYSTEM_ITEM_SCROLL_CURSE_JEWELLY_FAIL,You are not wearing any accessory that can be cursed.
 LOC_SYSTEM_ITEM_SCROLL_SOULSHOT,Bang!
-LOC_SYSTEM_ITEM_SCROLL_CHARGE_SPELLCARD_FAIL,You have no spell cards in your inventory that can be recharged.
-LOC_SYSTEM_ITEM_SCROLL_CHARGE_SPELLCARD,{0} has been recharged.
+LOC_SYSTEM_ITEM_SCROLL_CHARGE_MACHINE_FAIL,You have no mechanical tools in your inventory that can be recharged.
+LOC_SYSTEM_ITEM_SCROLL_CHARGE_MACHINE,{0} has been recharged.
 LOC_SYSTEM_ITEM_SCROLL_AMNESIA_ASK,Forget the {0} spell?
 LOC_SYSTEM_ITEM_SCROLL_AMNESIA_SUCCESS,You forgot the {0} spell.
 LOC_SYSTEM_ITEM_SCROLL_BRAND_NORMAL,{0} was engulfed in an unknown light!
@@ -3866,29 +3870,29 @@ LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_DETECT_CURSE,A scroll that detects cursed ite
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CURSE_JEWELRY,A scroll that curses your jewelry.\nRandomly curses either a ring or necklace you’re wearing.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SILENCE,A scroll that reduces surrounding noise. Creates temporary silence.\nEnemies inside the silence zone can’t cast spells, and the zone shrinks over time.\nYou also can’t use sound-based magic, scrolls, or abilities.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SOUL_SHOT,A scroll that uses spirit energy to paralyze nearby enemies briefly.\nUnresistable effect, but it forcibly consumes 1 P.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CHARGING,A scroll that recharges spell cards. Restores partial charge.\nThe more max charge the card has, the more it restores.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_CHARGING,A scroll that replenishes mechanical tools. It restores some of their ammunition.\nTools with a higher maximum ammunition receive more.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_AMNESIA,A scroll of amnesia that makes you forget a learned spell.\nYou choose which spell to forget and regain the level used to learn it.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_SANTUARY,A scroll that creates a wide sanctuary when read. All damage is nullified inside.\nSaid to be made by a mountain-dwelling yamamba. Very rare.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BRAND_WEAPON,A scroll that enchants your current weapon with magic.\nThe type of enchantment is random and overwrites any existing one.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ACQUIREMENT,A scroll imbued with the power to create items.\nBy reading it and selecting a category, you'll receive a corresponding item.\nThe item is likely to be one you haven't discovered yet and is often related to your current skills.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BUG,A bugged scroll. Report it to the developer immediately!\n
 LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_UNKNOWN,A scroll filled with unknown symbols.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD,Spell cards can be used freely until they run out. Once depleted, they cannot be reused.\nExact usage count must be identified. Power scales with Evoke skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_FIRE,A spell card imbued with fire energy.\nCreates a wide fire cloud in the chosen direction.\nDuration increases with higher Evoke skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_ICE,A spell card imbued with cold energy.\nDeals strong cold damage to the enemy.\nDamage increases with higher Evoke skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_EARTH,A spell card imbued with earth energy.\nDeals low base damage, but explodes upon hitting a wall for high AoE damage.\nDamage increases with higher Evoke skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_AIR,A spell card imbued with air energy.\nFires danmaku in a wide fan that pushes back enemies.\nStrength and knockback increase with higher Evoke skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_INVISIBLE,A spell card imbued with moonlight.\nTemporarily turns the user invisible.\nDuration increases with higher Evoke skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_METAL,A spell card imbued with metal energy.\nFires three spiked projectiles forward.\nDamage increases with higher Evoke skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_SUN,A spell card imbued with solar energy.\nEmits a bright light that confuses nearby enemies.\nStronger confusion effects can be resisted and don’t affect non-living beings.\nVampires take extra damage. Duration and confusion chance increase with Evoke skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_SPELLCARD_BUG,A bugged spell card.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE,Mechanical tools come in two types: ammunition-based tools used directly and installable tools attached to equipment.\nAmmunition-based mechanical tools can be used a limited number of times,\nbut can no longer be used once all ammunition is spent.\nTheir exact remaining ammunition must be identified. Their power scales with Engineering.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_FIRE,An improvised flamethrower made by attaching a torch to a fuel sprayer. Burn the filth!\nIt creates a wide area of fire clouds in the chosen direction.\nHigher Engineering makes the clouds last longer.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_ICE,A sprayer that blasts refrigerant under high pressure.\nIt fires a powerful, piercing stream of cold danmaku in a straight line.\nHigher Engineering increases its damage.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_EARTH,A powered drill optimized for boring through rock. Switch it on and it launches forward.\nIts own power is low, but striking a wall makes the wall explode for high area damage.\nHigher Engineering increases its damage.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_AIR,A huge fan that generates powerful winds.\nFires danmaku in a wide fan that pushes back enemies.\nStrength and knockback increase with higher Engineering.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_INVISIBLE,Optical camouflage made with the latest kappa technology. Installed on a cloak, it bends light to render the wearer invisible.\nIt is the most popular invention among the naturally timid kappa.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_METAL,A crudely made gun that uses scrap fed into its loading port.\nIt fires three lumps of scrap forward in succession.\nHigher Engineering increases its damage.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_SUN,A mechanical tool that shines as brightly as the sun.\nEmits a bright light that illuminates and confuses nearby enemies.\nStronger confusion effects can be resisted and do not affect non-living beings.\nVampires take extra damage. Duration and confusion chance increase with higher Engineering.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_BUG,A broken mechanical tool.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET,A charm containing mysterious power. It’s just a normal charm until charged with EXP.\nOnce fully charged, it activates. Removing it resets charge to 0%, so be careful.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PERFECT,A charm infused with Eirin’s elixir said to let you experience the future.\nCharges very slowly but revives you when fully charged and you die.\nThe amulet burns away upon revival.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BLOSSOM,A charm containing spring energy from the Spring Snow Incident.\nCharges with ambient spring energy and activates a binding spell.\nWhen fully charged, press 'v' to paralyze nearby enemies.\nResets charge to 0% afterward.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIMES,A charm infused with spell power used during the Imperishable Night Incident.\nCharges with ambient time energy and produces Power items.\nWhen it reaches 100%, it automatically drops power items around it.\nResets charge to 0% afterward.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH,A charm developed by the Moriya Shrine that collects faith.\nAutomatically increases faith when fully charged, then resets.\nSome gods ignore this, so it might not work on all.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE,A charm modified to send long-distance signals underground.\nIncreases MP regen when equipped at full charge.\nPress 'v' while fully charged to instantly restore MP.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,A charm said to have revived the Crown Prince in the Dream Mausoleum.\nCharges with spirits and recharges one spell card when full.\nPress 'v' to activate.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,A charm said to have revived the Crown Prince in the Dream Mausoleum.\nCharges with spirits and replenishes one mechanical tool when full.\nPress 'v' to activate.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE,A charm filled with the essence of Graze.\nWhile equipped, gradually charges and provides Graze ability at full charge.\nPress 'v' to dodge all avoidable attacks for a few turns.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,A charm infused with a delinquent celestial's sword energy.\nTriggers the stored weather effect when at 100% charge, greatly increasing health regeneration.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT,A charm powered by the Occult Ball that manifests urban legends.\nCharges with occult energy and can banish all summoned enemies in sight.\nAlso grants a random yokai effect.\n
@@ -3905,8 +3909,8 @@ LOC_SYSTEM_ITEM_DESCRIPTION_RING_POISON_RESIS,A ring that grants strong poison r
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_FIRE_RESIS,A ring that grants fire resistance. Stacks up to 3 levels.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_ICE_RESIS,A ring that grants ice resistance. Stacks up to 3 levels.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_SEE_INVISIBLE,Wearing this allows you to see invisible enemies.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_LEVITATION,A ring that allows flight. Grants a fly ability when equipped.\nWhile flying, you can cross deep water.\nRequires Evoke skill and consumes a small amount of MP.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_RING_INVISIBLE,A ring that grants invisibility. Adds an invisibility ability when equipped.\nGreatly reduces detection chance by enemies.\nInvisibility consumes MP quickly. Requires Evoke skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_LEVITATION,A ring that allows flight. Grants a fly ability when equipped.\nWhile flying, you can cross deep water.\nRequires Magical Devices skill and consumes a small amount of Power.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_RING_INVISIBLE,A ring that grants invisibility. Adds an invisibility ability when equipped.\nGreatly reduces detection chance by enemies.\nInvisibility consumes Power quickly. Requires Magical Devices skill.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_MANA,A ring that increases max MP.\nMP returns to normal when unequipped.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_MAGACIAN,A ring that boosts magic success rate and power.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_RING_AC,A ring that modifies defense.\nAmount is based on the number shown on the ring.\n
@@ -3948,19 +3952,19 @@ LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_AIR_ULTI,A thrilling adventure manga featuring 
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_ALCHMY_ULTI,A tome containing all of alchemy, found in a massive library inside a mansion.\nThe vague and messy handwriting makes it hard to understand unless you’re a true alchemy master.\nJudging from the scribbles, even the original owner probably didn’t understand it well.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_LIGHT_BASE,A basic tome for danmaku combat using light projectiles.\nUsed by everyone from stray fairies to skilled magicians.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_BOOK_FIRE_EXTEND,A popular magazine published in the Blazing Hellscape.\nPacked with fire-against-fire themed spells suited for the extreme heat of the inferno.\nIt also serves as a discussion forum for Gensokyo residents confident in their fire magic.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA,A lost pagoda infused with great power.\nWhen evoke, releases stored energy as a laser.\nDamage increases with higher Evoke skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL,A scripture once used by a wandering monk.\nConsumes Power to rapidly restore MP.\nMP restored increases with higher Evoke skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL,A soul that wandered from the dream world.\nSummons allies from the dream world for a short time.\nStronger allies with higher Evoke skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BOMB,A massive bomb ignitable with magic.\nCan be thrown after evoke. Explodes after a few turns.\nTakes up a tile. Destroyed if hit by enemies.\nNot consumed on use-powered by mysterious magic.\nDamage and bomb HP scale with Evoke skill.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL,A lantern said to be carried by ghosts.\nActivating turns you into a ghost state-untouchable, invisible.\nConsumes 30-70% of your HP. MP drains quickly while active.\nCannot act during ghost state. Ends when MP reaches 0 or you cancel it.\nIts efficiency gradually deteriorates with use.\nHigh Evoke skill reduces HP loss and MP drain.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_SKY_TORPEDO,A torpedo modified by kappas to fire out of water.\nBasically a missile. Damage increases with higher Evoke skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_PAGODA,A lost pagoda infused with great power.\nWhen evoked, it releases stored energy as a laser.\nDamage increases with higher Magical Devices skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_AIR_SCROLL,A scripture once used by a wandering monk.\nConsumes Power to rapidly restore MP.\nMP restored increases with higher Magical Devices skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_DREAM_SOUL,A soul that wandered from the dream world.\nSummons allies from the dream world for a short time.\nStronger allies appear with higher Magical Devices skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BOMB,A massive bomb ignitable with magic.\nCan be thrown after being activated. Explodes after a few turns.\nTakes up a tile and is destroyed without exploding if broken by enemies.\nIt is not consumed on use due to a mysterious magical force.\nDamage and bomb HP scale with Magical Devices skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_GHOST_BALL,A lantern said to be carried by ghosts.\nActivating it turns you into an untouchable and invisible ghost.\nConsumes 30-70% of your HP. Power drains quickly while active.\nYou can only move in ghost form. It ends when Power reaches 0 or you cancel it.\nIts efficiency gradually deteriorates with use.\nHigh Magical Devices skill reduces HP loss and Power drain.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_SKY_TORPEDO,A torpedo modified by kappas to fire out of water.\nBasically a missile. Damage increases with higher Engineering.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_MAGIC_HAMMER,A magic hammer wielded by the small people, once owned by an oni.\nAllows powerful effects with only 1 P.\nHowever, has a 10% chance to cause the opposite of the intended effect.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_CAMERA,A camera brought by accident to Gensokyo.\nUses mysterious energy to take pictures without film.\nWon’t help in battle but can photograph beautiful girls.\nToo weak to shoot distant subjects.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG,A bug-infused evokable item.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1,This item can be evoked without usage limits.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2,This item can be evoked without usage limits. Its power scales with your Evoke skill.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_BUG,A bug-infused tool.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO1,This magical device can be used without a usage limit.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO2,This magical device can be used without a usage limit. Its power scales with your Magical Devices skill.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO3,Press 'V' to evoke using Power.\n\n
-LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,Each time this evokable item is used, it requires Power
+LOC_SYSTEM_ITEM_DESCRIPTION_EVOKE_INFO4,Power required each time this magical device is used
 LOC_SYSTEM_ITEM_DESCRIPTION_RUNE,This is a rune proving you’ve conquered dungeons.\nCollect 3 to open the final door of the Hakurei Shrine.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_YINYANG_ORB,This is the powerful Yin-Yang Orb. It’s enshrined within the shrine.\nTake it to escape or harness its power-but beware!\nThe red-white shrine maiden will chase you relentlessly.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_ETC_SATORI_NOTE1,A flyer reading “Missing Pet - Komeiji Satori.”\nIt has your photo on it...\n
@@ -4498,10 +4502,10 @@ LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY5,You can summon the Crazy Back Dancer.
 LOC_SYSTEM_GOD_SHOW_OKINA_ABLILITY6,You can open a door behind you to escape anytime.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY1,You received a permanent blessing of Purity from Junko.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY2,You cannot use certain scrolls and potions.
-LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3,You cannot use spell cards, and some scrolls and potions.
+LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY3,You cannot use mechanical tools, and some scrolls and potions.
 LOC_SYSTEM_GOD_SHOW_JUNKO_PURITY4,All your stats are increased by 5.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1,Junko’s power is strong, but temporarily purifies you.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_1,Stage 1: You cannot use spell cards.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_1,Stage 1: You cannot use mechanical tools.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_2,Stage 2: You cannot use the effects of some scrolls.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY1_3,Stage 3: You are unaffected by potions.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY2,You can unleash simple but powerful danmaku.
@@ -4515,7 +4519,7 @@ LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_4,Magic Purity: Your HP and MP are treated a
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_5,Power Purity: Your maximum power and power regeneration are doubled.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_6,Life Purity: You received an extra life.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_7,Equipment Purity: Your gear has been purified.
-LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8,System Purity: You can now use spell cards, and amulet charge rate is tripled.
+LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_8,System Purity: You can now use mechanical tools, and amulet charge rate is tripled.
 LOC_SYSTEM_GOD_SHOW_JUNKO_ABLILITY5_BUG,Unknown Bug Purity
 LOC_SYSTEM_GOD_ABLILITES,Divine Abilities
 LOC_SYSTEM_GOD_COMMON_ACCECPT,{0} accepted at your kill.
@@ -4872,7 +4876,7 @@ LOC_SYSTEM_GOD_SEIJA_GIFT_JOON_AND_SION3,Their punishment may also forcibly poss
 LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO1,Kanako: Receive several random weapons.
 LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO2,Kanako may punish you with damage or pin you in place using Onbashira pillars,
 LOC_SYSTEM_GOD_SEIJA_GIFT_KANAKO3,or summon hostile monsters around you.
-LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO1,Suwako: Receive several spell cards.
+LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO1,Suwako: Receive several mechanical tools.
 LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO2,Suwako may curse you with unavoidable Slow and Poison,
 LOC_SYSTEM_GOD_SEIJA_GIFT_SUWAKO3,or summon hostile frogs around you.
 LOC_SYSTEM_GOD_SEIJA_GIFT_MINORIKO1,Minoriko: Receive several sweet potatoes.
@@ -4899,7 +4903,7 @@ LOC_SYSTEM_GOD_SEIJA_GIFT_YUKARI3,summoning enemies around you or calling forth 
 LOC_SYSTEM_GOD_SEIJA_GIFT_EIRIN1,Eirin: Receive a batch of random potions.
 LOC_SYSTEM_GOD_SEIJA_GIFT_EIRIN2,Eirin may force you to drink bad potions or conduct suspicious experiments
 LOC_SYSTEM_GOD_SEIJA_GIFT_EIRIN3,that leave side effects. During her punishment, potion effects may randomly fail.
-LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO1,Yuyuko: Receive several random evokable items.
+LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO1,Yuyuko: Receive several random magical devices.
 LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO2,Yuyuko may punish you by summoning many hostile ghosts around you.
 LOC_SYSTEM_GOD_SEIJA_GIFT_YUYUKO3,The summoned ghosts become stronger as you grow stronger.
 LOC_SYSTEM_GOD_SEIJA_GIFT_SATORI1,Satori: Receive several identification scrolls.
@@ -5063,7 +5067,7 @@ LOC_SYSTEM_GOD_JUNKO_PURIFICATION_MP,MP Purification: HP and MP are unified and 
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_POWER,Power Purification: Your maximum power and power regeneration are doubled.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_LIFE,Life Purification: Gain 2 extra lives.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_ITEM,Equipment Purification: The chosen equipment gets +5 above its max upgrade. Artifacts included.
-LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SYSTEM,Purification System: Amulet recharge speed is tripled, and spell cards can still be used during purification.
+LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SYSTEM,Purification System: Amulet recharge speed is tripled, and mechanical tools can still be used during purification.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_BUG,Bug Purification: This is a bug. Do not choose this.
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_APTIT,Only skills with an aptitude of 0 or higher can be selected!
 LOC_SYSTEM_GOD_JUNKO_PURIFICATION_SKILL_ASK,Are you really going to purify the {0} skill? (Current level: {1})
@@ -5320,8 +5324,8 @@ LOC_SYSTEM_DEBUG_WHICH,<Wizard Mode> Which command? (? - help)
 LOC_SYSTEM_DEBUG_CREATE_ITEM,Which item would you like to get?
 LOC_SYSTEM_DEBUG_CREATE_POTION,Which potion would you like to get?
 LOC_SYSTEM_DEBUG_CREATE_SCROLL,Which scroll would you like to get?
-LOC_SYSTEM_DEBUG_CREATE_EVOKE,Which evocable item would you like to get?
-LOC_SYSTEM_DEBUG_CREATE_SPELLCARD,Which spell card would you like to get?
+LOC_SYSTEM_DEBUG_CREATE_EVOKE,Which magical device would you like to get?
+LOC_SYSTEM_DEBUG_CREATE_MACHINE,Which mechanical tool would you like to get?
 LOC_SYSTEM_DEBUG_CREATE_RING,Which ring would you like to get?
 LOC_SYSTEM_DEBUG_CREATE_AMULET,Which amulet would you like to get?
 LOC_SYSTEM_DEBUG_TRAVEL_DUNGEON,Which dungeon would you like to travel to? (Use uppercase for final floor)
@@ -5516,7 +5520,7 @@ LOC_SYSTEM_CIRNO_ICEFAIRYRING_EQUIP,Your mind cannot get any worse than it alrea
 LOC_SYSTEM_KNIFE_COLLECT_EMPTY,There are no thrown weapons within sight that you can retrieve.
 LOC_SYSTEM_KNIFE_COLLECT_DONE,You retrieved the nearby thrown weapons.
 LOC_SYSTEM_TIME_PARADOX_NO_SPACE,There is no room to create a duplicate.
-LOC_SYSTEM_SPELLCARD_CANCEL_WASTE_ASK,Cancelling will consume a use. Are you sure you want to cancel?
+LOC_SYSTEM_MACHINE_CANCEL_WASTE_ASK,Cancelling will consume a use. Are you sure you want to cancel?
 LOC_SYSTEM_SPL_DOLL_SPEAR,Doll Placement
 LOC_SYSTEM_SPL_LITTLE_LEGION,Little Legion
 LOC_SYSTEM_SPL_DESCRIBE_DOLL_SPEAR,Summons two sword-wielding dolls that spin around the target.\nThe dolls cannot move, but continuously damage nearby creatures.
@@ -5804,3 +5808,32 @@ LOC_SYSTEM_KEYCONFIG_ACTION_TARGET_NEXT,Next target
 LOC_SYSTEM_KEYCONFIG_ACTION_THROW_PREV,Previous throwable
 LOC_SYSTEM_KEYCONFIG_ACTION_THROW_NEXT,Next throwable
 LOC_SYSTEM_KEYCONFIG_ACTION_THROW_INFO,Throwable information
+LOC_SYSTEM_MACHINE_PUNCH,Punching Machine
+LOC_SYSTEM_MACHINE_DEFENSE_FRAGMENT,Compact Shield Generator
+LOC_SYSTEM_MACHINE_OPTION_PUNCH,Punch
+LOC_SYSTEM_MACHINE_OPTION_OPTICAL_CAMOUFLAGE,Optical Camouflage
+LOC_SYSTEM_MACHINE_OPTION_DEFENSE_FRAGMENT,Defense
+LOC_SYSTEM_MACHINE_OPTION_SKY_TORPEDO,Sky Torpedo
+LOC_SYSTEM_MACHINE_INSTALL_SELECT,Install it on which piece of armour?
+LOC_SYSTEM_MACHINE_INSTALL_INVALID,This machine cannot be installed on that armour.
+LOC_SYSTEM_MACHINE_INSTALLED,Installed {0} on {1}.
+LOC_SYSTEM_MACHINE_INSTALL_POWER,This machine adds {0} to your Electrical Load while installed and operating.
+LOC_SYSTEM_MACHINE_INSTALL_SLOTS,This machine can be installed on: {0}
+LOC_SYSTEM_MACHINE_MAX_LEVEL,This machine reaches maximum performance at Engineering level {0}.
+LOC_SYSTEM_MACHINE_SLOT_BODY,body armour
+LOC_SYSTEM_MACHINE_SLOT_SHIELD,shield
+LOC_SYSTEM_MACHINE_SLOT_HEAD,headgear
+LOC_SYSTEM_MACHINE_SLOT_CLOAK,cloak
+LOC_SYSTEM_MACHINE_SLOT_GLOVE,gloves
+LOC_SYSTEM_MACHINE_SLOT_BOOTS,boots
+LOC_SYSTEM_ITEM_DESCRIPTION_INSTALLABLE_MACHINE,Mechanical tools come in two types: ammunition-based tools used directly and installable tools attached to equipment.\nInstallable machines can be attached to equipment to provide continuous effects.\nEach machine has specified installation slots, and each piece of equipment can hold only one machine.\nAn installed machine cannot be recovered without destroying the equipment or using a specific item.\nInstalled machines add to your Electrical Load, and raising Engineering increases your Load limit.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_PUNCH,A toy-like weapon made by the kappa. Many kappa hide one inside a large bag.\nIt automatically fires a punching glove at an enemy within 3 tiles that has noticed you.\nIt will not activate against the same enemy again for some time.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_DEFENSE_FRAGMENT,A scrap device attached to armour to improve its defense.\nWhen active, its kappa-made shield provides more protection than the scrap plating alone.\nIts drawback is that its heavy weight slows movement whenever installed, even while inactive.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_SKY_TORPEDO,A launcher that automatically scatters aerial torpedoes at nearby enemies.\nThe torpedoes home in on nearby enemies and deal explosive damage.\nThey are quite smart and will not harm their user or allies.
+LOC_SYSTEM_BUFF_STAT_MACHINE_OVERLOAD,Overloaded
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_MACHINE_OVERLOAD,Your Electrical Load exceeds its limit, disabling all installed machines.
+LOC_SYSTEM_ATT_PUNCH,punch
+LOC_SYSTEM_SHORT_MACHINE_POWER,Load
+LOC_SYSTEM_MACHINE_POWER_OVER_EQUIP,Your equipped machines exceed your Electrical Load limit!
+LOC_SYSTEM_TAG_MAGIC_DEVICE,Magical Device
+LOC_SYSTEM_MIGRATION_FINISH,Skill experience has been transferred.

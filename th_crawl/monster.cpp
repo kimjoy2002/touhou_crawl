@@ -53,7 +53,7 @@ s_fear(0), s_mind_reading(0), s_lunatic(0), s_neutrality(0), s_communication(0),
 force_strong(false), force_turn(0), s_changed(0), s_invincibility(0), s_oil(0), s_fire(0), fire_reason(PRT_NEUTRAL), s_none_move(0), s_dazed(0), bashed(false), debuf_boost(0),
 	summon_time(0), summon_parent(PRT_NEUTRAL), s_vulun_poison(0), 
 	s_acid(0), s_acid_turn(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0),wind_resist(0),walk_speed_bonus(0), time_delay(0), all_time_delay(0), 
-	speed(10), memory_time(0), first_contact(true), strong(1), special_value(0), spellcard_info(),
+speed(10), memory_time(0), first_contact(true), strong(1), special_value(0), machine_punch_cooldown(0), spellcard_info(),
 	delay_turn(0), target(NULL), temp_target_map_id(-1), target_pos(),
 	direction(-1), sm_info(), state(MS_NORMAL), random_spell(false), wait(false)
 {
@@ -196,6 +196,7 @@ void monster::SaveDatas(FILE *fp)
 		(*it).SaveDatas(fp);
 	}
 	spellcard_info.SaveDatas(fp);
+	SaveData<int>(fp,machine_punch_cooldown);
 	
 }
 void monster::LoadDatas(FILE *fp)
@@ -356,6 +357,8 @@ void monster::LoadDatas(FILE *fp)
 	}
 	if(!isPrevVersion(loading_version_string, "ver1.208"))
 		spellcard_info.LoadDatas(fp);
+	if(!isPrevVersion(loading_version_string,"ver1.301"))
+		LoadData<int>(fp,machine_punch_cooldown);
 }
 void monster::ReTarget()
 {
@@ -455,6 +458,7 @@ void monster::init()
 	first_contact = true;
 	strong = 1;
 	special_value = 0;
+	machine_punch_cooldown = 0;
 	spellcard_info.init();
 	delay_turn = 0;
 	while(!will_move.empty())
@@ -6474,7 +6478,7 @@ int monster::GetDetect()
 {
 	int detect_ = 10+level*(1.5f+sense);
 	if(!you.isView(this))
-		detect_ -= (you.s_invisible>10 || you.togle_invisible)?70:20;
+		detect_ -= (you.GetInvisible() < 0 || you.GetInvisible()>10 || you.togle_invisible)?70:20;
 	if(you.s_autumn)
 		detect_ -= 40;
 	if(detect_<=0)

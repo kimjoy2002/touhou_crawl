@@ -803,7 +803,10 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			if (i == IDEN_CHECK_MACHINE_START) {
 				first_ = true;
 			}
-			if (iden_list.machine_list[cur_].found)
+			//설치형 기계 도구는 하나로 묶어서 표시
+			bool installed_ = IsInstallableMachine((machine_type)cur_);
+			int installed_image_ = installed_ ? FirstFoundInstalledMachine(iden_list) : -1;
+			if (installed_ ? (i == InstalledMachinePickupIndex() && installed_image_ >= 0) : iden_list.machine_list[cur_].found != 0)
 			{
 				if (first_)
 				{
@@ -819,11 +822,14 @@ void display_manager::iden_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 
 				rc.left = two_;
 				rc2=rc;
-				MachineItemImage((machine_type)cur_,true)->draw(pSprite, rc.left - 24, rc.top + 6, 255);
+				MachineItemImage((machine_type)(installed_ ? installed_image_ : cur_),true)->draw(pSprite, rc.left - 24, rc.top + 6, 255);
 
 				ss.str("");
 				ss.clear();
-				ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::formatString(LOC_SYSTEM_MACHINE_IDENTIFY, PlaceHolderHelper(MachineName((machine_type)cur_)));
+				if (installed_)
+					ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::locString(LOC_SYSTEM_MACHINE_INSTALLABLE_PICKUP);
+				else
+					ss << index << ' ' << (iden_list.autopickup[i] ? '+' : '-') << ' ' << LocalzationManager::formatString(LOC_SYSTEM_MACHINE_IDENTIFY, PlaceHolderHelper(MachineName((machine_type)cur_)));
 				DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, font_color_);
 				rc2.right = rc.left + PrintCharWidth(ss.str())*fontDesc.Width;
 				rc2.bottom = rc2.top + fontDesc.Height;
@@ -3179,6 +3185,22 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_MACHINE_OVERLOAD), CL_danger,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_MACHINE_OVERLOAD), this);
 			}
+			if(you.s_machine_overheat)
+			{
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_MACHINE_OVERHEAT), CL_white_blue,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_MACHINE_OVERHEAT), this);
+			}
+			else if(you.s_machine_burnout)
+			{
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_MACHINE_BURNOUT), CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_MACHINE_BURNOUT), this);
+			}
+			else if(you.machine_preheat > 0 && you.HasActiveInstalledMachine(IMT_WEAPON_PREHEATER))
+			{
+				string dots_(min(3,(you.machine_preheat-1)/3+1),'.');
+				stateDraw.addState(LocalzationManager::formatString(LOC_SYSTEM_BUFF_STAT_MACHINE_PREHEAT, PlaceHolderHelper(dots_)), CL_warning,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_MACHINE_PREHEAT), this);
+			}
 			if (you.s_super_graze)
 			{
 				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_SUPER_GRAZE), you.s_super_graze>3 ? CL_normal : CL_white_blue, LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_SUPER_GRAZE), this);
@@ -4307,6 +4329,7 @@ void display_manager::item_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 	case IVT_CURSE_ENCHANT:
 	case IVT_INSTALL_BODY_MACHINE:
 	case IVT_INSTALL_ARMOUR_MACHINE:
+	case IVT_DISASSEMBLE_MACHINE:
 	{
     	std::ostringstream oss;
 		oss << "<"<< LocalzationManager::locString(LOC_SYSTEM_INVENTORY) <<">  (" << LocalzationManager::locString(LOC_SYSTEM_INVENTORY_ITEM) <<" " << you.item_list.size() << " / 52)";
@@ -4673,6 +4696,7 @@ bool display_manager::makeItemForItemDraw(list<item>::iterator& first, list<item
 	case IVT_CURSE_ENCHANT:
 	case IVT_INSTALL_BODY_MACHINE:
 	case IVT_INSTALL_ARMOUR_MACHINE:
+	case IVT_DISASSEMBLE_MACHINE:
 		first = you.item_list.begin();
 		end = you.item_list.end();
 		break;
@@ -4739,7 +4763,11 @@ bool display_manager::checkVaildItemView(item_type_simple i) {
 		return false;
 	if(item_vt == IVT_CURSE_ENCHANT && (i != ITMS_WEAPON && i != ITMS_ARMOR))
 		return false;
-	if((item_vt == IVT_INSTALL_BODY_MACHINE || item_vt == IVT_INSTALL_ARMOUR_MACHINE) && i != ITMS_ARMOR)
+	if(item_vt == IVT_INSTALL_BODY_MACHINE && i != ITMS_ARMOR)
+		return false;
+	if(item_vt == IVT_INSTALL_ARMOUR_MACHINE && i != ITMS_ARMOR && i != ITMS_WEAPON)
+		return false;
+	if(item_vt == IVT_DISASSEMBLE_MACHINE && i != ITMS_ARMOR && i != ITMS_WEAPON)
 		return false;
 	return true;
 }
@@ -4762,6 +4790,10 @@ bool display_manager::checkItemSimpleType(list<item>::iterator it) {
 	if (item_vt == IVT_CURSE_ENCHANT && (!(it->curse) || !(it->identify_curse)))
 		return false;
 	if(item_vt == IVT_INSTALL_BODY_MACHINE && it->GetArmorType() != ET_ARMOR)
+		return false;
+	if(item_vt == IVT_INSTALL_ARMOUR_MACHINE && install_machine_view != IMT_NONE && !it->CanInstallMachine(install_machine_view))
+		return false;
+	if(item_vt == IVT_DISASSEMBLE_MACHINE && !it->HasAnyInstalledMachine())
 		return false;
 	if (item_vt == IVT_EVOKE && !(*it).isEvokable())
 		return false;

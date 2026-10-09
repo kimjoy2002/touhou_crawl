@@ -379,7 +379,7 @@ void wiz_mode()
 			{
 				int list[SCT_MAX-1] = { SCT_TELEPORT,SCT_IDENTIFY,SCT_NONE,SCT_CURSE_WEAPON,SCT_CURSE_ARMOUR,SCT_REMOVE_CURSE,
 					SCT_BLINK,SCT_MAPPING,SCT_ENCHANT_WEAPON_1,	SCT_ENCHANT_ARMOUR,SCT_FOG,SCT_DETECT_CURSE,
-					SCT_CURSE_JEWELRY,SCT_SILENCE,SCT_SOUL_SHOT,SCT_CHARGING,SCT_AMNESIA, SCT_SANTUARY, SCT_BRAND_WEAPON, SCT_ACQUIREMENT };
+					SCT_CURSE_JEWELRY,SCT_SILENCE,SCT_SOUL_SHOT,SCT_CHARGING,SCT_AMNESIA, SCT_SANTUARY, SCT_BRAND_WEAPON, SCT_ACQUIREMENT, SCT_DISASSEMBLE };
 				
 				LOCALIZATION_ENUM_KEY keylist[SCT_MAX-1] = {
 					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_TELEPORT_SHORT,
@@ -401,7 +401,8 @@ void wiz_mode()
 					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_AMNESIA_SHORT,
 					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_SANTUARY_SHORT,
 					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_BRAND_WEAPON_SHORT,
-					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_ACQUIREMENT_SHORT
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_ACQUIREMENT_SHORT,
+					LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_DISASSEMBLE_SHORT
 				};
 
 				enterlog();
@@ -518,28 +519,12 @@ void wiz_mode()
 			return;
 			case 'v':
 			{
-				int list[MCH_MAX] = { MCH_FLAMETHROWER,MCH_FREEZE_SPRAYER,MCH_DRILL,MCH_LARGE_FAN,MCH_OPTICAL_CAMOUFLAGE,MCH_SCRAP_LAUNCHER, MCH_SUN_LAMP,
-					MCH_PUNCH,MCH_BARRIER_GENERATOR,MCH_SKY_TORPEDO };
-				
-				LOCALIZATION_ENUM_KEY keylist[MCH_MAX] = {
-					LOC_SYSTEM_MACHINE_FLAMETHROWER,
-					LOC_SYSTEM_MACHINE_FREEZE_SPRAYER,
-					LOC_SYSTEM_MACHINE_DRILL,
-					LOC_SYSTEM_MACHINE_LARGE_FAN,
-					LOC_SYSTEM_MACHINE_OPTICAL_CAMOUFLAGE,
-					LOC_SYSTEM_MACHINE_SCRAP_LAUNCHER,
-					LOC_SYSTEM_MACHINE_SUN_LAMP,
-					LOC_SYSTEM_MACHINE_PUNCH,
-					LOC_SYSTEM_MACHINE_DEFENSE_FRAGMENT,
-					LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO
-				};
-				
 				enterlog();
 				std::vector<int> listkey;
 				for(int i = 0; i < MCH_MAX; i++) {
 					ss.str("");
 					ss.clear();
-					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(keylist[i]) << " ";
+					ss << string(1,(char)('a'+i)) << "-" << LocalzationManager::locString(MachineName((machine_type)i)) << " ";
 					printlog(ss.str(), (i==MCH_MAX-1?true:false), false, false, CL_help, (char)('a'+i));
 					listkey.push_back('a'+i);
 				}
@@ -571,7 +556,7 @@ void wiz_mode()
 				if (key_ >= 'a' && key_ < 'a'+MCH_MAX)
 				{
 					item_infor t;
-					makeitem(ITM_MACHINE, 0, &t, list[key_ - 'a']);
+					makeitem(ITM_MACHINE, 0, &t, key_ - 'a');
 					env[current_level].MakeItem(you.position, t);
 					enterlog();
 				}

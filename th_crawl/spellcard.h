@@ -23,6 +23,7 @@ struct installed_machine_info
 	int max_engineering_level;
 	unsigned int equip_mask;
 	LOCALIZATION_ENUM_KEY option_name;
+	LOCALIZATION_ENUM_KEY effect_name;
 };
 
 //
@@ -36,12 +37,16 @@ bool IsInstallableMachine(machine_type skill);
 installed_machine_type MachineToInstalledType(machine_type skill);
 const installed_machine_info* GetInstalledMachineInfo(installed_machine_type machine_);
 LOCALIZATION_ENUM_KEY InstalledMachineOptionName(installed_machine_type machine_);
+LOCALIZATION_ENUM_KEY InstalledMachineEffectName(installed_machine_type machine_);
 int InstalledMachinePower(installed_machine_type machine_);
 int InstalledMachineMaxLevel(installed_machine_type machine_);
+machine_type RandomBulletMachine();
+machine_type RandomInstalledMachineByPower(int min_power_, int max_power_);
+bool IsMachineInstallSlot(int slot_);
 bool CanInstallMachineAt(installed_machine_type machine_, equip_type slot_);
 string InstalledMachineSlotsString(installed_machine_type machine_, const string& lang);
-void equipMachine(installed_machine_type machine_);
-void unequipMachine(installed_machine_type machine_);
+void equipMachine(installed_machine_type machine_, item* item_);
+void unequipMachine(installed_machine_type machine_, item* item_);
 LOCALIZATION_ENUM_KEY MachineDescription(machine_type machine_);
 textures* MachineItemImage(machine_type machine_, bool charged_);
 

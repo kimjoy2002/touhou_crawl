@@ -89,7 +89,7 @@ coord_def throwtanmac(int graphic_type,beam_iterator& beam, const beam_infor &in
 unit* throwtanmac_check_hit(textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_, void (*attack_prefix_)(attack_infor& attack, ThrowTamacInstance* instance_));
 unit* throwtanmac_check_hit(int graphic_type,beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_, void (*attack_prefix_)(attack_infor& attack, ThrowTamacInstance* instance_));
 
-bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &target, const beam_infor &infor_);
+bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &target, const beam_infor &infor_, bool hit_ = true, bool start_burst_ = false);
 bool ThrowSector(int graphic_type,beam_iterator& beam, const beam_infor &infor_, float sector_ , function<void(coord_def)> func_, bool reverse_, bool effect_delete = true);
 int PathToNum_forstem(int path);
 int PathToNum(int path);

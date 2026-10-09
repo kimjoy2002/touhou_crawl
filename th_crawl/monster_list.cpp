@@ -1232,5 +1232,9 @@ const mon_infor mondata[] = {
 	{MON_GLACIER_WALL,1,0,name_infor(MON_GLACIER_WALL),&img_mons_glacier_wall,10,5,0,
 		{0,0,0},{ATT_NONE,ATT_NONE,ATT_NONE},{name_infor(),name_infor(),name_infor()},
 		M_FLAG_NONE_MOVE | M_FLAG_IMMOBILE | M_FLAG_NONE_STAIR | M_FLAG_NO_ATK |
-		M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,10,'#'}
+		M_FLAG_CANT_NETURAL | M_FLAG_INANIMATE,99,0,10,'#'},
+
+	{ MON_PHOTON_TORPEDO, 1, 0, name_infor(MON_PHOTON_TORPEDO), &img_tanmac_photon_torpedo[1], 1, 10, 0,
+		{ 0, 0, 0 }, { ATT_NORMAL, ATT_NONE, ATT_NONE }, { name_infor(LOC_SYSTEM_ATT_NORMAL), name_infor(), name_infor() },
+		M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_STATE | M_FLAG_CAN_SEE_INVI | M_FLAG_NO_ATK | M_FLAG_PASSED_ALLY | M_FLAG_MISSLE | M_FLAG_DIRECT_KILL, 99, 0, 7 ,')' }
 };

@@ -173,7 +173,8 @@ LOCALIZATION_ENUM_KEY scroll_uniden_string[SCT_MAX]=
 	LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN18,
 	LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN19,
 	LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN20,
-	LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN21
+	LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN21,
+	LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN22
 };
 
 LOCALIZATION_ENUM_KEY scroll_iden_string[SCT_MAX]=
@@ -198,7 +199,8 @@ LOCALIZATION_ENUM_KEY scroll_iden_string[SCT_MAX]=
 	LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_AMNESIA,
 	LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_SANTUARY,
 	LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_BRAND_WEAPON,
-	LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_ACQUIRE
+	LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_ACQUIRE,
+	LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_DISASSEMBLE
 };
 
 
@@ -221,6 +223,7 @@ bool skill_santuary(int pow, bool short_, unit* order, coord_def target);
 bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_);
 bool amnesia_scroll(bool pre_iden_);
 bool brand_weapon_scroll(bool pre_iden_);
+bool disassemble_scroll(bool pre_iden_);
 
 
 scroll_type goodbadscroll(int good_bad)
@@ -232,7 +235,7 @@ scroll_type goodbadscroll(int good_bad)
 		scrolls.push(SCT_ENCHANT_WEAPON_1,30);
 		scrolls.push(SCT_ENCHANT_ARMOUR,20);
 		scrolls.push(SCT_FOG,10);
-		scrolls.push(SCT_CHARGING,10);
+		scrolls.push(SCT_DISASSEMBLE,10);
 		scrolls.push(SCT_MAPPING,15);
 		scrolls.push(SCT_AMNESIA,15);
 		return scrolls.choice();
@@ -288,6 +291,7 @@ int isGoodScroll(scroll_type kind)
 	case SCT_CHARGING:
 	case SCT_AMNESIA:
 	case SCT_BRAND_WEAPON:
+	case SCT_DISASSEMBLE:
 		return 1;
 	case SCT_NONE:
 		return 0;
@@ -530,6 +534,16 @@ bool readscroll(scroll_type kind, bool pre_iden_, bool waste_)
 			changedisplay(DT_GAME);
 			iden_list.scroll_list[kind].iden = 3;
 			bool return_ = aquire_scroll(pre_iden_);
+			WaitForSingleObject(mutx, INFINITE);
+			return return_;
+		}
+	case SCT_DISASSEMBLE:
+		{
+			if (waste_) //낭비시엔 의미가 없음
+				return true;
+			ReleaseMutex(mutx);
+			iden_list.scroll_list[kind].iden = 3;
+			bool return_ = disassemble_scroll(pre_iden_);
 			WaitForSingleObject(mutx, INFINITE);
 			return return_;
 		}
@@ -1334,6 +1348,96 @@ bool recharging_scroll(bool pre_iden_, bool ablity_, bool waste_)
 	else{
 		return true;
 	}
+}
+bool disassemble_scroll(bool pre_iden_)
+{
+	bool ok_ = false;
+	for(auto it = you.item_list.begin(); it != you.item_list.end(); it++)
+	{
+		if((it->isweapon() || it->isarmor()) && it->HasAnyInstalledMachine())
+		{
+			ok_ = true;
+			break;
+		}
+	}
+	if(!ok_)
+	{
+		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_DISASSEMBLE_FAIL),true,false,false,CL_normal);
+		return !pre_iden_;
+	}
+	view_item(IVT_DISASSEMBLE_MACHINE, LOC_SYSTEM_DISPLAY_MANAGER_DISASSEMBLE_MACHINE);
+	item* target_ = nullptr;
+	while(1)
+	{
+		InputedKey inputedKey;
+		int key_ = waitkeyinput(inputedKey,true);
+		if(key_ == VK_RETURN || key_ == GVK_BUTTON_A)
+			key_ = DisplayManager.positionToChar();
+		if((key_ >= 'a' && key_ <= 'z') || (key_ >= 'A' && key_ <= 'Z'))
+		{
+			item* item_ = you.GetItem(key_);
+			if(item_ && (item_->isweapon() || item_->isarmor()) && item_->HasAnyInstalledMachine())
+			{
+				target_ = item_;
+				break;
+			}
+		}
+		else if(key_ == VK_DOWN)
+			DisplayManager.addPosition(1);
+		else if(key_ == VK_UP)
+			DisplayManager.addPosition(-1);
+		else if(key_ == VK_PRIOR)
+			changemove(-option_mg.getHeight());
+		else if(key_ == VK_NEXT)
+			changemove(option_mg.getHeight());
+		else if(key_ == -1 && inputedKey.mouse == MKIND_SCROLL_UP)
+			changemove(-32);
+		else if(key_ == -1 && inputedKey.mouse == MKIND_SCROLL_DOWN)
+			changemove(32);
+		else if(key_ == -1 && inputedKey.isRightClick())
+			break;
+		else if(key_ == VK_ESCAPE || key_ == GVK_BUTTON_B || key_ == GVK_BUTTON_B_LONG)
+			break;
+	}
+	changedisplay(DT_GAME);
+	if(!target_)
+		return !pre_iden_;
+
+	WaitForSingleObject(mutx, INFINITE);
+	string target_name_ = target_->GetName();
+	bool equiped_ = you.isequip(target_) != 0;
+	bool machine_was_overloaded_ = you.IsMachinePowerOverloaded();
+	vector<machine_type> removed_;
+	for(int bit_ = 1; bit_ < IMT_MAX; bit_ <<= 1)
+	{
+		installed_machine_type machine_ = (installed_machine_type)bit_;
+		if(!target_->HasInstalledMachine(machine_))
+			continue;
+		if(equiped_ && !machine_was_overloaded_)
+			unequipMachine(machine_,target_);
+		target_->installed_machine &= ~bit_;
+		if(const installed_machine_info* info_ = GetInstalledMachineInfo(machine_))
+			removed_.push_back(info_->source_type);
+	}
+	you.UpdateMachinePowerOverload(machine_was_overloaded_);
+	if(equiped_)
+		you.ReSetASPanlty();
+	ReleaseMutex(mutx);
+
+	//분리한 기계 도구는 다시 아이템으로 돌려준다.
+	for(machine_type machine_kind_ : removed_)
+	{
+		item_infor t;
+		createMachine(0,machine_kind_,&t);
+		item* it = env[current_level].MakeItem(you.position,t);
+		it->identify = true;
+		string machine_name_ = it->GetName();
+		if(you.additem(it,false) > 0)
+			env[current_level].DeleteItem(it);
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_ITEM_SCROLL_DISASSEMBLE,true,false,false,CL_good,
+			PlaceHolderHelper(target_name_),PlaceHolderHelper(machine_name_));
+	}
+	return true;
 }
 bool amnesia_scroll(bool pre_iden_)
 {

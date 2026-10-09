@@ -154,13 +154,20 @@ public:
 	void LoadDatas(FILE *fp);
 };
 
+int InstalledMachinePickupIndex(); //설치형 기계 도구가 공유하는 자동줍기 칸
+void SetMachineFound(Iden_collect& collection_, int machine_);
+int FirstFoundInstalledMachine(const Iden_collect& collection_); //없으면 -1
+
 class Iden_collect_111 //111버전을 위한 임시..
 {
 public:
 	static const int LEGACY_MACHINE_COUNT = 7;
-	static const int LEGACY_AUTOPICKUP_COUNT = IDEN_CHECK_END-(MCH_MAX-LEGACY_MACHINE_COUNT);
+	static const int LEGACY_SCROLL_COUNT = SCT_ACQUIREMENT; //획득 두루마리 이전까지
+	static const int LEGACY_AUTOPICKUP_SCROLL_COUNT = SCT_DISASSEMBLE; //분해 두루마리 이전까지
+	static const int LEGACY_SCROLL_SHIFT = SCT_MAX-LEGACY_AUTOPICKUP_SCROLL_COUNT;
+	static const int LEGACY_AUTOPICKUP_COUNT = IDEN_CHECK_END-(MCH_MAX-LEGACY_MACHINE_COUNT)-LEGACY_SCROLL_SHIFT;
 	potion_iden potion_list[PT_MAX];
-	scroll_iden scroll_list[SCT_MAX-1];
+	scroll_iden scroll_list[LEGACY_SCROLL_COUNT];
 	ring_iden ring_list[RGT_MAX];
 	amulet_iden amulet_list[AMT_MAX];
 	machine_iden machine_list[LEGACY_MACHINE_COUNT];
@@ -225,6 +232,8 @@ public:
 	
 	int value8; //value8 - 무기 - 최소공속
 
+	int installed_machine; //무기,방어구 - 설치된 기계(installed_machine_type 비트)
+
 	fixed_artifact_type fixed_artifact;
 	vector<atifact_infor> atifact_vector;
 	vector<LOCALIZATION_ENUM_KEY> item_tag; //검색에 사용하는 아이템 태그
@@ -264,9 +273,12 @@ public:
 	bool isautopick();
 	bool isArtifact();
 	bool isChargable();
+	equip_type GetMachineInstallSlot();
 	bool HasInstalledMachine(installed_machine_type type_);
 	bool HasAnyInstalledMachine();
 	int InstalledMachinePowerUsage();
+	int GetInstalledMachineNum();
+	int GetMaxInstalledMachineNum();
 	bool CanInstallMachine(installed_machine_type type_);
 	void InstallMachine(installed_machine_type type_);
 	bool canSlashTanmac();

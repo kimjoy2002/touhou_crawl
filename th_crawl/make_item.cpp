@@ -1303,7 +1303,9 @@ void init_identify() //미식별아이템을 구별못하게 섞음
 				iden_list.autopickup[i] = false;
 		}
 		else if (i >= IDEN_CHECK_MACHINE_START && i < IDEN_CHECK_MACHINE_END) {
-			iden_list.autopickup[i] = true;
+			//설치형 기계 도구는 기본으로 자동줍기하지 않는다.
+			int cur = i - IDEN_CHECK_MACHINE_START;
+			iden_list.autopickup[i] = !IsInstallableMachine((machine_type)cur);
 		}
 		else if (i >= IDEN_CHECK_BOOK_START && i < IDEN_CHECK_BOOK_END) {
 			int cur = i - IDEN_CHECK_BOOK_START;

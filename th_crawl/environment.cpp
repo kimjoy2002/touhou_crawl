@@ -3375,7 +3375,7 @@ int GetLevelMonsterNum(int level, bool item_)
 	}
 	else{ //아이템
 		if(level_ == 0) {
-			return 11;//최소 한개의 치유 포션을 보장하기 위해서
+			return 12;//최소 한개의 치유 포션을 보장하기 위해서
 		}
 		if(level_ == TEMPLE_LEVEL || level_ == BAMBOO_LEVEL || level_ == YUKKURI_LAST_LEVEL || level_ == EIENTEI_LEVEL || level_ == MOON_LEVEL)
 			return 0;
@@ -3384,7 +3384,7 @@ int GetLevelMonsterNum(int level, bool item_)
 		if(level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)
 			return 8;
 		else
-			return 12;
+			return 13; //기계 도구가 추가된 만큼 1개 늘어남
 	}
 
 }

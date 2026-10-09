@@ -49,8 +49,8 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,Bonus) You can revive upon reaching lev
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4,Beginner Tip) You can revive when you reach levels 9 and 18. You’ll recover HP and MP and explode upon revival.\nPlay a bit more safely!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI1,Ancient! The triassic Kappa. Break through with the power of items!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2,Aptitude Bonus) +2 Mace Aptitude, +1 Engineering Aptitude
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI3,Bonus) Starts with Cloth Kappa Suit, Aerial Torpedo, and Neshii’s Occult Amulet
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4,Beginner Tip: Press 'V' to install installable machines onto equipment. \nEquipped Occult Amulets charge with XP. When fully charged, press 'V' to launch Neshii!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI3,Bonus) Photon Torpedo (replaces Punching Machine), Auxiliary Battery, Cloth Kappa Suit, 2 Scrolls of Disassembly, Neshii’s Occult Amulet.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4,Beginner Tip: Use 'V' to install machines.\nFit the battery to your weapon and the torpedo to your armour. Disassembly scrolls recover machines for reuse.\nEquipped Occult Amulets charge with XP. At 100%, use 'V' to launch Neshii!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES1,Fairy Wars! The Three Fairies of Light. It's better to fight together!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES2,Bonus) Trust Lily and start with two fairy companions.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3,Beginner Tip: You’ll always fight with companions. They revive after gaining XP, even if they die.\nUse the 'a' key to invoke divine powers. Recruit or summon fairy allies!\nYou still get the same XP even if allies land the kill. Prioritize your survival!
@@ -3751,7 +3751,7 @@ LOC_SYSTEM_ITEM_EVOKE_AIR_SCROLL,Air Scroll
 LOC_SYSTEM_ITEM_EVOKE_DREAM_SOUL,Dream Soul
 LOC_SYSTEM_ITEM_EVOKE_BOMB,Type-4 Magic Bomb
 LOC_SYSTEM_ITEM_EVOKE_GHOST_BALL,Okuri-Chochin
-LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO,Sky Torpedo
+LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO,Aerial Torpedo
 LOC_SYSTEM_ITEM_EVOKE_MAGIC_HAMMER,Magic Hammer
 LOC_SYSTEM_ITEM_EVOKE_CAMERA,Camera
 LOC_SYSTEM_ITEM_RUNE_RUNE,Rune
@@ -5813,9 +5813,9 @@ LOC_SYSTEM_MACHINE_DEFENSE_FRAGMENT,Compact Shield Generator
 LOC_SYSTEM_MACHINE_OPTION_PUNCH,Punch
 LOC_SYSTEM_MACHINE_OPTION_OPTICAL_CAMOUFLAGE,Optical Camouflage
 LOC_SYSTEM_MACHINE_OPTION_DEFENSE_FRAGMENT,Defense
-LOC_SYSTEM_MACHINE_OPTION_SKY_TORPEDO,Sky Torpedo
-LOC_SYSTEM_MACHINE_INSTALL_SELECT,Install it on which piece of armour?
-LOC_SYSTEM_MACHINE_INSTALL_INVALID,This machine cannot be installed on that armour.
+LOC_SYSTEM_MACHINE_OPTION_PHOTON_TORPEDO,Photon Torpedo
+LOC_SYSTEM_MACHINE_INSTALL_SELECT,Install it on which piece of equipment?
+LOC_SYSTEM_MACHINE_INSTALL_INVALID,This machine cannot be installed on that equipment.
 LOC_SYSTEM_MACHINE_INSTALLED,Installed {0} on {1}.
 LOC_SYSTEM_MACHINE_INSTALL_POWER,This machine adds {0} to your Electrical Load while installed and operating.
 LOC_SYSTEM_MACHINE_INSTALL_SLOTS,This machine can be installed on: {0}
@@ -5837,3 +5837,73 @@ LOC_SYSTEM_SHORT_MACHINE_POWER,Load
 LOC_SYSTEM_MACHINE_POWER_OVER_EQUIP,Your equipped machines exceed your Electrical Load limit!
 LOC_SYSTEM_TAG_MAGIC_DEVICE,Magical Device
 LOC_SYSTEM_MIGRATION_FINISH,Skill experience has been transferred.
+LOC_SYSTEM_MACHINE_PHOTON_TORPEDO,Photon Torpedo
+LOC_SYSTEM_MACHINE_OI_SOUND_SYSTEM,Q-Cumber Sound System
+LOC_SYSTEM_MACHINE_ARMOUR_ASSIST,Powered Exoskeleton
+LOC_SYSTEM_MACHINE_AUX_BATTERY,Auxiliary Battery
+LOC_SYSTEM_MACHINE_BLASTER,Rocket Boost
+LOC_SYSTEM_MACHINE_FLASH_SHIELD,Shield Flash Module
+LOC_SYSTEM_MACHINE_COUNTER_WAVE,Counter Shot System
+LOC_SYSTEM_MACHINE_VIBRATION,Vibration Injector
+LOC_SYSTEM_MACHINE_ARC_SHOT,Arc Generator
+LOC_SYSTEM_MACHINE_WEAPON_PREHEATER,Weapon Preheater
+LOC_SYSTEM_MACHINE_OFFSET_SHOT,Magnetic Field Generator
+LOC_SYSTEM_MACHINE_EMERGENCY_BARRIER,Emergency Barrier System
+LOC_SYSTEM_MACHINE_OPTION_OI_SOUND_SYSTEM,Sound
+LOC_SYSTEM_MACHINE_OPTION_ARMOUR_ASSIST,Exoskeleton
+LOC_SYSTEM_MACHINE_OPTION_AUX_BATTERY,Battery
+LOC_SYSTEM_MACHINE_OPTION_BLASTER,Boost
+LOC_SYSTEM_MACHINE_OPTION_FLASH_SHIELD,Flash
+LOC_SYSTEM_MACHINE_OPTION_COUNTER_WAVE,Counter
+LOC_SYSTEM_MACHINE_OPTION_VIBRATION,Vibration
+LOC_SYSTEM_MACHINE_OPTION_ARC_SHOT,Arc
+LOC_SYSTEM_MACHINE_OPTION_WEAPON_PREHEATER,Preheat
+LOC_SYSTEM_MACHINE_OPTION_OFFSET_SHOT,Magnet
+LOC_SYSTEM_MACHINE_OPTION_EMERGENCY_BARRIER,Emergency Barrier
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_OI_SOUND_SYSTEM,A huge speaker that attaches to equipment, blasting enemies on all sides with powerful sound waves.\nEvery few exchanges of melee blows, it deals armour-ignoring damage to all enemies within 2 tiles, scaling with Engineering.\nBeware: the deafening noise it makes each time may put you in danger.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_ARMOUR_ASSIST,An exoskeleton that assists with body armour or shields.\nIts artificial steel frame supports the user's movements, partially offsetting the penalties of heavy armour.\nReduces the installed equipment's armour penalty by 3 and its minimum armour penalty by 1.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_AUX_BATTERY,A kappa-made high-capacity auxiliary battery. Installing it raises your Electrical Load limit by 4.\nHowever, its considerable weight increases your armour penalty by 1.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_BLASTER,A small rocket booster attached to your back or feet.\nIt fires automatically as you approach an enemy, increasing your movement speed.\nReduces movement delay to 0.7 when moving toward an enemy.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_FLASH_SHIELD,A powerful flash module attached to a shield.\nWhen you block an enemy's melee attack, it bursts with light, dazing the attacker.\nThe flash inflicts Dazed, reducing accuracy and spellcasting frequency, and makes the attacker glow, reducing evasion.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_COUNTER_WAVE,A shield device that absorbs the impact of danmaku and sends it back.\nWhen you block danmaku, it fires an energy wave back at the shooter.\nIt also grants up to 6 additional SH, scaling with Engineering.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_VIBRATION,A tiny motor that injects fine vibrations into a weapon.\nIncreases the weapon's damage by 3.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_ARC_SHOT,A device that runs high-voltage current through a weapon.\nWhen your melee attack damages an enemy, a lightning arc jumps to another nearby enemy.\nThe arc deals 70%-80% of the melee damage, scaling with Engineering.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_WEAPON_PREHEATER,A powered device fitted to a weapon's grip to assist its swinging motion.\nEach attack warms it up, reducing attack delay by 0.1-0.3 as heat builds.\nAt maximum heat, it maintains maximum attack speed and grants additional melee damage.\nBeware: if you stop fighting after it enters overdrive, the device overheats and temporarily slows your attacks.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_OFFSET_SHOT,A device that wraps a weapon in a magnetic field.\nThe field repels danmaku, providing the protection of a shield without carrying one.\nGrants SH based on the weapon's base damage and Engineering.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_EMERGENCY_BARRIER,A kappa-made barrier generator that activates automatically in emergencies.\nWhen your HP drops to 25% or below, you gain a barrier that absorbs damage for a while.\nIts strength scales with maximum HP and Engineering. Once activated, it cannot activate again until your HP is full.
+LOC_SYSTEM_MACHINE_SLOT_WEAPON,weapon
+LOC_SYSTEM_ATT_PHOTON_TORPEDO,aerial torpedo
+LOC_SYSTEM_ATT_OI_SOUND_SYSTEM,roar
+LOC_SYSTEM_ATT_ARC_SHOT,arc
+LOC_SYSTEM_ATT_COUNTER_WAVE,energy wave
+LOC_SYSTEM_MACHINE_OI_SOUND_SYSTEM_BLAST,The Q-Cumber Sound System lets out a deafening roar!
+LOC_SYSTEM_MACHINE_FLASH_SHIELD_TRIGGER,Your shield flash module flares!
+LOC_SYSTEM_MACHINE_PREHEATER_BURNOUT,Your weapon has overheated.
+LOC_SYSTEM_MACHINE_PREHEATER_BURNOUT_END,Your weapon preheater has cooled down.
+LOC_SYSTEM_MACHINE_EMERGENCY_BARRIER_ON,Your emergency barrier system activates!
+LOC_SYSTEM_MACHINE_EMERGENCY_BARRIER_END,Your emergency barrier fades.
+LOC_SYSTEM_BUFF_STAT_MACHINE_PREHEAT,Preheating{0}
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_MACHINE_PREHEAT,Your weapon preheater is warming up, increasing attack speed. Attack delay decreases as heat builds.
+LOC_SYSTEM_BUFF_STAT_MACHINE_OVERHEAT,Overdrive!
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_MACHINE_OVERHEAT,Your weapon preheater is in overdrive, increasing attack speed and granting bonus damage. When the duration ends, your weapon overheats.
+LOC_SYSTEM_BUFF_STAT_MACHINE_BURNOUT,Weapon Overheat
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_MACHINE_BURNOUT,Your weapon has overheated, making the attack delay of weapons fitted with a preheater 1.5 times longer.
+LOC_SYSTEM_MACHINE_INSTALL_LOW_POWER,Your Electrical Load limit ({1}) is lower than this machine's required Load ({0}). You cannot install it.
+LOC_SYSTEM_MACHINE_EFFECT_PUNCH,Automatically fires a punch at enemies within 3 tiles that have noticed you.
+LOC_SYSTEM_MACHINE_EFFECT_OPTICAL_CAMOUFLAGE,Keeps you invisible.
+LOC_SYSTEM_MACHINE_EFFECT_BARRIER_GENERATOR,Increases AC by 5, but slows movement by 0.1.
+LOC_SYSTEM_MACHINE_EFFECT_PHOTON_TORPEDO,Periodically fires aerial torpedoes while enemies are in sight.
+LOC_SYSTEM_MACHINE_EFFECT_OI_SOUND_SYSTEM,Deals armour-ignoring damage to enemies within 2 tiles during melee combat, making a loud noise.
+LOC_SYSTEM_MACHINE_EFFECT_ARMOUR_ASSIST,Reduces this item's armour penalty by 3 and its minimum penalty by 1.
+LOC_SYSTEM_MACHINE_EFFECT_AUX_BATTERY,Raises your Electrical Load limit by 4, but increases armour penalty by 1.
+LOC_SYSTEM_MACHINE_EFFECT_BLASTER,Moving toward enemies is faster.
+LOC_SYSTEM_MACHINE_EFFECT_FLASH_SHIELD,Blocking a melee attack dazes the attacker and makes it glow.
+LOC_SYSTEM_MACHINE_EFFECT_COUNTER_WAVE,Increases SH and fires an energy wave back at the shooter when you block danmaku.
+LOC_SYSTEM_MACHINE_EFFECT_VIBRATION,Increases this weapon's damage by 3.
+LOC_SYSTEM_MACHINE_EFFECT_ARC_SHOT,Damaging melee hits deal electrical damage to another nearby enemy, proportional to the melee damage.
+LOC_SYSTEM_MACHINE_EFFECT_WEAPON_PREHEATER,Builds heat with each attack, speeding up this weapon's attacks.
+LOC_SYSTEM_MACHINE_EFFECT_OFFSET_SHOT,Increases your SH in proportion to this weapon's base damage.
+LOC_SYSTEM_MACHINE_EFFECT_EMERGENCY_BARRIER,Grants a damage-absorbing barrier when your HP falls to 25% or below.
+LOC_SYSTEM_MACHINE_EFFECT_OVERLOADED,(inactive: overloaded)
+LOC_SYSTEM_MACHINE_INSTALLABLE_PICKUP,Installable machine tools
+LOC_SYSTEM_BLOCK_WEAPON,Weapon

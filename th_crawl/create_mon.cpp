@@ -2418,6 +2418,7 @@ void SetResistMonster(monster* mon)
 		mon->confuse_resist = 1;
 		break;
 	case MON_MISSLE:
+	case MON_PHOTON_TORPEDO:
 		mon->elec_resist = 3;
 		mon->fire_resist = 3;
 		mon->ice_resist = 3;

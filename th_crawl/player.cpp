@@ -134,7 +134,9 @@ s_elec(0), s_paralyse(0), s_levitation(0), s_glow(0), s_graze(0), s_silence(0), 
  s_stat_boost(0), s_stat_boost_value(0), s_eirin_poison(0), s_eirin_poison_time(0), s_exhausted(0), s_stasis(0),
 force_strong(false), force_turn(0), s_unluck(0), s_super_graze(0), s_none_move(0), s_slippery(0), s_night_sight(0), s_night_sight_turn(0), s_sleep(0),
 s_pure(0),s_pure_turn(0), drowned(false), s_weather(0), s_weather_turn(0), s_evoke_ghost(0), s_evoke_ghost_level(0), s_oil(0), s_fire(0), s_tracking(0), s_shooting_turn(0), s_overheat(0), s_overheat_turn(0),
-s_regen(0), s_selfdestruct(0), s_glutton(0), s_glutton_turn(0), s_potion_addict(0), s_shield(), s_acid(0), s_acid_turn(0), s_dive(0),
+s_regen(0), s_selfdestruct(0), s_glutton(0), s_glutton_turn(0), s_potion_addict(0), s_shield(),
+machine_torpedo_charge(0), machine_combat_count(0), machine_preheat(0), machine_preheat_idle(0), s_machine_overheat(0), s_machine_burnout(0),
+s_acid(0), s_acid_turn(0), s_dive(0),
 alchemy_buff(ALCT_NONE), alchemy_time(0), alchemy_cold_armour_ac(0), alchemy_cold_armour_damage(0), alchemy_cold_armour_power(0),
 teleport_curse(false), magician_bonus(0), poison_resist(0),fire_resist(0),ice_resist(0),elec_resist(0),confuse_resist(0), invisible_view(0), power_keep(0), 
 togle_invisible(false), battle_count(0), youMaxiExp(false),
@@ -342,6 +344,12 @@ void players::init() {
 	s_shield.value = 0;
 	s_shield.turn = 0;
 	s_shield.max_turn = 0;
+	machine_torpedo_charge = 0;
+	machine_combat_count = 0;
+	machine_preheat = 0;
+	machine_preheat_idle = 0;
+	s_machine_overheat = 0;
+	s_machine_burnout = 0;
 	s_acid = 0;
 	s_acid_turn = 0;
 	s_dive  = 0;
@@ -675,6 +683,12 @@ void players::SaveDatas(FILE *fp)
 	SaveData<int>(fp,used_unique_spellcards.size());
 	for(unique_spellcard_type type_ : used_unique_spellcards)
 		SaveData<unique_spellcard_type>(fp,type_);
+	SaveData<int>(fp, machine_torpedo_charge);
+	SaveData<int>(fp, machine_combat_count);
+	SaveData<int>(fp, machine_preheat);
+	SaveData<int>(fp, machine_preheat_idle);
+	SaveData<int>(fp, s_machine_overheat);
+	SaveData<int>(fp, s_machine_burnout);
 }
 void players::LoadDatas(FILE *fp)
 {
@@ -1067,6 +1081,15 @@ void players::LoadDatas(FILE *fp)
 				used_unique_spellcards.push_back(type_);
 		}
 	}
+	if(!isPrevVersion(loading_version_string, "ver1.301"))
+	{
+		LoadData<int>(fp, machine_torpedo_charge);
+		LoadData<int>(fp, machine_combat_count);
+		LoadData<int>(fp, machine_preheat);
+		LoadData<int>(fp, machine_preheat_idle);
+		LoadData<int>(fp, s_machine_overheat);
+		LoadData<int>(fp, s_machine_burnout);
+	}
 }
 
 bool players::Draw(shared_ptr<DirectX::SpriteBatch> pSprite, float x_, float y_, float scale_)
@@ -1184,12 +1207,11 @@ void players::SetXYPassFloor(int prev_floor, int new_floor, int x_, int y_) {
 	}
 
 
-	if(GetProperty(TPT_QUICK_DASH)) {
-		for(int i = 0;i < 8; i++) {
-			coord_def c_ = position + GetDirecToPos(i);
-			if(c_.x >= 0 && c_.x < DG_MAX_X && c_.y >= 0 && c_.y < DG_MAX_Y)
-				env[prev_floor].dgtile[c_.x][c_.y].flag &= ~FLAG_QUICK_DASH;
-		}
+
+	for(int i = 0;i < 8; i++) {
+		coord_def c_ = position + GetDirecToPos(i);
+		if(c_.x >= 0 && c_.x < DG_MAX_X && c_.y >= 0 && c_.y < DG_MAX_Y)
+			env[prev_floor].dgtile[c_.x][c_.y].flag &= ~FLAG_QUICK_DASH;
 	}
 
 
@@ -1336,6 +1358,8 @@ bool players::attack(monster* mon_, equip_type type_, bool counter_)
 		canShockwave = true;
 	}
 
+	//damage에서 temp_att가 변하므로 무기 공격력을 미리 저장
+	int weapon_damage_ = temp_att.damage, weapon_max_damage_ = temp_att.max_damage;
 	bool hit_ = mon_->damage(temp_att);
 	if(sleeping_punch_ && mon_->isLive())
 		FirePunchMachine(mon_,true);
@@ -1412,6 +1436,7 @@ bool players::attack(monster* mon_, equip_type type_, bool counter_)
 			doShockwave = true;
 		}
 	}
+	MachineAfterAttack(mon_, attack_weapon, hit_, weapon_damage_, weapon_max_damage_);
 
 	you.SetBattleCount(30);
 	youAttack(mon_);
@@ -1587,6 +1612,7 @@ int players::move(short_move x_mov, short_move y_mov)
 					}
 				}
 				if(ok_) {
+					MachineMeleeAction();
 					time_delay += GetAtkDelay();
 					return 1;
 				} else {
@@ -1594,6 +1620,7 @@ int players::move(short_move x_mov, short_move y_mov)
 				}
 			}
 			else if(attack(mon_, ET_WEAPON, false)) {
+				MachineMeleeAction();
 				time_delay += GetAtkDelay();
 				return 1;
 			}
@@ -1670,20 +1697,9 @@ int players::move(short_move x_mov, short_move y_mov)
 				(!IsDiving() && env[current_level].dgtile[move_x_][move_y_].tile == DG_LAVA))
 			))
 		{
-			int quick_ = GetProperty(TPT_QUICK_DASH);
-			bool onQuick = env[current_level].dgtile[move_x_][move_y_].flag & FLAG_QUICK_DASH;
-			if(quick_ > 0 && onQuick) {
-				env[current_level].MakeAfterimage(position, image, 128, 3, true);
-			}
+			float dash_multi_ = PrepareQuickDashMove(coord_def(move_x_,move_y_), true);
 			SetXY(coord_def(move_x_,move_y_));
-			if(quick_ > 0 && onQuick) {
-				if(quick_ == 1)
-					time_delay += GetWalkDelay(0.5f);//빠름
-				else
-					time_delay += GetWalkDelay(0.3f);//더 빠름
-			} else {
-				time_delay += GetWalkDelay();//이동속도만큼 이동
-			}
+			time_delay += GetWalkDelay(dash_multi_);//이동속도만큼 이동
 			prev_action = ACTT_WALK;
 			return 2;
 		}
@@ -1701,21 +1717,9 @@ int players::move(short_move x_mov, short_move y_mov)
 			}
 			if (env[current_level].isMove(move_x_, move_y_, isFly(), isSwim() || drowned))
 			{
-				int quick_ = GetProperty(TPT_QUICK_DASH);
-				bool onQuick = env[current_level].dgtile[move_x_][move_y_].flag & FLAG_QUICK_DASH;
-				if(quick_ > 0 && onQuick) {
-					env[current_level].MakeAfterimage(position, image, 128, 3);
-				}
-
+				float dash_multi_ = PrepareQuickDashMove(coord_def(move_x_,move_y_), false);
 				SetXY(coord_def(move_x_,move_y_));
-				if(quick_ > 0 && onQuick) {
-					if(quick_ == 1)
-						time_delay += GetWalkDelay(0.5f);//빠름
-					else
-						time_delay += GetWalkDelay(0.3f);//더 빠름
-				} else {
-					time_delay += GetWalkDelay();//이동속도만큼 이동
-				}
+				time_delay += GetWalkDelay(dash_multi_);//이동속도만큼 이동
 				prev_action = ACTT_WALK;
 				return 2;
 			}
@@ -2142,24 +2146,34 @@ int players::GetDisplaySh()
 	return (you.s_sleep<0 || you.s_paralyse) ? 0 : sh;
 }
 
+static const int MACHINE_TORPEDO_CHARGE = 50; //광자토피도 발사 주기(행동 딜레이 누적, 대략 5턴)
+static const int MACHINE_OI_SOUND_COUNT = 6; //오이 사운드 시스템이 발동하는 전투 합
+static const int MACHINE_PREHEAT_OVERHEAT = 10; //무기 예열기가 폭주하는 예열 수치
+static const int MACHINE_OVERHEAT_TURN = 20; //폭주 지속 턴 (근접 공격시마다 초기화)
+static const int MACHINE_BURNOUT_TURN = 5; //완전연소 지속 턴
+static const int MACHINE_BARRIER_TURN = 10; //긴급보호막 지속 턴
+
 int players::GetMachinePowerCapacity()
 {
 	int level_ = GetSkillLevel(SKT_ENGINEERING,true);
+	int capacity_ = 0;
 	if(level_ <= 9)
-		return level_;
-	if(level_ <= 18)
-		return 9+(level_-9)*2;
-	return 27+(level_-18)*3;
+		capacity_ = level_;
+	else if(level_ <= 18)
+		capacity_ = 9+(level_-9)*2;
+	else
+		capacity_ = 27+(level_-18)*3;
+	capacity_ += 4*GetInstalledMachineCount(IMT_AUX_BATTERY,false);
+	return capacity_;
 }
 
 int players::GetMachinePowerUsage()
 {
 	int usage_ = 0;
-	for(int i = ET_ARMOR; i < ET_ARMOR_END; ++i)
+	for(int i = ET_FIRST; i < ET_ARMOR_END; ++i)
 	{
-		item* armour_ = equipment[i];
-		if(armour_)
-			usage_ += armour_->InstalledMachinePowerUsage();
+		if(IsMachineInstallSlot(i) && equipment[i])
+			usage_ += equipment[i]->InstalledMachinePowerUsage();
 	}
 	return usage_;
 }
@@ -2169,14 +2183,30 @@ bool players::IsMachinePowerOverloaded()
 	return GetMachinePowerUsage() > GetMachinePowerCapacity();
 }
 
+int players::GetInstalledMachineCount(installed_machine_type type_, bool active_only_)
+{
+	if(active_only_ && IsMachinePowerOverloaded())
+		return 0;
+	int count_ = 0;
+	for(int i = ET_FIRST; i < ET_ARMOR_END; ++i)
+		if(IsMachineInstallSlot(i) && equipment[i] && equipment[i]->HasInstalledMachine(type_))
+			count_++;
+	return count_;
+}
+
 bool players::HasActiveInstalledMachine(installed_machine_type type_)
 {
-	if(IsMachinePowerOverloaded())
-		return false;
-	for(int i = ET_ARMOR; i < ET_ARMOR_END; ++i)
-		if(equipment[i] && equipment[i]->HasInstalledMachine(type_))
-			return true;
-	return false;
+	return GetInstalledMachineCount(type_) > 0;
+}
+
+bool players::IsActiveMachineItem(item* item_, installed_machine_type type_)
+{
+	return item_ && item_->HasInstalledMachine(type_) && isequip(item_) && !IsMachinePowerOverloaded();
+}
+
+int players::GetInstalledMachineLevel(installed_machine_type type_)
+{
+	return min(GetSkillLevel(SKT_ENGINEERING,true),InstalledMachineMaxLevel(type_));
 }
 
 static void ChangeInstalledMachineEffects(item* armour_, bool equip_)
@@ -2189,9 +2219,9 @@ static void ChangeInstalledMachineEffects(item* armour_, bool equip_)
 		if(!armour_->HasInstalledMachine(machine_))
 			continue;
 		if(equip_)
-			equipMachine(machine_);
+			equipMachine(machine_,armour_);
 		else
-			unequipMachine(machine_);
+			unequipMachine(machine_,armour_);
 	}
 }
 
@@ -2200,16 +2230,16 @@ void players::UpdateMachinePowerOverload(bool was_overloaded_)
 	bool is_overloaded_ = IsMachinePowerOverloaded();
 	if(was_overloaded_ == is_overloaded_)
 		return;
-	for(int slot_ = ET_ARMOR; slot_ < ET_ARMOR_END; ++slot_)
+	for(int slot_ = ET_FIRST; slot_ < ET_ARMOR_END; ++slot_)
 	{
-		if(equipment[slot_])
+		if(IsMachineInstallSlot(slot_) && equipment[slot_])
 			ChangeInstalledMachineEffects(equipment[slot_],!is_overloaded_);
 	}
 }
 
 bool players::FirePunchMachine(monster* mon_, bool immediate_)
 {
-	if(!mon_ || !mon_->isLive() || !isEnemyUnit(mon_) ||
+	if(!IsMachineDangerTarget(mon_) ||
 		!HasActiveInstalledMachine(IMT_PUNCH) ||
 		mon_->machine_punch_cooldown > 0)
 		return false;
@@ -2235,16 +2265,354 @@ bool players::FirePunchMachine(monster* mon_, bool immediate_)
 	}
 
 	int direction_ = GetPosToDirec(position,mon_->position);
-	int engineering_ = min(GetSkillLevel(SKT_ENGINEERING,true),InstalledMachineMaxLevel(IMT_PUNCH));
+	int count_ = GetInstalledMachineCount(IMT_PUNCH);
+	int engineering_ = GetInstalledMachineLevel(IMT_PUNCH);
 	int max_damage_ = 10+engineering_;
 	int hit_ = 15+engineering_/2;
 
-	beam_infor punch_(randA_1(max_damage_),max_damage_,hit_,this,GetParentType(),
+	beam_infor punch_(randC(count_,max_damage_),count_*max_damage_,hit_,this,GetParentType(),
 		max(1,distance_),1,BMT_NORMAL,ATT_NORMAL_HIT,name_infor(LOC_SYSTEM_ATT_PUNCH));
 	PlaySE("shoot_heavy");
 	throwtanmac(&img_tanmac_punch[direction_],path_,punch_,NULL);
 	mon_->machine_punch_cooldown = 100;
 	return true;
+}
+
+bool players::IsMachineDangerTarget(monster* mon_)
+{
+	return mon_ && mon_->isLive() && mon_->isYourShight() && isEnemyUnit(mon_) &&
+		!mon_->isUserAlly() && !mon_->isCompleteNeutral() &&
+		!(mon_->flag & (M_FLAG_UNHARM | M_FLAG_DECORATE | M_FLAG_MISSLE));
+}
+
+bool players::IsMachineEnemyInSight()
+{
+	for(monster& mon_ : env[current_level].mon_vector)
+	{
+		if(IsMachineDangerTarget(&mon_))
+			return true;
+	}
+	return false;
+}
+
+void players::FirePhotonTorpedo(int count_)
+{
+	int level_ = 2+GetInstalledMachineLevel(IMT_PHOTON_TORPEDO);
+	bool fired_ = false;
+	for(int i = 0; i < count_; i++)
+	{
+		monster* torpedo_ = BaseSummon(MON_PHOTON_TORPEDO, rand_int(30,60), true, true, 1, this, position, SKD_OTHER, -1);
+		if(!torpedo_)
+			continue;
+		torpedo_->LevelUpdown(level_/2,0,0);
+		torpedo_->direction = GetPositionToAngle(position.x, position.y, torpedo_->position.x, torpedo_->position.y);
+		torpedo_->image = &img_tanmac_photon_torpedo[GetAngleToDirec(torpedo_->direction)];
+		fired_ = true;
+	}
+	if(fired_)
+		PlaySE("shoot_heavy");
+}
+
+void players::FireOiSoundSystem(int count_)
+{
+	int level_ = GetInstalledMachineLevel(IMT_OI_SOUND_SYSTEM);
+	int damage_ = 4+level_/3;
+	PlaySE("bomb");
+	printlog(LocalzationManager::locString(LOC_SYSTEM_MACHINE_OI_SOUND_SYSTEM_BLAST) + " ",false,false,false,CL_white_blue);
+	for(int range_ = 1; range_ <= 2; range_++)
+	{
+		for(rect_iterator rit(position,range_,range_);!rit.end();rit++)
+		{
+			if(max(abs(rit->x-position.x),abs(rit->y-position.y)) != range_)
+				continue;
+			if(env[current_level].isMove(rit->x,rit->y,true) && isSightnonblocked(*rit))
+				env[current_level].MakeEffect(*rit,&img_effect_machine_oi_sound[GetPosToDirec(position,*rit)],false);
+		}
+		Sleep(80);
+		env[current_level].ClearEffect();
+	}
+	for(rect_iterator rit(position,2,2);!rit.end();rit++)
+	{
+		if(!isSightnonblocked(*rit))
+			continue;
+		unit* unit_ = env[current_level].isMonsterPos(rit->x,rit->y,this);
+		if(unit_ && unit_ != this && isEnemyUnit(unit_))
+		{
+			attack_infor sound_att_(randC(2*count_,damage_),2*count_*damage_,99,this,GetParentType(),
+				ATT_NOISE,name_infor(LOC_SYSTEM_ATT_OI_SOUND_SYSTEM));
+			unit_->damage(sound_att_, true);
+		}
+	}
+	env[current_level].ClearEffect();
+	env[current_level].MakeNoise(position, 20, NULL);
+}
+
+void players::GetQuickDashDirec(bool can_dash[8])
+{
+	for(int i = 0;i < 8; i++)
+		can_dash[i] = false;
+	if(GetProperty(TPT_QUICK_DASH) > 0 || GetInstalledMachineCount(IMT_BLASTER) > 0) {
+		bool onMonster[8];
+		for(int i = 0;i < 8; i++)
+			onMonster[i] = false;
+		vector<monster>::iterator it;
+		it = env[current_level].mon_vector.begin();
+		for(int i=0;i<MON_MAX_IN_FLOOR && it != env[current_level].mon_vector.end() ;i++,it++)
+		{
+			if((*it).isLive() && (*it).isYourShight() && (*it).isEnemyUnit(this) && !((*it).flag & M_FLAG_UNHARM))
+			{
+				for(int i = 0;i < 8; i++) {
+					if((GetDirecToPos(i) + position) == (*it).position) {
+						onMonster[i] = true;
+					}
+				}
+				for(int i=RT_BEGIN;i!=RT_END;i++)
+				{
+					coord_def c_;
+					beam_iterator beam((*it).position,position,(round_type)i);
+					while(!beam.end())
+					{
+						c_ = (*beam++);
+						if(!env[current_level].isMove(*beam,true,true))
+						{
+							break;
+						}
+						if(beam.end() && env[current_level].isMove(c_,true,true)) {
+							can_dash[GetPosToDirec(position, c_)] = true;
+						}
+					}
+				}
+			}
+		}
+		for(int i = 0;i < 8; i++) {
+			if(onMonster[i])
+				can_dash[i] = false;
+		}
+	}
+}
+
+void players::UpdateQuickDashTile()
+{
+	bool can_dash[8];
+	GetQuickDashDirec(can_dash);
+	for(int i = 0;i < 8; i++) {
+		coord_def c_ = position + GetDirecToPos(i);
+		if(c_.x < 0 || c_.x >= DG_MAX_X || c_.y < 0 || c_.y >= DG_MAX_Y)
+			continue;
+		if(can_dash[i])
+			env[current_level].dgtile[c_.x][c_.y].flag |= FLAG_QUICK_DASH;
+		else
+			env[current_level].dgtile[c_.x][c_.y].flag &= ~FLAG_QUICK_DASH;
+	}
+}
+
+float players::PrepareQuickDashMove(const coord_def& to_, bool afterimage_on_turn_)
+{
+	bool can_dash[8];
+	GetQuickDashDirec(can_dash);
+	if(!can_dash[GetPosToDirec(position, to_)])
+		return 1.0f;
+	float multi_ = 1.0f;
+	int quick_ = GetProperty(TPT_QUICK_DASH);
+	if(quick_ > 0) {
+		env[current_level].MakeAfterimage(position, image, 128, 3, afterimage_on_turn_);
+		multi_ *= quick_ == 1 ? 0.5f : 0.3f;
+	}
+	int blaster_ = GetInstalledMachineCount(IMT_BLASTER);
+	if(blaster_ > 0) {
+		env[current_level].MakeSmoke(position, img_fog_normal, SMT_NORMAL, rand_int(3,4), 0, this);
+		//중첩된 만큼 배율이 곱해진다.
+		for(int i = blaster_; i > 0; i--)
+			multi_ *= 0.7f;
+	}
+	return max(0.2f, multi_);
+}
+
+void players::MachineAfterMove(const coord_def& prev_pos_, int move_type_)
+{
+	int torpedo_ = GetInstalledMachineCount(IMT_PHOTON_TORPEDO);
+	if(torpedo_ > 0 && IsMachineEnemyInSight())
+	{
+		machine_torpedo_charge += time_delay;
+		if(machine_torpedo_charge >= MACHINE_TORPEDO_CHARGE)
+		{
+			machine_torpedo_charge = min(machine_torpedo_charge-MACHINE_TORPEDO_CHARGE,MACHINE_TORPEDO_CHARGE-1);
+			FirePhotonTorpedo(torpedo_);
+		}
+	}
+}
+
+void players::MachineMeleeAction()
+{
+	if(HasActiveInstalledMachine(IMT_OI_SOUND_SYSTEM))
+		machine_combat_count++;
+}
+
+void players::MachineAfterAttack(monster* mon_, item* weapon_, bool hit_, int damage_, int max_damage_)
+{
+	if(IsActiveMachineItem(weapon_, IMT_WEAPON_PREHEATER))
+	{
+		machine_preheat_idle = 0;
+		if(s_machine_overheat)
+		{
+			s_machine_overheat = MACHINE_OVERHEAT_TURN;
+		}
+		else if(!s_machine_burnout)
+		{
+			machine_preheat++;
+			if(machine_preheat >= MACHINE_PREHEAT_OVERHEAT)
+			{
+				s_machine_overheat = MACHINE_OVERHEAT_TURN;
+				SetInter(IT_STAT);
+			}
+		}
+	}
+
+	if(mon_ && hit_ && max_damage_ > 0 && IsActiveMachineItem(weapon_, IMT_ARC_SHOT))
+	{
+		vector<unit*> targets_;
+		for(rect_iterator rit(mon_->position,4,4);!rit.end();rit++)
+		{
+			unit* unit_ = env[current_level].isMonsterPos(rit->x,rit->y,this);
+			if(unit_ && unit_ != mon_ && unit_ != this && isEnemyUnit(unit_) &&
+				env[current_level].isInSight(*rit) && mon_->isSightnonblocked(*rit))
+			{
+				beam_iterator beam_(mon_->position,unit_->position);
+				if(CheckThrowPath(mon_->position,unit_->position,beam_))
+					targets_.push_back(unit_);
+			}
+		}
+		if(!targets_.empty())
+		{
+			unit* target_ = targets_[randA(targets_.size()-1)];
+			//무기 공격력의 50%~100% (기계공학에 비례)
+			int level_ = GetInstalledMachineLevel(IMT_ARC_SHOT);
+			int rate_ = 50+50*level_/max(1,InstalledMachineMaxLevel(IMT_ARC_SHOT));
+			int arc_max_damage_ = max(1,max_damage_*rate_/100);
+			int arc_damage_ = min(arc_max_damage_,max(1,damage_*rate_/100));
+			beam_infor arc_infor_(arc_damage_,arc_max_damage_,99,this,GetParentType(),5,1,BMT_NORMAL,ATT_THROW_ELEC,name_infor(LOC_SYSTEM_ATT_ARC_SHOT));
+			PlaySE("elec");
+			ThrowShock(42,mon_->position,target_->position,arc_infor_,true,true);
+			Sleep(120);
+			env[current_level].ClearEffect();
+		}
+	}
+}
+
+void players::MachineGuard(attack_infor& a)
+{
+	if(!a.order || a.order->isplayer() || !a.order->isLive() || a.no_owner)
+		return;
+	monster* mon_ = (monster*)a.order;
+	if(isNormalAtt(a.type) && HasActiveInstalledMachine(IMT_FLASH_SHIELD))
+	{
+		int level_ = GetInstalledMachineLevel(IMT_FLASH_SHIELD);
+		PlaySE("camera");
+		env[current_level].MakeEffect(mon_->position,&img_blast[2],false);
+		Sleep(60);
+		env[current_level].ClearEffect();
+		printlog(LocalzationManager::locString(LOC_SYSTEM_MACHINE_FLASH_SHIELD_TRIGGER) + " ",false,false,false,CL_white_blue);
+		mon_->SetDazed(2+level_/4, mon_->bashed);
+		mon_->SetGlow(10+level_);
+	}
+	else if(isGrazableAtt(a.type) && HasActiveInstalledMachine(IMT_COUNTER_WAVE))
+	{
+		beam_iterator path_(position,mon_->position);
+		if(!CheckThrowPath(position,mon_->position,path_))
+			return;
+		int level_ = GetInstalledMachineLevel(IMT_COUNTER_WAVE);
+		int damage_ = a.max_damage;
+		int distance_ = max(abs(mon_->position.x-position.x),abs(mon_->position.y-position.y));
+		int direction_ = GetPosToDirec(position,mon_->position);
+		beam_infor wave_(randC(1,damage_),3*damage_,20+level_,this,GetParentType(),
+			max(1,distance_),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_COUNTER_WAVE));
+		PlaySE("shoot_heavy");
+		throwtanmac(&img_tanmac_counter_wave[direction_],path_,wave_,NULL);
+	}
+}
+
+void players::TryMachineEmergencyBarrier()
+{
+	if(hp <= 0 || hp*4 > GetMaxHp() || s_shield.percent > 0)
+		return;
+	if(!HasActiveInstalledMachine(IMT_EMERGENCY_BARRIER))
+		return;
+	int level_ = GetInstalledMachineLevel(IMT_EMERGENCY_BARRIER);
+	s_shield.percent = 15+level_;
+	s_shield.value = max(1,GetMaxHp()*s_shield.percent/100);
+	s_shield.max_turn = 0;
+	s_shield.turn = MACHINE_BARRIER_TURN;
+	PlaySE("buff");
+	printlog(LocalzationManager::locString(LOC_SYSTEM_MACHINE_EMERGENCY_BARRIER_ON) + " ",false,false,false,CL_white_blue);
+	SetInter(IT_STAT);
+}
+
+int players::GetMachinePreheatBonus()
+{
+	//예열 3마다 공격 딜레이 1(0.1) 감소, 최대 3(0.3)
+	if(s_machine_burnout)
+		return 0;
+	if(s_machine_overheat)
+		return 3;
+	return min(3,machine_preheat/3);
+}
+
+//해당 장비에 설치된 기계 도구가 올려주는 SH
+int players::GetMachineItemSh(installed_machine_type machine_, item* item_)
+{
+	if(!item_)
+		return 0;
+	switch(machine_)
+	{
+	case IMT_OFFSET_SHOT:
+	{
+		//자력 발생기: 무기 베이스 공격력의 30%~60% (기계공학에 비례)
+		if(!item_->isweapon())
+			return 0;
+		int level_ = GetInstalledMachineLevel(IMT_OFFSET_SHOT);
+		int rate_ = 30+30*level_/max(1,InstalledMachineMaxLevel(IMT_OFFSET_SHOT));
+		return item_->value2*rate_/100;
+	}
+	case IMT_COUNTER_WAVE:
+		//반격탄 시스템: 기계공학/3 만큼 SH (최대 6)
+		return GetInstalledMachineLevel(IMT_COUNTER_WAVE)/3;
+	default:
+		return 0;
+	}
+}
+
+//방어 메시지를 출력할때 쓰는 자력 발생기의 SH
+int players::GetMachineOffsetSh()
+{
+	if(!HasActiveInstalledMachine(IMT_OFFSET_SHOT))
+		return 0;
+	int sh_ = 0;
+	for(int i = ET_FIRST; i < ET_ARMOR_END; ++i)
+	{
+		if(IsMachineInstallSlot(i) && equipment[i] && equipment[i]->HasInstalledMachine(IMT_OFFSET_SHOT))
+			sh_ += GetMachineItemSh(IMT_OFFSET_SHOT,equipment[i]);
+	}
+	return sh_;
+}
+
+//기계공학 레벨이 바뀔때 레벨에 비례하는 SH를 뺐다가(up_ false) 다시 더한다(up_ true).
+void players::MachineShUpDown(bool up_)
+{
+	for(int i = ET_FIRST; i < ET_ARMOR_END; ++i)
+	{
+		if(!IsMachineInstallSlot(i) || !equipment[i])
+			continue;
+		for(int bit_ = 1; bit_ < IMT_MAX; bit_ <<= 1)
+		{
+			installed_machine_type machine_ = (installed_machine_type)bit_;
+			if(equipment[i]->HasInstalledMachine(machine_))
+			{
+				int sh_ = GetMachineItemSh(machine_,equipment[i]);
+				if(sh_)
+					ShUpDown(0,up_?sh_:-sh_);
+			}
+		}
+	}
 }
 
 void players::ProcessInstalledMachines(int delay_)
@@ -2253,12 +2621,63 @@ void players::ProcessInstalledMachines(int delay_)
 	for(monster& mon_ : env[current_level].mon_vector)
 		if(mon_.isLive() && !mon_.isYourShight() && mon_.machine_punch_cooldown > 0)
 			mon_.machine_punch_cooldown--;
+
+	if(s_machine_overheat > 0)
+	{
+		s_machine_overheat--;
+		if(!s_machine_overheat)
+		{
+			s_machine_burnout = MACHINE_BURNOUT_TURN;
+			machine_preheat = 0;
+			printlog(LocalzationManager::locString(LOC_SYSTEM_MACHINE_PREHEATER_BURNOUT) + " ",false,false,false,CL_small_danger);
+			SetInter(IT_STAT);
+		}
+	}
+	else if(s_machine_burnout > 0)
+	{
+		s_machine_burnout--;
+		if(!s_machine_burnout)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_MACHINE_PREHEATER_BURNOUT_END) + " ",false,false,false,CL_blue);
+			SetInter(IT_STAT);
+		}
+	}
+	else if(machine_preheat > 0 && ++machine_preheat_idle > 2)
+	{
+		machine_preheat--;
+	}
+
+	if(s_shield.percent > 0 && s_shield.max_turn == 0)
+	{
+		if(s_shield.turn > 0)
+		{
+			s_shield.turn--;
+			if(!s_shield.turn || s_shield.value <= 0)
+			{
+				s_shield.turn = 0;
+				s_shield.value = 0;
+				printlog(LocalzationManager::locString(LOC_SYSTEM_MACHINE_EMERGENCY_BARRIER_END) + " ",false,false,false,CL_blue);
+				SetInter(IT_STAT);
+			}
+		}
+		//긴급보호막은 체력이 가득 차야 다시 준비된다.
+		if(!s_shield.turn && hp >= GetMaxHp())
+			s_shield.percent = 0;
+	}
+
+	int oi_sound_ = GetInstalledMachineCount(IMT_OI_SOUND_SYSTEM);
+	if(oi_sound_ > 0 && machine_combat_count >= MACHINE_OI_SOUND_COUNT)
+	{
+		machine_combat_count = 0;
+		FireOiSoundSystem(oi_sound_);
+	}
+
 	if(!HasActiveInstalledMachine(IMT_PUNCH))
 		return;
 	vector<int> targets_;
 	for(monster& mon_ : env[current_level].mon_vector)
 	{
-		if(mon_.isLive() && mon_.isYourShight() && isEnemyUnit(&mon_) &&
+		if(IsMachineDangerTarget(&mon_) &&
 			mon_.state.GetState() == MS_ATACK && mon_.target == this)
 			targets_.push_back(mon_.GetMapId());
 	}
@@ -2322,6 +2741,8 @@ int players::GetWalkDelay(float multi_)
 	if(heavy_ > 0) {
 		speed_ += heavy_;
 	}
+	//간이 보호막 생성기는 무거워서 전력과 무관하게 이동속도가 0.1 느려진다.
+	speed_ += GetInstalledMachineCount(IMT_BARRIER_GENERATOR,false);
 
 	speed_ = speed_*multi_;
 	if(speed_<3)
@@ -2677,8 +3098,10 @@ int players::HpUpDown(int value_,damage_reason reason, unit *order_, bool non_de
 		{
 			mp = min(mp + plus_, max_mp);
 		}
-		hp = max_hp;		
-	}	
+		hp = max_hp;
+	}
+	if(value_ < 0)
+		TryMachineEmergencyBarrier();
 
 
 	if(hp<=0)
@@ -3514,7 +3937,12 @@ bool players::GiveSkillExp(skill_type skill_, int exp_, bool speak_)
 	if(need_exp <= skill[skill_].exper)
 	{
 		int exp_pool = (skill[skill_].exper - need_exp)*exp_panalty/10;
+		//과부하였다면 아래 UpdateMachinePowerOverload에서 새 레벨로 적용된다.
+		if(skill_ == SKT_ENGINEERING && !machine_was_overloaded_)
+			MachineShUpDown(false);
 		skill[skill_].level+=1;
+		if(skill_ == SKT_ENGINEERING && !machine_was_overloaded_)
+			MachineShUpDown(true);
 		skill[skill_].exper = need_exp;
 		if(skill[skill_].level >= 27)
 		{			
@@ -5924,7 +6352,15 @@ static bool InstallMachineTool(list<item>::iterator machine_it)
 	installed_machine_type machine_ = MachineToInstalledType(tool_kind_);
 	if(machine_ == IMT_NONE)
 		return false;
+	//최대 전력보다 전력이 높은 기계는 애초에 설치할 수 없다.
+	if(InstalledMachinePower(machine_) > you.GetMachinePowerCapacity())
+	{
+		LocalzationManager::printLogWithKey(LOC_SYSTEM_MACHINE_INSTALL_LOW_POWER,true,false,false,CL_small_danger,
+			PlaceHolderHelper(to_string(InstalledMachinePower(machine_))),PlaceHolderHelper(to_string(you.GetMachinePowerCapacity())));
+		return false;
+	}
 
+	DisplayManager.install_machine_view = machine_;
 	view_item(IVT_INSTALL_ARMOUR_MACHINE,LOC_SYSTEM_MACHINE_INSTALL_SELECT);
 	char selected_ = 0;
 	while(true)
@@ -5977,11 +6413,13 @@ static bool InstallMachineTool(list<item>::iterator machine_it)
 	WaitForSingleObject(mutx, INFINITE);
 	bool machine_was_overloaded_ = you.IsMachinePowerOverloaded();
 	target_->InstallMachine(machine_);
-	iden_list.machine_list[tool_kind_].found = true;
+	SetMachineFound(iden_list, tool_kind_);
 	machine_it->identify = true;
 	if(you.isequip(&(*target_)) && !machine_was_overloaded_)
-		equipMachine(machine_);
+		equipMachine(machine_,&(*target_));
 	you.UpdateMachinePowerOverload(machine_was_overloaded_);
+	if(you.isequip(&(*target_)))
+		you.ReSetASPanlty();
 	LocalzationManager::printLogWithKey(LOC_SYSTEM_MACHINE_INSTALLED,true,false,false,CL_white_blue,
 		PlaceHolderHelper(tool_name_),PlaceHolderHelper(armour_name_));
 	if(you.isequip(&(*target_)) && you.IsMachinePowerOverloaded())
@@ -6042,7 +6480,7 @@ bool players::Evoke(char id_, bool auto_)
 						you.time_delay += you.GetNormalDelay();
 						return true;
 					}
-					iden_list.machine_list[(*it).value2].found = true;
+					SetMachineFound(iden_list, (*it).value2);
 					(*it).value1--;
 					(*it).image = MachineItemImage((machine_type)(*it).value2,
 						(*it).value1 > 0 || IsInstallableMachine((machine_type)(*it).value2));
@@ -7850,7 +8288,7 @@ int players::CanSlash(attack_type att_type) {
 							} else {
 								float temp = 120 + (long_blade-7)*1.5f;
 								percent_ = (int)(percent_*temp/100);
-								
+
 							}
 						}
 					}

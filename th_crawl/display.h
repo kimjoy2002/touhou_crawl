@@ -158,6 +158,7 @@ public:
 	char item_view[52];
 	int item_num[52];
 	item_view_type item_vt;
+	installed_machine_type install_machine_view = IMT_NONE;
 	LOCALIZATION_ENUM_KEY item_view_message;
 	list<unique_ptr<vector<log_text_box>>> list_draw;
 

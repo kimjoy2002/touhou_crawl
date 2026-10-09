@@ -346,6 +346,12 @@ public:
 	int s_glutton_turn;
 	int s_potion_addict;
 	shield_struct s_shield;
+	int machine_torpedo_charge; //광자토피도 충전(행동 딜레이 누적)
+	int machine_combat_count; //오이 사운드 시스템 전투 합
+	int machine_preheat; //무기 예열기 예열 수치
+	int machine_preheat_idle; //무기 예열기 미공격 턴
+	int s_machine_overheat; //무기 예열기 오버히트
+	int s_machine_burnout; //무기 예열기 완전연소
 	int s_acid;
 	int s_acid_turn;
 	int s_dive;
@@ -474,9 +480,28 @@ public:
 	int GetMachinePowerUsage();
 	bool IsMachinePowerOverloaded();
 	bool HasActiveInstalledMachine(installed_machine_type type_);
+	int GetInstalledMachineCount(installed_machine_type type_, bool active_only_ = true);
+	bool IsActiveMachineItem(item* item_, installed_machine_type type_);
+	int GetInstalledMachineLevel(installed_machine_type type_);
 	void UpdateMachinePowerOverload(bool was_overloaded_);
 	void ProcessInstalledMachines(int delay_);
 	bool FirePunchMachine(monster* mon_, bool immediate_ = false);
+	bool IsMachineDangerTarget(monster* mon_);
+	bool IsMachineEnemyInSight();
+	void FirePhotonTorpedo(int count_);
+	void FireOiSoundSystem(int count_);
+	void GetQuickDashDirec(bool can_dash[8]);
+	void UpdateQuickDashTile();
+	float PrepareQuickDashMove(const coord_def& to_, bool afterimage_on_turn_);
+	void MachineAfterMove(const coord_def& prev_pos_, int move_type_);
+	void MachineMeleeAction();
+	void MachineAfterAttack(monster* mon_, item* weapon_, bool hit_, int damage_, int max_damage_);
+	void MachineGuard(attack_infor& a);
+	void TryMachineEmergencyBarrier();
+	int GetMachinePreheatBonus();
+	int GetMachineItemSh(installed_machine_type machine_, item* item_);
+	int GetMachineOffsetSh();
+	void MachineShUpDown(bool up_);
 	int GetAttack(bool max, equip_type type_ = ET_WEAPON);
 	int GetHit(equip_type type_ = ET_WEAPON);
 	int GetAtkDelay();
@@ -484,6 +509,7 @@ public:
 	//int GetArmourPanlty();
 	//int GetShieldPanlty();
 	int ReSetASPanlty(); //새로운 아머실드 패널티를 지정
+	void GetMachineArmourPenalty(const item* item_, int& penalty_, int& min_penalty_);
 	int GetPenaltyMinus(int level_);
 	int GetThrowAttack(const item* it, bool max_);
 	int GetThrowHit(const item* it);

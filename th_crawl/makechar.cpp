@@ -920,15 +920,15 @@ void SetJobs(job_type select_, unique_starting_type type)
 		{			
 			you.GiveSkillExp(WeaponSelect(0),60,false);
 			MakeStartItem(SIT_ROBE,1);
+			MakeStartItem(SIT_RECHARGING_SCROLL,2);
 		}
 		else
 		{
 			MakeStartItem(SIT_MACE,0);
 			you.GiveSkillExp(SKT_MACE,60,false);
-			MakeStartItem(SIT_KAPPA_ROBE,1);			
+			MakeStartItem(SIT_KAPPA_ROBE,1);	
 		}
 
-		MakeStartItem(SIT_RECHARGING_SCROLL,2);
 		you.GiveSkillExp(SKT_FIGHT,40,false);
 		you.GiveSkillExp(SKT_DODGE,40,false);
 		you.GiveSkillExp(SKT_ENGINEERING,60,false);
@@ -1160,7 +1160,17 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 		}
 		else
 		{
-			it = env[current_level].MakeItem(you.position,makeitem(ITM_MACHINE, 0, &t, MCH_SKY_TORPEDO));
+			it = env[current_level].MakeItem(you.position,makeitem(ITM_MACHINE, 0, &t, MCH_AUX_BATTERY));
+			you.additem(it,false);
+			env[current_level].DeleteItem(it);
+			it = env[current_level].MakeItem(you.position,makeitem(ITM_MACHINE, 0, &t, MCH_PHOTON_TORPEDO));
+			you.additem(it,false);
+			env[current_level].DeleteItem(it);
+			makeitem(ITM_SCROLL, 0, &t, SCT_DISASSEMBLE);
+			t.weight = t.weight/t.num*2;
+			t.num = 2;
+			it = env[current_level].MakeItem(you.position,t);
+			it->Identify();
 			you.additem(it,false);
 			env[current_level].DeleteItem(it);
 			it = env[current_level].MakeItem(you.position, makeitem(ITM_AMULET, 0, &t, AMT_OCCULT));
@@ -1171,7 +1181,14 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 
 			set_exist_named(MON_NITORI);
 
-			you.equip('a' + 4, ET_NECK, false);
+			for(auto amulet_ = you.item_list.begin(); amulet_ != you.item_list.end(); amulet_++)
+			{
+				if(amulet_->type == ITM_AMULET)
+				{
+					you.equip(amulet_->id, ET_NECK, false);
+					break;
+				}
+			}
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 			you.GetExp(you.GetNeedExp(you.level-1) - you.exper,false);
 		}

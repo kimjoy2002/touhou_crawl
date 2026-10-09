@@ -104,7 +104,7 @@ void createMachine(int goodbad, int select_, item_infor* t)
 	//나중에 속성에 따른 스펠카드, 발동 선언에 맞춘 세기 정도 가치 정도 다 잘 바꿔보자
 	//지금은 구현이 목적
 	t->type = ITM_MACHINE;
-	t->value2 = select_!=-1?(machine_type)select_:randA(MCH_SKY_TORPEDO-1);
+	t->value2 = select_!=-1?(machine_type)select_:randA(MCH_MAX-1);
 	t->value1 = IsInstallableMachine((machine_type)t->value2) ? 1 :
 		MachineMaxCharge((machine_type)t->value2)*rand_float(0.2f,1);
 	t->value3 = 0;
@@ -183,8 +183,30 @@ LOCALIZATION_ENUM_KEY MachineName(machine_type skill)
 		return LOC_SYSTEM_MACHINE_PUNCH;
 	case MCH_BARRIER_GENERATOR:
 		return LOC_SYSTEM_MACHINE_DEFENSE_FRAGMENT;
-	case MCH_SKY_TORPEDO:
-		return LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO;
+	case MCH_PHOTON_TORPEDO:
+		return LOC_SYSTEM_MACHINE_PHOTON_TORPEDO;
+	case MCH_OI_SOUND_SYSTEM:
+		return LOC_SYSTEM_MACHINE_OI_SOUND_SYSTEM;
+	case MCH_ARMOUR_ASSIST:
+		return LOC_SYSTEM_MACHINE_ARMOUR_ASSIST;
+	case MCH_AUX_BATTERY:
+		return LOC_SYSTEM_MACHINE_AUX_BATTERY;
+	case MCH_BLASTER:
+		return LOC_SYSTEM_MACHINE_BLASTER;
+	case MCH_FLASH_SHIELD:
+		return LOC_SYSTEM_MACHINE_FLASH_SHIELD;
+	case MCH_COUNTER_WAVE:
+		return LOC_SYSTEM_MACHINE_COUNTER_WAVE;
+	case MCH_VIBRATION:
+		return LOC_SYSTEM_MACHINE_VIBRATION;
+	case MCH_ARC_SHOT:
+		return LOC_SYSTEM_MACHINE_ARC_SHOT;
+	case MCH_WEAPON_PREHEATER:
+		return LOC_SYSTEM_MACHINE_WEAPON_PREHEATER;
+	case MCH_OFFSET_SHOT:
+		return LOC_SYSTEM_MACHINE_OFFSET_SHOT;
+	case MCH_EMERGENCY_BARRIER:
+		return LOC_SYSTEM_MACHINE_EMERGENCY_BARRIER;
 	default:
 		return LOC_NONE;
 	}
@@ -212,8 +234,30 @@ LOCALIZATION_ENUM_KEY MachineDescription(machine_type skill)
 		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_PUNCH;
 	case MCH_BARRIER_GENERATOR:
 		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_DEFENSE_FRAGMENT;
-	case MCH_SKY_TORPEDO:
-		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_SKY_TORPEDO;
+	case MCH_PHOTON_TORPEDO:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_PHOTON_TORPEDO;
+	case MCH_OI_SOUND_SYSTEM:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_OI_SOUND_SYSTEM;
+	case MCH_ARMOUR_ASSIST:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_ARMOUR_ASSIST;
+	case MCH_AUX_BATTERY:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_AUX_BATTERY;
+	case MCH_BLASTER:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_BLASTER;
+	case MCH_FLASH_SHIELD:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_FLASH_SHIELD;
+	case MCH_COUNTER_WAVE:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_COUNTER_WAVE;
+	case MCH_VIBRATION:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_VIBRATION;
+	case MCH_ARC_SHOT:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_ARC_SHOT;
+	case MCH_WEAPON_PREHEATER:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_WEAPON_PREHEATER;
+	case MCH_OFFSET_SHOT:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_OFFSET_SHOT;
+	case MCH_EMERGENCY_BARRIER:
+		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_EMERGENCY_BARRIER;
 	default:
 		return LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_BUG;
 	}
@@ -244,13 +288,37 @@ int MachineMaxCharge(machine_type skill)
 		return 15;
 	case MCH_SUN_LAMP:
 		return 9;
-	case MCH_PUNCH:
-	case MCH_BARRIER_GENERATOR:
-	case MCH_SKY_TORPEDO:
-		return 1;
 	default:
-		return false;
+		return IsInstallableMachine(skill) ? 1 : 0;
 	}
+}
+
+static const vector<installed_machine_info>& InstalledMachineInfoList()
+{
+	static const unsigned int weapon_slot_ = 1u<<ET_WEAPON;
+	static const unsigned int all_armour_slots_ =
+		(1u<<ET_ARMOR)|(1u<<ET_SHIELD)|(1u<<ET_HELMET)|
+		(1u<<ET_CLOAK)|(1u<<ET_GLOVE)|(1u<<ET_BOOTS);
+	static const unsigned int all_equipment_slots_ = weapon_slot_|all_armour_slots_;
+	//{설치 타입, 기계 종류, 전력, 최대 성능 기계공학 레벨, 설치 가능 부위, 옵션 이름, 효과 설명}
+	static const vector<installed_machine_info> list_ = {
+		{IMT_PUNCH,MCH_PUNCH,2,8,all_armour_slots_,LOC_SYSTEM_MACHINE_OPTION_PUNCH,LOC_SYSTEM_MACHINE_EFFECT_PUNCH},
+		{IMT_OPTICAL_CAMOUFLAGE,MCH_OPTICAL_CAMOUFLAGE,12,0,1u<<ET_CLOAK,LOC_SYSTEM_MACHINE_OPTION_OPTICAL_CAMOUFLAGE,LOC_SYSTEM_MACHINE_EFFECT_OPTICAL_CAMOUFLAGE},
+		{IMT_BARRIER_GENERATOR,MCH_BARRIER_GENERATOR,3,0,all_armour_slots_,LOC_SYSTEM_MACHINE_OPTION_DEFENSE_FRAGMENT,LOC_SYSTEM_MACHINE_EFFECT_BARRIER_GENERATOR},
+		{IMT_PHOTON_TORPEDO,MCH_PHOTON_TORPEDO,7,20,all_armour_slots_,LOC_SYSTEM_MACHINE_OPTION_PHOTON_TORPEDO,LOC_SYSTEM_MACHINE_EFFECT_PHOTON_TORPEDO},
+		{IMT_OI_SOUND_SYSTEM,MCH_OI_SOUND_SYSTEM,13,27,all_equipment_slots_,LOC_SYSTEM_MACHINE_OPTION_OI_SOUND_SYSTEM,LOC_SYSTEM_MACHINE_EFFECT_OI_SOUND_SYSTEM},
+		{IMT_ARMOUR_ASSIST,MCH_ARMOUR_ASSIST,9,0,(1u<<ET_ARMOR)|(1u<<ET_SHIELD),LOC_SYSTEM_MACHINE_OPTION_ARMOUR_ASSIST,LOC_SYSTEM_MACHINE_EFFECT_ARMOUR_ASSIST},
+		{IMT_AUX_BATTERY,MCH_AUX_BATTERY,0,0,all_equipment_slots_,LOC_SYSTEM_MACHINE_OPTION_AUX_BATTERY,LOC_SYSTEM_MACHINE_EFFECT_AUX_BATTERY},
+		{IMT_BLASTER,MCH_BLASTER,7,0,(1u<<ET_ARMOR)|(1u<<ET_BOOTS),LOC_SYSTEM_MACHINE_OPTION_BLASTER,LOC_SYSTEM_MACHINE_EFFECT_BLASTER},
+		{IMT_FLASH_SHIELD,MCH_FLASH_SHIELD,6,15,1u<<ET_SHIELD,LOC_SYSTEM_MACHINE_OPTION_FLASH_SHIELD,LOC_SYSTEM_MACHINE_EFFECT_FLASH_SHIELD},
+		{IMT_COUNTER_WAVE,MCH_COUNTER_WAVE,9,18,1u<<ET_SHIELD,LOC_SYSTEM_MACHINE_OPTION_COUNTER_WAVE,LOC_SYSTEM_MACHINE_EFFECT_COUNTER_WAVE},
+		{IMT_VIBRATION,MCH_VIBRATION,3,0,weapon_slot_,LOC_SYSTEM_MACHINE_OPTION_VIBRATION,LOC_SYSTEM_MACHINE_EFFECT_VIBRATION},
+		{IMT_ARC_SHOT,MCH_ARC_SHOT,12,27,weapon_slot_,LOC_SYSTEM_MACHINE_OPTION_ARC_SHOT,LOC_SYSTEM_MACHINE_EFFECT_ARC_SHOT},
+		{IMT_WEAPON_PREHEATER,MCH_WEAPON_PREHEATER,18,0,weapon_slot_,LOC_SYSTEM_MACHINE_OPTION_WEAPON_PREHEATER,LOC_SYSTEM_MACHINE_EFFECT_WEAPON_PREHEATER},
+		{IMT_OFFSET_SHOT,MCH_OFFSET_SHOT,10,20,weapon_slot_,LOC_SYSTEM_MACHINE_OPTION_OFFSET_SHOT,LOC_SYSTEM_MACHINE_EFFECT_OFFSET_SHOT},
+		{IMT_EMERGENCY_BARRIER,MCH_EMERGENCY_BARRIER,15,27,1u<<ET_ARMOR,LOC_SYSTEM_MACHINE_OPTION_EMERGENCY_BARRIER,LOC_SYSTEM_MACHINE_EFFECT_EMERGENCY_BARRIER}
+	};
+	return list_;
 }
 
 bool IsInstallableMachine(machine_type skill)
@@ -260,54 +328,30 @@ bool IsInstallableMachine(machine_type skill)
 
 installed_machine_type MachineToInstalledType(machine_type skill)
 {
-	switch(skill)
-	{
-	case MCH_OPTICAL_CAMOUFLAGE:
-		return IMT_OPTICAL_CAMOUFLAGE;
-	case MCH_PUNCH:
-		return IMT_PUNCH;
-	case MCH_BARRIER_GENERATOR:
-		return IMT_BARRIER_GENERATOR;
-	case MCH_SKY_TORPEDO:
-		return IMT_SKY_TORPEDO;
-	default:
-		return IMT_NONE;
-	}
+	for(const installed_machine_info& info_ : InstalledMachineInfoList())
+		if(info_.source_type == skill)
+			return info_.installed_type;
+	return IMT_NONE;
 }
 
 const installed_machine_info* GetInstalledMachineInfo(installed_machine_type machine_)
 {
-	static const unsigned int all_armour_slots_ =
-		(1u<<ET_ARMOR)|(1u<<ET_SHIELD)|(1u<<ET_HELMET)|
-		(1u<<ET_CLOAK)|(1u<<ET_GLOVE)|(1u<<ET_BOOTS);
-	static const installed_machine_info punch_ =
-		{IMT_PUNCH,MCH_PUNCH,2,8,1u<<ET_ARMOR,LOC_SYSTEM_MACHINE_OPTION_PUNCH};
-	static const installed_machine_info camouflage_ =
-		{IMT_OPTICAL_CAMOUFLAGE,MCH_OPTICAL_CAMOUFLAGE,12,0,1u<<ET_CLOAK,LOC_SYSTEM_MACHINE_OPTION_OPTICAL_CAMOUFLAGE};
-	static const installed_machine_info barrier_ =
-		{IMT_BARRIER_GENERATOR,MCH_BARRIER_GENERATOR,3,0,all_armour_slots_,LOC_SYSTEM_MACHINE_OPTION_DEFENSE_FRAGMENT};
-	static const installed_machine_info torpedo_ =
-		{IMT_SKY_TORPEDO,MCH_SKY_TORPEDO,7,0,all_armour_slots_,LOC_SYSTEM_MACHINE_OPTION_SKY_TORPEDO};
-
-	switch(machine_)
-	{
-	case IMT_PUNCH:
-		return &punch_;
-	case IMT_OPTICAL_CAMOUFLAGE:
-		return &camouflage_;
-	case IMT_BARRIER_GENERATOR:
-		return &barrier_;
-	case IMT_SKY_TORPEDO:
-		return &torpedo_;
-	default:
-		return nullptr;
-	}
+	for(const installed_machine_info& info_ : InstalledMachineInfoList())
+		if(info_.installed_type == machine_)
+			return &info_;
+	return nullptr;
 }
 
 LOCALIZATION_ENUM_KEY InstalledMachineOptionName(installed_machine_type machine_)
 {
 	const installed_machine_info* info_ = GetInstalledMachineInfo(machine_);
 	return info_ ? info_->option_name : LOC_NONE;
+}
+
+LOCALIZATION_ENUM_KEY InstalledMachineEffectName(installed_machine_type machine_)
+{
+	const installed_machine_info* info_ = GetInstalledMachineInfo(machine_);
+	return info_ ? info_->effect_name : LOC_NONE;
 }
 
 int InstalledMachinePower(installed_machine_type machine_)
@@ -322,40 +366,111 @@ int InstalledMachineMaxLevel(installed_machine_type machine_)
 	return info_ ? info_->max_engineering_level : 0;
 }
 
+machine_type RandomBulletMachine()
+{
+	//설치형이 아닌 탄환형 기계들
+	vector<machine_type> list_;
+	for(int i = 0; i < MCH_MAX; i++)
+		if(!IsInstallableMachine((machine_type)i))
+			list_.push_back((machine_type)i);
+	return list_[randA(list_.size()-1)];
+}
+
+static int InstalledMachineDropPower(const installed_machine_info& info_)
+{
+	//드랍 등급을 정할때 쓰는 전력. 실제 전력과 다르게 취급할 기계만 따로 처리
+	switch(info_.installed_type)
+	{
+	case IMT_AUX_BATTERY:
+		return 7; //보조배터리는 중급(7~12)으로 취급
+	default:
+		return info_.power;
+	}
+}
+
+machine_type RandomInstalledMachineByPower(int min_power_, int max_power_)
+{
+	vector<machine_type> list_;
+	for(const installed_machine_info& info_ : InstalledMachineInfoList())
+	{
+		int power_ = InstalledMachineDropPower(info_);
+		if(power_ >= min_power_ && power_ <= max_power_)
+			list_.push_back(info_.source_type);
+	}
+	if(list_.empty())
+		return RandomBulletMachine();
+	return list_[randA(list_.size()-1)];
+}
+
+bool IsMachineInstallSlot(int slot_)
+{
+	return slot_ == ET_WEAPON || (slot_ >= ET_ARMOR && slot_ < ET_ARMOR_END);
+}
+
 bool CanInstallMachineAt(installed_machine_type machine_, equip_type slot_)
 {
-	if(slot_ < ET_ARMOR || slot_ >= ET_ARMOR_END)
+	if(!IsMachineInstallSlot(slot_))
 		return false;
 	const installed_machine_info* info_ = GetInstalledMachineInfo(machine_);
 	return info_ && (info_->equip_mask & (1u<<slot_)) != 0;
 }
 
-void equipMachine(installed_machine_type machine_)
+void equipMachine(installed_machine_type machine_, item* item_)
 {
 	switch(machine_)
 	{
 	case IMT_BARRIER_GENERATOR:
-		you.AcUpDown(0,3);
+		you.AcUpDown(0,5);
+		break;
+	case IMT_ARMOUR_ASSIST:
+	case IMT_AUX_BATTERY:
+		you.ReSetASPanlty();
+		break;
+	case IMT_OFFSET_SHOT:
+	case IMT_COUNTER_WAVE:
+		you.ShUpDown(0,you.GetMachineItemSh(machine_,item_));
 		break;
 	case IMT_PUNCH:
 	case IMT_OPTICAL_CAMOUFLAGE:
-	case IMT_SKY_TORPEDO:
+	case IMT_PHOTON_TORPEDO:
+	case IMT_OI_SOUND_SYSTEM:
+	case IMT_BLASTER:
+	case IMT_FLASH_SHIELD:
+	case IMT_VIBRATION:
+	case IMT_ARC_SHOT:
+	case IMT_WEAPON_PREHEATER:
+	case IMT_EMERGENCY_BARRIER:
 	case IMT_NONE:
 	default:
 		break;
 	}
 }
 
-void unequipMachine(installed_machine_type machine_)
+void unequipMachine(installed_machine_type machine_, item* item_)
 {
 	switch(machine_)
 	{
 	case IMT_BARRIER_GENERATOR:
-		you.AcUpDown(0,-3);
+		you.AcUpDown(0,-5);
+		break;
+	case IMT_ARMOUR_ASSIST:
+	case IMT_AUX_BATTERY:
+		you.ReSetASPanlty();
+		break;
+	case IMT_OFFSET_SHOT:
+	case IMT_COUNTER_WAVE:
+		you.ShUpDown(0,-you.GetMachineItemSh(machine_,item_));
 		break;
 	case IMT_PUNCH:
 	case IMT_OPTICAL_CAMOUFLAGE:
-	case IMT_SKY_TORPEDO:
+	case IMT_PHOTON_TORPEDO:
+	case IMT_OI_SOUND_SYSTEM:
+	case IMT_BLASTER:
+	case IMT_FLASH_SHIELD:
+	case IMT_VIBRATION:
+	case IMT_ARC_SHOT:
+	case IMT_WEAPON_PREHEATER:
+	case IMT_EMERGENCY_BARRIER:
 	case IMT_NONE:
 	default:
 		break;
@@ -366,6 +481,7 @@ static LOCALIZATION_ENUM_KEY MachineSlotName(equip_type slot_)
 {
 	switch(slot_)
 	{
+	case ET_WEAPON: return LOC_SYSTEM_MACHINE_SLOT_WEAPON;
 	case ET_ARMOR: return LOC_SYSTEM_MACHINE_SLOT_BODY;
 	case ET_SHIELD: return LOC_SYSTEM_MACHINE_SLOT_SHIELD;
 	case ET_HELMET: return LOC_SYSTEM_MACHINE_SLOT_HEAD;
@@ -379,7 +495,7 @@ static LOCALIZATION_ENUM_KEY MachineSlotName(equip_type slot_)
 string InstalledMachineSlotsString(installed_machine_type machine_, const string& lang)
 {
 	string result_;
-	for(int slot_ = ET_ARMOR; slot_ < ET_ARMOR_END; ++slot_)
+	for(int slot_ = ET_FIRST; slot_ < ET_ARMOR_END; ++slot_)
 	{
 		if(!CanInstallMachineAt(machine_,(equip_type)slot_))
 			continue;

@@ -945,6 +945,7 @@ void monster::AfterMove(int map_num_, int x_, int y_) {
 		env[map_num_].MakeAfterimage(coord_def(position.x, position.y), image, 30, 3);
 		break;
 	case MON_MISSLE:
+	case MON_PHOTON_TORPEDO:
 		env[map_num_].MakeSmoke(coord_def(position.x, position.y), img_fog_normal, SMT_NORMAL, rand_int(3, 4), 0, this);
 		break;
 	case MON_SANGHAI_DOLL:
@@ -5155,6 +5156,14 @@ void monster::special_action(int delay_, bool smoke_)
 			}
 		}
 		break;
+	case MON_PHOTON_TORPEDO:
+		if (!smoke_){
+			image = &img_tanmac_photon_torpedo[GetAngleToDirec(direction)];
+			if(isUserAlly() && !env[current_level].isInSight(position) && summon_time > 0) {
+				summon_time = std::max(1, summon_time-40);
+			}
+		}
+		break;
 	case MON_HOMING:
 		if (!smoke_){
 			image = special_value>=1?&img_tanmac_homing_cyan[GetAngleToDirec(direction)]:&img_tanmac_homing[GetAngleToDirec(direction)];
@@ -6913,6 +6922,22 @@ int monster::special_state(bool is_sight_for_monster) {
 				attack_infor temp_infor(randC(2,damage_),damage_*2,99,this,GetParentType(),ATT_FIRE_BLAST,name_infor(LOC_SYSTEM_ATT_MISSLE));
 				BaseBomb(position, &img_blast[ice_?4:0],temp_infor, this);
 			}
+			if(env[current_level].isInSight(position)) {
+				Sleep(30);
+			}
+			env[current_level].MakeNoise(position, 8, this);
+			env[current_level].ClearEffect();
+			dead(PRT_NEUTRAL, false);
+		}
+	}
+	return 2;
+	case MON_PHOTON_TORPEDO:
+	{
+		//광자토피도: 피아식별 폭발
+		if(special_move(is_sight_for_monster, false, 45)) {
+			int damage_ = 4 +level/2;
+			attack_infor temp_infor(randC(2,damage_),damage_*2,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_PHOTON_TORPEDO));
+			BaseBomb_forAlly(position, &img_blast[0],temp_infor, &you, 10, false);
 			if(env[current_level].isInSight(position)) {
 				Sleep(30);
 			}

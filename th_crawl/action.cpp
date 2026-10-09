@@ -1029,6 +1029,7 @@ int Player_Move(const coord_def &c)
 	move_type = you.move(c);
 	if(move_type)
 	{
+		you.MachineAfterMove(tempPos, move_type);
 		if(move_type != 1) //한칸이라도 이동했을때
 		{
 			pick_ups = pickup_move();
@@ -3028,7 +3029,11 @@ void Iden_Show()
 		}
 		else if (i >= IDEN_CHECK_MACHINE_START && i < IDEN_CHECK_MACHINE_END) {
 			int cur = i - IDEN_CHECK_MACHINE_START;
-			if (iden_list.machine_list[cur].found)
+			if (IsInstallableMachine((machine_type)cur)) {
+				if (i == InstalledMachinePickupIndex() && FirstFoundInstalledMachine(iden_list) >= 0)
+					curList.push_back(i);
+			}
+			else if (iden_list.machine_list[cur].found)
 				curList.push_back(i);
 		}
 		else if (i >= IDEN_CHECK_BOOK_START && i < IDEN_CHECK_BOOK_END) {

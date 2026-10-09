@@ -262,7 +262,7 @@ void seija_real_gift(int key_)
 				for(int i = rand_int(2,4); i > 0; i--)
 				{
 					item_infor t;
-					env[current_level].MakeItem(you.position,makeitem(ITM_MACHINE, 0, &t, randA(MCH_SKY_TORPEDO-1)));
+					env[current_level].MakeItem(you.position,makeitem(ITM_MACHINE, 0, &t, randA(MCH_MAX-1)));
 				}
 			}
 			break;

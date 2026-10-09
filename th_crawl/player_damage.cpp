@@ -103,13 +103,14 @@ int players::GetAttack(bool max_, equip_type type_)
 
 
 
-	if(s_might || s_lunatic)
-		max_atk_+=randA_1(10);	
+	if(s_might || s_lunatic || (s_machine_overheat && IsActiveMachineItem(equipment[type_], IMT_WEAPON_PREHEATER)))
+		max_atk_+=randA_1(10);
 	
 	if(!equipment[type_] && alchemy_buff == ALCT_STONE_FORM)
 		max_atk_+=8;
 
-
+	if(IsActiveMachineItem(equipment[type_], IMT_VIBRATION))
+		max_atk_+=3;
 
 	max_atk_+=dam_plus;
 	if(s_slaying)
@@ -265,6 +266,13 @@ int players::GetAtkDelay()
 				real_delay_ += shieldPanaltyOfWeapon(equipment[type_]->type, equipment[type_]->value0);
 			}
 
+			if(IsActiveMachineItem(equipment[type_], IMT_WEAPON_PREHEATER))
+			{ //무기 예열기: 예열될수록 빨라지고 무기과열중엔 공격 딜레이가 1.5배
+				real_delay_ -= GetMachinePreheatBonus();
+				if(s_machine_burnout)
+					real_delay_ *= 1.5f;
+			}
+
 			delay_ = real_delay_+rand_float(0.99f,0.0f);
 		}
 		else if(equipment[type_])
@@ -284,23 +292,37 @@ int players::ReSetASPanlty()
 	int panlty_ = 0;
 	if(armor_)
 	{ //아머의 패널티
-		int panlty2_ = -armor_->value2;
+		int value2_ = armor_->value2, value3_ = armor_->value3;
+		GetMachineArmourPenalty(armor_, value2_, value3_);
+		int panlty2_ = -value2_;
 		panlty2_ -= GetSkillLevel(SKT_ARMOUR, true)/3;
-		if(panlty2_ < -armor_->value3)
-			panlty2_ = -armor_->value3;
-		panlty_ += panlty2_;
-	}	
-	if(shield_ && shield_->isShield())
-	{
-		int panlty2_ = -shield_->value2;
-		panlty2_ -= GetSkillLevel(SKT_SHIELD, true)/3;
-		if(panlty2_ < shield_->value3)
-			panlty2_ = shield_->value3;
+		if(panlty2_ < -value3_)
+			panlty2_ = -value3_;
 		panlty_ += panlty2_;
 	}
+	if(shield_ && shield_->isShield())
+	{
+		int value2_ = shield_->value2, value3_ = shield_->value3;
+		GetMachineArmourPenalty(shield_, value2_, value3_);
+		int panlty2_ = -value2_;
+		panlty2_ -= GetSkillLevel(SKT_SHIELD, true)/3;
+		if(panlty2_ < value3_)
+			panlty2_ = value3_;
+		panlty_ += panlty2_;
+	}
+	panlty_ += GetInstalledMachineCount(IMT_AUX_BATTERY,false);
 	as_penalty = panlty_;
 	EvUpDown(0,prev_panlty_-as_penalty);
 	return panlty_;
+}
+void players::GetMachineArmourPenalty(const item* item_, int& penalty_, int& min_penalty_)
+{
+	if(!item_ || !(item_->installed_machine & IMT_ARMOUR_ASSIST))
+		return;
+	if(isequip(const_cast<item*>(item_)) && IsMachinePowerOverloaded())
+		return;
+	penalty_ += 3;
+	min_penalty_ = min(0, min_penalty_+1);
 }
 int players::GetPenaltyMinus(int level_)
 {
@@ -1023,6 +1045,9 @@ bool players::damage(attack_infor &a, bool perfect_)
 	if (accuracy_ >= 99)
 		perfect_ = true;
 
+	if(a.order && !a.order->isplayer() && !a.no_owner && isNormalAtt(a.type))
+		MachineMeleeAction(); //오이 사운드 시스템의 전투 합
+
 	if(isNormalAtt(a.type))
 	{
 		if(s_paralyse)
@@ -1419,7 +1444,10 @@ bool players::damage(attack_infor &a, bool perfect_)
 			{
 				std::string shield_str = "";
 				
-				if(!equipment[ET_SHIELD] || !equipment[ET_SHIELD]->isShield()) {
+				int offset_sh_ = GetMachineOffsetSh();
+				if(offset_sh_ > 0 && randA(max(1,sh)-1) < offset_sh_) {
+					shield_str = LocalzationManager::locString(LOC_SYSTEM_BLOCK_WEAPON);
+				} else if(!equipment[ET_SHIELD] || !equipment[ET_SHIELD]->isShield()) {
 					shield_str = LocalzationManager::locString(LOC_SYSTEM_BLOCK_BODY);
 				} else if(equipment[ET_SHIELD]->fixed_artifact == FIXED_ARTIFACT_HAKUROUKEN) {
 					shield_str = LocalzationManager::locString(LOC_SYSTEM_ITEM_ARTIFACT_HAKUROUKEN_NAME);
@@ -1447,6 +1475,7 @@ bool players::damage(attack_infor &a, bool perfect_)
 						}
 					}
 				}
+				MachineGuard(a);
 			}
 			
 		}

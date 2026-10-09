@@ -598,7 +598,7 @@ bool ThrowTamacInstance::oneturn(coord_def& hit_pos_) {
 					if(env[current_level].isInSight(*beam)) {
 						PlaySE("slash");
 						name_infor name_;
-						if(infor_.order)	
+						if(infor_.order)
 							name_ = (*infor_.order->GetName());
 						LocalzationManager::printLogWithKey(LOC_SYSTEM_FIGHT_SLASH,true,false,false,CL_bad,
 							PlaceHolderHelper(you.name.getName()),
@@ -941,7 +941,7 @@ unit* throwtanmac_check_hit(int graphic_type, beam_iterator& beam, const beam_in
 
 
 
-bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &target, const beam_infor &infor_)
+bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &target, const beam_infor &infor_, bool hit_, bool start_burst_)
 {
 	beam_iterator beam(start,start);
 	if(!CheckThrowPath(start,target,beam))
@@ -954,6 +954,10 @@ bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &targe
 	int path = 8;
 	if((*beam) == target)
 		end = true;
+	if(start_burst_ && graphic_type)
+	{
+		env[current_level].MakeEffect(prev,GetTanmacGraphic(graphic_type, direc, count++, 10*GetPosToDirec(prev,(*beam))+9),false);
+	}
 	if(isStartGraphic(graphic_type))
 	{
 		coord_def postion_ = prev;
@@ -976,6 +980,8 @@ bool ThrowShock(int graphic_type, const coord_def &start, const coord_def &targe
 		if((*beam) == target)
 			end = true;
 	}
+	if(!hit_)
+		return true;
 	for(vector<monster>::iterator it=env[current_level].mon_vector.begin();it!=env[current_level].mon_vector.end();it++)
 	{
 		if((*it).isLive() && (*it).position.x == target.x && (*it).position.y == target.y &&

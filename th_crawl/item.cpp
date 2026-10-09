@@ -52,7 +52,7 @@ static void MigrateLegacySkyTorpedo(T* item_)
 		return;
 	item_->type = ITM_MACHINE;
 	item_->value1 = 1;
-	item_->value2 = MCH_SKY_TORPEDO;
+	item_->value2 = MCH_PHOTON_TORPEDO;
 	item_->value3 = 0;
 	item_->value4 = 0;
 	item_->value5 = 0;
@@ -61,7 +61,7 @@ static void MigrateLegacySkyTorpedo(T* item_)
 	item_->value8 = 0;
 	item_->is_pile = false;
 	item_->can_throw = false;
-	item_->image = MachineItemImage(MCH_SKY_TORPEDO,true);
+	item_->image = MachineItemImage(MCH_PHOTON_TORPEDO,true);
 	item_->name = name_infor(LOC_SYSTEM_MACHINE_ITEM);
 	item_->weight = 2.0f;
 	item_->value = 200;
@@ -69,22 +69,55 @@ static void MigrateLegacySkyTorpedo(T* item_)
 		item_->item_tag.push_back(LOC_SYSTEM_TAG_MACHINE);
 }
 
+int InstalledMachinePickupIndex()
+{
+	//설치형 기계 도구는 자동줍기를 하나로 묶는다. (가장 앞의 설치형 기계 칸을 사용)
+	for(int i = 0; i < MCH_MAX; i++)
+		if(IsInstallableMachine((machine_type)i))
+			return IDEN_CHECK_MACHINE_START + i;
+	return IDEN_CHECK_MACHINE_START;
+}
+
+int FirstFoundInstalledMachine(const Iden_collect& collection_)
+{
+	int any_ = -1;
+	for(int i = 0; i < MCH_MAX; i++)
+	{
+		if(!IsInstallableMachine((machine_type)i) || !collection_.machine_list[i].found)
+			continue;
+		if(collection_.machine_list[i].found == 2)
+			return i;
+		if(any_ < 0)
+			any_ = i;
+	}
+	return any_;
+}
+
+void SetMachineFound(Iden_collect& collection_, int machine_)
+{
+	if(machine_ < 0 || machine_ >= MCH_MAX || collection_.machine_list[machine_].found)
+		return;
+	//처음 발견한 설치형 기계 도구는 2로 기록한다. (자동줍기 설정 이미지용)
+	bool first_installed_ = IsInstallableMachine((machine_type)machine_) && FirstFoundInstalledMachine(collection_) < 0;
+	collection_.machine_list[machine_].found = first_installed_ ? 2 : 1;
+}
+
 static void RestoreMachineDiscoveryFromPlayer(Iden_collect& collection_)
 {
 	for(item& item_ : you.item_list)
 		if(item_.type == ITM_MACHINE && item_.value2 >= 0 && item_.value2 < MCH_MAX)
-			collection_.machine_list[item_.value2].found = true;
-	for(int slot_ = ET_ARMOR; slot_ < ET_ARMOR_END; ++slot_)
+			SetMachineFound(collection_, item_.value2);
+	for(int slot_ = ET_FIRST; slot_ < ET_ARMOR_END; ++slot_)
 	{
 		item* armour_ = you.equipment[slot_];
-		if(!armour_)
+		if(!IsMachineInstallSlot(slot_) || !armour_)
 			continue;
 		for(int bit_ = 1; bit_ < IMT_MAX; bit_ <<= 1)
 		{
 			installed_machine_type installed_ = (installed_machine_type)bit_;
 			const installed_machine_info* info_ = GetInstalledMachineInfo(installed_);
 			if(info_ && armour_->HasInstalledMachine(installed_))
-				collection_.machine_list[info_->source_type].found = true;
+				SetMachineFound(collection_, info_->source_type);
 		}
 	}
 }
@@ -110,7 +143,7 @@ value3(item_->value3), value4(item_->value4), value5(item_->value5), value6(item
 item::item()
 :name(LOC_SYSTEM_NONE_STRING), second_name(LOC_NONE), image(NULL), equip_image(NULL), position(0,0),prev_position(0,0), type(ITM_WEAPON_FIRST), weight(0), value(0),
 is_pile(false), num(0), id('a'), prev_sight(false), not_find(true), now_find(false), curse(false), identify(false), identify_curse(false), 
-can_throw(false), drop(false), throw_item(false), hamme_gift(false), waste(10000), delay_turn(0), artifact_guid(0), value0(0), value1(0), value2(0), value3(0), value4(0), value5(0), value6(0), value7(0), value8(0),
+can_throw(false), drop(false), throw_item(false), hamme_gift(false), waste(10000), delay_turn(0), artifact_guid(0), value0(0), value1(0), value2(0), value3(0), value4(0), value5(0), value6(0), value7(0), value8(0), installed_machine(0),
 fixed_artifact(FIXED_ARTIFACT_NONE), atifact_vector(), item_tag(), search_field()
 {
 
@@ -156,6 +189,7 @@ item::item(const coord_def &c, const item_infor &t)
 	value6 = t.value6;
 	value7 = t.value7;
 	value8 = t.value8;
+	installed_machine = 0;
 	fixed_artifact = FIXED_ARTIFACT_NONE;
 	atifact_vector.clear();
 	item_tag.clear();
@@ -287,6 +321,7 @@ void item::SaveDatas(FILE *fp)
 	{
 		SaveData<LOCALIZATION_ENUM_KEY>(fp, tag);
 	}
+	SaveData<int>(fp, installed_machine);
 
 	//search_field는 저장하지않음
 	
@@ -359,6 +394,9 @@ void item::LoadDatas(FILE *fp)
 			item_tag.push_back(temp);
 		}
 	}
+	installed_machine = 0;
+	if(!isPrevVersion(loading_version_string, "ver1.301"))
+		LoadData<int>(fp, installed_machine);
 	MigrateLegacySkyTorpedo(this);
 	if(isPrevVersion(loading_version_string, "ver1.301")) {
 		if(type == ITM_MACHINE)
@@ -469,6 +507,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 		}
 		for(; i < SCT_MAX; i++) {
 			scroll_list[i] = scroll_iden();
+			scroll_list[i].type = i; //새로 추가된 두루마리는 기존에 쓰지 않던 이름을 쓴다.
 		}
 	}
 
@@ -526,7 +565,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
 			if(isPrevVersion(loading_version_string,"ver1.301"))
 				machine_list[i].found = false;
 			else
-				machine_list[i].found = machine_list[i].found != 0;
+				machine_list[i].found = machine_list[i].found == 2 ? 2 : (machine_list[i].found != 0); //2는 처음 발견한 설치형
 		}
 	}
 	
@@ -610,7 +649,7 @@ void Iden_collect::LoadDatas(FILE *fp) {
         }
     }
     for (; i + IDEN_CHECK_SCROLL_START < IDEN_CHECK_SCROLL_END; ++i) {
-        autopickup[IDEN_CHECK_SCROLL_START + i] = false;
+        autopickup[IDEN_CHECK_SCROLL_START + i] = isGoodScroll((scroll_type)i) > 0;
 	}
 	size_ = 0;
     // 반지 자동줍기 로드
@@ -657,6 +696,8 @@ void Iden_collect::LoadDatas(FILE *fp) {
     for (; i + IDEN_CHECK_MACHINE_START < IDEN_CHECK_MACHINE_END; ++i){
         autopickup[IDEN_CHECK_MACHINE_START + i] = false;
 	}
+	if(isPrevVersion(loading_version_string,"ver1.301"))
+		autopickup[InstalledMachinePickupIndex()] = false; //설치형 기계 도구는 기본으로 자동줍기하지 않는다.
 	size_ = 0;
     // 책 자동줍기 로드 (미감정 포함)
     LoadData<int>(fp, size_);
@@ -693,7 +734,10 @@ void Iden_collect_111::migrateIden111toCurrent(const Iden_collect_111& old_data,
 {
 	memcpy(new_data.potion_list, old_data.potion_list, sizeof(old_data.potion_list));
 	memcpy(new_data.scroll_list, old_data.scroll_list, sizeof(old_data.scroll_list));
-	memset(&new_data.scroll_list[SCT_MAX - 1], 0, sizeof(scroll_iden)); // 새 항목 초기화
+	for(int i = Iden_collect_111::LEGACY_SCROLL_COUNT; i < SCT_MAX; i++) {
+		new_data.scroll_list[i] = scroll_iden(); // 새 항목 초기화
+		new_data.scroll_list[i].type = i;
+	}
 
 	memcpy(new_data.ring_list, old_data.ring_list, sizeof(old_data.ring_list));
 	memcpy(new_data.amulet_list, old_data.amulet_list, sizeof(old_data.amulet_list));
@@ -705,12 +749,19 @@ void Iden_collect_111::migrateIden111toCurrent(const Iden_collect_111& old_data,
 	memcpy(new_data.fixed_artifact, old_data.fixed_artifact, sizeof(old_data.fixed_artifact));
 	memcpy(new_data.books_list, old_data.books_list, sizeof(old_data.books_list));
 	memset(new_data.autopickup, 0, sizeof(new_data.autopickup));
-	const int legacy_machine_end_ = IDEN_CHECK_MACHINE_START+Iden_collect_111::LEGACY_MACHINE_COUNT;
+	const int legacy_shift_ = Iden_collect_111::LEGACY_SCROLL_SHIFT;
+	const int legacy_scroll_end_ = IDEN_CHECK_SCROLL_START+Iden_collect_111::LEGACY_AUTOPICKUP_SCROLL_COUNT;
+	const int legacy_machine_end_ = IDEN_CHECK_MACHINE_START+Iden_collect_111::LEGACY_MACHINE_COUNT-legacy_shift_;
 	const int legacy_book_start_ = legacy_machine_end_;
 	const int legacy_book_count_ = 1+BOOK_LAST;
 	const int legacy_etc_start_ = legacy_book_start_+legacy_book_count_;
 	const int legacy_etc_count_ = 2+TMT_MAX;
-	memcpy(new_data.autopickup,old_data.autopickup,legacy_machine_end_*sizeof(bool));
+	memcpy(new_data.autopickup,old_data.autopickup,legacy_scroll_end_*sizeof(bool));
+	for(int i = legacy_scroll_end_; i < IDEN_CHECK_SCROLL_END; i++)
+		new_data.autopickup[i] = isGoodScroll((scroll_type)(i-IDEN_CHECK_SCROLL_START)) > 0;
+	memcpy(&new_data.autopickup[IDEN_CHECK_RING_START],&old_data.autopickup[legacy_scroll_end_],
+		(legacy_machine_end_-legacy_scroll_end_)*sizeof(bool));
+	new_data.autopickup[InstalledMachinePickupIndex()] = false; //설치형 기계 도구는 기본으로 자동줍기하지 않는다.
 	memcpy(&new_data.autopickup[IDEN_CHECK_BOOK_START],
 		&old_data.autopickup[legacy_book_start_],legacy_book_count_*sizeof(bool));
 	memcpy(&new_data.autopickup[IDEN_CHECK_ETC_START],
@@ -943,7 +994,7 @@ string item::GetName(int num_, bool simple_, string lang)
 		ss << " (" << you.getAmuletPercent() << "%)";  // ostringstream 사용
 		temp += ss.str();
 	}
-	if(!isArtifact() && isarmor() && value8)
+	if(!isArtifact() && HasAnyInstalledMachine())
 	{
 		string installed_ = InstalledMachineOptionString(this,lang);
 		if(!installed_.empty())
@@ -1342,7 +1393,7 @@ equip_type item::GetArmorType()
 
 bool item::SameItem(const item &item_)
 {
-	return (type == item_.type && value1 == item_.value1 && value2 == item_.value2 && value3 == item_.value3 && value4 == item_.value4 && value5 == item_.value5 && value6 == item_.value6 &&  value7 == item_.value7 && value8 == item_.value8);
+	return (type == item_.type && value1 == item_.value1 && value2 == item_.value2 && value3 == item_.value3 && value4 == item_.value4 && value5 == item_.value5 && value6 == item_.value6 &&  value7 == item_.value7 && value8 == item_.value8 && installed_machine == item_.installed_machine);
 }
 float item::GetStabPercent()
 {
@@ -1530,7 +1581,11 @@ bool item::isautopick()
 			return true;
 	case ITM_MACHINE:
 		if (value2 >= 0 && value2 < MCH_MAX)
+		{
+			if(IsInstallableMachine((machine_type)value2))
+				return iden_list.autopickup[InstalledMachinePickupIndex()];
 			return iden_list.autopickup[value2 + IDEN_CHECK_MACHINE_START];
+		}
 		return true;
 	case ITM_AMULET:
 		if(isArtifact()) {
@@ -1600,20 +1655,27 @@ bool item::isChargable()
 
 }
 
+equip_type item::GetMachineInstallSlot()
+{
+	if(isweapon())
+		return ET_WEAPON;
+	if(isarmor())
+		return GetArmorType();
+	return ET_LAST;
+}
+
 bool item::HasInstalledMachine(installed_machine_type type_)
 {
-	return isarmor() && (value8 & (int)type_) != 0;
+	return (installed_machine & (int)type_) != 0;
 }
 
 bool item::HasAnyInstalledMachine()
 {
-	return isarmor() && (value8 & (IMT_MAX-1)) != 0;
+	return (installed_machine & (IMT_MAX-1)) != 0;
 }
 
 int item::InstalledMachinePowerUsage()
 {
-	if(!isarmor())
-		return 0;
 	int power_ = 0;
 	for(int bit_ = 1; bit_ < IMT_MAX; bit_ <<= 1)
 	{
@@ -1624,17 +1686,37 @@ int item::InstalledMachinePowerUsage()
 	return power_;
 }
 
+int item::GetInstalledMachineNum()
+{
+	int num_ = 0;
+	for(int bit_ = 1; bit_ < IMT_MAX; bit_ <<= 1)
+	{
+		if(HasInstalledMachine((installed_machine_type)bit_))
+			num_++;
+	}
+	return num_;
+}
+
+int item::GetMaxInstalledMachineNum()
+{
+	//일반적으로 장비 하나에 기계 하나만 설치할 수 있다.
+	//TODO: 2개 이상 설치 가능한 특수 아티팩트는 여기서 처리
+	return 1;
+}
+
 bool item::CanInstallMachine(installed_machine_type type_)
 {
-	if(!isarmor() || HasInstalledMachine(type_))
+	if(HasInstalledMachine(type_))
 		return false;
-	return CanInstallMachineAt(type_,GetArmorType());
+	if(GetInstalledMachineNum() >= GetMaxInstalledMachineNum())
+		return false;
+	return CanInstallMachineAt(type_,GetMachineInstallSlot());
 }
 
 void item::InstallMachine(installed_machine_type type_)
 {
 	if(CanInstallMachine(type_))
-		value8 |= (int)type_;
+		installed_machine |= (int)type_;
 }
 bool item::canSlashTanmac() {
 	if(type == ITM_WEAPON_LONGBLADE) {
@@ -1713,7 +1795,7 @@ void item::Identify()
 		you.auto_equip_iden();
 		break;
 	case ITM_MACHINE:
-		iden_list.machine_list[value2].found = true;
+		SetMachineFound(iden_list, value2);
 		break;
 	case ITM_AMULET:
 		iden_list.amulet_list[value1].iden = 2;
@@ -1911,7 +1993,7 @@ bool item::pick()
 	}
 	prev_sight = false;
 	if(type == ITM_MACHINE && value2 >= 0 && value2 < MCH_MAX)
-		iden_list.machine_list[value2].found = true;
+		SetMachineFound(iden_list, value2);
 	return return_;
 }
 

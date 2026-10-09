@@ -1176,6 +1176,8 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		
 		ostringstream ss;
 		ostringstream temp;
+		int penalty_ = it->value2, min_penalty_ = it->value3;
+		you.GetMachineArmourPenalty(it, penalty_, min_penalty_);
 		ss<< "\n\n";
 
 		temp << LocalzationManager::locString(LOC_SYSTEM_DEFAULT_DEFENSE) << ": " << it->value1;;
@@ -1187,7 +1189,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 		temp.str("");
 		temp.clear();
-		temp << LocalzationManager::locString(LOC_SYSTEM_DEFAULT_PENALTY) << ": " << it->value2;
+		temp << LocalzationManager::locString(LOC_SYSTEM_DEFAULT_PENALTY) << ": " << penalty_;
 		ss << temp.str();
 		if(PrintCharWidth(temp.str()) < 20)
 			ss << std::string(20-PrintCharWidth(temp.str()), ' ');
@@ -1196,7 +1198,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 		temp.str("");
 		temp.clear();
-		temp << LocalzationManager::locString(LOC_SYSTEM_MINIMUM_PENALTY) << ": " << it->value3;
+		temp << LocalzationManager::locString(LOC_SYSTEM_MINIMUM_PENALTY) << ": " << min_penalty_;
 		ss << temp.str() << "\n";
 
 
@@ -1206,7 +1208,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 		ss <<  LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_ARMOUR_INFO2, 
 			PlaceHolderHelper(to_string((it->isiden()?it->value4:0) + (int)(it->value1*(1.0f + you.GetSkillLevel(SKT_ARMOUR, true) / 22.0f)))),
-			PlaceHolderHelper(to_string(min(it->value3, it->value2 + you.GetSkillLevel(SKT_ARMOUR, true) / 3))),
+			PlaceHolderHelper(to_string(min(min_penalty_, penalty_ + you.GetSkillLevel(SKT_ARMOUR, true) / 3))),
 			PlaceHolderHelper(LOC_SYSTEM_SKILL_ARMOUR),
 			PlaceHolderHelper(to_string(you.GetSkillLevel(SKT_ARMOUR, true)))) << "\n\n";
 		
@@ -1252,6 +1254,8 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		
 		ostringstream ss;
 		ostringstream temp;
+		int penalty_ = it->value2, min_penalty_ = it->value3;
+		you.GetMachineArmourPenalty(it, penalty_, min_penalty_);
 		ss<< "\n\n";
 
 		temp << LocalzationManager::locString(LOC_SYSTEM_DEFAULT_SHIELD) << ": " << it->value1;;
@@ -1263,7 +1267,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		
 		temp.str("");
 		temp.clear();
-		temp << LocalzationManager::locString(LOC_SYSTEM_DEFAULT_PENALTY) << ": " << it->value2;
+		temp << LocalzationManager::locString(LOC_SYSTEM_DEFAULT_PENALTY) << ": " << penalty_;
 		ss << temp.str();
 		if(PrintCharWidth(temp.str()) < 20)
 			ss << std::string(20-PrintCharWidth(temp.str()), ' ');
@@ -1272,7 +1276,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 
 		temp.str("");
 		temp.clear();
-		temp << LocalzationManager::locString(LOC_SYSTEM_MINIMUM_PENALTY) << ": " << it->value3;
+		temp << LocalzationManager::locString(LOC_SYSTEM_MINIMUM_PENALTY) << ": " << min_penalty_;
 		ss << temp.str() << "\n";
 		
 		
@@ -1282,7 +1286,7 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		
 		ss <<  LocalzationManager::formatString(LOC_SYSTEM_ITEM_DESCRIPTION_SHIELD_INFO1, 
 			PlaceHolderHelper(to_string((it->isiden() ? it->value4 : 0) + (int)(it->value1*(1.0f + (you.s_dex / 5.0f + you.GetSkillLevel(SKT_SHIELD, true)) / 15.0f)*(you.GetProperty(TPT_SLAY)?1.2f:1.0f)))),
-			PlaceHolderHelper(to_string(min(it->value3, it->value2 + you.GetSkillLevel(SKT_SHIELD, true) / 3))),
+			PlaceHolderHelper(to_string(min(min_penalty_, penalty_ + you.GetSkillLevel(SKT_SHIELD, true) / 3))),
 			PlaceHolderHelper(LOC_SYSTEM_SKILL_SHIELD),
 			PlaceHolderHelper(to_string(you.GetSkillLevel(SKT_SHIELD, true)))) << "\n\n";
 		
@@ -1561,6 +1565,9 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			case SCT_ACQUIREMENT:
 				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_ACQUIREMENT));
 				break;
+			case SCT_DISASSEMBLE:
+				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_DISASSEMBLE));
+				break;
 			default:
 				_infor_(LocalzationManager::locString(LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_BUG));
 				break;
@@ -1602,9 +1609,12 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 				_infor_(LocalzationManager::formatString(LOC_SYSTEM_MACHINE_INSTALL_SLOTS,
 					PlaceHolderHelper(InstalledMachineSlotsString(installed_,LocalzationManager::current_lang))));
 				_infor_("\n");
-				_infor_(LocalzationManager::formatString(LOC_SYSTEM_MACHINE_MAX_LEVEL,
-					PlaceHolderHelper(to_string(InstalledMachineMaxLevel(installed_)))));
-				_infor_("\n");
+				if(InstalledMachineMaxLevel(installed_) > 0)
+				{
+					_infor_(LocalzationManager::formatString(LOC_SYSTEM_MACHINE_MAX_LEVEL,
+						PlaceHolderHelper(to_string(InstalledMachineMaxLevel(installed_)))));
+					_infor_("\n");
+				}
 			}
 		}
 
@@ -1973,6 +1983,25 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 		for(auto it2 = it->atifact_vector.begin(); it2 != it->atifact_vector.end(); it2++)
 		{
 			_infor_(GetAtifactInfor((artifact_type)it2->kind, it2->value));
+			_infor_("\n");
+		}
+	}
+
+	if(it->HasAnyInstalledMachine())
+	{
+		//설치된 기계의 효과
+		bool overloaded_ = you.isequip(it) && you.IsMachinePowerOverloaded();
+		_infor_("\n\n");
+		for(int bit_ = 1; bit_ < IMT_MAX; bit_ <<= 1)
+		{
+			installed_machine_type machine_ = (installed_machine_type)bit_;
+			const installed_machine_info* info_ = GetInstalledMachineInfo(machine_);
+			if(!info_ || !it->HasInstalledMachine(machine_))
+				continue;
+			_infor_(LocalzationManager::locString(MachineName(info_->source_type)) + ": " +
+				LocalzationManager::locString(info_->effect_name));
+			if(overloaded_ && machine_ != IMT_AUX_BATTERY)
+				_infor_(" " + LocalzationManager::locString(LOC_SYSTEM_MACHINE_EFFECT_OVERLOADED));
 			_infor_("\n");
 		}
 	}

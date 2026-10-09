@@ -49,8 +49,8 @@ LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU3,보너스) 9레벨, 18레벨에 다다�
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_MOKOU4,초보자팁) 9레벨, 18레벨에 다다르면 부활이 가능합니다. 부활할때 체력과 영력이 회복되고 폭발합니다.\n좀 더 안전하게 플레이하세요!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI1,태고! 트라이아스기의 캇파. 아이템의 힘으로 돌파하라!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI2,적성보너스) 둔기적성 +2, 기계공학적성 +1
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI3,보너스) 천 캇파옷과 공중어뢰, 네시의 오컬트 부적을 들고 시작한다.
-LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4,초보자팁) V를 사용하면 설치형 기계를 장비에 설치할 수 있습니다. \n장착 중인 오컬트 부적은 경험치를 모아 충전합니다. 100% 충전이 끝나면 V키로 네시를 출격시키세요!
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI3,보너스) 펀칭머신 대신에 광자토피도, 보조배터리, 천 캇파옷과 분해의 두루마리 2장, 네시의 오컬트 부적.
+LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_NITORI4,초보자팁) V를 사용하면 설치형 기계를 장비에 설치할 수 있습니다. \n 무기에 보조배터리, 갑옷에 광자토피도를 설치해보세요. 분해의 두루마리로 기계도구를 재활용하세요!\n 장착 중인 오컬트 부적은 경험치를 모아 충전합니다. 100% 충전이 끝나면 V키로 네시를 출격시키세요!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES1,요정대전쟁! 빛의 삼요정. 혼자보단 같이 싸워라!
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES2,보너스) 릴리를 믿고 다른 두 요정과 동료가 되어 시작한다.
 LOC_SYSTEM_MAINMENU_MAINGAME_CHAR_FAIRIES3,초보자팁) 항상 동료와 함께 싸울 수 있습니다. 동료는 죽어도 경험치를 먹다보면 부활합니다.\n a키로 신의 권능을 쓸 수 있습니다. 새로운 요정 동료를 얻거나 동료를 호출하면서 싸웁시다.\n 동료가 잡아도 얻는 경험치는 다르지않습니다. 자신의 안전을 최우선으로 지킵시다.
@@ -5813,9 +5813,9 @@ LOC_SYSTEM_MACHINE_DEFENSE_FRAGMENT,간이 보호막 생성기
 LOC_SYSTEM_MACHINE_OPTION_PUNCH,펀치
 LOC_SYSTEM_MACHINE_OPTION_OPTICAL_CAMOUFLAGE,광학미채
 LOC_SYSTEM_MACHINE_OPTION_DEFENSE_FRAGMENT,방어
-LOC_SYSTEM_MACHINE_OPTION_SKY_TORPEDO,공중어뢰
-LOC_SYSTEM_MACHINE_INSTALL_SELECT,어느 방어구에 설치하겠습니까?
-LOC_SYSTEM_MACHINE_INSTALL_INVALID,그 방어구에는 이 기계를 설치할 수 없다.
+LOC_SYSTEM_MACHINE_OPTION_PHOTON_TORPEDO,광자토피도
+LOC_SYSTEM_MACHINE_INSTALL_SELECT,어느 장비에 설치하겠습니까?
+LOC_SYSTEM_MACHINE_INSTALL_INVALID,그 장비에는 이 기계를 설치할 수 없다.
 LOC_SYSTEM_MACHINE_INSTALLED,{0:을|를} {1}에 설치했다.
 LOC_SYSTEM_MACHINE_INSTALL_POWER,이 기계는 설치하고 사용하기에 전력이 {0} 필요합니다.
 LOC_SYSTEM_MACHINE_INSTALL_SLOTS,이 기계는 다음의 장비에 설치 가능합니다: {0}
@@ -5827,7 +5827,7 @@ LOC_SYSTEM_MACHINE_SLOT_CLOAK,망토
 LOC_SYSTEM_MACHINE_SLOT_GLOVE,장갑
 LOC_SYSTEM_MACHINE_SLOT_BOOTS,신발
 LOC_SYSTEM_ITEM_DESCRIPTION_INSTALLABLE_MACHINE,기계 도구는 바로 사용가능한 잔탄형과 장비에 설치하는 설치형 두 종류가 있다.\n설치형 기계는 장비에 부착하여 효과를 지속적으로 발휘할 수 있다.\n기계마다 설치할 수 있는 위치가 정해져있고 각 장비에 하나의 기계만 설치할 수 있다.\n설치된 기계는 장비를 파괴하거나, 특정 아이템을 사용하기 전엔 회수가 불가능하다.\n설치해서 사용하는데는 전력이 필요하며 전력은 기계공학 레벨을 올려서 충당 가능하다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_PUNCH,캇파들의 장난감같은 무기. 많은 캇파들이 이를 큰 가방에 숨겨놓고는 한다.\n나를 인식한 3칸이내 거리의 자동으로 펀치 글러브를 발사한다.\n한 번 공격한 적에게는 당분간은 다시 발동하지 않는다.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_PUNCH,캇파들의 장난감같은 무기. 많은 캇파들이 이를 큰 가방에 숨겨놓고는 한다.\n나를 인식한 3칸이내 거리의 적에게 자동으로 펀치 글러브를 발사한다.\n한 번 공격한 적에게는 당분간은 다시 발동하지 않는다.
 LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_DEFENSE_FRAGMENT,방어구에 덧대서 방어력을 올릴 수 있는 고철 장치.\n전력을 공급하면 캇파 특제 실드가 발동하면서 단순한 덧댄 고철 이상의 효과를 낸다.\n단점으로는, 무거운 무게때문에 전력 여부와 상관없이 설치시 이동 속도가 감소한다는 사실이다.
 LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_SKY_TORPEDO,주변 적에게 자동으로 공중 어뢰를 뿌리는 발사 장치다.\n어뢰는 주변 적을 향해 자동으로 유도되며 폭발 데미지를 입힌다.\n꽤나 스마트한 어뢰로, 사용자나 아군들에게는 피해를 입히지않는다.
 LOC_SYSTEM_BUFF_STAT_MACHINE_OVERLOAD,전력-
@@ -5837,3 +5837,80 @@ LOC_SYSTEM_SHORT_MACHINE_POWER,전력
 LOC_SYSTEM_MACHINE_POWER_OVER_EQUIP,장착중인 장비의 전력이 최대 전력을 초과하고있다!
 LOC_SYSTEM_TAG_MAGIC_DEVICE,마도구
 LOC_SYSTEM_MIGRATION_FINISH,스킬 경험치가 이전되었습니다.
+LOC_SYSTEM_MACHINE_PHOTON_TORPEDO,광자토피도
+LOC_SYSTEM_MACHINE_OI_SOUND_SYSTEM,오이 사운드 시스템
+LOC_SYSTEM_MACHINE_ARMOUR_ASSIST,동력 외골격
+LOC_SYSTEM_MACHINE_AUX_BATTERY,보조배터리
+LOC_SYSTEM_MACHINE_BLASTER,로켓 부스트
+LOC_SYSTEM_MACHINE_FLASH_SHIELD,방패용 섬광 부품
+LOC_SYSTEM_MACHINE_COUNTER_WAVE,반격탄 시스템
+LOC_SYSTEM_MACHINE_VIBRATION,진동 주입기
+LOC_SYSTEM_MACHINE_ARC_SHOT,아크 발생기
+LOC_SYSTEM_MACHINE_WEAPON_PREHEATER,무기 예열기
+LOC_SYSTEM_MACHINE_OFFSET_SHOT,자력 발생기
+LOC_SYSTEM_MACHINE_EMERGENCY_BARRIER,긴급 보호막 시스템
+LOC_SYSTEM_MACHINE_OPTION_OI_SOUND_SYSTEM,사운드
+LOC_SYSTEM_MACHINE_OPTION_ARMOUR_ASSIST,외골격
+LOC_SYSTEM_MACHINE_OPTION_AUX_BATTERY,배터리
+LOC_SYSTEM_MACHINE_OPTION_BLASTER,부스트
+LOC_SYSTEM_MACHINE_OPTION_FLASH_SHIELD,섬광
+LOC_SYSTEM_MACHINE_OPTION_COUNTER_WAVE,반격탄
+LOC_SYSTEM_MACHINE_OPTION_VIBRATION,진동
+LOC_SYSTEM_MACHINE_OPTION_ARC_SHOT,아크
+LOC_SYSTEM_MACHINE_OPTION_WEAPON_PREHEATER,예열
+LOC_SYSTEM_MACHINE_OPTION_OFFSET_SHOT,자력
+LOC_SYSTEM_MACHINE_OPTION_EMERGENCY_BARRIER,긴급 보호막
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_OI_SOUND_SYSTEM,장비에 붙일 수 있는 거대한 스피커로, 강렬한 음파를 발하여 사방의 적을 공격한다.\n근접 전투를 일정 횟수 할때마다 2칸 이내의 모든 적에게 기계공학 스킬 비례 방어무시 데미지가 들어간다.\n단, 사용될때마다 어마어마한 굉음이 발생하므로 역으로 위기에 빠질 수 있음에 주의하라.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_ARMOUR_ASSIST,몸통 방어구나 방패를 보조해주는 외골격 장치.\n강철로 만들어진 인공 골격이 사용자의 움직임을 보조하여 무거운 갑옷의 패널티를 어느정도 상쇄해준다.\n최종적으로 설치된 장비의 갑옷 패널티를 3, 최소 갑옷 패널티를 1 감소시켜준다.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_AUX_BATTERY,캇파 특제 대용량 보조배터리. 설치한 것만으로 최대 전력을 4까지 올려준다.\n단 꽤나 무거운 배터리로, 사용자의 갑옷 패널티를 1 증가시키는 단점이 있다.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_BLASTER,등이나 발에 다는 소형 로켓 부스터.\n적에게 접근시 자동으로 분사되며 이동 속도가 빨라진다.\n적을 향해 이동할때, 이동 딜레이가 0.7로 감소한다.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_FLASH_SHIELD,방패에 다는 강력한 섬광 부품.\n적의 근접 공격을 방패로 막아내면 순간적으로 섬광을 터뜨려 상대를 멍하게 만든다.\n이 섬광은 상대를 멍함 상태를 만들어 명중률과 마법 빈도율을 낮추고, 빛남 상태로 만들어 회피율을 낮춘다.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_COUNTER_WAVE,탄막의 충격을 흡수해 되돌려주는 방패용 장치.\n탄막을 방패로 막아내면 탄막을 쏜 대상에게 에너지 파동을 발사한다.\n또한 이 장치는 기계공학 스킬에 비례해서 방패 성능을 최대 6까지 추가로 올려준다.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_VIBRATION,무기에 미세한 진동을 주입하는 작은 모터.\n미세한 진동이 무기의 피해량을 3 증가시킨다.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_ARC_SHOT,무기에 고압 전류를 흘려보내는 장치.\n근접 공격으로 적에게 피해를 주면 근처의 다른 적에게 번개 아크가 옮겨붙는다.\n아크의 피해량은 근접 피해량의 70%~80%이며 기계공학 레벨에 비례한다.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_WEAPON_PREHEATER,무기의 손잡이에 설치되며, 무기를 휘두르는 동작을 보조해주는 전력 장치.\n공격할수록 예열되며 예열한만큼 공격 딜레이가 0.1~0.3까지 감소한다.\n예열이 최대에 도달하면 최대 공격 속도가 유지되고, 추가적인 근접 데미지 증가 효과를 받는다.\n폭주 상태가 된 후로 전투를 지속하지않으면 기기가 과열되어, 역으로 공격속도가 잠시동안 증가하므로 주의가 필요하다.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_OFFSET_SHOT,무기에 자기장을 두르는 장치.\n무기에 설치된 자기장이 탄막을 밀어낼 수 있게되어, 방패없이 방패를 든 효과를 낼 수 있다.\n무기의 기본 공격력과 기계공학 스킬에 비례해서 방패 수치를 얻는다.
+LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_EMERGENCY_BARRIER,위급할 때 자동으로 작동하는 캇파 특제 보호막 발생 장치.\n체력이 25% 이하로 떨어지면 일정시간 피해를 흡수하는 보호막을 얻는다.\n보호막의 양은 최대 체력과 기계공학 레벨에 비례하며, 한번 작동하면 체력이 가득 차야 재기동된다.
+LOC_SYSTEM_MACHINE_SLOT_WEAPON,무기
+LOC_SYSTEM_ATT_PHOTON_TORPEDO,공중어뢰
+LOC_SYSTEM_ATT_OI_SOUND_SYSTEM,굉음
+LOC_SYSTEM_ATT_ARC_SHOT,아크
+LOC_SYSTEM_ATT_COUNTER_WAVE,에너지 파동
+LOC_SYSTEM_MACHINE_OI_SOUND_SYSTEM_BLAST,오이 사운드 시스템이 굉음을 내뿜었다!
+LOC_SYSTEM_MACHINE_FLASH_SHIELD_TRIGGER,방패용 섬광 부품이 번쩍였다!
+LOC_SYSTEM_MACHINE_PREHEATER_BURNOUT,무기가 과열되었다.
+LOC_SYSTEM_MACHINE_PREHEATER_BURNOUT_END,무기 예열기가 다시 식었다.
+LOC_SYSTEM_MACHINE_EMERGENCY_BARRIER_ON,긴급 보호막 시스템이 작동했다!
+LOC_SYSTEM_MACHINE_EMERGENCY_BARRIER_END,긴급 보호막이 사라졌다.
+LOC_SYSTEM_BUFF_STAT_MACHINE_PREHEAT,예열중{0}
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_MACHINE_PREHEAT,무기 예열기가 예열되어 공격 속도가 빨라졌습니다. 예열이 쌓일수록 공격 딜레이가 감소합니다.
+LOC_SYSTEM_BUFF_STAT_MACHINE_OVERHEAT,폭주!
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_MACHINE_OVERHEAT,무기 예열기가 폭주하여 공격 속도가 빨라지고 추가 피해를 얻습니다. 지속시간이 끝나면 무기과열 상태가 됩니다.
+LOC_SYSTEM_BUFF_STAT_MACHINE_BURNOUT,무기과열
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_MACHINE_BURNOUT,무기가 과열되어 예열기가 설치된 무기의 공격 딜레이가 1.5배가 됩니다.
+LOC_SYSTEM_MACHINE_INSTALL_LOW_POWER,최대 전력({1})이 이 기계의 전력({0})보다 낮아 설치할 수 없다.
+LOC_SYSTEM_MACHINE_EFFECT_PUNCH,나를 인식한 3칸 이내의 적에게 자동으로 펀치를 발사한다.
+LOC_SYSTEM_MACHINE_EFFECT_OPTICAL_CAMOUFLAGE,당신을 지속적으로 투명하게 만든다.
+LOC_SYSTEM_MACHINE_EFFECT_BARRIER_GENERATOR,AC가 5 증가하지만 이동 속도가 0.1 느려진다.
+LOC_SYSTEM_MACHINE_EFFECT_PHOTON_TORPEDO,적이 시야에 있을 때 주기적으로 공중어뢰를 발사한다.
+LOC_SYSTEM_MACHINE_EFFECT_OI_SOUND_SYSTEM,근접 전투시 큰 소음과 함께 주변 2칸의 적에게 방어무시 피해를 준다.
+LOC_SYSTEM_MACHINE_EFFECT_ARMOUR_ASSIST,이 장비의 갑옷 패널티가 3, 최소 패널티가 1 감소한다.
+LOC_SYSTEM_MACHINE_EFFECT_AUX_BATTERY,최대 전력이 4 증가하지만 갑옷 패널티가 1 증가한다.
+LOC_SYSTEM_MACHINE_EFFECT_BLASTER,적에게 다가가는 이동이 빨라진다.
+LOC_SYSTEM_MACHINE_EFFECT_FLASH_SHIELD,근접 공격을 막으면 상대를 멍하게 하고 빛나게 한다.
+LOC_SYSTEM_MACHINE_EFFECT_COUNTER_WAVE,방패 수치가 올라가며 탄막을 막으면 쏜 대상에게 에너지 파동을 발사한다.
+LOC_SYSTEM_MACHINE_EFFECT_VIBRATION,이 무기의 피해량이 3 증가한다.
+LOC_SYSTEM_MACHINE_EFFECT_ARC_SHOT,근접 공격으로 피해를 주면 근처의 다른 적에게 근접 데미지 비례 전기 데미지를 준다.
+LOC_SYSTEM_MACHINE_EFFECT_WEAPON_PREHEATER,공격할수록 예열되어 이 무기의 공격 속도가 빨라진다.
+LOC_SYSTEM_MACHINE_EFFECT_OFFSET_SHOT,이 무기의 기본 공격력에 비례해서 SH가 증가한다.
+LOC_SYSTEM_MACHINE_EFFECT_EMERGENCY_BARRIER,체력이 25% 이하가 되면 피해를 흡수하는 보호막을 얻는다.
+LOC_SYSTEM_MACHINE_EFFECT_OVERLOADED,(과부하로 작동 중지)
+LOC_SYSTEM_MACHINE_INSTALLABLE_PICKUP,설치형 기계 도구
+LOC_SYSTEM_BLOCK_WEAPON,무기
+LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN22,녹이 묻은 두루마리
+LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_DISASSEMBLE,분해의 두루마리
+LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_DISASSEMBLE_SHORT,분해
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_DISASSEMBLE,장비에 설치된 기계 도구를 분리해내는 두루마리.\n분리된 기계 도구는 다시 설치해서 사용할 수 있다.
+LOC_SYSTEM_ITEM_SCROLL_DISASSEMBLE,{0}에서 {1:을|를} 분리했다!
+LOC_SYSTEM_ITEM_SCROLL_DISASSEMBLE_FAIL,기계 도구가 설치된 장비가 없다.
+LOC_SYSTEM_DISPLAY_MANAGER_DISASSEMBLE_MACHINE,어느 장비에서 기계 도구를 분리하시겠습니까?

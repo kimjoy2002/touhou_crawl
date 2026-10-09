@@ -54,7 +54,7 @@ void MakeEvokeItem(item_infor* t, int kind_)
 		kind_= getEvokeItem();
 	if(kind_ == EVK_SKY_TORPEDO)
 	{
-		createMachine(0,MCH_SKY_TORPEDO,t);
+		createMachine(0,MCH_PHOTON_TORPEDO,t);
 		return;
 	}
 

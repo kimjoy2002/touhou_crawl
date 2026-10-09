@@ -1914,7 +1914,18 @@ textures img_item_machine_kind[] = {
 	textures(&texture_item04, 125, 255), // 태양등
 	textures(&texture_item04, 134, 255), // 펀칭머신
 	textures(&texture_item04, 135, 255), // 간이 보호막 생성기
-	textures(&texture_item03, 28, 255)   // 공중어뢰
+	textures(&texture_item03, 28, 255),  // 광자토피도
+	textures(&texture_item04, 137, 255), // 오이 사운드 시스템
+	textures(&texture_item04, 138, 255), // 동력 외골격
+	textures(&texture_item04, 139, 255), // 보조배터리
+	textures(&texture_item04, 140, 255), // 로켓 부스트
+	textures(&texture_item04, 141, 255), // 방패용 섬광 부품
+	textures(&texture_item04, 142, 255), // 반격탄 시스템
+	textures(&texture_item04, 143, 255), // 진동 주입기
+	textures(&texture_item04, 144, 255), // 아크 발생기
+	textures(&texture_item04, 145, 255), // 무기 예열기
+	textures(&texture_item04, 146, 255), // 자력 발생기
+	textures(&texture_item04, 147, 255)  // 긴급 보호막 시스템
 };
 textures img_item_machine_empty_kind[] = {
 	textures(&texture_item04, 122, 255),
@@ -1926,7 +1937,18 @@ textures img_item_machine_empty_kind[] = {
 	textures(&texture_item04, 126, 255),
 	textures(&texture_item04, 134, 255),
 	textures(&texture_item04, 135, 255),
-	textures(&texture_item03, 28, 255)
+	textures(&texture_item03, 28, 255),
+	textures(&texture_item04, 137, 255),
+	textures(&texture_item04, 138, 255),
+	textures(&texture_item04, 139, 255),
+	textures(&texture_item04, 140, 255),
+	textures(&texture_item04, 141, 255),
+	textures(&texture_item04, 142, 255),
+	textures(&texture_item04, 143, 255),
+	textures(&texture_item04, 144, 255),
+	textures(&texture_item04, 145, 255),
+	textures(&texture_item04, 146, 255),
+	textures(&texture_item04, 147, 255)
 };
 textures img_machine_power_icon(&texture_item04, 136, 255);
 
@@ -1950,7 +1972,8 @@ textures(&texture_item02, 96, 255),
 textures(&texture_item02, 97, 255),
 textures(&texture_item02, 98, 255),
 textures(&texture_item02, 99, 255),
-textures(&texture_item04, 12, 255) };
+textures(&texture_item04, 12, 255),
+textures(&texture_item02, 100, 255) };
 
 
 textures img_item_amulet_kind[] = { textures(&texture_item02, 112, 255),
@@ -2517,6 +2540,25 @@ textures img_bullet[] = {
 textures img_tanmac_punch[8] = {
 	textures(&texture_laser, 186, 255), textures(&texture_laser, 187, 255), textures(&texture_laser, 188, 255), textures(&texture_laser, 189, 255),
 	textures(&texture_laser, 190, 255), textures(&texture_laser, 191, 255), textures(&texture_laser, 192, 255), textures(&texture_laser, 193, 255)
+};
+//TODO: 기계 탄막/이펙트 임시 도트. 실제 도트 추가 후 좌표 교체
+textures img_tanmac_photon_torpedo[8] = {
+	textures(&texture_item03, 215, 255), textures(&texture_item03, 216, 255), textures(&texture_item03, 217, 255), textures(&texture_item03, 218, 255),
+	textures(&texture_item03, 219, 255), textures(&texture_item03, 220, 255), textures(&texture_item03, 221, 255), textures(&texture_item03, 222, 255)
+};
+textures img_tanmac_counter_wave[8] = {
+	textures(&texture_laser, 149, 255), textures(&texture_laser, 150, 255), textures(&texture_laser, 151, 255), textures(&texture_laser, 152, 255),
+	textures(&texture_laser, 153, 255), textures(&texture_laser, 154, 255), textures(&texture_laser, 155, 255), textures(&texture_laser, 156, 255)
+};
+textures img_effect_machine_oi_sound[] = {
+	textures(&texture_laser, 194, 255),
+	textures(&texture_laser, 195, 255),
+	textures(&texture_laser, 196, 255),
+	textures(&texture_laser, 197, 255),
+	textures(&texture_laser, 198, 255),
+	textures(&texture_laser, 199, 255),
+	textures(&texture_laser, 200, 255),
+	textures(&texture_laser, 201, 255)
 };
 
 
@@ -4793,6 +4835,98 @@ int texturetoint(textures* input)
 		return 873;
 	else if(input == &img_item_machine_empty_kind[9])
 		return 874;
+	else if(input == &img_item_machine_kind[10])
+		return 875;
+	else if(input == &img_item_machine_kind[11])
+		return 876;
+	else if(input == &img_item_machine_kind[12])
+		return 877;
+	else if(input == &img_item_machine_kind[13])
+		return 878;
+	else if(input == &img_item_machine_kind[14])
+		return 879;
+	else if(input == &img_item_machine_kind[15])
+		return 880;
+	else if(input == &img_item_machine_kind[16])
+		return 881;
+	else if(input == &img_item_machine_kind[17])
+		return 882;
+	else if(input == &img_item_machine_kind[18])
+		return 883;
+	else if(input == &img_item_machine_kind[19])
+		return 884;
+	else if(input == &img_item_machine_kind[20])
+		return 885;
+	else if(input == &img_item_machine_empty_kind[10])
+		return 886;
+	else if(input == &img_item_machine_empty_kind[11])
+		return 887;
+	else if(input == &img_item_machine_empty_kind[12])
+		return 888;
+	else if(input == &img_item_machine_empty_kind[13])
+		return 889;
+	else if(input == &img_item_machine_empty_kind[14])
+		return 890;
+	else if(input == &img_item_machine_empty_kind[15])
+		return 891;
+	else if(input == &img_item_machine_empty_kind[16])
+		return 892;
+	else if(input == &img_item_machine_empty_kind[17])
+		return 893;
+	else if(input == &img_item_machine_empty_kind[18])
+		return 894;
+	else if(input == &img_item_machine_empty_kind[19])
+		return 895;
+	else if(input == &img_item_machine_empty_kind[20])
+		return 896;
+	else if(input == &img_tanmac_photon_torpedo[0])
+		return 897;
+	else if(input == &img_tanmac_photon_torpedo[1])
+		return 898;
+	else if(input == &img_tanmac_photon_torpedo[2])
+		return 899;
+	else if(input == &img_tanmac_photon_torpedo[3])
+		return 900;
+	else if(input == &img_tanmac_photon_torpedo[4])
+		return 901;
+	else if(input == &img_tanmac_photon_torpedo[5])
+		return 902;
+	else if(input == &img_tanmac_photon_torpedo[6])
+		return 903;
+	else if(input == &img_tanmac_photon_torpedo[7])
+		return 904;
+	else if(input == &img_tanmac_counter_wave[0])
+		return 905;
+	else if(input == &img_tanmac_counter_wave[1])
+		return 906;
+	else if(input == &img_tanmac_counter_wave[2])
+		return 907;
+	else if(input == &img_tanmac_counter_wave[3])
+		return 908;
+	else if(input == &img_tanmac_counter_wave[4])
+		return 909;
+	else if(input == &img_tanmac_counter_wave[5])
+		return 910;
+	else if(input == &img_tanmac_counter_wave[6])
+		return 911;
+	else if(input == &img_tanmac_counter_wave[7])
+		return 912;
+	else if(input == &img_effect_machine_oi_sound[0])
+		return 913;
+	else if(input == &img_effect_machine_oi_sound[1])
+		return 916;
+	else if(input == &img_effect_machine_oi_sound[2])
+		return 917;
+	else if(input == &img_effect_machine_oi_sound[3])
+		return 918;
+	else if(input == &img_effect_machine_oi_sound[4])
+		return 919;
+	else if(input == &img_effect_machine_oi_sound[5])
+		return 920;
+	else if(input == &img_effect_machine_oi_sound[6])
+		return 921;
+	else if(input == &img_effect_machine_oi_sound[7])
+		return 922;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -6568,6 +6702,98 @@ textures* inttotexture(int input)
 		return &img_item_machine_empty_kind[8];
 	case 874:
 		return &img_item_machine_empty_kind[9];
+	case 875:
+		return &img_item_machine_kind[10];
+	case 876:
+		return &img_item_machine_kind[11];
+	case 877:
+		return &img_item_machine_kind[12];
+	case 878:
+		return &img_item_machine_kind[13];
+	case 879:
+		return &img_item_machine_kind[14];
+	case 880:
+		return &img_item_machine_kind[15];
+	case 881:
+		return &img_item_machine_kind[16];
+	case 882:
+		return &img_item_machine_kind[17];
+	case 883:
+		return &img_item_machine_kind[18];
+	case 884:
+		return &img_item_machine_kind[19];
+	case 885:
+		return &img_item_machine_kind[20];
+	case 886:
+		return &img_item_machine_empty_kind[10];
+	case 887:
+		return &img_item_machine_empty_kind[11];
+	case 888:
+		return &img_item_machine_empty_kind[12];
+	case 889:
+		return &img_item_machine_empty_kind[13];
+	case 890:
+		return &img_item_machine_empty_kind[14];
+	case 891:
+		return &img_item_machine_empty_kind[15];
+	case 892:
+		return &img_item_machine_empty_kind[16];
+	case 893:
+		return &img_item_machine_empty_kind[17];
+	case 894:
+		return &img_item_machine_empty_kind[18];
+	case 895:
+		return &img_item_machine_empty_kind[19];
+	case 896:
+		return &img_item_machine_empty_kind[20];
+	case 897:
+		return &img_tanmac_photon_torpedo[0];
+	case 898:
+		return &img_tanmac_photon_torpedo[1];
+	case 899:
+		return &img_tanmac_photon_torpedo[2];
+	case 900:
+		return &img_tanmac_photon_torpedo[3];
+	case 901:
+		return &img_tanmac_photon_torpedo[4];
+	case 902:
+		return &img_tanmac_photon_torpedo[5];
+	case 903:
+		return &img_tanmac_photon_torpedo[6];
+	case 904:
+		return &img_tanmac_photon_torpedo[7];
+	case 905:
+		return &img_tanmac_counter_wave[0];
+	case 906:
+		return &img_tanmac_counter_wave[1];
+	case 907:
+		return &img_tanmac_counter_wave[2];
+	case 908:
+		return &img_tanmac_counter_wave[3];
+	case 909:
+		return &img_tanmac_counter_wave[4];
+	case 910:
+		return &img_tanmac_counter_wave[5];
+	case 911:
+		return &img_tanmac_counter_wave[6];
+	case 912:
+		return &img_tanmac_counter_wave[7];
+	case 913:
+		return &img_effect_machine_oi_sound[0];
+	case 916:
+		return &img_effect_machine_oi_sound[1];
+	case 917:
+		return &img_effect_machine_oi_sound[2];
+	case 918:
+		return &img_effect_machine_oi_sound[3];
+	case 919:
+		return &img_effect_machine_oi_sound[4];
+	case 920:
+		return &img_effect_machine_oi_sound[5];
+	case 921:
+		return &img_effect_machine_oi_sound[6];
+	case 922:
+		return &img_effect_machine_oi_sound[7];
 	default:
 		return &img_mons_default;
 	}

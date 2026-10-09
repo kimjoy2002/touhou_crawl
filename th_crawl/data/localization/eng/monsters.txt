@@ -301,3 +301,4 @@ MON_TORNADO_SPIRIT,Tornado Elemental,An elemental imbued with the power of a whi
 MON_FLAN_AFTERIMAGE,Flandre's Afterimage,An afterimage of Flandre wandering the endless basement corridors.\nIt seems to be a clone Flandre once played with, but as it drifted farther from the original,\nits form gradually faded and weakened.
 MON_BULLET,Danmaku,Danmaku formed from magical power.\nIt moves very slowly, making it easier to dodge than ordinary danmaku.\nWatch its path carefully, and you should be able to evade it simply by moving.
 MON_GLACIER_WALL,Glacier Wall,A solid wall of ice created through magic.\nAlthough it cannot move, it blocks all movement and projectiles from where it stands.
+MON_PHOTON_TORPEDO,Aerial Torpedo,A homing torpedo fired from a Photon Torpedo launcher.\nExplodes in a 3x3 area upon impact without harming allies.

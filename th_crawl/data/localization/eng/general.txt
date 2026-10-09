@@ -5907,3 +5907,10 @@ LOC_SYSTEM_MACHINE_EFFECT_EMERGENCY_BARRIER,Grants a damage-absorbing barrier wh
 LOC_SYSTEM_MACHINE_EFFECT_OVERLOADED,(inactive: overloaded)
 LOC_SYSTEM_MACHINE_INSTALLABLE_PICKUP,Installable machine tools
 LOC_SYSTEM_BLOCK_WEAPON,Weapon
+LOC_SYSTEM_ITEM_SCROLL_SCROLL_UNIDEN22,Rust-Stained Scroll
+LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_DISASSEMBLE,Scroll of Disassembly
+LOC_SYSTEM_ITEM_SCROLL_SCROLL_IDEN_DISASSEMBLE_SHORT,Disassembly
+LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_DISASSEMBLE,A scroll that removes installed machines from equipment.\nRecovered machines can be installed again.
+LOC_SYSTEM_ITEM_SCROLL_DISASSEMBLE,Removed {1} from {0}!
+LOC_SYSTEM_ITEM_SCROLL_DISASSEMBLE_FAIL,No equipment has an installed machine.
+LOC_SYSTEM_DISPLAY_MANAGER_DISASSEMBLE_MACHINE,Remove a machine from which piece of equipment?

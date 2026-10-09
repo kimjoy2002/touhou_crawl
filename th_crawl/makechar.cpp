@@ -1185,7 +1185,9 @@ void TouhouPlayerble(unique_starting_type type, bool aptit_)
 			{
 				if(amulet_->type == ITM_AMULET)
 				{
-					you.equip(amulet_->id, ET_NECK, false);
+					if (you.equip(amulet_->id, ET_NECK, false)) {
+						you.system_exp.value = 0;
+					}
 					break;
 				}
 			}

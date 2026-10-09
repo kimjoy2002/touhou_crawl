@@ -499,8 +499,13 @@ void environment::EnterMap(int num_, deque<monster*> &dq, coord_def pos_, bool p
 	{
 		if(it->isLive() && env[current_level].isInSight(it->position))
 		{
-			it->atkmove(true,true);
-			it->atkmove(true,true);
+			for(int i = 0; i < 2; i++)
+			{
+				it->atkmove(true,true);
+				//지네는 한칸 움직일때마다 몸통을 이어붙여야 끊어지지 않는다.
+				if(it->id == MON_GIANT_CENTIPEDE)
+					it->special_action(true,false);
+			}
 		}
 	}
 

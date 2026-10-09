@@ -1525,7 +1525,10 @@ bool item::isiden()
 	{
 		return true;
 	}
-
+	else if(type == ITM_MACHINE && IsInstallableMachine((machine_type)value2))
+	{
+		return true;
+	}
 	else if(type == ITM_GOAL ||	type == ITM_ORB)
 	{
 		return true;
@@ -1993,7 +1996,15 @@ bool item::pick()
 	}
 	prev_sight = false;
 	if(type == ITM_MACHINE && value2 >= 0 && value2 < MCH_MAX)
+	{
 		SetMachineFound(iden_list, value2);
+		//설치형은 충전량이 없으므로 줍자마자 완전 식별된다.
+		if(IsInstallableMachine((machine_type)value2))
+		{
+			identify = true;
+			identify_curse = true;
+		}
+	}
 	return return_;
 }
 

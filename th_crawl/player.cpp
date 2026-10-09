@@ -7155,6 +7155,9 @@ void players::resetAmuletPercent(amulet_type type_, bool use_)
 	if (level_ == 27)
 		level_--;
 	system_exp.value = (GetNeedExp(max(level_ - 1, 0)) - GetNeedExp(max(level_ - 2, 0))) + 10;
+	if (level_ < 12) {
+		system_exp.value = system_exp.value * (11 + 2 * (12 - level_)) / 11;
+	}
 	system_exp.value *= getAmuletCharge(type_);
 	system_exp.maxi = system_exp.value;
 	if(use_) {

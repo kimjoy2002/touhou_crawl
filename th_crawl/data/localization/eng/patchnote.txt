@@ -1,3 +1,53 @@
+---------------------------------------------------------------------
+§c beta patch – ver1.302 (2026-10-09)§d
+---------------------------------------------------------------------
+
+§y* Feature Additions§d
+ * Reworked Evocation: the skill has been split into Engineering and Magical Devices.
+  * Engineering is geared more toward fighters, while Magical Devices is geared more toward spellcasters.
+  * Former Spell Cards are now called mechanical tools.
+   * Mechanical tools come in two types: ammunition-based tools and installable tools.
+   * All former Spell Cards except the Invisibility Spell Card are now ammunition-based tools. Their effects remain unchanged.
+  * Other evocable items now use Magical Devices.
+   * Their effects remain unchanged, but more magical devices are planned for future updates.
+  * When loading an older save, you can choose whether to transfer your Evocation experience to Engineering or Magical Devices.
+ * New items: installable mechanical tools.
+  * These tools can be attached to weapons, armour, shields, and other equipment.
+  * Use 'V' to attach a mechanical tool marked {Install} to a compatible piece of equipment.
+  * Machines on equipped gear add to your Electrical Load.
+   * Raising Engineering increases your Electrical Load limit. If the limit is exceeded, the machines cannot function.
+  * Added 14 installable mechanical tools.
+ * New item: Scroll of Disassembly.
+  * Removes installed mechanical tools from equipment.
+  * Replaces the former Spell Card recharging scroll.
+ * Reworked the Amulet of Spirits and Amulet of Waves.
+  * Amulet of Spirits: now restores MP, taking over the former effect of the Amulet of Waves.
+  * Amulet of Waves: now replenishes a mechanical tool's ammunition, similar to the former effect of the Amulet of Spirits.
+   * It also increases your Electrical Load limit by 5 while equipped at 100% charge.
+  * Since their effects have changed completely, the two amulet types are swapped when loading an older save.
+
+§y* Balance Adjustments§d
+ * Updated species aptitudes following the split of Evocation.
+  * For example, Kappa have +3 Engineering and -2 Magical Devices, while Witches have +2 Magical Devices and -2 Engineering.
+ * Reworked the Engineer's starting equipment.
+  * Engineers now start with a Punching Machine instead of an Ice Spell Card.
+  * Nitori starts with a Photon Torpedo instead of a Punching Machine, along with an Auxiliary Battery, 
+    a Cloth Kappa Suit, 2 Scrolls of Disassembly, and Neshii's Occult Amulet.
+ * Buffed Lily's fairies: allied projectiles now pass through them.
+ * Improved potion conversion when praying to Eirin so it no longer produces only one potion type.
+ * Reduced early-game amulet charging speed. The experience required to recharge is now 3 times the previous amount at level 1,
+   gradually decreasing to the previous amount at level 12.
+
+§y* Gameplay & Interface Improvements§d
+ * Added customizable key bindings.
+ * Added macros, configurable with the '~' key.
+ * Added Shift + movement to run until an obstacle is encountered.
+
+§y* Bug Fixes§d
+ * Fixed centipedes' body segments becoming detached when using stairs.
+ * Fixed Eirin's Emergency Transfusion displaying the Tension value instead of the actual side-effect value.
+ * Fixed some projectiles using incorrect ranges.
+
 
 ---------------------------------------------------------------------
 §c beta patch – ver1.301 (2026-10-05)§d

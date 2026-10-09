@@ -1951,6 +1951,23 @@ textures img_item_machine_empty_kind[] = {
 	textures(&texture_item04, 147, 255)
 };
 textures img_machine_power_icon(&texture_item04, 136, 255);
+textures img_item_installed_machine_mark[] = { //기계 도구가 설치된 장비에 덧그리는 작은 표식
+	textures(&texture_item04, 148, 255), // 광학미채
+	textures(&texture_item04, 149, 255), // 펀칭머신
+	textures(&texture_item04, 150, 255), // 간이 보호막 생성기
+	textures(&texture_item04, 151, 255), // 오이 사운드 시스템
+	textures(&texture_item04, 152, 255), // 동력 외골격
+	textures(&texture_item04, 153, 255), // 보조배터리
+	textures(&texture_item04, 154, 255), // 로켓 부스트
+	textures(&texture_item04, 155, 255), // 방패용 섬광 부품
+	textures(&texture_item04, 156, 255), // 반격탄 시스템
+	textures(&texture_item04, 157, 255), // 진동 주입기
+	textures(&texture_item04, 158, 255), // 아크 발생기
+	textures(&texture_item04, 159, 255), // 무기 예열기
+	textures(&texture_item04, 160, 255), // 자력 발생기
+	textures(&texture_item04, 161, 255), // 긴급 보호막 시스템
+	textures(&texture_item04, 162, 255)  // 광자토피도
+};
 
 textures img_item_scroll_kind[] = { textures(&texture_item02, 80, 255),
 textures(&texture_item02, 81, 255),

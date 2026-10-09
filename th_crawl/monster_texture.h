@@ -517,6 +517,7 @@ extern textures img_item_potion_kind[];
 extern textures img_item_spellcard_kind[];
 extern textures img_item_machine_kind[];
 extern textures img_item_machine_empty_kind[];
+extern textures img_item_installed_machine_mark[];
 extern textures img_machine_power_icon;
 extern textures img_item_scroll_kind[];
 extern textures img_item_amulet_kind[];

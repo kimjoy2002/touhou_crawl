@@ -1285,6 +1285,17 @@ bool item::draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::Sp
 				img_item_ring_kind[min(RGT_MAX - 1, max(0, value1))].draw(pSprite, x_, y_, 0.0f, scale_, scale_, alpha_);
 			}
 		}
+		if (HasAnyInstalledMachine()) {
+			int mark_num_ = 0;
+			for (int bit_ = 1; bit_ < IMT_MAX; bit_ <<= 1) {
+				installed_machine_type machine_ = (installed_machine_type)bit_;
+				const installed_machine_info* info_ = GetInstalledMachineInfo(machine_);
+				if (!info_ || !info_->mark_image || !HasInstalledMachine(machine_))
+					continue;
+				info_->mark_image->draw(pSprite, x_ - 10.0f*scale_*mark_num_, y_, 0.0f, scale_, scale_, alpha_);
+				mark_num_++;
+			}
+		}
 		return return_;
 	}
 	else

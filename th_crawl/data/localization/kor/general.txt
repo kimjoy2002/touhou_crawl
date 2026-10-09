@@ -5826,7 +5826,7 @@ LOC_SYSTEM_MACHINE_SLOT_HEAD,모자
 LOC_SYSTEM_MACHINE_SLOT_CLOAK,망토
 LOC_SYSTEM_MACHINE_SLOT_GLOVE,장갑
 LOC_SYSTEM_MACHINE_SLOT_BOOTS,신발
-LOC_SYSTEM_ITEM_DESCRIPTION_INSTALLABLE_MACHINE,기계 도구는 바로 사용가능한 잔탄형과 장비에 설치하는 설치형 두 종류가 있다.\n설치형 기계는 장비에 부착하여 효과를 지속적으로 발휘할 수 있다.\n기계마다 설치할 수 있는 위치가 정해져있고 각 장비에 하나의 기계만 설치할 수 있다.\n설치된 기계는 장비를 파괴하거나, 특정 아이템을 사용하기 전엔 회수가 불가능하다.\n설치해서 사용하는데는 전력이 필요하며 전력은 기계공학 레벨을 올려서 충당 가능하다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_INSTALLABLE_MACHINE,기계 도구는 바로 사용가능한 잔탄형과 장비에 설치하는 설치형 두 종류가 있다.\n설치형 기계는 장비에 부착하여 효과를 지속적으로 발휘할 수 있다.\n기계마다 설치할 수 있는 위치가 정해져있고 각 장비에 하나의 기계만 설치할 수 있다.\n설치된 기계는 특정 아이템을 사용하기 전엔 회수가 불가능하다.\n설치해서 사용하는데는 전력이 필요하며 전력은 기계공학 레벨을 올려서 충당 가능하다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_PUNCH,캇파들의 장난감같은 무기. 많은 캇파들이 이를 큰 가방에 숨겨놓고는 한다.\n나를 인식한 3칸이내 거리의 적에게 자동으로 펀치 글러브를 발사한다.\n한 번 공격한 적에게는 당분간은 다시 발동하지 않는다.
 LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_DEFENSE_FRAGMENT,방어구에 덧대서 방어력을 올릴 수 있는 고철 장치.\n전력을 공급하면 캇파 특제 실드가 발동하면서 단순한 덧댄 고철 이상의 효과를 낸다.\n단점으로는, 무거운 무게때문에 전력 여부와 상관없이 설치시 이동 속도가 감소한다는 사실이다.
 LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_SKY_TORPEDO,주변 적에게 자동으로 공중 어뢰를 뿌리는 발사 장치다.\n어뢰는 주변 적을 향해 자동으로 유도되며 폭발 데미지를 입힌다.\n꽤나 스마트한 어뢰로, 사용자나 아군들에게는 피해를 입히지않는다.

@@ -13,6 +13,7 @@
 #include "player.h"
 
 struct item_infor;
+class textures;
 enum skill_flag;
 
 struct installed_machine_info
@@ -24,6 +25,7 @@ struct installed_machine_info
 	unsigned int equip_mask;
 	LOCALIZATION_ENUM_KEY option_name;
 	LOCALIZATION_ENUM_KEY effect_name;
+	textures* mark_image; //설치된 장비 아이콘에 덧그리는 작은 표식 (없으면 nullptr)
 };
 
 //

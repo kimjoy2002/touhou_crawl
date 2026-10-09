@@ -4537,7 +4537,11 @@ void players::ChangeBattleCount(bool on_)
 			you.SetTogleInvisible(true);
 		else
 			you.SetTogleInvisible(false);
-		
+
+		SetInter(IT_STAT);
+	}
+	else if(HasActiveInstalledMachine(IMT_OPTICAL_CAMOUFLAGE))
+	{
 		SetInter(IT_STAT);
 	}
 }
@@ -5125,7 +5129,7 @@ int players::AbsorbShield(int damage_) {
 }
 int players::GetInvisible()
 {
-	return HasActiveInstalledMachine(IMT_OPTICAL_CAMOUFLAGE) ? -1 : s_invisible;
+	return (HasActiveInstalledMachine(IMT_OPTICAL_CAMOUFLAGE) && battle_count == 0) ? -1 : s_invisible;
 }
 int players::GetResist()
 {

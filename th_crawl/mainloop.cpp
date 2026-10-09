@@ -310,6 +310,9 @@ void init_localization() {
 	LocalzationManager::initLocalization();
 	string defaultLang = getDefaultLang();
 	LocalzationManager::allinit(defaultLang);
+	std::error_code key_file_error;
+	if(!std::filesystem::exists(keybind_mg.get_file_path(), key_file_error) && !key_file_error)
+		keybind_mg.save();
 }
 vector<int> g_selected;
 

@@ -864,7 +864,7 @@ bool key_binding_manager::load()
 	if(!input)
 	{
 		rebuild_lookup();
-		return save();
+		return true;
 	}
 
 	enum class section_type { NONE, KEYBOARD, GAMEPAD, MACROS } section = section_type::NONE;
@@ -953,11 +953,21 @@ bool key_binding_manager::save() const
 		return false;
 	else
 	{
-		source_lines.push_back(LocalzationManager::locString(LOC_SYSTEM_KEYCONFIG_FILE_HEADER));
-		source_lines.push_back(LocalzationManager::locString(LOC_SYSTEM_KEYCONFIG_FILE_BINDING_HELP));
-		source_lines.push_back(LocalzationManager::locString(LOC_SYSTEM_KEYCONFIG_FILE_MACRO_HELP));
-		source_lines.push_back("");
-		source_lines.push_back(LocalzationManager::locString(LOC_SYSTEM_KEYCONFIG_FILE_MACRO_COMMAND_HELP));
+		std::ifstream default_input("./data/default_keybindings.txt");
+		if(default_input)
+		{
+			std::string line;
+			while(std::getline(default_input, line))
+				source_lines.push_back(line);
+		}
+		else
+		{
+			source_lines.push_back(LocalzationManager::locString(LOC_SYSTEM_KEYCONFIG_FILE_HEADER));
+			source_lines.push_back(LocalzationManager::locString(LOC_SYSTEM_KEYCONFIG_FILE_BINDING_HELP));
+			source_lines.push_back(LocalzationManager::locString(LOC_SYSTEM_KEYCONFIG_FILE_MACRO_HELP));
+			source_lines.push_back("");
+			source_lines.push_back(LocalzationManager::locString(LOC_SYSTEM_KEYCONFIG_FILE_MACRO_COMMAND_HELP));
+		}
 	}
 
 	std::map<std::string, std::string> keyboard_values;

@@ -378,7 +378,7 @@ bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target)
 			if(CheckThrowPath(you.position,target,beam)){
 				beam_infor temp_infor(randC(3,5+level_*2/3),3*(5+level_*2/3),16 + level_ / 8,&you,you.GetParentType(),EvokeLength(kind),7,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_LASER));
 				if(short_)
-					temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
+					temp_infor.length = GetLengthFromCenter(target.x, target.y, you.position.x, you.position.y);
 
 				for (int i = 0; i < (you.GetParadox() ? 2 : 1); i++) {
 					PlaySE("laser");
@@ -666,7 +666,7 @@ bool EvokeEvokable(item* item_, evoke_kind kind, bool short_, coord_def &target)
 		if (CheckThrowPath(you.position, target, beam)) {
 			beam_infor temp_infor(randC(3, 2 + level_ * 3 / 4), 3 * (2 + level_ * 3 / 4), 17+ level_/8, &you, you.GetParentType(), EvokeLength(kind),1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ITEM_EVOKE_SKY_TORPEDO));
 			if (short_)
-				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
+				temp_infor.length = GetLengthFromCenter(target.x, target.y, you.position.x, you.position.y);
 
 			for (int i = 0; i < (you.GetParadox() ? 2 : 1); i++) {
 				PlaySE("shoot");

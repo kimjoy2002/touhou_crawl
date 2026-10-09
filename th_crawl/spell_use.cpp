@@ -732,7 +732,7 @@ bool skill_tanmac_small(int pow_, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(randC(SPL_MON_TANMAC_SMALL_DICE,SPL_MON_TANMAC_SMALL_DAM(pow_)), SPL_MON_TANMAC_SMALL_DICE*SPL_MON_TANMAC_SMALL_DAM(pow_), 17, order, order->GetParentType(), SpellLength(SPL_MON_TANMAC_SMALL, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if (short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if(env[current_level].isInSight(order->position)) {
@@ -753,7 +753,7 @@ bool skill_tanmac_middle(int pow_, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(randC(SPL_MON_TANMAC_MIDDLE_DICE,SPL_MON_TANMAC_MIDDLE_DAM(pow_)),SPL_MON_TANMAC_MIDDLE_DICE*SPL_MON_TANMAC_MIDDLE_DAM(pow_),14,order,order->GetParentType(),SpellLength(SPL_MON_TANMAC_MIDDLE, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
@@ -774,7 +774,7 @@ bool skill_water_gun(int pow_, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(randC(SPL_MON_WATER_GUN_DICE,SPL_MON_WATER_GUN_DAM(pow_)),SPL_MON_WATER_GUN_DICE*SPL_MON_WATER_GUN_DAM(pow_),12,order,order->GetParentType(),SpellLength(SPL_MON_WATER_GUN, order->isplayer()),1,BMT_NORMAL,ATT_THROW_WATER,name_infor(LOC_SYSTEM_ATT_WATERGUN));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -794,7 +794,7 @@ bool skill_burn(int pow_, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(randC(SPL_BURN_DICE,SPL_BURN_DAM(pow_)),SPL_BURN_DICE*SPL_BURN_DAM(pow_),13,order,order->GetParentType(),SpellLength(SPL_BURN, order->isplayer()),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_BURN));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -818,7 +818,7 @@ bool skill_flame(int pow_, bool short_, unit* order, coord_def target)
 		}
 		beam_infor temp_infor(randC(SPL_FLAME_DICE,damage_),SPL_FLAME_DICE*damage_,15+pow_/15,order,order->GetParentType(),SpellLength(SPL_FLAME, order->isplayer()),1,BMT_NORMAL,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_BURN));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -838,7 +838,7 @@ bool skill_frozen(int pow_, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(randC(SPL_FROZEN_DICE,SPL_FROZEN_DAM(pow_)),SPL_FROZEN_DICE*SPL_FROZEN_DAM(pow_),99,order,order->GetParentType(),SpellLength(SPL_FROZEN, order->isplayer()),1,BMT_NORMAL,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -862,7 +862,7 @@ bool skill_frost(int pow_, bool short_, unit* order, coord_def target)
 		}
 		beam_infor temp_infor(randC(SPL_FROST_DICE,damage_),SPL_FROST_DICE*damage_,14+pow_/15,order,order->GetParentType(),SpellLength(SPL_FROST, order->isplayer()),1,BMT_NORMAL,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -899,7 +899,7 @@ bool skill_sting(int pow_, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(randC(SPL_STING_DICE,SPL_STING_DAM(pow_)),SPL_STING_DICE*SPL_STING_DAM(pow_),14+pow_/15,order,order->GetParentType(),SpellLength(SPL_STING, order->isplayer()),1,BMT_NORMAL,ATT_THROW_WEAK_POISON,name_infor(LOC_SYSTEM_ATT_POISONTANMAC));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -976,7 +976,7 @@ bool skill_cold_beam(int pow_, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(randC(SPL_COLD_BEAM_DICE,SPL_COLD_BEAM_DAM(pow_)),SPL_COLD_BEAM_DICE*SPL_COLD_BEAM_DAM(pow_),18,order,order->GetParentType(),SpellLength(SPL_COLD_BEAM, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLDBEAM));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -1697,7 +1697,7 @@ bool skill_magic_tanmac(int pow_, bool short_, unit* order, coord_def target)
 		}
 		beam_infor temp_infor(randC(SPL_MAGIC_TANMAC_DICE, damage_),SPL_MAGIC_TANMAC_DICE*damage_,99,order,order->GetParentType(),SpellLength(SPL_MAGIC_TANMAC, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));		
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);		
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -1745,7 +1745,7 @@ bool skill_fire_bolt(int pow_, bool short_, unit* order, coord_def target)
 		}
 		beam_infor temp_infor(randC(SPL_FIRE_BOLT_DICE,damage_),SPL_FIRE_BOLT_DICE*(damage_),18+pow_/25,order,order->GetParentType(),SpellLength(SPL_FIRE_BOLT, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_FIRE,name_infor(LOC_SYSTEM_ATT_FIRE));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -1769,7 +1769,7 @@ bool skill_ice_bolt(int pow_, bool short_, unit* order, coord_def target)
 		}
 		beam_infor temp_infor(randC(SPL_ICE_BOLT_DICE,damage_),SPL_ICE_BOLT_DICE*(damage_),18+pow_/25,order,order->GetParentType(),SpellLength(SPL_ICE_BOLT, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_COLD));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -1789,7 +1789,7 @@ bool skill_venom_bolt(int pow_, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(randC(SPL_VENOM_BOLT_DICE,SPL_VENOM_BOLT_DAM(pow_)),SPL_VENOM_BOLT_DICE*SPL_VENOM_BOLT_DAM(pow_),19,order,order->GetParentType(),SpellLength(SPL_VENOM_BOLT, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_MIDDLE_POISON,name_infor(LOC_SYSTEM_ATT_VENOM));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -2073,7 +2073,7 @@ bool skill_water_cannon(int pow_, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(randC(SPL_WATER_CANNON_DICE,SPL_WATER_CANNON_DAM(pow_)),SPL_WATER_CANNON_DICE*SPL_WATER_CANNON_DAM(pow_),18,order,order->GetParentType(),SpellLength(SPL_WATER_CANNON, order->isplayer()),1,BMT_NORMAL,ATT_THROW_WATER,name_infor(LOC_SYSTEM_ATT_WATERPRESSURE));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
@@ -2342,7 +2342,7 @@ bool skill_laser(int pow_, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(randC(SPL_LASER_DICE,SPL_LASER_DAM(pow_)),SPL_LASER_DICE*SPL_LASER_DAM(pow_),18,order,order->GetParentType(),SpellLength(SPL_LASER, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_LASER));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -2627,7 +2627,7 @@ bool skill_stone_arrow(int pow_, bool short_, unit* order, coord_def target)
 		}
 		beam_infor temp_infor(randC(SPL_STONE_ARROW_DICE,damage_),SPL_STONE_ARROW_DICE*damage_,13+pow_/15,order,order->GetParentType(),SpellLength(SPL_STONE_ARROW, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_STONE));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -2728,7 +2728,7 @@ bool skill_kaname_drill(int pow_, bool short_, unit* order, coord_def target)
 		}
 		beam_infor temp_infor(randC(SPL_KANAME_DRILL_DICE,damage_),SPL_KANAME_DRILL_DICE*damage_,hit_,order,order->GetParentType(),SpellLength(SPL_KANAME_DRILL, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_KANAMEDRILL));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -2993,7 +2993,7 @@ bool skill_luminus_strike(int pow_, bool short_, unit* order, coord_def target)
 		
 		beam_infor temp_infor(randC(SPL_LUMINUS_STRIKE_DICE,damage_),SPL_LUMINUS_STRIKE_DICE*(damage_),99,order,order->GetParentType(),SpellLength(SPL_LUMINUS_STRIKE, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_LIGHTTANMAC));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 
 		
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
@@ -3456,7 +3456,7 @@ bool skill_moon_gun(int pow_, bool short_, unit* order, coord_def target)
 		int damage_ = SPL_MOON_GUN_DAM(pow_);
 		beam_infor temp_infor(randC(SPL_MOON_GUN_DICE,damage_),SPL_MOON_GUN_DICE*damage_,18,order,order->GetParentType(),SpellLength(SPL_MOON_GUN, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_BULLET));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
@@ -3972,7 +3972,7 @@ bool skill_schema_tanmac(int pow_, bool short_, unit* order, coord_def target)
 		int damage_ = order?SPL_SCHEMA_TANMAC_DAM(order->GetLevel()):SPL_SCHEMA_TANMAC_NOORDER_DAM;
 		beam_infor temp_infor(randC(SPL_SCHEMA_TANMAC_DICE,damage_),SPL_SCHEMA_TANMAC_DICE*damage_,99,order,order->GetParentType(),SpellLength(SPL_SCHEMA_TANMAC, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));		
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);		
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -4199,7 +4199,7 @@ bool skill_air_strike(int pow_, bool short_, unit* order, coord_def target)
 		}
 		beam_infor temp_infor(randC(SPL_AIR_STRIKE_DICE,SPL_AIR_STRIKE_DAM(pow_)),SPL_AIR_STRIKE_DICE*SPL_AIR_STRIKE_DAM(pow_),15+pow_/15,order,order->GetParentType(),SpellLength(SPL_AIR_STRIKE, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_AIRSTRIKE));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
 			throwtanmac(25,beam,temp_infor,NULL);
@@ -4460,7 +4460,7 @@ bool skill_nesy_cannon(int pow_, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(randC(SPL_NESY_CANNON_DICE,SPL_NESY_CANNON_DAM(pow_)),SPL_NESY_CANNON_DICE*SPL_NESY_CANNON_DAM(pow_),18,order,order->GetParentType(),SpellLength(SPL_NESY_CANNON, order->isplayer()),1,BMT_NORMAL,ATT_THROW_WATER,name_infor(LOC_SYSTEM_ATT_WATERPRESSURE));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		
 		for(int i=0;i<(order->GetParadox()?2:1);i++)
@@ -4872,7 +4872,7 @@ bool skill_thunder_bolt(int pow_, bool short_, unit* order, coord_def target)
 		}
 		beam_infor temp_infor(randC(SPL_THUNDER_BOLT_DICE, damage_), SPL_THUNDER_BOLT_DICE * (damage_), 18 + pow_ / 25, order, order->GetParentType(), SpellLength(SPL_THUNDER_BOLT, order->isplayer()), 8, BMT_PENETRATE, ATT_THROW_ELEC, name_infor(LOC_SYSTEM_ATT_THUNDER));
 		if (short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -4919,7 +4919,7 @@ bool skill_throw_dish(int pow_, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(randC(SPL_THROW_DISH_DICE, damage_), SPL_THROW_DISH_DICE*damage_, hit_, order, order->GetParentType(), SpellLength(SPL_THROW_DISH, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_DISH));
 		if (short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -5092,7 +5092,7 @@ bool skill_hyper_beam(int pow_, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(randC(SPL_HYPER_BEAM_DICE, SPL_HYPER_BEAM_DAM(pow_)), SPL_HYPER_BEAM_DICE * SPL_HYPER_BEAM_DAM(pow_), 20, order, order->GetParentType(), SpellLength(SPL_HYPER_BEAM, order->isplayer()), 8, BMT_PENETRATE, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_HYPERBEAM));
 		if (short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -5134,7 +5134,7 @@ bool skill_throw_sword(int pow_, bool short_, unit* order, coord_def target)
 		int damage_ = SPL_THROW_SWORD_DAM(pow_);
 		beam_infor temp_infor(randC(SPL_THROW_SWORD_DICE, damage_), SPL_THROW_SWORD_DICE*damage_, 16, order, order->GetParentType(), SpellLength(SPL_THROW_SWORD, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_SWORD));
 		if (short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
@@ -5159,7 +5159,7 @@ bool skill_throw_axe(int pow_, bool short_, unit* order, coord_def target)
 			16, order, order->GetParentType(), SpellLength(SPL_THROW_AXE, order->isplayer()), 1,
 			BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_AXE));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 
 		if(env[current_level].isInSight(order->position))
 			PlaySE("shoot_heavy");
@@ -5176,7 +5176,7 @@ bool skill_throw_knife(int pow_, bool short_, unit* order, coord_def target)
 		int damage_ = SPL_THROW_KNIFE_DAM(pow_);
 		beam_infor temp_infor(randC(SPL_THROW_KNIFE_DICE, damage_), SPL_THROW_KNIFE_DICE * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_KNIFE, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_KNIFE));
 		if (short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
@@ -5219,7 +5219,7 @@ bool skill_throw_amulet(int pow_, bool short_, unit* order, coord_def target)
 		int damage_ = SPL_THROW_AMULET_DAM(pow_);
 		beam_infor temp_infor(randC(SPL_THROW_AMULET_DICE, damage_), SPL_THROW_AMULET_DICE * damage_, 19, order, order->GetParentType(), SpellLength(SPL_THROW_AMULET, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_BILL));
 		if (short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
@@ -6011,7 +6011,7 @@ bool skill_allround_tanmac(int pow_, bool short_, unit* order, coord_def target)
 						damage_ = SPL_ALLROUND_TANMAC_DAM(pow_);
 					}
 					beam_infor temp_infor_sub(randC(SPL_ALLROUND_TANMAC_DICE,damage_),SPL_ALLROUND_TANMAC_DICE*(damage_),15+pow_/25,order,order->GetParentType(),SpellLength(SPL_ALLROUND_TANMAC, order->isplayer()),1,BMT_NORMAL,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_TANMAC));
-					temp_infor_sub.length = ceil(GetPositionGap(order->position.x, order->position.y, target_unit->position.x, target_unit->position.y));
+					temp_infor_sub.length = GetLengthFromCenter(target_unit->position.x, target_unit->position.y, order->position.x, order->position.y);
 					beam_iterator beam_sub(order->position,target_unit->position);
 					
 					if(CheckThrowPath(order->position,target_unit->position,beam_sub))
@@ -6156,7 +6156,7 @@ bool skill_throw_rabbit(int pow_, bool short_, unit* order, coord_def target)
 		int damage_ = SPL_THROW_RABBIT_DAM(pow_);
 		beam_infor temp_infor(randC(SPL_THROW_RABBIT_DICE,damage_),SPL_THROW_RABBIT_DICE*damage_,18,order,order->GetParentType(),SpellLength(SPL_THROW_RABBIT, order->isplayer()),1,BMT_PENETRATE,ATT_THROW_NORMAL,*throwing_->GetName());
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		if (env[current_level].isInSight(order->position)) {
 			PlaySE("shoot_heavy");
@@ -6211,7 +6211,7 @@ bool skill_arrow(int pow_, bool short_, unit* order, coord_def target) {
 
 		beam_infor temp_infor(randC(2,order->GetAttack(false)/2), order->GetAttack(true), order->GetHit(), order, order->GetParentType(), SpellLength(SPL_ARROW, order->isplayer()), 1, BMT_NORMAL, type_, name_infor(LOC_SYSTEM_ATT_ARROW));
 		if (short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
@@ -6284,7 +6284,7 @@ bool skill_haniwa_magic_tanmac(int pow_, bool short_, unit* order, coord_def tar
 
 		beam_infor temp_infor(burst_?0:randC(dam_multi_,damage_), burst_?0:(damage_*dam_multi_), 17, order, order->GetParentType(), SpellLength(spell__, order->isplayer()), is_pentan_?7:1, is_pentan_?BMT_PENETRATE:BMT_NORMAL, type_, name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if (short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if(env[current_level].isInSight(order->position)) {
@@ -6489,7 +6489,7 @@ bool skill_earth_bolt(int pow_, bool short_, unit* order, coord_def target)
 		}
 		beam_infor temp_infor(randC(SPL_EARTH_BOLT_DICE,damage_),SPL_EARTH_BOLT_DICE*(damage_),18+pow_/25,order,order->GetParentType(),5,5,BMT_PENETRATE,ATT_THROW_NORMAL,name_infor(LOC_SYSTEM_ATT_ROCK));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -6658,7 +6658,7 @@ bool skill_confuse_spore(int pow_, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(0,0,99,order,order->GetParentType(),SpellLength(SPL_CONFUSE_SPORE, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_COLD,name_infor(LOC_SYSTEM_ATT_SPORE));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -6708,7 +6708,7 @@ bool skill_acid_bolt(int pow_, bool short_, unit* order, coord_def target)
 		int damage_ = SPL_ACID_BOLT_DAM(pow_); //몬스터가 쓸때 패널티
 		beam_infor temp_infor(randC(SPL_ACID_BOLT_DICE,damage_),SPL_ACID_BOLT_DICE*(damage_),18+pow_/25,order,order->GetParentType(),SpellLength(SPL_ACID_BOLT, order->isplayer()),7,BMT_PENETRATE,ATT_THROW_ACID,name_infor(LOC_SYSTEM_ATT_ACID));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {
@@ -6751,7 +6751,7 @@ bool skill_throw_star(int pow_, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(randC(SPL_THROW_STAR_DICE, damage_), SPL_THROW_STAR_DICE*damage_, hit_, order, order->GetParentType(), SpellLength(SPL_THROW_STAR, order->isplayer()), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_STAR));
 		if (short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			if (env[current_level].isInSight(order->position)) {

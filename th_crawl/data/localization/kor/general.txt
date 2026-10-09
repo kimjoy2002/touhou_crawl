@@ -135,8 +135,8 @@ LOC_SYSTEM_SAVE_MENU_DELETE_SELECT,삭제할 세이브를 선택하세요.
 LOC_SYSTEM_SAVE_MENU_USED,사용중
 LOC_SYSTEM_SAVE_MENU_DELETE_REALLY,해당 세이브가 영구히 사라집니다. 정말로 삭제하시겠습니까?
 LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_WARNING,주의) 이번 패치로 발동이 기계공학, 마도구학으로 분리되었습니다. 경험치를 옮길 스킬을 선택하세요.
-LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_ENGINEERING,a. 발동 경험치를 기계공학으로 옮기기 (옮기고 난 후 레벨: {0})
-LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_MAGICAL_DEVICES,b. 발동 경험치를 마도구학으로 옮기기 (옮기고 난 후 레벨: {0})
+LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_ENGINEERING,a. 발동 경험치를 기계공학(기존 스펠카드, 신규 도구 추가됨)으로 옮기기 (옮기고 난 후 레벨: {0})
+LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_MAGICAL_DEVICES,b. 발동 경험치를 마도구학(스펠카드를 제외한 기존 발동템들)으로 옮기기 (옮기고 난 후 레벨: {0})
 LOC_SYSTEM_WELCOME_FIRST,환상향에 온걸 환영한다!
 LOC_SYSTEM_WELCOME,환상향에 돌아온걸 환영한다!
 LOC_SYSTEM_LOS_MON,시야안에 몬스터가 있다.
@@ -3891,8 +3891,8 @@ LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PERFECT,미래를 체험한다고 하는 에�
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BLOSSOM,춘설이변에 쓰인 봄의 기운을 모아서 특수한 결계를 발동시킬 수 있는 부적.\n착용하고 있으면 주변의 봄의 기운이 모이고 충전이 되면 영격을 발동할 수 있게 된다.\n100%가 된 부적을 착용한 채로 v를 누르면 영격이 발동되어 주변의 적을 일정시간 마비시킨다.\n발동후에는 충전치가 0%가 되어 다시 충전할 수 있게 된다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIMES,영야이변을 해결할때 사용된 주술의 힘이 담긴 부적.\n착용하고 있으면 주변의 각부가 모이고 충전이 되면 파워 아이템을 생산할 수 있다.\n100%가 되면 자동으로 주변에 파워아이템이 떨어진다.\n발동후에는 충전치가 0%가 되어 다시 충전할 수 있게 된다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH,모리야신사에서 개발한 신앙의 힘을 모을 수 있는 부적.\n착용하고 있으면 주변의 신앙이 모이고 충전이 되면 신들과의 관계가 좋아진다.\n100%가 되면 자동으로 현재 신앙심이 조금 오른후 충전치가 다시 0%이 된다.\n몇몇 신은 신앙을 모으지않기때문에 이 부적의 효능이 없을 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE,지저같은 지하에서도 멀리 있는 상대와 통신이 가능하도록 개조된 부적.\n착용하고 있으면 전파수신감도가 점점 좋아지고 충전이 되면 수신된 전파가 영력으로 환원된다.\n100%가 된 부적을 착용한 채로도 영력의 회복력이 조금 올라가며\n100%가 된 부적을 착용한 채로 v를 누르면 영력을 순간적으로 회복할 수 있다.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,몽전대사묘의 태자를 부활시킬때도 사용되었다던 신령을 담을 수 있는 부적.\n착용하고 있으면 주변의 신령이 모이고 충전이 되면 가진 기계 도구에 신령을 불어넣을 수 있다.\n100%가 된 부적을 착용한 채로 v를 누르면 가지고 있는 기계 도구 1개를 충전할 수 있다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE,지저같은 지하에서도 멀리 있는 상대와 통신이 가능하도록 개조된 부적.\n착용하고 있으면 전파수신감도가 점점 좋아지고 충전이 되면 수신된 전파를 통해 최대 전력이 증가한다.\n100%가 된 부적을 착용하고만 있어도 최대 전력을 5 얻을 수 있으며\n100%가 된 부적을 착용한 채로 v를 누르면 가지고 있는 기계 도구의 잔탄을 충전할 수 있다.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,몽전대사묘의 태자를 부활시킬때도 사용되었다던 신령을 담을 수 있는 부적.\n착용하고 있으면 주변의 신령이 모이고 충전이 되면 신령을 통해 영력을 얻을 수 있다.\n100%가 된 부적을 착용하고만 있어도 영력 회복속도가 증가하며\n100%가 된 부적을 착용한 채로 v를 누르면 영력을 순간적으로 회복할 수 있다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE,어느 이변에서나 중요한 그레이즈의 힘이 담긴 부적.\n착용하고 있으면 점차 충전이 되고 충전이 끝나면 당신은 탄막괴물이 된다.\n100%가 된 부적을 착용한 채로도 상시 그레이즈가 발동되어 원거리 탄막을 일정확률로 피할 수 있고\n100%상태에서 v를 누르면 근성회피가 발동되어 회피가능한 공격을 일정턴 100% 회피한다.\n그레이즈할때 나는 소리가 기분이 좋다. 그레이즈가 의미없던 시리즈도 있었다고...?\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,어느 불량 천인이 자신의 검의 힘을 부여한 부적. 그녀의 변덕스러운 성격이 부적에도 담겨있다.\n착용하고 있으면 주변의 기질 구슬을 흡수하고 충전이 끝나면 부적에 숨겨있던 기질이 발동된다.\n100%상태에서 v를 누르면 저장된 날씨가 발현되며 체력재생력을 높게 올린다.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT,도시전설을 실체화하는 힘을 가진 오컬트볼의 힘이 담긴 부적.\n착용하고 있으면 오컬트의 기운을 흡수하고 충전이 끝나면 오컬트의 힘을 방출한다.\n100%상태에서 v를 누르면 시야내의 모든 적대적인 소환물을 추방하며\n부적안에 숨겨있는 오컬트의 힘을 요괴로서 구현화한다.\n
@@ -5832,7 +5832,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_DEFENSE_FRAGMENT,방어구에 덧대서 방�
 LOC_SYSTEM_ITEM_DESCRIPTION_MACHINE_SKY_TORPEDO,주변 적에게 자동으로 공중 어뢰를 뿌리는 발사 장치다.\n어뢰는 주변 적을 향해 자동으로 유도되며 폭발 데미지를 입힌다.\n꽤나 스마트한 어뢰로, 사용자나 아군들에게는 피해를 입히지않는다.
 LOC_SYSTEM_BUFF_STAT_MACHINE_OVERLOAD,전력-
 LOC_SYSTEM_BUFF_DESCRIBE_STAT_MACHINE_OVERLOAD,허용 전력을 넘어서 모든 설치형 기계들이 효과를 발휘하지 못합니다.
-LOC_SYSTEM_ATT_PUNCH,★펀치
+LOC_SYSTEM_ATT_PUNCH,펀치
 LOC_SYSTEM_SHORT_MACHINE_POWER,전력
 LOC_SYSTEM_MACHINE_POWER_OVER_EQUIP,장착중인 장비의 전력이 최대 전력을 초과하고있다!
 LOC_SYSTEM_TAG_MAGIC_DEVICE,마도구
@@ -5914,3 +5914,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_DISASSEMBLE,장비에 설치된 기계 도구
 LOC_SYSTEM_ITEM_SCROLL_DISASSEMBLE,{0}에서 {1:을|를} 분리했다!
 LOC_SYSTEM_ITEM_SCROLL_DISASSEMBLE_FAIL,기계 도구가 설치된 장비가 없다.
 LOC_SYSTEM_DISPLAY_MANAGER_DISASSEMBLE_MACHINE,어느 장비에서 기계 도구를 분리하시겠습니까?
+LOC_SYSTEM_ITEM_INSTALL,설치
+LOC_SYSTEM_MACHINE_EFFECT_POWER_USAGE,소모전력:{0}
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_POWER_EQUIP,부적에 의해 최대 전력이 올라갔다!
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_POWER_UNEQUIP,더 이상 부적으로부터 전력을 공급받지 못한다.

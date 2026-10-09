@@ -252,7 +252,8 @@ bool skill_soul_shot(int power, unit* order, coord_def target)
 bool skill_eirin_throw_potion(int power, bool short_, unit* order, coord_def target)
 {
 	beam_iterator beam(order->position,order->position);
-	int length_ = ceil(sqrt(pow((float)abs(order->position.x-target.x),2)+pow((float)abs(order->position.y-target.y),2)));
+	//던지기 예시선과 같은 길이 계산을 사용해야 목표지점을 지나쳐서 떨어지지 않는다.
+	int length_ = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 	length_ = min(length_,SkillLength(SKL_EIRIN_0));
 	if(CheckThrowPath(order->position,target,beam))
 	{
@@ -925,7 +926,7 @@ bool skill_yuugi_throw(int power, bool short_, unit* order, coord_def target)
 			auto it = you.item_list.end();
 			if(Common_Throw(it, you.GetTargetIter(), beam, &infor, throw_length_, 0.0f))
 			{		
-				int length_ = ceil(sqrt(pow((float)abs(order->position.x-you.search_pos.x),2)+pow((float)abs(order->position.y-you.search_pos.y),2)));
+				int length_ = GetLengthFromCenter(you.search_pos.x, you.search_pos.y, order->position.x, order->position.y);
 				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_YUUGI_THROW) + " ",false,false,false,CL_yuigi);
 				int damage_ = 5+mon_->level+power/10;
 				beam_infor temp_infor(randC(1,damage_),damage_,15,order,order->GetParentType(),length_,1,BMT_PENETRATE,ATT_THROW_NORMAL,mon_->name);
@@ -1559,7 +1560,7 @@ bool skill_swako_water_gun(int power, bool short_, unit* order, coord_def target
 	{
 		beam_infor temp_infor(randA_1(5+power/5),5+power/5,15,order,order->GetParentType(),SkillLength(SKL_SWAKO_WATER_GUN),1,BMT_NORMAL,ATT_THROW_WATER,name_infor(LOC_SYSTEM_ATT_WATERGUN));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			PlaySE("shoot");
@@ -1643,7 +1644,7 @@ bool skill_swako_digging(int power, bool short_, unit* order, coord_def target)
 		beam.init();
 		int length_ = SkillLength(SKL_SWAKO_DIGGING);
 		if(short_)
-			length_ = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			length_ = max(abs(order->position.x-target.x), abs(order->position.y-target.y)); //빔 한칸씩 파므로 칸 수로 계산
 
 		if(length_ == 0)
 			return false;
@@ -2252,14 +2253,14 @@ bool skill_breath(int power, bool short_, unit* order, coord_def target)
 
 
 	beam_iterator beam(order->position,order->position);
-	int length_ = ceil(sqrt(pow((float)abs(order->position.x-target.x),2)+pow((float)abs(order->position.y-target.y),2)));
+	int length_ = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 	length_ = min(length_,SkillLength(SKL_BREATH));
 	if(CheckThrowPath(order->position,target,beam))
 	{
 		int damage_ = 15+power/4;
 		beam_infor temp_infor(randC(3,damage_),3*(damage_),20,order,order->GetParentType(),SkillLength(SKL_BREATH),7,BMT_PENETRATE,type_,name_infor(key_));
 		if(short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 		
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {
 			PlaySE("fire");
@@ -2725,7 +2726,7 @@ bool skill_lilly_1(int power, bool short_, unit* order, coord_def target)
 				you.lilly_allys[i].personality = person_;
 				you.lilly_allys[i].cooldown = 0;
 				
-				hit_mon->flag |= M_FLAG_ALLY;
+				hit_mon->flag |= M_FLAG_ALLY | M_FLAG_PASSED_ALLY; //릴리의 요정 아군은 항상 아군의 탄막을 흘린다.
 				hit_mon->flag &= ~M_FLAG_COMPLETE_NETURALY;
 				hit_mon->s_neutrality = 0;
 				hit_mon->s_ally = -1;
@@ -3319,7 +3320,7 @@ bool skill_junko_1(int power, bool short_, unit* order, coord_def target)
 	{
 		beam_infor temp_infor(randC(multi_, damage_), multi_ * (damage_), hit_, order, order->GetParentType(), SkillLength(SKL_JUNKO_1), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_TANMAC));
 		if (short_)
-			temp_infor.length = ceil(GetPositionGap(order->position.x, order->position.y, target.x, target.y));
+			temp_infor.length = GetLengthFromCenter(target.x, target.y, order->position.x, order->position.y);
 
 
 		for (int i = 0; i < (order->GetParadox() ? 2 : 1); i++) {

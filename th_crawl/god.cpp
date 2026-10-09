@@ -3004,7 +3004,7 @@ void printGodAbility(god_type god, int current_piety, int require_piety, bool ab
 		if(!able_punish && you.GetPunish(god)) {
 			subcolor = CL_punish_bad;
 		}
-		if(!more_condition || god != you.god || require_piety > current_piety) {
+		if(!more_condition || god != you.god || require_piety > current_piety || subabil.require_piety > current_piety) {
 			subcolor = CL_verybad;
 		}
 		printsub("  └",false,subcolor);
@@ -3540,18 +3540,50 @@ bool God_pray(const list<item>::iterator it)
 	case GT_EIRIN:
 		if(it->type == ITM_POTION && iden_list.potion_list[it->value1].iden && isGoodPotion((potion_type)it->value1)>0)
 		{
-			int per_ = randA(100);
-			int result_ = (per_<15)?PT_CONFUSE:((per_<41)?PT_POISON:((per_<67)?PT_SLOW:(per_<93)?PT_DOWN_STAT:PT_PARALYSIS));
-			
-			string prev_ = it->GetNameString();
-			it->value1 = result_;
-			string next_ = it->GetNameString();
-			LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_EIRIN_PRAY_1,true,false,false,CL_small_danger,
-				PlaceHolderHelper(prev_), PlaceHolderHelper(next_));
+			//물약 하나하나 개별적으로 어떤 물약으로 바뀔지 판정한다.
+			int count_[PT_MAX] = {0};
+			int total_num_ = it->num;
+			for(int i = 0; i < total_num_; i++)
+			{
+				int per_ = randA(100);
+				int result_ = (per_<15)?PT_CONFUSE:((per_<41)?PT_POISON:((per_<67)?PT_SLOW:(per_<93)?PT_DOWN_STAT:PT_PARALYSIS));
+				count_[result_]++;
+			}
+
+			item origin_ = *it;
+			bool first_ = true;
+			for(int i = 0; i < PT_MAX; i++)
+			{
+				if(!count_[i])
+					continue;
+				item prev_item_ = origin_;
+				prev_item_.weight = origin_.weight*count_[i]/total_num_;
+				prev_item_.num = count_[i];
+				string prev_ = prev_item_.GetNameString();
+				item* next_item_ = nullptr;
+				if(first_)
+				{
+					*it = prev_item_;
+					it->value1 = i;
+					next_item_ = &(*it);
+					first_ = false;
+				}
+				else
+				{
+					prev_item_.value1 = i;
+					next_item_ = env[current_level].AddItem(origin_.position, &prev_item_, count_[i]);
+				}
+				if(next_item_)
+				{
+					string next_ = next_item_->GetNameString();
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_EIRIN_PRAY_1,true,false,false,CL_small_danger,
+						PlaceHolderHelper(prev_), PlaceHolderHelper(next_));
+				}
+			}
 			LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_EIRIN_PRAY_2,true,false,false,CL_small_danger);
 
-			you.PietyUpDown(it->num * 2);
-			you.GiftCount(it->num * 1);
+			you.PietyUpDown(total_num_ * 2);
+			you.GiftCount(total_num_ * 1);
 			return true;
 		}
 		break;

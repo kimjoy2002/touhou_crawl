@@ -184,7 +184,7 @@ bool chargingFinish(amulet_type kind, int value)
 			}
 		}
 		break; 
-	case AMT_WAVE:
+	case AMT_SPIRIT:
 		if (value > 0) {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_EQUIP), true, false, false, CL_blue);
 		}
@@ -192,6 +192,19 @@ bool chargingFinish(amulet_type kind, int value)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_UNEQUIP), true, false, false, CL_blue);
 		}
 		break;
+	case AMT_WAVE:
+	{
+		int bonus_ = value > 0 ? AMULET_WAVE_MACHINE_POWER : -AMULET_WAVE_MACHINE_POWER;
+		bool was_overloaded_ = you.GetMachinePowerUsage() > you.GetMachinePowerCapacity() - bonus_;
+		you.UpdateMachinePowerOverload(was_overloaded_);
+		if (value > 0) {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_POWER_EQUIP), true, false, false, CL_blue);
+		}
+		else {
+			printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_POWER_UNEQUIP), true, false, false, CL_blue);
+		}
+		break;
+	}
 	case AMT_FAITH:
 		if (value > 0) {
 			if (you.god == GT_NONE) {
@@ -257,12 +270,12 @@ bool evokeAmulet(amulet_type kind, int value_)
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_SCROLL_SOULSHOT) + " ", false, false, false, CL_white_blue);
 		skill_soul_shot(power, &you, you.position);
 		break;
-	case AMT_WAVE:
+	case AMT_SPIRIT:
 		PlaySE("buff");
 		printlog(LocalzationManager::locString(LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_HEAL) + " ", false, false, false, CL_normal);
 		you.MpUpDown(rand_int(3, 5) + you.GetMaxMp()*rand_float(0.4f, 0.6f));
 		break;
-	case AMT_SPIRIT:
+	case AMT_WAVE:
 		PlaySE("buff");
 		return recharging_scroll(true, true, false);
 		break;

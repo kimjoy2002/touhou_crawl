@@ -54,7 +54,7 @@ const std::vector<skill_type> suitable_weapon[TRI_MAX] =
 /*요정*/	{SKT_SHORTBLADE, SKT_SPEAR},
 /*카라스텐구*/	{SKT_MACE, SKT_AXE, SKT_SPEAR},
 /*백랑텐구*/	{SKT_LONGBLADE,SKT_MACE,SKT_AXE,SKT_SPEAR},
-/*캇파*/	{SKT_SPEAR},
+/*캇파*/	{SKT_MACE, SKT_SPEAR},
 /*네코마타*/	{},
 /*용궁의사자*/	{},
 /*츠구모가미*/	{},

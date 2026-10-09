@@ -1998,7 +1998,8 @@ void GetItemInfor(item *it, bool can_use_, set<char> *key)
 			const installed_machine_info* info_ = GetInstalledMachineInfo(machine_);
 			if(!info_ || !it->HasInstalledMachine(machine_))
 				continue;
-			_infor_(LocalzationManager::locString(MachineName(info_->source_type)) + ": " +
+			_infor_(LocalzationManager::locString(MachineName(info_->source_type)) + "(" +
+				LocalzationManager::formatString(LOC_SYSTEM_MACHINE_EFFECT_POWER_USAGE, PlaceHolderHelper(to_string(info_->power))) + "): " +
 				LocalzationManager::locString(info_->effect_name));
 			if(overloaded_ && machine_ != IMT_AUX_BATTERY)
 				_infor_(" " + LocalzationManager::locString(LOC_SYSTEM_MACHINE_EFFECT_OVERLOADED));

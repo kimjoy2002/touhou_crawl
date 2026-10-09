@@ -2164,6 +2164,10 @@ int players::GetMachinePowerCapacity()
 	else
 		capacity_ = 27+(level_-18)*3;
 	capacity_ += 4*GetInstalledMachineCount(IMT_AUX_BATTERY,false);
+	//전파 부적이 MAX상태면 최대 전력이 증가한다.
+	if(equipment[ET_NECK] && equipment[ET_NECK]->type == ITM_AMULET &&
+		equipment[ET_NECK]->value1 == AMT_WAVE && getAmuletPercent() >= 100)
+		capacity_ += AMULET_WAVE_MACHINE_POWER;
 	return capacity_;
 }
 
@@ -3241,7 +3245,7 @@ int players::MpRecoverDelay(int delay_,bool set_)
 	{
 		cacul_ += 50 * you.GetBuffOk(BUFFSTAT_MREGEN);
 	}
-	if (you.equipment[ET_NECK] && you.equipment[ET_NECK]->value1 == AMT_WAVE && you.getAmuletPercent() >= 100) {
+	if (you.equipment[ET_NECK] && you.equipment[ET_NECK]->value1 == AMT_SPIRIT && you.getAmuletPercent() >= 100) {
 		cacul_ += 15;
 	}
 	if(GetProperty(TPT_MP_REGEN)>0)
@@ -3642,6 +3646,18 @@ void players::FairyRevive(bool speak_)
 	{
 		for (int i = 0; i < 5; i++)
 		{
+			if (you.god_value[GT_LILLY][i] == 1 && you.lilly_allys[i].floor == current_level)
+			{
+				//예전에 합류한 요정도 항상 아군의 탄막을 흘리도록 한다.
+				for (monster& fairy_ : env[current_level].mon_vector)
+				{
+					if (fairy_.isLive() && fairy_.map_id == you.lilly_allys[i].map_id)
+					{
+						fairy_.flag |= M_FLAG_PASSED_ALLY;
+						break;
+					}
+				}
+			}
 			if (you.god_value[GT_LILLY][i] == 2)
 			{
 				you.lilly_allys[i].cooldown--;
@@ -3653,7 +3669,7 @@ void players::FairyRevive(bool speak_)
 					{
 						if (env[current_level].isMove(rit->x, rit->y, true, false) && !env[current_level].isMonsterPos(rit->x, rit->y) && env[current_level].isInSight(coord_def(rit->x, rit->y)) && you.position != (*rit))
 						{
-							monster* mon_ = env[current_level].AddMonster(you.lilly_allys[i].id, M_FLAG_ALLY, coord_def(rit->x, rit->y));
+							monster* mon_ = env[current_level].AddMonster(you.lilly_allys[i].id, M_FLAG_ALLY | M_FLAG_PASSED_ALLY, coord_def(rit->x, rit->y));
 							if(!mon_)
 								continue;
 							if (!(mon_->flag & M_FLAG_UNIQUE))

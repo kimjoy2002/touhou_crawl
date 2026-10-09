@@ -3287,7 +3287,7 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				D3DCOLOR color_ = you.s_eirin_poison_time>11 ? CL_small_danger : CL_danger;
 				ss.str("");
 				ss.clear();
-				ss << LocalzationManager::locString(LOC_SYSTEM_BUFF_EIRIN_POISON) << "(" << you.tension_gauge << ")"; 
+				ss << LocalzationManager::locString(LOC_SYSTEM_BUFF_EIRIN_POISON) << "(" << you.s_eirin_poison << ")";
 				stateDraw.addState(ss.str(), color_,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_EIRIN_POISON), this);
 			}

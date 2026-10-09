@@ -139,7 +139,7 @@ void TimeParadoxThrow(item* item_, coord_def target_, const beam_infor& infor_, 
 	echo_.p_type = mon_->GetParentType();
 	echo_.damage = echo_.damage*4/5;
 	echo_.max_damage = echo_.max_damage*4/5;
-	echo_.length = min(you.getThrowLength(),(int)ceil(GetPositionGap(mon_->position.x,mon_->position.y,target_.x,target_.y)));
+	echo_.length = min(you.getThrowLength(),GetLengthFromCenter(target_.x, target_.y, mon_->position.x, mon_->position.y));
 	bool kiku_ = item_->type >= ITM_THROW_FIRST && item_->type < ITM_THROW_LAST && item_->value4 == TMT_KIKU_COMPRESSER;
 	beam_iterator beam_(mon_->position,target_);
 	if(!TimeParadoxSafe(mon_,target_,echo_.length,kiku_?1:0,beam_))
@@ -225,7 +225,7 @@ void TimeParadoxSpell(spell_list skill_, int power_, coord_def target_)
 	int cost_ = max(1,(SpellLevel(skill_)+1)/2);
 	if(!mon_)
 		return;
-	int length_ = (int)ceil(GetPositionGap(mon_->position.x,mon_->position.y,target_.x,target_.y));
+	int length_ = GetLengthFromCenter(target_.x, target_.y, mon_->position.x, mon_->position.y);
 	if(GetLengthFromCenter(target_.x,target_.y,mon_->position.x,mon_->position.y) > SpellLength(skill_,false))
 		return;
 	if(skill_ == SPL_SPARK || skill_ == SPL_FIRE_SPREAD || skill_ == SPL_SHOCK)
@@ -258,7 +258,7 @@ void TimeParadoxSpell(spell_list skill_, int power_, coord_def target_)
 	{
 		for(monster& other_ : env[current_level].mon_vector)
 		{
-			int distance_ = (int)ceil(GetPositionGap(mon_->position.x,mon_->position.y,other_.position.x,other_.position.y));
+			int distance_ = GetLengthFromCenter(other_.position.x, other_.position.y, mon_->position.x, mon_->position.y);
 			if(other_.isLive() && other_.isYourShight() && you.isEnemyUnit(&other_) &&
 				GetLengthFromCenter(other_.position.x,other_.position.y,mon_->position.x,mon_->position.y) <= SpellLength(skill_,false))
 			{

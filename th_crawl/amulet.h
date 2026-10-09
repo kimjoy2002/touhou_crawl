@@ -19,8 +19,8 @@ enum amulet_type
 	AMT_BLOSSOM, //삼라결계, 100%가 되면 영격발동
 	AMT_TIMES, //각부, 100%가 되면 파워생산
 	AMT_FAITH, //신앙, 100%가 되면 자동으로 신앙 증가
-	AMT_WAVE, //전파, 100%가 되면 영력재생증가 100%가 되면 영력회복
-	AMT_SPIRIT, //신령, 100%가 되면 스펠카드 충전
+	AMT_WAVE, //전파, 100%가 되면 최대 전력 증가, 발동시 기계 도구 충전
+	AMT_SPIRIT, //신령, 100%가 되면 영력재생증가, 발동시 영력회복
 	AMT_GRAZE, //그레이즈, 100%가 되면 그레이즈상태, 발동시 근성회피
 	AMT_WEATHER, //날씨, 사용시 무작위 날씨 발동 + 체젠증가
 	AMT_OCCULT, //오컬트, 100%가 되면 소환물 추방가능 + 소환하기
@@ -45,6 +45,8 @@ enum occult_type
 	OCT_MAX
 };
 
+
+static const int AMULET_WAVE_MACHINE_POWER = 5; //전파 부적이 MAX일때 늘어나는 최대 전력
 
 extern LOCALIZATION_ENUM_KEY amulet_uniden_string[AMT_MAX];
 extern LOCALIZATION_ENUM_KEY amulet_iden_string[AMT_MAX];

@@ -28,6 +28,7 @@
 #include "soundmanager.h"
 #include "option_manager.h"
 #include "steam_api.h"
+#include "amulet.h"
 #include <set>
 
 
@@ -3145,6 +3146,37 @@ void SaveFile(bool test_)
 }
 
 
+//1.302부터 전파와 신령 부적의 효과가 서로 바뀌었으므로
+//1.301 세이브에선 두 부적을 서로 교체해서 기존에 쓰던 효과가 유지되게 한다.
+static int SwapWaveSpiritAmulet(int value1_)
+{
+	if(value1_ == AMT_WAVE)
+		return AMT_SPIRIT;
+	if(value1_ == AMT_SPIRIT)
+		return AMT_WAVE;
+	return value1_;
+}
+
+static void MigrateWaveSpiritAmulet301()
+{
+	std::swap(iden_list.amulet_list[AMT_WAVE], iden_list.amulet_list[AMT_SPIRIT]);
+	std::swap(iden_list.autopickup[IDEN_CHECK_AMULET_START+AMT_WAVE], iden_list.autopickup[IDEN_CHECK_AMULET_START+AMT_SPIRIT]);
+
+	for(item& item_ : you.item_list)
+		if(item_.type == ITM_AMULET)
+			item_.value1 = SwapWaveSpiritAmulet(item_.value1);
+	for(int i = 0; i < MAXLEVEL; i++)
+	{
+		for(item& item_ : env[i].item_list)
+			if(item_.type == ITM_AMULET)
+				item_.value1 = SwapWaveSpiritAmulet(item_.value1);
+		for(monster& mon_ : env[i].mon_vector)
+			for(item_infor& item_ : mon_.item_lists)
+				if(item_.type == ITM_AMULET)
+					item_.value1 = SwapWaveSpiritAmulet(item_.value1);
+	}
+}
+
 bool LoadFile()
 {
 	DWORD wait_result = WaitForSingleObject(mutx, INFINITE);
@@ -3223,7 +3255,9 @@ bool LoadFile()
 	} else {
 		iden_list.LoadDatas(fp);
 	}
-	
+	if(isPrevVersion(loading_version_string, "ver1.301"))
+		MigrateWaveSpiritAmulet301();
+
 	unique_list.clear();
 	int size_=0;
 	LoadData<int>(fp, size_);
@@ -3380,14 +3414,14 @@ int GetLevelMonsterNum(int level, bool item_)
 	}
 	else{ //아이템
 		if(level_ == 0) {
-			return 12;//최소 한개의 치유 포션을 보장하기 위해서
+			return 13;//최소 한개의 치유 포션을 보장하기 위해서
 		}
 		if(level_ == TEMPLE_LEVEL || level_ == BAMBOO_LEVEL || level_ == YUKKURI_LAST_LEVEL || level_ == EIENTEI_LEVEL || level_ == MOON_LEVEL)
 			return 0;
 		if(level_ >= SUBTERRANEAN_LEVEL && level_ <= SUBTERRANEAN_LEVEL_LAST_LEVEL)
 			return 0;
 		if(level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)
-			return 8;
+			return 9;
 		else
 			return 13; //기계 도구가 추가된 만큼 1개 늘어남
 	}

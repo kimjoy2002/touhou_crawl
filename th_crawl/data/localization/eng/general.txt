@@ -135,8 +135,8 @@ LOC_SYSTEM_SAVE_MENU_DELETE_SELECT,Select a save to delete.
 LOC_SYSTEM_SAVE_MENU_USED,In Use
 LOC_SYSTEM_SAVE_MENU_DELETE_REALLY,This save will be permanently deleted. Are you sure?
 LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_WARNING,Warning: Evocation has been split into Engineering and Magical Devices in this update. Choose which skill will receive the experience.
-LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_ENGINEERING,a. Transfer Evocation experience to Engineering (level after transfer: {0})
-LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_MAGICAL_DEVICES,b. Transfer Evocation experience to Magical Devices (level after transfer: {0})
+LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_ENGINEERING,a. Transfer Evocation experience to Engineering (former Spell Cards and new tools) (level after transfer: {0})
+LOC_SYSTEM_SAVE_MAGIC_DEVICE_MIGRATION_MAGICAL_DEVICES,b. Transfer Evocation experience to Magical Devices (existing evocable items other than Spell Cards) (level after transfer: {0})
 LOC_SYSTEM_WELCOME_FIRST,Welcome to Gensokyo!
 LOC_SYSTEM_WELCOME,Welcome back to Gensokyo!
 LOC_SYSTEM_LOS_MON,You see a monster.
@@ -3891,8 +3891,8 @@ LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_PERFECT,A charm infused with Eirin’s elixir
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_BLOSSOM,A charm containing spring energy from the Spring Snow Incident.\nCharges with ambient spring energy and activates a binding spell.\nWhen fully charged, press 'v' to paralyze nearby enemies.\nResets charge to 0% afterward.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_TIMES,A charm infused with spell power used during the Imperishable Night Incident.\nCharges with ambient time energy and produces Power items.\nWhen it reaches 100%, it automatically drops power items around it.\nResets charge to 0% afterward.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_FAITH,A charm developed by the Moriya Shrine that collects faith.\nAutomatically increases faith when fully charged, then resets.\nSome gods ignore this, so it might not work on all.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE,A charm modified to send long-distance signals underground.\nIncreases MP regen when equipped at full charge.\nPress 'v' while fully charged to instantly restore MP.\n
-LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,A charm said to have revived the Crown Prince in the Dream Mausoleum.\nCharges with spirits and replenishes one mechanical tool when full.\nPress 'v' to activate.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WAVE,A charm modified to allow long-distance communication even underground, such as in the Underworld.\nWhile equipped, its signal reception gradually improves as it charges, and the received signals increase your Electrical Load limit when fully charged.\nKeeping it equipped at 100% charge increases your Electrical Load limit by 5.\nPress 'v' while wearing it at 100% charge to replenish the charges of a mechanical tool you are carrying.\n
+LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_SPIRIT,A charm that can hold divine spirits, said to have been used to revive the Crown Prince in the Hall of Dreams' Great Mausoleum.\nWhile equipped, it gathers nearby divine spirits, whose energy restores MP when fully charged.\nKeeping it equipped at 100% charge increases MP regeneration.\nPress 'v' while wearing it at 100% charge to instantly restore MP.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_GRAZE,A charm filled with the essence of Graze.\nWhile equipped, gradually charges and provides Graze ability at full charge.\nPress 'v' to dodge all avoidable attacks for a few turns.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_WEATHER,A charm infused with a delinquent celestial's sword energy.\nTriggers the stored weather effect when at 100% charge, greatly increasing health regeneration.\n
 LOC_SYSTEM_ITEM_DESCRIPTION_AMULET_OCCULT,A charm powered by the Occult Ball that manifests urban legends.\nCharges with occult energy and can banish all summoned enemies in sight.\nAlso grants a random yokai effect.\n
@@ -5914,3 +5914,7 @@ LOC_SYSTEM_ITEM_DESCRIPTION_SCROLL_DISASSEMBLE,A scroll that removes installed m
 LOC_SYSTEM_ITEM_SCROLL_DISASSEMBLE,Removed {1} from {0}!
 LOC_SYSTEM_ITEM_SCROLL_DISASSEMBLE_FAIL,No equipment has an installed machine.
 LOC_SYSTEM_DISPLAY_MANAGER_DISASSEMBLE_MACHINE,Remove a machine from which piece of equipment?
+LOC_SYSTEM_ITEM_INSTALL,Install
+LOC_SYSTEM_MACHINE_EFFECT_POWER_USAGE,Power usage:{0}
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_POWER_EQUIP,The amulet has increased your Electrical Load limit!
+LOC_SYSTEM_ITEM_JEWELRY_AMULET_WAVE_POWER_UNEQUIP,Your amulet no longer increases your Electrical Load limit.

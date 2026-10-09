@@ -586,7 +586,7 @@ bool UseMachine(machine_type kind, bool short_, int power, coord_def &target)
 		if (CheckThrowPath(you.position, target, beam)) {
 			beam_infor temp_infor(randC(3, 6 + power / 6), 3 * (6 + power / 6), 16, &you, you.GetParentType(), MachineLength(kind), 8, BMT_PENETRATE, ATT_THROW_COLD, name_infor(LOC_SYSTEM_ATT_COLD));
 			if (short_)
-				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
+				temp_infor.length = GetLengthFromCenter(target.x, target.y, you.position.x, you.position.y);
 
 			for (int i = 0; i < (you.GetParadox() ? 2 : 1); i++) {
 				PlaySE("cold");
@@ -608,7 +608,7 @@ bool UseMachine(machine_type kind, bool short_, int power, coord_def &target)
 
 			beam_infor temp_infor(randC(2, 4 + power / 8), 2 * (4 + power / 8), 10, &you, you.GetParentType(), MachineLength(kind), 1, BMT_WALL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_V_EARTH_SHOT));
 			if (short_)
-				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
+				temp_infor.length = GetLengthFromCenter(target.x, target.y, you.position.x, you.position.y);
 
 			for (int k = 0; k < (you.GetParadox() ? 2 : 1); k++)
 			{
@@ -730,7 +730,7 @@ bool UseMachine(machine_type kind, bool short_, int power, coord_def &target)
 		if (CheckThrowPath(you.position, target, beam)) {
 			beam_infor temp_infor(randC(1, 13 + power / 6), 1 * (13 + power / 6), 14, &you, you.GetParentType(), MachineLength(kind), 1, BMT_NORMAL, ATT_THROW_NORMAL, name_infor(LOC_SYSTEM_ATT_V_METAL));
 			if (short_)
-				temp_infor.length = ceil(GetPositionGap(you.position.x, you.position.y, target.x, target.y));
+				temp_infor.length = GetLengthFromCenter(target.x, target.y, you.position.x, you.position.y);
 
 			for (int i = 0; i < (you.GetParadox() ? 6 : 3); i++) {
 				PlaySE("shoot");

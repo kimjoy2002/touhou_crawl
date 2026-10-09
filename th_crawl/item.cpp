@@ -980,6 +980,8 @@ string item::GetName(int num_, bool simple_, string lang)
 				ss<<"("<<LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_MACHINE_CHARGED) << ")";
 			temp += ss.str();
 		}
+		if(IsInstallableMachine((machine_type)value2))
+			temp += " {" + LocalzationManager::locString(lang,LOC_SYSTEM_ITEM_INSTALL) + "}";
 	}
 	if(type==ITM_MISCELLANEOUS)
 	{

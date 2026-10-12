@@ -23,6 +23,7 @@
 #include "replay.h"
 #include "mon_infor.h"
 #include "tribe.h"
+#include "instance_dungeon.h"
 
 extern const char *version_string;
 
@@ -1108,6 +1109,32 @@ bool Dump(int type, wstring *filename_)
 
 	ss << "\n\n\n";
 
+
+	bool instance_entered_ = false;
+	for(const instance_dungeon_slot& slot_ : instance_dungeon.slots)
+		if(slot_.state != IDS_READY)
+			instance_entered_ = true;
+	if(instance_entered_)
+	{
+		static const LOCALIZATION_ENUM_KEY state_name_[] = {
+			LOC_SYSTEM_INSTANCE_DUNGEON_STATE_READY,
+			LOC_SYSTEM_INSTANCE_DUNGEON_STATE_ENTERED,
+			LOC_SYSTEM_INSTANCE_DUNGEON_STATE_CLEAR,
+			LOC_SYSTEM_INSTANCE_DUNGEON_STATE_CLOSED
+		};
+		ss << LocalzationManager::locString(LOC_SYSTEM_INSTANCE_DUNGEON) << "\n";
+		for(const instance_dungeon_slot& slot_ : instance_dungeon.slots)
+		{
+			const instance_dungeon_infor* infor_ = GetInstanceDungeonInfor(slot_.type);
+			if(!infor_ || slot_.state == IDS_READY)
+				continue;
+			ss << "  " << LocalzationManager::locString(infor_->name) << " - " << CurrentLevelString(slot_.floor);
+			if(slot_.state >= IDS_READY && slot_.state <= IDS_CLOSED)
+				ss << " (" << LocalzationManager::locString(state_name_[slot_.state]) << ")";
+			ss << "\n";
+		}
+		ss << "\n\n\n";
+	}
 
 	if(PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_TURNS)) < 8) {
 		ss << std::string(8-PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_TURNS)), ' ');

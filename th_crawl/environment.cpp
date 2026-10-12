@@ -29,6 +29,7 @@
 #include "option_manager.h"
 #include "steam_api.h"
 #include "amulet.h"
+#include "instance_dungeon.h"
 #include <set>
 
 
@@ -351,10 +352,12 @@ bool environment::MakeMap(bool return_)
 	if(!make || (isInstanceMap() && !return_))
 	{
 		map_algorithms(floor);
+		if(isNormalGame())
+			instance_dungeon.CheckEnterPlaced(floor);
 		allCalculateAutoTile();
 		if(isNormalGame())
 		{
-			if(floor != SCARLET_UNDER_LEVEL)
+			if(floor != SCARLET_UNDER_LEVEL && floor != INSTANCE_LEVEL)
 			{
 				create_mon(floor, GetLevelMonsterNum(floor,false));
 				create_item(floor,  GetLevelMonsterNum(floor,true));
@@ -412,6 +415,7 @@ bool environment::MakeMap(bool return_)
 		case HAKUREI_LEVEL:
 		case HAKUREI_LEVEL+MAX_HAKUREI_LEVEL:
 		case ZIGURRAT_LEVEL:
+		case INSTANCE_LEVEL:
 			{
 				AddNote(you.turn,CurrentLevelString(floor),LocalzationManager::formatString(LOC_SYSTEM_NOTE_DUNGEON_ENTER, PlaceHolderHelper(CurrentLevelString(floor))), CL_normal);
 			}
@@ -673,6 +677,7 @@ stair_kind environment::getStairKind(int x_, int y_)
 	case DG_PANDEMONIUM_STAIR:
 	case DG_HAKUREI_STAIR:
 	case DG_ZIGURRAT_STAIR:
+	case DG_INSTANCE_STAIR:
 		return STAIR_KIND_DOWN_SPECIAL;
 	case DG_UP_STAIR:
 		return STAIR_KIND_UP_BASE;
@@ -725,6 +730,7 @@ char environment::getAsciiDot(int x_, int y_)
 	case DG_HAKUREI_STAIR:
 		return '>';
 	case DG_ZIGURRAT_STAIR:
+	case DG_INSTANCE_STAIR:
 		return '>';
 	case DG_RETURN_STAIR:
 		return '<';
@@ -819,6 +825,7 @@ string environment::getTileHelp(int x_, int y_)
 	case DG_PANDEMONIUM_STAIR:
 	case DG_HAKUREI_STAIR:
 	case DG_ZIGURRAT_STAIR:
+	case DG_INSTANCE_STAIR:
 		return LocalzationManager::formatString(LOC_SYSTEM_TILE_HELP_DOWN, PlaceHolderHelper(joypadUtil::get(">",GVK_BUTTON_A)));
 	case DG_UP_STAIR:
 		return floor==0?LocalzationManager::locString(LOC_EMPTYSTRING):LocalzationManager::formatString(LOC_SYSTEM_TILE_HELP_UP, PlaceHolderHelper(joypadUtil::get("<",GVK_BUTTON_A)));
@@ -1877,6 +1884,9 @@ void environment::playBgm() {
 		PlayBGM("hakurei");
 	else if(floor == ZIGURRAT_LEVEL)
 		PlayBGM("ziggurat");
+	else if (floor == INSTANCE_LEVEL) {
+		PlayBGM("stage1");
+	}
 	else if (floor == OKINA_LEVEL) {
 		if (you.god_value[GT_OKINA][0] != OKINA_LEVEL
 			&& you.god_value[GT_OKINA][0] >= 0 &&
@@ -3137,6 +3147,7 @@ void SaveFile(bool test_)
 
 	ReplayClass.SaveDatas(fp);
 	SaveWikiSearchHistory(fp);
+	instance_dungeon.SaveDatas(fp);
 
 
 
@@ -3292,6 +3303,8 @@ bool LoadFile()
 	
 	ReplayClass.LoadDatas(fp);
 	LoadWikiSearchHistory(fp);
+	if(isPrevVersion(loading_version_string, "ver1.303") || !instance_dungeon.LoadDatas(fp))
+		instance_dungeon.initForOldSave();
 
 	
 
@@ -3367,6 +3380,8 @@ string CurrentLevelString(int level, int ziggurat_level)
 		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_OKINA);
 	else if (level_ == ZIGURRAT_LEVEL)
 		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_ZIGURRAT) << ' ' << LocalzationManager::formatString(LOC_SYSTEM_DUNGEON_FLOOR, PlaceHolderHelper(to_string(ziggurat_level)));
+	else if (level_ == INSTANCE_LEVEL)
+		ss << GetInstanceDungeonName();
 	else
 		ss << LocalzationManager::locString(LOC_SYSTEM_DUNGEON_UKNOWN_DUNGEON);
 

@@ -291,6 +291,9 @@
     <ClCompile Include="zigurrat.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="instance_dungeon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="localization.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -507,6 +510,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="zigurrat.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="instance_dungeon.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="localization.h">

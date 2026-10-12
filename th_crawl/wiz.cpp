@@ -21,6 +21,7 @@
 #include "god.h"
 #include "tribe.h"
 #include "unique_spellcard.h"
+#include "instance_dungeon.h"
 
 
 extern int g_menu_select;
@@ -185,6 +186,56 @@ void create_and_kill(int floor, float percent_ = 1.0f) {
 				temp->position = wizard_loot_position();
 		}
 	}
+}
+
+static instance_dungeon_type wizard_select_instance_dungeon()
+{
+	const string keys_ = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	vector<int> listkey;
+	vector<instance_dungeon_type> types_;
+	enterlog();
+	for(int i = 0; i < IDG_MAX && types_.size() < keys_.size(); i++) {
+		const instance_dungeon_infor* infor_ = GetInstanceDungeonInfor((instance_dungeon_type)i);
+		if(!infor_)
+			continue;
+		char key_ = keys_[types_.size()];
+		ostringstream ss;
+		ss << string(1,key_) << "-" << LocalzationManager::locString(infor_->name) << " ";
+		printlog(ss.str(), false, false, false, CL_help, key_);
+		listkey.push_back(key_);
+		types_.push_back(infor_->type);
+	}
+	enterlog();
+	listkey.push_back(VK_ESCAPE);
+	printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_TRAVEL_DUNGEON), false, false, false, CL_help);
+	startSelection(listkey);
+	g_menu_select = -1;
+	int key_ = 0;
+	while(true) {
+		key_ = waitkeyinput(true);
+		if(key_ == VK_RIGHT){
+			if(++g_menu_select>listkey.size()-1)
+				g_menu_select = 0;
+			continue;
+		} else if (key_ == VK_LEFT) {
+			if(--g_menu_select<0)
+				g_menu_select = listkey.size()-1;
+			continue;
+		} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
+			if(listkey.size() > g_menu_select) {
+				key_ = listkey[g_menu_select];
+			} else {
+				break;
+			}
+		}
+		endSelection();
+		break;
+	}
+	g_menu_select = -1;
+	for(int i = 0; i < (int)types_.size(); i++)
+		if(key_ == keys_[i])
+			return types_[i];
+	return IDG_NONE;
 }
 
 void wiz_mode()
@@ -829,7 +880,7 @@ void wiz_mode()
 			deque<monster*> dq;
 			dungeon_level next_ = TEMPLE_LEVEL;
 
-			pair<char,LOCALIZATION_ENUM_KEY> keylist[19] = {
+			pair<char,LOCALIZATION_ENUM_KEY> keylist[20] = {
 				make_pair('d',LOC_SYSTEM_DUNGEON),
 				make_pair('t',LOC_SYSTEM_DUNGEON_TEMPLE),
 				make_pair('l',LOC_SYSTEM_DUNGEON_MISTYLAKE),
@@ -848,14 +899,15 @@ void wiz_mode()
 				make_pair('o',LOC_SYSTEM_DUNGEON_MOON),
 				make_pair('k',LOC_SYSTEM_DUNGEON_PANDEMONIUM),
 				make_pair('z',LOC_SYSTEM_DUNGEON_HAKUREI),
-				make_pair('!',LOC_SYSTEM_DUNGEON_ZIGURRAT)
+				make_pair('!',LOC_SYSTEM_DUNGEON_ZIGURRAT),
+				make_pair('~',LOC_SYSTEM_INSTANCE_DUNGEON)
 			};
 			enterlog();
 			std::vector<int> listkey;
-			for(int i = 0; i < 19; i++) {
+			for(int i = 0; i < 20; i++) {
 				ostringstream ss;
 				ss << string(1,keylist[i].first) << "-" << LocalzationManager::locString(keylist[i].second) << " ";
-				printlog(ss.str(), (i==18?true:false), false, false, CL_help, keylist[i].first);
+				printlog(ss.str(), (i==19?true:false), false, false, CL_help, keylist[i].first);
 				listkey.push_back(keylist[i].first);
 			}
 			listkey.push_back(VK_ESCAPE);
@@ -984,6 +1036,21 @@ void wiz_mode()
 			case '!':
 				next_ = ZIGURRAT_LEVEL;
 				break;
+			case '~':
+			{
+				if(current_level == INSTANCE_LEVEL) {
+					printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
+					return;
+				}
+				instance_dungeon_type type_ = wizard_select_instance_dungeon();
+				if(type_ == IDG_NONE) {
+					printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
+					return;
+				}
+				instance_dungeon.WizardEnter(type_, current_level, you.position);
+				next_ = INSTANCE_LEVEL;
+				break;
+			}
 			default:
 				printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);
 				return;

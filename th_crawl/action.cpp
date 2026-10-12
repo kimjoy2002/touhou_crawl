@@ -29,6 +29,7 @@
 #include "smoke.h"
 #include "ring.h"
 #include "map.h"
+#include "instance_dungeon.h"
 #include "skill_use.h"
 #include "floor.h"
 #include "projectile.h"
@@ -2016,6 +2017,16 @@ bool warning(dungeon_tile_type type, bool down)
 			}
 		}
 		break;
+	case DG_INSTANCE_STAIR:
+		if(down)
+		{
+			if(!instance_dungeon.CanEnter(current_level, you.position)) {
+				printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_SUBDUNGEON_ZIGURRAT_ALREADY), true, false, false, CL_help);
+				return false;
+			}
+			return true;
+		}
+		break;
 	case DG_HAKUREI_STAIR:
 		if(down)
 		{
@@ -2076,6 +2087,7 @@ void Stair_move_all() {
 	case DG_PANDEMONIUM_STAIR:
 	case DG_HAKUREI_STAIR:
 	case DG_ZIGURRAT_STAIR:
+	case DG_INSTANCE_STAIR:
 	case DG_FORESTOFMAGIC_STAIR:
 	case DG_DOLLSHOUSE_STAIR:
 		Stair_move(true);
@@ -2276,6 +2288,10 @@ bool Stair_move(bool down)
 				case DG_ZIGURRAT_STAIR:
 					next_ = ZIGURRAT_LEVEL;
 					break;
+				case DG_INSTANCE_STAIR:
+					next_ = INSTANCE_LEVEL;
+					instance_dungeon.Enter(current_level, you.position);
+					break;
 				case DG_HAKUREI_STAIR:
 					next_ = HAKUREI_LEVEL;
 					break;
@@ -2283,7 +2299,7 @@ bool Stair_move(bool down)
 					break;
 			}
 
-			env[next_].EnterMap(0,dq); 
+			env[next_].EnterMap(0,dq);
 			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_DOWN),true,false,false,CL_normal);
 			GodAccpect_Stair(true, true);
 			PlaySE("stair");
@@ -2408,8 +2424,20 @@ bool Stair_move(bool down)
 				env[current_level].stair_up[0] = you.position;
 
 			
+			bool instance_exit_ = current_level == INSTANCE_LEVEL;
 			switch(current_level)
 			{
+			case INSTANCE_LEVEL:
+				if(instance_dungeon_slot* slot_ = instance_dungeon.GetCurrentSlot())
+				{
+					floor_return = slot_->floor;
+					pos_return = slot_->pos;
+				}
+				else
+				{
+					pos_return = env[floor_return].stair_down[0];
+				}
+				break;
 			case TEMPLE_LEVEL:
 				floor_return = map_list.dungeon_enter[TEMPLE].floor;
 				env[floor_return].MakeMap(true); //역행시 서브던전 입구를 찾기 위해 미리 만든다.
@@ -2550,6 +2578,8 @@ bool Stair_move(bool down)
 			you.TurnEnd();
 			env[floor_return].EnterMap(-1,dq,pos_return,preserve_return_map);
 			printlog(LocalzationManager::locString(LOC_SYSTEM_STAIR_RETURN),true,false,false,CL_normal);
+			if(instance_exit_)
+				instance_dungeon.Exit();
 			GodAccpect_Stair(false, true);
 			PlaySE("stair");
 			you.ReleaseDimention();

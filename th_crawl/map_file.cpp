@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 #include "map.h"
+#include "instance_dungeon.h"
 #include "throw.h"
 #include "rand_shuffle.h"
 #include "mon_infor.h"
@@ -36,7 +37,8 @@ bool environment::isFirstFloor(int level_)
 		(level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL)||
 		level_ == HAKUREI_LEVEL ||
 		level_ == OKINA_LEVEL ||
-		level_ == ZIGURRAT_LEVEL
+		level_ == ZIGURRAT_LEVEL ||
+		level_ == INSTANCE_LEVEL
 		) 
 		return true;
 	return false;
@@ -68,7 +70,8 @@ bool environment::isLastFloor(int level_)
 		(level_ >= PANDEMONIUM_LEVEL && level_ <= PANDEMONIUM_LAST_LEVEL )||
 		level_ == HAKUREI_LAST_LEVEL ||
 		level_ == OKINA_LEVEL ||
-		level_ == ZIGURRAT_LEVEL)
+		level_ == ZIGURRAT_LEVEL ||
+		level_ == INSTANCE_LEVEL)
 		return true;
 	return false;
 	//if(level_<MAX_DUNGEUN_LEVEL || (level_>=YOUKAI_MOUNTAIN_LEVEL && current_level<YOUKAI_MOUNTAIN_LEVEL+MAX_YOUKAI_MOUNTAIN_LEVEL) 
@@ -672,7 +675,7 @@ bool PixedMap(map_dummy* map, const char *temp)
 				int num_ = temp[j] == 'I' ? rand_int(3, 4) : 1;
 				for (int k = 0; k < num_; k++) {
 					item_infor t;
-					CreateFloorItem(map->floor, &t);
+					CreateInstanceFloorItem(map->floor, &t);
 					map->item_list.push_back(mapdummy_item(t, coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y)));
 					map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->floor_tex;
 				}
@@ -714,6 +717,11 @@ bool PixedMap(map_dummy* map, const char *temp)
 					map_list.dungeon_enter[stiar_enter_].pos = coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y);
 					map_list.dungeon_enter[stiar_enter_].pos += map->pos;
 				}
+				else if (map->sp_tile_list[index_] == DG_INSTANCE_STAIR)
+				{//인스턴스 서브던전 입구
+					instance_dungeon.SetEnterPos(map->floor, map->pattern - INSTANCE_ENTER_PATTERN,
+						coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y) + map->pos);
+				}
 				break;
 			}
 			case 'n':
@@ -722,7 +730,7 @@ bool PixedMap(map_dummy* map, const char *temp)
 			{
 				//그 층에 일반적으로 나오는 몹들
 				map->tiles[i % (map->size_x * 2 + 1)][i / (map->size_x * 2 + 1)] = map->floor_tex;
-				int mon_ = getMonsterFromFloor(map->floor, (temp[j] == 'm' ? GMFF_FLAG_ALL : (temp[j] == 'n' ? GMFF_FLAG_ONLY_WEAK : (temp[j] == 'M' ? GMFF_FLAG_ONLY_STRONG : GMFF_FLAG_ALL))));
+				int mon_ = GetInstanceFloorMonster(map->floor, (temp[j] == 'm' ? GMFF_FLAG_ALL : (temp[j] == 'n' ? GMFF_FLAG_ONLY_WEAK : (temp[j] == 'M' ? GMFF_FLAG_ONLY_STRONG : GMFF_FLAG_ALL))));
 				if (mon_ != -1) {
 					map->monster_list.push_back(mapdummy_mon(mon_, 0, coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y)));
 				}
@@ -950,6 +958,10 @@ void map_dummy::patternSet()
 	}
 	
 	
+	else if(pattern >= INSTANCE_ENTER_PATTERN && pattern < INSTANCE_ENTER_PATTERN_MAX) //인스턴스 서브던전 입구
+	{
+		PixedMap(this, instance_enter_pattern(this, pattern-INSTANCE_ENTER_PATTERN));
+	}
 	else if(pattern >= 100+MAX_SUB_DUNGEON && pattern < 100+MAX_SUB_DUNGEON+GT_LAST)
 	{
 		if(randA(3))

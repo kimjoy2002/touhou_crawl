@@ -15,6 +15,7 @@
 #include "armour.h"
 #include "evoke.h"
 #include "zigurrat.h"
+#include "instance_dungeon.h"
 #include "scarlet_under.h"
 
 static list<pair<const map_dummy*,monster_index>> reserved_named;
@@ -242,7 +243,8 @@ void map_dummy::make_map(environment& env_pointer, bool wall_, bool stair_input_
 						stait_down_num++;
 					}
 				}
-				else if(env_pointer.dgtile[i+pos.x][j+pos.y].tile >= DG_SUB_STAIR_FIRST && env_pointer.dgtile[i+pos.x][j+pos.y].tile < DG_SUB_STAIR_MAX)
+				else if((env_pointer.dgtile[i+pos.x][j+pos.y].tile >= DG_SUB_STAIR_FIRST && env_pointer.dgtile[i+pos.x][j+pos.y].tile < DG_SUB_STAIR_MAX) ||
+					env_pointer.dgtile[i+pos.x][j+pos.y].tile == DG_INSTANCE_STAIR)
 				{
 					env_pointer.stair_vector.push_back(stair_info(coord_def(i+pos.x,j+pos.y),tiles[i+size_x][j+size_y]));
 				}
@@ -521,6 +523,9 @@ void map_algorithms(int num)
 			env[num].ClearFloor();
 			map_algorithms_zigurrat(num);
 		}
+		else if (num == INSTANCE_LEVEL) {
+			map_algorithms_instance(num);
+		}
 		else
 		{
 			map_algorithms01(num,DG_FLOOR,DG_WALL);
@@ -571,6 +576,7 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 			vector_.push_back(100+MAX_SUB_DUNGEON+i);
 		}
 	}
+	instance_dungeon.GetEnterPatterns(floor, vector_);
 	if(floor != 0 && floor != YUKKURI_LAST_LEVEL && floor != DREAM_LEVEL)
 	{ //테스트
 		int i = rand_int(1, 2);

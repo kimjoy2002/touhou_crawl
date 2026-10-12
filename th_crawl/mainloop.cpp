@@ -17,6 +17,7 @@
 #include "beam.h"
 #include "monster_texture.h"
 #include "map.h"
+#include "instance_dungeon.h"
 #include "dump.h"
 #include "god.h"
 #include "throw.h"
@@ -46,7 +47,7 @@ extern bool ableWiz;
 
 extern HANDLE mutx;
 
-const char *version_string = "ver1.303";
+const char *version_string = "ver1.304";
 extern int g_tile_size;
 
 int version_string_to_int() {
@@ -459,6 +460,8 @@ void charter_selete(bool first)
 	}
 	if(map_list.tutorial == GM_TITLE)
 		map_list.tutorial = GM_NORMAL;
+	if(!saveexit)
+		instance_dungeon.init();
 
 
 	if(isNormalGame() && !saveexit)

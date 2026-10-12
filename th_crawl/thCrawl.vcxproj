@@ -233,6 +233,7 @@
     <ClCompile Include="weapon.cpp" />
     <ClCompile Include="wiz.cpp" />
     <ClCompile Include="zigurrat.cpp" />
+    <ClCompile Include="instance_dungeon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="alchemy.h" />
@@ -306,6 +307,7 @@
     <ClInclude Include="unit.h" />
     <ClInclude Include="weapon.h" />
     <ClInclude Include="zigurrat.h" />
+    <ClInclude Include="instance_dungeon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

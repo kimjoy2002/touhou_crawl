@@ -5738,6 +5738,7 @@ interupt_type players::resetLOS(bool speak_)
 						case DG_TEMPLE_KEIKI:
 						case DG_TEMPLE_TENKYUU:
 						case DG_ZIGURRAT_STAIR:
+						case DG_INSTANCE_STAIR:
 							switch(env[current_level].dgtile[check_pos_.x][check_pos_.y].tile)
 							{								
 							case DG_TEMPLE_STAIR:									

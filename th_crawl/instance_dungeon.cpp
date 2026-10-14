@@ -16,6 +16,7 @@
 #include "note.h"
 #include "rect.h"
 #include "player.h"
+#include "event.h"
 #include <algorithm>
 
 instance_dungeon_manager instance_dungeon;
@@ -51,9 +52,8 @@ static bool CanChooseFairyTree()
 	return you.char_type != UNIQ_START_SUNNY && you.char_type != UNIQ_START_STAR && you.char_type != UNIQ_START_LUNA;
 }
 
-static void make_map_fairy_tree(int floor_, const instance_dungeon_slot& slot_)
+void SetFairyTreeTable(instance_spawn_table& table_)
 {
-	instance_spawn_table table_;
 	table_.weak.push(MON_FAIRY_GREEN, 10);
 	table_.weak.push(MON_FAIRY_BLUE, 10);
 	table_.weak.push(MON_FAIRY_RED, 10);
@@ -65,12 +65,23 @@ static void make_map_fairy_tree(int floor_, const instance_dungeon_slot& slot_)
 	table_.strong.push(MON_FAIRY_RED_COMMANDER, 5);
 	table_.item.push(2, 10); //좋은 초반물약
 	table_.item.push(3, 10); //좋은 초반스크롤
+}
 
-	vector<coord_def> pos_list_;
-	MakeInstanceMapFromPattern(floor_, "\
+static void make_map_fairy_tree(int floor_, const instance_dungeon_slot& slot_)
+{
+	const int size_x_ = 22, size_y_ = 29;
+	const int tree_count_ = 60;
+	const int event_row_min_ = 20, event_row_max_ = 49; 
+	const int event_distance_ = 6;
+	const int event_count_ = 6;
+
+	instance_spawn_table table_;
+	SetFairyTreeTable(table_);
+
+	string pattern_ = "\
 TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\
 TTTTTTTTTTTTTTTTTTTTiiiiiTTTTTTTTTTTTTTTTTTTT\
-TTTTTTTTTTT____TTTii.....iiTTT____TTTTTTTTTTT\
+TTTTTTTTTTT____TTT.........TTT____TTTTTTTTTTT\
 TTTTTTT_______TTT...........TTT_______TTTTTTT\
 TTTT__________TT.............TT__________TTTT\
 TT____________TT......S......TT____________TT\
@@ -81,49 +92,68 @@ T____TTT......TT.............TT......TTT____T\
 T___TTT.......TTT...........TTT.......TTT___T\
 T___TT.........TTTT.......TTTT.........TT___T\
 T___TT......m....TTTT...TTTT....m......TT___T\
-T___TT.............TTT+TTT.............TT___T\
-T___T....m.M.......+.....+.......M.m....T___T\
-T___TT.............T.....T.............TT___T\
+T___TTi............TTT+TTT............iTT___T\
+T___Ti...m.M.......+.....+.......M.m...iT___T\
+T___TTi............T.....T............iTT___T\
 T___TT.......m.....T.....T.....m.......TT___T\
 T___TTT...........TT.....TT...........TTT___T\
 T____TTTT.......TTTT.....TTTT.......TTTT____T\
 T______TTTTTTTTTTTTT.....TTTTTTTTTTTTT______T\
 T_______________TTTT.....TTTT_______________T\
 T_________________TTT...TTT_________________T\
-T__________________TT...TT__________________T\
-T__________________TT...TT__________________T\
-T___________________TT+TT___________________T\
-T___________________________________________T\
-T___________________________________________T\
-T___________________________________________T\
-T___________________________________________T\
-T___________________________________________T\
-T___________________________________________T\
-T___________________________________________T\
-T___________________________________________T\
-T___________________________________________T\
-T___________________________________________T\
-T___________________________________________T\
-T___________________________________________T\
-T___________________________________________T\
-T___________________________________________T\
-T___________________________________________T\
-T___________________________________________T\
-T___________________________________________T\
-T___________________________________________T\
+T__________________TT...TT_________________TT\
+T__________________TT...TT_________________TT\
+TT__________________TT+TT_________________TTT\
+TTT_______________________________________TTT\
+TTTT____________________________________TTTTT\
+TTT___________________________________TTTTTTT\
+TTT____________________________________TTTTTT\
+TT______________________________________TTTTT\
+TT_______________________________________TTTT\
+T_________________________________________TTT\
+TTT________________________________________TT\
+TTTTT______________________________________TT\
+TTTT_______________________________________TT\
+TTTT______________________________________TTT\
+TTTTT____________________________________TTTT\
+TTTTTT__________________________________TTTTT\
+TTTTT__________________________________TTTTTT\
+TTTT____________________________________TTTTT\
+TTTT_____________________________________TTTT\
+TTTT______________________________________TTT\
+TTT________________________________________TT\
+TT__________________________________________T\
+T__________________________________________TT\
+TT________________________________________TTT\
+TTT________________________________________TT\
+TT__________________________________________T\
+T__________________________________________TT\
+TT________________________________________TTT\
+TTT_________________________________________T\
+TT_________________________________________TT\
+T________________________________________TTTT\
 TT_________________________________________TT\
 TTTT_____________________________________TTTT\
 TTTTTTT_______________________________TTTTTTT\
 TTTTTTTTTTT_______________________TTTTTTTTTTT\
 TTTTTTTTTTTTTTTT______<______TTTTTTTTTTTTTTTT\
-TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT",
-		22, 24, DG_FLOOR2, DG_TREE, &pos_list_, &table_);
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT";
+	ScatterInstanceBlocks(pattern_, size_x_, size_y_, '_', 'T', tree_count_);
+
+	vector<coord_def> pos_list_;
+	MakeInstanceMapFromPattern(floor_, pattern_.c_str(), size_x_, size_y_, DG_FLOOR2, DG_TREE, &pos_list_, &table_);
 
 	const monster_index fairies_[] = { MON_SUNNY, MON_LUNAR, MON_STAR };
 	int i = 0;
 	for (auto it = pos_list_.begin(); it != pos_list_.end() && i < 3; it++, i++)
-		AddInstanceMonster(floor_, fairies_[i], *it);
+		env[floor_].MakeEvent(EVL_INSTANCE_NAMED, *it, EVT_SIGHT, -1, fairies_[i]);
+
+	vector<coord_def> event_pos_ = PickInstancePatternPos(pattern_, size_x_, size_y_, '_',
+		event_row_min_, event_row_max_, event_count_, event_distance_);
+	for (const coord_def& pos_ : event_pos_)
+		env[floor_].MakeEvent(EVL_FAIRY_TREE, pos_, EVT_SIGHT_AREA);
 }
+
 
 //임시 던전
 static void make_map_temp(int floor_, const instance_dungeon_slot& slot_)
@@ -216,33 +246,40 @@ string GetInstanceDungeonName()
 
 static instance_spawn_table* current_spawn_table = nullptr; //MakeInstanceMapFromPattern 도중에만 쓰임
 
+int GetInstanceSpawnMonster(instance_spawn_table& table_, int power_)
+{
+	switch (power_)
+	{
+	case GMFF_FLAG_ONLY_WEAK:
+		if (table_.weak.GetSize())
+			return table_.weak.choice();
+		break;
+	case GMFF_FLAG_ONLY_STRONG:
+		if (table_.strong.GetSize())
+			return table_.strong.choice();
+		break;
+	default:
+		break;
+	}
+	if (table_.all.GetSize())
+		return table_.all.choice();
+	if (power_ == GMFF_FLAG_ALL && (table_.weak.GetSize() || table_.strong.GetSize()))
+	{
+		random_extraction<random_extraction<int>*> groups_;
+		groups_.push(&table_.weak, table_.weak.GetSize() ? 1 : 0);
+		groups_.push(&table_.strong, table_.strong.GetSize() ? 1 : 0);
+		return groups_.choice()->choice();
+	}
+	return -1;
+}
+
 int GetInstanceFloorMonster(int floor_, int power_)
 {
 	if (floor_ == INSTANCE_LEVEL && current_spawn_table)
 	{
-		instance_spawn_table& table_ = *current_spawn_table;
-		switch (power_)
-		{
-		case GMFF_FLAG_ONLY_WEAK:
-			if (table_.weak.GetSize())
-				return table_.weak.choice();
-			break;
-		case GMFF_FLAG_ONLY_STRONG:
-			if (table_.strong.GetSize())
-				return table_.strong.choice();
-			break;
-		default:
-			break;
-		}
-		if (table_.all.GetSize())
-			return table_.all.choice();
-		if (power_ == GMFF_FLAG_ALL && (table_.weak.GetSize() || table_.strong.GetSize()))
-		{
-			random_extraction<random_extraction<int>*> groups_;
-			groups_.push(&table_.weak, table_.weak.GetSize() ? 1 : 0);
-			groups_.push(&table_.strong, table_.strong.GetSize() ? 1 : 0);
-			return groups_.choice()->choice();
-		}
+		int id_ = GetInstanceSpawnMonster(*current_spawn_table, power_);
+		if (id_ >= 0)
+			return id_;
 	}
 	return getMonsterFromFloor(GetInstanceBaseFloor(floor_), (getMonsterFromFloor_flag)power_);
 }
@@ -257,7 +294,7 @@ void CreateInstanceFloorItem(int floor_, item_infor* item_)
 
 void MakeInstanceMapFromPattern(int floor_, const char* pattern_, int size_x_, int size_y_,
 	dungeon_tile_type floor_tex_, dungeon_tile_type wall_tex_, vector<coord_def>* pos_list_,
-	instance_spawn_table* table_)
+	instance_spawn_table* table_, instance_map_marks* marks_)
 {
 	environment& env_ = env[floor_];
 	coord_def center_(DG_MAX_X / 2, DG_MAX_Y / 2);
@@ -271,8 +308,21 @@ void MakeInstanceMapFromPattern(int floor_, const char* pattern_, int size_x_, i
 	}
 
 	map_dummy map_(floor_, center_, false, size_x_, size_y_, 0, floor_tex_, wall_tex_);
+	string pattern_copy_ = pattern_;
+	if (marks_)
+	{
+		int width_ = size_x_ * 2 + 1;
+		for (int i = 0; i < (int)pattern_copy_.size(); i++)
+		{
+			auto it = marks_->list.find(pattern_copy_[i]);
+			if (it == marks_->list.end())
+				continue;
+			it->second.push_back(GetInstancePatternPos(i % width_, i / width_, size_x_, size_y_));
+			pattern_copy_[i] = marks_->floor;
+		}
+	}
 	current_spawn_table = table_;
-	PixedMap(&map_, pattern_);
+	PixedMap(&map_, pattern_copy_.c_str());
 	current_spawn_table = nullptr;
 	map_.make_map(env_, false, true);
 
@@ -293,6 +343,103 @@ void MakeInstanceMapFromPattern(int floor_, const char* pattern_, int size_x_, i
 	if (pos_list_)
 		pos_list_->insert(pos_list_->end(), map_.pos_list.begin(), map_.pos_list.end());
 	setBaseFloorWall(floor_, floor_tex_, wall_tex_);
+}
+
+coord_def GetInstancePatternPos(int x_, int y_, int size_x_, int size_y_)
+{
+	return coord_def(DG_MAX_X / 2, DG_MAX_Y / 2) + coord_def(x_ - size_x_, y_ - size_y_);
+}
+
+static vector<bool> GetPatternReach(const string& pattern_, int width_, int height_, const string& blocks_)
+{
+	vector<bool> reach_(width_ * height_, false);
+	size_t start_ = pattern_.find('<');
+	if (start_ == string::npos || (int)start_ >= width_ * height_)
+		return reach_;
+	vector<int> queue_ = { (int)start_ };
+	reach_[start_] = true;
+	for (size_t q = 0; q < queue_.size(); q++)
+	{
+		int x_ = queue_[q] % width_, y_ = queue_[q] / width_;
+		for (int dx = -1; dx <= 1; dx++)
+			for (int dy = -1; dy <= 1; dy++)
+			{
+				int nx_ = x_ + dx, ny_ = y_ + dy;
+				if (nx_ < 0 || nx_ >= width_ || ny_ < 0 || ny_ >= height_)
+					continue;
+				int index_ = ny_ * width_ + nx_;
+				if (reach_[index_] || blocks_.find(pattern_[index_]) != string::npos)
+					continue;
+				reach_[index_] = true;
+				queue_.push_back(index_);
+			}
+	}
+	return reach_;
+}
+
+void ScatterInstanceBlocks(string& pattern_, int size_x_, int size_y_, char floor_, char block_, int count_)
+{
+	int width_ = size_x_ * 2 + 1, height_ = size_y_ * 2 + 1;
+	if ((int)pattern_.size() < width_ * height_ || width_ < 4 || height_ < 4)
+		return;
+	string blocks_ = string("#T") + block_;
+	vector<bool> reach_ = GetPatternReach(pattern_, width_, height_, blocks_);
+	for (int placed_ = 0, tries_ = 0; placed_ < count_ && tries_ < count_ * 50; tries_++)
+	{
+		int x_ = rand_int(1, width_ - 3), y_ = rand_int(1, height_ - 3);
+		bool ok_ = true; 
+		for (int dx = -1; dx <= 2 && ok_; dx++)
+			for (int dy = -1; dy <= 2 && ok_; dy++)
+				if (pattern_[(y_ + dy) * width_ + x_ + dx] != floor_)
+					ok_ = false;
+		if (!ok_)
+			continue;
+		string backup_ = pattern_;
+		for (int dx = 0; dx <= 1; dx++) {
+			for (int dy = 0; dy <= 1; dy++) {
+				if(randA(4)) {
+					pattern_[(y_ + dy) * width_ + x_ + dx] = block_;
+				}
+			}
+		}
+		vector<bool> new_reach_ = GetPatternReach(pattern_, width_, height_, blocks_);
+		for (int i = 0; i < width_ * height_ && ok_; i++)
+			if (reach_[i] && !new_reach_[i] && pattern_[i] != block_)
+				ok_ = false;
+		if (!ok_)
+		{
+			pattern_ = backup_;
+			continue;
+		}
+		reach_ = new_reach_;
+		placed_++;
+	}
+}
+
+vector<coord_def> PickInstancePatternPos(const string& pattern_, int size_x_, int size_y_, char floor_,
+	int y_min_, int y_max_, int count_, int min_distance_)
+{
+	int width_ = size_x_ * 2 + 1, height_ = size_y_ * 2 + 1;
+	random_extraction<coord_def> candidates_;
+	for (int y = max(0, y_min_); y <= min(height_ - 1, y_max_); y++)
+		for (int x = 0; x < width_; x++)
+			if (y * width_ + x < (int)pattern_.size() && pattern_[y * width_ + x] == floor_)
+				candidates_.push(coord_def(x, y));
+	vector<coord_def> picked_;
+	while ((int)picked_.size() < count_ && candidates_.GetSize() > 0)
+	{
+		coord_def pos_ = candidates_.pop();
+		bool ok_ = true;
+		for (const coord_def& other_ : picked_)
+			if (max(abs(other_.x - pos_.x), abs(other_.y - pos_.y)) < min_distance_)
+				ok_ = false;
+		if (ok_)
+			picked_.push_back(pos_);
+	}
+	vector<coord_def> list_;
+	for (const coord_def& pos_ : picked_)
+		list_.push_back(GetInstancePatternPos(pos_.x, pos_.y, size_x_, size_y_));
+	return list_;
 }
 
 monster* AddInstanceMonster(int floor_, int id_, const coord_def& pos_, uint64_t flag_)
@@ -343,8 +490,18 @@ const char* instance_enter_pattern(map_dummy* map, int index_)
 	return pattern_;
 }
 
+bool HasInstanceNamedEvent(int floor_)
+{
+	for (const events& event_ : env[floor_].event_list)
+		if (event_.id == EVL_INSTANCE_NAMED && event_.value >= 0)
+			return true;
+	return false;
+}
+
 static bool DefaultInstanceClear(int floor_, const instance_dungeon_infor* infor_)
 {
+	if (HasInstanceNamedEvent(floor_))
+		return false;
 	for (monster& mon_ : env[floor_].mon_vector)
 	{
 		if (!mon_.isLive() || mon_.isUserAlly())

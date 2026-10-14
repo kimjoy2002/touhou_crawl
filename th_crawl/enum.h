@@ -403,6 +403,7 @@ enum event_type
 	EVT_APPROACH_BIG, //근처에 도착했다. (꽤나)
 	EVT_COUNT, //턴
 	EVT_ALWAYS, //항상
+	EVT_SIGHT_AREA, //5*5범위가 시야에
 	EVT_MAX
 };
 
@@ -1066,7 +1067,7 @@ enum monster_speak_type
 	MST_PROPOSAL_ACCEPT,
 	MST_DEAD,
 	MST_SPELLCARD,
-	MST_SPELLCARD_FORCE
+	MST_SPECIAL
 };
 
 enum god_type

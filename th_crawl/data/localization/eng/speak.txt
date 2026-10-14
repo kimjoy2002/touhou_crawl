@@ -1828,4 +1828,7 @@ SPEAK_FLAN_NORMAL3_SAKUYA,{0} said, "It was noisy upstairs. Was that your doing,
 SPEAK_FLAN_NORMAL4_SAKUYA,{0} said, "So you're playing with me today, Sakuya!"
 SPEAK_FLAN_NORMAL5_SAKUYA,{0} said, "I haven't had enough exercise lately. Let's have some fun!"
 SPEAK_FLANDRE_SPELLCARD,{0} shouted, "Thought I was blown to bits? Then die!"
-SPEAK_FLANDRE_SPELLCARD_FORCE,{0} shouted, "Did you think you could escape?"
+SPEAK_FLANDRE_SPECIAL,{0} shouted, "Did you think you could escape?"
+SPEAK_SUNNY_FAIRY_SPECIAL,{0} shouted, "You made it all the way into our home? Think you can leave in one piece?"
+SPEAK_LUNAR_FAIRY_SPECIAL,{0} shouted, "How did you get in here? I erased all the sounds..."
+SPEAK_STAR_FAIRY_SPECIAL,{0} shouted, "I knew you were coming the whole time. Everyone, ready?"

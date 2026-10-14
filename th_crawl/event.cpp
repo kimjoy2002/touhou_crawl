@@ -17,12 +17,15 @@
 #include "floor.h"
 #include "beam.h"
 #include "scarlet_under.h"
+#include "instance_dungeon.h"
+#include "speak.h"
 
 int EventOccur(int id, events* event_);
 
 void bamboo_count(int num);
 bool arena_event(int num);
 bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target);
+bool isSightArea(const coord_def& center_);
 
 events::events()
 :id(0),position(),type(EVT_ABOVE),prev_sight(false), value(0)
@@ -95,6 +98,11 @@ int events::action(int delay_)
 		}
 	}
 	if(type == EVT_SIGHT && is_sight && !prev_sight)
+	{
+		if(EventOccur(id,this))
+			return 0;
+	}
+	if(type == EVT_SIGHT_AREA && isSightArea(position))
 	{
 		if(EventOccur(id,this))
 			return 0;
@@ -1304,9 +1312,96 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		}
 		return 0;
 	}
+	case EVL_INSTANCE_NAMED:
+	{
+		if (event_->value < 0)
+			return 1;
+		for (events& other_ : env[current_level].event_list)
+		{
+			if (other_.id != EVL_INSTANCE_NAMED || other_.value < 0)
+				continue;
+			monster* mon_ = AddInstanceMonster(current_level, other_.value, other_.position);
+			other_.value = -1;
+			if (!mon_)
+				continue;
+			mon_->FoundTarget(&you, mon_->FoundTime());
+			if (&other_ == event_ && !env[current_level].isSilence(mon_->position))
+			{
+				string str_ = Get_Speak(mon_->id, mon_, MST_SPECIAL);
+				if (str_.empty())
+					str_ = Get_Speak(mon_->id, mon_, MST_FOUND);
+				if (!str_.empty())
+					printlog(str_, true, false, false, CL_speak);
+			}
+		}
+		return 1;
+	}
+	case EVL_FAIRY_TREE:
+	{
+		if (event_->value == 0)
+		{
+			if (!HasInstanceNamedEvent(current_level))
+				return 1;
+			instance_spawn_table table_;
+			SetFairyTreeTable(table_);
+			random_extraction<coord_def> pos_list_;
+			for (int x = -2; x <= 2; x++)
+			{
+				for (int y = -2; y <= 2; y++)
+				{
+					coord_def pos_ = event_->position + coord_def(x, y);
+					if (x * x + y * y <= 6 && env[current_level].isMove(pos_.x, pos_.y, false) &&
+						!env[current_level].isMonsterPos(pos_.x, pos_.y) && pos_ != you.position)
+						pos_list_.push(pos_);
+				}
+			}
+			for (int i = rand_int(3, 4); i > 0 && pos_list_.GetSize() > 0; i--)
+			{
+				int id_ = GetInstanceSpawnMonster(table_, GMFF_FLAG_ALL);
+				if (id_ < 0)
+					break;
+				if (monster* mon_ = AddInstanceMonster(current_level, id_, pos_list_.pop()))
+					mon_->FoundTarget(&you, mon_->FoundTime());
+			}
+			event_->value = rand_int(1, 3); //1:투명 2:침묵 3:가속
+			event_->type = EVT_COUNT;
+			event_->count = rand_int(2, 3);
+			return 0;
+		}
+		if (event_->value == 2)
+		{
+			env[current_level].MakeEvent(EVL_SILENCE, you.position, EVT_ALWAYS, rand_int(16, 20));
+			return 1;
+		}
+		for (monster& mon_ : env[current_level].mon_vector)
+		{
+			if (!mon_.isLive() || mon_.isUserAlly() || distan_coord(mon_.position, event_->position) > 49)
+				continue;
+			if (event_->value == 1)
+				mon_.SetInvisible(rand_int(16, 20));
+			else
+				mon_.SetHaste(rand_int(16, 20));
+		}
+		return 1;
+	}
 	default:
 		break;
 	}
 
 	return 0;
+}
+
+bool isSightArea(const coord_def& center_)
+{
+	for (int x = -2; x <= 2; x++)
+	{
+		for (int y = -2; y <= 2; y++)
+		{
+			coord_def pos_ = center_ + coord_def(x, y);
+			if (x * x + y * y <= 6 && pos_.x >= 0 && pos_.x < DG_MAX_X && pos_.y >= 0 && pos_.y < DG_MAX_Y &&
+				env[current_level].isInSight(pos_))
+				return true;
+		}
+	}
+	return false;
 }

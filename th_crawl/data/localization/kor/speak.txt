@@ -1828,4 +1828,7 @@ SPEAK_FLAN_NORMAL3_SAKUYA,{0:은|는} 말했다. "위가 시끄럽던데, 사쿠
 SPEAK_FLAN_NORMAL4_SAKUYA,{0:은|는} 말했다. "오늘은 사쿠야가 놀아주는거구나!"
 SPEAK_FLAN_NORMAL5_SAKUYA,{0:은|는} 말했다. "요즘 운동이 부족했어. 잘 부탁해!"
 SPEAK_FLANDRE_SPELLCARD,{0:은|는} 외쳤다. "폭사한 줄 알았어? 그럼 죽어라!"
-SPEAK_FLANDRE_SPELLCARD_FORCE,{0:은|는} 외쳤다. "도망칠 수 있을거라 생각했어?"
+SPEAK_FLANDRE_SPECIAL,{0:은|는} 외쳤다. "도망칠 수 있을거라 생각했어?"
+SPEAK_SUNNY_FAIRY_SPECIAL,{0:은|는} 외쳤다. "여기까지 들어오다니, 우리 집에서 무사히 나갈 수 있을 것 같아?"
+SPEAK_LUNAR_FAIRY_SPECIAL,{0:은|는} 외쳤다. "어떻게 여기까지 들어온 거야? 소리는 다 지웠는데..."
+SPEAK_STAR_FAIRY_SPECIAL,{0:은|는} 외쳤다. "다가오는 건 진작에 알고 있었어. 다들, 준비됐지?"

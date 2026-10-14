@@ -513,7 +513,11 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 		}
 		break;
 	case MON_SUNNY:
-		if(type == MST_NORMAL)
+		if(type == MST_SPECIAL)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_SUNNY_FAIRY_SPECIAL), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		else if(type == MST_NORMAL)
 		{	
 			switch(randA(6))
 			{
@@ -573,7 +577,11 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 		}
 		break;
 	case MON_LUNAR:
-		if(type == MST_NORMAL)
+		if(type == MST_SPECIAL)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_LUNAR_FAIRY_SPECIAL), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		else if(type == MST_NORMAL)
 		{	
 			switch(randA(5))
 			{
@@ -621,7 +629,11 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 		}
 		break;
 	case MON_STAR:
-		if(type == MST_NORMAL)
+		if(type == MST_SPECIAL)
+		{
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_STAR_FAIRY_SPECIAL), PlaceHolderHelper(monster_info->GetName()->getName()));
+		}
+		else if(type == MST_NORMAL)
 		{	
 			switch(randA(5))
 			{
@@ -3028,9 +3040,9 @@ string Get_Speak(int mon_id, monster* monster_info, monster_speak_type type)
 		{
 			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_FLANDRE_SPELLCARD), PlaceHolderHelper(monster_info->GetName()->getName()));
 		}
-		else if(type == MST_SPELLCARD_FORCE)
+		else if(type == MST_SPECIAL)
 		{
-			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_FLANDRE_SPELLCARD_FORCE), PlaceHolderHelper(monster_info->GetName()->getName()));
+			return LocalzationManager::formatString(LocalzationManager::speakString(SPEAK_FLANDRE_SPECIAL), PlaceHolderHelper(monster_info->GetName()->getName()));
 		}
 		else if(type == MST_NORMAL)
 		{

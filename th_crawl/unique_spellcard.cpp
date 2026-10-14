@@ -242,7 +242,7 @@ bool TryActivateUniqueSpellcard(monster* mon_, parent_type reason_, unit* killer
 		PlaceHolderHelper(mon_->name.getName()));
 	if(mon_->CanSpeak() && !mon_->s_mute)
 	{
-		string speak_ = Get_Speak(mon_->id,mon_,force_?MST_SPELLCARD_FORCE:MST_SPELLCARD);
+		string speak_ = Get_Speak(mon_->id,mon_,force_?MST_SPECIAL:MST_SPELLCARD);
 		if(!speak_.empty())
 			printlog(speak_,true,false,false,force_?CL_magic:CL_speak);
 	}

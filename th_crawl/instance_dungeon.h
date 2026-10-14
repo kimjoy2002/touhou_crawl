@@ -15,6 +15,7 @@
 #define __INSTANCE_DUNGEON_H__
 
 #include <vector>
+#include <map>
 #include <stdio.h>
 #include "common.h"
 #include "enum.h"
@@ -121,9 +122,26 @@ struct instance_spawn_table
 	random_extraction<int> item; //'i', 'I'
 };
 
+struct instance_map_marks
+{
+	char floor = '.';
+	map<char, vector<coord_def>> list;
+};
+
 void MakeInstanceMapFromPattern(int floor_, const char* pattern_, int size_x_, int size_y_,
 	dungeon_tile_type floor_tex_, dungeon_tile_type wall_tex_, vector<coord_def>* pos_list_ = nullptr,
-	instance_spawn_table* table_ = nullptr);
+	instance_spawn_table* table_ = nullptr, instance_map_marks* marks_ = nullptr);
+
+coord_def GetInstancePatternPos(int x_, int y_, int size_x_, int size_y_); //아스키맵의 칸(x_, y_)이 놓이는 맵 좌표
+//floor_ 문자 위에 2*2 block_을 count_개 뿌린다
+void ScatterInstanceBlocks(string& pattern_, int size_x_, int size_y_, char floor_, char block_, int count_);
+//y_min_~y_max_ 줄의 floor_ 문자 중 서로 min_distance_칸 이상 떨어진 위치를 최대 count_개 골라 맵 좌표로 준다.
+vector<coord_def> PickInstancePatternPos(const string& pattern_, int size_x_, int size_y_, char floor_,
+	int y_min_, int y_max_, int count_, int min_distance_);
+
+void SetFairyTreeTable(instance_spawn_table& table_);
+int GetInstanceSpawnMonster(instance_spawn_table& table_, int power_); //그룹이 비어서 못 고르면 -1
+bool HasInstanceNamedEvent(int floor_); //아직 등장하지 않은 EVL_INSTANCE_NAMED가 있는지
 
 struct item_infor;
 int GetInstanceFloorMonster(int floor_, int power_); //power_: getMonsterFromFloor_flag

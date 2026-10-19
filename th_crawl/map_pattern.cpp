@@ -2377,15 +2377,7 @@ T.....T\
 			map->m_exit.x = -map->size_x;
 			map->m_exit.y = rand_int(map->size_y-1, map->size_y);
 			map->flag = FLAG_NO_MONSTER | FLAG_NO_ITEM | FLAG_NO_STAIR;
-			for (int i = -2; i <= 2; i++) {
-				for (int j = 1; j <= 2; j++) {
-					if(randA(10) > 2) {
-						map->monster_list.push_back(mapdummy_mon(MON_BUSH, 0, coord_def(i, j)));
-					}
-				}
-			}
-			map->name = "YOUKAI_MOUNTAIN_CAVE_REWARD";
-			return  "\
+			const char* pattern_ = "\
 `````````````\
 ```````####``\
 ````####ii##`\
@@ -2393,6 +2385,15 @@ T.....T\
 `##....mmmM#`\
 ........####`\
 ...######````";
+			for (int i = -2; i <= 2; i++) {
+				for (int j = 1; j <= 2; j++) {
+					if(pattern_[(j + map->size_y) * (map->size_x * 2 + 1) + i + map->size_x] == '.' && randA(10) > 2) {
+						map->monster_list.push_back(mapdummy_mon(MON_BUSH, 0, coord_def(i, j)));
+					}
+				}
+			}
+			map->name = "YOUKAI_MOUNTAIN_CAVE_REWARD";
+			return pattern_;
 		}
 		case 88:
 		{

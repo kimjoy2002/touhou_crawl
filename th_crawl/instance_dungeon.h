@@ -58,8 +58,8 @@ struct instance_dungeon_slot
 	coord_def pos; //입구 위치
 	instance_dungeon_state state;
 	int named_pick;
-	int reach_turn;
-	instance_dungeon_slot() :type(IDG_NONE), floor(-1), pos(0, 0), state(IDS_READY), named_pick(-1), reach_turn(-1) {};
+	int deep_turn;
+	instance_dungeon_slot() :type(IDG_NONE), floor(-1), pos(0, 0), state(IDS_READY), named_pick(-1), deep_turn(0) {};
 };
 
 struct instance_dungeon_infor

@@ -841,7 +841,7 @@ void instance_dungeon_manager::SaveDatas(FILE* fp)
 	fwrite(&count, sizeof(count), 1, fp);
 	for (const instance_dungeon_slot& slot_ : slots)
 	{
-		int data_[7] = { (int)slot_.type, slot_.floor, slot_.pos.x, slot_.pos.y, (int)slot_.state, slot_.named_pick, slot_.reach_turn };
+		int data_[7] = { (int)slot_.type, slot_.floor, slot_.pos.x, slot_.pos.y, (int)slot_.state, slot_.named_pick, slot_.deep_turn };
 		fwrite(data_, sizeof(int), 7, fp);
 	}
 	fwrite(&current, sizeof(current), 1, fp);
@@ -862,7 +862,7 @@ void instance_dungeon_manager::LoadDatas(FILE* fp)
 		slot_.pos = coord_def(data_[2], data_[3]);
 		slot_.state = (instance_dungeon_state)data_[4];
 		slot_.named_pick = data_[5];
-		slot_.reach_turn = data_[6];
+		slot_.deep_turn = data_[6];
 		slots.push_back(slot_);
 	}
 	fread(&current, sizeof(current), 1, fp);
@@ -978,9 +978,10 @@ void instance_dungeon_manager::TurnEnd()
 	{
 		if (slot_.state != IDS_READY || slot_.floor < 0 || slot_.floor > MAX_DUNGEUN_LEVEL)
 			continue;
-		if (slot_.reach_turn < 0 && current_level >= slot_.floor + INSTANCE_CLOSE_DEPTH && current_level <= MAX_DUNGEUN_LEVEL)
-			slot_.reach_turn = you.turn;
-		if (slot_.reach_turn >= 0 && you.turn - slot_.reach_turn >= INSTANCE_CLOSE_TURN)
+		if (current_level == INSTANCE_LEVEL || current_level == TEMPLE_LEVEL || (current_level >= 0 && current_level < slot_.floor + INSTANCE_CLOSE_DEPTH))
+			continue;
+		slot_.deep_turn++;
+		if (slot_.deep_turn >= INSTANCE_CLOSE_TURN)
 		{
 			slot_.state = IDS_EXPIRED;
 			CloseInstanceEnter(slot_);

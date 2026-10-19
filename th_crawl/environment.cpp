@@ -1886,7 +1886,7 @@ void environment::playBgm() {
 	else if(floor == ZIGURRAT_LEVEL)
 		PlayBGM("ziggurat");
 	else if (floor == INSTANCE_LEVEL) {
-		PlayBGM("stage1");
+		PlayBGM("dungeon");
 	}
 	else if (floor == OKINA_LEVEL) {
 		if (you.god_value[GT_OKINA][0] != OKINA_LEVEL

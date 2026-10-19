@@ -1,4 +1,28 @@
 ---------------------------------------------------------------------
+§c beta patch – ver1.304 (2026-10-19)§d
+---------------------------------------------------------------------
+
+§y* Feature Additions§d
+ * Added single-floor, one-time instance dungeons to explore in the early game.
+  * A mysterious entrance now appears on floor 4 or 5 of the main Dungeon.
+    * This entrance may disappear if you spend too long after descending two or more floors deeper.
+  * Three early-game dungeons are currently available: Great Tree of the Fairies, Dark Forest Path, and Small Pond.
+  * More instance dungeons are planned for the mid- and late game.
+
+§y* Balance Adjustments§d
+ * Increased the damage of Photon Torpedo and the Q-Cumber Sound System.
+   * Damage is unchanged at Engineering level 0, but is now up to approximately 70% higher as Engineering increases.
+ * Reduced the Tornado Elemental's base experience reward.
+ * Wakasagihime now becomes confused when out of water.
+
+§y* Gameplay & Interface Improvements§d
+ * Added an explanatory message when deleting a save file fails.
+
+§y* Bug Fixes§d
+ * Fixed bushes spawning inside walls in certain areas of Youkai Mountain.
+ * Fixed save files appearing to have been deleted even when deletion failed.
+
+---------------------------------------------------------------------
 §c beta patch – ver1.303 (2026-10-09)§d
 ---------------------------------------------------------------------
 

@@ -56,7 +56,8 @@ struct instance_dungeon_slot
 	int floor; //입구가 있는 층
 	coord_def pos; //입구 위치
 	instance_dungeon_state state;
-	instance_dungeon_slot() :type(IDG_NONE), floor(-1), pos(0, 0), state(IDS_READY) {};
+	int named_pick;
+	instance_dungeon_slot() :type(IDG_NONE), floor(-1), pos(0, 0), state(IDS_READY), named_pick(-1) {};
 };
 
 struct instance_dungeon_infor
@@ -69,6 +70,7 @@ struct instance_dungeon_infor
 	void(*make_map)(int floor_, const instance_dungeon_slot& slot_);
 	bool(*is_clear)(int floor_);
 	bool(*can_choose)();
+	bool named_one_of;
 };
 
 class instance_dungeon_manager
@@ -81,7 +83,7 @@ public:
 	void init();
 	void initForOldSave(); //마이그레이션
 	void SaveDatas(FILE* fp);
-	bool LoadDatas(FILE* fp);
+	void LoadDatas(FILE* fp);
 
 	instance_dungeon_slot* GetSlot(int index_);
 	instance_dungeon_slot* GetCurrentSlot();
@@ -109,6 +111,7 @@ extern instance_dungeon_manager instance_dungeon;
 const instance_dungeon_infor* GetInstanceDungeonInfor(instance_dungeon_type type_);
 int GetInstanceBaseFloor(int floor_);
 string GetInstanceDungeonName();
+instance_dungeon_type GetCurrentInstanceDungeonType();
 void map_algorithms_instance(int num);
 
 class map_dummy;
@@ -138,6 +141,8 @@ void ScatterInstanceBlocks(string& pattern_, int size_x_, int size_y_, char floo
 //y_min_~y_max_ 줄의 floor_ 문자 중 서로 min_distance_칸 이상 떨어진 위치를 최대 count_개 골라 맵 좌표로 준다.
 vector<coord_def> PickInstancePatternPos(const string& pattern_, int size_x_, int size_y_, char floor_,
 	int y_min_, int y_max_, int count_, int min_distance_);
+//미스티아 루미아 숲 맵
+string MakeInstanceStarPattern(int size_, int branch_count_, int wiggle_, int center_radius_, vector<coord_def>* tips_ = nullptr);
 
 void SetFairyTreeTable(instance_spawn_table& table_);
 int GetInstanceSpawnMonster(instance_spawn_table& table_, int power_); //그룹이 비어서 못 고르면 -1

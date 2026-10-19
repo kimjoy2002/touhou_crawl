@@ -67,7 +67,8 @@ enum event_list
 	EVL_SCARLET_UNDER_FRONTIER,
 	EVL_SCARLET_UNDER_FLAN_SPELLCARD,
 	EVL_INSTANCE_NAMED,
-	EVL_FAIRY_TREE
+	EVL_FAIRY_TREE,
+	EVL_DARK_FOREST
 };
 
 class events
@@ -87,4 +88,5 @@ public:
 	int start();
 	int action(int delay_);
 };
+int GetRealSight(int sight_);
 #endif // __EVENT_H__

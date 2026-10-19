@@ -18,6 +18,7 @@
 #include "player.h"
 #include "event.h"
 #include <algorithm>
+#include <cmath>
 
 instance_dungeon_manager instance_dungeon;
 
@@ -29,15 +30,16 @@ int get_unique_to_id(int m_id);
 
 static bool CanChooseFairyTree();
 static void make_map_fairy_tree(int floor_, const instance_dungeon_slot& slot_);
+static void make_map_dark_forest(int floor_, const instance_dungeon_slot& slot_);
 static void make_map_temp(int floor_, const instance_dungeon_slot& slot_);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // 던전 목록
-// {종류, 시기, 이름, 덤프용 이름, 전용 네임드, 맵 생성, 클리어 조건, 선택 조건, 보상 최소, 보상 최대}
+// {종류, 시기, 이름, 덤프용 이름, 전용 네임드, 맵 생성, 클리어 조건, 선택 조건, 네임드 중 하나만}
 //////////////////////////////////////////////////////////////////////////////////////////////////
 static const vector<instance_dungeon_infor> instance_dungeon_list = {
 	{IDG_FAIRY_TREE, IDT_EARLY, LOC_SYSTEM_DUNGEON_INSTANCE_FAIRY_TREE, "FAIRY_TREE", {MON_SUNNY, MON_LUNAR, MON_STAR}, make_map_fairy_tree, nullptr, CanChooseFairyTree},
-	{IDG_DARK_FOREST_PATH, IDT_EARLY, LOC_SYSTEM_DUNGEON_INSTANCE_DARK_FOREST_PATH, "DARK_FOREST_PATH", {}, make_map_temp, nullptr, nullptr},
+	{IDG_DARK_FOREST_PATH, IDT_EARLY, LOC_SYSTEM_DUNGEON_INSTANCE_DARK_FOREST_PATH, "DARK_FOREST_PATH", {MON_MISTIA, MON_RUMIA}, make_map_dark_forest, nullptr, nullptr, true},
 	{IDG_MAYOIGA, IDT_EARLY, LOC_SYSTEM_DUNGEON_INSTANCE_MAYOIGA, "MAYOIGA", {}, make_map_temp, nullptr, nullptr},
 };
 
@@ -154,6 +156,73 @@ TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT";
 		env[floor_].MakeEvent(EVL_FAIRY_TREE, pos_, EVT_SIGHT_AREA);
 }
 
+//////////////////////////////////////////////////////////////////////////////////////////////////
+// 어두운 숲길
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+static void make_map_dark_forest(int floor_, const instance_dungeon_slot& slot_)
+{
+	const int size_ = 25; //맵 크기 (size_*2+1)
+	int branch_count_ = rand_int(5,7); //가지 갯수
+	int wiggle_ = rand_int(4,6); //구불구불한 정도 (0~10)
+	const int center_radius_ = 8; //중앙 공터 반지름
+	int monster_count_ = rand_int(12,20);
+	const int monster_distance_ = 9;
+
+	instance_spawn_table table_;
+	table_.all.push(MON_CROW, 10);
+	table_.all.push(MON_MOOK, 3);
+	table_.all.push(MON_FIREFLY, 10);
+	table_.all.push(MON_GREEN_MOOK, 5);
+	table_.all.push(MON_ORANGE_MOOK, 2);
+	table_.all.push(MON_TORNADO_SPIRIT, 2);
+
+	vector<coord_def> tips_;
+	string pattern_ = MakeInstanceStarPattern(size_, branch_count_, wiggle_, center_radius_, &tips_);
+	int width_ = size_ * 2 + 1;
+	for (const coord_def& tip_ : tips_)
+	{
+		int count_ = rand_int(1, 2);
+		for (rand_rect_iterator rit(tip_, 1, 1, false); !rit.end() && count_ > 0; rit++)
+		{
+			if (rit->x < 0 || rit->x >= width_ || rit->y < 0 || rit->y >= width_)
+				continue;
+			char& tile_ = pattern_[rit->y * width_ + rit->x];
+			if (tile_ == '.')
+			{
+				tile_ = 'i';
+				count_--;
+			}
+		}
+	}
+	MakeInstanceMapFromPattern(floor_, pattern_.c_str(), size_, size_, DG_GRASS, DG_TREE, nullptr, &table_);
+
+	environment& env_ = env[floor_];
+	coord_def center_ = GetInstancePatternPos(size_, size_, size_, size_);
+	int named_ = slot_.named_pick >= 0 ? slot_.named_pick : (randA(1) ? MON_MISTIA : MON_RUMIA);
+	if (!tips_.empty())
+	{
+		const coord_def& tip_ = tips_[randA(tips_.size() - 1)];
+		if (monster* mon_ = AddInstanceMonster(floor_, named_, GetInstancePatternPos(tip_.x, tip_.y, size_, size_), M_FLAG_WAKE | M_FLAG_NONE_STAIR)) {
+
+		}
+	}
+
+	random_extraction<coord_def> pos_list_;
+	for (int x = 0; x < DG_MAX_X; x++)
+		for (int y = 0; y < DG_MAX_Y; y++)
+			if (env_.isMove(x, y) && !env_.isStair(x, y) && !env_.isMonsterPos(x, y) &&
+				distan_coord(center_, coord_def(x, y)) > monster_distance_ * monster_distance_)
+				pos_list_.push(coord_def(x, y));
+	for (int i = 0; i < monster_count_ && pos_list_.GetSize() > 0; i++)
+	{
+		int id_ = GetInstanceSpawnMonster(table_, GMFF_FLAG_ALL);
+		if (id_ >= 0)
+			AddInstanceMonster(floor_, id_, pos_list_.pop(), M_FLAG_WAKE);
+	}
+
+	env_.MakeEvent(EVL_DARK_FOREST, center_, EVT_ALWAYS);
+}
 
 //임시 던전
 static void make_map_temp(int floor_, const instance_dungeon_slot& slot_)
@@ -234,6 +303,15 @@ int GetInstanceBaseFloor(int floor_)
 	if (instance_dungeon_slot* slot_ = instance_dungeon.GetCurrentSlot())
 		return slot_->floor;
 	return 0;
+}
+
+instance_dungeon_type GetCurrentInstanceDungeonType()
+{
+	if (current_level != INSTANCE_LEVEL)
+		return IDG_NONE;
+	if (instance_dungeon_slot* slot_ = instance_dungeon.GetCurrentSlot())
+		return slot_->type;
+	return IDG_NONE;
 }
 
 string GetInstanceDungeonName()
@@ -442,6 +520,61 @@ vector<coord_def> PickInstancePatternPos(const string& pattern_, int size_x_, in
 	return list_;
 }
 
+string MakeInstanceStarPattern(int size_, int branch_count_, int wiggle_, int center_radius_, vector<coord_def>* tips_)
+{
+	const float pi_ = 3.14159265f;
+	int width_ = size_ * 2 + 1;
+	string pattern_(width_ * width_, 'T');
+	auto carve_ = [&](float cx_, float cy_, float r_)
+	{
+		int x_ = (int)floor(cx_ + 0.5f), y_ = (int)floor(cy_ + 0.5f);
+		int range_ = (int)r_ + 1;
+		for (int x = x_ - range_; x <= x_ + range_; x++)
+			for (int y = y_ - range_; y <= y_ + range_; y++)
+				if (x >= 1 && x < width_ - 1 && y >= 1 && y < width_ - 1 &&
+					((x == x_ && y == y_) || (x - cx_) * (x - cx_) + (y - cy_) * (y - cy_) <= r_ * r_))
+					pattern_[y * width_ + x] = '.';
+	};
+	float phase1_ = rand_float(0.0f, 2 * pi_), phase2_ = rand_float(0.0f, 2 * pi_);
+	int center_range_ = center_radius_ * 6 / 5 + 1;
+	for (int x = -center_range_; x <= center_range_; x++)
+	{
+		for (int y = -center_range_; y <= center_range_; y++)
+		{
+			float theta_ = atan2((float)y, (float)x);
+			float r_ = center_radius_ * (1 + 0.08f * sin(3 * theta_ + phase1_) + 0.06f * sin(5 * theta_ + phase2_));
+			int px_ = size_ + x, py_ = size_ + y;
+			if (x * x + y * y <= r_ * r_ && px_ >= 1 && px_ < width_ - 1 && py_ >= 1 && py_ < width_ - 1)
+				pattern_[py_ * width_ + px_] = '.';
+		}
+	}
+
+	float base_ = rand_float(0.0f, 2 * pi_);
+	for (int b = 0; b < branch_count_; b++)
+	{
+		float angle_ = base_ + 2 * pi_ * (b + rand_float(-0.2f, 0.2f)) / branch_count_;
+		float x_ = (float)size_, y_ = (float)size_;
+		float drift_ = 0.0f, phase_ = rand_float(0.0f, 2 * pi_);
+		int length_ = size_ * 6 / 5 - randA(2);
+		for (int step_ = 1; step_ <= length_; step_++)
+		{
+			float t_ = (float)step_ / length_;
+			drift_ = drift_ * 0.92f + rand_float(-1.0f, 1.0f) * wiggle_ * 0.015f;
+			float dir_ = angle_ + drift_ + wiggle_ * 0.07f * sin(step_ * 0.4f + phase_);
+			float nx_ = x_ + cos(dir_), ny_ = y_ + sin(dir_);
+			if (nx_ < 2 || nx_ > width_ - 3 || ny_ < 2 || ny_ > width_ - 3)
+				break;
+			x_ = nx_;
+			y_ = ny_;
+			carve_(x_, y_, size_ * 0.13f * (1 - t_) + 0.6f * t_); //끝으로 갈수록 가늘어진다.
+		}
+		if (tips_)
+			tips_->push_back(coord_def((int)floor(x_ + 0.5f), (int)floor(y_ + 0.5f)));
+	}
+	pattern_[size_ * width_ + size_] = '<';
+	return pattern_;
+}
+
 monster* AddInstanceMonster(int floor_, int id_, const coord_def& pos_, uint64_t flag_)
 {
 	environment& env_ = env[floor_];
@@ -498,17 +631,20 @@ bool HasInstanceNamedEvent(int floor_)
 	return false;
 }
 
-static bool DefaultInstanceClear(int floor_, const instance_dungeon_infor* infor_)
+static bool DefaultInstanceClear(int floor_, const instance_dungeon_infor* infor_, const instance_dungeon_slot& slot_)
 {
 	if (HasInstanceNamedEvent(floor_))
 		return false;
+	vector<monster_index> named_ = infor_->named;
+	if (infor_->named_one_of && slot_.named_pick >= 0)
+		named_ = { (monster_index)slot_.named_pick };
 	for (monster& mon_ : env[floor_].mon_vector)
 	{
 		if (!mon_.isLive() || mon_.isUserAlly())
 			continue;
-		if (!infor_->named.empty())
+		if (!named_.empty())
 		{
-			if (find(infor_->named.begin(), infor_->named.end(), (monster_index)mon_.id) != infor_->named.end())
+			if (find(named_.begin(), named_.end(), (monster_index)mon_.id) != named_.end())
 				return false;
 		}
 		else if (!(mon_.flag & (M_FLAG_INANIMATE | M_FLAG_NONE_MOVE)))
@@ -523,20 +659,30 @@ static bool DefaultInstanceClear(int floor_, const instance_dungeon_infor* infor
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 //이 던전의 전용 네임드를 예약할 수 있는지 (이미 다른곳에 나왔거나 볼트에 쓰였으면 불가)
+static bool CanReserveNamedId(monster_index id_)
+{
+	int unique_id_ = get_unique_to_id(id_);
+	for (const unique_infor& unique_ : unique_list)
+	{
+		if (unique_.id != unique_id_)
+			continue;
+		if (unique_.level < 0 || unique_.level >= MAXLEVEL || env[unique_.level].make)
+			return false;
+	}
+	return true;
+}
+
 static bool CanReserveNamed(const instance_dungeon_infor& infor_)
 {
 	for (monster_index id_ : infor_.named)
 	{
-		int unique_id_ = get_unique_to_id(id_);
-		for (const unique_infor& unique_ : unique_list)
-		{
-			if (unique_.id != unique_id_)
-				continue;
-			if (unique_.level < 0 || unique_.level >= MAXLEVEL || env[unique_.level].make)
-				return false;
-		}
+		bool can_ = CanReserveNamedId(id_);
+		if (infor_.named_one_of && can_)
+			return true;
+		if (!infor_.named_one_of && !can_)
+			return false;
 	}
-	return true;
+	return !infor_.named_one_of || infor_.named.empty();
 }
 
 void instance_dungeon_manager::choose(bool old_save_)
@@ -569,8 +715,23 @@ void instance_dungeon_manager::choose(bool old_save_)
 		instance_dungeon_slot slot_;
 		slot_.type = infor_->type;
 		slot_.floor = floors_[randA(floors_.size() - 1)];
-		for (monster_index id_ : infor_->named)
-			set_exist_named(id_);
+		if (infor_->named_one_of)
+		{
+			random_extraction<monster_index> named_;
+			for (monster_index id_ : infor_->named)
+				if (CanReserveNamedId(id_))
+					named_.push(id_);
+			if (named_.GetSize() > 0)
+			{
+				slot_.named_pick = named_.pop();
+				set_exist_named((monster_index)slot_.named_pick);
+			}
+		}
+		else
+		{
+			for (monster_index id_ : infor_->named)
+				set_exist_named(id_);
+		}
 		slots.push_back(slot_);
 	}
 }
@@ -587,50 +748,34 @@ void instance_dungeon_manager::initForOldSave()
 
 void instance_dungeon_manager::SaveDatas(FILE* fp)
 {
-	const char marker[4] = { 'I', 'D', 'G', '1' };
-	fwrite(marker, 1, sizeof(marker), fp);
 	int count = (int)slots.size();
 	fwrite(&count, sizeof(count), 1, fp);
 	for (const instance_dungeon_slot& slot_ : slots)
 	{
-		int data_[5] = { (int)slot_.type, slot_.floor, slot_.pos.x, slot_.pos.y, (int)slot_.state };
-		fwrite(data_, sizeof(int), 5, fp);
+		int data_[6] = { (int)slot_.type, slot_.floor, slot_.pos.x, slot_.pos.y, (int)slot_.state, slot_.named_pick };
+		fwrite(data_, sizeof(int), 6, fp);
 	}
 	fwrite(&current, sizeof(current), 1, fp);
 }
 
-bool instance_dungeon_manager::LoadDatas(FILE* fp)
+void instance_dungeon_manager::LoadDatas(FILE* fp)
 {
 	slots.clear();
-	current = -1;
-	char marker[4];
-	if (fread(marker, 1, sizeof(marker), fp) != sizeof(marker) ||
-		marker[0] != 'I' || marker[1] != 'D' || marker[2] != 'G' || marker[3] != '1')
-		return false;
 	int count = 0;
-	if (fread(&count, sizeof(count), 1, fp) != 1 || count <= 0 || count > 100)
-		return false;
-	vector<int> index_map_;
+	fread(&count, sizeof(count), 1, fp);
 	for (int i = 0; i < count; i++)
 	{
-		int data_[5];
-		if (fread(data_, sizeof(int), 5, fp) != 5)
-			return false;
-		index_map_.push_back(-1);
-		if (!GetInstanceDungeonInfor((instance_dungeon_type)data_[0]))
-			continue;
+		int data_[6];
+		fread(data_, sizeof(int), 6, fp);
 		instance_dungeon_slot slot_;
 		slot_.type = (instance_dungeon_type)data_[0];
 		slot_.floor = data_[1];
 		slot_.pos = coord_def(data_[2], data_[3]);
 		slot_.state = (instance_dungeon_state)data_[4];
-		index_map_.back() = (int)slots.size();
+		slot_.named_pick = data_[5];
 		slots.push_back(slot_);
 	}
-	int current_ = -1;
-	if (fread(&current_, sizeof(current_), 1, fp) == 1 && current_ >= 0 && current_ < (int)index_map_.size())
-		current = index_map_[current_];
-	return true;
+	fread(&current, sizeof(current), 1, fp);
 }
 
 instance_dungeon_slot* instance_dungeon_manager::GetSlot(int index_)
@@ -756,7 +901,7 @@ void instance_dungeon_manager::TurnEnd()
 	const instance_dungeon_infor* infor_ = GetInstanceDungeonInfor(slot_->type);
 	if (!infor_)
 		return;
-	if (infor_->is_clear ? !infor_->is_clear(current_level) : !DefaultInstanceClear(current_level, infor_))
+	if (infor_->is_clear ? !infor_->is_clear(current_level) : !DefaultInstanceClear(current_level, infor_, *slot_))
 		return;
 
 	slot_->state = IDS_CLEAR;

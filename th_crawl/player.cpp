@@ -37,6 +37,7 @@
 #include "swako.h"
 #include "dump.h"
 #include "armour.h"
+#include "event.h"
 #include "evoke.h"
 #include "map.h"
 #include "lilly.h"
@@ -5567,7 +5568,7 @@ vector<monster>::iterator players::GetTargetIter()
 
 interupt_type players::resetLOS(bool speak_)
 {
-	int sight =isShootingSprint()?20: 7;
+	int sight =isShootingSprint()?20: GetRealSight(7);
 	interupt_type interrupt_ = IT_NONE;
 	for(int x=0;x<DG_MAX_X;x++)
 	{

@@ -1067,6 +1067,10 @@ void wiz_mode()
 				if(mondata[m_id].flag & M_FLAG_UNIQUE)
 					unset_exist_named((monster_index)m_id);
 			}
+			if(current_level == INSTANCE_LEVEL) {
+				if(instance_dungeon_slot* slot_ = instance_dungeon.GetCurrentSlot())
+					slot_->state = IDS_ENTERED;
+			}
 			deque<monster*> dq;
 			env[current_level].ClearFloor();
 			env[current_level].make = false;

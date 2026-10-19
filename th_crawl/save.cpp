@@ -96,9 +96,12 @@ std::string loadString(FILE* fp) {
 	return result;
 }
 
-void delete_file(int slot)
+bool delete_file(int slot)
 {
-	DeleteFileW(save_file_w[slot-1].c_str());
+	if (DeleteFileW(save_file_w[slot-1].c_str()))
+		return true;
+	DWORD error_ = GetLastError();
+	return error_ == ERROR_FILE_NOT_FOUND || error_ == ERROR_PATH_NOT_FOUND;
 }
 
 void delete_file()
@@ -281,6 +284,7 @@ bool save_menu(int value_)
 
 	int delete_mode = 0;
 	int last_pick_delete = 0;
+	bool delete_fail = false;
 
 	while(1)
 	{
@@ -335,6 +339,9 @@ bool save_menu(int value_)
 		}
 		else if(delete_mode == 1) {
 			printsub(LocalzationManager::formatString(LOC_SYSTEM_SAVE_MENU_DELETE_SELECT),false,CL_warning);
+		}
+		else if(delete_fail) {
+			printsub(LocalzationManager::locString(LOC_SYSTEM_SAVE_MENU_DELETE_FAIL),false,CL_danger);
 		} else {
 			printsub("x - " + LocalzationManager::formatString(LOC_SYSTEM_SAVE_MENU_DELETE),false,CL_normal,'x');
 		}
@@ -358,6 +365,7 @@ bool save_menu(int value_)
 				break;
 			}
 		}
+		delete_fail = false;
 
 		if(input_ >= 'a' && input_ <= 'c')
 		{
@@ -385,8 +393,10 @@ bool save_menu(int value_)
 		else if(input_ == 'Y' || input_ == GVK_BUTTON_A_LONG)
 		{
 			if(delete_mode == 2 && (last_pick_delete>=1 && last_pick_delete <=3)) {
-				delete_file(last_pick_delete);
-				char_info[last_pick_delete-1] = "";
+				if(delete_file(last_pick_delete))
+					char_info[last_pick_delete-1] = "";
+				else
+					delete_fail = true;
 				last_pick_delete = 0;
 				delete_mode = 0;
 				continue;

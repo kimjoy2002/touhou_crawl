@@ -8,6 +8,7 @@
 
 
 #include "event.h"
+#include "instance_dungeon.h"
 #include "monster.h"
 #include "keiki.h"
 #include "mon_infor.h"
@@ -4851,7 +4852,7 @@ void monster::special_action(int delay_, bool smoke_)
 	switch (id)
 	{
 	case MON_RUMIA:
-		if(!(s_neutrality == -1))
+		if(!(s_neutrality == -1) && GetCurrentInstanceDungeonType() != IDG_DARK_FOREST_PATH)
 		{
 			if (smoke_){
 				for (int i = -1; i < 2; i++)

@@ -27,6 +27,12 @@ bool arena_event(int num);
 bool skill_summon_namaz2(int power, bool short_, unit* order, coord_def target);
 bool isSightArea(const coord_def& center_);
 
+static const int DARK_FOREST_MAX = 3000;
+static int GetDarkForestSight(int value_)
+{
+	return 6 - min(value_, DARK_FOREST_MAX) * 4 / DARK_FOREST_MAX;
+}
+
 events::events()
 :id(0),position(),type(EVT_ABOVE),prev_sight(false), value(0)
 {
@@ -1384,11 +1390,37 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		}
 		return 1;
 	}
+	case EVL_DARK_FOREST:
+	{
+		instance_dungeon_slot* slot_ = instance_dungeon.GetCurrentSlot();
+		if (!slot_ || slot_->state == IDS_CLEAR)
+		{
+			printlog(LocalzationManager::locString(LOC_SYSTEM_EVENT_DARK_FOREST_END), true, false, false, CL_blue);
+			you.resetLOS(false);
+			return 1;
+		}
+		int prev_sight_ = GetDarkForestSight(event_->value);
+		int far_ = max(0, (int)sqrt((float)distan_coord(event_->position, you.position)) - 8);
+		event_->value = min(DARK_FOREST_MAX, event_->value + 10 + far_ * far_ * 3 / 4);
+		if (GetDarkForestSight(event_->value) < prev_sight_)
+		{
+			you.resetLOS(false);
+		}
+		return 0;
+	}
 	default:
 		break;
 	}
 
 	return 0;
+}
+
+int GetRealSight(int sight_)
+{
+	for (const events& event_ : env[current_level].event_list)
+		if (event_.id == EVL_DARK_FOREST)
+			sight_ = min(sight_, GetDarkForestSight(event_.value));
+	return sight_;
 }
 
 bool isSightArea(const coord_def& center_)

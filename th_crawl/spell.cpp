@@ -18,6 +18,7 @@
 #include "dump.h"
 #include "tribe.h"
 #include "rect.h"
+#include "instance_dungeon.h"
 
 
 extern int g_menu_select;
@@ -2097,6 +2098,8 @@ bool SpellAiCondition(spell_list skill, monster *mon)
 		return true;
 	}
 	case SPL_MISTIA_SONG:
+		if (GetCurrentInstanceDungeonType() == IDG_DARK_FOREST_PATH)
+			return false;
 		return (mon->s_exhausted || mon->isUserAlly() ?false:true);
 	case SPL_SLEEP_SMITE:
 		if (!mon->isUserAlly()) {

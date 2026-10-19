@@ -3303,8 +3303,10 @@ bool LoadFile()
 	
 	ReplayClass.LoadDatas(fp);
 	LoadWikiSearchHistory(fp);
-	if(isPrevVersion(loading_version_string, "ver1.303") || !instance_dungeon.LoadDatas(fp))
+	if(isPrevVersion(loading_version_string, "ver1.303"))
 		instance_dungeon.initForOldSave();
+	else
+		instance_dungeon.LoadDatas(fp);
 
 	
 

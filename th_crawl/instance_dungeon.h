@@ -47,7 +47,8 @@ enum instance_dungeon_state
 	IDS_READY = 0, //아직 들어가지 않음
 	IDS_ENTERED, //들어가 있음
 	IDS_CLEAR, //클리어함
-	IDS_CLOSED //클리어하지 않고 나옴
+	IDS_CLOSED, //클리어하지 않고 나옴
+	IDS_EXPIRED //들어가지 않은채로 닫힘
 };
 
 struct instance_dungeon_slot
@@ -57,7 +58,8 @@ struct instance_dungeon_slot
 	coord_def pos; //입구 위치
 	instance_dungeon_state state;
 	int named_pick;
-	instance_dungeon_slot() :type(IDG_NONE), floor(-1), pos(0, 0), state(IDS_READY), named_pick(-1) {};
+	int reach_turn;
+	instance_dungeon_slot() :type(IDG_NONE), floor(-1), pos(0, 0), state(IDS_READY), named_pick(-1), reach_turn(-1) {};
 };
 
 struct instance_dungeon_infor
@@ -99,6 +101,9 @@ public:
 private:
 	void choose(bool old_save_);
 };
+
+static const int INSTANCE_CLOSE_DEPTH = 2;
+static const int INSTANCE_CLOSE_TURN = 500;
 
 extern instance_dungeon_manager instance_dungeon;
 

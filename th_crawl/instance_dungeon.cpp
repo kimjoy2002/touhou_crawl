@@ -348,7 +348,7 @@ static void GetTierFloors(instance_dungeon_tier tier_, vector<int>& floors_)
 	switch (tier_)
 	{
 	case IDT_EARLY:
-		for (int i = 2; i <= 4; i++)
+		for (int i = 3; i <= 4; i++)
 			floors_.push_back(i);
 		break;
 	case IDT_MIDDLE:
@@ -841,8 +841,8 @@ void instance_dungeon_manager::SaveDatas(FILE* fp)
 	fwrite(&count, sizeof(count), 1, fp);
 	for (const instance_dungeon_slot& slot_ : slots)
 	{
-		int data_[6] = { (int)slot_.type, slot_.floor, slot_.pos.x, slot_.pos.y, (int)slot_.state, slot_.named_pick };
-		fwrite(data_, sizeof(int), 6, fp);
+		int data_[7] = { (int)slot_.type, slot_.floor, slot_.pos.x, slot_.pos.y, (int)slot_.state, slot_.named_pick, slot_.reach_turn };
+		fwrite(data_, sizeof(int), 7, fp);
 	}
 	fwrite(&current, sizeof(current), 1, fp);
 }
@@ -854,14 +854,15 @@ void instance_dungeon_manager::LoadDatas(FILE* fp)
 	fread(&count, sizeof(count), 1, fp);
 	for (int i = 0; i < count; i++)
 	{
-		int data_[6];
-		fread(data_, sizeof(int), 6, fp);
+		int data_[7];
+		fread(data_, sizeof(int), 7, fp);
 		instance_dungeon_slot slot_;
 		slot_.type = (instance_dungeon_type)data_[0];
 		slot_.floor = data_[1];
 		slot_.pos = coord_def(data_[2], data_[3]);
 		slot_.state = (instance_dungeon_state)data_[4];
 		slot_.named_pick = data_[5];
+		slot_.reach_turn = data_[6];
 		slots.push_back(slot_);
 	}
 	fread(&current, sizeof(current), 1, fp);
@@ -929,6 +930,18 @@ void instance_dungeon_manager::Enter(int floor_, const coord_def& pos_)
 	env[INSTANCE_LEVEL].make = false; //매번 새로 만든다.
 }
 
+static bool CloseInstanceEnter(const instance_dungeon_slot& slot_)
+{
+	environment& env_ = env[slot_.floor];
+	if (env_.dgtile[slot_.pos.x][slot_.pos.y].tile != DG_INSTANCE_STAIR)
+		return false;
+	env_.changeTile(slot_.pos, DG_INSTANCE_CLOSED);
+	coord_def pos_ = slot_.pos;
+	env_.stair_vector.erase(remove_if(env_.stair_vector.begin(), env_.stair_vector.end(),
+		[pos_](const stair_info& stair_) {return stair_.pos == pos_; }), env_.stair_vector.end());
+	return true;
+}
+
 void instance_dungeon_manager::Exit()
 {
 	instance_dungeon_slot* slot_ = GetCurrentSlot();
@@ -939,15 +952,8 @@ void instance_dungeon_manager::Exit()
 		env[INSTANCE_LEVEL].AllySafeClear(slot_->floor, slot_->pos);
 
 		//한번 나오면 입구는 닫힌다.
-		environment& env_ = env[slot_->floor];
-		if (env_.dgtile[slot_->pos.x][slot_->pos.y].tile == DG_INSTANCE_STAIR)
-		{
-			env_.changeTile(slot_->pos, DG_INSTANCE_CLOSED);
-			coord_def pos_ = slot_->pos;
-			env_.stair_vector.erase(remove_if(env_.stair_vector.begin(), env_.stair_vector.end(),
-				[pos_](const stair_info& stair_) {return stair_.pos == pos_; }), env_.stair_vector.end());
+		if (CloseInstanceEnter(*slot_))
 			printlog(LocalzationManager::locString(LOC_SYSTEM_INSTANCE_DUNGEON_CLOSE), true, false, false, CL_normal);
-		}
 	}
 	env[INSTANCE_LEVEL].ClearFloor();
 	env[INSTANCE_LEVEL].make = false;
@@ -968,6 +974,19 @@ void instance_dungeon_manager::WizardEnter(instance_dungeon_type type_, int floo
 
 void instance_dungeon_manager::TurnEnd()
 {
+	for (instance_dungeon_slot& slot_ : slots)
+	{
+		if (slot_.state != IDS_READY || slot_.floor < 0 || slot_.floor > MAX_DUNGEUN_LEVEL)
+			continue;
+		if (slot_.reach_turn < 0 && current_level >= slot_.floor + INSTANCE_CLOSE_DEPTH && current_level <= MAX_DUNGEUN_LEVEL)
+			slot_.reach_turn = you.turn;
+		if (slot_.reach_turn >= 0 && you.turn - slot_.reach_turn >= INSTANCE_CLOSE_TURN)
+		{
+			slot_.state = IDS_EXPIRED;
+			CloseInstanceEnter(slot_);
+		}
+	}
+
 	if (current_level != INSTANCE_LEVEL)
 		return;
 	instance_dungeon_slot* slot_ = GetCurrentSlot();

@@ -1112,7 +1112,7 @@ bool Dump(int type, wstring *filename_)
 
 	bool instance_entered_ = false;
 	for(const instance_dungeon_slot& slot_ : instance_dungeon.slots)
-		if(slot_.state != IDS_READY)
+		if(slot_.state != IDS_READY && slot_.state != IDS_EXPIRED)
 			instance_entered_ = true;
 	if(instance_entered_)
 	{
@@ -1126,7 +1126,7 @@ bool Dump(int type, wstring *filename_)
 		for(const instance_dungeon_slot& slot_ : instance_dungeon.slots)
 		{
 			const instance_dungeon_infor* infor_ = GetInstanceDungeonInfor(slot_.type);
-			if(!infor_ || slot_.state == IDS_READY)
+			if(!infor_ || slot_.state == IDS_READY || slot_.state == IDS_EXPIRED)
 				continue;
 			ss << "  " << LocalzationManager::locString(infor_->name) << " - " << CurrentLevelString(slot_.floor);
 			if(slot_.state >= IDS_READY && slot_.state <= IDS_CLOSED)

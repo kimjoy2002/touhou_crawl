@@ -717,11 +717,6 @@ bool PixedMap(map_dummy* map, const char *temp)
 					map_list.dungeon_enter[stiar_enter_].pos = coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y);
 					map_list.dungeon_enter[stiar_enter_].pos += map->pos;
 				}
-				else if (map->sp_tile_list[index_] == DG_INSTANCE_STAIR)
-				{//인스턴스 서브던전 입구
-					instance_dungeon.SetEnterPos(map->floor, map->pattern - INSTANCE_ENTER_PATTERN,
-						coord_def(i % (map->size_x * 2 + 1) - map->size_x, i / (map->size_x * 2 + 1) - map->size_y) + map->pos);
-				}
 				break;
 			}
 			case 'n':
@@ -958,10 +953,6 @@ void map_dummy::patternSet()
 	}
 	
 	
-	else if(pattern >= INSTANCE_ENTER_PATTERN && pattern < INSTANCE_ENTER_PATTERN_MAX) //인스턴스 서브던전 입구
-	{
-		PixedMap(this, instance_enter_pattern(this, pattern-INSTANCE_ENTER_PATTERN));
-	}
 	else if(pattern >= 100+MAX_SUB_DUNGEON && pattern < 100+MAX_SUB_DUNGEON+GT_LAST)
 	{
 		if(randA(3))

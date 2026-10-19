@@ -316,6 +316,7 @@ enum dungeon_tile_type //요거 추가했을때 시야에 걸리도록하려면 
 	DG_TEMPLE_KEIKI,
 	DG_TEMPLE_TENKYUU,
 	DG_TEMPLE_LAST = DG_TEMPLE_TENKYUU,
+	DG_INSTANCE_CLOSED, //닫힌 인스턴스 서브던전 입구
 	DG_NONE_MOVE = 100,
 	DG_WALL = 100,
 	DG_STONE_WALL,

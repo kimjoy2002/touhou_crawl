@@ -5931,3 +5931,4 @@ LOC_SYSTEM_INSTANCE_DUNGEON_STATE_CLEAR,cleared
 LOC_SYSTEM_INSTANCE_DUNGEON_STATE_CLOSED,abandoned
 LOC_SYSTEM_EVENT_DARK_FOREST_END,The darkness shrouding the forest lifts.
 LOC_SYSTEM_SAVE_MENU_DELETE_FAIL,Failed to delete the save. If another game is running, close it and try again.
+LOC_SYSTEM_TILE_STAIR_INSTANCE_CLOSED,A closed entrance

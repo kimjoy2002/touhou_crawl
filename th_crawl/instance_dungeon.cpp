@@ -23,7 +23,6 @@
 instance_dungeon_manager instance_dungeon;
 
 bool PixedMap(map_dummy* map, const char *temp);
-const char* common_enter_pattern(map_dummy* map);
 void setBaseFloorWall(int floor_, dungeon_tile_type floor_tex, dungeon_tile_type wall_tex);
 item_infor& id_to_item(int id, item_infor* item_);
 int get_unique_to_id(int m_id);
@@ -75,7 +74,7 @@ static void make_map_fairy_tree(int floor_, const instance_dungeon_slot& slot_)
 	const int tree_count_ = 60;
 	const int event_row_min_ = 20, event_row_max_ = 49; 
 	const int event_distance_ = 6;
-	const int event_count_ = 6;
+	const int event_count_ = 4;
 
 	instance_spawn_table table_;
 	SetFairyTreeTable(table_);
@@ -95,7 +94,7 @@ T___TTT.......TTT...........TTT.......TTT___T\
 T___TT.........TTTT.......TTTT.........TT___T\
 T___TT......m....TTTT...TTTT....m......TT___T\
 T___TTi............TTT+TTT............iTT___T\
-T___Ti...m.M.......+.....+.......M.m...iT___T\
+T___Ti.....M.......+.....+.......M.....iT___T\
 T___TTi............T.....T............iTT___T\
 T___TT.......m.....T.....T.....m.......TT___T\
 T___TTT...........TT.....TT...........TTT___T\
@@ -203,9 +202,7 @@ static void make_map_dark_forest(int floor_, const instance_dungeon_slot& slot_)
 	if (!tips_.empty())
 	{
 		const coord_def& tip_ = tips_[randA(tips_.size() - 1)];
-		if (monster* mon_ = AddInstanceMonster(floor_, named_, GetInstancePatternPos(tip_.x, tip_.y, size_, size_), M_FLAG_WAKE | M_FLAG_NONE_STAIR)) {
-
-		}
+		env_.MakeEvent(EVL_INSTANCE_NAMED, GetInstancePatternPos(tip_.x, tip_.y, size_, size_), EVT_SIGHT, -1, named_);
 	}
 
 	random_extraction<coord_def> pos_list_;
@@ -611,18 +608,6 @@ void map_algorithms_instance(int num)
 #####", 2, 2, DG_FLOOR, DG_WALL);
 }
 
-const char* instance_enter_pattern(map_dummy* map, int index_)
-{
-	map->sp_tile_list.clear();
-	map->sp_tile_list.push_back(DG_INSTANCE_STAIR);
-	const char* pattern_ = common_enter_pattern(map);
-	map->name = "INSTANCE_ENTER";
-	if (instance_dungeon_slot* slot_ = instance_dungeon.GetSlot(index_))
-		if (const instance_dungeon_infor* infor_ = GetInstanceDungeonInfor(slot_->type))
-			map->name = string("INSTANCE_") + infor_->id_name + "_ENTER";
-	return pattern_;
-}
-
 bool HasInstanceNamedEvent(int floor_)
 {
 	for (const events& event_ : env[floor_].event_list)
@@ -798,20 +783,6 @@ int instance_dungeon_manager::GetSlotIndex(int floor_, const coord_def& pos_)
 	return -1;
 }
 
-void instance_dungeon_manager::GetEnterPatterns(int floor_, vector<int>& vector_)
-{
-	for (int i = 0; i < (int)slots.size(); i++)
-		if (slots[i].floor == floor_ && slots[i].state == IDS_READY)
-			vector_.push_back(INSTANCE_ENTER_PATTERN + i);
-}
-
-void instance_dungeon_manager::SetEnterPos(int floor_, int index_, const coord_def& pos_)
-{
-	if (instance_dungeon_slot* slot_ = GetSlot(index_))
-		if (slot_->floor == floor_)
-			slot_->pos = pos_;
-}
-
 void instance_dungeon_manager::CheckEnterPlaced(int floor_)
 {
 	environment& env_ = env[floor_];
@@ -820,7 +791,7 @@ void instance_dungeon_manager::CheckEnterPlaced(int floor_)
 		if (slot_.floor != floor_ || slot_.state != IDS_READY)
 			continue;
 		if (env_.dgtile[slot_.pos.x][slot_.pos.y].tile != DG_INSTANCE_STAIR)
-		{ //입구 볼트가 못 들어갔으면 아무 바닥에나 박는다.
+		{
 			random_extraction<coord_def> candidates_;
 			for (int x = 1; x < DG_MAX_X - 1; x++)
 				for (int y = 1; y < DG_MAX_Y - 1; y++)
@@ -863,11 +834,11 @@ void instance_dungeon_manager::Exit()
 			slot_->state = IDS_CLOSED;
 		env[INSTANCE_LEVEL].AllySafeClear(slot_->floor, slot_->pos);
 
-		//한번 나오면 입구는 사라진다.
+		//한번 나오면 입구는 닫힌다.
 		environment& env_ = env[slot_->floor];
 		if (env_.dgtile[slot_->pos.x][slot_->pos.y].tile == DG_INSTANCE_STAIR)
 		{
-			env_.changeTile(slot_->pos, env_.base_floor);
+			env_.changeTile(slot_->pos, DG_INSTANCE_CLOSED);
 			coord_def pos_ = slot_->pos;
 			env_.stair_vector.erase(remove_if(env_.stair_vector.begin(), env_.stair_vector.end(),
 				[pos_](const stair_info& stair_) {return stair_.pos == pos_; }), env_.stair_vector.end());

@@ -576,7 +576,6 @@ void calcul_spe_enter(int floor, vector<int> &vector_)
 			vector_.push_back(100+MAX_SUB_DUNGEON+i);
 		}
 	}
-	instance_dungeon.GetEnterPatterns(floor, vector_);
 	if(floor != 0 && floor != YUKKURI_LAST_LEVEL && floor != DREAM_LEVEL)
 	{ //테스트
 		int i = rand_int(1, 2);

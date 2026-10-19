@@ -30,7 +30,7 @@ bool isSightArea(const coord_def& center_);
 static const int DARK_FOREST_MAX = 3000;
 static int GetDarkForestSight(int value_)
 {
-	return 6 - min(value_, DARK_FOREST_MAX) * 4 / DARK_FOREST_MAX;
+	return 5 - min(value_, DARK_FOREST_MAX) * 3 / DARK_FOREST_MAX;
 }
 
 events::events()
@@ -1405,6 +1405,17 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		if (GetDarkForestSight(event_->value) < prev_sight_)
 		{
 			you.resetLOS(false);
+		}
+		if (event_->value >= DARK_FOREST_MAX)
+		{
+			for (events& other_ : env[current_level].event_list)
+			{
+				if (other_.id != EVL_INSTANCE_NAMED || other_.value < 0)
+					continue;
+				if (monster* mon_ = AddInstanceMonster(current_level, other_.value, other_.position))
+					mon_->FoundTarget(&you, mon_->FoundTime());
+				other_.value = -1;
+			}
 		}
 		return 0;
 	}

@@ -799,6 +799,7 @@ char environment::getAsciiDot(int x_, int y_)
 	case DG_SNOW:
 		return '^';
 	case DG_CARPET:
+	case DG_INSTANCE_CLOSED:
 		return '.';
 	default:
 		return ' ';

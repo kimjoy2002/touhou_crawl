@@ -88,8 +88,6 @@ public:
 	instance_dungeon_slot* GetSlot(int index_);
 	instance_dungeon_slot* GetCurrentSlot();
 	int GetSlotIndex(int floor_, const coord_def& pos_);
-	void GetEnterPatterns(int floor_, vector<int>& vector_);
-	void SetEnterPos(int floor_, int index_, const coord_def& pos_);
 	void CheckEnterPlaced(int floor_);
 
 	bool CanEnter(int floor_, const coord_def& pos_);
@@ -102,10 +100,6 @@ private:
 	void choose(bool old_save_);
 };
 
-//입구 패턴 번호 = INSTANCE_ENTER_PATTERN + slots 인덱스
-static const int INSTANCE_ENTER_PATTERN = 2000;
-static const int INSTANCE_ENTER_PATTERN_MAX = 2100;
-
 extern instance_dungeon_manager instance_dungeon;
 
 const instance_dungeon_infor* GetInstanceDungeonInfor(instance_dungeon_type type_);
@@ -113,9 +107,6 @@ int GetInstanceBaseFloor(int floor_);
 string GetInstanceDungeonName();
 instance_dungeon_type GetCurrentInstanceDungeonType();
 void map_algorithms_instance(int num);
-
-class map_dummy;
-const char* instance_enter_pattern(map_dummy* map, int index_);
 
 struct instance_spawn_table
 {

@@ -819,7 +819,7 @@ textures img_dungeon_object[][3] = {
 				
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //계단인형의집 45
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, //46
-				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)}, 
+				{textures(&texture_monster02, 165, 255),textures(&texture_monster02, 165, 255),textures(&texture_monster02, 165, 255)}, //인스턴스 입구 47
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},
 				{textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255),textures(&texture_item01, 213, 255)},
@@ -865,7 +865,7 @@ textures img_dungeon_object[][3] = {
 				{textures(&texture_item01, 120, 255),textures(&texture_item01, 120, 255),textures(&texture_item01, 120, 255)},  //시키에이키
 				{textures(&texture_item03, 192, 255),textures(&texture_item03, 192, 255),textures(&texture_item03, 192, 255)}, //케이키
 				{textures(&texture_item03, 193, 255),textures(&texture_item03, 193, 255),textures(&texture_item03, 193, 255)}, //텐큐
-				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
+				{textures(&texture_monster02, 166, 255),textures(&texture_monster02, 166, 255),textures(&texture_monster02, 166, 255)}, //닫힌 인스턴스 입구
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)}, // 90
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},
 				{textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255),textures(&texture_item01, 2, 255)},

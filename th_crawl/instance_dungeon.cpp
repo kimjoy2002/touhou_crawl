@@ -30,7 +30,7 @@ int get_unique_to_id(int m_id);
 static bool CanChooseFairyTree();
 static void make_map_fairy_tree(int floor_, const instance_dungeon_slot& slot_);
 static void make_map_dark_forest(int floor_, const instance_dungeon_slot& slot_);
-static void make_map_temp(int floor_, const instance_dungeon_slot& slot_);
+static void make_map_small_pond(int floor_, const instance_dungeon_slot& slot_);
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 // 던전 목록
@@ -39,7 +39,7 @@ static void make_map_temp(int floor_, const instance_dungeon_slot& slot_);
 static const vector<instance_dungeon_infor> instance_dungeon_list = {
 	{IDG_FAIRY_TREE, IDT_EARLY, LOC_SYSTEM_DUNGEON_INSTANCE_FAIRY_TREE, "FAIRY_TREE", {MON_SUNNY, MON_LUNAR, MON_STAR}, make_map_fairy_tree, nullptr, CanChooseFairyTree},
 	{IDG_DARK_FOREST_PATH, IDT_EARLY, LOC_SYSTEM_DUNGEON_INSTANCE_DARK_FOREST_PATH, "DARK_FOREST_PATH", {MON_MISTIA, MON_RUMIA}, make_map_dark_forest, nullptr, nullptr, true},
-	{IDG_MAYOIGA, IDT_EARLY, LOC_SYSTEM_DUNGEON_INSTANCE_MAYOIGA, "MAYOIGA", {}, make_map_temp, nullptr, nullptr},
+	{IDG_SMALL_POND, IDT_EARLY, LOC_SYSTEM_DUNGEON_INSTANCE_SMALL_POND, "SMALL_POND", {MON_WAKASAGI}, make_map_small_pond, nullptr, nullptr},
 };
 
 
@@ -174,7 +174,6 @@ static void make_map_dark_forest(int floor_, const instance_dungeon_slot& slot_)
 	table_.all.push(MON_FIREFLY, 10);
 	table_.all.push(MON_GREEN_MOOK, 5);
 	table_.all.push(MON_ORANGE_MOOK, 2);
-	table_.all.push(MON_TORNADO_SPIRIT, 2);
 
 	vector<coord_def> tips_;
 	string pattern_ = MakeInstanceStarPattern(size_, branch_count_, wiggle_, center_radius_, &tips_);
@@ -221,35 +220,118 @@ static void make_map_dark_forest(int floor_, const instance_dungeon_slot& slot_)
 	env_.MakeEvent(EVL_DARK_FOREST, center_, EVT_ALWAYS);
 }
 
-//임시 던전
-static void make_map_temp(int floor_, const instance_dungeon_slot& slot_)
+//////////////////////////////////////////////////////////////////////////////////////////////////
+// 작은 연못
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+void SetSmallPondTable(instance_spawn_table& table_)
 {
-	dungeon_tile_type floor_tex_ = DG_FLOOR, wall_tex_ = DG_WALL;
-	switch (slot_.type)
+	table_.all.push(MON_MOOK, 10);
+	table_.all.push(MON_FAIRY_GREEN, 10);
+	table_.all.push(MON_FAIRY_BLUE, 10);
+	table_.all.push(MON_TORNADO_SPIRIT, 5);
+}
+
+static void make_map_small_pond(int floor_, const instance_dungeon_slot& slot_)
+{
+	const int size_x_ = 22, size_y_ = 19;
+	const int pond_count_ = 12;
+	int monster_count_ = rand_int(6, 9);
+	const int monster_distance_ = 7;
+	const int event_count_ = 4;
+	const int event_distance_ = 6;
+	
+	const vector<pair<coord_def, coord_def>> event_forbid_ = {
+		{coord_def(15, 2), coord_def(28, 9)},
+		{coord_def(16, 21), coord_def(28, 27)},
+	};
+
+	instance_spawn_table table_;
+	SetSmallPondTable(table_);
+
+	string pattern_ = "\
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT\
+TTTTTTTTTTTTTT_________________TTTTTTTTTTTTTT\
+TTTT___TTTTT_______~~__~~___________TTTTTTTTT\
+TTTT______________~~~__~~~______________TTTTT\
+TTTTT___________~~~~ii_i~~~~_______________TT\
+TTTT___________~~~~~_ii_~~~~~_____________TTT\
+TT_____________~~~_i_iiii~~~~_____________TTT\
+TT_____________~~~~~i_i_~~~~~______________TT\
+T_______________~~~~~~~~~~~~~______________TT\
+T_________________~~~~~~~~~_________________T\
+T__________________________________________TT\
+T___________________________________________T\
+T___________________________________________T\
+T___________________________________________T\
+T___________________________________________T\
+T___________________________________________T\
+T___________________________________________T\
+T___________________________________________T\
+TT_________________________________________TT\
+TT_________________________________________TT\
+TTT_______________________________________TTT\
+TTT_______________________________________TTT\
+TTTTT______________________________________TT\
+TTTTT______________________________________TT\
+TTTTTT____________________________________TTT\
+TTTTTT____________________________________TTT\
+TTTTTTTT____________________________TTTTTTTTT\
+TTTTTTTTTTT_______________________TTTTTTTTTTT\
+TTTTTTTTTTTTTT__________________TTTTTTTTTTTTT\
+TTTTTTTTTTTTTTT________________TTTTTTTTTTTTTT\
+TTTTTTTTTTTTTTTT______________TTTTTTTTTTTTTTT\
+TTTTTTTTTTTTTTTT______________TTTTTTTTTTTTTTT\
+TTTTTTTTTTTTTT__________________TTTTTTTTTTTTT\
+TTTTTTTTTTTT_______________________TTTTTTTTTT\
+TTTTTTTTTTTT_______________________TTTTTTTTTT\
+TTTTTTTTTTTTT_________<___________TTTTTTTTTTT\
+TTTTTTTTTTTTTTT_________________TTTTTTTTTTTTT\
+TTTTTTTTTTTTTTTTTT__________TTTTTTTTTTTTTTTTT\
+TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT";
+	int width_ = size_x_ * 2 + 1;
+	random_extraction<coord_def> sea_list_; //중앙 연못
+	for (int i = 0; i < (int)pattern_.size(); i++)
+		if (pattern_[i] == '~')
+			sea_list_.push(GetInstancePatternPos(i % width_, i / width_, size_x_, size_y_));
+	string event_pattern_ = pattern_;
+	ScatterInstanceBlocks(pattern_, size_x_, size_y_-8, '_', '~', pond_count_, 3);
+
+	for (int i = 0; i < (int)pattern_.size(); i++)
+		event_pattern_[i] = (pattern_[i] == '~' && event_pattern_[i] != '~') ? 'P' : 'X';
+	for (const auto& rect_ : event_forbid_)
+		for (int x = rect_.first.x; x <= rect_.second.x; x++)
+			for (int y = rect_.first.y; y <= rect_.second.y; y++)
+				if (x >= 0 && x < width_ && y >= 0 && y * width_ + x < (int)event_pattern_.size())
+					event_pattern_[y * width_ + x] = 'X';
+	vector<coord_def> event_pos_ = PickInstancePatternPos(event_pattern_, size_x_, size_y_, 'P',
+		0, size_y_ * 2, event_count_, event_distance_);
+
+	vector<coord_def> named_pos_;
+	MakeInstanceMapFromPattern(floor_, pattern_.c_str(), size_x_, size_y_, DG_GRASS, DG_TREE, &named_pos_, &table_);
+
+	environment& env_ = env[floor_];
+	if (named_pos_.empty() && sea_list_.GetSize() > 0)
+		named_pos_.push_back(sea_list_.pop());
+	if (!named_pos_.empty())
+		AddInstanceMonster(floor_, MON_WAKASAGI, named_pos_[0]);
+
+	coord_def stair_ = env_.stair_up[0];
+	random_extraction<coord_def> pos_list_;
+	for (int x = 0; x < DG_MAX_X; x++)
+		for (int y = 0; y < DG_MAX_Y; y++)
+			if (env_.isMove(x, y) && !env_.isStair(x, y) && !env_.isMonsterPos(x, y) &&
+				max(abs(stair_.x - x), abs(stair_.y - y)) > monster_distance_)
+				pos_list_.push(coord_def(x, y));
+	for (int i = 0; i < monster_count_ && pos_list_.GetSize() > 0; i++)
 	{
-	default: floor_tex_ = DG_GRASS; wall_tex_ = DG_STONE_WALL; break;
+		int id_ = GetInstanceSpawnMonster(table_, GMFF_FLAG_ALL);
+		if (id_ >= 0)
+			AddInstanceMonster(floor_, id_, pos_list_.pop());
 	}
-	MakeInstanceMapFromPattern(floor_, "\
-#########################\
-#...........#...........#\
-#..m........#........m..#\
-#.....###.......###.....#\
-#.....#...........#.....#\
-#..........m............#\
-#.....#...........#.....#\
-#.....###.......###.....#\
-#.......................#\
-###+####...M.....####+###\
-#.......................#\
-#.....###.......###.....#\
-#.....#...........#.....#\
-#..........m............#\
-#.....#...........#.....#\
-#.....###.......###.....#\
-#..m........#........m..#\
-#...........<...........#\
-#########################",
-		12, 9, floor_tex_, wall_tex_);
+
+	for (const coord_def& pos_ : event_pos_)
+		env_.MakeEvent(EVL_SMALL_POND, pos_, EVT_APPROACH_MIDDLE);
 }
 
 
@@ -452,31 +534,46 @@ static vector<bool> GetPatternReach(const string& pattern_, int width_, int heig
 	return reach_;
 }
 
-void ScatterInstanceBlocks(string& pattern_, int size_x_, int size_y_, char floor_, char block_, int count_)
+void ScatterInstanceBlocks(string& pattern_, int size_x_, int size_y_, char floor_, char block_, int count_, int block_size_)
 {
 	int width_ = size_x_ * 2 + 1, height_ = size_y_ * 2 + 1;
-	if ((int)pattern_.size() < width_ * height_ || width_ < 4 || height_ < 4)
+	if (block_size_ < 1 || (int)pattern_.size() < width_ * height_ || width_ < block_size_ + 2 || height_ < block_size_ + 2)
 		return;
 	string blocks_ = string("#T") + block_;
 	vector<bool> reach_ = GetPatternReach(pattern_, width_, height_, blocks_);
+	int area_ = block_size_ * block_size_;
 	for (int placed_ = 0, tries_ = 0; placed_ < count_ && tries_ < count_ * 50; tries_++)
 	{
-		int x_ = rand_int(1, width_ - 3), y_ = rand_int(1, height_ - 3);
-		bool ok_ = true; 
-		for (int dx = -1; dx <= 2 && ok_; dx++)
-			for (int dy = -1; dy <= 2 && ok_; dy++)
+		int x_ = rand_int(1, width_ - 1 - block_size_), y_ = rand_int(1, height_ - 1 - block_size_);
+		bool ok_ = true;
+		for (int dx = -1; dx <= block_size_ && ok_; dx++)
+			for (int dy = -1; dy <= block_size_ && ok_; dy++)
 				if (pattern_[(y_ + dy) * width_ + x_ + dx] != floor_)
 					ok_ = false;
 		if (!ok_)
 			continue;
-		string backup_ = pattern_;
-		for (int dx = 0; dx <= 1; dx++) {
-			for (int dy = 0; dy <= 1; dy++) {
-				if(randA(4)) {
-					pattern_[(y_ + dy) * width_ + x_ + dx] = block_;
-				}
+
+		vector<bool> blob_(area_, false);
+		blob_[randA(area_ - 1)] = true;
+		for (int filled_ = 1, target_ = area_ - randA(area_ / 4); filled_ < target_; filled_++)
+		{
+			random_extraction<int> next_;
+			for (int i = 0; i < area_; i++)
+			{
+				int bx_ = i % block_size_, by_ = i / block_size_;
+				if (!blob_[i] && ((bx_ > 0 && blob_[i - 1]) || (bx_ < block_size_ - 1 && blob_[i + 1]) ||
+					(by_ > 0 && blob_[i - block_size_]) || (by_ < block_size_ - 1 && blob_[i + block_size_])))
+					next_.push(i);
 			}
+			if (next_.GetSize() == 0)
+				break;
+			blob_[next_.pop()] = true;
 		}
+
+		string backup_ = pattern_;
+		for (int i = 0; i < area_; i++)
+			if (blob_[i])
+				pattern_[(y_ + i / block_size_) * width_ + x_ + i % block_size_] = block_;
 		vector<bool> new_reach_ = GetPatternReach(pattern_, width_, height_, blocks_);
 		for (int i = 0; i < width_ * height_ && ok_; i++)
 			if (reach_[i] && !new_reach_[i] && pattern_[i] != block_)
@@ -575,9 +672,10 @@ string MakeInstanceStarPattern(int size_, int branch_count_, int wiggle_, int ce
 monster* AddInstanceMonster(int floor_, int id_, const coord_def& pos_, uint64_t flag_)
 {
 	environment& env_ = env[floor_];
+	bool fly_ = mondata[id_].flag & M_FLAG_FLY, swim_ = mondata[id_].flag & M_FLAG_SWIM, no_ground_ = mondata[id_].flag & M_FLAG_CANT_GROUND;
 	for (dif_rect_iterator rit(pos_, 3); !rit.end(); rit++)
 	{
-		if (!env_.isMove(rit->x, rit->y) || env_.isMonsterPos(rit->x, rit->y) || env_.isStair(rit->x, rit->y))
+		if (!env_.isMove(rit->x, rit->y, fly_, swim_, no_ground_) || env_.isMonsterPos(rit->x, rit->y) || env_.isStair(rit->x, rit->y))
 			continue;
 		if (monster* mon_ = env_.AddMonster(id_, flag_, *rit))
 		{

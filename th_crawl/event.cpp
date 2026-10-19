@@ -1390,6 +1390,35 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 		}
 		return 1;
 	}
+	case EVL_SMALL_POND:
+	{
+		instance_spawn_table table_;
+		SetSmallPondTable(table_);
+		random_extraction<coord_def> pos_list_;
+		for (int x = -2; x <= 2; x++)
+		{
+			for (int y = -2; y <= 2; y++)
+			{
+				coord_def pos_ = event_->position + coord_def(x, y);
+				if (x * x + y * y <= 6 && env[current_level].isMove(pos_.x, pos_.y, true) &&
+					!env[current_level].isMonsterPos(pos_.x, pos_.y) && pos_ != you.position)
+					pos_list_.push(pos_);
+			}
+		}
+		{
+			int id_ = GetInstanceSpawnMonster(table_, GMFF_FLAG_ALL);
+			if (id_ < 0)
+				break;
+			if (monster* mon_ = AddInstanceMonster(current_level, id_, pos_list_.pop()))
+			{
+				mon_->FoundTarget(&you, mon_->FoundTime());
+				if (env[current_level].isInSight(mon_->position))
+					LocalzationManager::printLogWithKey(LOC_SYSTEM_EVENT_SMALL_POND_APPEAR, true, false, false, CL_small_danger,
+						PlaceHolderHelper(mon_->GetName()->getName()));
+			}
+		}
+		return 1;
+	}
 	case EVL_DARK_FOREST:
 	{
 		instance_dungeon_slot* slot_ = instance_dungeon.GetCurrentSlot();

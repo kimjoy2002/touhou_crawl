@@ -29,7 +29,7 @@ enum instance_dungeon_type
 	IDG_NONE = -1,
 	IDG_FAIRY_TREE = 0, //요정이 사는 거목 (초반, 삼월정)
 	IDG_DARK_FOREST_PATH, //어두운 숲길 (초반, 임시)
-	IDG_MAYOIGA, //마요이가 (초반, 임시)
+	IDG_SMALL_POND, //작은 연못 (초반, 와카사기히메)
 	IDG_MAX
 };
 
@@ -127,8 +127,8 @@ void MakeInstanceMapFromPattern(int floor_, const char* pattern_, int size_x_, i
 	instance_spawn_table* table_ = nullptr, instance_map_marks* marks_ = nullptr);
 
 coord_def GetInstancePatternPos(int x_, int y_, int size_x_, int size_y_); //아스키맵의 칸(x_, y_)이 놓이는 맵 좌표
-//floor_ 문자 위에 2*2 block_을 count_개 뿌린다
-void ScatterInstanceBlocks(string& pattern_, int size_x_, int size_y_, char floor_, char block_, int count_);
+//floor_ 문자 위에 block_size_*block_size_ 안에서 한 덩어리로 이어진 block_을 count_개 뿌린다. (덩어리끼리는 붙지 않는다)
+void ScatterInstanceBlocks(string& pattern_, int size_x_, int size_y_, char floor_, char block_, int count_, int block_size_ = 2);
 //y_min_~y_max_ 줄의 floor_ 문자 중 서로 min_distance_칸 이상 떨어진 위치를 최대 count_개 골라 맵 좌표로 준다.
 vector<coord_def> PickInstancePatternPos(const string& pattern_, int size_x_, int size_y_, char floor_,
 	int y_min_, int y_max_, int count_, int min_distance_);
@@ -136,6 +136,7 @@ vector<coord_def> PickInstancePatternPos(const string& pattern_, int size_x_, in
 string MakeInstanceStarPattern(int size_, int branch_count_, int wiggle_, int center_radius_, vector<coord_def>* tips_ = nullptr);
 
 void SetFairyTreeTable(instance_spawn_table& table_);
+void SetSmallPondTable(instance_spawn_table& table_);
 int GetInstanceSpawnMonster(instance_spawn_table& table_, int power_); //그룹이 비어서 못 고르면 -1
 bool HasInstanceNamedEvent(int floor_); //아직 등장하지 않은 EVL_INSTANCE_NAMED가 있는지
 

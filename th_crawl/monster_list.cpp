@@ -1216,7 +1216,7 @@ const mon_infor mondata[] = {
 		{9,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_OPEN_DOOR | M_FLAG_SPEAK | M_FLAG_RANGE_ATTACK,0,1,10,'h'},
 
-	{MON_TORNADO_SPIRIT,6,120,name_infor(MON_TORNADO_SPIRIT),&img_mons_tornado_spirit,15,1,15,
+	{MON_TORNADO_SPIRIT,6,60,name_infor(MON_TORNADO_SPIRIT),&img_mons_tornado_spirit,15,1,15,
 		{8,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
 		M_FLAG_FLY,0,0,7,'m'},
 
@@ -1236,5 +1236,9 @@ const mon_infor mondata[] = {
 
 	{ MON_PHOTON_TORPEDO, 1, 0, name_infor(MON_PHOTON_TORPEDO), &img_tanmac_photon_torpedo[1], 1, 10, 0,
 		{ 0, 0, 0 }, { ATT_NORMAL, ATT_NONE, ATT_NONE }, { name_infor(LOC_SYSTEM_ATT_NORMAL), name_infor(), name_infor() },
-		M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_STATE | M_FLAG_CAN_SEE_INVI | M_FLAG_NO_ATK | M_FLAG_PASSED_ALLY | M_FLAG_MISSLE | M_FLAG_DIRECT_KILL, 99, 0, 7 ,')' }
+		M_FLAG_CANT_NETURAL | M_FLAG_FLY | M_FLAG_INANIMATE | M_FLAG_NO_STATE | M_FLAG_CAN_SEE_INVI | M_FLAG_NO_ATK | M_FLAG_PASSED_ALLY | M_FLAG_MISSLE | M_FLAG_DIRECT_KILL, 99, 0, 7 ,')' },
+
+	{MON_WATER_SPIRIT,5,40,name_infor(MON_WATER_SPIRIT),&img_mons_water_spirit,12,2,10,
+		{5,0,0},{ATT_NORMAL,ATT_NONE,ATT_NONE},{name_infor(LOC_SYSTEM_ATT_NORMAL),name_infor(),name_infor()},
+		M_FLAG_SWIM,0,0,7,'m'}
 };

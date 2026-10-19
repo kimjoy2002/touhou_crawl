@@ -165,13 +165,14 @@ static void make_map_dark_forest(int floor_, const instance_dungeon_slot& slot_)
 	int branch_count_ = rand_int(5,7); //가지 갯수
 	int wiggle_ = rand_int(4,6); //구불구불한 정도 (0~10)
 	const int center_radius_ = 8; //중앙 공터 반지름
-	int monster_count_ = rand_int(12,20);
+	int monster_count_ = rand_int(14,20);
 	const int monster_distance_ = 9;
 
 	instance_spawn_table table_;
 	table_.all.push(MON_CROW, 10);
 	table_.all.push(MON_MOOK, 3);
 	table_.all.push(MON_FIREFLY, 10);
+	table_.all.push(MON_BAKEKASA, 10);
 	table_.all.push(MON_GREEN_MOOK, 5);
 	table_.all.push(MON_ORANGE_MOOK, 2);
 
@@ -226,17 +227,22 @@ static void make_map_dark_forest(int floor_, const instance_dungeon_slot& slot_)
 
 void SetSmallPondTable(instance_spawn_table& table_)
 {
+	table_.weak.push(MON_MOOK, 10);
+	table_.weak.push(MON_FAIRY_GREEN, 5);
+	table_.weak.push(MON_FAIRY_BLUE, 10);
 	table_.all.push(MON_MOOK, 10);
-	table_.all.push(MON_FAIRY_GREEN, 10);
+	table_.all.push(MON_FAIRY_GREEN, 5);
 	table_.all.push(MON_FAIRY_BLUE, 10);
-	table_.all.push(MON_TORNADO_SPIRIT, 5);
+	table_.all.push(MON_TORNADO_SPIRIT, 3);
+	table_.all.push(MON_WATER_SPIRIT, 3);
+	table_.strong.push(MON_WATER_SPIRIT, 10);
 }
 
 static void make_map_small_pond(int floor_, const instance_dungeon_slot& slot_)
 {
 	const int size_x_ = 22, size_y_ = 19;
 	const int pond_count_ = 12;
-	int monster_count_ = rand_int(6, 9);
+	int monster_count_ = rand_int(5, 7);
 	const int monster_distance_ = 7;
 	const int event_count_ = 4;
 	const int event_distance_ = 6;
@@ -255,7 +261,7 @@ TTTTTTTTTTTTTT_________________TTTTTTTTTTTTTT\
 TTTT___TTTTT_______~~__~~___________TTTTTTTTT\
 TTTT______________~~~__~~~______________TTTTT\
 TTTTT___________~~~~ii_i~~~~_______________TT\
-TTTT___________~~~~~_ii_~~~~~_____________TTT\
+TTTT___________~~~~~MiiM~~~~~_____________TTT\
 TT_____________~~~_i_iiii~~~~_____________TTT\
 TT_____________~~~~~i_i_~~~~~______________TT\
 T_______________~~~~~~~~~~~~~______________TT\

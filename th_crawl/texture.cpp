@@ -1278,6 +1278,7 @@ textures img_mons_shoebill(&texture_monster02, 161, 255);
 textures img_mons_yamanba(&texture_monster02, 162, 255);
 textures img_mons_tornado_spirit(&texture_monster02, 163, 255);
 textures img_mons_glacier_wall(&texture_monster02, 164, 255);
+textures img_mons_water_spirit(&texture_monster02, 167, 255);
 
 textures img_mons_goliath_doll[] =
 {
@@ -4944,6 +4945,8 @@ int texturetoint(textures* input)
 		return 921;
 	else if(input == &img_effect_machine_oi_sound[7])
 		return 922;
+	else if(input == &img_mons_water_spirit)
+		return 923;
 	else
 	{
 		for (int i = 0; i < STYLE_NUM; i++)
@@ -6811,6 +6814,8 @@ textures* inttotexture(int input)
 		return &img_effect_machine_oi_sound[6];
 	case 922:
 		return &img_effect_machine_oi_sound[7];
+	case 923:
+		return &img_mons_water_spirit;
 	default:
 		return &img_mons_default;
 	}

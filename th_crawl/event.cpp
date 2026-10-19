@@ -1059,6 +1059,9 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 	{
 		if (env[current_level].dgtile[event_->position.x][event_->position.y].tile != DG_SEA)
 		{
+			unit* unit_ = env[current_level].isMonsterPos(event_->position.x, event_->position.y);
+			if (unit_ && !unit_->isFly() && !unit_->isSwim())
+				return 1;
 			event_->value = env[current_level].dgtile[event_->position.x][event_->position.y].tile;
 			env[current_level].changeTile(event_->position, DG_SEA);
 		}
@@ -1405,6 +1408,8 @@ int EventOccur(int id, events* event_) //1이 적용하고 끝내기
 					pos_list_.push(pos_);
 			}
 		}
+		if (pos_list_.GetSize() == 0)
+			return 0;
 		{
 			int id_ = GetInstanceSpawnMonster(table_, GMFF_FLAG_ALL);
 			if (id_ < 0)

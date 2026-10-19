@@ -68,6 +68,7 @@ bool SpellFlagCheck(spell_list skill, skill_flag flag)
 	case SPL_THROW_AXE:
 		return (S_FLAG_CLOSE_DANGER | S_FLAG_RANGE_ATTACK) & flag;
 	case SPL_COUNTER_TANMAC:
+	case SPL_WATER_BURST:
 		return (S_FLAG_IMMEDIATELY | S_FLAG_NO_COM) & flag;
 	case SPL_GLACIER_WALL:
 		return (S_FLAG_SUMMON | S_FLAG_SMITE | S_FLAG_SPEAK) & flag;
@@ -892,6 +893,8 @@ string SpellString(spell_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_THROW_AXE);
 	case SPL_COUNTER_TANMAC:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_COUNTER_TANMAC);
+	case SPL_WATER_BURST:
+		return LocalzationManager::locString(LOC_SYSTEM_SPL_WATER_BURST);
 	case SPL_GLACIER_WALL:
 		return LocalzationManager::locString(LOC_SYSTEM_SPL_GLACIER_WALL);
 	case SPL_COLD_ARMOUR:
@@ -1267,6 +1270,7 @@ int SpellNoise(spell_list skill)
 	case SPL_ACID_BOLT:
 	case SPL_THROW_STAR:
 	case SPL_DOLL_SPEAR:
+	case SPL_WATER_BURST:
 	case SPL_LITTLE_LEGION:
 		return 8; //기본 소음
 	case SPL_FIRE_BALL:
@@ -1641,6 +1645,7 @@ skill_type SpellSchool(spell_list skill, int num)
 	case SPL_THROW_AXE:
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_COUNTER_TANMAC:
+	case SPL_WATER_BURST:
 		return num == 0 ? (SKT_CONJURE) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
 	case SPL_GLACIER_WALL:
 		return num == 0 ? (SKT_COLD) : num == 1 ? (SKT_ERROR) : (SKT_ERROR);
@@ -1916,6 +1921,7 @@ int SpellCap(spell_list skill)
 	case SPL_THROW_AXE:
 		return 200;
 	case SPL_COUNTER_TANMAC:
+	case SPL_WATER_BURST:
 		return 0;
 	default:
 	case SPL_BLINK:

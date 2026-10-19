@@ -277,6 +277,8 @@
 
 #define SPL_COUNTER_TANMAC_DICE 1
 #define SPL_COUNTER_TANMAC_DAM 12
+#define SPL_WATER_BURST_DICE 1
+#define SPL_WATER_BURST_DAM 13
 
 extern HANDLE mutx;
 extern int map_effect;
@@ -5871,6 +5873,44 @@ bool skill_homing_tanmac(int pow_, bool short_, int base_damage, int type, unit*
 	return return_;
 }
 
+void skill_water_spirit_burst(monster* order)
+{
+	coord_def center_ = order->position;
+	bool sight_ = env[current_level].isInSight(center_);
+	if (sight_)
+		PlaySE("bomb");
+	for (rect_iterator rit(center_, 1, 1); !rit.end(); rit++)
+		if (env[current_level].isMove(rit->x, rit->y, true) && order->isSightnonblocked(*rit))
+			env[current_level].MakeEffect(*rit, &img_blast[4], false);
+	for (rect_iterator rit(center_, 1, 1); !rit.end(); rit++)
+	{
+		unit* hit_ = env[current_level].isMonsterPos(rit->x, rit->y, order);
+		if (hit_ && hit_->isEnemyUnit(order) && order->isSightnonblocked(*rit))
+		{
+			attack_infor temp_att(randC(SPL_WATER_BURST_DICE, SPL_WATER_BURST_DAM), SPL_WATER_BURST_DICE * SPL_WATER_BURST_DAM,
+				99, order, order->GetParentType(), ATT_NORMAL_BLAST, name_infor(LOC_SYSTEM_ATT_WATER_SPRAY));
+			hit_->damage(temp_att, true);
+		}
+	}
+	if (sight_)
+		Sleep(300);
+	env[current_level].ClearEffect();
+
+	int time_ = rand_int(10, 15);
+	for (rect_iterator rit(center_, 1, 1); !rit.end(); rit++)
+	{
+		if (*rit != center_ && randA(1))
+			continue;
+		if (!env[current_level].dgtile[rit->x][rit->y].isFloor())
+			continue;
+		unit* unit_ = env[current_level].isMonsterPos(rit->x, rit->y, order);
+		if (unit_ && !unit_->isFly() && !unit_->isSwim())
+			continue;
+		env[current_level].MakeEvent(EVL_WATER, *rit, EVT_ALWAYS, time_);
+	}
+	MakeCloud(center_, img_fog_normal, SMT_FOG, rand_int(10, 15), rand_int(8, 12), 0, 5, order);
+}
+
 bool skill_counter_tanmac(unit* order, coord_def target)
 {
 	if(!order || target == order->position)
@@ -7770,6 +7810,9 @@ void SetSpell(monster_index id, monster* mon_, vector<item_infor> *item_list_, b
 	case MON_TORNADO_SPIRIT:
 		list->push_back(spell(SPL_COUNTER_TANMAC, 0));
 		break;
+	case MON_WATER_SPIRIT:
+		list->push_back(spell(SPL_WATER_BURST, 0));
+		break;
 	case MON_RABIT_ALCHEMIST:
 		list->push_back(spell(SPL_THROW_POTION, 33));
 		break;
@@ -9566,6 +9609,13 @@ void GetSpellDamageString(spell_list skill, unit* order, int pow_)
 	{
 		ostringstream ss;
 		ss << "(" << SPL_COUNTER_TANMAC_DICE << "d" << SPL_COUNTER_TANMAC_DAM << " X 2)";
+		printsub(ss.str(), false, normal_dam);
+		return;
+	}
+	case SPL_WATER_BURST:
+	{
+		ostringstream ss;
+		ss << "(" << SPL_WATER_BURST_DICE << "d" << SPL_WATER_BURST_DAM << ")";
 		printsub(ss.str(), false, normal_dam);
 		return;
 	}

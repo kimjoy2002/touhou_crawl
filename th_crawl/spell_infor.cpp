@@ -590,6 +590,9 @@ string GetSpellInfor(spell_list spell, bool isPlayer)
 	case SPL_COUNTER_TANMAC:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_COUNTER_TANMAC);
 		break;
+	case SPL_WATER_BURST:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_WATER_BURST);
+		break;
 	case SPL_GLACIER_WALL:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SPL_DESCRIBE_GLACIER_WALL);
 		break;

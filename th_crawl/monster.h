@@ -177,6 +177,7 @@ public:
 	bool isLive(){return (hp>0);}
 	bool isFly();
 	bool isSwim();
+	bool isCantGround();
 	bool isMultipleAttack(bool canAttackFreindly);
 	void multipleAttack(unit* except, attack_infor& att_infor);
 	bool simple_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared_ptr<DirectX::SpriteFont> pfont, float x_, float y_, float scale_);

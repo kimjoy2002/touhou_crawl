@@ -633,7 +633,7 @@ void monster::FirstContact()
 				while(max_)
 				{
 					int x_ = randA(DG_MAX_X-1),y_=randA(DG_MAX_Y-1);
-					if(env[current_level].isMove(x_,y_,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND))
+					if(env[current_level].isMove(x_,y_,isFly(), isSwim(), isCantGround()))
 					{ //fly와 swim이 이 캐릭터 설정으로 되어있는건 이 캐릭터가 가볼수있는 위치였다. 라는것
 						env[current_level].MakeMapping(coord_def(x_,y_),rand_int(min_size_,max_size_),false,percent_);
 						break;
@@ -1134,6 +1134,10 @@ bool monster::isFly()
 bool monster::isSwim()
 {
 	return (flag & M_FLAG_SWIM);
+}
+bool monster::isCantGround()
+{
+	return (flag & M_FLAG_CANT_GROUND) && !(s_confuse && id == MON_WAKASAGI);
 }
 bool monster::isMultipleAttack(bool canAttackFreindly) {
 	if(id == MON_YUMA2) {
@@ -2540,7 +2544,7 @@ bool monster::smartmove(short_move x_mov, short_move y_mov, int num_, set<int>& 
 							}
 						}
 
-						if(env[current_level].isMove(new_pos_->x, new_pos_->y, isFly(), isSwim(),flag & M_FLAG_CANT_GROUND))
+						if(env[current_level].isMove(new_pos_->x, new_pos_->y, isFly(), isSwim(),isCantGround()))
 						{ //이동할수있는 위치다.				
 							unit *unit_ = env[current_level].isMonsterPos(new_pos_->x, new_pos_->y);
 							if(unit_)
@@ -2687,7 +2691,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 	}
 
 	if(!(flag & M_FLAG_NONE_MOVE) &&
-		env[current_level].isMove(position.x+x_mov,position.y+y_mov,isFly() || s_confuse, isSwim(), false/*flag & M_FLAG_CANT_GROUND*/, id == MON_SEIGA))
+		env[current_level].isMove(position.x+x_mov,position.y+y_mov,isFly() || s_confuse, isSwim(), false/*isCantGround()*/, id == MON_SEIGA))
 	{
 		if(env[current_level].isSmokePos(position.x+x_mov,position.y+y_mov))
 		{
@@ -2745,7 +2749,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 						able[1] = coord_def( 0, y_mov);
 					}
 					for(int i = 0; i<2;i++) {
-						if(env[current_level].isMove(position.x+able[i].x,position.y+able[i].y,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND, id == MON_SEIGA) &&
+						if(env[current_level].isMove(position.x+able[i].x,position.y+able[i].y,isFly(), isSwim(), isCantGround(), id == MON_SEIGA) &&
 							!env[current_level].isMonsterPos(position.x+able[i].x,position.y+able[i].y)) {
 							SetXY(coord_def(position.x+able[i].x,position.y+able[i].y));
 							return 2;
@@ -2806,7 +2810,7 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 				}
 			}
 		}
-		if(flag & M_FLAG_CANT_GROUND && !env[current_level].isMove(position.x+x_mov,position.y+y_mov,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND, id == MON_SEIGA))
+		if(isCantGround() && !env[current_level].isMove(position.x+x_mov,position.y+y_mov,isFly(), isSwim(), isCantGround(), id == MON_SEIGA))
 		{
 			if(s_confuse)
 			{
@@ -2861,7 +2865,7 @@ int monster::moveGoliath(short_move x_mov, short_move y_mov, bool only_move)
 	{
 		coord_def pos = destination + offset;
 		if(pos.x < 0 || pos.x >= DG_MAX_X || pos.y < 0 || pos.y >= DG_MAX_Y ||
-			!env[current_level].isMove(pos, isFly(), isSwim(), flag & M_FLAG_CANT_GROUND))
+			!env[current_level].isMove(pos, isFly(), isSwim(), isCantGround()))
 			return 0;
 
 		unit* occupied = env[current_level].isMonsterPos(pos.x, pos.y, this);
@@ -2902,7 +2906,7 @@ bool monster::canPlaceGoliath(const coord_def& anchor)
 	{
 		coord_def pos = anchor + offset;
 		if(pos.x < 0 || pos.x >= DG_MAX_X || pos.y < 0 || pos.y >= DG_MAX_Y ||
-			!env[current_level].isMove(pos, isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) ||
+			!env[current_level].isMove(pos, isFly(), isSwim(), isCantGround()) ||
 			you.position == pos)
 			return false;
 		unit* occupied = env[current_level].isMonsterPos(pos.x, pos.y, this);
@@ -3078,7 +3082,7 @@ int monster::longmove()
 		rand_shuffle(dq.begin(),dq.end());
 		for(int i=0;i<8;i++)
 		{
-			if(env[current_level].isMove(inttodirec(dq[i],position.x,position.y),isFly(), isSwim(), flag & M_FLAG_CANT_GROUND, id == MON_SEIGA)) //나는 몹은 2번째인자
+			if(env[current_level].isMove(inttodirec(dq[i],position.x,position.y),isFly(), isSwim(), isCantGround(), id == MON_SEIGA)) //나는 몹은 2번째인자
 			{
 				direction = dq[i];
 			}
@@ -3283,7 +3287,7 @@ int monster::atkmove(int is_sight, bool only_move)
 				target_pos = target_pos+c;
 			}
 
-			if(!env[current_level].isMove(target_pos.x,target_pos.y,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND, id == MON_SEIGA))
+			if(!env[current_level].isMove(target_pos.x,target_pos.y,isFly(), isSwim(), isCantGround(), id == MON_SEIGA))
 			{ //벽에 막히면 8방향 랜덤으로 방향틈
 				deque<int> dq;
 				for(int i=0;i<8;i++)
@@ -3291,7 +3295,7 @@ int monster::atkmove(int is_sight, bool only_move)
 				rand_shuffle(dq.begin(),dq.end());
 				for(int i=0;i<8;i++)
 				{
-					if(env[current_level].isMove(inttodirec(dq[i],position.x,position.y),isFly(), isSwim(), flag & M_FLAG_CANT_GROUND, id == MON_SEIGA))
+					if(env[current_level].isMove(inttodirec(dq[i],position.x,position.y),isFly(), isSwim(), isCantGround(), id == MON_SEIGA))
 					{
 						target_pos = inttodirec(dq[i],position.x,position.y);
 						break;
@@ -3370,6 +3374,7 @@ bool monster::CanSpeak()
 }
 bool skill_suicide_bomb(int base_damage, int power, bool short_, unit* order, coord_def target, bool hurt_ally, bool self_hurt);
 bool skill_counter_tanmac(unit* order, coord_def target);
+void skill_water_spirit_burst(monster* order);
 bool monster::dead(parent_type reason_, bool message_, bool remove_, unit* killer_)
 {
 	if(id == MON_GOLIATH_DOLL && parent_part_id != -1)
@@ -3385,6 +3390,7 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_, unit* kille
 		return false;
 
 	bool counter_tanmac_ = isHaveSpell(SPL_COUNTER_TANMAC) && !remove_;
+	bool water_burst_ = isHaveSpell(SPL_WATER_BURST) && !remove_;
 	coord_def counter_target_ = position;
 	if(counter_tanmac_)
 	{
@@ -3470,6 +3476,8 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_, unit* kille
 	{
 		if(counter_tanmac_)
 			skill_counter_tanmac(this, counter_target_);
+		if(water_burst_)
+			skill_water_spirit_burst(this);
 		return true;
 	}
 
@@ -3682,6 +3690,8 @@ bool monster::dead(parent_type reason_, bool message_, bool remove_, unit* kille
 		GodAccpect_KillMonster(this,reason_);
 	if(counter_tanmac_)
 		skill_counter_tanmac(this, counter_target_);
+	if(water_burst_)
+		skill_water_spirit_burst(this);
 	return true;
 }
 void monster::resetShadow() {
@@ -4859,6 +4869,15 @@ void monster::special_action(int delay_, bool smoke_)
 					for (int j = -1; j < 2; j++)
 						env[current_level].MakeSmoke(coord_def(i + position.x, j + position.y), img_fog_dark, SMT_DARK, rand_int(3, 4), 0, this);
 			}
+		}
+		break;
+	case MON_WAKASAGI:
+		if (env[current_level].dgtile[position.x][position.y].tile != DG_SEA && s_confuse < 2)
+		{
+			if (s_confuse)
+				s_confuse = 2;
+			else
+				SetConfuse(2, true);
 		}
 		break;
 	case MON_FIRE_CAR:
@@ -6429,7 +6448,7 @@ bool monster::Blink(int time_)
 			y_ = temp_y_;
 			if((i>=time_ || i%5 == 0) &&
 				(id == MON_GOLIATH_DOLL ? canPlaceGoliath(coord_def(x_, y_)) :
-				(env[current_level].isMove(x_,y_,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) && !env[current_level].isMonsterPos(x_,y_) && !(you.position.x == x_ && you.position.y == y_))) &&
+				(env[current_level].isMove(x_,y_,isFly(), isSwim(), isCantGround()) && !env[current_level].isMonsterPos(x_,y_) && !(you.position.x == x_ && you.position.y == y_))) &&
 				!env[current_level].isSmokePos(x_,y_))
 			{
 				prev_x = x_;
@@ -6459,7 +6478,7 @@ bool monster::Teleport()
 		{
 			coord_def candidate(x,y);
 			if(id == MON_GOLIATH_DOLL ? canPlaceGoliath(candidate) :
-				(env[current_level].isMove(x,y,isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) && !env[current_level].isMonsterPos(x,y)))
+				(env[current_level].isMove(x,y,isFly(), isSwim(), isCantGround()) && !env[current_level].isMonsterPos(x,y)))
 				candidates.push_back(candidate);
 		}
 	}
@@ -6853,7 +6872,7 @@ bool monster::sacrificeMove()
 	}
 	coord_def next = inttodirec(GetAngleToDirec(direction), position.x, position.y);
 	unit* occupied = env[current_level].isMonsterPos(next.x, next.y, this);
-	if(env[current_level].isMove(next, isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) && !occupied)
+	if(env[current_level].isMove(next, isFly(), isSwim(), isCantGround()) && !occupied)
 	{
 		SetXY(next);
 	}
@@ -6863,7 +6882,7 @@ bool monster::sacrificeMove()
 		{
 			direction = GetBaseAngle(direction + rand_int(120, 240));
 			next = inttodirec(GetAngleToDirec(direction), position.x, position.y);
-			if(env[current_level].isMove(next, isFly(), isSwim(), flag & M_FLAG_CANT_GROUND) &&
+			if(env[current_level].isMove(next, isFly(), isSwim(), isCantGround()) &&
 				!env[current_level].isMonsterPos(next.x, next.y, this))
 				break;
 		}

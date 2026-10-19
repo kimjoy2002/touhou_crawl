@@ -1577,7 +1577,7 @@ int players::move(short_move x_mov, short_move y_mov)
 		{
 			if(mon_->isUserAlly() && ((!(mon_->flag & M_FLAG_NONE_MOVE) && !mon_->isImmobile()) ||  mon_->flag & M_FLAG_CAN_SWAP))
 			{
-				if(env[current_level].isMove(position.x, position.y, mon_->isFly(), mon_->isSwim(), mon_->flag & M_FLAG_CANT_GROUND) && env[current_level].isMove(move_x_,move_y_,isFly(),isSwim() || drowned))
+				if(env[current_level].isMove(position.x, position.y, mon_->isFly(), mon_->isSwim(), mon_->isCantGround()) && env[current_level].isMove(move_x_,move_y_,isFly(),isSwim() || drowned))
 				{
 					PositionSwap(mon_);	
 					//printlog(LocalzationManager::locString(LOC_SYSTEM_SWAP_ALLY) + " ",false,false,false,CL_bad);

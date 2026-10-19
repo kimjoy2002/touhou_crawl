@@ -1355,7 +1355,7 @@ static void repair_goliath_groups(environment& map)
 				continue;
 			coord_def pos = anchor + offsets[part_index];
 			if(pos.x < 0 || pos.x >= DG_MAX_X || pos.y < 0 || pos.y >= DG_MAX_Y ||
-				!map.dgtile[pos.x][pos.y].isMove(root->isFly(), root->isSwim(), root->flag & M_FLAG_CANT_GROUND))
+				!map.dgtile[pos.x][pos.y].isMove(root->isFly(), root->isSwim(), root->isCantGround()))
 				continue;
 			unit* occupied = map.isMonsterPos(pos.x, pos.y);
 			if(occupied && (occupied->isplayer() || ((monster*)occupied)->map_id != root_id))

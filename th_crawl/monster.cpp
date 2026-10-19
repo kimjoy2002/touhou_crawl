@@ -6955,7 +6955,7 @@ int monster::special_state(bool is_sight_for_monster) {
 	{
 		//광자토피도: 피아식별 폭발
 		if(special_move(is_sight_for_monster, false, 45)) {
-			int damage_ = 4 +level/2;
+			int damage_ = 5 + (level - 1)*2/3;
 			attack_infor temp_infor(randC(2,damage_),damage_*2,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_PHOTON_TORPEDO));
 			BaseBomb_forAlly(position, &img_blast[0],temp_infor, &you, 10, false);
 			if(env[current_level].isInSight(position)) {

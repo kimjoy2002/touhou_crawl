@@ -2302,14 +2302,14 @@ bool players::IsMachineEnemyInSight()
 
 void players::FirePhotonTorpedo(int count_)
 {
-	int level_ = 2+GetInstalledMachineLevel(IMT_PHOTON_TORPEDO);
+	int level_ = GetInstalledMachineLevel(IMT_PHOTON_TORPEDO);
 	bool fired_ = false;
 	for(int i = 0; i < count_; i++)
 	{
 		monster* torpedo_ = BaseSummon(MON_PHOTON_TORPEDO, rand_int(30,60), true, true, 1, this, position, SKD_OTHER, -1);
 		if(!torpedo_)
 			continue;
-		torpedo_->LevelUpdown(level_/2,0,0);
+		torpedo_->LevelUpdown(level_,0,0);
 		torpedo_->direction = GetPositionToAngle(position.x, position.y, torpedo_->position.x, torpedo_->position.y);
 		torpedo_->image = &img_tanmac_photon_torpedo[GetAngleToDirec(torpedo_->direction)];
 		fired_ = true;
@@ -2321,7 +2321,7 @@ void players::FirePhotonTorpedo(int count_)
 void players::FireOiSoundSystem(int count_)
 {
 	int level_ = GetInstalledMachineLevel(IMT_OI_SOUND_SYSTEM);
-	int damage_ = 4+level_/3;
+	int damage_ = 4+level_*2/3;
 	PlaySE("bomb");
 	printlog(LocalzationManager::locString(LOC_SYSTEM_MACHINE_OI_SOUND_SYSTEM_BLAST) + " ",false,false,false,CL_white_blue);
 	for(int range_ = 1; range_ <= 2; range_++)

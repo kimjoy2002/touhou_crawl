@@ -304,7 +304,8 @@ int WINAPI WinMain(HINSTANCE hinstance,
 
 	Cleanup();
 
-	g_pd3dDevice->Release();
+	if (g_pd3dDevice)
+		g_pd3dDevice->Release();
 	return 0;
 }
 

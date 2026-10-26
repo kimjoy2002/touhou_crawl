@@ -17,6 +17,7 @@
 #include <climits>
 #include <cmath>
 #include <map>
+#include <set>
 #include <sstream>
 #include <string>
 #include <thread>
@@ -458,6 +459,11 @@ void drawMap(Grid& grid)
 	map<pair<int, int>, smoke*> smokes_;
 	for (smoke& smoke_ : env_.smoke_list)
 		smokes_[make_pair(smoke_.position.x, smoke_.position.y)] = &smoke_;
+	set<pair<int, int>> half_paths_;
+	for (const coord_def& c_ : DisplayManager.sakuya_knife_path)
+		half_paths_.insert(make_pair(c_.x, c_.y));
+	for (const coord_def& c_ : DisplayManager.spell_half_path)
+		half_paths_.insert(make_pair(c_.x, c_.y));
 	map<pair<int, int>, effect*> effects_;
 	for (effect& effect_ : env_.effect_list)
 		if (effect_.over_sight || env_.isInSight(effect_.position))
@@ -512,12 +518,25 @@ void drawMap(Grid& grid)
 					}
 				}
 			}
+			if (env_.dgtile[x][y].flag & FLAG_LIGHT)
+			{
+				bg = HexColor("#d0b000");
+				fg = readableColor(fg, bg);
+			}
+			else if (half_paths_.count(make_pair(x, y)))
+			{
+				bg = HexColor("#6a5a00");
+				fg = readableColor(fg, bg);
+			}
 			//날아가는 탄막/마법, 레이저, 폭발 등 효과
 			auto effect_it_ = effects_.find(make_pair(x, y));
 			if (effect_it_ != effects_.end())
 			{
-				D3DCOLOR effect_color_ = 0;
-				ch = (wchar_t)GetEffectAsciiDot(effect_it_->second->image, effect_color_);
+				D3DCOLOR effect_color_ = effect_it_->second->ascii_color;
+				char effect_dot_ = effect_it_->second->ascii_dot;
+				if (!effect_dot_)
+					effect_dot_ = GetEffectAsciiDot(effect_it_->second->image, effect_color_);
+				ch = (wchar_t)effect_dot_;
 				fg = effect_color_;
 				bg = 0;
 			}

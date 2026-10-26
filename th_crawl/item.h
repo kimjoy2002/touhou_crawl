@@ -317,6 +317,7 @@ int baditem(const item_infor *item_);
 item_type RandomItemType();
 
 string GetItemTypeSting(item_type_simple type);
+const char* GetItemTypeAsciiDot(item_type_simple type);
 
 
 bool GetItemofKey(list<item>::iterator it,list<item>::iterator it2);

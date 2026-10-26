@@ -808,6 +808,29 @@ char environment::getAsciiDot(int x_, int y_)
 D3DCOLOR environment::getAsciiColor(int x_, int y_)
 {
 	dungeon_tile_type type = dgtile[x_][y_].tile;
+	if (dgtile[x_][y_].flag & FLAG_FORBID)
+	{
+		if (dgtile[x_][y_].forbid_count2)
+			return HexColor("#ff2050");
+		if (dgtile[x_][y_].forbid_count)
+			return HexColor("#ff7090");
+	}
+	if (isInSight(coord_def(x_, y_)))
+	{
+		int flag_ = dgtile[x_][y_].flag;
+		if (flag_ & FLAG_SILENCE)
+			return HexColor("#40e0e0"); //침묵
+		if (flag_ & FLAG_VIOLET)
+			return HexColor("#ff80ff"); //필드 바이올렛(광기)
+		if (flag_ & FLAG_SANCTUARY)
+			return HexColor("#ffff60"); //성역
+		if (flag_ & FLAG_HALO && !(you.s_weather == 3 && you.s_weather_turn > 0))
+			return HexColor("#fff0c0"); //후광
+		if (flag_ & FLAG_ROYAL)
+			return HexColor("#ff8030"); //로얄 플레어
+		if (flag_ & FLAG_QUICK_DASH)
+			return HexColor("#70ff70");
+	}
 	if (type >= DG_TEMPLE_FIRST && type <= DG_TEMPLE_LAST)
 	{
 		god_type god_ = (god_type)(type - DG_TEMPLE_FIRST);
@@ -1658,6 +1681,18 @@ void environment::MakeEffect(const coord_def &c, textures *t, bool over_sight_, 
 		return;
 	WaitForSingleObject(mutx, INFINITE);
 	effect_list.push_back(effect(c,t,over_sight_, alpha_));
+	ReleaseMutex(mutx);
+}
+void environment::MakeItemEffect(const coord_def &c, textures *t, item *item_, bool over_sight_, float alpha_)
+{
+	if(c.x < 0 || c.x >= DG_MAX_X || c.y < 0 || c.y >= DG_MAX_Y)
+		return;
+	WaitForSingleObject(mutx, INFINITE);
+	effect_list.push_back(effect(c,t,over_sight_, alpha_));
+	if(item_) {
+		effect_list.back().ascii_dot = item_->getAsciiDot();
+		effect_list.back().ascii_color = item_->getAsciiColor();
+	}
 	ReleaseMutex(mutx);
 }
 void environment::ClearEffect()

@@ -1584,6 +1584,8 @@ char item::getAsciiDot()
 D3DCOLOR item::getAsciiColor()
 {
 	//콘솔판 아이템 색
+	if (isArtifact() || fixed_artifact != FIXED_ARTIFACT_NONE)
+		return HexColor("#ffffff");
 	if (type == ITM_FOOD && value1 == 0)
 		return HexColor("#ff4040");
 	if (type >= ITM_WEAPON_FIRST && type < ITM_WEAPON_LAST)
@@ -2202,6 +2204,24 @@ bool item::offsetmove(const coord_def &c)
 }
 
 
+const char* GetItemTypeAsciiDot(item_type_simple type)
+{
+	switch(type)
+	{
+	case ITMS_WEAPON: return ")";
+	case ITMS_THROW: return "(";
+	case ITMS_ARMOR: return "[";
+	case ITMS_POTION: return "!";
+	case ITMS_FOOD: return "%";
+	case ITMS_SCROLL: return "?";
+	case ITMS_MACHINE: return "/";
+	case ITMS_JEWELRY: return "\"=";
+	case ITMS_BOOK: return ":";
+	case ITMS_MISCELLANEOUS: return "}";
+	case ITMS_OTHER: return "&";
+	default: return "";
+	}
+}
 string GetItemTypeSting(item_type_simple type)
 {
 	switch(type)

@@ -302,6 +302,7 @@ public:
 	bool MakeFloorEffect(const coord_def &c, textures *t,textures *t2, floor_type type_, int time_, unit* parent_ = NULL);
 	bool MakeEvent(int id_, coord_def position_, event_type type_, int count_ = -1, int value = 0);
 	void MakeEffect(const coord_def &c, textures *t, bool over_sight_, float alpha_ = 1.0f); //over_sight_ : 시야 밖에서의 이펙트도 볼것인가?
+	void MakeItemEffect(const coord_def &c, textures *t, item *item_, bool over_sight_, float alpha_ = 1.0f); 
 	void ClearEffect();
 	void ClearWithoutLaserEffect();
 	void ClearAllShadow();

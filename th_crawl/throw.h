@@ -56,6 +56,7 @@ public:
 	beam_iterator beam;
 	const beam_infor infor_;
 	item* item_;
+	item* effect_item; //콘솔판에서 이 아이템 기호로 그린다 (기본은 item_)
 	unit* last_hit;
 	bool effect_delete;
 	bool mimic_;

@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------
+§c beta patch – ver1.305 (2026-10-26)§d
+---------------------------------------------------------------------
+
+§y* Feature Additions§d
+ * Added a console version that can be played in a terminal.
+  * Run th_crawl_console.exe, or launch th_crawl.exe with --console.
+
+§y* Gameplay & Interface Improvements§d
+ * Items can now be selected by category in item menus using their item symbols (! ? [ etc.).
+
+---------------------------------------------------------------------
 §c beta patch – ver1.304 (2026-10-19)§d
 ---------------------------------------------------------------------
 

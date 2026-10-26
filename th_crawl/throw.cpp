@@ -584,7 +584,7 @@ LOCALIZATION_ENUM_KEY GetTanmacKey(int type)
 
 
 ThrowTamacInstance::ThrowTamacInstance(textures* t_, int graphic_type, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete, bool mimic_):
- t_(t_), graphic_type(graphic_type), beam(beam), infor_(infor_), item_(item_), last_hit(nullptr), effect_delete(effect_delete), mimic_(mimic_), attack_prefix(nullptr)
+ t_(t_), graphic_type(graphic_type), beam(beam), infor_(infor_), item_(item_), effect_item(item_), last_hit(nullptr), effect_delete(effect_delete), mimic_(mimic_), attack_prefix(nullptr)
 {
 	init();
 }
@@ -612,10 +612,10 @@ void ThrowTamacInstance::init() {
 			coord_def postion_ = prev;
 			int path_ = 80+GetPosToDirec(prev,(*beam));
 			if(graphic_type || !item_) {
-				env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path_),false);
+				env[current_level].MakeItemEffect(postion_, GetTanmacGraphic(graphic_type, direc, count++,path_), effect_item, false);
 			}
 			else if(item_) {//자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
-				env[current_level].MakeEffect(postion_,item_->image,false);
+				env[current_level].MakeItemEffect(postion_, item_->image, effect_item, false);
 			}
 		}
 	break;
@@ -688,11 +688,11 @@ bool ThrowTamacInstance::oneturn(coord_def& hit_pos_) {
 			prev = *(beam++);
 			path += (penetrate>0 && length>0)?GetPosToDirec(prev,(*beam)):9;
 			if(t_)
-				env[current_level].MakeEffect(postion_,t_,false);
+				env[current_level].MakeItemEffect(postion_, t_, effect_item, false);
 			else if(graphic_type || !item_)
-				env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path),false);
+				env[current_level].MakeItemEffect(postion_, GetTanmacGraphic(graphic_type, direc, count++,path), effect_item, false);
 			else if(item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
-				env[current_level].MakeEffect(postion_,item_->image,false);
+				env[current_level].MakeItemEffect(postion_, item_->image, effect_item, false);
 		} else {
 			for(auto& beam_ : slashed_beams) {
 				int path_ = 10*GetPosToDirec((*beam_),prev);
@@ -701,11 +701,11 @@ bool ThrowTamacInstance::oneturn(coord_def& hit_pos_) {
 				path_ += (penetrate>0 && length>0)?GetPosToDirec(prev,(*beam_)):9;
 				if(env[current_level].isMove(postion_,true)) {
 					if(t_)
-						env[current_level].MakeEffect(postion_,t_,false, 0.4f);
+						env[current_level].MakeItemEffect(postion_, t_, effect_item, false, 0.4f);
 					else if(graphic_type || !item_)
-						env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path_),false, 0.4f);
+						env[current_level].MakeItemEffect(postion_, GetTanmacGraphic(graphic_type, direc, count++,path_), effect_item, false, 0.4f);
 					else if(item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
-						env[current_level].MakeEffect(postion_,item_->image,false, 0.4f);
+						env[current_level].MakeItemEffect(postion_, item_->image, effect_item, false, 0.4f);
 				}
 			}
 			slashed++;
@@ -775,11 +775,11 @@ coord_def ThrowTamacInstance::endShoot(bool sleep_, bool without_laser) {
 					{
 						pos_ = *(beam--);
 						if (t_)
-							env[current_level].MakeEffect(pos_, t_, false);
+							env[current_level].MakeItemEffect(pos_, t_, effect_item, false);
 						else if (graphic_type || !item_)
-							env[current_level].MakeEffect(pos_, GetTanmacGraphic(graphic_type, direc, count++, path), false);
+							env[current_level].MakeItemEffect(pos_, GetTanmacGraphic(graphic_type, direc, count++, path), effect_item, false);
 						else if (item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
-							env[current_level].MakeEffect(pos_, item_->image, false);
+							env[current_level].MakeItemEffect(pos_, item_->image, effect_item, false);
 						if(sleep_) {
 							if(env[current_level].isInSight(pos_)) {
 								Sleep(16);
@@ -885,9 +885,9 @@ coord_def throwtanmac_temp(int graphic_type, textures* t_, beam_iterator& beam, 
 			coord_def postion_ = prev;
 			int path_ = 80+GetPosToDirec(prev,(*beam));
 			if(graphic_type || !item_)
-				env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path_),false);
+				env[current_level].MakeItemEffect(postion_, GetTanmacGraphic(graphic_type, direc, count++,path_), item_, false);
 			else if(item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
-				env[current_level].MakeEffect(postion_,item_->image,false);
+				env[current_level].MakeItemEffect(postion_, item_->image, item_, false);
 		}
 		while(env[current_level].isMove(*(beam),true) && penetrate>0 && length>0)
 		{
@@ -917,11 +917,11 @@ coord_def throwtanmac_temp(int graphic_type, textures* t_, beam_iterator& beam, 
 			prev = *(beam++);
 			path += (penetrate>0 && length>0)?GetPosToDirec(prev,(*beam)):9;
 			if(t_)
-				env[current_level].MakeEffect(postion_,t_,false);
+				env[current_level].MakeItemEffect(postion_, t_, item_, false);
 			else if(graphic_type || !item_)
-				env[current_level].MakeEffect(postion_,GetTanmacGraphic(graphic_type, direc, count++,path),false);
+				env[current_level].MakeItemEffect(postion_, GetTanmacGraphic(graphic_type, direc, count++,path), item_, false);
 			else if(item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
-				env[current_level].MakeEffect(postion_,item_->image,false);
+				env[current_level].MakeItemEffect(postion_, item_->image, item_, false);
 			if(env[current_level].isInSight(postion_)) {
 				effect_ = true;
 				Sleep(16);
@@ -953,11 +953,11 @@ coord_def throwtanmac_temp(int graphic_type, textures* t_, beam_iterator& beam, 
 					{
 						pos_ = *(beam--);
 						if (t_)
-							env[current_level].MakeEffect(pos_, t_, false);
+							env[current_level].MakeItemEffect(pos_, t_, item_, false);
 						else if (graphic_type || !item_)
-							env[current_level].MakeEffect(pos_, GetTanmacGraphic(graphic_type, direc, count++, path), false);
+							env[current_level].MakeItemEffect(pos_, GetTanmacGraphic(graphic_type, direc, count++, path), item_, false);
 						else if (item_) //자체 그래픽이 없고 item일 경우 item 그래픽을 그대로 쓴다.
-							env[current_level].MakeEffect(pos_, item_->image, false);
+							env[current_level].MakeItemEffect(pos_, item_->image, item_, false);
 						if(env[current_level].isInSight(pos_)) {
 							Sleep(16);
 						}
@@ -1318,7 +1318,11 @@ void ThrowSakuyaKnives(beam_iterator& beam, const vector<beam_iterator>& side_be
 	beam_infor side_infor = infor_;
 	side_infor.length = you.getThrowLength();
 	for(beam_iterator side_beam : side_beams)
-		tanmac_list.push_back(make_shared<ThrowTamacInstance>(item_->image,0,side_beam,side_infor,nullptr,false,true));
+	{
+		auto side_ = make_shared<ThrowTamacInstance>(item_->image,0,side_beam,side_infor,nullptr,false,true);
+		side_->effect_item = item_;
+		tanmac_list.push_back(side_);
+	}
 	while(!tanmac_list.empty())
 	{
 		for(auto it = tanmac_list.begin();it != tanmac_list.end();)

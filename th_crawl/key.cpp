@@ -448,7 +448,22 @@ static bool isFixedDirectionInput(const InputedKey& key)
 	}
 }
 
+const int ITEM_TYPE_KEY_FLAG = 0x40000000;
+
+static int waitkeyinput_once(InputedKey& key, bool direction_, bool immedity_, bool ablecursor, bool command_context, bool raw_input, int movement_context);
 int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecursor, bool command_context, bool raw_input, int movement_context)
+{
+	while(true)
+	{
+		int return_ = waitkeyinput_once(key, direction_, immedity_, ablecursor, command_context, raw_input, movement_context);
+		if(!(return_ & ITEM_TYPE_KEY_FLAG))
+			return return_;
+		return_ &= ~ITEM_TYPE_KEY_FLAG;
+		if(!DisplayManager.selectItemType(return_))
+			return return_;
+	}
+}
+static int waitkeyinput_once(InputedKey& key, bool direction_, bool immedity_, bool ablecursor, bool command_context, bool raw_input, int movement_context)
 {
 	if(ReplayClass.auto_key == false)
 	{
@@ -459,6 +474,8 @@ int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecurs
 		{
 			return_ = waitkeyinput_inter(key, direction_,immedity_, ablecursor);
 			return_ = keybind_mg.process_input(return_, command_context, isFixedDirectionInput(key), raw_input, movement_context);
+			if(key.mouse == MKIND_NONE && key.key.message == WM_CHAR && DisplayManager.isItemTypeKey(return_))
+				return_ |= ITEM_TYPE_KEY_FLAG;
 		}
 		else
 		{

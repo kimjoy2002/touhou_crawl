@@ -208,6 +208,8 @@ public:
 	void setPositionToChar(int char_);
 	void addPosition(int value_);
 	int positionToChar();
+	bool isItemTypeKey(int key_);
+	bool selectItemType(int key_);
 };
 
 class stateBox

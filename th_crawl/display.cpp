@@ -4386,6 +4386,11 @@ void display_manager::item_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 					rc.top += 16;
 					rc.left -= 48;
 					DrawTextUTF8(pfont,pSprite,GetItemTypeSting(i).c_str(), -1, &rc, DT_NOCLIP,CL_help);
+					if(GetItemTypeAsciiDot(i)[0]) {
+						RECT rc_dot_ = rc;
+						rc_dot_.left += (PrintCharWidth(GetItemTypeSting(i)) + 1) * fontDesc.Width;
+						DrawTextUTF8(pfont,pSprite,GetItemTypeAsciiDot(i), -1, &rc_dot_, DT_NOCLIP,CL_warning);
+					}
 					rc.top += 32;
 					rc.left += 48;
 					exist = true;
@@ -4969,6 +4974,52 @@ void display_manager::setPositionToChar(int char_) {
 }
 void display_manager::addPosition(int value_) {
 	setPosition(current_position+value_);
+}
+static item_type_simple itemTypeOfKey(int key_) {
+	if(key_ <= ' ' || key_ > 127 || (key_ >= '0' && key_ <= '9'))
+		return ITMS_LAST;
+	for(item_type_simple i = ITMS_FIRST ; i != ITMS_LAST ; i=(item_type_simple)(i+1)) {
+		const char* dot_ = GetItemTypeAsciiDot(i);
+		if(dot_[0] && strchr(dot_, key_))
+			return i;
+	}
+	return ITMS_LAST;
+}
+bool display_manager::isItemTypeKey(int key_) {
+	return state == DT_ITEM && item_vt != IVT_SELECT && itemTypeOfKey(key_) != ITMS_LAST;
+}
+bool display_manager::selectItemType(int key_) {
+	if(!isItemTypeKey(key_))
+		return false;
+	item_type_simple type_ = itemTypeOfKey(key_);
+	if(!checkVaildItemView(type_))
+		return false;
+	list<item>::iterator first,end;
+	if(makeItemForItemDraw(first, end))
+		return false;
+	vector<int> ids_;
+	for(list<item>::iterator it = first; it!=end;it++) {
+		if((*it).isSimpleType(type_) && checkItemSimpleType(it))
+			ids_.push_back((*it).id);
+	}
+	if(ids_.empty())
+		return false;
+	if(item_vt == IVT_PICK || item_vt == IVT_DISCARD) {
+		WaitForSingleObject(mutx, INFINITE);
+		bool all_ = true;
+		for(int id_ : ids_)
+			if(!item_view[asctonum(id_)])
+				all_ = false;
+		for(int id_ : ids_) {
+			item_view[asctonum(id_)] = all_?0:1;
+			item_num[asctonum(id_)] = 0;
+		}
+		ReleaseMutex(mutx);
+	}
+	else {
+		setPositionToChar(ids_[0]);
+	}
+	return true;
 }
 int display_manager::positionToChar() {
 	int max_position = 0;

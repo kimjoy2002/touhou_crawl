@@ -378,9 +378,11 @@ public:
 	coord_def position;
 	bool over_sight;
 	float alpha;
-	effect():image(NULL),position(),over_sight(false), alpha(1.0f){}
-	effect(const coord_def &c, textures *t, bool over_sight_):image(t),position(c),over_sight(over_sight_), alpha(1.0f){};
-	effect(const coord_def &c, textures *t, bool over_sight_, float alpha):image(t),position(c),over_sight(over_sight_), alpha(alpha){};
+	char ascii_dot;
+	D3DCOLOR ascii_color;
+	effect():image(NULL),position(),over_sight(false), alpha(1.0f), ascii_dot(0), ascii_color(0){}
+	effect(const coord_def &c, textures *t, bool over_sight_):image(t),position(c),over_sight(over_sight_), alpha(1.0f), ascii_dot(0), ascii_color(0){};
+	effect(const coord_def &c, textures *t, bool over_sight_, float alpha):image(t),position(c),over_sight(over_sight_), alpha(alpha), ascii_dot(0), ascii_color(0){};
 };
 
 bool isNormalAtt(attack_type type);

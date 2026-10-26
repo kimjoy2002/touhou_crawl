@@ -84,7 +84,7 @@ unsigned int WINAPI DrawLoop(void *arg);
 unsigned int WINAPI GameInnerLoop();
 bool d3d::InitD3D11(HINSTANCE hInstance, int width, int height, bool windowed){
 #ifdef WEB_TILES
-    if (web::enabled() && web::headless())
+    if (web::headless())
         return true;
 #endif
     WNDCLASS wc = {};

@@ -31,7 +31,7 @@ std::wstring morgue_path_w;
 
 void init_save_paths() {
 #ifdef WEB_TILES
-    if (web::enabled() && !web::userDir().empty()) {
+    if (!web::userDir().empty()) {
         std::filesystem::path base = std::filesystem::u8path(web::userDir());
         std::filesystem::create_directories(base);
         option_mg.init((base / L"config.ini").wstring());

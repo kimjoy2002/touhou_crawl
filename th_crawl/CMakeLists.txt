@@ -172,3 +172,11 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E remove_directory
     "$<TARGET_FILE_DIR:${PROJECT_NAME}>/data/temp"
 )
+
+# 콘솔판 th_crawl_console.exe: 실행파일을 복사하고 PE 헤더 서브시스템을 CONSOLE(3)로 바꾼다.
+# (editbin /SUBSYSTEM:CONSOLE 과 같음. lld-link 는 /EDIT 를 지원하지 않아서 직접 고친다)
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND powershell -NoProfile -Command
+    "$b=[IO.File]::ReadAllBytes('$<TARGET_FILE:${PROJECT_NAME}>'); $p=[BitConverter]::ToInt32($b,0x3c); $b[$p+0x5c]=3; $b[$p+0x5d]=0; [IO.File]::WriteAllBytes('$<TARGET_FILE_DIR:${PROJECT_NAME}>/${PROJECT_NAME}_console.exe',$b)"
+    VERBATIM
+)

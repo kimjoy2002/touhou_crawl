@@ -9,6 +9,7 @@
 #include "d3dUtility.h"
 #include "textureUtility.h"
 #include "web_backend.h"
+#include "ascii_backend.h"
 #include "environment.h"
 #include "texture.h"
 #include "display.h"
@@ -160,7 +161,9 @@ bool Display(float timeDelta)
 #ifdef WEB_TILES
 	if (web::enabled()) web::beginFrame(option_mg.getWidth(), option_mg.getHeight());
 #endif
+	ascii::beginFrame();
 	DisplayManager.draw(g_pSprite, g_pfont);   // headless 시 g_pSprite/g_pfont 는 null
+	ascii::endFrame();
 #ifdef WEB_TILES
 	if (web::enabled()) web::endFrame();
 #endif
@@ -491,6 +494,8 @@ int DrawTextUTF8(shared_ptr<DirectX::SpriteFont> pFont, shared_ptr<DirectX::Spri
     if (web::enabled())
         web::recText(wtext.c_str(), x, y, color);
 #endif
+    if (ascii::enabled())
+        ascii::recText(wtext.c_str(), x, y, color);
     if (pFont && pSprite)
         pFont->DrawString(pSprite.get(), wtext.c_str(), { x, y }, colorVec);
 
@@ -2723,6 +2728,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 		ss.clear();
 		ss << "   " << pow_ / 100 << "." << std::setfill('0') << std::setw(2) << pow_ % 100;
 		DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, you.power == 1000 ? CL_junko :(pow_<=100?CL_danger:(pow_<=200?CL_warning:(pow_==you.GetMaxPower()?CL_good:CL_normal))));
+		if (ascii::enabled()) //"P: "
+		{
+			ascii::recText(L"P", (float)rc.left, (float)rc.top, CL_danger);
+			ascii::recText(L":", (float)(rc.left + fontDesc.Width), (float)rc.top, CL_normal);
+		}
 
 		int power_blank_ = PrintCharWidth(ss.str())+1;
 		rc.left += (power_blank_)*fontDesc.Width;
@@ -2739,6 +2749,11 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 			ss << "   " << machine_power_usage_ << "/" << machine_power_capacity_;
 			DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP,
 				machine_power_over_ ? CL_danger : CL_STAT);
+			if (ascii::enabled()) //"ϟ: "
+			{
+				ascii::recText(L"\x03DF", (float)rc.left, (float)rc.top, machine_power_over_ ? CL_danger : D3DCOLOR_ARGB(255, 255, 255, 0));
+				ascii::recText(L":", (float)(rc.left + fontDesc.Width), (float)rc.top, CL_normal);
+			}
 			power_blank_ += PrintCharWidth(ss.str())+1;
 			rc.left += fontDesc.Width*(PrintCharWidth(ss.str())+1);
 		}
@@ -4653,6 +4668,9 @@ void display_manager::start_itemview(item_view_type type, LOCALIZATION_ENUM_KEY 
 }
 
 bool display_manager::DrawRectOutline(std::shared_ptr<DirectX::SpriteBatch> spriteBatch, const RECT& rc, int thickness, D3DCOLOR color){
+
+    if (ascii::enabled() && color == D3DCOLOR_ARGB(255, 0, 255, 0))
+        ascii::recSelect(rc.left, rc.top, rc.right, rc.bottom);
     if (!spriteBatch) return false;
 
     float left   = (float)rc.left;

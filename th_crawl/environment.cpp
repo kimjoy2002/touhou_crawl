@@ -790,7 +790,7 @@ char environment::getAsciiDot(int x_, int y_)
 		return '&';
 	case DG_MUSHROOM1:
 	case DG_MUSHROOM2:
-		return 'P';
+		return 'T';
 	case DG_SEA:
 	case DG_LAVA:
 		return '~';

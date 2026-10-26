@@ -22,7 +22,8 @@
 #include "steam_api.h"
 #include "crash_dump.h"
 #include "web_backend.h"
-#include <wrl/client.h>  
+#include "ascii_backend.h"
+#include <wrl/client.h>
 
 
 //
@@ -265,6 +266,7 @@ int WINAPI WinMain(HINSTANCE hinstance,
 				   int showCmd)
 {
     checkWizardModeFromCmdLine(cmdLine);
+    ascii::init(cmdLine);
 #ifdef WEB_TILES
     web::init(cmdLine);
 #endif

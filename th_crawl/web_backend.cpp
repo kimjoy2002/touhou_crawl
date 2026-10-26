@@ -14,6 +14,7 @@
 #include <ws2tcpip.h>
 
 #include "web_backend.h"
+#include "ascii_backend.h"
 
 #include <array>
 #include <atomic>
@@ -298,6 +299,12 @@ void init(const char* cmdLine)
     std::string cl = cmdLine ? cmdLine : "";
     // --headless 는 --webtiles 를 함축한다(창 없이 스트리밍).
     bool wantHeadless = cl.find("--headless") != std::string::npos;
+
+    if (ascii::requested(cmdLine) && cl.find("--webtiles") == std::string::npos && !wantHeadless) {
+        g_headless.store(true);
+        g_userDir = parseArg(cl, "--userdir");
+        return;
+    }
     if (cl.find("--webtiles") == std::string::npos && !wantHeadless) return;
     g_headless.store(wantHeadless);
 

@@ -167,6 +167,8 @@ public:
 	void SetXYPassFloor(int prev_floor, int new_floor, int x_, int y_);
 	void AfterMove(int map_num_, int x_, int y_);
 	char getAsciiDot();
+	D3DCOLOR getAsciiColor();
+	D3DCOLOR getAsciiBackColor();
 	void LevelUpdown(int level_, float hp_ = 6.0f, float atk_ = 2.0f);
 	void FoundTarget(unit* unit_, int time_);
 	int FoundTime();

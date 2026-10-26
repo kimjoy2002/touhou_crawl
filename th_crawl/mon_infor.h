@@ -31,6 +31,7 @@ struct mon_infor
 	int sense;
 	int speed;
 	char dot;
+	const char* color; //콘솔판 글자색 "#rrggbb"
 };
 
 

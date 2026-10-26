@@ -37,6 +37,7 @@ public:
 	bool offsetmove(const coord_def &c);
 	int sight_inter();
 	string GetName();
+	D3DCOLOR getAsciiColor();
 	bool effectSmoke(unit* unit_);
 	int danger(unit* unit_, bool first_ = true);
 };

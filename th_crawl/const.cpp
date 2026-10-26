@@ -306,3 +306,19 @@ const int level_up_value[] = {
 	746000,	//91000	26
 	-1 //끝
 };
+
+D3DCOLOR HexColor(const char* hex_, D3DCOLOR default_)
+{
+	if (!hex_ || hex_[0] != '#')
+		return default_;
+	unsigned int value_ = 0;
+	for (int i = 1; i <= 6; i++)
+	{
+		char c = hex_[i];
+		int d = (c >= '0' && c <= '9') ? c - '0' : (c >= 'a' && c <= 'f') ? c - 'a' + 10 : (c >= 'A' && c <= 'F') ? c - 'A' + 10 : -1;
+		if (d < 0)
+			return default_;
+		value_ = value_ * 16 + d;
+	}
+	return 0xff000000 | value_;
+}

@@ -88,5 +88,8 @@ extern LOCALIZATION_ENUM_KEY item_other_string;
 
 extern const int level_up_value[];
 
+//콘솔판 색 지정용: "#rrggbb" -> 색. 형식이 틀리면 default_
+D3DCOLOR HexColor(const char* hex_, D3DCOLOR default_ = D3DCOLOR_RGBA(200, 200, 200, 255));
+
 
 #endif // __CONST_H__

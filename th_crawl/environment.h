@@ -268,6 +268,7 @@ public:
 
 	stair_kind getStairKind(int x_, int y_);
 	char getAsciiDot(int x_, int y_);
+	D3DCOLOR getAsciiColor(int x_, int y_);
 	string getTileHelp(int x_, int y_);
 
 

@@ -1555,6 +1555,82 @@ bool item::isiden()
 
 	return (identify && identify_curse);
 }
+char item::getAsciiDot()
+{
+	//콘솔판 아이템 기호
+	if (type == ITM_FOOD && value1 == 0)
+		return 'p'; //P템
+	if (type >= ITM_WEAPON_FIRST && type < ITM_WEAPON_LAST)
+		return ')';
+	if (type >= ITM_THROW_FIRST && type < ITM_THROW_LAST)
+		return '(';
+	if (type >= ITM_ARMOR_FIRST && type < ITM_ARMOR_LAST)
+		return '[';
+	switch (type)
+	{
+	case ITM_POTION: return '!';
+	case ITM_FOOD: return '%';
+	case ITM_SCROLL: return '?';
+	case ITM_MACHINE: return '/';
+	case ITM_AMULET: return '"';
+	case ITM_RING: return '=';
+	case ITM_BOOK: case ITM_MENUAL: return ':';
+	case ITM_GOAL: case ITM_ORB: return '0';
+	case ITM_ETC: return '&';
+	case ITM_MISCELLANEOUS: return '}';
+	default: return '&';
+	}
+}
+D3DCOLOR item::getAsciiColor()
+{
+	//콘솔판 아이템 색
+	if (type == ITM_FOOD && value1 == 0)
+		return HexColor("#ff4040");
+	if (type >= ITM_WEAPON_FIRST && type < ITM_WEAPON_LAST)
+		return HexColor("#00ffff");
+	if (type >= ITM_THROW_FIRST && type < ITM_THROW_LAST)
+		return HexColor("#80c0ff");
+	if (type >= ITM_ARMOR_FIRST && type < ITM_ARMOR_LAST)
+		return HexColor("#8080ff");
+	switch (type)
+	{
+	case ITM_POTION:
+	{
+		//물약은 외형(potion_uniden_string 순서) 색. 식별해도 그대로
+		static const char* potion_colors_[] = {
+			"#ffffff", //새하얀
+			"#40d040", //초록색
+			"#ff4040", //빨강색
+			"#5080ff", //파랑색
+			"#ffff40", //노랑색
+			"#707080", //검정색
+			"#a0a0a0", //회색
+			"#ff80c0", //분홍색
+			"#90ff90", //거품낀 초록색
+			"#ff9090", //거품낀 빨강색
+			"#90b0ff", //거품낀 파랑색
+			"#ffff90", //거품낀 노랑색
+			"#909098", //거품낀 검정색
+			"#d8ecff", //무색
+			"#b07040", //갈색
+			"#c8c8c8", //거품낀 회색
+			"#e8f4ff", //거품낀 투명한
+		};
+		int color_ = (value1 >= 0 && value1 < PT_MAX) ? iden_list.potion_list[value1].color : -1;
+		if (color_ >= 0 && color_ < (int)(sizeof(potion_colors_) / sizeof(potion_colors_[0])))
+			return HexColor(potion_colors_[color_]);
+		return HexColor("#ff80ff");
+	}
+	case ITM_FOOD: return HexColor("#ffc040");
+	case ITM_SCROLL: return HexColor("#ffffff");
+	case ITM_MACHINE: return HexColor("#c0c0c0");
+	case ITM_AMULET: case ITM_RING: return HexColor("#ffff00");
+	case ITM_BOOK: case ITM_MENUAL: return HexColor("#ff8040");
+	case ITM_GOAL: case ITM_ORB: return HexColor("#ff00ff");
+	case ITM_ETC: return HexColor("#a0a0a0");
+	default: return HexColor("#40ffff"); //마도구
+	}
+}
 bool item::isautopick()
 {
 	if(drop)

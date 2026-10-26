@@ -442,6 +442,73 @@ textures* GetTanmacGraphic(int type, int direc, int count, int path)
 	}
 }
 
+//콘솔판 이펙트(탄막, 레이저, 폭발 등) 기호와 색. 모르는 이펙트는 노란 *
+char GetEffectAsciiDot(textures* t_, D3DCOLOR& color_)
+{
+#define IN_IMAGE(arr, count) (t_ >= &arr[0] && t_ < &arr[0] + (count)) //배열 크기는 texture.cpp 기준
+#define IN_IMAGE2(arr) (t_ >= &arr[0][0] && t_ < &arr[0][0] + sizeof(arr) / sizeof(arr[0][0]))
+	//레이저 이미지(PathToNum 순서)의 방향: 좌우 =, 위아래 ", 대각선 /
+	static const char laser_dot_[] = "\"/=\\\"/=\\\"\"/\"/=/=\\=\\\"\"/=\\\"/=\\*";
+	if (IN_IMAGE(img_laser, 32) || IN_IMAGE(img_thunder, 32))
+	{
+		int index_ = IN_IMAGE(img_laser, 32) ? (int)(t_ - img_laser) : (int)(t_ - img_thunder);
+		color_ = IN_IMAGE(img_laser, 32) ? HexColor("#caffff") : HexColor("#e0e0ff");
+		return index_ < (int)sizeof(laser_dot_) - 1 ? laser_dot_[index_] : '*';
+	}
+	if (IN_IMAGE(img_laser_small, 4))
+	{
+		color_ = HexColor("#b0ecbe");
+		return "\"/=\\"[(t_ - img_laser_small) % 4];
+	}
+	if (IN_IMAGE(img_tanmac_master_spark, 8)) { color_ = HexColor("#fff8a0"); return '#'; }
+	if (IN_IMAGE(img_blast, 8))
+	{
+		static const char* blast_colors_[] = { "#ef8686", "#eab493", "#ebeb7e", "#82e982", "#7e7eeb", "#ea81ea", "#dbdbdb", "#dcdcdc" };
+		int index_ = (int)(t_ - img_blast);
+		color_ = HexColor(index_ < 8 ? blast_colors_[index_] : "#ffd040");
+		return '*';
+	}
+	if (IN_IMAGE(img_effect_tanmac_middle, 6))
+	{
+		static const char* middle_colors_[] = { "#e89d9d", "#e8c1a7", "#e8e89d", "#9de89d", "#9d9de8", "#e79de7" };
+		color_ = HexColor(middle_colors_[(t_ - img_effect_tanmac_middle) % 6]);
+		return '*';
+	}
+	if (IN_IMAGE2(img_tanmac_small))
+	{
+		static const char* small_colors_[] = { "#ff9191", "#ffc4a7", "#e8e89d", "#9de89d", "#9d9de8", "#e79de7" };
+		color_ = HexColor(small_colors_[((t_ - &img_tanmac_small[0][0]) / 4) % 6]);
+		return '*';
+	}
+	if (IN_IMAGE(img_star_tanmac, 4))
+	{
+		static const char* star_colors_[] = { "#e39aed", "#ede99a", "#a5ed9a", "#9aa3ed" };
+		color_ = HexColor(star_colors_[(t_ - img_star_tanmac) % 4]);
+		return '*';
+	}
+	if (IN_IMAGE(img_tanmac_bill, 8)) color_ = HexColor("#ff8d8d");
+	else if (IN_IMAGE(img_tanmac_amulet, 2)) color_ = HexColor("#ff9966");
+	else if (IN_IMAGE(img_tanmac_fire_big, 8) || IN_IMAGE(img_tanmac_fire_small, 8) || IN_IMAGE(img_fog_fire, 4)) color_ = HexColor("#ff9010");
+	else if (IN_IMAGE(img_tanmac_ice, 4) || IN_IMAGE(img_tanmac_ice_big, 8) || IN_IMAGE(img_tanmac_ice_small, 8) || IN_IMAGE(img_fog_cold, 4)) color_ = HexColor("#8080ff");
+	else if (IN_IMAGE(img_tanmac_poison_small, 8) || IN_IMAGE(img_tanmac_poison_big, 8) || IN_IMAGE(img_fog_poison, 4)) color_ = HexColor("#00dc00");
+	else if (IN_IMAGE(img_tanmac_rock_small, 8) || IN_IMAGE(img_effect_rock_uplift, 5)) color_ = HexColor("#dc7800");
+	else if (IN_IMAGE(img_tanmac_rock_big, 8)) color_ = HexColor("#dcd4cc");
+	else if (IN_IMAGE(img_tanmac_doggojeo, 8)) color_ = HexColor("#dcda3f");
+	else if (IN_IMAGE(img_tanmac_sion, 8) || IN_IMAGE2(img_fog_sion)) color_ = HexColor("#cf8cdc");
+	else if (IN_IMAGE(img_tanmac_shockwave, 8) || IN_IMAGE(img_fog_tonado, 4)) color_ = HexColor("#b4c8fb");
+	else if (IN_IMAGE(img_tanmac_axe, 4)) color_ = HexColor("#dcab7b");
+	else if (IN_IMAGE(img_tanmac_knife, 8)) color_ = HexColor("#dcd0c7");
+	else if (IN_IMAGE(img_fog_confusion, 4)) color_ = HexColor("#acdc3d");
+	else if (IN_IMAGE(img_fog_slow, 4)) color_ = HexColor("#bc98ff");
+	else if (IN_IMAGE(img_fog_thunder, 4)) color_ = HexColor("#e8e860");
+	else if (IN_IMAGE(img_fog_heavenly_storm, 4)) color_ = HexColor("#f8dfa7");
+	else if (IN_IMAGE(img_tanmac_air, 8) || IN_IMAGE(img_tanmac_sword, 8) || IN_IMAGE(img_autumn_edge, 8) || IN_IMAGE(img_tanmac_oil_big, 8) || IN_IMAGE(img_fog_normal, 4)) color_ = HexColor("#e0e0e0");
+	else color_ = HexColor("#ffd040");
+	return '*';
+#undef IN_IMAGE
+#undef IN_IMAGE2
+}
+
 textures* GetBorderGraphic(coord_def center, coord_def target, int size_x, int size_y, int count)
 {
     int dx = target.x - center.x;

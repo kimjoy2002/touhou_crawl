@@ -271,6 +271,8 @@ public:
 	bool isring();
 	bool isiden();
 	bool isautopick();
+	char getAsciiDot();
+	D3DCOLOR getAsciiColor();
 	bool isArtifact();
 	bool isChargable();
 	equip_type GetMachineInstallSlot();

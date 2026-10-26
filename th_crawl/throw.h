@@ -83,6 +83,7 @@ public:
 };
 
 textures* GetTanmacGraphic(int type, int direc, int count, int path);
+char GetEffectAsciiDot(textures* t_, D3DCOLOR& color_);
 
 coord_def throwtanmac(textures* t_, beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete = true, bool mimic_ = false);
 coord_def throwtanmac(int graphic_type,beam_iterator& beam, const beam_infor &infor_, item* item_, bool effect_delete = true, bool mimic_ = false);

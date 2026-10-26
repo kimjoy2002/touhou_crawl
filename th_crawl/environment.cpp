@@ -805,6 +805,53 @@ char environment::getAsciiDot(int x_, int y_)
 		return ' ';
 	}
 }
+D3DCOLOR environment::getAsciiColor(int x_, int y_)
+{
+	dungeon_tile_type type = dgtile[x_][y_].tile;
+	if (type >= DG_TEMPLE_FIRST && type <= DG_TEMPLE_LAST)
+	{
+		god_type god_ = (god_type)(type - DG_TEMPLE_FIRST);
+		return GetGodColor(god_, god_ == GT_JOON_AND_SION ? you.turn % 3 : 0) | 0xff000000;
+	}
+	static const char* pande_colors_[] = { "#ff4040", "#ff9a30", "#ffff40", "#40e040", "#40a0ff", "#6060ff", "#c060ff" };
+	if (type >= DG_PANDE_FLOOR1 && type <= DG_PANDE_FLOOR7)
+		return (HexColor(pande_colors_[type - DG_PANDE_FLOOR1]) & 0xffa0a0a0);
+	if (type >= DG_PANDE_WALL1 && type <= DG_PANDE_WALL7)
+		return HexColor(pande_colors_[type - DG_PANDE_WALL1]);
+	bool scarlet_ = (floor >= SCARLET_LEVEL && floor <= SCARLET_LEVEL_LAST_LEVEL) ||
+		(floor >= SCARLET_LIBRARY_LEVEL && floor <= SCARLET_UNDER_LEVEL_LAST_LEVEL);
+	switch (type)
+	{
+	case DG_RED_WALL: return HexColor("#c03030");
+	case DG_BOOK_WALL: return HexColor("#b06030");
+	case DG_CARPET: return HexColor("#a02020");
+	case DG_SEA: return HexColor("#4080ff");
+	case DG_LAVA: return HexColor("#ff4020");
+	case DG_OIL: return HexColor("#906030");
+	case DG_TREE: case DG_SUN_FLOWER: return HexColor("#40c040");
+	case DG_MUSHROOM1: case DG_MUSHROOM2: return HexColor("#ff4040");
+	case DG_GRASS: return HexColor("#509050");
+	case DG_BAMBOO_WALL: return HexColor("#60b060");
+	case DG_HELL_WALL: return HexColor("#e05030");
+	case DG_HELL_FLOOR: return HexColor("#904030");
+	case DG_DOLLSHOUSE_WALL: return HexColor("#e090c0");
+	case DG_DOLLSHOUSE_FLOOR: return HexColor("#a07090");
+	case DG_DREAM_FLOOR: case DG_DREAM_FLOOR2: return HexColor("#8080c0");
+	case DG_METAL_WALL: return HexColor("#80a0c0");
+	case DG_GLASS: return HexColor("#a0e0ff");
+	case DG_CLOSE_DOOR: case DG_OPEN_DOOR: return HexColor("#c08040");
+	case DG_SNOW: return HexColor("#ffffff");
+	case DG_INSTANCE_STAIR: return HexColor("#60ffff");
+	default: break;
+	}
+	switch (getAsciiDot(x_, y_))
+	{
+	case '#': return scarlet_ ? HexColor("#c03030") : HexColor("#a0a0a0");
+	case '<': case '>': return HexColor("#ffffff");
+	case '.': return scarlet_ ? HexColor("#904040") : HexColor("#808080");
+	default: return HexColor("#c8c8c8");
+	}
+}
 string environment::getTileHelp(int x_, int y_)
 {
 	switch(dgtile[x_][y_].tile)

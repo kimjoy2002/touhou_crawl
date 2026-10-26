@@ -4408,6 +4408,10 @@ void display_manager::item_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				}
 
 				it->draw(pSprite, pfont, rc.left - 24, rc.top + 8);
+				if (ascii::enabled()) {
+					wchar_t dot_[2] = { (wchar_t)it->getAsciiDot(), 0 };
+					ascii::recText(dot_, (float)(rc.left - 2 * fontDesc.Width), (float)rc.top, it->getAsciiColor());
+				}
 				std::string item_string = temp.str();
 				//(*it).image->draw(pSprite,rc.left-24,rc.top+8,D3DCOLOR_XRGB(255,255,255));
 				DrawTextUTF8(pfont,pSprite,item_string.c_str(), -1, &rc, DT_NOCLIP,(*it).item_color());

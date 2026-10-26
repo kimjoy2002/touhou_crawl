@@ -32,6 +32,12 @@
 #include "option_manager.h"
 #include "const.h"
 #include "localization.h"
+#include "throw.h"
+#include <imm.h>
+#pragma comment(lib, "imm32.lib")
+#ifndef IMC_SETCONVERSIONMODE
+#define IMC_SETCONVERSIONMODE 0x0002
+#endif
 
 using namespace std;
 
@@ -47,10 +53,10 @@ int COLS = 120;
 int ROWS = 30;
 
 const int PANEL_W = 65;
-int MAP_RX = 30, MAP_RY = 11; //맵은 (MAP_RX*2+1) x (MAP_RY*2+1)
-int MAP_W = 61, MAP_H = 23;
-int PANEL_COL = 63;
-int MSG_ROW = 23;
+int MAP_RX = 26, MAP_RY = 9;
+int MAP_W = 53, MAP_H = 19;
+int PANEL_COL = 55;
+int MSG_ROW = 19;
 
 void updateLayout(int cols, int rows, int min_map_h = 0)
 {
@@ -71,10 +77,12 @@ void updateLayout(int cols, int rows, int min_map_h = 0)
 
 const unsigned int COLOR_DEFAULT = 0xffc8c8c8;
 
+const wchar_t CLOUD_GLYPH = 0x0282; //ʂ
+
 std::atomic<bool> g_enabled{ false };
 HANDLE g_out = INVALID_HANDLE_VALUE;
 HANDLE g_in = INVALID_HANDLE_VALUE;
-
+bool g_ownConsole = false; 
 struct TextOp
 {
 	wstring str;
@@ -111,7 +119,7 @@ wchar_t narrowChar(wchar_t ch)
 	case 0x2195: return L'|';
 	case 0x2196: case 0x2198: return L'\\';
 	case 0x2197: case 0x2199: return L'/';
-	case 0x00A7: return L'*'; //§
+	case 0x00A7: return CLOUD_GLYPH; //§
 	case 0x00B7: case 0x2026: return L'.'; //· …
 	case 0x00D7: return L'x'; //×
 	case 0x203B: case 0x2605: case 0x2606: case 0x25CF: case 0x2022: return L'*'; //※ ★ ☆ ● •
@@ -228,6 +236,11 @@ void visibleSize(int& cols, int& rows)
 	{
 		cols = info_.srWindow.Right - info_.srWindow.Left + 1;
 		rows = info_.srWindow.Bottom - info_.srWindow.Top + 1;
+		if (g_ownConsole)
+		{
+			cols = info_.dwSize.X;
+			rows = info_.dwSize.Y;
+		}
 	}
 }
 
@@ -316,7 +329,7 @@ void buildTextRows()
 
 int g_textScroll = 0;
 int g_textScrollState = -1;
-int g_visRows = 36;
+int g_visRows = 30;
 
 bool textInRect(const TextOp& t, const RECT& rc)
 {
@@ -412,62 +425,15 @@ void drawSelects(Grid& grid, F to_cell)
 // 게임 화면
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-unsigned int tileColor(dungeon_tile_type tile_, char ch_)
-{
-	switch (tile_)
-	{
-	case DG_SEA: return 0xff4080ff;
-	case DG_LAVA: return 0xffff4020;
-	case DG_OIL: return 0xff906030;
-	case DG_TREE: case DG_SUN_FLOWER: return 0xff40c040;
-	case DG_MUSHROOM1: case DG_MUSHROOM2: return 0xffff4040; //버섯은 빨간 T (나무는 초록 T)
-	case DG_GRASS: return 0xff509050;
-	case DG_CLOSE_DOOR: case DG_OPEN_DOOR: return 0xffc08040;
-	case DG_SNOW: return 0xffffffff;
-	case DG_INSTANCE_STAIR: return 0xff60ffff;
-	default: break;
-	}
-	switch (ch_)
-	{
-	case '#': return 0xffa0a0a0;
-	case '<': case '>': return 0xffffffff;
-	case '_': return 0xffffff60;
-	case '.': return 0xff808080;
-	default: return COLOR_DEFAULT;
-	}
-}
 
-wchar_t itemGlyph(const item& it_, unsigned int& color_)
+unsigned int readableColor(unsigned int fg_, unsigned int bg_)
 {
-	item_type type_ = it_.type;
-	//P템(줍기만 하면 파워가 오르는 음식)
-	if (type_ == ITM_FOOD && it_.value1 == 0) { color_ = 0xffff4040; return L'p'; }
-	if (type_ >= ITM_WEAPON_FIRST && type_ < ITM_WEAPON_LAST) { color_ = 0xff00ffff; return L')'; }
-	if (type_ >= ITM_THROW_FIRST && type_ < ITM_THROW_LAST) { color_ = 0xff80c0ff; return L'('; }
-	if (type_ >= ITM_ARMOR_FIRST && type_ < ITM_ARMOR_LAST) { color_ = 0xff8080ff; return L'['; }
-	switch (type_)
-	{
-	case ITM_POTION: color_ = 0xffff80ff; return L'!';
-	case ITM_FOOD: color_ = 0xffffc040; return L'%';
-	case ITM_SCROLL: color_ = 0xffffffff; return L'?';
-	case ITM_MACHINE: color_ = 0xffc0c0c0; return L'/';
-	case ITM_AMULET: color_ = 0xffffff00; return L'"';
-	case ITM_RING: color_ = 0xffffff00; return L'=';
-	case ITM_BOOK: case ITM_MENUAL: color_ = 0xffff8040; return L':';
-	case ITM_GOAL: case ITM_ORB: color_ = 0xffff00ff; return L'0';
-	default: color_ = 0xff40ffff; return L'}';
-	}
-}
-
-unsigned int monsterColor(monster* mon_)
-{
-	if (mon_->isUserAlly())
-		return 0xff60ff60;
-	if (mon_->isCompleteNeutral())
-		return 0xffffff60;
-	if (mon_->flag & M_FLAG_UNIQUE)
-		return 0xffff60ff;
-	return 0xffff7070;
+	if (!(bg_ & 0xff000000))
+		return fg_;
+	int dr_ = (int)((fg_ >> 16) & 0xff) - (int)((bg_ >> 16) & 0xff);
+	int dg_ = (int)((fg_ >> 8) & 0xff) - (int)((bg_ >> 8) & 0xff);
+	int db_ = (int)(fg_ & 0xff) - (int)(bg_ & 0xff);
+	return dr_ * dr_ + dg_ * dg_ + db_ * db_ < 120 * 120 ? 0xff000000 : fg_;
 }
 
 bool isShownMonster(monster& mon_)
@@ -492,6 +458,10 @@ void drawMap(Grid& grid)
 	map<pair<int, int>, smoke*> smokes_;
 	for (smoke& smoke_ : env_.smoke_list)
 		smokes_[make_pair(smoke_.position.x, smoke_.position.y)] = &smoke_;
+	map<pair<int, int>, effect*> effects_;
+	for (effect& effect_ : env_.effect_list)
+		if (effect_.over_sight || env_.isInSight(effect_.position))
+			effects_[make_pair(effect_.position.x, effect_.position.y)] = &effect_;
 
 	for (int dy = -MAP_RY; dy <= MAP_RY; dy++)
 	{
@@ -506,18 +476,27 @@ void drawMap(Grid& grid)
 				continue;
 			char tile_ch_ = env_.getAsciiDot(x, y);
 			wchar_t ch = (wchar_t)tile_ch_;
-			unsigned int fg = tileColor(env_.dgtile[x][y].tile, tile_ch_);
+			unsigned int fg = env_.getAsciiColor(x, y);
 			if (sight_)
 			{
 				auto smoke_it_ = smokes_.find(make_pair(x, y));
 				auto item_it_ = items_.find(make_pair(x, y));
 				if (item_it_ != items_.end())
-					ch = itemGlyph(*item_it_->second, fg);
+				{
+					ch = (wchar_t)item_it_->second->getAsciiDot();
+					fg = item_it_->second->getAsciiColor();
+				}
 				if (smoke_it_ != smokes_.end())
 				{
-					ch = L'§';
-					fg = 0xffb0b0b0;
+					ch = CLOUD_GLYPH;
+					fg = smoke_it_->second->getAsciiColor();
 				}
+			}
+			else
+				fg = dimColor(fg);
+			unsigned int bg = 0;
+			if (sight_)
+			{
 				if (unit* unit_ = env_.isMonsterPos(x, y))
 				{
 					if (unit_->isplayer())
@@ -528,13 +507,20 @@ void drawMap(Grid& grid)
 					else if (((monster*)unit_)->isView())
 					{
 						ch = (wchar_t)unit_->getAsciiDot();
-						fg = monsterColor((monster*)unit_);
+						bg = ((monster*)unit_)->getAsciiBackColor();
+						fg = readableColor(((monster*)unit_)->getAsciiColor(), bg);
 					}
 				}
 			}
-			else
-				fg = dimColor(fg);
-			unsigned int bg = 0;
+			//날아가는 탄막/마법, 레이저, 폭발 등 효과
+			auto effect_it_ = effects_.find(make_pair(x, y));
+			if (effect_it_ != effects_.end())
+			{
+				D3DCOLOR effect_color_ = 0;
+				ch = (wchar_t)GetEffectAsciiDot(effect_it_->second->image, effect_color_);
+				fg = effect_color_;
+				bg = 0;
+			}
 			if (you.search && you.search_pos == coord_def(x, y))
 			{
 				bg = 0xffc0c0c0;
@@ -551,6 +537,7 @@ void drawMonsterList(Grid& grid, int row_, int max_row_)
 	{
 		wchar_t ch;
 		unsigned int color;
+		unsigned int back;
 		wstring name;
 		vector<pair<wstring, unsigned int>> states;
 		int count;
@@ -563,7 +550,8 @@ void drawMonsterList(Grid& grid, int row_, int max_row_)
 			continue;
 		Entry e;
 		e.ch = (wchar_t)mon_.getAsciiDot();
-		e.color = monsterColor(&mon_);
+		e.back = mon_.getAsciiBackColor();
+		e.color = readableColor(mon_.getAsciiColor(), e.back);
 		e.name = ConvertUTF8ToUTF16(mon_.GetName()->getName());
 		if (!(mon_.flag & M_FLAG_NO_STATE))
 		{
@@ -580,7 +568,7 @@ void drawMonsterList(Grid& grid, int row_, int max_row_)
 		bool merged_ = false;
 		for (Entry& other_ : list_)
 		{
-			if (other_.ch == e.ch && other_.name == e.name && other_.states == e.states && other_.color == e.color)
+			if (other_.ch == e.ch && other_.name == e.name && other_.states == e.states && other_.color == e.color && other_.back == e.back)
 			{
 				other_.count++;
 				other_.dist = min(other_.dist, e.dist);
@@ -600,7 +588,7 @@ void drawMonsterList(Grid& grid, int row_, int max_row_)
 		//다 못 보여주면 마지막으로 보이는 몬스터 뒤에 ... 을 붙인다
 		bool cut_ = row_ == max_row_ - 1 && n_ + 1 < list_.size();
 		int x = PANEL_COL;
-		x += grid.put(x, row_, wstring(1, e.ch), e.color);
+		x += grid.put(x, row_, wstring(1, e.ch), e.color, e.back);
 		x += grid.put(x, row_, L" ", COLOR_DEFAULT);
 		wstring name_ = e.name;
 		if (e.count > 1)
@@ -633,7 +621,7 @@ void drawUnderPlayer(Grid& grid, int row_)
 	if (items_.empty() && tile_ch_ != '.' && tile_ch_ != ' ')
 	{
 		dungeon_tile_type tile_ = env_.dgtile[you.position.x][you.position.y].tile;
-		x += grid.put(x, row_, L" " + wstring(1, (wchar_t)tile_ch_), tileColor(tile_, tile_ch_));
+		x += grid.put(x, row_, L" " + wstring(1, (wchar_t)tile_ch_), env_.getAsciiColor(you.position.x, you.position.y));
 		wstring name_ = ConvertUTF8ToUTF16(LocalzationManager::locString(dungeon_tile_tribe_type_string[tile_]));
 		if (!name_.empty())
 			x += grid.put(x, row_, L" (" + name_ + L")", COLOR_DEFAULT);
@@ -647,8 +635,8 @@ void drawUnderPlayer(Grid& grid, int row_)
 		x += grid.put(x, row_, L" ", COLOR_DEFAULT);
 	for (item* it_ : items_)
 	{
-		unsigned int color_;
-		wchar_t ch_ = itemGlyph(*it_, color_);
+		unsigned int color_ = it_->getAsciiColor();
+		wchar_t ch_ = (wchar_t)it_->getAsciiDot();
 		if (glyph_only_)
 		{
 			x += grid.put(x, row_, wstring(1, ch_), color_);
@@ -741,11 +729,22 @@ void inputLoop()
 			}
 			if (k.dwControlKeyState & (LEFT_ALT_PRESSED | RIGHT_ALT_PRESSED))
 				continue;
+			wchar_t ch_ = k.uChar.UnicodeChar;
+			//한글 입력 상태로 눌린 자모(ㅁ 등)는 같은 자리의 영문 키로 바꾼다 (게임 명령은 영문 키)
+			if (vk == VK_PROCESSKEY)
+				vk = (WORD)MapVirtualKeyW(k.wVirtualScanCode, MAPVK_VSC_TO_VK);
+			if ((ch_ >= 0x3131 && ch_ <= 0x318E) || (k.wVirtualKeyCode == VK_PROCESSKEY && ch_ == 0))
+			{
+				if (vk >= 'A' && vk <= 'Z')
+					ch_ = (k.dwControlKeyState & SHIFT_PRESSED) ? (wchar_t)vk : (wchar_t)(vk - 'A' + 'a');
+				else if (ch_ >= 0x3131)
+					continue;
+			}
 			for (WORD rep = 0; rep < max<WORD>(1, k.wRepeatCount); rep++)
 			{
 				pushMsg(WM_KEYDOWN, vk);
-				if (k.uChar.UnicodeChar)
-					pushMsg(WM_CHAR, k.uChar.UnicodeChar);
+				if (ch_)
+					pushMsg(WM_CHAR, ch_);
 			}
 		}
 	}
@@ -763,7 +762,6 @@ BOOL WINAPI ctrlHandler(DWORD type_)
 }
 
 //터미널에서 실행했을 때 끝나고 원래대로 돌려놓을 상태
-bool g_ownConsole = false;
 DWORD g_origOutMode = 0, g_origInMode = 0;
 UINT g_origCP = 0;
 CONSOLE_SCREEN_BUFFER_INFO g_origInfo{};
@@ -795,6 +793,11 @@ void setupConsole()
 	GetConsoleScreenBufferInfo(g_out, &g_origInfo);
 	GetConsoleTitleW(g_origTitle, 255);
 	atexit(restoreConsole);
+	//입력기를 영문 모드로 시작한다 (한/영 키로 다시 바꿀 수 있다).
+	//실행한 터미널을 쓰는 경우엔 지금 앞에 있는 창(그 터미널)도 바꾼다. 새 콘솔이면 다른 프로그램 창은 건드리지 않는다.
+	for (HWND w_ : { GetConsoleWindow(), g_ownConsole ? (HWND)nullptr : GetForegroundWindow() })
+		if (HWND ime_ = w_ ? ImmGetDefaultIMEWnd(w_) : nullptr)
+			SendMessageW(ime_, WM_IME_CONTROL, IMC_SETCONVERSIONMODE, IME_CMODE_ALPHANUMERIC);
 	SetConsoleOutputCP(CP_UTF8);
 	SetConsoleTitleW(L"Touhou Crawl");
 	SetConsoleMode(g_out, ENABLE_PROCESSED_OUTPUT | ENABLE_VIRTUAL_TERMINAL_PROCESSING | DISABLE_NEWLINE_AUTO_RETURN);

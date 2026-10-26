@@ -124,6 +124,29 @@ bool smoke::offsetmove(const coord_def &c)
 		return false;
 	}
 }
+D3DCOLOR smoke::getAsciiColor()
+{
+	//콘솔판 구름 색
+	switch(type)
+	{
+	case SMT_NORMAL: return HexColor("#dcdcdc");
+	case SMT_FOG: return HexColor("#a0a0a0");
+	case SMT_FIRE: return HexColor("#ff9410");
+	case SMT_COLD: return HexColor("#7070ff");
+	case SMT_ELEC: return HexColor("#e8e860");
+	case SMT_DARK: return HexColor("#8060c0");
+	case SMT_SION: return HexColor("#cf8cdc");
+	case SMT_POISON: return HexColor("#00dc00");
+	case SMT_CONFUSE: return HexColor("#acdc3d");
+	case SMT_SLOW: return HexColor("#bc98ff");
+	case SMT_TWIST: return HexColor("#b4b7fb");
+	case SMT_WHIRLWIND: return HexColor("#b4b7fb");
+	case SMT_CURSE: return HexColor("#c040c0");
+	case SMT_BLIZZARD: return HexColor("#d9d9ff");
+	case SMT_HEAVENLY_STORM: return HexColor("#f8dfa7");
+	default: return HexColor("#b0b0b0");
+	}
+}
 string smoke::GetName()
 {
 	switch(type)

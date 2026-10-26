@@ -968,7 +968,27 @@ char monster::getAsciiDot()
 {
 	if (id < 0)
 		return '?';
+	if (id == MON_COGWHEEL)
+		return "|/-\\"[you.turn % 4];
 	return mondata[id].dot;
+}
+D3DCOLOR monster::getAsciiColor()
+{
+	if (id < 0)
+		return HexColor(nullptr);
+	return HexColor(mondata[id].color);
+}
+D3DCOLOR monster::getAsciiBackColor()
+{
+	if (isUserAlly())
+		return HexColor("#2e8b3a");
+	if (isCompleteNeutral())
+		return HexColor("#707070");
+	if (isSimpleState(MSS_SLEEP) || isSimpleState(MSS_PARALYSE))
+		return HexColor("#2a52be");
+	if (isSimpleState(MSS_CONFUSE) || isSimpleState(MSS_WANDERING))
+		return HexColor("#c8a000");
+	return 0;
 }
 void monster::LevelUpdown(int level_, float hp_, float atk_)
 {

@@ -47,7 +47,7 @@ extern bool ableWiz;
 
 extern HANDLE mutx;
 
-const char *version_string = "ver1.305";
+const char *version_string = "ver1.306";
 extern int g_tile_size;
 
 int version_string_to_int() {

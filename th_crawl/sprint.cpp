@@ -70,7 +70,7 @@ void map_algorithms_sprint(int num)
 	{
 		for (int y = 0; y < DG_MAX_Y; y++)
 		{
-			env[num].dgtile[x][y].tile = DG_FLOOR;
+			env[num].dgtile[x][y].tile = DG_WALL;
 		}
 	}
 	map_dummy sprint_map(num, coord_def(DG_MAX_X/2, DG_MAX_Y/2), true, 1, 1, 0, DG_FLOOR, DG_WALL);

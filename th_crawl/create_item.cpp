@@ -295,6 +295,11 @@ item_infor& CreateFloorItem(int floor, item_infor* item_)
 		id_to_item(31, item_);
 		return (*item_);
 	}
+	if(you.GetPunish(GT_KAPPA) && randA(9)==0)
+	{
+		id_to_item(38, item_);
+		return (*item_);
+	}
 	if(you.s_unluck>3 && randA(you.s_unluck>6?6:12)==0)
 	{
 		//대흉이상의 불운에선 확률적으로 나쁜템이 잔뜩 나온다.
@@ -372,6 +377,11 @@ void create_item(int floor, int num_)
 		{
 			//사토리 징벌중엔 강제로 몇개의 템이 애완동물 포스터가 된다.
 			create_id_to_item(31, floor);
+			continue;
+		}
+		if(you.GetPunish(GT_KAPPA) && randA(9)==0)
+		{
+			create_id_to_item(38, floor);
 			continue;
 		}
 
@@ -508,6 +518,9 @@ item_infor& id_to_item(int id, item_infor* item_)
 		break;
 	case 34://초반용 책
 		makeitem(ITM_BOOK,-1,item_, -1);
+		break;
+	case 38://캇파
+		makeitem(ITM_ETC,0,item_, EIT_KAPPA_TRASH);
 		break;
 	default:
 		break;

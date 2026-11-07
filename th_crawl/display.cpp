@@ -36,6 +36,7 @@
 #include "throw.h"
 #include "mon_infor.h"
 #include "localization.h"
+#include "kappa.h"
 #include <sstream>
 #include <iomanip>
 #include <Xinput.h>
@@ -1313,14 +1314,14 @@ void display_manager::state_draw(shared_ptr<DirectX::SpriteBatch> pSprite, share
 	{
 		ss.str("");
 		ss.clear();
-		ss << LocalzationManager::locString(LOC_SYSTEM_FAITH) << ": " << GetGodString(you.god);
+		ss << LocalzationManager::locString(GetFaithLabel(you.god)) << ": " << GetGodString(you.god);
 		DrawTextUTF8(pfont,pSprite, ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
 	else
 	{
 		ss.str("");
 		ss.clear();
-		ss << LocalzationManager::locString(LOC_SYSTEM_FAITH) << ": " << GetGodString(you.god) << ' ' 
+		ss << LocalzationManager::locString(GetFaithLabel(you.god)) << ": " << GetGodString(you.god) << ' ' 
 			<< (pietyLevel(you.piety)>=1?'*':'.') << (pietyLevel(you.piety)>=2?'*':'.') << (pietyLevel(you.piety)>=3?'*':'.') << (pietyLevel(you.piety)>=4?'*':'.') << (pietyLevel(you.piety)>=5?'*':'.') << (pietyLevel(you.piety)>=6?'*':'.');
 		DrawTextUTF8(pfont,pSprite,ss.str(), -1, &rc, DT_SINGLELINE | DT_NOCLIP, CL_normal);
 	}
@@ -3215,6 +3216,16 @@ void display_manager::game_draw(shared_ptr<DirectX::SpriteBatch> pSprite, shared
 				string dots_(min(3,(you.machine_preheat-1)/3+1),'.');
 				stateDraw.addState(LocalzationManager::formatString(LOC_SYSTEM_BUFF_STAT_MACHINE_PREHEAT, PlaceHolderHelper(dots_)), CL_warning,
 					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_MACHINE_PREHEAT), this);
+			}
+			if(kappa_is_overdrive())
+			{
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_KAPPA_OVERDRIVE), CL_kappa,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_KAPPA_OVERDRIVE), this);
+			}
+			if(kappa_is_blackout())
+			{
+				stateDraw.addState(LocalzationManager::locString(LOC_SYSTEM_BUFF_STAT_KAPPA_BLACKOUT), CL_danger,
+					LocalzationManager::locString(LOC_SYSTEM_BUFF_DESCRIBE_STAT_KAPPA_BLACKOUT), this);
 			}
 			if (you.s_super_graze)
 			{

@@ -276,7 +276,7 @@ void initMap()
 	deque<int> dq;
 	for(int i=0;i<GT_LAST;i++)
 	{
-		if(i != GT_SEIJA && i != GT_TENKYUU && i != GT_SHIKIEIKI)
+		if(i != GT_SEIJA && i != GT_TENKYUU && i != GT_SHIKIEIKI && i != GT_NINA)
 			dq.push_back(i);
 	}
 	rand_shuffle(dq.begin(),dq.end());

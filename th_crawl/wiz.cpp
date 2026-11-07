@@ -1159,7 +1159,7 @@ void wiz_mode()
 		{
 			dungeon_tile_type next_ = DG_TEMPLE_FIRST;
 
-			pair<char,LOCALIZATION_ENUM_KEY> keylist[21] = {
+			pair<char,LOCALIZATION_ENUM_KEY> keylist[22] = {
 				make_pair('B',LOC_SYSTEM_GOD_BYAKUREN),
 				make_pair('K',LOC_SYSTEM_GOD_KANAKO),
 				make_pair('W',LOC_SYSTEM_GOD_SUWAKO),
@@ -1180,14 +1180,15 @@ void wiz_mode()
 				make_pair('O',LOC_SYSTEM_GOD_OKINA),
 				make_pair('J',LOC_SYSTEM_GOD_JUNKO),
 				make_pair('X',LOC_SYSTEM_GOD_JOON_AND_SION),
-				make_pair('N',LOC_SYSTEM_GOD_KEIKI)
+				make_pair('N',LOC_SYSTEM_GOD_KEIKI),
+				make_pair('C',LOC_SYSTEM_GOD_KAPPA)
 			};
 			enterlog();
 			std::vector<int> listkey;
-			for(int i = 0; i < 21; i++) {
+			for(int i = 0; i < 22; i++) {
 				ostringstream ss;
 				ss << string(1,keylist[i].first) << "-" << LocalzationManager::locString(keylist[i].second) << " ";
-				printlog(ss.str(), (i==20?true:false), false, false, CL_help, keylist[i].first);
+				printlog(ss.str(), (i==21?true:false), false, false, CL_help, keylist[i].first);
 				listkey.push_back(keylist[i].first);
 			}
 			printlog(LocalzationManager::locString(LOC_SYSTEM_DEBUG_CREATE_ALTAR),false,false,false,CL_help);
@@ -1309,6 +1310,10 @@ void wiz_mode()
 			case 'N':
 			case 'n':
 				next_ = DG_TEMPLE_KEIKI;
+				break;
+			case 'C':
+			case 'c':
+				next_ = DG_TEMPLE_KAPPA;
 				break;
 			default:
 				printlog(" " + LocalzationManager::locString(LOC_SYSTEM_CANCLE), true, false, false, CL_help);

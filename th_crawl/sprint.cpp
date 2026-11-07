@@ -1016,7 +1016,7 @@ void set_sprint_map(map_dummy* map_dummy_) {
 	random_extraction<int> rand_;
 
 	for (int i = DG_TEMPLE_FIRST; i <= DG_TEMPLE_LAST; i++) {
-		if(i != DG_TEMPLE_MIKO && i != DG_TEMPLE_SHIKIEIKI && i != DG_TEMPLE_TENKYUU) {
+		if(i != DG_TEMPLE_MIKO && i != DG_TEMPLE_SHIKIEIKI && i != DG_TEMPLE_TENKYUU && i != DG_TEMPLE_NINA) {
 			rand_.push(i);
 		}
 	}

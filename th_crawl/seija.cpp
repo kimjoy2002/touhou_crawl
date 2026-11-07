@@ -205,6 +205,8 @@ string seija_god_string(int god, int num) {
 		}
 	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
+	case GT_KAPPA:
+	case GT_NINA:
 		//TODO) 신구현
 	case GT_ERROR:
 	case GT_NONE:
@@ -451,6 +453,8 @@ void seija_real_gift(int key_)
 			it->Identify();
 		}
 		case GT_TENKYUU:
+		case GT_KAPPA:
+		case GT_NINA:
 			//TODO) 신구현
 			break;
 	}
@@ -761,6 +765,8 @@ string seija_talk(god_type god_, int piety)
 			}
 			break;
 		case GT_TENKYUU:
+		case GT_KAPPA:
+		case GT_NINA:
 			//TODO) 신구현
 			break;
 		}

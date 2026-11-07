@@ -234,6 +234,8 @@ public:
 
 	int installed_machine; //무기,방어구 - 설치된 기계(installed_machine_type 비트)
 
+	int find_turn; //처음 발견한 턴(-1이면 아직 발견못함)
+
 	fixed_artifact_type fixed_artifact;
 	vector<atifact_infor> atifact_vector;
 	vector<LOCALIZATION_ENUM_KEY> item_tag; //검색에 사용하는 아이템 태그

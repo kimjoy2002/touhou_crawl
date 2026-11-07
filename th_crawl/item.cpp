@@ -143,7 +143,7 @@ value3(item_->value3), value4(item_->value4), value5(item_->value5), value6(item
 item::item()
 :name(LOC_SYSTEM_NONE_STRING), second_name(LOC_NONE), image(NULL), equip_image(NULL), position(0,0),prev_position(0,0), type(ITM_WEAPON_FIRST), weight(0), value(0),
 is_pile(false), num(0), id('a'), prev_sight(false), not_find(true), now_find(false), curse(false), identify(false), identify_curse(false), 
-can_throw(false), drop(false), throw_item(false), hamme_gift(false), waste(10000), delay_turn(0), artifact_guid(0), value0(0), value1(0), value2(0), value3(0), value4(0), value5(0), value6(0), value7(0), value8(0), installed_machine(0),
+can_throw(false), drop(false), throw_item(false), hamme_gift(false), waste(10000), delay_turn(0), artifact_guid(0), value0(0), value1(0), value2(0), value3(0), value4(0), value5(0), value6(0), value7(0), value8(0), installed_machine(0), find_turn(-1),
 fixed_artifact(FIXED_ARTIFACT_NONE), atifact_vector(), item_tag(), search_field()
 {
 
@@ -190,6 +190,7 @@ item::item(const coord_def &c, const item_infor &t)
 	value7 = t.value7;
 	value8 = t.value8;
 	installed_machine = 0;
+	find_turn = -1;
 	fixed_artifact = FIXED_ARTIFACT_NONE;
 	atifact_vector.clear();
 	item_tag.clear();
@@ -322,6 +323,7 @@ void item::SaveDatas(FILE *fp)
 		SaveData<LOCALIZATION_ENUM_KEY>(fp, tag);
 	}
 	SaveData<int>(fp, installed_machine);
+	SaveData<int>(fp, find_turn);
 
 	//search_field는 저장하지않음
 	
@@ -397,6 +399,9 @@ void item::LoadDatas(FILE *fp)
 	installed_machine = 0;
 	if(!isPrevVersion(loading_version_string, "ver1.301"))
 		LoadData<int>(fp, installed_machine);
+	find_turn = not_find ? -1 : 0;
+	if(!isPrevVersion(loading_version_string, "ver1.305"))
+		LoadData<int>(fp, find_turn);
 	MigrateLegacySkyTorpedo(this);
 	if(isPrevVersion(loading_version_string, "ver1.301")) {
 		if(type == ITM_MACHINE)
@@ -1719,6 +1724,8 @@ bool item::isautopick()
 	}
 	case ITM_MENUAL:
 		return true;
+	case ITM_ETC:
+		return value1 == EIT_KAPPA_TRASH && you.god == GT_KAPPA;
 	case ITM_THROW_TANMAC:
 	{
 		if(value4 >= 0 && value4 < TMT_MAX) {
@@ -2123,6 +2130,8 @@ int item::action(int delay_)
 		if(now_find)
 			not_find = false;
 		now_find = true;
+		if(find_turn < 0)
+			find_turn = you.turn;
 
 
 		if(!identify)

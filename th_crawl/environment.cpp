@@ -184,7 +184,8 @@ void environment::LoadDatas(FILE *fp)
 	LoadData(fp, dgtile);
 	const bool load_ver_1202_or_older = isPrevVersion(loading_version_string, "ver1.202");
 	const bool load_ver_1205_or_older = isPrevVersion(loading_version_string, "ver1.205");
-	auto remapDungeonTile = [load_ver_1202_or_older, load_ver_1205_or_older](dungeon_tile_type& tile)
+	const bool load_ver_1305_or_older = isPrevVersion(loading_version_string, "ver1.305");
+	auto remapDungeonTile = [load_ver_1202_or_older, load_ver_1205_or_older, load_ver_1305_or_older](dungeon_tile_type& tile)
 	{
 		int value = static_cast<int>(tile);
 		if(load_ver_1202_or_older) {
@@ -206,6 +207,12 @@ void environment::LoadDatas(FILE *fp)
 			}
 			else if(value >= 115) { //당시 DG_METAL_WALL 이후
 				value += 1;
+			}
+		}
+		if(load_ver_1305_or_older) {
+			//ver1.306에서 신전 타일이 2개 추가됨
+			if(value > 88 && value < DG_NONE_MOVE) { //당시 DG_TEMPLE_LAST 이후
+				value += 2;
 			}
 		}
 		tile = static_cast<dungeon_tile_type>(value);
@@ -757,6 +764,8 @@ char environment::getAsciiDot(int x_, int y_)
 	case DG_TEMPLE_SHIKIEIKI:
 	case DG_TEMPLE_KEIKI:
 	case DG_TEMPLE_TENKYUU:
+	case DG_TEMPLE_KAPPA:
+	case DG_TEMPLE_NINA:
 		return '_';
 	case DG_WALL:
 	case DG_STONE_WALL:
@@ -925,6 +934,8 @@ string environment::getTileHelp(int x_, int y_)
 	case DG_TEMPLE_SHIKIEIKI:
 	case DG_TEMPLE_KEIKI:
 	case DG_TEMPLE_TENKYUU:
+	case DG_TEMPLE_KAPPA:
+	case DG_TEMPLE_NINA:
 		return LocalzationManager::formatString(LOC_SYSTEM_TILE_HELP_PRAY, PlaceHolderHelper(joypadUtil::get("p",GVK_BUTTON_A)));
 	default:
 		break;

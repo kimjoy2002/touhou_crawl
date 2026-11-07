@@ -20,7 +20,7 @@ dungeon_tile_type randomTemple()
 	
 	for(int i=0;i<GT_LAST;i++)
 	{
-		if(i != GT_SEIJA && i != GT_SHIKIEIKI && i != GT_TENKYUU)
+		if(i != GT_SEIJA && i != GT_SHIKIEIKI && i != GT_TENKYUU && i != GT_NINA)
 			rand_.push((dungeon_tile_type)(i+DG_TEMPLE_JOON_AND_SION));
 	}
 	
@@ -1046,8 +1046,12 @@ B.B";
 			case DG_TEMPLE_KEIKI:
 				mon_ = MON_HANIWA;
 				break;
+			case DG_TEMPLE_KAPPA:
+				mon_ = MON_KATPA;
+				break;
 			case DG_TEMPLE_SHIKIEIKI:
 			case DG_TEMPLE_TENKYUU:
+			case DG_TEMPLE_NINA:
 				//TODO) 신구현
 			default:
 				break;

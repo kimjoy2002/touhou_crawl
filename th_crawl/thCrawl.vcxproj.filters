@@ -114,6 +114,9 @@
     <ClCompile Include="joypad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="kappa.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="keiki.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -378,6 +381,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="joypad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="kappa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="keiki.h">

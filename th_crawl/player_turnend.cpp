@@ -17,6 +17,7 @@
 #include "scroll.h"
 #include "key.h"
 #include "keiki.h"
+#include "kappa.h"
 #include "save.h"
 #include "skill_use.h"
 #include "weapon.h"
@@ -1284,6 +1285,7 @@ interupt_type players::TurnEnd(bool *item_delete_)
 	ReleaseMutex(mutx);
 	CheckPunish(delay_);
 	GodAccpect_turn(god_turn);
+	kappa_turn();
 	CheckMonsterPassive(god_turn);
 	
 	if(GetMp() == GetMaxMp())

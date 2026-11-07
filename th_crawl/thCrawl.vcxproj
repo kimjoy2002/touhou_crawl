@@ -172,6 +172,7 @@
     <ClCompile Include="iteminfor.cpp" />
     <ClCompile Include="item_action.cpp" />
     <ClCompile Include="joypad.cpp" />
+    <ClCompile Include="kappa.cpp" />
     <ClCompile Include="keiki.cpp" />
     <ClCompile Include="key.cpp" />
     <ClCompile Include="lilly.cpp" />
@@ -262,6 +263,7 @@
     <ClInclude Include="god.h" />
     <ClInclude Include="item.h" />
     <ClInclude Include="joypad.h" />
+    <ClInclude Include="kappa.h" />
     <ClInclude Include="keiki.h" />
     <ClInclude Include="key.h" />
     <ClInclude Include="lilly.h" />

@@ -5936,3 +5936,85 @@ LOC_SYSTEM_EVENT_SMALL_POND_APPEAR,{0:이|가} 물에서 튀어나왔다!
 LOC_SYSTEM_SPL_WATER_BURST,물 폭발
 LOC_SYSTEM_SPL_DESCRIBE_WATER_BURST,죽는 순간 3*3범위의 주변의 적에게 물을 터뜨리고, 주위를 잠시 물과 안개로 뒤덮는다.
 LOC_SYSTEM_ATT_WATER_SPRAY,물보라
+LOC_SYSTEM_GOD_KAPPA,캇파 협동조합
+LOC_SYSTEM_GOD_NINA,와타리 니나
+LOC_SYSTEM_GOD_KAPPA_TITLE,캇파 협동조합 - 요괴의 산의 기술자 조합
+LOC_SYSTEM_GOD_KAPPA_DESCRIPTION,캇파 협동조합은 요괴의 산에 사는 캇파들이 주도하여 만든 단체다.\n그들이 만든 기계를 서로 공유하기도 하고 판매하며, 노하우를 주고 받기도 한다.\n적을 처치하면서 가끔씩 고철들이 나오게 되며 이를 판매하여 조합으로의 신뢰도가 올라간다.\n기계 도구나 아티팩트를 판매할수도 있지만, 발견 즉시 판매하지않는다면 중고 취급을 받을 것이다.\n협동조합은 비록 캇파들이 만든 단체지만, 기계에 관심이 있는 타 종족의 가입은 막진 않는다.\n종교 집단은 아니지만 그들의 무신론적인 태도는, 다른 종교와 함께 가입하기엔 부적절할 것이다.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY0_ADD,당신은 아티팩트나 기계도구 위에서 p를 이용하여 판매할 수 있다.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY0_1_ADD,당신은 최대 전력이 {0} 증가한다.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY1_ADD,당신은 이제 장착되어있는 기계 도구를 분리할 수 있다.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY1_REMOVE,더 이상 기계 도구를 분리할 수 없다.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY2_ADD,당신은 이제 주기적으로 캇파 인트라넷에 접속할 수 있다.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY2_REMOVE,더 이상 캇파 인트라넷에 접속할 수 없다.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY3_ADD,당신은 이제 기계 도구의 잔탄을 충전할 수 있다.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY3_REMOVE,더 이상 기계 도구의 잔탄을 충전할 수 없다.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY4_ADD,당신은 이제 일시적으로 기계 도구들을 폭주시킬 수 있다.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY4_REMOVE,더 이상 기계 도구들을 폭주시킬 수 없다.
+LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY0,당신은 가진 아티팩트나 기계도구를 판매할 수 있다.
+LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY0_1,당신은 최대 전력이 {0} 증가한다.
+LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY1,당신은 장착되어있는 기계 도구를 분리할 수 있다.
+LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY2,당신은 주기적으로 캇파 인트라넷에 접속하여 도구들을 살 수 있다.
+LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY3,당신은 기계 도구의 잔탄을 충전할 수 있다.
+LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY4,당신은 일시적으로 기계 도구들의 성능을 끌어올릴 수 있다.
+LOC_SYSTEM_GOD_KAPPA_WELCOME,캇파 협동조합은 당신의 로그인에 환영 메시지를 남겼다.
+LOC_SYSTEM_SKL_KAPPA_DISASSEMBLE,기계 분리
+LOC_SYSTEM_SKL_KAPPA_INTRANET,캇파 인트라넷 접속
+LOC_SYSTEM_SKL_KAPPA_CHARGE,기계 잔탄 충전
+LOC_SYSTEM_SKL_KAPPA_OVERDRIVE,기계 폭주
+LOC_SYSTEM_SKL_KAPPA_PROTOTYPE,시제품 제작
+LOC_SYSTEM_SKL_DESCRIBE_KAPPA_DISASSEMBLE,장비에 설치되어있는 기계 도구를 분리하여 다시 아이템으로 돌려받는다.\n분해 두루마리와 같은 효과다.\n
+LOC_SYSTEM_SKL_DESCRIBE_KAPPA_INTRANET,캇파 인트라넷에 접속하여 서로 다른 3개의 기계 도구 중 하나를 구매할 수 있다.\n구매하면 신뢰도가 1칸 감소하지만 첫 방문은 무료다.\n하나를 구매하거나 시간이 지나면 인트라넷은 닫힌다.\n
+LOC_SYSTEM_SKL_DESCRIBE_KAPPA_CHARGE,가진 잔탄형 기계 도구 하나의 잔탄을 충전한다.\n충전 두루마리와 같은 효과다.\n
+LOC_SYSTEM_SKL_DESCRIBE_KAPPA_OVERDRIVE,일정 시간동안 기계 폭주 상태가 되어 기계 도구들의 성능이 1.5배로 증가한다.\n광자 토피도와 오이 사운드 시스템은 발동 빈도가 2배가 된다.\n
+LOC_SYSTEM_BUFF_STAT_KAPPA_OVERDRIVE,기계폭주
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_KAPPA_OVERDRIVE,기계 도구들이 폭주하여 성능이 크게 증가했습니다.
+LOC_SYSTEM_BUFF_STAT_KAPPA_BLACKOUT,정전
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_KAPPA_BLACKOUT,전력이 차단되어 최대 전력이 0이 되었습니다.
+LOC_SYSTEM_GOD_KAPPA_PUNISH_MISFIRE,기계 도구가 작동하지 않았다!
+LOC_SYSTEM_GOD_KAPPA_OVERDRIVE_START,기계 도구들이 굉음을 내며 폭주하기 시작했다!
+LOC_SYSTEM_GOD_KAPPA_OVERDRIVE_END,기계 폭주 상태가 끝났다.
+LOC_SYSTEM_GOD_KAPPA_BLACKOUT_END,전력이 복구되었다.
+LOC_SYSTEM_GOD_KAPPA_PICKUP_SCRAP,고철을 조합에 넘겼다.
+LOC_SYSTEM_GOD_KAPPA_SELL,{0:을|를} 판매했다.
+LOC_SYSTEM_GOD_KAPPA_SELL_NEW,캇파 협동 조합은 신제품 판매에 기뻐한다!
+LOC_SYSTEM_GOD_KAPPA_SELL_OLD,캇파 협동 조합은 약간 오래된 제품의 판매를 받아들였다.
+LOC_SYSTEM_GOD_KAPPA_SELL_USED,당신은 {0:을|를} 판매했지만 오래되어 중고품으로 취급되었다.
+LOC_SYSTEM_GOD_KAPPA_PUNISH_JUNK,캇파들의 훼방으로 {0:이|가} 고철이 되어버렸다!
+LOC_SYSTEM_GOD_KAPPA_PUNISH_SUMMON,캇파 협동조합이 당신을 처리하기 위해 캇파들을 보냈다!
+LOC_SYSTEM_GOD_KAPPA_PUNISH_BLACKOUT,캇파 협동조합이 당신의 전력을 차단했다!
+LOC_SYSTEM_GOD_KAPPA_PUNISH_MISSLE,당신의 주변에서 캇파들의 미사일이 발사되었다!
+LOC_SYSTEM_GOD_KAPPA_INTRANET_OPEN,캇파 인트라넷에 새로운 상품이 올라왔다.
+LOC_SYSTEM_GOD_KAPPA_INTRANET_HELP,({0}키의 능력으로 접속)
+LOC_SYSTEM_GOD_KAPPA_INTRANET_HELP_PAD,(능력으로 접속)
+LOC_SYSTEM_GOD_KAPPA_INTRANET_CLOSE,캇파 인트라넷의 판매 기간이 끝났다.
+LOC_SYSTEM_GOD_KAPPA_INTRANET_INSTALL,[설치형 / 전력 {0}]
+LOC_SYSTEM_GOD_KAPPA_INTRANET_BULLET,[탄환형 / 잔탄 {0}]
+LOC_SYSTEM_GOD_KAPPA_INTRANET_TITLE,KAPPA-NET    캇파 협동조합 인트라넷 서비스    v2.4
+LOC_SYSTEM_GOD_KAPPA_INTRANET_CONNECT,ATDT 01482 ... CONNECT 2400 / 접속되었습니다.
+LOC_SYSTEM_GOD_KAPPA_INTRANET_MENU,[ 이 주의 신제품 ]
+LOC_SYSTEM_GOD_KAPPA_INTRANET_FREE_INFO,*첫 방문 무료!*
+LOC_SYSTEM_GOD_KAPPA_INTRANET_COST_INFO,신뢰도 1칸 소모
+LOC_SYSTEM_GOD_KAPPA_INTRANET_CONFIRM,{0:을|를} 구매하시겠습니까?
+LOC_SYSTEM_GOD_KAPPA_INTRANET_KEY_BUY,Enter: 구매    ?: 상세정보 모드    ESC: 접속 종료
+LOC_SYSTEM_GOD_KAPPA_INTRANET_KEY_INFO,Enter: 상세정보    ?: 구매 모드    ESC: 접속 종료
+LOC_SYSTEM_GOD_KAPPA_INTRANET_PROMPT,구매할 상품 번호를 선택하세요 >
+LOC_SYSTEM_GOD_KAPPA_INTRANET_PROMPT_INFO,정보를 볼 상품 번호를 선택하세요 >
+LOC_SYSTEM_NOTE_KAPPA_BUY,캇파 인트라넷에서 {0:을|를} 구매했다.
+LOC_SYSTEM_GOD_SHOW_KAPPA_TRUST,(신뢰도)
+LOC_SYSTEM_GOD_KAPPA_MEMBERSHIP,소속
+LOC_SYSTEM_GOD_KAPPA_PRAY_HELP,당신은 이 커맨드로 발 밑의 특별한 도구를 판매할 수 있다.
+LOC_SYSTEM_GOD_KAPPA_WRATH,캇파 협동조합은 당신에게 원한을 품었다.
+LOC_SYSTEM_GOD_KAPPA_FORGIVE,{0:은|는} 당신에 대한 원한을 풀었다.
+LOC_SYSTEM_GOD_KAPPA_NOT_YET_FORGIVE,{0:은|는} 아직 당신에 대한 원한을 풀지 않았다.
+LOC_SYSTEM_GOD_KAPPA_ABANDON,당신은 {0}에서 탈퇴했다.
+LOC_SYSTEM_GOD_KAPPA_ABANDON_ASK,조합을 탈퇴하면 당신은 조합의 원한을 살 것이다. 진짜로?
+LOC_SYSTEM_GOD_KAPPA_TEMPLE_YN,조합원이 되시겠습니까?
+LOC_SYSTEM_GOD_KAPPA_TEMPLE_CONVERSION_YN,그동안 믿고 있던 신의 이점을 모두 포기하고 조합에 가입하시겠습니까?
+LOC_SYSTEM_GOD_KAPPA_LEAVE_CONVERSION_YN,조합원의 이점을 모두 포기하고 조합을 탈퇴하여 이 신을 믿으시겠습니까?
+LOC_SYSTEM_GOD_KAPPA_CONVERSION_REALLY,이 행동은 캇파 협동조합의 원한을 살것입니다. 정말로?
+LOC_SYSTEM_NOTE_KAPPA_WORSHIP,{0}의 조합원이 되었다.
+LOC_SYSTEM_NOTE_KAPPA_ABANDON,{0}에서 탈퇴했다.
+LOC_SYSTEM_SKL_KAPPA_ABANDON,조합 탈퇴
+LOC_SYSTEM_SKL_DESCRIBE_KAPPA_ABANDON,캇파 협동조합에서 탈퇴한다.\n탈퇴하는 순간 조합에서 얻은 권능과 이점이 사라지며 조합의 원한을 사게된다.\n조합이 원한을 품고 있는 동안엔 조합의 보복을 받게 된다. 많은 시간이 지나면 보복은 사라진다.\n
+LOC_SYSTEM_TILE_TEMPLE_KAPPA,캇파의 협동조합 가입 부스
+LOC_SYSTEM_TILE_TEMPLE_NINA,니나의 제단

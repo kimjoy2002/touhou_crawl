@@ -11,6 +11,7 @@
 #include "god.h"
 #include "key.h"
 #include "keiki.h"
+#include "kappa.h"
 #include "tribe.h"
 #include "skill_use.h"
 #include "mon_infor.h"
@@ -72,7 +73,10 @@ int GetGodGiftTime(god_type god)
 		return 0;
 	case GT_KEIKI:
 		return 20;
+	case GT_KAPPA:
+		return KAPPA_INTRANET_GIFT_TIME;
 	case GT_TENKYUU:
+	case GT_NINA:
 		return 0;
 	}
 	return 0;
@@ -134,6 +138,10 @@ D3DCOLOR GetGodColor(god_type god, int value)
 		return CL_keiki;
 	case GT_TENKYUU:
 		return CL_tenkyuu;
+	case GT_KAPPA:
+		return CL_kappa;
+	case GT_NINA:
+		return CL_nina;
 	}
 	return CL_normal;
 }
@@ -222,7 +230,14 @@ bool GodGift(god_type god, int piety)
 			return keiki_gift();
 		}
 		return false;
+	case GT_KAPPA:
+		if(pietyLevel(you.piety)>=2)
+		{
+			return kappa_open_intranet(true);
+		}
+		return false;
 	case GT_TENKYUU:
+	case GT_NINA:
 		return false;
 	}
 	return false;

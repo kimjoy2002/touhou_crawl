@@ -11,6 +11,7 @@
 #include "god.h"
 #include "key.h"
 #include "keiki.h"
+#include "kappa.h"
 #include "skill_use.h"
 #include "mon_infor.h"
 #include "potion.h"
@@ -88,8 +89,19 @@ string GetGodString(god_type god)
 		return LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI);
 	case GT_TENKYUU:
 		return LocalzationManager::locString(LOC_SYSTEM_GOD_TENKYUU);
+	case GT_KAPPA:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_KAPPA);
+	case GT_NINA:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_NINA);
 	}
 	return LocalzationManager::locString(LOC_SYSTEM_GOD_ERROR);
+}
+
+LOCALIZATION_ENUM_KEY GetFaithLabel(god_type god)
+{
+	if(god == GT_KAPPA)
+		return LOC_SYSTEM_GOD_KAPPA_MEMBERSHIP;
+	return LOC_SYSTEM_FAITH;
 }
 
 int GetGodAbandonValue(god_type god)
@@ -999,7 +1011,57 @@ bool GetGodAbility(int level, bool plus)
 		return false;
 	case GT_KEIKI:
 		return false;
+	case GT_KAPPA:
+		switch (level)
+		{
+		case 0:
+			kappa_set_power_bonus(plus);
+			if (plus)
+			{
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY0_ADD), true, false, false, CL_kappa);
+				printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY0_1_ADD, PlaceHolderHelper(to_string(KAPPA_MACHINE_POWER_BONUS))), true, false, false, CL_kappa);
+			}
+			break;
+		case 1:
+			you.Ability(SKL_KAPPA_DISASSEMBLE, true, !plus);
+			if (plus)
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY1_ADD), true, false, false, CL_kappa);
+			else
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY1_REMOVE), true, false, false, CL_kappa);
+			break;
+		case 2:
+			if (plus)
+			{
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY2_ADD), true, false, false, CL_kappa);
+				kappa_first_intranet();
+			}
+			else
+			{
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY2_REMOVE), true, false, false, CL_kappa);
+				kappa_close_intranet(false);
+			}
+			break;
+		case 3:
+			you.Ability(SKL_KAPPA_CHARGE, true, !plus);
+			if (plus)
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY3_ADD), true, false, false, CL_kappa);
+			else
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY3_REMOVE), true, false, false, CL_kappa);
+			break;
+		case 4:
+			you.Ability(SKL_KAPPA_OVERDRIVE, true, !plus);
+			if (plus)
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY4_ADD), true, false, false, CL_kappa);
+			else
+				printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY4_REMOVE), true, false, false, CL_kappa);
+			break;
+		case 6:
+			//TODO) 시제품 제작(SKL_KAPPA_PROTOTYPE)
+			break;
+		}
+		return false;
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		return false;
 	}
@@ -1419,7 +1481,17 @@ bool GodAccpect_KillMonster(monster* mon_, parent_type type_)
 			}
 		}
 		return false;
+	case GT_KAPPA:
+		if (type_ == PRT_PLAYER || type_ == PRT_ALLY)
+		{
+			if (!mon_->isUserAlly())
+			{
+				return kappa_scatter_scrap(mon_);
+			}
+		}
+		return false;
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		return false;
 	}
@@ -1461,6 +1533,7 @@ bool GodAccpect_Entering()
 		return true;
 	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		return false;
 	}
@@ -1541,6 +1614,7 @@ bool GodAccpect_GetPitem()
 		return false;
 	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		return false;
 	}
@@ -1622,6 +1696,7 @@ bool GodAccpect_HPUpDown(int value_,damage_reason reason)
 		return false;
 	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		return false;
 	}
@@ -1669,6 +1744,7 @@ bool GodAccpect_UseSpell(spell_list spell_)
 		return false;
 	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		return false;
 	}
@@ -1719,6 +1795,7 @@ bool GodAccpect_Practice(int value, skill_type skill_)
 		return false;
 	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		return false;
 	}
@@ -1782,6 +1859,7 @@ bool GodAccpect_Stair(bool down_, bool new_dungeon_)
 		return false;
 	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		return false;
 	}
@@ -1909,6 +1987,7 @@ bool GodAccpect_Explore_100()
 		return false;
 	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		return false;
 	}
@@ -1958,6 +2037,7 @@ bool GodAccpect_Exp_get()
 		return false;
 	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		return false;
 	}
@@ -2022,6 +2102,7 @@ bool GodAccpect_First_contact()
 		return false;
 	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		return false;
 	}
@@ -2104,8 +2185,12 @@ bool GodAccpect_Abandon(god_type god)
 			}
 		}
 		return false;
+	case GT_KAPPA:
+		kappa_abandon();
+		return false;
 	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		return false;
 	}
@@ -2327,8 +2412,15 @@ bool GodAccpect_turn(int turn)
 	case GT_JUNKO:
 	case GT_KEIKI:
 		return false;
+	case GT_KAPPA:
+		if(turn%KAPPA_TRUST_DECAY_TURN == 0)
+		{
+			you.PietyUpDown(-1);
+		}
+		return false;
 	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		return false;
 	}
@@ -2371,7 +2463,7 @@ void Pray()
 				break;
 		}
 		if (!sacrifice) {
-			if (you.GetPunish(you.god)) {
+			if (you.GetPunish(you.god) && you.god != GT_KAPPA) {
 				LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_PRAY2,true,false,false,CL_warning,
 					 PlaceHolderHelper(GetGodString(you.god)));
 			}
@@ -2383,7 +2475,7 @@ void Pray()
 	}
 	else if(altar)
 	{
-		if( type == DG_TEMPLE_SHIKIEIKI || type == DG_TEMPLE_TENKYUU)
+		if( type == DG_TEMPLE_SHIKIEIKI || type == DG_TEMPLE_TENKYUU || type == DG_TEMPLE_NINA)
 		{
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_COMMON_NOT_READY_GOD),true,false,false,CL_danger);
 			return;
@@ -2398,7 +2490,7 @@ void Pray()
 
 		if(type != DG_TEMPLE_SATORI && you.GetPunish((god_type)(type-DG_TEMPLE_FIRST)))
 		{
-			LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_NOT_YET_FORGIVE,true,false,false,CL_warning,
+			LocalzationManager::printLogWithKey(type == DG_TEMPLE_KAPPA ? LOC_SYSTEM_GOD_KAPPA_NOT_YET_FORGIVE : LOC_SYSTEM_GOD_NOT_YET_FORGIVE,true,false,false,CL_warning,
 				 PlaceHolderHelper(GetGodString((god_type)(type-DG_TEMPLE_FIRST))));
 
 		}
@@ -2410,7 +2502,12 @@ void Pray()
 			SetDisplayTexture(&img_god_background[(type - DG_TEMPLE_FIRST)]);
 			GodInfor((god_type)(type-DG_TEMPLE_FIRST));
 			D3DCOLOR color_ = you.god != GT_NONE ? CL_small_danger:CL_help;
-			printsub(LocalzationManager::locString(you.god != GT_NONE ? LOC_SYSTEM_GOD_PRAY_TEMPLE_CONVERSION_YN :LOC_SYSTEM_GOD_PRAY_TEMPLE_YN),false,color_);
+			LOCALIZATION_ENUM_KEY join_key_ = you.god != GT_NONE ? LOC_SYSTEM_GOD_PRAY_TEMPLE_CONVERSION_YN :LOC_SYSTEM_GOD_PRAY_TEMPLE_YN;
+			if(type == DG_TEMPLE_KAPPA)
+				join_key_ = you.god != GT_NONE ? LOC_SYSTEM_GOD_KAPPA_TEMPLE_CONVERSION_YN : LOC_SYSTEM_GOD_KAPPA_TEMPLE_YN;
+			else if(you.god == GT_KAPPA)
+				join_key_ = LOC_SYSTEM_GOD_KAPPA_LEAVE_CONVERSION_YN;
+			printsub(LocalzationManager::locString(join_key_),false,color_);
 			printsub(" (",false,color_);
 			if(joypadUtil::isUsingPad()) {
 				printsub(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_Y, 
@@ -2477,7 +2574,7 @@ void Pray()
 					if(onemore) {
 						bool junko_ = you.god_value[GT_JUNKO][3] != 0 && you.god == GT_JUNKO;
 						endSelection();
-						printsub(LocalzationManager::locString(junko_?LOC_SYSTEM_GOD_ABANDON_ASK_PURIFICATION:LOC_SYSTEM_GOD_PRAY_TEMPLE_CONVERSION_REALLY),false,CL_danger);
+						printsub(LocalzationManager::locString(junko_?LOC_SYSTEM_GOD_ABANDON_ASK_PURIFICATION:(you.god == GT_KAPPA ? LOC_SYSTEM_GOD_KAPPA_CONVERSION_REALLY : LOC_SYSTEM_GOD_PRAY_TEMPLE_CONVERSION_REALLY)),false,CL_danger);
 						printsub(" (",false,CL_danger);
 						if(joypadUtil::isUsingPad()) {
 							printsub(LocalzationManager::formatString(LOC_SYSTEM_PLEASE_SELECT_Y, 
@@ -2554,8 +2651,9 @@ void Pray()
 void GodInfor(god_type god)
 {
 	ostringstream blank;
-	blank << string((option_mg.getWidth() / DisplayManager.fontDesc.Width -PrintCharWidth(LocalzationManager::locString(LOC_SYSTEM_FAITH)))/2 -1, ' ');
-	printsub(blank.str() + LocalzationManager::locString(LOC_SYSTEM_FAITH),true,CL_normal);
+	LOCALIZATION_ENUM_KEY faith_key_ = GetFaithLabel(god);
+	blank << string((option_mg.getWidth() / DisplayManager.fontDesc.Width -PrintCharWidth(LocalzationManager::locString(faith_key_)))/2 -1, ' ');
+	printsub(blank.str() + LocalzationManager::locString(faith_key_),true,CL_normal);
 	switch(god)
 	{
 	case GT_SUWAKO:
@@ -2925,7 +3023,25 @@ void GodInfor(god_type god)
 		size_t pos = 0;
 		std::string token;
 		std::string delimiter = "\n";
-		
+
+		while ((pos = desc.find(delimiter)) != std::string::npos) {
+			token = desc.substr(0, pos);
+			printsub(token, true, CL_normal);
+			desc.erase(0, pos + delimiter.length());
+		}
+		printsub(desc, true, CL_normal);
+		printsub("", true, CL_normal);
+		break;
+	}
+	case GT_KAPPA:
+	{
+		printsub(LocalzationManager::locString(LOC_SYSTEM_GOD_KAPPA_TITLE), true, CL_kappa);
+		printsub("", true, CL_normal);
+		std::string desc = LocalzationManager::locString(LOC_SYSTEM_GOD_KAPPA_DESCRIPTION);
+		size_t pos = 0;
+		std::string token;
+		std::string delimiter = "\n";
+
 		while ((pos = desc.find(delimiter)) != std::string::npos) {
 			token = desc.substr(0, pos);
 			printsub(token, true, CL_normal);
@@ -2937,6 +3053,7 @@ void GodInfor(god_type god)
 	}
 	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 	default: 
 	{
@@ -3446,7 +3563,18 @@ void God_AblilityShow(god_type god) {
 			printGodAbility(GT_KEIKI, level_, 0, false, LOC_SYSTEM_GOD_SHOW_KEIKI_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_SOMETIME);
 		}
 		break;
+	case GT_KAPPA:
+		printGodAbility(GT_KAPPA, level_, 0, true, LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY0, vector<subability>(), LOC_SYSTEM_GOD_SHOW_PASSIVE);
+		printGodAbility(GT_KAPPA, level_, 0, true,
+			LocalzationManager::formatString(LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY0_1, PlaceHolderHelper(to_string(KAPPA_MACHINE_POWER_BONUS))),
+			vector<subability>(), LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_PASSIVE));
+		printGodAbility(GT_KAPPA, level_, 1, false, LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY1, vector<subability>(), LOC_SYSTEM_GOD_SHOW_KAPPA_TRUST);
+		printGodAbility(GT_KAPPA, level_, 2, false, LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY2, vector<subability>(), LOC_SYSTEM_GOD_SHOW_SOMETIME);
+		printGodAbility(GT_KAPPA, level_, 3, false, LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY3, vector<subability>(), LOC_SYSTEM_GOD_SHOW_KAPPA_TRUST);
+		printGodAbility(GT_KAPPA, level_, 4, false, LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY4, vector<subability>(), LOC_SYSTEM_GOD_SHOW_KAPPA_TRUST);
+		break;
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		break;
 	}
@@ -3608,11 +3736,14 @@ bool God_pray(const list<item>::iterator it)
 		return false;
 	case GT_KEIKI:
 		break;
+	case GT_KAPPA:
+		return kappa_sell_item(it);
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		return false;
 	}
-	return false;		
+	return false;
 }
 bool god_punish(god_type god)
 {
@@ -4476,7 +4607,12 @@ bool god_punish(god_type god)
 				break;
 			}
 		}
+		break;
+	case GT_KAPPA:
+		summon_ = kappa_punish();
+		break;
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		break;
 	}
@@ -4623,6 +4759,7 @@ void godAutoPickUp(god_type god_, bool belive_) {
 		break;
 	case GT_SHIKIEIKI:
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		break;
 	}
@@ -4743,7 +4880,11 @@ void printReEnter()
 	case GT_KEIKI:
 		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_WELCOME), true, false, false, CL_keiki);
 		break;
+	case GT_KAPPA:
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KAPPA_WELCOME), true, false, false, CL_kappa);
+		break;
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		break;
 	}
@@ -5311,7 +5452,11 @@ bool God_PraySpeak()
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_TALK7), true, false, false, CL_keiki);
 			return true;
 		}
+	case GT_KAPPA:
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KAPPA_PRAY_HELP), true, false, false, CL_kappa);
+		return true;
 	case GT_TENKYUU:
+	case GT_NINA:
 		//TODO) 신구현
 		break;
 	}

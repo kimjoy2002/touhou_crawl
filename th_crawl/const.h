@@ -69,6 +69,8 @@ extern const D3DCOLOR CL_sion;
 extern const D3DCOLOR CL_eiki;
 extern const D3DCOLOR CL_keiki;
 extern const D3DCOLOR CL_tenkyuu;
+extern const D3DCOLOR CL_kappa;
+extern const D3DCOLOR CL_nina;
 extern const name_infor string_that;
 extern const name_infor string_something;
 

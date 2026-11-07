@@ -10,6 +10,7 @@
 #define  __GOD_H__
 
 #include "enum.h"
+#include "enumMapBuilder.h"
 
 enum spell_list;
 
@@ -42,6 +43,7 @@ struct bookgift_compare {
 
 
 string GetGodString(god_type god);
+LOCALIZATION_ENUM_KEY GetFaithLabel(god_type god);
 int GetGodAbandonValue(god_type god);
 int pietyLevel(int piety);
 int GetGodGiftTime(god_type god);

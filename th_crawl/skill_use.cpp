@@ -13,6 +13,7 @@
 #include "throw.h"
 #include "beam.h"
 #include "keiki.h"
+#include "kappa.h"
 #include "monster.h"
 #include "smoke.h"
 #include "mon_infor.h"
@@ -2344,7 +2345,7 @@ void abandon_god() {
 		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_ABANDON_SATORI,true,false,false,CL_small_danger,
 			PlaceHolderHelper(GetGodString(you.god)));
 	} else {
-		LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_ABANDON,true,false,false,CL_danger,
+		LocalzationManager::printLogWithKey(you.god == GT_KAPPA ? LOC_SYSTEM_GOD_KAPPA_ABANDON : LOC_SYSTEM_GOD_ABANDON,true,false,false,CL_danger,
 			PlaceHolderHelper(GetGodString(you.god)));
 	}
 
@@ -2353,7 +2354,7 @@ void abandon_god() {
 		you.PunishUpDown(30, you.god, true);
 	}
 
-	AddNote(you.turn, CurrentLevelString(), LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_ABANDON, PlaceHolderHelper(GetGodString(you.god))), CL_small_danger);
+	AddNote(you.turn, CurrentLevelString(), LocalzationManager::formatString(you.god == GT_KAPPA ? LOC_SYSTEM_NOTE_KAPPA_ABANDON : LOC_SYSTEM_NOTE_GOD_ABANDON,PlaceHolderHelper(GetGodString(you.god))), CL_small_danger);
 
 	for (int level_ = pietyLevel(you.piety); level_ >= 0; level_--)
 		GetGodAbility(level_, false);
@@ -2388,7 +2389,7 @@ bool skill_abandon_god(int pow, bool short_, unit* order, coord_def target)
 	bool junko_ = you.god_value[GT_JUNKO][3] != 0 && you.god == GT_JUNKO;
 	for (int i = 0; i < (junko_ ? 2 : 1); i++)
 	{
-		LOCALIZATION_ENUM_KEY key_ = LOC_SYSTEM_GOD_ABANDON_ASK;
+		LOCALIZATION_ENUM_KEY key_ = you.god == GT_KAPPA ? LOC_SYSTEM_GOD_KAPPA_ABANDON_ASK : LOC_SYSTEM_GOD_ABANDON_ASK;
 		if (i == 1)
 			key_ = LOC_SYSTEM_GOD_ABANDON_ASK_PURIFICATION;
 		else if (sanae_)
@@ -2419,7 +2420,7 @@ bool skill_seija_gift(int pow, bool short_, unit* order, coord_def target)
 		random_extraction<int> rand_god;
 
 		for (int i = GT_FIRST; i < GT_LAST; i++) {
-			if (i != GT_SEIJA && i != GT_SHIKIEIKI && i != GT_TENKYUU && !(you.god_value[GT_SEIJA][1] & (1 << i)))
+			if (i != GT_SEIJA && i != GT_SHIKIEIKI && i != GT_TENKYUU && i != GT_KAPPA && i != GT_NINA && !(you.god_value[GT_SEIJA][1] & (1 << i)))
 				rand_god.push(i);
 		}
 		for (int i = 0; i < 4; i++) {
@@ -5226,6 +5227,18 @@ int UseSkill(skill_list skill, bool short_, coord_def &target)
 		break;
 	case SKL_DIVE_OFF:
 		return skill_off_dive(power, short_, &you,target);
+		break;
+	case SKL_KAPPA_DISASSEMBLE:
+		return skill_kappa_disassemble(power, short_, &you, target);
+		break;
+	case SKL_KAPPA_INTRANET:
+		return skill_kappa_intranet(power, short_, &you, target);
+		break;
+	case SKL_KAPPA_CHARGE:
+		return skill_kappa_charge(power, short_, &you, target);
+		break;
+	case SKL_KAPPA_OVERDRIVE:
+		return skill_kappa_overdrive(power, short_, &you, target);
 		break;
 	default:
 		break;

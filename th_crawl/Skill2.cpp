@@ -14,6 +14,7 @@
 #include "mon_infor.h"
 #include "projectile.h"
 #include "god.h"
+#include "kappa.h"
 #include "dump.h"
 #include "tribe.h"
 #include <algorithm>
@@ -132,6 +133,11 @@ bool SkillFlagCheck(skill_list skill, skill_flag flag)
 	case SKL_SEIJA_GIFT:
 	case SKL_UPGRADE_HANIWA:
 	case SKL_DELAY_HANIWA:
+	case SKL_KAPPA_DISASSEMBLE:
+	case SKL_KAPPA_INTRANET:
+	case SKL_KAPPA_CHARGE:
+	case SKL_KAPPA_OVERDRIVE:
+	case SKL_KAPPA_PROTOTYPE:
 		return ((S_FLAG_IMMEDIATELY | S_FLAG_GOD) & flag);
 	case SKL_GRAZE:
 	case SKL_LEVITATION:
@@ -395,7 +401,7 @@ string SkillString(skill_list skill)
 	case SKL_TORMENT:
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_TORMENT);
 	case SKL_ABANDON_GOD:
-		return LocalzationManager::locString(LOC_SYSTEM_SKL_ABANDON_GOD);
+		return LocalzationManager::locString(you.god == GT_KAPPA ? LOC_SYSTEM_SKL_KAPPA_ABANDON : LOC_SYSTEM_SKL_ABANDON_GOD);
 	case SKL_SEIJA_GIFT:
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_SEIJA_GIFT);
 	case SKL_SEIJA_1:
@@ -486,6 +492,16 @@ string SkillString(skill_list skill)
 		return LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE);
 	case SKL_DIVE_OFF:
 		return LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_OFF);
+	case SKL_KAPPA_DISASSEMBLE:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_KAPPA_DISASSEMBLE);
+	case SKL_KAPPA_INTRANET:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_KAPPA_INTRANET);
+	case SKL_KAPPA_CHARGE:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_KAPPA_CHARGE);
+	case SKL_KAPPA_OVERDRIVE:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_KAPPA_OVERDRIVE);
+	case SKL_KAPPA_PROTOTYPE:
+		return LocalzationManager::locString(LOC_SYSTEM_SKL_KAPPA_PROTOTYPE);
 	case SKL_NONE:
 	default:
 		return LocalzationManager::locString(LOC_SYSTEM_SKL_UKNOWN);
@@ -977,6 +993,11 @@ int SkillDiffer(skill_list skill)
 	case SKL_SILENCE:
 	case SKL_CIRNO_ICE_CREATE:
 	case SKL_DIVE_OFF:
+	case SKL_KAPPA_DISASSEMBLE:
+	case SKL_KAPPA_INTRANET:
+	case SKL_KAPPA_CHARGE:
+	case SKL_KAPPA_OVERDRIVE:
+	case SKL_KAPPA_PROTOTYPE:
 		return 100;
 	case SKL_NONE:
 	default:
@@ -1722,10 +1743,22 @@ bool SkillPlusCost(skill_list skill,bool check_)
 			you.PietyUpDown(-getMikoPiety(4));
 		return true;
 	}
+	case SKL_KAPPA_DISASSEMBLE:
+		if(!check_)
+			you.PietyUpDown(-rand_int(1,2));
+		return true;
+	case SKL_KAPPA_CHARGE:
+		if(!check_)
+			you.PietyUpDown(-rand_int(3,4));
+		return true;
+	case SKL_KAPPA_OVERDRIVE:
+		if(!check_)
+			you.PietyUpDown(-rand_int(5,6));
+		return true;
 	case SKL_FIREBALL:
 		if(check_ && you.power<100)
 		{
-			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);	
+			printlog(LocalzationManager::locString(LOC_SYSTEM_SHOULD_P_OVER_ONE),true,false,false,CL_normal);
 			return false;
 		}
 		if(!check_)
@@ -1990,6 +2023,12 @@ string SkillCostString(skill_list skill)
 			PlaceHolderHelper(to_string(GetCirnoIceCreateCount())));
 	case SKL_DIVE:
 		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_P_LITTLE);
+	case SKL_KAPPA_DISASSEMBLE:
+	case SKL_KAPPA_CHARGE:
+	case SKL_KAPPA_OVERDRIVE:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_KAPPA_TRUST);
+	case SKL_KAPPA_INTRANET:
+		return LocalzationManager::locString(LOC_SYSTEM_GOD_SHOW_NONE);
 	case SKL_YUYUKO_ON:
 	case SKL_YUYUKO_OFF:
 	case SKL_NONE:

@@ -112,6 +112,8 @@ dot_tile_type dungeon_tile::GetDot()
 	case DG_TEMPLE_SHIKIEIKI:
 	case DG_TEMPLE_KEIKI:
 	case DG_TEMPLE_TENKYUU:
+	case DG_TEMPLE_KAPPA:
+	case DG_TEMPLE_NINA:
 		return DOT_TEMPLE;
 	case DG_SEA:
 	case DG_LAVA:

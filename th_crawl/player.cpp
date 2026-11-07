@@ -22,6 +22,7 @@
 #include "save.h"
 #include "key.h"
 #include "keiki.h"
+#include "kappa.h"
 #include "weapon.h"
 #include "god.h"
 #include "steam_api.h"
@@ -1014,11 +1015,21 @@ void players::LoadDatas(FILE *fp)
 	LoadData<god_type>(fp, god);
 	LoadData<int>(fp, gift_count);
 	LoadData<int>(fp, piety);
-	LoadData(fp, punish);
+	if(isPrevVersion(loading_version_string, "ver1.305")) {
+		//신이 23명
+		for(int i=0;i<23;i++)
+			LoadData(fp, punish[i]);
+	} else {
+		LoadData(fp, punish);
+	}
 	LoadData<int>(fp, god_turn);
 	if(isPrevVersion(loading_version_string, "ver1.104")) {
 		//신이 20명
 		for(int i=0;i<20;i++)
+			LoadData(fp, god_value[i]);
+	} else if(isPrevVersion(loading_version_string, "ver1.305")) {
+		//신이 23명
+		for(int i=0;i<23;i++)
 			LoadData(fp, god_value[i]);
 	} else {
 		for(int i=0;i<GT_LAST;i++)
@@ -2169,6 +2180,9 @@ int players::GetMachinePowerCapacity()
 	if(equipment[ET_NECK] && equipment[ET_NECK]->type == ITM_AMULET &&
 		equipment[ET_NECK]->value1 == AMT_WAVE && getAmuletPercent() >= 100)
 		capacity_ += AMULET_WAVE_MACHINE_POWER;
+	capacity_ += kappa_machine_power_bonus();
+	if(kappa_is_blackout())
+		capacity_ = 0;
 	return capacity_;
 }
 
@@ -2211,7 +2225,10 @@ bool players::IsActiveMachineItem(item* item_, installed_machine_type type_)
 
 int players::GetInstalledMachineLevel(installed_machine_type type_)
 {
-	return min(GetSkillLevel(SKT_ENGINEERING,true),InstalledMachineMaxLevel(type_));
+	int level_ = min(GetSkillLevel(SKT_ENGINEERING,true),InstalledMachineMaxLevel(type_));
+	if(kappa_is_overdrive())
+		level_ = level_*3/2;
+	return level_;
 }
 
 static void ChangeInstalledMachineEffects(item* armour_, bool equip_)
@@ -2438,7 +2455,7 @@ void players::MachineAfterMove(const coord_def& prev_pos_, int move_type_)
 	int torpedo_ = GetInstalledMachineCount(IMT_PHOTON_TORPEDO);
 	if(torpedo_ > 0 && IsMachineEnemyInSight())
 	{
-		machine_torpedo_charge += time_delay;
+		machine_torpedo_charge += kappa_is_overdrive() ? time_delay*2 : time_delay;
 		if(machine_torpedo_charge >= MACHINE_TORPEDO_CHARGE)
 		{
 			machine_torpedo_charge = min(machine_torpedo_charge-MACHINE_TORPEDO_CHARGE,MACHINE_TORPEDO_CHARGE-1);
@@ -2450,7 +2467,7 @@ void players::MachineAfterMove(const coord_def& prev_pos_, int move_type_)
 void players::MachineMeleeAction()
 {
 	if(HasActiveInstalledMachine(IMT_OI_SOUND_SYSTEM))
-		machine_combat_count++;
+		machine_combat_count += kappa_is_overdrive() ? 2 : 1;
 }
 
 void players::MachineAfterAttack(monster* mon_, item* weapon_, bool hit_, int damage_, int max_damage_)
@@ -3878,7 +3895,7 @@ void players::CheckPunish(int delay_)
 
 					if(punish[i].number == 0)
 					{
-						LocalzationManager::printLogWithKey(LOC_SYSTEM_GOD_FORGIVE,true,false,false,CL_white_blue,
+						LocalzationManager::printLogWithKey(i == GT_KAPPA ? LOC_SYSTEM_GOD_KAPPA_FORGIVE : LOC_SYSTEM_GOD_FORGIVE,true,false,false,CL_white_blue,
 							 PlaceHolderHelper(GetGodString((god_type)i)));
 	
 						if(you.god==GT_SATORI) {
@@ -5738,6 +5755,8 @@ interupt_type players::resetLOS(bool speak_)
 						case DG_TEMPLE_SHIKIEIKI:
 						case DG_TEMPLE_KEIKI:
 						case DG_TEMPLE_TENKYUU:
+						case DG_TEMPLE_KAPPA:
+						case DG_TEMPLE_NINA:
 						case DG_ZIGURRAT_STAIR:
 						case DG_INSTANCE_STAIR:
 							switch(env[current_level].dgtile[check_pos_.x][check_pos_.y].tile)
@@ -6025,6 +6044,17 @@ int players::additem(item *t, bool speak_) //1이상이 성공, 0이하가 실�
 		return 1;
 	}
 	
+	if(t->type == ITM_ETC && t->value1 == EIT_KAPPA_TRASH && you.god == GT_KAPPA)
+	{
+		int num_ = t->num;
+		ReleaseMutex(mutx);
+		if (speak_)
+			PlaySE("pickup");
+		kappa_pickup_scrap(num_, speak_);
+		return 1;
+	}
+	if(t->find_turn < 0)
+		t->find_turn = you.turn;
 	if(t->type == ITM_BOOK)
 	{
 		t->Identify(); //책은 항상 줍자마자 식별
@@ -6491,8 +6521,17 @@ bool players::Evoke(char id_, bool auto_)
 				}
 				ReleaseMutex(mutx);
 				int bonus_pow_ = 11+max(you.level*3+ GetSkillLevel(SKT_ENGINEERING, true)*4 , GetSkillLevel(SKT_ENGINEERING, true) * 7);
-				if(evoke_machine((machine_type)(*it).value2, bonus_pow_,(*it).value1 == 0, true, auto_))
+				if(kappa_is_overdrive())
+					bonus_pow_ = bonus_pow_*3/2;
+				bool misfire_ = (*it).value1 > 0 && kappa_machine_misfire();
+				if(evoke_machine((machine_type)(*it).value2, bonus_pow_,(*it).value1 == 0 || misfire_, true, auto_))
 				{
+					if(misfire_)
+					{
+						printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KAPPA_PUNISH_MISFIRE),true,false,false,CL_small_danger);
+						you.time_delay += you.GetNormalDelay();
+						return true;
+					}
 					WaitForSingleObject(mutx, INFINITE);
 					if(!(*it).value1)
 					{
@@ -6836,7 +6875,7 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_COMMON_NOT_EXIST_GOD),true,false,false,CL_danger);
 		return false;
 	}
-	if( god_ == GT_SHIKIEIKI || god_ == GT_TENKYUU)
+	if( god_ == GT_SHIKIEIKI || god_ == GT_TENKYUU || god_ == GT_NINA)
 	{
 		if(speak_)
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_COMMON_NOT_READY_GOD),true,false,false,CL_danger);
@@ -6875,7 +6914,7 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 	}
 	else if(speak_)
 	{
-		printlog(LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_WORSHIP, PlaceHolderHelper(GetGodString(god))),true,false,false,CL_help);	
+		printlog(LocalzationManager::formatString(god == GT_KAPPA ? LOC_SYSTEM_NOTE_KAPPA_WORSHIP : LOC_SYSTEM_NOTE_GOD_WORSHIP, PlaceHolderHelper(GetGodString(god))),true,false,false,CL_help);
 	}
 
 
@@ -6892,7 +6931,7 @@ bool players::Belief(god_type god_, int piety_, bool speak_)
 	}
 	else
 	{
-		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(LOC_SYSTEM_NOTE_GOD_WORSHIP, PlaceHolderHelper(GetGodString(god))),CL_help);
+		AddNote(you.turn,CurrentLevelString(),LocalzationManager::formatString(god == GT_KAPPA ? LOC_SYSTEM_NOTE_KAPPA_WORSHIP : LOC_SYSTEM_NOTE_GOD_WORSHIP, PlaceHolderHelper(GetGodString(god))),CL_help);
 	}
 	you.punish[god].number = 0;
 	you.punish[god].punish = false;
@@ -6996,7 +7035,9 @@ bool players::PunishUpDown(int punish_, god_type god_ , bool absolutely_ )
 	if(god_ == GT_NONE)
 		god_ = god;
 	punish[god_].number = absolutely_?punish_:punish_+punish[god_].number;
-	if (god_ != GT_SATORI)
+	if (god_ == GT_KAPPA)
+		printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KAPPA_WRATH),true,false,false,CL_danger);
+	else if (god_ != GT_SATORI)
 		printlog(LocalzationManager::formatString(LOC_SYSTEM_GOD_WRATH, PlaceHolderHelper(GetGodString(god_))),true,false,false,CL_danger);
 	return true;
 	

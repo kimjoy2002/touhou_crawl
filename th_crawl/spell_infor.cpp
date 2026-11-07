@@ -842,7 +842,7 @@ string GetSkillInfor(skill_list skill)
 		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_TORMENT);
 		break;
 	case SKL_ABANDON_GOD:
-		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_ABANDON_GOD);
+		oss << LocalzationManager::locString(you.god == GT_KAPPA ? LOC_SYSTEM_SKL_DESCRIBE_KAPPA_ABANDON : LOC_SYSTEM_SKL_DESCRIBE_ABANDON_GOD);
 		break;
 	case SKL_SEIJA_GIFT:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_SEIJA_GIFT);
@@ -976,6 +976,18 @@ string GetSkillInfor(skill_list skill)
 	case SKL_DIVE:
 	case SKL_DIVE_OFF:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SKILL_DIVE_INFO);
+		break;
+	case SKL_KAPPA_DISASSEMBLE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_KAPPA_DISASSEMBLE);
+		break;
+	case SKL_KAPPA_INTRANET:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_KAPPA_INTRANET);
+		break;
+	case SKL_KAPPA_CHARGE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_KAPPA_CHARGE);
+		break;
+	case SKL_KAPPA_OVERDRIVE:
+		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_KAPPA_OVERDRIVE);
 		break;
 	default:
 		oss << LocalzationManager::locString(LOC_SYSTEM_SKL_DESCRIBE_UKNOWN);

@@ -579,15 +579,15 @@ bool Dump(int type, wstring *filename_)
 	}
 	else if (you.god == GT_MIKO) 
 	{
-		ss << LocalzationManager::locString(LOC_SYSTEM_FAITH) << ": " << GetGodString(you.god) << " (" <<  LocalzationManager::locString(LOC_SYSTEM_POULARITY) << ' ' << you.piety/2 << "%)\n\n";
+		ss << LocalzationManager::locString(GetFaithLabel(you.god)) << ": " << GetGodString(you.god) << " (" <<  LocalzationManager::locString(LOC_SYSTEM_POULARITY) << ' ' << you.piety/2 << "%)\n\n";
 	}
 	else if (you.god == GT_TENSI)
 	{
-		ss << LocalzationManager::locString(LOC_SYSTEM_FAITH) << ": " << GetGodString(you.god) << "\n\n";
+		ss << LocalzationManager::locString(GetFaithLabel(you.god)) << ": " << GetGodString(you.god) << "\n\n";
 	}
 	else
 	{
-		ss << LocalzationManager::locString(LOC_SYSTEM_FAITH) << ": " << GetGodString(you.god) << ' ' 
+		ss << LocalzationManager::locString(GetFaithLabel(you.god)) << ": " << GetGodString(you.god) << ' ' 
 			<< (pietyLevel(you.piety)>=1?'*':'.') << (pietyLevel(you.piety)>=2?'*':'.') << (pietyLevel(you.piety)>=3?'*':'.') << (pietyLevel(you.piety)>=4?'*':'.') << (pietyLevel(you.piety)>=5?'*':'.') << (pietyLevel(you.piety)>=6?'*':'.') << "\n\n";
 	}
 	ss << "HP: " << std::setfill(' ') << std::setw(4) << you.GetHp() << "/" << std::setw(4) << you.GetMaxHp() << "             AC:" << std::setw(4) << you.ac << "             ";

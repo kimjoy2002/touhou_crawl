@@ -456,7 +456,7 @@ int waitkeyinput(InputedKey& key, bool direction_, bool immedity_, bool ablecurs
 	while(true)
 	{
 		int return_ = waitkeyinput_once(key, direction_, immedity_, ablecursor, command_context, raw_input, movement_context);
-		if(!(return_ & ITEM_TYPE_KEY_FLAG))
+		if(return_ < 0 || !(return_ & ITEM_TYPE_KEY_FLAG))
 			return return_;
 		return_ &= ~ITEM_TYPE_KEY_FLAG;
 		if(!DisplayManager.selectItemType(return_))

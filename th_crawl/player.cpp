@@ -1578,8 +1578,12 @@ int players::move(short_move x_mov, short_move y_mov)
 
 		monster* mon_ = (monster*)env[current_level].isMonsterPos(move_x_,move_y_,this);
 
+		bool ally_torpedo_ = mon_ && mon_->id == MON_PHOTON_TORPEDO && mon_->isUserAlly();
+		if(ally_torpedo_ && mon_->dodgeFrom(position)) {
+			mon_ = nullptr;
+		}
 
-		if(mon_ && mon_->flag & M_FLAG_MISSLE) {
+		if(mon_ && mon_->flag & M_FLAG_MISSLE && mon_->id != MON_PHOTON_TORPEDO) {
 			//이건 미사일류 몬스터라 사라져야함
 			mon_->AttackToYou(true);
 			mon_->dead(PRT_NEUTRAL, false);

@@ -4596,9 +4596,11 @@ bool skill_upgrade_haniwa(int power, bool short_, unit* order, coord_def target)
 			select_[2] = (haniwa_abil_key)you.god_value[GT_KEIKI][5];
 		} else if (haniwa_abil::isEmpty_abil()) {
 			//첫번째
-			select_[0] = haniwa_abil::getAbleHaniwaAbils(HANIWA_T_COMBAT).choice();
-			select_[1] = haniwa_abil::getAbleHaniwaAbils(HANIWA_T_MAGIC).choice();
-			select_[2] = haniwa_abil::getAbleHaniwaAbils(HANIWA_T_SUPPORT).choice();
+			haniwa_abil_type first_type_[3] = {HANIWA_T_COMBAT, HANIWA_T_MAGIC, HANIWA_T_SUPPORT};
+			for (int i = 0; i < 3; i++) {
+				random_extraction<haniwa_abil_key> able_abils = haniwa_abil::getAbleHaniwaAbils(first_type_[i]);
+				select_[i] = able_abils.GetSize() ? able_abils.choice() : HANIWA_A_MAX;
+			}
 			you.god_value[GT_KEIKI][3] = select_[0];
 			you.god_value[GT_KEIKI][4] = select_[1];
 			you.god_value[GT_KEIKI][5] = select_[2];
@@ -4607,25 +4609,51 @@ bool skill_upgrade_haniwa(int power, bool short_, unit* order, coord_def target)
 			int limit_ = 100;
 			while(limit_-->0) {
 				random_extraction<haniwa_abil_key> able_abils = haniwa_abil::getAbleHaniwaAbils(-1);
+				bool match_type_ = (current_type == HANIWA_T_COMMON);
+				bool cosmetic_ = false;
 				for (int i = 0; i < 3; i++) {
-					select_[i] = able_abils.pop();
+					select_[i] = HANIWA_A_MAX;
+					while(able_abils.GetSize()) {
+						haniwa_abil_key key_ = able_abils.pop();
+						bool is_cosmetic_ = (key_ == HANIWA_A_TALK || key_ == HANIWA_A_GIRL);
+						if(is_cosmetic_ && cosmetic_)
+							continue;
+						if(is_cosmetic_)
+							cosmetic_ = true;
+						select_[i] = key_;
+						break;
+					}
+					if(select_[i] != HANIWA_A_MAX && haniwa_abil_list[select_[i]].type == current_type)
+						match_type_ = true;
 				}
-				if(current_type == HANIWA_T_COMMON || haniwa_abil_list[select_[0]].type == current_type || haniwa_abil_list[select_[1]].type == current_type || haniwa_abil_list[select_[2]].type == current_type) {
+				if(match_type_ || select_[2] == HANIWA_A_MAX) {
 					break;
-				} 
+				}
 			}
 			you.god_value[GT_KEIKI][3] = select_[0];
 			you.god_value[GT_KEIKI][4] = select_[1];
 			you.god_value[GT_KEIKI][5] = select_[2];
 		}
+		vector<int> select_key_;
 		for (int i = 0; i < 3; i++) {
+			if(select_[i] == HANIWA_A_MAX)
+				continue;
+			select_key_.push_back(i+'a');
 			ostringstream ss;
 			ss << string(1,(char)(i+'a')) << " - " << LocalzationManager::locString(haniwa_abil_list[select_[i]].name) << ": " << LocalzationManager::locString(haniwa_abil_list[select_[i]].infor) << " (" << LocalzationManager::locString(LOC_SYSTEM_COST) << ": " << haniwa_abil_list[select_[i]].getCostString() << ")";
 			printlog(ss.str(), true, false, true, CL_help,(char)(i+'a'));
 		}
 		
 		
-		startSelection({'a', 'b', 'c', VK_ESCAPE});
+		if(select_key_.empty()) {
+			you.god_value[GT_KEIKI][3] = 0;
+			you.god_value[GT_KEIKI][4] = 0;
+			you.god_value[GT_KEIKI][5] = 0;
+			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_GIFT_NONE), true, false, false, CL_keiki);
+			return false;
+		}
+		select_key_.push_back(VK_ESCAPE);
+		startSelection(select_key_);
 
 
 		int key_;
@@ -4634,27 +4662,16 @@ bool skill_upgrade_haniwa(int power, bool short_, unit* order, coord_def target)
 			key_ = waitkeyinput(true);
 
 			if(key_ == VK_RIGHT){
-				if(++g_menu_select>3)
+				if(++g_menu_select>=(int)select_key_.size())
 					g_menu_select = 0;
 				continue;
 			} else if (key_ == VK_LEFT) {
 				if(--g_menu_select<0)
-					g_menu_select = 3;
+					g_menu_select = select_key_.size()-1;
 				continue;
 			} else if(key_ == VK_RETURN || key_ == GVK_BUTTON_A) {
-				switch(g_menu_select) {
-					case 0:
-						key_ = 'a';
-						break;
-					case 1:
-						key_ = 'b';
-						break;
-					case 2:
-						key_ = 'c';
-						break;
-					default:
-						break;
-				}
+				if(g_menu_select >= 0 && g_menu_select < (int)select_key_.size())
+					key_ = select_key_[g_menu_select];
 			}
 			endSelection();
 			break;
@@ -4662,6 +4679,7 @@ bool skill_upgrade_haniwa(int power, bool short_, unit* order, coord_def target)
 		g_menu_select = -1;
 
 
+		next_ = HANIWA_A_MAX;
 		switch (key_)
 		{
 		case 'a':
@@ -4677,6 +4695,9 @@ bool skill_upgrade_haniwa(int power, bool short_, unit* order, coord_def target)
 			next_ = select_[2];
 			break;
 		default:
+			break;
+		}
+		if(next_ == HANIWA_A_MAX) {
 			printlog(LocalzationManager::locString(LOC_SYSTEM_GOD_KEIKI_GIFT_CANCLE), true, false, false, CL_keiki);
 			return false;
 		}

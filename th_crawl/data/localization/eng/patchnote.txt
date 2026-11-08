@@ -1,9 +1,29 @@
 ---------------------------------------------------------------------
-§c beta patch – ver1.306 (2026-~~~)§d
+§c beta patch – ver1.306 (2026-11-08)§d
 ---------------------------------------------------------------------
+
+§y* Feature Additions§d
+ * New god: Kappa Cooperative
+  * An engineers' union run by the kappa of Youkai Mountain.
+  * Although it is treated as a god, it isn't actually one, so instead of piety you build up trust with the cooperative.
+  * Provides abilities that help you make the most of the newly added mechanical tools.
+    * 0★ passive: Increases your Electrical Load limit.
+    * 1★ active: Detach mechanical tools.
+    * 2★ active: Access the Kappa Intranet (buy a mechanical tool at regular intervals).
+    * 3★ active: Recharge mechanical tool ammunition.
+    * 4★ active: Temporarily boost the performance of your mechanical tools.
+  * Note: The current version is still far from complete.
+
+§y* Balance Adjustments§d
+ * Increased the base damage of Photon Torpedo by 2, and removed some cases where it disappeared without exploding.
+ * Keiki's haniwa upgrades no longer offer two or more abilities with no gameplay effect, or too few choices.
 
 §y* Bug Fixes§d
  * Fixed a bug in Sprint where the player could be teleported outside the map and become stuck.
+ * Fixed mouse controls (clicking, mouse wheel, and menu buttons) not working.
+ * Fixed one god's altar occasionally not being generated in the Temple and the Sprint map.
+ * Fixed Keiki's haniwa upgrade choices sometimes including abilities that conflict with ones already learned.
+ * Fixed the player overlapping with a monster when pulled in by Wakasagihime's song.
 
 ---------------------------------------------------------------------
 §c beta patch – ver1.305 (2026-10-26)§d

@@ -5936,3 +5936,86 @@ LOC_SYSTEM_EVENT_SMALL_POND_APPEAR,{0} jumps out of the water!
 LOC_SYSTEM_SPL_WATER_BURST,Water Burst
 LOC_SYSTEM_SPL_DESCRIBE_WATER_BURST,Upon death, bursts water onto nearby enemies in a 3x3 area and briefly floods the surroundings with water and fog.
 LOC_SYSTEM_ATT_WATER_SPRAY,water spray
+LOC_SYSTEM_GOD_KAPPA,Kappa Cooperative
+LOC_SYSTEM_GOD_NINA,Watari Nina
+LOC_SYSTEM_GOD_KAPPA_TITLE,Kappa Cooperative - The Engineers' Union of Youkai Mountain
+LOC_SYSTEM_GOD_KAPPA_DESCRIPTION,The Kappa Cooperative is an organization led by the kappa of Youkai Mountain.\nMembers share and sell the machines they build, and trade their know-how with one another.\nDefeated enemies sometimes leave behind scrap, and selling it raises your trust with the cooperative.\nYou can also sell mechanical tools and artifacts, but if you don't sell them as soon as you find them, they will be treated as second-hand.\nAlthough the kappa founded it, the cooperative does not turn away members of other races who are interested in machines.\nIt is not a religious group, but its atheistic attitude makes it a poor fit alongside any other faith.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY0_ADD,You can sell artifacts and mechanical tools by pressing p while standing on them.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY0_1_ADD,Your Electrical Load limit increases by {0}.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY1_ADD,You can now detach installed mechanical tools.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY1_REMOVE,You can no longer detach mechanical tools.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY2_ADD,You can now periodically access the Kappa Intranet.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY2_REMOVE,You can no longer access the Kappa Intranet.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY3_ADD,You can now recharge the ammo of mechanical tools.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY3_REMOVE,You can no longer recharge mechanical tools.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY4_ADD,You can now temporarily overdrive your mechanical tools.
+LOC_SYSTEM_GOD_KAPPA_GAIN_ABLILITY4_REMOVE,You can no longer overdrive your mechanical tools.
+LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY0,You can sell artifacts and mechanical tools.
+LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY0_1,Your Electrical Load limit is increased by {0}.
+LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY1,You can detach installed mechanical tools.
+LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY2,You can periodically access the Kappa Intranet to buy tools.
+LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY3,You can recharge the ammo of mechanical tools.
+LOC_SYSTEM_GOD_SHOW_KAPPA_ABLILITY4,You can temporarily boost the performance of your mechanical tools.
+LOC_SYSTEM_GOD_KAPPA_WELCOME,The Kappa Cooperative left a welcome message on your login.
+LOC_SYSTEM_SKL_KAPPA_DISASSEMBLE,Detach Machine
+LOC_SYSTEM_SKL_KAPPA_INTRANET,Access Kappa Intranet
+LOC_SYSTEM_SKL_KAPPA_CHARGE,Recharge Machine
+LOC_SYSTEM_SKL_KAPPA_OVERDRIVE,Machine Overdrive
+LOC_SYSTEM_SKL_KAPPA_PROTOTYPE,Build Prototype
+LOC_SYSTEM_SKL_DESCRIBE_KAPPA_DISASSEMBLE,Detaches the mechanical tools installed on a piece of equipment and returns them as items.\nSame effect as a scroll of disassembly.\n
+LOC_SYSTEM_SKL_DESCRIBE_KAPPA_INTRANET,Access the Kappa Intranet and buy one of three different mechanical tools.\nA purchase costs one level of trust, but your first visit is free.\nThe intranet closes once you buy something or after some time passes.\n
+LOC_SYSTEM_SKL_DESCRIBE_KAPPA_CHARGE,Recharges the ammo of one of your ammo-based mechanical tools.\nSame effect as a scroll of recharging.\n
+LOC_SYSTEM_SKL_DESCRIBE_KAPPA_OVERDRIVE,For a while your machines go into overdrive, increasing the performance of your mechanical tools by 1.5x.\nThe Photon Torpedo and the Q-Cumber Sound System trigger twice as often.\n
+LOC_SYSTEM_BUFF_STAT_KAPPA_OVERDRIVE,Mech Overdrive
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_KAPPA_OVERDRIVE,Your mechanical tools are in overdrive, greatly increasing their performance.
+LOC_SYSTEM_BUFF_STAT_KAPPA_BLACKOUT,Blackout
+LOC_SYSTEM_BUFF_DESCRIBE_STAT_KAPPA_BLACKOUT,Your power has been cut off, reducing your Electrical Load limit to 0.
+LOC_SYSTEM_GOD_KAPPA_PUNISH_MISFIRE,Your mechanical tool failed to work!
+LOC_SYSTEM_GOD_KAPPA_OVERDRIVE_START,Your mechanical tools roar into overdrive!
+LOC_SYSTEM_GOD_KAPPA_OVERDRIVE_END,Your machine overdrive has ended.
+LOC_SYSTEM_GOD_KAPPA_BLACKOUT_END,Your power has been restored.
+LOC_SYSTEM_GOD_KAPPA_PICKUP_SCRAP,You hand the scrap over to the cooperative.
+LOC_SYSTEM_GOD_KAPPA_SELL,You sold {0}.
+LOC_SYSTEM_GOD_KAPPA_SELL_NEW,The Kappa Cooperative is delighted by the sale of a brand-new product!
+LOC_SYSTEM_GOD_KAPPA_SELL_OLD,The Kappa Cooperative accepts the sale of a slightly old product.
+LOC_SYSTEM_GOD_KAPPA_SELL_USED,You sold {0}, but it was too old and treated as second-hand.
+LOC_SYSTEM_GOD_KAPPA_PUNISH_JUNK,Thanks to the kappa's sabotage, {0} has turned into junk!
+LOC_SYSTEM_GOD_KAPPA_PUNISH_SUMMON,The Kappa Cooperative sends kappa to deal with you!
+LOC_SYSTEM_GOD_KAPPA_PUNISH_BLACKOUT,The Kappa Cooperative cuts off your power!
+LOC_SYSTEM_GOD_KAPPA_PUNISH_MISSLE,Kappa missiles launch all around you!
+LOC_SYSTEM_GOD_KAPPA_INTRANET_OPEN,New products have been posted on the Kappa Intranet.
+LOC_SYSTEM_GOD_KAPPA_INTRANET_HELP,(Access it via abilities with {0})
+LOC_SYSTEM_GOD_KAPPA_INTRANET_HELP_PAD,(Access it via abilities)
+LOC_SYSTEM_GOD_KAPPA_INTRANET_CLOSE,The sale period on the Kappa Intranet has ended.
+LOC_SYSTEM_GOD_KAPPA_INTRANET_INSTALL,[Installable / Load {0}]
+LOC_SYSTEM_GOD_KAPPA_INTRANET_BULLET,[Ammo type / Charges {0}]
+LOC_SYSTEM_GOD_KAPPA_INTRANET_TITLE,KAPPA-NET    Kappa Cooperative Intranet Service    v2.4
+LOC_SYSTEM_GOD_KAPPA_INTRANET_CONNECT,ATDT 01482 ... CONNECT 2400 / Connected.
+LOC_SYSTEM_GOD_KAPPA_INTRANET_MENU,[ New Products of the Week ]
+LOC_SYSTEM_GOD_KAPPA_INTRANET_FREE_INFO,*First visit free!*
+LOC_SYSTEM_GOD_KAPPA_INTRANET_COST_INFO,Costs 1 trust level
+LOC_SYSTEM_GOD_KAPPA_INTRANET_CONFIRM,Buy {0}?
+LOC_SYSTEM_GOD_KAPPA_INTRANET_KEY_BUY,Enter: Buy    ?: Info mode    ESC: Disconnect
+LOC_SYSTEM_GOD_KAPPA_INTRANET_KEY_INFO,Enter: Details    ?: Buy mode    ESC: Disconnect
+LOC_SYSTEM_GOD_KAPPA_INTRANET_PROMPT,Select a product number to buy >
+LOC_SYSTEM_GOD_KAPPA_INTRANET_PROMPT_INFO,Select a product number to view >
+LOC_SYSTEM_NOTE_KAPPA_BUY,Bought {0} from the Kappa Intranet.
+LOC_SYSTEM_GOD_SHOW_KAPPA_TRUST,(Trust)
+LOC_SYSTEM_GOD_KAPPA_MEMBERSHIP,Member of
+LOC_SYSTEM_GOD_KAPPA_PRAY_HELP,With this command, you can sell the special tool under your feet.
+LOC_SYSTEM_GOD_KAPPA_WRATH,The Kappa Cooperative holds a grudge against you.
+LOC_SYSTEM_GOD_KAPPA_FORGIVE,{0} no longer holds a grudge against you.
+LOC_SYSTEM_GOD_KAPPA_NOT_YET_FORGIVE,{0} still holds a grudge against you.
+LOC_SYSTEM_GOD_KAPPA_ABANDON,You left the {0}.
+LOC_SYSTEM_GOD_KAPPA_ABANDON_ASK,If you leave the cooperative, it will hold a grudge against you. Really?
+LOC_SYSTEM_GOD_KAPPA_TEMPLE_YN,Do you wish to become a member?
+LOC_SYSTEM_GOD_KAPPA_TEMPLE_CONVERSION_YN,Do you wish to give up all benefits of your current god and join the cooperative?
+LOC_SYSTEM_GOD_KAPPA_LEAVE_CONVERSION_YN,Do you wish to give up all membership benefits, leave the cooperative and follow this god?
+LOC_SYSTEM_GOD_KAPPA_CONVERSION_REALLY,This will earn you the grudge of the Kappa Cooperative. Really?
+LOC_SYSTEM_NOTE_KAPPA_WORSHIP,Became a member of the {0}.
+LOC_SYSTEM_NOTE_KAPPA_ABANDON,Left the {0}.
+LOC_SYSTEM_SKL_KAPPA_ABANDON,Leave Cooperative
+LOC_SYSTEM_SKL_DESCRIBE_KAPPA_ABANDON,Leave the Kappa Cooperative.\nYou lose all abilities and benefits from the cooperative, and it will hold a grudge against you.\nWhile it holds a grudge, the cooperative will retaliate against you. The retaliation ends after a long time.\n
+LOC_SYSTEM_TILE_TEMPLE_KAPPA,Kappa's Cooperative Membership Booth
+LOC_SYSTEM_TILE_TEMPLE_NINA,Nina's Altar
+LOC_SYSTEM_GOD_KEIKI_GIFT_NONE,Keiki: There's nothing left to sculpt!

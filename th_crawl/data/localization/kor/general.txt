@@ -6018,3 +6018,4 @@ LOC_SYSTEM_SKL_KAPPA_ABANDON,조합 탈퇴
 LOC_SYSTEM_SKL_DESCRIBE_KAPPA_ABANDON,캇파 협동조합에서 탈퇴한다.\n탈퇴하는 순간 조합에서 얻은 권능과 이점이 사라지며 조합의 원한을 사게된다.\n조합이 원한을 품고 있는 동안엔 조합의 보복을 받게 된다. 많은 시간이 지나면 보복은 사라진다.\n
 LOC_SYSTEM_TILE_TEMPLE_KAPPA,캇파의 협동조합 가입 부스
 LOC_SYSTEM_TILE_TEMPLE_NINA,니나의 제단
+LOC_SYSTEM_GOD_KEIKI_GIFT_NONE,케이키: 더 이상 다듬을 곳이 없어!

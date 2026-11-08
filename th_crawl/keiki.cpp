@@ -238,7 +238,7 @@ random_extraction<haniwa_abil_key> haniwa_abil::getAbleHaniwaAbils(int type) {
 				break;
 			if(has_abil((haniwa_abil_key)j)) {
 				for (auto& ex : haniwa_abil_list[j].except_abil) {
-					if (ex == type) {
+					if (ex == i) {
 						excepted = true;
 						break;
 					}
@@ -271,7 +271,7 @@ random_extraction<haniwa_abil_key> haniwa_abil::getAbleHaniwaAbils(int type) {
         }
 
         // 비용 초과 시 제외
-        if (abil.cost + current_cost_ > 170)
+        if (abil.cost > 20 && abil.cost + current_cost_ > 170)
             continue;
 
         // 조건을 만족하므로 추가

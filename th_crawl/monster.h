@@ -299,6 +299,8 @@ public:
 	bool isVulnerableSilver();
 	bool CanChase();
 	bool special_move(bool is_sight_for_monster, bool can_bounce, float angle_);
+	bool dodgeFrom(const coord_def& mover_pos_);
+	void missileExplode();
 	int special_state(bool is_sight_for_monster);//모든 상태를 무시하고 자신만의 상태를 가짐
 	parent_type GetParentType();
 	bool isUnique();

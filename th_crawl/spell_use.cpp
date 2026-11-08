@@ -4499,7 +4499,8 @@ bool skill_mermaid_song(int pow_, bool short_, unit* order, coord_def target)
 			{
 				beam.init();
 
-				if(env[current_level].isMove(coord_def(beam->x,beam->y),hit_mon->isFly(),hit_mon->isSwim(),false))
+				if(env[current_level].isMove(coord_def(beam->x,beam->y),hit_mon->isFly(),hit_mon->isSwim(),false) &&
+					!env[current_level].isMonsterPos(beam->x,beam->y,hit_mon))
 				{
 					hit_mon->SetXY(*beam);
 					hit_mon->AttackedTarget(order);

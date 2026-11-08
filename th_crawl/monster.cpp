@@ -2177,7 +2177,12 @@ bool monster::damage(attack_infor &a, bool perfect_, const coord_def* hit_pos)
 					}
 				}
 
-				dead(a.p_type, !(a.order), false, a.order);
+				if(id == MON_PHOTON_TORPEDO) {
+					hp = 1;
+					missileExplode();
+				}
+				else
+					dead(a.p_type, !(a.order), false, a.order);
 			}
 
 			
@@ -2524,6 +2529,8 @@ bool monster::isMoveNotInturrpt(monster* mon) {
 	}
 	if(flag & M_FLAG_MISSLE && mon->flag & M_FLAG_MISSLE)
 		return true;
+	if(id == MON_PHOTON_TORPEDO && !isEnemyMonster(mon))
+		return true;
 	if((mon->isImmobile() || mon->flag & M_FLAG_NONE_MOVE) && !canSwap(mon, false) && mon->position != target_pos)
 		return true;
 	return false;
@@ -2725,8 +2732,40 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 				return 0;
 		}
 
+		auto side_move_ = [&]() -> bool {
+			coord_def able[2];
+
+			//(1,1)로 움직이는데 있으면 (1,0)이나 (0,1)
+			//(-1,-1)로 움직이는데 있으면 (-1,0)이나 (0,-1)
+			//(1,-1)로 움직이는데 있으면 (1,0)이나 (0,-1)
+			if(x_mov == 0) {
+				able[0] = coord_def(-1, y_mov);
+				able[1] = coord_def(1, y_mov);
+			}
+			else if(y_mov == 0) {
+				able[0] = coord_def(x_mov, -1);
+				able[1] = coord_def(x_mov, 1);
+			}
+			else {
+				able[0] = coord_def(x_mov, 0);
+				able[1] = coord_def( 0, y_mov);
+			}
+			for(int i = 0; i<2;i++) {
+				if(env[current_level].isMove(position.x+able[i].x,position.y+able[i].y,isFly(), isSwim(), isCantGround(), id == MON_SEIGA) &&
+					!env[current_level].isMonsterPos(position.x+able[i].x,position.y+able[i].y)) {
+					SetXY(coord_def(position.x+able[i].x,position.y+able[i].y));
+					return true;
+				}
+			}
+			return false;
+		};
+
 		if((you.position.x  == position.x+x_mov && you.position.y  == position.y+y_mov))
 		{
+			if(id == MON_PHOTON_TORPEDO && isUserAlly()) {
+				side_move_();
+				return 2;
+			}
 			if(only_move)
 				return 0;
 			return AttackToYou(false);
@@ -2743,6 +2782,18 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 			else if(isExistMon_ && it->id == MON_BULLET) {
 				it->hp = 0;
 			}
+			else if(isExistMon_ && it->id == MON_PHOTON_TORPEDO && isEnemyMonster(&(*it))) {
+				if(only_move)
+					return 0;
+				return AttackToMon(&(*it), false);
+			}
+			else if(isExistMon_ && it->id == MON_PHOTON_TORPEDO && !(flag & M_FLAG_MISSLE)) {
+				coord_def prev_ = position;
+				if(!it->dodgeFrom(prev_))
+					it->SetXY(prev_);
+				SetXY(coord_def(prev_.x + x_mov, prev_.y + y_mov));
+				return 2;
+			}
 			else if(isExistMon_ && (*it).flag & M_FLAG_MISSLE && !isMoveNotInturrpt(&(*it))) {
 				//이건 미사일류 몬스터라 사라져야함
 				AttackToMon(&(*it), true);
@@ -2751,31 +2802,10 @@ int monster::move(short_move x_mov, short_move y_mov, bool only_move)
 			else if(isExistMon_)
 			{
 				if(isMoveNotInturrpt(&(*it))) {
-					coord_def able[2];
-
-					//(1,1)로 움직이는데 있으면 (1,0)이나 (0,1)
-					//(-1,-1)로 움직이는데 있으면 (-1,0)이나 (0,-1)
-					//(1,-1)로 움직이는데 있으면 (1,0)이나 (0,-1)
-					if(x_mov == 0) {
-						able[0] = coord_def(-1, y_mov);
-						able[1] = coord_def(1, y_mov);
-					}
-					else if(y_mov == 0) {
-						able[0] = coord_def(x_mov, -1);
-						able[1] = coord_def(x_mov, 1);
-					}
-					else {
-						able[0] = coord_def(x_mov, 0);
-						able[1] = coord_def( 0, y_mov);
-					}
-					for(int i = 0; i<2;i++) {
-						if(env[current_level].isMove(position.x+able[i].x,position.y+able[i].y,isFly(), isSwim(), isCantGround(), id == MON_SEIGA) &&
-							!env[current_level].isMonsterPos(position.x+able[i].x,position.y+able[i].y)) {
-							SetXY(coord_def(position.x+able[i].x,position.y+able[i].y));
-							return 2;
-						}
-					}
-
+					if(side_move_())
+						return 2;
+					if(id == MON_PHOTON_TORPEDO && !isEnemyMonster(&(*it)))
+						return 2;
 				}
 
 
@@ -6799,6 +6829,74 @@ int MoveAngleTowards(int A, int B, int delta)
         return A + (diff > 0 ? delta : -delta);
 }
 
+void monster::missileExplode()
+{
+	if((id != MON_PHOTON_TORPEDO && id != MON_MISSLE) || !isLive())
+		return;
+	hp = 0;
+	int damage_ = 7 + (level - 1)*2/3;
+	if(id == MON_MISSLE) {
+		bool ice_ =  you.GetProperty(TPT_STG_ICE_SHOT);
+		if(isShootingSprint()) {
+			damage_ = 3 +level/3;
+			attack_infor temp_infor(randC(2,damage_),damage_*2,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_MISSLE));
+			BaseBomb_forAlly(position, &img_blast[ice_?4:0],temp_infor, &you, 10, ice_);
+		}
+		else {
+			damage_ = 6 +level/2;
+			attack_infor temp_infor(randC(2,damage_),damage_*2,99,this,GetParentType(),ATT_FIRE_BLAST,name_infor(LOC_SYSTEM_ATT_MISSLE));
+			BaseBomb(position, &img_blast[ice_?4:0],temp_infor, this);
+		}
+	}
+	else if(isUserAlly()) {
+		attack_infor temp_infor(randC(2,damage_),damage_*2,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_PHOTON_TORPEDO));
+		BaseBomb_forAlly(position, &img_blast[0],temp_infor, &you, 10, false);
+	}
+	else {
+		attack_infor temp_infor(randC(2,damage_),damage_*2,99,this,GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_PHOTON_TORPEDO));
+		BaseBomb(position, &img_blast[0],temp_infor, this);
+	}
+	if(env[current_level].isInSight(position)) {
+		Sleep(30);
+	}
+	env[current_level].MakeNoise(position, 8, this);
+	env[current_level].ClearEffect();
+	dead(PRT_NEUTRAL, false);
+}
+
+bool monster::dodgeFrom(const coord_def& mover_pos_)
+{
+	coord_def dir_ = position - mover_pos_;
+	random_extraction<coord_def> side_, front_;
+	for(int x = -1; x <= 1; x++) {
+		for(int y = -1; y <= 1; y++) {
+			if(x == 0 && y == 0)
+				continue;
+			coord_def next_ = position + coord_def(x, y);
+			if(next_ == mover_pos_ || next_ == you.position)
+				continue;
+			if(!env[current_level].isMove(next_.x, next_.y, isFly(), isSwim(), isCantGround()))
+				continue;
+			if(env[current_level].isMonsterPos(next_.x, next_.y))
+				continue;
+			int dot_ = x*dir_.x + y*dir_.y;
+			if(dot_ == 0)
+				side_.push(next_);
+			else if(dot_ > 0)
+				front_.push(next_);
+		}
+	}
+	if(side_.GetSize()) {
+		SetXY(side_.pop());
+		return true;
+	}
+	if(front_.GetSize()) {
+		SetXY(front_.pop());
+		return true;
+	}
+	return false;
+}
+
 bool monster::special_move(bool is_sight_for_monster, bool can_bounce, float angle_) {
 	if(target) {
 		int target_angle = GetBaseAngle(GetPositionToAngle(position.x,position.y,target->position.x, target->position.y));
@@ -6951,23 +7049,7 @@ int monster::special_state(bool is_sight_for_monster) {
 	case MON_MISSLE:
 	{
 		if(special_move(is_sight_for_monster, false, 45)) {
-			bool ice_ =  you.GetProperty(TPT_STG_ICE_SHOT);
-			if(isShootingSprint()) {
-				int damage_ = 3 +level/3;
-				attack_infor temp_infor(randC(2,damage_),damage_*2,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_MISSLE));
-				BaseBomb_forAlly(position, &img_blast[ice_?4:0],temp_infor, &you, 10, ice_);
-			}
-			else {
-				int damage_ = 6 +level/2;
-				attack_infor temp_infor(randC(2,damage_),damage_*2,99,this,GetParentType(),ATT_FIRE_BLAST,name_infor(LOC_SYSTEM_ATT_MISSLE));
-				BaseBomb(position, &img_blast[ice_?4:0],temp_infor, this);
-			}
-			if(env[current_level].isInSight(position)) {
-				Sleep(30);
-			}
-			env[current_level].MakeNoise(position, 8, this);
-			env[current_level].ClearEffect();
-			dead(PRT_NEUTRAL, false);
+			missileExplode();
 		}
 	}
 	return 2;
@@ -6975,15 +7057,7 @@ int monster::special_state(bool is_sight_for_monster) {
 	{
 		//광자토피도: 피아식별 폭발
 		if(special_move(is_sight_for_monster, false, 45)) {
-			int damage_ = 7 + (level - 1)*2/3;
-			attack_infor temp_infor(randC(2,damage_),damage_*2,99,&you,you.GetParentType(),ATT_NORMAL_BLAST,name_infor(LOC_SYSTEM_ATT_PHOTON_TORPEDO));
-			BaseBomb_forAlly(position, &img_blast[0],temp_infor, &you, 10, false);
-			if(env[current_level].isInSight(position)) {
-				Sleep(30);
-			}
-			env[current_level].MakeNoise(position, 8, this);
-			env[current_level].ClearEffect();
-			dead(PRT_NEUTRAL, false);
+			missileExplode();
 		}
 	}
 	return 2;

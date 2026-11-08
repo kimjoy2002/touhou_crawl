@@ -2120,12 +2120,25 @@ void map_algorithms_temple(int num, dungeon_tile_type floor_tex, dungeon_tile_ty
 	}
 	//temple_.push(DG_STATUE);
 
-
+	vector<coord_def> temple_pos_;
 	for(int i=1; i<21; i++)
 	{
 		float x = round((float)DG_MAX_X/2+sin(i*18.0f/180.0f*DirectX::XM_PI)*10.0f);
 		float y = round((float)DG_MAX_Y/2+cos(i*18.0f/180.0f*DirectX::XM_PI)*-10.0f);
-		env[num].dgtile[(int)x][(int)y].tile = temple_.pop();
+		temple_pos_.push_back(coord_def((int)x,(int)y));
+	}
+	for(int i=0; i<10; i++)
+	{
+		float x = round((float)DG_MAX_X/2+sin(i*36.0f/180.0f*DirectX::XM_PI)*5.0f);
+		float y = round((float)DG_MAX_Y/2+cos(i*36.0f/180.0f*DirectX::XM_PI)*-5.0f);
+		temple_pos_.push_back(coord_def((int)x,(int)y));
+	}
+	while(temple_.GetSize() < (int)temple_pos_.size())
+		temple_.push(floor_tex);
+
+	for(auto& pos_ : temple_pos_)
+	{
+		env[num].dgtile[pos_.x][pos_.y].tile = temple_.pop();
 	}
 	setBaseFloorWall(num, floor_tex, wall_tex);
 }

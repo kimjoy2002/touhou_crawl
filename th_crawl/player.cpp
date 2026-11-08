@@ -1015,13 +1015,7 @@ void players::LoadDatas(FILE *fp)
 	LoadData<god_type>(fp, god);
 	LoadData<int>(fp, gift_count);
 	LoadData<int>(fp, piety);
-	if(isPrevVersion(loading_version_string, "ver1.305")) {
-		//신이 23명
-		for(int i=0;i<23;i++)
-			LoadData(fp, punish[i]);
-	} else {
-		LoadData(fp, punish);
-	}
+	LoadData(fp, punish);
 	LoadData<int>(fp, god_turn);
 	if(isPrevVersion(loading_version_string, "ver1.104")) {
 		//신이 20명
